@@ -51,6 +51,44 @@
 
     
     
+    <style>
+      .grid.cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1rem;
+        margin: 1.5rem 0;
+      }
+      .card {
+        background: var(--md-default-bg-color);
+        border: 1px solid var(--md-default-fg-color--lightest);
+        border-radius: 0.5rem;
+        padding: 1.5rem;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+      .card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+      }
+      .card h3 {
+        margin-top: 0;
+        color: var(--md-primary-fg-color);
+      }
+      .link-card {
+        background: var(--md-code-bg-color);
+        border-radius: 0.25rem;
+        padding: 1rem;
+        text-align: center;
+      }
+      .link-card h4 {
+        margin-top: 0;
+        margin-bottom: 0.5rem;
+      }
+      .md-button {
+        margin-top: 1rem;
+        display: inline-block;
+      }
+    </style>
     
   </head>
   
@@ -357,21 +395,111 @@
 
 
 <h1 id="bienvenido-a-la-documentacion-de-docucenter">Bienvenido a la Documentación de Docucenter</h1>
-<p>Esta es la página principal de la documentación de Docucenter.</p>
-<p>Puedes agregar nuevas páginas Markdown en este directorio (<code>docs/</code>). Cada vez que agregues o modifiques una página y hagas <em>push</em> a la rama principal, el sitio web se actualizará automáticamente.</p>
+<p>Esta es la página principal de la documentación técnica de Docucenter - Sistema integral de facturación electrónica y gestión empresarial.</p>
+
+<h2 id="documentacion-disponible">📚 Documentación Disponible</h2>
+<div class="grid cards" markdown>
+  
+  <div class="card">
+    <h3>🇨🇴 API MEYPAR Colombia</h3>
+    <p>Integración completa con el sistema MEYPAR de Colombia para facturación electrónica.</p>
+    <a href="meypar-colombia-api/" class="md-button md-button--primary">Ver Documentación</a>
+  </div>
+  
+  <div class="card">
+    <h3>💳 Solución Sincronización de Pagos</h3>
+    <p>Implementación de sincronización automática de pagos entre sistemas.</p>
+    <a href="solucion-sincronizacion-pagos/" class="md-button md-button--primary">Ver Documentación</a>
+  </div>
+  
+  <div class="card">
+    <h3>🏋️ Validación RUC MaxGym</h3>
+    <p>Sistema de validación de RUC específico para integración MaxGym.</p>
+    <a href="maxgym-ruc-validation/" class="md-button md-button--primary">Ver Documentación</a>
+  </div>
+  
+  <div class="card">
+    <h3>📋 Validación RUC CreateSale</h3>
+    <p>Validación de RUC en el proceso de creación de ventas.</p>
+    <a href="createSale-ruc-validation/" class="md-button md-button--primary">Ver Documentación</a>
+  </div>
+  
+  <div class="card">
+    <h3>⚡ Optimización MySQL con Circuit Breaker</h3>
+    <p>Implementación de circuit breaker para optimizar conexiones MySQL 8.0.</p>
+    <a href="mysql-optimization-circuit-breaker/" class="md-button md-button--primary">Ver Documentación</a>
+  </div>
+  
+  <div class="card">
+    <h3>🧮 Corrección Cálculo de Pagos</h3>
+    <p>Mejoras implementadas en el sistema de cálculo de pagos.</p>
+    <a href="payment-calculation-fix/" class="md-button md-button--primary">Ver Documentación</a>
+  </div>
+  
+  <div class="card">
+    <h3>👥 Optimización Cliente-Proveedor</h3>
+    <p>Mejoras de rendimiento en la gestión de clientes y proveedores.</p>
+    <a href="customer-supplier-optimizations/" class="md-button md-button--primary">Ver Documentación</a>
+  </div>
+  
+</div>
+
+<p>Puedes agregar nuevas páginas Markdown en el directorio (<code>docs/</code>). Cada vez que agregues o modifiques una página y hagas <em>push</em> a la rama principal, el sitio web se actualizará automáticamente.</p>
 <hr />
-<h2 id="como-agregar-una-nueva-pagina">¿Cómo agregar una nueva página?</h2>
+<h2 id="como-agregar-una-nueva-pagina">📝 ¿Cómo agregar una nueva página?</h2>
 <ol>
-<li>Crea un nuevo archivo <code>.md</code> dentro del directorio <code>docs/</code>.</li>
-<li>Añade la referencia en el archivo <code>mkdocs.yml</code> bajo la sección <code>nav</code> para que aparezca en el menú.</li>
+<li><strong>Crear archivo</strong>: Crea un nuevo archivo <code>.md</code> dentro del directorio <code>docs/</code></li>
+<li><strong>Actualizar navegación</strong>: Añade la referencia en el archivo <code>mkdocs.yml</code> bajo la sección <code>nav</code></li>
+<li><strong>Commit y push</strong>: Los cambios se desplegarán automáticamente via GitHub Actions</li>
 </ol>
-<h2 id="personalizacion">Personalización</h2>
+
+<h2 id="tecnologias">🛠️ Tecnologías Utilizadas</h2>
+<div class="grid" markdown>
+  
+  - **Backend**: Laravel 9.x con PHP 8.1+
+  - **Base de datos**: MySQL 8.0 / MariaDB
+  - **Cache**: Redis para sessions y caching
+  - **Queue**: Redis para jobs asíncronos
+  - **Documentación**: MkDocs Material
+  - **CI/CD**: GitHub Actions
+  - **Testing**: PHPUnit con Docker
+  
+</div>
+
+<h2 id="personalizacion">⚙️ Personalización</h2>
 <ul>
-<li>Para cambiar el favicon, sube el archivo (por ejemplo, <code>favicon.ico</code>) al directorio <code>docs/</code> y actualiza la ruta en <code>mkdocs.yml</code>.</li>
-<li>Puedes agregar un logo subiendo la imagen y cambiando la ruta en la sección <code>theme</code>.</li>
+<li><strong>Favicon</strong>: Sube el archivo al directorio <code>docs/</code> y actualiza la ruta en <code>mkdocs.yml</code></li>
+<li><strong>Logo</strong>: Puedes agregar un logo subiendo la imagen y cambiando la ruta en la sección <code>theme</code></li>
+<li><strong>Colores</strong>: Personaliza el esquema de colores en <code>mkdocs.yml</code></li>
 </ul>
+
+<h2 id="enlaces-utiles">🔗 Enlaces Útiles</h2>
+<div class="grid" markdown>
+  
+  <div class="link-card">
+    <h4>📦 Repositorio</h4>
+    <p><a href="https://github.com/aghabrego/docucenter" target="_blank">GitHub - DocuCenter</a></p>
+  </div>
+  
+  <div class="link-card">
+    <h4>🐛 Issues</h4>
+    <p><a href="https://github.com/aghabrego/docucenter/issues" target="_blank">Reportar Problemas</a></p>
+  </div>
+  
+  <div class="link-card">
+    <h4>📋 Pull Requests</h4>
+    <p><a href="https://github.com/aghabrego/docucenter/pulls" target="_blank">Contribuir al Proyecto</a></p>
+  </div>
+  
+  <div class="link-card">
+    <h4>📚 MkDocs</h4>
+    <p><a href="https://mkdocs.org/" target="_blank">Documentación de MkDocs</a></p>
+  </div>
+  
+</div>
+
 <hr />
-<p>¿Dudas o sugerencias? Abre un issue en <a href="https://github.com/aghabrego/docucenter/issues">GitHub</a>.</p>
+<p><strong>¿Dudas o sugerencias?</strong> Abre un issue en <a href="https://github.com/aghabrego/docucenter/issues">GitHub</a> o contacta al equipo de desarrollo.</p>
 
 
 
