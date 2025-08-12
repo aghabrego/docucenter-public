@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="es" class="no-js">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="API Sage ACICloud - DocuCenter">
+    <meta name="author" content="aghabrego">
+    <link rel="canonical" href="https://aghabrego.github.io/docucenter/sage-acicloud-api/">
+    <link rel="icon" href="https://home.apconpanama.me/wp-content/uploads/2024/03/logo3.png">
+    <title>API Sage ACICloud - Docucenter</title>
+    <link rel="stylesheet" href="../assets/stylesheets/main.7e37652d.min.css">
+</head>
+<body>
+    <div class="md-container">
+        <main class="md-main">
+            <div class="md-main__inner md-grid">
+                <div class="md-content">
+                    <article class="md-content__inner md-typeset">
+                        
+<h1>🏢 API Sage ACICloud - Documentación Técnica</h1>
+
+<h2>📋 Descripción General</h2>
+<p>La API Sage ACICloud proporciona integración completa con el sistema Sage 50cloud, permitiendo la sincronización bidireccional de datos contables y de facturación entre DocuCenter y Sage.</p>
+
+<h2>🔐 Autenticación</h2>
+<p>Todas las rutas requieren autenticación Sanctum y verificación de organización activa:</p>
+<pre><code>Authorization: Bearer {token}
+Content-Type: application/json
+X-Organization-ID: {organization_id}</code></pre>
+
+<h2>🌐 URL Base</h2>
+<pre><code>https://apconpanama.me/api/acicloud/</code></pre>
+
+<hr>
+
+<h2>📋 Módulo de Facturas</h2>
+
+<h3>GET <code>/invoices</code></h3>
+<p>Obtiene el listado de facturas desde Sage.</p>
+<p><strong>Respuesta:</strong></p>
+<pre><code class="json">{
+  "success": true,
+  "data": [
+    {
+      "invoice_number": "INV-001",
+      "customer_code": "CUST001",
+      "total": 1000.00,
+      "date": "2025-08-12",
+      "status": "posted"
+    }
+  ]
+}</code></pre>
+
+<hr>
+
+<h2>👥 Módulo de Clientes</h2>
+
+<h3>GET <code>/customers</code></h3>
+<p>Lista todos los clientes de Sage.</p>
+<p><strong>Parámetros de consulta:</strong></p>
+<ul>
+<li><code>page</code>: Página (default: 1)</li>
+<li><code>limit</code>: Registros por página (default: 50)</li>
+<li><code>search</code>: Búsqueda por nombre o código</li>
+</ul>
+
+<h3>POST <code>/customer</code></h3>
+<p>Importa un cliente desde DocuCenter a Sage.</p>
+<p><strong>Request Body:</strong></p>
+<pre><code class="json">{
+  "customer_code": "CUST001",
+  "name": "Cliente Ejemplo S.A.",
+  "ruc": "1234567890-1-2024",
+  "email": "cliente@ejemplo.com",
+  "phone": "+507-1234-5678",
+  "address": {
+    "street": "Calle Principal",
+    "city": "Ciudad de Panamá",
+    "province": "Panamá",
+    "postal_code": "0000"
+  },
+  "credit_limit": 5000.00,
+  "payment_terms": "Net 30"
+}</code></pre>
+
+<h3>GET <code>/customers_imp</code></h3>
+<p>Obtiene el listado de clientes importados desde DocuCenter.</p>
+
+<hr>
+
+<h2>🏪 Módulo de Proveedores</h2>
+
+<h3>GET <code>/vendors</code></h3>
+<p>Lista todos los proveedores de Sage.</p>
+
+<h3>POST <code>/vendor</code></h3>
+<p>Importa un proveedor desde DocuCenter a Sage.</p>
+<p><strong>Request Body:</strong></p>
+<pre><code class="json">{
+  "vendor_code": "VEND001",
+  "name": "Proveedor Ejemplo S.A.",
+  "ruc": "9876543210-1-2024",
+  "email": "proveedor@ejemplo.com",
+  "phone": "+507-9876-5432",
+  "address": {
+    "street": "Avenida Central",
+    "city": "Ciudad de Panamá",
+    "province": "Panamá",
+    "postal_code": "0000"
+  },
+  "credit_limit": 10000.00,
+  "payment_terms": "Net 15"
+}</code></pre>
+
+<hr>
+
+<h2>📦 Módulo de Productos</h2>
+
+<h3>GET <code>/products</code></h3>
+<p>Lista todos los productos/servicios de Sage.</p>
+
+<h3>POST <code>/product</code></h3>
+<p>Importa un producto desde DocuCenter a Sage.</p>
+<p><strong>Request Body:</strong></p>
+<pre><code class="json">{
+  "product_code": "PROD001",
+  "description": "Producto de Ejemplo",
+  "unit_price": 50.00,
+  "tax_rate": 0.07,
+  "unit_of_measure": "UNI",
+  "category": "Servicios"
+}</code></pre>
+
+<hr>
+
+<h2>💰 Módulo de Contabilidad</h2>
+
+<h3>GET <code>/accounts</code></h3>
+<p>Obtiene el catálogo de cuentas contables de Sage.</p>
+
+<h3>POST <code>/journal_entry</code></h3>
+<p>Registra un asiento contable en Sage.</p>
+<p><strong>Request Body:</strong></p>
+<pre><code class="json">{
+  "date": "2025-08-12",
+  "reference": "JE-001",
+  "description": "Asiento de ejemplo",
+  "entries": [
+    {
+      "account_code": "1100",
+      "debit": 1000.00,
+      "credit": 0.00,
+      "description": "Cuenta por cobrar"
+    },
+    {
+      "account_code": "4100",
+      "debit": 0.00,
+      "credit": 1000.00,
+      "description": "Ingresos por servicios"
+    }
+  ]
+}</code></pre>
+
+<h2>🔄 Sincronización</h2>
+<p>La integración permite sincronización bidireccional:</p>
+<ul>
+<li><strong>DocuCenter → Sage</strong>: Clientes, proveedores, productos, facturas</li>
+<li><strong>Sage → DocuCenter</strong>: Estados de cuenta, balances, reportes contables</li>
+</ul>
+
+<h2>⚠️ Consideraciones Importantes</h2>
+<ol>
+<li><strong>Códigos únicos</strong>: Asegurar que los códigos de cliente/proveedor/producto sean únicos</li>
+<li><strong>Formato RUC</strong>: Validar formato de RUC según normativas panameñas</li>
+<li><strong>Límites de crédito</strong>: Configurar límites apropiados según políticas empresariales</li>
+<li><strong>Términos de pago</strong>: Usar términos estándar de Sage (Net 15, Net 30, etc.)</li>
+</ol>
+
+<h2>📞 Soporte</h2>
+<p>Para soporte técnico:</p>
+<ul>
+<li><strong>Email</strong>: soporte@apconpanama.me</li>
+<li><strong>GitHub</strong>: <a href="https://github.com/aghabrego/docucenter/issues">Reportar Issues</a></li>
+<li><strong>Sage Support</strong>: Documentación oficial de Sage 50cloud</li>
+</ul>
+
+                    </article>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

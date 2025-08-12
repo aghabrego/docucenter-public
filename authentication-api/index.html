@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="es" class="no-js">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="API de Autenticación - DocuCenter">
+    <meta name="author" content="aghabrego">
+    <link rel="canonical" href="https://aghabrego.github.io/docucenter/authentication-api/">
+    <link rel="icon" href="https://home.apconpanama.me/wp-content/uploads/2024/03/logo3.png">
+    <title>API de Autenticación - DocuCenter</title>
+    <link rel="stylesheet" href="../assets/stylesheets/main.7e37652d.min.css">
+</head>
+<body>
+    <div class="md-container">
+        <main class="md-main">
+            <div class="md-main__inner md-grid">
+                <div class="md-content">
+                    <article class="md-content__inner md-typeset">
+                        
+<h1>🔐 API de Autenticación - DocuCenter</h1>
+
+<h2>📋 Descripción General</h2>
+<p>La API de Autenticación permite obtener tokens de acceso para interactuar con todas las APIs de DocuCenter. Utiliza autenticación basada en tokens Bearer con Sanctum.</p>
+
+<hr>
+
+<h2>🚪 Generar Token de Acceso</h2>
+
+<h3>POST <code>/api/auth/login</code></h3>
+<p>Genera un token de acceso utilizando credenciales de usuario.</p>
+
+<p><strong>Controller:</strong> <code>Auth\LoginController::login</code></p>
+<p><strong>Middleware:</strong> Ninguno (endpoint público)</p>
+
+<h4>📝 Campos de Request</h4>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Tipo</th>
+<th>Requerido</th>
+<th>Descripción</th>
+<th>Ejemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>login</code></td>
+<td>string</td>
+<td>✅</td>
+<td>Username o email del usuario</td>
+<td><code>"user@empresa.com"</code></td>
+</tr>
+<tr>
+<td><code>password</code></td>
+<td>string</td>
+<td>✅</td>
+<td>Contraseña del usuario</td>
+<td><code>"mi_password_segura"</code></td>
+</tr>
+<tr>
+<td><code>remember</code></td>
+<td>boolean</td>
+<td>❌</td>
+<td>Recordar sesión (opcional)</td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>device_name</code></td>
+<td>string</td>
+<td>❌</td>
+<td>Nombre del dispositivo/aplicación</td>
+<td><code>"Mi App Web"</code></td>
+</tr>
+</tbody>
+</table>
+
+<h4>✅ Validaciones</h4>
+<ul>
+<li><strong>login</strong>: Email válido o username (mínimo 3 caracteres)</li>
+<li><strong>password</strong>: Mínimo 6 caracteres</li>
+<li><strong>device_name</strong>: Máximo 100 caracteres (opcional)</li>
+</ul>
+
+<h4>📤 Ejemplo de Request</h4>
+<pre><code class="json">{
+  "login": "admin@docucenter.com",
+  "password": "password123",
+  "device_name": "DocuCenter Web App",
+  "remember": true
+}</code></pre>
+
+<h4>📥 Respuesta de Éxito</h4>
+<pre><code class="json">{
+  "success": true,
+  "message": "Autenticación exitosa",
+  "data": {
+    "access_token": "1|eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9...",
+    "token_type": "Bearer",
+    "expires_in": 86400,
+    "expires_at": "2025-08-13 21:29:09",
+    "user": {
+      "id": 1,
+      "name": "Administrador",
+      "email": "admin@docucenter.com",
+      "username": "admin",
+      "created_at": "2025-01-15T08:00:00Z"
+    }
+  }
+}</code></pre>
+
+<h4>❌ Respuesta de Error</h4>
+<pre><code class="json">{
+  "success": false,
+  "message": "Credenciales inválidas",
+  "errors": {
+    "login": ["Las credenciales proporcionadas son incorrectas."]
+  }
+}</code></pre>
+
+<hr>
+
+<h2>👤 Obtener Información del Usuario</h2>
+
+<h3>GET <code>/api/auth/user</code></h3>
+<p>Obtiene información del usuario autenticado.</p>
+
+<p><strong>Autenticación:</strong> Bearer Token requerido</p>
+
+<h4>📤 Headers Requeridos</h4>
+<pre><code>Authorization: Bearer {token}
+Content-Type: application/json</code></pre>
+
+<h4>📥 Respuesta de Éxito</h4>
+<pre><code class="json">{
+  "success": true,
+  "data": {
+    "id": 1,
+    "name": "Administrador",
+    "email": "admin@docucenter.com",
+    "username": "admin",
+    "email_verified_at": "2025-01-15T08:30:00Z",
+    "created_at": "2025-01-15T08:00:00Z",
+    "updated_at": "2025-08-12T10:15:00Z",
+    "organizations": [
+      {
+        "id": 1,
+        "name": "Empresa Principal S.A.",
+        "ruc": "1234567890123",
+        "status": "active"
+      }
+    ]
+  }
+}</code></pre>
+
+<hr>
+
+<h2>🚪 Cerrar Sesión</h2>
+
+<h3>POST <code>/api/auth/logout</code></h3>
+<p>Revoca el token de acceso actual y cierra la sesión.</p>
+
+<p><strong>Autenticación:</strong> Bearer Token requerido</p>
+
+<h4>📤 Headers Requeridos</h4>
+<pre><code>Authorization: Bearer {token}
+Content-Type: application/json</code></pre>
+
+<h4>📥 Respuesta de Éxito</h4>
+<pre><code class="json">{
+  "success": true,
+  "message": "Sesión cerrada exitosamente"
+}</code></pre>
+
+<hr>
+
+<h2>🔑 Uso del Token</h2>
+
+<h3>📋 Formato del Header de Autorización</h3>
+<p>Una vez obtenido el token, debe incluirse en todas las requests a las APIs:</p>
+<pre><code>Authorization: Bearer {access_token}
+Content-Type: application/json
+X-Organization-ID: {organization_id}</code></pre>
+
+<h3>⏰ Expiración del Token</h3>
+<ul>
+<li><strong>Duración por defecto</strong>: 24 horas (86400 segundos)</li>
+<li><strong>Campo <code>expires_at</code></strong>: Indica la fecha y hora exacta de expiración</li>
+<li><strong>Renovación</strong>: Debe obtener un nuevo token antes de la expiración</li>
+</ul>
+
+<h3>🏢 Multi-Tenant</h3>
+<p>DocuCenter es multi-tenant. Después de autenticarse, debe:</p>
+<ol>
+<li>Obtener la lista de organizaciones con <code>GET /api/v1/organizations</code></li>
+<li>Incluir el header <code>X-Organization-ID</code> en todas las requests subsecuentes</li>
+</ol>
+
+<hr>
+
+<h2>⚠️ Códigos de Error Comunes</h2>
+
+<table>
+<thead>
+<tr>
+<th>Código</th>
+<th>Descripción</th>
+<th>Solución</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>401</code></td>
+<td>Token inválido o expirado</td>
+<td>Obtener nuevo token con <code>/api/auth/login</code></td>
+</tr>
+<tr>
+<td><code>422</code></td>
+<td>Datos de validación incorrectos</td>
+<td>Revisar campos requeridos y formatos</td>
+</tr>
+<tr>
+<td><code>429</code></td>
+<td>Demasiados intentos de login</td>
+<td>Esperar antes de intentar nuevamente</td>
+</tr>
+</tbody>
+</table>
+
+<h2>🛡️ Consideraciones de Seguridad</h2>
+
+<ol>
+<li><strong>HTTPS Obligatorio</strong>: Todas las comunicaciones deben usar HTTPS</li>
+<li><strong>Almacenamiento Seguro</strong>: Guarda los tokens de forma segura</li>
+<li><strong>Rotación de Tokens</strong>: Implementa renovación automática antes de expiración</li>
+<li><strong>Rate Limiting</strong>: Respeta los límites de intentos de login</li>
+<li><strong>Logout</strong>: Siempre revoca tokens al cerrar sesión</li>
+</ol>
+
+<h2>💡 Ejemplos de Implementación</h2>
+
+<h3>JavaScript/Axios</h3>
+<pre><code class="javascript">// Login
+const loginResponse = await axios.post('/api/auth/login', {
+  login: 'user@empresa.com',
+  password: 'password123',
+  device_name: 'Mi App Web'
+});
+
+const token = loginResponse.data.data.access_token;
+
+// Usar token en requests subsecuentes
+axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+
+// Obtener organizaciones
+const orgsResponse = await axios.get('/api/v1/organizations');
+
+// Configurar organización
+axios.defaults.headers.common['X-Organization-ID'] = orgsResponse.data.data.organizations[0].id;</code></pre>
+
+<h3>PHP/cURL</h3>
+<pre><code class="php">&lt;?php
+// Login
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, 'https://apconpanama.me/api/auth/login');
+curl_setopt($ch, CURLOPT_POST, true);
+curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode([
+    'login' => 'user@empresa.com',
+    'password' => 'password123',
+    'device_name' => 'Mi App PHP'
+]));
+curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+$response = curl_exec($ch);
+$data = json_decode($response, true);
+$token = $data['data']['access_token'];
+
+// Usar token en requests subsecuentes
+$headers = [
+    'Authorization: Bearer ' . $token,
+    'Content-Type: application/json'
+];
+?&gt;</code></pre>
+
+<h2>📞 Soporte</h2>
+<p>Para soporte con autenticación:</p>
+<ul>
+<li><strong>Email</strong>: soporte@apconpanama.me</li>
+<li><strong>GitHub</strong>: <a href="https://github.com/aghabrego/docucenter/issues">Reportar Issues</a></li>
+<li><strong>Documentación</strong>: <a href="../apis/">Índice de APIs</a></li>
+</ul>
+
+                    </article>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

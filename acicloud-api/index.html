@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="es" class="no-js">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width-device-width,initial-scale=1">
+    <meta name="description" content="API ACICloud - DocuCenter">
+    <meta name="author" content="aghabrego">
+    <link rel="canonical" href="https://aghabrego.github.io/docucenter/acicloud-api/">
+    <link rel="icon" href="https://home.apconpanama.me/wp-content/uploads/2024/03/logo3.png">
+    <title>API ACICloud - Docucenter</title>
+    <link rel="stylesheet" href="../assets/stylesheets/main.7e37652d.min.css">
+</head>
+<body>
+    <div class="md-container">
+        <main class="md-main">
+            <div class="md-main__inner md-grid">
+                <div class="md-content">
+                    <article class="md-content__inner md-typeset">
+                        
+<h1>☁️ API ACICloud - Documentación</h1>
+
+<h2>📋 Descripción General</h2>
+<p>La API ACICloud proporciona acceso programático a los servicios de facturación electrónica y gestión empresarial de APC Panamá. Esta API REST permite integrar funcionalidades de DocuCenter en aplicaciones externas.</p>
+
+<h2>🌐 URL Base</h2>
+<pre><code>https://apconpanama.me/api/acicloud</code></pre>
+
+<h2>🔐 Autenticación</h2>
+<p>La API utiliza autenticación mediante token Bearer. Incluye el token en el header de autorización:</p>
+<pre><code>Authorization: Bearer {tu_token_de_acceso}
+Content-Type: application/json
+Accept: application/json</code></pre>
+
+<h2>🚀 Endpoints Principales</h2>
+
+<h3>1. Información del Sistema</h3>
+<h4>GET <code>/api/acicloud</code></h4>
+<p>Obtiene información general de la API y estado del sistema.</p>
+<p><strong>Respuesta:</strong></p>
+<pre><code class="json">{
+  "success": true,
+  "data": {
+    "api_version": "v1.0",
+    "system_status": "operational",
+    "services": [
+      "electronic_invoicing",
+      "sage_integration",
+      "document_management"
+    ]
+  }
+}</code></pre>
+
+<h3>2. Gestión de Organizaciones</h3>
+<h4>GET <code>/organizations</code></h4>
+<p>Lista las organizaciones disponibles para el usuario autenticado.</p>
+
+<h4>POST <code>/organizations</code></h4>
+<p>Crear nueva organización.</p>
+<p><strong>Request Body:</strong></p>
+<pre><code class="json">{
+  "name": "Mi Empresa S.A.",
+  "ruc": "1234567890-1-2024",
+  "email": "contacto@miempresa.com",
+  "address": "Calle Principal, Ciudad de Panamá"
+}</code></pre>
+
+<h3>3. Facturación Electrónica</h3>
+<h4>POST <code>/invoices</code></h4>
+<p>Crear nueva factura electrónica.</p>
+<p><strong>Request Body:</strong></p>
+<pre><code class="json">{
+  "customer": {
+    "name": "Cliente Ejemplo",
+    "ruc": "9876543210-1-2024",
+    "email": "cliente@ejemplo.com"
+  },
+  "items": [
+    {
+      "description": "Servicio de Consultoría",
+      "quantity": 1,
+      "unit_price": 500.00
+    }
+  ]
+}</code></pre>
+
+<h3>4. Gestión de Clientes</h3>
+<h4>GET <code>/customers</code></h4>
+<p>Lista todos los clientes de la organización.</p>
+
+<h4>POST <code>/customers</code></h4>
+<p>Crear nuevo cliente.</p>
+
+<h4>PUT <code>/customers/{id}</code></h4>
+<p>Actualizar información de cliente existente.</p>
+
+<h3>5. Productos y Servicios</h3>
+<h4>GET <code>/products</code></h4>
+<p>Lista todos los productos y servicios.</p>
+
+<h4>POST <code>/products</code></h4>
+<p>Crear nuevo producto o servicio.</p>
+
+<h2>📊 Códigos de Respuesta</h2>
+<ul>
+<li><code>200</code> - Operación exitosa</li>
+<li><code>201</code> - Recurso creado exitosamente</li>
+<li><code>400</code> - Error en los datos enviados</li>
+<li><code>401</code> - No autorizado - Token inválido</li>
+<li><code>403</code> - Prohibido - Sin permisos suficientes</li>
+<li><code>404</code> - Recurso no encontrado</li>
+<li><code>422</code> - Error de validación</li>
+<li><code>500</code> - Error interno del servidor</li>
+</ul>
+
+<h2>📝 Formato de Respuestas</h2>
+<p>Todas las respuestas siguen un formato estándar:</p>
+<pre><code class="json">{
+  "success": true|false,
+  "data": {...},
+  "message": "Mensaje descriptivo",
+  "errors": {...} // Solo en caso de error
+}</code></pre>
+
+<h2>🔄 Rate Limiting</h2>
+<p>La API tiene límites de velocidad para prevenir abuso:</p>
+<ul>
+<li><strong>General</strong>: 1000 requests por hora</li>
+<li><strong>Facturación</strong>: 500 requests por hora</li>
+<li><strong>Autenticación</strong>: 10 requests por minuto</li>
+</ul>
+
+<h2>🌐 Webhooks</h2>
+<p>ACICloud puede enviar notificaciones webhook para eventos importantes:</p>
+<ul>
+<li><strong>invoice.created</strong> - Nueva factura creada</li>
+<li><strong>invoice.paid</strong> - Factura pagada</li>
+<li><strong>customer.updated</strong> - Cliente actualizado</li>
+</ul>
+
+<h2>📚 SDKs Disponibles</h2>
+<ul>
+<li><strong>PHP</strong>: Composer package disponible</li>
+<li><strong>JavaScript</strong>: NPM package</li>
+<li><strong>Python</strong>: PyPI package</li>
+</ul>
+
+<h2>⚠️ Consideraciones de Seguridad</h2>
+<ol>
+<li><strong>HTTPS Obligatorio</strong>: Todas las comunicaciones deben usar HTTPS</li>
+<li><strong>Tokens seguros</strong>: Nunca expongas tokens en código del lado cliente</li>
+<li><strong>Validación</strong>: Always validate input data</li>
+<li><strong>Logs</strong>: Monitorea logs para detectar uso anómalo</li>
+</ol>
+
+<h2>🆕 Próximas Funcionalidades</h2>
+<ul>
+<li>Integración con más PACs de Panamá</li>
+<li>Soporte para facturación internacional</li>
+<li>Dashboard de analytics en tiempo real</li>
+<li>Integración con más ERPs</li>
+</ul>
+
+<h2>📞 Soporte y Contacto</h2>
+<ul>
+<li><strong>Documentación</strong>: <a href="https://aghabrego.github.io/docucenter/">Sitio oficial</a></li>
+<li><strong>Email Soporte</strong>: soporte@apconpanama.me</li>
+<li><strong>GitHub Issues</strong>: <a href="https://github.com/aghabrego/docucenter/issues">Reportar problemas</a></li>
+<li><strong>Status Page</strong>: Monitoreamos el estado de la API 24/7</li>
+</ul>
+
+                    </article>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

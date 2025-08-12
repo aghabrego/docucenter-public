@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="es" class="no-js">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="API Facturación Electrónica (FE) - DocuCenter">
+    <meta name="author" content="aghabrego">
+    <link rel="canonical" href="https://aghabrego.github.io/docucenter/fe-api/">
+    <link rel="icon" href="https://home.apconpanama.me/wp-content/uploads/2024/03/logo3.png">
+    <title>API Facturación Electrónica (FE) - Docucenter</title>
+    <link rel="stylesheet" href="../assets/stylesheets/main.7e37652d.min.css">
+</head>
+<body>
+    <div class="md-container">
+        <main class="md-main">
+            <div class="md-main__inner md-grid">
+                <div class="md-content">
+                    <article class="md-content__inner md-typeset">
+                        
+<h1>🧾 API Facturación Electrónica (FE) - Documentación Técnica</h1>
+
+<h2>📋 Descripción General</h2>
+<p>La API de Facturación Electrónica (FE) proporciona endpoints especializados para la emisión, importación y gestión de documentos fiscales electrónicos conforme a las regulaciones de la DGI de Panamá.</p>
+
+<h2>🔐 Autenticación</h2>
+<p>Todas las rutas requieren autenticación Sanctum y verificación de organización activa:</p>
+<pre><code>Authorization: Bearer {token}
+Content-Type: application/json
+X-Organization-ID: {organization_id}</code></pre>
+
+<h2>🌐 URL Base</h2>
+<pre><code>https://apconpanama.me/api/v1/fe/</code></pre>
+
+<hr>
+
+<h2>📄 Módulo de Documentos Fiscales</h2>
+
+<h3>GET <code>/download_base64_document/{id}</code></h3>
+<p>Descarga un documento fiscal en formato base64.</p>
+<p><strong>Parámetros:</strong></p>
+<ul>
+<li><code>id</code>: ID único del documento fiscal</li>
+</ul>
+<p><strong>Respuesta:</strong></p>
+<pre><code class="json">{
+  "success": true,
+  "data": {
+    "document_id": "FE-2025-001234",
+    "base64_content": "JVBERi0xLjQKMSAwIG9iago8PAovVHlwZSAvQ2F0YWxvZ...",
+    "mime_type": "application/pdf",
+    "filename": "factura_001234.pdf"
+  }
+}</code></pre>
+
+<h3>POST <code>/import_xml</code></h3>
+<p>Importa un documento XML de facturación electrónica.</p>
+<p><strong>Request Body:</strong></p>
+<pre><code class="json">{
+  "xml_content": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>...",
+  "document_type": "01", // 01=Factura, 02=Nota Crédito, 03=Nota Débito
+  "validate_dgi": true
+}</code></pre>
+
+<p><strong>Respuesta:</strong></p>
+<pre><code class="json">{
+  "success": true,
+  "data": {
+    "document_id": "FE-2025-001234",
+    "dgi_number": "01234567890123456789",
+    "status": "imported",
+    "validation_errors": []
+  }
+}</code></pre>
+
+<h3>POST <code>/emit_json_object</code></h3>
+<p>Emite un documento fiscal a partir de un objeto JSON.</p>
+<p><strong>Request Body:</strong></p>
+<pre><code class="json">{
+  "document_type": "01",
+  "emission_point": "001",
+  "customer": {
+    "identification_type": "04", // RUC
+    "identification": "1234567890-1-2024",
+    "name": "Cliente Ejemplo S.A.",
+    "email": "cliente@ejemplo.com"
+  },
+  "items": [
+    {
+      "description": "Servicio de Consultoría",
+      "quantity": 1,
+      "unit_price": 1000.00,
+      "tax_rate": 0.07
+    }
+  ],
+  "totals": {
+    "subtotal": 1000.00,
+    "tax": 70.00,
+    "total": 1070.00
+  }
+}</code></pre>
+
+<h2>🏷️ Tipos de Documento</h2>
+<ul>
+<li><code>01</code> = Factura Comercial</li>
+<li><code>02</code> = Nota de Crédito</li>
+<li><code>03</code> = Nota de Débito</li>
+<li><code>04</code> = Nota de Entrega</li>
+<li><code>05</code> = Documento de Soporte</li>
+</ul>
+
+<h2>🆔 Tipos de Identificación</h2>
+<ul>
+<li><code>04</code> = RUC (Registro Único de Contribuyente)</li>
+<li><code>02</code> = Cédula de Identidad Personal</li>
+<li><code>03</code> = Pasaporte</li>
+<li><code>06</code> = Otro</li>
+</ul>
+
+<h2>⚠️ Consideraciones Importantes</h2>
+<ol>
+<li><strong>Cumplimiento DGI</strong>: Todos los documentos deben cumplir con las normativas de la Dirección General de Ingresos de Panamá</li>
+<li><strong>Validación previa</strong>: Recomendamos validar los datos antes de enviarlos para emisión</li>
+<li><strong>Formatos de fecha</strong>: Usar formato ISO 8601 (YYYY-MM-DD)</li>
+<li><strong>Decimales</strong>: Máximo 2 decimales para montos</li>
+<li><strong>Encoding</strong>: UTF-8 para todos los textos</li>
+</ol>
+
+<h2>📞 Soporte</h2>
+<p>Para soporte técnico, contactar a:</p>
+<ul>
+<li><strong>Email</strong>: soporte@apconpanama.me</li>
+<li><strong>GitHub</strong>: <a href="https://github.com/aghabrego/docucenter/issues">Reportar Issues</a></li>
+<li><strong>Documentación</strong>: <a href="https://aghabrego.github.io/docucenter/">Sitio de Documentación</a></li>
+</ul>
+
+                    </article>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
