@@ -241,12 +241,12 @@ El código fuente principal está en el repositorio privado:
 ## 📞 Soporte y Contacto
 
 ### 🆘 Soporte Técnico
-- **Email**: [soporte@apconpanama.me](mailto:soporte@apconpanama.me)
-- **GitHub Issues**: [Reportar Problema](https://github.com/aghabrego/docucenter/issues)
+- **Email**: [desarrollo@apconpanama.me](mailto:desarrollo@apconpanama.me)
+- **GitHub Issues**: [Reportar Problema](https://github.com/aghabrego/docucenter-public/issues)
 - **Documentación**: [Centro de Ayuda](https://aghabrego.github.io/docucenter-public/)
 
 ### 🏢 APC Panamá
-- **Sitio Web**: [home.apconpanama.me](https://home.apconpanama.me/)
+- **Sitio Web**: [https://home.apconpanama.me/](https://home.apconpanama.me/)
 - **GitHub**: [@aghabrego](https://github.com/aghabrego)
 - **LinkedIn**: [APC Panamá](https://linkedin.com/company/apc-panama)
 
