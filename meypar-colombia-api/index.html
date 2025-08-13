@@ -3,7 +3,7 @@
 <html lang="es" class="no-js">
   <head>
     
-      <meta charset="utf-8">
+               <a href="#api-meypar-colombia-facturacion-electronica" class="md-skip"><meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
         <meta name="description" content="Documentación técnica y de usuario de Docucenter">
@@ -22,7 +22,7 @@
     
     
       
-        <title>Ejemplo de API MEYPAR Colombia - Docucenter</title>
+        <title>API MEYPAR Colombia - Docucenter</title>
       
     
     
@@ -100,7 +100,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Ejemplo de API MEYPAR Colombia
+              API MEYPAR Colombia
             
           </span>
         </div>
@@ -261,63 +261,74 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#endpoint" class="md-nav__link">
-    <span class="md-ellipsis">
-      Endpoint
-    </span>
+  <a href="#descripcion" class="md-nav__link">
+    📋 Descripción
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#headers" class="md-nav__link">
-    <span class="md-ellipsis">
-      Headers
-    </span>
+  <a href="#endpoints-disponibles" class="md-nav__link">
+    📋 Endpoints Disponibles
+  </a>
+  
+    <nav class="md-nav" aria-label="📋 Endpoints Disponibles">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#crear-venta-meypar-asincrona" class="md-nav__link">
+    🚀 1. Crear Venta MEYPAR (Asíncrona)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#crear-venta-meypar-con-emision-directa" class="md-nav__link">
+    ⚡ 2. Crear Venta MEYPAR con Emisión Directa
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#estructura-del-request" class="md-nav__link">
+    📊 Estructura del Request
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#ejemplo-de-request-body" class="md-nav__link">
-    <span class="md-ellipsis">
-      Ejemplo de Request Body
-    </span>
+  <a href="#casos-de-uso" class="md-nav__link">
+    💡 Casos de Uso
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#respuesta-exitosa" class="md-nav__link">
-    <span class="md-ellipsis">
-      Respuesta Exitosa
-    </span>
+  <a href="#configuraciones-requeridas" class="md-nav__link">
+    ⚙️ Configuraciones Requeridas
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#respuesta-de-error" class="md-nav__link">
-    <span class="md-ellipsis">
-      Respuesta de Error
-    </span>
+  <a href="#monitoreo-y-mejores-practicas" class="md-nav__link">
+    📊 Monitoreo y Mejores Prácticas
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#codigos-de-medios-de-pago-mediodepagotypeenum" class="md-nav__link">
-    <span class="md-ellipsis">
-      Códigos de Medios de Pago (MedioDePagoTypeEnum)
-    </span>
+  <a href="#soporte" class="md-nav__link">
+    📞 Soporte
   </a>
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#codigos-de-vehiculos-vehiculotypeenum" class="md-nav__link">
-    <span class="md-ellipsis">
-      Códigos de Vehículos (VehiculoTypeEnum)
     </span>
   </a>
   
@@ -360,136 +371,328 @@
   
 
 
-<h1 id="ejemplo-de-api-meypar-colombia">Ejemplo de API MEYPAR Colombia</h1>
-<h2 id="endpoint">Endpoint</h2>
-<div class="codehilite"><pre><span></span><code>POST /api/v1/fe/create_sale_meypar
+<h1 id="api-meypar-colombia-facturacion-electronica">🅿️ API MEYPAR Colombia - Facturación Electrónica</h1>
+
+<h2 id="descripcion">📋 Descripción</h2>
+<p>API completa para integración con el sistema MEYPAR Colombia, especializada en facturación electrónica para estacionamientos y servicios de parqueo. Incluye dos modalidades de procesamiento: asíncrona y con emisión directa.</p>
+
+<div class="admonition note">
+<p class="admonition-title">Integración Completa</p>
+<p>Esta API proporciona sincronización completa con MEYPAR Colombia, incluyendo terminales, productos de estacionamiento, recargas eléctricas y servicios premium con emisión automática de facturación electrónica.</p>
+</div>
+
+<h2 id="endpoints-disponibles">📋 Endpoints Disponibles</h2>
+
+<h3 id="crear-venta-meypar-asincrona">🚀 1. Crear Venta MEYPAR (Asíncrona)</h3>
+
+<p><strong>Endpoint:</strong> <code>POST /api/v1/fe/create_sale_meypar</code><br>
+<strong>Controller:</strong> <code>FeController::createSaleMeypar</code><br>
+<strong>Request Class:</strong> <code>CreateSaleMeyparRequest</code><br>
+<strong>Procesamiento:</strong> Asíncrono usando <code>CreateSaleMeyparJob</code></p>
+
+<h4>📋 Descripción</h4>
+<p>Crea y emite una factura electrónica basada en datos del sistema MEYPAR Colombia. El procesamiento se realiza de forma asíncrona mediante jobs en cola.</p>
+
+<h4>🔐 Autenticación</h4>
+<div class="codehilite"><pre><span></span><code>Authorization: Bearer {token}
+Content-Type: application/json
 </code></pre></div>
 
-<h2 id="headers">Headers</h2>
-<div class="codehilite"><pre><span></span><code><span class="n">Authorization</span><span class="o">:</span><span class="w"> </span><span class="n">Bearer</span><span class="w"> </span><span class="o">{</span><span class="n">token</span><span class="o">}</span>
-<span class="n">Content</span><span class="o">-</span><span class="n">Type</span><span class="o">:</span><span class="w"> </span><span class="n">application</span><span class="o">/</span><span class="n">json</span>
+<h4>📥 Respuesta de Éxito (Test)</h4>
+<div class="codehilite"><pre><span></span><code class="language-json"><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;response&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;HTTP: 201 OK&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Factura Meypar procesada exitosamente&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;job_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;uuid-generated-job-id&quot;</span>
+<span class="p">}</span>
 </code></pre></div>
 
-<h2 id="ejemplo-de-request-body">Ejemplo de Request Body</h2>
-<p>Basado en la documentación MEYPAR Colombia y los objetos WADetalleFactura, WAMedioPagoFactura, WATerminalID:</p>
-<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+<hr>
+
+<h3 id="crear-venta-meypar-con-emision-directa">⚡ 2. Crear Venta MEYPAR con Emisión Directa</h3>
+
+<p><strong>Endpoint:</strong> <code>POST /api/v1/fe/create_sale_meypar_with_emission</code><br>
+<strong>Controller:</strong> <code>FeController::createSaleMeyparWithEmission</code><br>
+<strong>Request Class:</strong> <code>CreateSaleMeyparRequest</code><br>
+<strong>Procesamiento:</strong> Síncrono con emisión automática</p>
+
+<h4>📋 Descripción</h4>
+<p>Crea y procesa una factura electrónica con emisión directa basada en datos del sistema MEYPAR Colombia. Este endpoint procesa la venta de manera síncrona incluyendo la emisión automática mediante el PAC configurado, con sistema de reintentos integrado.</p>
+
+<h4>🔄 Diferencias Principales</h4>
+<table>
+<thead>
+<tr>
+<th>Característica</th>
+<th><code>create_sale_meypar</code></th>
+<th><code>create_sale_meypar_with_emission</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Procesamiento</strong></td>
+<td>Asíncrono (Job)</td>
+<td>Síncrono con emisión directa</td>
+</tr>
+<tr>
+<td><strong>Emisión FE</strong></td>
+<td>Separada</td>
+<td>Automática integrada</td>
+</tr>
+<tr>
+<td><strong>Respuesta</strong></td>
+<td>Job despachado</td>
+<td>Resultado completo</td>
+</tr>
+<tr>
+<td><strong>Reintentos</strong></td>
+<td>Manual</td>
+<td>Automático con MeyparService</td>
+</tr>
+<tr>
+<td><strong>Tiempo respuesta</strong></td>
+<td>Inmediato</td>
+<td>Variable (depende de PAC)</td>
+</tr>
+</tbody>
+</table>
+
+<h4>📥 Respuesta de Éxito - Emisión Directa</h4>
+<div class="codehilite"><pre><span></span><code class="language-json"><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Venta MEYPAR creada y emitida exitosamente&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;attempt&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;sale&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">12345</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;invoice_number&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;MEYPAR-EMISSION-001&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;customer_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;María Elena Rodríguez&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;total&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;8000.0000&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;invoice_date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2025-08-12&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;issued&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;emission&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;cufe&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FE012000155702081-2-2021-2600002025081179999999990010127999999993&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;transition_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;01K2G9PGACC8BDC4NYP5D5HMZE&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;numeroDocumentoFiscal&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0000001234&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;pac_response&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;sale&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">12345</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;invoices&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;transition&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;01K2G9PGACC8BDC4NYP5D5HMZE&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;cufe&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FE012000155702081-2-2021-2600002025081179999999990010127999999993&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;codigoSucursalEmisor&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;001&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;numeroDocumentoFiscal&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0000001234&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;puntoFacturacionFiscal&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;001&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;tipoDocumento&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;01&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;tipoEmision&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;01&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;signedXml&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4...&quot;</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h4>❌ Respuesta de Error - Después de 3 Reintentos</h4>
+<div class="codehilite"><pre><span></span><code class="language-json"><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Falló después de 3 intentos&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;error&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Error procesando venta MEYPAR con emisión&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<hr>
+
+<h2 id="estructura-del-request">📊 Estructura del Request</h2>
+
+<p><strong>La estructura del request es idéntica para ambos endpoints.</strong> Basado en la documentación MEYPAR Colombia y los objetos WADetalleFactura, WAMedioPagoFactura, WATerminalID:</p>
+
+<h3>📦 Ejemplo Completo de Request</h3>
+<div class="codehilite"><pre><span></span><code class="language-json"><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;documento&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="nt">&quot;tipo_documento&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;numero&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;MEYPAR-001&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;numero&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;MEYPAR-INTEGRATION-001&quot;</span><span class="p">,</span>
 <span class="w">    </span><span class="nt">&quot;fecha&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2025-08-12&quot;</span><span class="p">,</span>
 <span class="w">    </span><span class="nt">&quot;emisor&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">      </span><span class="nt">&quot;nombre&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Estacionamientos MEYPAR Colombia&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;nombre&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Estacionamientos MEYPAR Colombia SAS&quot;</span><span class="p">,</span>
 <span class="w">      </span><span class="nt">&quot;nit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;900123456-1&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;direccion&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Calle 123 #45-67&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;telefono&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;+57 1 2345678&quot;</span>
+<span class="w">      </span><span class="nt">&quot;direccion&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Calle 123 #45-67, Bogotá D.C.&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;telefono&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;+57 1 2345678&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;email&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;emisor@meypar.co&quot;</span>
 <span class="w">    </span><span class="p">},</span>
 <span class="w">    </span><span class="nt">&quot;adquiriente&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">      </span><span class="nt">&quot;nombre&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Juan Pérez&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;nit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;12345678-9&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;email&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;juan.perez@email.com&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;direccion&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Carrera 10 #20-30&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;telefono&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;+57 300 1234567&quot;</span>
+<span class="w">      </span><span class="nt">&quot;nombre&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Carlos Eduardo Morales&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;nit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;79123456-7&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;email&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;carlos.morales@gmail.com&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;direccion&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Carrera 15 #32-18, Bogotá D.C.&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;telefono&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;+57 310 5678901&quot;</span>
 <span class="w">    </span><span class="p">},</span>
 <span class="w">    </span><span class="nt">&quot;terminal&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">      </span><span class="nt">&quot;CodigoTerminal&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;CodigoExterno&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;NombreTerminal&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;PP1-Automatica3&quot;</span>
+<span class="w">      </span><span class="nt">&quot;CodigoTerminal&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;CodigoExterno&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;TERM-BOG-001&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;NombreTerminal&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Terminal Centro Comercial Unicentro&quot;</span>
 <span class="w">    </span><span class="p">},</span>
 <span class="w">    </span><span class="nt">&quot;items&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <span class="w">      </span><span class="p">{</span>
 <span class="w">        </span><span class="nt">&quot;objectName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;WADetalleFactura&quot;</span><span class="p">,</span>
 <span class="w">        </span><span class="nt">&quot;cantidad&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;descripcion&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Cobro Ticket Estacionamiento&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;precioUnitario&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">2500.00</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;codigoProducto&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;TICKET-EST&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;descripcion&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Cobro Estancia Vehiculo - 2 horas 30 min&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;precioUnitario&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">4500.00</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;codigoProducto&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;EST-VEHICULO&quot;</span><span class="p">,</span>
 <span class="w">        </span><span class="nt">&quot;codigoVehiculo&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
 <span class="w">        </span><span class="nt">&quot;unidadMedida&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;UNI&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;precioTotalSinDescuento&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">2500.00</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;precioTotalFinalDetalle&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">2500.00</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;observacion&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;45min&quot;</span>
+<span class="w">        </span><span class="nt">&quot;precioTotalSinDescuento&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">4500.00</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;precioTotalFinalDetalle&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">4500.00</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;observacion&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;150min - Entrada: 14:30, Salida: 17:00&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;objectName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;WADetalleFactura&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;cantidad&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;descripcion&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Recarga Electrica Vehiculo&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;precioUnitario&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">8000.00</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;codigoProducto&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;RECARGA-ELECT&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;codigoVehiculo&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;unidadMedida&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;KWH&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;precioTotalSinDescuento&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">8000.00</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;precioTotalFinalDetalle&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">8000.00</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;observacion&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;15 KWH - Tiempo: 45min&quot;</span>
 <span class="w">      </span><span class="p">}</span>
 <span class="w">    </span><span class="p">],</span>
 <span class="w">    </span><span class="nt">&quot;medios_pago&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <span class="w">      </span><span class="p">{</span>
 <span class="w">        </span><span class="nt">&quot;objectName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;WAMedioPagoFactura&quot;</span><span class="p">,</span>
 <span class="w">        </span><span class="nt">&quot;codigoMedioPago&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;importeMedioPago&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">2500.00</span>
+<span class="w">        </span><span class="nt">&quot;importeMedioPago&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">12500.00</span>
 <span class="w">      </span><span class="p">}</span>
 <span class="w">    </span><span class="p">],</span>
 <span class="w">    </span><span class="nt">&quot;totales&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">      </span><span class="nt">&quot;total&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">2500.00</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;subtotal&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">2500.00</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;total&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">12500.00</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;subtotal&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">12500.00</span><span class="p">,</span>
 <span class="w">      </span><span class="nt">&quot;impuestos&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.00</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;descuentos&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.00</span>
+<span class="w">      </span><span class="nt">&quot;descuentos&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.00</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;moneda&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;COP&quot;</span>
 <span class="w">    </span><span class="p">},</span>
 <span class="w">    </span><span class="nt">&quot;autorizacion_prefijo&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">      </span><span class="nt">&quot;objectName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;WAAutorizacionPrefijo&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;PrefijoId&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;C1PQ&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;ResolucionNumero&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;132343423423432&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;VigenciaFecha&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2025-01-15&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;PrefijoId&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;UNI1&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;ResolucionNumero&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;18764000000123&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;VigenciaFecha&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-12-31&quot;</span><span class="p">,</span>
 <span class="w">      </span><span class="nt">&quot;VigenciaDuracion&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">24</span><span class="p">,</span>
 <span class="w">      </span><span class="nt">&quot;CorrelativoInicialNum&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;CorrelativoFinalNum&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">30000</span>
+<span class="w">      </span><span class="nt">&quot;CorrelativoFinalNum&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">50000</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="w">  </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
 
-<h2 id="respuesta-exitosa">Respuesta Exitosa</h2>
-<div class="codehilite"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;response&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;HTTP: 201 OK&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Documento MEYPAR enviado para procesamiento. Se procesará en segundo plano.&quot;</span>
-<span class="p">}</span>
-</code></pre></div>
+<hr>
 
-<h2 id="respuesta-de-error">Respuesta de Error</h2>
-<div class="codehilite"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;response&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;HTTP: 201 OK&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Mensaje de error específico&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;error&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Error procesando documento MEYPAR&quot;</span>
-<span class="p">}</span>
-</code></pre></div>
+<h2 id="casos-de-uso">💡 Casos de Uso</h2>
 
-<h2 id="codigos-de-medios-de-pago-mediodepagotypeenum">Códigos de Medios de Pago (MedioDePagoTypeEnum)</h2>
+<h3>🅿️ Estacionamientos</h3>
 <ul>
-<li><code>1</code> = Efectivo</li>
-<li><code>2</code> = Pago con Tarjeta  </li>
-<li><code>3</code> = Cheque</li>
-<li><code>4</code> = Transferencia</li>
+<li><strong>Cobro de estancia</strong>: Facturación por tiempo de permanencia</li>
+<li><strong>Zonas VIP</strong>: Estacionamiento premium con servicios adicionales</li>
+<li><strong>Estacionamiento nocturno</strong>: Tarifas especiales por horario</li>
 </ul>
-<h2 id="codigos-de-vehiculos-vehiculotypeenum">Códigos de Vehículos (VehiculoTypeEnum)</h2>
+
+<h3>⚡ Servicios Eléctricos</h3>
 <ul>
-<li><code>0</code> = Vehículo genérico</li>
-<li><code>1</code> = Coche</li>
-<li><code>2</code> = Coche pequeño</li>
-<li><code>40</code> = Ciclomotor</li>
-<li><code>41</code> = Motocicleta</li>
-<li><code>50</code> = Furgoneta</li>
-<li><code>60</code> = Camión</li>
+<li><strong>Recarga de vehículos eléctricos</strong>: Por KWH consumidos</li>
+<li><strong>Servicios de carga rápida</strong>: Tarifas premium</li>
 </ul>
-<h2 id="codigos-de-conceptos-de-sistema-systemconceptenum">Códigos de Conceptos de Sistema (SystemConceptEnum)</h2>
+
+<h3>🔧 Servicios Adicionales</h3>
 <ul>
-<li><code>1</code> = Cobro definido por usuario</li>
-<li><code>2</code> = Cobro de estancia de Ticket</li>
-<li><code>4</code> = Cobro de ticket perdido</li>
-<li><code>8</code> = Renovación de abono</li>
-<li><code>34</code> = Cobro recarga eléctrica</li>
+<li><strong>Lavado de vehículos</strong>: Servicios de limpieza</li>
+<li><strong>Servicios premium</strong>: Atención personalizada</li>
+<li><strong>Multi-terminal</strong>: Soporte para múltiples terminales</li>
 </ul>
-<h2 id="notas-importantes">Notas Importantes</h2>
+
+<hr>
+
+<h2 id="configuraciones-requeridas">⚙️ Configuraciones Requeridas</h2>
+
+<h3>📋 PAC Connection</h3>
+<ul>
+<li>Configuración PAC activa en la organización</li>
+<li>Token válido y endpoint configurado</li>
+<li>Certificados digitales válidos</li>
+</ul>
+
+<h3>🔧 MeyparService</h3>
+<ul>
+<li>Servicio configurado para la organización</li>
+<li>Mapeo de productos MEYPAR a códigos internos</li>
+<li>Configuración de impuestos y tarifas</li>
+</ul>
+
+<hr>
+
+<h2 id="monitoreo-y-mejores-practicas">📊 Monitoreo y Mejores Prácticas</h2>
+
+<h3>📈 Consideraciones de Performance</h3>
+<table>
+<thead>
+<tr>
+<th>Aspecto</th>
+<th>Impacto</th>
+<th>Recomendación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Tiempo de respuesta</strong></td>
+<td>Variable (PAC + procesamiento)</td>
+<td>Implementar timeout en cliente</td>
+</tr>
+<tr>
+<td><strong>Reintentos automáticos</strong></td>
+<td>Hasta 3 intentos con sleep(1-3s)</td>
+<td>Mostrar indicador de progreso</td>
+</tr>
+<tr>
+<td><strong>Conexión PAC</strong></td>
+<td>Dependiente del proveedor PAC</td>
+<td>Monitorear disponibilidad</td>
+</tr>
+<tr>
+<td><strong>Procesamiento de datos</strong></td>
+<td>Creación de registros BD</td>
+<td>Optimizar queries de inserción</td>
+</tr>
+</tbody>
+</table>
+
+<h3>✅ Validaciones Específicas</h3>
+<ul>
+<li><strong>Items</strong>: Mínimo 1 item requerido</li>
+<li><strong>Medios de Pago</strong>: Al menos un medio de pago</li>
+<li><strong>Terminal</strong>: Validación opcional pero recomendada</li>
+<li><strong>Moneda</strong>: Soporte para COP, USD, PAB</li>
+<li><strong>Fecha</strong>: Formato YYYY-MM-DD</li>
+</ul>
+
+<h3>🔍 Mejores Prácticas</h3>
 <ol>
-<li><strong>Procesamiento Asíncrono</strong>: La API procesa los datos en segundo plano usando Jobs de Laravel</li>
-<li><strong>Multi-tenant</strong>: Cada organización tiene su propia base de datos</li>
-<li><strong>Almacenamiento</strong>: Los datos se mapean a los modelos internos de DocuCenter:</li>
-<li><code>CustomersImp</code>: Datos del adquiriente</li>
-<li><code>SalesHeaderImp</code>: Cabecera del documento</li>
-<li><code>SalesDetailImp</code>: Detalles de items</li>
-<li><code>ProductsImp</code>: Productos/servicios</li>
-<li><code>CustomerReceiptHeaderImp/DetailImp</code>: Medios de pago</li>
-<li><strong>Validación</strong>: Validaciones completas basadas en la especificación MEYPAR</li>
-<li><strong>Logging</strong>: Registro detallado para debugging y auditoría</li>
+<li><strong>Timeout del cliente</strong>: Configurar timeout mínimo de 30 segundos</li>
+<li><strong>Manejo de errores</strong>: Implementar fallback a método asíncrono si falla</li>
+<li><strong>Cache de resultados</strong>: Evitar reprocesamiento (verificar <code>EzeeIssued</code>)</li>
+<li><strong>Monitoring</strong>: Alertas por alta latencia o errores frecuentes</li>
+<li><strong>Validación previa</strong>: Verificar configuración PAC antes del envío</li>
+<li><strong>XML firmado</strong>: Para Alanube, el XML base64 se incluye en <code>signedXml</code></li>
 </ol>
+
+<hr>
+
+<h2 id="soporte">📞 Soporte</h2>
+<p>Para soporte con integración MEYPAR:</p>
+<ul>
+<li><strong>Email</strong>: desarrollo@apconpanama.me</li>
+<li><strong>GitHub</strong>: <a href="https://github.com/aghabrego/docucenter-public/issues">Reportar Issues</a></li>
+<li><strong>Documentación</strong>: <a href="../apis/">Índice de APIs</a></li>
+<li><strong>MEYPAR Colombia</strong>: Soporte técnico especializado en integración</li>
+</ul>
 
 
 
