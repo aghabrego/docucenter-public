@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="description" content="FE API - DocuCenter">
     <meta name="author" content="aghabrego">
-    <link rel="canonical" href="https://aghabrego.github.io/docucenter/fe-api/">
+    <link rel="canonical" href="https://aghabrego.github.io/docucenter-public/fe-api/">
     <link rel="icon" href="https://home.apconpanama.me/wp-content/uploads/2024/03/logo3.png">
     <title>FE API - DocuCenter</title>
     <link rel="stylesheet" href="../assets/stylesheets/main.7e37652d.min.css">
@@ -158,121 +158,235 @@
                 <div class="md-content">
                     <article class="md-content__inner md-typeset">
                         
-<h1>🧾 API Facturación Electrónica (FE) - Documentación Técnica</h1>
+<h1 id="fe-api-facturacion-electronica-docucenter">🧾 API Facturación Electrónica (FE) - DocuCenter</h1>
 
-<h2>📋 Descripción General</h2>
-<p>La API de Facturación Electrónica (FE) proporciona endpoints especializados para la emisión, importación y gestión de documentos fiscales electrónicos conforme a las regulaciones de la DGI de Panamá.</p>
+<h2 id="introduccion">📋 Introducción</h2>
+<p>Las APIs de Facturación Electrónica (FE) permiten la integración con el sistema de facturación electrónica de Panamá, facilitando la emisión de facturas electrónicas desde diferentes plataformas y sistemas ERP.</p>
 
-<h2>🔐 Autenticación</h2>
-<p>Todas las rutas requieren autenticación Sanctum y verificación de organización activa:</p>
-<pre><code>Authorization: Bearer {token}
-Content-Type: application/json
-X-Organization-ID: {organization_id}</code></pre>
-
-<h2>🌐 URL Base</h2>
-<pre><code>https://apconpanama.me/api/v1/fe/</code></pre>
+<p><strong>Autenticación:</strong> Bearer Token requerido para todos los endpoints</p>
+<p><strong>Middleware:</strong> <code>check.activate.organization</code> - Verificación de organización activa</p>
 
 <hr>
 
-<h2>📄 Módulo de Documentos Fiscales</h2>
+<h2 id="emitir-factura-acicloud">💼 Emitir Factura desde ACICloud</h2>
 
-<h3>GET <code>/download_base64_document/{id}</code></h3>
-<p>Descarga un documento fiscal en formato base64.</p>
-<p><strong>Parámetros:</strong></p>
-<ul>
-<li><code>id</code>: ID único del documento fiscal</li>
-</ul>
-<p><strong>Respuesta:</strong></p>
-<pre><code class="json">{
-  "success": true,
-  "data": {
-    "document_id": "FE-2025-001234",
-    "base64_content": "JVBERi0xLjQKMSAwIG9iago8PAovVHlwZSAvQ2F0YWxvZ...",
-    "mime_type": "application/pdf",
-    "filename": "factura_001234.pdf"
-  }
-}</code></pre>
+<h3>POST <code>/api/v1/fe/create_sale_acicloud</code></h3>
+<p>Crea y emite una factura electrónica basada en datos provenientes del sistema Sage ACICloud.</p>
 
-<h3>POST <code>/import_xml</code></h3>
-<p>Importa un documento XML de facturación electrónica.</p>
-<p><strong>Request Body:</strong></p>
-<pre><code class="json">{
-  "xml_content": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>...",
-  "document_type": "01", // 01=Factura, 02=Nota Crédito, 03=Nota Débito
-  "validate_dgi": true
-}</code></pre>
+<p><strong>Controller:</strong> <code>FeController::createSaleAciCloud</code></p>
+<p><strong>Autenticación:</strong> Bearer Token requerido</p>
 
-<p><strong>Respuesta:</strong></p>
-<pre><code class="json">{
-  "success": true,
-  "data": {
-    "document_id": "FE-2025-001234",
-    "dgi_number": "01234567890123456789",
-    "status": "imported",
-    "validation_errors": []
-  }
-}</code></pre>
+<h4>📤 Headers Requeridos</h4>
+<pre><code>Authorization: Bearer {token}
+Content-Type: application/json</code></pre>
 
-<h3>POST <code>/emit_json_object</code></h3>
-<p>Emite un documento fiscal a partir de un objeto JSON.</p>
-<p><strong>Request Body:</strong></p>
+<h4>📝 Campos de Request</h4>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Tipo</th>
+<th>Requerido</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>dGen.gDatRec.iTipoRec</code></td>
+<td>string</td>
+<td>✅</td>
+<td>Tipo de receptor</td>
+</tr>
+<tr>
+<td><code>dGen.gDatRec.gRucRec.dTipoRuc</code></td>
+<td>string</td>
+<td>✅</td>
+<td>Tipo de RUC (default: "1")</td>
+</tr>
+<tr>
+<td><code>gTot.gFormaPago[].iFormaPago</code></td>
+<td>string</td>
+<td>✅</td>
+<td>Forma de pago</td>
+</tr>
+<tr>
+<td><code>gItem[].gITBMSItem.dTasaITBMS</code></td>
+<td>string</td>
+<td>✅</td>
+<td>Tasa de ITBMS</td>
+</tr>
+</tbody>
+</table>
+
+<h4>📨 Ejemplo de Request</h4>
 <pre><code class="json">{
-  "document_type": "01",
-  "emission_point": "001",
-  "customer": {
-    "identification_type": "04", // RUC
-    "identification": "1234567890-1-2024",
-    "name": "Cliente Ejemplo S.A.",
-    "email": "cliente@ejemplo.com"
-  },
-  "items": [
-    {
-      "description": "Servicio de Consultoría",
-      "quantity": 1,
-      "unit_price": 1000.00,
-      "tax_rate": 0.07
+  "dGen": {
+    "gDatRec": {
+      "iTipoRec": "01",
+      "gRucRec": {
+        "dTipoRuc": "1"
+      }
     }
-  ],
-  "totals": {
-    "subtotal": 1000.00,
-    "tax": 70.00,
-    "total": 1070.00
-  }
+  },
+  "gTot": {
+    "gFormaPago": [
+      {
+        "iFormaPago": "01",
+        "dMontoFPago": "118.00"
+      }
+    ]
+  },
+  "gItem": [
+    {
+      "dCodProd": "PROD001",
+      "dDesProd": "Producto ejemplo",
+      "dCantProd": "1.00",
+      "dPrUnit": "100.00",
+      "gITBMSItem": {
+        "dTasaITBMS": "07"
+      }
+    }
+  ]
 }</code></pre>
 
-<h2>🏷️ Tipos de Documento</h2>
+<hr>
+
+<h2 id="emitir-factura-quickbooks">📊 Emitir Factura desde Quickbooks</h2>
+
+<h3>POST <code>/api/v1/fe/create_sale_quickbooks</code></h3>
+<p>Crea y emite una factura electrónica basada en datos provenientes de Quickbooks Online.</p>
+
+<p><strong>Controller:</strong> <code>FeController::createSaleQuickbooks</code></p>
+<p><strong>Autenticación:</strong> Bearer Token requerido</p>
+
+<hr>
+
+<h2 id="emitir-factura-shopify">🛒 Emitir Factura desde Shopify</h2>
+
+<h3>POST <code>/api/v1/fe/create_sale_shopify</code></h3>
+<p>Crea y emite una factura electrónica basada en datos provenientes de Shopify.</p>
+
+<p><strong>Controller:</strong> <code>FeController::createSaleShopify</code></p>
+<p><strong>Autenticación:</strong> Bearer Token requerido</p>
+
+<hr>
+
+<h2 id="emitir-factura-lightspeed">⚡ Emitir Factura desde Lightspeed</h2>
+
+<h3>POST <code>/api/v1/fe/create_sale_lightspeed</code></h3>
+<p>Crea y emite una factura electrónica basada en datos provenientes de Lightspeed.</p>
+
+<p><strong>Controller:</strong> <code>FeController::createSaleLightspeed</code></p>
+<p><strong>Autenticación:</strong> Bearer Token requerido</p>
+
+<hr>
+
+<h2 id="importar-xml">📄 Importar XML</h2>
+
+<h3>POST <code>/api/v1/fe/import_xml</code></h3>
+<p>Importa y procesa archivos XML para generar facturas electrónicas.</p>
+
+<p><strong>Controller:</strong> <code>FeController::importXml</code></p>
+<p><strong>Autenticación:</strong> Bearer Token requerido</p>
+
+<hr>
+
+<h2 id="emitir-objeto-json">📋 Emitir Objeto JSON</h2>
+
+<h3>POST <code>/api/v1/fe/emit_json_object</code></h3>
+<p>Emite una factura electrónica a partir de un objeto JSON estructurado.</p>
+
+<p><strong>Controller:</strong> <code>FeController::emitObject</code></p>
+<p><strong>Autenticación:</strong> Bearer Token requerido</p>
+
+<hr>
+
+<h2 id="descargar-documento-base64">📥 Descargar Documento Base64</h2>
+
+<h3>GET <code>/api/v1/fe/download_base64_document/{id}</code></h3>
+<p>Descarga un documento de factura electrónica en formato Base64.</p>
+
+<p><strong>Controller:</strong> <code>FeController::downloadBase64Document</code></p>
+<p><strong>Autenticación:</strong> Bearer Token requerido</p>
+
+<h4>📝 Parámetros de URL</h4>
+<table>
+<thead>
+<tr>
+<th>Parámetro</th>
+<th>Tipo</th>
+<th>Requerido</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>integer</td>
+<td>✅</td>
+<td>ID del documento FE</td>
+</tr>
+</tbody>
+</table>
+
+<hr>
+
+<h2 id="codigos-respuesta">📊 Códigos de Respuesta HTTP</h2>
+
+<table>
+<thead>
+<tr>
+<th>Código</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200</td>
+<td>Factura procesada exitosamente</td>
+</tr>
+<tr>
+<td>201</td>
+<td>Factura creada y emitida exitosamente</td>
+</tr>
+<tr>
+<td>400</td>
+<td>Datos de entrada inválidos</td>
+</tr>
+<tr>
+<td>401</td>
+<td>No autorizado</td>
+</tr>
+<tr>
+<td>422</td>
+<td>Error de validación</td>
+</tr>
+<tr>
+<td>500</td>
+<td>Error interno del servidor</td>
+</tr>
+</tbody>
+</table>
+
+<hr>
+
+<h2 id="notas-tecnicas">⚙️ Notas Técnicas</h2>
+
 <ul>
-<li><code>01</code> = Factura Comercial</li>
-<li><code>02</code> = Nota de Crédito</li>
-<li><code>03</code> = Nota de Débito</li>
-<li><code>04</code> = Nota de Entrega</li>
-<li><code>05</code> = Documento de Soporte</li>
+<li><strong>Formato de fechas</strong>: ISO 8601 (YYYY-MM-DDTHH:MM:SS)</li>
+<li><strong>Monedas</strong>: Soporte para USD y PAB</li>
+<li><strong>ITBMS</strong>: Cálculo automático de impuestos</li>
+<li><strong>Validaciones</strong>: Validación estricta según normativas DGI</li>
+<li><strong>Asincronía</strong>: Procesamiento en background con Jobs</li>
+<li><strong>Multi-tenant</strong>: Respeta el contexto de organización</li>
 </ul>
 
-<h2>🆔 Tipos de Identificación</h2>
+<h2 id="soporte">📞 Soporte</h2>
+<p>Para soporte con facturación electrónica:</p>
 <ul>
-<li><code>04</code> = RUC (Registro Único de Contribuyente)</li>
-<li><code>02</code> = Cédula de Identidad Personal</li>
-<li><code>03</code> = Pasaporte</li>
-<li><code>06</code> = Otro</li>
-</ul>
-
-<h2>⚠️ Consideraciones Importantes</h2>
-<ol>
-<li><strong>Cumplimiento DGI</strong>: Todos los documentos deben cumplir con las normativas de la Dirección General de Ingresos de Panamá</li>
-<li><strong>Validación previa</strong>: Recomendamos validar los datos antes de enviarlos para emisión</li>
-<li><strong>Formatos de fecha</strong>: Usar formato ISO 8601 (YYYY-MM-DD)</li>
-<li><strong>Decimales</strong>: Máximo 2 decimales para montos</li>
-<li><strong>Encoding</strong>: UTF-8 para todos los textos</li>
-</ol>
-
-<h2>📞 Soporte y Contacto</h2>
-<p>Para asistencia técnica y consultas:</p>
-<ul>
-<li><strong>🆘 Soporte Técnico</strong>: <a href="mailto:desarrollo@apconpanama.me">desarrollo@apconpanama.me</a></li>
-<li><strong>🐛 Reportar Errores</strong>: <a href="https://github.com/aghabrego/docucenter-public/issues">GitHub Issues</a></li>
-<li><strong>🌐 APC Panamá</strong>: <a href="https://home.apconpanama.me/">https://home.apconpanama.me/</a></li>
-<li><strong>📚 Documentación</strong>: <a href="../apis/">Índice de APIs</a></li>
+<li><strong>Email</strong>: desarrollo@apconpanama.me</li>
+<li><strong>GitHub</strong>: <a href="https://github.com/aghabrego/docucenter-public/issues">Reportar Issues</a></li>
+<li><strong>Documentación</strong>: <a href="../apis/">Índice de APIs</a></li>
 </ul>
 
                     </article>

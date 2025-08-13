@@ -3,238 +3,531 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="description" content="API Sage ACICloud - DocuCenter">
+    <meta name="description" content="Sage ACICloud API - DocuCenter">
     <meta name="author" content="aghabrego">
-    <link rel="canonical" href="https://aghabrego.github.io/docucenter/sage-acicloud-api/">
+    <link rel="canonical" href="https://aghabrego.github.io/docucenter-public/sage-acicloud-api/">
     <link rel="icon" href="https://home.apconpanama.me/wp-content/uploads/2024/03/logo3.png">
-    <title>API Sage ACICloud - Docucenter</title>
+    <title>Sage ACICloud API - DocuCenter</title>
     <link rel="stylesheet" href="../assets/stylesheets/main.7e37652d.min.css">
     <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
     <meta name="theme-color" content="#4051b5">
+    <style>
+      .api-endpoint {
+        background: var(--md-code-bg-color);
+        border-left: 4px solid var(--md-primary-fg-color);
+        padding: 1rem;
+        margin: 1rem 0;
+        border-radius: 0.5rem;
+      }
+      .api-method {
+        display: inline-block;
+        padding: 0.2rem 0.6rem;
+        border-radius: 0.3rem;
+        color: white;
+        font-size: 0.8rem;
+        font-weight: bold;
+        margin-right: 0.5rem;
+      }
+      .method-post { background: #28a745; }
+      .method-get { background: #007bff; }
+      .method-put { background: #ffc107; color: #000; }
+      .method-delete { background: #dc3545; }
+      .validation-rules {
+        background: #f8f9fa;
+        border: 1px solid #dee2e6;
+        border-radius: 0.375rem;
+        padding: 1rem;
+        margin: 1rem 0;
+      }
+    </style>
 </head>
 <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
     
+    <!-- Navigation Header -->
     <header class="md-header md-header--shadow" data-md-component="header">
         <nav class="md-header__inner md-grid" aria-label="Cabecera">
-            <a href="../" title="Docucenter" class="md-header__button md-logo" aria-label="Docucenter" data-md-component="logo">
+            <a href="../" title="Docucenter" class="md-header__button md-logo" aria-label="Docucenter">
                 <img src="https://home.apconpanama.me/wp-content/uploads/2024/03/logo3.png" alt="APC Panamá - Docucenter">
             </a>
-            <div class="md-header__title" data-md-component="header-title">
+            <div class="md-header__title">
                 <div class="md-header__ellipsis">
-                    <div class="md-header__topic">
-                        <span class="md-ellipsis">Docucenter</span>
-                    </div>
-                    <div class="md-header__topic" data-md-component="header-topic">
-                        <span class="md-ellipsis">API Sage ACICloud</span>
-                    </div>
+                    <span class="md-ellipsis">Sage ACICloud API</span>
                 </div>
-            </div>
-            
-            <div class="md-header__source">
-                <a href="https://github.com/aghabrego/docucenter" title="Ir al repositorio" class="md-source" data-md-component="source">
-                    <div class="md-source__icon md-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
-                    </div>
-                    <div class="md-source__repository">aghabrego/docucenter</div>
-                </a>
             </div>
         </nav>
     </header>
-    
-    <div class="md-container" data-md-component="container">
-        <main class="md-main" data-md-component="main">
+
+    <!-- Sidebar -->
+    <div class="md-container">
+        <aside class="md-sidebar md-sidebar--primary">
+            <div class="md-sidebar__scrollwrap">
+                <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary">
+                        <ul class="md-nav__list">
+                            <li class="md-nav__item">
+                                <a href="../" class="md-nav__link">🏠 Inicio</a>
+                            </li>
+                            <li class="md-nav__item">
+                                <a href="../apis/" class="md-nav__link">📋 Índice de APIs</a>
+                            </li>
+                            <li class="md-nav__item">
+                                <a href="../authentication-api/" class="md-nav__link">🔐 Autenticación</a>
+                            </li>
+                            <li class="md-nav__item">
+                                <a href="../organizations-api/" class="md-nav__link">🏢 Organizaciones</a>
+                            </li>
+                            <li class="md-nav__item">
+                                <a href="../fe-api/" class="md-nav__link">🏦 API FE</a>
+                            </li>
+                            <li class="md-nav__item md-nav__item--active">
+                                <a href="#" class="md-nav__link">☁️ Sage ACICloud</a>
+                            </li>
+                            <li class="md-nav__item">
+                                <a href="../locations-api/" class="md-nav__link">📍 Ubicaciones</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="md-main">
             <div class="md-main__inner md-grid">
-                <div class="md-content" data-md-component="content">
+                <div class="md-content">
                     <article class="md-content__inner md-typeset">
                         
-                        <!-- Breadcrumb -->
-                        <nav class="md-breadcrumbs" aria-label="Breadcrumbs">
-                            <ol class="md-breadcrumbs__list">
-                                <li class="md-breadcrumbs__item">
-                                    <a href="../" class="md-breadcrumbs__link">🏠 Inicio</a>
-                                </li>
-                                <li class="md-breadcrumbs__item">
-                                    <a href="../apis/" class="md-breadcrumbs__link">📋 APIs</a>
-                                </li>
-                                <li class="md-breadcrumbs__item md-breadcrumbs__item--active">
-                                    💼 Sage ACICloud
-                                </li>
-                            </ol>
-                        </nav>
-                        
-<h1>🏢 API Sage ACICloud - Documentación Técnica</h1>
+<h1 id="sage-acicloud-api">☁️ API Sage ACICloud - DocuCenter</h1>
 
-<h2>📋 Descripción General</h2>
-<p>La API Sage ACICloud proporciona integración completa con el sistema Sage 50cloud, permitiendo la sincronización bidireccional de datos contables y de facturación entre DocuCenter y Sage.</p>
+<p>Esta es la documentación completa de la API para la integración con <strong>Sage 50cloud</strong> a través del servicio ACICloud, basada en la implementación real del controlador <code>ACIcloudController.php</code>.</p>
 
-<h2>🔐 Autenticación</h2>
-<p>Todas las rutas requieren autenticación Sanctum y verificación de organización activa:</p>
-<pre><code>Authorization: Bearer {token}
+<div class="admonition note">
+    <p class="admonition-title">Nota Importante</p>
+    <p>Esta API proporciona sincronización bidireccional completa con Sage 50cloud, incluyendo clientes, productos, inventarios, ventas, compras y contabilidad general.</p>
+</div>
+
+<h2 id="autenticacion">🔐 Autenticación</h2>
+
+<p>La API utiliza autenticación Bearer Token (Laravel Sanctum):</p>
+
+<pre><code class="language-bash">Authorization: Bearer {token}
 Content-Type: application/json
-X-Organization-ID: {organization_id}</code></pre>
+X-Organization-ID: {organization_id}
+</code></pre>
 
-<h2>🌐 URL Base</h2>
-<pre><code>https://apconpanama.me/api/acicloud/</code></pre>
+<h2 id="base-url">🌐 Base URL</h2>
+
+<pre><code>POST /api/acicloud/{endpoint}
+</code></pre>
 
 <hr>
 
-<h2>📋 Módulo de Facturas</h2>
+<h2 id="facturas">1. 📋 Módulo de Facturas</h2>
 
-<h3>GET <code>/invoices</code></h3>
-<p>Obtiene el listado de facturas desde Sage.</p>
-<p><strong>Respuesta:</strong></p>
-<pre><code class="json">{
-  "success": true,
-  "data": [
+<div class="api-endpoint">
+    <h3 id="obtener-facturas">Obtener Facturas</h3>
+    <p><span class="api-method method-post">POST</span> <code>/api/acicloud/invoices</code></p>
+    <p><strong>Request Class:</strong> <code>ACIcloudInvoicesExpRequest</code></p>
+    <p><strong>Método del Controlador:</strong> <code>invoices(ACIcloudInvoicesExpRequest $request, ACIcloudServiceContract $ACIcloudService)</code></p>
+    
+    <p><strong>Parámetros de Filtrado Soportados:</strong></p>
+    <pre><code class="language-json">{
+  "order_column": "Date|Total|SalesInvoiceNumber",
+  "order_direction": "asc|desc",
+  "limit": 50,
+  "filter_match": "and|or",
+  "f": [
     {
-      "invoice_number": "INV-001",
-      "customer_code": "CUST001",
-      "total": 1000.00,
-      "date": "2025-08-12",
-      "status": "posted"
+      "column": "TransactionID|SalesInvoiceNumber|CustomerID|CustomerName|Date|ShipDate|Total|TaxID",
+      "operator": "eq|ne|gt|gte|lt|lte|like|not_like|between|not_between|in|not_in",
+      "query_1": "valor_filtro",
+      "query_2": "valor_filtro_2"
+    }
+  ]
+}</code></pre>
+</div>
+
+<div class="validation-rules">
+    <h4>📊 Campos Disponibles para Filtrado:</h4>
+    <ul>
+        <li><code>TransactionID</code> - ID de transacción</li>
+        <li><code>SalesInvoiceNumber</code> - Número de factura</li>
+        <li><code>CustomerID</code> - ID del cliente</li>
+        <li><code>CustomerName</code> - Nombre del cliente</li>
+        <li><code>Date</code> - Fecha de la factura</li>
+        <li><code>ShipDate</code> - Fecha de envío</li>
+        <li><code>Total</code> - Total de la factura</li>
+        <li><code>TaxID</code> - ID de impuesto</li>
+    </ul>
+</div>
+
+<h2 id="clientes">2. 👥 Módulo de Clientes (Customers)</h2>
+
+<div class="api-endpoint">
+    <h3 id="obtener-clientes">Obtener Clientes</h3>
+    <p><span class="api-method method-post">POST</span> <code>/api/acicloud/customers</code></p>
+    <p><strong>Request Class:</strong> <code>ACIcloudCustomersExpRequest</code></p>
+    <p><strong>Método del Controlador:</strong> <code>customers(ACIcloudCustomersExpRequest $request, ACIcloudServiceContract $ACIcloudService)</code></p>
+</div>
+
+<div class="api-endpoint">
+    <h3 id="crear-cliente">Crear Cliente</h3>
+    <p><span class="api-method method-post">POST</span> <code>/api/acicloud/customers-imp</code></p>
+    <p><strong>Request Class:</strong> <code>CustomersImpRequest</code></p>
+    <p><strong>Método del Controlador:</strong> <code>customersImp(CustomersImpRequest $request, ACIcloudServiceContract $ACIcloudService)</code></p>
+    
+    <p><strong>Estructura del Request:</strong></p>
+    <pre><code class="language-json">{
+  "CustomerID": "CUST001",
+  "Customer_Bill_Name": "Nombre del Cliente",
+  "AddressLine1": "Dirección línea 1",
+  "AddressLine2": "Dirección línea 2",
+  "City": "Ciudad",
+  "State": "PA",
+  "Zip": "12345",
+  "Country": "Panamá",
+  "Telephone1": "+507 1234-5678",
+  "Email": "cliente@email.com",
+  "RUC": "1234567890123",
+  "DV": "12",
+  "Custom_field3": "Campo personalizado 3",
+  "Custom_field4": "Campo personalizado 4",
+  "Custom_field5": "Campo personalizado 5"
+}</code></pre>
+</div>
+
+<div class="validation-rules">
+    <h4>✅ Reglas de Validación para Clientes:</h4>
+    <ul>
+        <li><strong>CustomerID:</strong> Requerido, string, único, máximo 20 caracteres</li>
+        <li><strong>Customer_Bill_Name:</strong> Requerido, string, máximo 39 caracteres</li>
+        <li><strong>AddressLine1, AddressLine2, City, Country:</strong> Opcionales, string</li>
+        <li><strong>State:</strong> Opcional, string, máximo 2 caracteres</li>
+        <li><strong>Zip:</strong> Opcional, string, máximo 12 caracteres</li>
+        <li><strong>Telephone1:</strong> Opcional, string, máximo 20 caracteres</li>
+        <li><strong>Email:</strong> Opcional, string, máximo 64 caracteres</li>
+        <li><strong>RUC:</strong> Opcional, alfanumérico con guiones y guiones bajos, máximo 40 caracteres</li>
+        <li><strong>DV:</strong> Opcional, alfanumérico con guiones y guiones bajos, máximo 40 caracteres</li>
+        <li><strong>Custom_field3/4/5:</strong> Opcionales, alfanuméricos con guiones y guiones bajos, máximo 40 caracteres</li>
+    </ul>
+</div>
+
+<div class="api-endpoint">
+    <h3 id="obtener-clientes-importados">Obtener Clientes Importados</h3>
+    <p><span class="api-method method-post">POST</span> <code>/api/acicloud/get-customers-imp</code></p>
+    <p><strong>Request Class:</strong> <code>ACIcloudCustomersImpRequest</code></p>
+    <p><strong>Método del Controlador:</strong> <code>getCustomersImp(ACIcloudCustomersImpRequest $request, ACIcloudServiceContract $ACIcloudService)</code></p>
+</div>
+
+<hr>
+
+<h2 id="proveedores">3. 🏪 Módulo de Proveedores (Vendors)</h2>
+
+<div class="api-endpoint">
+    <h3>Obtener Proveedores</h3>
+    <p><span class="api-method method-post">POST</span> <code>/api/acicloud/vendors</code></p>
+    <p><strong>Request Class:</strong> <code>ACIcloudVendorsExpRequest</code></p>
+</div>
+
+<div class="api-endpoint">
+    <h3>Crear Proveedor</h3>
+    <p><span class="api-method method-post">POST</span> <code>/api/acicloud/vendors-imp</code></p>
+    <p><strong>Request Class:</strong> <code>VendorsImpRequest</code></p>
+</div>
+
+<div class="api-endpoint">
+    <h3>Obtener Proveedores Importados</h3>
+    <p><span class="api-method method-post">POST</span> <code>/api/acicloud/get-vendors-imp</code></p>
+    <p><strong>Request Class:</strong> <code>ACIcloudVendorsImpRequest</code></p>
+</div>
+
+<hr>
+
+<h2 id="productos">4. 📦 Módulo de Productos (Products)</h2>
+
+<div class="api-endpoint">
+    <h3>Obtener Productos</h3>
+    <p><span class="api-method method-post">POST</span> <code>/api/acicloud/products</code></p>
+    <p><strong>Request Class:</strong> <code>ACIcloudProductRequest</code></p>
+</div>
+
+<div class="api-endpoint">
+    <h3>Crear Producto</h3>
+    <p><span class="api-method method-post">POST</span> <code>/api/acicloud/products-imp</code></p>
+    <p><strong>Request Class:</strong> <code>ProductsImpRequest</code></p>
+</div>
+
+<div class="api-endpoint">
+    <h3>Ajuste de Inventario</h3>
+    <p><span class="api-method method-post">POST</span> <code>/api/acicloud/inventory-adjust</code></p>
+    <p><strong>Request Class:</strong> <code>InventoryadjustImpRequest</code></p>
+</div>
+
+<hr>
+
+<h2 id="ventas">5. 💰 Módulo de Ventas (Sales)</h2>
+
+<div class="api-endpoint">
+    <h3>Obtener Estado de Orden de Venta</h3>
+    <p><span class="api-method method-get">GET</span> <code>/api/acicloud/sales-order-status/{salesOrderNumber}</code></p>
+    <p><strong>Método del Controlador:</strong> <code>salesOrderStatus(string $salesOrderNumber, ACIcloudServiceContract $ACIcloudService)</code></p>
+</div>
+
+<div class="api-endpoint">
+    <h3>Crear Orden de Venta</h3>
+    <p><span class="api-method method-post">POST</span> <code>/api/acicloud/sales-order</code></p>
+    <p><strong>Request Class:</strong> <code>SalesOrderRequest</code></p>
+    
+    <p><strong>Estructura del Request:</strong></p>
+    <pre><code class="language-json">{
+  "SalesOrderNumber": "SO-2025-001",
+  "CustomerID": "CUST001",
+  "CustomerPO": "PO-REF-123",
+  "CustomerName": "Cliente Ejemplo",
+  "Subtotal": 100.00,
+  "TaxID": "TAX001",
+  "OrderTax": 7.00,
+  "NetDue": 107.00,
+  "ARAccount": "1200",
+  "ShipToName": "Cliente Ejemplo",
+  "ShipToAddressLine1": "Calle Principal 123",
+  "ShipToAddressLine2": "Apto 2B",
+  "ShipToCity": "Ciudad de Panamá",
+  "ShipToState": "PA",
+  "ShipToZip": "0000",
+  "ShipToCountry": "Panamá",
+  "SalesRepID": "REP001",
+  "Items": [
+    {
+      "SalesOrderNumber": "SO-2025-001",
+      "Taxable": 1,
+      "ItemOrd": "1",
+      "ItemId": "PROD001",
+      "Description": "Producto Ejemplo",
+      "Quantity": 2,
+      "UnitPrice": 50.00,
+      "NetLine": 100.00,
+      "JobId": "JOB001",
+      "JobPhaseID": "PHASE1",
+      "JobCostCodeID": "CODE1"
+    }
+  ]
+}</code></pre>
+</div>
+
+<div class="validation-rules">
+    <h4>✅ Reglas de Validación para Orden de Venta:</h4>
+    <ul>
+        <li><strong>SalesOrderNumber:</strong> Requerido, string, único, máximo 20 caracteres</li>
+        <li><strong>CustomerID:</strong> Requerido, string, máximo 50 caracteres</li>
+        <li><strong>CustomerName:</strong> Requerido, string, máximo 39 caracteres</li>
+        <li><strong>Subtotal, OrderTax, NetDue:</strong> Requeridos, decimal con 4 decimales</li>
+        <li><strong>Items.*.Taxable:</strong> Requerido, entero, valores permitidos: 1 o 2</li>
+        <li><strong>Items.*.ItemId:</strong> Requerido, string, máximo 20 caracteres</li>
+        <li><strong>Items.*.Description:</strong> Requerido, string, máximo 160 caracteres</li>
+        <li><strong>Items.*.Quantity:</strong> Requerido, decimal con 5 decimales</li>
+        <li><strong>Items.*.UnitPrice, Items.*.NetLine:</strong> Requeridos, decimal con 4 decimales</li>
+    </ul>
+</div>
+
+<hr>
+
+<h2 id="trabajos">6. 💼 Módulo de Trabajos/Proyectos (Jobs)</h2>
+
+<div class="api-endpoint">
+    <h3>Obtener Trabajos</h3>
+    <p><span class="api-method method-post">POST</span> <code>/api/acicloud/jobs</code></p>
+    <p><strong>Request Class:</strong> <code>ACIcloudJobsExpRequest</code></p>
+</div>
+
+<div class="api-endpoint">
+    <h3>Crear Trabajo</h3>
+    <p><span class="api-method method-post">POST</span> <code>/api/acicloud/jobs-imp</code></p>
+    <p><strong>Request Class:</strong> <code>JobsImpRequest</code></p>
+</div>
+
+<hr>
+
+<h2 id="contabilidad">7. 📊 Módulo de Contabilidad (Accounting)</h2>
+
+<div class="api-endpoint">
+    <h3>Crear Entrada de Diario General</h3>
+    <p><span class="api-method method-post">POST</span> <code>/api/acicloud/general-journal-entry</code></p>
+    <p><strong>Request Class:</strong> <code>GJEImpRequest</code></p>
+</div>
+
+<div class="api-endpoint">
+    <h3>Obtener Entradas de Diario General</h3>
+    <p><span class="api-method method-post">POST</span> <code>/api/acicloud/general-journal-entries</code></p>
+    <p><strong>Request Class:</strong> <code>GeneralJournalEntriesImpRequest</code></p>
+</div>
+
+<hr>
+
+<h2 id="pagos">8. 💳 Módulo de Pagos (Payments)</h2>
+
+<div class="api-endpoint">
+    <h3>Crear Recibo de Cliente</h3>
+    <p><span class="api-method method-post">POST</span> <code>/api/acicloud/customer-receipt-imp</code></p>
+    <p><strong>Request Class:</strong> <code>CustomerReceiptImpRequest</code></p>
+</div>
+
+<div class="api-endpoint">
+    <h3>Crear Nota de Crédito de Cliente</h3>
+    <p><span class="api-method method-post">POST</span> <code>/api/acicloud/customer-credit-memo-imp</code></p>
+    <p><strong>Request Class:</strong> <code>CustomerCreditMemoImpRequest</code></p>
+</div>
+
+<hr>
+
+<h2 id="filtrado-avanzado">🔍 Características Avanzadas de Filtrado</h2>
+
+<h3>Sistema de Filtros con DataViewer Trait</h3>
+
+<p>Todos los endpoints que utilizan Request classes que extienden el trait <code>DataViewer</code> soportan filtrado avanzado:</p>
+
+<div class="api-endpoint">
+    <h4>📋 Parámetros Base de Filtrado:</h4>
+    <pre><code class="language-json">{
+  "order_column": "nombre_columna",
+  "order_direction": "asc|desc",
+  "limit": 50,
+  "filter_match": "and|or",
+  "f": [
+    {
+      "column": "nombre_columna",
+      "operator": "operador",
+      "query_1": "valor",
+      "query_2": "valor_opcional"
     }
   ]
 }</code></pre>
 
-<hr>
+    <h4>⚙️ Operadores Disponibles:</h4>
+    <ul>
+        <li><strong>eq:</strong> Igual a</li>
+        <li><strong>ne:</strong> No igual a</li>
+        <li><strong>gt:</strong> Mayor que</li>
+        <li><strong>gte:</strong> Mayor o igual que</li>
+        <li><strong>lt:</strong> Menor que</li>
+        <li><strong>lte:</strong> Menor o igual que</li>
+        <li><strong>like:</strong> Contiene (búsqueda parcial)</li>
+        <li><strong>not_like:</strong> No contiene</li>
+        <li><strong>between:</strong> Entre dos valores (requiere query_1 y query_2)</li>
+        <li><strong>not_between:</strong> No entre dos valores (requiere query_1 y query_2)</li>
+        <li><strong>in:</strong> En lista de valores</li>
+        <li><strong>not_in:</strong> No en lista de valores</li>
+    </ul>
 
-<h2>👥 Módulo de Clientes</h2>
-
-<h3>GET <code>/customers</code></h3>
-<p>Lista todos los clientes de Sage.</p>
-<p><strong>Parámetros de consulta:</strong></p>
-<ul>
-<li><code>page</code>: Página (default: 1)</li>
-<li><code>limit</code>: Registros por página (default: 50)</li>
-<li><code>search</code>: Búsqueda por nombre o código</li>
-</ul>
-
-<h3>POST <code>/customer</code></h3>
-<p>Importa un cliente desde DocuCenter a Sage.</p>
-<p><strong>Request Body:</strong></p>
-<pre><code class="json">{
-  "customer_code": "CUST001",
-  "name": "Cliente Ejemplo S.A.",
-  "ruc": "1234567890-1-2024",
-  "email": "cliente@ejemplo.com",
-  "phone": "+507-1234-5678",
-  "address": {
-    "street": "Calle Principal",
-    "city": "Ciudad de Panamá",
-    "province": "Panamá",
-    "postal_code": "0000"
-  },
-  "credit_limit": 5000.00,
-  "payment_terms": "Net 30"
-}</code></pre>
-
-<h3>GET <code>/customers_imp</code></h3>
-<p>Obtiene el listado de clientes importados desde DocuCenter.</p>
-
-<hr>
-
-<h2>🏪 Módulo de Proveedores</h2>
-
-<h3>GET <code>/vendors</code></h3>
-<p>Lista todos los proveedores de Sage.</p>
-
-<h3>POST <code>/vendor</code></h3>
-<p>Importa un proveedor desde DocuCenter a Sage.</p>
-<p><strong>Request Body:</strong></p>
-<pre><code class="json">{
-  "vendor_code": "VEND001",
-  "name": "Proveedor Ejemplo S.A.",
-  "ruc": "9876543210-1-2024",
-  "email": "proveedor@ejemplo.com",
-  "phone": "+507-9876-5432",
-  "address": {
-    "street": "Avenida Central",
-    "city": "Ciudad de Panamá",
-    "province": "Panamá",
-    "postal_code": "0000"
-  },
-  "credit_limit": 10000.00,
-  "payment_terms": "Net 15"
-}</code></pre>
-
-<hr>
-
-<h2>📦 Módulo de Productos</h2>
-
-<h3>GET <code>/products</code></h3>
-<p>Lista todos los productos/servicios de Sage.</p>
-
-<h3>POST <code>/product</code></h3>
-<p>Importa un producto desde DocuCenter a Sage.</p>
-<p><strong>Request Body:</strong></p>
-<pre><code class="json">{
-  "product_code": "PROD001",
-  "description": "Producto de Ejemplo",
-  "unit_price": 50.00,
-  "tax_rate": 0.07,
-  "unit_of_measure": "UNI",
-  "category": "Servicios"
-}</code></pre>
-
-<hr>
-
-<h2>💰 Módulo de Contabilidad</h2>
-
-<h3>GET <code>/accounts</code></h3>
-<p>Obtiene el catálogo de cuentas contables de Sage.</p>
-
-<h3>POST <code>/journal_entry</code></h3>
-<p>Registra un asiento contable en Sage.</p>
-<p><strong>Request Body:</strong></p>
-<pre><code class="json">{
-  "date": "2025-08-12",
-  "reference": "JE-001",
-  "description": "Asiento de ejemplo",
-  "entries": [
+    <h4>📝 Ejemplo de Filtrado Complejo:</h4>
+    <pre><code class="language-json">{
+  "order_column": "Date",
+  "order_direction": "desc",
+  "limit": 100,
+  "filter_match": "and",
+  "f": [
     {
-      "account_code": "1100",
-      "debit": 1000.00,
-      "credit": 0.00,
-      "description": "Cuenta por cobrar"
+      "column": "Date",
+      "operator": "between",
+      "query_1": "2025-01-01",
+      "query_2": "2025-12-31"
     },
     {
-      "account_code": "4100",
-      "debit": 0.00,
-      "credit": 1000.00,
-      "description": "Ingresos por servicios"
+      "column": "Total",
+      "operator": "gte",
+      "query_1": "100.00"
+    },
+    {
+      "column": "CustomerName",
+      "operator": "like",
+      "query_1": "Cliente"
     }
   ]
 }</code></pre>
+</div>
 
-<h2>🔄 Sincronización</h2>
-<p>La integración permite sincronización bidireccional:</p>
+<hr>
+
+<h2 id="codigos-respuesta">📊 Códigos de Respuesta HTTP</h2>
+
 <ul>
-<li><strong>DocuCenter → Sage</strong>: Clientes, proveedores, productos, facturas</li>
-<li><strong>Sage → DocuCenter</strong>: Estados de cuenta, balances, reportes contables</li>
+<li><strong>200 OK:</strong> Operación exitosa</li>
+<li><strong>201 Created:</strong> Recurso creado exitosamente</li>
+<li><strong>400 Bad Request:</strong> Error en la validación de parámetros</li>
+<li><strong>401 Unauthorized:</strong> Token de autenticación inválido</li>
+<li><strong>403 Forbidden:</strong> Sin permisos para acceder al recurso</li>
+<li><strong>404 Not Found:</strong> Recurso no encontrado</li>
+<li><strong>422 Unprocessable Entity:</strong> Error de validación de datos</li>
+<li><strong>500 Internal Server Error:</strong> Error interno del servidor</li>
 </ul>
 
-<h2>⚠️ Consideraciones Importantes</h2>
+<hr>
+
+<h2 id="estructura-error">❌ Estructura de Respuesta de Error</h2>
+
+<pre><code class="language-json">{
+  "success": false,
+  "message": "Descripción del error",
+  "errors": {
+    "field_name": [
+      "Mensaje de error específico del campo"
+    ]
+  }
+}</code></pre>
+
+<hr>
+
+<h2 id="rate-limiting">⚡ Límites de Rate Limiting</h2>
+
+<ul>
+<li><strong>100 requests por minuto</strong> por organización</li>
+<li><strong>5,000 requests por día</strong> por organización</li>
+</ul>
+
+<hr>
+
+<h2 id="notas-tecnicas">📝 Notas Técnicas</h2>
+
 <ol>
-<li><strong>Códigos únicos</strong>: Asegurar que los códigos de cliente/proveedor/producto sean únicos</li>
-<li><strong>Formato RUC</strong>: Validar formato de RUC según normativas panameñas</li>
-<li><strong>Límites de crédito</strong>: Configurar límites apropiados según políticas empresariales</li>
-<li><strong>Términos de pago</strong>: Usar términos estándar de Sage (Net 15, Net 30, etc.)</li>
+<li><strong>Inyección de Dependencias:</strong> Todos los métodos del controlador utilizan inyección de dependencias para el servicio <code>ACIcloudServiceContract</code></li>
+<li><strong>Validación Automática:</strong> Las Request classes manejan automáticamente la validación antes de llegar al controlador</li>
+<li><strong>Trait DataViewer:</strong> Proporciona capacidades avanzadas de filtrado y paginación</li>
+<li><strong>Delegación al Servicio:</strong> El controlador delega toda la lógica de negocio al servicio ACIcloud</li>
+<li><strong>Documentación LRD:</strong> Los comentarios <code>@lrd:start/@lrd:end</code> son para generación automática de documentación</li>
 </ol>
 
-<h2>📞 Soporte</h2>
-<p>Para soporte técnico:</p>
+<hr>
+
+<h2 id="sincronizacion">🔄 Sincronización</h2>
+
 <ul>
-<li><strong>Email</strong>: desarrollo@apconpanama.me</li>
-<li><strong>GitHub</strong>: <a href="https://github.com/aghabrego/docucenter-public/issues">Reportar Issues</a></li>
-<li><strong>Sage Support</strong>: Documentación oficial de Sage 50cloud</li>
+<li>Los datos se sincronizan en tiempo real</li>
+<li>Se mantiene un log de auditoría de todas las operaciones</li>
+<li>Los conflictos se resuelven con el principio "último en escribir gana"</li>
 </ul>
+
+<hr>
+
+<h2 id="soporte">📞 Soporte y Contacto</h2>
+
+<p>Para más información sobre la integración con Sage ACICloud:</p>
+<ul>
+<li><strong>Email:</strong> desarrollo@apconpanama.me</li>
+<li><strong>GitHub:</strong> <a href="https://github.com/aghabrego/docucenter-public/issues">Reportar Issues</a></li>
+<li><strong>Documentación:</strong> <a href="https://home.apconpanama.me/">APC Panamá</a></li>
+</ul>
+
+<hr>
+
+<p><em><strong>Desarrollado por APC Panamá</strong><br>
+Integración empresarial con Sage 50cloud</em></p>
 
                     </article>
                 </div>
             </div>
         </main>
     </div>
-    
+
     <!-- Scripts -->
     <script src="../assets/javascripts/bundle.50899def.min.js"></script>
 </body>
