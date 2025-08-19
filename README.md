@@ -5,7 +5,7 @@
 [![MkDocs](https://img.shields.io/badge/MkDocs-Material-blue?logo=markdown)](https://squidfunk.github.io/mkdocs-material/)
 [![License](https://img.shields.io/badge/License-Private-red)](https://github.com/aghabrego/docucenter)
 
-> **Documentación técnica oficial** del sistema integral de facturación electrónica **DocuCenter** desarrollado por [APC Panamá](https://home.apconpanama.me/).
+> **Documentación técnica oficial** del sistema integral de facturación electrónica **DocuCenter** desarrollado por [APCON](https://home.apconpanama.me/).
 
 ## 🌐 Sitio Web Live
 
@@ -40,7 +40,7 @@ Este repositorio contiene la documentación pública generada automáticamente d
 | **📍 Ubicaciones** | Provincias, distritos y corregimientos de Panamá | [Ver Docs](https://aghabrego.github.io/docucenter-public/locations-api/) |
 | **🧾 Facturación Electrónica** | Emisión de documentos fiscales DGI Panamá | [Ver Docs](https://aghabrego.github.io/docucenter-public/fe-api/) |
 | **💼 Sage ACICloud** | Sincronización con Sage 50cloud | [Ver Docs](https://aghabrego.github.io/docucenter-public/sage-acicloud-api/) |
-| **☁️ ACICloud General** | API REST principal de APC Panamá | [Ver Docs](https://aghabrego.github.io/docucenter-public/acicloud-api/) |
+| **☁️ ACICloud General** | API REST principal de APCON | [Ver Docs](https://aghabrego.github.io/docucenter-public/acicloud-api/) |
 
 ### 🛠️ Documentación Técnica
 
@@ -245,10 +245,10 @@ El código fuente principal está en el repositorio privado:
 - **GitHub Issues**: [Reportar Problema](https://github.com/aghabrego/docucenter-public/issues)
 - **Documentación**: [Centro de Ayuda](https://aghabrego.github.io/docucenter-public/)
 
-### 🏢 APC Panamá
+### 🏢 APCON
 - **Sitio Web**: [https://home.apconpanama.me/](https://home.apconpanama.me/)
 - **GitHub**: [@aghabrego](https://github.com/aghabrego)
-- **LinkedIn**: [APC Panamá](https://linkedin.com/company/apc-panama)
+- **LinkedIn**: [APCON](https://linkedin.com/company/apc-panama)
 
 ### 📋 Recursos Adicionales
 - **Status Page**: [status.apconpanama.me](https://status.apconpanama.me)
@@ -259,21 +259,21 @@ El código fuente principal está en el repositorio privado:
 
 ## 📄 Licencia y Términos
 
-- **Código Principal**: Propietario - APC Panamá
+- **Código Principal**: Propietario - APCON
 - **Documentación**: Pública para desarrolladores
 - **APIs**: Requieren autenticación y suscripción
-- **Uso Comercial**: Contactar a APC Panamá
+- **Uso Comercial**: Contactar a APCON
 
 ### Disclaimer
-Esta documentación es para fines informativos. El acceso a las APIs requiere autorización previa de APC Panamá.
+Esta documentación es para fines informativos. El acceso a las APIs requiere autorización previa de APCON.
 
 ---
 
 <div align="center">
 
-**Desarrollado con ❤️ por [APC Panamá](https://home.apconpanama.me/)**
+**Desarrollado con ❤️ por [APCON](https://home.apconpanama.me/)**
 
-[![APC Panamá](https://home.apconpanama.me/wp-content/uploads/2024/03/logo3.png)](https://home.apconpanama.me/)
+[![APCON](https://home.apconpanama.me/wp-content/uploads/2024/03/logo3.png)](https://home.apconpanama.me/)
 
 *Facturación Electrónica • Gestión Empresarial • Cumplimiento Fiscal*
 

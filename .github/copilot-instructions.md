@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-**Docucenter** is a comprehensive electronic invoicing and business management system developed by APC Panama. This repository contains the **public documentation site** built with MkDocs Material, deployed to GitHub Pages.
+**Docucenter** is a comprehensive electronic invoicing and business management system developed by APCON. This repository contains the **public documentation site** built with MkDocs Material, deployed to GitHub Pages.
 
 ### ⚠️ IMPORTANT: Source Repository
 **Main Repository**: `git@github.com:aghabrego/docucenter.git` (PRIVATE)  
@@ -153,7 +153,7 @@ docker-compose exec laravel.test vendor/bin/phpunit tests/Unit/Http/Requests/Cre
 
 ## Brand & Assets
 
-- **Company**: APC Panama  
+- **Company**: APCON  
 - **Logo URL**: `https://home.apconpanama.me/wp-content/uploads/2024/03/logo3.png`
 - **GitHub**: `aghabrego/docucenter` (main app repo)
 - **Colors**: Material theme with custom CSS for cards/grids
