@@ -1,0 +1,806 @@
+<!doctype html>
+<html lang="es" class="no-js">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="icon" href="../assets/images/favicon.png">
+    <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.16">
+    <title>API Pagos y Créditos Sage ACICloud - Docucenter</title>
+    <link rel="stylesheet" href="../assets/stylesheets/main.7e37652d.min.css">
+    <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+    <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+    <link rel="canonical" href="https://aghabrego.github.io/docucenter-public/payments-api/">
+</head>
+<body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="light-blue">
+<input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+<input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+<label class="md-overlay" for="__drawer"></label>
+<div data-md-component="skip">
+    <a href="#api-pagos-creditos-sage-acicloud" class="md-skip">Saltar al contenido</a>
+</div>
+<div data-md-component="announce"></div>
+<header class="md-header md-header--shadow" data-md-component="header">
+    <nav class="md-header__inner md-grid" aria-label="Encabezado">
+        <a href="../index.html" title="Docucenter" class="md-header__button md-logo" aria-label="Docucenter" data-md-component="logo">
+            <img src="https://home.apconpanama.me/wp-content/uploads/2024/03/logo3.png" alt="APCON - Docucenter">
+        </a>
+        <label class="md-header__button md-icon" for="__drawer">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+        </label>
+        <div class="md-header__title" data-md-component="header-title">
+            <div class="md-header__ellipsis">
+                <div class="md-header__topic">
+                    <span class="md-ellipsis">Docucenter</span>
+                </div>
+                <div class="md-header__topic" data-md-component="header-topic">
+                    <span class="md-ellipsis">API Pagos y Créditos Sage ACICloud</span>
+                </div>
+            </div>
+        </div>
+        <form class="md-header__option" data-md-component="palette"></form>
+        <div class="md-header__source"></div>
+    </nav>
+</header>
+<div class="md-container" data-md-component="container">
+    <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+            <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+                <div class="md-sidebar__scrollwrap">
+                    <div class="md-sidebar__inner">
+                        <nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+                            <label class="md-nav__title" for="__drawer">
+                                <a href="../index.html" title="Docucenter" class="md-nav__button md-logo" aria-label="Docucenter" data-md-component="logo">
+                                    <img src="https://home.apconpanama.me/wp-content/uploads/2024/03/logo3.png" alt="APCON - Docucenter">
+                                </a>
+                                Docucenter
+                            </label>
+                            <ul class="md-nav__list" data-md-scrollfix>
+                                <li class="md-nav__item">
+                                    <a href="../index.html" class="md-nav__link">🏠 Inicio</a>
+                                </li>
+                                <li class="md-nav__item md-nav__item--active">
+                                    <a href="../payments-api/index.html" class="md-nav__link md-nav__link--active">💰 API Pagos y Créditos</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+                <div class="md-sidebar__scrollwrap">
+                    <div class="md-sidebar__inner">
+                        <nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos" data-md-level="0">
+                            <label class="md-nav__title" for="__toc">
+                                <span class="md-nav__icon md-icon"></span>
+                                Tabla de contenidos
+                            </label>
+                            <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+                                <li class="md-nav__item">
+                                    <a href="#estado-ordenes-venta" class="md-nav__link">Estado de Órdenes de Venta</a>
+                                </li>
+                                <li class="md-nav__item">
+                                    <a href="#crear-orden-venta" class="md-nav__link">Crear Orden de Venta</a>
+                                </li>
+                                <li class="md-nav__item">
+                                    <a href="#crear-recibo-cliente" class="md-nav__link">Crear Recibo de Cliente</a>
+                                </li>
+                                <li class="md-nav__item">
+                                    <a href="#crear-nota-credito" class="md-nav__link">Crear Nota de Crédito</a>
+                                </li>
+                                <li class="md-nav__item">
+                                    <a href="#gestion-cobros" class="md-nav__link">Gestión de Cobros</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <div class="md-content" data-md-component="content">
+                <article class="md-content__inner md-typeset">
+
+<h1 id="api-pagos-creditos-sage-acicloud">💰 API Pagos y Créditos - Sage ACICloud</h1>
+
+<h2 id="estado-ordenes-venta">📊 Obtener Estado de Órdenes de Venta</h2>
+
+<p><strong>Endpoint:</strong> <code>GET /api/acicloud/sales_order_status/{salesOrderNumber}</code><br>
+<strong>Controller:</strong> <code>ACIcloudController::salesOrderStatus</code><br>
+<strong>Autenticación:</strong> Bearer Token requerido<br>
+<strong>Middleware:</strong> <code>check.activate.organization</code></p>
+
+<h3 id="parametros-url">📝 Parámetros de URL</h3>
+<table>
+    <thead>
+        <tr>
+            <th>Parámetro</th>
+            <th>Tipo</th>
+            <th>Requerido</th>
+            <th>Descripción</th>
+            <th>Ejemplo</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>salesOrderNumber</code></td>
+            <td>string</td>
+            <td>✅</td>
+            <td>Número de orden de venta</td>
+            <td><code>"SO-2025-001"</code></td>
+        </tr>
+    </tbody>
+</table>
+
+<h3 id="estados-posibles">🏷️ Estados Posibles</h3>
+<ul>
+    <li><code>pending</code> - Pendiente</li>
+    <li><code>confirmed</code> - Confirmada</li>
+    <li><code>in_production</code> - En producción</li>
+    <li><code>ready_to_ship</code> - Lista para envío</li>
+    <li><code>partially_shipped</code> - Parcialmente enviada</li>
+    <li><code>shipped</code> - Enviada</li>
+    <li><code>delivered</code> - Entregada</li>
+    <li><code>completed</code> - Completada</li>
+    <li><code>cancelled</code> - Cancelada</li>
+</ul>
+
+<h3 id="respuesta-estado">📥 Respuesta de Éxito</h3>
+<pre><code class="language-json">{
+  "success": true,
+  "data": {
+    "sales_order_number": "SO-2025-001",
+    "status": "partially_shipped",
+    "customer": {
+      "id": "CUST001",
+      "name": "ABC Corporation S.A.",
+      "ruc": "12345678-1-123456"
+    },
+    "order_date": "2025-01-15",
+    "requested_date": "2025-01-25",
+    "promised_date": "2025-01-22",
+    "total_amount": 2500.00,
+    "shipped_amount": 1500.00,
+    "remaining_amount": 1000.00,
+    "payment_status": "pending",
+    "shipping_info": {
+      "total_quantity": 10,
+      "shipped_quantity": 6,
+      "remaining_quantity": 4,
+      "shipments": [
+        {
+          "shipment_number": "SHIP-001",
+          "date": "2025-01-20",
+          "quantity": 6,
+          "amount": 1500.00,
+          "tracking_number": "TRK123456789"
+        }
+      ]
+    },
+    "items_status": [
+      {
+        "line_number": 1,
+        "product_code": "PROD001",
+        "description": "Laptop Dell Inspiron 15",
+        "ordered_quantity": 5,
+        "shipped_quantity": 3,
+        "remaining_quantity": 2,
+        "unit_price": 1200.00,
+        "line_status": "partially_shipped"
+      },
+      {
+        "line_number": 2,
+        "product_code": "PROD002",
+        "description": "Mouse Inalámbrico",
+        "ordered_quantity": 5,
+        "shipped_quantity": 3,
+        "remaining_quantity": 2,
+        "unit_price": 25.00,
+        "line_status": "partially_shipped"
+      }
+    ]
+  }
+}</code></pre>
+
+<hr>
+
+<h2 id="crear-orden-venta">📋 Crear Orden de Venta</h2>
+
+<p><strong>Endpoint:</strong> <code>POST /api/acicloud/sales_order</code><br>
+<strong>Request Class:</strong> <code>SalesOrderRequest</code><br>
+<strong>Controller:</strong> <code>ACIcloudController::salesOrder</code><br>
+<strong>Autenticación:</strong> Bearer Token requerido<br>
+<strong>Middleware:</strong> <code>check.activate.organization</code></p>
+
+<h3 id="campos-header">📋 Campos de Request (Header)</h3>
+<table>
+    <thead>
+        <tr>
+            <th>Campo</th>
+            <th>Tipo</th>
+            <th>Requerido</th>
+            <th>Descripción</th>
+            <th>Validación</th>
+            <th>Ejemplo</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>SalesOrderNumber</code></td>
+            <td>string</td>
+            <td>✅</td>
+            <td>Número único de orden</td>
+            <td>Único, máx. 20 chars</td>
+            <td><code>"SO-2025-001"</code></td>
+        </tr>
+        <tr>
+            <td><code>CustomerID</code></td>
+            <td>string</td>
+            <td>✅</td>
+            <td>ID del cliente</td>
+            <td>Máx. 50 characters</td>
+            <td><code>"CUST001"</code></td>
+        </tr>
+        <tr>
+            <td><code>CustomerPO</code></td>
+            <td>string</td>
+            <td>❌</td>
+            <td>Orden de compra del cliente</td>
+            <td>Máx. 50 characters</td>
+            <td><code>"PO-ABC-2025-001"</code></td>
+        </tr>
+        <tr>
+            <td><code>CustomerName</code></td>
+            <td>string</td>
+            <td>✅</td>
+            <td>Nombre del cliente</td>
+            <td>Máx. 39 characters</td>
+            <td><code>"ABC Corporation S.A."</code></td>
+        </tr>
+        <tr>
+            <td><code>Subtotal</code></td>
+            <td>decimal</td>
+            <td>✅</td>
+            <td>Subtotal de la orden</td>
+            <td>Decimal (4 decimales)</td>
+            <td><code>2500.0000</code></td>
+        </tr>
+        <tr>
+            <td><code>TaxID</code></td>
+            <td>string</td>
+            <td>✅</td>
+            <td>ID del impuesto</td>
+            <td>Máx. 8 characters</td>
+            <td><code>"TAX001"</code></td>
+        </tr>
+        <tr>
+            <td><code>OrderTax</code></td>
+            <td>decimal</td>
+            <td>✅</td>
+            <td>Impuesto de la orden</td>
+            <td>Decimal (4 decimales)</td>
+            <td><code>175.0000</code></td>
+        </tr>
+        <tr>
+            <td><code>NetDue</code></td>
+            <td>decimal</td>
+            <td>✅</td>
+            <td>Total neto</td>
+            <td>Decimal (4 decimales)</td>
+            <td><code>2675.0000</code></td>
+        </tr>
+        <tr>
+            <td><code>ShipToName</code></td>
+            <td>string</td>
+            <td>✅</td>
+            <td>Nombre para envío</td>
+            <td>Máx. 100 characters</td>
+            <td><code>"ABC Corp Warehouse"</code></td>
+        </tr>
+    </tbody>
+</table>
+
+<h3 id="campos-items">📦 Campos de Request (Items)</h3>
+<table>
+    <thead>
+        <tr>
+            <th>Campo</th>
+            <th>Tipo</th>
+            <th>Requerido</th>
+            <th>Descripción</th>
+            <th>Validación</th>
+            <th>Ejemplo</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>Items[].SalesOrderNumber</code></td>
+            <td>string</td>
+            <td>✅</td>
+            <td>Número de orden (debe coincidir)</td>
+            <td>Máx. 20 characters</td>
+            <td><code>"SO-2025-001"</code></td>
+        </tr>
+        <tr>
+            <td><code>Items[].Taxable</code></td>
+            <td>integer</td>
+            <td>✅</td>
+            <td>Si aplica impuesto</td>
+            <td>1 o 2</td>
+            <td><code>1</code></td>
+        </tr>
+        <tr>
+            <td><code>Items[].ItemId</code></td>
+            <td>string</td>
+            <td>✅</td>
+            <td>ID del producto</td>
+            <td>Máx. 20 characters</td>
+            <td><code>"PROD001"</code></td>
+        </tr>
+        <tr>
+            <td><code>Items[].Description</code></td>
+            <td>string</td>
+            <td>✅</td>
+            <td>Descripción del item</td>
+            <td>Máx. 160 characters</td>
+            <td><code>"Laptop Dell Inspiron 15"</code></td>
+        </tr>
+        <tr>
+            <td><code>Items[].Quantity</code></td>
+            <td>decimal</td>
+            <td>✅</td>
+            <td>Cantidad</td>
+            <td>Decimal (5 decimales)</td>
+            <td><code>5.00000</code></td>
+        </tr>
+        <tr>
+            <td><code>Items[].UnitPrice</code></td>
+            <td>decimal</td>
+            <td>✅</td>
+            <td>Precio unitario</td>
+            <td>Decimal (4 decimales)</td>
+            <td><code>1200.0000</code></td>
+        </tr>
+        <tr>
+            <td><code>Items[].NetLine</code></td>
+            <td>decimal</td>
+            <td>✅</td>
+            <td>Línea neta</td>
+            <td>Decimal (4 decimales)</td>
+            <td><code>6000.0000</code></td>
+        </tr>
+    </tbody>
+</table>
+
+<h3 id="ejemplo-request-orden">📤 Ejemplo de Request</h3>
+<pre><code class="language-json">{
+  "SalesOrderNumber": "SO-2025-001",
+  "CustomerID": "CUST001",
+  "CustomerPO": "PO-ABC-2025-001",
+  "CustomerName": "ABC Corporation S.A.",
+  "Subtotal": 6125.0000,
+  "TaxID": "TAX001",
+  "OrderTax": 428.7500,
+  "NetDue": 6553.7500,
+  "ARAccount": "1200",
+  "ShipToName": "ABC Corp Warehouse",
+  "ShipToAddressLine1": "Calle 50, Torre Global",
+  "ShipToAddressLine2": "Piso 15, Oficina 1501",
+  "ShipToCity": "Ciudad de Panamá",
+  "ShipToState": "PA",
+  "ShipToZip": "0833",
+  "ShipToCountry": "Panamá",
+  "SalesRepID": "REP001",
+  "Items": [
+    {
+      "SalesOrderNumber": "SO-2025-001",
+      "Taxable": 1,
+      "ItemOrd": "1",
+      "ItemId": "PROD001",
+      "Description": "Laptop Dell Inspiron 15",
+      "Quantity": 5.00000,
+      "UnitPrice": 1200.0000,
+      "NetLine": 6000.0000,
+      "JobId": null,
+      "JobPhaseID": null,
+      "JobCostCodeID": null
+    },
+    {
+      "SalesOrderNumber": "SO-2025-001",
+      "Taxable": 1,
+      "ItemOrd": "2",
+      "ItemId": "PROD002",
+      "Description": "Mouse Inalámbrico",
+      "Quantity": 5.00000,
+      "UnitPrice": 25.0000,
+      "NetLine": 125.0000,
+      "JobId": null,
+      "JobPhaseID": null,
+      "JobCostCodeID": null
+    }
+  ]
+}</code></pre>
+
+<hr>
+
+<h2 id="crear-recibo-cliente">🧾 Crear Recibo de Cliente</h2>
+
+<p><strong>Endpoint:</strong> <code>POST /api/acicloud/customer_receipt_imp</code><br>
+<strong>Controller:</strong> <code>ACIcloudController::customerReceiptImp</code><br>
+<strong>Autenticación:</strong> Bearer Token requerido<br>
+<strong>Middleware:</strong> <code>check.activate.organization</code></p>
+
+<h3 id="campos-recibo">📋 Campos de Request</h3>
+<table>
+    <thead>
+        <tr>
+            <th>Campo</th>
+            <th>Tipo</th>
+            <th>Requerido</th>
+            <th>Descripción</th>
+            <th>Ejemplo</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>receipt_number</code></td>
+            <td>string</td>
+            <td>✅</td>
+            <td>Número del recibo</td>
+            <td><code>"REC-2025-001"</code></td>
+        </tr>
+        <tr>
+            <td><code>customer_id</code></td>
+            <td>string</td>
+            <td>✅</td>
+            <td>ID del cliente</td>
+            <td><code>"CUST001"</code></td>
+        </tr>
+        <tr>
+            <td><code>date</code></td>
+            <td>string</td>
+            <td>✅</td>
+            <td>Fecha del recibo</td>
+            <td><code>"2025-01-29"</code></td>
+        </tr>
+        <tr>
+            <td><code>payment_method</code></td>
+            <td>string</td>
+            <td>✅</td>
+            <td>Método de pago</td>
+            <td><code>"check"</code></td>
+        </tr>
+        <tr>
+            <td><code>amount</code></td>
+            <td>decimal</td>
+            <td>✅</td>
+            <td>Monto del pago</td>
+            <td><code>2500.00</code></td>
+        </tr>
+        <tr>
+            <td><code>currency</code></td>
+            <td>string</td>
+            <td>❌</td>
+            <td>Moneda</td>
+            <td><code>"USD"</code></td>
+        </tr>
+        <tr>
+            <td><code>reference</code></td>
+            <td>string</td>
+            <td>❌</td>
+            <td>Referencia del pago</td>
+            <td><code>"CHK-123456"</code></td>
+        </tr>
+        <tr>
+            <td><code>bank_account</code></td>
+            <td>string</td>
+            <td>❌</td>
+            <td>Cuenta bancaria</td>
+            <td><code>"1100"</code></td>
+        </tr>
+        <tr>
+            <td><code>memo</code></td>
+            <td>string</td>
+            <td>❌</td>
+            <td>Memo del recibo</td>
+            <td><code>"Pago factura SO-2025-001"</code></td>
+        </tr>
+    </tbody>
+</table>
+
+<h3 id="metodos-pago">💳 Métodos de Pago Válidos</h3>
+<ul>
+    <li><code>cash</code> - Efectivo</li>
+    <li><code>check</code> - Cheque</li>
+    <li><code>credit_card</code> - Tarjeta de crédito</li>
+    <li><code>bank_transfer</code> - Transferencia bancaria</li>
+    <li><code>ach</code> - ACH</li>
+    <li><code>wire_transfer</code> - Transferencia wire</li>
+    <li><code>other</code> - Otros</li>
+</ul>
+
+<h3 id="ejemplo-request-recibo">📤 Ejemplo de Request</h3>
+<pre><code class="language-json">{
+  "receipt_number": "REC-2025-001",
+  "customer_id": "CUST001",
+  "date": "2025-01-29",
+  "payment_method": "check",
+  "amount": 2500.00,
+  "currency": "USD",
+  "reference": "CHK-123456",
+  "bank_account": "1100",
+  "memo": "Pago de factura SO-2025-001",
+  "applied_invoices": [
+    {
+      "invoice_number": "INV-2025-001",
+      "amount_applied": 2500.00,
+      "discount_taken": 0.00
+    }
+  ]
+}</code></pre>
+
+<h3 id="respuesta-recibo">📥 Respuesta de Éxito</h3>
+<pre><code class="language-json">{
+  "success": true,
+  "message": "Recibo de cliente creado exitosamente",
+  "data": {
+    "receipt_number": "REC-2025-001",
+    "sage_id": "SAGE_REC_001",
+    "amount": 2500.00,
+    "customer_balance_updated": true,
+    "invoices_applied": 1,
+    "created_at": "2025-01-29 21:30:00",
+    "sync_status": "completed"
+  }
+}</code></pre>
+
+<hr>
+
+<h2 id="crear-nota-credito">🔄 Crear Nota de Crédito de Cliente</h2>
+
+<p><strong>Endpoint:</strong> <code>POST /api/acicloud/customer_credit_memo</code><br>
+<strong>Controller:</strong> <code>ACIcloudController::customerCreditMemoImp</code><br>
+<strong>Autenticación:</strong> Bearer Token requerido<br>
+<strong>Middleware:</strong> <code>check.activate.organization</code></p>
+
+<h3 id="campos-credito">📋 Campos de Request</h3>
+<table>
+    <thead>
+        <tr>
+            <th>Campo</th>
+            <th>Tipo</th>
+            <th>Requerido</th>
+            <th>Descripción</th>
+            <th>Ejemplo</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>credit_memo_number</code></td>
+            <td>string</td>
+            <td>✅</td>
+            <td>Número de nota de crédito</td>
+            <td><code>"CM-2025-001"</code></td>
+        </tr>
+        <tr>
+            <td><code>customer_id</code></td>
+            <td>string</td>
+            <td>✅</td>
+            <td>ID del cliente</td>
+            <td><code>"CUST001"</code></td>
+        </tr>
+        <tr>
+            <td><code>date</code></td>
+            <td>string</td>
+            <td>✅</td>
+            <td>Fecha de la nota</td>
+            <td><code>"2025-01-29"</code></td>
+        </tr>
+        <tr>
+            <td><code>reason</code></td>
+            <td>string</td>
+            <td>✅</td>
+            <td>Razón de la nota de crédito</td>
+            <td><code>"Product return"</code></td>
+        </tr>
+        <tr>
+            <td><code>reference_invoice</code></td>
+            <td>string</td>
+            <td>❌</td>
+            <td>Factura de referencia</td>
+            <td><code>"INV-2025-001"</code></td>
+        </tr>
+        <tr>
+            <td><code>currency</code></td>
+            <td>string</td>
+            <td>❌</td>
+            <td>Moneda</td>
+            <td><code>"USD"</code></td>
+        </tr>
+        <tr>
+            <td><code>items</code></td>
+            <td>array</td>
+            <td>✅</td>
+            <td>Items de la nota de crédito</td>
+            <td><code>[]</code></td>
+        </tr>
+    </tbody>
+</table>
+
+<h3 id="ejemplo-request-credito">📤 Ejemplo de Request</h3>
+<pre><code class="language-json">{
+  "credit_memo_number": "CM-2025-001",
+  "customer_id": "CUST001",
+  "date": "2025-01-29",
+  "reason": "Product return - defective unit",
+  "reference_invoice": "INV-2025-001",
+  "currency": "USD",
+  "items": [
+    {
+      "product_code": "PROD001",
+      "description": "Laptop Dell Inspiron 15 - devuelta",
+      "quantity": 1.00,
+      "unit_price": 1200.00,
+      "tax_rate": 0.07,
+      "reason": "Defective screen"
+    }
+  ]
+}</code></pre>
+
+<h3 id="respuesta-credito">📥 Respuesta de Éxito</h3>
+<pre><code class="language-json">{
+  "success": true,
+  "message": "Nota de crédito creada exitosamente",
+  "data": {
+    "credit_memo_number": "CM-2025-001",
+    "sage_id": "SAGE_CM_001",
+    "subtotal": 1200.00,
+    "tax_amount": 84.00,
+    "total_amount": 1284.00,
+    "customer_balance_updated": true,
+    "created_at": "2025-01-29 21:30:00",
+    "sync_status": "completed"
+  }
+}</code></pre>
+
+<hr>
+
+<h2 id="gestion-cobros">💼 Gestión de Cobros</h2>
+
+<h3 id="caracteristicas-cobros">✨ Características de Gestión</h3>
+<ul>
+    <li>✅ <strong>Recibos</strong>: Registro de pagos recibidos de clientes</li>
+    <li>✅ <strong>Aplicación</strong>: Aplicación de pagos a facturas específicas</li>
+    <li>✅ <strong>Conciliación</strong>: Proceso de conciliación bancaria</li>
+    <li>✅ <strong>Seguimiento</strong>: Control de antigüedad de saldos</li>
+    <li>✅ <strong>Reportes</strong>: Reportes de cobranza y flujo de caja</li>
+</ul>
+
+<h3 id="control-creditos">🔒 Control de Créditos</h3>
+<ul>
+    <li>✅ <strong>Notas de Crédito</strong>: Manejo de devoluciones y ajustes</li>
+    <li>✅ <strong>Aplicación</strong>: Aplicación automática a facturas pendientes</li>
+    <li>✅ <strong>Inventario</strong>: Actualización de inventario en devoluciones</li>
+    <li>✅ <strong>Contabilidad</strong>: Asientos contables automáticos</li>
+    <li>✅ <strong>Aprobaciones</strong>: Flujo de aprobación para notas de crédito</li>
+</ul>
+
+<hr>
+
+<h2 id="codigos-respuesta">📊 Códigos de Respuesta HTTP</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Código</th>
+            <th>Descripción</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>200</td>
+            <td>Consulta exitosa</td>
+        </tr>
+        <tr>
+            <td>201</td>
+            <td>Recibo/Nota de crédito creado exitosamente</td>
+        </tr>
+        <tr>
+            <td>400</td>
+            <td>Datos de entrada inválidos</td>
+        </tr>
+        <tr>
+            <td>401</td>
+            <td>No autorizado</td>
+        </tr>
+        <tr>
+            <td>404</td>
+            <td>Orden/Cliente no encontrado</td>
+        </tr>
+        <tr>
+            <td>422</td>
+            <td>Error de validación</td>
+        </tr>
+        <tr>
+            <td>500</td>
+            <td>Error interno del servidor</td>
+        </tr>
+    </tbody>
+</table>
+
+<hr>
+
+<h2 id="ejemplos-curl">🔧 Ejemplos de cURL</h2>
+
+<h4>Consultar Estado de Orden de Venta</h4>
+<pre><code class="language-bash">curl -X GET "https://api.docucenter.com/api/acicloud/sales_order_status/SO-2025-001" \
+     -H "Authorization: Bearer YOUR_TOKEN"</code></pre>
+
+<h4>Crear Recibo de Cliente</h4>
+<pre><code class="language-bash">curl -X POST "https://api.docucenter.com/api/acicloud/customer_receipt_imp" \
+     -H "Authorization: Bearer YOUR_TOKEN" \
+     -H "Content-Type: application/json" \
+     -d '{
+       "receipt_number": "REC-2025-001",
+       "customer_id": "CUST001",
+       "date": "2025-01-29",
+       "payment_method": "check",
+       "amount": 2500.00,
+       "reference": "CHK-123456"
+     }'</code></pre>
+
+<h4>Crear Nota de Crédito</h4>
+<pre><code class="language-bash">curl -X POST "https://api.docucenter.com/api/acicloud/customer_credit_memo" \
+     -H "Authorization: Bearer YOUR_TOKEN" \
+     -H "Content-Type: application/json" \
+     -d '{
+       "credit_memo_number": "CM-2025-001",
+       "customer_id": "CUST001",
+       "date": "2025-01-29",
+       "reason": "Product return",
+       "items": [
+         {
+           "product_code": "PROD001",
+           "description": "Laptop devuelta",
+           "quantity": 1.00,
+           "unit_price": 1200.00
+         }
+       ]
+     }'</code></pre>
+
+<hr>
+
+<h2 id="notas-tecnicas">⚙️ Notas Técnicas</h2>
+
+<ul>
+    <li><strong>Multi-tenant</strong>: Todos los endpoints respetan el contexto de organización</li>
+    <li><strong>Validación de Saldos</strong>: Se verifica que los pagos no excedan saldos pendientes</li>
+    <li><strong>Aplicación Automática</strong>: Los recibos pueden aplicarse automáticamente a facturas</li>
+    <li><strong>Control de Créditos</strong>: Las notas de crédito actualizan automáticamente saldos</li>
+    <li><strong>Trazabilidad</strong>: Mantiene referencias a documentos originales</li>
+    <li><strong>Monedas Múltiples</strong>: Soporte para pagos en diferentes monedas</li>
+</ul>
+
+<h3 id="integracion-sage">🔗 Integración con Sage ACICloud</h3>
+<p>Los pagos y créditos se integran completamente con el módulo de cuentas por cobrar de Sage ACICloud, actualizando automáticamente balances y generando asientos contables.</p>
+
+                </article>
+            </div>
+        </div>
+    </main>
+    <footer class="md-footer">
+        <div class="md-footer-meta md-typeset">
+            <div class="md-footer-meta__inner md-grid">
+                <div class="md-copyright">
+                    Made with <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">Material for MkDocs</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>
+<div class="md-dialog" data-md-component="dialog">
+    <div class="md-dialog__inner md-typeset"></div>
+</div>
+<script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.path", "navigation.top", "search.suggest", "search.highlight", "content.tabs.link"], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 más en esta página", "search.result.more.other": "# más en esta página", "search.result.none": "No se encontraron coincidencias", "search.result.one": "1 coincidencia", "search.result.other": "# coincidencias", "search.result.placeholder": "Teclea para comenzar la búsqueda", "search.result.term.missing": "Faltante", "select.version": "Seleccionar versión"}}</script>
+<script src="../assets/javascripts/bundle.50899def.min.js"></script>
+</body>
+</html>
