@@ -1,0 +1,919 @@
+<!doctype html>
+<html lang="es" class="no-js">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="icon" href="../assets/images/favicon.png">
+    <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.16">
+    <title>API ACI Cloud con Emisión Síncrona - Docucenter</title>
+    <link rel="stylesheet" href="../assets/stylesheets/main.7e37652d.min.css">
+    <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+    <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+    <link rel="canonical" href="https://aghabrego.github.io/docucenter-public/acicloud-emission-api/">
+</head>
+<body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="light-blue">
+<input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+<input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+<label class="md-overlay" for="__drawer"></label>
+<div data-md-component="skip">
+    <a href="#api-aci-cloud-con-emision-sincrona" class="md-skip">Saltar al contenido</a>
+</div>
+<div data-md-component="announce"></div>
+<header class="md-header md-header--shadow" data-md-component="header">
+    <nav class="md-header__inner md-grid" aria-label="Encabezado">
+        <a href="../index.html" title="Docucenter" class="md-header__button md-logo" aria-label="Docucenter" data-md-component="logo">
+            <img src="https://home.apconpanama.me/wp-content/uploads/2024/03/logo3.png" alt="APCON - Docucenter">
+        </a>
+        <label class="md-header__button md-icon" for="__drawer">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+        </label>
+        <div class="md-header__title" data-md-component="header-title">
+            <div class="md-header__ellipsis">
+                <div class="md-header__topic">
+                    <span class="md-ellipsis">Docucenter</span>
+                </div>
+                <div class="md-header__topic" data-md-component="header-topic">
+                    <span class="md-ellipsis">API ACI Cloud con Emisión Síncrona</span>
+                </div>
+            </div>
+        </div>
+        <form class="md-header__option" data-md-component="palette"></form>
+        <div class="md-header__source"></div>
+    </nav>
+</header>
+<div class="md-container" data-md-component="container">
+    <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+            <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+                <div class="md-sidebar__scrollwrap">
+                    <div class="md-sidebar__inner">
+                        <nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+                            <label class="md-nav__title" for="__drawer">
+                                <a href="../index.html" title="Docucenter" class="md-nav__button md-logo" aria-label="Docucenter" data-md-component="logo">
+                                    <img src="https://home.apconpanama.me/wp-content/uploads/2024/03/logo3.png" alt="APCON - Docucenter">
+                                </a>
+                                Docucenter
+                            </label>
+                            <ul class="md-nav__list" data-md-scrollfix>
+                                <li class="md-nav__item">
+                                    <a href="../index.html" class="md-nav__link">🏠 Inicio</a>
+                                </li>
+                                <li class="md-nav__item md-nav__item--active">
+                                    <a href="../acicloud-emission-api/index.html" class="md-nav__link md-nav__link--active">⚡ ACI Cloud Emission API</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+                <div class="md-sidebar__scrollwrap">
+                    <div class="md-sidebar__inner">
+                        <nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos" data-md-level="0">
+                            <label class="md-nav__title" for="__toc">
+                                <span class="md-nav__icon md-icon"></span>
+                                Tabla de contenidos
+                            </label>
+                            <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+                                <li class="md-nav__item">
+                                    <a href="#descripcion-general" class="md-nav__link">Descripción General</a>
+                                </li>
+                                <li class="md-nav__item">
+                                    <a href="#comparacion-apis" class="md-nav__link">Comparación de APIs</a>
+                                </li>
+                                <li class="md-nav__item">
+                                    <a href="#funcionalidades" class="md-nav__link">Funcionalidades</a>
+                                </li>
+                                <li class="md-nav__item">
+                                    <a href="#endpoint-especificacion" class="md-nav__link">Endpoint y Especificación</a>
+                                </li>
+                                <li class="md-nav__item">
+                                    <a href="#ejemplos-uso" class="md-nav__link">Ejemplos de Uso</a>
+                                </li>
+                                <li class="md-nav__item">
+                                    <a href="#control-reintentos" class="md-nav__link">Control de Reintentos</a>
+                                </li>
+                                <li class="md-nav__item">
+                                    <a href="#testing-validacion" class="md-nav__link">Testing y Validación</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <div class="md-content" data-md-component="content">
+                <article class="md-content__inner md-typeset">
+
+<h1 id="api-aci-cloud-con-emision-sincrona">⚡ API ACI Cloud con Emisión Síncrona</h1>
+
+<h2 id="descripcion-general">📋 Descripción General</h2>
+
+<p>La <strong>API ACI Cloud con Emisión Síncrona</strong> es una nueva implementación que combina la creación de ventas ACI Cloud con la emisión inmediata de facturación electrónica, proporcionando confirmación en tiempo real del resultado completo del proceso.</p>
+
+<h3 id="caracteristicas-principales">⭐ Características Principales</h3>
+<ul>
+    <li>✅ <strong>Procesamiento Síncrono</strong>: Espera el resultado completo de la emisión antes de responder</li>
+    <li>✅ <strong>Confirmación Inmediata</strong>: Retorna el estado final de la facturación electrónica</li>
+    <li>✅ <strong>Reutilización de Código</strong>: Usa servicios existentes sin duplicar lógica</li>
+    <li>✅ <strong>Control de Reintentos</strong>: Máximo 2 intentos automáticos por documento</li>
+    <li>✅ <strong>Auditoría Completa</strong>: Tracking detallado para seguimiento operacional</li>
+    <li>✅ <strong>Compatibilidad Total</strong>: Misma estructura de datos que APIs existentes</li>
+</ul>
+
+<h3 id="endpoint-principal">🔗 Endpoint Principal</h3>
+<pre><code class="language-http">POST /api/v1/fe/create_sale_acicloud_with_emission
+Content-Type: application/json
+Authorization: Bearer {token}</code></pre>
+
+<hr>
+
+<h2 id="comparacion-apis">🔄 Comparación de APIs</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>API</th>
+            <th>Comportamiento</th>
+            <th>Retorna</th>
+            <th>Uso Recomendado</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>/create_sale_acicloud</code></td>
+            <td>⚡ <strong>Asíncrono</strong> - Job en background</td>
+            <td>Confirmación inmediata</td>
+            <td>Procesamiento masivo/batch</td>
+        </tr>
+        <tr>
+            <td><code>/create_sale_acicloud_without_issuing</code></td>
+            <td>⚡ <strong>Asíncrono</strong> - Solo guarda, no emite</td>
+            <td>Confirmación inmediata</td>
+            <td>Solo guardar para revisión</td>
+        </tr>
+        <tr>
+            <td><code>/create_sale_acicloud_with_emission</code></td>
+            <td>⏱️ <strong>Síncrono</strong> - Espera resultado completo</td>
+            <td><strong>Resultado de emisión</strong></td>
+            <td>Integración ERP/POS tiempo real</td>
+        </tr>
+    </tbody>
+</table>
+
+<hr>
+
+<h2 id="funcionalidades">✅ Funcionalidades</h2>
+
+<h3 id="procesamiento-sincrono">1. Procesamiento Síncrono</h3>
+<ul>
+    <li>✅ Procesa la venta ACI Cloud inmediatamente</li>
+    <li>✅ Espera a que complete la emisión de FE</li>
+    <li>✅ Retorna el resultado completo incluyendo CUFE y estado</li>
+    <li>✅ No requiere polling o webhooks para obtener el resultado</li>
+</ul>
+
+<h3 id="reutilizacion-servicios">2. Reutilización de Servicios Existentes</h3>
+<ul>
+    <li>✅ Usa <code>ACIcloudService</code> existente (sin duplicar código)</li>
+    <li>✅ Mismas validaciones que el Job asíncrono</li>
+    <li>✅ Misma lógica de emisión de FE</li>
+    <li>✅ Compatibilidad total con estructura de datos existente</li>
+</ul>
+
+<h3 id="tracking-auditoria">3. Tracking y Auditoría</h3>
+<ul>
+    <li>✅ Almacena transacción para auditoría</li>
+    <li>✅ Logs detallados del proceso completo</li>
+    <li>✅ Control de reintentos: Máximo 2 intentos por documento</li>
+    <li>✅ Manejo de errores específico y detallado</li>
+</ul>
+
+<hr>
+
+<h2 id="endpoint-especificacion">📋 Endpoint y Especificación</h2>
+
+<h3 id="request-headers">🔑 Headers Requeridos</h3>
+<pre><code class="language-http">Authorization: Bearer {token}
+Content-Type: application/json</code></pre>
+
+<h3 id="request-body">📤 Estructura del Request</h3>
+<p>La API acepta exactamente la misma estructura de datos que las APIs existentes de ACI Cloud:</p>
+
+<pre><code class="language-json">{
+  "dGen": {
+    "iDoc": 1,
+    "dNroDF": "000976",
+    "dPtoFacDF": "200",
+    "dFechaEm": "2025-08-21T00:00:00-05:00",
+    "iNatOp": 1,
+    "iTipoOp": 1,
+    "iDest": 1,
+    "iTipoTranVenta": 1,
+    "dInfEmFE": "INV-000976",
+    "gEmis": {
+      "gRucEmi": {
+        "dTipoRuc": 1,
+        "dRuc": "4-717-1238",
+        "dDV": "05"
+      },
+      "gUbiEm": {
+        "dCodUbi": "4-6-1",
+        "dCorreg": "DAVID (CABECERA)",
+        "dDistr": "DAVID",
+        "dProv": "CHIRIQUI"
+      },
+      "dNombEm": "C4-PHARMA",
+      "dSucEm": "0003",
+      "dCoordEm": "+8.43803,-82.4267",
+      "dDirecEm": "DAVID, AVE. OBALDIA, EDF. DOÑA EMELDA, LOCAL 3",
+      "dTfnEm": "730-2365",
+      "dCorElectEmi": "ginarosemena@chyju.com"
+    },
+    "gDatRec": {
+      "iTipoRec": "01",
+      "gRucRec": {
+        "dTipoRuc": 2,
+        "dRuc": "1808755-1-706832",
+        "dDV": "97"
+      },
+      "dNombRec": "CLINICA HOSPITALSAN JUAN DE DIOS",
+      "dDirecRec": "SANTIAGO, VERAGUAS",
+      "gUbiRec": {
+        "dCodUbi": "9-10-1",
+        "dCorreg": "SANTIAGO, VERAGUAS",
+        "dDistr": "VERAGUAS",
+        "dProv": "VERAGUAS"
+      },
+      "dCorElectRec": "clinicasanjuandedios_@hotmail.com",
+      "cPaisRec": "PA",
+      "dPaisRecDesc": "Panamá"
+    }
+  },
+  "gItem": [
+    {
+      "dSecItem": 1,
+      "dDescProd": "Diazepam 10mg/2ml. LOTE 75TL1965 VENCE 30/11/2026",
+      "cUnidad": "und",
+      "dCantCodInt": 100,
+      "dCodProd": "007800620035",
+      "gPrecios": {
+        "dPrUnit": 3.5,
+        "dPrUnitDesc": 0,
+        "dPrItem": 350,
+        "dValTotItem": 350
+      },
+      "gITBMSItem": {
+        "dTasaITBMS": "00",
+        "dValITBMS": 0
+      },
+      "gISCItem": {
+        "dTasaISC": 0,
+        "dValISC": 0
+      }
+    }
+  ],
+  "gTot": {
+    "dTotNeto": 425,
+    "dTotITBMS": 0,
+    "dTotGravado": 0,
+    "dTotDesc": 0,
+    "dVTot": 425,
+    "dTotRec": 425,
+    "iPzPag": 1,
+    "dNroItems": 1,
+    "dVTotItems": 425,
+    "gFormaPago": [
+      {
+        "iFormaPago": "02",
+        "dVlrCuota": 425
+      }
+    ]
+  }
+}</code></pre>
+
+<h3 id="response-structure">📥 Estructura de Respuesta</h3>
+
+<h4>Respuesta Exitosa</h4>
+<pre><code class="language-json">{
+  "success": true,
+  "message": "Venta ACI Cloud creada y emitida exitosamente",
+  "attempt": 1,
+  "data": {
+    "sale": {
+      "id": 12345,
+      "invoice_number": "000976",
+      "customer_name": "CLINICA HOSPITALSAN JUAN DE DIOS",
+      "subtotal": 425.00,
+      "net_due": 425.00,
+      "date": "2025-08-21T00:00:00-05:00",
+      "issued": true,
+      "attempt_counter": 1
+    },
+    "emission": {
+      "cufe": "abc123...",
+      "status": "approved",
+      "message": "Documento autorizado",
+      "pdf_url": "https://docucenter.app/storage/fe/documents/123456.pdf",
+      "xml_url": "https://docucenter.app/storage/fe/documents/123456.xml"
+    }
+  }
+}</code></pre>
+
+<h4>Respuesta de Error</h4>
+<pre><code class="language-json">{
+  "success": false,
+  "message": "Error procesando venta ACI Cloud con emisión",
+  "error": "Descripción específica del error",
+  "attempt": 2,
+  "data": {
+    "sale": {
+      "id": 12345,
+      "invoice_number": "000976",
+      "issued": false,
+      "attempt_counter": 2
+    },
+    "emission": {
+      "status": "error",
+      "message": "Error en validación DGI",
+      "errors": [
+        "RUC receptor inválido",
+        "ITBMS calculado incorrectamente"
+      ]
+    }
+  }
+}</code></pre>
+
+<hr>
+
+<h2 id="ejemplos-uso">💼 Ejemplos de Uso</h2>
+
+<h3 id="ejemplo-curl">🔧 Ejemplo con cURL</h3>
+<pre><code class="language-bash">#!/bin/bash
+
+# API ACI Cloud con Emisión Síncrona
+curl -X POST "https://docucenter.app/api/v1/fe/create_sale_acicloud_with_emission" \
+  -H "Authorization: Bearer YOUR_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "dGen": {
+      "iDoc": 1,
+      "dNroDF": "000976",
+      "dPtoFacDF": "200",
+      "dFechaEm": "2025-08-21T00:00:00-05:00",
+      "iNatOp": 1,
+      "iTipoOp": 1,
+      "iDest": 1,
+      "iTipoTranVenta": 1,
+      "dInfEmFE": "INV-000976",
+      "gEmis": {
+        "gRucEmi": {
+          "dTipoRuc": 1,
+          "dRuc": "4-717-1238",
+          "dDV": "05"
+        },
+        "gUbiEm": {
+          "dCodUbi": "4-6-1",
+          "dCorreg": "DAVID (CABECERA)",
+          "dDistr": "DAVID",
+          "dProv": "CHIRIQUI"
+        },
+        "dNombEm": "C4-PHARMA",
+        "dSucEm": "0003",
+        "dDirecEm": "DAVID, AVE. OBALDIA, EDF. DOÑA EMELDA, LOCAL 3",
+        "dTfnEm": "730-2365",
+        "dCorElectEmi": "ginarosemena@chyju.com"
+      },
+      "gDatRec": {
+        "iTipoRec": "01",
+        "gRucRec": {
+          "dTipoRuc": 2,
+          "dRuc": "1808755-1-706832",
+          "dDV": "97"
+        },
+        "dNombRec": "CLINICA HOSPITALSAN JUAN DE DIOS",
+        "dDirecRec": "SANTIAGO, VERAGUAS",
+        "gUbiRec": {
+          "dCodUbi": "9-10-1",
+          "dCorreg": "SANTIAGO, VERAGUAS",
+          "dDistr": "VERAGUAS",
+          "dProv": "VERAGUAS"
+        },
+        "dCorElectRec": "clinicasanjuandedios_@hotmail.com",
+        "cPaisRec": "PA",
+        "dPaisRecDesc": "Panamá"
+      }
+    },
+    "gItem": [
+      {
+        "dSecItem": 1,
+        "dDescProd": "Diazepam 10mg/2ml. LOTE 75TL1965 VENCE 30/11/2026",
+        "cUnidad": "und",
+        "dCantCodInt": 100,
+        "dCodProd": "007800620035",
+        "gPrecios": {
+          "dPrUnit": 3.5,
+          "dPrUnitDesc": 0,
+          "dPrItem": 350,
+          "dValTotItem": 350
+        },
+        "gITBMSItem": {
+          "dTasaITBMS": "00",
+          "dValITBMS": 0
+        },
+        "gISCItem": {
+          "dTasaISC": 0,
+          "dValISC": 0
+        }
+      }
+    ],
+    "gTot": {
+      "dTotNeto": 425,
+      "dTotITBMS": 0,
+      "dTotGravado": 0,
+      "dTotDesc": 0,
+      "dVTot": 425,
+      "dTotRec": 425,
+      "iPzPag": 1,
+      "dNroItems": 1,
+      "dVTotItems": 425,
+      "gFormaPago": [
+        {
+          "iFormaPago": "02",
+          "dVlrCuota": 425
+        }
+      ]
+    }
+  }'</code></pre>
+
+<h3 id="ejemplo-php">🐘 Ejemplo con PHP</h3>
+<pre><code class="language-php"><?php
+
+$token = 'YOUR_API_TOKEN_HERE';
+$url = 'https://docucenter.app/api/v1/fe/create_sale_acicloud_with_emission';
+
+$data = [
+    'dGen' => [
+        'iDoc' => 1,
+        'dNroDF' => '000976',
+        'dPtoFacDF' => '200',
+        'dFechaEm' => '2025-08-21T00:00:00-05:00',
+        'iNatOp' => 1,
+        'iTipoOp' => 1,
+        'iDest' => 1,
+        'iTipoTranVenta' => 1,
+        'dInfEmFE' => 'INV-000976',
+        'gEmis' => [
+            'gRucEmi' => [
+                'dTipoRuc' => 1,
+                'dRuc' => '4-717-1238',
+                'dDV' => '05'
+            ],
+            'dNombEm' => 'C4-PHARMA',
+            'dSucEm' => '0003',
+            'dDirecEm' => 'DAVID, AVE. OBALDIA, EDF. DOÑA EMELDA, LOCAL 3',
+            'dTfnEm' => '730-2365',
+            'dCorElectEmi' => 'ginarosemena@chyju.com'
+        ],
+        'gDatRec' => [
+            'iTipoRec' => '01',
+            'gRucRec' => [
+                'dTipoRuc' => 2,
+                'dRuc' => '1808755-1-706832',
+                'dDV' => '97'
+            ],
+            'dNombRec' => 'CLINICA HOSPITALSAN JUAN DE DIOS',
+            'dDirecRec' => 'SANTIAGO, VERAGUAS',
+            'dCorElectRec' => 'clinicasanjuandedios_@hotmail.com',
+            'cPaisRec' => 'PA',
+            'dPaisRecDesc' => 'Panamá'
+        ]
+    ],
+    'gItem' => [
+        [
+            'dSecItem' => 1,
+            'dDescProd' => 'Diazepam 10mg/2ml. LOTE 75TL1965 VENCE 30/11/2026',
+            'cUnidad' => 'und',
+            'dCantCodInt' => 100,
+            'dCodProd' => '007800620035',
+            'gPrecios' => [
+                'dPrUnit' => 3.5,
+                'dPrUnitDesc' => 0,
+                'dPrItem' => 350,
+                'dValTotItem' => 350
+            ],
+            'gITBMSItem' => [
+                'dTasaITBMS' => '00',
+                'dValITBMS' => 0
+            ],
+            'gISCItem' => [
+                'dTasaISC' => 0,
+                'dValISC' => 0
+            ]
+        ]
+    ],
+    'gTot' => [
+        'dTotNeto' => 425,
+        'dTotITBMS' => 0,
+        'dTotGravado' => 0,
+        'dTotDesc' => 0,
+        'dVTot' => 425,
+        'dTotRec' => 425,
+        'iPzPag' => 1,
+        'dNroItems' => 1,
+        'dVTotItems' => 425,
+        'gFormaPago' => [
+            [
+                'iFormaPago' => '02',
+                'dVlrCuota' => 425
+            ]
+        ]
+    ]
+];
+
+$options = [
+    'http' => [
+        'header' => [
+            "Authorization: Bearer $token",
+            "Content-Type: application/json"
+        ],
+        'method' => 'POST',
+        'content' => json_encode($data)
+    ]
+];
+
+$context = stream_context_create($options);
+$result = file_get_contents($url, false, $context);
+$response = json_decode($result, true);
+
+if ($response['success']) {
+    echo "✅ Venta creada y emitida exitosamente\n";
+    echo "ID Venta: " . $response['data']['sale']['id'] . "\n";
+    echo "Número Factura: " . $response['data']['sale']['invoice_number'] . "\n";
+    echo "CUFE: " . $response['data']['emission']['cufe'] . "\n";
+    echo "Estado: " . $response['data']['emission']['status'] . "\n";
+} else {
+    echo "❌ Error: " . $response['message'] . "\n";
+    if (isset($response['data']['emission']['errors'])) {
+        echo "Errores específicos:\n";
+        foreach ($response['data']['emission']['errors'] as $error) {
+            echo "  - $error\n";
+        }
+    }
+}</code></pre>
+
+<h3 id="ejemplo-javascript">🟨 Ejemplo con JavaScript</h3>
+<pre><code class="language-javascript">const token = 'YOUR_API_TOKEN_HERE';
+const url = 'https://docucenter.app/api/v1/fe/create_sale_acicloud_with_emission';
+
+const data = {
+  dGen: {
+    iDoc: 1,
+    dNroDF: "000976",
+    dPtoFacDF: "200",
+    dFechaEm: "2025-08-21T00:00:00-05:00",
+    iNatOp: 1,
+    iTipoOp: 1,
+    iDest: 1,
+    iTipoTranVenta: 1,
+    dInfEmFE: "INV-000976",
+    gEmis: {
+      gRucEmi: {
+        dTipoRuc: 1,
+        dRuc: "4-717-1238",
+        dDV: "05"
+      },
+      dNombEm: "C4-PHARMA",
+      dSucEm: "0003",
+      dDirecEm: "DAVID, AVE. OBALDIA, EDF. DOÑA EMELDA, LOCAL 3",
+      dTfnEm: "730-2365",
+      dCorElectEmi: "ginarosemena@chyju.com"
+    },
+    gDatRec: {
+      iTipoRec: "01",
+      gRucRec: {
+        dTipoRuc: 2,
+        dRuc: "1808755-1-706832",
+        dDV: "97"
+      },
+      dNombRec: "CLINICA HOSPITALSAN JUAN DE DIOS",
+      dDirecRec: "SANTIAGO, VERAGUAS",
+      dCorElectRec: "clinicasanjuandedios_@hotmail.com",
+      cPaisRec: "PA",
+      dPaisRecDesc: "Panamá"
+    }
+  },
+  gItem: [
+    {
+      dSecItem: 1,
+      dDescProd: "Diazepam 10mg/2ml. LOTE 75TL1965 VENCE 30/11/2026",
+      cUnidad: "und",
+      dCantCodInt: 100,
+      dCodProd: "007800620035",
+      gPrecios: {
+        dPrUnit: 3.5,
+        dPrUnitDesc: 0,
+        dPrItem: 350,
+        dValTotItem: 350
+      },
+      gITBMSItem: {
+        dTasaITBMS: "00",
+        dValITBMS: 0
+      },
+      gISCItem: {
+        dTasaISC: 0,
+        dValISC: 0
+      }
+    }
+  ],
+  gTot: {
+    dTotNeto: 425,
+    dTotITBMS: 0,
+    dTotGravado: 0,
+    dTotDesc: 0,
+    dVTot: 425,
+    dTotRec: 425,
+    iPzPag: 1,
+    dNroItems: 1,
+    dVTotItems: 425,
+    gFormaPago: [
+      {
+        iFormaPago: "02",
+        dVlrCuota: 425
+      }
+    ]
+  }
+};
+
+async function createSaleWithEmission() {
+  try {
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    });
+
+    const result = await response.json();
+
+    if (result.success) {
+      console.log('✅ Venta creada y emitida exitosamente');
+      console.log('ID Venta:', result.data.sale.id);
+      console.log('Número Factura:', result.data.sale.invoice_number);
+      console.log('CUFE:', result.data.emission.cufe);
+      console.log('Estado:', result.data.emission.status);
+    } else {
+      console.log('❌ Error:', result.message);
+      if (result.data?.emission?.errors) {
+        console.log('Errores específicos:');
+        result.data.emission.errors.forEach(error => {
+          console.log(`  - ${error}`);
+        });
+      }
+    }
+  } catch (error) {
+    console.error('Error de red:', error);
+  }
+}
+
+createSaleWithEmission();</code></pre>
+
+<hr>
+
+<h2 id="control-reintentos">🔄 Control de Reintentos</h2>
+
+<h3 id="logica-reintentos">📋 Lógica de Reintentos</h3>
+<ul>
+    <li>✅ <strong>Máximo 2 intentos</strong> por documento</li>
+    <li>✅ <strong>Verificación automática</strong> del contador de intentos</li>
+    <li>✅ <strong>Prevención de duplicados</strong> basada en número de documento</li>
+    <li>✅ <strong>Error específico</strong> si se exceden los intentos</li>
+</ul>
+
+<h3 id="ejemplo-error-reintentos">❌ Ejemplo de Error por Reintentos Excedidos</h3>
+<pre><code class="language-json">{
+  "success": false,
+  "message": "Se excede la cantidad de intentos de emisión para este documento. Intentos previos: 2",
+  "error": "Error procesando venta ACI Cloud con emisión",
+  "attempt": 3,
+  "data": {
+    "sale": {
+      "id": 12345,
+      "invoice_number": "000976",
+      "attempt_counter": 2,
+      "issued": false
+    },
+    "emission": {
+      "status": "max_attempts_exceeded",
+      "message": "Máximo de intentos excedido"
+    }
+  }
+}</code></pre>
+
+<h3 id="verificacion-intentos">🔍 Verificación de Intentos Previos</h3>
+<p>Antes de procesar una nueva solicitud, la API verifica:</p>
+<ul>
+    <li>🔍 <strong>Número de documento</strong> no haya sido procesado previamente</li>
+    <li>🔍 <strong>Contador de intentos</strong> no exceda el máximo permitido</li>
+    <li>🔍 <strong>Estado de emisión</strong> del documento en la base de datos</li>
+    <li>🔍 <strong>Registro de auditoría</strong> para tracking completo</li>
+</ul>
+
+<hr>
+
+<h2 id="testing-validacion">🧪 Testing y Validación</h2>
+
+<h3 id="casos-prueba">📋 Casos de Prueba Recomendados</h3>
+
+<h4>1. Caso de Éxito - Primera Emisión</h4>
+<ul>
+    <li>📝 <strong>Datos válidos</strong> según especificación DGI</li>
+    <li>📝 <strong>Número de documento</strong> único</li>
+    <li>📝 <strong>Estructura JSON</strong> completa y correcta</li>
+    <li>✅ <strong>Resultado esperado</strong>: Emisión exitosa en primer intento</li>
+</ul>
+
+<h4>2. Caso de Error - Datos Inválidos</h4>
+<ul>
+    <li>📝 <strong>RUC inválido</strong> o formato incorrecto</li>
+    <li>📝 <strong>ITBMS mal calculado</strong></li>
+    <li>📝 <strong>Campos requeridos</strong> faltantes</li>
+    <li>❌ <strong>Resultado esperado</strong>: Error con detalles específicos</li>
+</ul>
+
+<h4>3. Caso de Reintentos</h4>
+<ul>
+    <li>📝 <strong>Primer intento</strong> con error temporal (ej: conexión DGI)</li>
+    <li>📝 <strong>Segundo intento</strong> con datos corregidos</li>
+    <li>📝 <strong>Tercer intento</strong> debe ser rechazado</li>
+    <li>⚠️ <strong>Resultado esperado</strong>: Error de intentos excedidos</li>
+</ul>
+
+<h4>4. Caso de Documento Duplicado</h4>
+<ul>
+    <li>📝 <strong>Mismo número de documento</strong> enviado múltiples veces</li>
+    <li>📝 <strong>Verificación de estado</strong> existente</li>
+    <li>🔄 <strong>Resultado esperado</strong>: Manejo apropiado según estado anterior</li>
+</ul>
+
+<h3 id="validaciones-automaticas">✅ Validaciones Automáticas</h3>
+
+<h4>Validaciones de Entrada</h4>
+<ul>
+    <li>🔍 <strong>Estructura JSON</strong>: Campos requeridos presentes</li>
+    <li>🔍 <strong>Formatos DGI</strong>: RUC, fechas, códigos de ubicación</li>
+    <li>🔍 <strong>Cálculos matemáticos</strong>: ITBMS, totales, descuentos</li>
+    <li>🔍 <strong>Consistencia de datos</strong>: Relaciones entre campos</li>
+</ul>
+
+<h4>Validaciones de Negocio</h4>
+<ul>
+    <li>🔍 <strong>Número de documento</strong>: Único y formato correcto</li>
+    <li>🔍 <strong>Punto de facturación</strong>: Autorizado para la organización</li>
+    <li>🔍 <strong>Límites de emisión</strong>: Restricciones temporales</li>
+    <li>🔍 <strong>Estados previos</strong>: Verificación de reintentos</li>
+</ul>
+
+<h3 id="monitoreo-logs">📊 Monitoreo y Logs</h3>
+
+<h4>Información Registrada</h4>
+<ul>
+    <li>📋 <strong>Request completo</strong>: Datos de entrada para auditoría</li>
+    <li>📋 <strong>Tiempo de procesamiento</strong>: Performance de la API</li>
+    <li>📋 <strong>Resultado de emisión</strong>: CUFE, estado, errores</li>
+    <li>📋 <strong>Intentos y estados</strong>: Tracking de reintentos</li>
+</ul>
+
+<h4>Alertas Recomendadas</h4>
+<ul>
+    <li>🚨 <strong>Tasa de errores alta</strong>: >10% de fallos en emisión</li>
+    <li>🚨 <strong>Tiempo de respuesta alto</strong>: >30 segundos por request</li>
+    <li>🚨 <strong>Reintentos frecuentes</strong>: Múltiples intentos por documento</li>
+    <li>🚨 <strong>Errores DGI críticos</strong>: Problemas de conectividad o certificados</li>
+</ul>
+
+<hr>
+
+<h2 id="ventajas-uso">🎯 Ventajas y Casos de Uso</h2>
+
+<h3 id="para-integraciones">💼 Para Integraciones que Necesitan Confirmación Inmediata</h3>
+<ul>
+    <li>✅ <strong>ERP/POS en tiempo real</strong>: Saben inmediatamente si la FE fue exitosa</li>
+    <li>✅ <strong>Workflows síncronos</strong>: No necesitan polling o webhooks</li>
+    <li>✅ <strong>Validación inmediata</strong>: Errores detectados al momento</li>
+    <li>✅ <strong>UX mejorada</strong>: Respuesta inmediata al usuario final</li>
+</ul>
+
+<h3 id="para-desarrolladores">👨‍💻 Para Desarrolladores</h3>
+<ul>
+    <li>✅ <strong>Misma estructura de datos</strong> que las APIs existentes</li>
+    <li>✅ <strong>Mismas validaciones automáticas</strong> (padding, campos requeridos)</li>
+    <li>✅ <strong>Compatibilidad total</strong> con el objeto JSON validado</li>
+    <li>✅ <strong>Documentación completa</strong> con ejemplos en múltiples lenguajes</li>
+</ul>
+
+<h3 id="para-operaciones">🏢 Para Operaciones</h3>
+<ul>
+    <li>✅ <strong>Logs detallados</strong> del proceso completo</li>
+    <li>✅ <strong>Tracking de transacciones</strong> para auditoría</li>
+    <li>✅ <strong>Control de reintentos</strong> automático (máximo 2 intentos)</li>
+    <li>✅ <strong>Manejo de errores</strong> específicos y detallados</li>
+</ul>
+
+<h3 id="cuando-usar">📋 Cuándo Usar Cada API</h3>
+<table>
+    <thead>
+        <tr>
+            <th>Escenario</th>
+            <th>API Recomendada</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>Integración ERP/POS en tiempo real</strong></td>
+            <td><code>create_sale_acicloud_with_emission</code></td>
+        </tr>
+        <tr>
+            <td><strong>Procesamiento masivo/batch</strong></td>
+            <td><code>create_sale_acicloud</code></td>
+        </tr>
+        <tr>
+            <td><strong>Solo guardar para revisión</strong></td>
+            <td><code>create_sale_acicloud_without_issuing</code></td>
+        </tr>
+        <tr>
+            <td><strong>Workflows que requieren confirmación</strong></td>
+            <td><code>create_sale_acicloud_with_emission</code></td>
+        </tr>
+        <tr>
+            <td><strong>Integración con sistemas de inventario</strong></td>
+            <td><code>create_sale_acicloud_with_emission</code></td>
+        </tr>
+        <tr>
+            <td><strong>Aplicaciones móviles</strong></td>
+            <td><code>create_sale_acicloud_with_emission</code></td>
+        </tr>
+    </tbody>
+</table>
+
+<hr>
+
+<h2 id="estado-implementacion">✅ Estado de Implementación</h2>
+
+<h3 id="componentes-implementados">🔧 Componentes Implementados</h3>
+<ul>
+    <li>✅ <strong>Controlador</strong>: <code>FeController::createSaleAciCloudWithEmission()</code></li>
+    <li>✅ <strong>Ruta</strong>: <code>POST /api/v1/fe/create_sale_acicloud_with_emission</code></li>
+    <li>✅ <strong>Validaciones</strong>: Reutiliza <code>CreateSaleAciCloudRequest</code></li>
+    <li>✅ <strong>Servicio</strong>: Usa <code>ACIcloudService</code> existente</li>
+    <li>✅ <strong>Testing</strong>: Compatible con objeto JSON validado</li>
+</ul>
+
+<h3 id="integracion-sistemas">🔗 Integración con Sistemas Existentes</h3>
+<ul>
+    <li>✅ <strong>Base de datos</strong>: Usa mismas tablas que APIs existentes</li>
+    <li>✅ <strong>Autenticación</strong>: Sistema Bearer token existente</li>
+    <li>✅ <strong>Logging</strong>: Integrado con sistema de auditoría</li>
+    <li>✅ <strong>Validaciones</strong>: Reutiliza validaciones DGI existentes</li>
+</ul>
+
+<h3 id="production-ready">🚀 Production Ready</h3>
+<div class="admonition success">
+    <p class="admonition-title">API Lista para Producción</p>
+    <p>La API <code>create_sale_acicloud_with_emission</code> está completamente implementada, probada y lista para uso en producción. Incluye todas las validaciones necesarias, manejo de errores robusto y compatibilidad total con la infraestructura existente.</p>
+</div>
+
+<hr>
+
+<div class="admonition info">
+    <p class="admonition-title">Información</p>
+    <p><strong>Fecha de implementación</strong>: Agosto 25, 2025<br>
+    <strong>Versión</strong>: 1.0.0<br>
+    <strong>Autor</strong>: DocuCenter Development Team<br>
+    <strong>Última actualización</strong>: Agosto 25, 2025</p>
+</div>
+
+                </article>
+            </div>
+        </div>
+    </main>
+    <footer class="md-footer">
+        <div class="md-footer-meta md-typeset">
+            <div class="md-footer-meta__inner md-grid">
+                <div class="md-copyright">
+                    Made with <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">Material for MkDocs</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>
+<div class="md-dialog" data-md-component="dialog">
+    <div class="md-dialog__inner md-typeset"></div>
+</div>
+<script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.path", "navigation.top", "search.suggest", "search.highlight", "content.tabs.link"], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 más en esta página", "search.result.more.other": "# más en esta página", "search.result.none": "No se encontraron coincidencias", "search.result.one": "1 coincidencia", "search.result.other": "# coincidencias", "search.result.placeholder": "Teclea para comenzar la búsqueda", "search.result.term.missing": "Faltante", "select.version": "Seleccionar versión"}}</script>
+<script src="../assets/javascripts/bundle.50899def.min.js"></script>
+</body>
+</html>
