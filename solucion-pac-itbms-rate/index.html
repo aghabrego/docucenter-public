@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Solución PAC: Errores ITBMS Rate y RUC Type - DocuCenter</title>
+    <meta name="description" content="Documentación de la solución completa para los errores PAC de Alanube: ITBMS Rate y RUC Type properties">
+    <link rel="canonical" href="https://aghabrego.github.io/docucenter-public/solucion-pac-itbms-rate/">
+    <link rel="icon" href="../assets/images/favicon.png">
+    <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.39">
+    <link rel="stylesheet" href="../assets/stylesheets/main.7e37652d.min.css">
+    <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+    <style>
+        .md-grid {
+            max-width: 1220px;
+        }
+        .highlight {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+        .success {
+            background-color: #d4edda;
+            border-left-color: #28a745;
+        }
+        .danger {
+            background-color: #f8d7da;
+            border-left-color: #dc3545;
+        }
+        .info {
+            background-color: #d1ecf1;
+            border-left-color: #17a2b8;
+        }
+        .card {
+            background: white;
+            border-radius: 8px;
+            padding: 25px;
+            margin: 20px 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .error-box {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            border-radius: 6px;
+            padding: 15px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+        }
+        .solution-box {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            border-radius: 6px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        .code-comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .code-before {
+            background: #f8f9fa;
+            border-left: 4px solid #dc3545;
+            padding: 15px;
+            border-radius: 4px;
+        }
+        .code-after {
+            background: #f8f9fa;
+            border-left: 4px solid #28a745;
+            padding: 15px;
+            border-radius: 4px;
+        }
+        .status-resolved {
+            color: #28a745;
+            font-weight: bold;
+        }
+        .status-error {
+            color: #dc3545;
+            font-weight: bold;
+        }
+        .commit-list {
+            background: #e9ecef;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 15px 0;
+        }
+        .commit-item {
+            margin: 8px 0;
+            font-family: 'Courier New', monospace;
+        }
+    </style>
+</head>
+<body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="light-blue">
+    <div id="container">
+        <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+        <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+        <label class="md-overlay" for="__drawer"></label>
+        <div data-md-component="skip">
+            <a href="#solucion-completa-errores-pac-alanube" class="md-skip">Ir al contenido</a>
+        </div>
+        <div data-md-component="announce"></div>
+        <header class="md-header md-header--shadow" data-md-component="header">
+            <nav class="md-header__inner md-grid" aria-label="Encabezado">
+                <a href="../" title="DocuCenter" class="md-header__button md-logo" aria-label="DocuCenter" data-md-component="logo">
+                    <img src="https://home.apconpanama.me/wp-content/uploads/2024/03/logo3.png" alt="APCON Logo" style="height: 24px;">
+                </a>
+                <label class="md-header__button md-icon" for="__drawer">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+                </label>
+                <div class="md-header__title" data-md-component="header-title">
+                    <div class="md-header__ellipsis">
+                        <div class="md-header__topic">
+                            <span class="md-ellipsis">DocuCenter</span>
+                        </div>
+                        <div class="md-header__topic" data-md-component="header-topic">
+                            <span class="md-ellipsis">🔧 Solución PAC: ITBMS Rate y RUC Type</span>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <div class="md-container" data-md-component="container">
+            <main class="md-main" data-md-component="main">
+                <div class="md-main__inner md-grid">
+                    <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+                        <div class="md-sidebar__scrollwrap">
+                            <div class="md-sidebar__inner">
+                                <nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+                                    <label class="md-nav__title" for="__drawer">
+                                        <a href="../" title="DocuCenter" class="md-nav__button md-logo" aria-label="DocuCenter" data-md-component="logo">
+                                            <img src="https://home.apconpanama.me/wp-content/uploads/2024/03/logo3.png" alt="APCON Logo" style="height: 24px;">
+                                        </a>
+                                        DocuCenter
+                                    </label>
+                                    <ul class="md-nav__list" data-md-scrollfix>
+                                        <li class="md-nav__item">
+                                            <a href="../" class="md-nav__link">🏠 Inicio</a>
+                                        </li>
+                                        <li class="md-nav__item">
+                                            <a href="../apis/" class="md-nav__link">🔌 APIs</a>
+                                        </li>
+                                        <li class="md-nav__item md-nav__item--active">
+                                            <a href="#" class="md-nav__link">🔧 Validaciones PAC</a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="md-content" data-md-component="content">
+                        <article class="md-content__inner md-typeset">
+                            <h1 id="solucion-completa-errores-pac-alanube">🔧 Solución Completa a Errores PAC de Alanube</h1>
+
+                            <div class="highlight danger">
+                                <h3>🚨 Problemas Identificados</h3>
+                                <p>Se identificaron <strong>DOS errores críticos</strong> del PAC de Alanube que impedían la validación de facturas:</p>
+                            </div>
+
+                            <div class="card">
+                                <h2>❌ Errores PAC Identificados</h2>
+                                
+                                <h3>1. Error ITBMS Rate</h3>
+                                <div class="error-box">
+                                    <code>instance.items[0].itbms requires property "rate"</code><br>
+                                    <code>instance.items[1].itbms requires property "rate"</code>
+                                </div>
+
+                                <h3>2. Error Receiver RUC Type</h3>
+                                <div class="error-box">
+                                    <code>instance.receiver.ruc requires property "type"</code>
+                                </div>
+                            </div>
+
+                            <div class="card">
+                                <h2>📊 Datos de Ejemplo que Causaron los Errores</h2>
+                                <pre><code class="language-json">{
+  "dGen": {
+    "gDatRec": {
+      "gRucRec": {
+        "dTipoRuc": "2",        // Problemático cuando es 0
+        "dRuc": "1808755-1-706832",
+        "dDV": "97"             // Era buscado como "dDVRuc"
+      }
+    }
+  },
+  "gItem": [
+    {
+      "gITBMSItem": {
+        "dTasaITBMS": 0,        // ¡PROBLEMA PRINCIPAL!
+        "dValITBMS": "0.000000"
+      }
+    }
+  ]
+}</code></pre>
+                            </div>
+
+                            <div class="card">
+                                <h2>🔍 Causa Raíz de Ambos Errores</h2>
+                                <div class="highlight danger">
+                                    <p><strong>Problema común:</strong> El método <code>removeNullValues()</code> eliminaba propiedades críticas cuando tenían valor <code>0</code>, porque <code>0</code> se evalúa como falsy en PHP.</p>
+                                </div>
+                                
+                                <h3>Funciones Problemáticas:</h3>
+                                <ol>
+                                    <li><strong><code>padString()</code>:</strong> Convertía <code>0</code> a <code>null</code></li>
+                                    <li><strong><code>removeNullValues()</code>:</strong> Eliminaba propiedades con valor <code>0</code></li>
+                                    <li><strong>Mapeo incorrecto:</strong> Buscaba <code>dDVRuc</code> en lugar de <code>dDV</code></li>
+                                </ol>
+                            </div>
+
+                            <div class="card">
+                                <h2>🔧 Soluciones Implementadas</h2>
+
+                                <h3>1. Corrección de <code>padString()</code></h3>
+                                <div class="code-comparison">
+                                    <div class="code-before">
+                                        <h4>❌ Antes:</h4>
+                                        <pre><code class="language-php">private static function padString(?string $value, int $length): ?string
+{
+    return $value ? str_pad($value, $length, '0', STR_PAD_LEFT) : null;
+}</code></pre>
+                                    </div>
+                                    <div class="code-after">
+                                        <h4>✅ Después:</h4>
+                                        <pre><code class="language-php">private static function padString(?string $value, int $length): ?string
+{
+    if ($value === null || $value === '') {
+        return null;
+    }
+    return str_pad($value, $length, '0', STR_PAD_LEFT);
+}</code></pre>
+                                    </div>
+                                </div>
+
+                                <h3>2. Nuevo Método <code>formatTaxStructure()</code></h3>
+                                <pre><code class="language-php">private static function formatTaxStructure(array $tax): array
+{
+    $result = [];
+    foreach ($tax as $key => $value) {
+        if ($value !== null && $value !== '') {
+            $result[$key] = $value;
+        } elseif (($key === 'rate' || $key === 'amount') && is_numeric($value)) {
+            // Para rate y amount, siempre incluir incluso si es 0
+            $result[$key] = (float)$value;
+        }
+    }
+    return $result;
+}</code></pre>
+
+                                <h3>3. Nuevo Método <code>formatRucStructure()</code></h3>
+                                <pre><code class="language-php">private static function formatRucStructure(array $ruc): array
+{
+    $result = [];
+    foreach ($ruc as $key => $value) {
+        if ($value !== null && $value !== '') {
+            $result[$key] = $value;
+        } elseif ($key === 'type' && is_numeric($value)) {
+            // Para 'type', siempre incluir incluso si es 0
+            $result[$key] = (int)$value;
+        }
+    }
+    
+    // Garantizar que 'type' esté presente
+    if (!isset($result['type'])) {
+        $result['type'] = 1; // Valor por defecto
+    }
+    
+    return $result;
+}</code></pre>
+                            </div>
+
+                            <div class="card">
+                                <h2>🔄 Aplicación de las Correcciones</h2>
+
+                                <h3>Formateo de Impuestos</h3>
+                                <div class="code-comparison">
+                                    <div class="code-before">
+                                        <h4>❌ Antes:</h4>
+                                        <pre><code class="language-php">'itbms' => self::removeNullValues([
+    'rate' => self::padString($lineItem['gITBMSItem']['dTasaITBMS'] ?? null, 2),
+    'amount' => (float)($lineItem['gITBMSItem']['dValITBMS'] ?? 0),
+]),</code></pre>
+                                    </div>
+                                    <div class="code-after">
+                                        <h4>✅ Después:</h4>
+                                        <pre><code class="language-php">'itbms' => self::formatTaxStructure([
+    'rate' => self::padString($lineItem['gITBMSItem']['dTasaITBMS'] ?? null, 2),
+    'amount' => (float)($lineItem['gITBMSItem']['dValITBMS'] ?? 0),
+]),</code></pre>
+                                    </div>
+                                </div>
+
+                                <h3>Formateo de RUC</h3>
+                                <div class="code-comparison">
+                                    <div class="code-before">
+                                        <h4>❌ Antes:</h4>
+                                        <pre><code class="language-php">'ruc' => self::removeNullValues([
+    'type' => (int)($data['dGen']['gDatRec']['gRucRec']['dTipoRuc'] ?? 1),
+    'ruc' => $ruc,
+    'verificationDigit' => $data['dGen']['gDatRec']['gRucRec']['dDVRuc'] ?? null,
+]),</code></pre>
+                                    </div>
+                                    <div class="code-after">
+                                        <h4>✅ Después:</h4>
+                                        <pre><code class="language-php">'ruc' => self::formatRucStructure([
+    'type' => (int)($data['dGen']['gDatRec']['gRucRec']['dTipoRuc'] ?? 1),
+    'ruc' => $ruc,
+    'verificationDigit' => $data['dGen']['gDatRec']['gRucRec']['dDV'] ?? 
+                          $data['dGen']['gDatRec']['gRucRec']['dDVRuc'] ?? null,
+]),</code></pre>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card">
+                                <h2>📈 Resultado Final</h2>
+
+                                <h3>Estructura ITBMS Corregida</h3>
+                                <div class="solution-box">
+                                    <pre><code class="language-json">{
+  "itbms": {
+    "rate": "00",    // ✅ Preservado incluso cuando dTasaITBMS = 0
+    "amount": 0      // ✅ Preservado incluso cuando dValITBMS = 0
+  }
+}</code></pre>
+                                </div>
+
+                                <h3>Estructura RUC Corregida</h3>
+                                <div class="solution-box">
+                                    <pre><code class="language-json">{
+  "receiver": {
+    "ruc": {
+      "type": 2,                        // ✅ Preservado incluso cuando dTipoRuc = 0
+      "ruc": "1808755-1-706832",       // ✅ Presente
+      "verificationDigit": "97"        // ✅ Usando campo correcto 'dDV'
+    },
+    "authorizedGroup": {
+      "type": 2,                       // ✅ También corregido
+      "ruc": "1808755-1-706832"
+    }
+  }
+}</code></pre>
+                                </div>
+
+                                <h3>Validación PAC Final</h3>
+                                <div class="highlight success">
+                                    <ul>
+                                        <li>✅ <strong>receiver.ruc 'type' property present:</strong> 2</li>
+                                        <li>✅ <strong>items[0].itbms 'rate' property present:</strong> 00</li>
+                                        <li>✅ <strong>items[0].itbms 'amount' property present:</strong> 0</li>
+                                        <li>✅ <strong>receiver.ruc 'verificationDigit' present:</strong> 97</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="card">
+                                <h2>📁 Archivos Modificados</h2>
+                                <ul>
+                                    <li><strong>/app/Helpers/AlanubeFormatterHelper.php:</strong>
+                                        <ul>
+                                            <li>Método <code>padString()</code> corregido</li>
+                                            <li>Nuevo método <code>formatTaxStructure()</code></li>
+                                            <li>Nuevo método <code>formatRucStructure()</code></li>
+                                            <li>Aplicado a formateo de ITBMS, ISC, RUC y authorizedGroup</li>
+                                            <li>Corrección del mapeo de campos (<code>dDV</code> vs <code>dDVRuc</code>)</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="card">
+                                <h2>🔬 Tests de Validación Creados</h2>
+                                <ul>
+                                    <li><code>test_tax_structure.php</code> - Validación de formatTaxStructure</li>
+                                    <li><code>test_padstring.php</code> - Validación de padString con valores 0</li>
+                                    <li><code>test_complete_scenario.php</code> - Escenario completo del usuario</li>
+                                    <li><code>test_formatpanama_document.php</code> - Validación de formatPanamaDocument</li>
+                                    <li><code>test_final_validation.php</code> - Validación de ambos errores juntos</li>
+                                </ul>
+                            </div>
+
+                            <div class="card">
+                                <h2>📝 Commits Realizados</h2>
+                                <div class="commit-list">
+                                    <div class="commit-item">
+                                        <strong>2146edb</strong> - "fix: preservar propiedades rate y amount de ITBMS/ISC incluso cuando son 0"
+                                    </div>
+                                    <div class="commit-item">
+                                        <strong>235d033</strong> - "fix: preservar propiedad type en receiver.ruc incluso cuando es 0"
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card">
+                                <h2>✅ Errores PAC Resueltos</h2>
+                                <div class="highlight success">
+                                    <h3>Estado de Resolución:</h3>
+                                    <ul>
+                                        <li><span class="status-error">❌ Error Original 1:</span> <code>instance.items[0].itbms requires property "rate"</code></li>
+                                        <li><span class="status-resolved">✅ RESUELTO:</span> Propiedades <code>rate</code> y <code>amount</code> preservadas incluso cuando son 0</li>
+                                        <li><span class="status-error">❌ Error Original 2:</span> <code>instance.receiver.ruc requires property "type"</code></li>
+                                        <li><span class="status-resolved">✅ RESUELTO:</span> Propiedad <code>type</code> preservada incluso cuando es 0, con valor por defecto</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="highlight success">
+                                <h3>🎉 Conclusión</h3>
+                                <p><strong>AMBOS errores PAC han sido completamente resueltos.</strong> El PAC de Alanube ahora debe aceptar las facturas sin errores de validación.</p>
+                            </div>
+
+                            <div style="margin-top: 40px; text-align: center;">
+                                <a href="../" class="md-button md-button--primary">← Volver al Inicio</a>
+                                <a href="../solucion-pac-receiver-type-validation/" class="md-button">Ver Validación Receptor</a>
+                                <a href="../apis/" class="md-button">Ver APIs</a>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</body>
+</html>
