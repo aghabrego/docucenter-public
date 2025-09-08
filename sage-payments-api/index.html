@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>API Pagos y Créditos Sage ACICloud - DocuCenter</title>
+    <meta name="description" content="API para gestionar órdenes de venta, recibos de pago y notas de crédito en Sage ACICloud">
+    <link rel="canonical" href="https://aghabrego.github.io/docucenter-public/sage-payments-api/">
+    <link rel="icon" href="../assets/images/favicon.png">
+    <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.39">
+    <link rel="stylesheet" href="../assets/stylesheets/main.7e37652d.min.css">
+    <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+    <style>
+        .md-grid {
+            max-width: 1220px;
+        }
+        .highlight {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+        .success {
+            background-color: #d4edda;
+            border-left-color: #28a745;
+        }
+        .danger {
+            background-color: #f8d7da;
+            border-left-color: #dc3545;
+        }
+        .info {
+            background-color: #d1ecf1;
+            border-left-color: #17a2b8;
+        }
+        .card {
+            background: white;
+            border-radius: 8px;
+            padding: 25px;
+            margin: 20px 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .endpoint-card {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+        .method-get {
+            background: #28a745;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 0.8em;
+        }
+        .method-post {
+            background: #007bff;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 0.8em;
+        }
+        .params-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        .params-table th,
+        .params-table td {
+            border: 1px solid #dee2e6;
+            padding: 10px;
+            text-align: left;
+        }
+        .params-table th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+        .code-block {
+            background: #212529;
+            color: #f8f9fa;
+            padding: 15px;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            margin: 15px 0;
+            overflow-x: auto;
+        }
+        .response-example {
+            background: #e9ecef;
+            border-left: 4px solid #007bff;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 6px 6px 0;
+        }
+        .status-code {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+        .status-200 { background: #d4edda; color: #155724; }
+        .status-201 { background: #d4edda; color: #155724; }
+        .status-400 { background: #f8d7da; color: #721c24; }
+        .status-401 { background: #f8d7da; color: #721c24; }
+        .status-422 { background: #f8d7da; color: #721c24; }
+        .status-500 { background: #f8d7da; color: #721c24; }
+        .required-badge {
+            background: #dc3545;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 0.7em;
+            font-weight: bold;
+        }
+        .optional-badge {
+            background: #6c757d;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 0.7em;
+            font-weight: bold;
+        }
+        .payment-method {
+            background: #28a745;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 0.7em;
+            margin: 2px;
+            display: inline-block;
+        }
+        .status-badge {
+            background: #17a2b8;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 0.7em;
+            margin: 2px;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="light-blue">
+    <div id="container">
+        <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+        <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+        <label class="md-overlay" for="__drawer"></label>
+        <div data-md-component="skip">
+            <a href="#sage-payments-api" class="md-skip">Ir al contenido</a>
+        </div>
+        <div data-md-component="announce"></div>
+        <header class="md-header md-header--shadow" data-md-component="header">
+            <nav class="md-header__inner md-grid" aria-label="Encabezado">
+                <a href="../" title="DocuCenter" class="md-header__button md-logo" aria-label="DocuCenter" data-md-component="logo">
+                    <img src="https://home.apconpanama.me/wp-content/uploads/2024/03/logo3.png" alt="APCON Logo" style="height: 24px;">
+                </a>
+                <label class="md-header__button md-icon" for="__drawer">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+                </label>
+                <div class="md-header__title" data-md-component="header-title">
+                    <div class="md-header__ellipsis">
+                        <div class="md-header__topic">
+                            <span class="md-ellipsis">DocuCenter</span>
+                        </div>
+                        <div class="md-header__topic" data-md-component="header-topic">
+                            <span class="md-ellipsis">💳 API Pagos Sage</span>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <div class="md-container" data-md-component="container">
+            <main class="md-main" data-md-component="main">
+                <div class="md-main__inner md-grid">
+                    <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+                        <div class="md-sidebar__scrollwrap">
+                            <div class="md-sidebar__inner">
+                                <nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+                                    <label class="md-nav__title" for="__drawer">
+                                        <a href="../" title="DocuCenter" class="md-nav__button md-logo" aria-label="DocuCenter" data-md-component="logo">
+                                            <img src="https://home.apconpanama.me/wp-content/uploads/2024/03/logo3.png" alt="APCON Logo" style="height: 24px;">
+                                        </a>
+                                        DocuCenter
+                                    </label>
+                                    <ul class="md-nav__list" data-md-scrollfix>
+                                        <li class="md-nav__item">
+                                            <a href="../" class="md-nav__link">🏠 Inicio</a>
+                                        </li>
+                                        <li class="md-nav__item md-nav__item--active">
+                                            <a href="#" class="md-nav__link">💳 API Pagos Sage</a>
+                                        </li>
+                                        <li class="md-nav__item">
+                                            <a href="../apis/" class="md-nav__link">🔌 Otras APIs</a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="md-content" data-md-component="content">
+                        <article class="md-content__inner md-typeset">
+                            <h1 id="sage-payments-api">💳 API Pagos y Créditos - Sage ACICloud</h1>
+
+                            <div class="highlight info">
+                                <h3>📋 Descripción</h3>
+                                <p>API completa para gestionar órdenes de venta, recibos de pago y notas de crédito en Sage ACICloud con integración automática al módulo de cuentas por cobrar.</p>
+                            </div>
+
+                            <div class="card">
+                                <h2>🌐 Base URL</h2>
+                                <div class="code-block">
+/api/acicloud/
+                                </div>
+                                <div class="highlight danger">
+                                    <strong>🔐 Autenticación requerida:</strong> Bearer Token (Sanctum)<br>
+                                    <strong>🔒 Middleware:</strong> check.activate.organization
+                                </div>
+                            </div>
+
+                            <div class="card">
+                                <h2>💼 Módulos Principales</h2>
+                                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin: 20px 0;">
+                                    <div style="background: #e3f2fd; padding: 20px; border-radius: 8px; border-left: 4px solid #2196f3;">
+                                        <h3>📄 Órdenes de Venta</h3>
+                                        <p>Creación, consulta y seguimiento de órdenes de venta con control de envíos</p>
+                                    </div>
+                                    <div style="background: #e8f5e8; padding: 20px; border-radius: 8px; border-left: 4px solid #4caf50;">
+                                        <h3>💰 Recibos de Pago</h3>
+                                        <p>Registro de pagos recibidos de clientes con múltiples métodos de pago</p>
+                                    </div>
+                                    <div style="background: #fff3e0; padding: 20px; border-radius: 8px; border-left: 4px solid #ff9800;">
+                                        <h3>🔄 Notas de Crédito</h3>
+                                        <p>Manejo de devoluciones y ajustes de crédito para clientes</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card">
+                                <h2>📚 Endpoints Disponibles</h2>
+
+                                <div class="endpoint-card">
+                                    <h3><span class="method-get">GET</span> Obtener Estado de Orden de Venta</h3>
+                                    <p><strong>Endpoint:</strong> <code>/api/acicloud/sales_order_status/{salesOrderNumber}</code></p>
+                                    <p>Consulta el estado detallado de una orden de venta específica, incluyendo información de envíos y pagos.</p>
+                                    
+                                    <h4>Parámetros de URL</h4>
+                                    <table class="params-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Parámetro</th>
+                                                <th>Tipo</th>
+                                                <th>Descripción</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><code>salesOrderNumber</code> <span class="required-badge">REQUERIDO</span></td>
+                                                <td>string</td>
+                                                <td>Número de orden de venta</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                    <h4>Estados Posibles</h4>
+                                    <div style="margin: 15px 0;">
+                                        <span class="status-badge">pending</span>
+                                        <span class="status-badge">partially_shipped</span>
+                                        <span class="status-badge">shipped</span>
+                                        <span class="status-badge">delivered</span>
+                                        <span class="status-badge">cancelled</span>
+                                    </div>
+
+                                    <h4>Respuesta Exitosa <span class="status-code status-200">200</span></h4>
+                                    <div class="response-example">
+                                        <pre><code class="language-json">{
+  "success": true,
+  "data": {
+    "sales_order_number": "SO-2025-001",
+    "status": "partially_shipped",
+    "customer": {
+      "id": "CUST001",
+      "name": "ABC Corporation S.A.",
+      "ruc": "12345678-1-123456"
+    },
+    "order_date": "2025-01-15",
+    "requested_date": "2025-01-25",
+    "promised_date": "2025-01-22",
+    "total_amount": 2500.00,
+    "shipped_amount": 1500.00,
+    "remaining_amount": 1000.00,
+    "payment_status": "pending",
+    "shipping_info": {
+      "total_quantity": 10,
+      "shipped_quantity": 6,
+      "remaining_quantity": 4,
+      "shipments": [
+        {
+          "shipment_number": "SHIP-001",
+          "date": "2025-01-20",
+          "quantity": 6,
+          "amount": 1500.00,
+          "tracking_number": "TRK123456789"
+        }
+      ]
+    }
+  }
+}</code></pre>
+                                    </div>
+                                </div>
+
+                                <div class="endpoint-card">
+                                    <h3><span class="method-post">POST</span> Crear Orden de Venta</h3>
+                                    <p><strong>Endpoint:</strong> <code>/api/acicloud/sales_order</code></p>
+                                    <p>Crea una nueva orden de venta con líneas de detalle y sincronización automática.</p>
+
+                                    <h4>Campos de Request (Header)</h4>
+                                    <table class="params-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Campo</th>
+                                                <th>Tipo</th>
+                                                <th>Descripción</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><code>CustomerID</code> <span class="required-badge">REQUERIDO</span></td>
+                                                <td>string</td>
+                                                <td>ID del cliente</td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>SONumber</code> <span class="required-badge">REQUERIDO</span></td>
+                                                <td>string</td>
+                                                <td>Número único de orden</td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>SODate</code> <span class="required-badge">REQUERIDO</span></td>
+                                                <td>date</td>
+                                                <td>Fecha de la orden</td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>RequiredDate</code> <span class="optional-badge">OPCIONAL</span></td>
+                                                <td>date</td>
+                                                <td>Fecha requerida de entrega</td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>Items</code> <span class="required-badge">REQUERIDO</span></td>
+                                                <td>array</td>
+                                                <td>Líneas de detalle de la orden</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                    <h4>Campos de Request (Items)</h4>
+                                    <table class="params-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Campo</th>
+                                                <th>Tipo</th>
+                                                <th>Descripción</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><code>ItemID</code> <span class="required-badge">REQUERIDO</span></td>
+                                                <td>string</td>
+                                                <td>ID del producto/servicio</td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>Quantity</code> <span class="required-badge">REQUERIDO</span></td>
+                                                <td>decimal</td>
+                                                <td>Cantidad solicitada</td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>UnitPrice</code> <span class="required-badge">REQUERIDO</span></td>
+                                                <td>decimal</td>
+                                                <td>Precio unitario</td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>Description</code> <span class="optional-badge">OPCIONAL</span></td>
+                                                <td>string</td>
+                                                <td>Descripción del item</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                    <h4>Ejemplo de Request</h4>
+                                    <div class="response-example">
+                                        <pre><code class="language-json">{
+  "CustomerID": "CUST001",
+  "SONumber": "SO-2025-002",
+  "SODate": "2025-01-29",
+  "RequiredDate": "2025-02-05",
+  "ShipToAddress": "Calle 50, Edificio Global Plaza",
+  "ShipToCity": "Ciudad de Panamá",
+  "Items": [
+    {
+      "ItemID": "PROD001",
+      "Quantity": 5,
+      "UnitPrice": 250.00,
+      "Description": "Laptop Dell Inspiron 15"
+    },
+    {
+      "ItemID": "PROD002", 
+      "Quantity": 3,
+      "UnitPrice": 150.00,
+      "Description": "Mouse Inalámbrico"
+    }
+  ]
+}</code></pre>
+                                    </div>
+
+                                    <h4>Respuesta Exitosa <span class="status-code status-201">201</span></h4>
+                                    <div class="response-example">
+                                        <pre><code class="language-json">{
+  "success": true,
+  "data": {
+    "SONumber": "SO-2025-002",
+    "CustomerID": "CUST001",
+    "Status": "pending",
+    "TotalAmount": 1700.00,
+    "OrderDate": "2025-01-29",
+    "sage_sync_status": "synced",
+    "created_at": "2025-01-29T15:30:00.000000Z"
+  }
+}</code></pre>
+                                    </div>
+                                </div>
+
+                                <div class="endpoint-card">
+                                    <h3><span class="method-get">GET</span> Obtener Órdenes de Venta</h3>
+                                    <p><strong>Endpoint:</strong> <code>/api/acicloud/sales_order</code></p>
+                                    <p>Obtiene la lista de órdenes de venta con filtrado y paginación.</p>
+
+                                    <h4>Parámetros de Query (Opcionales)</h4>
+                                    <table class="params-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Parámetro</th>
+                                                <th>Tipo</th>
+                                                <th>Descripción</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><code>status</code> <span class="optional-badge">OPCIONAL</span></td>
+                                                <td>string</td>
+                                                <td>Filtrar por estado</td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>customer_id</code> <span class="optional-badge">OPCIONAL</span></td>
+                                                <td>string</td>
+                                                <td>Filtrar por cliente</td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>page</code> <span class="optional-badge">OPCIONAL</span></td>
+                                                <td>integer</td>
+                                                <td>Página de resultados</td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>per_page</code> <span class="optional-badge">OPCIONAL</span></td>
+                                                <td>integer</td>
+                                                <td>Registros por página</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div class="endpoint-card">
+                                    <h3><span class="method-post">POST</span> Crear Recibo de Cliente</h3>
+                                    <p><strong>Endpoint:</strong> <code>/api/acicloud/customer_receipt_imp</code></p>
+                                    <p>Registra un pago recibido de un cliente con múltiples métodos de pago.</p>
+
+                                    <h4>Métodos de Pago Válidos</h4>
+                                    <div style="margin: 15px 0;">
+                                        <span class="payment-method">cash</span>
+                                        <span class="payment-method">check</span>
+                                        <span class="payment-method">credit_card</span>
+                                        <span class="payment-method">bank_transfer</span>
+                                        <span class="payment-method">ach</span>
+                                        <span class="payment-method">wire_transfer</span>
+                                    </div>
+
+                                    <h4>Campos de Request</h4>
+                                    <table class="params-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Campo</th>
+                                                <th>Tipo</th>
+                                                <th>Descripción</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><code>CustomerID</code> <span class="required-badge">REQUERIDO</span></td>
+                                                <td>string</td>
+                                                <td>ID del cliente</td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>ReceiptNumber</code> <span class="required-badge">REQUERIDO</span></td>
+                                                <td>string</td>
+                                                <td>Número único del recibo</td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>ReceiptDate</code> <span class="required-badge">REQUERIDO</span></td>
+                                                <td>date</td>
+                                                <td>Fecha del recibo</td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>PaymentMethod</code> <span class="required-badge">REQUERIDO</span></td>
+                                                <td>string</td>
+                                                <td>Método de pago utilizado</td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>Amount</code> <span class="required-badge">REQUERIDO</span></td>
+                                                <td>decimal</td>
+                                                <td>Monto del pago</td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>Reference</code> <span class="optional-badge">OPCIONAL</span></td>
+                                                <td>string</td>
+                                                <td>Número de referencia</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                    <h4>Ejemplo de Request</h4>
+                                    <div class="response-example">
+                                        <pre><code class="language-json">{
+  "CustomerID": "CUST001",
+  "ReceiptNumber": "REC-2025-001",
+  "ReceiptDate": "2025-01-29",
+  "PaymentMethod": "bank_transfer",
+  "Amount": 1500.00,
+  "Reference": "TXN789123456",
+  "Notes": "Pago parcial orden SO-2025-001"
+}</code></pre>
+                                    </div>
+
+                                    <h4>Respuesta Exitosa <span class="status-code status-201">201</span></h4>
+                                    <div class="response-example">
+                                        <pre><code class="language-json">{
+  "success": true,
+  "data": {
+    "ReceiptNumber": "REC-2025-001",
+    "CustomerID": "CUST001",
+    "Amount": 1500.00,
+    "PaymentMethod": "bank_transfer",
+    "Status": "processed",
+    "sage_sync_status": "synced",
+    "created_at": "2025-01-29T16:00:00.000000Z"
+  }
+}</code></pre>
+                                    </div>
+                                </div>
+
+                                <div class="endpoint-card">
+                                    <h3><span class="method-post">POST</span> Crear Nota de Crédito de Cliente</h3>
+                                    <p><strong>Endpoint:</strong> <code>/api/acicloud/customer_credit_memo</code></p>
+                                    <p>Crea una nota de crédito para manejar devoluciones y ajustes de clientes.</p>
+
+                                    <h4>Campos de Request</h4>
+                                    <table class="params-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Campo</th>
+                                                <th>Tipo</th>
+                                                <th>Descripción</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><code>CustomerID</code> <span class="required-badge">REQUERIDO</span></td>
+                                                <td>string</td>
+                                                <td>ID del cliente</td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>CreditMemoNumber</code> <span class="required-badge">REQUERIDO</span></td>
+                                                <td>string</td>
+                                                <td>Número único de la nota</td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>CreditMemoDate</code> <span class="required-badge">REQUERIDO</span></td>
+                                                <td>date</td>
+                                                <td>Fecha de la nota de crédito</td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>Amount</code> <span class="required-badge">REQUERIDO</span></td>
+                                                <td>decimal</td>
+                                                <td>Monto del crédito</td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>Reason</code> <span class="required-badge">REQUERIDO</span></td>
+                                                <td>string</td>
+                                                <td>Motivo del crédito</td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>OriginalInvoice</code> <span class="optional-badge">OPCIONAL</span></td>
+                                                <td>string</td>
+                                                <td>Factura original relacionada</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                    <h4>Ejemplo de Request</h4>
+                                    <div class="response-example">
+                                        <pre><code class="language-json">{
+  "CustomerID": "CUST001",
+  "CreditMemoNumber": "CM-2025-001",
+  "CreditMemoDate": "2025-01-29",
+  "Amount": 300.00,
+  "Reason": "Producto defectuoso devuelto",
+  "OriginalInvoice": "INV-2025-055",
+  "Description": "Devolución laptop con falla en pantalla"
+}</code></pre>
+                                    </div>
+
+                                    <h4>Respuesta Exitosa <span class="status-code status-201">201</span></h4>
+                                    <div class="response-example">
+                                        <pre><code class="language-json">{
+  "success": true,
+  "data": {
+    "CreditMemoNumber": "CM-2025-001",
+    "CustomerID": "CUST001",
+    "Amount": 300.00,
+    "Status": "approved",
+    "sage_sync_status": "synced",
+    "created_at": "2025-01-29T17:00:00.000000Z"
+  }
+}</code></pre>
+                                    </div>
+                                </div>
+
+                                <div class="endpoint-card">
+                                    <h3><span class="method-get">GET</span> Obtener Notas de Crédito Importadas</h3>
+                                    <p><strong>Endpoint:</strong> <code>/api/acicloud/customer_credit_memo_imp</code></p>
+                                    <p>Obtiene la lista de notas de crédito que han sido procesadas e importadas.</p>
+
+                                    <h4>Respuesta Exitosa <span class="status-code status-200">200</span></h4>
+                                    <div class="response-example">
+                                        <pre><code class="language-json">{
+  "success": true,
+  "data": {
+    "credit_memos": [
+      {
+        "CreditMemoNumber": "CM-2025-001",
+        "CustomerID": "CUST001",
+        "Amount": 300.00,
+        "Status": "approved",
+        "import_date": "2025-01-29T17:00:00Z",
+        "sage_sync_status": "synced"
+      }
+    ],
+    "pagination": {
+      "current_page": 1,
+      "per_page": 25,
+      "total": 15
+    }
+  }
+}</code></pre>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card">
+                                <h2>🧪 Casos de Uso</h2>
+
+                                <h3>1. Consultar Estado de Orden de Venta</h3>
+                                <div class="code-block">
+curl -X GET "https://api.docucenter.com/api/acicloud/sales_order_status/SO-2025-001" \
+  -H "Authorization: Bearer YOUR_TOKEN"
+                                </div>
+
+                                <h3>2. Crear Orden de Venta</h3>
+                                <div class="code-block">
+curl -X POST "https://api.docucenter.com/api/acicloud/sales_order" \
+  -H "Authorization: Bearer YOUR_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "CustomerID": "CUST001",
+    "SONumber": "SO-2025-002",
+    "SODate": "2025-01-29",
+    "Items": [
+      {
+        "ItemID": "PROD001",
+        "Quantity": 5,
+        "UnitPrice": 250.00
+      }
+    ]
+  }'
+                                </div>
+
+                                <h3>3. Registrar Pago</h3>
+                                <div class="code-block">
+curl -X POST "https://api.docucenter.com/api/acicloud/customer_receipt_imp" \
+  -H "Authorization: Bearer YOUR_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "CustomerID": "CUST001",
+    "ReceiptNumber": "REC-2025-001",
+    "ReceiptDate": "2025-01-29",
+    "PaymentMethod": "bank_transfer",
+    "Amount": 1500.00
+  }'
+                                </div>
+
+                                <h3>4. Crear Nota de Crédito</h3>
+                                <div class="code-block">
+curl -X POST "https://api.docucenter.com/api/acicloud/customer_credit_memo" \
+  -H "Authorization: Bearer YOUR_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "CustomerID": "CUST001",
+    "CreditMemoNumber": "CM-2025-001",
+    "CreditMemoDate": "2025-01-29",
+    "Amount": 300.00,
+    "Reason": "Producto defectuoso"
+  }'
+                                </div>
+                            </div>
+
+                            <div class="card">
+                                <h2>⚠️ Códigos de Estado HTTP</h2>
+                                <table class="params-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Código</th>
+                                            <th>Descripción</th>
+                                            <th>Cuándo Ocurre</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><span class="status-code status-200">200</span></td>
+                                            <td>Consulta exitosa</td>
+                                            <td>Datos obtenidos correctamente</td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="status-code status-201">201</span></td>
+                                            <td>Recurso creado exitosamente</td>
+                                            <td>Orden/pago/crédito creado con sincronización</td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="status-code status-400">400</span></td>
+                                            <td>Datos de request inválidos</td>
+                                            <td>Formato incorrecto o datos duplicados</td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="status-code status-401">401</span></td>
+                                            <td>No autorizado</td>
+                                            <td>Token faltante o inválido</td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="status-code status-422">422</span></td>
+                                            <td>Error de validación</td>
+                                            <td>Campos inválidos o faltantes</td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="status-code status-500">500</span></td>
+                                            <td>Error interno del servidor</td>
+                                            <td>Error de sincronización con Sage</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="highlight success">
+                                <h3>📝 Notas Técnicas</h3>
+                                <ul>
+                                    <li><strong>Multi-tenant:</strong> Todos los endpoints respetan el contexto de organización</li>
+                                    <li><strong>Sincronización automática:</strong> Integración completa con Sage ACICloud</li>
+                                    <li><strong>Control de estados:</strong> Seguimiento completo del ciclo de vida de órdenes</li>
+                                    <li><strong>Múltiples métodos de pago:</strong> Soporte para efectivo, transferencias, tarjetas</li>
+                                    <li><strong>Gestión de créditos:</strong> Manejo completo de devoluciones y ajustes</li>
+                                    <li><strong>Asientos contables:</strong> Generación automática de asientos en Sage</li>
+                                    <li><strong>Validación de montos:</strong> Control de precisión decimal en cálculos</li>
+                                    <li><strong>Números únicos:</strong> Validación de unicidad en números de documento</li>
+                                    <li><strong>Tracking de envíos:</strong> Información detallada de envíos y entregas</li>
+                                    <li><strong>Cuentas por cobrar:</strong> Actualización automática de balances de clientes</li>
+                                </ul>
+                            </div>
+
+                            <div style="margin-top: 40px; text-align: center;">
+                                <a href="../" class="md-button md-button--primary">← Volver al Inicio</a>
+                                <a href="../sage-customers-api/" class="md-button">Ver API Clientes Sage</a>
+                                <a href="../apis/" class="md-button">Ver Todas las APIs</a>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

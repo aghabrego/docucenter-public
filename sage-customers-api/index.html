@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>API Clientes Sage ACICloud - DocuCenter</title>
+    <meta name="description" content="API para gestionar clientes en Sage ACICloud con sincronización automática y validación de RUC">
+    <link rel="canonical" href="https://aghabrego.github.io/docucenter-public/sage-customers-api/">
+    <link rel="icon" href="../assets/images/favicon.png">
+    <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.39">
+    <link rel="stylesheet" href="../assets/stylesheets/main.7e37652d.min.css">
+    <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+    <style>
+        .md-grid {
+            max-width: 1220px;
+        }
+        .highlight {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+        .success {
+            background-color: #d4edda;
+            border-left-color: #28a745;
+        }
+        .danger {
+            background-color: #f8d7da;
+            border-left-color: #dc3545;
+        }
+        .info {
+            background-color: #d1ecf1;
+            border-left-color: #17a2b8;
+        }
+        .card {
+            background: white;
+            border-radius: 8px;
+            padding: 25px;
+            margin: 20px 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .endpoint-card {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+        .method-get {
+            background: #28a745;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 0.8em;
+        }
+        .method-post {
+            background: #007bff;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 0.8em;
+        }
+        .params-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        .params-table th,
+        .params-table td {
+            border: 1px solid #dee2e6;
+            padding: 10px;
+            text-align: left;
+        }
+        .params-table th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+        .code-block {
+            background: #212529;
+            color: #f8f9fa;
+            padding: 15px;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            margin: 15px 0;
+            overflow-x: auto;
+        }
+        .response-example {
+            background: #e9ecef;
+            border-left: 4px solid #007bff;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 6px 6px 0;
+        }
+        .status-code {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+        .status-200 { background: #d4edda; color: #155724; }
+        .status-201 { background: #d4edda; color: #155724; }
+        .status-400 { background: #f8d7da; color: #721c24; }
+        .status-401 { background: #f8d7da; color: #721c24; }
+        .status-422 { background: #f8d7da; color: #721c24; }
+        .status-500 { background: #f8d7da; color: #721c24; }
+        .required-badge {
+            background: #dc3545;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 0.7em;
+            font-weight: bold;
+        }
+        .optional-badge {
+            background: #6c757d;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 0.7em;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="light-blue">
+    <div id="container">
+        <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+        <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+        <label class="md-overlay" for="__drawer"></label>
+        <div data-md-component="skip">
+            <a href="#sage-customers-api" class="md-skip">Ir al contenido</a>
+        </div>
+        <div data-md-component="announce"></div>
+        <header class="md-header md-header--shadow" data-md-component="header">
+            <nav class="md-header__inner md-grid" aria-label="Encabezado">
+                <a href="../" title="DocuCenter" class="md-header__button md-logo" aria-label="DocuCenter" data-md-component="logo">
+                    <img src="https://home.apconpanama.me/wp-content/uploads/2024/03/logo3.png" alt="APCON Logo" style="height: 24px;">
+                </a>
+                <label class="md-header__button md-icon" for="__drawer">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+                </label>
+                <div class="md-header__title" data-md-component="header-title">
+                    <div class="md-header__ellipsis">
+                        <div class="md-header__topic">
+                            <span class="md-ellipsis">DocuCenter</span>
+                        </div>
+                        <div class="md-header__topic" data-md-component="header-topic">
+                            <span class="md-ellipsis">👥 API Clientes Sage</span>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <div class="md-container" data-md-component="container">
+            <main class="md-main" data-md-component="main">
+                <div class="md-main__inner md-grid">
+                    <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+                        <div class="md-sidebar__scrollwrap">
+                            <div class="md-sidebar__inner">
+                                <nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+                                    <label class="md-nav__title" for="__drawer">
+                                        <a href="../" title="DocuCenter" class="md-nav__button md-logo" aria-label="DocuCenter" data-md-component="logo">
+                                            <img src="https://home.apconpanama.me/wp-content/uploads/2024/03/logo3.png" alt="APCON Logo" style="height: 24px;">
+                                        </a>
+                                        DocuCenter
+                                    </label>
+                                    <ul class="md-nav__list" data-md-scrollfix>
+                                        <li class="md-nav__item">
+                                            <a href="../" class="md-nav__link">🏠 Inicio</a>
+                                        </li>
+                                        <li class="md-nav__item md-nav__item--active">
+                                            <a href="#" class="md-nav__link">👥 API Clientes Sage</a>
+                                        </li>
+                                        <li class="md-nav__item">
+                                            <a href="../apis/" class="md-nav__link">🔌 Otras APIs</a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="md-content" data-md-component="content">
+                        <article class="md-content__inner md-typeset">
+                            <h1 id="sage-customers-api">👥 API Clientes - Sage ACICloud</h1>
+
+                            <div class="highlight info">
+                                <h3>📋 Descripción</h3>
+                                <p>API para gestionar clientes en Sage ACICloud con sincronización automática, validación de RUC panameño y soporte multi-tenant.</p>
+                            </div>
+
+                            <div class="card">
+                                <h2>🌐 Base URL</h2>
+                                <div class="code-block">
+/api/acicloud/customers
+                                </div>
+                                <div class="highlight danger">
+                                    <strong>🔐 Autenticación requerida:</strong> Bearer Token (Sanctum)<br>
+                                    <strong>🔒 Middleware:</strong> check.activate.organization
+                                </div>
+                            </div>
+
+                            <div class="card">
+                                <h2>📚 Endpoints Disponibles</h2>
+
+                                <div class="endpoint-card">
+                                    <h3><span class="method-post">POST</span> Crear Cliente</h3>
+                                    <p><strong>Endpoint:</strong> <code>/api/acicloud/customer</code></p>
+                                    <p>Crea un nuevo cliente con sincronización automática a Sage ACICloud.</p>
+
+                                    <h4>Campos de Request</h4>
+                                    <table class="params-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Campo</th>
+                                                <th>Tipo</th>
+                                                <th>Validación</th>
+                                                <th>Descripción</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><code>CustomerID</code> <span class="required-badge">REQUERIDO</span></td>
+                                                <td>string</td>
+                                                <td>Máx. 20 caracteres, único</td>
+                                                <td>ID único del cliente</td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>Customer_Bill_Name</code> <span class="required-badge">REQUERIDO</span></td>
+                                                <td>string</td>
+                                                <td>Máx. 39 caracteres</td>
+                                                <td>Nombre de facturación</td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>AddressLine1</code> <span class="optional-badge">OPCIONAL</span></td>
+                                                <td>string</td>
+                                                <td>-</td>
+                                                <td>Dirección línea 1</td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>AddressLine2</code> <span class="optional-badge">OPCIONAL</span></td>
+                                                <td>string</td>
+                                                <td>-</td>
+                                                <td>Dirección línea 2</td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>City</code> <span class="optional-badge">OPCIONAL</span></td>
+                                                <td>string</td>
+                                                <td>-</td>
+                                                <td>Ciudad</td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>State</code> <span class="optional-badge">OPCIONAL</span></td>
+                                                <td>string</td>
+                                                <td>Máx. 2 caracteres</td>
+                                                <td>Estado/Provincia</td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>Zip</code> <span class="optional-badge">OPCIONAL</span></td>
+                                                <td>string</td>
+                                                <td>Máx. 12 caracteres</td>
+                                                <td>Código postal</td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>Country</code> <span class="optional-badge">OPCIONAL</span></td>
+                                                <td>string</td>
+                                                <td>-</td>
+                                                <td>País</td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>Telephone1</code> <span class="optional-badge">OPCIONAL</span></td>
+                                                <td>string</td>
+                                                <td>Máx. 20 caracteres</td>
+                                                <td>Teléfono principal</td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>Email</code> <span class="optional-badge">OPCIONAL</span></td>
+                                                <td>string</td>
+                                                <td>Email válido, máx. 64 caracteres</td>
+                                                <td>Correo electrónico</td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>RUC</code> <span class="optional-badge">OPCIONAL</span></td>
+                                                <td>string</td>
+                                                <td>Alfanumérico, máx. 40</td>
+                                                <td>RUC del cliente</td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>DV</code> <span class="optional-badge">OPCIONAL</span></td>
+                                                <td>string</td>
+                                                <td>Alfanumérico, máx. 40</td>
+                                                <td>Dígito verificador</td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>Custom_field3</code> <span class="optional-badge">OPCIONAL</span></td>
+                                                <td>string</td>
+                                                <td>Alfanumérico, máx. 40</td>
+                                                <td>Campo personalizado 3</td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>Custom_field4</code> <span class="optional-badge">OPCIONAL</span></td>
+                                                <td>string</td>
+                                                <td>Alfanumérico, máx. 40</td>
+                                                <td>Campo personalizado 4</td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>Custom_field5</code> <span class="optional-badge">OPCIONAL</span></td>
+                                                <td>string</td>
+                                                <td>Alfanumérico, máx. 40</td>
+                                                <td>Campo personalizado 5</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                    <h4>Ejemplo de Request Completo</h4>
+                                    <div class="response-example">
+                                        <pre><code class="language-json">{
+  "CustomerID": "CUST001",
+  "Customer_Bill_Name": "Empresa Ejemplo S.A.",
+  "AddressLine1": "Calle 50, Edificio Torre Global",
+  "AddressLine2": "Piso 15, Oficina 1501",
+  "City": "Ciudad de Panamá",
+  "State": "PA",
+  "Zip": "0000",
+  "Country": "Panamá",
+  "Telephone1": "+507 1234-5678",
+  "Email": "contacto@empresaejemplo.com",
+  "RUC": "1234567890123",
+  "DV": "12",
+  "Custom_field3": "Sector_Financiero",
+  "Custom_field4": "Cliente_VIP",
+  "Custom_field5": "Corporativo"
+}</code></pre>
+                                    </div>
+
+                                    <h4>Ejemplo de Request Mínimo</h4>
+                                    <div class="response-example">
+                                        <pre><code class="language-json">{
+  "CustomerID": "CUST002",
+  "Customer_Bill_Name": "Cliente Básico"
+}</code></pre>
+                                    </div>
+
+                                    <h4>Respuesta Exitosa <span class="status-code status-201">201</span></h4>
+                                    <div class="response-example">
+                                        <pre><code class="language-json">{
+  "CustomerID": "CUST001",
+  "Customer_Bill_Name": "Empresa Ejemplo S.A.",
+  "AddressLine1": "Calle 50, Edificio Torre Global",
+  "AddressLine2": "Piso 15, Oficina 1501",
+  "City": "Ciudad de Panamá",
+  "State": "PA",
+  "Zip": "0000",
+  "Country": "Panamá",
+  "Telephone1": "+507 1234-5678",
+  "Email": "contacto@empresaejemplo.com",
+  "Custom_field1": "1234567890123",
+  "Custom_field2": "12",
+  "Custom_field3": "Sector_Financiero",
+  "Custom_field4": "Cliente_VIP",
+  "Custom_field5": "Corporativo"
+}</code></pre>
+                                    </div>
+
+                                    <h4>Respuestas de Error</h4>
+                                    <p><strong>Error de Validación <span class="status-code status-422">422</span></strong></p>
+                                    <div class="response-example">
+                                        <pre><code class="language-json">{
+  "success": false,
+  "message": "Los datos proporcionados no son válidos.",
+  "errors": {
+    "CustomerID": [
+      "The CustomerID has already been taken."
+    ],
+    "Customer_Bill_Name": [
+      "The Customer_Bill_Name field is required."
+    ],
+    "Email": [
+      "The Email field must be a valid email address."
+    ]
+  }
+}</code></pre>
+                                    </div>
+
+                                    <p><strong>Error de Duplicado <span class="status-code status-400">400</span></strong></p>
+                                    <div class="response-example">
+                                        <pre><code class="language-json">{
+  "success": false,
+  "message": "El CustomerID ya existe en el sistema.",
+  "errors": {
+    "CustomerID": [
+      "The CustomerID has already been taken."
+    ]
+  }
+}</code></pre>
+                                    </div>
+                                </div>
+
+                                <div class="endpoint-card">
+                                    <h3><span class="method-get">GET</span> Obtener Clientes</h3>
+                                    <p><strong>Endpoint:</strong> <code>/api/acicloud/customers</code></p>
+                                    <p>Obtiene la lista de clientes con filtrado y paginación avanzada.</p>
+
+                                    <h4>Parámetros de Consulta</h4>
+                                    <table class="params-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Campo</th>
+                                                <th>Tipo</th>
+                                                <th>Descripción</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><code>order_column</code> <span class="optional-badge">OPCIONAL</span></td>
+                                                <td>string</td>
+                                                <td>Columna para ordenamiento</td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>order_direction</code> <span class="optional-badge">OPCIONAL</span></td>
+                                                <td>string</td>
+                                                <td><code>asc</code> o <code>desc</code></td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>limit</code> <span class="optional-badge">OPCIONAL</span></td>
+                                                <td>integer</td>
+                                                <td>Registros por página</td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>f</code> <span class="optional-badge">OPCIONAL</span></td>
+                                                <td>array</td>
+                                                <td>Filtros avanzados</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                    <h4>Ejemplo de Request</h4>
+                                    <div class="response-example">
+                                        <pre><code class="language-json">{
+  "limit": 50,
+  "order_column": "Customer_Bill_Name",
+  "order_direction": "asc",
+  "f": [
+    {
+      "column": "Customer_Bill_Name",
+      "operator": "like",
+      "query_1": "Empresa"
+    }
+  ]
+}</code></pre>
+                                    </div>
+
+                                    <h4>Respuesta Exitosa <span class="status-code status-200">200</span></h4>
+                                    <div class="response-example">
+                                        <pre><code class="language-json">{
+  "current_page": 1,
+  "data": [
+    {
+      "CustomerID": "CUST001",
+      "Customer_Bill_Name": "John Doe",
+      "PriceLevel": 2,
+      "Phone_Number": "1234567890",
+      "Contact": "John Contact",
+      "Balance": "500.00",
+      "CreditLimit": "1000.00",
+      "Email": "johndoe@example.com",
+      "AddressLine1": "123 Main St",
+      "AddressLine2": "Suite 100",
+      "City": "Sample City",
+      "State": "CA",
+      "Zip": "12345",
+      "Country": "US",
+      "IsActive": 1,
+      "SalesRepID": "SR001",
+      "SalesRepName": "Jane Smith",
+      "Custom_field1": "Custom Value 1",
+      "Custom_field2": "Custom Value 2",
+      "Custom_field3": "Custom Value 3",
+      "Custom_field4": "Custom Value 4",
+      "Custom_field5": "Custom Value 5",
+      "SalesAccountId": "SA001",
+      "Fax_Number": "9876543210"
+    }
+  ],
+  "first_page_url": "https://api.docucenter.com/api/acicloud/customers?page=1",
+  "from": 1,
+  "last_page": 15,
+  "last_page_url": "https://api.docucenter.com/api/acicloud/customers?page=15",
+  "links": [
+    {
+      "url": null,
+      "label": "&laquo; Previous",
+      "active": false
+    },
+    {
+      "url": "https://api.docucenter.com/api/acicloud/customers?page=1",
+      "label": "1",
+      "active": true
+    },
+    {
+      "url": "https://api.docucenter.com/api/acicloud/customers?page=2",
+      "label": "2",
+      "active": false
+    }
+  ],
+  "next_page_url": "https://api.docucenter.com/api/acicloud/customers?page=2",
+  "path": "https://api.docucenter.com/api/acicloud/customers",
+  "per_page": 10,
+  "prev_page_url": null,
+  "to": 10,
+  "total": 150
+}</code></pre>
+                                    </div>
+                                </div>
+
+                                <div class="endpoint-card">
+                                    <h3><span class="method-get">GET</span> Obtener Clientes Importados</h3>
+                                    <p><strong>Endpoint:</strong> <code>/api/acicloud/customers_imp</code></p>
+                                    <p>Obtiene la lista de clientes que han sido importados desde DocuCenter a Sage ACICloud.</p>
+
+                                    <h4>Respuesta Exitosa <span class="status-code status-200">200</span></h4>
+                                    <div class="response-example">
+                                        <pre><code class="language-json">{
+  "success": true,
+  "data": {
+    "customers_imported": [
+      {
+        "CustomerID": "CUST001",
+        "Customer_Bill_Name": "Empresa Ejemplo S.A.",
+        "import_date": "2025-08-12T10:30:00Z",
+        "status": "imported",
+        "sage_sync_status": "synced"
+      }
+    ]
+  }
+}</code></pre>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card">
+                                <h2>🧪 Casos de Uso</h2>
+
+                                <h3>1. Crear Cliente</h3>
+                                <div class="code-block">
+curl -X POST "https://api.docucenter.com/api/acicloud/customer" \
+  -H "Authorization: Bearer YOUR_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "CustomerID": "CUST001",
+    "Customer_Bill_Name": "Empresa Ejemplo S.A.",
+    "Email": "contacto@empresa.com",
+    "RUC": "1234567890123"
+  }'
+                                </div>
+
+                                <h3>2. Obtener Clientes</h3>
+                                <div class="code-block">
+curl -X GET "https://api.docucenter.com/api/acicloud/customers" \
+  -H "Authorization: Bearer YOUR_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "limit": 10,
+    "order_column": "Customer_Bill_Name"
+  }'
+                                </div>
+
+                                <h3>3. Buscar Clientes por Nombre</h3>
+                                <div class="code-block">
+curl -X GET "https://api.docucenter.com/api/acicloud/customers" \
+  -H "Authorization: Bearer YOUR_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "limit": 50,
+    "f": [
+      {
+        "column": "Customer_Bill_Name",
+        "operator": "like",
+        "query_1": "Empresa"
+      }
+    ]
+  }'
+                                </div>
+
+                                <h3>4. Obtener Clientes Importados</h3>
+                                <div class="code-block">
+curl -X GET "https://api.docucenter.com/api/acicloud/customers_imp" \
+  -H "Authorization: Bearer YOUR_TOKEN"
+                                </div>
+                            </div>
+
+                            <div class="card">
+                                <h2>⚠️ Códigos de Estado HTTP</h2>
+                                <table class="params-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Código</th>
+                                            <th>Descripción</th>
+                                            <th>Cuándo Ocurre</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><span class="status-code status-200">200</span></td>
+                                            <td>Operación exitosa</td>
+                                            <td>Consulta realizada correctamente</td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="status-code status-201">201</span></td>
+                                            <td>Cliente creado exitosamente</td>
+                                            <td>Creación exitosa con sincronización</td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="status-code status-400">400</span></td>
+                                            <td>Datos de request inválidos</td>
+                                            <td>Formato de request incorrecto o CustomerID duplicado</td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="status-code status-401">401</span></td>
+                                            <td>No autorizado</td>
+                                            <td>Token faltante o inválido</td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="status-code status-422">422</span></td>
+                                            <td>Error de validación</td>
+                                            <td>Campos inválidos o faltantes</td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="status-code status-500">500</span></td>
+                                            <td>Error interno del servidor</td>
+                                            <td>Error de sincronización con Sage</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="highlight success">
+                                <h3>📝 Notas Técnicas</h3>
+                                <ul>
+                                    <li><strong>CustomerID único:</strong> Debe ser único en toda la organización</li>
+                                    <li><strong>Campos personalizados:</strong> Custom_field3-5 son útiles para categorización</li>
+                                    <li><strong>Validación RUC:</strong> Sigue el patrón panameño estándar (^[a-zA-Z0-9_-]*$)</li>
+                                    <li><strong>Multi-tenant:</strong> Compatible con el sistema multi-tenant de DocuCenter</li>
+                                    <li><strong>Sincronización automática:</strong> Los clientes se sincronizan con Sage ACICloud</li>
+                                    <li><strong>Mapeo de campos:</strong> RUC → Custom_field1, DV → Custom_field2</li>
+                                    <li><strong>Validación email:</strong> Los emails deben tener formato válido</li>
+                                    <li><strong>Límites de texto:</strong> Customer_Bill_Name máximo 39 caracteres</li>
+                                    <li><strong>Filtrado avanzado:</strong> Soporte para operadores like, equals, etc.</li>
+                                </ul>
+                            </div>
+
+                            <div style="margin-top: 40px; text-align: center;">
+                                <a href="../" class="md-button md-button--primary">← Volver al Inicio</a>
+                                <a href="../sage-vendors-api/" class="md-button">Ver API Proveedores Sage</a>
+                                <a href="../apis/" class="md-button">Ver Todas las APIs</a>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

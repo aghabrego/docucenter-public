@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>API Proveedores Sage ACICloud - DocuCenter</title>
+    <meta name="description" content="API para gestionar proveedores en Sage ACICloud con filtrado avanzado y sincronización automática">
+    <link rel="canonical" href="https://aghabrego.github.io/docucenter-public/sage-vendors-api/">
+    <link rel="icon" href="../assets/images/favicon.png">
+    <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.39">
+    <link rel="stylesheet" href="../assets/stylesheets/main.7e37652d.min.css">
+    <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+    <style>
+        .md-grid {
+            max-width: 1220px;
+        }
+        .highlight {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+        .success {
+            background-color: #d4edda;
+            border-left-color: #28a745;
+        }
+        .danger {
+            background-color: #f8d7da;
+            border-left-color: #dc3545;
+        }
+        .info {
+            background-color: #d1ecf1;
+            border-left-color: #17a2b8;
+        }
+        .card {
+            background: white;
+            border-radius: 8px;
+            padding: 25px;
+            margin: 20px 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .endpoint-card {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+        .method-get {
+            background: #28a745;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 0.8em;
+        }
+        .method-post {
+            background: #007bff;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 0.8em;
+        }
+        .params-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        .params-table th,
+        .params-table td {
+            border: 1px solid #dee2e6;
+            padding: 10px;
+            text-align: left;
+        }
+        .params-table th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+        .code-block {
+            background: #212529;
+            color: #f8f9fa;
+            padding: 15px;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            margin: 15px 0;
+            overflow-x: auto;
+        }
+        .response-example {
+            background: #e9ecef;
+            border-left: 4px solid #007bff;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 6px 6px 0;
+        }
+        .status-code {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+        .status-200 { background: #d4edda; color: #155724; }
+        .status-201 { background: #d4edda; color: #155724; }
+        .status-400 { background: #f8d7da; color: #721c24; }
+        .status-401 { background: #f8d7da; color: #721c24; }
+        .status-409 { background: #fff3cd; color: #856404; }
+        .status-422 { background: #f8d7da; color: #721c24; }
+        .status-500 { background: #f8d7da; color: #721c24; }
+        .required-badge {
+            background: #dc3545;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 0.7em;
+            font-weight: bold;
+        }
+        .optional-badge {
+            background: #6c757d;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 0.7em;
+            font-weight: bold;
+        }
+        .operator-badge {
+            background: #17a2b8;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 0.7em;
+            margin: 2px;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="light-blue">
+    <div id="container">
+        <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+        <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+        <label class="md-overlay" for="__drawer"></label>
+        <div data-md-component="skip">
+            <a href="#sage-vendors-api" class="md-skip">Ir al contenido</a>
+        </div>
+        <div data-md-component="announce"></div>
+        <header class="md-header md-header--shadow" data-md-component="header">
+            <nav class="md-header__inner md-grid" aria-label="Encabezado">
+                <a href="../" title="DocuCenter" class="md-header__button md-logo" aria-label="DocuCenter" data-md-component="logo">
+                    <img src="https://home.apconpanama.me/wp-content/uploads/2024/03/logo3.png" alt="APCON Logo" style="height: 24px;">
+                </a>
+                <label class="md-header__button md-icon" for="__drawer">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+                </label>
+                <div class="md-header__title" data-md-component="header-title">
+                    <div class="md-header__ellipsis">
+                        <div class="md-header__topic">
+                            <span class="md-ellipsis">DocuCenter</span>
+                        </div>
+                        <div class="md-header__topic" data-md-component="header-topic">
+                            <span class="md-ellipsis">🏪 API Proveedores Sage</span>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <div class="md-container" data-md-component="container">
+            <main class="md-main" data-md-component="main">
+                <div class="md-main__inner md-grid">
+                    <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+                        <div class="md-sidebar__scrollwrap">
+                            <div class="md-sidebar__inner">
+                                <nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+                                    <label class="md-nav__title" for="__drawer">
+                                        <a href="../" title="DocuCenter" class="md-nav__button md-logo" aria-label="DocuCenter" data-md-component="logo">
+                                            <img src="https://home.apconpanama.me/wp-content/uploads/2024/03/logo3.png" alt="APCON Logo" style="height: 24px;">
+                                        </a>
+                                        DocuCenter
+                                    </label>
+                                    <ul class="md-nav__list" data-md-scrollfix>
+                                        <li class="md-nav__item">
+                                            <a href="../" class="md-nav__link">🏠 Inicio</a>
+                                        </li>
+                                        <li class="md-nav__item md-nav__item--active">
+                                            <a href="#" class="md-nav__link">🏪 API Proveedores Sage</a>
+                                        </li>
+                                        <li class="md-nav__item">
+                                            <a href="../apis/" class="md-nav__link">🔌 Otras APIs</a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="md-content" data-md-component="content">
+                        <article class="md-content__inner md-typeset">
+                            <h1 id="sage-vendors-api">🏪 API Proveedores - Sage ACICloud</h1>
+
+                            <div class="highlight info">
+                                <h3>📋 Descripción</h3>
+                                <p>API para gestionar proveedores en Sage ACICloud con filtrado avanzado, paginación y sincronización automática con el sistema ERP.</p>
+                            </div>
+
+                            <div class="card">
+                                <h2>🌐 Base URL</h2>
+                                <div class="code-block">
+/api/acicloud/vendors
+                                </div>
+                                <div class="highlight danger">
+                                    <strong>🔐 Autenticación requerida:</strong> Bearer Token (Sanctum)<br>
+                                    <strong>🔒 Middleware:</strong> check.activate.organization
+                                </div>
+                            </div>
+
+                            <div class="card">
+                                <h2>✨ Características Principales</h2>
+                                <ul>
+                                    <li>✅ <strong>Filtrado Avanzado:</strong> Soporte para múltiples filtros y operadores</li>
+                                    <li>✅ <strong>Paginación:</strong> Resultados paginados automáticamente</li>
+                                    <li>✅ <strong>Ordenamiento:</strong> Ordenar por cualquier campo</li>
+                                    <li>✅ <strong>Multi-tenant:</strong> Respeta el contexto de organización activa</li>
+                                    <li>✅ <strong>Sincronización:</strong> Integración automática con Sage ACICloud</li>
+                                </ul>
+                            </div>
+
+                            <div class="card">
+                                <h2>📚 Endpoints Disponibles</h2>
+
+                                <div class="endpoint-card">
+                                    <h3><span class="method-get">GET</span> Obtener Lista de Proveedores</h3>
+                                    <p><strong>Endpoint:</strong> <code>/api/acicloud/vendors</code></p>
+                                    <p>Obtiene la lista de proveedores con filtrado avanzado y paginación.</p>
+                                    
+                                    <h4>Parámetros de Query (Opcionales)</h4>
+                                    <table class="params-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Parámetro</th>
+                                                <th>Tipo</th>
+                                                <th>Descripción</th>
+                                                <th>Ejemplo</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><code>page</code> <span class="optional-badge">OPCIONAL</span></td>
+                                                <td>integer</td>
+                                                <td>Página a obtener</td>
+                                                <td><code>2</code></td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>per_page</code> <span class="optional-badge">OPCIONAL</span></td>
+                                                <td>integer</td>
+                                                <td>Registros por página (máx 100)</td>
+                                                <td><code>50</code></td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>sort</code> <span class="optional-badge">OPCIONAL</span></td>
+                                                <td>string</td>
+                                                <td>Campo para ordenar</td>
+                                                <td><code>"name"</code></td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>order</code> <span class="optional-badge">OPCIONAL</span></td>
+                                                <td>string</td>
+                                                <td>Dirección del ordenamiento</td>
+                                                <td><code>"asc"</code> o <code>"desc"</code></td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>filter</code> <span class="optional-badge">OPCIONAL</span></td>
+                                                <td>object</td>
+                                                <td>Filtros aplicados</td>
+                                                <td>Ver sección de filtros</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                    <h4>Sistema de Filtros Avanzados</h4>
+                                    <p><strong>Operadores disponibles:</strong></p>
+                                    <div style="margin: 15px 0;">
+                                        <span class="operator-badge">equals</span>
+                                        <span class="operator-badge">not_equals</span>
+                                        <span class="operator-badge">contains</span>
+                                        <span class="operator-badge">starts_with</span>
+                                        <span class="operator-badge">ends_with</span>
+                                        <span class="operator-badge">greater_than</span>
+                                        <span class="operator-badge">less_than</span>
+                                        <span class="operator-badge">between</span>
+                                        <span class="operator-badge">in</span>
+                                        <span class="operator-badge">not_in</span>
+                                        <span class="operator-badge">is_null</span>
+                                        <span class="operator-badge">is_not_null</span>
+                                    </div>
+
+                                    <h4>Ejemplo de Request</h4>
+                                    <div class="code-block">
+GET /api/acicloud/vendors?page=1&per_page=25&sort=name&order=asc
+                                    </div>
+
+                                    <h4>Ejemplo con Filtros</h4>
+                                    <div class="code-block">
+GET /api/acicloud/vendors?filter[name][operator]=contains&filter[name][value]=Distribuidora&filter[active][operator]=equals&filter[active][value]=1
+                                    </div>
+
+                                    <h4>Respuesta Exitosa <span class="status-code status-200">200</span></h4>
+                                    <div class="response-example">
+                                        <pre><code class="language-json">{
+  "current_page": 1,
+  "data": [
+    {
+      "ID_compania": 2,
+      "VendorID": "0001",
+      "Name": "vendor",
+      "Contact": "tony",
+      "Phone_Number1": "123-123",
+      "Email": "tony@gmail.com",
+      "AddressLine1": "123-321",
+      "AddressLine2": "098-456",
+      "City": "San Francisco",
+      "State": "CA",
+      "Zip": "123",
+      "Country": "PA",
+      "IsActive": "1",
+      "Custom_field1": "qwe",
+      "Custom_field2": null,
+      "Custom_field3": null,
+      "Custom_field4": null,
+      "Custom_field5": "dsa",
+      "ExpensesAccountId": null,
+      "VendorType": null
+    }
+  ],
+  "first_page_url": "https://api.docucenter.com/api/acicloud/vendors?page=1",
+  "from": 1,
+  "last_page": 6,
+  "last_page_url": "https://api.docucenter.com/api/acicloud/vendors?page=6",
+  "links": [
+    {
+      "url": null,
+      "label": "&laquo; Previous",
+      "active": false
+    },
+    {
+      "url": "https://api.docucenter.com/api/acicloud/vendors?page=1",
+      "label": "1",
+      "active": true
+    }
+  ],
+  "next_page_url": "https://api.docucenter.com/api/acicloud/vendors?page=2",
+  "path": "https://api.docucenter.com/api/acicloud/vendors",
+  "per_page": 10,
+  "prev_page_url": null,
+  "to": 10,
+  "total": 150
+}</code></pre>
+                                    </div>
+                                </div>
+
+                                <div class="endpoint-card">
+                                    <h3><span class="method-post">POST</span> Crear Proveedor</h3>
+                                    <p><strong>Endpoint:</strong> <code>/api/acicloud/vendor</code></p>
+                                    <p>Crea un nuevo proveedor con sincronización automática a Sage ACICloud.</p>
+
+                                    <h4>Campos de Request</h4>
+                                    <table class="params-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Campo</th>
+                                                <th>Tipo</th>
+                                                <th>Validación</th>
+                                                <th>Descripción</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><code>VendorID</code> <span class="required-badge">REQUERIDO</span></td>
+                                                <td>string</td>
+                                                <td>Único, máx. 20 chars</td>
+                                                <td>ID único del proveedor</td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>VendrName</code> <span class="required-badge">REQUERIDO</span></td>
+                                                <td>string</td>
+                                                <td>Máx. 39 characters</td>
+                                                <td>Nombre del proveedor</td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>PhoneNumber</code> <span class="optional-badge">OPCIONAL</span></td>
+                                                <td>string</td>
+                                                <td>Máx. 20 characters</td>
+                                                <td>Teléfono del proveedor</td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>Email</code> <span class="optional-badge">OPCIONAL</span></td>
+                                                <td>string</td>
+                                                <td>Email válido, único, máx. 64</td>
+                                                <td>Email del proveedor</td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>AddressLine1</code> <span class="optional-badge">OPCIONAL</span></td>
+                                                <td>string</td>
+                                                <td>-</td>
+                                                <td>Dirección línea 1</td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>AddressLine2</code> <span class="optional-badge">OPCIONAL</span></td>
+                                                <td>string</td>
+                                                <td>-</td>
+                                                <td>Dirección línea 2</td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>City</code> <span class="required-badge">REQUERIDO</span></td>
+                                                <td>string</td>
+                                                <td>Requerido</td>
+                                                <td>Ciudad</td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>State</code> <span class="required-badge">REQUERIDO</span></td>
+                                                <td>string</td>
+                                                <td>Requerido, máx. 2 chars</td>
+                                                <td>Estado/Provincia</td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>Zip</code> <span class="optional-badge">OPCIONAL</span></td>
+                                                <td>string</td>
+                                                <td>Máx. 12 characters</td>
+                                                <td>Código postal</td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>Country</code> <span class="required-badge">REQUERIDO</span></td>
+                                                <td>string</td>
+                                                <td>Requerido</td>
+                                                <td>País</td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>RUC</code> <span class="optional-badge">OPCIONAL</span></td>
+                                                <td>string</td>
+                                                <td>Alfanumérico, máx. 40</td>
+                                                <td>RUC del proveedor</td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>DV</code> <span class="optional-badge">OPCIONAL</span></td>
+                                                <td>string</td>
+                                                <td>Alfanumérico, máx. 40</td>
+                                                <td>Dígito verificador</td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>VendorType</code> <span class="required-badge">REQUERIDO</span></td>
+                                                <td>string</td>
+                                                <td>Requerido, alfanumérico, máx. 40</td>
+                                                <td>Tipo de proveedor</td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>TaxpayerType</code> <span class="required-badge">REQUERIDO</span></td>
+                                                <td>string</td>
+                                                <td>Requerido, alfanumérico, máx. 40</td>
+                                                <td>Tipo de contribuyente</td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>Custom_field5</code> <span class="required-badge">REQUERIDO</span></td>
+                                                <td>string</td>
+                                                <td>Requerido, alfanumérico, máx. 40</td>
+                                                <td>Campo personalizado 5</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                    <h4>Ejemplo de Request Completo</h4>
+                                    <div class="response-example">
+                                        <pre><code class="language-json">{
+  "VendorID": "VENDOR001",
+  "VendrName": "Distribuidora Nacional S.A.",
+  "PhoneNumber": "+507 6789-1234",
+  "Email": "compras@distribuidora.com",
+  "AddressLine1": "Calle 50, Edificio Global Bank",
+  "AddressLine2": "Piso 12, Oficina 1201",
+  "City": "Ciudad de Panamá",
+  "State": "PA",
+  "Zip": "0833-01234",
+  "Country": "Panamá",
+  "RUC": "87654321-1-123456",
+  "DV": "56",
+  "VendorType": "Regular",
+  "TaxpayerType": "Contributor",
+  "Custom_field5": "Activo"
+}</code></pre>
+                                    </div>
+
+                                    <h4>Ejemplo de Request Mínimo</h4>
+                                    <div class="response-example">
+                                        <pre><code class="language-json">{
+  "VendorID": "VENDOR002",
+  "VendrName": "Proveedor Básico",
+  "City": "Panamá",
+  "State": "PA",
+  "Country": "Panamá",
+  "VendorType": "Basic",
+  "TaxpayerType": "Regular",
+  "Custom_field5": "Nuevo"
+}</code></pre>
+                                    </div>
+
+                                    <h4>Respuesta Exitosa <span class="status-code status-201">201</span></h4>
+                                    <div class="response-example">
+                                        <pre><code class="language-json">{
+  "ID": 1,
+  "ID_compania": 1,
+  "VendorID": "VENDOR001",
+  "VendrName": "Distribuidora Nacional S.A.",
+  "Contact": null,
+  "Telephone1": "+507 6789-1234",
+  "Email": "compras@distribuidora.com",
+  "AddressLine1": "Calle 50, Edificio Global Bank",
+  "AddressLine2": "Piso 12, Oficina 1201",
+  "City": "Ciudad de Panamá",
+  "State": "PA",
+  "Zip": "0833-01234",
+  "Country": "Panamá",
+  "IsActive": null,
+  "Custom_field1": "87654321-1-123456",
+  "Custom_field2": "56",
+  "Custom_field3": "Regular",
+  "Custom_field4": "Contributor",
+  "Custom_field5": "Activo",
+  "Export_date": null,
+  "Enviado": 0,
+  "Error": 0,
+  "ErrorPT": null,
+  "ExpensesAccount": null,
+  "created_at": "2025-01-29T21:30:00.000000Z",
+  "updated_at": "2025-01-29T21:30:00.000000Z"
+}</code></pre>
+                                    </div>
+
+                                    <h4>Respuestas de Error</h4>
+                                    <p><strong>Error de Validación <span class="status-code status-422">422</span></strong></p>
+                                    <div class="response-example">
+                                        <pre><code class="language-json">{
+  "message": "The given data was invalid.",
+  "errors": {
+    "VendorID": [
+      "The VendorID has already been taken."
+    ],
+    "VendrName": [
+      "The VendrName field is required."
+    ],
+    "Email": [
+      "The Email has already been taken.",
+      "The Email must be a valid email address."
+    ]
+  }
+}</code></pre>
+                                    </div>
+
+                                    <p><strong>Error de Duplicado <span class="status-code status-409">409</span></strong></p>
+                                    <div class="response-example">
+                                        <pre><code class="language-json">{
+  "message": "The given data was invalid.",
+  "errors": {
+    "VendorID": [
+      "The VendorID has already been taken."
+    ]
+  }
+}</code></pre>
+                                    </div>
+                                </div>
+
+                                <div class="endpoint-card">
+                                    <h3><span class="method-get">GET</span> Obtener Proveedores Importados</h3>
+                                    <p><strong>Endpoint:</strong> <code>/api/acicloud/vendors_imp</code></p>
+                                    <p>Obtiene la lista de proveedores que han sido importados/creados a través de la API.</p>
+
+                                    <h4>Respuesta Exitosa <span class="status-code status-200">200</span></h4>
+                                    <div class="response-example">
+                                        <pre><code class="language-json">{
+  "success": true,
+  "data": [
+    {
+      "id": 1,
+      "vendor_id": "VENDOR001",
+      "name": "Distribuidora Nacional S.A.",
+      "sage_id": "SAGE_VEN_001",
+      "import_status": "completed",
+      "created_at": "2025-01-29 21:30:00",
+      "updated_at": "2025-01-29 21:30:00",
+      "errors": null
+    },
+    {
+      "id": 2,
+      "vendor_id": "VENDOR002",
+      "name": "Proveedora del Este",
+      "sage_id": "SAGE_VEN_002",
+      "import_status": "pending",
+      "created_at": "2025-01-29 21:25:00",
+      "updated_at": "2025-01-29 21:25:00",
+      "errors": null
+    }
+  ],
+  "pagination": {
+    "current_page": 1,
+    "per_page": 25,
+    "total": 45,
+    "total_pages": 2
+  }
+}</code></pre>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card">
+                                <h2>🧪 Casos de Uso</h2>
+
+                                <h3>1. Obtener Lista de Proveedores</h3>
+                                <div class="code-block">
+curl -X GET "https://api.docucenter.com/api/acicloud/vendors?page=1&per_page=25" \
+  -H "Authorization: Bearer YOUR_TOKEN"
+                                </div>
+
+                                <h3>2. Buscar Proveedores por Nombre</h3>
+                                <div class="code-block">
+curl -X GET "https://api.docucenter.com/api/acicloud/vendors?filter[Name][operator]=contains&filter[Name][value]=Distribuidora" \
+  -H "Authorization: Bearer YOUR_TOKEN"
+                                </div>
+
+                                <h3>3. Crear Proveedor</h3>
+                                <div class="code-block">
+curl -X POST "https://api.docucenter.com/api/acicloud/vendor" \
+  -H "Authorization: Bearer YOUR_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "VendorID": "VENDOR001",
+    "VendrName": "Distribuidora Nacional S.A.",
+    "Email": "compras@distribuidora.com",
+    "City": "Ciudad de Panamá",
+    "State": "PA",
+    "Country": "Panamá",
+    "VendorType": "Regular",
+    "TaxpayerType": "Contributor",
+    "Custom_field5": "Activo"
+  }'
+                                </div>
+
+                                <h3>4. Obtener Proveedores Importados</h3>
+                                <div class="code-block">
+curl -X GET "https://api.docucenter.com/api/acicloud/vendors_imp" \
+  -H "Authorization: Bearer YOUR_TOKEN"
+                                </div>
+                            </div>
+
+                            <div class="card">
+                                <h2>⚠️ Códigos de Estado HTTP</h2>
+                                <table class="params-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Código</th>
+                                            <th>Descripción</th>
+                                            <th>Cuándo Ocurre</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><span class="status-code status-200">200</span></td>
+                                            <td>Consulta exitosa</td>
+                                            <td>Lista obtenida correctamente</td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="status-code status-201">201</span></td>
+                                            <td>Proveedor creado exitosamente</td>
+                                            <td>Creación exitosa con sincronización</td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="status-code status-400">400</span></td>
+                                            <td>Datos de entrada inválidos</td>
+                                            <td>Formato de request incorrecto</td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="status-code status-401">401</span></td>
+                                            <td>No autorizado</td>
+                                            <td>Token faltante o inválido</td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="status-code status-409">409</span></td>
+                                            <td>Proveedor duplicado</td>
+                                            <td>VendorID ya existe</td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="status-code status-422">422</span></td>
+                                            <td>Error de validación</td>
+                                            <td>Campos inválidos o faltantes</td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="status-code status-500">500</span></td>
+                                            <td>Error interno del servidor</td>
+                                            <td>Error de sincronización con Sage</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="highlight success">
+                                <h3>📝 Notas Técnicas</h3>
+                                <ul>
+                                    <li><strong>Multi-tenant:</strong> Todos los endpoints respetan el contexto de organización</li>
+                                    <li><strong>Sincronización:</strong> Los proveedores se sincronizan automáticamente con Sage</li>
+                                    <li><strong>Validación RUC:</strong> Implementa validación específica para RUC panameño</li>
+                                    <li><strong>Monedas:</strong> Soporte para USD y PAB</li>
+                                    <li><strong>Estados:</strong> Los proveedores pueden estar activos o inactivos</li>
+                                    <li><strong>Límites de Crédito:</strong> Control de límites de crédito por proveedor</li>
+                                    <li><strong>Campos Personalizados:</strong> Uso de Custom_field1-5 para datos específicos</li>
+                                    <li><strong>Validación Email:</strong> Los emails deben ser únicos en el sistema</li>
+                                    <li><strong>Patrón RUC/DV:</strong> Solo letras, números, guiones y guiones bajos (^[a-zA-Z0-9_-]*$)</li>
+                                </ul>
+                            </div>
+
+                            <div style="margin-top: 40px; text-align: center;">
+                                <a href="../" class="md-button md-button--primary">← Volver al Inicio</a>
+                                <a href="../sage-customers-api/" class="md-button">Ver API Clientes Sage</a>
+                                <a href="../apis/" class="md-button">Ver Todas las APIs</a>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</body>
+</html>
