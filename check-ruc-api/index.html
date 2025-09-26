@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>API Consulta RUC - DocuCenter</title>
+    <link rel="shortcut icon" href="../assets/images/favicon.png">
+    <link rel="stylesheet" href="../assets/stylesheets/main.7e37652d.min.css">
+    <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+    <style>
+        .highlight { background-color: #fff3cd; padding: 0.5rem; border-radius: 0.25rem; margin: 1rem 0; }
+        .code-block { background-color: #f8f9fa; border: 1px solid #e9ecef; border-radius: 0.25rem; padding: 1rem; margin: 1rem 0; overflow-x: auto; }
+        .success { color: #28a745; font-weight: 600; }
+        .error { color: #dc3545; font-weight: 600; }
+        .warning { color: #ffc107; font-weight: 600; }
+        .info { color: #17a2b8; font-weight: 600; }
+        .endpoint { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 1rem; border-radius: 0.5rem; margin: 1rem 0; font-family: 'Roboto Mono', monospace; }
+        .method-get { background-color: #28a745; color: white; padding: 0.25rem 0.5rem; border-radius: 0.25rem; font-weight: bold; margin-right: 1rem; }
+        .response-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin: 2rem 0; }
+        .response-card { background: white; border: 1px solid #ddd; border-radius: 0.5rem; padding: 1.5rem; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .validation-table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+        .validation-table th, .validation-table td { border: 1px solid #ddd; padding: 0.75rem; text-align: left; }
+        .validation-table th { background-color: #f8f9fa; font-weight: 600; }
+        .param-required { color: #dc3545; font-weight: bold; }
+        .param-optional { color: #6c757d; font-style: italic; }
+        .badge { display: inline-block; padding: 0.25rem 0.5rem; font-size: 0.75rem; font-weight: 700; border-radius: 0.25rem; margin-right: 0.5rem; }
+        .badge-success { color: #fff; background-color: #28a745; }
+        .badge-danger { color: #fff; background-color: #dc3545; }
+        .badge-warning { color: #212529; background-color: #ffc107; }
+        .badge-info { color: #fff; background-color: #17a2b8; }
+        .ruc-examples { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; padding: 1.5rem; border-radius: 0.5rem; margin: 1.5rem 0; }
+    </style>
+</head>
+<body>
+    <div class="md-container" data-md-component="container">
+        <main class="md-main" data-md-component="main">
+            <div class="md-main__inner md-grid">
+                <div class="md-content">
+                    <article class="md-content__inner md-typeset">
+                        <h1>🔍 API Consulta de RUC - DocuCenter</h1>
+                        
+                        <div class="highlight">
+                            <p><strong>Descripción</strong>: API para consultar el dígito verificador de RUC utilizando el PAC Alanube configurado en la organización. Esta funcionalidad permite validar y obtener información de RUCs panameños mediante el servicio oficial de Alanube.</p>
+                        </div>
+
+                        <h2>📋 Endpoint</h2>
+                        <div class="endpoint">
+                            <span class="method-get">GET</span>/api/v1/fe/check_ruc/{ruc}
+                        </div>
+
+                        <h2>🔐 Autenticación</h2>
+                        <div class="code-block">
+                            <ul>
+                                <li><strong>Requerida</strong>: <span class="success">Sí</span> (Bearer Token)</li>
+                                <li><strong>Middleware</strong>: <code>auth:sanctum</code>, <code>check.activate.organization</code></li>
+                            </ul>
+                        </div>
+
+                        <h2>📥 Parámetros</h2>
+
+                        <h3>Parámetro de Ruta</h3>
+                        <table class="validation-table">
+                            <thead>
+                                <tr>
+                                    <th>Parámetro</th>
+                                    <th>Tipo</th>
+                                    <th>Requerido</th>
+                                    <th>Descripción</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>ruc</code></td>
+                                    <td>string</td>
+                                    <td><span class="param-required">Sí</span></td>
+                                    <td>RUC a consultar (formatos: 8-123-456, PE-8-123456, 155750453-2-2024)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h3>📝 Validaciones de RUC</h3>
+                        <div class="code-block">
+                            <ul>
+                                <li><strong>Mínimo</strong>: 3 caracteres</li>
+                                <li><strong>Máximo</strong>: 50 caracteres</li>
+                                <li><strong>Formato</strong>: Solo números, guiones y letras P, E</li>
+                                <li><strong>Expresión Regular</strong>: <code>/^[0-9\-PE]+$/</code></li>
+                            </ul>
+                        </div>
+
+                        <div class="ruc-examples">
+                            <h3>📋 Tipos de RUC Soportados</h3>
+                            <div class="response-grid">
+                                <div>
+                                    <h4>👤 Persona Natural</h4>
+                                    <p><strong>Formato</strong>: <code>8-123-456</code><br>
+                                    <strong>Descripción</strong>: Cédula panameña<br>
+                                    <strong>Ejemplo</strong>: 8-456-789</p>
+                                </div>
+                                <div>
+                                    <h4>🌍 Persona Extranjera</h4>
+                                    <p><strong>Formato</strong>: <code>PE-8-123456</code><br>
+                                    <strong>Descripción</strong>: Cédula extranjera<br>
+                                    <strong>Ejemplo</strong>: PE-8-456789</p>
+                                </div>
+                                <div>
+                                    <h4>🏢 Empresa</h4>
+                                    <p><strong>Formato</strong>: <code>155750453-2-2024</code><br>
+                                    <strong>Descripción</strong>: RUC empresarial con año<br>
+                                    <strong>Ejemplo</strong>: 155123456-1-2024</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h2>⚙️ Configuración Requerida</h2>
+
+                        <div class="response-grid">
+                            <div class="response-card">
+                                <h3>🏢 Organización</h3>
+                                <ul>
+                                    <li>Debe tener una organización activa configurada</li>
+                                    <li>La organización debe tener conexión PAC configurada</li>
+                                </ul>
+                            </div>
+
+                            <div class="response-card">
+                                <h3>🔗 PAC Connection</h3>
+                                <ul>
+                                    <li><strong>Tipo</strong>: Debe ser de Alanube (<code>alanube_panama</code> o variantes de <code>alanube</code>)</li>
+                                    <li><strong>País</strong>: Solo disponible para Panamá (PA)</li>
+                                    <li><strong>Token</strong>: Debe estar configurado y válido</li>
+                                    <li><strong>Endpoint</strong>: Debe apuntar a servicios de Alanube Panamá</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <h3>🌐 Ejemplos de Endpoints Válidos</h3>
+                        <div class="code-block">
+<pre>
+Testing:    https://sandbox-api.alanube.co/pan/v1
+Production: https://api.alanube.co/pan/v1
+</pre>
+                        </div>
+
+                        <h2>📤 Respuestas</h2>
+
+                        <h3><span class="success">✅ Respuesta Exitosa (200)</span></h3>
+                        <div class="code-block">
+<pre>
+{
+  "success": true,
+  "message": "Consulta de RUC exitosa",
+  "data": {
+    "ruc": "8-123-456",
+    "digit": "78",
+    "valid": true,
+    "company_name": "Empresa de Ejemplo S.A.",
+    "status": "active"
+  },
+  "ruc_consulted": "8-123-456",
+  "country": "PA",
+  "pac_type": "alanube_panama"
+}
+</pre>
+                        </div>
+
+                        <div class="response-grid">
+                            <div class="response-card">
+                                <h3><span class="error">❌ Error - Organización no encontrada (400)</span></h3>
+                                <div class="code-block">
+<pre>
+{
+  "success": false,
+  "message": "No hay organización activa configurada",
+  "error": "ORGANIZATION_NOT_FOUND"
+}
+</pre>
+                                </div>
+                            </div>
+
+                            <div class="response-card">
+                                <h3><span class="error">❌ Error - PAC no configurado (400)</span></h3>
+                                <div class="code-block">
+<pre>
+{
+  "success": false,
+  "message": "No hay configuración PAC disponible para la organización",
+  "error": "PAC_NOT_CONFIGURED"
+}
+</pre>
+                                </div>
+                            </div>
+
+                            <div class="response-card">
+                                <h3><span class="error">❌ Error - PAC no soportado (400)</span></h3>
+                                <div class="code-block">
+<pre>
+{
+  "success": false,
+  "message": "La consulta de RUC solo está disponible para conexiones PAC de Alanube",
+  "error": "PAC_NOT_SUPPORTED",
+  "pac_type": "thefactoryhka"
+}
+</pre>
+                                </div>
+                            </div>
+
+                            <div class="response-card">
+                                <h3><span class="error">❌ Error - País no soportado (400)</span></h3>
+                                <div class="code-block">
+<pre>
+{
+  "success": false,
+  "message": "La consulta de dígito verificador solo está disponible para Panamá",
+  "error": "COUNTRY_NOT_SUPPORTED",
+  "country": "DO"
+}
+</pre>
+                                </div>
+                            </div>
+
+                            <div class="response-card">
+                                <h3><span class="error">❌ Error - API PAC (4xx/5xx)</span></h3>
+                                <div class="code-block">
+<pre>
+{
+  "success": false,
+  "message": "Error en la consulta de RUC con el PAC",
+  "error": "PAC_API_ERROR",
+  "status_code": 404,
+  "pac_error": {
+    "code": "RUC_NOT_FOUND",
+    "message": "RUC no encontrado en la base de datos"
+  },
+  "ruc_consulted": "8-123-456"
+}
+</pre>
+                                </div>
+                            </div>
+
+                            <div class="response-card">
+                                <h3><span class="error">❌ Error - Validación (422)</span></h3>
+                                <div class="code-block">
+<pre>
+{
+  "message": "The given data was invalid.",
+  "errors": {
+    "ruc": [
+      "El RUC solo puede contener números, guiones y las letras P y E (formatos: 8-123-456, PE-8-123456, 155750453-2-2024)"
+    ]
+  }
+}
+</pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h2>💻 Ejemplos de Uso</h2>
+
+                        <h3>🔨 cURL - RUC Válido</h3>
+                        <div class="code-block">
+<pre>
+curl -X GET "https://tu-dominio.com/api/v1/fe/check_ruc/8-123-456" \
+  -H "Authorization: Bearer tu-token-aqui" \
+  -H "Accept: application/json"
+</pre>
+                        </div>
+
+                        <h3>🔨 cURL - RUC con Formato PE</h3>
+                        <div class="code-block">
+<pre>
+curl -X GET "https://tu-dominio.com/api/v1/fe/check_ruc/PE-8-123456" \
+  -H "Authorization: Bearer tu-token-aqui" \
+  -H "Accept: application/json"
+</pre>
+                        </div>
+
+                        <h3>🔨 cURL - RUC Empresarial con Año</h3>
+                        <div class="code-block">
+<pre>
+curl -X GET "https://tu-dominio.com/api/v1/fe/check_ruc/155750453-2-2024" \
+  -H "Authorization: Bearer tu-token-aqui" \
+  -H "Accept: application/json"
+</pre>
+                        </div>
+
+                        <h3>🟨 JavaScript/Fetch</h3>
+                        <div class="code-block">
+<pre>
+const response = await fetch('/api/v1/fe/check_ruc/8-123-456', {
+  method: 'GET',
+  headers: {
+    'Authorization': 'Bearer ' + token,
+    'Accept': 'application/json'
+  }
+});
+
+const result = await response.json();
+console.log(result);
+</pre>
+                        </div>
+
+                        <h3>🐘 PHP/Laravel HTTP Client</h3>
+                        <div class="code-block">
+<pre>
+use Illuminate\Support\Facades\Http;
+
+$response = Http::withToken($token)
+    ->get('/api/v1/fe/check_ruc/8-123-456');
+
+$result = $response->json();
+</pre>
+                        </div>
+
+                        <h2>⚠️ Códigos de Error</h2>
+
+                        <table class="validation-table">
+                            <thead>
+                                <tr>
+                                    <th>Código</th>
+                                    <th>Error</th>
+                                    <th>Descripción</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>ORGANIZATION_NOT_FOUND</code></td>
+                                    <td><span class="badge badge-danger">400</span></td>
+                                    <td>Organización no configurada</td>
+                                </tr>
+                                <tr>
+                                    <td><code>PAC_NOT_CONFIGURED</code></td>
+                                    <td><span class="badge badge-danger">400</span></td>
+                                    <td>Sin configuración PAC</td>
+                                </tr>
+                                <tr>
+                                    <td><code>PAC_NOT_SUPPORTED</code></td>
+                                    <td><span class="badge badge-danger">400</span></td>
+                                    <td>PAC no es Alanube</td>
+                                </tr>
+                                <tr>
+                                    <td><code>COUNTRY_NOT_SUPPORTED</code></td>
+                                    <td><span class="badge badge-danger">400</span></td>
+                                    <td>País no es Panamá</td>
+                                </tr>
+                                <tr>
+                                    <td><code>PAC_API_ERROR</code></td>
+                                    <td><span class="badge badge-warning">4xx/5xx</span></td>
+                                    <td>Error en API de Alanube</td>
+                                </tr>
+                                <tr>
+                                    <td><code>INTERNAL_ERROR</code></td>
+                                    <td><span class="badge badge-danger">500</span></td>
+                                    <td>Error interno del sistema</td>
+                                </tr>
+                                <tr>
+                                    <td><code>INVALID_RUC_FORMAT</code></td>
+                                    <td><span class="badge badge-warning">422</span></td>
+                                    <td>Formato de RUC inválido</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h2>📊 Logging</h2>
+                        <div class="code-block">
+                            <p>El sistema registra automáticamente:</p>
+                            <ul>
+                                <li><span class="success">✅ Consultas exitosas</span> con detalles de RUC y respuesta</li>
+                                <li><span class="error">❌ Errores de PAC</span> con códigos de estado</li>
+                                <li><span class="error">🔥 Excepciones internas</span> con stack trace</li>
+                                <li><span class="info">ℹ️ Información de debugging</span> para troubleshooting</li>
+                            </ul>
+                        </div>
+
+                        <h2>🎯 Casos de Uso</h2>
+
+                        <div class="response-grid">
+                            <div class="response-card">
+                                <h3>👥 1. Validación de Clientes</h3>
+                                <p>Verificar RUCs de clientes antes de crear facturas</p>
+                            </div>
+
+                            <div class="response-card">
+                                <h3>✨ 2. Autocompletado</h3>
+                                <p>Obtener datos de empresa desde RUC</p>
+                            </div>
+
+                            <div class="response-card">
+                                <h3>📝 3. Integración de Formularios</h3>
+                                <p>Validar RUCs en tiempo real</p>
+                            </div>
+
+                            <div class="response-card">
+                                <h3>📊 4. Auditoría</h3>
+                                <p>Verificar existencia de RUCs para reportes</p>
+                            </div>
+
+                            <div class="response-card">
+                                <h3>📋 5. Compliance</h3>
+                                <p>Validar contribuyentes según DGI Panamá</p>
+                            </div>
+                        </div>
+
+                        <h2>⚙️ Consideraciones Técnicas</h2>
+
+                        <div class="code-block">
+                            <ul>
+                                <li><strong>Timeout</strong>: 30 segundos para consultas PAC</li>
+                                <li><strong>Rate Limiting</strong>: Sujeto a límites de la API de Alanube</li>
+                                <li><strong>Cache</strong>: No se implementa cache - consultas en tiempo real</li>
+                                <li><strong>Concurrent</strong>: Soporte para múltiples consultas simultáneas</li>
+                                <li><strong>Retry</strong>: No implementado - fallas se reportan inmediatamente</li>
+                            </ul>
+                        </div>
+
+                        <h2>🔗 Dependencias</h2>
+
+                        <div class="response-grid">
+                            <div class="response-card">
+                                <h3>📦 Servicios</h3>
+                                <ul>
+                                    <li><code>App\Services\AlanubeService</code>: Servicio principal</li>
+                                    <li><code>App\Http\Requests\CheckRucRequest</code>: Validación de entrada</li>
+                                    <li><code>App\Facades\OrganizationFacade</code>: Gestión de organización</li>
+                                </ul>
+                            </div>
+
+                            <div class="response-card">
+                                <h3>🗄️ Base de Datos</h3>
+                                <ul>
+                                    <li>Configuración PAC válida en base de datos</li>
+                                    <li>Token de autenticación Alanube válido</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <h2>📋 Notas de Implementación</h2>
+
+                        <div class="highlight">
+                            <ul>
+                                <li>Solo funciona con conexiones PAC de Alanube Panamá</li>
+                                <li>Requiere token válido configurado en <code>pacconnection.token</code></li>
+                                <li>El endpoint se construye automáticamente según configuración PAC</li>
+                                <li>Respeta configuración sandbox vs producción según endpoint PAC</li>
+                                <li>Logging detallado para troubleshooting y auditoría</li>
+                            </ul>
+                        </div>
+
+                        <div style="text-align: center; margin-top: 2rem; padding: 2rem; background-color: #f8f9fa; border-radius: 0.5rem;">
+                            <h3>🔗 APIs Relacionadas</h3>
+                            <p>
+                                <a href="../createSale-ruc-validation/" class="md-button md-button--primary">Validación RUC en CreateSale</a>
+                                <a href="../maxgym-ruc-validation/" class="md-button md-button--primary">Validación RUC Maxgym</a>
+                            </p>
+                        </div>
+
+                    </article>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
