@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Mejoras en Manejo de Errores - Lightspeed Serie R - DocuCenter</title>
+    <link rel="shortcut icon" href="../assets/images/favicon.png">
+    <link rel="stylesheet" href="../assets/stylesheets/main.7e37652d.min.css">
+    <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+    <style>
+        .highlight { background-color: #fff3cd; padding: 0.5rem; border-radius: 0.25rem; margin: 1rem 0; }
+        .code-block { background-color: #f8f9fa; border: 1px solid #e9ecef; border-radius: 0.25rem; padding: 1rem; margin: 1rem 0; overflow-x: auto; }
+        .success { color: #28a745; font-weight: 600; }
+        .error { color: #dc3545; font-weight: 600; }
+        .warning { color: #ffc107; font-weight: 600; }
+        .info { color: #17a2b8; font-weight: 600; }
+        .lightspeed-header { background: linear-gradient(135deg, #ff6b6b 0%, #ffa726 100%); color: white; padding: 2rem; border-radius: 0.5rem; margin: 1.5rem 0; text-align: center; }
+        .improvements-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 1.5rem; margin: 2rem 0; }
+        .improvement-card { background: white; border: 1px solid #ddd; border-radius: 0.5rem; padding: 1.5rem; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .error-types-table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+        .error-types-table th, .error-types-table td { border: 1px solid #ddd; padding: 0.75rem; text-align: left; }
+        .error-types-table th { background-color: #f8f9fa; font-weight: 600; }
+        .badge { display: inline-block; padding: 0.25rem 0.5rem; font-size: 0.75rem; font-weight: 700; border-radius: 0.25rem; margin-right: 0.5rem; }
+        .badge-success { color: #fff; background-color: #28a745; }
+        .badge-danger { color: #fff; background-color: #dc3545; }
+        .badge-warning { color: #212529; background-color: #ffc107; }
+        .badge-info { color: #fff; background-color: #17a2b8; }
+        .badge-primary { color: #fff; background-color: #007bff; }
+        .before-after { background: linear-gradient(135deg, #fd79a8 0%, #fdcb6e 100%); color: white; padding: 1.5rem; border-radius: 0.5rem; margin: 1.5rem 0; }
+        .error-handling { background: linear-gradient(135deg, #6c5ce7 0%, #74b9ff 100%); color: white; padding: 1.5rem; border-radius: 0.5rem; margin: 1.5rem 0; }
+        .debugging-info { background: linear-gradient(135deg, #00b894 0%, #00cec9 100%); color: white; padding: 1.5rem; border-radius: 0.5rem; margin: 1.5rem 0; }
+        .benefits-section { background: linear-gradient(135deg, #a29bfe 0%, #74b9ff 100%); color: white; padding: 1.5rem; border-radius: 0.5rem; margin: 1.5rem 0; }
+        .comparison-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin: 2rem 0; }
+        .before-card { background: #fee; border-left: 4px solid #dc3545; padding: 1rem; border-radius: 0.5rem; }
+        .after-card { background: #e8f5e8; border-left: 4px solid #28a745; padding: 1rem; border-radius: 0.5rem; }
+        .use-cases { background: linear-gradient(135deg, #fd79a8 0%, #fdcb6e 100%); color: white; padding: 1.5rem; border-radius: 0.5rem; margin: 1.5rem 0; }
+    </style>
+</head>
+<body>
+    <div class="md-container" data-md-component="container">
+        <main class="md-main" data-md-component="main">
+            <div class="md-main__inner md-grid">
+                <div class="md-content">
+                    <article class="md-content__inner md-typeset">
+                        <h1>🔧 Mejoras en Manejo de Errores - Lightspeed Serie R</h1>
+                        
+                        <div class="lightspeed-header">
+                            <h2>✅ <strong>ERROR HANDLING DETALLADO IMPLEMENTADO</strong></h2>
+                            <p>Sistema avanzado de <strong>manejo de errores</strong> con <strong>decodificación JSON</strong>, <strong>logging estructurado</strong> y <strong>contexto completo</strong> para debugging de errores de Lightspeed Serie R.</p>
+                            <p><strong>Servicio</strong>: <code>LightspeedSerieRService</code> | <strong>Estado</strong>: <span class="badge badge-success">IMPLEMENTADO</span></p>
+                        </div>
+
+                        <h2>📋 Mejoras Implementadas</h2>
+
+                        <div class="improvements-grid">
+                            <div class="improvement-card">
+                                <h3><strong>🔑 1. Error Handling en refreshAccessToken()</strong></h3>
+                                <ul>
+                                    <li>✅ Decodificación JSON de respuestas de error</li>
+                                    <li>✅ Mensajes específicos según tipo de error</li>
+                                    <li>✅ Manejo de tokens revocados</li>
+                                    <li>✅ Validación de credenciales OAuth</li>
+                                </ul>
+                            </div>
+
+                            <div class="improvement-card">
+                                <h3><strong>⚡ 2. Error Handling en executeWithRateLimit()</strong></h3>
+                                <ul>
+                                    <li>✅ Logging detallado con contexto de conexión</li>
+                                    <li>✅ Información completa de organización</li>
+                                    <li>✅ Manejo específico de rate limiting</li>
+                                    <li>✅ Preservación de códigos HTTP</li>
+                                </ul>
+                            </div>
+
+                            <div class="improvement-card">
+                                <h3><strong>🚀 3. Error Handling en executeWithRateLimitAdvanced()</strong></h3>
+                                <ul>
+                                    <li>✅ Headers HTTP incluidos en logs</li>
+                                    <li>✅ Retry-After header respetado</li>
+                                    <li>✅ Contexto completo de debugging</li>
+                                    <li>✅ Mensajes de error más descriptivos</li>
+                                </ul>
+                            </div>
+
+                            <div class="improvement-card">
+                                <h3><strong>📊 4. Logging Estructurado</strong></h3>
+                                <ul>
+                                    <li>✅ Formato JSON para parsing automático</li>
+                                    <li>✅ Categorización por tipo de error</li>
+                                    <li>✅ Tracking de reintentos</li>
+                                    <li>✅ Timestamps para correlación</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <h2>🔄 Antes vs Después</h2>
+
+                        <div class="before-after">
+                            <h3><strong>🛠️ Transformación del Error Handling</strong></h3>
+                            
+                            <div class="comparison-grid">
+                                <div class="before-card">
+                                    <h4><strong>❌ Antes</strong></h4>
+                                    <div class="code-block">
+<pre>
+throw new Exception('Error al refrescar el token: ' . $e->getMessage(), $statusCode);
+</pre>
+                                    </div>
+                                    <p><strong>Problemas:</strong></p>
+                                    <ul>
+                                        <li>❌ Mensaje genérico</li>
+                                        <li>❌ Sin contexto específico</li>
+                                        <li>❌ No decodifica respuesta JSON</li>
+                                        <li>❌ Sin información de debugging</li>
+                                    </ul>
+                                </div>
+
+                                <div class="after-card">
+                                    <h4><strong>✅ Después</strong></h4>
+                                    <div class="code-block">
+<pre>
+// Decodificación de respuesta JSON
+$errorDetails = [];
+if (!empty($responseBody)) {
+    $decodedResponse = json_decode($responseBody, true);
+    if (json_last_error() === JSON_ERROR_NONE && is_array($decodedResponse)) {
+        $errorDetails = $decodedResponse;
+    }
+}
+
+// Mensaje específico según el tipo de error
+switch ($errorDetails['error'] ?? '') {
+    case 'invalid_grant':
+        if (str_contains($errorDetails['error_description'] ?? '', 'refresh token is invalid')) {
+            $errorMessage = "Token de refresco de Lightspeed Serie R ha sido revocado o expirado. Se requiere re-autorización manual.";
+        }
+        break;
+    case 'invalid_client':
+        $errorMessage = "Client ID o Client Secret de Lightspeed Serie R inválidos";
+        break;
+}
+
+throw new \Exception($errorMessage . " | Detalles: " . json_encode($detailedError), $statusCode);
+</pre>
+                                    </div>
+                                    <p><strong>Beneficios:</strong></p>
+                                    <ul>
+                                        <li>✅ Mensajes específicos en español</li>
+                                        <li>✅ Decodificación JSON completa</li>
+                                        <li>✅ Contexto detallado incluido</li>
+                                        <li>✅ Información para debugging</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h2>🚨 Tipos de Error Manejados</h2>
+
+                        <div class="error-handling">
+                            <h3><strong>🔑 1. Token Errors (OAuth)</strong></h3>
+                            
+                            <h4><strong>Error JSON de Lightspeed:</strong></h4>
+                            <div class="code-block" style="background: rgba(255,255,255,0.1);">
+<pre style="color: white;">
+{
+  "error": "invalid_grant",
+  "error_description": "The refresh token is invalid.",
+  "hint": "Token has been revoked"
+}
+</pre>
+                            </div>
+
+                            <h4><strong>Respuesta Mejorada:</strong></h4>
+                            <ul>
+                                <li>✅ <strong>Mensaje claro</strong>: "Token de refresco ha sido revocado - se requiere re-autorización manual"</li>
+                                <li>✅ <strong>Código HTTP</strong>: Preservado (400, 401, etc.)</li>
+                                <li>✅ <strong>Contexto</strong>: Connection ID, Organization ID incluidos</li>
+                            </ul>
+
+                            <h3><strong>⏱️ 2. Rate Limit Errors (429)</strong></h3>
+                            
+                            <h4><strong>Error JSON de Lightspeed:</strong></h4>
+                            <div class="code-block" style="background: rgba(255,255,255,0.1);">
+<pre style="color: white;">
+{
+  "error": "rate_limit_exceeded",
+  "error_description": "Too many requests",
+  "retry_after": 60
+}
+</pre>
+                            </div>
+
+                            <h4><strong>Respuesta Mejorada:</strong></h4>
+                            <ul>
+                                <li>✅ <strong>Retry-After header</strong>: Respetado automáticamente</li>
+                                <li>✅ <strong>Backoff exponencial</strong>: Implementado</li>
+                                <li>✅ <strong>Logging detallado</strong>: Con attempt number y wait time</li>
+                            </ul>
+
+                            <h3><strong>🔧 3. API Errors (4xx, 5xx)</strong></h3>
+                            
+                            <h4><strong>Error JSON de Lightspeed:</strong></h4>
+                            <div class="code-block" style="background: rgba(255,255,255,0.1);">
+<pre style="color: white;">
+{
+  "error": "invalid_request",
+  "error_description": "Missing required parameter",
+  "hint": "Check your request parameters"
+}
+</pre>
+                            </div>
+
+                            <h4><strong>Respuesta Mejorada:</strong></h4>
+                            <ul>
+                                <li>✅ <strong>Error type</strong>: Identificado y categorizado</li>
+                                <li>✅ <strong>Description</strong>: Error específico de la API</li>
+                                <li>✅ <strong>Hint</strong>: Sugerencias cuando están disponibles</li>
+                                <li>✅ <strong>Raw response</strong>: Incluido para debugging</li>
+                            </ul>
+                        </div>
+
+                        <h2>📊 Información de Debugging Incluida</h2>
+
+                        <div class="debugging-info">
+                            <div class="improvements-grid">
+                                <div>
+                                    <h3><strong>📝 En Logs:</strong></h3>
+                                    <div class="code-block" style="background: rgba(255,255,255,0.1);">
+<pre style="color: white;">
+{
+  "http_status": 400,
+  "method": "refreshAccessToken",
+  "error_type": "invalid_grant",
+  "error_description": "The refresh token is invalid.",
+  "hint": "Token has been revoked",
+  "raw_response": "{\"error\":\"invalid_grant\"...}",
+  "connection_id": 123,
+  "organization_id": 16,
+  "timestamp": "2025-10-01T06:48:32.000Z"
+}
+</pre>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <h3><strong>🚨 En Excepciones:</strong></h3>
+                                    <div class="code-block" style="background: rgba(255,255,255,0.1);">
+<pre style="color: white;">
+$detailedError = [
+    'http_status' => $statusCode,
+    'error_type' => $errorDetails['error'] ?? 'unknown_error',
+    'error_description' => $errorDetails['error_description'] ?? $e->getMessage(),
+    'hint' => $errorDetails['hint'] ?? null,
+    'raw_response' => $responseBody,
+    'connection_id' => $this->connection ? $this->connection->id : null,
+    'organization_id' => $this->organization ? $this->organization->id : null,
+    'timestamp' => now()->toISOString()
+];
+
+throw new \Exception($errorMessage . " | Detalles: " . json_encode($detailedError), $statusCode);
+</pre>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h2>🎯 Beneficios de las Mejoras</h2>
+
+                        <div class="benefits-section">
+                            <div class="improvements-grid">
+                                <div>
+                                    <h3><strong>🔍 1. Debugging Mejorado</strong></h3>
+                                    <ul>
+                                        <li>✅ <strong>Información completa</strong> sobre el error</li>
+                                        <li>✅ <strong>Contexto de organización</strong> y conexión</li>
+                                        <li>✅ <strong>Raw response</strong> para análisis detallado</li>
+                                        <li>✅ <strong>Timestamp</strong> para correlación temporal</li>
+                                    </ul>
+                                </div>
+
+                                <div>
+                                    <h3><strong>🎯 2. Manejo Específico de Errores</strong></h3>
+                                    <ul>
+                                        <li>✅ <strong>Token revocado</strong>: Mensaje claro sobre re-autorización</li>
+                                        <li>✅ <strong>Credenciales inválidas</strong>: Identificación específica</li>
+                                        <li>✅ <strong>Rate limits</strong>: Manejo automático con tiempos de espera</li>
+                                        <li>✅ <strong>API errors</strong>: Descripción detallada del problema</li>
+                                    </ul>
+                                </div>
+
+                                <div>
+                                    <h3><strong>📋 3. Logging Estructurado</strong></h3>
+                                    <ul>
+                                        <li>✅ <strong>JSON format</strong>: Fácil parsing y análisis</li>
+                                        <li>✅ <strong>Context fields</strong>: Connection ID, Organization ID</li>
+                                        <li>✅ <strong>Error categorization</strong>: Por tipo de error</li>
+                                        <li>✅ <strong>Attempt tracking</strong>: Para reintentos y debugging</li>
+                                    </ul>
+                                </div>
+
+                                <div>
+                                    <h3><strong>👥 4. Experiencia de Usuario</strong></h3>
+                                    <ul>
+                                        <li>✅ <strong>Mensajes claros</strong>: En español, descriptivos</li>
+                                        <li>✅ <strong>Acciones sugeridas</strong>: Qué hacer en cada caso</li>
+                                        <li>✅ <strong>Información técnica</strong>: Para soporte técnico</li>
+                                        <li>✅ <strong>Preservación de códigos</strong>: HTTP status codes</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h2>📝 Casos de Uso Mejorados</h2>
+
+                        <div class="use-cases">
+                            <h3><strong>🚀 Transformación de Mensajes de Error</strong></h3>
+
+                            <table class="error-types-table" style="background: rgba(255,255,255,0.1); color: white;">
+                                <thead>
+                                    <tr>
+                                        <th>Caso</th>
+                                        <th>Antes</th>
+                                        <th>Después</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>🔑 Token Revocado</strong></td>
+                                        <td style="color: #ffcccb;">Error al refrescar el token: Client error: POST https://cloud.lightspeedapp.com/auth/oauth/token resulted in a 400 Bad Request</td>
+                                        <td style="color: #90ee90;">Token de refresco de Lightspeed Serie R ha sido revocado o expirado. Se requiere re-autorización manual. | Detalles: {"http_status":400,"error_type":"invalid_grant","connection_id":123,"organization_id":16}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>⏱️ Rate Limit</strong></td>
+                                        <td style="color: #ffcccb;">Error al obtener las ventas: Too Many Requests</td>
+                                        <td style="color: #90ee90;">Log: Rate limit en LightspeedSerieRService - method: getTodaySales, wait_time: 60, retry_after_header: 60<br>Excepción: Manejo automático con reintento después de 60 segundos</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>🔧 API Error</strong></td>
+                                        <td style="color: #ffcccb;">Error al obtener el cliente: Bad Request</td>
+                                        <td style="color: #90ee90;">Error al obtener información de la tienda: Invalid shop ID provided | Status: 400 | Type: invalid_request | Detalles: {"error":"invalid_request","error_description":"Shop ID does not exist","hint":"Check your shop ID parameter"}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h2>🔧 Configuración Recomendada</h2>
+
+                        <div class="improvements-grid">
+                            <div class="improvement-card">
+                                <h3><strong>📊 Log Level Configuration</strong></h3>
+                                <div class="code-block">
+<pre>
+// En .env para diferentes ambientes
+LOG_LEVEL=debug  // Desarrollo - información completa
+LOG_LEVEL=info   // Staging - información importante
+LOG_LEVEL=error  // Producción - solo errores críticos
+</pre>
+                                </div>
+                            </div>
+
+                            <div class="improvement-card">
+                                <h3><strong>🚨 Monitoring Alerts</strong></h3>
+                                <div class="code-block">
+<pre>
+// Configurar alertas para errores específicos
+- invalid_grant errors -> Notificar para re-autorización
+- rate_limit_exceeded -> Monitorear frecuencia de requests
+- api_errors -> Investigar problemas de integración
+</pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h2>📈 Tipos de Error y Códigos HTTP</h2>
+
+                        <table class="error-types-table">
+                            <thead>
+                                <tr>
+                                    <th>Error Type</th>
+                                    <th>HTTP Code</th>
+                                    <th>Descripción</th>
+                                    <th>Acción Recomendada</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>invalid_grant</code></td>
+                                    <td><span class="badge badge-warning">400</span></td>
+                                    <td>Token de refresco revocado o expirado</td>
+                                    <td>Re-autorización manual requerida</td>
+                                </tr>
+                                <tr>
+                                    <td><code>invalid_client</code></td>
+                                    <td><span class="badge badge-warning">401</span></td>
+                                    <td>Client ID o Secret inválidos</td>
+                                    <td>Verificar credenciales OAuth</td>
+                                </tr>
+                                <tr>
+                                    <td><code>rate_limit_exceeded</code></td>
+                                    <td><span class="badge badge-danger">429</span></td>
+                                    <td>Demasiadas requests por minuto</td>
+                                    <td>Esperar según Retry-After header</td>
+                                </tr>
+                                <tr>
+                                    <td><code>invalid_request</code></td>
+                                    <td><span class="badge badge-warning">400</span></td>
+                                    <td>Parámetros de request inválidos</td>
+                                    <td>Verificar parámetros enviados</td>
+                                </tr>
+                                <tr>
+                                    <td><code>server_error</code></td>
+                                    <td><span class="badge badge-danger">500</span></td>
+                                    <td>Error interno de Lightspeed</td>
+                                    <td>Reintento automático, contactar soporte</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h2>🚀 Implementación Técnica</h2>
+
+                        <div class="highlight">
+                            <h3><strong>Método Mejorado de Error Handling</strong></h3>
+                        </div>
+
+                        <div class="code-block">
+<pre>
+protected function handleApiError(\Exception $e, $method, $statusCode = null, $responseBody = '')
+{
+    // Decodificación de respuesta JSON para obtener detalles específicos
+    $errorDetails = [];
+    if (!empty($responseBody)) {
+        $decodedResponse = json_decode($responseBody, true);
+        if (json_last_error() === JSON_ERROR_NONE && is_array($decodedResponse)) {
+            $errorDetails = $decodedResponse;
+        }
+    }
+
+    // Mensaje específico según el tipo de error
+    $errorMessage = "Error en Lightspeed Serie R";
+    switch ($errorDetails['error'] ?? '') {
+        case 'invalid_grant':
+            if (str_contains($errorDetails['error_description'] ?? '', 'refresh token is invalid')) {
+                $errorMessage = "Token de refresco de Lightspeed Serie R ha sido revocado o expirado. Se requiere re-autorización manual.";
+            }
+            break;
+        case 'invalid_client':
+            $errorMessage = "Client ID o Client Secret de Lightspeed Serie R inválidos";
+            break;
+        case 'rate_limit_exceeded':
+            $errorMessage = "Rate limit excedido en Lightspeed Serie R";
+            break;
+        case 'invalid_request':
+            $errorMessage = "Request inválido a Lightspeed Serie R: " . ($errorDetails['error_description'] ?? 'Parámetros inválidos');
+            break;
+        default:
+            $errorMessage = "Error al ejecutar método {$method} en Lightspeed Serie R";
+    }
+
+    // Construcción de información detallada para debugging
+    $detailedError = [
+        'http_status' => $statusCode,
+        'method' => $method,
+        'error_type' => $errorDetails['error'] ?? 'unknown_error',
+        'error_description' => $errorDetails['error_description'] ?? $e->getMessage(),
+        'hint' => $errorDetails['hint'] ?? null,
+        'raw_response' => $responseBody,
+        'connection_id' => $this->connection ? $this->connection->id : null,
+        'organization_id' => $this->organization ? $this->organization->id : null,
+        'timestamp' => now()->toISOString()
+    ];
+
+    // Logging estructurado
+    \Log::error("Lightspeed Serie R Error", $detailedError);
+
+    // Lanzar excepción con información completa
+    throw new \Exception($errorMessage . " | Detalles: " . json_encode($detailedError), $statusCode ?: 500);
+}
+</pre>
+                        </div>
+
+                        <h2>🏆 Conclusión</h2>
+
+                        <div class="lightspeed-header">
+                            <p>Las <strong>Mejoras en Manejo de Errores para Lightspeed Serie R</strong> proporcionan:</p>
+
+                            <div style="margin-top: 2rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.3);">
+                                <div class="improvements-grid" style="margin-top: 1rem;">
+                                    <div>
+                                        <h4><strong>🔍 Diagnóstico Completo:</strong></h4>
+                                        <ul style="text-align: left;">
+                                            <li>✅ Decodificación JSON de errores</li>
+                                            <li>✅ Contexto completo de debugging</li>
+                                            <li>✅ Logging estructurado para análisis</li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <h4><strong>🎯 Manejo Específico:</strong></h4>
+                                        <ul style="text-align: left;">
+                                            <li>✅ Mensajes claros en español</li>
+                                            <li>✅ Acciones recomendadas por error</li>
+                                            <li>✅ Información técnica detallada</li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div style="margin-top: 2rem; padding: 1rem; background: rgba(255,255,255,0.1); border-radius: 0.5rem;">
+                                    <p><strong>El sistema mejorado facilita significativamente el debugging y resolución de problemas con la integración Lightspeed Serie R, proporcionando diagnóstico completo y acciones específicas para cada tipo de error.</strong></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="text-align: center; margin-top: 2rem; padding: 2rem; background-color: #f8f9fa; border-radius: 0.5rem;">
+                            <h3>🔗 Documentaciones Relacionadas</h3>
+                            <p>
+                                <a href="../quickbooks-intelligent-duplication-prevention/" class="md-button md-button--primary">QuickBooks Prevention</a>
+                                <a href="../enhanced-transaction-status-system/" class="md-button md-button--primary">Sistema Transacciones</a>
+                                <a href="../zoho-purchase-order-implementation/" class="md-button md-button--primary">Zoho Purchase Order</a>
+                            </p>
+                            
+                            <div style="margin-top: 1rem; font-size: 0.9rem; color: #666;">
+                                <p><strong>Servicio</strong>: <code>LightspeedSerieRService</code><br>
+                                <strong>Métodos mejorados</strong>: refreshAccessToken(), executeWithRateLimit(), executeWithRateLimitAdvanced()<br>
+                                <strong>Estado</strong>: Implementado en producción<br>
+                                <strong>Configuración recomendada</strong>: LOG_LEVEL=debug para desarrollo, LOG_LEVEL=error para producción</p>
+                            </div>
+                        </div>
+
+                    </article>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
