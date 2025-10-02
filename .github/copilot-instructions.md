@@ -7,7 +7,7 @@
 ## Documentation Guidelines
 
 ### Content and Style Rules
-- **NO incluir texto**: "Implementado por: GitHub Copilot" en documentaciones
+- **NO incluir texto**: "Implementado por: [cualquier entidad]" en documentaciones
 - **NO usar iconos**: Evitar emojis y símbolos en títulos y contenido
 - **Language**: Spanish (es) - all content and UI
 - **Technical terms**: Keep English for code/API terms (e.g., "RUC", "PaymentCalculationHelper")
