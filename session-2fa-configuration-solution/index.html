@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="es" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" href="../assets/images/favicon.png">
+<meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.43">
+<title>Configuración de Sesiones y 2FA - Solución Implementada - DocuCenter</title>
+<link rel="stylesheet" href="../assets/stylesheets/main.7e37652d.min.css">
+<link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+</head>
+<body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+
+<h1>Configuración de Sesiones y 2FA - Solución Implementada</h1>
+
+<h2>Cambios Aplicados</h2>
+
+<h3>Problema Original</h3>
+
+<pre><code class="language-env"># Producción (ANTES)
+SESSION_LIFETIME=120      # Solo 2 horas
+OTP_LIFETIME=120          # Solo 2 horas
+</code></pre>
+
+<p><strong>Síntoma:</strong> El sistema pedía el código 2FA después de 2 horas, incluso con "Recordar sesión" marcado.</p>
+
+<h3>Solución Implementada</h3>
+
+<pre><code class="language-env"># Producción (AHORA - RECOMENDADO)
+SESSION_DRIVER=database
+SESSION_CONNECTION=mysql
+SESSION_LIFETIME=43200           # 30 días (43200 minutos)
+SESSION_DOMAIN="${APP_DOMAIN}"
+
+OTP_LIFETIME=0                   # Eterno (no expira mientras sesión esté activa)
+OTP_KEEP_ALIVE=true              # Se renueva en cada request
+OTP_ENABLED=true
+OTP_THROW_EXCEPTION=true
+</code></pre>
+
+<hr>
+
+<h2>Explicación Técnica</h2>
+
+<h3>¿Por qué funcionaba mal?</h3>
+
+<ol>
+<li><strong>SESSION_LIFETIME=120</strong> (2 horas)
+<ul>
+<li>La sesión de Laravel expiraba a las 2 horas</li>
+<li>Al expirar la sesión, se perdía el estado de autenticación 2FA</li>
+</ul>
+</li>
+<li><strong>OTP_LIFETIME=120</strong> (2 horas)
+<ul>
+<li>El token 2FA también expiraba a las 2 horas</li>
+<li>Doble expiración innecesaria</li>
+</ul>
+</li>
+</ol>
+
+<h3>¿Cómo funciona ahora?</h3>
+
+<ol>
+<li><strong>SESSION_LIFETIME=43200</strong> (30 días)
+<ul>
+<li>La sesión dura 30 días</li>
+<li>El usuario puede trabajar durante 30 días sin reiniciar sesión</li>
+</ul>
+</li>
+<li><strong>OTP_LIFETIME=0</strong> (eterno)
+<ul>
+<li>El 2FA no expira mientras la sesión esté activa</li>
+<li>Se valida una sola vez y permanece válido durante toda la sesión</li>
+</ul>
+</li>
+<li><strong>OTP_KEEP_ALIVE=true</strong>
+<ul>
+<li>El timestamp de validación 2FA se actualiza en cada request</li>
+<li>Mantiene el 2FA activo mientras el usuario esté usando el sistema</li>
+</ul>
+</li>
+</ol>
+
+<hr>
+
+<h2>Comportamiento Actual</h2>
+
+<h3>Flujo con "Recordar Sesión"</h3>
+
+<pre><code>Usuario login → Valida 2FA → ✓
+Trabaja 1 día → ✓ (sesión activa)
+Trabaja 5 días → ✓ (sesión activa)
+Trabaja 30 días → ✓ (sesión activa)
+Día 31 → Pide login nuevamente
+</code></pre>
+
+<h3>Flujo sin "Recordar Sesión"</h3>
+
+<pre><code>Usuario login → Valida 2FA → ✓
+Cierra navegador → Sesión se mantiene
+Abre navegador → ✓ (sesión activa hasta 30 días)
+</code></pre>
+
+<p><strong>Nota:</strong> Laravel usa cookies de sesión. El comportamiento de "recordar" está controlado por:</p>
+
+<ul>
+<li><code>SESSION_LIFETIME</code>: Tiempo máximo de sesión</li>
+<li>Cookie <code>laravel_session</code>: Almacena el ID de sesión</li>
+<li>Cookie <code>remember_web_*</code>: Para "Recordar sesión" (5 años)</li>
+</ul>
+
+<hr>
+
+<h2>Migración en Producción</h2>
+
+<h3>Paso 1: Actualizar .env</h3>
+
+<pre><code class="language-bash"># En el servidor de producción
+nano .env
+</code></pre>
+
+<p>Cambiar:</p>
+
+<pre><code class="language-env">SESSION_DRIVER=database
+SESSION_CONNECTION=mysql
+SESSION_LIFETIME=43200
+SESSION_DOMAIN="${APP_DOMAIN}"
+
+OTP_LIFETIME=0
+OTP_KEEP_ALIVE=true
+OTP_ENABLED=true
+OTP_THROW_EXCEPTION=true
+</code></pre>
+
+<h3>Paso 2: Crear tabla de sesiones (si no existe)</h3>
+
+<pre><code class="language-bash">php artisan session:table
+php artisan migrate
+</code></pre>
+
+<h3>Paso 3: Limpiar cache</h3>
+
+<pre><code class="language-bash">php artisan config:cache
+php artisan cache:clear
+</code></pre>
+
+<h3>Paso 4: Verificar</h3>
+
+<pre><code class="language-bash">php artisan tinker
+
+&gt;&gt;&gt; config('session.lifetime')
+=&gt; 43200
+
+&gt;&gt;&gt; config('google2fa.lifetime')
+=&gt; 0
+
+&gt;&gt;&gt; config('google2fa.keep_alive')
+=&gt; true
+</code></pre>
+
+<hr>
+
+<h2>Ventajas de Esta Configuración</h2>
+
+<h3>Ventajas</h3>
+
+<ol>
+<li><strong>Sesión larga:</strong> 30 días sin pedir login</li>
+<li><strong>2FA único:</strong> Solo se pide una vez por sesión</li>
+<li><strong>Mejor UX:</strong> Usuario no interrumpido constantemente</li>
+<li><strong>Más seguro:</strong> Usa base de datos para sesiones (más persistente que archivos)</li>
+<li><strong>Keep-alive:</strong> Se renueva automáticamente con actividad</li>
+</ol>
+
+<h3>Consideraciones de Seguridad</h3>
+
+<ol>
+<li><strong>Sesión de 30 días:</strong>
+<ul>
+<li>Pros: Mejor experiencia de usuario</li>
+<li>Contras: Sesión activa por más tiempo</li>
+<li>Mitigación: El 2FA ya validó la identidad</li>
+</ul>
+</li>
+<li><strong>2FA eterno:</strong>
+<ul>
+<li>Solo es eterno DENTRO de la sesión</li>
+<li>Si la sesión expira (30 días), se pide 2FA nuevamente</li>
+<li>Si usuario cierra sesión manualmente, se pide 2FA nuevamente</li>
+</ul>
+</li>
+<li><strong>Recomendación adicional:</strong>
+<ul>
+<li>Implementar logout automático por inactividad (opcional)</li>
+<li>Monitorear sesiones activas</li>
+<li>Logs de acceso con 2FA</li>
+</ul>
+</li>
+</ol>
+
+<hr>
+
+<h2>Opciones Alternativas</h2>
+
+<h3>Opción 1: Sesión Más Corta (7 días)</h3>
+
+<pre><code class="language-env">SESSION_LIFETIME=10080  # 7 días en minutos
+OTP_LIFETIME=0          # Eterno dentro de la sesión
+</code></pre>
+
+<h3>Opción 2: Sesión Moderada (14 días)</h3>
+
+<pre><code class="language-env">SESSION_LIFETIME=20160  # 14 días en minutos
+OTP_LIFETIME=0          # Eterno dentro de la sesión
+</code></pre>
+
+<h3>Opción 3: Mantener 2 horas pero mejorar UX</h3>
+
+<pre><code class="language-env">SESSION_LIFETIME=120    # 2 horas
+OTP_LIFETIME=1440       # 24 horas (1 día)
+OTP_KEEP_ALIVE=true     # Renovar en cada request
+</code></pre>
+
+<p>Con esta última opción:</p>
+
+<ul>
+<li>Sesión expira en 2 horas de inactividad</li>
+<li>2FA válido por 24 horas (se renueva con actividad)</li>
+<li>Usuario solo valida 2FA una vez al día</li>
+</ul>
+
+<hr>
+
+<h2>Monitoreo Recomendado</h2>
+
+<h3>Ver sesiones activas:</h3>
+
+<pre><code class="language-sql">SELECT 
+    COUNT(*) as total_sesiones,
+    FROM_UNIXTIME(MAX(last_activity)) as ultima_actividad
+FROM sessions;
+</code></pre>
+
+<h3>Limpiar sesiones viejas:</h3>
+
+<pre><code class="language-bash">php artisan session:gc
+</code></pre>
+
+<p>O configurar en cron:</p>
+
+<pre><code class="language-cron">0 0 * * * cd /path/to/project &amp;&amp; php artisan session:gc
+</code></pre>
+
+<hr>
+
+<h2>Resultado Final</h2>
+
+<p><strong>Configuración actual (desarrollo y producción):</strong></p>
+
+<pre><code>SESSION_DRIVER=database
+SESSION_LIFETIME=43200 minutos (30 días)
+OTP_LIFETIME=0 (eterno dentro de sesión)
+OTP_KEEP_ALIVE=true (se renueva)
+</code></pre>
+
+<p><strong>Comportamiento:</strong></p>
+
+<ul>
+<li>Usuario valida 2FA una sola vez</li>
+<li>Sesión dura 30 días</li>
+<li>No se pide 2FA constantemente</li>
+<li>Mejor experiencia de usuario</li>
+<li>Mantiene seguridad con 2FA inicial</li>
+</ul>
+
+<hr>
+
+<p><strong>Fecha de Implementación:</strong> 2025-11-25<br>
+<strong>Ambiente:</strong> Desarrollo y Producción<br>
+<strong>Estado:</strong> Implementado y Verificado</p>
+
+</article>
+</div>
+</div>
+</main>
+</div>
+<script src="../assets/javascripts/bundle.50899def.min.js"></script>
+</body>
+</html>

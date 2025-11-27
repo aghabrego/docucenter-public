@@ -1,0 +1,652 @@
+<!doctype html>
+<html lang="es" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" href="../assets/images/favicon.png">
+<meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.43">
+<title>Guía de Entrenamiento de Document AI - Workflow Completo - DocuCenter</title>
+<link rel="stylesheet" href="../assets/stylesheets/main.7e37652d.min.css">
+<link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+</head>
+<body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+
+<h1>Guía de Entrenamiento de Document AI - Workflow Completo</h1>
+
+<h2>Resumen Ejecutivo</h2>
+
+<p>Este sistema permite entrenar un modelo custom de Google Document AI para extraer datos de facturas panameñas automáticamente, usando una interfaz web en DocuCenter.</p>
+
+<p><strong>Estado actual:</strong> Sistema funcional y optimizado<br>
+<strong>Última actualización:</strong> 26 de noviembre de 2025</p>
+
+<hr>
+
+<h2>¿Qué hace este sistema?</h2>
+
+<ol>
+<li><strong>Sube PDFs</strong> de facturas a DocuCenter</li>
+<li><strong>Anota manualmente</strong> los campos importantes (vendor, tax ID, totales, etc.)</li>
+<li><strong>Genera automáticamente</strong> archivos JSON con las anotaciones mapeadas al texto OCR</li>
+<li><strong>Sube todo a Google Cloud Storage</strong> (PDFs + JSONs)</li>
+<li><strong>Listo para importar</strong> manualmente en Google Cloud Workbench Console</li>
+</ol>
+
+<hr>
+
+<h2>Workflow Paso a Paso</h2>
+
+<h3>Paso 1: Subir Documentos (DocuCenter)</h3>
+
+<p><strong>Ubicación:</strong> <code>/admin/sage50/document-ai-training</code></p>
+
+<ol>
+<li>Ir a la sección "Upload Training Documents"</li>
+<li>Hacer clic en "Choose Files" o arrastrar PDFs</li>
+<li>Subir facturas (máximo 12MB por archivo)</li>
+<li>El sistema automáticamente:
+<ul>
+<li>Guarda el PDF localmente</li>
+<li>Extrae texto con OCR</li>
+<li>Detecta tipo de documento (venta/compra)</li>
+</ul>
+</li>
+</ol>
+
+<p><strong>Requisito mínimo:</strong> 20 documentos anotados para entrenar</p>
+
+<hr>
+
+<h3>Paso 2: Anotar Documentos (DocuCenter)</h3>
+
+<p><strong>Importante:</strong> Debes anotar manualmente cada campo en los PDFs</p>
+
+<h4>Campos a anotar:</h4>
+
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Descripción</th>
+<th>Ejemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>vendor_name</code></td>
+<td>Nombre del proveedor</td>
+<td>"Supermercado El Rey"</td>
+</tr>
+<tr>
+<td><code>vendor_tax_id</code></td>
+<td>RUC sin DV</td>
+<td>"123456"</td>
+</tr>
+<tr>
+<td><code>vendor_dv</code></td>
+<td>Dígito verificador</td>
+<td>"78"</td>
+</tr>
+<tr>
+<td><code>invoice_number</code></td>
+<td>Número de factura</td>
+<td>"FACT-001-00123"</td>
+</tr>
+<tr>
+<td><code>invoice_date</code></td>
+<td>Fecha de emisión</td>
+<td>"2025-11-26"</td>
+</tr>
+<tr>
+<td><code>due_date</code></td>
+<td>Fecha de vencimiento</td>
+<td>"2025-12-26"</td>
+</tr>
+<tr>
+<td><code>subtotal</code></td>
+<td>Subtotal sin impuestos</td>
+<td>"100.00"</td>
+</tr>
+<tr>
+<td><code>tax_amount</code></td>
+<td>Monto de impuestos</td>
+<td>"7.00"</td>
+</tr>
+<tr>
+<td><code>total_amount</code></td>
+<td>Total a pagar</td>
+<td>"107.00"</td>
+</tr>
+<tr>
+<td><code>payment_method</code></td>
+<td>Método de pago</td>
+<td>"Efectivo"</td>
+</tr>
+<tr>
+<td><code>document_type</code></td>
+<td>Tipo</td>
+<td>"sale" o "purchase"</td>
+</tr>
+</tbody>
+</table>
+
+<h4>Proceso de anotación:</h4>
+
+<ol>
+<li>Click en botón "Annotate" en cada documento</li>
+<li>Revisar y corregir campos pre-llenados por OCR</li>
+<li>Asegurarse que <code>document_type</code> sea correcto (sale/purchase)</li>
+<li>Click "Save Annotation"</li>
+</ol>
+
+<p><strong>Tip:</strong> El sistema pre-llena con los valores extraídos por OCR, solo corrígelos si están mal.</p>
+
+<hr>
+
+<h3>Paso 3: Generar JSONs (DocuCenter)</h3>
+
+<p><strong>Cuándo hacer esto:</strong> Cuando tengas 20+ documentos anotados</p>
+
+<ol>
+<li>Verificar en el panel de estadísticas:
+<ul>
+<li>"Annotated" debe ser ≥ 20</li>
+<li>"Pending JSON" muestra cuántos faltan por generar</li>
+</ul>
+</li>
+<li>Click en botón <strong>"Generate JSON Files (X)"</strong></li>
+<li>El sistema ejecuta en <strong>segundo plano</strong> (Job):
+<ul>
+<li>Verifica qué PDFs ya están en GCS (no los sube de nuevo)</li>
+<li>Sube PDFs nuevos a GCS</li>
+<li>Procesa cada PDF con OCR de Document AI</li>
+<li>Mapea cada anotación a su posición exacta en el texto</li>
+<li>Genera archivo JSON en formato Document proto</li>
+<li>Sube JSON a GCS</li>
+</ul>
+</li>
+<li><strong>Duración aproximada:</strong> 8-10 segundos por documento
+<ul>
+<li>20 docs = ~3 minutos</li>
+<li>50 docs = ~7 minutos</li>
+</ul>
+</li>
+<li><strong>Seguimiento del progreso:</strong>
+<ul>
+<li>La página se actualiza automáticamente cada 30 segundos</li>
+<li>Verás un alert con el estado:
+<ul>
+<li>"QUEUED" → Job iniciado</li>
+<li>"GENERATING" → Procesando X/Y documentos</li>
+<li>"COMPLETED" → Listos para importar</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Al completar</strong>, verás:
+<ul>
+<li>Ruta GCS donde están los JSONs</li>
+<li>Link directo a Google Cloud Workbench Console</li>
+</ul>
+</li>
+</ol>
+
+<hr>
+
+<h3>Paso 4: Importar en Google Cloud Workbench (Manual)</h3>
+
+<p><strong>IMPORTANTE:</strong> Este paso se hace en Google Cloud Console, NO en DocuCenter</p>
+
+<h4>4.1 Acceder a Workbench</h4>
+
+<ol>
+<li>Ir a: <a href="https://console.cloud.google.com/ai/document-ai/workbench">https://console.cloud.google.com/ai/document-ai/workbench</a></li>
+<li>Seleccionar proyecto: <code>docucenter-aci</code></li>
+<li>Seleccionar processor: <code>Custom Extractor</code> (ID: <code>d6eea813b0c73fc8</code>)</li>
+</ol>
+
+<h4>4.2 Importar Documentos</h4>
+
+<ol>
+<li>En Workbench, click en <strong>"Import"</strong> (botón azul)</li>
+<li>Seleccionar <strong>"Import documents from Cloud Storage"</strong></li>
+<li><strong>Configuración de la importación:</strong>
+<ul>
+<li><strong>Ruta de acceso fuente:</strong></li>
+</ul>
+</li>
+</ol>
+
+<pre><code>gs://docucenter-aci-document-ai-training/training-pdfs/
+</code></pre>
+
+<p><strong>MUY IMPORTANTE:</strong> Usar la carpeta de PDFs, NO la carpeta <code>json/</code></p>
+
+<ul>
+<li><strong>División de datos</strong> (Dataset split):
+<ul>
+<li><strong>Training:</strong> 80%</li>
+<li><strong>Test:</strong> 20%</li>
+</ul>
+</li>
+<li><strong>Etiquetado automático:</strong>
+<ul>
+<li><strong>Activar</strong> "Importar con etiquetado automático"</li>
+<li>Esto usará los archivos JSON para etiquetar los PDFs automáticamente</li>
+</ul>
+</li>
+</ul>
+
+<ol start="4">
+<li>Click <strong>"Import"</strong> (botón al final del formulario)</li>
+</ol>
+
+<h4>4.3 Esperar Importación</h4>
+
+<ul>
+<li><strong>Tiempo:</strong> 5-15 minutos dependiendo de cantidad</li>
+<li><strong>Progreso:</strong> Verás una barra de progreso en Workbench</li>
+<li><strong>Status:</strong> Verificar que los documentos aparezcan en la lista con sus etiquetas</li>
+</ul>
+
+<h4>4.4 Verificar Documentos Importados</h4>
+
+<ol>
+<li>Los documentos deben aparecer en la lista de Workbench</li>
+<li>Cada documento debe mostrar:
+<ul>
+<li>Thumbnail del PDF</li>
+<li>Etiquetas aplicadas (vendor_name, invoice_number, etc.)</li>
+<li>Estado "Labeled" o "Etiquetado"</li>
+</ul>
+</li>
+<li>Verifica que el conteo sea correcto (21 documentos en tu caso)</li>
+</ol>
+
+<p><strong>Nota sobre la estructura de carpetas:</strong></p>
+
+<ul>
+<li>Google Cloud Workbench busca los PDFs en la ruta que especifiques</li>
+<li>Automáticamente busca archivos JSON con el mismo nombre en la carpeta <code>json/</code></li>
+<li><strong>Ejemplo:</strong>
+<ul>
+<li>PDF: <code>gs://.../training-pdfs/20251126230000/factura1.pdf</code></li>
+<li>JSON: <code>gs://.../json/factura1.json</code> (se encuentra automáticamente)</li>
+</ul>
+</li>
+</ul>
+
+<hr>
+
+<h3>Paso 5: Entrenar Modelo (Google Cloud Console)</h3>
+
+<p><strong>Este paso también es manual en Google Cloud</strong></p>
+
+<h4>5.1 Iniciar Training</h4>
+
+<ol>
+<li>En Workbench, verificar que tienes:
+<ul>
+<li>Mínimo 20 documentos importados</li>
+<li>Distribution: 80/20 (training/test)</li>
+</ul>
+</li>
+<li>Click en <strong>"Train"</strong></li>
+<li>Configurar:
+<ul>
+<li><strong>Training budget:</strong> 1-4 horas</li>
+<li><strong>Model version:</strong> Nueva versión</li>
+</ul>
+</li>
+<li>Click <strong>"Start Training"</strong></li>
+</ol>
+
+<h4>5.2 Esperar Training</h4>
+
+<ul>
+<li><strong>Duración:</strong> 1-3 horas típicamente</li>
+<li><strong>Progreso:</strong> Visible en Google Cloud Console</li>
+<li><strong>Notificación:</strong> Email cuando termine</li>
+</ul>
+
+<h4>5.3 Validar Resultados</h4>
+
+<ol>
+<li>Ver métricas de precision/recall</li>
+<li>Probar con documentos de test</li>
+<li>Si está bien → Desplegar a producción</li>
+<li>Si está mal → Agregar más documentos y re-entrenar</li>
+</ol>
+
+<hr>
+
+<h2>Panel de Estadísticas Explicado</h2>
+
+<h3>Total Documents</h3>
+<ul>
+<li><strong>Qué es:</strong> Total de PDFs subidos</li>
+<li><strong>Acción:</strong> Ninguna</li>
+</ul>
+
+<h3>Annotated</h3>
+<ul>
+<li><strong>Qué es:</strong> Documentos con anotaciones completas</li>
+<li><strong>Meta:</strong> ≥ 20 para entrenar</li>
+<li><strong>Acción:</strong> Anotar más documentos</li>
+</ul>
+
+<h3>PDFs in GCS</h3>
+<ul>
+<li><strong>Qué es:</strong> PDFs ya subidos a Google Cloud</li>
+<li><strong>Optimización:</strong> No se suben de nuevo (ahorra tiempo y $)</li>
+<li><strong>Acción:</strong> Ninguna</li>
+</ul>
+
+<h3>JSON Generated</h3>
+<ul>
+<li><strong>Qué es:</strong> JSONs con anotaciones ya en GCS</li>
+<li><strong>Estado:</strong> Listos para importar en Workbench</li>
+<li><strong>Acción:</strong> Importar en Google Cloud Console</li>
+</ul>
+
+<h3>Pending JSON</h3>
+<ul>
+<li><strong>Qué es:</strong> Documentos anotados sin JSON generado</li>
+<li><strong>Acción:</strong> Click "Generate JSON Files"</li>
+</ul>
+
+<h3>Training Status</h3>
+<ul>
+<li><strong>Listo:</strong> ≥ 20 anotados</li>
+<li><strong>Pendiente:</strong> Muestra cuántos faltan</li>
+</ul>
+
+<hr>
+
+<h2>Optimizaciones Implementadas</h2>
+
+<h3>1. Control de Subidas Duplicadas</h3>
+<ul>
+<li>Los PDFs ya subidos a GCS NO se suben de nuevo</li>
+<li>Se guarda <code>gcs_pdf_uri</code> en base de datos</li>
+<li>Ahorra bandwidth y tiempo</li>
+</ul>
+
+<h3>2. Procesamiento en Background</h3>
+<ul>
+<li>Generación de JSON usa Laravel Jobs</li>
+<li>No bloquea la interfaz de usuario</li>
+<li>Progreso visible en tiempo real</li>
+</ul>
+
+<h3>3. Tracking de Estado</h3>
+<ul>
+<li>Saber qué documentos están en cada etapa</li>
+<li>Badges visuales: "Annotated", "En GCS", "JSON"</li>
+<li>Estadísticas actualizadas en tiempo real</li>
+</ul>
+
+<h3>4. Mapeo Inteligente de Texto</h3>
+<ul>
+<li>Busca cada valor en el texto OCR</li>
+<li>Genera <code>textAnchor</code> con posición exacta</li>
+<li>Permite a Document AI aprender ubicaciones</li>
+</ul>
+
+<hr>
+
+<h2>Configuración Técnica</h2>
+
+<h3>Base de Datos</h3>
+
+<p><strong>Tabla:</strong> <code>document_ai_training_documents</code></p>
+
+<pre><code class="language-sql">- id: bigint
+- filename: varchar
+- file_path: varchar (storage/app/training-documents/)
+- extracted_data: json (OCR + entities)
+- annotations: json (valores manuales)
+- is_annotated: boolean
+- annotated_at: timestamp
+- confidence: decimal
+- document_type: enum(sale,purchase,unknown)
+- type_auto_detected: boolean
+- imported_at: timestamp (cuándo se generó JSON)
+- json_file_path: varchar (ruta en GCS)
+- gcs_pdf_uri: varchar (gs://bucket/path/file.pdf)
+- pdf_uploaded_at: timestamp
+</code></pre>
+
+<h3>Google Cloud Storage</h3>
+
+<p><strong>Bucket:</strong> <code>docucenter-aci-document-ai-training</code></p>
+
+<p><strong>Estructura:</strong></p>
+
+<pre><code>gs://docucenter-aci-document-ai-training/
+├── training-pdfs/
+│   └── 20251126230000/
+│       ├── factura1.pdf
+│       ├── factura2.pdf
+│       └── ...
+└── json/
+    ├── factura1.json
+    ├── factura2.json
+    └── ...
+</code></pre>
+
+<h3>Document AI Processor</h3>
+
+<ul>
+<li><strong>Project:</strong> <code>docucenter-aci</code></li>
+<li><strong>Processor Type:</strong> Custom Document Extractor</li>
+<li><strong>Processor ID:</strong> <code>d6eea813b0c73fc8</code></li>
+<li><strong>Location:</strong> <code>us</code></li>
+</ul>
+
+<h3>Laravel Jobs</h3>
+
+<p><strong>Job:</strong> <code>GenerateDocumentAIJSONFilesJob</code></p>
+
+<ul>
+<li><strong>Queue:</strong> <code>default</code></li>
+<li><strong>Timeout:</strong> 3600 segundos (1 hora)</li>
+<li><strong>Tracking:</strong> Cache con key <code>json_generation_status_{sessionId}</code></li>
+</ul>
+
+<p><strong>Para ejecutar manualmente:</strong></p>
+
+<pre><code class="language-bash">php artisan queue:work redis --timeout=3600 --tries=3
+</code></pre>
+
+<hr>
+
+<h2>Troubleshooting</h2>
+
+<h3>Problema: "No hay documentos pendientes de generar JSON"</h3>
+
+<p><strong>Causa:</strong> Todos los documentos anotados ya tienen JSON generado</p>
+
+<p><strong>Solución:</strong></p>
+<ol>
+<li>Anotar más documentos</li>
+<li>O re-generar borrando campo <code>imported_at</code> en BD</li>
+</ol>
+
+<hr>
+
+<h3>Problema: "PDF no encontrado en GCS"</h3>
+
+<p><strong>Causa:</strong> El PDF no existe en ninguna ruta conocida</p>
+
+<p><strong>Solución:</strong></p>
+<ol>
+<li>Verificar que <code>file_path</code> en BD sea correcto</li>
+<li>Verificar que archivo existe en <code>storage/app/training-documents/</code></li>
+<li>El Job lo subirá automáticamente si existe localmente</li>
+</ol>
+
+<hr>
+
+<h3>Problema: Job no procesa</h3>
+
+<p><strong>Causa:</strong> Queue worker no está corriendo</p>
+
+<p><strong>Solución:</strong></p>
+
+<pre><code class="language-bash"># En Docker
+docker exec -it docucenter_laravel.test php artisan queue:work redis
+
+# O verificar que Supervisor esté corriendo
+docker exec -it docucenter_laravel.test supervisorctl status
+</code></pre>
+
+<hr>
+
+<h3>Problema: "Valor no encontrado en OCR"</h3>
+
+<p><strong>Causa:</strong> El valor anotado no coincide exactamente con el texto OCR</p>
+
+<p><strong>Solución:</strong></p>
+<ol>
+<li>Verificar que la anotación sea igual al texto en el PDF</li>
+<li>Revisar espacios, mayúsculas, caracteres especiales</li>
+<li>El sistema busca coincidencia exacta</li>
+</ol>
+
+<hr>
+
+<h2>Comandos Útiles</h2>
+
+<h3>Generar JSONs por línea de comandos</h3>
+
+<pre><code class="language-bash"># Dentro del contenedor Docker
+php artisan docai:generate-json-files
+
+# Ver logs
+tail -f storage/logs/laravel.log
+</code></pre>
+
+<h3>Limpiar cache</h3>
+
+<pre><code class="language-bash">php artisan cache:clear
+php artisan view:clear
+php artisan config:clear
+</code></pre>
+
+<h3>Verificar Jobs en cola</h3>
+
+<pre><code class="language-bash">php artisan queue:listen --queue=default
+</code></pre>
+
+<hr>
+
+<h2>Workflow Resumido (TL;DR)</h2>
+
+<pre><code>1. DocuCenter: Subir PDFs ➜ Anotar campos
+                            ⬇️
+2. DocuCenter: Click "Generate JSON Files"
+                            ⬇️
+3. Job en background: PDF → OCR → JSON → GCS
+                            ⬇️
+4. Google Cloud Workbench: Import JSON files
+                            ⬇️
+5. Google Cloud Console: Train model (1-3 hrs)
+                            ⬇️
+6. Modelo entrenado listo para producción
+</code></pre>
+
+<hr>
+
+<h2>Referencias Técnicas</h2>
+
+<h3>Documentación Google Document AI</h3>
+<ul>
+<li><a href="https://cloud.google.com/document-ai/docs/custom-extractor">Custom Extractors</a></li>
+<li><a href="https://cloud.google.com/document-ai/docs/document-proto">Document Proto Format</a></li>
+<li><a href="https://cloud.google.com/document-ai/docs/train-model">Training Guide</a></li>
+</ul>
+
+<h3>Artículos Clave</h3>
+<ul>
+<li><a href="https://medium.com/@neilkolban/google-document-ai-pre-labeled-data-import-bb0f9c9e3d2a">Medium: Neil Kolban - Pre-labeled Import Method</a></li>
+</ul>
+
+<h3>Código Fuente</h3>
+<ul>
+<li><strong>Livewire Component:</strong> <code>app/Http/Livewire/Admin/DocumentAI/TrainingManager.php</code></li>
+<li><strong>Job:</strong> <code>app/Jobs/GenerateDocumentAIJSONFilesJob.php</code></li>
+<li><strong>Service:</strong> <code>app/Services/DocumentAIService.php</code></li>
+<li><strong>Modelo:</strong> <code>app/Models/DocumentAITrainingDocument.php</code></li>
+<li><strong>Vista:</strong> <code>resources/views/livewire/admin/document-ai/training-manager.blade.php</code></li>
+</ul>
+
+<hr>
+
+<h2>Funcionalidades Destacadas</h2>
+
+<h3>Lo que el sistema HACE automáticamente:</h3>
+<ul>
+<li>Extracción inicial con OCR</li>
+<li>Detección automática de tipo de documento</li>
+<li>Pre-llenado de campos en anotación</li>
+<li>Búsqueda y mapeo de texto en OCR</li>
+<li>Generación de textAnchor positions</li>
+<li>Subida a GCS (PDFs + JSONs)</li>
+<li>Tracking de estado</li>
+<li>Control de duplicados</li>
+</ul>
+
+<h3>Lo que debes hacer MANUALMENTE:</h3>
+<ul>
+<li>Revisar y corregir anotaciones</li>
+<li>Importar JSONs en Google Cloud Workbench</li>
+<li>Iniciar training del modelo</li>
+<li>Desplegar a producción</li>
+</ul>
+
+<hr>
+
+<h2>Equipo y Soporte</h2>
+
+<p><strong>Desarrollador:</strong> Sistema implementado en DocuCenter<br>
+<strong>Fecha:</strong> Noviembre 2025<br>
+<strong>Versión Laravel:</strong> 9.x<br>
+<strong>Versión PHP:</strong> 8.1+</p>
+
+<p><strong>Para soporte técnico:</strong></p>
+<ol>
+<li>Revisar logs en <code>storage/logs/laravel.log</code></li>
+<li>Verificar estado de Jobs en base de datos tabla <code>jobs</code></li>
+<li>Consultar documentación de Google Document AI</li>
+</ol>
+
+<hr>
+
+<h2>Próximos Pasos Sugeridos</h2>
+
+<ol>
+<li><strong>Entrenar modelo inicial</strong> con 20-50 documentos</li>
+<li><strong>Evaluar precisión</strong> con documentos de test</li>
+<li><strong>Iterar:</strong> Agregar más documentos donde el modelo falle</li>
+<li><strong>Re-entrenar</strong> para mejorar precisión</li>
+<li><strong>Desplegar a producción</strong> cuando precision &gt; 90%</li>
+</ol>
+
+<hr>
+
+<p><strong>¡Éxito entrenando tu modelo!</strong></p>
+
+</article>
+</div>
+</div>
+</main>
+</div>
+<script src="../assets/javascripts/bundle.50899def.min.js"></script>
+</body>
+</html>

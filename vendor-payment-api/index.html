@@ -1,0 +1,427 @@
+<!doctype html>
+<html lang="es" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" href="../assets/images/favicon.png">
+<meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.43">
+<title>API de Vendor Payment - AciCloud - DocuCenter</title>
+<link rel="stylesheet" href="../assets/stylesheets/main.7e37652d.min.css">
+<link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+</head>
+<body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+
+<h1>API de Vendor Payment - AciCloud</h1>
+
+<h2>Descripción General</h2>
+
+<p>API RESTful para gestión de pagos a proveedores (Vendor Payments) en el sistema DocuCenter, integrada con AciCloud/Sage 100. Permite crear y consultar pagos a proveedores con sus líneas de detalle asociadas.</p>
+
+<hr>
+
+<h2>Endpoints</h2>
+
+<h3>1. Crear Vendor Payment</h3>
+
+<p><strong>Endpoint:</strong> <code>POST /api/acicloud/vendor_payment</code></p>
+
+<p><strong>Autenticación:</strong> Bearer Token + Organization ID Header</p>
+
+<p><strong>Headers:</strong></p>
+
+<pre><code>Authorization: Bearer {token}
+Content-Type: application/json
+X-Organization-Id: {organization_id}
+</code></pre>
+
+<p><strong>Request Body:</strong></p>
+
+<pre><code class="language-json">{
+  "CheckNumber": "CHK-001",            // Requerido, único, max 45 caracteres
+  "VendorID": "V123",                  // Requerido, max 45 caracteres
+  "VendorName": "Proveedor Test",      // Opcional, max 45 caracteres
+  "Date": "2025-11-25",                // Opcional, formato: YYYY-MM-DD
+  "Total": 1000.00,                    // Opcional, decimal(18,4)
+  "Memo": "Pago proveedor",            // Opcional, max 30 caracteres
+  "CashAccountID": "1100",             // Opcional, max 45 caracteres
+  "Method_of_payment": "CHECK",        // Opcional, max 20 caracteres
+  "PrePayment": false,                 // Opcional, boolean
+  "Items": [                           // Array de líneas de detalle
+    {
+      "Item_Id": "ITEM001",            // Opcional, max 45 caracteres
+      "Description": "Producto 1",     // Opcional, max 255 caracteres
+      "GL_Acct": "5100",               // Opcional, max 45 caracteres
+      "Quantity": 2.0,                 // Opcional, decimal(11,4)
+      "Unit_Price": 250.00,            // Opcional, decimal(16,4)
+      "Net_Line": 500.00,              // Opcional, decimal(16,2)
+      "ApplyTo": 123,                  // Opcional, integer
+      "InvoiceNumber": "INV-001"       // Opcional, max 20 caracteres
+    }
+  ]
+}
+</code></pre>
+
+<p><strong>Response Success (200):</strong></p>
+
+<pre><code class="language-json">{
+  "UniquePaymentID": 1,
+  "ID_compania": 1,
+  "CheckNumber": "CHK-001",
+  "VendorID": "V123",
+  "VendorName": "Proveedor Test",
+  "Date": "2025-11-25 00:00:00",
+  "Total": "1000.0000",
+  "Memo": "Pago proveedor",
+  "CashAccountID": "1100",
+  "Method_of_payment": "CHECK",
+  "PrePayment": 0,
+  "Enviado": 0,
+  "Error": 0,
+  "ErrorPT": null,
+  "Export_date": "2025-11-25 10:30:00",
+  "Items": [
+    {
+      "ID": 1,
+      "ID_compania": 1,
+      "UniquePaymentID": 1,
+      "Item_Id": "ITEM001",
+      "Description": "Producto 1",
+      "GL_Acct": "5100",
+      "Quantity": "2.0000",
+      "Unit_Price": "250.0000",
+      "Net_Line": "500.00",
+      "ApplyTo": 123,
+      "InvoiceNumber": "INV-001"
+    }
+  ]
+}
+</code></pre>
+
+<p><strong>Validaciones:</strong></p>
+
+<ul>
+<li><code>CheckNumber</code> debe ser único en la base de datos de la organización</li>
+<li>Si <code>Date</code> no se proporciona, se usa la fecha actual con la zona horaria del usuario</li>
+<li>Si <code>Export_date</code> no se proporciona, se genera automáticamente</li>
+<li>Transacción atómica: si falla algún item, se hace rollback completo</li>
+</ul>
+
+<hr>
+
+<h3>2. Listar Vendor Payments</h3>
+
+<p><strong>Endpoint:</strong> <code>GET /api/acicloud/vendor_payment_imp</code></p>
+
+<p><strong>Autenticación:</strong> Bearer Token + Organization ID Header</p>
+
+<p><strong>Headers:</strong></p>
+
+<pre><code>Authorization: Bearer {token}
+Content-Type: application/json
+X-Organization-Id: {organization_id}
+</code></pre>
+
+<p><strong>Query Parameters:</strong></p>
+
+<ul>
+<li><code>limit</code>: Número de registros por página (default: 10)</li>
+<li><code>page</code>: Número de página (default: 1)</li>
+</ul>
+
+<p><strong>Filtros Disponibles:</strong></p>
+
+<ul>
+<li><code>UniquePaymentID</code>: ID único del pago</li>
+<li><code>CheckNumber</code>: Número de cheque</li>
+<li><code>VendorID</code>: ID del proveedor</li>
+<li><code>VendorName</code>: Nombre del proveedor</li>
+<li><code>Date</code>: Fecha del pago (soporta rangos: <code>Date[from]</code> y <code>Date[to]</code>)</li>
+<li><code>CashAccountID</code>: Cuenta de efectivo</li>
+<li><code>Total</code>: Total del pago</li>
+<li><code>Memo</code>: Nota del pago</li>
+<li><code>PrePayment</code>: Pago anticipado (0 o 1)</li>
+<li><code>Method_of_payment</code>: Método de pago</li>
+<li><code>Export_date</code>: Fecha de exportación</li>
+<li><code>Enviado</code>: Estado de envío (0 o 1)</li>
+<li><code>Error</code>: Estado de error (0 o 1)</li>
+</ul>
+
+<p><strong>Ordenamiento:</strong></p>
+
+<ul>
+<li>Soporta ordenamiento por todos los campos de filtros</li>
+<li>Uso: <code>order_by=CheckNumber&amp;order_dir=asc</code></li>
+</ul>
+
+<p><strong>Ejemplos de Uso:</strong></p>
+
+<pre><code class="language-bash"># Listar todos (paginado)
+GET /api/acicloud/vendor_payment_imp?limit=20
+
+# Filtrar por proveedor
+GET /api/acicloud/vendor_payment_imp?VendorID=V123
+
+# Filtrar por rango de fechas
+GET /api/acicloud/vendor_payment_imp?Date[from]=2025-11-01&amp;Date[to]=2025-11-30
+
+# Filtrar solo pagos no enviados
+GET /api/acicloud/vendor_payment_imp?Enviado=0
+
+# Filtrar por método de pago
+GET /api/acicloud/vendor_payment_imp?Method_of_payment=CHECK
+
+# Combinación de filtros con ordenamiento
+GET /api/acicloud/vendor_payment_imp?VendorID=V123&amp;Enviado=0&amp;order_by=Date&amp;order_dir=desc
+</code></pre>
+
+<p><strong>Response Success (200):</strong></p>
+
+<pre><code class="language-json">{
+  "current_page": 1,
+  "data": [
+    {
+      "UniquePaymentID": 1,
+      "ID_compania": 1,
+      "CheckNumber": "CHK-001",
+      "VendorID": "V123",
+      "VendorName": "Proveedor Test",
+      "Date": "2025-11-25 00:00:00",
+      "Total": "1000.0000",
+      "vendor_payment_detail": [
+        {
+          "ID": 1,
+          "UniquePaymentID": 1,
+          "Item_Id": "ITEM001",
+          "Description": "Producto 1",
+          "Net_Line": "500.00"
+        }
+      ]
+    }
+  ],
+  "first_page_url": "http://localhost/api/acicloud/vendor_payment_imp?page=1",
+  "from": 1,
+  "last_page": 1,
+  "last_page_url": "http://localhost/api/acicloud/vendor_payment_imp?page=1",
+  "next_page_url": null,
+  "path": "http://localhost/api/acicloud/vendor_payment_imp",
+  "per_page": 10,
+  "prev_page_url": null,
+  "to": 1,
+  "total": 1
+}
+</code></pre>
+
+<hr>
+
+<h2>Arquitectura</h2>
+
+<h3>Modelos</h3>
+
+<p><strong>VendorPaymentHeaderImp</strong> (<code>app/Models/VendorPaymentHeaderImp.php</code>)</p>
+
+<ul>
+<li>Tabla: <code>vendor_payment_header_imp</code></li>
+<li>Primary Key: <code>UniquePaymentID</code></li>
+<li>Relaciones:
+<ul>
+<li><code>vendorPaymentDetail()</code>: HasMany → VendorPaymentDetailImp</li>
+<li><code>vendor()</code>: BelongsTo → VendorsExp</li>
+<li><code>vendorImp()</code>: BelongsTo → VendorsImp</li>
+</ul>
+</li>
+<li>Traits: HasFactory, DataViewer, ActiveCreateTables, CustomConnection, UpdateSentAndError</li>
+</ul>
+
+<p><strong>VendorPaymentDetailImp</strong> (<code>app/Models/VendorPaymentDetailImp.php</code>)</p>
+
+<ul>
+<li>Tabla: <code>vendor_payment_detail_imp</code></li>
+<li>Primary Key: <code>ID</code></li>
+<li>Relación con header por: <code>UniquePaymentID</code></li>
+<li>Traits: HasFactory, ActiveCreateTables, CustomConnection, Helper</li>
+</ul>
+
+<h3>Servicios</h3>
+
+<p><strong>ACIcloudService</strong> (<code>app/Services/ACIcloudService.php</code>)</p>
+
+<ul>
+<li><code>vendorPaymentImp()</code>: Crea vendor payment con transacción atómica</li>
+<li><code>getVendorPaymentImp()</code>: Lista vendor payments con filtros y paginación</li>
+</ul>
+
+<h3>Controladores</h3>
+
+<p><strong>ACIcloudController</strong> (<code>app/Http/Controllers/Sage/ACIcloudController.php</code>)</p>
+
+<ul>
+<li><code>vendorPaymentImp()</code>: Endpoint POST para crear</li>
+<li><code>getVendorPaymentImp()</code>: Endpoint GET para listar</li>
+</ul>
+
+<h3>Requests</h3>
+
+<p><strong>VendorPaymentHeaderImpRequest</strong> (<code>app/Http/Requests/VendorPaymentHeaderImpRequest.php</code>)</p>
+
+<ul>
+<li>Validaciones para creación</li>
+<li>Preparación de datos (fechas automáticas)</li>
+</ul>
+
+<p><strong>ACIcloudVendorPaymentImpRequest</strong> (<code>app/Http/Requests/ACIcloudVendorPaymentImpRequest.php</code>)</p>
+
+<ul>
+<li>Filtros permitidos</li>
+<li>Campos ordenables</li>
+<li>Usa trait <code>DataViewer</code> para filtrado avanzado</li>
+</ul>
+
+<hr>
+
+<h2>Base de Datos</h2>
+
+<h3>Stubs SQL</h3>
+
+<p>Los stubs se crean automáticamente al crear la base de datos de una organización:</p>
+
+<ul>
+<li><code>app/Models/stubs/vendor_payment_header_imp.sql.stub</code></li>
+<li><code>app/Models/stubs/vendor_payment_detail_imp.sql.stub</code></li>
+</ul>
+
+<h3>Estructura de Tablas</h3>
+
+<p><strong>vendor_payment_header_imp:</strong></p>
+
+<pre><code class="language-sql">CREATE TABLE `vendor_payment_header_imp` (
+    UniquePaymentID BIGINT NOT NULL AUTO_INCREMENT,
+    ID_compania INT NOT NULL,
+    CheckNumber VARCHAR(45) NOT NULL,
+    VendorID VARCHAR(45) NOT NULL,
+    VendorName VARCHAR(45) NULL,
+    Date DATETIME NULL,
+    CashAccountID VARCHAR(45) NULL,
+    Total DECIMAL(18,4) NULL,
+    Memo VARCHAR(30) NULL,
+    PrePayment TINYINT(1) NULL,
+    Method_of_payment VARCHAR(20) NULL,
+    Enviado TINYINT(1) NULL DEFAULT '0',
+    Error TINYINT(1) NULL DEFAULT '0',
+    ErrorPT VARCHAR(255) NULL,
+    Export_date DATETIME NULL,
+    PRIMARY KEY (UniquePaymentID)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+</code></pre>
+
+<p><strong>vendor_payment_detail_imp:</strong></p>
+
+<pre><code class="language-sql">CREATE TABLE vendor_payment_detail_imp (
+    ID INT NOT NULL AUTO_INCREMENT,
+    ID_compania INT NOT NULL,
+    UniquePaymentID BIGINT NOT NULL,
+    Item_Id VARCHAR(45) NULL,
+    Description VARCHAR(255) NULL,
+    GL_Acct VARCHAR(45) NULL,
+    Quantity DECIMAL(11,4) NULL,
+    Unit_Price DECIMAL(16,4) NULL,
+    Net_Line DECIMAL(16,2) NULL,
+    ApplyTo INT NULL,
+    InvoiceNumber VARCHAR(20) NULL,
+    PRIMARY KEY (ID,ID_compania,UniquePaymentID)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+</code></pre>
+
+<hr>
+
+<h2>Testing</h2>
+
+<h3>Script de Prueba</h3>
+
+<p>Ubicación: <code>docs/testing/vendor-payment-api-test.sh</code></p>
+
+<pre><code class="language-bash"># Configurar variables de entorno
+export BASE_URL="http://localhost"
+export TOKEN="your-token-here"
+export ORG_ID="1"
+
+# Ejecutar pruebas
+./docs/testing/vendor-payment-api-test.sh
+</code></pre>
+
+<h3>Unit Tests</h3>
+
+<p>Ubicación: <code>tests/Unit/Jobs/PanamaPaymentsMadeJobTest.php</code></p>
+
+<ul>
+<li>Pruebas de creación de tablas</li>
+<li>Pruebas de inserción de datos</li>
+<li>Pruebas de relaciones</li>
+<li>Pruebas de validaciones</li>
+</ul>
+
+<hr>
+
+<h2>Notas Importantes</h2>
+
+<h3>Multi-Tenant</h3>
+
+<ul>
+<li>Cada organización tiene su propia base de datos</li>
+<li>El sistema cambia automáticamente de conexión según la organización activa</li>
+<li>Usar siempre header <code>X-Organization-Id</code> para especificar la organización</li>
+</ul>
+
+<h3>Convenciones</h3>
+
+<ul>
+<li>Seguir patrón de AciCloud existente</li>
+<li>Usar transacciones para operaciones críticas</li>
+<li>Implementar rollback en caso de errores</li>
+</ul>
+
+<h3>Seguridad</h3>
+
+<ul>
+<li>Autenticación requerida (Sanctum)</li>
+<li>Validación de organización activa</li>
+<li>CheckNumber debe ser único por organización</li>
+<li>Validación de campos según reglas de negocio</li>
+</ul>
+
+<hr>
+
+<h2>Changelog</h2>
+
+<h3>v1.0.0 - 2025-11-25</h3>
+
+<ul>
+<li>Implementación inicial de API Vendor Payment</li>
+<li>Endpoints POST y GET</li>
+<li>Validaciones y filtros</li>
+<li>Documentación completa</li>
+<li>Scripts de prueba</li>
+</ul>
+
+<hr>
+
+<h2>Referencias</h2>
+
+<ul>
+<li>Patrón base: Purchase API (<code>purchaseImp</code> / <code>getPurchasesImp</code>)</li>
+<li>Convenciones: <code>.github/copilot-instructions.md</code></li>
+<li>Testing: <code>tests/Unit/Jobs/PanamaPaymentsMadeJobTest.php</code></li>
+</ul>
+
+</article>
+</div>
+</div>
+</main>
+</div>
+<script src="../assets/javascripts/bundle.50899def.min.js"></script>
+</body>
+</html>
