@@ -1,0 +1,455 @@
+<!doctype html>
+<html lang="es" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" href="../assets/images/favicon.png">
+<meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.43">
+<title>API de Autenticación Meypar - DocuCenter</title>
+<link rel="stylesheet" href="../assets/stylesheets/main.7e37652d.min.css">
+<link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+</head>
+<body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+
+<h1>API de Autenticación Meypar</h1>
+
+<h2>Descripción</h2>
+
+<p>API de autenticación específica para integración con Meypar Colombia. Usa nombres de parámetros personalizados pero mantiene la misma funcionalidad que la API estándar de DocuCenter.</p>
+
+<hr>
+
+<h2>Endpoint</h2>
+
+<pre><code>POST /api/v1/auth/meypar-login
+</code></pre>
+
+<h2>Headers</h2>
+
+<pre><code>Content-Type: application/json
+Accept: application/json
+</code></pre>
+
+<hr>
+
+<h2>Parámetros de Entrada</h2>
+
+<table>
+<thead>
+<tr>
+<th>Parámetro</th>
+<th>Tipo</th>
+<th>Requerido</th>
+<th>Descripción</th>
+<th>Validación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>userName</code></td>
+<td>string</td>
+<td>Sí</td>
+<td>Email del usuario</td>
+<td>Formato email válido, máx 255 caracteres</td>
+</tr>
+<tr>
+<td><code>userPW</code></td>
+<td>string</td>
+<td>Sí</td>
+<td>Contraseña del usuario</td>
+<td>Mínimo 6 caracteres</td>
+</tr>
+<tr>
+<td><code>parkingId</code></td>
+<td>integer</td>
+<td>Sí</td>
+<td>ID de la organización/parking</td>
+<td>Debe existir en la base de datos</td>
+</tr>
+<tr>
+<td><code>ambiente</code></td>
+<td>integer</td>
+<td>Sí</td>
+<td>Punto de venta/ambiente</td>
+<td>Entre 0 y 999</td>
+</tr>
+<tr>
+<td><code>idFacturador</code></td>
+<td>string</td>
+<td>No</td>
+<td>Identificador del facturador</td>
+<td>Máx 255 caracteres. Si no se envía, se genera automáticamente</td>
+</tr>
+</tbody>
+</table>
+
+<hr>
+
+<h2>Mapeo Interno</h2>
+
+<p>Los parámetros de Meypar se mapean internamente a:</p>
+
+<table>
+<thead>
+<tr>
+<th>Meypar</th>
+<th>DocuCenter Interno</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>userName</code></td>
+<td><code>email</code></td>
+</tr>
+<tr>
+<td><code>userPW</code></td>
+<td><code>password</code></td>
+</tr>
+<tr>
+<td><code>parkingId</code></td>
+<td><code>organization_id</code></td>
+</tr>
+<tr>
+<td><code>ambiente</code></td>
+<td><code>point_sale</code></td>
+</tr>
+<tr>
+<td><code>idFacturador</code></td>
+<td><code>token_name</code></td>
+</tr>
+</tbody>
+</table>
+
+<hr>
+
+<h2>Ejemplo de Request</h2>
+
+<pre><code class="language-bash">curl -X POST https://docucenter.com/api/v1/auth/meypar-login \
+  -H "Content-Type: application/json" \
+  -H "Accept: application/json" \
+  -d '{
+    "userName": "usuario@meypar.com",
+    "userPW": "password123",
+    "parkingId": 42,
+    "ambiente": 1,
+    "idFacturador": "FACTURADOR-001"
+  }'
+</code></pre>
+
+<hr>
+
+<h2>Respuestas</h2>
+
+<h3>Éxito (200 OK)</h3>
+
+<pre><code class="language-json">{
+  "success": true,
+  "message": "Autenticación exitosa",
+  "token": "1|abc123def456ghi789...",
+  "token_info": {
+    "name": "FACTURADOR-001",
+    "expires_at": "2025-12-31T23:59:59.000000Z",
+    "organization_id": 42,
+    "point_sale": 1,
+    "days_until_expiration": 365
+  },
+  "user": {
+    "id": 123,
+    "name": "Juan Pérez",
+    "email": "usuario@meypar.com"
+  }
+}
+</code></pre>
+
+<h3>Éxito con Advertencia (200 OK)</h3>
+
+<p>Si la licencia está próxima a vencer (menos de 30 días):</p>
+
+<pre><code class="language-json">{
+  "success": true,
+  "message": "Autenticación exitosa",
+  "token": "1|abc123def456ghi789...",
+  "token_info": {
+    "name": "FACTURADOR-001",
+    "expires_at": "2025-01-15T23:59:59.000000Z",
+    "organization_id": 42,
+    "point_sale": 1,
+    "days_until_expiration": 15
+  },
+  "user": {
+    "id": 123,
+    "name": "Juan Pérez",
+    "email": "usuario@meypar.com"
+  },
+  "warning": "La licencia vence en 15 días",
+  "warning_code": "LICENSE_EXPIRING_SOON"
+}
+</code></pre>
+
+<h3>Error: Credenciales Inválidas (401 Unauthorized)</h3>
+
+<pre><code class="language-json">{
+  "success": false,
+  "message": "Credenciales inválidas",
+  "code": "INVALID_CREDENTIALS"
+}
+</code></pre>
+
+<h3>Error: Acceso Denegado (403 Forbidden)</h3>
+
+<pre><code class="language-json">{
+  "success": false,
+  "message": "Usuario no tiene acceso a esta organización",
+  "code": "ORGANIZATION_ACCESS_DENIED"
+}
+</code></pre>
+
+<h3>Error: Licencia Expirada (403 Forbidden)</h3>
+
+<pre><code class="language-json">{
+  "success": false,
+  "message": "La licencia ha expirado",
+  "code": "LICENSE_EXPIRED",
+  "license_info": {
+    "expired_at": "2024-12-31T23:59:59.000000Z",
+    "expired_days_ago": 30
+  }
+}
+</code></pre>
+
+<h3>Error: Validación (422 Unprocessable Entity)</h3>
+
+<pre><code class="language-json">{
+  "message": "Los datos proporcionados no son válidos",
+  "errors": {
+    "userName": [
+      "El campo userName es requerido"
+    ],
+    "userPW": [
+      "El campo userPW debe tener al menos 6 caracteres"
+    ],
+    "parkingId": [
+      "El parkingId especificado no existe"
+    ],
+    "ambiente": [
+      "El campo ambiente debe estar entre 0 y 999"
+    ]
+  }
+}
+</code></pre>
+
+<h3>Error: Servicio No Disponible (503 Service Unavailable)</h3>
+
+<pre><code class="language-json">{
+  "success": false,
+  "message": "Error al verificar licencia: Servicio de licencias no disponible",
+  "code": "LICENSE_VERIFICATION_ERROR"
+}
+</code></pre>
+
+<h3>Error: Interno (500 Internal Server Error)</h3>
+
+<pre><code class="language-json">{
+  "success": false,
+  "message": "Error interno en autenticación",
+  "code": "INTERNAL_ERROR"
+}
+</code></pre>
+
+<hr>
+
+<h2>Uso del Token</h2>
+
+<p>Una vez obtenido el token, debe incluirse en todas las solicitudes subsiguientes:</p>
+
+<pre><code class="language-bash">curl -X POST https://docucenter.com/api/v1/fe/create_sale_meypar \
+  -H "Authorization: Bearer 1|abc123def456ghi789..." \
+  -H "Content-Type: application/json" \
+  -H "Accept: application/json" \
+  -d '{ ... }'
+</code></pre>
+
+<hr>
+
+<h2>Notas Importantes</h2>
+
+<ol>
+<li><strong>Seguridad</strong>: El token debe almacenarse de forma segura y nunca exponerse en código del lado del cliente</li>
+<li><strong>Expiración</strong>: El token expira junto con la licencia de la organización</li>
+<li><strong>Renovación</strong>: Cuando el token esté próximo a vencer, use el endpoint <code>/api/v1/auth/refresh_token</code></li>
+<li><strong>Logs</strong>: Todos los intentos de login se registran con el identificador <code>client: 'meypar'</code></li>
+<li><strong>Validación</strong>: Los parámetros se validan según las reglas de DocuCenter pero con nombres de Meypar</li>
+</ol>
+
+<hr>
+
+<h2>Diferencias con API Estándar</h2>
+
+<table>
+<thead>
+<tr>
+<th>Característica</th>
+<th>API Estándar (<code>/login</code>)</th>
+<th>API Meypar (<code>/meypar-login</code>)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Parámetros</td>
+<td>email, password, organization_id, point_sale</td>
+<td>userName, userPW, parkingId, ambiente</td>
+</tr>
+<tr>
+<td>Funcionalidad</td>
+<td>Idéntica</td>
+<td>Idéntica</td>
+</tr>
+<tr>
+<td>Validaciones</td>
+<td>Idénticas</td>
+<td>Idénticas</td>
+</tr>
+<tr>
+<td>Respuestas</td>
+<td>Idénticas</td>
+<td>Idénticas</td>
+</tr>
+<tr>
+<td>Token</td>
+<td>Mismo formato</td>
+<td>Mismo formato</td>
+</tr>
+<tr>
+<td>Cliente Log</td>
+<td>'standard'</td>
+<td>'meypar'</td>
+</tr>
+</tbody>
+</table>
+
+<hr>
+
+<h2>Ejemplo de Integración (PHP)</h2>
+
+<pre><code class="language-php">&lt;?php
+
+function meyparLogin($userName, $userPW, $parkingId, $ambiente, $idFacturador = null) {
+    $url = 'https://docucenter.com/api/v1/auth/meypar-login';
+    
+    $data = [
+        'userName' =&gt; $userName,
+        'userPW' =&gt; $userPW,
+        'parkingId' =&gt; $parkingId,
+        'ambiente' =&gt; $ambiente,
+    ];
+    
+    if ($idFacturador) {
+        $data['idFacturador'] = $idFacturador;
+    }
+    
+    $ch = curl_init($url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+    curl_setopt($ch, CURLOPT_HTTPHEADER, [
+        'Content-Type: application/json',
+        'Accept: application/json'
+    ]);
+    
+    $response = curl_exec($ch);
+    $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    curl_close($ch);
+    
+    $result = json_decode($response, true);
+    
+    if ($httpCode === 200 &amp;&amp; $result['success']) {
+        return [
+            'success' =&gt; true,
+            'token' =&gt; $result['token'],
+            'expires_at' =&gt; $result['token_info']['expires_at']
+        ];
+    }
+    
+    return [
+        'success' =&gt; false,
+        'error' =&gt; $result['message'] ?? 'Error desconocido',
+        'code' =&gt; $result['code'] ?? 'UNKNOWN'
+    ];
+}
+
+// Uso
+$auth = meyparLogin(
+    'usuario@meypar.com',
+    'password123',
+    42,
+    1,
+    'FACTURADOR-001'
+);
+
+if ($auth['success']) {
+    echo "Token: " . $auth['token'];
+} else {
+    echo "Error: " . $auth['error'];
+}
+</code></pre>
+
+<hr>
+
+<h2>Testing</h2>
+
+<h3>Caso 1: Login Exitoso</h3>
+
+<pre><code class="language-bash">curl -X POST http://localhost/api/v1/auth/meypar-login \
+  -H "Content-Type: application/json" \
+  -d '{
+    "userName": "test@example.com",
+    "userPW": "password",
+    "parkingId": 1,
+    "ambiente": 1,
+    "idFacturador": "TEST-001"
+  }'
+</code></pre>
+
+<h3>Caso 2: Credenciales Inválidas</h3>
+
+<pre><code class="language-bash">curl -X POST http://localhost/api/v1/auth/meypar-login \
+  -H "Content-Type: application/json" \
+  -d '{
+    "userName": "test@example.com",
+    "userPW": "wrongpassword",
+    "parkingId": 1,
+    "ambiente": 1
+  }'
+</code></pre>
+
+<h3>Caso 3: Validación de Parámetros</h3>
+
+<pre><code class="language-bash">curl -X POST http://localhost/api/v1/auth/meypar-login \
+  -H "Content-Type: application/json" \
+  -d '{
+    "userName": "invalid-email",
+    "userPW": "123",
+    "parkingId": 999999,
+    "ambiente": 1000
+  }'
+</code></pre>
+
+<hr>
+
+<p><strong>Última actualización:</strong> 1 de diciembre de 2025<br>
+<strong>Versión:</strong> 1.0<br>
+<strong>Cliente:</strong> Meypar Colombia</p>
+
+</article>
+</div>
+</div>
+</main>
+</div>
+<script src="../assets/javascripts/bundle.50899def.min.js"></script>
+</body>
+</html>
