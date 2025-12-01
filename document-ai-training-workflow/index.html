@@ -4,31 +4,205 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <link rel="icon" href="../assets/images/favicon.png">
-<meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.43">
-<title>Guía de Entrenamiento de Document AI - Workflow Completo - DocuCenter</title>
+<meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.44">
+<title>Guía de Entrenamiento de Document AI - Workflow Completo - Docucenter Documentation</title>
 <link rel="stylesheet" href="../assets/stylesheets/main.7e37652d.min.css">
 <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+<style>
+.md-main {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+}
+.md-content {
+  background: white;
+  border-radius: 15px;
+  padding: 2rem;
+  margin: 2rem;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+}
+.doc-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 2rem;
+  border-radius: 10px;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+.doc-header h1 {
+  margin: 0;
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+.status-badge {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background: #10b981;
+  color: white;
+  border-radius: 20px;
+  font-weight: 600;
+  margin-top: 1rem;
+}
+.step-card {
+  background: #f8fafc;
+  border-left: 4px solid #667eea;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  border-radius: 8px;
+}
+.step-card h3 {
+  color: #667eea;
+  margin-top: 0;
+}
+.info-box {
+  background: #dbeafe;
+  border-left: 4px solid #3b82f6;
+  padding: 1rem;
+  margin: 1rem 0;
+  border-radius: 5px;
+}
+.warning-box {
+  background: #fef3c7;
+  border-left: 4px solid #f59e0b;
+  padding: 1rem;
+  margin: 1rem 0;
+  border-radius: 5px;
+}
+.success-box {
+  background: #d1fae5;
+  border-left: 4px solid #10b981;
+  padding: 1rem;
+  margin: 1rem 0;
+  border-radius: 5px;
+}
+.field-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+}
+.field-table th {
+  background: #667eea;
+  color: white;
+  padding: 0.75rem;
+  text-align: left;
+}
+.field-table td {
+  padding: 0.75rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+.field-table tr:hover {
+  background: #f9fafb;
+}
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+.stat-card {
+  background: white;
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 1rem;
+  text-align: center;
+}
+.stat-card h4 {
+  margin: 0;
+  color: #667eea;
+  font-size: 0.9rem;
+}
+.stat-card p {
+  margin: 0.5rem 0 0 0;
+  color: #6b7280;
+}
+code {
+  background: #f1f5f9;
+  padding: 0.2rem 0.4rem;
+  border-radius: 3px;
+  font-family: 'Monaco', 'Courier New', monospace;
+  font-size: 0.9em;
+}
+pre {
+  background: #1e293b;
+  color: #e2e8f0;
+  padding: 1rem;
+  border-radius: 8px;
+  overflow-x: auto;
+}
+pre code {
+  background: transparent;
+  color: #e2e8f0;
+  padding: 0;
+}
+.workflow-diagram {
+  background: linear-gradient(to bottom, #f8fafc, white);
+  border: 2px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 2rem;
+  margin: 2rem 0;
+  text-align: center;
+}
+.workflow-step {
+  display: inline-block;
+  background: white;
+  border: 2px solid #667eea;
+  border-radius: 8px;
+  padding: 1rem 1.5rem;
+  margin: 0.5rem;
+  font-weight: 600;
+  color: #667eea;
+}
+.arrow {
+  display: inline-block;
+  color: #667eea;
+  font-size: 1.5rem;
+  margin: 0 0.5rem;
+}
+.optimization-list {
+  list-style: none;
+  padding: 0;
+}
+.optimization-list li {
+  background: #f0fdf4;
+  border-left: 4px solid #10b981;
+  padding: 1rem;
+  margin: 0.5rem 0;
+  border-radius: 5px;
+}
+.troubleshooting-item {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 8px;
+  padding: 1rem;
+  margin: 1rem 0;
+}
+.troubleshooting-item h4 {
+  color: #dc2626;
+  margin-top: 0;
+}
+</style>
 </head>
-<body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
-<div class="md-container" data-md-component="container">
-<main class="md-main" data-md-component="main">
-<div class="md-main__inner md-grid">
-<div class="md-content" data-md-component="content">
-<article class="md-content__inner md-typeset">
+<body>
+<div class="md-main">
+<div class="md-content">
 
-<h1>Guía de Entrenamiento de Document AI - Workflow Completo</h1>
+<div class="doc-header">
+<h1>Guía de Entrenamiento de Document AI</h1>
+<p style="font-size: 1.2rem; margin: 1rem 0;">Workflow Completo</p>
+<div class="status-badge">Sistema funcional y optimizado</div>
+<p style="margin-top: 1rem; opacity: 0.9;">Última actualización: 26 de noviembre de 2025</p>
+</div>
 
-<h2>Resumen Ejecutivo</h2>
+<h2>📋 Resumen Ejecutivo</h2>
 
 <p>Este sistema permite entrenar un modelo custom de Google Document AI para extraer datos de facturas panameñas automáticamente, usando una interfaz web en DocuCenter.</p>
 
-<p><strong>Estado actual:</strong> Sistema funcional y optimizado<br>
-<strong>Última actualización:</strong> 26 de noviembre de 2025</p>
+<div class="success-box">
+<strong>Estado actual:</strong> Sistema funcional y optimizado con procesamiento en background, control de duplicados y tracking de estado en tiempo real.
+</div>
 
-<hr>
+<h2>🎯 ¿Qué hace este sistema?</h2>
 
-<h2>¿Qué hace este sistema?</h2>
-
+<div class="step-card">
 <ol>
 <li><strong>Sube PDFs</strong> de facturas a DocuCenter</li>
 <li><strong>Anota manualmente</strong> los campos importantes (vendor, tax ID, totales, etc.)</li>
@@ -36,11 +210,11 @@
 <li><strong>Sube todo a Google Cloud Storage</strong> (PDFs + JSONs)</li>
 <li><strong>Listo para importar</strong> manualmente en Google Cloud Workbench Console</li>
 </ol>
+</div>
 
-<hr>
+<h2>🚀 Workflow Paso a Paso</h2>
 
-<h2>Workflow Paso a Paso</h2>
-
+<div class="step-card">
 <h3>Paso 1: Subir Documentos (DocuCenter)</h3>
 
 <p><strong>Ubicación:</strong> <code>/admin/sage50/document-ai-training</code></p>
@@ -50,25 +224,29 @@
 <li>Hacer clic en "Choose Files" o arrastrar PDFs</li>
 <li>Subir facturas (máximo 12MB por archivo)</li>
 <li>El sistema automáticamente:
-<ul>
-<li>Guarda el PDF localmente</li>
-<li>Extrae texto con OCR</li>
-<li>Detecta tipo de documento (venta/compra)</li>
-</ul>
+  <ul>
+    <li>Guarda el PDF localmente</li>
+    <li>Extrae texto con OCR</li>
+    <li>Detecta tipo de documento (venta/compra)</li>
+  </ul>
 </li>
 </ol>
 
-<p><strong>Requisito mínimo:</strong> 20 documentos anotados para entrenar</p>
+<div class="info-box">
+<strong>Requisito mínimo:</strong> 20 documentos anotados para entrenar
+</div>
+</div>
 
-<hr>
-
+<div class="step-card">
 <h3>Paso 2: Anotar Documentos (DocuCenter)</h3>
 
-<p><strong>Importante:</strong> Debes anotar manualmente cada campo en los PDFs</p>
+<div class="warning-box">
+<strong>Importante:</strong> Debes anotar manualmente cada campo en los PDFs
+</div>
 
 <h4>Campos a anotar:</h4>
 
-<table>
+<table class="field-table">
 <thead>
 <tr>
 <th>Campo</th>
@@ -144,68 +322,72 @@
 <li>Click "Save Annotation"</li>
 </ol>
 
-<p><strong>Tip:</strong> El sistema pre-llena con los valores extraídos por OCR, solo corrígelos si están mal.</p>
+<div class="info-box">
+<strong>Tip:</strong> El sistema pre-llena con los valores extraídos por OCR, solo corrígelos si están mal.
+</div>
+</div>
 
-<hr>
-
+<div class="step-card">
 <h3>Paso 3: Generar JSONs (DocuCenter)</h3>
 
 <p><strong>Cuándo hacer esto:</strong> Cuando tengas 20+ documentos anotados</p>
 
 <ol>
 <li>Verificar en el panel de estadísticas:
-<ul>
-<li>"Annotated" debe ser ≥ 20</li>
-<li>"Pending JSON" muestra cuántos faltan por generar</li>
-</ul>
+  <ul>
+    <li>"Annotated" debe ser ≥ 20</li>
+    <li>"Pending JSON" muestra cuántos faltan por generar</li>
+  </ul>
 </li>
 <li>Click en botón <strong>"Generate JSON Files (X)"</strong></li>
 <li>El sistema ejecuta en <strong>segundo plano</strong> (Job):
-<ul>
-<li>Verifica qué PDFs ya están en GCS (no los sube de nuevo)</li>
-<li>Sube PDFs nuevos a GCS</li>
-<li>Procesa cada PDF con OCR de Document AI</li>
-<li>Mapea cada anotación a su posición exacta en el texto</li>
-<li>Genera archivo JSON en formato Document proto</li>
-<li>Sube JSON a GCS</li>
-</ul>
+  <ul>
+    <li>Verifica qué PDFs ya están en GCS (no los sube de nuevo) ⚡</li>
+    <li>Sube PDFs nuevos a GCS</li>
+    <li>Procesa cada PDF con OCR de Document AI</li>
+    <li>Mapea cada anotación a su posición exacta en el texto</li>
+    <li>Genera archivo JSON en formato Document proto</li>
+    <li>Sube JSON a GCS</li>
+  </ul>
 </li>
 <li><strong>Duración aproximada:</strong> 8-10 segundos por documento
-<ul>
-<li>20 docs = ~3 minutos</li>
-<li>50 docs = ~7 minutos</li>
-</ul>
+  <ul>
+    <li>20 docs = ~3 minutos</li>
+    <li>50 docs = ~7 minutos</li>
+  </ul>
 </li>
 <li><strong>Seguimiento del progreso:</strong>
-<ul>
-<li>La página se actualiza automáticamente cada 30 segundos</li>
-<li>Verás un alert con el estado:
-<ul>
-<li>"QUEUED" → Job iniciado</li>
-<li>"GENERATING" → Procesando X/Y documentos</li>
-<li>"COMPLETED" → Listos para importar</li>
-</ul>
-</li>
-</ul>
+  <ul>
+    <li>La página se actualiza automáticamente cada 30 segundos</li>
+    <li>Verás un alert con el estado:
+      <ul>
+        <li>"QUEUED" → Job iniciado</li>
+        <li>"GENERATING" → Procesando X/Y documentos</li>
+        <li>"COMPLETED" → Listos para importar</li>
+      </ul>
+    </li>
+  </ul>
 </li>
 <li><strong>Al completar</strong>, verás:
-<ul>
-<li>Ruta GCS donde están los JSONs</li>
-<li>Link directo a Google Cloud Workbench Console</li>
-</ul>
+  <ul>
+    <li>Ruta GCS donde están los JSONs</li>
+    <li>Link directo a Google Cloud Workbench Console</li>
+  </ul>
 </li>
 </ol>
+</div>
 
-<hr>
-
+<div class="step-card">
 <h3>Paso 4: Importar en Google Cloud Workbench (Manual)</h3>
 
-<p><strong>IMPORTANTE:</strong> Este paso se hace en Google Cloud Console, NO en DocuCenter</p>
+<div class="warning-box">
+<strong>⚠️ IMPORTANTE:</strong> Este paso se hace en Google Cloud Console, NO en DocuCenter
+</div>
 
 <h4>4.1 Acceder a Workbench</h4>
 
 <ol>
-<li>Ir a: <a href="https://console.cloud.google.com/ai/document-ai/workbench">https://console.cloud.google.com/ai/document-ai/workbench</a></li>
+<li>Ir a: <a href="https://console.cloud.google.com/ai/document-ai/workbench" target="_blank">https://console.cloud.google.com/ai/document-ai/workbench</a></li>
 <li>Seleccionar proyecto: <code>docucenter-aci</code></li>
 <li>Seleccionar processor: <code>Custom Extractor</code> (ID: <code>d6eea813b0c73fc8</code>)</li>
 </ol>
@@ -216,42 +398,37 @@
 <li>En Workbench, click en <strong>"Import"</strong> (botón azul)</li>
 <li>Seleccionar <strong>"Import documents from Cloud Storage"</strong></li>
 <li><strong>Configuración de la importación:</strong>
-<ul>
-<li><strong>Ruta de acceso fuente:</strong></li>
-</ul>
-</li>
-</ol>
 
-<pre><code>gs://docucenter-aci-document-ai-training/training-pdfs/
-</code></pre>
+<div class="info-box">
+<p><strong>📁 Ruta de acceso fuente:</strong></p>
+<pre><code>gs://docucenter-aci-document-ai-training/training-pdfs/</code></pre>
+</div>
 
-<p><strong>MUY IMPORTANTE:</strong> Usar la carpeta de PDFs, NO la carpeta <code>json/</code></p>
+<div class="warning-box">
+<strong>⚠️ MUY IMPORTANTE:</strong> Usar la carpeta de PDFs, NO la carpeta <code>json/</code>
+</div>
 
-<ul>
-<li><strong>División de datos</strong> (Dataset split):
+<p><strong>📊 División de datos</strong> (Dataset split):</p>
 <ul>
 <li><strong>Training:</strong> 80%</li>
 <li><strong>Test:</strong> 20%</li>
 </ul>
-</li>
-<li><strong>Etiquetado automático:</strong>
+
+<p><strong>🏷️ Etiquetado automático:</strong></p>
 <ul>
-<li><strong>Activar</strong> "Importar con etiquetado automático"</li>
+<li>✅ <strong>Activar</strong> "Importar con etiquetado automático"</li>
 <li>Esto usará los archivos JSON para etiquetar los PDFs automáticamente</li>
 </ul>
 </li>
-</ul>
-
-<ol start="4">
 <li>Click <strong>"Import"</strong> (botón al final del formulario)</li>
 </ol>
 
 <h4>4.3 Esperar Importación</h4>
 
 <ul>
-<li><strong>Tiempo:</strong> 5-15 minutos dependiendo de cantidad</li>
-<li><strong>Progreso:</strong> Verás una barra de progreso en Workbench</li>
-<li><strong>Status:</strong> Verificar que los documentos aparezcan en la lista con sus etiquetas</li>
+<li>⏱️ <strong>Tiempo:</strong> 5-15 minutos dependiendo de cantidad</li>
+<li>📊 <strong>Progreso:</strong> Verás una barra de progreso en Workbench</li>
+<li>✅ <strong>Status:</strong> Verificar que los documentos aparezcan en la lista con sus etiquetas</li>
 </ul>
 
 <h4>4.4 Verificar Documentos Importados</h4>
@@ -259,49 +436,52 @@
 <ol>
 <li>Los documentos deben aparecer en la lista de Workbench</li>
 <li>Cada documento debe mostrar:
-<ul>
-<li>Thumbnail del PDF</li>
-<li>Etiquetas aplicadas (vendor_name, invoice_number, etc.)</li>
-<li>Estado "Labeled" o "Etiquetado"</li>
-</ul>
+  <ul>
+    <li>✅ Thumbnail del PDF</li>
+    <li>✅ Etiquetas aplicadas (vendor_name, invoice_number, etc.)</li>
+    <li>✅ Estado "Labeled" o "Etiquetado"</li>
+  </ul>
 </li>
-<li>Verifica que el conteo sea correcto (21 documentos en tu caso)</li>
+<li>Verifica que el conteo sea correcto</li>
 </ol>
 
-<p><strong>Nota sobre la estructura de carpetas:</strong></p>
-
+<div class="info-box">
+<strong>⚠️ Nota sobre la estructura de carpetas:</strong>
 <ul>
 <li>Google Cloud Workbench busca los PDFs en la ruta que especifiques</li>
 <li>Automáticamente busca archivos JSON con el mismo nombre en la carpeta <code>json/</code></li>
 <li><strong>Ejemplo:</strong>
-<ul>
-<li>PDF: <code>gs://.../training-pdfs/20251126230000/factura1.pdf</code></li>
-<li>JSON: <code>gs://.../json/factura1.json</code> (se encuentra automáticamente)</li>
-</ul>
+  <ul>
+    <li>PDF: <code>gs://.../training-pdfs/20251126230000/factura1.pdf</code></li>
+    <li>JSON: <code>gs://.../json/factura1.json</code> (se encuentra automáticamente)</li>
+  </ul>
 </li>
 </ul>
+</div>
+</div>
 
-<hr>
-
+<div class="step-card">
 <h3>Paso 5: Entrenar Modelo (Google Cloud Console)</h3>
 
-<p><strong>Este paso también es manual en Google Cloud</strong></p>
+<div class="warning-box">
+<strong>⚠️ Este paso también es manual en Google Cloud</strong>
+</div>
 
 <h4>5.1 Iniciar Training</h4>
 
 <ol>
 <li>En Workbench, verificar que tienes:
-<ul>
-<li>Mínimo 20 documentos importados</li>
-<li>Distribution: 80/20 (training/test)</li>
-</ul>
+  <ul>
+    <li>Mínimo 20 documentos importados</li>
+    <li>Distribution: 80/20 (training/test)</li>
+  </ul>
 </li>
 <li>Click en <strong>"Train"</strong></li>
 <li>Configurar:
-<ul>
-<li><strong>Training budget:</strong> 1-4 horas</li>
-<li><strong>Model version:</strong> Nueva versión</li>
-</ul>
+  <ul>
+    <li><strong>Training budget:</strong> 1-4 horas</li>
+    <li><strong>Model version:</strong> Nueva versión</li>
+  </ul>
 </li>
 <li>Click <strong>"Start Training"</strong></li>
 </ol>
@@ -309,9 +489,9 @@
 <h4>5.2 Esperar Training</h4>
 
 <ul>
-<li><strong>Duración:</strong> 1-3 horas típicamente</li>
-<li><strong>Progreso:</strong> Visible en Google Cloud Console</li>
-<li><strong>Notificación:</strong> Email cuando termine</li>
+<li>⏱️ <strong>Duración:</strong> 1-3 horas típicamente</li>
+<li>📊 <strong>Progreso:</strong> Visible en Google Cloud Console</li>
+<li>🔔 <strong>Notificación:</strong> Email cuando termine</li>
 </ul>
 
 <h4>5.3 Validar Resultados</h4>
@@ -322,91 +502,92 @@
 <li>Si está bien → Desplegar a producción</li>
 <li>Si está mal → Agregar más documentos y re-entrenar</li>
 </ol>
+</div>
 
-<hr>
+<h2>📊 Panel de Estadísticas Explicado</h2>
 
-<h2>Panel de Estadísticas Explicado</h2>
+<div class="stats-grid">
+<div class="stat-card">
+<h4>🔵 Total Documents</h4>
+<p><strong>Qué es:</strong> Total de PDFs subidos</p>
+<p><strong>Acción:</strong> Ninguna</p>
+</div>
 
-<h3>Total Documents</h3>
-<ul>
-<li><strong>Qué es:</strong> Total de PDFs subidos</li>
-<li><strong>Acción:</strong> Ninguna</li>
+<div class="stat-card">
+<h4>✅ Annotated</h4>
+<p><strong>Qué es:</strong> Documentos con anotaciones completas</p>
+<p><strong>Meta:</strong> ≥ 20 para entrenar</p>
+<p><strong>Acción:</strong> Anotar más documentos</p>
+</div>
+
+<div class="stat-card">
+<h4>☁️ PDFs in GCS</h4>
+<p><strong>Qué es:</strong> PDFs ya subidos a Google Cloud</p>
+<p><strong>Optimización:</strong> No se suben de nuevo</p>
+<p><strong>Acción:</strong> Ninguna</p>
+</div>
+
+<div class="stat-card">
+<h4>📄 JSON Generated</h4>
+<p><strong>Qué es:</strong> JSONs con anotaciones ya en GCS</p>
+<p><strong>Estado:</strong> Listos para importar</p>
+<p><strong>Acción:</strong> Importar en Google Cloud Console</p>
+</div>
+
+<div class="stat-card">
+<h4>⏰ Pending JSON</h4>
+<p><strong>Qué es:</strong> Documentos anotados sin JSON generado</p>
+<p><strong>Acción:</strong> Click "Generate JSON Files"</p>
+</div>
+
+<div class="stat-card">
+<h4>🏆 Training Status</h4>
+<p><strong>Listo:</strong> ≥ 20 anotados</p>
+<p><strong>Pendiente:</strong> Muestra cuántos faltan</p>
+</div>
+</div>
+
+<h2>🔧 Optimizaciones Implementadas</h2>
+
+<ul class="optimization-list">
+<li><strong>✅ Control de Subidas Duplicadas</strong>
+  <ul>
+    <li>Los PDFs ya subidos a GCS NO se suben de nuevo</li>
+    <li>Se guarda <code>gcs_pdf_uri</code> en base de datos</li>
+    <li>Ahorra bandwidth y tiempo</li>
+  </ul>
+</li>
+<li><strong>✅ Procesamiento en Background</strong>
+  <ul>
+    <li>Generación de JSON usa Laravel Jobs</li>
+    <li>No bloquea la interfaz de usuario</li>
+    <li>Progreso visible en tiempo real</li>
+  </ul>
+</li>
+<li><strong>✅ Tracking de Estado</strong>
+  <ul>
+    <li>Saber qué documentos están en cada etapa</li>
+    <li>Badges visuales: "Annotated", "En GCS", "JSON"</li>
+    <li>Estadísticas actualizadas en tiempo real</li>
+  </ul>
+</li>
+<li><strong>✅ Mapeo Inteligente de Texto</strong>
+  <ul>
+    <li>Busca cada valor en el texto OCR</li>
+    <li>Genera <code>textAnchor</code> con posición exacta</li>
+    <li>Permite a Document AI aprender ubicaciones</li>
+  </ul>
+</li>
 </ul>
 
-<h3>Annotated</h3>
-<ul>
-<li><strong>Qué es:</strong> Documentos con anotaciones completas</li>
-<li><strong>Meta:</strong> ≥ 20 para entrenar</li>
-<li><strong>Acción:</strong> Anotar más documentos</li>
-</ul>
+<h2>⚙️ Configuración Técnica</h2>
 
-<h3>PDFs in GCS</h3>
-<ul>
-<li><strong>Qué es:</strong> PDFs ya subidos a Google Cloud</li>
-<li><strong>Optimización:</strong> No se suben de nuevo (ahorra tiempo y $)</li>
-<li><strong>Acción:</strong> Ninguna</li>
-</ul>
-
-<h3>JSON Generated</h3>
-<ul>
-<li><strong>Qué es:</strong> JSONs con anotaciones ya en GCS</li>
-<li><strong>Estado:</strong> Listos para importar en Workbench</li>
-<li><strong>Acción:</strong> Importar en Google Cloud Console</li>
-</ul>
-
-<h3>Pending JSON</h3>
-<ul>
-<li><strong>Qué es:</strong> Documentos anotados sin JSON generado</li>
-<li><strong>Acción:</strong> Click "Generate JSON Files"</li>
-</ul>
-
-<h3>Training Status</h3>
-<ul>
-<li><strong>Listo:</strong> ≥ 20 anotados</li>
-<li><strong>Pendiente:</strong> Muestra cuántos faltan</li>
-</ul>
-
-<hr>
-
-<h2>Optimizaciones Implementadas</h2>
-
-<h3>1. Control de Subidas Duplicadas</h3>
-<ul>
-<li>Los PDFs ya subidos a GCS NO se suben de nuevo</li>
-<li>Se guarda <code>gcs_pdf_uri</code> en base de datos</li>
-<li>Ahorra bandwidth y tiempo</li>
-</ul>
-
-<h3>2. Procesamiento en Background</h3>
-<ul>
-<li>Generación de JSON usa Laravel Jobs</li>
-<li>No bloquea la interfaz de usuario</li>
-<li>Progreso visible en tiempo real</li>
-</ul>
-
-<h3>3. Tracking de Estado</h3>
-<ul>
-<li>Saber qué documentos están en cada etapa</li>
-<li>Badges visuales: "Annotated", "En GCS", "JSON"</li>
-<li>Estadísticas actualizadas en tiempo real</li>
-</ul>
-
-<h3>4. Mapeo Inteligente de Texto</h3>
-<ul>
-<li>Busca cada valor en el texto OCR</li>
-<li>Genera <code>textAnchor</code> con posición exacta</li>
-<li>Permite a Document AI aprender ubicaciones</li>
-</ul>
-
-<hr>
-
-<h2>Configuración Técnica</h2>
-
+<div class="step-card">
 <h3>Base de Datos</h3>
 
 <p><strong>Tabla:</strong> <code>document_ai_training_documents</code></p>
 
-<pre><code class="language-sql">- id: bigint
+<pre><code>- id: bigint
 - filename: varchar
 - file_path: varchar (storage/app/training-documents/)
 - extracted_data: json (OCR + entities)
@@ -419,15 +600,15 @@
 - imported_at: timestamp (cuándo se generó JSON)
 - json_file_path: varchar (ruta en GCS)
 - gcs_pdf_uri: varchar (gs://bucket/path/file.pdf)
-- pdf_uploaded_at: timestamp
-</code></pre>
+- pdf_uploaded_at: timestamp</code></pre>
+</div>
 
+<div class="step-card">
 <h3>Google Cloud Storage</h3>
 
 <p><strong>Bucket:</strong> <code>docucenter-aci-document-ai-training</code></p>
 
 <p><strong>Estructura:</strong></p>
-
 <pre><code>gs://docucenter-aci-document-ai-training/
 ├── training-pdfs/
 │   └── 20251126230000/
@@ -437,9 +618,10 @@
 └── json/
     ├── factura1.json
     ├── factura2.json
-    └── ...
-</code></pre>
+    └── ...</code></pre>
+</div>
 
+<div class="step-card">
 <h3>Document AI Processor</h3>
 
 <ul>
@@ -448,11 +630,12 @@
 <li><strong>Processor ID:</strong> <code>d6eea813b0c73fc8</code></li>
 <li><strong>Location:</strong> <code>us</code></li>
 </ul>
+</div>
 
+<div class="step-card">
 <h3>Laravel Jobs</h3>
 
 <p><strong>Job:</strong> <code>GenerateDocumentAIJSONFilesJob</code></p>
-
 <ul>
 <li><strong>Queue:</strong> <code>default</code></li>
 <li><strong>Timeout:</strong> 3600 segundos (1 hora)</li>
@@ -460,121 +643,102 @@
 </ul>
 
 <p><strong>Para ejecutar manualmente:</strong></p>
+<pre><code>php artisan queue:work redis --timeout=3600 --tries=3</code></pre>
+</div>
 
-<pre><code class="language-bash">php artisan queue:work redis --timeout=3600 --tries=3
-</code></pre>
+<h2>🐛 Troubleshooting</h2>
 
-<hr>
-
-<h2>Troubleshooting</h2>
-
-<h3>Problema: "No hay documentos pendientes de generar JSON"</h3>
-
+<div class="troubleshooting-item">
+<h4>Problema: "No hay documentos pendientes de generar JSON"</h4>
 <p><strong>Causa:</strong> Todos los documentos anotados ya tienen JSON generado</p>
-
 <p><strong>Solución:</strong></p>
 <ol>
 <li>Anotar más documentos</li>
 <li>O re-generar borrando campo <code>imported_at</code> en BD</li>
 </ol>
+</div>
 
-<hr>
-
-<h3>Problema: "PDF no encontrado en GCS"</h3>
-
+<div class="troubleshooting-item">
+<h4>Problema: "PDF no encontrado en GCS"</h4>
 <p><strong>Causa:</strong> El PDF no existe en ninguna ruta conocida</p>
-
 <p><strong>Solución:</strong></p>
 <ol>
 <li>Verificar que <code>file_path</code> en BD sea correcto</li>
 <li>Verificar que archivo existe en <code>storage/app/training-documents/</code></li>
 <li>El Job lo subirá automáticamente si existe localmente</li>
 </ol>
+</div>
 
-<hr>
-
-<h3>Problema: Job no procesa</h3>
-
+<div class="troubleshooting-item">
+<h4>Problema: Job no procesa</h4>
 <p><strong>Causa:</strong> Queue worker no está corriendo</p>
-
 <p><strong>Solución:</strong></p>
-
-<pre><code class="language-bash"># En Docker
+<pre><code># En Docker
 docker exec -it docucenter_laravel.test php artisan queue:work redis
 
 # O verificar que Supervisor esté corriendo
-docker exec -it docucenter_laravel.test supervisorctl status
-</code></pre>
+docker exec -it docucenter_laravel.test supervisorctl status</code></pre>
+</div>
 
-<hr>
-
-<h3>Problema: "Valor no encontrado en OCR"</h3>
-
+<div class="troubleshooting-item">
+<h4>Problema: "Valor no encontrado en OCR"</h4>
 <p><strong>Causa:</strong> El valor anotado no coincide exactamente con el texto OCR</p>
-
 <p><strong>Solución:</strong></p>
 <ol>
 <li>Verificar que la anotación sea igual al texto en el PDF</li>
 <li>Revisar espacios, mayúsculas, caracteres especiales</li>
 <li>El sistema busca coincidencia exacta</li>
 </ol>
+</div>
 
-<hr>
+<h2>📝 Comandos Útiles</h2>
 
-<h2>Comandos Útiles</h2>
-
+<div class="step-card">
 <h3>Generar JSONs por línea de comandos</h3>
-
-<pre><code class="language-bash"># Dentro del contenedor Docker
+<pre><code># Dentro del contenedor Docker
 php artisan docai:generate-json-files
 
 # Ver logs
-tail -f storage/logs/laravel.log
-</code></pre>
+tail -f storage/logs/laravel.log</code></pre>
 
 <h3>Limpiar cache</h3>
-
-<pre><code class="language-bash">php artisan cache:clear
+<pre><code>php artisan cache:clear
 php artisan view:clear
-php artisan config:clear
-</code></pre>
+php artisan config:clear</code></pre>
 
 <h3>Verificar Jobs en cola</h3>
+<pre><code>php artisan queue:listen --queue=default</code></pre>
+</div>
 
-<pre><code class="language-bash">php artisan queue:listen --queue=default
-</code></pre>
+<h2>🔄 Workflow Resumido (TL;DR)</h2>
 
-<hr>
+<div class="workflow-diagram">
+<div class="workflow-step">1. DocuCenter: Subir PDFs → Anotar campos</div>
+<div class="arrow">⬇️</div>
+<div class="workflow-step">2. DocuCenter: Click "Generate JSON Files"</div>
+<div class="arrow">⬇️</div>
+<div class="workflow-step">3. Job en background: PDF → OCR → JSON → GCS</div>
+<div class="arrow">⬇️</div>
+<div class="workflow-step">4. Google Cloud Workbench: Import JSON files</div>
+<div class="arrow">⬇️</div>
+<div class="workflow-step">5. Google Cloud Console: Train model (1-3 hrs)</div>
+<div class="arrow">⬇️</div>
+<div class="workflow-step">6. ✅ Modelo entrenado listo para producción</div>
+</div>
 
-<h2>Workflow Resumido (TL;DR)</h2>
+<h2>📚 Referencias Técnicas</h2>
 
-<pre><code>1. DocuCenter: Subir PDFs ➜ Anotar campos
-                            ⬇️
-2. DocuCenter: Click "Generate JSON Files"
-                            ⬇️
-3. Job en background: PDF → OCR → JSON → GCS
-                            ⬇️
-4. Google Cloud Workbench: Import JSON files
-                            ⬇️
-5. Google Cloud Console: Train model (1-3 hrs)
-                            ⬇️
-6. Modelo entrenado listo para producción
-</code></pre>
-
-<hr>
-
-<h2>Referencias Técnicas</h2>
-
+<div class="step-card">
 <h3>Documentación Google Document AI</h3>
 <ul>
-<li><a href="https://cloud.google.com/document-ai/docs/custom-extractor">Custom Extractors</a></li>
-<li><a href="https://cloud.google.com/document-ai/docs/document-proto">Document Proto Format</a></li>
-<li><a href="https://cloud.google.com/document-ai/docs/train-model">Training Guide</a></li>
+<li><a href="https://cloud.google.com/document-ai/docs/custom-extractor" target="_blank">Custom Extractors</a></li>
+<li><a href="https://cloud.google.com/document-ai/docs/document-proto" target="_blank">Document Proto Format</a></li>
+<li><a href="https://cloud.google.com/document-ai/docs/train-model" target="_blank">Training Guide</a></li>
 </ul>
 
 <h3>Artículos Clave</h3>
 <ul>
-<li><a href="https://medium.com/@neilkolban/google-document-ai-pre-labeled-data-import-bb0f9c9e3d2a">Medium: Neil Kolban - Pre-labeled Import Method</a></li>
+<li><a href="https://medium.com/@neilkolban/google-document-ai-pre-labeled-data-import-bb0f9c9e3d2a" target="_blank">Medium: Neil Kolban - Pre-labeled Import Method</a></li>
 </ul>
 
 <h3>Código Fuente</h3>
@@ -585,12 +749,12 @@ php artisan config:clear
 <li><strong>Modelo:</strong> <code>app/Models/DocumentAITrainingDocument.php</code></li>
 <li><strong>Vista:</strong> <code>resources/views/livewire/admin/document-ai/training-manager.blade.php</code></li>
 </ul>
+</div>
 
-<hr>
+<h2>✨ Funcionalidades Destacadas</h2>
 
-<h2>Funcionalidades Destacadas</h2>
-
-<h3>Lo que el sistema HACE automáticamente:</h3>
+<div class="step-card">
+<h3>✅ Lo que el sistema HACE automáticamente:</h3>
 <ul>
 <li>Extracción inicial con OCR</li>
 <li>Detección automática de tipo de documento</li>
@@ -602,51 +766,48 @@ php artisan config:clear
 <li>Control de duplicados</li>
 </ul>
 
-<h3>Lo que debes hacer MANUALMENTE:</h3>
+<h3>⚠️ Lo que debes hacer MANUALMENTE:</h3>
 <ul>
 <li>Revisar y corregir anotaciones</li>
 <li>Importar JSONs en Google Cloud Workbench</li>
 <li>Iniciar training del modelo</li>
 <li>Desplegar a producción</li>
 </ul>
+</div>
 
-<hr>
+<h2>👥 Equipo y Soporte</h2>
 
-<h2>Equipo y Soporte</h2>
+<div class="info-box">
+<p><strong>Desarrollador:</strong> Sistema implementado en DocuCenter</p>
+<p><strong>Fecha:</strong> Noviembre 2025</p>
+<p><strong>Versión Laravel:</strong> 9.x</p>
+<p><strong>Versión PHP:</strong> 8.1+</p>
+</div>
 
-<p><strong>Desarrollador:</strong> Sistema implementado en DocuCenter<br>
-<strong>Fecha:</strong> Noviembre 2025<br>
-<strong>Versión Laravel:</strong> 9.x<br>
-<strong>Versión PHP:</strong> 8.1+</p>
-
-<p><strong>Para soporte técnico:</strong></p>
+<div class="step-card">
+<h3>Para soporte técnico:</h3>
 <ol>
 <li>Revisar logs en <code>storage/logs/laravel.log</code></li>
 <li>Verificar estado de Jobs en base de datos tabla <code>jobs</code></li>
 <li>Consultar documentación de Google Document AI</li>
 </ol>
+</div>
 
-<hr>
-
-<h2>Próximos Pasos Sugeridos</h2>
+<h2>🎓 Próximos Pasos Sugeridos</h2>
 
 <ol>
 <li><strong>Entrenar modelo inicial</strong> con 20-50 documentos</li>
 <li><strong>Evaluar precisión</strong> con documentos de test</li>
 <li><strong>Iterar:</strong> Agregar más documentos donde el modelo falle</li>
 <li><strong>Re-entrenar</strong> para mejorar precisión</li>
-<li><strong>Desplegar a producción</strong> cuando precision &gt; 90%</li>
+<li><strong>Desplegar a producción</strong> cuando precision > 90%</li>
 </ol>
 
-<hr>
+<div class="success-box" style="text-align: center; font-size: 1.5rem; font-weight: bold; margin-top: 2rem;">
+¡Éxito entrenando tu modelo! 🚀
+</div>
 
-<p><strong>¡Éxito entrenando tu modelo!</strong></p>
-
-</article>
 </div>
 </div>
-</main>
-</div>
-<script src="../assets/javascripts/bundle.50899def.min.js"></script>
 </body>
 </html>
