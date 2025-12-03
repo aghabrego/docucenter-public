@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <link rel="icon" href="../assets/images/favicon.png">
 <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.44">
-<title>Análisis del Sistema Multi-Branch - Docucenter Documentation</title>
+<title>Análisis del Sistema Multi-Sucursal - Docucenter Documentation</title>
 <link rel="stylesheet" href="../assets/stylesheets/main.7e37652d.min.css">
 <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
 <style>
@@ -146,6 +146,16 @@ pre code {
   margin: 0;
   opacity: 0.9;
 }
+.diagram {
+  background: #f8fafc;
+  border: 2px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  font-family: monospace;
+  white-space: pre;
+  overflow-x: auto;
+}
 </style>
 </head>
 <body>
@@ -153,135 +163,214 @@ pre code {
 <div class="md-content">
 
 <div class="doc-header">
-<h1>Análisis del Sistema Multi-Branch</h1>
-<p style="font-size: 1.2rem; margin: 1rem 0;">Arquitectura de Organizaciones y Sucursales en DocuCenter</p>
-<p style="margin-top: 1rem; opacity: 0.9;">Última actualización: 3 de diciembre de 2025</p>
+<h1>Análisis del Sistema Multi-Sucursal con ID_compania</h1>
+<p style="font-size: 1.2rem; margin: 1rem 0;">Arquitectura Multi-Tenant: Organizaciones y Sucursales</p>
+<p style="margin-top: 1rem; opacity: 0.9;">Versión 1.0 - 3 de diciembre de 2025</p>
 </div>
 
-<h2>Resumen Ejecutivo</h2>
+<h2>Contexto General</h2>
 
-<p>Este documento analiza la arquitectura multi-tenant de DocuCenter con enfoque en el sistema de organizaciones, sucursales y el filtrado de datos por <code>ID_compania</code>.</p>
+<p>DocuCenter maneja un sistema multi-tenant donde:</p>
 
-<div class="alert-box">
-<strong>⚠️ Problema Crítico Identificado:</strong> 36+ modelos sin filtrado automático por <code>ID_compania</code>, lo que permite acceso no autorizado a datos de otras sucursales.
+<ul>
+<li>Una <strong>Empresa/Matriz</strong> (CompanySession) puede tener múltiples <strong>Organizaciones</strong></li>
+<li>Cada <strong>Organización</strong> tiene su propia base de datos</li>
+<li>Dentro de cada base de datos, existen múltiples <strong>Sucursales</strong> identificadas por <code>ID_compania</code></li>
+<li>Una organización puede gestionar múltiples sucursales de la misma empresa</li>
+</ul>
+
+<div class="success-box">
+<h3>Caso de Uso Real:</h3>
+<p><strong>Empresa:</strong> "Restaurantes XYZ S.A." (CompanySession con ID_compania: 100)</p>
+<ul>
+<li><strong>Organización 1:</strong> "RXY Regional Centro" (BD: rest_centro)
+  <ul>
+    <li>Sucursal 1: Local Centro (ID_compania: 1)</li>
+    <li>Sucursal 2: Local Plaza (ID_compania: 2)</li>
+  </ul>
+</li>
+<li><strong>Organización 2:</strong> "RXY Regional Norte" (BD: rest_norte)
+  <ul>
+    <li>Sucursal 3: Local Norte (ID_compania: 3)</li>
+    <li>Sucursal 4: Local Costa (ID_compania: 4)</li>
+  </ul>
+</li>
+<li><strong>Organización 3:</strong> "RXY Regional Sur" (BD: rest_sur)
+  <ul>
+    <li>Sucursal 5: Local Sur (ID_compania: 5)</li>
+  </ul>
+</li>
+</ul>
 </div>
 
 <h2>Arquitectura Actual</h2>
 
-<h3>Modelo de Datos Multi-Tenant</h3>
+<h3>Estructura de Base de Datos</h3>
+
+<div class="diagram">┌──────────────────────────────────────┐
+│  Base de Datos Principal (mysql)     │
+├──────────────────────────────────────┤
+│  - organizations                      │
+│  - users                              │
+│  - user_organizations                 │
+│  - CompanySession ⭐ (PRINCIPAL)      │
+│    └─> Modelo Companysession lee AQUÍ│
+└──────────────────────────────────────┘
+                  │
+   Cada org tiene su BD
+                  ▼
+┌──────────────────────────────────────┐
+│  Base de Datos Organización           │
+│  (ej: 9_734_1672_56)                  │
+├──────────────────────────────────────┤
+│  - CompanySession (copia del stub)    │
+│    └─> ID_compania (datos locales)   │
+│                                       │
+│  - Customers_Imp (ID_compania)        │
+│  - Sales_Header_Imp (ID_compania)     │
+│  - Products_Imp (ID_compania)         │
+│  - ... (43+ tablas más)               │
+└──────────────────────────────────────┘</div>
+
+<div class="alert-box">
+<h3>⚠️ IMPORTANTE - Dualidad de CompanySession</h3>
+<p>La tabla <code>CompanySession</code> existe en DOS ubicaciones:</p>
+
+<ol>
+<li><strong>Base de Datos Principal (<code>mysql</code>):</strong>
+  <ul>
+    <li>Tabla centralizada para gestión</li>
+    <li><strong>El modelo <code>Companysession</code> SIEMPRE lee de aquí</strong></li>
+    <li>Usa <code>setDefaultConnection()</code> en constructor</li>
+    <li>Relación: <code>organizations()</code> via <code>id_empresa</code></li>
+  </ul>
+</li>
+<li><strong>Base de Datos de cada Organización:</strong>
+  <ul>
+    <li>Creada desde <code>CompanySession.sql.stub</code></li>
+    <li>Copia local con datos específicos</li>
+    <li><strong>NO es consultada por el modelo Eloquent</strong></li>
+    <li>Posiblemente para importación/exportación de datos</li>
+  </ul>
+</li>
+</ol>
+</div>
 
 <div class="code-card">
-<p><strong>Concepto Clave:</strong> 1 Usuario → N Organizaciones → 1 Base de Datos por Organización</p>
-
-<pre><code>User (BD Principal)
-  └─> UserOrganizations (N organizaciones)
-        │
-        ├─> Organization 1 (BD: org_db_1)
-        │     ├─> id_empresa: 10
-        │     └─> CompanySession.ID_compania = 10
-        │
-        ├─> Organization 2 (BD: org_db_2)
-        │     ├─> id_empresa: 20
-        │     └─> CompanySession.ID_compania = 20
-        │
-        └─> Organization 3 (BD: org_db_3)
-              ├─> id_empresa: 30
-              └─> CompanySession.ID_compania = 30</code></pre>
+<pre><code>// app/Models/Companysession.php
+public function __construct(array $attributes = [])
+{
+    parent::__construct($attributes);
+    
+    // ⭐ SIEMPRE usa BD principal
+    $this->setDefaultConnection();
+}</code></pre>
 </div>
 
-<h3>Bases de Datos del Sistema</h3>
+<h3>Flujo de Conexión Correcto (Propuesto)</h3>
 
-<div class="table-wrapper">
-<table>
-<thead>
-<tr>
-<th>Base de Datos</th>
-<th>Propósito</th>
-<th>Contenido</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Principal (mysql)</strong></td>
-<td>Gestión de usuarios y organizaciones</td>
-<td><code>users</code>, <code>organizations</code>, <code>user_organizations</code>, <code>CompanySession</code></td>
-</tr>
-<tr>
-<td><strong>Por Organización</strong></td>
-<td>Datos operativos de cada sucursal</td>
-<td><code>Sales_*</code>, <code>Customers_*</code>, <code>Products_*</code>, <code>FE_*</code> (43+ tablas con <code>ID_compania</code>)</td>
-</tr>
-</tbody>
-</table>
+<div class="code-card">
+<pre><code>// 1. Usuario se autentica
+User::find(1)
+
+// 2. Obtiene la organización actual
+→ UserOrganizations
+  → Organization (id: 25, nombre: "RXY Regional Centro", 
+                  database: "9_734_1672_56")
+
+// 3. Cambia a la BD de la organización
+DB::connection()->useDatabase("9_734_1672_56")
+
+// 4. La BD contiene datos de MÚLTIPLES sucursales
+→ CompanySession (registros con ID_compania: 1, 2, 3, 4, 5)
+→ Customers_Imp (mezclados: ID_compania 1, 2, 3, 4, 5)
+→ Sales_Header_Imp (mezclados: ID_compania 1, 2, 3, 4, 5)
+
+// 5. PROBLEMA ACTUAL: Usuario ve TODOS los datos mezclados
+// 6. SOLUCIÓN: Filtrar por las sucursales asignadas al usuario</code></pre>
 </div>
 
-<h3>Relación Crítica: Organization ↔ CompanySession</h3>
+<h2>Relaciones Clave</h2>
+
+<h3>✅ Relación CORRECTA (Flujo Propuesto)</h3>
+
+<div class="diagram">CompanySession (BD Principal)
+    ├─> ID_compania: 100 (Empresa/Matriz "Restaurantes XYZ S.A.")
+    ├─> CompanyNameSage50: "Restaurantes XYZ S.A."
+    └─> organizations() → hasMany (UNA EMPRESA = MUCHAS ORGANIZACIONES)
+          ├─> Organization 1: "RXY Regional Centro" (BD: rest_centro)
+          ├─> Organization 2: "RXY Regional Norte" (BD: rest_norte)
+          └─> Organization 3: "RXY Regional Sur" (BD: rest_sur)
+
+Organization (BD Principal)
+    ├─> id: 25
+    ├─> nombre: "RXY Regional Centro"
+    ├─> database: "9_734_1672_56"
+    ├─> id_empresa: 100 (FK a CompanySession - Empresa Matriz)
+    └─> belongsTo(Companysession) → Empresa Matriz
+
+Dentro de BD Organización (9_734_1672_56):
+    ├─> CompanySession (múltiples registros)
+    │     ├─> ID_compania: 1 (Sucursal Centro)
+    │     ├─> ID_compania: 2 (Sucursal Plaza)
+    │     └─> ID_compania: 3 (Sucursal Mall)
+    │
+    ├─> Customers_Imp
+    │     ├─> Record 1: ID_compania = 1 (clientes de Sucursal Centro)
+    │     ├─> Record 2: ID_compania = 2 (clientes de Sucursal Plaza)
+    │     └─> Record 3: ID_compania = 3 (clientes de Sucursal Mall)
+    │
+    └─> Sales_Header_Imp (ventas mezcladas de todas las sucursales)</div>
 
 <div class="success-box">
-<p><strong>✅ Regla de Oro:</strong> UNA ORGANIZACIÓN = UNA SUCURSAL = UN ID_compania</p>
+<h3>IMPORTANTE:</h3>
+<ul>
+<li><strong>UNA EMPRESA</strong> (CompanySession en BD principal) = <strong>MUCHAS ORGANIZACIONES</strong></li>
+<li><strong>UNA ORGANIZACIÓN</strong> (con su BD) = <strong>MUCHAS SUCURSALES</strong> (ID_compania en su BD)</li>
+<li>Usuario debe ver solo las sucursales que le fueron asignadas</li>
+</ul>
 </div>
 
-<div class="code-card">
-<p><strong>En BD Principal (<code>organizations</code>):</strong></p>
-<pre><code>class Organization extends Model
-{
-    protected $fillable = [
-        'id',           // 25
-        'nombre',       // "Restaurante XYZ - Sucursal Centro"
-        'database',     // "9_734_1672_56"
-        'id_empresa',   // 100 → FK a CompanySession.ID_compania
-    ];
-    
-    public function company()
-    {
-        // Cambia a BD específica y busca por ID_compania
-        return $this->belongsTo(Companysession::class, 
-                                'id_empresa', 
-                                'ID_compania');
-    }
-}</code></pre>
-</div>
+<h3>📊 Modelo de Datos Actualizado (Flujo Correcto)</h3>
 
-<div class="code-card">
-<p><strong>En BD Principal (<code>CompanySession</code>):</strong></p>
-<pre><code>class Companysession extends Model
-{
-    protected $table = 'CompanySession';
-    
-    protected $fillable = [
-        'ID_compania',      // 100
-        'CompanyNameSage50' // "Restaurante XYZ - Centro"
-    ];
-    
-    /**
-     * ⭐ SIEMPRE usa la base de datos principal
-     */
-    public function __construct(array $attributes = [])
-    {
-        parent::__construct($attributes);
-        
-        // Forzar conexión a BD principal (mysql)
-        $this->setDefaultConnection();
-    }
-    
-    public function organizations()
-    {
-        // UNA sucursal = UNA organización
-        return $this->hasMany(Organization::class, 
-                              'id_empresa', 
-                              'ID_compania');
-    }
-}</code></pre>
-</div>
+<div class="diagram">CompanySession (BD Principal) - Empresas Matriz
+  └─> ID_compania: 100 ("Restaurantes XYZ S.A.")
+        └─> hasMany Organizations
+              ├─> Organization 1 (id_empresa: 100, BD: rest_centro)
+              ├─> Organization 2 (id_empresa: 100, BD: rest_norte)
+              └─> Organization 3 (id_empresa: 100, BD: rest_sur)
 
-<div class="info-box">
-<p><strong>⚠️ Aclaraciones Importantes:</strong></p>
-<ol>
-<li><code>hasMany</code> NO significa "muchas organizaciones por sucursal" - es convención de Eloquent</li>
-<li>En la práctica: <strong>1 Sucursal = 1 Organización</strong></li>
-<li>Modelo <code>Companysession</code> lee de BD Principal (usando <code>setDefaultConnection()</code>)</li>
-<li><code>CompanySession</code> en BD de Organización es copia local para importación/exportación</li>
-</ol>
+User (BD Principal)
+  └─> UserOrganizations (N organizaciones)
+        │
+        ├─> Organization 1: "RXY Regional Centro" (BD: rest_centro)
+        │     ├─> id_empresa: 100 (Empresa Matriz)
+        │     └─> Dentro de BD rest_centro:
+        │           ├─> CompanySession: ID_compania 1, 2, 3
+        │           ├─> Customers_Imp: mezclado (ID_compania 1,2,3)
+        │           └─> Sales_Header_Imp: mezclado (ID_compania 1,2,3)
+        │
+        ├─> Organization 2: "RXY Regional Norte" (BD: rest_norte)
+        │     ├─> id_empresa: 100 (Empresa Matriz)
+        │     └─> Dentro de BD rest_norte:
+        │           ├─> CompanySession: ID_compania 4, 5
+        │           ├─> Customers_Imp: mezclado (ID_compania 4,5)
+        │           └─> Sales_Header_Imp: mezclado (ID_compania 4,5)
+        │
+        └─> Organization 3: "RXY Regional Sur" (BD: rest_sur)
+              ├─> id_empresa: 100 (Empresa Matriz)
+              └─> Dentro de BD rest_sur:
+                    ├─> CompanySession: ID_compania 6, 7, 8
+                    ├─> Customers_Imp: mezclado (ID_compania 6,7,8)
+                    └─> Sales_Header_Imp: mezclado (ID_compania 6,7,8)</div>
+
+<div class="alert-box">
+<h3>NUEVO REQUERIMIENTO:</h3>
+<p>User debe tener asignación de sucursales específicas:</p>
+<ul>
+<li>Juan puede ver: Org 1 (sucursales 1,2) + Org 2 (sucursal 4)</li>
+<li>María puede ver: Org 1 (sucursal 3) + Org 3 (sucursales 6,7)</li>
+</ul>
 </div>
 
 <h2>Inventario de Modelos con ID_compania</h2>
@@ -355,45 +444,33 @@ pre code {
 <h3>❌ Modelos Sin Filtrado (36+ vulnerables)</h3>
 
 <div class="danger-box">
-<p><strong>🚨 RIESGO DE SEGURIDAD:</strong> Estos modelos NO filtran por <code>ID_compania</code>, permitiendo acceso a datos de otras sucursales.</p>
+<p><strong>🚨 RIESGO DE SEGURIDAD:</strong> Estos modelos NO filtran por <code>ID_compania</code>, permitiendo acceso a datos de todas las sucursales de la organización.</p>
 </div>
 
 <p><strong>Ventas:</strong></p>
 <ul>
-<li><code>SalesHeaderImp</code></li>
-<li><code>SalesDetailImp</code></li>
-<li><code>SalesDetailImpDiscounts</code></li>
-<li><code>SalesOrderHeaderImp</code></li>
-<li><code>SalesOrderDetailImp</code></li>
-<li><code>SalesOrderHeaderExp</code></li>
-<li><code>SalesOrderDetailExp</code></li>
-<li><code>SalesInvoiceHeaderExp</code></li>
-<li><code>SalesInvoiceDetailExp</code></li>
+<li><code>SalesHeaderImp</code>, <code>SalesDetailImp</code>, <code>SalesDetailImpDiscounts</code></li>
+<li><code>SalesOrderHeaderImp</code>, <code>SalesOrderDetailImp</code></li>
+<li><code>SalesOrderHeaderExp</code>, <code>SalesOrderDetailExp</code></li>
+<li><code>SalesInvoiceHeaderExp</code>, <code>SalesInvoiceDetailExp</code></li>
 </ul>
 
 <p><strong>Compras:</strong></p>
 <ul>
-<li><code>PurchaseHeaderImp</code></li>
-<li><code>PurchaseDetailImp</code></li>
-<li><code>PurchaseHeaderExp</code></li>
-<li><code>PurchaseDetailExp</code></li>
-<li><code>PurOrdrHeaderExp</code></li>
-<li><code>PurOrdrDetailExp</code></li>
+<li><code>PurchaseHeaderImp</code>, <code>PurchaseDetailImp</code></li>
+<li><code>PurchaseHeaderExp</code>, <code>PurchaseDetailExp</code></li>
+<li><code>PurOrdrHeaderExp</code>, <code>PurOrdrDetailExp</code></li>
 </ul>
 
 <p><strong>Pagos y Recibos:</strong></p>
 <ul>
-<li><code>CustomerReceiptHeaderImp</code></li>
-<li><code>CustomerReceiptDetailImp</code></li>
-<li><code>VendorPaymentHeaderImp</code></li>
-<li><code>VendorPaymentDetailImp</code></li>
+<li><code>CustomerReceiptHeaderImp</code>, <code>CustomerReceiptDetailImp</code></li>
+<li><code>VendorPaymentHeaderImp</code>, <code>VendorPaymentDetailImp</code></li>
 </ul>
 
 <p><strong>Facturación Electrónica:</strong></p>
 <ul>
-<li><code>FeHeader</code></li>
-<li><code>FeDetail</code></li>
-<li><code>FePayment</code></li>
+<li><code>FeHeader</code>, <code>FeDetail</code>, <code>FePayment</code></li>
 </ul>
 
 <p><strong>Otros módulos:</strong> Catálogos Exp, Jobs, Inventario, Contabilidad (20+ modelos adicionales)</p>
@@ -405,110 +482,125 @@ pre code {
 <div class="danger-box">
 <pre><code><strong>Usuario:</strong> Juan
 <strong>Organizaciones asignadas:</strong>
-  - Org 1 (Restaurante Centro) → BD: rest_centro   → ID_compania: 100
-  - Org 2 (Restaurante Norte)  → BD: rest_norte    → ID_compania: 200
-  - Org 3 (Restaurante Sur)    → BD: rest_sur      → ID_compania: 300
+  - Org 1 "RXY Centro" (BD: rest_centro) 
+    → Tiene sucursales: 1, 2, 3
+    → Juan solo debe ver: 1, 2 (NO la 3)
+  
+  - Org 2 "RXY Norte" (BD: rest_norte)
+    → Tiene sucursales: 4, 5
+    → Juan solo debe ver: 4 (NO la 5)
 
-<strong>Problema:</strong>
-  Al consultar Sales_Header_Imp en rest_centro
-  Juan ve TODAS las ventas, sin importar ID_compania
+<strong>Problema Actual:</strong>
+  Al seleccionar Org 1 y consultar Sales_Header_Imp
+  Juan ve ventas de TODAS las sucursales (1, 2, 3)
   
 <strong>Debería ver solo:</strong>
-  Ventas donde ID_compania = 100 (sucursal actual)</code></pre>
+  Ventas de sucursales 1 y 2 (asignadas a él)</code></pre>
 </div>
 
 <h3>Flujo Incorrecto Actual</h3>
 
 <div class="code-card">
-<pre><code>1. Usuario tiene 3 organizaciones
-   └─> getCompanyIds() retorna [100, 200, 300]
+<pre><code>1. Usuario Juan selecciona Org 1 "RXY Centro"
+   └─> Sistema cambia a BD rest_centro
 
-2. Usuario cambia a BD de Org 1 (rest_centro)
-   └─> DB::useDatabase('rest_centro')
-
-3. Query: WHERE ID_compania IN (100, 200, 300)
-   └─> ❌ ERROR: IDs 200 y 300 NO existen en rest_centro
-   └─> Solo existe ID_compania = 100 en esta BD</code></pre>
+2. Query sin filtrado adecuado:
+   SalesHeaderImp::all()
+   └─> Retorna: TODAS las ventas (ID_compania: 1, 2, 3)
+   
+3. ❌ ERROR: Juan ve ventas de sucursal 3 (no asignada a él)</code></pre>
 </div>
 
 <h3>Flujo Correcto Propuesto</h3>
 
 <div class="success-box">
-<pre><code>1. Usuario tiene 3 organizaciones
-   └─> Organization::find(25) // Org actual
+<pre><code>1. Usuario Juan selecciona Org 1 "RXY Centro"
+   └─> Sistema cambia a BD rest_centro
+   └─> Sistema obtiene sucursales asignadas: [1, 2]
 
-2. Obtener ID_compania de la organización actual
-   └─> Organization->id_empresa = 100
-
-3. Usuario cambia a BD de Org 1
-   └─> DB::useDatabase('rest_centro')
-
-4. Query: WHERE ID_compania = 100
-   └─> ✅ CORRECTO: Solo datos de esa sucursal</code></pre>
+2. Query con filtrado automático:
+   SalesHeaderImp::all()
+   └─> WHERE ID_compania IN (1, 2)
+   
+3. ✅ CORRECTO: Juan solo ve ventas de sus sucursales asignadas</code></pre>
 </div>
 
-<h2>⭐ Solución Recomendada</h2>
+<h2>⭐ Soluciones Propuestas</h2>
+
+<h3>Opción 1: Tabla Intermedia user_branches (RECOMENDADA)</h3>
 
 <div class="success-box">
-<h3>Concepto Central</h3>
+<h4>Ventajas:</h4>
 <ul>
-<li>NO necesitamos tabla intermedia usuario-sucursal</li>
-<li>1 Organización = 1 Sucursal (<code>CompanySession.ID_compania</code>)</li>
-<li>Filtrar por el <code>ID_compania</code> de la organización actual del usuario</li>
+<li>Control granular: asignar sucursales específicas por organización</li>
+<li>Flexible: Juan puede ver sucursales 1,2 de Org1 y solo 4 de Org2</li>
+<li>Escalable: fácil agregar/quitar sucursales</li>
+<li>Auditable: registrar quién tiene acceso a qué</li>
 </ul>
 </div>
 
-<h3>1️⃣ Modificar OrganizationService</h3>
+<div class="code-card">
+<h4>1. Crear tabla intermedia:</h4>
+<pre><code>php artisan make:migration create_user_branches_table
+
+// Migration
+Schema::create('user_branches', function (Blueprint $table) {
+    $table->id();
+    $table->unsignedBigInteger('user_id');
+    $table->unsignedBigInteger('organization_id');
+    $table->integer('branch_id'); // ID_compania
+    $table->timestamps();
+    
+    $table->foreign('user_id')->references('id')->on('users');
+    $table->foreign('organization_id')->references('id')->on('organizations');
+    
+    // Índice único: un usuario no puede tener la misma sucursal duplicada
+    $table->unique(['user_id', 'organization_id', 'branch_id']);
+});</code></pre>
+</div>
 
 <div class="code-card">
+<h4>2. Modificar OrganizationService:</h4>
 <pre><code>// app/Services/OrganizationService.php
 
 /**
- * Obtiene el ID_compania de la organización actual
- * Una organización = una sucursal
- * 
- * @return int|null
- */
-public function getCurrentCompanyId(): ?int
-{
-    $organization = $this->getOrganization();
-    
-    if (!$organization) {
-        return null;
-    }
-    
-    // Retornar id_empresa que es el ID_compania de CompanySession
-    return $organization->id_empresa;
-}
-
-/**
- * Obtiene todos los ID_compania de las organizaciones del usuario
- * Útil para reportes consolidados
+ * Obtiene los ID_compania (sucursales) asignados al usuario
+ * en la organización actual
  * 
  * @return array
  */
-public function getAllCompanyIds(): array
+public function getUserBranchIds(): array
 {
-    $this->setDefaultConnection();
+    $organization = $this->getOrganization();
     $user = auth()->user();
     
-    if (!$user) {
+    if (!$organization || !$user) {
         return [];
     }
     
-    return $user->organizations()
-        ->pluck('id_empresa')
-        ->filter()
-        ->unique()
-        ->values()
+    return DB::table('user_branches')
+        ->where('user_id', $user->id)
+        ->where('organization_id', $organization->id)
+        ->pluck('branch_id')
         ->toArray();
+}
+
+/**
+ * Verifica si el usuario tiene acceso a una sucursal específica
+ * 
+ * @param int $branchId
+ * @return bool
+ */
+public function hasAccessToBranch(int $branchId): bool
+{
+    $allowedBranches = $this->getUserBranchIds();
+    return in_array($branchId, $allowedBranches);
 }</code></pre>
 </div>
 
-<h3>2️⃣ Crear Global Scope Reutilizable</h3>
-
 <div class="code-card">
-<pre><code>// app/Models/Scopes/CompanyIdFilterScope.php
+<h4>3. Crear Global Scope:</h4>
+<pre><code>// app/Models/Scopes/BranchFilterScope.php
 
 namespace App\Models\Scopes;
 
@@ -516,111 +608,50 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Scope;
 
-class CompanyIdFilterScope implements Scope
+class BranchFilterScope implements Scope
 {
     /**
-     * Filtra automáticamente por ID_compania de la organización actual
-     * Solo aplica cuando hay usuario autenticado
+     * Filtra automáticamente por sucursales asignadas al usuario
      */
     public function apply(Builder $builder, Model $model)
     {
-        // Solo aplicar si hay usuario autenticado
         if (!auth()->check()) {
             return;
         }
         
-        // Obtener ID_compania de la organización actual
         $organizationService = app(\App\Contracts\OrganizationServiceContract::class);
-        $companyId = $organizationService->getCurrentCompanyId();
+        $branchIds = $organizationService->getUserBranchIds();
         
-        if ($companyId) {
-            $builder->where('ID_compania', $companyId);
+        if (!empty($branchIds)) {
+            $builder->whereIn('ID_compania', $branchIds);
         }
     }
 }</code></pre>
 </div>
 
-<h3>3️⃣ Aplicar Scope a Modelos</h3>
-
 <div class="code-card">
+<h4>4. Aplicar a modelos:</h4>
 <pre><code>// app/Models/SalesHeaderImp.php
 
-namespace App\Models;
-
-use App\Models\Scopes\CompanyIdFilterScope;
-use Illuminate\Database\Eloquent\Model;
+use App\Models\Scopes\BranchFilterScope;
 
 class SalesHeaderImp extends Model
 {
-    protected $table = 'Sales_Header_Imp';
-    
-    protected $fillable = [
-        'ID_compania',
-        'InvoiceNumber',
-        'CustomerID',
-        // ... otros campos
-    ];
-    
-    /**
-     * Bootstrap del modelo
-     */
     protected static function booted()
     {
-        // Aplicar filtrado automático por ID_compania
-        static::addGlobalScope(new CompanyIdFilterScope);
+        static::addGlobalScope(new BranchFilterScope);
     }
 }</code></pre>
 </div>
 
-<h3>4️⃣ Casos Especiales: Reportes Consolidados</h3>
+<h3>Opción 2: Campo JSON en user_organizations</h3>
 
-<div class="code-card">
-<p><strong>Problema:</strong> Algunos reportes necesitan ver TODAS las sucursales</p>
+<div class="info-box">
+<h4>Alternativa más simple (menos recomendada):</h4>
+<p>Agregar campo <code>branch_ids</code> (JSON) en tabla <code>user_organizations</code></p>
 
-<pre><code>// Desactivar scope globalmente
-SalesHeaderImp::withoutGlobalScope(CompanyIdFilterScope::class)
-    ->whereIn('ID_compania', $allCompanyIds)
-    ->get();
-
-// O crear método en el modelo
-class SalesHeaderImp extends Model
-{
-    public function scopeAllBranches(Builder $query)
-    {
-        return $query->withoutGlobalScope(CompanyIdFilterScope::class);
-    }
-}
-
-// Uso:
-SalesHeaderImp::allBranches()->get();</code></pre>
-</div>
-
-<h3>5️⃣ Jobs Asíncronos</h3>
-
-<div class="code-card">
-<p><strong>Problema:</strong> Jobs no tienen <code>auth()->user()</code></p>
-
-<pre><code>// En Jobs, deshabilitar scope y filtrar manualmente
-class ProcessSalesJob implements ShouldQueue
-{
-    protected $organizationId;
-    
-    public function handle()
-    {
-        $organization = Organization::find($this->organizationId);
-        $companyId = $organization->id_empresa;
-        
-        // Cambiar a BD de la organización
-        DB::connection()->useDatabase($organization->database);
-        
-        // Query sin scope, filtrado manual
-        $sales = SalesHeaderImp::withoutGlobalScopes()
-            ->where('ID_compania', $companyId)
-            ->get();
-        
-        // Procesar...
-    }
-}</code></pre>
+<p><strong>Ventajas:</strong> No requiere nueva tabla<br>
+<strong>Desventajas:</strong> Menos flexible, más difícil de consultar/auditar</p>
 </div>
 
 <h2>Plan de Implementación</h2>
@@ -628,91 +659,206 @@ class ProcessSalesJob implements ShouldQueue
 <div class="phase-card">
 <h3>Fase 1: Preparación (1-2 días)</h3>
 
-<p><strong>1.1 Crear Scope Base</strong></p>
-<pre><code>php artisan make:scope CompanyIdFilterScope</code></pre>
+<p><strong>1.1 Crear infraestructura</strong></p>
+<pre><code>php artisan make:migration create_user_branches_table
+php artisan make:scope BranchFilterScope
+php artisan make:seeder UserBranchesSeeder</code></pre>
 
 <p><strong>1.2 Modificar OrganizationService</strong></p>
 <ul>
-<li>Agregar <code>getCurrentCompanyId()</code></li>
-<li>Agregar <code>getAllCompanyIds()</code></li>
-<li>Deprecar <code>getCompanyIds()</code> (mantener por compatibilidad)</li>
+<li>Agregar <code>getUserBranchIds()</code></li>
+<li>Agregar <code>hasAccessToBranch()</code></li>
+<li>Agregar <code>getAllUserBranchIds()</code> (para reportes consolidados)</li>
 </ul>
 
-<p><strong>1.3 Testing de Scope</strong></p>
-<pre><code>// tests/Unit/CompanyIdFilterScopeTest.php
-test('filters by current organization company_id', function () {
-    $user = User::factory()->create();
-    $org = Organization::factory()->create(['id_empresa' => 100]);
-    $user->organizations()->attach($org->id);
-    
-    $this->actingAs($user);
-    
-    SalesHeaderImp::factory()->create(['ID_compania' => 100]);
-    SalesHeaderImp::factory()->create(['ID_compania' => 200]);
-    
-    $sales = SalesHeaderImp::all();
-    
-    expect($sales)->toHaveCount(1);
-    expect($sales->first()->ID_compania)->toBe(100);
-});</code></pre>
+<p><strong>1.3 Crear interfaz de administración</strong></p>
+<ul>
+<li>CRUD para asignar sucursales a usuarios</li>
+<li>UI en panel de administración</li>
+</ul>
 </div>
 
 <div class="phase-card">
 <h3>Fase 2: Implementación Progresiva (3-5 días)</h3>
 
-<p><strong>2.1 Modelos de Alta Prioridad</strong></p>
+<p><strong>2.1 Modelos de Alta Prioridad (Transacciones)</strong></p>
 <ol>
-<li><code>SalesHeaderImp</code> y <code>SalesDetailImp</code></li>
-<li><code>CustomerReceiptHeaderImp</code> y <code>CustomerReceiptDetailImp</code></li>
+<li><code>SalesHeaderImp</code>, <code>SalesDetailImp</code></li>
+<li><code>PurchaseHeaderImp</code>, <code>PurchaseDetailImp</code></li>
 <li><code>FeHeader</code>, <code>FeDetail</code>, <code>FePayment</code></li>
+<li><code>CustomerReceiptHeaderImp</code>, <code>CustomerReceiptDetailImp</code></li>
+<li><code>VendorPaymentHeaderImp</code>, <code>VendorPaymentDetailImp</code></li>
 </ol>
 
 <p><strong>2.2 Actualizar Modelos Existentes</strong></p>
 <ul>
-<li>Cambiar de <code>whereIn('ID_compania', $companiesIds)</code></li>
-<li>A <code>CompanyIdFilterScope</code> automático</li>
+<li>Reemplazar <code>whereIn('ID_compania', $companiesIds)</code></li>
+<li>Con <code>BranchFilterScope</code> automático</li>
 </ul>
 
-<p><strong>2.3 Testing por Módulo</strong></p>
+<p><strong>2.3 Testing Exhaustivo</strong></p>
+<pre><code>// tests/Feature/BranchFilterTest.php
+test('user only sees assigned branches', function () {
+    $user = User::factory()->create();
+    $org = Organization::factory()->create();
+    
+    // Asignar sucursales 1 y 2
+    DB::table('user_branches')->insert([
+        ['user_id' => $user->id, 'organization_id' => $org->id, 'branch_id' => 1],
+        ['user_id' => $user->id, 'organization_id' => $org->id, 'branch_id' => 2],
+    ]);
+    
+    // Crear ventas para 3 sucursales
+    SalesHeaderImp::factory()->create(['ID_compania' => 1]);
+    SalesHeaderImp::factory()->create(['ID_compania' => 2]);
+    SalesHeaderImp::factory()->create(['ID_compania' => 3]);
+    
+    $this->actingAs($user);
+    $sales = SalesHeaderImp::all();
+    
+    expect($sales)->toHaveCount(2);
+    expect($sales->pluck('ID_compania')->toArray())->toBe([1, 2]);
+});</code></pre>
+</div>
+
+<div class="phase-card">
+<h3>Fase 3: Migración de Datos (2-3 días)</h3>
+
+<p><strong>3.1 Analizar asignaciones actuales</strong></p>
 <ul>
-<li>Facturación Electrónica</li>
-<li>Ventas e Inventario</li>
-<li>Reportes</li>
+<li>¿Qué usuarios tienen acceso a qué organizaciones?</li>
+<li>¿Necesitan acceso a TODAS las sucursales o solo algunas?</li>
+</ul>
+
+<p><strong>3.2 Seeder de migración</strong></p>
+<pre><code>// database/seeders/MigrateUserBranchesSeeder.php
+
+// Por defecto: dar acceso a TODAS las sucursales de sus organizaciones
+foreach ($users as $user) {
+    foreach ($user->organizations as $org) {
+        // Obtener todas las sucursales de esta organización
+        $branches = DB::connection($org->database)
+            ->table('CompanySession')
+            ->pluck('ID_compania');
+        
+        foreach ($branches as $branchId) {
+            DB::table('user_branches')->insert([
+                'user_id' => $user->id,
+                'organization_id' => $org->id,
+                'branch_id' => $branchId,
+            ]);
+        }
+    }
+}</code></pre>
+
+<p><strong>3.3 Verificación post-migración</strong></p>
+<ul>
+<li>Reportes de asignaciones</li>
+<li>Testing con usuarios reales</li>
 </ul>
 </div>
 
 <div class="phase-card">
-<h3>Fase 3: Migración y Despliegue (2-3 días)</h3>
+<h3>Fase 4: Deploy y Monitoreo (1-2 días)</h3>
 
-<p><strong>3.1 Verificación de Jobs</strong></p>
+<p><strong>4.1 Deploy gradual</strong></p>
+<pre><code># 1. Staging: Deploy completo
+# 2. Testing intensivo con usuarios piloto
+# 3. Producción: Deploy por módulos
+#    - Día 1: Facturación electrónica
+#    - Día 2: Ventas y compras
+#    - Día 3: Reportes</code></pre>
+
+<p><strong>4.2 Monitoreo</strong></p>
 <ul>
-<li>Identificar jobs que usan modelos con scope</li>
-<li>Agregar <code>withoutGlobalScope()</code> donde sea necesario</li>
+<li>Logs de queries con filtrado</li>
+<li>Métricas de performance</li>
+<li>Feedback de usuarios</li>
 </ul>
-
-<p><strong>3.2 Actualizar Reportes</strong></p>
-<ul>
-<li>Identificar reportes consolidados</li>
-<li>Implementar <code>allBranches()</code> scope</li>
-</ul>
-
-<p><strong>3.3 Deploy Gradual</strong></p>
-<pre><code># 1. Deploy en staging
-# 2. Testing completo con organizaciones multi-sucursal
-# 3. Deploy en producción por módulos
-# 4. Monitoreo de logs</code></pre>
 </div>
 
-<div class="phase-card">
-<h3>Fase 4: Documentación (1 día)</h3>
+<h2>Casos de Uso Específicos</h2>
 
-<p><strong>4.1 Actualizar Copilot Instructions</strong></p>
+<h3>Caso 1: Usuario con 1 Organización, Múltiples Sucursales</h3>
 
-<p><strong>4.2 Crear Migration Guide</strong></p>
-<ul>
-<li>Para desarrolladores que agreguen nuevos modelos</li>
-<li>Checklist de validación</li>
-</ul>
+<div class="code-card">
+<pre><code>User: María
+Organizaciones: 1
+  └─> Org: "RXY Regional Centro" (BD: rest_centro)
+        ├─> Sucursal 1: Local Centro (ID_compania: 1)
+        ├─> Sucursal 2: Local Plaza (ID_compania: 2)
+        └─> Sucursal 3: Local Mall (ID_compania: 3)
+
+María tiene asignadas: sucursales 1 y 2 (NO la 3)
+
+// Todas las queries automáticamente filtran por sucursales asignadas
+SalesHeaderImp::all(); // WHERE ID_compania IN (1, 2)
+CustomersImp::all();   // WHERE ID_compania IN (1, 2)
+
+// María NO ve datos de sucursal 3</code></pre>
+</div>
+
+<h3>Caso 2: Usuario con Múltiples Organizaciones y Sucursales Selectivas</h3>
+
+<div class="code-card">
+<pre><code>User: Juan
+Organizaciones: 2
+  ├─> Org 1: "RXY Regional Centro" (BD: rest_centro)
+  │     ├─> Sucursales disponibles: 1, 2, 3
+  │     └─> Asignadas a Juan: 1, 2 (NO la 3)
+  │
+  └─> Org 2: "RXY Regional Norte" (BD: rest_norte)
+        ├─> Sucursales disponibles: 4, 5, 6
+        └─> Asignadas a Juan: 4 (NO 5 ni 6)
+
+// Juan selecciona Org 1 en el header
+Session::put('organization_id', org1_id);
+
+// Sistema cambia a BD rest_centro
+DB::connection()->useDatabase('rest_centro');
+
+// Queries filtran por sucursales asignadas en esa org
+SalesHeaderImp::all(); // WHERE ID_compania IN (1, 2)
+// Solo ve ventas de sucursales 1 y 2, NO la 3
+
+// Juan selecciona Org 2
+Session::put('organization_id', org2_id);
+DB::connection()->useDatabase('rest_norte');
+
+// Ahora filtra por sucursales de Org 2
+SalesHeaderImp::all(); // WHERE ID_compania IN (4)
+// Solo ve ventas de sucursal 4, NO 5 ni 6</code></pre>
+</div>
+
+<h3>Caso 3: Reporte Consolidado Multi-Organización</h3>
+
+<div class="code-card">
+<pre><code>// Supervisor necesita ver consolidado de múltiples organizaciones
+// Cada organización tiene múltiples sucursales
+
+$totalSales = 0;
+$salesByBranch = [];
+
+foreach ($user->organizations as $org) {
+    DB::connection()->useDatabase($org->database);
+    
+    // Obtener sucursales asignadas para esta organización
+    $branchIds = $organizationService->getUserBranchIdsForOrg($org->id);
+    
+    $sales = SalesHeaderImp::withoutGlobalScope(BranchFilterScope::class)
+        ->whereIn('ID_compania', $branchIds)
+        ->get();
+    
+    foreach ($sales as $sale) {
+        $salesByBranch[$sale->ID_compania] = ($salesByBranch[$sale->ID_compania] ?? 0) + $sale->Net_due;
+        $totalSales += $sale->Net_due;
+    }
+}
+
+return [
+    'total' => $totalSales,
+    'by_branch' => $salesByBranch
+];</code></pre>
 </div>
 
 <h2>Ventajas de Esta Solución</h2>
@@ -720,19 +866,19 @@ test('filters by current organization company_id', function () {
 <div class="stats-grid">
 <div class="stat-card">
 <h4>✅</h4>
-<p><strong>Simplicidad</strong><br>No requiere tabla intermedia<br>Usa relaciones existentes</p>
+<p><strong>Control Granular</strong><br>Asignación específica por sucursal y organización</p>
 </div>
 <div class="stat-card">
 <h4>✅</h4>
-<p><strong>Seguridad</strong><br>Filtrado automático<br>Imposible olvidar filtrar</p>
+<p><strong>Seguridad</strong><br>Filtrado automático<br>Imposible olvidar</p>
 </div>
 <div class="stat-card">
 <h4>✅</h4>
-<p><strong>Performance</strong><br>Un solo filtro<br>Queries 2-3x más rápidos</p>
+<p><strong>Flexibilidad</strong><br>Diferentes permisos por usuario</p>
 </div>
 <div class="stat-card">
 <h4>✅</h4>
-<p><strong>Mantenibilidad</strong><br>Comportamiento consistente<br>Fácil de testear</p>
+<p><strong>Auditoría</strong><br>Registro completo de accesos</p>
 </div>
 </div>
 
@@ -749,19 +895,19 @@ test('filters by current organization company_id', function () {
 <tbody>
 <tr>
 <td><strong>Seguridad</strong></td>
-<td>✅ 0 queries sin filtro ID_compania<br>✅ Auditoría completa de accesos</td>
+<td>✅ 0 accesos no autorizados a sucursales<br>✅ Auditoría completa de permisos</td>
 </tr>
 <tr>
 <td><strong>Performance</strong></td>
-<td>✅ Reducción de 60-80% en filas retornadas<br>✅ Queries 2-3x más rápidos</td>
+<td>✅ Reducción de 40-70% en filas retornadas<br>✅ Queries más eficientes</td>
 </tr>
 <tr>
-<td><strong>Calidad</strong></td>
-<td>✅ 100% cobertura de tests en modelos críticos<br>✅ 0 bugs relacionados con datos cruzados</td>
+<td><strong>Usabilidad</strong></td>
+<td>✅ Interfaz intuitiva para asignación<br>✅ 0 quejas de usuarios por datos incorrectos</td>
 </tr>
 <tr>
 <td><strong>Desarrollo</strong></td>
-<td>✅ 43 modelos con scope implementado<br>✅ Documentación actualizada</td>
+<td>✅ 43 modelos con scope implementado<br>✅ Documentación completa actualizada</td>
 </tr>
 </tbody>
 </table>
@@ -770,31 +916,34 @@ test('filters by current organization company_id', function () {
 <h2>Conclusión</h2>
 
 <div class="success-box">
-<p><strong>El sistema actual tiene la infraestructura correcta:</strong></p>
+<p><strong>Arquitectura Correcta Identificada:</strong></p>
 <ul>
-<li>✅ 1 Organización = 1 Sucursal (ID_compania)</li>
-<li>✅ Relación Organization → Companysession ya existe</li>
-<li>✅ Columna ID_compania en 43+ tablas</li>
+<li>✅ 1 Empresa Matriz = N Organizaciones</li>
+<li>✅ 1 Organización (BD propia) = N Sucursales (ID_compania)</li>
+<li>✅ Usuario necesita asignación granular de sucursales</li>
 </ul>
 
-<p><strong>Solo necesitamos:</strong></p>
+<p><strong>Solución Recomendada:</strong></p>
 <ol>
-<li>Implementar <code>CompanyIdFilterScope</code> global</li>
-<li>Aplicarlo a todos los modelos</li>
-<li>Filtrar automáticamente por organización actual</li>
+<li>Crear tabla <code>user_branches</code> para asignación granular</li>
+<li>Implementar <code>BranchFilterScope</code> global</li>
+<li>Aplicarlo a los 43 modelos con <code>ID_compania</code></li>
+<li>Migrar asignaciones existentes (por defecto: todas las sucursales)</li>
+<li>Desplegar gradualmente con monitoreo</li>
 </ol>
 
-<p><strong>NO necesitamos:</strong></p>
+<p><strong>Impacto Esperado:</strong></p>
 <ul>
-<li>❌ Tabla intermedia usuario-sucursal</li>
-<li>❌ Columnas JSON adicionales</li>
-<li>❌ Cambios estructurales en BD</li>
+<li>🔒 Mayor seguridad y control de acceso</li>
+<li>⚡ Mejor performance (menos datos procesados)</li>
+<li>👥 Gestión flexible de permisos por usuario</li>
+<li>📊 Auditoría completa de accesos</li>
 </ul>
 </div>
 
 <div class="alert-box" style="text-align: center;">
-<h3 style="margin-top: 0;">Impacto: Bajo riesgo, alta recompensa 🎯</h3>
-<p>Implementación estimada: <strong>6-10 días</strong></p>
+<h3 style="margin-top: 0;">Implementación Total: 7-12 días 🎯</h3>
+<p><strong>Fase 1:</strong> 1-2 días | <strong>Fase 2:</strong> 3-5 días | <strong>Fase 3:</strong> 2-3 días | <strong>Fase 4:</strong> 1-2 días</p>
 </div>
 
 </div>
