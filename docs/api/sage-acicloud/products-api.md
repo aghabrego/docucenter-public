@@ -209,6 +209,140 @@ GET /api/acicloud/products?filter[description][operator]=contains&filter[descrip
 
 ---
 
+## Consultar Producto Específico
+
+**Endpoint:** `GET /api/acicloud/product_imp/{identifier}`  
+**Autenticación:** Bearer Token requerido  
+**Middleware:** `check.activate.organization`
+
+Obtiene los detalles de un producto específico por su identificador.
+
+### Parámetros de URL
+
+| Campo | Tipo | Descripción |
+|-------|------|-------------|
+| `identifier` | string | ProductID o ID interno del producto |
+
+### Ejemplo de Request
+
+```bash
+GET /api/acicloud/product_imp/PROD001
+```
+
+### Respuesta de Éxito
+
+```json
+{
+  "success": true,
+  "data": {
+    "id": 1,
+    "ProductID": "PROD001",
+    "Description": "Laptop Dell Inspiron 15",
+    "QtyOnHand": "50.00000",
+    "Price1": "899.99",
+    "Price2": "850.00",
+    "Price3": "800.00",
+    "ItemType": "physical",
+    "Location": "Almacén Principal",
+    "Weight": "2.5000",
+    "SalesDescription": "Laptop Dell Inspiron 15, 8GB RAM, 256GB SSD",
+    "PartNumber": "DELL-INS15-001",
+    "sage_id": "SAGE_PROD_001",
+    "import_status": "completed",
+    "created_at": "2025-01-29 21:30:00",
+    "updated_at": "2025-01-29 21:30:00"
+  }
+}
+```
+
+### Respuesta de Error
+
+```json
+{
+  "success": false,
+  "message": "Producto no encontrado"
+}
+```
+
+---
+
+## Actualizar Producto
+
+**Endpoint:** `PUT /api/acicloud/product_imp/{id}`  
+**Autenticación:** Bearer Token requerido  
+**Middleware:** `check.activate.organization`
+
+Actualiza los datos de un producto existente.
+
+### Parámetros de URL
+
+| Campo | Tipo | Descripción |
+|-------|------|-------------|
+| `id` | integer | ID interno del producto |
+
+### Parámetros de Request
+
+Todos los campos son opcionales. Solo se actualizarán los campos enviados.
+
+| Campo | Tipo | Descripción | Validación |
+|-------|------|-------------|------------|
+| `ProductID` | string | Código único del producto | Máx. 20 caracteres |
+| `Description` | string | Descripción del producto | Máx. 40 caracteres |
+| `QtyOnHand` | numeric | Cantidad en inventario | Decimal (8,5) |
+| `Price1` | numeric | Precio nivel 1 | Decimal (8,4) |
+| `Price2` | numeric | Precio nivel 2 | Decimal (8,4) |
+| `Price3` | numeric | Precio nivel 3 | Decimal (8,4) |
+| `ItemType` | string | Tipo de ítem | physical/service/non-inventory |
+| `Location` | string | Ubicación | Máx. 15 caracteres |
+| `Weight` | numeric | Peso del producto | Decimal (8,4) |
+| `SalesDescription` | string | Descripción de ventas | - |
+| `PartNumber` | string | Número de parte | Máx. 30 caracteres |
+
+### Ejemplo de Request
+
+```json
+{
+  "Description": "Laptop Dell Inspiron 15 - Actualizada",
+  "Price1": "949.99",
+  "QtyOnHand": "75.00000",
+  "SalesDescription": "Laptop Dell Inspiron 15, 16GB RAM, 512GB SSD"
+}
+```
+
+### Respuesta de Éxito
+
+```json
+{
+  "success": true,
+  "message": "Producto actualizado exitosamente",
+  "data": {
+    "id": 1,
+    "ProductID": "PROD001",
+    "Description": "Laptop Dell Inspiron 15 - Actualizada",
+    "Price1": "949.99",
+    "QtyOnHand": "75.00000",
+    "SalesDescription": "Laptop Dell Inspiron 15, 16GB RAM, 512GB SSD",
+    "updated_at": "2025-01-16 10:00:00"
+  }
+}
+```
+
+### Respuesta de Error
+
+```json
+{
+  "success": false,
+  "message": "Error al actualizar producto",
+  "errors": {
+    "Price1": [
+      "El precio debe ser un valor numérico válido"
+    ]
+  }
+}
+```
+
+---
+
 ## Obtener Productos Importados
 
 **Endpoint:** `GET /api/acicloud/products_imp`  
