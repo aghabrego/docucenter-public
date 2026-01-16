@@ -1,0 +1,3027 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentación técnica y de usuario de DocuCenter - Sistema de facturación electrónica">
+      
+      
+        <meta name="author" content="aghabrego">
+      
+      
+        <link rel="canonical" href="https://aghabrego.github.io/docucenter/technical/configuracion-swap-debian-produccion/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="https://home.apconpanama.me/wp-content/uploads/2024/03/logo3.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Configuración de Memoria Swap en Debian 11 (Producción) - DocuCenter</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="light-blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#configuracion-de-memoria-swap-en-debian-11-produccion" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="DocuCenter" class="md-header__button md-logo" aria-label="DocuCenter" data-md-component="logo">
+      
+  <img src="https://home.apconpanama.me/wp-content/uploads/2024/03/logo3.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            DocuCenter
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Configuración de Memoria Swap en Debian 11 (Producción)
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="light-blue"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/aghabrego/docucenter" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    aghabrego/docucenter
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Pestañas" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Inicio
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../api/" class="md-tabs__link">
+          
+  
+  
+  APIs
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../optimizations/" class="md-tabs__link">
+          
+  
+  
+  Optimizaciones
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../README.md" class="md-tabs__link">
+          
+  
+  
+  Documentación Técnica
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../validations/" class="md-tabs__link">
+          
+  
+  
+  Validaciones
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="DocuCenter" class="md-nav__button md-logo" aria-label="DocuCenter" data-md-component="logo">
+      
+  <img src="https://home.apconpanama.me/wp-content/uploads/2024/03/logo3.png" alt="logo">
+
+    </a>
+    DocuCenter
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/aghabrego/docucenter" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    aghabrego/docucenter
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    APIs
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    APIs
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    APIs de DocuCenter
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Facturación Electrónica (FE)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Facturación Electrónica (FE)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/fe-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Facturación Electrónica (FE) - DocuCenter
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/acicloud-fe-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Facturación Electrónica - Integración ACICloud FE
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/document-emission-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Facturación Electrónica - Emisión de Documentos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/shopify-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Facturación Electrónica - Integración Shopify
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/lightspeed-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Facturación Electrónica - Integración Lightspeed
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/maxgym-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Facturación Electrónica - Integración Maxgym
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/meypar-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Facturación Electrónica - Integración Meypar
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/kart21-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Facturación Electrónica - Integración Kart21
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sage ACICloud
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Sage ACICloud
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/customers-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Sage ACICloud - Módulo Clientes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/products-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Productos - Sage ACICloud
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/sales-orders-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Sage ACICloud - Módulo Órdenes de Venta
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/purchases-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Compras - Sage ACICloud
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/payments-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Pagos y Créditos - Sage ACICloud
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/inventory-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Inventario - Sage ACICloud
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/jobs-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Trabajos/Jobs - Sage ACICloud
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Organizaciones
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Organizaciones
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/organizations/organizations-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API de Organizaciones
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Optimizaciones
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Optimizaciones
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optimizations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Optimizaciones - DocuCenter
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Performance
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Performance
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optimizations/customer-supplier-optimizations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Optimizaciones para el manejo de muchos clientes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optimizations/mysql-optimization-circuit-breaker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Optimización MySQL 8.0 y Circuit Breaker para DocuCenter
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Documentación Técnica
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Documentación Técnica
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../README.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    None
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pagos y Cálculos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Pagos y Cálculos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../payment-calculation-fix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Análisis de Discrepancias en Cálculo de Pagos - Facturación Electrónica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../solucion-sincronizacion-pagos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Solución Final: Sincronización Completa de Pagos en Facturación Electrónica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validaciones
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Validaciones
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../validations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validaciones - DocuCenter
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Documentos Fiscales
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Documentos Fiscales
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../validations/createSale-ruc-validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validación de RUC en CreateSaleMaxgymRequest
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../validations/maxgym-ruc-validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validación de RUC en MaxgymService
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#estado-actualizado-swap-8gb-configurado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ✅ ESTADO ACTUALIZADO - SWAP 8GB CONFIGURADO
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#problema-identificado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Problema Identificado
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#estado-verificado-del-sistema-de-produccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Estado Verificado del Sistema de Producción
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisitos-preparacion-del-servidor-de-produccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prerequisitos: Preparación del Servidor de Producción
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#solucion-configuracion-de-memoria-swap-en-servidor-de-produccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Solución: Configuración de Memoria Swap en Servidor de Producción
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Solución: Configuración de Memoria Swap en Servidor de Producción">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#paso-1-verificacion-inicial-del-sistema-servidor-de-produccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 1: Verificación Inicial del Sistema (Servidor de Producción)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-2-crear-archivo-swap-2gb-recomendado-para-servidor-4gb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 2: Crear Archivo Swap (2GB Recomendado para Servidor 4GB)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-3-configurar-permisos-de-seguridad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 3: Configurar Permisos de Seguridad
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-4-activar-el-archivo-swap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 4: Activar el Archivo Swap
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-5-hacer-configuracion-permanente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 5: Hacer Configuración Permanente
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#optimizacion-de-configuracion-swap-para-produccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Optimización de Configuración Swap para Producción
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Optimización de Configuración Swap para Producción">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configurar-swappiness-critico-para-servidores" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configurar Swappiness (Crítico para Servidores)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configurar-cache-pressure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configurar Cache Pressure
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configurar-dirty-ratio-optimizacion-de-io" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configurar Dirty Ratio (Optimización de I/O)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuracion-mysqlmariadb-para-memoria-optimizada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuración MySQL/MariaDB para Memoria Optimizada
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuración MySQL/MariaDB para Memoria Optimizada">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#optimizar-configuracion-de-base-de-datos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Optimizar Configuración de Base de Datos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reiniciar-servicios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reiniciar Servicios
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#monitoreo-y-validacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Monitoreo y Validación
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Monitoreo y Validación">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#script-de-monitoreo-de-memoria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Script de Monitoreo de Memoria
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configurar-monitoreo-automatico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configurar Monitoreo Automático
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#script-de-validacion-post-instalacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Script de Validación Post-Instalación
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#validacion-de-la-solucion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validación de la Solución
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Validación de la Solución">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ejecutar-validacion-completa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejecutar Validación Completa
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#verificacion-de-estado-optimo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Verificación de Estado Óptimo
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mantenimiento-y-monitoreo-continuo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mantenimiento y Monitoreo Continuo
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Mantenimiento y Monitoreo Continuo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#alertas-de-memoria-critica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alertas de Memoria Crítica
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rotacion-de-logs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rotación de Logs
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resultado-esperado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resultado Esperado
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#validacion-final-swap-8gb-implementado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ✅ Validación Final - Swap 8GB Implementado
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="✅ Validación Final - Swap 8GB Implementado">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#estado-del-sistema-despues-de-actualizacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Estado del Sistema Después de Actualización
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mejoras-confirmadas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mejoras Confirmadas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#caracteristicas-de-la-implementacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Características de la Implementación
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validacion-de-funcionalidad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validación de Funcionalidad
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#plan-de-implementacion-rapida" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🚀 PLAN DE IMPLEMENTACIÓN RÁPIDA
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🚀 PLAN DE IMPLEMENTACIÓN RÁPIDA">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#implementacion-inmediata-5-minutos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implementación Inmediata (5 minutos)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#verificacion-de-exito" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Verificación de Éxito
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#proximo-paso-critico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Próximo Paso Crítico
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#actualizacion-segura-de-swap-2gb-8gb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔄 Actualización Segura de Swap (2GB → 8GB)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔄 Actualización Segura de Swap (2GB → 8GB)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#escenario-actualizar-swap-sin-reinicio-en-servidor-con-memoria-critica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Escenario: Actualizar Swap Sin Reinicio en Servidor con Memoria Crítica
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-1-verificar-estado-actual" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 1: Verificar Estado Actual
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-2-crear-nuevo-swap-de-8gb-sin-desactivar-el-actual" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 2: Crear Nuevo Swap de 8GB (Sin Desactivar el Actual)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-3-migrar-a-swap-unico-de-8gb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 3: Migrar a Swap Único de 8GB
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-4-validacion-final" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 4: Validación Final
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resultado-de-la-actualizacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resultado de la Actualización
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#notas-importantes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notas Importantes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comandos-de-verificacion-rapida" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comandos de Verificación Rápida
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#proximo-paso-critico-completado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Próximo Paso Crítico (COMPLETADO)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="configuracion-de-memoria-swap-en-debian-11-produccion">Configuración de Memoria Swap en Debian 11 (Producción)<a class="headerlink" href="#configuracion-de-memoria-swap-en-debian-11-produccion" title="Permanent link">&para;</a></h1>
+<h2 id="estado-actualizado-swap-8gb-configurado">✅ ESTADO ACTUALIZADO - SWAP 8GB CONFIGURADO<a class="headerlink" href="#estado-actualizado-swap-8gb-configurado" title="Permanent link">&para;</a></h2>
+<p><strong>Servidor</strong>: desarrollo@debian-s-1vcpu-2gb-amd-nyc1-01
+<strong>Memoria disponible</strong>: 287Mi de 3.8Gi total (mejora desde 108Mi)
+<strong>Memoria usada</strong>: 3.2Gi (84.2% de uso)
+<strong>Swap configurado</strong>: 8.0Gi (actualmente usando 1.1Gi)
+<strong>Archivo swap</strong>: /swapfile.new</p>
+<p><strong>ESTADO</strong>: Sistema estable con swap de 8GB operativo</p>
+<h2 id="problema-identificado">Problema Identificado<a class="headerlink" href="#problema-identificado" title="Permanent link">&para;</a></h2>
+<p><strong>Error</strong>: <code>SQLSTATE[HY000]: General error: 2006 MySQL server has gone away</code>
+<strong>Causa</strong>: Memoria insuficiente en servidor de producción (87% usado, solo 119MB libres)
+<strong>Contexto</strong>: Job <code>word:update-sql-server-module</code> ejecutándose diariamente a las 6 AM</p>
+<h2 id="estado-verificado-del-sistema-de-produccion">Estado Verificado del Sistema de Producción<a class="headerlink" href="#estado-verificado-del-sistema-de-produccion" title="Permanent link">&para;</a></h2>
+<p><strong>Información del servidor de producción</strong> (desarrollo@debian-s-1vcpu-2gb-amd-nyc1-01):</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Distribución confirmada</span>
+$<span class="w"> </span>lsb_release<span class="w"> </span>-a
+Distributor<span class="w"> </span>ID:<span class="w"> </span>Debian
+Description:<span class="w">    </span>Debian<span class="w"> </span>GNU/Linux<span class="w"> </span><span class="m">11</span><span class="w"> </span><span class="o">(</span>bullseye<span class="o">)</span>
+Release:<span class="w">        </span><span class="m">11</span>
+Codename:<span class="w">       </span>bullseye
+
+<span class="c1"># Estado crítico de memoria</span>
+$<span class="w"> </span>free<span class="w"> </span>-h
+<span class="w">               </span>total<span class="w">        </span>used<span class="w">        </span>free<span class="w">      </span>shared<span class="w">  </span>buff/cache<span class="w">   </span>available
+Mem:<span class="w">           </span><span class="m">3</span>.8Gi<span class="w">       </span><span class="m">3</span>.3Gi<span class="w">       </span>123Mi<span class="w">       </span>222Mi<span class="w">       </span>419Mi<span class="w">       </span>108Mi
+Swap:<span class="w">             </span>0B<span class="w">          </span>0B<span class="w">          </span>0B
+
+<span class="c1"># Confirmación: sin swap configurado</span>
+$<span class="w"> </span>cat<span class="w"> </span>/proc/swaps
+Filename<span class="w">                                </span>Type<span class="w">            </span>Size<span class="w">            </span>Used<span class="w">            </span>Priority
+<span class="o">(</span>vacío<span class="w"> </span>-<span class="w"> </span>sin<span class="w"> </span>swap<span class="w"> </span>configurado<span class="o">)</span>
+
+<span class="c1"># Comando swapon no disponible</span>
+$<span class="w"> </span>swapon<span class="w"> </span>--show
+-bash:<span class="w"> </span>swapon:<span class="w"> </span><span class="nb">command</span><span class="w"> </span>not<span class="w"> </span>found
+</code></pre></div>
+<p><strong>Estado CRÍTICO</strong>: Solo 108Mi disponibles de 3.8Gi total
+<strong>Problema Confirmado</strong>: Sin memoria swap configurada
+<strong>Impacto</strong>: Errores "MySQL server has gone away" durante jobs pesados como <code>word:update-sql-server-module</code></p>
+<h2 id="prerequisitos-preparacion-del-servidor-de-produccion">Prerequisitos: Preparación del Servidor de Producción<a class="headerlink" href="#prerequisitos-preparacion-del-servidor-de-produccion" title="Permanent link">&para;</a></h2>
+<p><strong>Servidor</strong>: desarrollo@debian-s-1vcpu-2gb-amd-nyc1-01
+<strong>Estado</strong>: <code>swapon</code> no disponible (comando no encontrado)</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 1. Conectar al servidor de producción</span>
+ssh<span class="w"> </span>desarrollo@debian-s-1vcpu-2gb-amd-nyc1-01
+
+<span class="c1"># 2. Verificar si util-linux está instalado</span>
+dpkg<span class="w"> </span>-l<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>util-linux
+
+<span class="c1"># 3. Instalar util-linux para obtener comandos swap</span>
+sudo<span class="w"> </span>apt<span class="w"> </span>update
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>util-linux
+
+<span class="c1"># 4. Verificar instalación exitosa</span>
+swapon<span class="w"> </span>--version
+</code></pre></div>
+<p><strong>Comandos de verificación</strong> que ya funcionan en el servidor:
+- <code>cat /proc/swaps</code> - Ver archivos swap activos ✅
+- <code>grep -i swap /proc/meminfo</code> - Ver información de swap ✅
+- <code>free -h</code> - Ver memoria total incluyendo swap ✅</p>
+<h2 id="solucion-configuracion-de-memoria-swap-en-servidor-de-produccion">Solución: Configuración de Memoria Swap en Servidor de Producción<a class="headerlink" href="#solucion-configuracion-de-memoria-swap-en-servidor-de-produccion" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p><strong>IMPORTANTE</strong>: Los siguientes comandos deben ejecutarse en el servidor de producción Debian 11, NO en el ambiente local de desarrollo.</p>
+</blockquote>
+<h3 id="paso-1-verificacion-inicial-del-sistema-servidor-de-produccion">Paso 1: Verificación Inicial del Sistema (Servidor de Producción)<a class="headerlink" href="#paso-1-verificacion-inicial-del-sistema-servidor-de-produccion" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Conectar al servidor de producción primero</span>
+<span class="c1"># ssh usuario@servidor-produccion</span>
+
+<span class="c1"># Verificar memoria actual en producción</span>
+free<span class="w"> </span>-h
+
+<span class="c1"># Verificar si hay swap configurado (método principal)</span>
+cat<span class="w"> </span>/proc/swaps
+
+<span class="c1"># Método alternativo si swapon no está disponible</span>
+grep<span class="w"> </span>-i<span class="w"> </span>swap<span class="w"> </span>/proc/meminfo
+
+<span class="c1"># Instalar util-linux si swapon no está disponible</span>
+sudo<span class="w"> </span>apt<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>util-linux
+
+<span class="c1"># Verificar espacio en disco disponible</span>
+df<span class="w"> </span>-h
+
+<span class="c1"># Verificar distribución</span>
+lsb_release<span class="w"> </span>-a
+</code></pre></div>
+<h3 id="paso-2-crear-archivo-swap-2gb-recomendado-para-servidor-4gb">Paso 2: Crear Archivo Swap (2GB Recomendado para Servidor 4GB)<a class="headerlink" href="#paso-2-crear-archivo-swap-2gb-recomendado-para-servidor-4gb" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Verificar espacio disponible en disco</span>
+df<span class="w"> </span>-h
+
+<span class="c1"># Crear archivo de 2GB para servidor de 4GB RAM (desarrollo@debian-s-1vcpu-2gb-amd-nyc1-01)</span>
+sudo<span class="w"> </span>fallocate<span class="w"> </span>-l<span class="w"> </span>2G<span class="w"> </span>/swapfile
+
+<span class="c1"># Verificar que se creó correctamente</span>
+ls<span class="w"> </span>-lh<span class="w"> </span>/swapfile
+</code></pre></div>
+<p><strong>Nota</strong>: Para el servidor actual con 3.8Gi RAM, 2GB swap es óptimo
+<strong>Alternativa</strong> si <code>fallocate</code> no está disponible:
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>dd<span class="w"> </span><span class="k">if</span><span class="o">=</span>/dev/zero<span class="w"> </span><span class="nv">of</span><span class="o">=</span>/swapfile<span class="w"> </span><span class="nv">bs</span><span class="o">=</span><span class="m">1024</span><span class="w"> </span><span class="nv">count</span><span class="o">=</span><span class="m">2097152</span>
+</code></pre></div></p>
+<h3 id="paso-3-configurar-permisos-de-seguridad">Paso 3: Configurar Permisos de Seguridad<a class="headerlink" href="#paso-3-configurar-permisos-de-seguridad" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Establecer permisos restrictivos (crítico para seguridad)</span>
+sudo<span class="w"> </span>chmod<span class="w"> </span><span class="m">600</span><span class="w"> </span>/swapfile
+
+<span class="c1"># Verificar permisos correctos</span>
+ls<span class="w"> </span>-lh<span class="w"> </span>/swapfile
+<span class="c1"># Debe mostrar: -rw------- 1 root root 2.0G</span>
+</code></pre></div>
+<h3 id="paso-4-activar-el-archivo-swap">Paso 4: Activar el Archivo Swap<a class="headerlink" href="#paso-4-activar-el-archivo-swap" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Marcar el archivo como área de swap</span>
+sudo<span class="w"> </span>mkswap<span class="w"> </span>/swapfile
+
+<span class="c1"># Activar el swap inmediatamente</span>
+sudo<span class="w"> </span>swapon<span class="w"> </span>/swapfile
+
+<span class="c1"># Verificar activación exitosa</span>
+<span class="c1"># Método principal (si swapon está disponible)</span>
+swapon<span class="w"> </span>--show
+
+<span class="c1"># Método alternativo de verificación</span>
+cat<span class="w"> </span>/proc/swaps
+free<span class="w"> </span>-h
+</code></pre></div>
+<p><strong>Resultado esperado</strong> (con <code>cat /proc/swaps</code>):
+<div class="highlight"><pre><span></span><code>Filename                Type        Size    Used    Priority
+/swapfile               file        2097148 0       -2
+</code></pre></div></p>
+<p><strong>O con <code>swapon --show</code></strong> (si está disponible):
+<div class="highlight"><pre><span></span><code>NAME      TYPE SIZE USED PRIO
+/swapfile file   2G   0B   -2
+</code></pre></div></p>
+<h3 id="paso-5-hacer-configuracion-permanente">Paso 5: Hacer Configuración Permanente<a class="headerlink" href="#paso-5-hacer-configuracion-permanente" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Respaldar archivo fstab actual</span>
+sudo<span class="w"> </span>cp<span class="w"> </span>/etc/fstab<span class="w"> </span>/etc/fstab.backup.<span class="k">$(</span>date<span class="w"> </span>+%Y%m%d<span class="k">)</span>
+
+<span class="c1"># Agregar entrada swap permanente</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;/swapfile none swap sw 0 0&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>-a<span class="w"> </span>/etc/fstab
+
+<span class="c1"># Verificar que se agregó correctamente</span>
+grep<span class="w"> </span>swap<span class="w"> </span>/etc/fstab
+</code></pre></div>
+<h2 id="optimizacion-de-configuracion-swap-para-produccion">Optimización de Configuración Swap para Producción<a class="headerlink" href="#optimizacion-de-configuracion-swap-para-produccion" title="Permanent link">&para;</a></h2>
+<h3 id="configurar-swappiness-critico-para-servidores">Configurar Swappiness (Crítico para Servidores)<a class="headerlink" href="#configurar-swappiness-critico-para-servidores" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Ver valor actual (por defecto 60)</span>
+cat<span class="w"> </span>/proc/sys/vm/swappiness
+
+<span class="c1"># Configurar valor óptimo para servidores de bases de datos (10-20)</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;vm.swappiness=15&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>-a<span class="w"> </span>/etc/sysctl.conf
+
+<span class="c1"># Aplicar configuración inmediatamente</span>
+sudo<span class="w"> </span>sysctl<span class="w"> </span>vm.swappiness<span class="o">=</span><span class="m">15</span>
+</code></pre></div>
+<p><strong>Valores recomendados</strong>:
+- <code>60</code> (default): Para desktops
+- <code>10-20</code>: Para servidores de bases de datos
+- <code>15</code>: Óptimo para DocuCenter con MySQL/MariaDB</p>
+<h3 id="configurar-cache-pressure">Configurar Cache Pressure<a class="headerlink" href="#configurar-cache-pressure" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Configurar para optimizar cache de archivos</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;vm.vfs_cache_pressure=50&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>-a<span class="w"> </span>/etc/sysctl.conf
+
+<span class="c1"># Aplicar inmediatamente</span>
+sudo<span class="w"> </span>sysctl<span class="w"> </span>vm.vfs_cache_pressure<span class="o">=</span><span class="m">50</span>
+</code></pre></div>
+<h3 id="configurar-dirty-ratio-optimizacion-de-io">Configurar Dirty Ratio (Optimización de I/O)<a class="headerlink" href="#configurar-dirty-ratio-optimizacion-de-io" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Configurar para escrituras más eficientes</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;vm.dirty_ratio=15&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>-a<span class="w"> </span>/etc/sysctl.conf
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;vm.dirty_background_ratio=5&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>-a<span class="w"> </span>/etc/sysctl.conf
+
+<span class="c1"># Aplicar configuración</span>
+sudo<span class="w"> </span>sysctl<span class="w"> </span>vm.dirty_ratio<span class="o">=</span><span class="m">15</span>
+sudo<span class="w"> </span>sysctl<span class="w"> </span>vm.dirty_background_ratio<span class="o">=</span><span class="m">5</span>
+</code></pre></div>
+<h2 id="configuracion-mysqlmariadb-para-memoria-optimizada">Configuración MySQL/MariaDB para Memoria Optimizada<a class="headerlink" href="#configuracion-mysqlmariadb-para-memoria-optimizada" title="Permanent link">&para;</a></h2>
+<h3 id="optimizar-configuracion-de-base-de-datos">Optimizar Configuración de Base de Datos<a class="headerlink" href="#optimizar-configuracion-de-base-de-datos" title="Permanent link">&para;</a></h3>
+<p>Editar <code>/etc/mysql/mariadb.conf.d/50-server.cnf</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="k">[mysqld]</span>
+<span class="c1"># === TIMEOUTS PARA JOBS LARGOS ===</span>
+<span class="na">wait_timeout</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">28800</span><span class="w">                </span><span class="c1"># 8 horas</span>
+<span class="na">interactive_timeout</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">28800</span><span class="w">         </span><span class="c1"># 8 horas</span>
+<span class="na">net_read_timeout</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">300</span><span class="w">              </span><span class="c1"># 5 minutos</span>
+<span class="na">net_write_timeout</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">300</span><span class="w">             </span><span class="c1"># 5 minutos</span>
+
+<span class="c1"># === OPTIMIZACIÓN DE MEMORIA ===</span>
+<span class="na">innodb_buffer_pool_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">1536M</span><span class="w">     </span><span class="c1"># 40% de RAM disponible</span>
+<span class="na">innodb_buffer_pool_instances</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">4</span><span class="w">    </span><span class="c1"># Para buffer &gt; 1GB</span>
+<span class="na">innodb_log_file_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">256M</span><span class="w">         </span><span class="c1"># 25% del buffer pool</span>
+
+<span class="c1"># === LÍMITES DE CONEXIÓN ===</span>
+<span class="na">max_connections</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">150</span><span class="w">               </span><span class="c1"># Reducido para conservar memoria</span>
+<span class="na">max_allowed_packet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">256M</span><span class="w">           </span><span class="c1"># Para queries grandes</span>
+
+<span class="c1"># === OPTIMIZACIÓN DE QUERIES ===</span>
+<span class="na">query_cache_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">1</span>
+<span class="na">query_cache_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">128M</span>
+<span class="na">query_cache_limit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">32M</span>
+
+<span class="c1"># === OPTIMIZACIÓN INNODB ===</span>
+<span class="na">innodb_flush_log_at_trx_commit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">2</span><span class="w">  </span><span class="c1"># Mejor performance</span>
+<span class="na">innodb_flush_method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">O_DIRECT</span><span class="w">      </span><span class="c1"># Evita double buffering</span>
+<span class="na">innodb_file_per_table</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">1</span><span class="w">           </span><span class="c1"># Un archivo por tabla</span>
+</code></pre></div>
+<h3 id="reiniciar-servicios">Reiniciar Servicios<a class="headerlink" href="#reiniciar-servicios" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Verificar configuración antes de reiniciar</span>
+sudo<span class="w"> </span>mysqld<span class="w"> </span>--help<span class="w"> </span>--verbose<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-A<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="s2">&quot;Default options&quot;</span>
+
+<span class="c1"># Reiniciar MariaDB/MySQL</span>
+sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>mariadb
+
+<span class="c1"># Verificar estado del servicio</span>
+sudo<span class="w"> </span>systemctl<span class="w"> </span>status<span class="w"> </span>mariadb
+
+<span class="c1"># Verificar configuración aplicada</span>
+mysql<span class="w"> </span>-u<span class="w"> </span>root<span class="w"> </span>-p<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;SHOW VARIABLES LIKE &#39;wait_timeout&#39;;&quot;</span>
+mysql<span class="w"> </span>-u<span class="w"> </span>root<span class="w"> </span>-p<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;SHOW VARIABLES LIKE &#39;innodb_buffer_pool_size&#39;;&quot;</span>
+</code></pre></div>
+<h2 id="monitoreo-y-validacion">Monitoreo y Validación<a class="headerlink" href="#monitoreo-y-validacion" title="Permanent link">&para;</a></h2>
+<h3 id="script-de-monitoreo-de-memoria">Script de Monitoreo de Memoria<a class="headerlink" href="#script-de-monitoreo-de-memoria" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Crear script de monitoreo</span>
+sudo<span class="w"> </span>tee<span class="w"> </span>/usr/local/bin/docucenter-memory-monitor.sh<span class="w"> </span><span class="s">&lt;&lt; &#39;EOF&#39;</span>
+<span class="s">#!/bin/bash</span>
+<span class="s">LOGFILE=&quot;/var/log/docucenter-memory.log&quot;</span>
+<span class="s">TIMESTAMP=$(date &#39;+%Y-%m-%d %H:%M:%S&#39;)</span>
+
+<span class="s">echo &quot;=== MONITOREO DOCUCENTER - $TIMESTAMP ===&quot; &gt;&gt; $LOGFILE</span>
+
+<span class="s"># Información de memoria</span>
+<span class="s">echo &quot;--- Memoria del Sistema ---&quot; &gt;&gt; $LOGFILE</span>
+<span class="s">free -h &gt;&gt; $LOGFILE</span>
+
+<span class="s">echo &quot;--- Uso de Swap ---&quot; &gt;&gt; $LOGFILE</span>
+<span class="s">cat /proc/swaps &gt;&gt; $LOGFILE</span>
+
+<span class="s"># Si swapon está disponible, usar también:</span>
+<span class="s"># swapon --show &gt;&gt; $LOGFILE 2&gt;/dev/null || echo &quot;swapon no disponible&quot; &gt;&gt; $LOGFILE</span>
+
+<span class="s"># Procesos PHP que más consumen memoria</span>
+<span class="s">echo &quot;--- Top Procesos PHP ---&quot; &gt;&gt; $LOGFILE</span>
+<span class="s">ps aux | grep php | grep -v grep | sort -k4 -nr | head -5 &gt;&gt; $LOGFILE</span>
+
+<span class="s"># Conexiones MySQL activas</span>
+<span class="s">echo &quot;--- Conexiones MySQL ---&quot; &gt;&gt; $LOGFILE</span>
+<span class="s">mysql -u root -p&quot;$MYSQL_ROOT_PASSWORD&quot; -e &quot;SELECT COUNT(*) as conexiones_activas FROM information_schema.PROCESSLIST;&quot; 2&gt;/dev/null &gt;&gt; $LOGFILE</span>
+
+<span class="s"># Estadísticas de swap</span>
+<span class="s">echo &quot;--- Estadísticas Swap ---&quot; &gt;&gt; $LOGFILE</span>
+<span class="s">cat /proc/swaps &gt;&gt; $LOGFILE</span>
+
+<span class="s">echo &quot;&quot; &gt;&gt; $LOGFILE</span>
+<span class="s">EOF</span>
+
+sudo<span class="w"> </span>chmod<span class="w"> </span>+x<span class="w"> </span>/usr/local/bin/docucenter-memory-monitor.sh
+</code></pre></div>
+<h3 id="configurar-monitoreo-automatico">Configurar Monitoreo Automático<a class="headerlink" href="#configurar-monitoreo-automatico" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Agregar al crontab para monitoreo durante jobs críticos</span>
+sudo<span class="w"> </span>tee<span class="w"> </span>-a<span class="w"> </span>/etc/crontab<span class="w"> </span><span class="s">&lt;&lt; &#39;EOF&#39;</span>
+<span class="s"># Monitoreo DocuCenter - Jobs SQL Server (6-8 AM)</span>
+<span class="s">*/15 6-8 * * * root /usr/local/bin/docucenter-memory-monitor.sh</span>
+
+<span class="s"># Monitoreo general cada hora</span>
+<span class="s">0 * * * * root /usr/local/bin/docucenter-memory-monitor.sh</span>
+<span class="s">EOF</span>
+
+<span class="c1"># Reiniciar cron</span>
+sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>cron
+</code></pre></div>
+<h3 id="script-de-validacion-post-instalacion">Script de Validación Post-Instalación<a class="headerlink" href="#script-de-validacion-post-instalacion" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Crear script de validación</span>
+sudo<span class="w"> </span>tee<span class="w"> </span>/usr/local/bin/validate-swap-config.sh<span class="w"> </span><span class="s">&lt;&lt; &#39;EOF&#39;</span>
+<span class="s">#!/bin/bash</span>
+<span class="s">echo &quot;=== VALIDACIÓN CONFIGURACIÓN SWAP DOCUCENTER ===&quot;</span>
+
+<span class="s">echo &quot;1. Verificando memoria total:&quot;</span>
+<span class="s">free -h</span>
+
+<span class="s">echo -e &quot;\n2. Verificando swap activo:&quot;</span>
+<span class="s"># Usar método que funciona en todos los sistemas</span>
+<span class="s">cat /proc/swaps</span>
+
+<span class="s"># Si swapon está disponible</span>
+<span class="s">if command -v swapon &amp;&gt; /dev/null; then</span>
+<span class="s">    echo &quot;Usando swapon:&quot;</span>
+<span class="s">    swapon --show</span>
+<span class="s">else</span>
+<span class="s">    echo &quot;swapon no disponible, usando /proc/meminfo:&quot;</span>
+<span class="s">    grep -i swap /proc/meminfo</span>
+<span class="s">fi</span>
+
+<span class="s">echo -e &quot;\n3. Verificando configuración swappiness:&quot;</span>
+<span class="s">echo &quot;Actual: $(cat /proc/sys/vm/swappiness)&quot;</span>
+<span class="s">echo &quot;Recomendado: 15&quot;</span>
+
+<span class="s">echo -e &quot;\n4. Verificando entrada en fstab:&quot;</span>
+<span class="s">grep swap /etc/fstab</span>
+
+<span class="s">echo -e &quot;\n5. Verificando configuración MySQL:&quot;</span>
+<span class="s">systemctl is-active mariadb</span>
+<span class="s">mysql -u root -p -e &quot;SHOW VARIABLES LIKE &#39;wait_timeout&#39;;&quot; 2&gt;/dev/null | grep wait_timeout</span>
+
+<span class="s">echo -e &quot;\n6. Verificando logs DocuCenter:&quot;</span>
+<span class="s">ls -la /var/log/docucenter-memory.log</span>
+
+<span class="s">echo -e &quot;\n=== VALIDACIÓN COMPLETA ===&quot;</span>
+<span class="s">EOF</span>
+
+sudo<span class="w"> </span>chmod<span class="w"> </span>+x<span class="w"> </span>/usr/local/bin/validate-swap-config.sh
+</code></pre></div>
+<h2 id="validacion-de-la-solucion">Validación de la Solución<a class="headerlink" href="#validacion-de-la-solucion" title="Permanent link">&para;</a></h2>
+<h3 id="ejecutar-validacion-completa">Ejecutar Validación Completa<a class="headerlink" href="#ejecutar-validacion-completa" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Ejecutar script de validación</span>
+sudo<span class="w"> </span>/usr/local/bin/validate-swap-config.sh
+
+<span class="c1"># Probar job problemático manualmente</span>
+<span class="nb">cd</span><span class="w"> </span>/home/desarrollo/code/docucenter
+sudo<span class="w"> </span>-u<span class="w"> </span>www-data<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>word:update-sql-server-module
+
+<span class="c1"># Monitorear durante ejecución</span>
+watch<span class="w"> </span>-n<span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="s1">&#39;free -h &amp;&amp; echo &quot;=== SWAP ===&quot; &amp;&amp; cat /proc/swaps&#39;</span>
+</code></pre></div>
+<h3 id="verificacion-de-estado-optimo">Verificación de Estado Óptimo<a class="headerlink" href="#verificacion-de-estado-optimo" title="Permanent link">&para;</a></h3>
+<p><strong>Memoria esperada después de configuración</strong>:
+<div class="highlight"><pre><span></span><code>              total        used        free      shared  buff/cache   available
+Mem:          3.8Gi       2.8Gi       0.5Gi        50Mi       500Mi       800Mi
+Swap:         2.0Gi         0B       2.0Gi
+</code></pre></div></p>
+<p><strong>Configuración MySQL verificada</strong>:
+<div class="highlight"><pre><span></span><code><span class="c1">-- Verificar timeouts aumentados</span>
+<span class="k">SHOW</span><span class="w"> </span><span class="n">VARIABLES</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;wait_timeout&#39;</span><span class="p">;</span><span class="w">        </span><span class="c1">-- Debe ser 28800</span>
+<span class="k">SHOW</span><span class="w"> </span><span class="n">VARIABLES</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;interactive_timeout&#39;</span><span class="p">;</span><span class="w"> </span><span class="c1">-- Debe ser 28800</span>
+
+<span class="c1">-- Verificar buffer pool</span>
+<span class="k">SHOW</span><span class="w"> </span><span class="n">VARIABLES</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;innodb_buffer_pool_size&#39;</span><span class="p">;</span><span class="w"> </span><span class="c1">-- Debe ser ~1.5GB</span>
+</code></pre></div></p>
+<h2 id="mantenimiento-y-monitoreo-continuo">Mantenimiento y Monitoreo Continuo<a class="headerlink" href="#mantenimiento-y-monitoreo-continuo" title="Permanent link">&para;</a></h2>
+<h3 id="alertas-de-memoria-critica">Alertas de Memoria Crítica<a class="headerlink" href="#alertas-de-memoria-critica" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Script de alerta (ejecutar cada 5 minutos)</span>
+sudo<span class="w"> </span>tee<span class="w"> </span>/usr/local/bin/memory-alert.sh<span class="w"> </span><span class="s">&lt;&lt; &#39;EOF&#39;</span>
+<span class="s">#!/bin/bash</span>
+<span class="s">THRESHOLD=90</span>
+<span class="s">MEMORY_USAGE=$(free | grep Mem | awk &#39;{printf(&quot;%.0f&quot;, $3/$2 * 100.0)}&#39;)</span>
+
+<span class="s">if [ $MEMORY_USAGE -gt $THRESHOLD ]; then</span>
+<span class="s">    echo &quot;ALERTA: Uso de memoria crítico: ${MEMORY_USAGE}%&quot; | \</span>
+<span class="s">    logger -t &quot;DocuCenter-Memory&quot;</span>
+
+<span class="s">    # Opcional: enviar email o notificación</span>
+<span class="s">    # echo &quot;Memoria crítica en servidor DocuCenter&quot; | mail -s &quot;Alerta Memoria&quot; admin@empresa.com</span>
+<span class="s">fi</span>
+<span class="s">EOF</span>
+
+sudo<span class="w"> </span>chmod<span class="w"> </span>+x<span class="w"> </span>/usr/local/bin/memory-alert.sh
+
+<span class="c1"># Agregar al cron</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;*/5 * * * * root /usr/local/bin/memory-alert.sh&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>-a<span class="w"> </span>/etc/crontab
+</code></pre></div>
+<h3 id="rotacion-de-logs">Rotación de Logs<a class="headerlink" href="#rotacion-de-logs" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Configurar rotación de logs de monitoreo</span>
+sudo<span class="w"> </span>tee<span class="w"> </span>/etc/logrotate.d/docucenter-memory<span class="w"> </span><span class="s">&lt;&lt; &#39;EOF&#39;</span>
+<span class="s">/var/log/docucenter-memory.log {</span>
+<span class="s">    daily</span>
+<span class="s">    rotate 30</span>
+<span class="s">    compress</span>
+<span class="s">    delaycompress</span>
+<span class="s">    missingok</span>
+<span class="s">    notifempty</span>
+<span class="s">    create 644 root root</span>
+<span class="s">}</span>
+<span class="s">EOF</span>
+</code></pre></div>
+<h2 id="resultado-esperado">Resultado Esperado<a class="headerlink" href="#resultado-esperado" title="Permanent link">&para;</a></h2>
+<p>Después de implementar esta configuración:</p>
+<ol>
+<li><strong>Memoria disponible</strong>: +8GB de swap como respaldo (actualizado desde 2GB)</li>
+<li><strong>Timeouts MySQL</strong>: Extendidos para jobs largos (8 horas)</li>
+<li><strong>Monitoreo</strong>: Alertas automáticas de uso de memoria</li>
+<li><strong>Performance</strong>: Jobs SQL Server ejecutándose sin errores de conexión</li>
+<li><strong>Estabilidad</strong>: Sistema más resistente a picos de memoria</li>
+</ol>
+<p><strong>Error resuelto</strong>: <code>MySQL server has gone away</code> durante ejecución de <code>word:update-sql-server-module</code></p>
+<h2 id="validacion-final-swap-8gb-implementado">✅ Validación Final - Swap 8GB Implementado<a class="headerlink" href="#validacion-final-swap-8gb-implementado" title="Permanent link">&para;</a></h2>
+<p><strong>Fecha de Implementación</strong>: 29 de Octubre, 2025
+<strong>Servidor</strong>: desarrollo@debian-s-1vcpu-2gb-amd-nyc1-01</p>
+<h3 id="estado-del-sistema-despues-de-actualizacion">Estado del Sistema Después de Actualización<a class="headerlink" href="#estado-del-sistema-despues-de-actualizacion" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>cat<span class="w"> </span>/proc/swaps
+Filename<span class="w">                </span>Type<span class="w">      </span>Size<span class="w">      </span>Used<span class="w">      </span>Priority
+/swapfile.new<span class="w">          </span>file<span class="w">    </span><span class="m">8388604</span><span class="w">   </span><span class="m">1126140</span><span class="w">           </span>-2
+
+$<span class="w"> </span>free<span class="w"> </span>-h
+<span class="w">               </span>total<span class="w">        </span>used<span class="w">        </span>free<span class="w">      </span>shared<span class="w">  </span>buff/cache<span class="w">   </span>available
+Mem:<span class="w">           </span><span class="m">3</span>.8Gi<span class="w">       </span><span class="m">3</span>.2Gi<span class="w">       </span>193Mi<span class="w">       </span>155Mi<span class="w">       </span>465Mi<span class="w">       </span>287Mi
+Swap:<span class="w">          </span><span class="m">8</span>.0Gi<span class="w">       </span><span class="m">1</span>.1Gi<span class="w">       </span><span class="m">6</span>.9Gi
+
+$<span class="w"> </span>grep<span class="w"> </span>swap<span class="w"> </span>/etc/fstab
+/swapfile.new<span class="w"> </span>none<span class="w"> </span>swap<span class="w"> </span>sw<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">0</span>
+</code></pre></div>
+<h3 id="mejoras-confirmadas">Mejoras Confirmadas<a class="headerlink" href="#mejoras-confirmadas" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Métrica</th>
+<th>Antes</th>
+<th>Después</th>
+<th>Mejora</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Memoria disponible</td>
+<td>108Mi</td>
+<td>287Mi</td>
+<td>+165%</td>
+</tr>
+<tr>
+<td>Swap configurado</td>
+<td>0-2GB</td>
+<td>8GB</td>
+<td>+300-800%</td>
+</tr>
+<tr>
+<td>Swap en uso</td>
+<td>N/A</td>
+<td>1.1Gi</td>
+<td>Activo</td>
+</tr>
+<tr>
+<td>Estado del sistema</td>
+<td>Crítico</td>
+<td>Estable</td>
+<td>✅</td>
+</tr>
+</tbody>
+</table>
+<h3 id="caracteristicas-de-la-implementacion">Características de la Implementación<a class="headerlink" href="#caracteristicas-de-la-implementacion" title="Permanent link">&para;</a></h3>
+<ul>
+<li>✅ <strong>Sin reinicio</strong>: Migración realizada con servidor en producción</li>
+<li>✅ <strong>Zero downtime</strong>: Método dual-swap evitó interrupciones</li>
+<li>✅ <strong>Persistente</strong>: Configuración en fstab garantiza permanencia</li>
+<li>✅ <strong>Optimizado</strong>: Swappiness=15 configurado para bases de datos</li>
+<li>✅ <strong>Monitoreado</strong>: Scripts de monitoreo activos</li>
+</ul>
+<h3 id="validacion-de-funcionalidad">Validación de Funcionalidad<a class="headerlink" href="#validacion-de-funcionalidad" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Swap siendo usado activamente por el sistema</span>
+$<span class="w"> </span>cat<span class="w"> </span>/proc/swaps<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>swapfile.new
+/swapfile.new<span class="w">          </span>file<span class="w">    </span><span class="m">8388604</span><span class="w">   </span><span class="m">1126140</span><span class="w">           </span>-2
+
+<span class="c1"># Sistema usando swap para aliviar presión de memoria</span>
+<span class="c1"># 1.1Gi de swap en uso indica que el sistema está trabajando correctamente</span>
+</code></pre></div>
+<p><strong>Estado</strong>: Sistema de producción estabilizado con swap de 8GB completamente funcional.</p>
+<h2 id="plan-de-implementacion-rapida">🚀 PLAN DE IMPLEMENTACIÓN RÁPIDA<a class="headerlink" href="#plan-de-implementacion-rapida" title="Permanent link">&para;</a></h2>
+<h3 id="implementacion-inmediata-5-minutos">Implementación Inmediata (5 minutos)<a class="headerlink" href="#implementacion-inmediata-5-minutos" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># 1. Conectar al servidor crítico</span>
+ssh<span class="w"> </span>desarrollo@debian-s-1vcpu-2gb-amd-nyc1-01
+
+<span class="c1"># 2. Verificar espacio disponible</span>
+df<span class="w"> </span>-h
+
+<span class="c1"># 3. Crear swap inmediatamente (2GB)</span>
+sudo<span class="w"> </span>fallocate<span class="w"> </span>-l<span class="w"> </span>2G<span class="w"> </span>/swapfile
+sudo<span class="w"> </span>chmod<span class="w"> </span><span class="m">600</span><span class="w"> </span>/swapfile
+sudo<span class="w"> </span>mkswap<span class="w"> </span>/swapfile
+sudo<span class="w"> </span>swapon<span class="w"> </span>/swapfile
+
+<span class="c1"># 4. Verificar activación inmediata</span>
+cat<span class="w"> </span>/proc/swaps
+free<span class="w"> </span>-h
+
+<span class="c1"># 5. Hacer permanente</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;/swapfile none swap sw 0 0&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>-a<span class="w"> </span>/etc/fstab
+
+<span class="c1"># 6. Optimizar para servidor de DB</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;vm.swappiness=15&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>-a<span class="w"> </span>/etc/sysctl.conf
+sudo<span class="w"> </span>sysctl<span class="w"> </span>vm.swappiness<span class="o">=</span><span class="m">15</span>
+</code></pre></div>
+<h3 id="verificacion-de-exito">Verificación de Éxito<a class="headerlink" href="#verificacion-de-exito" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Estado esperado después de implementación:</span>
+$<span class="w"> </span>free<span class="w"> </span>-h
+<span class="w">               </span>total<span class="w">        </span>used<span class="w">        </span>free<span class="w">      </span>shared<span class="w">  </span>buff/cache<span class="w">   </span>available
+Mem:<span class="w">           </span><span class="m">3</span>.8Gi<span class="w">       </span><span class="m">2</span>.8Gi<span class="w">       </span>800Mi<span class="w">       </span>222Mi<span class="w">       </span>419Mi<span class="w">       </span><span class="m">1</span>.2Gi
+Swap:<span class="w">          </span><span class="m">2</span>.0Gi<span class="w">         </span>0B<span class="w">       </span><span class="m">2</span>.0Gi
+
+<span class="c1"># Swap activo confirmado:</span>
+$<span class="w"> </span>cat<span class="w"> </span>/proc/swaps
+Filename<span class="w">                </span>Type<span class="w">      </span>Size<span class="w">      </span>Used<span class="w">    </span>Priority
+/swapfile<span class="w">              </span>file<span class="w">    </span><span class="m">2097148</span><span class="w">        </span><span class="m">0</span><span class="w">          </span>-2
+</code></pre></div>
+<h3 id="proximo-paso-critico">Próximo Paso Crítico<a class="headerlink" href="#proximo-paso-critico" title="Permanent link">&para;</a></h3>
+<p><strong>Ejecutar inmediatamente</strong> en servidor de producción para resolver crisis de memoria y prevenir fallos del sistema durante jobs de SQL Server.</p>
+<hr />
+<h2 id="actualizacion-segura-de-swap-2gb-8gb">🔄 Actualización Segura de Swap (2GB → 8GB)<a class="headerlink" href="#actualizacion-segura-de-swap-2gb-8gb" title="Permanent link">&para;</a></h2>
+<h3 id="escenario-actualizar-swap-sin-reinicio-en-servidor-con-memoria-critica">Escenario: Actualizar Swap Sin Reinicio en Servidor con Memoria Crítica<a class="headerlink" href="#escenario-actualizar-swap-sin-reinicio-en-servidor-con-memoria-critica" title="Permanent link">&para;</a></h3>
+<p><strong>Contexto</strong>: Servidor con memoria crítica (&lt;10% libre) donde <code>swapoff</code> falla por OOM killer.</p>
+<p><strong>Método Dual-Swap</strong>: Crear nuevo swap sin desactivar el existente, luego migrar.</p>
+<h3 id="paso-1-verificar-estado-actual">Paso 1: Verificar Estado Actual<a class="headerlink" href="#paso-1-verificar-estado-actual" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Verificar memoria y swap actuales</span>
+free<span class="w"> </span>-h
+cat<span class="w"> </span>/proc/swaps
+grep<span class="w"> </span>swap<span class="w"> </span>/etc/fstab
+
+<span class="c1"># Resultado esperado (antes de actualización):</span>
+<span class="c1"># Mem:  3.8Gi total, 3.3Gi usado, 108Mi disponible</span>
+<span class="c1"># Swap: 2.0Gi (o posiblemente 0B si swap original fue eliminado)</span>
+</code></pre></div>
+<h3 id="paso-2-crear-nuevo-swap-de-8gb-sin-desactivar-el-actual">Paso 2: Crear Nuevo Swap de 8GB (Sin Desactivar el Actual)<a class="headerlink" href="#paso-2-crear-nuevo-swap-de-8gb-sin-desactivar-el-actual" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># 1. Verificar espacio en disco</span>
+df<span class="w"> </span>-h
+
+<span class="c1"># 2. Crear archivo swap de 8GB con nombre temporal</span>
+sudo<span class="w"> </span>fallocate<span class="w"> </span>-l<span class="w"> </span>8G<span class="w"> </span>/swapfile.new
+
+<span class="c1"># 3. Configurar permisos restrictivos</span>
+sudo<span class="w"> </span>chmod<span class="w"> </span><span class="m">600</span><span class="w"> </span>/swapfile.new
+
+<span class="c1"># 4. Marcar como área de swap</span>
+sudo<span class="w"> </span>mkswap<span class="w"> </span>/swapfile.new
+
+<span class="c1"># 5. Activar el nuevo swap (ahora tendrás 2GB + 8GB = 10GB total)</span>
+sudo<span class="w"> </span>swapon<span class="w"> </span>/swapfile.new
+
+<span class="c1"># 6. Verificar que ambos swaps están activos</span>
+cat<span class="w"> </span>/proc/swaps
+free<span class="w"> </span>-h
+</code></pre></div>
+<p><strong>Resultado esperado</strong> (dual-swap activo):
+<div class="highlight"><pre><span></span><code>Filename                Type      Size      Used    Priority
+/swapfile              file    2097148        0          -2
+/swapfile.new          file    8388604        0          -2
+</code></pre></div></p>
+<h3 id="paso-3-migrar-a-swap-unico-de-8gb">Paso 3: Migrar a Swap Único de 8GB<a class="headerlink" href="#paso-3-migrar-a-swap-unico-de-8gb" title="Permanent link">&para;</a></h3>
+<p><strong>Opción A</strong>: Si el archivo <code>/swapfile</code> original existe:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 1. Intentar desactivar swap original</span>
+sudo<span class="w"> </span>swapoff<span class="w"> </span>/swapfile
+
+<span class="c1"># 2. Si el comando anterior falla con &quot;Killed&quot;, el sistema tiene demasiada presión</span>
+<span class="c1"># En ese caso, continuar con Opción B</span>
+
+<span class="c1"># 3. Si swapoff tuvo éxito, eliminar el archivo viejo</span>
+sudo<span class="w"> </span>rm<span class="w"> </span>/swapfile
+
+<span class="c1"># 4. Renombrar el nuevo swap</span>
+sudo<span class="w"> </span>mv<span class="w"> </span>/swapfile.new<span class="w"> </span>/swapfile
+
+<span class="c1"># 5. Actualizar fstab</span>
+sudo<span class="w"> </span>cp<span class="w"> </span>/etc/fstab<span class="w"> </span>/etc/fstab.backup.<span class="k">$(</span>date<span class="w"> </span>+%Y%m%d_%H%M%S<span class="k">)</span>
+sudo<span class="w"> </span>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;s|/swapfile.new none swap sw 0 0|/swapfile none swap sw 0 0|g&#39;</span><span class="w"> </span>/etc/fstab
+</code></pre></div>
+<p><strong>Opción B</strong>: Si <code>/swapfile</code> no existe o swapoff falla (CASO COMÚN):</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 1. Actualizar fstab para apuntar al nuevo archivo directamente</span>
+sudo<span class="w"> </span>cp<span class="w"> </span>/etc/fstab<span class="w"> </span>/etc/fstab.backup.<span class="k">$(</span>date<span class="w"> </span>+%Y%m%d_%H%M%S<span class="k">)</span>
+sudo<span class="w"> </span>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;s|/swapfile none swap sw 0 0|/swapfile.new none swap sw 0 0|g&#39;</span><span class="w"> </span>/etc/fstab
+
+<span class="c1"># 2. Verificar cambio en fstab</span>
+grep<span class="w"> </span>swap<span class="w"> </span>/etc/fstab
+<span class="c1"># Debe mostrar: /swapfile.new none swap sw 0 0</span>
+
+<span class="c1"># 3. Verificar que el sistema está usando el nuevo swap</span>
+cat<span class="w"> </span>/proc/swaps
+free<span class="w"> </span>-h
+</code></pre></div>
+<h3 id="paso-4-validacion-final">Paso 4: Validación Final<a class="headerlink" href="#paso-4-validacion-final" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Verificar configuración completa</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;=== FSTAB ===&quot;</span>
+grep<span class="w"> </span>swap<span class="w"> </span>/etc/fstab
+
+<span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;\n=== SWAP ACTIVO ===&quot;</span>
+cat<span class="w"> </span>/proc/swaps
+
+<span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;\n=== MEMORIA TOTAL ===&quot;</span>
+free<span class="w"> </span>-h
+
+<span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;\n=== SWAPPINESS ===&quot;</span>
+cat<span class="w"> </span>/proc/sys/vm/swappiness
+</code></pre></div>
+<p><strong>Estado esperado después de migración</strong>:
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>grep<span class="w"> </span>swap<span class="w"> </span>/etc/fstab
+/swapfile.new<span class="w"> </span>none<span class="w"> </span>swap<span class="w"> </span>sw<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">0</span>
+
+$<span class="w"> </span>cat<span class="w"> </span>/proc/swaps
+Filename<span class="w">                </span>Type<span class="w">      </span>Size<span class="w">      </span>Used<span class="w">    </span>Priority
+/swapfile.new<span class="w">          </span>file<span class="w">    </span><span class="m">8388604</span><span class="w">   </span><span class="m">1126140</span><span class="w">          </span>-2
+
+$<span class="w"> </span>free<span class="w"> </span>-h
+<span class="w">               </span>total<span class="w">        </span>used<span class="w">        </span>free<span class="w">      </span>shared<span class="w">  </span>buff/cache<span class="w">   </span>available
+Mem:<span class="w">           </span><span class="m">3</span>.8Gi<span class="w">       </span><span class="m">3</span>.2Gi<span class="w">       </span>193Mi<span class="w">       </span>155Mi<span class="w">       </span>465Mi<span class="w">       </span>287Mi
+Swap:<span class="w">          </span><span class="m">8</span>.0Gi<span class="w">       </span><span class="m">1</span>.1Gi<span class="w">       </span><span class="m">6</span>.9Gi
+</code></pre></div></p>
+<h3 id="resultado-de-la-actualizacion">Resultado de la Actualización<a class="headerlink" href="#resultado-de-la-actualizacion" title="Permanent link">&para;</a></h3>
+<p><strong>Antes</strong>:
+- Memoria disponible: 108Mi (crítico)
+- Swap: 2GB o 0B
+- Riesgo: OOM killer activo</p>
+<p><strong>Después</strong>:
+- Memoria disponible: 287Mi (mejorado 165%)
+- Swap: 8GB activo (usando 1.1Gi)
+- Estado: Sistema estable con respaldo suficiente</p>
+<h3 id="notas-importantes">Notas Importantes<a class="headerlink" href="#notas-importantes" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Dual-Swap Temporal</strong>: Es seguro tener dos archivos swap activos simultáneamente durante la migración</li>
+<li><strong>OOM Killer</strong>: Si <code>swapoff</code> falla con "Killed", simplemente mantén el nuevo archivo <code>/swapfile.new</code></li>
+<li><strong>Reinicio NO Requerido</strong>: Todo el proceso se realiza sin reiniciar el servidor</li>
+<li><strong>fstab</strong>: Asegúrate de que apunte al archivo swap correcto para persistencia después de reinicios</li>
+<li><strong>Monitoreo</strong>: El sistema comenzará a usar el nuevo swap inmediatamente según necesidad</li>
+</ol>
+<h3 id="comandos-de-verificacion-rapida">Comandos de Verificación Rápida<a class="headerlink" href="#comandos-de-verificacion-rapida" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Ver swap activo y uso actual</span>
+cat<span class="w"> </span>/proc/swaps<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;---&quot;</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>free<span class="w"> </span>-h<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>Swap
+
+<span class="c1"># Verificar que fstab está correcto para próximo reinicio</span>
+grep<span class="w"> </span>swap<span class="w"> </span>/etc/fstab
+
+<span class="c1"># Monitorear uso de swap en tiempo real</span>
+watch<span class="w"> </span>-n<span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="s1">&#39;cat /proc/swaps &amp;&amp; echo &quot;---&quot; &amp;&amp; free -h&#39;</span>
+</code></pre></div>
+<hr />
+<h3 id="proximo-paso-critico-completado">Próximo Paso Crítico (COMPLETADO)<a class="headerlink" href="#proximo-paso-critico-completado" title="Permanent link">&para;</a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/aghabrego/docucenter" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.highlight", "search.suggest"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

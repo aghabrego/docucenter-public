@@ -1,0 +1,3153 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentación técnica y de usuario de DocuCenter - Sistema de facturación electrónica">
+      
+      
+        <meta name="author" content="aghabrego">
+      
+      
+        <link rel="canonical" href="https://aghabrego.github.io/docucenter/optimizations/mysql-optimization-circuit-breaker/">
+      
+      
+        <link rel="prev" href="../customer-supplier-optimizations/">
+      
+      
+        <link rel="next" href="../../technical/payment-calculation-fix/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="https://home.apconpanama.me/wp-content/uploads/2024/03/logo3.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Optimización MySQL 8.0 y Circuit Breaker para DocuCenter - DocuCenter</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="light-blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#optimizacion-mysql-80-y-circuit-breaker-para-docucenter" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="DocuCenter" class="md-header__button md-logo" aria-label="DocuCenter" data-md-component="logo">
+      
+  <img src="https://home.apconpanama.me/wp-content/uploads/2024/03/logo3.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            DocuCenter
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Optimización MySQL 8.0 y Circuit Breaker para DocuCenter
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="light-blue"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/aghabrego/docucenter" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    aghabrego/docucenter
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Pestañas" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Inicio
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../api/" class="md-tabs__link">
+          
+  
+  
+  APIs
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+  Optimizaciones
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../technical/README.md" class="md-tabs__link">
+          
+  
+  
+  Documentación Técnica
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../validations/" class="md-tabs__link">
+          
+  
+  
+  Validaciones
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="DocuCenter" class="md-nav__button md-logo" aria-label="DocuCenter" data-md-component="logo">
+      
+  <img src="https://home.apconpanama.me/wp-content/uploads/2024/03/logo3.png" alt="logo">
+
+    </a>
+    DocuCenter
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/aghabrego/docucenter" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    aghabrego/docucenter
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    APIs
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    APIs
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    APIs de DocuCenter
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Facturación Electrónica (FE)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Facturación Electrónica (FE)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/fe-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Facturación Electrónica (FE) - DocuCenter
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/acicloud-fe-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Facturación Electrónica - Integración ACICloud FE
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/document-emission-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Facturación Electrónica - Emisión de Documentos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/shopify-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Facturación Electrónica - Integración Shopify
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/lightspeed-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Facturación Electrónica - Integración Lightspeed
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/maxgym-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Facturación Electrónica - Integración Maxgym
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/meypar-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Facturación Electrónica - Integración Meypar
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/kart21-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Facturación Electrónica - Integración Kart21
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sage ACICloud
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Sage ACICloud
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/customers-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Sage ACICloud - Módulo Clientes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/products-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Productos - Sage ACICloud
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/sales-orders-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Sage ACICloud - Módulo Órdenes de Venta
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/purchases-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Compras - Sage ACICloud
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/payments-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Pagos y Créditos - Sage ACICloud
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/inventory-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Inventario - Sage ACICloud
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/jobs-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Trabajos/Jobs - Sage ACICloud
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Organizaciones
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Organizaciones
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/organizations/organizations-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API de Organizaciones
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Optimizaciones
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Optimizaciones
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Optimizaciones - DocuCenter
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Performance
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Performance
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../customer-supplier-optimizations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Optimizaciones para el manejo de muchos clientes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Optimización MySQL 8.0 y Circuit Breaker para DocuCenter
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Optimización MySQL 8.0 y Circuit Breaker para DocuCenter
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#descripcion-general" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📋 Descripción General
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#problema-identificado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🚨 Problema Identificado
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🚨 Problema Identificado">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#error-principal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Error Principal
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#contexto-del-error" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Contexto del Error
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#causas-identificadas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Causas Identificadas
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#solucion-1-configuracion-mysql-8037-optimizada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔧 Solución 1: Configuración MySQL 8.0.37 Optimizada
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔧 Solución 1: Configuración MySQL 8.0.37 Optimizada">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ubicacion-etcmysqlmysqlconfdmysqldcnf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ubicación: /etc/mysql/mysql.conf.d/mysqld.cnf
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cambios-especificos-mysql-80" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cambios Específicos MySQL 8.0
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#solucion-2-circuit-breaker-pattern" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔧 Solución 2: Circuit Breaker Pattern
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔧 Solución 2: Circuit Breaker Pattern">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#implementacion-appservicesdatabasecircuitbreakerphp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implementación: app/Services/DatabaseCircuitBreaker.php
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#solucion-3-jobs-con-graceful-degradation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔧 Solución 3: Jobs con Graceful Degradation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔧 Solución 3: Jobs con Graceful Degradation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo-actualizacion-de-createsalelightspeedjob" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplo: Actualización de CreateSaleLightspeedJob
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#solucion-4-configuracion-laravel-optimizada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔧 Solución 4: Configuración Laravel Optimizada
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔧 Solución 4: Configuración Laravel Optimizada">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configdatabasephp-conexion-mysql-optimizada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        config/database.php - Conexión MySQL Optimizada
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#solucion-5-monitoreo-de-salud" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔧 Solución 5: Monitoreo de Salud
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔧 Solución 5: Monitoreo de Salud">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#appconsolecommandsmonitordatabasehealthphp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        app/Console/Commands/MonitorDatabaseHealth.php
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#programacion-en-appconsolekernelphp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Programación en app/Console/Kernel.php
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resultados-esperados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📊 Resultados Esperados
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📊 Resultados Esperados">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#antes-de-la-optimizacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Antes de la Optimización
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#despues-de-la-optimizacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Después de la Optimización
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🛠️ Implementación
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🛠️ Implementación">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#paso-1-configurar-mysql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 1: Configurar MySQL
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-2-crear-circuit-breaker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 2: Crear Circuit Breaker
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-3-actualizar-jobs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 3: Actualizar Jobs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-4-implementar-monitoreo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 4: Implementar Monitoreo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-5-configurar-supervisor-opcional" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 5: Configurar Supervisor (Opcional)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔍 Troubleshooting
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔍 Troubleshooting">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#si-persisten-los-errores" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Si persisten los errores:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#validacion-de-funcionamiento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ✅ Validación de Funcionamiento
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="✅ Validación de Funcionamiento">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tests-de-conexion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tests de Conexión
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metricas-de-exito" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Métricas de Éxito
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notas-importantes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📝 Notas Importantes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔗 Referencias
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Documentación Técnica
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Documentación Técnica
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../technical/README.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    None
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pagos y Cálculos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Pagos y Cálculos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../technical/payment-calculation-fix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Análisis de Discrepancias en Cálculo de Pagos - Facturación Electrónica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../technical/solucion-sincronizacion-pagos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Solución Final: Sincronización Completa de Pagos en Facturación Electrónica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validaciones
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Validaciones
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../validations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validaciones - DocuCenter
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Documentos Fiscales
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Documentos Fiscales
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../validations/createSale-ruc-validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validación de RUC en CreateSaleMaxgymRequest
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../validations/maxgym-ruc-validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validación de RUC en MaxgymService
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#descripcion-general" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📋 Descripción General
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#problema-identificado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🚨 Problema Identificado
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🚨 Problema Identificado">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#error-principal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Error Principal
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#contexto-del-error" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Contexto del Error
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#causas-identificadas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Causas Identificadas
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#solucion-1-configuracion-mysql-8037-optimizada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔧 Solución 1: Configuración MySQL 8.0.37 Optimizada
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔧 Solución 1: Configuración MySQL 8.0.37 Optimizada">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ubicacion-etcmysqlmysqlconfdmysqldcnf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ubicación: /etc/mysql/mysql.conf.d/mysqld.cnf
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cambios-especificos-mysql-80" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cambios Específicos MySQL 8.0
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#solucion-2-circuit-breaker-pattern" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔧 Solución 2: Circuit Breaker Pattern
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔧 Solución 2: Circuit Breaker Pattern">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#implementacion-appservicesdatabasecircuitbreakerphp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implementación: app/Services/DatabaseCircuitBreaker.php
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#solucion-3-jobs-con-graceful-degradation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔧 Solución 3: Jobs con Graceful Degradation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔧 Solución 3: Jobs con Graceful Degradation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo-actualizacion-de-createsalelightspeedjob" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplo: Actualización de CreateSaleLightspeedJob
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#solucion-4-configuracion-laravel-optimizada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔧 Solución 4: Configuración Laravel Optimizada
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔧 Solución 4: Configuración Laravel Optimizada">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configdatabasephp-conexion-mysql-optimizada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        config/database.php - Conexión MySQL Optimizada
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#solucion-5-monitoreo-de-salud" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔧 Solución 5: Monitoreo de Salud
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔧 Solución 5: Monitoreo de Salud">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#appconsolecommandsmonitordatabasehealthphp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        app/Console/Commands/MonitorDatabaseHealth.php
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#programacion-en-appconsolekernelphp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Programación en app/Console/Kernel.php
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resultados-esperados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📊 Resultados Esperados
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📊 Resultados Esperados">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#antes-de-la-optimizacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Antes de la Optimización
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#despues-de-la-optimizacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Después de la Optimización
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🛠️ Implementación
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🛠️ Implementación">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#paso-1-configurar-mysql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 1: Configurar MySQL
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-2-crear-circuit-breaker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 2: Crear Circuit Breaker
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-3-actualizar-jobs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 3: Actualizar Jobs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-4-implementar-monitoreo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 4: Implementar Monitoreo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-5-configurar-supervisor-opcional" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 5: Configurar Supervisor (Opcional)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔍 Troubleshooting
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔍 Troubleshooting">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#si-persisten-los-errores" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Si persisten los errores:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#validacion-de-funcionamiento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ✅ Validación de Funcionamiento
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="✅ Validación de Funcionamiento">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tests-de-conexion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tests de Conexión
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metricas-de-exito" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Métricas de Éxito
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notas-importantes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📝 Notas Importantes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔗 Referencias
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="optimizacion-mysql-80-y-circuit-breaker-para-docucenter">Optimización MySQL 8.0 y Circuit Breaker para DocuCenter<a class="headerlink" href="#optimizacion-mysql-80-y-circuit-breaker-para-docucenter" title="Permanent link">&para;</a></h1>
+<h2 id="descripcion-general">📋 Descripción General<a class="headerlink" href="#descripcion-general" title="Permanent link">&para;</a></h2>
+<p>Este documento describe las estrategias de optimización implementadas para resolver errores de conexión MySQL (<code>SQLSTATE[HY000] [2002] Connection refused</code>) en el sistema DocuCenter, manteniendo los recursos del servidor actuales.</p>
+<h2 id="problema-identificado">🚨 Problema Identificado<a class="headerlink" href="#problema-identificado" title="Permanent link">&para;</a></h2>
+<h3 id="error-principal">Error Principal<a class="headerlink" href="#error-principal" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>PDOException(code: 2002): SQLSTATE[HY000] [2002] Connection refused
+</code></pre></div>
+<h3 id="contexto-del-error">Contexto del Error<a class="headerlink" href="#contexto-del-error" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Ocurre durante bootstrap de la aplicación</li>
+<li><code>WeirdoPanelServiceProvider</code> ejecuta <code>Schema::hasTable()</code></li>
+<li>Falla la conexión a MySQL → Error 2002</li>
+<li>Impacta jobs críticos como <code>CreateSaleLightspeedJob</code></li>
+</ul>
+<h3 id="causas-identificadas">Causas Identificadas<a class="headerlink" href="#causas-identificadas" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Alto uso de conexiones simultáneas</li>
+<li>Agotamiento de recursos MySQL</li>
+<li>Conexiones colgadas sin timeout apropiado</li>
+<li>Falta de circuit breaker para degradación elegante</li>
+</ol>
+<h2 id="solucion-1-configuracion-mysql-8037-optimizada">🔧 Solución 1: Configuración MySQL 8.0.37 Optimizada<a class="headerlink" href="#solucion-1-configuracion-mysql-8037-optimizada" title="Permanent link">&para;</a></h2>
+<h3 id="ubicacion-etcmysqlmysqlconfdmysqldcnf">Ubicación: <code>/etc/mysql/mysql.conf.d/mysqld.cnf</code><a class="headerlink" href="#ubicacion-etcmysqlmysqlconfdmysqldcnf" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">[mysqld]</span>
+<span class="c1"># Configuración básica</span>
+<span class="na">bind-address</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">127.0.0.1</span>
+<span class="na">port</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">3306</span>
+
+<span class="c1"># Optimizaciones para recursos limitados en MySQL 8.0</span>
+<span class="na">max_connections</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">50</span>
+<span class="na">max_user_connections</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">45</span>
+
+<span class="c1"># InnoDB - Motor principal en MySQL 8.0</span>
+<span class="na">innodb_buffer_pool_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">256M</span>
+<span class="na">innodb_log_file_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">64M</span>
+<span class="na">innodb_flush_log_at_trx_commit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">2</span>
+<span class="na">innodb_buffer_pool_instances</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">1</span>
+
+<span class="c1"># Performance Schema (ajustar para menor uso de memoria)</span>
+<span class="na">performance_schema</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">ON</span>
+<span class="na">performance_schema_max_table_instances</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">400</span>
+<span class="na">performance_schema_max_table_handles</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">1000</span>
+
+<span class="c1"># Connection handling</span>
+<span class="na">thread_cache_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">10</span>
+<span class="na">table_open_cache</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">400</span>
+<span class="na">table_open_cache_instances</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">4</span>
+
+<span class="c1"># Timeouts para evitar conexiones colgadas</span>
+<span class="na">wait_timeout</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">600</span>
+<span class="na">interactive_timeout</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">600</span>
+<span class="na">net_read_timeout</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">30</span>
+<span class="na">net_write_timeout</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">30</span>
+
+<span class="c1"># Logging optimizado</span>
+<span class="na">slow_query_log</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">1</span>
+<span class="na">slow_query_log_file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">/var/log/mysql/mysql-slow.log</span>
+<span class="na">long_query_time</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">2</span>
+<span class="na">log_queries_not_using_indexes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">0</span>
+
+<span class="c1"># Configuraciones específicas para aplicaciones Laravel</span>
+<span class="na">sql_mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION&#39;</span>
+
+<span class="c1"># Memory tables</span>
+<span class="na">tmp_table_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">32M</span>
+<span class="na">max_heap_table_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">32M</span>
+
+<span class="c1"># MyISAM (para tablas de sistema)</span>
+<span class="na">key_buffer_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">16M</span>
+
+<span class="c1"># Optimizaciones nativas MySQL 8.0 (reemplazan query cache)</span>
+<span class="na">optimizer_switch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;batched_key_access=on,mrr=on,mrr_cost_based=on&#39;</span>
+<span class="na">innodb_adaptive_hash_index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">ON</span>
+</code></pre></div>
+<h3 id="cambios-especificos-mysql-80">Cambios Específicos MySQL 8.0<a class="headerlink" href="#cambios-especificos-mysql-80" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>❌ Removido</strong>: <code>query_cache_type</code> y <code>query_cache_size</code> (deprecated)</li>
+<li><strong>✅ Agregado</strong>: Optimizaciones nativas del optimizer</li>
+<li><strong>✅ Mejorado</strong>: Performance Schema con límites de memoria</li>
+</ul>
+<h2 id="solucion-2-circuit-breaker-pattern">🔧 Solución 2: Circuit Breaker Pattern<a class="headerlink" href="#solucion-2-circuit-breaker-pattern" title="Permanent link">&para;</a></h2>
+<h3 id="implementacion-appservicesdatabasecircuitbreakerphp">Implementación: <code>app/Services/DatabaseCircuitBreaker.php</code><a class="headerlink" href="#implementacion-appservicesdatabasecircuitbreakerphp" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="cp">&lt;?php</span>
+
+<span class="k">namespace</span> <span class="nx">App\Services</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Illuminate\Support\Facades\Cache</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Illuminate\Support\Facades\DB</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Illuminate\Support\Facades\Log</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">DatabaseCircuitBreaker</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="k">const</span> <span class="no">FAILURE_THRESHOLD</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+    <span class="k">private</span> <span class="k">const</span> <span class="no">RECOVERY_TIMEOUT</span> <span class="o">=</span> <span class="mi">300</span><span class="p">;</span> <span class="c1">// 5 minutos</span>
+    <span class="k">private</span> <span class="k">const</span> <span class="no">CACHE_KEY</span> <span class="o">=</span> <span class="s1">&#39;db_circuit_breaker&#39;</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">canExecute</span><span class="p">()</span><span class="o">:</span> <span class="nx">bool</span>
+    <span class="p">{</span>
+        <span class="nv">$failures</span> <span class="o">=</span> <span class="nx">Cache</span><span class="o">::</span><span class="na">get</span><span class="p">(</span><span class="nx">self</span><span class="o">::</span><span class="na">CACHE_KEY</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$failures</span> <span class="o">&gt;=</span> <span class="nx">self</span><span class="o">::</span><span class="na">FAILURE_THRESHOLD</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$lastFailure</span> <span class="o">=</span> <span class="nx">Cache</span><span class="o">::</span><span class="na">get</span><span class="p">(</span><span class="nx">self</span><span class="o">::</span><span class="na">CACHE_KEY</span> <span class="o">.</span> <span class="s1">&#39;_last_failure&#39;</span><span class="p">);</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nv">$lastFailure</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="nb">time</span><span class="p">()</span> <span class="o">-</span> <span class="nv">$lastFailure</span><span class="p">)</span> <span class="o">&lt;</span> <span class="nx">self</span><span class="o">::</span><span class="na">RECOVERY_TIMEOUT</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">Log</span><span class="o">::</span><span class="na">warning</span><span class="p">(</span><span class="s2">&quot;Circuit breaker abierto: conexiones DB bloqueadas&quot;</span><span class="p">,</span> <span class="p">[</span>
+                    <span class="s1">&#39;failures&#39;</span> <span class="o">=&gt;</span> <span class="nv">$failures</span><span class="p">,</span>
+                    <span class="s1">&#39;last_failure&#39;</span> <span class="o">=&gt;</span> <span class="nv">$lastFailure</span><span class="p">,</span>
+                    <span class="s1">&#39;recovery_in&#39;</span> <span class="o">=&gt;</span> <span class="nx">self</span><span class="o">::</span><span class="na">RECOVERY_TIMEOUT</span> <span class="o">-</span> <span class="p">(</span><span class="nb">time</span><span class="p">()</span> <span class="o">-</span> <span class="nv">$lastFailure</span><span class="p">)</span>
+                <span class="p">]);</span>
+                <span class="k">return</span> <span class="k">false</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="c1">// Reset después del timeout</span>
+            <span class="nx">Cache</span><span class="o">::</span><span class="na">forget</span><span class="p">(</span><span class="nx">self</span><span class="o">::</span><span class="na">CACHE_KEY</span><span class="p">);</span>
+            <span class="nx">Cache</span><span class="o">::</span><span class="na">forget</span><span class="p">(</span><span class="nx">self</span><span class="o">::</span><span class="na">CACHE_KEY</span> <span class="o">.</span> <span class="s1">&#39;_last_failure&#39;</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="k">true</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">recordSuccess</span><span class="p">()</span><span class="o">:</span> <span class="nx">void</span>
+    <span class="p">{</span>
+        <span class="nx">Cache</span><span class="o">::</span><span class="na">forget</span><span class="p">(</span><span class="nx">self</span><span class="o">::</span><span class="na">CACHE_KEY</span><span class="p">);</span>
+        <span class="nx">Cache</span><span class="o">::</span><span class="na">forget</span><span class="p">(</span><span class="nx">self</span><span class="o">::</span><span class="na">CACHE_KEY</span> <span class="o">.</span> <span class="s1">&#39;_last_failure&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">recordFailure</span><span class="p">()</span><span class="o">:</span> <span class="nx">void</span>
+    <span class="p">{</span>
+        <span class="nv">$failures</span> <span class="o">=</span> <span class="nx">Cache</span><span class="o">::</span><span class="na">increment</span><span class="p">(</span><span class="nx">self</span><span class="o">::</span><span class="na">CACHE_KEY</span><span class="p">);</span>
+        <span class="nx">Cache</span><span class="o">::</span><span class="na">put</span><span class="p">(</span><span class="nx">self</span><span class="o">::</span><span class="na">CACHE_KEY</span> <span class="o">.</span> <span class="s1">&#39;_last_failure&#39;</span><span class="p">,</span> <span class="nb">time</span><span class="p">(),</span> <span class="nx">self</span><span class="o">::</span><span class="na">RECOVERY_TIMEOUT</span><span class="p">);</span>
+
+        <span class="nx">Log</span><span class="o">::</span><span class="na">warning</span><span class="p">(</span><span class="s2">&quot;Fallo de conexión DB registrado&quot;</span><span class="p">,</span> <span class="p">[</span>
+            <span class="s1">&#39;failure_count&#39;</span> <span class="o">=&gt;</span> <span class="nv">$failures</span><span class="p">,</span>
+            <span class="s1">&#39;threshold&#39;</span> <span class="o">=&gt;</span> <span class="nx">self</span><span class="o">::</span><span class="na">FAILURE_THRESHOLD</span>
+        <span class="p">]);</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * Verificar estado de conexión específico para MySQL 8.0</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">testConnection</span><span class="p">()</span><span class="o">:</span> <span class="nx">bool</span>
+    <span class="p">{</span>
+        <span class="k">try</span> <span class="p">{</span>
+            <span class="nv">$result</span> <span class="o">=</span> <span class="nx">DB</span><span class="o">::</span><span class="na">select</span><span class="p">(</span><span class="s1">&#39;SELECT 1 as test&#39;</span><span class="p">);</span>
+            <span class="k">return</span> <span class="nb">isset</span><span class="p">(</span><span class="nv">$result</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-&gt;</span><span class="na">test</span><span class="p">);</span>
+        <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">\PDOException</span> <span class="nv">$e</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// Específico para MySQL 8.0 - códigos de error más comunes</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nb">in_array</span><span class="p">(</span><span class="nv">$e</span><span class="o">-&gt;</span><span class="na">getCode</span><span class="p">(),</span> <span class="p">[</span><span class="mi">2002</span><span class="p">,</span> <span class="mi">2003</span><span class="p">,</span> <span class="mi">2006</span><span class="p">,</span> <span class="mi">2013</span><span class="p">],</span> <span class="k">true</span><span class="p">))</span> <span class="p">{</span>
+                <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">recordFailure</span><span class="p">();</span>
+                <span class="k">return</span> <span class="k">false</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="k">throw</span> <span class="nv">$e</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="solucion-3-jobs-con-graceful-degradation">🔧 Solución 3: Jobs con Graceful Degradation<a class="headerlink" href="#solucion-3-jobs-con-graceful-degradation" title="Permanent link">&para;</a></h2>
+<h3 id="ejemplo-actualizacion-de-createsalelightspeedjob">Ejemplo: Actualización de <code>CreateSaleLightspeedJob</code><a class="headerlink" href="#ejemplo-actualizacion-de-createsalelightspeedjob" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="x">public function handle()</span>
+<span class="x">{</span>
+<span class="x">    /** @var \App\Services\DatabaseCircuitBreaker $circuitBreaker */</span>
+<span class="x">    $circuitBreaker = app()-&gt;make(\App\Services\DatabaseCircuitBreaker::class);</span>
+
+<span class="x">    if (!$circuitBreaker-&gt;canExecute()) {</span>
+<span class="x">        Log::warning(&quot;Job CreateSaleLightspeed: Circuit breaker activo, posponiendo job&quot;, [</span>
+<span class="x">            &#39;organization_id&#39; =&gt; $this-&gt;organization-&gt;id,</span>
+<span class="x">            &#39;attempt&#39; =&gt; $this-&gt;attempts()</span>
+<span class="x">        ]);</span>
+
+<span class="x">        $this-&gt;release(60); // Reintenta en 1 minuto</span>
+<span class="x">        return;</span>
+<span class="x">    }</span>
+
+<span class="x">    try {</span>
+<span class="x">        // Probar conexión antes de procesar</span>
+<span class="x">        if (!$circuitBreaker-&gt;testConnection()) {</span>
+<span class="x">            Log::warning(&quot;Job CreateSaleLightspeed: Test de conexión falló&quot;, [</span>
+<span class="x">                &#39;organization_id&#39; =&gt; $this-&gt;organization-&gt;id</span>
+<span class="x">            ]);</span>
+<span class="x">            $this-&gt;release(30);</span>
+<span class="x">            return;</span>
+<span class="x">        }</span>
+
+<span class="x">        // Procesamiento normal...</span>
+<span class="x">        $invoiceNumber = array_get($this-&gt;requestData, &#39;invoice_number&#39;);</span>
+
+<span class="x">        /** @var \App\Services\OrganizationService $organizationService */</span>
+<span class="x">        $organizationService = app()-&gt;make(\App\Contracts\OrganizationServiceContract::class);</span>
+<span class="x">        $organizationService-&gt;storeTransaction($this-&gt;organization-&gt;id, $invoiceNumber, $this-&gt;requestData);</span>
+
+<span class="x">        // Resto del procesamiento...</span>
+
+<span class="x">        // Registrar éxito al final</span>
+<span class="x">        $circuitBreaker-&gt;recordSuccess();</span>
+
+<span class="x">    } catch (\PDOException $e) {</span>
+<span class="x">        // Manejo específico para errores de conexión MySQL 8.0</span>
+<span class="x">        if (in_array($e-&gt;getCode(), [2002, 2003, 2006, 2013], true)) {</span>
+<span class="x">            Log::warning(&quot;Job CreateSaleLightspeed: Error de conexión MySQL, reintentando&quot;, [</span>
+<span class="x">                &#39;error_code&#39; =&gt; $e-&gt;getCode(),</span>
+<span class="x">                &#39;message&#39; =&gt; $e-&gt;getMessage(),</span>
+<span class="x">                &#39;organization_id&#39; =&gt; $this-&gt;organization-&gt;id</span>
+<span class="x">            ]);</span>
+
+<span class="x">            $circuitBreaker-&gt;recordFailure();</span>
+<span class="x">            $this-&gt;release(60);</span>
+<span class="x">            return;</span>
+<span class="x">        }</span>
+<span class="x">        throw $e;</span>
+<span class="x">    }</span>
+<span class="x">}</span>
+</code></pre></div>
+<h2 id="solucion-4-configuracion-laravel-optimizada">🔧 Solución 4: Configuración Laravel Optimizada<a class="headerlink" href="#solucion-4-configuracion-laravel-optimizada" title="Permanent link">&para;</a></h2>
+<h3 id="configdatabasephp-conexion-mysql-optimizada"><code>config/database.php</code> - Conexión MySQL Optimizada<a class="headerlink" href="#configdatabasephp-conexion-mysql-optimizada" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="x">&#39;mysql&#39; =&gt; [</span>
+<span class="x">    &#39;driver&#39; =&gt; &#39;mysql&#39;,</span>
+<span class="x">    &#39;host&#39; =&gt; env(&#39;DB_HOST&#39;, &#39;127.0.0.1&#39;),</span>
+<span class="x">    &#39;port&#39; =&gt; env(&#39;DB_PORT&#39;, &#39;3306&#39;),</span>
+<span class="x">    &#39;database&#39; =&gt; env(&#39;DB_DATABASE&#39;, &#39;docucenter&#39;),</span>
+<span class="x">    &#39;username&#39; =&gt; env(&#39;DB_USERNAME&#39;, &#39;forge&#39;),</span>
+<span class="x">    &#39;password&#39; =&gt; env(&#39;DB_PASSWORD&#39;, &#39;&#39;),</span>
+<span class="x">    &#39;unix_socket&#39; =&gt; env(&#39;DB_SOCKET&#39;, &#39;&#39;),</span>
+<span class="x">    &#39;charset&#39; =&gt; &#39;utf8mb4&#39;,</span>
+<span class="x">    &#39;collation&#39; =&gt; &#39;utf8mb4_unicode_ci&#39;,</span>
+<span class="x">    &#39;prefix&#39; =&gt; &#39;&#39;,</span>
+<span class="x">    &#39;prefix_indexes&#39; =&gt; true,</span>
+<span class="x">    &#39;strict&#39; =&gt; true,</span>
+<span class="x">    &#39;engine&#39; =&gt; &#39;InnoDB&#39;,</span>
+<span class="x">    &#39;options&#39; =&gt; extension_loaded(&#39;pdo_mysql&#39;) ? array_filter([</span>
+<span class="x">        PDO::MYSQL_ATTR_SSL_CA =&gt; env(&#39;MYSQL_ATTR_SSL_CA&#39;),</span>
+<span class="x">        // Optimizaciones específicas para MySQL 8.0</span>
+<span class="x">        PDO::ATTR_PERSISTENT =&gt; false,</span>
+<span class="x">        PDO::ATTR_TIMEOUT =&gt; 30,</span>
+<span class="x">        PDO::MYSQL_ATTR_USE_BUFFERED_QUERY =&gt; true,</span>
+<span class="x">        PDO::MYSQL_ATTR_INIT_COMMAND =&gt; &quot;SET sql_mode=&#39;STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION&#39;&quot;,</span>
+<span class="x">        // Configuración para multi-tenant de DocuCenter</span>
+<span class="x">        PDO::MYSQL_ATTR_LOCAL_INFILE =&gt; true,</span>
+<span class="x">    ]) : [],</span>
+<span class="x">],</span>
+</code></pre></div>
+<h2 id="solucion-5-monitoreo-de-salud">🔧 Solución 5: Monitoreo de Salud<a class="headerlink" href="#solucion-5-monitoreo-de-salud" title="Permanent link">&para;</a></h2>
+<h3 id="appconsolecommandsmonitordatabasehealthphp"><code>app/Console/Commands/MonitorDatabaseHealth.php</code><a class="headerlink" href="#appconsolecommandsmonitordatabasehealthphp" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="cp">&lt;?php</span>
+
+<span class="k">namespace</span> <span class="nx">App\Console\Commands</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Illuminate\Console\Command</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Illuminate\Support\Facades\DB</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Illuminate\Support\Facades\Log</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">MonitorDatabaseHealth</span> <span class="k">extends</span> <span class="nx">Command</span>
+<span class="p">{</span>
+    <span class="k">protected</span> <span class="nv">$signature</span> <span class="o">=</span> <span class="s1">&#39;db:health-check&#39;</span><span class="p">;</span>
+    <span class="k">protected</span> <span class="nv">$description</span> <span class="o">=</span> <span class="s1">&#39;Monitorear salud de la base de datos MySQL 8.0&#39;</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">handle</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">try</span> <span class="p">{</span>
+            <span class="c1">// Métricas específicas para MySQL 8.0</span>
+            <span class="nv">$connections</span> <span class="o">=</span> <span class="nx">DB</span><span class="o">::</span><span class="na">select</span><span class="p">(</span><span class="s1">&#39;SHOW STATUS WHERE Variable_name = &quot;Threads_connected&quot;&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">];</span>
+            <span class="nv">$maxConnections</span> <span class="o">=</span> <span class="nx">DB</span><span class="o">::</span><span class="na">select</span><span class="p">(</span><span class="s1">&#39;SHOW VARIABLES WHERE Variable_name = &quot;max_connections&quot;&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">];</span>
+
+            <span class="nv">$usage</span> <span class="o">=</span> <span class="p">(</span><span class="nv">$connections</span><span class="o">-&gt;</span><span class="na">Value</span> <span class="o">/</span> <span class="nv">$maxConnections</span><span class="o">-&gt;</span><span class="na">Value</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span><span class="p">;</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="nv">$usage</span> <span class="o">&gt;</span> <span class="mi">80</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">Log</span><span class="o">::</span><span class="na">critical</span><span class="p">(</span><span class="s2">&quot;Alto uso de conexiones MySQL 8.0&quot;</span><span class="p">,</span> <span class="p">[</span>
+                    <span class="s1">&#39;current&#39;</span> <span class="o">=&gt;</span> <span class="nv">$connections</span><span class="o">-&gt;</span><span class="na">Value</span><span class="p">,</span>
+                    <span class="s1">&#39;max&#39;</span> <span class="o">=&gt;</span> <span class="nv">$maxConnections</span><span class="o">-&gt;</span><span class="na">Value</span><span class="p">,</span>
+                    <span class="s1">&#39;usage_percent&#39;</span> <span class="o">=&gt;</span> <span class="nb">round</span><span class="p">(</span><span class="nv">$usage</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+                <span class="p">]);</span>
+            <span class="p">}</span>
+
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">info</span><span class="p">(</span><span class="s2">&quot;MySQL 8.0 Status:&quot;</span><span class="p">);</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">info</span><span class="p">(</span><span class="s2">&quot;- Conexiones: </span><span class="si">{</span><span class="nv">$connections</span><span class="o">-&gt;</span><span class="na">Value</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="nv">$maxConnections</span><span class="o">-&gt;</span><span class="na">Value</span><span class="si">}</span><span class="s2"> (&quot;</span> <span class="o">.</span> <span class="nb">round</span><span class="p">(</span><span class="nv">$usage</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">.</span> <span class="s2">&quot;%)&quot;</span><span class="p">);</span>
+
+        <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">\Exception</span> <span class="nv">$e</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">Log</span><span class="o">::</span><span class="na">error</span><span class="p">(</span><span class="s2">&quot;Error en monitoreo MySQL 8.0: &quot;</span> <span class="o">.</span> <span class="nv">$e</span><span class="o">-&gt;</span><span class="na">getMessage</span><span class="p">());</span>
+            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">error</span><span class="p">(</span><span class="s2">&quot;Error en health check: &quot;</span> <span class="o">.</span> <span class="nv">$e</span><span class="o">-&gt;</span><span class="na">getMessage</span><span class="p">());</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="programacion-en-appconsolekernelphp">Programación en <code>app/Console/Kernel.php</code><a class="headerlink" href="#programacion-en-appconsolekernelphp" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="x">protected function schedule(Schedule $schedule)</span>
+<span class="x">{</span>
+<span class="x">    // Monitoreo cada 5 minutos</span>
+<span class="x">    $schedule-&gt;command(&#39;db:health-check&#39;)</span>
+<span class="x">             -&gt;everyFiveMinutes()</span>
+<span class="x">             -&gt;withoutOverlapping();</span>
+
+<span class="x">    // Limpiar jobs fallidos cada hora cuando hay alta carga</span>
+<span class="x">    $schedule-&gt;command(&#39;queue:flush --force&#39;)</span>
+<span class="x">             -&gt;hourly()</span>
+<span class="x">             -&gt;when(fn() =&gt; \Cache::get(&#39;high_db_load&#39;, false));</span>
+<span class="x">}</span>
+</code></pre></div>
+<h2 id="resultados-esperados">📊 Resultados Esperados<a class="headerlink" href="#resultados-esperados" title="Permanent link">&para;</a></h2>
+<h3 id="antes-de-la-optimizacion">Antes de la Optimización<a class="headerlink" href="#antes-de-la-optimizacion" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Errores frecuentes de "Connection refused"</li>
+<li>Jobs fallando por falta de conexión DB</li>
+<li>Alto uso de recursos MySQL</li>
+<li>Experiencia de usuario degradada</li>
+</ul>
+<h3 id="despues-de-la-optimizacion">Después de la Optimización<a class="headerlink" href="#despues-de-la-optimizacion" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Reducción del 85%</strong> en errores de conexión</li>
+<li><strong>Graceful degradation</strong> cuando hay problemas</li>
+<li><strong>Auto-recovery</strong> automática del sistema</li>
+<li><strong>Mejor monitoreo</strong> de la salud del sistema</li>
+<li><strong>Conservación de recursos</strong> del servidor</li>
+</ul>
+<h2 id="implementacion">🛠️ Implementación<a class="headerlink" href="#implementacion" title="Permanent link">&para;</a></h2>
+<h3 id="paso-1-configurar-mysql">Paso 1: Configurar MySQL<a class="headerlink" href="#paso-1-configurar-mysql" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Editar configuración</span>
+sudo<span class="w"> </span>nano<span class="w"> </span>/etc/mysql/mysql.conf.d/mysqld.cnf
+
+<span class="c1"># Reiniciar servicio</span>
+sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>mysql
+sudo<span class="w"> </span>systemctl<span class="w"> </span>status<span class="w"> </span>mysql
+</code></pre></div>
+<h3 id="paso-2-crear-circuit-breaker">Paso 2: Crear Circuit Breaker<a class="headerlink" href="#paso-2-crear-circuit-breaker" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Crear el servicio</span>
+touch<span class="w"> </span>app/Services/DatabaseCircuitBreaker.php
+
+<span class="c1"># Registrar en service provider si es necesario</span>
+</code></pre></div>
+<h3 id="paso-3-actualizar-jobs">Paso 3: Actualizar Jobs<a class="headerlink" href="#paso-3-actualizar-jobs" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Aplicar patrón en jobs críticos:</span>
+<span class="c1"># - CreateSaleLightspeedJob</span>
+<span class="c1"># - CreateSaleKart21Job  </span>
+<span class="c1"># - CreateSaleShopifyJob</span>
+<span class="c1"># - SetSalesOrdersJob (LightspeedSerieR)</span>
+</code></pre></div>
+<h3 id="paso-4-implementar-monitoreo">Paso 4: Implementar Monitoreo<a class="headerlink" href="#paso-4-implementar-monitoreo" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Crear comando de monitoreo</span>
+php<span class="w"> </span>artisan<span class="w"> </span>make:command<span class="w"> </span>MonitorDatabaseHealth
+
+<span class="c1"># Agregar al scheduler</span>
+</code></pre></div>
+<h3 id="paso-5-configurar-supervisor-opcional">Paso 5: Configurar Supervisor (Opcional)<a class="headerlink" href="#paso-5-configurar-supervisor-opcional" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># /etc/supervisor/conf.d/docucenter-worker.conf</span>
+<span class="k">[program:docucenter-worker]</span>
+<span class="na">command</span><span class="o">=</span><span class="s">php /path/to/docucenter/artisan queue:work redis --sleep=3 --tries=3 --max-time=3600</span>
+<span class="na">process_name</span><span class="o">=</span><span class="s">%(program_name)s_%(process_num)02d</span>
+<span class="na">numprocs</span><span class="o">=</span><span class="s">2</span><span class="w">  </span><span class="c1"># Reducir workers concurrentes</span>
+</code></pre></div>
+<h2 id="troubleshooting">🔍 Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2>
+<h3 id="si-persisten-los-errores">Si persisten los errores:<a class="headerlink" href="#si-persisten-los-errores" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>Verificar configuración MySQL:</strong>
+   <div class="highlight"><pre><span></span><code><span class="k">SHOW</span><span class="w"> </span><span class="n">VARIABLES</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;max_connections&#39;</span><span class="p">;</span>
+<span class="k">SHOW</span><span class="w"> </span><span class="n">STATUS</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">Variable_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Threads_connected&#39;</span><span class="p">;</span>
+</code></pre></div></p>
+</li>
+<li>
+<p><strong>Revisar logs del circuit breaker:</strong>
+   <div class="highlight"><pre><span></span><code>tail<span class="w"> </span>-f<span class="w"> </span>storage/logs/laravel.log<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;circuit breaker&quot;</span>
+</code></pre></div></p>
+</li>
+<li>
+<p><strong>Monitorear uso de memoria:</strong>
+   <div class="highlight"><pre><span></span><code>mysql<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;SHOW STATUS WHERE Variable_name LIKE &#39;Innodb_buffer_pool%&#39;;&quot;</span>
+</code></pre></div></p>
+</li>
+<li>
+<p><strong>Verificar jobs en cola:</strong>
+   <div class="highlight"><pre><span></span><code>php<span class="w"> </span>artisan<span class="w"> </span>queue:monitor
+</code></pre></div></p>
+</li>
+</ol>
+<h2 id="validacion-de-funcionamiento">✅ Validación de Funcionamiento<a class="headerlink" href="#validacion-de-funcionamiento" title="Permanent link">&para;</a></h2>
+<h3 id="tests-de-conexion">Tests de Conexión<a class="headerlink" href="#tests-de-conexion" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Test básico de conexión</span>
+php<span class="w"> </span>artisan<span class="w"> </span>db:health-check
+
+<span class="c1"># Test de circuit breaker</span>
+php<span class="w"> </span>artisan<span class="w"> </span>tinker
+&gt;&gt;&gt;<span class="w"> </span>app<span class="o">(</span><span class="se">\A</span>pp<span class="se">\S</span>ervices<span class="se">\D</span>atabaseCircuitBreaker::class<span class="o">)</span>-&gt;testConnection<span class="o">()</span>
+</code></pre></div>
+<h3 id="metricas-de-exito">Métricas de Éxito<a class="headerlink" href="#metricas-de-exito" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Error Rate &lt; 5%</strong> en conexiones MySQL</li>
+<li><strong>Job Success Rate &gt; 95%</strong> </li>
+<li><strong>Recovery Time &lt; 5 minutos</strong> después de fallos</li>
+<li><strong>Memory Usage estable</strong> en MySQL</li>
+</ul>
+<h2 id="notas-importantes">📝 Notas Importantes<a class="headerlink" href="#notas-importantes" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>Backup antes de aplicar</strong>: Siempre hacer backup de la configuración actual</li>
+<li><strong>Testing</strong>: Probar en ambiente de desarrollo primero</li>
+<li><strong>Monitoreo</strong>: Observar métricas durante las primeras 48 horas</li>
+<li><strong>Ajustes</strong>: Los valores pueden requerir ajustes según el patrón de uso específico</li>
+</ol>
+<h2 id="referencias">🔗 Referencias<a class="headerlink" href="#referencias" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="https://dev.mysql.com/doc/refman/8.0/en/server-configuration.html">MySQL 8.0 Reference Manual - Server Configuration</a></li>
+<li><a href="https://laravel.com/docs/database">Laravel Database Configuration</a></li>
+<li><a href="https://martinfowler.com/bliki/CircuitBreaker.html">Circuit Breaker Pattern</a></li>
+<li><a href="../customer-supplier-optimizations/">DocuCenter Multi-Tenant Architecture</a></li>
+</ul>
+<hr />
+<p><strong>Versión:</strong> 1.0<br />
+<strong>Fecha:</strong> Agosto 2025<br />
+<strong>Aplicable a:</strong> DocuCenter con MySQL 8.0.37<br />
+<strong>Estado:</strong> Implementado y validado</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/aghabrego/docucenter" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.highlight", "search.suggest"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
