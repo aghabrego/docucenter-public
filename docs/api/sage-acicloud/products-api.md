@@ -209,6 +209,55 @@ GET /api/acicloud/products?filter[description][operator]=contains&filter[descrip
 
 ---
 
+## Obtener Productos Importados
+
+**Endpoint:** `GET /api/acicloud/products_imp`  
+**Controller:** `ACIcloudController::getProductsImp`  
+**Autenticación:** Bearer Token requerido  
+**Middleware:** `check.activate.organization`
+
+### Descripción
+
+Obtiene la lista de productos que han sido importados/creados a través de la API.
+
+### Respuesta de Éxito
+
+```json
+{
+  "success": true,
+  "data": [
+    {
+      "id": 1,
+      "code": "PROD001",
+      "description": "Laptop Dell Inspiron 15",
+      "sage_id": "SAGE_PROD_001",
+      "import_status": "completed",
+      "created_at": "2025-01-29 21:30:00",
+      "updated_at": "2025-01-29 21:30:00",
+      "errors": null
+    },
+    {
+      "id": 2,
+      "code": "PROD002",
+      "description": "Mouse Inalámbrico Logitech",
+      "sage_id": "SAGE_PROD_002",
+      "import_status": "pending",
+      "created_at": "2025-01-29 21:25:00",
+      "updated_at": "2025-01-29 21:25:00",
+      "errors": null
+    }
+  ],
+  "pagination": {
+    "current_page": 1,
+    "per_page": 25,
+    "total": 150,
+    "total_pages": 6
+  }
+}
+```
+
+---
+
 ## Consultar Producto Específico
 
 **Endpoint:** `GET /api/acicloud/product_imp/{identifier}`  
@@ -337,55 +386,6 @@ Todos los campos son opcionales. Solo se actualizarán los campos enviados.
     "Price1": [
       "El precio debe ser un valor numérico válido"
     ]
-  }
-}
-```
-
----
-
-## Obtener Productos Importados
-
-**Endpoint:** `GET /api/acicloud/products_imp`  
-**Controller:** `ACIcloudController::getProductsImp`  
-**Autenticación:** Bearer Token requerido  
-**Middleware:** `check.activate.organization`
-
-### Descripción
-
-Obtiene la lista de productos que han sido importados/creados a través de la API.
-
-### Respuesta de Éxito
-
-```json
-{
-  "success": true,
-  "data": [
-    {
-      "id": 1,
-      "code": "PROD001",
-      "description": "Laptop Dell Inspiron 15",
-      "sage_id": "SAGE_PROD_001",
-      "import_status": "completed",
-      "created_at": "2025-01-29 21:30:00",
-      "updated_at": "2025-01-29 21:30:00",
-      "errors": null
-    },
-    {
-      "id": 2,
-      "code": "PROD002",
-      "description": "Mouse Inalámbrico Logitech",
-      "sage_id": "SAGE_PROD_002",
-      "import_status": "pending",
-      "created_at": "2025-01-29 21:25:00",
-      "updated_at": "2025-01-29 21:25:00",
-      "errors": null
-    }
-  ],
-  "pagination": {
-    "current_page": 1,
-    "per_page": 25,
-    "total": 150,
-    "total_pages": 6
   }
 }
 ```

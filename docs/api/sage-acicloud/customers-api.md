@@ -1,6 +1,14 @@
 # API Sage ACICloud - Módulo Clientes
 
-## Crear Clie```json
+## Crear Cliente
+
+**Endpoint:** `POST /api/acicloud/customer`
+**Request Class:** `CustomersImpRequest`
+**Autenticación:** Bearer Token requerido
+
+### Ejemplo de Request
+
+```json
 {
   "CustomerID": "12345",
   "Customer_Bill_Name": "John Doe",
@@ -273,7 +281,8 @@
 ## Consultar Cliente Específico
 
 **Endpoint:** `GET /api/acicloud/customer_imp/{identifier}`  
-**Autenticación:** Bearer Token requerido
+**Autenticación:** Bearer Token requerido  
+**Middleware:** `check.activate.organization`
 
 Obtiene los detalles de un cliente específico por su identificador.
 
@@ -295,7 +304,7 @@ GET /api/acicloud/customer_imp/CUST001
 {
   "success": true,
   "data": {
-    "id": 123,
+    "id": 1,
     "CustomerID": "CUST001",
     "Customer_Bill_Name": "Empresa Ejemplo S.A.",
     "AddressLine1": "Calle 50, Edificio Torre Global",
@@ -308,11 +317,10 @@ GET /api/acicloud/customer_imp/CUST001
     "Email": "contacto@empresaejemplo.com",
     "RUC": "1234567890123",
     "DV": "12",
-    "Custom_field3": "Sector_Financiero",
-    "Custom_field4": "Cliente_VIP",
-    "Custom_field5": "Corporativo",
-    "created_at": "2025-01-10T10:00:00Z",
-    "updated_at": "2025-01-15T14:30:00Z"
+    "sage_id": "SAGE_CUST_001",
+    "import_status": "completed",
+    "created_at": "2025-01-29 21:30:00",
+    "updated_at": "2025-01-29 21:30:00"
   }
 }
 ```
@@ -331,7 +339,8 @@ GET /api/acicloud/customer_imp/CUST001
 ## Actualizar Cliente
 
 **Endpoint:** `PUT /api/acicloud/customer_imp/{id}`  
-**Autenticación:** Bearer Token requerido
+**Autenticación:** Bearer Token requerido  
+**Middleware:** `check.activate.organization`
 
 Actualiza los datos de un cliente existente.
 
@@ -356,21 +365,17 @@ Todos los campos son opcionales. Solo se actualizarán los campos enviados.
 | `Zip` | string | Código postal | Máx. 12 caracteres |
 | `Country` | string | País | - |
 | `Telephone1` | string | Teléfono principal | Máx. 20 caracteres |
-| `Email` | string | Correo electrónico | Formato email válido |
+| `Email` | string | Correo electrónico | Máx. 64 caracteres |
 | `RUC` | string | RUC del cliente | Alfanumérico, máx. 40 |
 | `DV` | string | Dígito verificador | Alfanumérico, máx. 40 |
-| `Custom_field3` | string | Campo personalizado 3 | Alfanumérico, máx. 40 |
-| `Custom_field4` | string | Campo personalizado 4 | Alfanumérico, máx. 40 |
-| `Custom_field5` | string | Campo personalizado 5 | Alfanumérico, máx. 40 |
 
 ### Ejemplo de Request
 
 ```json
 {
-  "Customer_Bill_Name": "Empresa Ejemplo Actualizada S.A.",
-  "Email": "nuevo@empresaejemplo.com",
-  "Telephone1": "+507 9876-5432",
-  "Custom_field4": "Cliente_Platinum"
+  "Customer_Bill_Name": "Empresa Ejemplo S.A. - Actualizada",
+  "Email": "nuevoemail@empresaejemplo.com",
+  "Telephone1": "+507 9876-5432"
 }
 ```
 
@@ -381,13 +386,12 @@ Todos los campos son opcionales. Solo se actualizarán los campos enviados.
   "success": true,
   "message": "Cliente actualizado exitosamente",
   "data": {
-    "id": 123,
+    "id": 1,
     "CustomerID": "CUST001",
-    "Customer_Bill_Name": "Empresa Ejemplo Actualizada S.A.",
-    "Email": "nuevo@empresaejemplo.com",
+    "Customer_Bill_Name": "Empresa Ejemplo S.A. - Actualizada",
+    "Email": "nuevoemail@empresaejemplo.com",
     "Telephone1": "+507 9876-5432",
-    "Custom_field4": "Cliente_Platinum",
-    "updated_at": "2025-01-16T10:00:00Z"
+    "updated_at": "2025-01-16 10:00:00"
   }
 }
 ```
@@ -400,7 +404,7 @@ Todos los campos son opcionales. Solo se actualizarán los campos enviados.
   "message": "Error al actualizar cliente",
   "errors": {
     "Email": [
-      "El formato del email no es válido"
+      "El formato del correo electrónico no es válido"
     ]
   }
 }
@@ -469,23 +473,6 @@ curl -X GET "https://api.docucenter.com/api/acicloud/customers" \
   -d '{
     "limit": 10,
     "order_column": "Customer_Bill_Name"
-  }'
-```
-
-#### Consultar Cliente Específico
-```bash
-curl -X GET "https://api.docucenter.com/api/acicloud/customer_imp/CUST001" \
-  -H "Authorization: Bearer YOUR_TOKEN"
-```
-
-#### Actualizar Cliente
-```bash
-curl -X PUT "https://api.docucenter.com/api/acicloud/customer_imp/123" \
-  -H "Authorization: Bearer YOUR_TOKEN" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "Customer_Bill_Name": "Empresa Actualizada S.A.",
-    "Email": "nuevo@empresa.com"
   }'
 ```
 
