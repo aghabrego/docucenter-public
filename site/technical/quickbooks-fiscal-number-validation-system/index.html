@@ -1,0 +1,4720 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentación técnica y de usuario de DocuCenter - Sistema de facturación electrónica">
+      
+      
+        <meta name="author" content="aghabrego">
+      
+      
+        <link rel="canonical" href="https://aghabrego.github.io/docucenter-public/technical/quickbooks-fiscal-number-validation-system/">
+      
+      
+        <link rel="prev" href="../quickbooks-bills-job-graceful-validation/">
+      
+      
+        <link rel="next" href="../document-ai-import-to-workbench/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="https://home.apconpanama.me/wp-content/uploads/2024/03/logo3.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Sistema de Validación de Números Fiscales QuickBooks - DocuCenter</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="light-blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#sistema-de-validacion-de-numeros-fiscales-quickbooks" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="DocuCenter" class="md-header__button md-logo" aria-label="DocuCenter" data-md-component="logo">
+      
+  <img src="https://home.apconpanama.me/wp-content/uploads/2024/03/logo3.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            DocuCenter
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Sistema de Validación de Números Fiscales QuickBooks
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="light-blue"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/aghabrego/docucenter-public" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    aghabrego/docucenter-public
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Pestañas" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Inicio
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../api/" class="md-tabs__link">
+          
+  
+  
+  APIs
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../optimizations/" class="md-tabs__link">
+          
+  
+  
+  Optimizaciones
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+  Documentación Técnica
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../validations/" class="md-tabs__link">
+          
+  
+  
+  Validaciones
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../testing/" class="md-tabs__link">
+          
+  
+  
+  Testing
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../integrations/" class="md-tabs__link">
+          
+  
+  
+  Integraciones
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="DocuCenter" class="md-nav__button md-logo" aria-label="DocuCenter" data-md-component="logo">
+      
+  <img src="https://home.apconpanama.me/wp-content/uploads/2024/03/logo3.png" alt="logo">
+
+    </a>
+    DocuCenter
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/aghabrego/docucenter-public" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    aghabrego/docucenter-public
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    APIs
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    APIs
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    APIs de DocuCenter
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Facturación Electrónica (FE)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Facturación Electrónica (FE)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/fe-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Facturación Electrónica (FE) - DocuCenter
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/acicloud-fe-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Facturación Electrónica - Integración ACICloud FE
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/document-emission-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Facturación Electrónica - Emisión de Documentos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/shopify-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Facturación Electrónica - Integración Shopify
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/lightspeed-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Facturación Electrónica - Integración Lightspeed
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/maxgym-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Facturación Electrónica - Integración Maxgym
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/meypar-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Facturación Electrónica - Integración Meypar
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/kart21-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Facturación Electrónica - Integración Kart21
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sage ACICloud
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Sage ACICloud
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/customers-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Sage ACICloud - Módulo Clientes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/products-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Productos - Sage ACICloud
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/sales-orders-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Sage ACICloud - Módulo Órdenes de Venta
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/purchases-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Compras - Sage ACICloud
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/payments-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Pagos y Créditos - Sage ACICloud
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/inventory-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Inventario - Sage ACICloud
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/jobs-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Trabajos/Jobs - Sage ACICloud
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Organizaciones
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Organizaciones
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/organizations/organizations-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API de Organizaciones
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Optimizaciones
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Optimizaciones
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optimizations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Optimizaciones - DocuCenter
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Performance
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Performance
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optimizations/customer-supplier-optimizations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Optimizaciones para el manejo de muchos clientes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optimizations/mysql-optimization-circuit-breaker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Optimización MySQL 8.0 y Circuit Breaker para DocuCenter
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Documentación Técnica
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Documentación Técnica
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Documentación Técnica - DocuCenter
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    QuickBooks
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    QuickBooks
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../quickbooks-webhook-organizationid-fix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fix: QuickBooks Webhook OrganizationId Duplicado
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../quickbooks-bills-job-graceful-validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fix: Validación Graceful de Tablas en CreateIntuitBillsJob
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sistema de Validación de Números Fiscales QuickBooks
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sistema de Validación de Números Fiscales QuickBooks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#resumen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumen
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#problema-identificado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Problema Identificado
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Problema Identificado">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#situacion-original" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Situación Original
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#analisis-del-cufe-panameno" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Análisis del CUFE Panameño
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#arquitectura-de-la-solucion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Arquitectura de la Solución
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Arquitectura de la Solución">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#componentes-implementados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Componentes Implementados
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#flujo-de-validacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Flujo de Validación
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementacion-detallada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implementación Detallada
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Implementación Detallada">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-helper-de-validacion-cufe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Helper de Validación CUFE
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Helper de Validación CUFE">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#metodo-extractfiscalnumberfromcufecufe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Método: extractFiscalNumberFromCufe($cufe)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metodo-checkexistingfiscalnumberfiscalnumber-organizationid-excludesaleid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Método: checkExistingFiscalNumber($fiscalNumber, $organizationId, $excludeSaleId)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-modelo-salesheaderimp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Modelo SalesHeaderImp
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Modelo SalesHeaderImp">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cambios-implementados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cambios Implementados
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-job-createsalequickbooksjob" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Job CreateSaleQuickBooksJob
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Job CreateSaleQuickBooksJob">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#metodo-extractandstorefiscalnumbersale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Método: extractAndStoreFiscalNumber($sale)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-fecontroller-validacion-preventiva" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. FeController Validación Preventiva
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. FeController Validación Preventiva">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#metodo-validatequickbooksinvoiceduplicationorganization-requestdata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Método: validateQuickBooksInvoiceDuplication($organization, $requestData)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-comando-de-migracion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Comando de Migración
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Comando de Migración">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#uso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Uso
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-stub-de-base-de-datos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Stub de Base de Datos
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testing
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Testing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tests-unitarios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tests Unitarios
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Tests Unitarios">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#casos-de-prueba" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Casos de Prueba
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tests-de-integracion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tests de Integración
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Tests de Integración">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#validaciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validaciones
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#casos-de-uso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Casos de Uso
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Casos de Uso">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo-1-cliente-con-factura-duplicada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplo 1: Cliente con Factura Duplicada
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo-2-validacion-en-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplo 2: Validación en API
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuracion-y-despliegue" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuración y Despliegue
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuración y Despliegue">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-agregar-columna-a-bases-de-datos-existentes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Agregar Columna a Bases de Datos Existentes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-verificar-funcionamiento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Verificar Funcionamiento
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#monitoreo-y-logging" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Monitoreo y Logging
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Monitoreo y Logging">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#eventos-loggeados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Eventos Loggeados
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#consultas-de-monitoreo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Consultas de Monitoreo
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#consideraciones-de-rendimiento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Consideraciones de Rendimiento
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Consideraciones de Rendimiento">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#optimizaciones-implementadas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Optimizaciones Implementadas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#recomendaciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Recomendaciones
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mantenimiento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mantenimiento
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Mantenimiento">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#limpieza-de-datos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Limpieza de Datos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#verificacion-periodica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Verificación Periódica
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resolucion-de-problemas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resolución de Problemas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Resolución de Problemas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#problema-cufe-sin-numero-fiscal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Problema: CUFE sin número fiscal
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problema-falsos-positivos-en-validacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Problema: Falsos positivos en validación
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problema-performance-lenta-en-validacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Problema: Performance lenta en validación
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#roadmap-futuro" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Roadmap Futuro
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Roadmap Futuro">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mejoras-propuestas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mejoras Propuestas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#extensiones-posibles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Extensiones Posibles
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Document AI
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Document AI
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../document-ai-import-to-workbench/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Document AI - Importación a Workbench
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../document-ai-import-implementation-summary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Document AI - Implementación Import to Workbench
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Alanube DOM
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Alanube DOM
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../alanube-dom-service-usage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guía de Uso del Servicio AlanubeDomService
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../alanube-dom-export-invoices/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Facturas de Exportación Electrónica (46) - Alanube DOM
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ALANUBE_DOM_COMPLETE_INTEGRATION/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integración Completa Alanube DOM - República Dominicana
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../FISCAL_CREDIT_IMPLEMENTATION_SUMMARY/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Implementación Completa de Facturas de Crédito Fiscal (31) - Alanube DOM
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_5" id="__nav_4_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Soluciones Técnicas
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Soluciones Técnicas
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ezeeissued-solution-summary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Solución Implementada - Campo EzeeIssued
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../getsaleproperty-optimizations-summary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Optimizaciones Completas - getSaleProperty() - Create.php
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ezeeissued-field-correction-summary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Corrección de Campo EzeeIssued - Resumen Técnico
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_6" id="__nav_4_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pagos y Cálculos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Pagos y Cálculos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../payment-calculation-fix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Análisis de Discrepancias en Cálculo de Pagos - Facturación Electrónica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../solucion-sincronizacion-pagos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Solución Final: Sincronización Completa de Pagos en Facturación Electrónica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_7" id="__nav_4_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SQL Server
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    SQL Server
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sql-server-complete-store-id-filtering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Implementación Completa de Filtrado por Store ID en Jobs SQL Server
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sql-server-store-id-filtering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Implementación de Filtrado por Store ID en STInvoiceJob
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validaciones
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Validaciones
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../validations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validaciones - DocuCenter
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Documentos Fiscales
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Documentos Fiscales
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../validations/createSale-ruc-validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validación de RUC en CreateSaleMaxgymRequest
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../validations/maxgym-ruc-validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validación de RUC en MaxgymService
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Testing
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Testing
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🧪 Sistema de Testing DocuCenter
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_2" id="__nav_6_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reportes de Error
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Reportes de Error
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../testing/PLUSMOVIL-PRODUCTION-ERROR-REPORT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reporte Error PlusMóvil Producción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integraciones
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Integraciones
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../integrations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integraciones Disponibles
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_2" id="__nav_7_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PlusMóvil
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    PlusMóvil
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../integrations/plusmovil-implementation-summary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resumen Implementación
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../integrations/plusmovil-implementation-analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Análisis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../integrations/plusmovil-api-testing-results/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resultados Testing API
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../integrations/plusmovil-continuation-plan/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plan Continuación
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../integrations/plusmovil-next-steps/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Próximos Pasos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#resumen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumen
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#problema-identificado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Problema Identificado
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Problema Identificado">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#situacion-original" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Situación Original
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#analisis-del-cufe-panameno" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Análisis del CUFE Panameño
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#arquitectura-de-la-solucion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Arquitectura de la Solución
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Arquitectura de la Solución">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#componentes-implementados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Componentes Implementados
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#flujo-de-validacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Flujo de Validación
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementacion-detallada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implementación Detallada
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Implementación Detallada">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-helper-de-validacion-cufe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Helper de Validación CUFE
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Helper de Validación CUFE">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#metodo-extractfiscalnumberfromcufecufe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Método: extractFiscalNumberFromCufe($cufe)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metodo-checkexistingfiscalnumberfiscalnumber-organizationid-excludesaleid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Método: checkExistingFiscalNumber($fiscalNumber, $organizationId, $excludeSaleId)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-modelo-salesheaderimp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Modelo SalesHeaderImp
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Modelo SalesHeaderImp">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cambios-implementados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cambios Implementados
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-job-createsalequickbooksjob" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Job CreateSaleQuickBooksJob
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Job CreateSaleQuickBooksJob">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#metodo-extractandstorefiscalnumbersale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Método: extractAndStoreFiscalNumber($sale)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-fecontroller-validacion-preventiva" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. FeController Validación Preventiva
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. FeController Validación Preventiva">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#metodo-validatequickbooksinvoiceduplicationorganization-requestdata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Método: validateQuickBooksInvoiceDuplication($organization, $requestData)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-comando-de-migracion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Comando de Migración
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Comando de Migración">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#uso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Uso
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-stub-de-base-de-datos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Stub de Base de Datos
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testing
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Testing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tests-unitarios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tests Unitarios
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Tests Unitarios">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#casos-de-prueba" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Casos de Prueba
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tests-de-integracion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tests de Integración
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Tests de Integración">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#validaciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validaciones
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#casos-de-uso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Casos de Uso
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Casos de Uso">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo-1-cliente-con-factura-duplicada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplo 1: Cliente con Factura Duplicada
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo-2-validacion-en-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplo 2: Validación en API
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuracion-y-despliegue" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuración y Despliegue
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuración y Despliegue">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-agregar-columna-a-bases-de-datos-existentes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Agregar Columna a Bases de Datos Existentes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-verificar-funcionamiento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Verificar Funcionamiento
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#monitoreo-y-logging" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Monitoreo y Logging
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Monitoreo y Logging">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#eventos-loggeados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Eventos Loggeados
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#consultas-de-monitoreo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Consultas de Monitoreo
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#consideraciones-de-rendimiento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Consideraciones de Rendimiento
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Consideraciones de Rendimiento">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#optimizaciones-implementadas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Optimizaciones Implementadas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#recomendaciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Recomendaciones
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mantenimiento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mantenimiento
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Mantenimiento">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#limpieza-de-datos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Limpieza de Datos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#verificacion-periodica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Verificación Periódica
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resolucion-de-problemas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resolución de Problemas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Resolución de Problemas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#problema-cufe-sin-numero-fiscal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Problema: CUFE sin número fiscal
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problema-falsos-positivos-en-validacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Problema: Falsos positivos en validación
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problema-performance-lenta-en-validacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Problema: Performance lenta en validación
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#roadmap-futuro" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Roadmap Futuro
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Roadmap Futuro">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mejoras-propuestas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mejoras Propuestas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#extensiones-posibles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Extensiones Posibles
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="sistema-de-validacion-de-numeros-fiscales-quickbooks">Sistema de Validación de Números Fiscales QuickBooks<a class="headerlink" href="#sistema-de-validacion-de-numeros-fiscales-quickbooks" title="Permanent link">&para;</a></h1>
+<p><strong>Fecha:</strong> 13 de septiembre de 2025<br />
+<strong>Versión:</strong> 1.0<br />
+<strong>Autor:</strong> Sistema DocuCenter  </p>
+<h2 id="resumen">Resumen<a class="headerlink" href="#resumen" title="Permanent link">&para;</a></h2>
+<p>Implementación de un sistema completo de validación de números fiscales para prevenir la duplicación de documentos fiscales en la integración QuickBooks, solucionando el problema de múltiples facturas del mismo cliente con diferentes números fiscales.</p>
+<h2 id="problema-identificado">Problema Identificado<a class="headerlink" href="#problema-identificado" title="Permanent link">&para;</a></h2>
+<h3 id="situacion-original">Situación Original<a class="headerlink" href="#situacion-original" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Cliente:</strong> VentasGT</li>
+<li><strong>Problema:</strong> Facturas duplicadas en QuickBooks con diferentes números fiscales</li>
+<li>Factura 1: CUFE con fiscal <code>3162</code></li>
+<li>Factura 2: CUFE con fiscal <code>3134</code></li>
+<li><strong>Impacto:</strong> Duplicación de documentos fiscales para el mismo cliente</li>
+<li><strong>Causa:</strong> Falta de validación por número fiscal extraído del CUFE</li>
+</ul>
+<h3 id="analisis-del-cufe-panameno">Análisis del CUFE Panameño<a class="headerlink" href="#analisis-del-cufe-panameno" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>CUFE: FE0120240826602793000000390500200000009773162
+Estructura:
+- Posiciones 1-2: FE (Factura Electrónica)
+- Posiciones 3-10: Fecha emisión
+- Posiciones 11-24: RUC del emisor
+- Posiciones 25-40: Datos del documento
+- Posiciones 41-44: NÚMERO FISCAL (3162)
+- Posiciones 45+: Datos adicionales
+</code></pre></div>
+<h2 id="arquitectura-de-la-solucion">Arquitectura de la Solución<a class="headerlink" href="#arquitectura-de-la-solucion" title="Permanent link">&para;</a></h2>
+<h3 id="componentes-implementados">Componentes Implementados<a class="headerlink" href="#componentes-implementados" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>CufeValidationHelper</strong> - Lógica central de extracción y validación</li>
+<li><strong>SalesHeaderImp Model</strong> - Almacenamiento del número fiscal</li>
+<li><strong>CreateSaleQuickBooksJob</strong> - Procesamiento y extracción automática</li>
+<li><strong>FeController</strong> - Validación preventiva en API</li>
+<li><strong>AddFiscalDocumentNumberColumnCommand</strong> - Migración para bases de datos cliente</li>
+<li><strong>Tests</strong> - Validación unitaria e integración</li>
+</ol>
+<h3 id="flujo-de-validacion">Flujo de Validación<a class="headerlink" href="#flujo-de-validacion" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>graph TD
+    A[API create_sale_quickbooks] --&gt; B[Validación Preventiva]
+    B --&gt; C[Dispatch CreateSaleQuickBooksJob]
+    C --&gt; D[Procesar Venta]
+    D --&gt; E[Emitir FE]
+    E --&gt; F[Extraer CUFE]
+    F --&gt; G[Extraer Número Fiscal]
+    G --&gt; H[Validar Duplicados]
+    H --&gt; I[Almacenar en BD]
+</code></pre></div>
+<h2 id="implementacion-detallada">Implementación Detallada<a class="headerlink" href="#implementacion-detallada" title="Permanent link">&para;</a></h2>
+<h3 id="1-helper-de-validacion-cufe">1. Helper de Validación CUFE<a class="headerlink" href="#1-helper-de-validacion-cufe" title="Permanent link">&para;</a></h3>
+<p><strong>Ubicación:</strong> <code>app/Helpers/CufeValidationHelper.php</code></p>
+<h4 id="metodo-extractfiscalnumberfromcufecufe">Método: <code>extractFiscalNumberFromCufe($cufe)</code><a class="headerlink" href="#metodo-extractfiscalnumberfromcufecufe" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="x">/**</span>
+<span class="x"> * Extrae el número fiscal del CUFE panameño</span>
+<span class="x"> * @param string|null $cufe CUFE completo</span>
+<span class="x"> * @return string|null Número fiscal (4 dígitos) o null si inválido</span>
+<span class="x"> */</span>
+<span class="x">public static function extractFiscalNumberFromCufe($cufe): ?string</span>
+<span class="x">{</span>
+<span class="x">    if (empty($cufe) || !is_string($cufe)) return null;</span>
+<span class="x">    if (strlen($cufe) &lt; 45) return null;</span>
+<span class="x">    if (!str_starts_with($cufe, &#39;FE&#39;)) return null;</span>
+
+<span class="x">    return substr($cufe, 40, 4); // Posiciones 41-44</span>
+<span class="x">}</span>
+</code></pre></div>
+<h4 id="metodo-checkexistingfiscalnumberfiscalnumber-organizationid-excludesaleid">Método: <code>checkExistingFiscalNumber($fiscalNumber, $organizationId, $excludeSaleId)</code><a class="headerlink" href="#metodo-checkexistingfiscalnumberfiscalnumber-organizationid-excludesaleid" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="x">/**</span>
+<span class="x"> * Verifica si existe una factura con el mismo número fiscal</span>
+<span class="x"> * @param string $fiscalNumber Número fiscal a validar</span>
+<span class="x"> * @param int $organizationId ID de la organización</span>
+<span class="x"> * @param int|null $excludeSaleId ID de venta a excluir</span>
+<span class="x"> * @return array Resultado de la validación</span>
+<span class="x"> */</span>
+</code></pre></div>
+<h3 id="2-modelo-salesheaderimp">2. Modelo SalesHeaderImp<a class="headerlink" href="#2-modelo-salesheaderimp" title="Permanent link">&para;</a></h3>
+<p><strong>Archivo:</strong> <code>app/Models/SalesHeaderImp.php</code></p>
+<h4 id="cambios-implementados">Cambios Implementados<a class="headerlink" href="#cambios-implementados" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="x">// Documentación de propiedades</span>
+<span class="x">/**</span>
+<span class="x"> * @property string $fiscal_document_number</span>
+<span class="x"> */</span>
+
+<span class="x">// Fillable</span>
+<span class="x">protected $fillable = [</span>
+<span class="x">    // ... campos existentes</span>
+<span class="x">    &#39;intuit_extracted_cufe&#39;,</span>
+<span class="x">    &#39;fiscal_document_number&#39;, // ← NUEVO</span>
+<span class="x">    &#39;intuit_sync_attempts&#39;,</span>
+<span class="x">    // ...</span>
+<span class="x">];</span>
+</code></pre></div>
+<h3 id="3-job-createsalequickbooksjob">3. Job CreateSaleQuickBooksJob<a class="headerlink" href="#3-job-createsalequickbooksjob" title="Permanent link">&para;</a></h3>
+<p><strong>Archivo:</strong> <code>app/Jobs/CreateSaleQuickBooksJob.php</code></p>
+<h4 id="metodo-extractandstorefiscalnumbersale">Método: <code>extractAndStoreFiscalNumber($sale)</code><a class="headerlink" href="#metodo-extractandstorefiscalnumbersale" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="x">protected function extractAndStoreFiscalNumber(\App\Models\SalesHeaderImp $sale): void</span>
+<span class="x">{</span>
+<span class="x">    try {</span>
+<span class="x">        DB::connection()-&gt;useDatabase($this-&gt;organization-&gt;database);</span>
+<span class="x">        $sale-&gt;refresh();</span>
+
+<span class="x">        $cufe = $sale-&gt;getAttribute(&#39;intuit_extracted_cufe&#39;);</span>
+<span class="x">        if (empty($cufe)) return;</span>
+
+<span class="x">        $fiscalNumber = CufeValidationHelper::extractFiscalNumberFromCufe($cufe);</span>
+<span class="x">        if (empty($fiscalNumber)) return;</span>
+
+<span class="x">        // Validar duplicados</span>
+<span class="x">        $existingValidation = CufeValidationHelper::checkExistingFiscalNumber(</span>
+<span class="x">            $fiscalNumber, </span>
+<span class="x">            $this-&gt;organization-&gt;id,</span>
+<span class="x">            $sale-&gt;getKey()</span>
+<span class="x">        );</span>
+
+<span class="x">        if ($existingValidation[&#39;exists&#39;]) {</span>
+<span class="x">            Log::warning(&quot;Número fiscal duplicado detectado&quot;, [...]);</span>
+<span class="x">        }</span>
+
+<span class="x">        // Almacenar número fiscal</span>
+<span class="x">        $sale-&gt;update([&#39;fiscal_document_number&#39; =&gt; $fiscalNumber]);</span>
+
+<span class="x">    } catch (\Exception $e) {</span>
+<span class="x">        Log::error(&quot;Error al extraer número fiscal&quot;, [...]);</span>
+<span class="x">    } finally {</span>
+<span class="x">        DB::connection()-&gt;useDatabase(env(&#39;DB_DATABASE&#39;));</span>
+<span class="x">    }</span>
+<span class="x">}</span>
+</code></pre></div>
+<h3 id="4-fecontroller-validacion-preventiva">4. FeController Validación Preventiva<a class="headerlink" href="#4-fecontroller-validacion-preventiva" title="Permanent link">&para;</a></h3>
+<p><strong>Archivo:</strong> <code>app/Http/Controllers/V1/FeController.php</code></p>
+<h4 id="metodo-validatequickbooksinvoiceduplicationorganization-requestdata">Método: <code>validateQuickBooksInvoiceDuplication($organization, $requestData)</code><a class="headerlink" href="#metodo-validatequickbooksinvoiceduplicationorganization-requestdata" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="x">protected function validateQuickBooksInvoiceDuplication(\App\Models\Organization $organization, array $requestData): void</span>
+<span class="x">{</span>
+<span class="x">    // Extraer datos básicos</span>
+<span class="x">    $invoiceData = $requestData[&#39;Invoice&#39;] ?? $requestData;</span>
+<span class="x">    $customerName = $invoiceData[&#39;CustomerRef&#39;][&#39;name&#39;] ?? &#39;QuickBooks Customer&#39;;</span>
+<span class="x">    $totalAmount = (float) ($invoiceData[&#39;TotalAmt&#39;] ?? 0);</span>
+
+<span class="x">    // Buscar facturas similares en los últimos 30 días</span>
+<span class="x">    $suspiciousSales = \App\Models\SalesHeaderImp::where(&#39;CustomerName&#39;, &#39;LIKE&#39;, &#39;%&#39; . trim($customerName) . &#39;%&#39;)</span>
+<span class="x">        -&gt;where(&#39;Net_due&#39;, &#39;&gt;=&#39;, $totalAmount * 0.95) // Tolerancia 5%</span>
+<span class="x">        -&gt;where(&#39;Net_due&#39;, &#39;&lt;=&#39;, $totalAmount * 1.05)</span>
+<span class="x">        -&gt;whereNotNull(&#39;fiscal_document_number&#39;)</span>
+<span class="x">        -&gt;where(&#39;origin&#39;, &#39;quickbooks&#39;)</span>
+<span class="x">        -&gt;where(&#39;created_at&#39;, &#39;&gt;&#39;, now()-&gt;subDays(30))</span>
+<span class="x">        -&gt;get();</span>
+
+<span class="x">    if ($suspiciousSales-&gt;isNotEmpty()) {</span>
+<span class="x">        Log::warning(&quot;Detectadas facturas QuickBooks potencialmente duplicadas&quot;, [...]);</span>
+<span class="x">    }</span>
+<span class="x">}</span>
+</code></pre></div>
+<h3 id="5-comando-de-migracion">5. Comando de Migración<a class="headerlink" href="#5-comando-de-migracion" title="Permanent link">&para;</a></h3>
+<p><strong>Archivo:</strong> <code>app/Console/Commands/Configuration/AddFiscalDocumentNumberColumnCommand.php</code></p>
+<h4 id="uso">Uso<a class="headerlink" href="#uso" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="c1"># Agregar columna a todas las organizaciones</span>
+php<span class="w"> </span>artisan<span class="w"> </span>db:add-fiscal-document-number-column
+
+<span class="c1"># Agregar solo a organización específica</span>
+php<span class="w"> </span>artisan<span class="w"> </span>db:add-fiscal-document-number-column<span class="w"> </span>--org-id<span class="o">=</span><span class="m">123</span>
+
+<span class="c1"># Modo dry-run (solo mostrar cambios)</span>
+php<span class="w"> </span>artisan<span class="w"> </span>db:add-fiscal-document-number-column<span class="w"> </span>--dry-run
+</code></pre></div>
+<h3 id="6-stub-de-base-de-datos">6. Stub de Base de Datos<a class="headerlink" href="#6-stub-de-base-de-datos" title="Permanent link">&para;</a></h3>
+<p><strong>Archivo:</strong> <code>app/Models/stubs/Sales_Header_Imp.sql.stub</code></p>
+<div class="highlight"><pre><span></span><code><span class="o">`</span><span class="n">intuit_extracted_cufe</span><span class="o">`</span><span class="w"> </span><span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="o">`</span><span class="n">fiscal_document_number</span><span class="o">`</span><span class="w"> </span><span class="nb">varchar</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w">  </span><span class="c1">-- ← NUEVO</span>
+<span class="o">`</span><span class="n">intuit_sync_attempts</span><span class="o">`</span><span class="w"> </span><span class="nb">int</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+</code></pre></div>
+<h2 id="testing">Testing<a class="headerlink" href="#testing" title="Permanent link">&para;</a></h2>
+<h3 id="tests-unitarios">Tests Unitarios<a class="headerlink" href="#tests-unitarios" title="Permanent link">&para;</a></h3>
+<p><strong>Archivo:</strong> <code>tests/Unit/Helpers/CufeValidationHelperTest.php</code></p>
+<h4 id="casos-de-prueba">Casos de Prueba<a class="headerlink" href="#casos-de-prueba" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="x">// Extracción correcta</span>
+<span class="x">test_extract_fiscal_number_from_cufe_extracts_correct_number()</span>
+<span class="x">// CUFE: FE0120240826602793000000390500200000009773162 → 3162</span>
+
+<span class="x">// Diferentes números</span>
+<span class="x">test_extract_fiscal_number_from_cufe_extracts_different_number()</span>
+<span class="x">// CUFE: FE0120240826602793000000390500200000009773134 → 3134</span>
+
+<span class="x">// CUFEs inválidos</span>
+<span class="x">test_extract_fiscal_number_from_short_cufe_returns_null()</span>
+<span class="x">test_extract_fiscal_number_from_empty_cufe_returns_null()</span>
+<span class="x">test_extract_fiscal_number_from_invalid_format_returns_null()</span>
+</code></pre></div>
+<h3 id="tests-de-integracion">Tests de Integración<a class="headerlink" href="#tests-de-integracion" title="Permanent link">&para;</a></h3>
+<p><strong>Archivo:</strong> <code>tests/Unit/Jobs/CreateSaleQuickBooksJobFiscalValidationTest.php</code></p>
+<h4 id="validaciones">Validaciones<a class="headerlink" href="#validaciones" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Extracción de números fiscales desde CUFE</li>
+<li>Manejo de CUFEs inválidos</li>
+<li>Estructura del job CreateSaleQuickBooksJob</li>
+<li>Integración completa del sistema</li>
+</ul>
+<h2 id="casos-de-uso">Casos de Uso<a class="headerlink" href="#casos-de-uso" title="Permanent link">&para;</a></h2>
+<h3 id="ejemplo-1-cliente-con-factura-duplicada">Ejemplo 1: Cliente con Factura Duplicada<a class="headerlink" href="#ejemplo-1-cliente-con-factura-duplicada" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="x">// Factura Original</span>
+<span class="x">$cufe1 = &#39;FE0120240826602793000000390500200000009773162&#39;; // Fiscal: 3162</span>
+<span class="x">$sale1 = SalesHeaderImp::create([</span>
+<span class="x">    &#39;intuit_extracted_cufe&#39; =&gt; $cufe1,</span>
+<span class="x">    &#39;fiscal_document_number&#39; =&gt; &#39;3162&#39;,</span>
+<span class="x">    &#39;CustomerName&#39; =&gt; &#39;VentasGT&#39;,</span>
+<span class="x">    // ...</span>
+<span class="x">]);</span>
+
+<span class="x">// Intento de Factura Duplicada</span>
+<span class="x">$cufe2 = &#39;FE0120240826602793000000390500200000009773134&#39;; // Fiscal: 3134</span>
+<span class="x">$validation = CufeValidationHelper::checkExistingFiscalNumber(&#39;3134&#39;, $orgId);</span>
+
+<span class="x">// Resultado: Se detecta patrón sospechoso por mismo cliente</span>
+</code></pre></div>
+<h3 id="ejemplo-2-validacion-en-api">Ejemplo 2: Validación en API<a class="headerlink" href="#ejemplo-2-validacion-en-api" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>POST<span class="w"> </span>/api/v1/fe/create_sale_quickbooks
+<span class="o">{</span>
+<span class="w">    </span><span class="s2">&quot;Invoice&quot;</span>:<span class="w"> </span><span class="o">{</span>
+<span class="w">        </span><span class="s2">&quot;DocNumber&quot;</span>:<span class="w"> </span><span class="s2">&quot;INV-001&quot;</span>,
+<span class="w">        </span><span class="s2">&quot;CustomerRef&quot;</span>:<span class="w"> </span><span class="o">{</span><span class="s2">&quot;name&quot;</span>:<span class="w"> </span><span class="s2">&quot;VentasGT&quot;</span><span class="o">}</span>,
+<span class="w">        </span><span class="s2">&quot;TotalAmt&quot;</span>:<span class="w"> </span><span class="m">115</span>.00
+<span class="w">    </span><span class="o">}</span>
+<span class="o">}</span>
+
+<span class="c1"># Flujo:</span>
+<span class="c1"># 1. validateQuickBooksInvoiceDuplication() busca facturas similares</span>
+<span class="c1"># 2. Si encuentra patrones sospechosos → Log warning</span>
+<span class="c1"># 3. Continúa con procesamiento normal</span>
+<span class="c1"># 4. extractAndStoreFiscalNumber() valida al extraer CUFE</span>
+</code></pre></div>
+<h2 id="configuracion-y-despliegue">Configuración y Despliegue<a class="headerlink" href="#configuracion-y-despliegue" title="Permanent link">&para;</a></h2>
+<h3 id="1-agregar-columna-a-bases-de-datos-existentes">1. Agregar Columna a Bases de Datos Existentes<a class="headerlink" href="#1-agregar-columna-a-bases-de-datos-existentes" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Ejecutar comando para todas las organizaciones</span>
+php<span class="w"> </span>artisan<span class="w"> </span>db:add-fiscal-document-number-column
+
+<span class="c1"># Verificar cambios antes de aplicar</span>
+php<span class="w"> </span>artisan<span class="w"> </span>db:add-fiscal-document-number-column<span class="w"> </span>--dry-run
+</code></pre></div>
+<h3 id="2-verificar-funcionamiento">2. Verificar Funcionamiento<a class="headerlink" href="#2-verificar-funcionamiento" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Ejecutar tests</span>
+php<span class="w"> </span>artisan<span class="w"> </span><span class="nb">test</span><span class="w"> </span>tests/Unit/Helpers/CufeValidationHelperTest.php
+php<span class="w"> </span>artisan<span class="w"> </span><span class="nb">test</span><span class="w"> </span>tests/Unit/Jobs/CreateSaleQuickBooksJobFiscalValidationTest.php
+
+<span class="c1"># Monitorear logs</span>
+tail<span class="w"> </span>-f<span class="w"> </span>storage/logs/laravel.log<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;fiscal&quot;</span>
+</code></pre></div>
+<h2 id="monitoreo-y-logging">Monitoreo y Logging<a class="headerlink" href="#monitoreo-y-logging" title="Permanent link">&para;</a></h2>
+<h3 id="eventos-loggeados">Eventos Loggeados<a class="headerlink" href="#eventos-loggeados" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>Extracción exitosa de número fiscal</strong>
+<div class="highlight"><pre><span></span><code>&quot;Job CreateSaleQuickBooks: Número fiscal extraído y almacenado exitosamente&quot;
+</code></pre></div></p>
+</li>
+<li>
+<p><strong>Detección de duplicados</strong>
+<div class="highlight"><pre><span></span><code>&quot;Job CreateSaleQuickBooks: Número fiscal duplicado detectado&quot;
+</code></pre></div></p>
+</li>
+<li>
+<p><strong>Validación preventiva</strong>
+<div class="highlight"><pre><span></span><code>&quot;FeController: Detectadas facturas QuickBooks potencialmente duplicadas&quot;
+</code></pre></div></p>
+</li>
+<li>
+<p><strong>Errores de extracción</strong>
+<div class="highlight"><pre><span></span><code>&quot;Job CreateSaleQuickBooks: Error al extraer número fiscal&quot;
+</code></pre></div></p>
+</li>
+</ol>
+<h3 id="consultas-de-monitoreo">Consultas de Monitoreo<a class="headerlink" href="#consultas-de-monitoreo" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1">-- Verificar números fiscales duplicados</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">fiscal_document_number</span><span class="p">,</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="k">count</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">Sales_Header_Imp</span><span class="w"> </span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">fiscal_document_number</span><span class="w"> </span><span class="k">IS</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span>
+<span class="w">  </span><span class="k">AND</span><span class="w"> </span><span class="n">origin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;quickbooks&#39;</span>
+<span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">fiscal_document_number</span><span class="w"> </span>
+<span class="k">HAVING</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+
+<span class="c1">-- Facturas sin número fiscal</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">sin_fiscal</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">Sales_Header_Imp</span><span class="w"> </span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">intuit_extracted_cufe</span><span class="w"> </span><span class="k">IS</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span>
+<span class="w">  </span><span class="k">AND</span><span class="w"> </span><span class="n">fiscal_document_number</span><span class="w"> </span><span class="k">IS</span><span class="w"> </span><span class="k">NULL</span><span class="p">;</span>
+</code></pre></div>
+<h2 id="consideraciones-de-rendimiento">Consideraciones de Rendimiento<a class="headerlink" href="#consideraciones-de-rendimiento" title="Permanent link">&para;</a></h2>
+<h3 id="optimizaciones-implementadas">Optimizaciones Implementadas<a class="headerlink" href="#optimizaciones-implementadas" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Validación asíncrona:</strong> Extracción en background job</li>
+<li><strong>Validación preventiva:</strong> Solo facturas sospechosas en últimos 30 días</li>
+<li><strong>Tolerancia de montos:</strong> 5% para evitar falsos positivos</li>
+<li><strong>Logs selectivos:</strong> Solo casos relevantes para evitar spam</li>
+</ol>
+<h3 id="recomendaciones">Recomendaciones<a class="headerlink" href="#recomendaciones" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Monitorear frecuencia de duplicados detectados</li>
+<li>Ajustar ventana de tiempo (30 días) según necesidades</li>
+<li>Considerar índices en <code>fiscal_document_number</code> si el volumen aumenta</li>
+</ul>
+<h2 id="mantenimiento">Mantenimiento<a class="headerlink" href="#mantenimiento" title="Permanent link">&para;</a></h2>
+<h3 id="limpieza-de-datos">Limpieza de Datos<a class="headerlink" href="#limpieza-de-datos" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1">-- Actualizar números fiscales faltantes (ejecutar una vez)</span>
+<span class="k">UPDATE</span><span class="w"> </span><span class="n">Sales_Header_Imp</span><span class="w"> </span>
+<span class="k">SET</span><span class="w"> </span><span class="n">fiscal_document_number</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">SUBSTRING</span><span class="p">(</span><span class="n">intuit_extracted_cufe</span><span class="p">,</span><span class="w"> </span><span class="mi">41</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">intuit_extracted_cufe</span><span class="w"> </span><span class="k">IS</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span>
+<span class="w">  </span><span class="k">AND</span><span class="w"> </span><span class="n">fiscal_document_number</span><span class="w"> </span><span class="k">IS</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span>
+<span class="w">  </span><span class="k">AND</span><span class="w"> </span><span class="k">LENGTH</span><span class="p">(</span><span class="n">intuit_extracted_cufe</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">45</span>
+<span class="w">  </span><span class="k">AND</span><span class="w"> </span><span class="k">LEFT</span><span class="p">(</span><span class="n">intuit_extracted_cufe</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;FE&#39;</span><span class="p">;</span>
+</code></pre></div>
+<h3 id="verificacion-periodica">Verificación Periódica<a class="headerlink" href="#verificacion-periodica" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Script de verificación mensual</span>
+php<span class="w"> </span>artisan<span class="w"> </span>tinker
+&gt;&gt;&gt;<span class="w"> </span><span class="nv">$duplicates</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="se">\D</span>B::select<span class="o">(</span><span class="s2">&quot;SELECT fiscal_document_number, COUNT(*) as count FROM Sales_Header_Imp WHERE fiscal_document_number IS NOT NULL GROUP BY fiscal_document_number HAVING COUNT(*) &gt; 1&quot;</span><span class="o">)</span><span class="p">;</span>
+&gt;&gt;&gt;<span class="w"> </span>dd<span class="o">(</span><span class="nv">$duplicates</span><span class="o">)</span><span class="p">;</span>
+</code></pre></div>
+<h2 id="resolucion-de-problemas">Resolución de Problemas<a class="headerlink" href="#resolucion-de-problemas" title="Permanent link">&para;</a></h2>
+<h3 id="problema-cufe-sin-numero-fiscal">Problema: CUFE sin número fiscal<a class="headerlink" href="#problema-cufe-sin-numero-fiscal" title="Permanent link">&para;</a></h3>
+<p><strong>Síntoma:</strong> <code>intuit_extracted_cufe</code> poblado pero <code>fiscal_document_number</code> es NULL<br />
+<strong>Solución:</strong> Verificar longitud de CUFE y formato</p>
+<h3 id="problema-falsos-positivos-en-validacion">Problema: Falsos positivos en validación<a class="headerlink" href="#problema-falsos-positivos-en-validacion" title="Permanent link">&para;</a></h3>
+<p><strong>Síntoma:</strong> Alertas de duplicación para facturas legítimas<br />
+<strong>Solución:</strong> Ajustar tolerancia de montos o ventana de tiempo</p>
+<h3 id="problema-performance-lenta-en-validacion">Problema: Performance lenta en validación<a class="headerlink" href="#problema-performance-lenta-en-validacion" title="Permanent link">&para;</a></h3>
+<p><strong>Síntoma:</strong> API lenta en <code>create_sale_quickbooks</code><br />
+<strong>Solución:</strong> Agregar índices o reducir ventana de búsqueda</p>
+<h2 id="roadmap-futuro">Roadmap Futuro<a class="headerlink" href="#roadmap-futuro" title="Permanent link">&para;</a></h2>
+<h3 id="mejoras-propuestas">Mejoras Propuestas<a class="headerlink" href="#mejoras-propuestas" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Dashboard de monitoreo:</strong> Panel para visualizar duplicados detectados</li>
+<li><strong>Notificaciones automáticas:</strong> Alertas por email/Slack en duplicados</li>
+<li><strong>Validación más estricta:</strong> Bloquear duplicados en lugar de solo logging</li>
+<li><strong>API de consulta:</strong> Endpoint para verificar números fiscales programáticamente</li>
+</ol>
+<h3 id="extensiones-posibles">Extensiones Posibles<a class="headerlink" href="#extensiones-posibles" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Validación para otros PACs (no solo CUFE panameño)</li>
+<li>Integración con otros sistemas POS</li>
+<li>Histórico de cambios en números fiscales</li>
+<li>Validación cruzada con registros fiscales oficiales</li>
+</ul>
+<hr />
+<p><strong>Documentación generada automáticamente el 13 de septiembre de 2025</strong><br />
+<strong>Sistema DocuCenter - Versión 1.0</strong></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/aghabrego/docucenter" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.highlight", "search.suggest"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
