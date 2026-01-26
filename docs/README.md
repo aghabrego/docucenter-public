@@ -3,7 +3,9 @@
 
 Este directorio contiene la documentación técnica completa del sistema DocuCenter de facturación electrónica.
 
-##  **Actualizaciones Recientes (Septiembre 2025)**
+## Actualizaciones Recientes (Enero 2026)
+- [**Estandarización Custom Fields**](technical/custom-fields-standardization.md) - Implementación completa del estándar global para los 5 campos custom
+- [**Referencia Rápida Custom Fields**](technical/custom-fields-quick-reference.md) - Guía de referencia rápida con ejemplos y troubleshooting
 - [**Mejoras QuickBooks Completas**](QUICKBOOKS_IMPROVEMENTS_SUMMARY.md) - Simplificación payment lookup y reorganización
 - [**Removal Notice**](technical/payment-lookup-removal-notice.md) - Documentación remoción funcionalidad
 - [**Payment Methods Integration**](technical/quickbooks-payment-methods-integration.md) - Sistema análisis pagos QB
