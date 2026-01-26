@@ -1,4 +1,4 @@
-# 🚨 Reporte de Error - API PlusMóvil Producción
+# Reporte de Error - API PlusMóvil Producción
 
 **Fecha:** 2026-01-26  
 **Reportado por:** DocuCenter Development Team  
@@ -7,13 +7,13 @@
 
 ---
 
-## 📋 Resumen Ejecutivo
+## Resumen Ejecutivo
 
 El endpoint `/com-invoices` en el ambiente de **Producción** está devolviendo error 500 (Internal Server Error) en todas las variaciones de consulta probadas. El mismo endpoint funciona correctamente en el ambiente de **QA**.
 
 ---
 
-## 🌍 Información del Ambiente
+## Información del Ambiente
 
 ### Producción (AFECTADO)
 - **Base URL:** `https://0m2jyxhl41.execute-api.us-east-1.amazonaws.com/prod`
@@ -29,7 +29,7 @@ El endpoint `/com-invoices` en el ambiente de **Producción** está devolviendo 
 
 ---
 
-## ✅ Estado de Autenticación
+## Estado de Autenticación
 
 La autenticación mediante **AWS Cognito** funciona correctamente en ambos ambientes:
 
@@ -44,7 +44,7 @@ La autenticación mediante **AWS Cognito** funciona correctamente en ambos ambie
 
 ---
 
-## ❌ Endpoint Afectado
+## Endpoint Afectado
 
 ```
 GET /com-invoices
@@ -61,7 +61,7 @@ GET /com-invoices
 
 ---
 
-## 🧪 Casos de Prueba Ejecutados
+## Casos de Prueba Ejecutados
 
 ### Test 1: Consulta Simple con Límite
 
@@ -79,7 +79,7 @@ curl -X GET "https://0m2jyxhl41.execute-api.us-east-1.amazonaws.com/prod/com-inv
 }
 ```
 
-**Status:** ❌ Error 500
+**Status:** Error 500
 
 ---
 
@@ -99,7 +99,7 @@ curl -X GET "https://0m2jyxhl41.execute-api.us-east-1.amazonaws.com/prod/com-inv
 }
 ```
 
-**Status:** ❌ Error 500
+**Status:** Error 500
 
 **Nota:** Este mismo parámetro funciona en QA
 
@@ -121,7 +121,7 @@ curl -X GET "https://0m2jyxhl41.execute-api.us-east-1.amazonaws.com/prod/com-inv
 }
 ```
 
-**Status:** ❌ Error 500
+**Status:** Error 500
 
 ---
 
@@ -141,7 +141,7 @@ curl -X GET "https://0m2jyxhl41.execute-api.us-east-1.amazonaws.com/prod/com-inv
 }
 ```
 
-**Status:** ❌ Error 500
+**Status:** Error 500
 
 ---
 
@@ -161,11 +161,11 @@ curl -X GET "https://0m2jyxhl41.execute-api.us-east-1.amazonaws.com/prod/com-inv
 }
 ```
 
-**Status:** ❌ Error 500
+**Status:** Error 500
 
 ---
 
-## ✅ Comparación con QA (Funcionando)
+## Comparación con QA (Funcionando)
 
 ### Ejemplo Exitoso en QA
 
@@ -213,16 +213,16 @@ curl -X GET "https://kg0zs65dq0.execute-api.us-east-1.amazonaws.com/qa/com-invoi
 }
 ```
 
-**Status:** ✅ 200 OK
+**Status:** 200 OK
 
 ---
 
-## 📊 Impacto del Error
+## Impacto del Error
 
 ### Funcionalidades Afectadas
-- ❌ Importación automática de facturas desde PlusMóvil a DocuCenter
-- ❌ Sincronización de datos de facturación
-- ❌ Consulta de facturas en tiempo real
+- Importación automática de facturas desde PlusMóvil a DocuCenter
+- Sincronización de datos de facturación
+- Consulta de facturas en tiempo real
 
 ### Impacto de Negocio
 No es posible importar facturas desde el ambiente de producción al sistema DocuCenter.
@@ -234,15 +234,15 @@ No es posible importar facturas desde el ambiente de producción al sistema Docu
 
 ---
 
-## 🔍 Análisis
+## Análisis
 
 ### Observaciones Clave
 
-1. ✅ **Autenticación:** Funciona correctamente en ambos ambientes
-2. ❌ **Endpoint:** Falla consistentemente en Producción
-3. ✅ **QA:** El mismo endpoint funciona en QA
-4. ❌ **Consistencia:** Falla con todos los parámetros probados
-5. ❌ **Error Genérico:** Solo devuelve "Internal server error" sin detalles
+1. **Autenticación:** Funciona correctamente en ambos ambientes
+2. **Endpoint:** Falla consistentemente en Producción
+3. **QA:** El mismo endpoint funciona en QA
+4. **Consistencia:** Falla con todos los parámetros probados
+5. **Error Genérico:** Solo devuelve "Internal server error" sin detalles
 
 ### Posibles Causas
 
@@ -265,7 +265,7 @@ No es posible importar facturas desde el ambiente de producción al sistema Docu
 
 ---
 
-## 🛠️ Acciones Recomendadas
+## Acciones Recomendadas
 
 ### Prioridad 1 - Urgente
 - [ ] **Revisar logs del servidor** en ambiente de producción
@@ -284,7 +284,7 @@ No es posible importar facturas desde el ambiente de producción al sistema Docu
 
 ---
 
-## 📎 Archivos Adjuntos
+## Archivos Adjuntos
 
 - `plusmovil-production-error-report.json` - Reporte completo en formato JSON
 - `test-prod-complete.sh` - Script de pruebas ejecutadas
@@ -292,7 +292,7 @@ No es posible importar facturas desde el ambiente de producción al sistema Docu
 
 ---
 
-## 📞 Información de Contacto
+## Información de Contacto
 
 **Equipo DocuCenter**
 - Email: desarrollo@docucenter.com
@@ -301,7 +301,7 @@ No es posible importar facturas desde el ambiente de producción al sistema Docu
 
 ---
 
-## 🔄 Siguientes Pasos
+## Siguientes Pasos
 
 1. Equipo PlusMóvil revisa logs del servidor
 2. Se identifica causa raíz del error
