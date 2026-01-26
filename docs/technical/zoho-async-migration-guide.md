@@ -80,7 +80,7 @@ autostart=true
 autorestart=true
 ```
 
-## 🧪 Testing
+##  Testing
 
 ### Comando de Prueba
 ```bash
@@ -130,7 +130,7 @@ redis-cli info
 "Error procesando Zoho Purchase Order Job"
 ```
 
-## 🚦 Ventajas vs Desventajas
+##  Ventajas vs Desventajas
 
 ### Ventajas
 1. **Respuesta ultrarrápida** a Zoho (< 50ms)

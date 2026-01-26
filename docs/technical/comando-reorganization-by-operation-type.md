@@ -14,7 +14,7 @@ Los siguientes comandos ya están programados en el `App\Console\Kernel`:
 - `word:create-access-token` - Token Invupos (Cada 5 min)
 - `word:create-access-token-apc` - Token PAC (Cada 5 min)
 
-### **🏪 Integraciones POS**
+### ** Integraciones POS**
 - `word:type-payment-lightspeed` - Tipos pago Lightspeed (1:00 AM)
 - `word:update-invu-pos-module` - Lotes Invupos (Cada 30 min)
 - `word:update-lightspeed-serie-r` - Lightspeed Serie R (Cada 5 min)
@@ -35,7 +35,7 @@ Los siguientes comandos ya están programados en el `App\Console\Kernel`:
 
 ### **1. COMANDOS DE DIAGNÓSTICO Y DEBUG**
 
-#### **🏎Kart21 Diagnosis**
+#### **Kart21 Diagnosis**
 - `DiagnoseKartInvoiceCommand.php` → `kart:diagnose-invoice`
 - `EmitKartOrderCommand.php` → `kart:emit-order`
 - `EmitKartWithCashPayment.php` → `kart:emit-cash-payment`
@@ -46,7 +46,7 @@ Los siguientes comandos ya están programados en el `App\Console\Kernel`:
 - `TestKart21ServiceCommand.php` → `kart21:test-service`
 - `TestKart21DecimalPrecision.php` → `kart21:test-precision`
 
-#### **🏭 PAC y Facturación Debug**
+#### ** PAC y Facturación Debug**
 - `DebugCreateFastJobVuelto.php` → `debug:createfastjob-vuelto`
 - `DebugTheFactoryHKARequest.php` → `debug:thefactoryhka-request`
 - `TestTheFactoryHKAPayload.php` → `test:thefactoryhka-payload`
@@ -83,7 +83,7 @@ Los siguientes comandos ya están programados en el `App\Console\Kernel`:
 - `TestLightspeedPacEmissionReal.php` → `test:lightspeed-pac-real`
 - `ValidateLightspeedCreditNoteFix.php` → `validate:lightspeed-credit-note-fix`
 
-### **🏪 3. COMANDOS DE SINCRONIZACIÓN POS**
+### ** 3. COMANDOS DE SINCRONIZACIÓN POS**
 
 #### **Invupos**
 - `CategoryInvuposCommand.php` → `word:category-invupos`
@@ -107,7 +107,7 @@ Los siguientes comandos ya están programados en el `App\Console\Kernel`:
 - `CreateSalesOrderSummary.php` → `create:sales-order-summary`
 - `PanamaDailyEntryCommand.php` → `panama:daily-entry`
 
-#### **🧮 Testing de Cálculos**
+#### ** Testing de Cálculos**
 - `TestCreateFastJobCalculation.php` → `test:createfastjob-calculation`
 - `TestInvoiceQuantityNormalization.php` → `test:invoice-quantity-normalization`
 
@@ -120,7 +120,7 @@ Los siguientes comandos ya están programados en el `App\Console\Kernel`:
 - `RemoveColumnToOrganizationsTableCommand.php` → `config:remove-column-organizations`
 - `RemoveColumnsGjeHeaderImp.php` → `config:remove-columns-gje-header`
 
-#### **🧹 Limpieza Manual**
+#### ** Limpieza Manual**
 - `CleanOldArchivesCommand.php` → `maintenance:clean-archives`
 - `CleanOldTransactionsCommand.php` → `maintenance:clean-transactions`
 - `ClearLogFile.php` → `word:clear-log`
@@ -131,7 +131,7 @@ Los siguientes comandos ya están programados en el `App\Console\Kernel`:
 
 ### **6. COMANDOS ESPECÍFICOS DE TESTING**
 
-#### **🧪 Testing de Meypar**
+#### ** Testing de Meypar**
 - `DebugMeyparEmission.php` → `debug:meypar-emission`
 - `MeyparTestComplete.php` → `meypar:test-complete`
 - `TestMeyparApiNormalization.php` → `test:meypar-api-normalization`
@@ -142,7 +142,7 @@ Los siguientes comandos ya están programados en el `App\Console\Kernel`:
 - `TestMeyparRealFlow.php` → `test:meypar-real-flow`
 - `TestMeyparSpecificData.php` → `test:meypar-specific-data`
 
-#### **🔬 Testing de Procesos**
+#### ** Testing de Procesos**
 - `CreateAlanubeConfigAndTestMeypar.php` → `create:alanube-config-test-meypar`
 - `CreateFastJobWrapper.php` → `create:fastjob-wrapper`
 - `CreateFastJobWrapperFixed.php` → `create:fastjob-wrapper-fixed`
@@ -159,7 +159,7 @@ Los siguientes comandos ya están programados en el `App\Console\Kernel`:
 #### ** Tokens Específicos**
 - `CreateAccessTokenSerieRCommand.php` → `word:create-access-token-serie-r`
 
-#### **🤖 Procesos Ezete**
+#### ** Procesos Ezete**
 - `EzeeteCommand.php` → `ezete:process`
 
 ---
@@ -195,13 +195,13 @@ $schedule->command('kart:send-to-zoho')->hourly()->when(function () {
 $schedule->command('word:update-booqable-module')->everyThirtyMinutes();
 ```
 
-### **🧪 Comandos de Testing - Solo para Desarrollo**
+### ** Comandos de Testing - Solo para Desarrollo**
 Los comandos en la carpeta `Testing/` y comandos de debug deberían:
 - **Mantenerse** en desarrollo/staging
 - **Excluirse** de producción via environment check
 - **Documentarse** en `docs/testing/`
 
-### **🗂Comandos Manuales - Administrativos**
+### **Comandos Manuales - Administrativos**
 Los comandos de configuración y análisis deberían:
 - **Ejecutarse** manualmente por administradores
 - **Documentarse** en `docs/technical/`
@@ -260,7 +260,7 @@ protected function schedule(Schedule $schedule)
 - **Disponibles**: ~120 comandos adicionales
 - **Críticos para incluir**: 4 comandos
 - **Opcionales para incluir**: 2 comandos
-- **🧪 Solo testing**: ~30 comandos
+- ** Solo testing**: ~30 comandos
 - **Solo manuales**: ~70 comandos
 
 **Total: ~135 comandos artisan en el sistema DocuCenter**

@@ -121,20 +121,20 @@ $config->save();
 
 ```
 Usuario cambia de "payment" → "category"
-│
-├─ 1. syncCurrentTabToBackup('payment')
-│  └─ $accountsBackup['details'] = $accounts['details']
-│
-├─ 2. updateCurrentTabOnly('payment')
-│  ├─ Carga TODOS de BD: $dbAccounts = BD[all tabs]
-│  ├─ Actualiza solo: $dbAccounts['details'] = $accounts['details']
-│  └─ Guarda TODO: BD[all tabs] = $dbAccounts
-│
-├─ 3. unloadPreviousTab('payment') ← NUEVO
-│  └─ unset($accounts['details']) ← Libera memoria
-│
-└─ 4. loadTabData('category')
-   └─ $accounts['categories'] = BD['categories']
+
+ 1. syncCurrentTabToBackup('payment')
+   $accountsBackup['details'] = $accounts['details']
+
+ 2. updateCurrentTabOnly('payment')
+   Carga TODOS de BD: $dbAccounts = BD[all tabs]
+   Actualiza solo: $dbAccounts['details'] = $accounts['details']
+   Guarda TODO: BD[all tabs] = $dbAccounts
+
+ 3. unloadPreviousTab('payment') ← NUEVO
+   unset($accounts['details']) ← Libera memoria
+
+ 4. loadTabData('category')
+    $accounts['categories'] = BD['categories']
 
 Resultado:
 - Memoria: Solo campos generales + ['categories']

@@ -43,7 +43,7 @@ Este sistema de diagnóstico está diseñado para identificar y resolver problem
 - Verificación de configuración PAC
 - Búsqueda de facturas en el sistema
 -  Análisis de logs de procesamiento
-- 🧪 Simulación de procesamiento
+-  Simulación de procesamiento
 -  Estado de jobs en cola
 - Recomendaciones de solución
 
@@ -267,7 +267,7 @@ class Kart21Service implements Kart21ServiceContract
 - [ ] Emisión PAC exitosa
 - [ ] EzeeIssued = 1
 
-## 🆘 Soporte y Troubleshooting
+##  Soporte y Troubleshooting
 
 ### Logs Importantes
 ```bash

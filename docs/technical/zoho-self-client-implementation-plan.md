@@ -18,9 +18,9 @@ resources/views/livewire/admin/connection/zoho-setup.blade.php // UI
 ### Modificaciones a Archivos Existentes
 
 ```
-app/Http/Livewire/Admin/Connection/Create.php // ➕ Agregar zoho-self-client
-app/Models/Connection.php                      // ➕ Métodos helper para Zoho
-routes/web.php                                // ➕ Rutas OAuth callback
+app/Http/Livewire/Admin/Connection/Create.php //  Agregar zoho-self-client
+app/Models/Connection.php                      //  Métodos helper para Zoho
+routes/web.php                                //  Rutas OAuth callback
 ```
 
 ## Flujo de Implementación

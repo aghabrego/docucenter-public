@@ -138,7 +138,7 @@ Redirect URI: https://tudominio.com/admin/connections/zoho/callback
 4. Autorizar en popup → tokens renovados automáticamente
 ```
 
-### 🧪 Testing
+###  Testing
 
 #### **Script de Pruebas**
 ```bash

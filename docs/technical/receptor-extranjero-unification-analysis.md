@@ -49,7 +49,7 @@
 - `direccionExtranjero` → `dDirExt` (B415)
 - `telefonoExtranjero` → `dTfnExt` (B416)
 
-## 🤔 Campos Duplicados que Necesitan Unificación
+##  Campos Duplicados que Necesitan Unificación
 
 ### 1. País del Receptor
 **Conflicto**:

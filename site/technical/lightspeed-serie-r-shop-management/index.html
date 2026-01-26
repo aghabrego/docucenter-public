@@ -2526,7 +2526,7 @@
   <span class="md-ellipsis">
     
   
-    🧪 Sistema de Testing DocuCenter
+    Sistema de Testing DocuCenter
   
 
     
@@ -2980,12 +2980,12 @@
   <a href="#estructura-de-base-de-datos" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🗄Estructura de Base de Datos
+        Estructura de Base de Datos
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="🗄Estructura de Base de Datos">
+    <nav class="md-nav" aria-label="Estructura de Base de Datos">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -3136,12 +3136,12 @@
   <a href="#uso" class="md-nav__link">
     <span class="md-ellipsis">
       
-        📖 Uso
+        Uso
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="📖 Uso">
+    <nav class="md-nav" aria-label="Uso">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -3225,12 +3225,12 @@
   <a href="#testing" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🧪 Testing
+        Testing
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="🧪 Testing">
+    <nav class="md-nav" aria-label="Testing">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -3319,12 +3319,12 @@
   <a href="#troubleshooting" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🆘 Troubleshooting
+        Troubleshooting
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="🆘 Troubleshooting">
+    <nav class="md-nav" aria-label="Troubleshooting">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -3404,7 +3404,7 @@
 <h2 id="descripcion">Descripción<a class="headerlink" href="#descripcion" title="Permanent link">&para;</a></h2>
 <p>Sistema de gestión de configuración de tiendas (Shop ID) para organizaciones con integración Lightspeed Serie R.</p>
 <hr />
-<h2 id="estructura-de-base-de-datos">🗄Estructura de Base de Datos<a class="headerlink" href="#estructura-de-base-de-datos" title="Permanent link">&para;</a></h2>
+<h2 id="estructura-de-base-de-datos">Estructura de Base de Datos<a class="headerlink" href="#estructura-de-base-de-datos" title="Permanent link">&para;</a></h2>
 <h3 id="tabla-lightspeed_serie_r_shop_configurations">Tabla: <code>lightspeed_serie_r_shop_configurations</code><a class="headerlink" href="#tabla-lightspeed_serie_r_shop_configurations" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">lightspeed_serie_r_shop_configurations</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">BIGINT</span><span class="w"> </span><span class="n">UNSIGNED</span><span class="w"> </span><span class="n">AUTO_INCREMENT</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
@@ -3503,7 +3503,7 @@
 - <code>dynamicAcl</code>: Control de acceso
 - <code>check.active.organization</code>: Validar organización activa</p>
 <hr />
-<h2 id="uso">📖 Uso<a class="headerlink" href="#uso" title="Permanent link">&para;</a></h2>
+<h2 id="uso">Uso<a class="headerlink" href="#uso" title="Permanent link">&para;</a></h2>
 <h3 id="1-acceder-a-la-pantalla">1. Acceder a la Pantalla<a class="headerlink" href="#1-acceder-a-la-pantalla" title="Permanent link">&para;</a></h3>
 <p>Navegar a: <strong>Facturación Electrónica → Configuración → Gestión de Tienda Serie R</strong></p>
 <h3 id="2-configurar-tienda">2. Configurar Tienda<a class="headerlink" href="#2-configurar-tienda" title="Permanent link">&para;</a></h3>
@@ -3542,7 +3542,7 @@
 <li>Índice compuesto en <code>(organization_id, is_active)</code></li>
 </ul>
 <hr />
-<h2 id="testing">🧪 Testing<a class="headerlink" href="#testing" title="Permanent link">&para;</a></h2>
+<h2 id="testing">Testing<a class="headerlink" href="#testing" title="Permanent link">&para;</a></h2>
 <h3 id="verificar-migration">Verificar Migration<a class="headerlink" href="#verificar-migration" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>docucenter-app-1<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>migrate
 </code></pre></div>
@@ -3571,25 +3571,25 @@
 <hr />
 <h2 id="estructura-del-proyecto">Estructura del Proyecto<a class="headerlink" href="#estructura-del-proyecto" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code>app/
-├── Http/Livewire/Admin/
-│   └── LightspeedSerieR/
-│       └── ManageShop.php
-├── Jobs/LightspeedSerieR/
-│   └── SetSalesOrdersJob.php (modificado)
-├── Models/
-│   └── LightspeedSerieRShopConfiguration.php
-└── Support/
-    └── helper.php (actualizado)
+ Http/Livewire/Admin/
+    LightspeedSerieR/
+        ManageShop.php
+ Jobs/LightspeedSerieR/
+    SetSalesOrdersJob.php (modificado)
+ Models/
+    LightspeedSerieRShopConfiguration.php
+ Support/
+     helper.php (actualizado)
 
 database/migrations/
-└── 2025_11_06_000001_create_lightspeed_serie_r_shop_configurations_table.php
+ 2025_11_06_000001_create_lightspeed_serie_r_shop_configurations_table.php
 
 resources/views/livewire/admin/
-└── lightspeed-serie-r/
-    └── manage-shop.blade.php
+ lightspeed-serie-r/
+     manage-shop.blade.php
 
 routes/
-└── web.php (actualizado)
+ web.php (actualizado)
 </code></pre></div>
 <hr />
 <h2 id="checklist-de-implementacion">Checklist de Implementación<a class="headerlink" href="#checklist-de-implementacion" title="Permanent link">&para;</a></h2>
@@ -3623,7 +3623,7 @@ routes/
 <li>Solo organizaciones con <code>application = 'lightspeed-serie-r'</code></li>
 </ul>
 <hr />
-<h2 id="troubleshooting">🆘 Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2>
+<h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2>
 <h3 id="error-organization_id-ya-existe">Error: "organization_id ya existe"<a class="headerlink" href="#error-organization_id-ya-existe" title="Permanent link">&para;</a></h3>
 <p><strong>Causa:</strong> Ya hay una configuración para esa organización<br />
 <strong>Solución:</strong> Editar la existente o eliminarla primero</p>

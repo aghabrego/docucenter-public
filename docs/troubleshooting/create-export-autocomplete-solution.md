@@ -141,7 +141,7 @@ if ($this->isDocumentTypeById($this->tipeDocument, ['03'])) {
 4. **Validación DGI pasa** → Sin errores de campos faltantes
 5. **Experiencia fluida** → Reducción significativa de errores
 
-## 🧪 Validación y Testing
+##  Validación y Testing
 
 ### Script de Testing
 **Ubicación**: `scripts/test-export-autocomplete-fix.sh`

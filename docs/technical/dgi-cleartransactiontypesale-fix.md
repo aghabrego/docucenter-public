@@ -152,27 +152,27 @@ El método es parte del sistema más amplio de **formularios condicionales JSch0
 
 ```
 app/Http/Livewire/Admin/Einvoice/Create.php
-├── + clearTransactionTypeSale() método público (línea ~970)
-├── + filterVar() método privado (línea ~755)
-└── Sin cambios en propiedades existentes
+ + clearTransactionTypeSale() método público (línea ~970)
+ + filterVar() método privado (línea ~755)
+ Sin cambios en propiedades existentes
 ```
 
 ### Archivos de Testing
 
 ```
 docs/testing/test-clearTransactionTypeSale-fix.sh
-├── Script de verificación completo
-├── Validación de sintaxis PHP
-└── Verificación de integración con vista
+ Script de verificación completo
+ Validación de sintaxis PHP
+ Verificación de integración con vista
 ```
 
 ### Archivos de Documentación
 
 ```
 docs/technical/dgi-cleartransactiontypesale-fix.md
-├── Documentación técnica completa
-├── Casos de uso documentados
-└── Procedimientos de testing
+ Documentación técnica completa
+ Casos de uso documentados
+ Procedimientos de testing
 ```
 
 ## Compatibilidad

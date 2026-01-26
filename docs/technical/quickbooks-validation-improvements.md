@@ -6,7 +6,7 @@ Se han implementado mejoras en la validación del `CreateSaleQuickBooksRequest` 
 
 ## Cambios Implementados
 
-### 1. 📧 Validación Inteligente de Emails
+### 1.  Validación Inteligente de Emails
 
 **Antes:**
 ```php
@@ -26,7 +26,7 @@ if (empty($cleanEmail) || !filter_var($cleanEmail, FILTER_VALIDATE_EMAIL)) {
 'Invoice.CustomerRef.PrimaryEmail' => 'nullable|email|max:255'
 ```
 
-### 2. 🆔 Campos Fiscales Flexibles (RUC/DV)
+### 2.  Campos Fiscales Flexibles (RUC/DV)
 
 **Antes:**
 ```php
@@ -48,7 +48,7 @@ foreach ($fiscalFields as $field) {
 }
 ```
 
-### 3. 🧹 Preservación de Campos Importantes
+### 3.  Preservación de Campos Importantes
 
 **Actualizado en `validArray()`:**
 ```php
@@ -107,7 +107,7 @@ $preserveFields = [
 }
 ```
 
-## 🏛Cumplimiento DGI Panamá
+## Cumplimiento DGI Panamá
 
 ### No Contribuyentes (TIPO_RECEPTOR: "02")
 - **RUC puede ser null** - Personas naturales sin obligación fiscal

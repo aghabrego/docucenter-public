@@ -9,12 +9,12 @@ Este directorio contiene documentación sobre validaciones específicas implemen
 - **[SOLUCION_PAC_RECEIVER_TYPE_VALIDATION.md](./SOLUCION_PAC_RECEIVER_TYPE_VALIDATION.md)** - Solución completa para error PAC "receiver.ruc.ruc is not valid dni" con auto-detección de tipos de receptor según documentación oficial de Panamá
 - **[SOLUCION_PAC_ITBMS_RATE.md](./SOLUCION_PAC_ITBMS_RATE.md)** - Documentación sobre validaciones de tasas ITBMS en facturas PAC
 
-### 🆔 Validaciones de Identificación
+###  Validaciones de Identificación
 
 - **[createSale-ruc-validation.md](./createSale-ruc-validation.md)** - Validación de RUC en el proceso de creación de ventas
 - **[maxgym-ruc-validation.md](./maxgym-ruc-validation.md)** - Validación específica de RUC para integración con MaxGym
 
-### 🧮 Validaciones de Integración y Cálculos
+###  Validaciones de Integración y Cálculos
 
 - **[VALIDATION_REPORT_MAXGYM_TRAIT.md](./VALIDATION_REPORT_MAXGYM_TRAIT.md)** - Validación completa de compatibilidad entre MaxGym y CreateFastJobCalculation, incluyendo precisión fiscal y cálculos tributarios
 - **[meypar-validations.md](./meypar-validations.md)** - Validaciones específicas para integración Meypar
@@ -28,7 +28,7 @@ Reglas específicas del dominio empresarial que deben cumplirse para mantener la
 ### Validaciones de Formato
 Verificaciones de formato de datos como RUC, cédulas, correos electrónicos, etc.
 
-### ⚖Validaciones Fiscales
+### Validaciones Fiscales
 Validaciones específicas requeridas por regulaciones fiscales y tributarias.
 
 ### Validaciones de Integración

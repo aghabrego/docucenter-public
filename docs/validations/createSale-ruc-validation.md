@@ -164,7 +164,7 @@ if ($rucValidation['valid']) {
 
 ## Ventajas de esta Implementación
 
-### 🛡**Prevención de Errores**
+### **Prevención de Errores**
 - Evita que lleguen RUCs inválidos al servicio
 - Convierte automáticamente a consumidor final
 

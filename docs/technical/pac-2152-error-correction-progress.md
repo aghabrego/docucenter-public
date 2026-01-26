@@ -15,8 +15,8 @@ El error no estaba en el cálculo del ITBMS del ítem individual, sino en incons
 
 ```xml
 <!-- XML PROBLEMÁTICO -->
-<dValTotItem>5.990000</dValTotItem>  <!-- ✓ Correcto -->
-<dValITBMS>0.390000</dValITBMS>      <!-- ✓ Correcto -->
+<dValTotItem>5.990000</dValTotItem>  <!--  Correcto -->
+<dValITBMS>0.390000</dValITBMS>      <!--  Correcto -->
 <dTotRec>5.60</dTotRec>              <!-- INCORRECTO -->
 <iPzPag>5.60</iPzPag>                <!-- INCORRECTO -->
 <dVTotItems>5.60</dVTotItems>        <!-- INCORRECTO -->

@@ -1,6 +1,6 @@
 # Solución PAC Error 2152 - Problema Confirmado en Servicio Externo
 
-## Estado: PROBLEMA IDENTIFICADO - � ESTRATEGIA ACTUALIZADA
+## Estado: PROBLEMA IDENTIFICADO -  ESTRATEGIA ACTUALIZADA
 
 **Fecha**: 2024-12-19  
 **Error**: `2152-Item 1: Monto del ITBMS del ítem inválido`  
@@ -118,13 +118,13 @@ if ($pacconnection->name === 'TheFactoryHKA') {
 3. Confirmar eliminación de error 2152
 
 ### **Seguimiento (Esta Semana)**
-1. 📧 Reportar bug a TheFactoryHKA con evidencia técnica
+1.  Reportar bug a TheFactoryHKA con evidencia técnica
 2. Documentar workaround como solución temporal
 3. Monitorear si el problema afecta otros campos
 
 ### **Largo Plazo**
 1. Verificar si TheFactoryHKA corrige el bug
-2. 🧹 Remover workaround cuando se resuelva
+2.  Remover workaround cuando se resuelva
 3. Documentar caso para futuros problemas similares
 
 ---

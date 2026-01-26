@@ -240,11 +240,11 @@ echo "Testing Organization Access Control"
 
 # Test Profile access (should work for all plans)
 echo "Testing Profile access..."
-curl -s "http://localhost/setting/profile" | grep -q "Profile" && echo "✓ Profile accessible" || echo "✗ Profile not accessible"
+curl -s "http://localhost/setting/profile" | grep -q "Profile" && echo " Profile accessible" || echo " Profile not accessible"
 
 # Test Import access (should work for professional+)
 echo "Testing Import access..."
-curl -s "http://localhost/setting/import" | grep -q "Import" && echo "✓ Import accessible" || echo "✗ Import not accessible"
+curl -s "http://localhost/setting/import" | grep -q "Import" && echo " Import accessible" || echo " Import not accessible"
 
 # Add more tests for each component
 ```

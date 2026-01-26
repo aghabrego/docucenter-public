@@ -67,7 +67,7 @@ php artisan kart:test-real-data 21 --dry-run      # Simulación
 - Métricas de rendimiento esperadas
 - Referencias técnicas
 
-## 🏎Datos de Prueba KART 21, S.A.
+## Datos de Prueba KART 21, S.A.
 
 ### Cliente de Prueba Realista
 ```
@@ -105,7 +105,7 @@ Total: $48.69 (Subtotal: $45.50 + Impuesto: $3.19)
 ```
  Factura ID: 4429
 Número: FE-KART-20250830-4429
-👤 Cliente: Marcos Bohnen
+ Cliente: Marcos Bohnen
 Total: $48.69
  Fecha: 2025-08-30
 Estado PAC: Emitida

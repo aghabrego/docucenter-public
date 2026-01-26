@@ -87,22 +87,22 @@ $typeOfSaleId = $this->determineTypedocument($data, $total, $originalIDoc);
 ## Puntos de Verificación Actualizados
 
 ### 1. Entrada del Request
-- `$request->dGen['iDoc']` = "6" ✓ Verificado
+- `$request->dGen['iDoc']` = "6"  Verificado
 
 ### 2. Almacenamiento en SalesHeaderImp  
-- `TypeOfSale` = "6" ✓ **NUEVO: Ahora se almacena**
-- `InvoiceNote` contiene `iDoc_original` = "6" ✓ **NUEVO: Backup**
+- `TypeOfSale` = "6"  **NUEVO: Ahora se almacena**
+- `InvoiceNote` contiene `iDoc_original` = "6"  **NUEVO: Backup**
 
 ### 3. Procesamiento en CreateFast
-- `$this->tipeDocument` obtiene valor de `TypeOfSale` ✓ Verificado
-- Se usa en `mount1()` para configurar emisión ✓ Verificado
+- `$this->tipeDocument` obtiene valor de `TypeOfSale`  Verificado
+- Se usa en `mount1()` para configurar emisión  Verificado
 
 ### 4. Emisión PAC
-- `FeHeader.iDoc` = 6 ✓ Verificado
-- XML generado mantiene tipo correcto ✓ Verificado
+- `FeHeader.iDoc` = 6  Verificado
+- XML generado mantiene tipo correcto  Verificado
 
 ### 5. Respuesta Final
-- Información completa del documento procesado ✓ Verificado
+- Información completa del documento procesado  Verificado
 
 ## Resultados Esperados
 - **Campo preservado**: `iDoc` = "6" en todas las etapas

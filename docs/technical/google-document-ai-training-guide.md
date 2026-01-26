@@ -6,10 +6,10 @@
 ```bash
 # Recopilar 20-50 facturas representativas
 facturas_entrenamiento/
-  ├── factura_001.pdf
-  ├── factura_002.pdf
-  ├── ...
-  └── factura_050.pdf
+   factura_001.pdf
+   factura_002.pdf
+   ...
+   factura_050.pdf
 ```
 
 ### Paso 2: Crear Processor Personalizado

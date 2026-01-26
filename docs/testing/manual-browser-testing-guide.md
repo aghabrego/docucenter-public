@@ -202,7 +202,7 @@ Ruta: Admin → Facturación Electrónica → Crear Factura
 
 ---
 
-## 🧪 Testing de Validaciones
+##  Testing de Validaciones
 
 ### **Test de Campos Obligatorios**
 

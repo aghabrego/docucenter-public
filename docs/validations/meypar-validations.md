@@ -33,7 +33,7 @@ private function validateColombianNIT(string $nit): bool
 - ReceiverType: `'1'` (Contribuyente)
 - Custom_field5: Código de ubicación de la organización
 
-### 👤 Cédula Colombiana
+###  Cédula Colombiana
 
 **Formato Válido**: Solo números de 6 a 10 dígitos
 
@@ -57,7 +57,7 @@ private function validateColombianCedula(string $cedula): bool
 - ReceiverType: `'2'` (Persona natural)
 - Custom_field5: `null`
 
-### 🛒 Consumidor Final
+###  Consumidor Final
 
 **Formatos Válidos**:
 - `'0-0-0'`
@@ -92,7 +92,7 @@ if (!$nitValidation['valid']) {
 
 ## Validaciones de Límites de Base de Datos
 
-### 📏 Campos de Texto
+###  Campos de Texto
 
 | Campo | Límite BD | Validación Request | Campo BD |
 |-------|-----------|-------------------|-----------|
@@ -203,7 +203,7 @@ $header->update(['Subtotal' => $subtotalSum]);
 
 ## Estructura de Campos Personalizados (CustomersImp)
 
-### 🗂Sistema de Custom Fields
+### Sistema de Custom Fields
 
 | Campo | Tipo Empresa | Tipo Persona | Consumidor Final |
 |-------|--------------|--------------|------------------|
@@ -311,7 +311,7 @@ Número excede límite de BD decimal(16,4)
 
 ## Testing de Validaciones
 
-### 🧪 Casos de Prueba Documentos
+###  Casos de Prueba Documentos
 
 **NITs Válidos**:
 - `900123456-1` → Empresa

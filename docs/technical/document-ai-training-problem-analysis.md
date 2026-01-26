@@ -74,7 +74,7 @@ Google Document AI ofrece varios tipos de procesadores con IA generativa:
    - Ideal para: clasificar tipos de documentos (factura vs recibo vs contrato)
    - No extrae datos, solo clasifica
 
-3. **✂Custom Splitter**
+3. **Custom Splitter**
    - Identifica límites de documentos en archivos grandes
    - Ideal para: PDFs con múltiples facturas/documentos
    - Separa automáticamente cada documento
@@ -206,7 +206,7 @@ protected function getAnnotationsForDocument(string $fileName): array
     $annotations = json_decode(file_get_contents($annotationsFile), true);
     
     if (json_last_error() !== JSON_ERROR_NONE) {
-        $this->error("  ✗ Error parseando {$annotationsFile}: " . json_last_error_msg());
+        $this->error("   Error parseando {$annotationsFile}: " . json_last_error_msg());
         return [];
     }
     

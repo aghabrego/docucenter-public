@@ -2526,7 +2526,7 @@
   <span class="md-ellipsis">
     
   
-    🧪 Sistema de Testing DocuCenter
+    Sistema de Testing DocuCenter
   
 
     
@@ -4081,52 +4081,50 @@ USERNAME: TESTUSER
 <hr />
 <h2 id="flujo-de-certificacion">Flujo de Certificación<a class="headerlink" href="#flujo-de-certificacion" title="Permanent link">&para;</a></h2>
 <h3 id="diagrama-de-flujo">Diagrama de Flujo<a class="headerlink" href="#diagrama-de-flujo" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>┌─────────────────────────────────────────────────────────┐
-│ 1. Solicitar Credenciales                               │
-│    → Email: soporte@digifact.com.gt                     │
-│    → Tel: 2319-1921 opción 2                            │
-└──────────────────────┬──────────────────────────────────┘
+<div class="highlight"><pre><span></span><code> 1. Solicitar Credenciales                               
+    → Email: soporte@digifact.com.gt                     
+    → Tel: 2319-1921 opción 2                            
+
                        ↓
-┌─────────────────────────────────────────────────────────┐
-│ 2. Recibir Credenciales                                 │
-│    → RUC (TAXID)                                        │
-│    → Usuario                                            │
-│    → Contraseña                                         │
-└──────────────────────┬──────────────────────────────────┘
+
+ 2. Recibir Credenciales                                 
+    → RUC (TAXID)                                        
+    → Usuario                                            
+    → Contraseña                                         
+
                        ↓
-┌─────────────────────────────────────────────────────────┐
-│ 3. Obtener Token JWT (Vigencia: 30 días)               │
-│    POST /login/get_token                                │
-│    Body: { Username, Password }                         │
-└──────────────────────┬──────────────────────────────────┘
+
+ 3. Obtener Token JWT (Vigencia: 30 días)               
+    POST /login/get_token                                
+    Body: { Username, Password }                         
+
                        ↓
-┌─────────────────────────────────────────────────────────┐
-│ 4. Generar XML según Esquema DGI                        │
-│    → Validar estructura XML                             │
-│    → Incluir todos los campos requeridos                │
-└──────────────────────┬──────────────────────────────────┘
+
+ 4. Generar XML según Esquema DGI                        
+    → Validar estructura XML                             
+    → Incluir todos los campos requeridos                
+
                        ↓
-┌─────────────────────────────────────────────────────────┐
-│ 5. Enviar a Certificación                               │
-│    POST /transform/nuc                                  │
-│    Headers: Authorization, Content-Type                 │
-│    Params: TAXID, FORMAT, USERNAME                      │
-│    Body: XML del documento                              │
-└──────────────────────┬──────────────────────────────────┘
+
+ 5. Enviar a Certificación                               
+    POST /transform/nuc                                  
+    Headers: Authorization, Content-Type                 
+    Params: TAXID, FORMAT, USERNAME                      
+    Body: XML del documento                              
+
                        ↓
-┌─────────────────────────────────────────────────────────┐
-│ 6. Recibir Respuesta de DGI                             │
-│    → Acuse de Recibo (CUFE)                             │
-│    → Documentos en formatos solicitados (base64)        │
-│    → Códigos de validación                              │
-└──────────────────────┬──────────────────────────────────┘
+
+ 6. Recibir Respuesta de DGI                             
+    → Acuse de Recibo (CUFE)                             
+    → Documentos en formatos solicitados (base64)        
+    → Códigos de validación                              
+
                        ↓
-┌─────────────────────────────────────────────────────────┐
-│ 7. Procesar y Almacenar                                 │
-│    → Decodificar base64                                 │
-│    → Guardar archivos (XML, PDF, HTML)                  │
-│    → Registrar CUFE y acuse de recibo                   │
-└─────────────────────────────────────────────────────────┘
+
+ 7. Procesar y Almacenar                                 
+    → Decodificar base64                                 
+    → Guardar archivos (XML, PDF, HTML)                  
+    → Registrar CUFE y acuse de recibo                   
 </code></pre></div>
 <h3 id="validaciones-realizadas-por-digifact">Validaciones Realizadas por Digifact<a class="headerlink" href="#validaciones-realizadas-por-digifact" title="Permanent link">&para;</a></h3>
 <p>Digifact ejecuta todas las validaciones según:
@@ -4240,12 +4238,12 @@ USERNAME: TESTUSER
 <p><strong>Formato</strong>: <code>FE + Tipo + Serie + Número + Identificadores</code></p>
 <p><strong>Ejemplo</strong>:
 <div class="highlight"><pre><span></span><code>FE0120000155704849-2-2021320001202205018539617752001120008136739
-│ │││                                                      │
-│ │││                                                      └─ Checksum
-│ ││└─ Serie y número
-│ │└── RUC emisor
-│ └─── Tipo de documento
-└───── Prefijo FE (Factura Electrónica)
+
+                                                        Checksum
+  Serie y número
+  RUC emisor
+  Tipo de documento
+ Prefijo FE (Factura Electrónica)
 </code></pre></div></p>
 <hr />
 <h2 id="integracion-con-docucenter">Integración con DocuCenter<a class="headerlink" href="#integracion-con-docucenter" title="Permanent link">&para;</a></h2>
@@ -4909,12 +4907,12 @@ test_complete<span class="o">()</span><span class="w"> </span><span class="o">{<
 <span class="x">        $result = $service-&gt;authenticate();</span>
 
 <span class="x">        if ($result[&#39;success&#39;]) {</span>
-<span class="x">            $this-&gt;info(&quot;✓ Authentication successful&quot;);</span>
+<span class="x">            $this-&gt;info(&quot; Authentication successful&quot;);</span>
 <span class="x">            $this-&gt;line(&quot;Token: &quot; . substr($result[&#39;token&#39;], 0, 50) . &quot;...&quot;);</span>
 <span class="x">            return 0;</span>
 <span class="x">        }</span>
 
-<span class="x">        $this-&gt;error(&quot;✗ Authentication failed&quot;);</span>
+<span class="x">        $this-&gt;error(&quot; Authentication failed&quot;);</span>
 <span class="x">        $this-&gt;line(&quot;Error: &quot; . $result[&#39;error&#39;]);</span>
 <span class="x">        return 1;</span>
 <span class="x">    }</span>
@@ -4934,13 +4932,13 @@ test_complete<span class="o">()</span><span class="w"> </span><span class="o">{<
 <span class="x">        $result = $service-&gt;certifyDocument($xml);</span>
 
 <span class="x">        if ($result[&#39;success&#39;]) {</span>
-<span class="x">            $this-&gt;info(&quot;✓ Certification successful&quot;);</span>
+<span class="x">            $this-&gt;info(&quot; Certification successful&quot;);</span>
 <span class="x">            $this-&gt;line(&quot;CUFE: &quot; . $result[&#39;cufe&#39;]);</span>
 <span class="x">            $this-&gt;line(&quot;Acuse Recibo: &quot; . $result[&#39;acuse_recibo&#39;]);</span>
 <span class="x">            return 0;</span>
 <span class="x">        }</span>
 
-<span class="x">        $this-&gt;error(&quot;✗ Certification failed&quot;);</span>
+<span class="x">        $this-&gt;error(&quot; Certification failed&quot;);</span>
 <span class="x">        $this-&gt;line(&quot;Error: &quot; . $result[&#39;error&#39;]);</span>
 <span class="x">        return 1;</span>
 <span class="x">    }</span>
@@ -4957,12 +4955,12 @@ test_complete<span class="o">()</span><span class="w"> </span><span class="o">{<
 <span class="x">        $result = $service-&gt;getDocument($cufe);</span>
 
 <span class="x">        if ($result[&#39;success&#39;]) {</span>
-<span class="x">            $this-&gt;info(&quot;✓ Query successful&quot;);</span>
+<span class="x">            $this-&gt;info(&quot; Query successful&quot;);</span>
 <span class="x">            $this-&gt;line(&quot;Document found and retrieved&quot;);</span>
 <span class="x">            return 0;</span>
 <span class="x">        }</span>
 
-<span class="x">        $this-&gt;error(&quot;✗ Query failed&quot;);</span>
+<span class="x">        $this-&gt;error(&quot; Query failed&quot;);</span>
 <span class="x">        $this-&gt;line(&quot;Error: &quot; . $result[&#39;error&#39;]);</span>
 <span class="x">        return 1;</span>
 <span class="x">    }</span>

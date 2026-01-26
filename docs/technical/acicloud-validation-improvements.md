@@ -89,7 +89,7 @@ Se actualizó la lista de formas de pago según especificaciones DGI:
 - Incluye todas las tasas ITBMS vigentes
 - Formas de pago según catálogo oficial
 
-## 🧪 Validación con Datos Reales
+##  Validación con Datos Reales
 
 ### Antes de las Mejoras:
 ```

@@ -89,7 +89,7 @@
 | B415 | Dirección | Input opcional | `direccionExtranjero` | nullable |
 | B416 | Teléfono | Input opcional | `telefonoExtranjero` | nullable |
 
-## 🧪 Testing Completo Implementado
+##  Testing Completo Implementado
 
 ### Scripts de Validación:
 - `scripts/test-receptor-extranjero-unification.sh` - Testing lógica backend

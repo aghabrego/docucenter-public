@@ -109,23 +109,23 @@ La vista usa Livewire polling para actualización automática:
 
 ```
 app/
-  ├── Services/
-  │   └── ServerMetricsService.php
-  └── Http/
-      └── Livewire/
-          └── Admin/
-              └── Reports/
-                  └── ServerMonitor.php
+   Services/
+      ServerMetricsService.php
+   Http/
+       Livewire/
+           Admin/
+               Reports/
+                   ServerMonitor.php
 
 resources/
-  └── views/
-      └── livewire/
-          └── admin/
-              └── reports/
-                  └── server-monitor.blade.php
+   views/
+       livewire/
+           admin/
+               reports/
+                   server-monitor.blade.php
 
 scripts/
-  └── test-server-monitor.sh
+   test-server-monitor.sh
 ```
 
 ### 2. Ruta Agregada

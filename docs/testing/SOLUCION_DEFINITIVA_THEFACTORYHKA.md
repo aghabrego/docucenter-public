@@ -96,7 +96,7 @@ $panama = \App\Models\Destinationcountryoperation::query()
 $this->receptor_paisDestinoOperacion = $panama->id;
 ```
 
-## 🧪 Verificación
+##  Verificación
 
 ### Test de Validación:
 ```bash

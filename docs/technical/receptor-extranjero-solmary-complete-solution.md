@@ -115,18 +115,18 @@ protected function fillForeignCustomerFields(): void
 ### **Campos Visibles en Interfaz**:
 ```blade
 Información Adicional Extranjero (B406-B416)
-   ├── Tipo Identificación (B408) * [SELECT: Pasaporte]
-   ├── Número Identificación (B409) * [INPUT: XYZABC123]  
-   ├── País Extranjero (B410) * [SELECT: Chile]
-   ├── Provincia Extranjero (B411) [INPUT: Opcional]
-   ├── Distrito Extranjero (B412) [INPUT: Opcional]
-   ├── Corregimiento (B413) [INPUT: Opcional]
-   ├── Urbanización (B414) [INPUT: Opcional]
-   ├── Dirección (B415) [INPUT: Opcional]
-   └── Teléfono (B416) [INPUT: Opcional]
+    Tipo Identificación (B408) * [SELECT: Pasaporte]
+    Número Identificación (B409) * [INPUT: XYZABC123]  
+    País Extranjero (B410) * [SELECT: Chile]
+    Provincia Extranjero (B411) [INPUT: Opcional]
+    Distrito Extranjero (B412) [INPUT: Opcional]
+    Corregimiento (B413) [INPUT: Opcional]
+    Urbanización (B414) [INPUT: Opcional]
+    Dirección (B415) [INPUT: Opcional]
+    Teléfono (B416) [INPUT: Opcional]
 ```
 
-## 🧪 VALIDACIÓN DE LA SOLUCIÓN
+##  VALIDACIÓN DE LA SOLUCIÓN
 
 ### **Testing Manual**:
 1. **Acceder** a DocuCenter organización 2

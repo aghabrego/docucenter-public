@@ -6,7 +6,7 @@
 
 | Campo | DocuCenter | Nombre Real | Estado DGI | ¿Necesario? |
 |-------|------------|-------------|-----------|-------------|
-| **B411** | Provincia Extranjero | **dPaisRecDesc** (Descripción País) | **EXISTE** | 🔶 **CONDICIONAL** |
+| **B411** | Provincia Extranjero | **dPaisRecDesc** (Descripción País) | **EXISTE** |  **CONDICIONAL** |
 | **B412** | Distrito Extranjero | `dDistrExt` | **NO EXISTE** | **INNECESARIO** |
 | **B413** | Corregimiento | `dCorregExt` | **NO EXISTE** | **INNECESARIO** |
 | **B414** | Urbanización | `dUrbanExt` | **NO EXISTE** | **INNECESARIO** |

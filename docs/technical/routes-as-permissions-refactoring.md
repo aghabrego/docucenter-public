@@ -162,7 +162,7 @@ VENTAJAS IMPLEMENTADAS:
   • Consistencia automática entre rutas y permisos
 ```
 
-## 🔮 **Roadmap Futuro**
+##  **Roadmap Futuro**
 
 ### **Posibles Extensiones:**
 1. **Middleware Global de Permisos**

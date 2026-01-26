@@ -217,7 +217,7 @@ CreateInvoiceAlanubeJob::dispatch(
 4. **FINALIZING** - Procesando respuesta
 5. **COMPLETED** - Completado exitosamente
 
-## 🧪 Testing Completo
+##  Testing Completo
 
 ### 1. Comando Artisan
 

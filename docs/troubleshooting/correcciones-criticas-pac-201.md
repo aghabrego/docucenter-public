@@ -87,7 +87,7 @@ if (floatval($totalITBMS) > 0) {
 }
 ```
 
-## 🧪 Validación de Correcciones
+##  Validación de Correcciones
 
 Se creó script de testing integral: `docs/testing/test-correcciones-pac-201.php`
 
@@ -116,7 +116,7 @@ Se creó script de testing integral: `docs/testing/test-correcciones-pac-201.php
 2. **Validación PAC**: Confirmar que error 201 se resuelve
 3. **Monitoreo**: Supervisar otras transacciones para efectos secundarios
 
-## 📖 Referencias
+##  Referencias
 
 - **Documentación PAC**: https://felwiki.thefactoryhka.com.pa/
 - **Catálogo Errores**: `public/catalogo_de_codigos_de_retorno_del_servicio-08-2023.pdf`

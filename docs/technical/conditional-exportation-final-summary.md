@@ -15,7 +15,7 @@
 
 ### Lógica por País
 
-#### 🇵🇦 Panamá (`formatForPanama`)
+####  Panamá (`formatForPanama`)
 ```php
 $exportationRequiredTypes = ['02', '03']; // Importación y exportación
 if (in_array($documentType, $exportationRequiredTypes) && isset($data['gFExp'])) {
@@ -23,7 +23,7 @@ if (in_array($documentType, $exportationRequiredTypes) && isset($data['gFExp']))
 }
 ```
 
-#### 🇩🇴 República Dominicana (`formatForDominicana`)  
+####  República Dominicana (`formatForDominicana`)  
 ```php
 $exportationRequiredTypes = ['2', '3']; // Importación y exportación
 if (in_array($documentType, $exportationRequiredTypes) && isset($data['gFExp'])) {
@@ -80,10 +80,10 @@ if (in_array($documentType, $exportationRequiredTypes) && isset($data['gFExp']))
 
 ```bash
 # Verificar lógica condicional implementada
-✓ Línea 168: $exportationRequiredTypes = ['02', '03']; (Panamá)
-✓ Línea 564: $exportationRequiredTypes = ['2', '3']; (Rep. Dominicana)
-✓ Línea 170: if (in_array($documentType, $exportationRequiredTypes)...)
-✓ Línea 566: if (in_array($documentType, $exportationRequiredTypes)...)
+ Línea 168: $exportationRequiredTypes = ['02', '03']; (Panamá)
+ Línea 564: $exportationRequiredTypes = ['2', '3']; (Rep. Dominicana)
+ Línea 170: if (in_array($documentType, $exportationRequiredTypes)...)
+ Línea 566: if (in_array($documentType, $exportationRequiredTypes)...)
 ```
 
 ## IMPACTO Y BENEFICIOS

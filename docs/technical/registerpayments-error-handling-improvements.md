@@ -203,7 +203,7 @@ Log::error("registerInQuickBooks: Error general", [
 - Respuestas completas de API guardadas
 - Stack traces con línea específica de error
 
-## 🧪 **Testing y Validación**
+##  **Testing y Validación**
 
 ### **Script de Testing**
 **Ubicación**: `docs/testing/test-registerpaymentsqb-error-handling.php`

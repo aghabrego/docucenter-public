@@ -104,7 +104,7 @@ public $paisExtranjero = null;
 
 ---
 
-## 🧪 **Testing y Validación**
+##  **Testing y Validación**
 
 ### **Script de Testing Automático**
 **Archivo**: `/scripts/test-conditional-fields.sh`
@@ -123,7 +123,7 @@ public $paisExtranjero = null;
 
 ---
 
-## 📖 **Documentación Técnica Creada**
+##  **Documentación Técnica Creada**
 
 ### **1. Mapeo de Campos Condicionales**
 **Archivo**: `/docs/technical/panama-document-conditional-fields-mapping.md`

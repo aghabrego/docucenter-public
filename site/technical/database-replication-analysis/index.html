@@ -2526,7 +2526,7 @@
   <span class="md-ellipsis">
     
   
-    🧪 Sistema de Testing DocuCenter
+    Sistema de Testing DocuCenter
   
 
     
@@ -4013,81 +4013,79 @@
 - Actualmente: Cada organización tiene su BD con diferente ID_compania</p>
 <h3 id="arquitectura-actual">Arquitectura Actual<a class="headerlink" href="#arquitectura-actual" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code>BD Principal (mysql/docucenter)
-├─&gt; CompanySession (tabla centralizada)
-├─&gt; Organizations
-│   ├─&gt; Org 1: database = &quot;9_734_1672_56&quot;  (id_empresa: 100)
-│   ├─&gt; Org 2: database = &quot;9_734_1672_57&quot;  (id_empresa: 100)
-│   └─&gt; Org 3: database = &quot;9_734_1672_58&quot;  (id_empresa: 101)
+&gt; CompanySession (tabla centralizada)
+&gt; Organizations
+   &gt; Org 1: database = &quot;9_734_1672_56&quot;  (id_empresa: 100)
+   &gt; Org 2: database = &quot;9_734_1672_57&quot;  (id_empresa: 100)
+   &gt; Org 3: database = &quot;9_734_1672_58&quot;  (id_empresa: 101)
 
 BD Organización 1 (9_734_1672_56)
-├─&gt; CompanySession (ID_compania: 100)
-├─&gt; Customers_Imp (datos org 1)
-└─&gt; Sales_Header_Imp (datos org 1)
+&gt; CompanySession (ID_compania: 100)
+&gt; Customers_Imp (datos org 1)
+&gt; Sales_Header_Imp (datos org 1)
 
 BD Organización 2 (9_734_1672_57)
-├─&gt; CompanySession (ID_compania: 100)
-├─&gt; Customers_Imp (datos org 2)
-└─&gt; Sales_Header_Imp (datos org 2)
+&gt; CompanySession (ID_compania: 100)
+&gt; Customers_Imp (datos org 2)
+&gt; Sales_Header_Imp (datos org 2)
 
 BD Organización 3 (9_734_1672_58)
-├─&gt; CompanySession (ID_compania: 101)
-├─&gt; Customers_Imp (datos org 3)
-└─&gt; Sales_Header_Imp (datos org 3)
+&gt; CompanySession (ID_compania: 101)
+&gt; Customers_Imp (datos org 3)
+&gt; Sales_Header_Imp (datos org 3)
 
 PROBLEMA: Sage no puede acceder a datos de Org 1 + Org 2 + Org 3
 </code></pre></div>
 <h3 id="arquitectura-deseada">Arquitectura Deseada<a class="headerlink" href="#arquitectura-deseada" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code>BD Principal (mysql/docucenter)
-├─&gt; companies (NUEVA tabla)
-│   ├─&gt; Company 100: database = &quot;company_100&quot;
-│   └─&gt; Company 101: database = &quot;company_101&quot;
-│
-├─&gt; CompanySession (mantener para compatibilidad)
-├─&gt; Organizations
-│   ├─&gt; Org 1: company_id = 100, database = &quot;9_734_1672_56&quot;
-│   ├─&gt; Org 2: company_id = 100, database = &quot;9_734_1672_57&quot;
-│   └─&gt; Org 3: company_id = 101, database = &quot;9_734_1672_58&quot;
+&gt; companies (NUEVA tabla)
+   &gt; Company 100: database = &quot;company_100&quot;
+   &gt; Company 101: database = &quot;company_101&quot;
+
+&gt; CompanySession (mantener para compatibilidad)
+&gt; Organizations
+   &gt; Org 1: company_id = 100, database = &quot;9_734_1672_56&quot;
+   &gt; Org 2: company_id = 100, database = &quot;9_734_1672_57&quot;
+   &gt; Org 3: company_id = 101, database = &quot;9_734_1672_58&quot;
 
 BD Organización 1 (9_734_1672_56) - ORIGEN
-├─&gt; Customers_Imp (100 registros)
-└─&gt; Sales_Header_Imp (500 ventas)
+&gt; Customers_Imp (100 registros)
+&gt; Sales_Header_Imp (500 ventas)
 
 BD Organización 2 (9_734_1672_57) - ORIGEN
-├─&gt; Customers_Imp (80 registros)
-└─&gt; Sales_Header_Imp (300 ventas)
+&gt; Customers_Imp (80 registros)
+&gt; Sales_Header_Imp (300 ventas)
 
 BD Compañía 100 (company_100) - DESTINO CONSOLIDADO
-├─&gt; Customers_Imp (180 registros: 100 de org1 + 80 de org2)
-│   ├─&gt; Registros de Org 1: org_source_id = 1, ID_compania = 100
-│   └─&gt; Registros de Org 2: org_source_id = 2, ID_compania = 100
-│
-└─&gt; Sales_Header_Imp (800 ventas: 500 de org1 + 300 de org2)
-    ├─&gt; Ventas de Org 1: org_source_id = 1, ID_compania = 100
-    └─&gt; Ventas de Org 2: org_source_id = 2, ID_compania = 100
+&gt; Customers_Imp (180 registros: 100 de org1 + 80 de org2)
+   &gt; Registros de Org 1: org_source_id = 1, ID_compania = 100
+   &gt; Registros de Org 2: org_source_id = 2, ID_compania = 100
+
+&gt; Sales_Header_Imp (800 ventas: 500 de org1 + 300 de org2)
+    &gt; Ventas de Org 1: org_source_id = 1, ID_compania = 100
+    &gt; Ventas de Org 2: org_source_id = 2, ID_compania = 100
 
 SOLUCIÓN: Sage Connector se conecta a company_100 y ve TODO
 </code></pre></div>
 <hr />
 <h2 id="arquitectura-propuesta">Arquitectura Propuesta<a class="headerlink" href="#arquitectura-propuesta" title="Permanent link">&para;</a></h2>
 <h3 id="flujo-de-datos">Flujo de Datos<a class="headerlink" href="#flujo-de-datos" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>┌─────────────────────────────────────────────────────────────────┐
-│  BD Organizaciones (ORIGEN - Operación Diaria)                  │
-├─────────────────────────────────────────────────────────────────┤
-│  - DocuCenter crea facturas aquí                                │
-│  - Usuarios trabajan aquí                                       │
-│  - Cambio de BD por organización (actual)                       │
-└──────────────────┬──────────────────────────────────────────────┘
-                   │
-                   │ REPLICACIÓN (cada N minutos)
-                   ▼
-┌─────────────────────────────────────────────────────────────────┐
-│  BD Compañía (DESTINO - Solo Lectura para Sage)                │
-├─────────────────────────────────────────────────────────────────┤
-│  - Sage Connector LEE desde aquí                                │
-│  - Datos consolidados de TODAS las organizaciones               │
-│  - Mismo ID_compania para todos los registros                   │
-│  - Campo org_source_id identifica origen                        │
-└─────────────────────────────────────────────────────────────────┘
+<div class="highlight"><pre><span></span><code>  BD Organizaciones (ORIGEN - Operación Diaria)                  
+
+  - DocuCenter crea facturas aquí                                
+  - Usuarios trabajan aquí                                       
+  - Cambio de BD por organización (actual)                       
+
+
+                    REPLICACIÓN (cada N minutos)
+
+
+  BD Compañía (DESTINO - Solo Lectura para Sage)                
+
+  - Sage Connector LEE desde aquí                                
+  - Datos consolidados de TODAS las organizaciones               
+  - Mismo ID_compania para todos los registros                   
+  - Campo org_source_id identifica origen                        
 </code></pre></div>
 <h3 id="campos-adicionales-necesarios">Campos Adicionales Necesarios<a class="headerlink" href="#campos-adicionales-necesarios" title="Permanent link">&para;</a></h3>
 <p><strong>SOLUCIÓN SIMPLIFICADA:</strong> Agregar <code>org_source_id</code> en <strong>TODAS</strong> las BDs</p>
@@ -4143,9 +4141,9 @@ BD Compañía (company_100):
 <h4 id="descripcion">Descripción<a class="headerlink" href="#descripcion" title="Permanent link">&para;</a></h4>
 <p>Usar el sistema de replicación binlog de MySQL/MariaDB.</p>
 <h4 id="como-funciona">Cómo Funciona<a class="headerlink" href="#como-funciona" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code>BD Org 1 (Master) ──binlog──&gt; BD Company (Slave)
-BD Org 2 (Master) ──binlog──&gt; BD Company (Slave)
-BD Org 3 (Master) ──binlog──&gt; BD Company (Slave)
+<div class="highlight"><pre><span></span><code>BD Org 1 (Master) binlog&gt; BD Company (Slave)
+BD Org 2 (Master) binlog&gt; BD Company (Slave)
+BD Org 3 (Master) binlog&gt; BD Company (Slave)
 </code></pre></div>
 <h4 id="configuracion">Configuración<a class="headerlink" href="#configuracion" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><span class="c1"># En my.cnf de cada BD Organización (Master)</span>
@@ -4831,17 +4829,17 @@ php<span class="w"> </span>artisan<span class="w"> </span>queue:work<span class=
 <span class="n">Customers_Imp</span><span class="p">:</span>
 <span class="w">  </span><span class="o">-</span><span class="w"> </span><span class="n">ID</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="n">ID_compania</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="n">org_source_id</span><span class="o">=</span><span class="mi">1</span><span class="w"> </span><span class="p">(</span><span class="n">de</span><span class="w"> </span><span class="n">Org</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
 <span class="w">  </span><span class="o">-</span><span class="w"> </span><span class="n">ID</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="n">ID_compania</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="n">org_source_id</span><span class="o">=</span><span class="mi">2</span><span class="w"> </span><span class="p">(</span><span class="n">de</span><span class="w"> </span><span class="n">Org</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
-<span class="w">  </span><span class="err">└─</span><span class="o">&gt;</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">ID</span><span class="p">,</span><span class="w"> </span><span class="n">org_source_id</span><span class="p">)</span><span class="w"> </span><span class="n">permite</span><span class="w"> </span><span class="n">IDs</span><span class="w"> </span><span class="n">duplicados</span>
+<span class="w">  </span><span class="o">&gt;</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">ID</span><span class="p">,</span><span class="w"> </span><span class="n">org_source_id</span><span class="p">)</span><span class="w"> </span><span class="n">permite</span><span class="w"> </span><span class="n">IDs</span><span class="w"> </span><span class="n">duplicados</span>
 
 <span class="c1">-- BD de Organización 1 (9_734_1672_56) - PRIMARY KEY simple</span>
 <span class="n">Customers_Imp</span><span class="p">:</span>
 <span class="w">  </span><span class="o">-</span><span class="w"> </span><span class="n">ID</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="n">ID_compania</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="n">org_source_id</span><span class="o">=</span><span class="k">NULL</span>
-<span class="w">  </span><span class="err">└─</span><span class="o">&gt;</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">ID</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">columna</span><span class="w"> </span><span class="n">existe</span><span class="w"> </span><span class="n">pero</span><span class="w"> </span><span class="k">no</span><span class="w"> </span><span class="n">se</span><span class="w"> </span><span class="n">usa</span>
+<span class="w">  </span><span class="o">&gt;</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">ID</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">columna</span><span class="w"> </span><span class="n">existe</span><span class="w"> </span><span class="n">pero</span><span class="w"> </span><span class="k">no</span><span class="w"> </span><span class="n">se</span><span class="w"> </span><span class="n">usa</span>
 
 <span class="c1">-- BD de Organización 2 (9_734_1672_57) - PRIMARY KEY simple</span>
 <span class="n">Customers_Imp</span><span class="p">:</span>
 <span class="w">  </span><span class="o">-</span><span class="w"> </span><span class="n">ID</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="n">ID_compania</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="n">org_source_id</span><span class="o">=</span><span class="k">NULL</span>
-<span class="w">  </span><span class="err">└─</span><span class="o">&gt;</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">ID</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">columna</span><span class="w"> </span><span class="n">existe</span><span class="w"> </span><span class="n">pero</span><span class="w"> </span><span class="k">no</span><span class="w"> </span><span class="n">se</span><span class="w"> </span><span class="n">usa</span>
+<span class="w">  </span><span class="o">&gt;</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">ID</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">columna</span><span class="w"> </span><span class="n">existe</span><span class="w"> </span><span class="n">pero</span><span class="w"> </span><span class="k">no</span><span class="w"> </span><span class="n">se</span><span class="w"> </span><span class="n">usa</span>
 </code></pre></div>
 <p><strong>Implementación:</strong>
 - Todas las BDs tienen columna <code>org_source_id</code> (compatibilidad de modelos)

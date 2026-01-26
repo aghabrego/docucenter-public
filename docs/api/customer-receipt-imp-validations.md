@@ -45,7 +45,7 @@ La validación de campos en `Items` depende de dos factores principales:
 1. **`Prepayment`** (a nivel de header)  
 2. **`ApplyTo`** (a nivel de item)
 
-### 🔹 PREPAYMENT = true (Pago por adelantado)
+###  PREPAYMENT = true (Pago por adelantado)
 **Características especiales para prepagos:**
 - `Quantity`: **OPCIONAL** - Puede ser null
 - `Item_id`: **OPCIONAL** - Puede ser null  
@@ -87,7 +87,7 @@ La validación de campos en `Items` depende de dos factores principales:
 }
 ```
 
-### 🔹 PREPAYMENT = false + ApplyTo = true (Aplicar a factura existente)
+###  PREPAYMENT = false + ApplyTo = true (Aplicar a factura existente)
 - `InvoiceNumber`: **REQUERIDO** - Debe especificar factura
 - `Quantity`: **OPCIONAL** - No necesario para aplicar a factura
 - `Item_id`: **OPCIONAL** - No necesario para aplicar a factura
@@ -108,7 +108,7 @@ La validación de campos en `Items` depende de dos factores principales:
 }
 ```
 
-### 🔹 PREPAYMENT = false + ApplyTo = false (Producto/servicio nuevo)
+###  PREPAYMENT = false + ApplyTo = false (Producto/servicio nuevo)
 - `InvoiceNumber`: **OPCIONAL** - No aplica a factura existente
 - `Quantity`: **REQUERIDO** - Cantidad del producto/servicio
 - `Item_id`: **OPCIONAL** - ID del producto (nullable)

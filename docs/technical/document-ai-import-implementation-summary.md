@@ -103,25 +103,25 @@ Usuario → [Importar a Workbench]
               ↓
     DocumentAIService::importToWorkbench()
               ↓
-    ┌─────────────────────┐
-    │ 1. Upload PDFs      │ → GCS Bucket
-    └─────────────────────┘
+    
+     1. Upload PDFs       → GCS Bucket
+    
               ↓
-    ┌─────────────────────┐
-    │ 2. Import API Call  │ → Document AI
-    └─────────────────────┘
+    
+     2. Import API Call   → Document AI
+    
               ↓
-    ┌─────────────────────┐
-    │ 3. Store Operation  │ → Session
-    └─────────────────────┘
+    
+     3. Store Operation   → Session
+    
               ↓
     [wire:poll cada 30s]
               ↓
     DocumentAIService::checkImportStatus()
               ↓
-    ┌─────────────────────┐
-    │ 4. Update UI State  │ → Livewire
-    └─────────────────────┘
+    
+     4. Update UI State   → Livewire
+    
 ```
 
 ## Configuración Requerida
@@ -154,14 +154,14 @@ Database: panel_database
 
 Found 21 annotated documents
 
-┌─────────────────────────┬─────────┐
-│ Metric                  │ Value   │
-├─────────────────────────┼─────────┤
-│ Total Documents         │ 22      │
-│ Annotated Documents     │ 21      │
-│ Pending Documents       │ 1       │
-│ Average Confidence      │ 85.32%  │
-└─────────────────────────┴─────────┘
+
+ Metric                   Value   
+
+ Total Documents          22      
+ Annotated Documents      21      
+ Pending Documents        1       
+ Average Confidence       85.32%  
+
 
 Start import to Workbench? (yes/no) [no]: yes
 

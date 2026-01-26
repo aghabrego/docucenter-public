@@ -1,6 +1,6 @@
-# 🧪 Sistema de Testing DocuCenter
+#  Sistema de Testing DocuCenter
 
-## Scrip### 🧪 Scripts de Prueba Reutilizables
+## Scrip###  Scripts de Prueba Reutilizables
 
 ### **[API Consulta de RUC](../api/check-ruc-api.md)** 
 Testing de la nueva API para consulta de RUCs panameños usando Alanube.
@@ -137,15 +137,15 @@ Documentación completa del sistema de testing implementado en `app/Console/Comm
 ### [Resumen Ejecutivo](../TESTING_SYSTEM_SUMMARY.md)
 Resumen completo de la implementación del sistema de testing con todas las funcionalidades.
 
-### � [Comandos de Testing](commands/README.md) 
+###  [Comandos de Testing](commands/README.md) 
 Colección completa de scripts bash para testing específico y validaciones automáticas.
 
-### �[Script de Automatización Principal](commands/testing.sh)
+### [Script de Automatización Principal](commands/testing.sh)
 Script bash maestro para automatizar flujos completos de testing con Docker.
 
-## 🧪 Scripts de Prueba Reutilizables
+##  Scripts de Prueba Reutilizables
 
-### � **Validaciones PAC - Alanube Panamá**
+###  **Validaciones PAC - Alanube Panamá**
 
 #### `test_dni_vs_ruc_analysis.php`
 **Propósito**: Análisis detallado del problema de validación DNI vs RUC para tipos de receptor.
@@ -211,7 +211,7 @@ cd /home/weirdolabs/code/docucenter
 #### `TestPurOrdrHeaderTransformSimple.php`
 **Propósito**: Comando de test reutilizable para validación booleana.
 
-### 🆔 **Testing de Identificadores de Transacción**
+###  **Testing de Identificadores de Transacción**
 
 #### `test-parent-transaction-id.sh`
 **Propósito**: Validación de funcionalidad ParentTransactionId en CustomerCreditMemoHeaderImp.
@@ -294,7 +294,7 @@ php docs/testing/test_user_data_analysis.php
 - Verificación de estructura final para PAC
 - Confirmación de resolución del error
 
-### � **Facturas de Crédito Fiscal - Alanube DOM**
+###  **Facturas de Crédito Fiscal - Alanube DOM**
 
 #### `test_fiscal_credit_detection.php`
 **Propósito**: Prueba de detección automática de tipos de documento para facturas de crédito fiscal.
@@ -341,13 +341,13 @@ php docs/testing/test_fiscal_credit_complete.php
 
 ---
 
-## 🧪 Tipos de Testing Disponibles
+##  Tipos de Testing Disponibles
 
 ### **Testing de Webhooks**
 - **[CreateSaleMaxgymJob](../app/Console/Commands/Testing/TestCreateSaleMaxgymJob.php)** - Testing de webhooks de pagos Maxgym
 - **Datos de Prueba**: [test_payment_data.json](../storage/testing/data/test_payment_data.json)
 
-### 🧮 **Testing de Cálculos**  
+###  **Testing de Cálculos**  
 - **[CreateFastJobCalculation](../app/Console/Commands/Testing/TestCreateFastJobCalculation.php)** - Cálculos de facturación sin PAC
 - **[Trait de Cálculos](../app/Traits/CreateFastJobCalculation.php)** - Lógica de cálculo independiente
 
@@ -408,7 +408,7 @@ Análisis comparativo de diferentes sistemas de validación.
 2. **Prueba específica**: `./scripts/testing.sh test-maxgym 1`
 3. **Verificación**: `./scripts/testing.sh test-calculations 1`
 
-### 🧪 **Testing Completo**
+###  **Testing Completo**
 1. **Estado del sistema**: `./scripts/testing.sh status`
 2. **Todas las pruebas**: `./scripts/testing.sh test-all 1`
 3. **Revisión de logs**: Verificar `storage/logs/laravel.log`
@@ -426,19 +426,19 @@ Análisis comparativo de diferentes sistemas de validación.
 
 #### Testing Exitoso de Webhooks
 ```
-✓ Datos JSON cargados correctamente
-✓ Organización encontrada
-✓ Usuario encontrado
-✓ Job ejecutado exitosamente
+ Datos JSON cargados correctamente
+ Organización encontrada
+ Usuario encontrado
+ Job ejecutado exitosamente
 ```
 
 #### Testing Exitoso de Cálculos
 ```
-✓ Cálculos completados exitosamente
-✓ Total general coincide
-✓ Cantidad de items coincide
-✓ ITBMS coincide
-✓ Todos los cálculos son consistentes
+ Cálculos completados exitosamente
+ Total general coincide
+ Cantidad de items coincide
+ ITBMS coincide
+ Todos los cálculos son consistentes
 ```
 
 ---
@@ -493,7 +493,7 @@ Los comandos de testing están diseñados para **NO** usar PAC. Verificar que se
 
 ## Beneficios del Sistema
 
-### 🛡**Seguridad**
+### **Seguridad**
 - Testing sin afectar producción
 - Sin conexiones PAC durante testing
 - Validaciones robustas

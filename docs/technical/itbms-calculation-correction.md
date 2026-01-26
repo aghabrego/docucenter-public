@@ -31,7 +31,7 @@
 - **Precio base**: 5.60
 - **ITBMS enviado**: 0.39
 - **Total enviado**: 5.99
-- **Verificación**: 5.60 + 0.39 = 5.99 ✓
+- **Verificación**: 5.60 + 0.39 = 5.99 
 - **Problema**: ITBMS correcto al 7% = 5.60 × 0.07 = 0.392
 
 ## Causa Raíz

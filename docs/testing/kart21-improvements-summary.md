@@ -50,17 +50,17 @@ Log::info("Discrepancia detectada en orden Kart21", [
 ### **ANTES de las Mejoras:**
 ```
 Subtotal: 15.90     (2 decimales) 
-💵 Total: 17.01        (2 decimales) Pérdida de 0.003
-🏷Impuesto: 1.11    (2 decimales) Pérdida de 0.003
-💳 Pagado: 17.01       (2 decimales)
+ Total: 17.01        (2 decimales) Pérdida de 0.003
+Impuesto: 1.11    (2 decimales) Pérdida de 0.003
+ Pagado: 17.01       (2 decimales)
 ```
 
 ### **DESPUÉS de las Mejoras:**
 ```
 Subtotal: 15.900    (3 decimales) 
-💵 Total: 17.013       (3 decimales) Precisión preservada
-🏷Impuesto: 1.113   (3 decimales) Precisión preservada  
-💳 Pagado: 17.010      (3 decimales) 
+ Total: 17.013       (3 decimales) Precisión preservada
+Impuesto: 1.113   (3 decimales) Precisión preservada  
+ Pagado: 17.010      (3 decimales) 
 ```
 
 ## **Beneficios Conseguidos**
@@ -82,7 +82,7 @@ Subtotal: 15.900    (3 decimales)
 - **Análisis automático**: Sin overhead significativo
 - **Logging selectivo**: Solo registra discrepancias > 0.001
 
-## 🧪 **Testing y Validación**
+##  **Testing y Validación**
 
 ### **Comando de Testing Creado:**
 ```bash

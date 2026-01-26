@@ -43,7 +43,7 @@ if (in_array($value, ['03', '3'])) { ... }
 
 ---
 
-## 🧪 **TESTING ESPERADO**
+##  **TESTING ESPERADO**
 
 ### HTML Generado Correcto:
 ```html

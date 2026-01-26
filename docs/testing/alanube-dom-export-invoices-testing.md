@@ -123,10 +123,10 @@ Esta documentación describe el sistema de testing completo para las **Facturas 
 
 **Resultado Esperado**:
 ```
-[INFO] ✓ Validación de estructura del documento de exportación - EXITOSO
-[INFO] ✓ Validación de límites de ítems - EXITOSO
-[INFO] ✓ Validación de indicadores de facturación para exportación - EXITOSO
-[INFO] ✓ Validación de información específica de exportación - EXITOSO
+[INFO]  Validación de estructura del documento de exportación - EXITOSO
+[INFO]  Validación de límites de ítems - EXITOSO
+[INFO]  Validación de indicadores de facturación para exportación - EXITOSO
+[INFO]  Validación de información específica de exportación - EXITOSO
 ```
 
 ### 2. Generación de Datos de Prueba
@@ -338,10 +338,10 @@ echo 'Cola: ' . $job->queue;
 
 ### Resultados Exitosos
 ```
-[INFO] ✓ Validación de estructura del documento de exportación - EXITOSO
-[INFO] ✓ Generación de datos de prueba - EXITOSO
-[INFO] ✓ Detección inteligente de factura de exportación - EXITOSO
-[INFO] ✓ Creación de instancia del job - EXITOSO
+[INFO]  Validación de estructura del documento de exportación - EXITOSO
+[INFO]  Generación de datos de prueba - EXITOSO
+[INFO]  Detección inteligente de factura de exportación - EXITOSO
+[INFO]  Creación de instancia del job - EXITOSO
 ```
 
 ### Errores Comunes y Soluciones

@@ -43,7 +43,7 @@ Ambos países retornan estructura completa:
 }
 ```
 
-### 🇵🇦 **Panamá - Mapeo DGI Oficial**
+###  **Panamá - Mapeo DGI Oficial**
 
 - Información general con tipos de documento 01-10
 - Receptor con RUC y ubicación por provincia/distrito/corregimiento
@@ -51,7 +51,7 @@ Ambos países retornan estructura completa:
 - Totales con métodos de pago locales
 - Validaciones según normativa DGI
 
-### 🇩🇴 **República Dominicana - Migración Completa**
+###  **República Dominicana - Migración Completa**
 
 - Toda la lógica existente del `FeHeader.php` migrada
 - Tipos de documento 01-15 (incluye regímenes especiales)

@@ -74,7 +74,7 @@ public function getPacTypeAttribute(): ?string
 3. **Flexibilidad**: Soporta múltiples proveedores PAC
 4. **Mantenibilidad**: Lógica centralizada en el modelo
 
-## 🧪 Testing
+##  Testing
 
 ### Casos Probados
 ```

@@ -140,7 +140,7 @@ ManageShop funcionando con nuevo sidebar
 
 ---
 
-## 🧪 Para Probar
+##  Para Probar
 
 ### 1. Ver el Componente Migrado
 ```
@@ -259,38 +259,38 @@ docker exec -it docucenter_laravel.test php artisan cache:clear
 
 ```
 ANTES:                          DESPUÉS:
-┌─────────────────┐            ┌──────────────────────────┐
-│ Home            │            │ VOGLIA MULTIPLAZA    │
-│ Applications    │            ├──────────────────────────┤
-│  ├─ CRUD        │            │ PRINCIPAL                │
-│  ├─ Translation │            │  • Dashboard             │
-│  ├─ Roles       │            ├──────────────────────────┤
-│  ├─ Users       │            │ FACTURACIÓN ELECTRÓNICA  │
-│  ├─ Tokens      │            │  • Facturas Emitidas     │
-│  ├─ Databases   │            │  • Facturas Recibidas    │
-│  └─ ...         │            │  • Configuración ▼       │
-│ E-Docs          │            │    - Clientes            │
-│  ├─ Config      │            │    - General             │
-│  ├─ Lightspeed  │            │    - Lightspeed X        │
-│  ├─ Serie R     │            │    - Serie R │
-│  └─ Facturas    │            │    - Sage50              │
-│ Reportes        │            ├──────────────────────────┤
-│ Logout          │            │ INTEGRACIONES            │
-└─────────────────┘            │  • Conexiones            │
-                               │  • Bases de Datos        │
-TODO MEZCLADO                  ├──────────────────────────┤
-                               │ REPORTES                 │
-                               │  • Monitoreo Emisión     │
-                               ├──────────────────────────┤
-                               │ ADMINISTRACIÓN           │
-                               │  • Sistema ▼             │
-                               │    - Usuarios            │
-                               │    - Roles               │
-                               │    - Catálogos           │
-                               │    - Tokens              │
-                               ├──────────────────────────┤
-                               │ • Cerrar Sesión          │
-                               └──────────────────────────┘
+            
+ Home                         VOGLIA MULTIPLAZA    
+ Applications                
+   CRUD                     PRINCIPAL                
+   Translation               • Dashboard             
+   Roles                   
+   Users                    FACTURACIÓN ELECTRÓNICA  
+   Tokens                    • Facturas Emitidas     
+   Databases                 • Facturas Recibidas    
+   ...                       • Configuración        
+ E-Docs                          - Clientes            
+   Config                      - General             
+   Lightspeed                  - Lightspeed X        
+   Serie R                     - Serie R 
+   Facturas                    - Sage50              
+ Reportes                    
+ Logout                       INTEGRACIONES            
+              • Conexiones            
+                                 • Bases de Datos        
+TODO MEZCLADO                  
+                                REPORTES                 
+                                 • Monitoreo Emisión     
+                               
+                                ADMINISTRACIÓN           
+                                 • Sistema              
+                                   - Usuarios            
+                                   - Roles               
+                                   - Catálogos           
+                                   - Tokens              
+                               
+                                • Cerrar Sesión          
+                               
                                ORGANIZADO POR CONTEXTO
 ```
 

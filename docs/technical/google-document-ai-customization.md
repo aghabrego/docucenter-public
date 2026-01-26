@@ -18,13 +18,13 @@
 ```bash
 # Necesitas 20-100 facturas representativas
 dataset/
-  ├── train/          # 80% para entrenamiento
-  │   ├── factura_001.pdf
-  │   ├── factura_002.pdf
-  │   └── ...
-  └── test/           # 20% para validación
-      ├── factura_020.pdf
-      └── ...
+   train/          # 80% para entrenamiento
+      factura_001.pdf
+      factura_002.pdf
+      ...
+   test/           # 20% para validación
+       factura_020.pdf
+       ...
 ```
 
 #### Paso 2: Crear Custom Processor

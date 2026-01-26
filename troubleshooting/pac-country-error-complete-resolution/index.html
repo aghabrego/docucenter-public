@@ -2526,7 +2526,7 @@
   <span class="md-ellipsis">
     
   
-    🧪 Sistema de Testing DocuCenter
+    Sistema de Testing DocuCenter
   
 
     
@@ -3374,22 +3374,22 @@
 </code></pre></div></p>
 <h2 id="flujo-corregido-de-procesamiento">Flujo Corregido de Procesamiento<a class="headerlink" href="#flujo-corregido-de-procesamiento" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code>1. QuickBooks Webhook → QuickBooksOnlineService
-   ├─ Determinar TIPO_RECEPTOR desde customerRef
-   ├─ Cliente Nacional (01,02,03) → Forzar país PA
-   └─ Cliente Extranjero (04) → Preservar país original
+    Determinar TIPO_RECEPTOR desde customerRef
+    Cliente Nacional (01,02,03) → Forzar país PA
+    Cliente Extranjero (04) → Preservar país original
 
 2. createDefaultClient
-   ├─ Recibir país corregido en request
-   ├─ Preservar país del request si está presente
-   └─ Solo usar default si país no está presente
+    Recibir país corregido en request
+    Preservar país del request si está presente
+    Solo usar default si país no está presente
 
 3. CreateFastJob → Determinar destinoOperacion
-   ├─ Cliente Nacional → destinoOperacion = 1, país = PA
-   └─ Cliente Extranjero → destinoOperacion = 2, país = original
+    Cliente Nacional → destinoOperacion = 1, país = PA
+    Cliente Extranjero → destinoOperacion = 2, país = original
 
 4. PAC Validation 
-   ├─ Cliente Nacional: destinoOperacion=1, país=PA ✓
-   └─ Cliente Extranjero: destinoOperacion=2, país=Chile ✓
+    Cliente Nacional: destinoOperacion=1, país=PA 
+    Cliente Extranjero: destinoOperacion=2, país=Chile 
 </code></pre></div>
 <h2 id="testing-y-validacion">Testing y Validación<a class="headerlink" href="#testing-y-validacion" title="Permanent link">&para;</a></h2>
 <h3 id="script-de-prueba-creado">Script de Prueba Creado<a class="headerlink" href="#script-de-prueba-creado" title="Permanent link">&para;</a></h3>

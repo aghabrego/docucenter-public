@@ -2988,7 +2988,7 @@
   <span class="md-ellipsis">
     
   
-    🧪 Sistema de Testing DocuCenter
+    Sistema de Testing DocuCenter
   
 
     
@@ -3920,25 +3920,24 @@
               ↓
     DocumentAIService::importToWorkbench()
               ↓
-    ┌─────────────────────┐
-    │ 1. Upload PDFs      │ → GCS Bucket
-    └─────────────────────┘
+
+     1. Upload PDFs       → GCS Bucket
+
               ↓
-    ┌─────────────────────┐
-    │ 2. Import API Call  │ → Document AI
-    └─────────────────────┘
+
+     2. Import API Call   → Document AI
+
               ↓
-    ┌─────────────────────┐
-    │ 3. Store Operation  │ → Session
-    └─────────────────────┘
+
+     3. Store Operation   → Session
+
               ↓
     [wire:poll cada 30s]
               ↓
     DocumentAIService::checkImportStatus()
               ↓
-    ┌─────────────────────┐
-    │ 4. Update UI State  │ → Livewire
-    └─────────────────────┘
+
+     4. Update UI State   → Livewire
 </code></pre></div>
 <h2 id="configuracion-requerida">Configuración Requerida<a class="headerlink" href="#configuracion-requerida" title="Permanent link">&para;</a></h2>
 <h3 id="env">.env<a class="headerlink" href="#env" title="Permanent link">&para;</a></h3>
@@ -3964,14 +3963,14 @@ Database: panel_database
 
 Found 21 annotated documents
 
-┌─────────────────────────┬─────────┐
-│ Metric                  │ Value   │
-├─────────────────────────┼─────────┤
-│ Total Documents         │ 22      │
-│ Annotated Documents     │ 21      │
-│ Pending Documents       │ 1       │
-│ Average Confidence      │ 85.32%  │
-└─────────────────────────┴─────────┘
+
+ Metric                   Value   
+
+ Total Documents          22      
+ Annotated Documents      21      
+ Pending Documents        1       
+ Average Confidence       85.32%  
+
 
 Start import to Workbench? (yes/no) [no]: yes
 

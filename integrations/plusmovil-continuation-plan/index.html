@@ -2532,7 +2532,7 @@
   <span class="md-ellipsis">
     
   
-    🧪 Sistema de Testing DocuCenter
+    Sistema de Testing DocuCenter
   
 
     
@@ -3190,7 +3190,7 @@
   <a href="#fase-3-testing-empezar-aqui" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Fase 3: Testing ⬅EMPEZAR AQUÍ
+        Fase 3: Testing EMPEZAR AQUÍ
       
     </span>
   </a>
@@ -3579,7 +3579,7 @@
   <a href="#fase-3-testing-empezar-aqui" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Fase 3: Testing ⬅EMPEZAR AQUÍ
+        Fase 3: Testing EMPEZAR AQUÍ
       
     </span>
   </a>
@@ -3678,9 +3678,9 @@
 <div class="highlight"><pre><span></span><code><span class="c1"># Ver información completa de la conexión</span>
 docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>docucenter_laravel.test<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>tinker<span class="w"> </span>--execute<span class="o">=</span><span class="s2">&quot;</span>
 <span class="s2">\$conn = \App\Models\Connection::where(&#39;application&#39;, &#39;plusmovil&#39;)-&gt;first();</span>
-<span class="s2">echo &#39;═══════════════════════════════════════&#39; . PHP_EOL;</span>
+<span class="s2">echo &#39;&#39; . PHP_EOL;</span>
 <span class="s2">echo &#39;INFORMACIÓN DE CONEXIÓN PLUSMÓVIL&#39; . PHP_EOL;</span>
-<span class="s2">echo &#39;═══════════════════════════════════════&#39; . PHP_EOL;</span>
+<span class="s2">echo &#39;&#39; . PHP_EOL;</span>
 <span class="s2">echo &#39;ID: &#39; . \$conn-&gt;id . PHP_EOL;</span>
 <span class="s2">echo &#39;Nombre: &#39; . \$conn-&gt;name . PHP_EOL;</span>
 <span class="s2">echo &#39;Organización ID: &#39; . \$conn-&gt;organization_id . PHP_EOL;</span>
@@ -3688,13 +3688,13 @@ docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </spa
 <span class="s2">echo &#39;Usuario: &#39; . (\$conn-&gt;settings[&#39;username&#39;] ?? &#39;N/A&#39;) . PHP_EOL;</span>
 <span class="s2">echo &#39;Base URL: &#39; . (\$conn-&gt;settings[&#39;base_url&#39;] ?? &#39;N/A&#39;) . PHP_EOL;</span>
 <span class="s2">echo &#39;Client ID: &#39; . substr(\$conn-&gt;settings[&#39;client_id&#39;] ?? &#39;N/A&#39;, 0, 20) . &#39;...&#39; . PHP_EOL;</span>
-<span class="s2">echo &#39;───────────────────────────────────────&#39; . PHP_EOL;</span>
+<span class="s2">echo &#39;&#39; . PHP_EOL;</span>
 <span class="s2">echo &#39;Tiene token: &#39; . (!empty(\$conn-&gt;settings[&#39;access_token&#39;]) ? &#39;Sí&#39; : &#39;No&#39;) . PHP_EOL;</span>
 <span class="s2">echo &#39;Token válido: &#39; . (\$conn-&gt;hasPlusMovilValidToken() ? &#39;Sí &#39; : &#39;No &#39;) . PHP_EOL;</span>
 <span class="s2">if (!empty(\$conn-&gt;settings[&#39;token_expires_at&#39;])) {</span>
 <span class="s2">    echo &#39;Expira en: &#39; . \$conn-&gt;settings[&#39;token_expires_at&#39;] . PHP_EOL;</span>
 <span class="s2">}</span>
-<span class="s2">echo &#39;═══════════════════════════════════════&#39; . PHP_EOL;</span>
+<span class="s2">echo &#39;&#39; . PHP_EOL;</span>
 <span class="s2">&quot;</span>
 </code></pre></div>
 <p><strong>Resultado esperado:</strong>
@@ -3715,15 +3715,15 @@ docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </spa
  Rango de fechas: 2025-10-01 a 2025-11-09
 
 Conexión encontrada: PlusMóvil QA
-┌────────────┬──────────────────────────────────┐
-│ Campo      │ Valor                            │
-├────────────┼──────────────────────────────────┤
-│ ID         │ 1                                │
-│ Nombre     │ PlusMóvil QA                     │
-│ Ambiente   │ qa                               │
-│ Usuario    │ usuario@empresa.com              │
-│ Token      │ Sí │
-└────────────┴──────────────────────────────────┘
+
+ Campo       Valor                            
+
+ ID          1                                
+ Nombre      PlusMóvil QA                     
+ Ambiente    qa                               
+ Usuario     usuario@empresa.com              
+ Token       Sí 
+
 
  Probando autenticación...
 Token obtenido exitosamente
@@ -3732,11 +3732,11 @@ Token obtenido exitosamente
 Consultando facturas...
 Facturas obtenidas: 25
 
-┌────┬────────────┬────────────┬──────────────┬─────────┬─────────┐
-│ ID │ Número     │ Fecha      │ Cliente      │ Total   │ Estado  │
-├────┼────────────┼────────────┼──────────────┼─────────┼─────────┤
-│ 86 │ INV-00086  │ 2025-10-15 │ Cliente A    │ 1,250.00│ paid    │
-│ 87 │ INV-00087  │ 2025-10-16 │ Cliente B    │ 850.00  │ pending │
+
+ ID  Número      Fecha       Cliente       Total    Estado  
+
+ 86  INV-00086   2025-10-15  Cliente A     1,250.00 paid    
+ 87  INV-00087   2025-10-16  Cliente B     850.00   pending 
 ...
 </code></pre></div></p>
 <h3 id="paso-3-verificar-logs">Paso 3: Verificar Logs<a class="headerlink" href="#paso-3-verificar-logs" title="Permanent link">&para;</a></h3>
@@ -3899,7 +3899,7 @@ Revisa los detalles en: storage/logs/laravel.log
 </code></pre></div>
 <hr />
 <h2 id="checklist-de-continuacion">Checklist de Continuación<a class="headerlink" href="#checklist-de-continuacion" title="Permanent link">&para;</a></h2>
-<h3 id="fase-3-testing-empezar-aqui">Fase 3: Testing ⬅<strong>EMPEZAR AQUÍ</strong><a class="headerlink" href="#fase-3-testing-empezar-aqui" title="Permanent link">&para;</a></h3>
+<h3 id="fase-3-testing-empezar-aqui">Fase 3: Testing <strong>EMPEZAR AQUÍ</strong><a class="headerlink" href="#fase-3-testing-empezar-aqui" title="Permanent link">&para;</a></h3>
 <ul class="task-list">
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Verificar datos de conexión existente</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Ejecutar comando <code>plusmovil:test-connection</code></li>

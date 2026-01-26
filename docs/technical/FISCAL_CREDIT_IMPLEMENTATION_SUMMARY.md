@@ -74,7 +74,7 @@ Comando de prueba actualizado con soporte completo para facturas de crédito fis
 - buyerTypeId, billingIndicator, accountType
 ```
 
-## 🧪 Pruebas Implementadas
+##  Pruebas Implementadas
 
 ### Detección Automática
 - Factura gubernamental (RNC 10xxxxxxxxx) → Tipo 45

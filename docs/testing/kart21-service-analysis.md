@@ -1,4 +1,4 @@
-# 🧪 Análisis y Mejoras Propuestas para Kart21Service
+#  Análisis y Mejoras Propuestas para Kart21Service
 
 ## Resultados del Testing
 

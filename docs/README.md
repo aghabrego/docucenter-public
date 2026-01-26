@@ -3,30 +3,30 @@
 
 Este directorio contiene la documentación técnica completa del sistema DocuCenter de facturación electrónica.
 
-## � **Actualizaciones Recientes (Septiembre 2025)**
+##  **Actualizaciones Recientes (Septiembre 2025)**
 - [**Mejoras QuickBooks Completas**](QUICKBOOKS_IMPROVEMENTS_SUMMARY.md) - Simplificación payment lookup y reorganización
 - [**Removal Notice**](technical/payment-lookup-removal-notice.md) - Documentación remoción funcionalidad
 - [**Payment Methods Integration**](technical/quickbooks-payment-methods-integration.md) - Sistema análisis pagos QB
 
-## �🗂Organización de la Documentación
+## Organización de la Documentación
 
-### 📖 [Índice Principal](./index.md)
+###  [Índice Principal](./index.md)
 Portal principal de navegación con acceso a todas las secciones de documentación.
 
 ###  Estructura de Directorios
 
 ```
 docs/
-├── 📖 index.md                    # Portal principal de documentación
-├── 🔌 api/                        # Documentación de APIs
-│   ├── fe/                        # APIs de Facturación Electrónica
-│   ├── sage-acicloud/             # Integración Sage ACICloud
-│   ├── organizations/             # APIs de Organizaciones
-│   └── locations/                 # APIs de Ubicaciones
-├── optimizations/              # Optimizaciones y mejoras
-├── technical/                  # Documentación técnica
-│   └── TRANSACTION_SYSTEM_COMPLETE.md  # Sistema de Transacciones y Reintentos
-└── validations/                # Validaciones y pruebas
+  index.md                    # Portal principal de documentación
+  api/                        # Documentación de APIs
+    fe/                        # APIs de Facturación Electrónica
+    sage-acicloud/             # Integración Sage ACICloud
+    organizations/             # APIs de Organizaciones
+    locations/                 # APIs de Ubicaciones
+ optimizations/              # Optimizaciones y mejoras
+ technical/                  # Documentación técnica
+    TRANSACTION_SYSTEM_COMPLETE.md  # Sistema de Transacciones y Reintentos
+ validations/                # Validaciones y pruebas
 ```
 
 ## Inicio Rápido
@@ -45,7 +45,7 @@ docs/
 
 Cada vez que hagas un _push_ a la rama principal (`master`), GitHub Actions generará y publicará el sitio web con MkDocs Material en GitHub Pages.
 
-## ✏Cómo Contribuir
+## Cómo Contribuir
 
 ### Agregar Nueva Documentación
 1. Crea un archivo `.md` en el directorio apropiado dentro de `docs/`

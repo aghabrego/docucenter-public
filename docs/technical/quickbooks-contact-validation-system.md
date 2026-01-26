@@ -186,7 +186,7 @@ RESUMEN DEL CONTACTO:
 | Moneda               | PAB (Balboa de P) |
 +----------------------+-------------------+
 
-🏛ANÁLISIS FISCAL:
+ANÁLISIS FISCAL:
 +-----------------------------------+--------+
 | Aspecto                           | Valor  |
 +-----------------------------------+--------+

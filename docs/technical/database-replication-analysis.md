@@ -30,26 +30,26 @@
 
 ```
 BD Principal (mysql/docucenter)
-├─> CompanySession (tabla centralizada)
-├─> Organizations
-│   ├─> Org 1: database = "9_734_1672_56"  (id_empresa: 100)
-│   ├─> Org 2: database = "9_734_1672_57"  (id_empresa: 100)
-│   └─> Org 3: database = "9_734_1672_58"  (id_empresa: 101)
+> CompanySession (tabla centralizada)
+> Organizations
+   > Org 1: database = "9_734_1672_56"  (id_empresa: 100)
+   > Org 2: database = "9_734_1672_57"  (id_empresa: 100)
+   > Org 3: database = "9_734_1672_58"  (id_empresa: 101)
 
 BD Organización 1 (9_734_1672_56)
-├─> CompanySession (ID_compania: 100)
-├─> Customers_Imp (datos org 1)
-└─> Sales_Header_Imp (datos org 1)
+> CompanySession (ID_compania: 100)
+> Customers_Imp (datos org 1)
+> Sales_Header_Imp (datos org 1)
 
 BD Organización 2 (9_734_1672_57)
-├─> CompanySession (ID_compania: 100)
-├─> Customers_Imp (datos org 2)
-└─> Sales_Header_Imp (datos org 2)
+> CompanySession (ID_compania: 100)
+> Customers_Imp (datos org 2)
+> Sales_Header_Imp (datos org 2)
 
 BD Organización 3 (9_734_1672_58)
-├─> CompanySession (ID_compania: 101)
-├─> Customers_Imp (datos org 3)
-└─> Sales_Header_Imp (datos org 3)
+> CompanySession (ID_compania: 101)
+> Customers_Imp (datos org 3)
+> Sales_Header_Imp (datos org 3)
 
 PROBLEMA: Sage no puede acceder a datos de Org 1 + Org 2 + Org 3
 ```
@@ -58,32 +58,32 @@ PROBLEMA: Sage no puede acceder a datos de Org 1 + Org 2 + Org 3
 
 ```
 BD Principal (mysql/docucenter)
-├─> companies (NUEVA tabla)
-│   ├─> Company 100: database = "company_100"
-│   └─> Company 101: database = "company_101"
-│
-├─> CompanySession (mantener para compatibilidad)
-├─> Organizations
-│   ├─> Org 1: company_id = 100, database = "9_734_1672_56"
-│   ├─> Org 2: company_id = 100, database = "9_734_1672_57"
-│   └─> Org 3: company_id = 101, database = "9_734_1672_58"
+> companies (NUEVA tabla)
+   > Company 100: database = "company_100"
+   > Company 101: database = "company_101"
+
+> CompanySession (mantener para compatibilidad)
+> Organizations
+   > Org 1: company_id = 100, database = "9_734_1672_56"
+   > Org 2: company_id = 100, database = "9_734_1672_57"
+   > Org 3: company_id = 101, database = "9_734_1672_58"
 
 BD Organización 1 (9_734_1672_56) - ORIGEN
-├─> Customers_Imp (100 registros)
-└─> Sales_Header_Imp (500 ventas)
+> Customers_Imp (100 registros)
+> Sales_Header_Imp (500 ventas)
 
 BD Organización 2 (9_734_1672_57) - ORIGEN
-├─> Customers_Imp (80 registros)
-└─> Sales_Header_Imp (300 ventas)
+> Customers_Imp (80 registros)
+> Sales_Header_Imp (300 ventas)
 
 BD Compañía 100 (company_100) - DESTINO CONSOLIDADO
-├─> Customers_Imp (180 registros: 100 de org1 + 80 de org2)
-│   ├─> Registros de Org 1: org_source_id = 1, ID_compania = 100
-│   └─> Registros de Org 2: org_source_id = 2, ID_compania = 100
-│
-└─> Sales_Header_Imp (800 ventas: 500 de org1 + 300 de org2)
-    ├─> Ventas de Org 1: org_source_id = 1, ID_compania = 100
-    └─> Ventas de Org 2: org_source_id = 2, ID_compania = 100
+> Customers_Imp (180 registros: 100 de org1 + 80 de org2)
+   > Registros de Org 1: org_source_id = 1, ID_compania = 100
+   > Registros de Org 2: org_source_id = 2, ID_compania = 100
+
+> Sales_Header_Imp (800 ventas: 500 de org1 + 300 de org2)
+    > Ventas de Org 1: org_source_id = 1, ID_compania = 100
+    > Ventas de Org 2: org_source_id = 2, ID_compania = 100
 
 SOLUCIÓN: Sage Connector se conecta a company_100 y ve TODO
 ```
@@ -95,24 +95,24 @@ SOLUCIÓN: Sage Connector se conecta a company_100 y ve TODO
 ### Flujo de Datos
 
 ```
-┌─────────────────────────────────────────────────────────────────┐
-│  BD Organizaciones (ORIGEN - Operación Diaria)                  │
-├─────────────────────────────────────────────────────────────────┤
-│  - DocuCenter crea facturas aquí                                │
-│  - Usuarios trabajan aquí                                       │
-│  - Cambio de BD por organización (actual)                       │
-└──────────────────┬──────────────────────────────────────────────┘
-                   │
-                   │ REPLICACIÓN (cada N minutos)
-                   ▼
-┌─────────────────────────────────────────────────────────────────┐
-│  BD Compañía (DESTINO - Solo Lectura para Sage)                │
-├─────────────────────────────────────────────────────────────────┤
-│  - Sage Connector LEE desde aquí                                │
-│  - Datos consolidados de TODAS las organizaciones               │
-│  - Mismo ID_compania para todos los registros                   │
-│  - Campo org_source_id identifica origen                        │
-└─────────────────────────────────────────────────────────────────┘
+
+  BD Organizaciones (ORIGEN - Operación Diaria)                  
+
+  - DocuCenter crea facturas aquí                                
+  - Usuarios trabajan aquí                                       
+  - Cambio de BD por organización (actual)                       
+
+                   
+                    REPLICACIÓN (cada N minutos)
+                   
+
+  BD Compañía (DESTINO - Solo Lectura para Sage)                
+
+  - Sage Connector LEE desde aquí                                
+  - Datos consolidados de TODAS las organizaciones               
+  - Mismo ID_compania para todos los registros                   
+  - Campo org_source_id identifica origen                        
+
 ```
 
 ### Campos Adicionales Necesarios
@@ -187,9 +187,9 @@ Usar el sistema de replicación binlog de MySQL/MariaDB.
 
 #### Cómo Funciona
 ```
-BD Org 1 (Master) ──binlog──> BD Company (Slave)
-BD Org 2 (Master) ──binlog──> BD Company (Slave)
-BD Org 3 (Master) ──binlog──> BD Company (Slave)
+BD Org 1 (Master) binlog> BD Company (Slave)
+BD Org 2 (Master) binlog> BD Company (Slave)
+BD Org 3 (Master) binlog> BD Company (Slave)
 ```
 
 #### Configuración
@@ -945,17 +945,17 @@ php artisan queue:work --queue=default --tries=3 --timeout=600
 Customers_Imp:
   - ID=100, ID_compania=100, org_source_id=1 (de Org 1)
   - ID=100, ID_compania=100, org_source_id=2 (de Org 2)
-  └─> PRIMARY KEY (ID, org_source_id) permite IDs duplicados
+  > PRIMARY KEY (ID, org_source_id) permite IDs duplicados
 
 -- BD de Organización 1 (9_734_1672_56) - PRIMARY KEY simple
 Customers_Imp:
   - ID=100, ID_compania=100, org_source_id=NULL
-  └─> PRIMARY KEY (ID) - columna existe pero no se usa
+  > PRIMARY KEY (ID) - columna existe pero no se usa
 
 -- BD de Organización 2 (9_734_1672_57) - PRIMARY KEY simple
 Customers_Imp:
   - ID=100, ID_compania=100, org_source_id=NULL
-  └─> PRIMARY KEY (ID) - columna existe pero no se usa
+  > PRIMARY KEY (ID) - columna existe pero no se usa
 ```
 
 **Implementación:**

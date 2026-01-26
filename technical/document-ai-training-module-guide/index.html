@@ -2526,7 +2526,7 @@
   <span class="md-ellipsis">
     
   
-    🧪 Sistema de Testing DocuCenter
+    Sistema de Testing DocuCenter
   
 
     
@@ -3690,49 +3690,44 @@
 4. No requiere cambios en Google Cloud</p>
 <h2 id="interfaz-de-usuario">Interfaz de Usuario<a class="headerlink" href="#interfaz-de-usuario" title="Permanent link">&para;</a></h2>
 <h3 id="panel-principal">Panel Principal<a class="headerlink" href="#panel-principal" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>┌─────────────────────────────────────────────────────────────┐
-│  Document AI Training Manager                               │
-├─────────────────────────────────────────────────────────────┤
-│                                                               │
-│  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌─────────────┐ │
-│  │ Total: 45│  │ Anotados│  │ Pendien- │  │ Listo para  │ │
-│  │          │  │    32   │  │ tes: 13  │  │ entrenar ✓  │ │
-│  └──────────┘  └──────────┘  └──────────┘  └─────────────┘ │
-│                                                               │
-│  Subir Documentos para Entrenamiento                         │
-│  ┌─────────────────────────────────────────────────────────┐ │
-│  │ [Seleccionar PDFs...]                   [Subir]         │ │
-│  └─────────────────────────────────────────────────────────┘ │
-│                                                               │
-│  Documentos de Entrenamiento        [Exportar Datos ↓]       │
-│  ┌─────────────────────────────────────────────────────────┐ │
-│  │ Archivo           │ Fecha    │ Conf. │ Estado │ Acción  │ │
-│  ├─────────────────────────────────────────────────────────┤ │
-│  │ factura001.pdf   │ 10/11/25 │ 68.5% │ ✓Anotado│ [Ver]  │ │
-│  │ factura002.pdf   │ 10/11/25 │ 72.3% │ Pend.│ [Anotar]│ │
-│  └─────────────────────────────────────────────────────────┘ │
-└─────────────────────────────────────────────────────────────┘
+<div class="highlight"><pre><span></span><code>  Document AI Training Manager                               
+
+
+
+   Total: 45   Anotados   Pendien-    Listo para   
+                  32      tes: 13     entrenar    
+
+
+  Subir Documentos para Entrenamiento                         
+
+   [Seleccionar PDFs...]                   [Subir]          
+
+
+  Documentos de Entrenamiento        [Exportar Datos ↓]       
+
+   Archivo            Fecha     Conf.  Estado  Acción   
+
+   factura001.pdf    10/11/25  68.5%  Anotado [Ver]   
+   factura002.pdf    10/11/25  72.3%  Pend. [Anotar] 
 </code></pre></div>
 <h3 id="modo-anotacion">Modo Anotación<a class="headerlink" href="#modo-anotacion" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>┌──────────────────────────────────────────────────────────────┐
-│  Anotación de Campos                                          │
-├──────────────────┬───────────────────────────────────────────┤
-│ Vista PDF        │  Formulario                                │
-│                  │                                            │
-│ ┌──────────────┐ │  Nombre del Proveedor *                   │
-│ │              │ │  [EQUIPOS DE COCINA Y PANADERIA, S.A.]    │
-│ │   FACTURA    │ │                                            │
-│ │              │ │  RUC del Proveedor *                       │
-│ │   Nro.60825  │ │  [155764420-2-2025                  ]     │
-│ │              │ │                                            │
-│ │  Total B/.   │ │  DV                                        │
-│ │    285.00    │ │  [19]                                      │
-│ │              │ │                                            │
-│ └──────────────┘ │  Número de Factura *                       │
-│                  │  [60825                             ]     │
-│                  │                                            │
-│                  │  [Cancelar]            [Guardar Anotación]│
-└──────────────────┴───────────────────────────────────────────┘
+<div class="highlight"><pre><span></span><code>  Anotación de Campos                                          
+
+ Vista PDF          Formulario                                
+
+    Nombre del Proveedor *                   
+                  [EQUIPOS DE COCINA Y PANADERIA, S.A.]    
+    FACTURA                                                 
+                  RUC del Proveedor *                       
+    Nro.60825     [155764420-2-2025                  ]     
+
+   Total B/.      DV                                        
+     285.00       [19]                                      
+
+    Número de Factura *                       
+                    [60825                             ]     
+
+                    [Cancelar]            [Guardar Anotación]
 </code></pre></div>
 <h2 id="codigo-de-implementacion">Código de Implementación<a class="headerlink" href="#codigo-de-implementacion" title="Permanent link">&para;</a></h2>
 <h3 id="componente-livewire">Componente Livewire<a class="headerlink" href="#componente-livewire" title="Permanent link">&para;</a></h3>
@@ -3762,14 +3757,14 @@
 <p><strong>Ubicación:</strong> <code>resources/views/livewire/admin/document-ai/training-manager.blade.php</code></p>
 <h2 id="mejores-practicas">Mejores Prácticas<a class="headerlink" href="#mejores-practicas" title="Permanent link">&para;</a></h2>
 <h3 id="seleccion-de-documentos-para-entrenamiento">Selección de Documentos para Entrenamiento<a class="headerlink" href="#seleccion-de-documentos-para-entrenamiento" title="Permanent link">&para;</a></h3>
-<p><strong>✓ Incluir:</strong>
+<p>** Incluir:**
 - Facturas de diferentes proveedores (variedad)
 - Diferentes formatos y diseños
 - Casos que actualmente tienen baja confianza
 - Documentos con todos los campos presentes
 - Facturas con y sin impuestos
 - Diferentes métodos de pago (CONTADO/CRÉDITO)</p>
-<p><strong>✗ Evitar:</strong>
+<p>** Evitar:**
 - Documentos escaneados de muy baja calidad
 - Facturas dañadas o ilegibles
 - PDFs que no son facturas

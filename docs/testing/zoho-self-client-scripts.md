@@ -295,7 +295,7 @@ mkdir -p docs/testing
 
 # Generar README de testing
 cat > docs/testing/zoho-self-client-testing.md << 'EOF'
-# 🧪 Testing: Zoho Self Client Implementation
+#  Testing: Zoho Self Client Implementation
 
 ## Checklist de Testing
 
@@ -405,12 +405,12 @@ Solución: Usar scope "ZohoBooks.fullaccess.all"
 ### Métricas de Éxito
 
 #### **Performance**
-- ⏱Autorización directa: < 5 segundos
-- ⏱Re-autorización: < 3 segundos
+- Autorización directa: < 5 segundos
+- Re-autorización: < 3 segundos
 - Tamaño de respuesta: < 2KB
 
 #### **Usabilidad**
-- 👆 Clicks para autorizar: 1
+-  Clicks para autorizar: 1
 - Campos requeridos: 4 (ID, Secret, Env, Code)
 - Tiempo de configuración: < 2 minutos
 

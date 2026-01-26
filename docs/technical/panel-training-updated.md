@@ -37,7 +37,7 @@ docker exec -it docucenter_laravel.test php artisan documentai:import-annotation
 **Siguiente paso**: Ir al panel y entrenar
 
 1. Ve a: `http://localhost/admin/sage50/document-ai-training`
-2. Verás 20 documentos con estado "Anotado ✓"
+2. Verás 20 documentos con estado "Anotado "
 3. Click en **"Start Google Training"**
 4. Espera 1-3 horas para el entrenamiento
 

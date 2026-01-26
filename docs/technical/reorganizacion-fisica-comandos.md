@@ -9,7 +9,7 @@
 
 ---
 
-## 🗂Nueva Estructura de Directorios
+## Nueva Estructura de Directorios
 
 ### Distribución por Directorio
 
@@ -25,7 +25,7 @@
 
 ---
 
-## 🧪 Testing (41 comandos)
+##  Testing (41 comandos)
 **Ubicación**: `app/Console/Commands/Testing/`
 
 ### Comandos Movidos al Directorio Testing:
@@ -63,7 +63,7 @@
 
 ---
 
-## 🛒 POS (23 comandos)
+##  POS (23 comandos)
 **Ubicación**: `app/Console/Commands/POS/`
 
 ### Invupos (7 comandos):
@@ -140,7 +140,7 @@
 
 ---
 
-## 🗄Configuration (5 comandos)
+## Configuration (5 comandos)
 **Ubicación**: `app/Console/Commands/Configuration/`
 
 ### Gestión de Esquemas de BD:

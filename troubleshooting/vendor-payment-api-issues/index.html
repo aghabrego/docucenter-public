@@ -2526,7 +2526,7 @@
   <span class="md-ellipsis">
     
   
-    🧪 Sistema de Testing DocuCenter
+    Sistema de Testing DocuCenter
   
 
     
@@ -3301,12 +3301,12 @@
 <h4 id="1-content-type-incorrecto">1. Content-Type incorrecto<a class="headerlink" href="#1-content-type-incorrecto" title="Permanent link">&para;</a></h4>
 <p><strong>Problema</strong>: No se está enviando <code>Content-Type: application/json</code></p>
 <p><strong>Solución</strong>:
-<div class="highlight"><pre><span></span><code><span class="c1"># ✗ Incorrecto (sin Content-Type)</span>
+<div class="highlight"><pre><span></span><code><span class="c1">#  Incorrecto (sin Content-Type)</span>
 curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://localhost/api/acicloud/vendor_payment<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Authorization: Bearer token&quot;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>-d<span class="w"> </span><span class="s1">&#39;{&quot;CheckNumber&quot;: &quot;CHK-001&quot;}&#39;</span>
 
-<span class="c1"># ✓ Correcto (con Content-Type)</span>
+<span class="c1">#  Correcto (con Content-Type)</span>
 curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://localhost/api/acicloud/vendor_payment<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Authorization: Bearer token&quot;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Content-Type: application/json&quot;</span><span class="w"> </span><span class="se">\</span>
@@ -3320,13 +3320,13 @@ curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </spa
 3. Seleccionar "JSON" en el dropdown
 4. Pegar el JSON</p>
 <p><strong>Solución en código</strong>:
-<div class="highlight"><pre><span></span><code><span class="c1">// ✗ Incorrecto</span>
+<div class="highlight"><pre><span></span><code><span class="c1">//  Incorrecto</span>
 <span class="nx">fetch</span><span class="p">(</span><span class="s1">&#39;/api/acicloud/vendor_payment&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="nx">method</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;POST&#39;</span><span class="p">,</span>
 <span class="w">  </span><span class="nx">body</span><span class="o">:</span><span class="w"> </span><span class="nx">formData</span><span class="w">  </span><span class="c1">// FormData object</span>
 <span class="p">})</span>
 
-<span class="c1">// ✓ Correcto</span>
+<span class="c1">//  Correcto</span>
 <span class="nx">fetch</span><span class="p">(</span><span class="s1">&#39;/api/acicloud/vendor_payment&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="nx">method</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;POST&#39;</span><span class="p">,</span>
 <span class="w">  </span><span class="nx">headers</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>

@@ -91,7 +91,7 @@ php artisan app:force-kart-invoice-emission
 
 ---
 
-### 🛒 3. SINCRONIZACIÓN POS (15 comandos - 21%)
+###  3. SINCRONIZACIÓN POS (15 comandos - 21%)
 
 #### Invupos
 ```bash
@@ -123,7 +123,7 @@ php artisan app:create-credit-notes-summary
 
 ---
 
-### 🗄4. CONFIGURACIÓN Y MANTENIMIENTO (5 comandos - 7%)
+### 4. CONFIGURACIÓN Y MANTENIMIENTO (5 comandos - 7%)
 
 ```bash
 php artisan config:alter-column-increment

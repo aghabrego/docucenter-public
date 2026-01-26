@@ -86,7 +86,7 @@ $exportData = [
 $result = $service->emitInvoice($organization, $exportData);
 ```
 
-### 🏭 Factura de Importación (02)
+###  Factura de Importación (02)
 
 **Indicadores de Detección**:
 - Naturaleza de operación = '21' (NATURE_IMPORT)
@@ -154,7 +154,7 @@ $internalData = [
 $result = $service->emitInvoice($organization, $internalData);
 ```
 
-### 🏭 Factura de Zona Franca (08)
+###  Factura de Zona Franca (08)
 
 **Indicadores de Detección**:
 - Información de zona franca presente

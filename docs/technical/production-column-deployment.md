@@ -28,7 +28,7 @@ KEY `sales_header_imp_origin_index` (`origin`)
 
 ## Scripts de Ejecución
 
-### 🔹 **Script Individual - Columna `origin`**
+###  **Script Individual - Columna `origin`**
 ```bash
 ./scripts/add-origin-column-production.sh
 ```
@@ -45,7 +45,7 @@ php artisan db:add-column-to-organizations-table \
   --index=1
 ```
 
-### 🔹 **Script Individual - Columna `intuit_sync_attempts`**
+###  **Script Individual - Columna `intuit_sync_attempts`**
 ```bash
 ./scripts/add-intuit-sync-attempts-column-production.sh
 ```
@@ -62,7 +62,7 @@ php artisan db:add-column-to-organizations-table \
   --index=0
 ```
 
-### 🔹 **Script Combinado - Ambas Columnas** (RECOMENDADO)
+###  **Script Combinado - Ambas Columnas** (RECOMENDADO)
 ```bash
 ./scripts/add-quickbooks-loop-columns-production.sh
 ```
@@ -73,7 +73,7 @@ php artisan db:add-column-to-organizations-table \
 - Validación de errores entre pasos
 - Reporte final de éxito/fallo
 
-### 🔹 **Script de Verificación**
+###  **Script de Verificación**
 ```bash
 ./scripts/verify-quickbooks-loop-columns.sh
 ```

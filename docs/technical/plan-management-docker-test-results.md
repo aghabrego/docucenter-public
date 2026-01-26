@@ -7,7 +7,7 @@ El Sistema de Gestión de Planes ha sido implementado completamente y probado us
 
 ---
 
-## 🐳 **Resultados de Pruebas Docker**
+##  **Resultados de Pruebas Docker**
 
 ### **Tests de Sistema (12/12 PASSED)**
 

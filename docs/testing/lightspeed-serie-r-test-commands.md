@@ -1,4 +1,4 @@
-# 🧪 Comandos de Testing para Lightspeed Serie R
+#  Comandos de Testing para Lightspeed Serie R
 
 ## **Número de Ticket Real para Testing**
 

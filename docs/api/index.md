@@ -2,7 +2,7 @@
 
 Este directorio contiene toda la documentación de las APIs REST disponibles en el sistema DocuCenter.
 
-## 🔌 APIs Disponibles
+##  APIs Disponibles
 
 ###  [Facturación Electrónica (FE)](./fe/)
 APIs para la emisión de documentos fiscales electrónicos y integración con diferentes plataformas:
@@ -34,7 +34,7 @@ API completa para integración con el sistema ERP Sage ACICloud:
 ### [Organizaciones](./organizations/)
 APIs para la gestión de organizaciones y configuraciones del sistema.
 
-### 📍 [Ubicaciones](./locations/)
+###  [Ubicaciones](./locations/)
 APIs para el manejo de ubicaciones geográficas y direcciones.
 
 ## Guía de Inicio Rápido

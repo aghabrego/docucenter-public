@@ -56,7 +56,7 @@ El problema de los tipos de documento ha sido **completamente resuelto**.
 
 ---
 
-## 🧪 **TESTING CONFIRMADO**
+##  **TESTING CONFIRMADO**
 
 ### **Base de Datos** (9 tipos):
 ```

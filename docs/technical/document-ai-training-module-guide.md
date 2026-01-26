@@ -181,52 +181,52 @@ Con el archivo exportado, puedes:
 ### Panel Principal
 
 ```
-┌─────────────────────────────────────────────────────────────┐
-│  Document AI Training Manager                               │
-├─────────────────────────────────────────────────────────────┤
-│                                                               │
-│  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌─────────────┐ │
-│  │ Total: 45│  │ Anotados│  │ Pendien- │  │ Listo para  │ │
-│  │          │  │    32   │  │ tes: 13  │  │ entrenar ✓  │ │
-│  └──────────┘  └──────────┘  └──────────┘  └─────────────┘ │
-│                                                               │
-│  Subir Documentos para Entrenamiento                         │
-│  ┌─────────────────────────────────────────────────────────┐ │
-│  │ [Seleccionar PDFs...]                   [Subir]         │ │
-│  └─────────────────────────────────────────────────────────┘ │
-│                                                               │
-│  Documentos de Entrenamiento        [Exportar Datos ↓]       │
-│  ┌─────────────────────────────────────────────────────────┐ │
-│  │ Archivo           │ Fecha    │ Conf. │ Estado │ Acción  │ │
-│  ├─────────────────────────────────────────────────────────┤ │
-│  │ factura001.pdf   │ 10/11/25 │ 68.5% │ ✓Anotado│ [Ver]  │ │
-│  │ factura002.pdf   │ 10/11/25 │ 72.3% │ Pend.│ [Anotar]│ │
-│  └─────────────────────────────────────────────────────────┘ │
-└─────────────────────────────────────────────────────────────┘
+
+  Document AI Training Manager                               
+
+                                                               
+         
+   Total: 45   Anotados   Pendien-    Listo para   
+                  32      tes: 13     entrenar    
+         
+                                                               
+  Subir Documentos para Entrenamiento                         
+   
+   [Seleccionar PDFs...]                   [Subir]          
+   
+                                                               
+  Documentos de Entrenamiento        [Exportar Datos ↓]       
+   
+   Archivo            Fecha     Conf.  Estado  Acción   
+   
+   factura001.pdf    10/11/25  68.5%  Anotado [Ver]   
+   factura002.pdf    10/11/25  72.3%  Pend. [Anotar] 
+   
+
 ```
 
 ### Modo Anotación
 
 ```
-┌──────────────────────────────────────────────────────────────┐
-│  Anotación de Campos                                          │
-├──────────────────┬───────────────────────────────────────────┤
-│ Vista PDF        │  Formulario                                │
-│                  │                                            │
-│ ┌──────────────┐ │  Nombre del Proveedor *                   │
-│ │              │ │  [EQUIPOS DE COCINA Y PANADERIA, S.A.]    │
-│ │   FACTURA    │ │                                            │
-│ │              │ │  RUC del Proveedor *                       │
-│ │   Nro.60825  │ │  [155764420-2-2025                  ]     │
-│ │              │ │                                            │
-│ │  Total B/.   │ │  DV                                        │
-│ │    285.00    │ │  [19]                                      │
-│ │              │ │                                            │
-│ └──────────────┘ │  Número de Factura *                       │
-│                  │  [60825                             ]     │
-│                  │                                            │
-│                  │  [Cancelar]            [Guardar Anotación]│
-└──────────────────┴───────────────────────────────────────────┘
+
+  Anotación de Campos                                          
+
+ Vista PDF          Formulario                                
+                                                              
+    Nombre del Proveedor *                   
+                  [EQUIPOS DE COCINA Y PANADERIA, S.A.]    
+    FACTURA                                                 
+                  RUC del Proveedor *                       
+    Nro.60825     [155764420-2-2025                  ]     
+                                                            
+   Total B/.      DV                                        
+     285.00       [19]                                      
+                                                            
+    Número de Factura *                       
+                    [60825                             ]     
+                                                              
+                    [Cancelar]            [Guardar Anotación]
+
 ```
 
 ## Código de Implementación
@@ -266,7 +266,7 @@ protected $casts = [
 
 ### Selección de Documentos para Entrenamiento
 
-**✓ Incluir:**
+** Incluir:**
 - Facturas de diferentes proveedores (variedad)
 - Diferentes formatos y diseños
 - Casos que actualmente tienen baja confianza
@@ -274,7 +274,7 @@ protected $casts = [
 - Facturas con y sin impuestos
 - Diferentes métodos de pago (CONTADO/CRÉDITO)
 
-**✗ Evitar:**
+** Evitar:**
 - Documentos escaneados de muy baja calidad
 - Facturas dañadas o ilegibles
 - PDFs que no son facturas

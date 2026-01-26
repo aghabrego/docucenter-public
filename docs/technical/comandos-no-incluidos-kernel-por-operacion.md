@@ -110,7 +110,7 @@ Los siguientes comandos YA están incluidos en el scheduler automático:
 
 ---
 
-## 🛒 3. SINCRONIZACIÓN POS/INVENTARIO (15 comandos)
+##  3. SINCRONIZACIÓN POS/INVENTARIO (15 comandos)
 
 ### Invupos Commands
 - **`app:customer-invupos`** - Sincronización de clientes Invupos
@@ -140,7 +140,7 @@ Los siguientes comandos YA están incluidos en el scheduler automático:
 
 ---
 
-## 🗄4. CONFIGURACIÓN Y MANTENIMIENTO (5 comandos)
+## 4. CONFIGURACIÓN Y MANTENIMIENTO (5 comandos)
 
 ### Configuración de Base de Datos
 - **`config:alter-column-increment`** - Alterar columnas con auto-incremento
@@ -158,7 +158,7 @@ Los siguientes comandos YA están incluidos en el scheduler automático:
 
 ---
 
-## 🧪 6. CATEGORÍA ESPECIAL - TESTING CENTRALIZADO
+##  6. CATEGORÍA ESPECIAL - TESTING CENTRALIZADO
 
 Los comandos de testing están centralizados en el directorio `app/Console/Commands/Testing/` para facilitar su gestión y reutilización.
 

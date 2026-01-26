@@ -188,7 +188,7 @@ docker exec -it docucenter-app-1 tail -f storage/logs/laravel.log | grep -E "(De
 - Logs claros sobre qué ID se está usando y por qué
 - Fácil identificación de vendors con custom fields vs fallback
 
-### 🛡**Compatibilidad Mantenida**
+### **Compatibilidad Mantenida**
 - Fallback automático a Zoho ID cuando no hay custom field
 - No rompe vendors existentes
 - Retrocompatibilidad completa

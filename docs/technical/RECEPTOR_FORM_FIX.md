@@ -89,14 +89,14 @@ Campos B406 según ficha técnica DGI:
 2. Formulario se muestra cuando `customer_id` tiene valor real
 3. Sin cambios automáticos
 
-## 🧪 **Validación**
+##  **Validación**
 
 ```bash
-✓ Alpine.js incluye tipeDocument: OK
-✓ Condición extranjero para exportación: OK  
-✓ Customer ID temporal para exportación: OK
-✓ Receptor tipo automático para exportación: OK
-✓ Formulario extranjero tiene campos requeridos: OK (9 campos)
+ Alpine.js incluye tipeDocument: OK
+ Condición extranjero para exportación: OK  
+ Customer ID temporal para exportación: OK
+ Receptor tipo automático para exportación: OK
+ Formulario extranjero tiene campos requeridos: OK (9 campos)
 ```
 
 ##  **Archivos Modificados**

@@ -32,7 +32,7 @@ Authorization: Bearer {token}
 **Estado**: 
 - **Endpoint existe** pero requiere autenticación Bearer Token
 - **No está documentado** en el PDF oficial
-- ❓ **Formato desconocido**: ¿Acepta JSON DGI o JSON NUC?
+-  **Formato desconocido**: ¿Acepta JSON DGI o JSON NUC?
 
 ---
 

@@ -221,7 +221,7 @@ public $descripcionMonedaPersonalizada = null; // B503
 | 05 | Nota Débito | B60x (5 campos) | 180 días, CUFE | 100% |
 | 06-09 | Otros tipos | Ninguno | Básicas | 90% |
 
-## 🧪 TESTING IMPLEMENTADO
+##  TESTING IMPLEMENTADO
 
 ### Scripts de Validación
 1. **`validate-critical-dgi-rules.sh`** - Resumen de implementación
@@ -244,7 +244,7 @@ public $descripcionMonedaPersonalizada = null; // B503
 - **Validaciones en Tiempo Real**: 100%
 - **UI/UX Condicional**: 100%
 
-### 🔲 PENDIENTE PARA 100%
+###  PENDIENTE PARA 100%
 - **Validaciones de Negocio Avanzadas**: Integración con datos reales
 - **Base de Datos de Contribuyentes**: Validación RUC en vivo
 - **Validaciones PAC Específicas**: Por proveedor (TheFactoryHKA/Alanube)

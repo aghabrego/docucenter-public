@@ -95,7 +95,7 @@ Implementar sistema de prefijos configurables por tienda en Lightspeed X-Series 
 - Compatible con facturas existentes
 - Interfaz intuitiva en español e inglés
 
-## 🧪 Testing
+##  Testing
 
 Para probar la funcionalidad:
 

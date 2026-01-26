@@ -157,10 +157,10 @@ get_errors() → No errors found
 ```bash
 # Comando de testing exitoso
 docker exec -it docucenter_laravel.test php artisan test:create-component
-✓ Componente creado exitosamente
-✓ Layout correcto: admin::layouts.app
-✓ Método hydrate() sin errores de sintaxis
-✓ getSaleProperty() retorna null apropiadamente
+ Componente creado exitosamente
+ Layout correcto: admin::layouts.app
+ Método hydrate() sin errores de sintaxis
+ getSaleProperty() retorna null apropiadamente
 ```
 
 ### Rutas Activas

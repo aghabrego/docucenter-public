@@ -232,32 +232,32 @@ docker exec docucenter_laravel.test php artisan storage:link
 
 ```
 app/
-├── Http/
-│   └── Livewire/
-│       └── Admin/
-│           └── DocumentAI/
-│               └── TrainingManager.php (nuevo)
-└── Models/
-    └── DocumentAITrainingDocument.php (nuevo)
+ Http/
+    Livewire/
+        Admin/
+            DocumentAI/
+                TrainingManager.php (nuevo)
+ Models/
+     DocumentAITrainingDocument.php (nuevo)
 
 database/
-└── migrations/
-    └── 2025_11_13_135635_create_document_ai_training_documents_table.php (nuevo)
+ migrations/
+     2025_11_13_135635_create_document_ai_training_documents_table.php (nuevo)
 
 resources/
-└── views/
-    └── livewire/
-        └── admin/
-            └── document-ai/
-                └── training-manager.blade.php (nuevo)
+ views/
+     livewire/
+         admin/
+             document-ai/
+                 training-manager.blade.php (nuevo)
 
 routes/
-└── web.php (modificado)
+ web.php (modificado)
 
 docs/
-└── technical/
-    ├── document-ai-training-module-guide.md (nuevo)
-    └── document-ai-training-implementation-summary.md (este archivo)
+ technical/
+     document-ai-training-module-guide.md (nuevo)
+     document-ai-training-implementation-summary.md (este archivo)
 ```
 
 ## Testing Inicial
@@ -289,13 +289,13 @@ docs/
 
 ### Casos Edge a Probar
 
-- ✓ PDF corrupto o no válido
-- ✓ PDF > 12MB
-- ✓ Múltiples PDFs a la vez
-- ✓ Cancelar anotación sin guardar
-- ✓ Re-anotar documento ya anotado
-- ✓ Eliminar documento
-- ✓ Exportar con menos de 20 documentos
+-  PDF corrupto o no válido
+-  PDF > 12MB
+-  Múltiples PDFs a la vez
+-  Cancelar anotación sin guardar
+-  Re-anotar documento ya anotado
+-  Eliminar documento
+-  Exportar con menos de 20 documentos
 
 ## Métricas de Éxito
 

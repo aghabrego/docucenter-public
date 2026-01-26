@@ -114,22 +114,22 @@ Log::info('QuickBooksOnlineService.createDefaultClient: DEBUGGING Country Assign
 
 ```
 1. QuickBooks Webhook → QuickBooksOnlineService
-   ├─ Determinar TIPO_RECEPTOR desde customerRef
-   ├─ Cliente Nacional (01,02,03) → Forzar país PA
-   └─ Cliente Extranjero (04) → Preservar país original
+    Determinar TIPO_RECEPTOR desde customerRef
+    Cliente Nacional (01,02,03) → Forzar país PA
+    Cliente Extranjero (04) → Preservar país original
 
 2. createDefaultClient
-   ├─ Recibir país corregido en request
-   ├─ Preservar país del request si está presente
-   └─ Solo usar default si país no está presente
+    Recibir país corregido en request
+    Preservar país del request si está presente
+    Solo usar default si país no está presente
 
 3. CreateFastJob → Determinar destinoOperacion
-   ├─ Cliente Nacional → destinoOperacion = 1, país = PA
-   └─ Cliente Extranjero → destinoOperacion = 2, país = original
+    Cliente Nacional → destinoOperacion = 1, país = PA
+    Cliente Extranjero → destinoOperacion = 2, país = original
 
 4. PAC Validation 
-   ├─ Cliente Nacional: destinoOperacion=1, país=PA ✓
-   └─ Cliente Extranjero: destinoOperacion=2, país=Chile ✓
+    Cliente Nacional: destinoOperacion=1, país=PA 
+    Cliente Extranjero: destinoOperacion=2, país=Chile 
 ```
 
 ## Testing y Validación

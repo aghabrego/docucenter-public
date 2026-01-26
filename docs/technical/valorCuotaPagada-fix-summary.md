@@ -42,7 +42,7 @@ El problema crítico estaba en `/app/Services/HKAService.php` línea 317:
 $totales->listaFormaPago[] = [
     'formaPagoFact' => $this->getNestedValue($formaPago, 'iFormaPago'),
     'valorCuotaPagada' => $this->normalizeNumericValueToTwoDecimals($this->getNestedValue($formaPago, 'dVlrCuota')),
-    // ⬆Siempre usaba dVlrCuota, ignorando valorCuotaPagada del array original
+    // Siempre usaba dVlrCuota, ignorando valorCuotaPagada del array original
     'descFormaPago' => $this->getNestedValue($formaPago, 'dFormaPagoDesc'),
 ];
 ```

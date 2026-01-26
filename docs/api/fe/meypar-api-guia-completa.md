@@ -6,7 +6,7 @@ La API MEYPAR está **100% funcional** y coincide exactamente con la documentaci
 
 ---
 
-## 📍 **Endpoints Disponibles**
+##  **Endpoints Disponibles**
 
 ### 1. **Crear Venta MEYPAR (Solo Almacenar)**
 ```http
@@ -131,7 +131,7 @@ Accept: application/json
 }
 ```
 
-### 📜 **Autorización de Prefijo (autorizacionPrefijo)**
+###  **Autorización de Prefijo (autorizacionPrefijo)**
 
 ```json
 {
@@ -148,7 +148,7 @@ Accept: application/json
 
 ---
 
-## 💳 **Array: Medios de Pago (detalleMedioPagoList)**
+##  **Array: Medios de Pago (detalleMedioPagoList)**
 
 **Obligatorio:** Mínimo 1 elemento
 
@@ -175,7 +175,7 @@ Accept: application/json
 
 ---
 
-## 🧾 **Array: Detalles de Factura (detalleFacturaList)**
+##  **Array: Detalles de Factura (detalleFacturaList)**
 
 **Obligatorio:** Mínimo 1 elemento
 
@@ -208,9 +208,9 @@ Accept: application/json
 - `precioTotalFinalDetalle`: Total final
 
 ### Campos Opcionales en Detalle
-- 🔹 `codigoVehiculo`: Tipo de vehículo
-- 🔹 `unidadMedida`: Por defecto "UNI"
-- 🔹 `observacion`: Observación específica del item
+-  `codigoVehiculo`: Tipo de vehículo
+-  `unidadMedida`: Por defecto "UNI"
+-  `observacion`: Observación específica del item
 
 ---
 
@@ -323,7 +323,7 @@ Accept: application/json
 
 ---
 
-## 🧪 **Ejemplos de Uso con cURL**
+##  **Ejemplos de Uso con cURL**
 
 ### **Solo Almacenar (create_sale_meypar)**
 
@@ -451,7 +451,7 @@ curl -X POST \
 
 ---
 
-## 🤔 **¿Cuál Endpoint Usar?**
+##  **¿Cuál Endpoint Usar?**
 
 ### **create_sale_meypar** - Solo Almacenar
 **Usar cuando:**

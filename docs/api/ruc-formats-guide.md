@@ -4,7 +4,7 @@
 
 La API de consulta de RUC de DocuCenter soporta todos los formatos oficiales de RUC utilizados en Panamá:
 
-### 1. 🧑 Persona Natural (Cédula)
+### 1.  Persona Natural (Cédula)
 **Formato**: `D-DDD-DDD`
 **Ejemplo**: `8-123-456`
 **Descripción**: RUC basado en la cédula de identidad panameña
@@ -60,7 +60,7 @@ La API valida automáticamente todos estos formatos usando la expresión regular
 - `ABC-123-456` (letras no permitidas excepto PE)
 - `8.123.456` (puntos en lugar de guiones)
 
-## 🧪 Testing de Formatos
+##  Testing de Formatos
 
 ### Script Automatizado
 El script de testing incluye casos para todos los formatos:

@@ -61,13 +61,13 @@ try {
 ### Resultados de Testing
 ```bash
 Test 1: Instanciación del componente
-   ✓ Componente creado exitosamente
+    Componente creado exitosamente
 
 Test 2: getCustomerProperty() sin customer_id
-   ✓ Retorna null cuando no hay customer_id
+    Retorna null cuando no hay customer_id
 
 Test 3: getCustomerProperty() con customer_id válido
-   ✓ Customer encontrado: ID = 4
+    Customer encontrado: ID = 4
 ```
 
 **Nota**: Error de autenticación durante testing es esperado ya que no hay sesión de usuario en contexto de comando.

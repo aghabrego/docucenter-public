@@ -128,7 +128,7 @@ SET store_id = NULL
 WHERE organization_id = 123;
 ```
 
-## 🧪 Testing
+##  Testing
 
 ### Comando de Prueba
 ```bash

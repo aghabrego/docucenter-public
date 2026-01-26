@@ -41,7 +41,7 @@ if ($shouldIncludeExportation) {
 
 ## COMPORTAMIENTO POR TIPO
 
-### 🇵🇦 Panamá
+###  Panamá
 
 | Tipo | Descripción | Estructura exportation | Contenido |
 |------|-------------|----------------------|-----------|
@@ -50,7 +50,7 @@ if ($shouldIncludeExportation) {
 | 03   | Exportación | **Presente** | Datos reales gFExp |
 | 04-09| Otros | **Presente** | Campos vacíos |
 
-### 🇩🇴 República Dominicana
+###  República Dominicana
 
 | Tipo | Descripción | Estructura exportation | Contenido |
 |------|-------------|----------------------|-----------|

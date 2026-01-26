@@ -49,7 +49,7 @@ Los siguientes comandos requieren verificación antes de ser incluidos automáti
 # Nota: Incluido con verificación condicional
 ```
 
-#### 6. **UpdateLightspeedSerierModule.php** 🧪
+#### 6. **UpdateLightspeedSerierModule.php** 
 ```bash
 # Comando: word:update-lightspeed-serie-r
 # Estado: INCLUIDO - TESTING DISPONIBLE
@@ -74,7 +74,7 @@ Los siguientes comandos requieren verificación antes de ser incluidos automáti
 #### 7. **CreateCreditNotesSummaryCommand.php**
 ```bash
 # Comando: create:credit-notes-summary
-# Estado: ❓ EVALUACIÓN manual
+# Estado:  EVALUACIÓN manual
 # Frecuencia: ¿Semanal?
 # Propósito: Generar resúmenes de notas de crédito
 ```
@@ -82,7 +82,7 @@ Los siguientes comandos requieren verificación antes de ser incluidos automáti
 #### 8. **CreateSalesOrderSummary.php**
 ```bash
 # Comando: create:sales-order-summary
-# Estado: ❓ EVALUACIÓN manual
+# Estado:  EVALUACIÓN manual
 # Frecuencia: ¿Diario?
 # Propósito: Generar resúmenes de órdenes de venta
 ```
@@ -90,7 +90,7 @@ Los siguientes comandos requieren verificación antes de ser incluidos automáti
 #### 9. **PanamaDailyEntryCommand.php**
 ```bash
 # Comando: panama:daily-entry
-# Estado: ❓ EVALUACIÓN manual
+# Estado:  EVALUACIÓN manual
 # Frecuencia: ¿Diario?
 # Propósito: Procesamiento diario específico de Panamá
 ```

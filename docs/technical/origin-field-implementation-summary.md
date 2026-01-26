@@ -53,7 +53,7 @@ Se ha implementado exitosamente el campo `origin` en todas las APIs del grupo FE
    - **Origin:** `'quickbooks'`
    - **Estado:** Ya implementado (anti-loop)
 
-### ❓ APIs que NO Requieren Origin:
+###  APIs que NO Requieren Origin:
 
 8. **`import_xml`**
    - **Job:** `ImportXmlJob.php`

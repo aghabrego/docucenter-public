@@ -11,7 +11,7 @@ Documentación de todas las integraciones con sistemas externos disponibles en D
 - Re-autorización sencilla para renovar tokens
 - Testing automatizado completo
 
-### 🏪 Lightspeed POS
+###  Lightspeed POS
 **Estado**: Implementada
 - Integración con sistema POS Lightspeed
 - Sincronización de productos y ventas
@@ -23,7 +23,7 @@ Documentación de todas las integraciones con sistemas externos disponibles en D
 - Importación de órdenes y clientes
 - Manejo de pagos y facturas
 
-### 🛒 Shopify
+###  Shopify
 **Estado**: Implementada
 - Importación automática de órdenes
 - Sincronización de productos

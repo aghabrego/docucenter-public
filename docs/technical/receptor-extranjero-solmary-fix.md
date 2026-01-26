@@ -113,7 +113,7 @@ SELECT id, name, code FROM docucenter.type_receptors;
    - **País Extranjero (B410)**: Select con Chile seleccionado
    - **Campos opcionales B411-B416**: Provincia, distrito, etc.
 
-## 🧪 Validación del Fix
+##  Validación del Fix
 
 ### **Testing Manual**:
 1. **Acceder a la aplicación** para organización 2

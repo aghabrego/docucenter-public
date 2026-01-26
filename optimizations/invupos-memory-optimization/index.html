@@ -2526,7 +2526,7 @@
   <span class="md-ellipsis">
     
   
-    🧪 Sistema de Testing DocuCenter
+    Sistema de Testing DocuCenter
   
 
     
@@ -3283,20 +3283,20 @@
 - Se carga on-demand</p>
 <h2 id="diagrama-de-flujo">Diagrama de Flujo<a class="headerlink" href="#diagrama-de-flujo" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code>Usuario cambia de &quot;payment&quot; → &quot;category&quot;
-│
-├─ 1. syncCurrentTabToBackup(&#39;payment&#39;)
-│  └─ $accountsBackup[&#39;details&#39;] = $accounts[&#39;details&#39;]
-│
-├─ 2. updateCurrentTabOnly(&#39;payment&#39;)
-│  ├─ Carga TODOS de BD: $dbAccounts = BD[all tabs]
-│  ├─ Actualiza solo: $dbAccounts[&#39;details&#39;] = $accounts[&#39;details&#39;]
-│  └─ Guarda TODO: BD[all tabs] = $dbAccounts
-│
-├─ 3. unloadPreviousTab(&#39;payment&#39;) ← NUEVO
-│  └─ unset($accounts[&#39;details&#39;]) ← Libera memoria
-│
-└─ 4. loadTabData(&#39;category&#39;)
-   └─ $accounts[&#39;categories&#39;] = BD[&#39;categories&#39;]
+
+ 1. syncCurrentTabToBackup(&#39;payment&#39;)
+   $accountsBackup[&#39;details&#39;] = $accounts[&#39;details&#39;]
+
+ 2. updateCurrentTabOnly(&#39;payment&#39;)
+   Carga TODOS de BD: $dbAccounts = BD[all tabs]
+   Actualiza solo: $dbAccounts[&#39;details&#39;] = $accounts[&#39;details&#39;]
+   Guarda TODO: BD[all tabs] = $dbAccounts
+
+ 3. unloadPreviousTab(&#39;payment&#39;) ← NUEVO
+   unset($accounts[&#39;details&#39;]) ← Libera memoria
+
+ 4. loadTabData(&#39;category&#39;)
+    $accounts[&#39;categories&#39;] = BD[&#39;categories&#39;]
 
 Resultado:
 - Memoria: Solo campos generales + [&#39;categories&#39;]

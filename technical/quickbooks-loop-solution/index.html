@@ -2526,7 +2526,7 @@
   <span class="md-ellipsis">
     
   
-    🧪 Sistema de Testing DocuCenter
+    Sistema de Testing DocuCenter
   
 
     
@@ -2981,7 +2981,7 @@
   <a href="#campo-origin-en-salesheaderimp" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🔹 Campo origin en SalesHeaderImp
+        Campo origin en SalesHeaderImp
       
     </span>
   </a>
@@ -2992,7 +2992,7 @@
   <a href="#modificacion-createsalequickbooksjob" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🔹 Modificación CreateSaleQuickBooksJob
+        Modificación CreateSaleQuickBooksJob
       
     </span>
   </a>
@@ -3003,7 +3003,7 @@
   <a href="#modificacion-updateintuitordersjob" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🔹 Modificación UpdateIntuitOrdersJob
+        Modificación UpdateIntuitOrdersJob
       
     </span>
   </a>
@@ -3289,7 +3289,7 @@
 <li><strong>Resultado</strong>: Loop infinito y facturas duplicadas</li>
 </ol>
 <h2 id="solucion-implementada">Solución Implementada<a class="headerlink" href="#solucion-implementada" title="Permanent link">&para;</a></h2>
-<h3 id="campo-origin-en-salesheaderimp">🔹 <strong>Campo <code>origin</code> en SalesHeaderImp</strong><a class="headerlink" href="#campo-origin-en-salesheaderimp" title="Permanent link">&para;</a></h3>
+<h3 id="campo-origin-en-salesheaderimp"><strong>Campo <code>origin</code> en SalesHeaderImp</strong><a class="headerlink" href="#campo-origin-en-salesheaderimp" title="Permanent link">&para;</a></h3>
 <p><strong>Propósito</strong>: Identificar el origen de cada factura para aplicar lógica diferencial.</p>
 <div class="highlight"><pre><span></span><code><span class="c1">-- Agregado al stub Sales_Header_Imp.sql.stub</span>
 <span class="o">`</span><span class="n">origin</span><span class="o">`</span><span class="w"> </span><span class="nb">varchar</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="s1">&#39;docucenter&#39;</span><span class="p">,</span>
@@ -3301,7 +3301,7 @@
 - <code>'shopify'</code>: Factura recibida desde Shopify
 - <code>'lightspeed'</code>: Factura recibida desde Lightspeed
 - etc.</p>
-<h3 id="modificacion-createsalequickbooksjob">🔹 <strong>Modificación CreateSaleQuickBooksJob</strong><a class="headerlink" href="#modificacion-createsalequickbooksjob" title="Permanent link">&para;</a></h3>
+<h3 id="modificacion-createsalequickbooksjob"><strong>Modificación CreateSaleQuickBooksJob</strong><a class="headerlink" href="#modificacion-createsalequickbooksjob" title="Permanent link">&para;</a></h3>
 <p><strong>Antes</strong>:
 <div class="highlight"><pre><span></span><code><span class="x">// Después de emitir FE, enviaba de vuelta a QB</span>
 <span class="x">if ($this-&gt;hasActiveQuickBooksConnection()) {</span>
@@ -3320,7 +3320,7 @@
 
 <span class="x">// NO enviar de vuelta a QuickBooks (evita loop)</span>
 </code></pre></div></p>
-<h3 id="modificacion-updateintuitordersjob">🔹 <strong>Modificación UpdateIntuitOrdersJob</strong><a class="headerlink" href="#modificacion-updateintuitordersjob" title="Permanent link">&para;</a></h3>
+<h3 id="modificacion-updateintuitordersjob"><strong>Modificación UpdateIntuitOrdersJob</strong><a class="headerlink" href="#modificacion-updateintuitordersjob" title="Permanent link">&para;</a></h3>
 <p><strong>Filtro agregado</strong>:
 <div class="highlight"><pre><span></span><code><span class="x">// Solo procesar facturas originadas en DocuCenter</span>
 <span class="x">$query-&gt;where(function ($subQuery) {</span>
@@ -3411,7 +3411,7 @@
 <li><strong>Visibilidad total</strong> del origen de cada factura</li>
 <li><strong>Performance mejorado</strong> - menos procesamiento redundante</li>
 <li><strong>Compatibilidad</strong> con facturas existentes</li>
-<li><strong>🧩 Escalable</strong> para futuras integraciones (Shopify, etc.)</li>
+<li>** Escalable** para futuras integraciones (Shopify, etc.)</li>
 </ol>
 <h2 id="monitoreo">Monitoreo<a class="headerlink" href="#monitoreo" title="Permanent link">&para;</a></h2>
 <h3 id="queries-utiles"><strong>Queries Útiles</strong><a class="headerlink" href="#queries-utiles" title="Permanent link">&para;</a></h3>

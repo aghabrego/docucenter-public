@@ -173,7 +173,7 @@ docker exec docucenter_laravel.test php artisan test:auto-emit-fe-qb --org_id=2
 
 **Resultado de Prueba**:
 ```
-🧪 Testing Auto-Emit FE para QuickBooks en Organización 2
+ Testing Auto-Emit FE para QuickBooks en Organización 2
 Organización: 
 Conexión encontrada: ID 19
 Módulo QuickBooks confirmado

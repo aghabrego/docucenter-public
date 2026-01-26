@@ -75,7 +75,7 @@
 #### Estructura XML Mejorada:
 - **Lines ~1685-1692**: Uso del método unificado en case '3' para receptor extranjero
 
-## 🧪 Testing Implementado
+##  Testing Implementado
 
 ### Script de Validación
 - `scripts/test-receptor-extranjero-unification.sh`

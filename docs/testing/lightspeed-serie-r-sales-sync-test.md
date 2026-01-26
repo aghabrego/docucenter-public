@@ -92,16 +92,16 @@ docker exec -it docucenter-app-1 php artisan lightspeed:test-serie-r-sync 123 --
 El comando muestra:
 
 ```
-═══════════════════════════════════════════════════════
+
   Test Lightspeed Serie R - Sincronización de Ventas
-═══════════════════════════════════════════════════════
+
 
 Organización: VOGLIA (ID: 123)
    Base de datos: 9_734_1672_56
 
 Conexión encontrada (ID: 45)
 
-🏪 Configuración de Shop:
+ Configuración de Shop:
    Shop ID: 9
    Shop Name: VOGLIA Multiplaza
    Account ID: 192176
@@ -117,9 +117,9 @@ Obteniendo preview de ventas...
 
 Ventas encontradas: 15
 
-┌─────────────────────────────────────────────────────────────┐
-│                    PREVIEW DE VENTAS                        │
-└─────────────────────────────────────────────────────────────┘
+
+                    PREVIEW DE VENTAS                        
+
 +-----------------+-----------+----------+----------+---------------------+
 | Ticket          | Sale ID   | Shop ID  | Total    | Fecha              |
 +-----------------+-----------+----------+----------+---------------------+
@@ -135,9 +135,9 @@ Filtro por shop_id funcionando correctamente
 
 Para ejecutar la sincronización real, usa: --sync
 
-═══════════════════════════════════════════════════════
+
   Test completado
-═══════════════════════════════════════════════════════
+
 ```
 
 ## Validaciones que Realiza

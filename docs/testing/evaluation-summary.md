@@ -38,7 +38,7 @@
   - `fa-file-alt` (Notas) 
   - `fa-undo` (Reembolso) 
 
-### 🧰 Verificación Backend
+###  Verificación Backend
 - **Propiedades Livewire**: 5/5 
   - `$conceptoNota` 
   - `$periodoNota` 
@@ -118,7 +118,7 @@
 
 ---
 
-## 📖 Documentación de Referencia
+##  Documentación de Referencia
 
 ### Scripts de Testing
 - `docs/testing/conditional-fields-evaluation.sh` - Evaluación completa automatizada

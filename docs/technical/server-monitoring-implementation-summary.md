@@ -105,7 +105,7 @@ Agregadas en:
 - Logging de errores
 - Manejo de excepciones
 
-## 🧪 Testing
+##  Testing
 
 ### Prueba Manual
 ```bash

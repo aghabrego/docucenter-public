@@ -115,7 +115,7 @@ docker exec -it docucenter_laravel.test php docs/testing/test-thefactoryhka-tipo
 
 ### Beneficios a Largo Plazo
 - Mayor throughput de facturación automática
-- 📉 Reducción de tickets de soporte PAC
+-  Reducción de tickets de soporte PAC
 - Cumplimiento estricto DGI Panamá
 
 ## Contacto

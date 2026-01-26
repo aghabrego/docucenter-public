@@ -44,7 +44,7 @@ docker exec -it docucenter_laravel.test php artisan plusmovil:import-invoices 25
 - 35 facturas importadas
 - 58 items importados
 - 0 errores
-- ⏱Tiempo: ~22 segundos
+- Tiempo: ~22 segundos
 
 ### Verificación en Base de Datos
 

@@ -92,7 +92,7 @@ zoho_environment: com
 has_access_token: YES
 token_expires_at: 2025-10-14 18:35:08
 
-🧪 Pruebas de API:
+ Pruebas de API:
 get_organizations (1 organizaciones)
 search_vendors  
 search_customers

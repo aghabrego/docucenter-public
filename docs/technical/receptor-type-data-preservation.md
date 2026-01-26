@@ -221,13 +221,13 @@ Compatible con flujo existente para nuevos customers
 ## Impacto y Beneficios
 
 ### Para Usuarios
-- ⏱**Tiempo ahorrado**: 80% menos re-digitación
-- 😊 **Experiencia mejorada**: Flujo natural sin frustraciones  
+- **Tiempo ahorrado**: 80% menos re-digitación
+-  **Experiencia mejorada**: Flujo natural sin frustraciones  
 - **Mayor precisión**: Menos errores por re-captura manual
 
 ### Para el Sistema
 - **Mantenibilidad**: Código organizado y extensible
-- 🛡**Estabilidad**: No rompe funcionalidad existente
+- **Estabilidad**: No rompe funcionalidad existente
 - **Escalabilidad**: Fácil agregar nuevos tipos de receptor
 
 ## Notas Técnicas

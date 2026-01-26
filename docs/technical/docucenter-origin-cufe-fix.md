@@ -177,7 +177,7 @@ FE/Create.php → Emisión PAC → CUFE obtenido → saveInvoiceToDatabase()
 - **Mejor tracking** de facturas emitidas
 
 ### Registros Históricos
-- ❓ **852 registros existentes** aún necesitan procesamiento
+-  **852 registros existentes** aún necesitan procesamiento
 - **Posible script** para extraer CUFE de InvoiceNote en registros existentes
 
 ## Validación

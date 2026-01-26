@@ -5,10 +5,10 @@
 **20 documentos JSON con anotaciones** listos en GCS:
 ```
 gs://docucenter-aci-document-ai-training/json/
-├── document-1.json
-├── document-2.json
-├── ...
-└── document-20.json
+ document-1.json
+ document-2.json
+ ...
+ document-20.json
 ```
 
 Cada JSON contiene:

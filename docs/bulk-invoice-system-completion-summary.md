@@ -28,21 +28,21 @@ Se ha implementado y optimizado completamente el sistema de emisión masiva de f
 
 ```
 Create.php (Livewire Component)
-├── mount()
-│   ├── Configuración de conexión BD organizacional
-│   ├── Carga de venta por ID (sale_id + getSaleProperty())
-│   ├── Extracción directa de customer desde relaciones
-│   └── Almacenamiento de IDs para serialización
-├── hydrate()
-│   └── Restablecimiento automático de conexión BD
-├── getSaleProperty()
-│   ├── Resolución dinámica desde sale_id
-│   └── Conexión BD apropiada
-├── getCustomerProperty()
-│   ├── Resolución dinámica desde customer_id
-│   └── Conexión BD apropiada
-└── render()
-    └── Vista con layout definido en método separado
+ mount()
+    Configuración de conexión BD organizacional
+    Carga de venta por ID (sale_id + getSaleProperty())
+    Extracción directa de customer desde relaciones
+    Almacenamiento de IDs para serialización
+ hydrate()
+    Restablecimiento automático de conexión BD
+ getSaleProperty()
+    Resolución dinámica desde sale_id
+    Conexión BD apropiada
+ getCustomerProperty()
+    Resolución dinámica desde customer_id
+    Conexión BD apropiada
+ render()
+     Vista con layout definido en método separado
 ```
 
 ### Testing Implementado

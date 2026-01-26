@@ -42,7 +42,7 @@ $cPDF->Cell($w[2], 10, $description, 'LR', 0, 'L', $fill, '', 1);
 | Descripción Original | Método Anterior | Método Nuevo | Mejora |
 |---------------------|-----------------|--------------|---------|
 | `iPhone 14 Pro Max - Color Morado - Garantía` | `Garantía` | `iPhone 14 Pro Max - Color Morad...` | Más información |
-| `Laptop Dell Inspiron 15 3000` | `Laptop Dell Inspiron 15 3000` | `Laptop Dell Inspiron 15 3000` | ➖ Similar |
+| `Laptop Dell Inspiron 15 3000` | `Laptop Dell Inspiron 15 3000` | `Laptop Dell Inspiron 15 3000` |  Similar |
 | `A-B-C-D-E` | `E` | `A-B-C-D-E` | Mucho mejor |
 | `Producto con Descripción Muy Larga...` | `Producto con...` (dependía de guiones) | `Producto con Descripción Muy L...` | Consistente |
 
@@ -61,7 +61,7 @@ $cPDF->Cell($w[2], 10, $description, 'LR', 0, 'L', $fill, '', 1);
 - **Longitud de truncado**: 37 + `...` = 40 total
 - **Indicador**: `...` para texto truncado
 
-## 🧪 Testing Realizado
+##  Testing Realizado
 
 ### Script de Validación:
 - **`docs/testing/test-description-truncate.php`**

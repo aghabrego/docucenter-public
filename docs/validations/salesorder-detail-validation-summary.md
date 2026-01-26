@@ -75,7 +75,7 @@ Verificar y optimizar los campos de `detailData` para compatibilidad completa co
 - **Relación**: `saleOrder()` usa `('ID', 'ID')`
 - **Estado**: **FUNCIONAL**
 
-## 🧪 Scripts de Validación Creados
+##  Scripts de Validación Creados
 
 1. **`test-salesorder-detail-fields.php`**: Validación inicial de compatibilidad
 2. **`test-salesorder-detail-final.php`**: Validación después de mejoras

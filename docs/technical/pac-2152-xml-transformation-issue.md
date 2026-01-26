@@ -35,9 +35,9 @@
 En el log del HKAService vemos:
 ```json
 "totalesSubTotales": {
-  "totalValorRecibido": "5.99",  // ✓ Correcto
-  "tiempoPago": "1",             // ✓ Correcto  
-  "totalTodosItems": "5.99"      // ✓ Correcto
+  "totalValorRecibido": "5.99",  //  Correcto
+  "tiempoPago": "1",             //  Correcto  
+  "totalTodosItems": "5.99"      //  Correcto
 }
 ```
 

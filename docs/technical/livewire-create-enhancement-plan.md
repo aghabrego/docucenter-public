@@ -305,7 +305,7 @@ protected function buildDocumentData(): array
 }
 ```
 
-## 🧪 Testing
+##  Testing
 
 ### Crear casos de prueba específicos:
 

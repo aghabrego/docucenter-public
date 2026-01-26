@@ -4,25 +4,25 @@
 
 ```
 resources/views/
-├── layouts/
-│   ├── app-new.blade.php           # NUEVO Layout completo con sidebar reorganizado
-│   ├── sidebar-new.blade.php       # Sidebar principal reorganizado
-│   ├── sidebar-header.blade.php    # Componente: Header con org
-│   ├── sidebar-section.blade.php   # Componente: Sección con título
-│   └── sidebar-item.blade.php      # Componente: Item individual
-│
-└── partials/menu/
-    ├── principal.blade.php         # Sección: Dashboard
-    ├── facturacion.blade.php       # Sección: Facturas + Config
-    ├── integraciones.blade.php     # Sección: Conexiones + Tiendas
-    ├── reportes.blade.php          # Sección: Reportes
-    └── administracion.blade.php    # Sección: Sistema + Usuarios
+ layouts/
+    app-new.blade.php           # NUEVO Layout completo con sidebar reorganizado
+    sidebar-new.blade.php       # Sidebar principal reorganizado
+    sidebar-header.blade.php    # Componente: Header con org
+    sidebar-section.blade.php   # Componente: Sección con título
+    sidebar-item.blade.php      # Componente: Item individual
+
+ partials/menu/
+     principal.blade.php         # Sección: Dashboard
+     facturacion.blade.php       # Sección: Facturas + Config
+     integraciones.blade.php     # Sección: Conexiones + Tiendas
+     reportes.blade.php          # Sección: Reportes
+     administracion.blade.php    # Sección: Sistema + Usuarios
 
 config/
-└── sidebar.php                     # Configuración y feature flag
+ sidebar.php                     # Configuración y feature flag
 
 app/Console/Commands/
-└── ToggleSidebar.php               # Comando para activar/desactivar
+ ToggleSidebar.php               # Comando para activar/desactivar
 ```
 
 ## Cómo Activar el Nuevo Sidebar
@@ -89,7 +89,7 @@ docker exec -it docucenter_laravel.test php artisan config:cache
 - Responsive design
 - Logout funcional
 
-## 🧪 Testing
+##  Testing
 
 ### Opción A: Testing con Componente Específico (Recomendado)
 Actualizar un componente Livewire para usar el nuevo layout:

@@ -35,14 +35,14 @@ SESSION_LIFETIME=120  # ← PROBLEMA: Solo 2 horas
 
 ### Flujo del Problema:
 ```
-Usuario inicia sesión → ✓
-Usuario valida 2FA → ✓ (se guarda en sesión como 'google2fa')
+Usuario inicia sesión → 
+Usuario valida 2FA →  (se guarda en sesión como 'google2fa')
 Usuario usa el sistema por 2+ horas → Sesión de Laravel expira
 Middleware 2FA verifica sesión → Sesión expiró, no encuentra 'google2fa'
 Sistema pide 2FA nuevamente o redirige a login
 ```
 
-## 📖 Documentación de Google2FA Laravel
+##  Documentación de Google2FA Laravel
 
 Según la documentación oficial de `pragmarx/google2fa-laravel`:
 

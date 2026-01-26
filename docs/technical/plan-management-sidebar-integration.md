@@ -61,7 +61,7 @@ El enlace del Sistema de Gestión de Planes ha sido agregado exitosamente al sid
 
 ---
 
-## 🧪 **Pruebas Realizadas**
+##  **Pruebas Realizadas**
 
 ### **Tests de Integración (5/5 PASSED)**
 
@@ -93,19 +93,19 @@ El enlace del Sistema de Gestión de Planes ha sido agregado exitosamente al sid
 ### **Ubicación Visual**
 ```
 Sidebar → Applications (sección desplegable)
-├── CRUD Manager
-├── Translation
-├── Roles
-├── Users
-├── Admins
-├── Tokens management
-├── Databases management
-├── Table management
-├── Connection management
-├── Authorized certification providers
-├── Transacciones
-├── Catalogos
-└── Plan Management  ← NUEVO
+ CRUD Manager
+ Translation
+ Roles
+ Users
+ Admins
+ Tokens management
+ Databases management
+ Table management
+ Connection management
+ Authorized certification providers
+ Transacciones
+ Catalogos
+ Plan Management  ← NUEVO
 ```
 
 ---

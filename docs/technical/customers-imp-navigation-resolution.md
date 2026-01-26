@@ -165,16 +165,16 @@ public function getSaleProperty() {
 docker exec -it docucenter_laravel.test php artisan test:simple-customer-access
 
 Test 1: Conexión directa a base de organización
-   ✓ Conectado a: db_18257061709732_90
+    Conectado a: db_18257061709732_90
 
 Test 2: Buscar customer por ID directamente  
-   ✓ Customer encontrado:
+    Customer encontrado:
      - ID: 4
      - Name: Roberto Arnuero Delgado
      - CustomerID: Roberto Arnuero Delg
 
 Test 3: Usar modelo CustomersImp directamente
-   ✓ Modelo CustomersImp funciona correctamente
+    Modelo CustomersImp funciona correctamente
 ```
 
 ### Verificación de Arquitectura

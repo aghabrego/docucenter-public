@@ -35,17 +35,17 @@ public function getSettingsMenuConfiguration(): array
 
 | Configuración | Basic | Professional | Premium | Enterprise |
 |---------------|-------|--------------|---------|------------|
-| Profile | ✓ | ✓ | ✓ | ✓ |
-| General | ✓ | ✓ | ✓ | ✓ |
-| Login Security | - | ✓ | ✓ | ✓ |
-| Import SQL Server | - | ✓ | ✓ | ✓ |
-| Import Magaya | - | - | ✓ | ✓ |
-| Import Fikable | - | - | ✓ | ✓ |
-| Extraction Invupos | - | ✓ | ✓ | ✓ |
-| Extraction Lightspeed | - | - | ✓ | ✓ |
-| Integration QuickBooks | - | - | ✓ | ✓ |
-| Integration Shopify | - | - | - | ✓ |
-| Advanced Settings | - | - | - | ✓ |
+| Profile |  |  |  |  |
+| General |  |  |  |  |
+| Login Security | - |  |  |  |
+| Import SQL Server | - |  |  |  |
+| Import Magaya | - | - |  |  |
+| Import Fikable | - | - |  |  |
+| Extraction Invupos | - |  |  |  |
+| Extraction Lightspeed | - | - |  |  |
+| Integration QuickBooks | - | - |  |  |
+| Integration Shopify | - | - | - |  |
+| Advanced Settings | - | - | - |  |
 
 ## Implementación en Componentes
 

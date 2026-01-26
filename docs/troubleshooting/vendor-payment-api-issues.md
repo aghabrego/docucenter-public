@@ -21,12 +21,12 @@ Al hacer POST a `/api/acicloud/vendor_payment` con JSON válido, se recibe:
 
 **Solución**:
 ```bash
-# ✗ Incorrecto (sin Content-Type)
+#  Incorrecto (sin Content-Type)
 curl -X POST http://localhost/api/acicloud/vendor_payment \
   -H "Authorization: Bearer token" \
   -d '{"CheckNumber": "CHK-001"}'
 
-# ✓ Correcto (con Content-Type)
+#  Correcto (con Content-Type)
 curl -X POST http://localhost/api/acicloud/vendor_payment \
   -H "Authorization: Bearer token" \
   -H "Content-Type: application/json" \
@@ -44,13 +44,13 @@ curl -X POST http://localhost/api/acicloud/vendor_payment \
 
 **Solución en código**:
 ```javascript
-// ✗ Incorrecto
+//  Incorrecto
 fetch('/api/acicloud/vendor_payment', {
   method: 'POST',
   body: formData  // FormData object
 })
 
-// ✓ Correcto
+//  Correcto
 fetch('/api/acicloud/vendor_payment', {
   method: 'POST',
   headers: {

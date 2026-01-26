@@ -14,7 +14,7 @@ Se ha realizado una reorganización completa de archivos siguiendo las convencio
 | `FISCAL_CREDIT_IMPLEMENTATION_SUMMARY.md` | `docs/technical/` | Implementación facturas crédito fiscal |
 | `TRANSACTION_SYSTEM_COMPLETE.md` | `docs/technical/` | Sistema de transacciones completo |
 
-### 🧪 Scripts de Prueba → `docs/testing/`
+###  Scripts de Prueba → `docs/testing/`
 
 | Archivo Original (root) | Nueva Ubicación | Descripción |
 |------------------------|-----------------|-------------|
@@ -23,7 +23,7 @@ Se ha realizado una reorganización completa de archivos siguiendo las convencio
 
 ## Nuevos Archivos Creados
 
-### 📖 Documentación de Índices
+###  Documentación de Índices
 
 1. **`docs/technical/README.md`** - Actualizado con índice completo de documentación técnica
 2. **`docs/testing/README.md`** - Actualizado con instrucciones de uso de scripts de prueba

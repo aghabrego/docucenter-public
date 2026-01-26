@@ -67,7 +67,7 @@ https://28cwop8rj6.execute-api.us-east-1.amazonaws.com/dev/sys-logs
 **Diagnóstico**:
 1. Internet funciona correctamente (ping a google.com exitoso)
 2. DNS no resuelve el hostname específico de la API
-3. ❓ La URL podría ser incorrecta o el endpoint no existe
+3.  La URL podría ser incorrecta o el endpoint no existe
 
 ## Posibles Causas
 
@@ -161,7 +161,7 @@ Solicitar al equipo de Plus Movil:
 | Access Token | Generado | Token JWT válido por 60 min |
 | User Pool | Confirmado | `us-east-1_xMaEibiru` |
 | DNS Endpoint | No resuelve | URL podría ser incorrecta |
-| API Gateway | ❓ Sin confirmar | No se pudo probar conectividad |
+| API Gateway |  Sin confirmar | No se pudo probar conectividad |
 
 ## Scripts Funcionales
 
@@ -191,7 +191,7 @@ cat /tmp/plusmovil_access_token.txt
 
 Válido hasta: **~60 minutos desde generación** (28/10/2025 ~21:13)
 
-## ✉Preguntas para el Equipo de PlusMovil
+## Preguntas para el Equipo de PlusMovil
 
 1. **¿Cuál es la URL correcta del API Gateway?**
    - URL actual no resuelve DNS: `28cwop8rj6.execute-api.us-east-1.amazonaws.com`

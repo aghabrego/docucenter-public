@@ -131,7 +131,7 @@ Este sistema permite entrenar un modelo custom de Google Document AI para extrae
    - **Training**: 80%
    - **Test**: 20%
    
-   **🏷Etiquetado automático**:
+   **Etiquetado automático**:
    - **Activar** "Importar con etiquetado automático"
    - Esto usará los archivos JSON para etiquetar los PDFs automáticamente
 
@@ -139,7 +139,7 @@ Este sistema permite entrenar un modelo custom de Google Document AI para extrae
 
 #### 4.3 Esperar Importación
 
-- ⏱**Tiempo**: 5-15 minutos dependiendo de cantidad
+- **Tiempo**: 5-15 minutos dependiendo de cantidad
 - **Progreso**: Verás una barra de progreso en Workbench
 - **Status**: Verificar que los documentos aparezcan en la lista con sus etiquetas
 
@@ -178,7 +178,7 @@ Este sistema permite entrenar un modelo custom de Google Document AI para extrae
 
 #### 5.2 Esperar Training
 
-- ⏱**Duración**: 1-3 horas típicamente
+- **Duración**: 1-3 horas típicamente
 - **Progreso**: Visible en Google Cloud Console
 - **Notificación**: Email cuando termine
 
@@ -202,7 +202,7 @@ Este sistema permite entrenar un modelo custom de Google Document AI para extrae
 - **Meta**: ≥ 20 para entrenar
 - **Acción**: Anotar más documentos
 
-### ☁PDFs in GCS
+### PDFs in GCS
 - **Qué es**: PDFs ya subidos a Google Cloud
 - **Optimización**: No se suben de nuevo (ahorra tiempo y $)
 - **Acción**: Ninguna
@@ -276,15 +276,15 @@ Este sistema permite entrenar un modelo custom de Google Document AI para extrae
 **Estructura**:
 ```
 gs://docucenter-aci-document-ai-training/
-├── training-pdfs/
-│   └── 20251126230000/
-│       ├── factura1.pdf
-│       ├── factura2.pdf
-│       └── ...
-└── json/
-    ├── factura1.json
-    ├── factura2.json
-    └── ...
+ training-pdfs/
+    20251126230000/
+        factura1.pdf
+        factura2.pdf
+        ...
+ json/
+     factura1.json
+     factura2.json
+     ...
 ```
 
 ### Document AI Processor
@@ -388,16 +388,16 @@ php artisan queue:listen --queue=default
 ## Workflow Resumido (TL;DR)
 
 ```
-1. DocuCenter: Subir PDFs ➜ Anotar campos
-                           ⬇
+1. DocuCenter: Subir PDFs  Anotar campos
+                           
 2. DocuCenter: Click "Generate JSON Files"
-                           ⬇
+                           
 3. Job en background: PDF → OCR → JSON → GCS
-                           ⬇
+                           
 4. Google Cloud Workbench: Import JSON files
-                           ⬇
+                           
 5. Google Cloud Console: Train model (1-3 hrs)
-                           ⬇
+                           
 6. Modelo entrenado listo para producción
 ```
 
@@ -442,7 +442,7 @@ php artisan queue:listen --queue=default
 
 ---
 
-## 👥 Equipo y Soporte
+##  Equipo y Soporte
 
 **Desarrollador**: Sistema implementado en DocuCenter
 **Fecha**: Noviembre 2025

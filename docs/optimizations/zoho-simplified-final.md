@@ -100,7 +100,7 @@ Se ha eliminado la configuración de **Redirect URI** y **Scope** de Zoho Self C
 
 ---
 
-## 🧪 **Testing Completado**
+##  **Testing Completado**
 
 ### **Verificaciones Exitosas:**
 ```bash

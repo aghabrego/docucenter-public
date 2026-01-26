@@ -70,7 +70,7 @@ Se creó exitosamente `CreatePurchaseOrderZohoRequest` para mantener **simetría
 'taxes.*.tax_percentage.between' => 'El porcentaje de impuesto debe estar entre 0 y 100',
 ```
 
-## 🧪 Testing y Validación
+##  Testing y Validación
 
 ### Comando de Validación
 ```bash

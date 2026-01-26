@@ -72,7 +72,7 @@ const DEBIT_NOTE_GENERIC = '07';      // Nota de Débito genérica
 5. `/docs/technical/panama-document-types-analysis.md` - Análisis técnico
 6. `/docs/technical/livewire-create-enhancement-plan.md` - Plan Frontend
 
-## 🧪 Testing Implementado
+##  Testing Implementado
 
 ### Comando Artisan
 ```bash

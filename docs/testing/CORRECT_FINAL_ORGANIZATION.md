@@ -7,16 +7,16 @@
 ```
 # COMANDOS PHP ARTISAN
 app/Console/Commands/Testing/
-├── README.md                           # Documentación comandos PHP
-├── TestingIndex.php                    # Índice maestro
-└── 31 comandos PHP (Test*.php)         # Solo comandos Artisan
+ README.md                           # Documentación comandos PHP
+ TestingIndex.php                    # Índice maestro
+ 31 comandos PHP (Test*.php)         # Solo comandos Artisan
 
 # SCRIPTS BASH
 scripts/
-├── README.md                           # Documentación scripts bash
-├── docs-cleanup.sh                     # Utilidad general
-├── testing.sh                         # Script maestro de testing
-└── 16 scripts de testing (test*.sh)   # Scripts de automatización
+ README.md                           # Documentación scripts bash
+ docs-cleanup.sh                     # Utilidad general
+ testing.sh                         # Script maestro de testing
+ 16 scripts de testing (test*.sh)   # Scripts de automatización
 ```
 
 ## Separación Lógica Correcta

@@ -2,7 +2,7 @@
 
 ## Resumen de Implementación
 
-### 🇵🇦 Sistema de Facturación Electrónica para Panamá
+###  Sistema de Facturación Electrónica para Panamá
 
 DocuCenter ahora incluye soporte completo para **Alanube Panamá**, permitiendo la emisión de facturas electrónicas según las normativas fiscales panameñas a través de la API de Alanube.
 
@@ -49,7 +49,7 @@ DocuCenter ahora incluye soporte completo para **Alanube Panamá**, permitiendo 
 - `app/Console/Commands/TestAlanubeService.php` - Suite completa de pruebas
 - `scripts/test-alanube-panama.sh` - Script de testing automatizado
 
-## 🤖 Detección Automática de Tipo de Documento
+##  Detección Automática de Tipo de Documento
 
 ### Algoritmo de Detección
 El servicio analiza automáticamente los datos de entrada y detecta el tipo de documento apropiado:

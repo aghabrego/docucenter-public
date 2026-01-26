@@ -92,7 +92,7 @@ dVuelto = 0.00   // ← Sin vuelto no deseado
 - Preserva la lógica de negocio existente
 - Escalable para futuras modificaciones
 
-## 🧪 **Testing Recomendado**
+##  **Testing Recomendado**
 
 1. **Facturas con descuentos múltiples**
 2. **Combinaciones de formas de pago**

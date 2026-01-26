@@ -259,13 +259,13 @@ protected function schedule(Schedule $schedule)
 - [x] Vista de formulario creada
 - [x] PlusMovilInvoiceService actualizado
 - [x] Comando de testing creado
-- [ ] **Testing en QA** ⬅SIGUIENTE PASO
+- [ ] **Testing en QA** SIGUIENTE PASO
 - [ ] Testing en Producción
 - [ ] Crear Job de importación (opcional)
 
 ---
 
-## 🧪 Comando de Testing
+##  Comando de Testing
 
 ```bash
 # Ver ayuda del comando

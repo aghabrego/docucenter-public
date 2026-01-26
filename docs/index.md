@@ -8,7 +8,7 @@ Esta es la documentación completa del sistema DocuCenter, organizada por catego
 
 - **[Workflow de Entrenamiento Document AI](./document-ai-training-workflow.md)** - Guía completa paso a paso para entrenar modelos custom de Google Document AI
 
-### 🔌 [APIs](./api/)
+###  [APIs](./api/)
 Documentación completa de todas las APIs disponibles en el sistema:
 
 - **[Facturación Electrónica (FE)](./api/fe/)** - APIs para emisión de documentos fiscales electrónicos
@@ -24,7 +24,7 @@ Documentación de integraciones con sistemas externos:
 - **QuickBooks** - Sincronización bidireccional
 - **Shopify** - Importación de órdenes
 
-### 🧪 [Sistema de Testing](./testing/)
+###  [Sistema de Testing](./testing/)
 Documentación completa del sistema de testing y validaciones:
 
 - **[Testing de Filtros de Configuración FE](./testing/test-configuration-filters.md)** - Testing de filtros de organización y usuario en configuración de facturación electrónica

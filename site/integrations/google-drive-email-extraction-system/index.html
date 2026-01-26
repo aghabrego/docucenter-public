@@ -2526,7 +2526,7 @@
   <span class="md-ellipsis">
     
   
-    🧪 Sistema de Testing DocuCenter
+    Sistema de Testing DocuCenter
   
 
     
@@ -3863,60 +3863,58 @@
 <hr />
 <h2 id="arquitectura-del-sistema">Arquitectura del Sistema<a class="headerlink" href="#arquitectura-del-sistema" title="Permanent link">&para;</a></h2>
 <h3 id="diagrama-de-flujo">Diagrama de Flujo<a class="headerlink" href="#diagrama-de-flujo" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>┌─────────────────────────────────────────────────────────────────┐
-│                    SERVIDOR DE CORREO                           │
-│  /var/vmail/apconpanama.me/                                     │
-│  ├── organizacion1@apconpanama.me/Maildir/cur/                  │
-│  ├── organizacion2@apconpanama.me/Maildir/cur/                  │
-│  └── organizacionN@apconpanama.me/Maildir/cur/                  │
-└─────────────────────────────────────────────────────────────────┘
-                          │
-                          │ (1) ExtractEmailAttachmentsJob
-                          │     - Escanea Maildir
-                          │     - Extrae archivos XML
-                          ▼
-┌─────────────────────────────────────────────────────────────────┐
-│               PROCESAMIENTO LOCAL (Temporal)                     │
-│  storage/app/xml_processing/{organization_id}/                  │
-│  ├── {random_hash}.xml                                          │
-│  ├── {random_hash}.xml                                          │
-│  └── metadata.json (info del email original)                    │
-└─────────────────────────────────────────────────────────────────┘
-                          │
-                          │ (2) UploadToGoogleDriveJob
-                          │     - Valida XML
-                          │     - Identifica organización
-                          ▼
-┌─────────────────────────────────────────────────────────────────┐
-│                      GOOGLE DRIVE                               │
-│  DocuCenter-Facturas/                                           │
-│  ├── 1825706-90/  (RUC-DV de APCON)                            │
-│  │   ├── 2026/                                                  │
-│  │   │   ├── 01-Enero/                                         │
-│  │   │   │   ├── FE-001-001-00001234.xml                      │
-│  │   │   │   └── FE-001-001-00001235.xml                      │
-│  │   │   └── 02-Febrero/                                       │
-│  │   └── metadata/                                             │
-│  │       └── audit.log                                         │
-│  ├── 155706268-07/  (RUC-DV de otra org)                       │
-│  │   └── 2026/                                                  │
-│  └── _shared/  (Archivos compartidos)                           │
-└─────────────────────────────────────────────────────────────────┘
-                          │
-                          │ (3) CleanupMaildirJob
-                          │     - Verifica subida exitosa
-                          │     - Elimina email original
-                          ▼
-┌─────────────────────────────────────────────────────────────────┐
-│                   REGISTRO DE AUDITORÍA                         │
-│  database: google_drive_uploads                                 │
-│  - organization_id                                              │
-│  - file_name                                                    │
-│  - google_drive_id                                              │
-│  - maildir_path (para tracking)                                │
-│  - uploaded_at                                                  │
-│  - deleted_at (del servidor)                                    │
-└─────────────────────────────────────────────────────────────────┘
+<div class="highlight"><pre><span></span><code>                    SERVIDOR DE CORREO                           
+  /var/vmail/apconpanama.me/                                     
+   organizacion1@apconpanama.me/Maildir/cur/                  
+   organizacion2@apconpanama.me/Maildir/cur/                  
+   organizacionN@apconpanama.me/Maildir/cur/                  
+
+
+                           (1) ExtractEmailAttachmentsJob
+                               - Escanea Maildir
+                               - Extrae archivos XML
+
+
+               PROCESAMIENTO LOCAL (Temporal)                     
+  storage/app/xml_processing/{organization_id}/                  
+   {random_hash}.xml                                          
+   {random_hash}.xml                                          
+   metadata.json (info del email original)                    
+
+
+                           (2) UploadToGoogleDriveJob
+                               - Valida XML
+                               - Identifica organización
+
+
+                      GOOGLE DRIVE                               
+  DocuCenter-Facturas/                                           
+   1825706-90/  (RUC-DV de APCON)                            
+      2026/                                                  
+         01-Enero/                                         
+            FE-001-001-00001234.xml                      
+            FE-001-001-00001235.xml                      
+         02-Febrero/                                       
+      metadata/                                             
+          audit.log                                         
+   155706268-07/  (RUC-DV de otra org)                       
+      2026/                                                  
+   _shared/  (Archivos compartidos)                           
+
+
+                           (3) CleanupMaildirJob
+                               - Verifica subida exitosa
+                               - Elimina email original
+
+
+                   REGISTRO DE AUDITORÍA                         
+  database: google_drive_uploads                                 
+  - organization_id                                              
+  - file_name                                                    
+  - google_drive_id                                              
+  - maildir_path (para tracking)                                
+  - uploaded_at                                                  
+  - deleted_at (del servidor)                                    
 </code></pre></div>
 <hr />
 <h2 id="analisis-de-componentes-existentes">Análisis de Componentes Existentes<a class="headerlink" href="#analisis-de-componentes-existentes" title="Permanent link">&para;</a></h2>
@@ -4057,19 +4055,19 @@
 <p><strong>Ruta Base</strong>: <code>/var/vmail/apconpanama.me/</code></p>
 <p><strong>Estructura por Usuario</strong>:
 <div class="highlight"><pre><span></span><code>/var/vmail/apconpanama.me/
-├── usuario1@apconpanama.me/
-│   └── Maildir/
-│       ├── cur/          # Emails leídos
-│       ├── new/          # Emails nuevos (sin leer)
-│       └── tmp/          # Emails temporales
-├── usuario2@apconpanama.me/
-│   └── Maildir/
-└── usuarioN@apconpanama.me/
-    └── Maildir/
+ usuario1@apconpanama.me/
+    Maildir/
+        cur/          # Emails leídos
+        new/          # Emails nuevos (sin leer)
+        tmp/          # Emails temporales
+ usuario2@apconpanama.me/
+    Maildir/
+ usuarioN@apconpanama.me/
+     Maildir/
 </code></pre></div></p>
 <p><strong>Formato de Archivo Email (Maildir)</strong>:
 <div class="highlight"><pre><span></span><code>1673954321.M123456P12345.apconpanama.me,S=12345,W=12567:2,S
-│          │               │                 │       │
+
 Timestamp  Unique ID       Hostname          Size    Flags
 </code></pre></div></p>
 <p><strong>Flags Comunes</strong>:
@@ -4898,7 +4896,7 @@ Requiere librería adicional para parsing MIME  </p>
 
 <span class="sb">    public function handle()</span>
 <span class="sb">    {</span>
-<span class="sb">        $this-&gt;info(&quot;📧 Iniciando extracción de emails a Google Drive&quot;);</span>
+<span class="sb">        $this-&gt;info(&quot; Iniciando extracción de emails a Google Drive&quot;);</span>
 <span class="sb">        $this-&gt;newLine();</span>
 
 <span class="sb">        $useQueue = $this-&gt;option(&#39;queue&#39;);</span>
@@ -4938,7 +4936,7 @@ Requiere librería adicional para parsing MIME  </p>
 
 <span class="sb">            $this-&gt;info(&quot;Organización: {$organization-&gt;nombre}&quot;);</span>
 <span class="sb">            $this-&gt;info(&quot; RUC: {$organization-&gt;ruc}-{$organization-&gt;dv}&quot;);</span>
-<span class="sb">            $this-&gt;info(&quot;📧 Email: {$config-&gt;email}&quot;);</span>
+<span class="sb">            $this-&gt;info(&quot; Email: {$config-&gt;email}&quot;);</span>
 
 <span class="sb">            if ($useQueue) {</span>
 <span class="sb">                ExtractEmailToGoogleDriveJob::dispatch($config);</span>
@@ -5249,18 +5247,18 @@ Requiere librería adicional para parsing MIME  </p>
 <span class="nv">NC</span><span class="o">=</span><span class="s1">&#39;\033[0m&#39;</span><span class="w"> </span><span class="c1"># No Color</span>
 
 print_header<span class="o">()</span><span class="w"> </span><span class="o">{</span>
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">BLUE</span><span class="si">}</span><span class="s2">═══════════════════════════════════════════════════</span><span class="si">${</span><span class="nv">NC</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">BLUE</span><span class="si">}${</span><span class="nv">NC</span><span class="si">}</span><span class="s2">&quot;</span>
 <span class="w">    </span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">BLUE</span><span class="si">}</span><span class="s2">  </span><span class="nv">$1</span><span class="si">${</span><span class="nv">NC</span><span class="si">}</span><span class="s2">&quot;</span>
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">BLUE</span><span class="si">}</span><span class="s2">═══════════════════════════════════════════════════</span><span class="si">${</span><span class="nv">NC</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">BLUE</span><span class="si">}${</span><span class="nv">NC</span><span class="si">}</span><span class="s2">&quot;</span>
 <span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
 <span class="o">}</span>
 
 print_success<span class="o">()</span><span class="w"> </span><span class="o">{</span>
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">GREEN</span><span class="si">}</span><span class="s2">✓ </span><span class="nv">$1</span><span class="si">${</span><span class="nv">NC</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">GREEN</span><span class="si">}</span><span class="s2"> </span><span class="nv">$1</span><span class="si">${</span><span class="nv">NC</span><span class="si">}</span><span class="s2">&quot;</span>
 <span class="o">}</span>
 
 print_error<span class="o">()</span><span class="w"> </span><span class="o">{</span>
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">RED</span><span class="si">}</span><span class="s2">✗ </span><span class="nv">$1</span><span class="si">${</span><span class="nv">NC</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">RED</span><span class="si">}</span><span class="s2"> </span><span class="nv">$1</span><span class="si">${</span><span class="nv">NC</span><span class="si">}</span><span class="s2">&quot;</span>
 <span class="o">}</span>
 
 print_warning<span class="o">()</span><span class="w"> </span><span class="o">{</span>

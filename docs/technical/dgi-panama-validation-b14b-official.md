@@ -42,7 +42,7 @@ ENTONCES Destino_Operacion DEBE SER = "1" (Nacional)
 
 **Violación**: Si B06=01 AND B14=2 → Error 1534 (Rechazo)
 
-## 🏛Justificación Legal/Fiscal
+## Justificación Legal/Fiscal
 
 ### Concepto: "Operación Interna"
 Una **Factura de Operación Interna** (tipo 01) por definición legal es:
@@ -113,7 +113,7 @@ private static function determineDestination(array $data): int
 
 *Dependiendo del documento referenciado
 
-## 🚫 Casos de Error Relacionados
+##  Casos de Error Relacionados
 
 ### Error 1533 - Exportación Nacional
 - **Condición**: B06=03 Y B14=1

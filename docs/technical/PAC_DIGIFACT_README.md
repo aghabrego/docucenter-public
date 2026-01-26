@@ -2,7 +2,7 @@
 
 ## Documentos Principales
 
-### 📘 Guía Completa de Implementación
+###  Guía Completa de Implementación
 **Archivo**: [digifact-panama-pac-implementation-guide.md](digifact-panama-pac-implementation-guide.md)
 
 Este es el documento principal que contiene:
@@ -78,21 +78,21 @@ Authorization: Bearer {token}
 
 ```
 app/
-├── Services/
-│   └── DigifactService.php          # Servicio principal
-├── Jobs/
-│   └── CertifyDigifactInvoiceJob.php # Job de certificación
-└── Console/Commands/
-    └── DigifactTestCommand.php       # Command de testing
+ Services/
+    DigifactService.php          # Servicio principal
+ Jobs/
+    CertifyDigifactInvoiceJob.php # Job de certificación
+ Console/Commands/
+     DigifactTestCommand.php       # Command de testing
 
 resources/views/xml/digifact/
-└── invoice.blade.php                 # Template XML DGI
+ invoice.blade.php                 # Template XML DGI
 
 docs/testing/
-└── digifact-test.sh                  # Script de testing
+ digifact-test.sh                  # Script de testing
 
 database/migrations/
-└── xxxx_add_digifact_fields_to_pacconnections.php
+ xxxx_add_digifact_fields_to_pacconnections.php
 ```
 
 ## Plan de Implementación

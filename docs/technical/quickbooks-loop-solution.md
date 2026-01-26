@@ -10,7 +10,7 @@
 
 ## Solución Implementada
 
-### 🔹 **Campo `origin` en SalesHeaderImp**
+###  **Campo `origin` en SalesHeaderImp**
 
 **Propósito**: Identificar el origen de cada factura para aplicar lógica diferencial.
 
@@ -27,7 +27,7 @@ KEY `sales_header_imp_origin_index` (`origin`)
 - `'lightspeed'`: Factura recibida desde Lightspeed
 - etc.
 
-### 🔹 **Modificación CreateSaleQuickBooksJob**
+###  **Modificación CreateSaleQuickBooksJob**
 
 **Antes**:
 ```php
@@ -51,7 +51,7 @@ $sale->update([
 // NO enviar de vuelta a QuickBooks (evita loop)
 ```
 
-### 🔹 **Modificación UpdateIntuitOrdersJob**
+###  **Modificación UpdateIntuitOrdersJob**
 
 **Filtro agregado**:
 ```php
@@ -160,7 +160,7 @@ WHERE origin IS NULL
 2. **Visibilidad total** del origen de cada factura
 3. **Performance mejorado** - menos procesamiento redundante
 4. **Compatibilidad** con facturas existentes
-5. **🧩 Escalable** para futuras integraciones (Shopify, etc.)
+5. ** Escalable** para futuras integraciones (Shopify, etc.)
 
 ## Monitoreo
 

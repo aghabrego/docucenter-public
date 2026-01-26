@@ -88,7 +88,7 @@ if ($recentFromSameCustomer->count() >= 2) {
 
 ### **2. Mejoras Clave**
 
-#### 🚫 **Eliminada Validación por Monto**
+####  **Eliminada Validación por Monto**
 - **Antes:** Bloqueaba por monto similar (±2% tolerancia)
 - **Después:** Ya no usa monto para evitar falsos positivos
 - **Razón:** Clientes pueden tener múltiples facturas legítimas con montos similares
@@ -107,7 +107,7 @@ Log::debug("FeController: Validación anti-webhook mejorada", [
 ]);
 ```
 
-## 🧪 Testing Completado
+##  Testing Completado
 
 ### **Escenarios Probados:**
 

@@ -130,7 +130,7 @@ $productionUrl = AlanubeDomConsumerInvoiceEnhancement::getApiUrl(false);
 // https://api.alanube.co/dom/v1/invoices
 ```
 
-### 🧪 Testing
+###  Testing
 
 ```bash
 # Probar el servicio con validaciones

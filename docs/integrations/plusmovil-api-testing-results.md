@@ -102,8 +102,8 @@ aws cognito-idp initiate-auth \
 
 **Análisis:**
 - El endpoint rechaza el Bearer token de Cognito
-- 🤔 Mensaje sugiere que espera **AWS Signature Version 4** (formato key=value)
-- 🤔 Posible configuración mixta: algunos endpoints con Cognito, otros con AWS IAM
+-  Mensaje sugiere que espera **AWS Signature Version 4** (formato key=value)
+-  Posible configuración mixta: algunos endpoints con Cognito, otros con AWS IAM
 - **Acción requerida:** Confirmar con equipo de PlusMovil el método de autenticación para este endpoint
 
 ---

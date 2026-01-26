@@ -132,7 +132,7 @@ $headerData = [
 ];
 ```
 
-## 🧪 Scripts de Validación Creados
+##  Scripts de Validación Creados
 
 1. **`analyze-table-structure.php`**: Análisis completo de stubs SQL vs implementación
 2. **`test-api-sql-structure.php`**: Prueba con datos que respetan limitaciones SQL

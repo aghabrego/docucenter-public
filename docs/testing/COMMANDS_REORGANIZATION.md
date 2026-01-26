@@ -38,15 +38,15 @@ Centralizar todos los comandos de testing en la estructura de documentación par
 #### Estructura de Documentación
 ```
 docs/testing/
-├── README.md (índice principal)
-├── commands/
-│   ├── README.md (documentación de comandos) 
-│   ├── testing.sh (script maestro)
-│   ├── test-alanube*.sh (validaciones PAC)
-│   ├── test-acicloud*.sh (testing ACICloud)
-│   ├── test-ddirecec*.sh (testing DDIRecec)
-│   └── test-*.sh (otros scripts específicos)
-└── *.php (scripts PHP de testing)
+ README.md (índice principal)
+ commands/
+    README.md (documentación de comandos) 
+    testing.sh (script maestro)
+    test-alanube*.sh (validaciones PAC)
+    test-acicloud*.sh (testing ACICloud)
+    test-ddirecec*.sh (testing DDIRecec)
+    test-*.sh (otros scripts específicos)
+ *.php (scripts PHP de testing)
 ```
 
 ### Impacto en Uso

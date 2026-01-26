@@ -142,7 +142,7 @@ public function salesDetails(): HasMany
 
 ---
 
-## 🧪 Herramientas de Testing Creadas
+##  Herramientas de Testing Creadas
 
 ### 1. **TestEmissionFromJson.php**
 **Comando**: `php artisan test:emission-json {organization_id} [--json=file] [--clean]`

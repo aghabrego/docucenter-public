@@ -55,18 +55,18 @@ OTP_THROW_EXCEPTION=true
 
 ### Flujo con "Recordar Sesión"
 ```
-Usuario login → Valida 2FA → ✓
-Trabaja 1 día → ✓ (sesión activa)
-Trabaja 5 días → ✓ (sesión activa)
-Trabaja 30 días → ✓ (sesión activa)
+Usuario login → Valida 2FA → 
+Trabaja 1 día →  (sesión activa)
+Trabaja 5 días →  (sesión activa)
+Trabaja 30 días →  (sesión activa)
 Día 31 → Pide login nuevamente
 ```
 
 ### Flujo sin "Recordar Sesión"
 ```
-Usuario login → Valida 2FA → ✓
+Usuario login → Valida 2FA → 
 Cierra navegador → Sesión se mantiene
-Abre navegador → ✓ (sesión activa hasta 30 días)
+Abre navegador →  (sesión activa hasta 30 días)
 ```
 
 **Nota**: Laravel usa cookies de sesión. El comportamiento de "recordar" está controlado por:

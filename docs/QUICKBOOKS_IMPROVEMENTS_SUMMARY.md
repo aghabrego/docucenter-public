@@ -82,28 +82,28 @@
 #### **Antes** (Desorganizado):
 ```
 /root/
-├── test-quickbooks-update.sh 
-├── test_qb_update.php 
-├── test_truncate.php 
-└── [otros archivos de test dispersos]
+ test-quickbooks-update.sh 
+ test_qb_update.php 
+ test_truncate.php 
+ [otros archivos de test dispersos]
 ```
 
 #### **Después** (Organizado):
 ```
 docs/
-├── testing/ 
-│   ├── test-quickbooks-update.sh
-│   ├── test_qb_update.php  
-│   ├── test_truncate.php
-│   ├── test-get-payment-by-ref-num.php
-│   └── [85+ scripts organizados]
-├── technical/ 
-│   ├── payment-lookup-removal-notice.md
-│   ├── quickbooks-payment-lookup-integration.md
-│   ├── quickbooks-payment-methods-integration.md
-│   └── index.md [actualizado]
-└── scripts/ 
-    └── validate-quickbooks-improvements.sh
+ testing/ 
+    test-quickbooks-update.sh
+    test_qb_update.php  
+    test_truncate.php
+    test-get-payment-by-ref-num.php
+    [85+ scripts organizados]
+ technical/ 
+    payment-lookup-removal-notice.md
+    quickbooks-payment-lookup-integration.md
+    quickbooks-payment-methods-integration.md
+    index.md [actualizado]
+ scripts/ 
+     validate-quickbooks-improvements.sh
 ```
 
 ## **Métricas de Impacto**

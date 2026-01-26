@@ -198,14 +198,14 @@ Después de ejecutar el entrenamiento:
 
 ```
 gs://bucket-name/
-├── training-pdfs/
-│   └── 20251124215223/          # Timestamp del entrenamiento
-│       ├── document-1.pdf
-│       ├── document-2.pdf
-│       └── ...
-└── datasets/
-    ├── training-dataset-20251124215223.jsonl
-    └── test-dataset-20251124215223.jsonl
+ training-pdfs/
+    20251124215223/          # Timestamp del entrenamiento
+        document-1.pdf
+        document-2.pdf
+        ...
+ datasets/
+     training-dataset-20251124215223.jsonl
+     test-dataset-20251124215223.jsonl
 ```
 
 ## Requisitos de Document AI v1beta3

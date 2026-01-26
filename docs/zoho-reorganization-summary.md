@@ -22,7 +22,7 @@ Se ha reorganizado exitosamente toda la documentación de Zoho Self Client sigui
 - `zoho-direct-code-summary.md`
 - `zoho-simplified-final.md`
 
-### **🧪 Testing** (`docs/testing/`)
+### ** Testing** (`docs/testing/`)
 - `zoho-self-client-scripts.md`
 
 ### **Scripts** (`scripts/`)

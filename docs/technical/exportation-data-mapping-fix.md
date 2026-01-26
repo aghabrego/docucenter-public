@@ -80,14 +80,14 @@ if (in_array($documentType, $exportationRequiredTypes) && isset($data['gFExp']))
 
 ## Casos de Uso Específicos
 
-### 🇵🇦 Panamá
+###  Panamá
 | Tipo | Descripción | Receptor Extranjero | ¿Incluir exportation? |
 |------|-------------|-------------------|----------------------|
 | 01   | Operación interna | Sí (ej: cliente USA) | **NO** |
 | 02   | Importación | Cualquiera | **SÍ** |
 | 03   | Exportación | Sí (extranjero) | **SÍ** |
 
-### 🇩🇴 República Dominicana
+###  República Dominicana
 | Tipo | Descripción | ¿Incluir exportation? |
 |------|-------------|----------------------|
 | 1    | Factura estándar | **NO** |

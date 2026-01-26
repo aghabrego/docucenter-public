@@ -50,7 +50,7 @@ Esta sección contiene toda la documentación relacionada con la implementación
 
 ---
 
-## 🧪 Testing (`docs/testing/`)
+##  Testing (`docs/testing/`)
 
 ### **Scripts de Prueba**
 - **[zoho-self-client-scripts.md](testing/zoho-self-client-scripts.md)**

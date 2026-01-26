@@ -145,7 +145,7 @@ Scripts creados:
 | DNS | No resuelve | Resuelve |
 | Base Path | /pa.com.apinuc/api | /api |
 | Login Endpoint | /login/get_token | /login/get_token |
-| SSL | ❓ Unknown | Válido |
+| SSL |  Unknown | Válido |
 | Autenticación | Bearer Token | Bearer Token JWT |
 | Duración Token | 30 días | 27 días (actual) |
 

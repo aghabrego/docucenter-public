@@ -92,7 +92,7 @@ Diferencias PAC:
 - Estado: ACEPTADO POR PAC
 ```
 
-## 🧪 Testing Implementado
+##  Testing Implementado
 
 ### Comandos de Prueba Creados
 1. **TestLightspeedCreditNoteCommand**: Prueba completa con BD

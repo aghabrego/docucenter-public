@@ -1,6 +1,6 @@
 # Solución Completa: Destino Extranjero en Factura de Operación Interna
 
-## 🚫 Error Persistente
+##  Error Persistente
 **Mensaje**: "The destination of the operation cannot be Foreign if the Document Type is Internal Operation Invoice"
 
 ## Root Cause Analysis Completo

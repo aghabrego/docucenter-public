@@ -53,7 +53,7 @@
 
 ---
 
-## 🧩 **DIFERENCIA CONCEPTUAL**
+##  **DIFERENCIA CONCEPTUAL**
 
 ### Step 3: "Conditional Fields"
 ```javascript

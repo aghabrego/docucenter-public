@@ -24,7 +24,7 @@
 - **Clientes empresariales**: Con RNC
 - **Testing**: Incluido en detección automática
 
-### 🤖 Detección Automática de Tipo de Documento
+###  Detección Automática de Tipo de Documento
 
 El sistema implementa **detección inteligente** basada en:
 

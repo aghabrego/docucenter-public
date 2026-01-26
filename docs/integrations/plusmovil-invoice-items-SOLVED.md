@@ -270,11 +270,11 @@ La API agrupa items del mismo producto en rangos consecutivos:
 
 ```
 Tipo de Venta          → Items en API
-─────────────────────────────────────
+
 Tarjeta Prepago        → SÍ (con ranges)
 SIM Card               → SÍ (con ranges)
 Dispositivo Móvil      → SÍ (con serie)
-─────────────────────────────────────
+
 Recarga Electrónica    → NO
 Pago de Servicio       → NO
 Crédito Virtual        → NO

@@ -12,10 +12,10 @@
 
 ### **EXISTENTE (Funcional)**
 ```
-📍 Endpoint: POST /api/acicloud/create_sale_order_zoho
+ Endpoint: POST /api/acicloud/create_sale_order_zoho
  Request: app/Http/Requests/CreateSaleOrderZohoRequest.php
 Service: app/Services/ACIcloudService.php::createSaleOrderZoho()
-🗄Modelos: SalesOrderHeaderImp, SalesOrderDetailImp
+Modelos: SalesOrderHeaderImp, SalesOrderDetailImp
 ```
 
 ### **PROPUESTA (Self Client)**
@@ -247,7 +247,7 @@ Zoho Items → InventoryMasterListImp
 
 ---
 
-## **⏱Cronograma de Implementación**
+## **Cronograma de Implementación**
 
 | Fase | Descripción | Tiempo | Archivos |
 |------|-------------|---------|----------|

@@ -82,7 +82,7 @@ Webhook Zoho → Job Asíncrono → Importer → Transformer
                             3. Link via ProductID
 ```
 
-## 🧪 Validación y Testing
+##  Validación y Testing
 
 ### Script de Prueba Creado
 - **Ubicación**: `/docs/testing/test-zoho-purchase-product-management.sh`
@@ -133,13 +133,13 @@ grep "ERROR.*ZohoPurchaseOrderImporter" storage/logs/laravel.log
 - Mantiene toda funcionalidad anterior  
 - No rompe integraciones actuales
 
-### 🛡Riesgos Mitigados
+### Riesgos Mitigados
 - **Duplicación**: Controlada via `updateOrCreate()`
 - **Datos faltantes**: Fallbacks para campos opcionales
 - **Performance**: Proceso asíncrono mantenido
 - **Errores**: Logging detallado para debugging
 
-## 🚦 Estado y Siguientes Pasos
+##  Estado y Siguientes Pasos
 
 ### COMPLETADO
 - [x] Análisis comparativo ventas vs compras

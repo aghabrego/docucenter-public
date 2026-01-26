@@ -242,7 +242,7 @@ Crea y emite una factura electrónica basada en datos provenientes del sistema M
 | `detalleMedioPagoList[].codigoMedioPago` | integer | required, in:1,2,3,4 | 1=Efectivo, 2=Tarjeta, 3=Cheque, 4=Transferencia |
 | `detalleMedioPagoList[].importeMedioPago` | numeric | required, decimal(16,4) | Importe del medio de pago |
 
-**📏 Campos de Texto**
+** Campos de Texto**
 - Todos los campos de texto tienen límites específicos según la estructura de BD
 - Si un campo excede el límite, se trunca automáticamente
 - Se registra un log de advertencia con el valor original y truncado

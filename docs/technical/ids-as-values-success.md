@@ -93,7 +93,7 @@ x-show="['1'].includes($wire.tipeDocument)"          // Factura interna
 
 ---
 
-## 🧪 **FUNCIONALIDAD VALIDADA**
+##  **FUNCIONALIDAD VALIDADA**
 
 ### **Base de Datos**
 - 9 tipos de documento con IDs secuenciales

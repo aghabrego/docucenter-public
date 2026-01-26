@@ -50,7 +50,7 @@ export TEST_POINT_SALE=1
 
 - **Modo interactivo**: Menú con 6 opciones
 - **Almacenamiento de token**: Guarda token en `/tmp/docucenter_test_token.txt`
-- **Códigos de color**: Output visual con ✓, ✗, , ℹ
+- **Códigos de color**: Output visual con , , , ℹ
 - **Manejo de errores**: Detecta token expirado, licencia expirada, etc.
 - **Verificación de salud**: Comprueba que el servidor esté accesible
 - **Información detallada**: Muestra token info, días restantes, advertencias

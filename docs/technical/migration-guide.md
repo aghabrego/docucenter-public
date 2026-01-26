@@ -53,7 +53,7 @@ public function render()
 - [ ] Documentar cambios
 - [ ] Marcar módulo como migrado
 
-## 🗂Componentes por Migrar (Prioridad)
+## Componentes por Migrar (Prioridad)
 
 ### Alta Prioridad - Facturación Electrónica
 ```bash
@@ -80,7 +80,7 @@ app/Http/Livewire/Admin/Catalogos/Lists.php
 app/Http/Livewire/Admin/PersonalAccess/Lists.php
 ```
 
-## 🧪 Testing por Componente
+##  Testing por Componente
 
 ### 1. Testing Visual
 ```bash

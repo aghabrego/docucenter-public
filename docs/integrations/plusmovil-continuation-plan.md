@@ -28,9 +28,9 @@
 # Ver información completa de la conexión
 docker exec -it docucenter_laravel.test php artisan tinker --execute="
 \$conn = \App\Models\Connection::where('application', 'plusmovil')->first();
-echo '═══════════════════════════════════════' . PHP_EOL;
+echo '' . PHP_EOL;
 echo 'INFORMACIÓN DE CONEXIÓN PLUSMÓVIL' . PHP_EOL;
-echo '═══════════════════════════════════════' . PHP_EOL;
+echo '' . PHP_EOL;
 echo 'ID: ' . \$conn->id . PHP_EOL;
 echo 'Nombre: ' . \$conn->name . PHP_EOL;
 echo 'Organización ID: ' . \$conn->organization_id . PHP_EOL;
@@ -38,13 +38,13 @@ echo 'Ambiente: ' . (\$conn->settings['environment'] ?? 'N/A') . PHP_EOL;
 echo 'Usuario: ' . (\$conn->settings['username'] ?? 'N/A') . PHP_EOL;
 echo 'Base URL: ' . (\$conn->settings['base_url'] ?? 'N/A') . PHP_EOL;
 echo 'Client ID: ' . substr(\$conn->settings['client_id'] ?? 'N/A', 0, 20) . '...' . PHP_EOL;
-echo '───────────────────────────────────────' . PHP_EOL;
+echo '' . PHP_EOL;
 echo 'Tiene token: ' . (!empty(\$conn->settings['access_token']) ? 'Sí' : 'No') . PHP_EOL;
 echo 'Token válido: ' . (\$conn->hasPlusMovilValidToken() ? 'Sí ' : 'No ') . PHP_EOL;
 if (!empty(\$conn->settings['token_expires_at'])) {
     echo 'Expira en: ' . \$conn->settings['token_expires_at'] . PHP_EOL;
 }
-echo '═══════════════════════════════════════' . PHP_EOL;
+echo '' . PHP_EOL;
 "
 ```
 
@@ -71,15 +71,15 @@ Probando conexión PlusMóvil ID: 1
  Rango de fechas: 2025-10-01 a 2025-11-09
 
 Conexión encontrada: PlusMóvil QA
-┌────────────┬──────────────────────────────────┐
-│ Campo      │ Valor                            │
-├────────────┼──────────────────────────────────┤
-│ ID         │ 1                                │
-│ Nombre     │ PlusMóvil QA                     │
-│ Ambiente   │ qa                               │
-│ Usuario    │ usuario@empresa.com              │
-│ Token      │ Sí │
-└────────────┴──────────────────────────────────┘
+
+ Campo       Valor                            
+
+ ID          1                                
+ Nombre      PlusMóvil QA                     
+ Ambiente    qa                               
+ Usuario     usuario@empresa.com              
+ Token       Sí 
+
 
  Probando autenticación...
 Token obtenido exitosamente
@@ -88,11 +88,11 @@ Token obtenido exitosamente
 Consultando facturas...
 Facturas obtenidas: 25
 
-┌────┬────────────┬────────────┬──────────────┬─────────┬─────────┐
-│ ID │ Número     │ Fecha      │ Cliente      │ Total   │ Estado  │
-├────┼────────────┼────────────┼──────────────┼─────────┼─────────┤
-│ 86 │ INV-00086  │ 2025-10-15 │ Cliente A    │ 1,250.00│ paid    │
-│ 87 │ INV-00087  │ 2025-10-16 │ Cliente B    │ 850.00  │ pending │
+
+ ID  Número      Fecha       Cliente       Total    Estado  
+
+ 86  INV-00086   2025-10-15  Cliente A     1,250.00 paid    
+ 87  INV-00087   2025-10-16  Cliente B     850.00   pending 
 ...
 ```
 
@@ -298,7 +298,7 @@ protected function schedule(Schedule $schedule)
 
 ## Checklist de Continuación
 
-### Fase 3: Testing ⬅**EMPEZAR AQUÍ**
+### Fase 3: Testing **EMPEZAR AQUÍ**
 - [ ] Verificar datos de conexión existente
 - [ ] Ejecutar comando `plusmovil:test-connection`
 - [ ] Verificar que obtiene token correctamente

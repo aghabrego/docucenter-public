@@ -97,7 +97,7 @@ protected function validatePacConfiguration(Organization $organization): array
 - **APIs unificadas**: Un solo servicio maneja ambos países inteligentemente
 - **Logs mejorados**: Información de país y warnings en todos los logs
 - **Compatibilidad**: Retrocompatibilidad completa mantenida
-- 🛡**Validaciones**: Prevención automática de configuraciones incorrectas
+- **Validaciones**: Prevención automática de configuraciones incorrectas
 
 ### **3. Para el Sistema**
 - **Endpoints oficiales**: URLs exactas según documentación proporcionada

@@ -23,22 +23,22 @@ Este documento describe la implementación completa de las **Facturas de Exporta
 
 ```
 AlanubeDomExportInvoiceEnhancement.php (Utility Class)
-├── Validaciones específicas de exportación
-├── Constantes de tipos de exportación
-├── Preparación de documentos
-└── Generación de datos de prueba
+ Validaciones específicas de exportación
+ Constantes de tipos de exportación
+ Preparación de documentos
+ Generación de datos de prueba
 
 AlanubeDomService.php (Service Integration)
-├── emitExportInvoice() - Método principal
-├── isExportInvoiceIndicator() - Detección inteligente
-├── Integración con endpoint 'export-supports'
-└── Manejo de respuestas específicas
+ emitExportInvoice() - Método principal
+ isExportInvoiceIndicator() - Detección inteligente
+ Integración con endpoint 'export-supports'
+ Manejo de respuestas específicas
 
 CreateExportInvoiceAlanubeDomJob.php (Async Processing)
-├── Procesamiento asíncrono con estados granulares
-├── Validaciones avanzadas de límites
-├── Manejo de errores y reintentos
-└── Logging detallado del proceso
+ Procesamiento asíncrono con estados granulares
+ Validaciones avanzadas de límites
+ Manejo de errores y reintentos
+ Logging detallado del proceso
 ```
 
 ## Componentes Implementados

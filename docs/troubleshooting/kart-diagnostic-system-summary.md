@@ -19,7 +19,7 @@ Se ha creado un sistema completo de diagnóstico y reparación para resolver pro
 | Script | Propósito | Características |
 |--------|-----------|-----------------|
 | `diagnose-kart-invoice.sh` | Script principal de diagnóstico | Diagnóstico completo, Forzar emisión,  Análisis de logs |
-| `test-kart-order-12720.sh` | Prueba específica orden #12720 | 🧪 Datos reales, Búsqueda múltiple, Simulación |
+| `test-kart-order-12720.sh` | Prueba específica orden #12720 |  Datos reales, Búsqueda múltiple, Simulación |
 | `test-kart-to-zoho.sh` | Integración Kart → Zoho | Testing de integración, Transformación de datos |
 
 ### Caso Específico: Orden Kart #12720

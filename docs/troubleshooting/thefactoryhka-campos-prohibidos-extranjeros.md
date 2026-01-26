@@ -149,7 +149,7 @@ private function filterNullValues($object)
 </ser:cliente>
 ```
 
-## 🧪 **TESTING**
+##  **TESTING**
 
 ### **Script de Validación**:
 ```bash

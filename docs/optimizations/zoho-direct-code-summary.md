@@ -165,7 +165,7 @@ public function reauthorizeWithDirectCode()
    Tokens renovados, configuración preservada
 ```
 
-### 🧪 **Testing Implementado**
+###  **Testing Implementado**
 
 #### **Script Automatizado:**
 ```bash

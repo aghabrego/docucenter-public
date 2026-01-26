@@ -24,7 +24,7 @@ Basado en análisis del código `Create.php`:
 - **B4061 - dIdExt**: Identificación extranjero
 - **B4062 - dPaisExt**: País extranjero (solo si es pasaporte)
 
-## 📖 2. Análisis de Reglas DGI según Código Actual
+##  2. Análisis de Reglas DGI según Código Actual
 
 ### Regla Principal Identificada
 ```php

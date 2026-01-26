@@ -146,7 +146,7 @@ Se creó un script para identificar y limpiar configuraciones duplicadas:
 Buscando configuraciones duplicadas por RealmId...
 
 RealmId: 9341454854054771 tiene 2 configuraciones:
-══════════════════════════════════════════════════════════════
+
   Config #1:
     Doc ID: TMxcK8mY1DwJ0UQQeWma
     OrganizationId: Rw8DunJnEnxY1MS2QHVH - STRING ID (CORRECTO)
@@ -162,15 +162,15 @@ RealmId: 9341454854054771 tiene 2 configuraciones:
     Estado: Enabled
 
   RECOMENDACIÓN: Eliminar configuración(es) con ID numérico
-══════════════════════════════════════════════════════════════
+
 
 RESUMEN:
-══════════════════════════════════════════════════════════════
+
 Total de RealmIds con duplicados: 1
 Configuraciones marcadas para eliminar: 1
 
-🗑CONFIGURACIONES A ELIMINAR:
-══════════════════════════════════════════════════════════════
+CONFIGURACIONES A ELIMINAR:
+
   • Doc ID: z8ywLjyJKX4FzQnWBWYY
     RealmId: 9341454854054771
     OrganizationId: 119

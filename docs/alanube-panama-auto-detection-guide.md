@@ -1,6 +1,6 @@
 # Guía de Detección Automática - Alanube Panamá
 
-## 🤖 Descripción General
+##  Descripción General
 
 El servicio de Alanube Panamá incluye un sistema de **detección automática** que puede determinar si un conjunto de datos representa una **factura electrónica** o una **nota de crédito** sin necesidad de especificar manualmente el tipo de documento.
 
@@ -99,7 +99,7 @@ $response = AlanubeEmissionHelper::emitDocumentAuto($organization, $documentData
 ]
 ```
 
-## 🧪 Testing
+##  Testing
 
 ### Comando Artisan
 
@@ -267,7 +267,7 @@ $isCredit = $alanubeService->isCreditNoteDocument($documentData);
 - Procesar documentos históricos sin metadata de tipo
 - Clasificación automática basada en contenido
 
-## 🚧 Limitaciones
+##  Limitaciones
 
 1. **Dependencia de Datos**: La precisión depende de la calidad de los datos
 2. **Documentos Atípicos**: Casos edge pueden requerir especificación manual

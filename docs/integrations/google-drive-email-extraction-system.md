@@ -37,60 +37,60 @@ Crear un sistema automatizado que:
 ### Diagrama de Flujo
 
 ```
-┌─────────────────────────────────────────────────────────────────┐
-│                    SERVIDOR DE CORREO                           │
-│  /var/vmail/apconpanama.me/                                     │
-│  ├── organizacion1@apconpanama.me/Maildir/cur/                  │
-│  ├── organizacion2@apconpanama.me/Maildir/cur/                  │
-│  └── organizacionN@apconpanama.me/Maildir/cur/                  │
-└─────────────────────────────────────────────────────────────────┘
-                          │
-                          │ (1) ExtractEmailAttachmentsJob
-                          │     - Escanea Maildir
-                          │     - Extrae archivos XML
-                          ▼
-┌─────────────────────────────────────────────────────────────────┐
-│               PROCESAMIENTO LOCAL (Temporal)                     │
-│  storage/app/xml_processing/{organization_id}/                  │
-│  ├── {random_hash}.xml                                          │
-│  ├── {random_hash}.xml                                          │
-│  └── metadata.json (info del email original)                    │
-└─────────────────────────────────────────────────────────────────┘
-                          │
-                          │ (2) UploadToGoogleDriveJob
-                          │     - Valida XML
-                          │     - Identifica organización
-                          ▼
-┌─────────────────────────────────────────────────────────────────┐
-│                      GOOGLE DRIVE                               │
-│  DocuCenter-Facturas/                                           │
-│  ├── 1825706-90/  (RUC-DV de APCON)                            │
-│  │   ├── 2026/                                                  │
-│  │   │   ├── 01-Enero/                                         │
-│  │   │   │   ├── FE-001-001-00001234.xml                      │
-│  │   │   │   └── FE-001-001-00001235.xml                      │
-│  │   │   └── 02-Febrero/                                       │
-│  │   └── metadata/                                             │
-│  │       └── audit.log                                         │
-│  ├── 155706268-07/  (RUC-DV de otra org)                       │
-│  │   └── 2026/                                                  │
-│  └── _shared/  (Archivos compartidos)                           │
-└─────────────────────────────────────────────────────────────────┘
-                          │
-                          │ (3) CleanupMaildirJob
-                          │     - Verifica subida exitosa
-                          │     - Elimina email original
-                          ▼
-┌─────────────────────────────────────────────────────────────────┐
-│                   REGISTRO DE AUDITORÍA                         │
-│  database: google_drive_uploads                                 │
-│  - organization_id                                              │
-│  - file_name                                                    │
-│  - google_drive_id                                              │
-│  - maildir_path (para tracking)                                │
-│  - uploaded_at                                                  │
-│  - deleted_at (del servidor)                                    │
-└─────────────────────────────────────────────────────────────────┘
+
+                    SERVIDOR DE CORREO                           
+  /var/vmail/apconpanama.me/                                     
+   organizacion1@apconpanama.me/Maildir/cur/                  
+   organizacion2@apconpanama.me/Maildir/cur/                  
+   organizacionN@apconpanama.me/Maildir/cur/                  
+
+                          
+                           (1) ExtractEmailAttachmentsJob
+                               - Escanea Maildir
+                               - Extrae archivos XML
+                          
+
+               PROCESAMIENTO LOCAL (Temporal)                     
+  storage/app/xml_processing/{organization_id}/                  
+   {random_hash}.xml                                          
+   {random_hash}.xml                                          
+   metadata.json (info del email original)                    
+
+                          
+                           (2) UploadToGoogleDriveJob
+                               - Valida XML
+                               - Identifica organización
+                          
+
+                      GOOGLE DRIVE                               
+  DocuCenter-Facturas/                                           
+   1825706-90/  (RUC-DV de APCON)                            
+      2026/                                                  
+         01-Enero/                                         
+            FE-001-001-00001234.xml                      
+            FE-001-001-00001235.xml                      
+         02-Febrero/                                       
+      metadata/                                             
+          audit.log                                         
+   155706268-07/  (RUC-DV de otra org)                       
+      2026/                                                  
+   _shared/  (Archivos compartidos)                           
+
+                          
+                           (3) CleanupMaildirJob
+                               - Verifica subida exitosa
+                               - Elimina email original
+                          
+
+                   REGISTRO DE AUDITORÍA                         
+  database: google_drive_uploads                                 
+  - organization_id                                              
+  - file_name                                                    
+  - google_drive_id                                              
+  - maildir_path (para tracking)                                
+  - uploaded_at                                                  
+  - deleted_at (del servidor)                                    
+
 ```
 
 ---
@@ -263,21 +263,21 @@ PanamaRucHelper::getRucInfo($ruc);
 **Estructura por Usuario**:
 ```
 /var/vmail/apconpanama.me/
-├── usuario1@apconpanama.me/
-│   └── Maildir/
-│       ├── cur/          # Emails leídos
-│       ├── new/          # Emails nuevos (sin leer)
-│       └── tmp/          # Emails temporales
-├── usuario2@apconpanama.me/
-│   └── Maildir/
-└── usuarioN@apconpanama.me/
-    └── Maildir/
+ usuario1@apconpanama.me/
+    Maildir/
+        cur/          # Emails leídos
+        new/          # Emails nuevos (sin leer)
+        tmp/          # Emails temporales
+ usuario2@apconpanama.me/
+    Maildir/
+ usuarioN@apconpanama.me/
+     Maildir/
 ```
 
 **Formato de Archivo Email (Maildir)**:
 ```
 1673954321.M123456P12345.apconpanama.me,S=12345,W=12567:2,S
-│          │               │                 │       │
+                                                 
 Timestamp  Unique ID       Hostname          Size    Flags
 ```
 
@@ -1113,7 +1113,7 @@ class ExtractEmailToDriveCommand extends Command
 
     public function handle()
     {
-        $this->info("📧 Iniciando extracción de emails a Google Drive");
+        $this->info(" Iniciando extracción de emails a Google Drive");
         $this->newLine();
         
         $useQueue = $this->option('queue');
@@ -1153,7 +1153,7 @@ class ExtractEmailToDriveCommand extends Command
             
             $this->info("Organización: {$organization->nombre}");
             $this->info(" RUC: {$organization->ruc}-{$organization->dv}");
-            $this->info("📧 Email: {$config->email}");
+            $this->info(" Email: {$config->email}");
             
             if ($useQueue) {
                 ExtractEmailToGoogleDriveJob::dispatch($config);
@@ -1481,18 +1481,18 @@ BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
 print_header() {
-    echo -e "${BLUE}═══════════════════════════════════════════════════${NC}"
+    echo -e "${BLUE}${NC}"
     echo -e "${BLUE}  $1${NC}"
-    echo -e "${BLUE}═══════════════════════════════════════════════════${NC}"
+    echo -e "${BLUE}${NC}"
     echo ""
 }
 
 print_success() {
-    echo -e "${GREEN}✓ $1${NC}"
+    echo -e "${GREEN} $1${NC}"
 }
 
 print_error() {
-    echo -e "${RED}✗ $1${NC}"
+    echo -e "${RED} $1${NC}"
 }
 
 print_warning() {

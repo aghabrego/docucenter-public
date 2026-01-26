@@ -44,30 +44,30 @@ DocuCenter maneja un sistema multi-tenant donde:
 ### Estructura de Base de Datos
 
 ```
-┌─────────────────────────────────────────┐
-│  Base de Datos Principal (mysql)       │
-├─────────────────────────────────────────┤
-│  - organizations                        │
-│  - users                                │
-│  - user_organizations                   │
-│  - CompanySession (PRINCIPAL)        │
-│    └─> Modelo Companysession lee AQUÍ  │
-└─────────────────────────────────────────┘
-                    │
-                    │ Cada org tiene su BD
-                    ▼
-┌─────────────────────────────────────────┐
-│  Base de Datos Organización             │
-│  (ej: 9_734_1672_56)                   │
-├─────────────────────────────────────────┤
-│  - CompanySession (copia del stub)      │
-│    └─> ID_compania (datos locales)     │
-│                                         │
-│  - Customers_Imp (ID_compania)          │
-│  - Sales_Header_Imp (ID_compania)       │
-│  - Products_Imp (ID_compania)           │
-│  - ... (43+ tablas más)                 │
-└─────────────────────────────────────────┘
+
+  Base de Datos Principal (mysql)       
+
+  - organizations                        
+  - users                                
+  - user_organizations                   
+  - CompanySession (PRINCIPAL)        
+    > Modelo Companysession lee AQUÍ  
+
+                    
+                     Cada org tiene su BD
+                    
+
+  Base de Datos Organización             
+  (ej: 9_734_1672_56)                   
+
+  - CompanySession (copia del stub)      
+    > ID_compania (datos locales)     
+                                         
+  - Customers_Imp (ID_compania)          
+  - Sales_Header_Imp (ID_compania)       
+  - Products_Imp (ID_compania)           
+  - ... (43+ tablas más)                 
+
 ```
 
 **IMPORTANTE - Dualidad de CompanySession:**
@@ -127,34 +127,34 @@ DB::connection()->useDatabase("9_734_1672_56")
 
 ```
 CompanySession (BD Principal)
-    ├─> ID_compania: 100 (Empresa/Matriz "Restaurantes XYZ S.A.")
-    ├─> CompanyNameSage50: "Restaurantes XYZ S.A."
-    └─> organizations() → hasMany (UNA EMPRESA = MUCHAS ORGANIZACIONES)
-          ├─> Organization 1: "RXY Regional Centro" (BD: rest_centro)
-          ├─> Organization 2: "RXY Regional Norte" (BD: rest_norte)
-          └─> Organization 3: "RXY Regional Sur" (BD: rest_sur)
+    > ID_compania: 100 (Empresa/Matriz "Restaurantes XYZ S.A.")
+    > CompanyNameSage50: "Restaurantes XYZ S.A."
+    > organizations() → hasMany (UNA EMPRESA = MUCHAS ORGANIZACIONES)
+          > Organization 1: "RXY Regional Centro" (BD: rest_centro)
+          > Organization 2: "RXY Regional Norte" (BD: rest_norte)
+          > Organization 3: "RXY Regional Sur" (BD: rest_sur)
 
 Organization (BD Principal)
-    ├─> id: 25
-    ├─> nombre: "RXY Regional Centro"
-    ├─> database: "9_734_1672_56"
-    ├─> id_empresa: 100 (FK a CompanySession - Empresa Matriz)
-    └─> belongsTo(Companysession) → Empresa Matriz
+    > id: 25
+    > nombre: "RXY Regional Centro"
+    > database: "9_734_1672_56"
+    > id_empresa: 100 (FK a CompanySession - Empresa Matriz)
+    > belongsTo(Companysession) → Empresa Matriz
 
 Dentro de BD Organización (9_734_1672_56):
-    ├─> CompanySession (UN SOLO ID_compania por organización)
-    │     └─> ID_compania: 100 (la organización pertenece a esta compañía)
-    ├─> CompanySession (múltiples registros)
-    │     ├─> ID_compania: 1 (Sucursal Centro)
-    │     ├─> ID_compania: 2 (Sucursal Plaza)
-    │     └─> ID_compania: 3 (Sucursal Mall)
-    │
-    ├─> Customers_Imp
-    │     ├─> Record 1: ID_compania = 1 (clientes de Sucursal Centro)
-    │     ├─> Record 2: ID_compania = 2 (clientes de Sucursal Plaza)
-    │     └─> Record 3: ID_compania = 3 (clientes de Sucursal Mall)
-    │
-    └─> Sales_Header_Imp (ventas mezcladas de todas las sucursales)
+    > CompanySession (UN SOLO ID_compania por organización)
+         > ID_compania: 100 (la organización pertenece a esta compañía)
+    > CompanySession (múltiples registros)
+         > ID_compania: 1 (Sucursal Centro)
+         > ID_compania: 2 (Sucursal Plaza)
+         > ID_compania: 3 (Sucursal Mall)
+    
+    > Customers_Imp
+         > Record 1: ID_compania = 1 (clientes de Sucursal Centro)
+         > Record 2: ID_compania = 2 (clientes de Sucursal Plaza)
+         > Record 3: ID_compania = 3 (clientes de Sucursal Mall)
+    
+    > Sales_Header_Imp (ventas mezcladas de todas las sucursales)
 
 **IMPORTANTE:** 
 - UNA EMPRESA (CompanySession en BD principal) = MUCHAS ORGANIZACIONES
@@ -166,35 +166,35 @@ Dentro de BD Organización (9_734_1672_56):
 
 ```
 CompanySession (BD Principal) - Empresas Matriz
-  └─> ID_compania: 100 ("Restaurantes XYZ S.A.")
-        └─> hasMany Organizations
-              ├─> Organization 1 (id_empresa: 100, BD: rest_centro)
-              ├─> Organization 2 (id_empresa: 100, BD: rest_norte)
-              └─> Organization 3 (id_empresa: 100, BD: rest_sur)
+  > ID_compania: 100 ("Restaurantes XYZ S.A.")
+        > hasMany Organizations
+              > Organization 1 (id_empresa: 100, BD: rest_centro)
+              > Organization 2 (id_empresa: 100, BD: rest_norte)
+              > Organization 3 (id_empresa: 100, BD: rest_sur)
 
 User (BD Principal)
-  └─> UserOrganizations (N organizaciones)
-        │
-        ├─> Organization 1: "RXY Regional Centro" (BD: rest_centro)
-        │     ├─> id_empresa: 100 (Empresa Matriz)
-        │     └─> Dentro de BD rest_centro:
-        │           ├─> CompanySession: ID_compania 1, 2, 3
-        │           ├─> Customers_Imp: mezclado (ID_compania 1,2,3)
-        │           └─> Sales_Header_Imp: mezclado (ID_compania 1,2,3)
-        │
-        ├─> Organization 2: "RXY Regional Norte" (BD: rest_norte)
-        │     ├─> id_empresa: 100 (Empresa Matriz)
-        │     └─> Dentro de BD rest_norte:
-        │           ├─> CompanySession: ID_compania 4, 5
-        │           ├─> Customers_Imp: mezclado (ID_compania 4,5)
-        │           └─> Sales_Header_Imp: mezclado (ID_compania 4,5)
-        │
-        └─> Organization 3: "RXY Regional Sur" (BD: rest_sur)
-              ├─> id_empresa: 100 (Empresa Matriz)
-              └─> Dentro de BD rest_sur:
-                    ├─> CompanySession: ID_compania 6, 7, 8
-                    ├─> Customers_Imp: mezclado (ID_compania 6,7,8)
-                    └─> Sales_Header_Imp: mezclado (ID_compania 6,7,8)
+  > UserOrganizations (N organizaciones)
+        
+        > Organization 1: "RXY Regional Centro" (BD: rest_centro)
+             > id_empresa: 100 (Empresa Matriz)
+             > Dentro de BD rest_centro:
+                   > CompanySession: ID_compania 1, 2, 3
+                   > Customers_Imp: mezclado (ID_compania 1,2,3)
+                   > Sales_Header_Imp: mezclado (ID_compania 1,2,3)
+        
+        > Organization 2: "RXY Regional Norte" (BD: rest_norte)
+             > id_empresa: 100 (Empresa Matriz)
+             > Dentro de BD rest_norte:
+                   > CompanySession: ID_compania 4, 5
+                   > Customers_Imp: mezclado (ID_compania 4,5)
+                   > Sales_Header_Imp: mezclado (ID_compania 4,5)
+        
+        > Organization 3: "RXY Regional Sur" (BD: rest_sur)
+              > id_empresa: 100 (Empresa Matriz)
+              > Dentro de BD rest_sur:
+                    > CompanySession: ID_compania 6, 7, 8
+                    > Customers_Imp: mezclado (ID_compania 6,7,8)
+                    > Sales_Header_Imp: mezclado (ID_compania 6,7,8)
 
 **NUEVO REQUERIMIENTO:**
 User debe tener asignación de sucursales específicas:
@@ -370,17 +370,17 @@ Cada organización tiene **UN SOLO ID_compania** en su base de datos, NO múltip
 
 ```
 BD Organización (9_734_1672_56):
-  └─> CompanySession (ID_compania: 100)  ← UN SOLO VALOR
-  └─> Customers_Imp (todos con ID_compania: 100)
-  └─> Sales_Header_Imp (todos con ID_compania: 100)
+  > CompanySession (ID_compania: 100)  ← UN SOLO VALOR
+  > Customers_Imp (todos con ID_compania: 100)
+  > Sales_Header_Imp (todos con ID_compania: 100)
 ```
 
 **NO es como se documentó inicialmente:**
 ```
 INCORRECTO:
 BD Organización (9_734_1672_56):
-  └─> CompanySession (ID_compania: 1, 2, 3)  ← Múltiples valores
-  └─> Datos mezclados de varias sucursales
+  > CompanySession (ID_compania: 1, 2, 3)  ← Múltiples valores
+  > Datos mezclados de varias sucursales
 ```
 
 ### Problema Real: Consolidación para Sage Connector
@@ -403,9 +403,9 @@ Necesita UNA BD consolidada con TODOS los datos
 **Solución Propuesta:**
 ```
 BD Company_100 (nueva - consolidada)
-  ├─> Customers_Imp (de Org 1 + Org 2 + Org 3)
-  ├─> Sales_Header_Imp (de Org 1 + Org 2 + Org 3)
-  └─> org_source_id (identifica de qué org vino cada registro)
+  > Customers_Imp (de Org 1 + Org 2 + Org 3)
+  > Sales_Header_Imp (de Org 1 + Org 2 + Org 3)
+  > org_source_id (identifica de qué org vino cada registro)
 
 Sage se conecta AQUÍ y ve TODO consolidado
 ```
@@ -481,44 +481,44 @@ SalesHeaderImp::all();
 
 ```
 1. Usuario Juan tiene 2 organizaciones
-   └─> Org 1: rest_centro (sucursales 1,2,3)
-   └─> Org 2: rest_norte (sucursales 4,5)
+   > Org 1: rest_centro (sucursales 1,2,3)
+   > Org 2: rest_norte (sucursales 4,5)
 
 2. Juan selecciona Org 1 en el header
-   └─> Sistema: DB::useDatabase('rest_centro')
+   > Sistema: DB::useDatabase('rest_centro')
 
 3. Query sin filtrado:
-   └─> SalesHeaderImp::all()
-   └─> PROBLEMA: Retorna TODAS las ventas (ID_compania 1,2,3)
-   └─> Juan no debería ver sucursal 3
+   > SalesHeaderImp::all()
+   > PROBLEMA: Retorna TODAS las ventas (ID_compania 1,2,3)
+   > Juan no debería ver sucursal 3
 
 4. Método actual getCompanyIds() no ayuda:
-   └─> Retorna [100] (ID empresa matriz de BD principal)
-   └─> No distingue entre sucursales de la BD organizacional
+   > Retorna [100] (ID empresa matriz de BD principal)
+   > No distingue entre sucursales de la BD organizacional
 ```
 
 ### Flujo Correcto Propuesto
 
 ```
 1. Usuario Juan tiene 2 organizaciones CON sucursales asignadas
-   └─> Org 1: rest_centro
-        └─> Sucursales asignadas: [1, 2] (NO la 3)
-   └─> Org 2: rest_norte
-        └─> Sucursales asignadas: [4] (NO la 5)
+   > Org 1: rest_centro
+        > Sucursales asignadas: [1, 2] (NO la 3)
+   > Org 2: rest_norte
+        > Sucursales asignadas: [4] (NO la 5)
 
 2. Juan selecciona Org 1 en el header
-   └─> Sistema: DB::useDatabase('rest_centro')
-   └─> Carga: assigned_branches = [1, 2]
+   > Sistema: DB::useDatabase('rest_centro')
+   > Carga: assigned_branches = [1, 2]
 
 3. Query con filtrado automático:
-   └─> SalesHeaderImp::all()
-   └─> CompanyIdFilterScope aplica:
+   > SalesHeaderImp::all()
+   > CompanyIdFilterScope aplica:
         WHERE ID_compania IN (1, 2)
-   └─> CORRECTO: Solo ventas de sucursales 1 y 2
+   > CORRECTO: Solo ventas de sucursales 1 y 2
 
 4. Método mejorado getBranchIds():
-   └─> Retorna [1, 2] (sucursales asignadas en org actual)
-   └─> Filtrado granular por sucursal
+   > Retorna [1, 2] (sucursales asignadas en org actual)
+   > Filtrado granular por sucursal
 ```
 
 ---
@@ -1047,10 +1047,10 @@ $sales = SalesHeaderImp::withoutGlobalScopes()
 ```php
 User: María
 Organizaciones: 1
-  └─> Org: "RXY Regional Centro" (BD: rest_centro)
-      ├─> Sucursal 1: Local Centro (ID_compania: 1)
-      ├─> Sucursal 2: Local Plaza (ID_compania: 2)
-      └─> Sucursal 3: Local Mall (ID_compania: 3)
+  > Org: "RXY Regional Centro" (BD: rest_centro)
+      > Sucursal 1: Local Centro (ID_compania: 1)
+      > Sucursal 2: Local Plaza (ID_compania: 2)
+      > Sucursal 3: Local Mall (ID_compania: 3)
 
 María tiene asignadas: sucursales 1 y 2 (NO la 3)
 
@@ -1066,13 +1066,13 @@ CustomersImp::all();   // WHERE ID_compania IN (1, 2)
 ```php
 User: Juan
 Organizaciones: 2
-  ├─> Org 1: "RXY Regional Centro" (BD: rest_centro)
-  │     ├─> Sucursales disponibles: 1, 2, 3
-  │     └─> Asignadas a Juan: 1, 2 (NO la 3)
-  │
-  └─> Org 2: "RXY Regional Norte" (BD: rest_norte)
-        ├─> Sucursales disponibles: 4, 5, 6
-        └─> Asignadas a Juan: 4 (NO 5 ni 6)
+  > Org 1: "RXY Regional Centro" (BD: rest_centro)
+       > Sucursales disponibles: 1, 2, 3
+       > Asignadas a Juan: 1, 2 (NO la 3)
+  
+  > Org 2: "RXY Regional Norte" (BD: rest_norte)
+        > Sucursales disponibles: 4, 5, 6
+        > Asignadas a Juan: 4 (NO 5 ni 6)
 
 // Juan selecciona Org 1 en el header
 Session::put('organization_id', org1_id);

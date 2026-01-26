@@ -226,7 +226,7 @@ Operación continúa transparentemente
 
 ---
 
-## 🧪 Plan de Testing
+##  Plan de Testing
 
 ### Fase 1: Crear Conexión 
 ```bash
@@ -336,7 +336,7 @@ docker exec -it docucenter_laravel.test php artisan plusmovil:test-connection 1
 - [x] Comando de testing creado
 - [x] Documentación completa
 - [x] 4 commits realizados
-- [ ] **Testing en QA** ⬅SIGUIENTE PASO
+- [ ] **Testing en QA** SIGUIENTE PASO
 - [ ] Testing en Producción
 - [ ] Job de importación (opcional)
 

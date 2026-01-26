@@ -10,7 +10,7 @@ He realizado un análisis **exhaustivo y avanzado** del PDF "CO_FacturaElectroni
 - ** Páginas**: 23 páginas
 - **Palabras**: 6,002 palabras
 - **Oraciones**: 415 oraciones  
-- **📏 Líneas**: 894 líneas de texto
+- ** Líneas**: 894 líneas de texto
 - **Tablas**: 72 tablas identificadas
 - **URLs**: 6 referencias web
 - ** Referencias temporales**: 98 menciones de versiones/fechas

@@ -119,7 +119,7 @@ $exportData = [
 $result = $service->emitInvoice($organization, $exportData);
 ```
 
-### 🏛Factura Gubernamental (45)
+### Factura Gubernamental (45)
 
 **Indicadores de Detección**:
 - RNC gubernamental (prefijos 10, 11)
@@ -160,7 +160,7 @@ $governmentalData = [
 $result = $service->emitInvoice($organization, $governmentalData);
 ```
 
-### 🛒 Factura de Consumo (32)
+###  Factura de Consumo (32)
 
 **Indicadores de Detección**:
 - Cliente "Consumidor Final"

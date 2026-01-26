@@ -113,7 +113,7 @@ DB::table($table)->orderBy($orderByColumn)->chunk($chunkSize, function ($records
 
 ---
 
-## 💥 Escenario de Colisión
+##  Escenario de Colisión
 
 ### Ejemplo Práctico: Customer_Credit_Memo
 
@@ -841,7 +841,7 @@ grep -r "AUTO_INCREMENT" app/Models/stubs/*.sql.stub | grep -E "(PurOrdr|SalesIn
 
 ---
 
-## 🧪 Testing
+##  Testing
 
 ### Test Case 1: Headers con IDs Duplicados
 

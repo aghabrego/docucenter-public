@@ -13,7 +13,7 @@
 |-----|---------------|---------|
 | `/create_sale_acicloud` | **Asíncrono** - Job en background | Confirmación inmediata |
 | `/create_sale_acicloud_without_issuing` | **Asíncrono** - Solo guarda, no emite | Confirmación inmediata |
-| `/create_sale_acicloud_with_emission` | ⏱**Síncrono** - Espera resultado completo | **Resultado de emisión** |
+| `/create_sale_acicloud_with_emission` | **Síncrono** - Espera resultado completo | **Resultado de emisión** |
 
 ## **Funcionalidades Implementadas**
 

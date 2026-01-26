@@ -144,7 +144,7 @@ Campos organizados en filas lógicas:
 <small>País donde se realiza la operación comercial</small>  <!-- Explicación clara -->
 ```
 
-## 🧪 Testing de la Unificación
+##  Testing de la Unificación
 
 ### Casos de Prueba del Blade:
 

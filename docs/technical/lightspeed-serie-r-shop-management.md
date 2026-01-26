@@ -13,7 +13,7 @@ Sistema de gestión de configuración de tiendas (Shop ID) para organizaciones c
 
 ---
 
-## 🗄Estructura de Base de Datos
+## Estructura de Base de Datos
 
 ### Tabla: `lightspeed_serie_r_shop_configurations`
 
@@ -148,7 +148,7 @@ Route::get(
 
 ---
 
-## 📖 Uso
+##  Uso
 
 ### 1. Acceder a la Pantalla
 
@@ -199,7 +199,7 @@ $shopId = $config->shop_id;
 
 ---
 
-## 🧪 Testing
+##  Testing
 
 ### Verificar Migration
 
@@ -241,25 +241,25 @@ echo $config->shop_id; // 123
 
 ```
 app/
-├── Http/Livewire/Admin/
-│   └── LightspeedSerieR/
-│       └── ManageShop.php
-├── Jobs/LightspeedSerieR/
-│   └── SetSalesOrdersJob.php (modificado)
-├── Models/
-│   └── LightspeedSerieRShopConfiguration.php
-└── Support/
-    └── helper.php (actualizado)
+ Http/Livewire/Admin/
+    LightspeedSerieR/
+        ManageShop.php
+ Jobs/LightspeedSerieR/
+    SetSalesOrdersJob.php (modificado)
+ Models/
+    LightspeedSerieRShopConfiguration.php
+ Support/
+     helper.php (actualizado)
 
 database/migrations/
-└── 2025_11_06_000001_create_lightspeed_serie_r_shop_configurations_table.php
+ 2025_11_06_000001_create_lightspeed_serie_r_shop_configurations_table.php
 
 resources/views/livewire/admin/
-└── lightspeed-serie-r/
-    └── manage-shop.blade.php
+ lightspeed-serie-r/
+     manage-shop.blade.php
 
 routes/
-└── web.php (actualizado)
+ web.php (actualizado)
 ```
 
 ---
@@ -298,7 +298,7 @@ routes/
 
 ---
 
-## 🆘 Troubleshooting
+##  Troubleshooting
 
 ### Error: "organization_id ya existe"
 

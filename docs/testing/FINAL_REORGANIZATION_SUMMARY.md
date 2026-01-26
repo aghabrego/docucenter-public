@@ -9,25 +9,25 @@ Centralizar **todos** los comandos de testing (PHP y bash) en `app/Console/Comma
 
 ```
 app/Console/Commands/Testing/
-├── Control y Documentación
-│   ├── TestingIndex.php                    # Índice maestro
-│   └── README.md                           # Documentación completa 
-│
-├── 🧪 31 Comandos PHP de Testing
-│   ├── TestACIcloud*.php                   # Testing ACICloud (5 comandos)
-│   ├── TestAlanube*.php                    # Testing Alanube (3 comandos) 
-│   ├── TestLightspeed*.php                 # Testing Lightspeed (3 comandos)
-│   ├── TestKart21*.php                     # Testing Kart21 (2 comandos)
-│   ├── TestMeypar*.php                     # Testing Meypar (6 comandos)
-│   ├── TestPurOrdr*.php                    # Testing transformaciones (2 comandos)
-│   └── Test*.php                           # Otros comandos específicos (10 comandos)
-│
-└── 16 Scripts Bash de Automatización
-    ├── testing.sh                         # Script maestro
-    ├── test-alanube*.sh                   # Scripts Alanube (4 scripts)
-    ├── test-acicloud*.sh                  # Scripts ACICloud (3 scripts)  
-    ├── test-ddirecec*.sh                  # Scripts DDIRecec (3 scripts)
-    └── test-*.sh                          # Otros scripts específicos (6 scripts)
+ Control y Documentación
+    TestingIndex.php                    # Índice maestro
+    README.md                           # Documentación completa 
+
+  31 Comandos PHP de Testing
+    TestACIcloud*.php                   # Testing ACICloud (5 comandos)
+    TestAlanube*.php                    # Testing Alanube (3 comandos) 
+    TestLightspeed*.php                 # Testing Lightspeed (3 comandos)
+    TestKart21*.php                     # Testing Kart21 (2 comandos)
+    TestMeypar*.php                     # Testing Meypar (6 comandos)
+    TestPurOrdr*.php                    # Testing transformaciones (2 comandos)
+    Test*.php                           # Otros comandos específicos (10 comandos)
+
+ 16 Scripts Bash de Automatización
+     testing.sh                         # Script maestro
+     test-alanube*.sh                   # Scripts Alanube (4 scripts)
+     test-acicloud*.sh                  # Scripts ACICloud (3 scripts)  
+     test-ddirecec*.sh                  # Scripts DDIRecec (3 scripts)
+     test-*.sh                          # Otros scripts específicos (6 scripts)
 ```
 
 ## Movimientos Realizados
@@ -54,11 +54,11 @@ app/Console/Commands/Testing/
 ### Estructura de Referencias
 ```
 docs/index.md
-└── Sistema de Testing
-    └── docs/testing/README.md
-        └── app/Console/Commands/Testing/README.md 
-            ├── 31 Comandos PHP documentados
-            └── 16 Scripts Bash documentados
+ Sistema de Testing
+     docs/testing/README.md
+         app/Console/Commands/Testing/README.md 
+             31 Comandos PHP documentados
+             16 Scripts Bash documentados
 ```
 
 ## Resultado Final

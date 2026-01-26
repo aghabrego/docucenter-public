@@ -76,7 +76,7 @@ Campos que siempre tienen valores y son fundamentales:
 - `tiempoPago` 
 - `nroItems` 
 
-## 🛡**Sistema de Protección**
+## **Sistema de Protección**
 
 ### **Array keepZeroFields Actualizado**
 ```php
@@ -103,7 +103,7 @@ $keepZeroFields = [
 | `totalAcarreoCobrado` | VACÍO | VACÍO | VACÍO | NO PRESENTE |
 | `valorSeguroCobrado` | VACÍO | VACÍO | VACÍO | NO PRESENTE |
 
-## 🧪 **Validación Completa**
+##  **Validación Completa**
 
 ### **Scripts de Testing Creados**
 1. `test-campos-impuestos-requeridos.php` - Validación campos críticos

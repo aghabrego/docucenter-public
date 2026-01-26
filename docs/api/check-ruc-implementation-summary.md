@@ -137,7 +137,7 @@ Production: https://api.alanube.co/pan/v1
 - **500**: Error interno del sistema
 - **4xx/5xx**: Errores del PAC Alanube
 
-## 🧪 Testing
+##  Testing
 
 ### Script Automatizado
 ```bash

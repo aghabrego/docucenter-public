@@ -46,7 +46,7 @@
 | Campo | Valor | Análisis |
 |-------|-------|----------|
 | `endpoint` | "https://sandbox-api.alanube.co/pan/v1" | URL de ambiente sandbox para Panamá |
-| País detectado | 🇵🇦 Panamá | Basado en `/pan/v1` en la URL |
+| País detectado |  Panamá | Basado en `/pan/v1` en la URL |
 | Ambiente | Sandbox/Testing | Basado en `sandbox-api.alanube.co` |
 
 ### Campos Específicos de Alanube
@@ -104,8 +104,8 @@
 
 ### Lógica de Detección de País
 El sistema detecta automáticamente el país basado en el endpoint:
-- `/pan/v1` → 🇵🇦 Panamá
-- `/dom/v1` → 🇩🇴 República Dominicana
+- `/pan/v1` →  Panamá
+- `/dom/v1` →  República Dominicana
 
 ### Detección de Ambiente
 - `sandbox-api.alanube.co` → Testing/Sandbox
@@ -138,7 +138,7 @@ if ($pacConnection->name === 'alanube') {
 
 ### Configuración Válida Detectada
 - **PAC Provider**: Alanube 
-- **País**: Panamá 🇵🇦 
+- **País**: Panamá  
 - **Ambiente**: Sandbox 
 - **Autenticación**: JWT válido 
 - **Empresa configurada**: Sí 

@@ -19,7 +19,7 @@ Se implementó un **sistema inteligente de validación** en `FeController::valid
 
 ## Solución Implementada
 
-### **1. Sistema de Detección Inteligente** 🧠
+### **1. Sistema de Detección Inteligente** 
 
 #### A. **Normalización de Nombres**
 ```php
@@ -261,7 +261,7 @@ docker exec -it docucenter_laravel.test php docs/testing/test-quickbooks-duplica
 
 **Resultado Esperado:**
 ```
-🧪 === PRUEBA DE SISTEMA DE DUPLICACIÓN QUICKBOOKS ===
+ === PRUEBA DE SISTEMA DE DUPLICACIÓN QUICKBOOKS ===
 
 Escenario 1: Cliente exacto duplicado BLOQUEADO correctamente
 Escenario 2: Cliente diferente PERMITIDO correctamente  
