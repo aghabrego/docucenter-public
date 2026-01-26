@@ -67,14 +67,14 @@ Este documento detalla la implementación del **estándar global para los 5 camp
 ### Regla 3: Auto-detección cuando es posible
 
 **Servicios que auto-detectan:**
-- ✅ Lightspeed: `PanamaRucHelper::detectContributorType()`
-- ✅ Maxgym: `PanamaRucHelper::detectContributorType()`
-- ✅ QuickBooks: Lógica propia + `PanamaRucHelper` en algunos casos
+- Lightspeed: `PanamaRucHelper::detectContributorType()`
+- Maxgym: `PanamaRucHelper::detectContributorType()`
+- QuickBooks: Lógica propia + `PanamaRucHelper` en algunos casos
 
 **Servicios que NO auto-detectan:**
-- ❌ Shopify: Confía en datos del cliente
-- ❌ Kart21: No maneja tipo contribuyente
-- ❌ Meypar: Mapeo especial propio
+- Shopify: Confía en datos del cliente
+- Kart21: No maneja tipo contribuyente
+- Meypar: Mapeo especial propio
 
 ---
 
@@ -361,8 +361,8 @@ $this->receptor_tipoContribuyente = in_array($this->receptor_tipo, ['1', '2', '4
 **Archivo:** `app/Jobs/CreateSaleQuickBooksJob.php`
 
 **Comportamiento:**
-- ✅ Delega completamente a QuickBooksOnlineService
-- ✅ No manipula Custom_fields directamente
+- Delega completamente a QuickBooksOnlineService
+- No manipula Custom_fields directamente
 - Usa la lógica validada del servicio
 
 ### UpdateIntuitOrdersJob
@@ -498,13 +498,13 @@ WHERE Custom_field3 IN (1, 2, 4)
 
 | Integración | Custom_field3 | Auto-detecta CF4 | Prioridad | Estado |
 |-------------|---------------|------------------|-----------|--------|
-| QuickBooks  | Normaliza CODE→ID | Parcial | 🔴 CRÍTICO | ✅ Implementado |
-| Lightspeed  | ID correcto | ✅ Sí | - | ✅ OK |
-| Shopify     | Sin validar | ❌ No | ⚠️ ALTO | ✅ Usa Helper |
-| Maxgym      | ID correcto | ✅ Sí | - | ✅ OK |
-| Kart21      | ID correcto | ❌ No | - | ✅ OK |
-| Meypar      | ID correcto | ❌ No | 📋 MEDIO | ✅ OK |
-| ACIcloud    | Sin validar | ❌ No | ⚠️ ALTO | ✅ Usa Helper |
+| QuickBooks  | Normaliza CODE→ID | Parcial | CRÍTICO | Implementado |
+| Lightspeed  | ID correcto | Sí | - | OK |
+| Shopify     | Sin validar | No | ALTO | Usa Helper |
+| Maxgym      | ID correcto | Sí | - | OK |
+| Kart21      | ID correcto | No | - | OK |
+| Meypar      | ID correcto | No | MEDIO | OK |
+| ACIcloud    | Sin validar | No | ALTO | Usa Helper |
 
 ---
 
@@ -539,14 +539,14 @@ WHERE Custom_field3 IN (1, 2, 4)
 
 ### Próximos Pasos
 
-1. ✅ Monitorear logs de CustomFieldsValidator en producción
-2. ✅ Migrar datos existentes usando script de migración
-3. ✅ Agregar validación en formularios de creación manual de clientes
-4. ⏳ Implementar auditoría de cambios en Custom_fields
-5. ⏳ Dashboard de consistencia de datos
+1. Monitorear logs de CustomFieldsValidator en producción
+2. Migrar datos existentes usando script de migración
+3. Agregar validación en formularios de creación manual de clientes
+4. Implementar auditoría de cambios en Custom_fields
+5. Dashboard de consistencia de datos
 
 ---
 
 **Última actualización:** 2026-01-26  
-**Responsable:** Sistema DocuCenter  
+**Autor:** Equipo de DocuCenter  
 **Revisado por:** Equipo de Desarrollo

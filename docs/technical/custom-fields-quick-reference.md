@@ -6,17 +6,13 @@ Esta es una guía de referencia rápida para el estándar de Custom Fields en Do
 
 ## Los 5 Campos Custom
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│                   ESTÁNDAR GLOBAL                           │
-├─────────────────────────────────────────────────────────────┤
-│ Custom_field1  →  RUC o PASAPORTE según tipo               │
-│ Custom_field2  →  DV (solo clientes panameños)             │
-│ Custom_field3  →  TIPO_RECEPTOR ID (1, 2, 3, 4)            │
-│ Custom_field4  →  Tipo Contribuyente (1, 2) - solo RUC     │
-│ Custom_field5  →  Código ubicación (provincia-dist-correg) │
-└─────────────────────────────────────────────────────────────┘
-```
+**ESTÁNDAR GLOBAL:**
+
+- Custom_field1: RUC o PASAPORTE según tipo
+- Custom_field2: DV (solo clientes panameños)
+- Custom_field3: TIPO_RECEPTOR ID (1, 2, 3, 4)
+- Custom_field4: Tipo Contribuyente (1, 2) - solo RUC
+- Custom_field5: Código ubicación (provincia-dist-correg)
 
 ---
 
@@ -37,7 +33,7 @@ Esta es una guía de referencia rápida para el estándar de Custom Fields en Do
 
 ## Reglas Rápidas
 
-### ✅ Clientes Panameños (IDs: 1, 2, 4)
+### Clientes Panameños (IDs: 1, 2, 4)
 ```php
 [
     'Custom_field1' => '123456-7-890',  // RUC
@@ -48,7 +44,7 @@ Esta es una guía de referencia rápida para el estándar de Custom Fields en Do
 ]
 ```
 
-### ❌ Clientes Extranjeros (ID: 3)
+### Clientes Extranjeros (ID: 3)
 ```php
 [
     'Custom_field1' => 'ABC123456',     // PASAPORTE
@@ -102,13 +98,13 @@ $fixed = CustomFieldsValidator::autoFix($customFields);
 
 | Servicio | Auto-detecta CF4 | Mapea CODE→ID | Estado |
 |----------|------------------|---------------|--------|
-| QuickBooks | ⚠️ Parcial | ✅ Sí | ✅ OK |
-| Lightspeed | ✅ Sí | - | ✅ OK |
-| Shopify | ❌ No | - | ✅ OK |
-| Maxgym | ✅ Sí | - | ✅ OK |
-| Meypar | ❌ No | - | ✅ OK |
-| Kart21 | ❌ No | - | ✅ OK |
-| ACIcloud | ❌ No | - | ✅ OK |
+| QuickBooks | Parcial | Sí | OK |
+| Lightspeed | Sí | - | OK |
+| Shopify | No | - | OK |
+| Maxgym | Sí | - | OK |
+| Meypar | No | - | OK |
+| Kart21 | No | - | OK |
+| ACIcloud | No | - | OK |
 
 ---
 
@@ -163,48 +159,20 @@ $this->receptor_tipoContribuyente = in_array($this->receptor_tipo, ['1', '2', '4
 
 ## Flujo de Datos Completo
 
-```
-┌─────────────────┐
-│  Integración    │  (QuickBooks, Shopify, etc.)
-│  CODE='04'      │
-└────────┬────────┘
-         │
-         ▼
-┌─────────────────┐
-│ ReceiverType    │  Mapea CODE → ID
-│ Helper          │  '04' → 3 (Extranjero)
-└────────┬────────┘
-         │
-         ▼
-┌─────────────────┐
-│ CustomFields    │  Valida y normaliza
-│ Validator       │  Aplica reglas de negocio
-└────────┬────────┘
-         │
-         ▼
-┌─────────────────┐
-│ Base de Datos   │  Customers_Imp/Exp
-│ Custom_field3=3 │  Custom_field4=null
-└─────────────────┘
-         │
-         ▼
-┌─────────────────┐
-│ Create.php      │  Lee y valida
-│ CreateFast.php  │  receptor_tipo='3'
-└────────┬────────┘
-         │
-         ▼
-┌─────────────────┐
-│ Emisión FE      │  Envía a PAC
-│ CODE='04'       │  (convierte ID → CODE)
-└─────────────────┘
-```
+**Flujo del proceso:**
+
+1. **Integración** (QuickBooks, Shopify, etc.) - Envía CODE='04'
+2. **ReceiverTypeHelper** - Mapea CODE → ID ('04' → 3 Extranjero)
+3. **CustomFieldsValidator** - Valida y normaliza, aplica reglas de negocio
+4. **Base de Datos** - Guarda en Customers_Imp/Exp (Custom_field3=3, Custom_field4=null)
+5. **Create.php / CreateFast.php** - Lee y valida (receptor_tipo='3')
+6. **Emisión FE** - Envía a PAC (convierte ID → CODE='04')
 
 ---
 
 ## Troubleshooting Común
 
-### ❌ Error: "Extranjero con tipo contribuyente"
+### Error: "Extranjero con tipo contribuyente"
 
 **Problema:** Custom_field4 tiene valor para un extranjero
 
@@ -217,7 +185,7 @@ if (ReceiverTypeHelper::isExtranjero($tipoReceptor)) {
 }
 ```
 
-### ❌ Error: "CODE no coincide con ID"
+### Error: "CODE no coincide con ID"
 
 **Problema:** Confusión entre CODE 03/04 e ID 3/4
 
@@ -228,7 +196,7 @@ $id = ReceiverTypeHelper::mapCodeToId($code);
 // NUNCA hacer: $id = (int)$code;
 ```
 
-### ❌ Error: "Contribuyente sin tipo"
+### Error: "Contribuyente sin tipo"
 
 **Problema:** Custom_field4 es null para tipo 1, 2 o 4
 
