@@ -146,4 +146,4 @@ La diferencia entre clientes nacionales y extranjeros se maneja con `tipoCliente
 **Referencias:**
 - [Documentación TheFactoryHKA](https://felwiki.thefactoryhka.com.pa/)
 - [Test de Verificación](docs/testing/test-thefactoryhka-documentacion-oficial-fix.php)
-- [Commit Final](https://github.com/aghabrego/docucenter/commit/263bdbc7)
+- [Commit Final](https://github.com/aghabrego/docucenter-public/commit/263bdbc7)

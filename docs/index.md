@@ -110,4 +110,4 @@ Cada documento debe seguir las plantillas establecidas en cada directorio y incl
 
 ---
 
-**¿Dudas o sugerencias?** Abre un issue en [GitHub](https://github.com/aghabrego/docucenter/issues).
+**¿Dudas o sugerencias?** Abre un issue en [GitHub](https://github.com/aghabrego/docucenter-public/issues).
