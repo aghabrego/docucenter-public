@@ -486,7 +486,7 @@ Los comandos de testing están diseñados para **NO** usar PAC. Verificar que se
 ## 📚 Documentación Adicional
 
 - **[README Principal](../README.md)** - Información general del proyecto
-- **[Copilot Instructions](../.github/copilot-instructions.md)** - Guías para AI/Copilot
+- **[Guías de Desarrollo](../.github/guias-desarrollo.md)** - Guías para AI/Copilot
 - **[Scripts Disponibles](../scripts/README.md)** - Documentación de todos los scripts
 
 ---

@@ -213,7 +213,7 @@ Continue normal sync flow
 
 ---
 
-**Preparado por**: GitHub Copilot  
+**Preparado por**: Equipo DocuCenter  
 **Fecha**: 17 de Septiembre, 2025  
 **Commits realizados**: 2 commits con push exitoso  
 **Estado**: ✅ **COMPLETADO EXITOSAMENTE**

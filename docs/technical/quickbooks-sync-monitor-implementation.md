@@ -204,5 +204,5 @@ Para personalizar colores o estilos, editar:
 ---
 
 **Fecha de Implementación**: 26 de Diciembre, 2025
-**Autor**: GitHub Copilot
+**Autor**: Equipo DocuCenter
 **Versión**: 1.0.0

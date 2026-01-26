@@ -114,5 +114,5 @@ chmod +x docs/testing/commands/*.sh
 ---
 
 **Implementado**: Agosto 26, 2025  
-**Responsable**: GitHub Copilot  
+**Responsable**: Equipo DocuCenter  
 **Revisión**: Pendiente validación de usuario

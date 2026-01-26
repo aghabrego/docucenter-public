@@ -184,6 +184,6 @@ $saleModel->save();                             // Una sola operación de BD
 ---
 
 **Creado**: $(date)  
-**Autor**: GitHub Copilot  
+**Autor**: Equipo DocuCenter  
 **Organización Afectada**: 14034741628418  
 **Factura de Referencia**: ID=67  

@@ -126,6 +126,6 @@ cd /home/weirdolabs/code/docucenter
 
 ---
 
-**Implementado por**: GitHub Copilot  
+**Implementado por**: Equipo DocuCenter  
 **Fecha**: 2025-09-03  
 **Estado**: Completado y Documentado

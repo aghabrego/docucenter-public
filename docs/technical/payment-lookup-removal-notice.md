@@ -107,7 +107,7 @@ El sistema `UpdateIntuitOrdersJob` ahora opera con el flujo tradicional bien pro
 ---
 
 **Fecha**: 17 de Septiembre, 2025  
-**Autor**: GitHub Copilot  
+**Autor**: Equipo DocuCenter  
 **Aprobado por**: Usuario (eliminación solicitada)  
 
 La remoción se realizó exitosamente manteniendo toda la funcionalidad core intacta mientras se simplifica significativamente el código base.

@@ -421,6 +421,6 @@ Para problemas o preguntas:
 
 ---
 
-**Implementado por:** GitHub Copilot  
+**Implementado por:** Equipo DocuCenter  
 **Fecha:** 9 de noviembre de 2025  
 **Estado:** ✅ Producción Ready

@@ -214,5 +214,5 @@ curl -X GET "http://localhost/api/acicloud/vendor_payment_imp?VendorID=V123&limi
 ---
 
 **Fecha de Implementación:** 2025-11-25
-**Desarrollador:** GitHub Copilot
+**Desarrollador:** Equipo DocuCenter
 **Estado:** ✅ Completado

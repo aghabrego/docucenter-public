@@ -345,5 +345,5 @@ Ubicación: `tests/Unit/Jobs/PanamaPaymentsMadeJobTest.php`
 ## Referencias
 
 - Patrón base: Purchase API (`purchaseImp` / `getPurchasesImp`)
-- Convenciones: `.github/copilot-instructions.md`
+- Convenciones: `.github/guias-desarrollo.md`
 - Testing: `tests/Unit/Jobs/PanamaPaymentsMadeJobTest.php`

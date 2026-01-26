@@ -163,7 +163,7 @@ docker exec -it docucenter_laravel.test php artisan test:ezeeissued-field 5 1
 - **Resumen Técnico**: `docs/technical/ezeeissued-field-correction-summary.md`
 - **Script de Testing**: `docs/testing/test-ezeeissued-field-update.sh`
 - **Comando Artisan**: `app/Console/Commands/TestEzeeIssuedField.php`
-- **Instrucciones Copilot**: `.github/copilot-instructions.md`
+- **Guías de Desarrollo**: `.github/guias-desarrollo.md`
 
 ---
 

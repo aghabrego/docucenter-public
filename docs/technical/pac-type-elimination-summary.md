@@ -155,7 +155,7 @@ grep -r "pac_type" app/**/*.php
 
 - [Documentación PAC Original](/docs/integrations/)
 - [Guía de Alanube](/docs/alanube-panama-auto-detection-guide.md)
-- [Copilot Instructions](/.github/copilot-instructions.md)
+- [Guías de Desarrollo](/.github/guias-desarrollo.md)
 
 ---
 

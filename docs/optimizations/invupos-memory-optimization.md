@@ -220,6 +220,6 @@ Mensajes clave:
 
 ---
 
-**Autor**: GitHub Copilot  
+**Autor**: Equipo DocuCenter  
 **Revisión**: Pendiente de testing en producción  
 **Estado**: ✅ Implementado y verificado con script automatizado

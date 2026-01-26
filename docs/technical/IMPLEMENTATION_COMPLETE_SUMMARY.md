@@ -223,6 +223,6 @@ El sistema ahora maneja dinámicamente:
 
 ---
 
-**Implementado por**: GitHub Copilot  
+**Implementado por**: Equipo DocuCenter  
 **Fecha**: 23 de septiembre de 2025  
 **Versión**: DocuCenter v2.0 - Campos Condicionales JSch09 iDoc

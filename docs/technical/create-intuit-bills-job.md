@@ -251,7 +251,7 @@ tail -f storage/logs/laravel.log | grep CreateIntuitBillsJob
 
 ---
 
-**Autor**: GitHub Copilot  
+**Autor**: Equipo DocuCenter  
 **Fecha**: 2025-09-03  
 **Versión**: 1.0  
 **Estado**: Implementado

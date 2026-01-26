@@ -2,7 +2,7 @@
 
 ## 🎯 Reorganización Completada
 
-Se ha realizado una reorganización completa de archivos siguiendo las convenciones establecidas en `.github/copilot-instructions.md`.
+Se ha realizado una reorganización completa de archivos siguiendo las convenciones establecidas en `.github/guias-desarrollo.md`.
 
 ## 📋 Archivos Reubicados
 
@@ -44,7 +44,7 @@ Se ha realizado una reorganización completa de archivos siguiendo las convencio
 
 ## 🎯 Actualización de Configuración
 
-### `.github/copilot-instructions.md`
+### `.github/guias-desarrollo.md`
 
 Se agregaron las siguientes secciones:
 
@@ -58,7 +58,7 @@ Se agregaron las siguientes secciones:
 - Documentación del script `test-alanube.sh`
 - Instrucciones de uso para diferentes tipos de prueba
 
-#### **Configuración de Copilot**
+#### **Configuración de DocuCenter**
 - Instrucciones OBLIGATORIAS para seguimiento estricto
 - Convenciones de namespace
 - Mejores prácticas de organización
@@ -114,6 +114,6 @@ php docs/testing/test_fiscal_credit_complete.php
 
 ---
 
-**🎉 Reorganización completada siguiendo estrictamente las convenciones establecidas en las instrucciones de Copilot.**
+**🎉 Reorganización completada siguiendo estrictamente las convenciones establecidas en las guías de desarrollo.**
 
 *Esta reorganización asegura que todos los archivos estén en las ubicaciones correctas según las mejores prácticas del proyecto, facilitando el mantenimiento y la colaboración.*

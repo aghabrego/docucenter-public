@@ -965,7 +965,7 @@ php artisan db:seed --class=AssignAllBranchesToUsersSeeder
 
 ### Fase 4: Documentación (1 día)
 
-**4.1 Actualizar Copilot Instructions**
+**4.1 Actualizar Guías de Desarrollo**
 ```markdown
 ## Filtrado por Sucursal (ID_compania) - ACTUALIZADO
 
@@ -1173,7 +1173,7 @@ return [
 **Última Actualización:** 3 de diciembre de 2025
 
 **Referencias:**
-- [Copilot Instructions](../../.github/copilot-instructions.md)
+- [Guías de Desarrollo](../../.github/guias-desarrollo.md)
 - [Organization Model](../../app/Models/Organization.php)
 - [OrganizationService](../../app/Services/OrganizationService.php)
 

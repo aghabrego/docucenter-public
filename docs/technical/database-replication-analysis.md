@@ -1041,7 +1041,7 @@ Customers_Imp:
 **Última Actualización:** 5 de diciembre de 2025
 
 **Referencias:**
-- [Copilot Instructions](../../.github/copilot-instructions.md)
+- [Guías de Desarrollo](../../.github/guias-desarrollo.md)
 - [Multi-Branch System Analysis](./multi-branch-system-analysis.md)
 - [Laravel Queue Documentation](https://laravel.com/docs/9.x/queues)
 

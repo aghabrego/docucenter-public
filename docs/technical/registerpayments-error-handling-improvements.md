@@ -276,7 +276,7 @@ php docs/testing/test-registerpaymentsqb-error-handling.php
 
 ---
 
-**Implementado por**: GitHub Copilot  
+**Implementado por**: Equipo DocuCenter  
 **Fecha**: 18 de Septiembre, 2025  
 **Archivos Modificados**: 4 archivos (trait + 3 jobs)  
 **Líneas Agregadas**: ~200 líneas de código robusto  
