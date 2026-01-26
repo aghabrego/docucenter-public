@@ -1,207 +1,245 @@
 # Documentación Técnica - DocuCenter
 
+Este directorio contiene documentación técnica sobre implementaciones específicas, soluciones a problemas técnicos y análisis de funcionalidades del sistema DocuCenter.
+
 ## Índice de Documentación
 
-### Resolución de Problemas Arquitecturales
+### Integraciones - QuickBooks
 
-#### Livewire UI/UX Improvements
-- **[Preservación de Datos del Customer al Cambiar Tipo de Receptor](receptor-type-data-preservation.md)** - Preservación inteligente de datos en formulario ⭐ **NUEVO**
-  - Problema: Cambiar tipo de receptor borraba completamente datos del customer
-  - Solución: Preservación selectiva con limpieza solo de campos incompatibles  
-  - Auto-re-llenado automático según nuevo tipo de receptor
-  - Mejora significativa en experiencia de usuario (80% menos re-trabajo)
+#### [quickbooks-webhook-organizationid-fix.md](./quickbooks-webhook-organizationid-fix.md)
+**Descripción**: Fix de configuraciones duplicadas de webhook por uso inconsistente de IDs
+**Contenido**:
+- Análisis de causa raíz: ID numérico de QuickBooks vs String ID de DocuCenter
+- Correcciones en Read.php y helper.php
+- Script de limpieza de duplicados en Firestore
+- Reglas de prevención y code review checklist
+- Ejemplo real: RealmId 9341454854054771 con 2 configs (119 vs Rw8DunJnEnxY1MS2QHVH)
 
-#### Customers Multi-Tenant Navigation
-- **[Resolución de Dependencia Circular en Customer Property](customer-property-circular-dependency-resolution.md)** - Corrección de inconsistencia lógica en inicialización de customer ⭐ **NUEVO**
-  - Identificación y análisis de dependencia circular en getCustomerProperty()
-  - Implementación de obtención directa desde relaciones de venta
-  - Corrección de errores de layout y compilación
-  - Testing y validación de arquitectura multi-tenant
+### Document AI (Google Cloud)
 
-#### PAC Integration Errors
-- **[Fix: Error "datosFacturaExportacion es requerido"](fix-datos-factura-exportacion-error.md)** - Corrección de nombre de campo para PAC Alanube ⭐ **NUEVO**
-  - Error: PAC esperaba campo 'datosFacturaExportacion' pero recibía 'exportation'
-  - Fix aplicado en AlanubeFormatterHelper para Panamá y República Dominicana
-  - Facturas de exportación (tipo 03) ahora procesan correctamente
-  - Scripts de testing y verificación incluidos
+#### [document-ai-import-to-workbench.md](./document-ai-import-to-workbench.md)
+**Descripción**: Sistema de importación de documentos anotados a Google Cloud Workbench
+**Contenido**:
+- Implementación completa de Import API
+- Upload automático de PDFs a GCS
+- Monitoreo de operaciones con polling
+- División automática training/test (80/20)
+- Guía de troubleshooting y debugging
 
-- **[Fix: Requerimiento dPaisExt de TheFactoryHKA](fix-thefactoryhka-dpaisext-requirement.md)** - Corrección para campo paisExtranjero requerido por PAC ⭐ **NUEVO**
-  - Error: "El campo paisExtranjero es requerido" en operación interna a cliente extranjero
-  - TheFactoryHKA requiere dPaisExt en gIdExt para todos los clientes extranjeros
-  - Lógica automática para incluir dPaisExt según tipo de operación y nacionalidad
-  - Testing completo con 5/5 casos de uso verificados
+#### [document-ai-import-implementation-summary.md](./document-ai-import-implementation-summary.md)
+**Descripción**: Resumen ejecutivo de implementación Import to Workbench
+**Contenido**:
+- 7 archivos modificados/creados
+- 4 nuevos métodos implementados
+- Flujo de datos completo
+- Comando de testing interactivo
+- Métricas y estado final
 
-- **[Fix: Error Validación paisExtranjero en Operación Interna](fix-pais-extranjero-operacion-interna.md)** - Corrección para clientes extranjeros en operación interna ⭐ **IMPLEMENTADO**
-  - Resolución de conflicto de validación para operación interna (iDest=1) a cliente extranjero (iTipoRec=4)
-  - Validación condicional de paisExtranjero basada en tipo de operación
-  - Lógica automática de asignación de receptor_paisNacionalidad para operación interna
-  - Cumplimiento de normativas DGI para facturas a clientes extranjeros en territorio panameño
+### Soluciones de Problemas Técnicos
 
-- **[Análisis Oficial Validaciones DGI](dgi-official-validation-analysis.md)** - Análisis de ficha técnica DGI vs error 2152 ⭐ **CRÍTICO**
-  - Error 2152 NO EXISTE en especificación oficial DGI (232 páginas)
-  - Código fuera de rangos oficiales DGI (0800-1059)
-  - Confirmado: Bug propietario de TheFactoryHKA
-  - Nuestro sistema cumple 100% estándares DGI
-  
-- **[Solución Definitiva PAC Error 2152](pac-2152-solution-external-service-bug.md)** - Workaround implementado para bug en servicio externo TheFactoryHKA ⭐ **IMPLEMENTADO**
-  - Problema confirmado en servicio externo: mapeo incorrecto de campos totales
-  - Workaround implementado en HKAService líneas 276-295
-  - Corrección automática para totalValorRecibido y totalTodosItems
-  - Logging detallado de correcciones aplicadas
+#### [ezeeissued-solution-summary.md](./ezeeissued-solution-summary.md)
+**Descripción**: Solución completa al problema de campo EzeeIssued no actualizado tras emisión
+**Contenido**:
+- Análisis de causa raíz: problemas de conexión multi-tenant durante emisión
+- Implementación de patrón de instancia única para consistencia de BD
+- Herramientas de testing: script bash y comando Artisan
+- Validación completa con datos reales
 
-- **[Corrección PAC Campos ISC Condicionales](thefactoryhka-isc-conditional-fields.md)** - Implementación de lógica condicional ISC según especificación oficial ⭐ **IMPLEMENTADO**
-  - Corrección de "El campo valorISC es inválido" y "El campo totalISC no debe ser informado"
-  - Lógica condicional para tasaISC, valorISC en items solo cuando tasa > 0
-  - totalISC en totales solo cuando existe ISC real en items
-  - Validación contra especificación oficial TheFactoryHKA
-  
-- **[Investigación Transformación SOAP PAC 2152](pac-2152-soap-transformation-investigation.md)** - Investigación del punto exacto de transformación incorrecta ⭐ **COMPLETADO**
-  - Identificación de cadena de transformación Create.php → HKAService → SOAP → XML
-  - Logging detallado agregado antes del envío SOAP
-  - Análisis de hipótesis: filterNullValues, servicio externo, array conversion
-  - Evidencia de mapeo cruzado donde múltiples campos toman valor totalPrecioNeto
+#### [getsaleproperty-optimizations-summary.md](./getsaleproperty-optimizations-summary.md)
+**Descripción**: Optimizaciones completas del patrón getSaleProperty() en Create.php
+**Contenido**:
+- Aplicación de patrón de instancia única en 5 áreas críticas
+- Optimización de flujos de emisión PAC (TheFactoryHKA, Alanube, Default)
+- Mejoras en saveFileAndLog y extractAndStoreCufeAfterEmission
+- Eliminación de problemas de conexión multi-tenant durante operaciones
 
-- **[Resolución Error PAC 2152 - ITBMS Inválido](pac-2152-error-correction-progress.md)** - Corrección en progreso del error "Monto del ITBMS del ítem inválido" ⭐ **ARCHIVADO**
-  - Análisis de inconsistencias en campos totales enviados al PAC
-  - Corrección de campo dVTotItems (enviaba total general en lugar de suma de ítems)
-  - Implementación de cálculo ITBMS con precisión DGI
-  - Logging mejorado para debugging de valores enviados al PAC
-  
-- **[Análisis Original ITBMS TheFactoryHKA](itbms-calculation-correction.md)** - Documentación del análisis matemático inicial ⭐ **COMPLETADO**
-  - Identificación de inconsistencia entre precio base (5.60), ITBMS (0.39) y total (5.99)
-  - Métodos calculateCorrectITBMS() y validateITBMSCoherence() implementados
-  - Testing con comando artisan test:itbms-calculation
+#### [ezeeissued-field-correction-summary.md](./ezeeissued-field-correction-summary.md)
+**Descripción**: Resumen técnico detallado de la corrección del campo EzeeIssued
+**Contenido**:
+- Optimizaciones implementadas en SalesHeaderImp model
+- Cambios en flujos de emisión (TheFactoryHKA, Alanube, Default PAC)
+- Patrones de conexión multi-tenant aplicados
+- Documentación de testing y validación
 
-- **[Resolución: Error "Attempt to assign property cufe on array"](cufe-property-assignment-error-resolution.md)** - Corrección de error de asignación de propiedades en HKAService ⭐ **COMPLETADO**
-  - Análisis de conversión incompleta de array a objeto con (object)$request
-  - Implementación de conversión recursiva con json_decode(json_encode())
-  - Corrección en HKAService::writeXMLLog() y simplificación en Create.php
-  - Validación de transmisión exitosa al PAC
+### Integraciones Alanube DOM (República Dominicana)
 
-### Análisis y Mapeos de Integración
+#### [alanube-dom-service-usage.md](./alanube-dom-service-usage.md)
+**Descripción**: Guía completa de uso del servicio AlanubeDomService con detección automática
+**Contenido**:
+- Detección automática de tipos de documento
+- Uso por tipo específico (exportación, gubernamental, consumo, fiscal)
+- Ejemplos de implementación y casos de uso
+- Manejo de errores y mejores prácticas
 
-#### Zoho Books Integration
-- **[Zoho Purchase Order Mapping Analysis](zoho-purchase-order-mapping-analysis.md)** - Análisis completo del mapeo de órdenes de compra desde Zoho Books hacia modelos DocuCenter ⭐ **NUEVO**
-  - Estructura de datos del webhook de Zoho
-  - Mapeo hacia PurchaseHeaderImp y PurchaseDetailImp
-  - Clases de transformación e importación
-  - Scripts de testing y validación
+#### [alanube-dom-export-invoices.md](./alanube-dom-export-invoices.md)
+**Descripción**: Implementación completa de Facturas de Exportación Electrónica (46)
+**Contenido**:
+- Validaciones específicas de exportación (ITBIS 0%, transporte, aduanas)
+- Procesamiento asíncrono con estados granulares
+- Sistema de testing completo
+- Documentación técnica y casos de uso
 
-- **[Segunda Verificación Custom Fields de Zoho desde API](zoho-vendor-api-second-verification.md)** - Implementación de consulta a API de Zoho para obtener cf_sagevendorid y cf_sagecustomerid ⭐ **ACTUALIZADO**
-  - Doble verificación para vendors (cf_sagevendorid) y customers (cf_sagecustomerid)
-  - Helper centralizado ZohoCustomFieldsHelper para ambos tipos de campos
-  - Consulta directa a contacts API cuando custom_field_hash no incluye campos personalizados
-  - Manejo robusto de errores con fallbacks y logging detallado
+#### [ALANUBE_DOM_COMPLETE_INTEGRATION.md](./ALANUBE_DOM_COMPLETE_INTEGRATION.md)
+**Descripción**: Documentación completa de la integración con Alanube DOM para República Dominicana
+**Contenido**:
+- Implementación de facturas de consumo (32)
+- Implementación de facturas gubernamentales (45)
+- Configuración de endpoints y autenticación
+- Validaciones específicas por tipo de documento
 
-### Sistema de Control de Acceso Organizacional
+#### [FISCAL_CREDIT_IMPLEMENTATION_SUMMARY.md](./FISCAL_CREDIT_IMPLEMENTATION_SUMMARY.md)
+**Descripción**: Resumen completo de implementación de Facturas de Crédito Fiscal (31)
+**Contenido**:
+- Clase de enhancement AlanubeDomFiscalCreditEnhancement
+- Servicio AlanubeDomService actualizado
+- Job asíncrono CreateFiscalCreditInvoiceAlanubeDomJob
+- Comando de testing interactivo
+- Validaciones específicas de API
+- Detección automática inteligente
 
-1. **Control de Acceso para Configuraciones**
-   - [Sistema de Control de Acceso Organizacional](organization-access-control-system.md) - Arquitectura completa del sistema
-   - [Guía de Implementación](implementation-guide-organization-access.md) - Guía práctica paso a paso
-   - [Resumen de Implementación](organization-access-implementation-summary.md) - Resumen ejecutivo y estado final
+### Sistema de Transacciones
 
-2. **Sistema de Gestión de Planes**
-   - [Plan Management Complete Guide](plan-management-complete-guide.md) - Guía completa del sistema de gestión de planes
-   - [Routes-as-Permissions Architecture](plan-management-complete-guide.md#system-architecture) - Arquitectura de rutas como permisos
+#### [TRANSACTION_SYSTEM_COMPLETE.md](./TRANSACTION_SYSTEM_COMPLETE.md)
+**Descripción**: Documentación completa del sistema de transacciones
+**Contenido**:
+- Arquitectura de transacciones
+- Modelos y relaciones
+- Validaciones y procesamiento
 
-### Integraciones PAC
+### Componentes Livewire y Frontend
 
-1. **Eliminación del Campo Virtual pac_type**
-   - [Resumen de Eliminación pac_type](pac-type-elimination-summary.md) - Eliminación sistemática del campo virtual pac_type
+#### [solucion-tabla-items-factura-electronica.md](./solucion-tabla-items-factura-electronica.md)
+**Descripción**: Solución completa para visualización y gestión de ítems en facturación electrónica
+**Contenido**:
+- Problema: Tabla de ítems no visible sin datos previos
+- Implementación de gestión manual de ítems (agregar/eliminar)
+- Tabla completamente editable con recálculo automático
+- Compatibilidad con facturas existentes y nuevas
+- Casos de uso cubiertos y testing implementado
+- Integración con sistemas de pago
 
-2. **API CheckRUC**
-   - [Campo Type (Tipo de Contribuyente)](../api/fe/checkruc-type-field.md) - Detección automática de tipo de contribuyente
+### Gestión de Pagos y Cálculos
 
-3. **Digifact Panamá**
-   - [Guía de Implementación Digifact PAC](digifact-panama-pac-implementation-guide.md) - Análisis completo y guía de implementación para PAC Digifact ⭐ **NUEVO**
-     - Análisis exhaustivo de API REST v1.0.4
-     - Arquitectura de autenticación con JWT (30 días vigencia)
-     - Endpoints de certificación y consulta
-     - Plan de implementación por fases
-     - Integración con arquitectura multi-tenant DocuCenter
-     - Scripts de testing y validación
+- **[payment-calculation-fix.md](./payment-calculation-fix.md)** - Análisis y solución de discrepancias en cálculo de pagos y vueltos
+- **[solucion-sincronizacion-pagos.md](./solucion-sincronizacion-pagos.md)** - Implementación de sincronización de pagos entre sistemas
 
-4. **Alanube República Dominicana**
-   - [Mejoras DOM Consumer Invoice](alanube-dom-consumer-invoice-improvements.md) - Enhancements para el consumer DOM
-   - [Testing System Summary](TESTING_SYSTEM_SUMMARY.md) - Framework de testing para Alanube DOM
+### Integración QuickBooks
 
-5. **Alanube Panamá**
-   - [Integración Completa Alanube Panamá](alanube-panama-complete-integration.md) - Implementación completa del servicio
-   - [Guía de Uso del Servicio](alanube-panama-service-usage.md) - Manual de uso del AlanubeService
-   - [Guía de Notas de Crédito](alanube-panama-credit-notes-guide.md) - Manual completo para notas de crédito
-   - [Corrección Mapeo Datos Exportación](exportation-data-mapping-fix.md) - Fix para errores PAC en documentos de exportación ⭐ **NUEVO**
+#### [quickbooks-bills-job-graceful-validation.md](./quickbooks-bills-job-graceful-validation.md)
+**Descripción**: Fix para validación graceful de tablas en CreateIntuitBillsJob
+**Contenido**:
+- Problema: Organizaciones sin módulo de compras generaban errores innecesarios
+- Solución: Validación no-destructiva que retorna silenciosamente si faltan tablas
+- Patrón de consistencia con UpdateIntuitOrdersJob
+- Testing para organizaciones con/sin tablas de compras
+- Logs informativos en lugar de errores de stack trace
 
-3. **QuickBooks Online**
-   - [Job Creación de Bills](create-intuit-bills-job.md) - Sincronización de compras hacia QuickBooks como Bills
-   - [Payment Lookup Integration](quickbooks-payment-lookup-integration.md) - Funcionalidad de búsqueda de pagos existentes para prevenir duplicados
-   - [Payment Methods Integration](quickbooks-payment-methods-integration.md) - Sistema de determinación de métodos de pago basado en balance de QB
-   - [Mejoras Manejo de Errores registerPaymentsQB](registerpayments-error-handling-improvements.md) - Sistema robusto de captura y manejo de errores ⭐ **NUEVO**
-   - [Corrección Asignación País Clientes Extranjeros](quickbooks-country-assignment-fix.md) - Fix para preservar país original de clientes extranjeros ⭐ **NUEVO**
-   - [Detección de Clientes Extranjeros](quickbooks-foreign-client-detection.md) - Sistema completo de detección y manejo de clientes extranjeros en QuickBooks ⭐ **NUEVO**
-   - [Solución Rate Limiting HTTP 429](quickbooks-rate-limiting-solution.md) - Manejo robusto de rate limiting para APIs QuickBooks ⭐ **NUEVO**
-   - [Sistema Inteligente de Prevención de Duplicación](quickbooks-intelligent-duplication-prevention.md) - Detección avanzada con algoritmo de similitud de nombres ⭐ **NUEVO**
+#### [quickbooks-fiscal-number-validation-system.md](./quickbooks-fiscal-number-validation-system.md)
+**Descripción**: Sistema completo de validación de números fiscales para prevenir duplicación de documentos QuickBooks
+**Contenido**:
+- Extracción automática de números fiscales desde CUFE panameño
+- Validación de duplicados por cliente y número fiscal
+- Integración en CreateSaleQuickBooksJob y FeController
+- Comando de migración para bases de datos cliente
+- Tests unitarios y de integración completos
+- Arquitectura multi-tenant con manejo de conexiones dinámicas
 
-4. **Sistemas de Validación**
-   - [Validation System Overview](validation-system-overview.md) - Sistema de validaciones completo
-   - [Alanube Validation](alanube-validation.md) - Validaciones específicas para Alanube
-   - [Customer APIs Validation](customer-apis-validation.md) - Validación de integridad para APIs customer
-   - [Customer APIs Validation Summary](customer-apis-validation-summary.md) - Resumen de implementación
+## Implementaciones por Tipo de Documento
 
-### DGI Compliance & Formularios Condicionales
+### Facturas Alanube DOM
 
-1. **Implementación 98% DGI Compliance**
-   - [Formularios Condicionales JSch09](dgi-conditional-forms-jsch09.md) - Sistema completo de campos condicionales para 9 tipos de documento
-   - [Validaciones Críticas DGI](dgi-critical-validations.md) - Validaciones automáticas obligatorias según ficha técnica
-   - [Campos Adicionales Completos](dgi-additional-fields-complete.md) - 45+ campos adicionales para 98% compliance
-   - [Fix clearTransactionTypeSale](dgi-cleartransactiontypesale-fix.md) - Solución a método faltante en componente Livewire ⭐ **NUEVO**
+| Tipo | Documento | Estado | Archivo Enhancement |
+|------|-----------|--------|-------------------|
+| 31 | Factura de Crédito Fiscal | Implementado | `AlanubeDomFiscalCreditEnhancement.php` |
+| 32 | Factura de Consumo | Implementado | `AlanubeDomConsumerInvoiceEnhancement.php` |
+| 45 | Factura Gubernamental | Implementado | `AlanubeDomGovernmentalEnhancement.php` |
+| 46 | Factura de Exportación | Implementado | `AlanubeDomExportInvoiceEnhancement.php` |
 
-### Optimizaciones de Infraestructura
+### Características Técnicas
 
-#### Laravel Framework & Job Management
-- **[Error Laravel Builder::query() Correction](laravel-builder-query-error-correction.md)** - Corrección de patrones Eloquent Builder en SQL Server jobs ⭐ **IMPLEMENTADO**
-  - Error: "Call to undefined method Illuminate\Database\Eloquent\Builder::query()"
-  - Corrección de Builder::query() por Model::newQuery() en STCostOfGoodsOfCategoryJob
-  - Patrones correctos para SQL Server data processing jobs
-  - Validación de sintaxis y funcionalidad completa
+- **Detección Automática**: El sistema detecta automáticamente el tipo de documento basado en RNC y campos complejos
+- **Validaciones Específicas**: Cada tipo tiene validaciones específicas según API de Alanube DOM
+- **Procesamiento Asíncrono**: Jobs especializados para cada tipo de documento
+- **Testing Interactivo**: Comando unificado con selección de tipo de documento
 
-#### Servidor de Producción
-- **[Configuración Memoria Swap Debian 11](configuracion-swap-debian-produccion.md)** - Configuración completa de memoria swap para servidor de producción ⭐ **NUEVO**
-  - Configuración de swap para resolver "MySQL server has gone away" errors
-  - Optimización MySQL para ambiente de producción Debian 11 (bullseye)
-  - Scripts de monitoreo de memoria y sistema
-  - Guía específica para deployment sin Docker
+## Categorías de Documentación
 
-### Optimizaciones
+### Soluciones Técnicas
+Documentación que describe la resolución de problemas específicos encontrados en el sistema y las implementaciones técnicas correspondientes.
 
-1. **Sistema de Búsqueda**
-   - [Optimización Customer Search](customer-search-optimization.md) - Mejoras al search de customers
-   - [Implementación Search Components](search-components-implementation.md) - Componentes de búsqueda
+### Análisis de Funcionalidades
+Análisis detallados de funcionalidades específicas del sistema, incluyendo casos edge y comportamientos especiales.
 
-2. **Sistema de Estado de Transacciones**
-   - [Enhanced Transaction Status System](enhanced-transaction-status-system.md) - Sistema mejorado de seguimiento de estado para transacciones FE
+### Integraciones y Sincronizaciones
+Documentación sobre procesos de sincronización entre diferentes sistemas y plataformas integradas.
 
-### Testing
+### Integraciones SQL Server
 
-1. **Framework de Testing**
-   - [RegisterPaymentsQB Error Handling](registerpayments-error-handling-improvements.md) - Testing de manejo de errores registerPaymentsQB
-   - Ver más documentación en la [sección Testing](../testing/README.md)
+#### [sql-server-complete-store-id-filtering.md](./sql-server-complete-store-id-filtering.md)
+**Descripción**: Implementación completa de filtrado por Store ID en toda la cadena de jobs SQL Server
+**Contenido**:
+- Filtrado condicional en STInvoiceJob, STCostOfGoodsJob, STCostOfGoodsOfCategoryJob y STCreateSummaryJob
+- Optimización de performance con reducción 70-90% de datos transferidos
+- Sistema de logging detallado para debugging y monitoreo
+- Compatibilidad total con configuraciones existentes
+- Patrón de implementación reutilizable
 
-### Troubleshooting y Soluciones
+**Características principales**:
+- **Filtrado selectivo**: Procesa solo tienda específica cuando está configurada
+- **Retrocompatibilidad**: Sin configuración procesa todas las tiendas
+- **Performance optimizada**: Consultas SQL filtradas en origen
+- **Logging granular**: Trazabilidad completa del procesamiento
+- **Testing integrado**: Comandos de prueba y verificación
 
-1. **Errores de OrganizationService**
-   - Ver documentación en la [sección Troubleshooting](../troubleshooting/README.md)
+#### [sql-server-store-id-filtering.md](./sql-server-store-id-filtering.md)
+**Descripción**: Implementación específica de filtrado por Store ID en STInvoiceJob
+**Contenido**:
+- Filtro condicional por store_id en facturas SQL Server
+- Logging detallado para debugging y trazabilidad
+- Preservación de Store ID en datos DocuCenter
+- Optimización de consultas y transferencia de datos
 
-## Estructura de Archivos
+## Estructura de Documentos
 
-Ver el índice principal [README.md](README.md) para la lista completa de documentación técnica organizada por categorías.
+Cada documento técnico sigue esta estructura estándar:
 
-## Scripts de Automatización
-
-Los scripts de automatización se encuentran en el repositorio principal del proyecto.
+1. **Problema Identificado** - Descripción del issue o requerimiento
+2. **Análisis Técnico** - Investigación y análisis del problema
+3. **Solución Implementada** - Detalles de la implementación
+4. **Pruebas y Validación** - Casos de prueba y resultados
+5. **Impacto y Consideraciones** - Efectos en el sistema
 
 ## Convenciones
 
-- Toda la documentación técnica se mantiene en español
-- Los archivos siguen el formato `feature-description.md`
-- Se incluyen ejemplos de código y casos de uso
-- Se documentan tanto implementación como testing
+- **Código de ejemplo**: Incluido para ilustrar implementaciones
+- **Casos de prueba**: Documentados para validación futura
+- **Referencias**: Enlaces a archivos de código relacionados
+- **Logs de ejemplo**: Para facilitar debugging
+
+### Implementación General de Documentos JSch09 iDoc
+
+#### [general-document-types-implementation.md](./general-document-types-implementation.md)
+**Descripción**: Implementación universal de tipos de documentos JSch09 iDoc para todos los PACs
+**Contenido**:
+- Soporte completo para 9 tipos oficiales DGI Panamá
+- Compatibilidad universal con todos los PACs (Alanube, TheFactoryHKA, etc.)
+- Sistema de detección automática de PAC y país
+- Servicios de abstracción y validación
+- Scripts de implementación y testing
+- Arquitectura extensible para futuros PACs
+
+**Características principales**:
+- **PanamaDocumentTypesService**: Servicio central para tipos oficiales
+- **ElectronicDocumentService**: Capa de abstracción PAC-agnóstica
+- **Detección automática**: PAC y país detectados por configuración
+- **Compatibilidad hacia atrás**: Mantiene funcionalidad existente
+- **Extensibilidad**: Preparado para nuevos proveedores
+
+**Script de implementación**:
+```bash
+./scripts/implement-general-document-types.sh
+```
+
+---
+
+*Última actualización: Septiembre 2025*
