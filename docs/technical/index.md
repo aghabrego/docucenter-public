@@ -4,6 +4,20 @@ Este directorio contiene documentación técnica sobre implementaciones específ
 
 ## Índice de Documentación
 
+### Estandarización
+
+#### [custom-fields-standardization.md](./custom-fields-standardization.md)
+**Descripción**: Implementación del estándar global para los 5 campos custom
+**Contenido**:
+- Definición del estándar global de Custom Fields
+- Mapeo TIPO_RECEPTOR (CODEs vs IDs)
+- Reglas de negocio para cada tipo de receptor
+- Implementación por integración (QuickBooks, Shopify, Lightspeed, etc.)
+- Helpers de validación: ReceiverTypeHelper y CustomFieldsValidator
+- Módulos de emisión y Jobs asíncronos
+- Testing y casos de prueba críticos
+- Script de migración de datos
+
 ### Integraciones - QuickBooks
 
 #### [quickbooks-webhook-organizationid-fix.md](./quickbooks-webhook-organizationid-fix.md)
