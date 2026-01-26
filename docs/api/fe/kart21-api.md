@@ -18,47 +18,47 @@ Crea y emite una factura electrónica basada en datos provenientes de Kart21 (si
 
 | Campo | Tipo | Requerido | Descripción |
 |-------|------|-----------|-------------|
-| `id` | integer | ✅ | ID del evento |
-| `event` | string | ✅ | Tipo de evento ("order.close") |
-| `object_id` | string | ✅ | ID del objeto relacionado |
+| `id` | integer | | ID del evento |
+| `event` | string | | Tipo de evento ("order.close") |
+| `object_id` | string | | ID del objeto relacionado |
 
 #### Datos de la Orden
 
 | Campo | Tipo | Requerido | Descripción |
 |-------|------|-----------|-------------|
-| `data.id` | string | ✅ | ID de la orden |
-| `data.number` | string | ✅ | Número de la orden |
-| `data.status` | integer | ✅ | Estado de la orden (2 = CLOSED) |
-| `data.status_description` | string | ✅ | Descripción del estado |
-| `data.order_type` | integer | ✅ | Tipo de orden (0 = REGULAR) |
-| `data.order_dt` | string | ✅ | Fecha y hora de la orden |
-| `data.closed_dt` | string | ✅ | Fecha y hora de cierre |
-| `data.subtotal` | number | ✅ | Subtotal de la orden |
-| `data.tax` | number | ✅ | Impuestos |
-| `data.total` | number | ✅ | Total de la orden |
-| `data.paid` | number | ✅ | Monto pagado |
+| `data.id` | string | | ID de la orden |
+| `data.number` | string | | Número de la orden |
+| `data.status` | integer | | Estado de la orden (2 = CLOSED) |
+| `data.status_description` | string | | Descripción del estado |
+| `data.order_type` | integer | | Tipo de orden (0 = REGULAR) |
+| `data.order_dt` | string | | Fecha y hora de la orden |
+| `data.closed_dt` | string | | Fecha y hora de cierre |
+| `data.subtotal` | number | | Subtotal de la orden |
+| `data.tax` | number | | Impuestos |
+| `data.total` | number | | Total de la orden |
+| `data.paid` | number | | Monto pagado |
 
 #### Usuario
 
 | Campo | Tipo | Requerido | Descripción |
 |-------|------|-----------|-------------|
-| `data.create_user.id` | integer | ✅ | ID del usuario que creó |
-| `data.create_user.first_name` | string | ✅ | Nombre del usuario |
-| `data.create_user.last_name` | string | ✅ | Apellido del usuario |
-| `data.create_user.email` | string | ✅ | Email del usuario |
+| `data.create_user.id` | integer | | ID del usuario que creó |
+| `data.create_user.first_name` | string | | Nombre del usuario |
+| `data.create_user.last_name` | string | | Apellido del usuario |
+| `data.create_user.email` | string | | Email del usuario |
 
 #### Items de la Orden
 
 | Campo | Tipo | Requerido | Descripción |
 |-------|------|-----------|-------------|
-| `data.items[].id` | integer | ✅ | ID del item |
-| `data.items[].lineitem_number` | integer | ✅ | Número de línea |
-| `data.items[].active` | boolean | ✅ | Si está activo |
-| `data.items[].status` | integer | ✅ | Estado del item |
-| `data.items[].class_id` | integer | ✅ | ID de la clase |
-| `data.items[].discount` | number | ✅ | Descuento aplicado |
-| `data.items[].quantity` | number | ✅ | Cantidad |
-| `data.items[].total` | number | ✅ | Total del item |
+| `data.items[].id` | integer | | ID del item |
+| `data.items[].lineitem_number` | integer | | Número de línea |
+| `data.items[].active` | boolean | | Si está activo |
+| `data.items[].status` | integer | | Estado del item |
+| `data.items[].class_id` | integer | | ID de la clase |
+| `data.items[].discount` | number | | Descuento aplicado |
+| `data.items[].quantity` | number | | Cantidad |
+| `data.items[].total` | number | | Total del item |
 
 ### Ejemplo de Request (Basado en Test)
 

@@ -85,7 +85,7 @@ if ($this->destinoOperacion == '1' && empty($this->paisExtranjero) && empty($thi
   "receptor_paisNacionalidad": "PA"
 }
 ```
-✅ **Resultado**: Validación exitosa, asignación automática de receptor_paisNacionalidad
+**Resultado**: Validación exitosa, asignación automática de receptor_paisNacionalidad
 
 ### Caso 2: Exportación a Cliente Extranjero
 ```json
@@ -97,7 +97,7 @@ if ($this->destinoOperacion == '1' && empty($this->paisExtranjero) && empty($thi
   "receptor_paisNacionalidad": null
 }
 ```
-✅ **Resultado**: Validación exitosa con país extranjero específico
+**Resultado**: Validación exitosa con país extranjero específico
 
 ## Objeto de Datos Típico Después del Fix
 
@@ -133,9 +133,9 @@ cd /home/weirdolabs/code/docucenter
 ```
 
 ### Casos de Prueba
-1. **Operación interna + Cliente extranjero**: ✅ Debe validar correctamente
-2. **Exportación + Cliente extranjero**: ✅ Debe requerir país extranjero válido
-3. **Operación interna + Cliente nacional**: ✅ No debe verse afectado
+1. **Operación interna + Cliente extranjero**: Debe validar correctamente
+2. **Exportación + Cliente extranjero**: Debe requerir país extranjero válido
+3. **Operación interna + Cliente nacional**: No debe verse afectado
 
 ## Normativas DGI Cumplidas
 

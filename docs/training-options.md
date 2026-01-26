@@ -1,6 +1,6 @@
 # Opciones para Entrenar Document AI
 
-## ✅ Opción 1: Workbench UI (RECOMENDADO - Más Rápido)
+## Opción 1: Workbench UI (RECOMENDADO - Más Rápido)
 
 Usa la interfaz gráfica de Google con auto-labeling.
 
@@ -43,19 +43,19 @@ gcloud storage buckets add-iam-policy-binding gs://docucenter-aci-document-ai-tr
 4. Click en **"Start training"**
 5. Esperar 1-3 horas
 
-**✅ Ventajas:**
+**Ventajas:**
 - Auto-labeling (IA sugiere campos)
 - No necesitas crear annotations manualmente
 - Interfaz visual fácil de usar
 - textAnchor generado automáticamente
 
-**❌ Desventajas:**
+**Desventajas:**
 - Manual (uno por uno)
 - No automatizable
 
 ---
 
-## 🔧 Opción 2: Código (Programático)
+## Opción 2: Código (Programático)
 
 Usa el comando Artisan con OCR para generar training data.
 
@@ -123,19 +123,19 @@ Esto:
 sail artisan documentai:train --timestamp={nuevo_timestamp}
 ```
 
-**✅ Ventajas:**
+**Ventajas:**
 - Automatizable (batch processing)
 - Reutilizable para futuros trainings
 - Control total del proceso
 
-**❌ Desventajas:**
+**Desventajas:**
 - Requiere crear 20 archivos JSON manualmente
 - Más lento (OCR de 20 PDFs)
 - Más complejo
 
 ---
 
-## 🎯 Recomendación
+## Recomendación
 
 **Usa Opción 1 (Workbench UI)** porque:
 - Ya tienes el processor configurado

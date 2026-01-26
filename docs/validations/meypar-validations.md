@@ -6,7 +6,7 @@ Documentación técnica de las validaciones implementadas para la integración c
 
 ## Validaciones de Documentos de Identificación
 
-### 🏢 NIT Empresarial Colombiano
+### NIT Empresarial Colombiano
 
 **Formato Válido**: `XXXXXXXXX-X`
 - 9 dígitos numéricos
@@ -14,11 +14,11 @@ Documentación técnica de las validaciones implementadas para la integración c
 - 1 dígito verificador
 
 **Ejemplos**:
-- ✅ `900123456-1`
-- ✅ `123456789-0`
-- ✅ `800123456-7`
-- ❌ `12345678` (falta guión y DV)
-- ❌ `90012345-12` (DV debe ser 1 dígito)
+- `900123456-1`
+- `123456789-0`
+- `800123456-7`
+- `12345678` (falta guión y DV)
+- `90012345-12` (DV debe ser 1 dígito)
 
 **Implementación**:
 ```php
@@ -38,12 +38,12 @@ private function validateColombianNIT(string $nit): bool
 **Formato Válido**: Solo números de 6 a 10 dígitos
 
 **Ejemplos**:
-- ✅ `123456` (6 dígitos)
-- ✅ `79123456` (8 dígitos)
-- ✅ `1234567890` (10 dígitos)
-- ❌ `12345` (menos de 6 dígitos)
-- ❌ `12345678901` (más de 10 dígitos)
-- ❌ `79-123-456` (con guiones)
+- `123456` (6 dígitos)
+- `79123456` (8 dígitos)
+- `1234567890` (10 dígitos)
+- `12345` (menos de 6 dígitos)
+- `12345678901` (más de 10 dígitos)
+- `79-123-456` (con guiones)
 
 **Implementación**:
 ```php
@@ -69,7 +69,7 @@ private function validateColombianCedula(string $cedula): bool
 - ReceiverType: `'2'` (Consumidor final)
 - Custom_field5: `null`
 
-### ⚙️ Auto-corrección de Documentos
+### Auto-corrección de Documentos
 
 ```php
 if (!$nitValidation['valid']) {
@@ -85,10 +85,10 @@ if (!$nitValidation['valid']) {
 ```
 
 **Ventajas**:
-- ✅ No interrumpe el procesamiento
-- ✅ Logging detallado para auditoría
-- ✅ Conversión silenciosa a consumidor final
-- ✅ Mantiene la funcionalidad del sistema
+- No interrumpe el procesamiento
+- Logging detallado para auditoría
+- Conversión silenciosa a consumidor final
+- Mantiene la funcionalidad del sistema
 
 ## Validaciones de Límites de Base de Datos
 
@@ -134,7 +134,7 @@ private function sanitizeTextField(string $value, int $maxLength, string $fieldN
 }
 ```
 
-### 💰 Validaciones Decimales
+### Validaciones Decimales
 
 | Campo | Estructura BD | Validación Request | Regex |
 |-------|---------------|-------------------|--------|
@@ -167,7 +167,7 @@ private function numberFormat(float $number, int $decimals = 4): float
 
 ## Optimización de Totales
 
-### 🎯 Estrategia de Totales Globales
+### Estrategia de Totales Globales
 
 **Antes** (Calculado):
 ```php
@@ -183,7 +183,7 @@ $header->update(['Subtotal' => $subtotalSum]);
 'Net_due' => $this->numberFormat($totalGlobal, 2),
 ```
 
-### 📊 Mapeo de Campos de Totales
+### Mapeo de Campos de Totales
 
 | JSON MEYPAR | Campo BD | Descripción |
 |-------------|-----------|-------------|
@@ -192,7 +192,7 @@ $header->update(['Subtotal' => $subtotalSum]);
 | `totales.impuestos` | `TotalTaxInvupos` | Total de impuestos |
 | `totales.descuentos` | `TotalDiscountInvupos` | Total de descuentos |
 
-### 🔧 Mapeo de Líneas de Detalle
+### Mapeo de Líneas de Detalle
 
 | Campo Origen | Campo BD | Cálculo |
 |--------------|-----------|---------|
@@ -203,7 +203,7 @@ $header->update(['Subtotal' => $subtotalSum]);
 
 ## Estructura de Campos Personalizados (CustomersImp)
 
-### 🗂️ Sistema de Custom Fields
+### 🗂Sistema de Custom Fields
 
 | Campo | Tipo Empresa | Tipo Persona | Consumidor Final |
 |-------|--------------|--------------|------------------|
@@ -232,7 +232,7 @@ switch ($nitValidation['type']) {
 
 ## Mensajes de Error Específicos
 
-### 📝 Validaciones de Request
+### Validaciones de Request
 
 **Límites de Caracteres**:
 - `"El número de documento no puede exceder 20 caracteres"`
@@ -249,7 +249,7 @@ switch ($nitValidation['type']) {
 - `"El nombre del adquiriente es requerido"`
 - `"Los items del documento son requeridos"`
 
-### 🔍 Logging de Validaciones
+### Logging de Validaciones
 
 **Documento Inválido**:
 ```
@@ -285,25 +285,25 @@ Número excede límite de BD decimal(16,4)
 
 ## Beneficios de la Implementación
 
-### ✅ Robustez
+### Robustez
 - **Validación automática** de documentos colombianos
 - **Auto-corrección** para datos inválidos
 - **Límites exactos** según estructura de BD
 - **Logging detallado** para auditoría
 
-### ⚡ Performance
+### Performance
 - **Totales directos** de MEYPAR (no calculados)
 - **Validación en una pasada** de documentos
 - **Formateo optimizado** con límites exactos
 - **Sin operaciones de actualización** innecesarias
 
-### 🔧 Mantenibilidad
+### Mantenibilidad
 - **Mensajes claros** en español
 - **Logging estructurado** para debugging
 - **Separación de responsabilidades** (Request vs Service)
 - **Documentación completa** de validaciones
 
-### 🎯 Precisión
+### Precisión
 - **Compatibilidad exacta** con estructura de BD
 - **Validaciones específicas** para Colombia
 - **Formato decimal preciso** (16,4 y 18,4)
@@ -328,7 +328,7 @@ Número excede límite de BD decimal(16,4)
 - `900123456` → Consumidor final (falta DV)
 - `''` → Consumidor final
 
-### 📊 Casos de Prueba Límites
+### Casos de Prueba Límites
 
 **Campos de Texto**:
 - Nombre 40 caracteres → Truncado a 39

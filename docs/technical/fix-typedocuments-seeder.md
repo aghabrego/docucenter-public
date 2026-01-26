@@ -1,6 +1,6 @@
-# 🔧 INSTRUCCIONES - ACTUALIZAR TIPOS DE DOCUMENTO
+# INSTRUCCIONES - ACTUALIZAR TIPOS DE DOCUMENTO
 
-## ❌ **PROBLEMA IDENTIFICADO**
+## **PROBLEMA IDENTIFICADO**
 
 Solo estás viendo 2 tipos de documento en el dropdown:
 - `value="01"` → Factura de operación interna
@@ -10,13 +10,13 @@ Solo estás viendo 2 tipos de documento en el dropdown:
 
 ---
 
-## 🎯 **CAUSA RAÍZ**
+## **CAUSA RAÍZ**
 
 El seeder no estaba guardando el campo `code` en la tabla `typedocuments`. Solo guardaba el `name`, por lo que el DataProvider no podía usar los códigos JSch09.
 
 ---
 
-## ✅ **SOLUCIONES IMPLEMENTADAS**
+## **SOLUCIONES IMPLEMENTADAS**
 
 ### 1. **Seeder Corregido**
 **Archivo**: `database/seeders/TypedocumentSeeder.php`
@@ -43,7 +43,7 @@ Typedocument::firstOrCreate(['code' => $code], [
 
 ---
 
-## 🚀 **PASOS PARA RESOLVER**
+## **PASOS PARA RESOLVER**
 
 ### **Opción 1: Comando Artisan (Recomendado)**
 ```bash
@@ -70,7 +70,7 @@ php artisan db:seed --class=TypedocumentSeeder
 
 ---
 
-## 🎉 **RESULTADO ESPERADO**
+## **RESULTADO ESPERADO**
 
 Después de ejecutar cualquiera de las opciones, el dropdown mostrará:
 
@@ -91,7 +91,7 @@ Después de ejecutar cualquiera de las opciones, el dropdown mostrará:
 
 ---
 
-## ✅ **VERIFICACIÓN**
+## **VERIFICACIÓN**
 
 1. **Base de datos**: Tabla `typedocuments` debe tener 9 registros con columna `code` llena
 2. **Dropdown**: Debe mostrar 9 opciones con values '01', '02', etc.
@@ -99,4 +99,4 @@ Después de ejecutar cualquiera de las opciones, el dropdown mostrará:
 
 ---
 
-**¡Ejecuta una de las opciones y el problema estará resuelto!** 🎯
+**¡Ejecuta una de las opciones y el problema estará resuelto!** 

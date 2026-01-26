@@ -1,10 +1,10 @@
 # Implementación Completa: UpdateQuickBooksInvoicesJob
 
-## 📋 Resumen de Implementación
+## Resumen de Implementación
 
 Se ha implementado exitosamente un sistema completo para actualizar facturas de ventas originadas en QuickBooks usando la API de Intuit.
 
-## 🚀 Archivos Creados
+## Archivos Creados
 
 ### 1. Job Principal
 - **Archivo**: `app/Jobs/Intuit/UpdateQuickBooksInvoicesJob.php`
@@ -39,7 +39,7 @@ Se ha implementado exitosamente un sistema completo para actualizar facturas de 
 - **Propósito**: Documentación completa del sistema
 - **Contenido**: API, configuración, troubleshooting, mejores prácticas
 
-## 🔧 Campos Utilizados (SalesHeaderImp)
+## Campos Utilizados (SalesHeaderImp)
 
 El sistema utiliza los campos existentes del modelo sin necesidad de migraciones:
 
@@ -60,20 +60,20 @@ El sistema utiliza los campos existentes del modelo sin necesidad de migraciones
 'InvoiceNote'          // Datos de facturación
 ```
 
-## 📊 Criterios de Selección
+## Criterios de Selección
 
 ### Facturas Elegibles
-- ✅ `origin = 'quickbooks'`
-- ✅ `EzeeIssued = 1`
-- ✅ `InvoiceNote IS NOT NULL`
-- ✅ `intuit_invoice_id IS NOT NULL`
+- `origin = 'quickbooks'`
+- `EzeeIssued = 1`
+- `InvoiceNote IS NOT NULL`
+- `intuit_invoice_id IS NOT NULL`
 
 ### Filtros de Procesamiento
 - Estado diferente a 'synced'
 - Sin estado (nuevas)
 - Último intento hace más de 1 hora
 
-## 🎯 Uso del Sistema
+## Uso del Sistema
 
 ### Comando Básico
 ```bash
@@ -115,7 +115,7 @@ dispatch(new UpdateQuickBooksInvoicesJob($connection, 123));
 dispatch(new UpdateQuickBooksInvoicesJob($connection, 123, [1, 2, 3]));
 ```
 
-## 🔍 Monitoreo
+## Monitoreo
 
 ### Logs Principales
 ```bash
@@ -163,7 +163,7 @@ ORDER BY intuit_last_attempt DESC
 LIMIT 10;
 ```
 
-## 🔥 API de QuickBooks
+## API de QuickBooks
 
 ### Endpoint Usado
 ```
@@ -195,28 +195,28 @@ POST https://sandbox-quickbooks.api.intuit.com/v3/company/{companyId}/invoice
 }
 ```
 
-## ⚠️ Consideraciones Importantes
+## Consideraciones Importantes
 
 ### Prerrequisitos
-1. ✅ Conexión QuickBooks activa en tabla `connections`
-2. ✅ Tokens de acceso válidos
-3. ✅ Facturas ya creadas en QuickBooks (`intuit_invoice_id` populated)
-4. ✅ Cola de trabajos configurada
+1. Conexión QuickBooks activa en tabla `connections`
+2. Tokens de acceso válidos
+3. Facturas ya creadas en QuickBooks (`intuit_invoice_id` populated)
+4. Cola de trabajos configurada
 
 ### Limitaciones
-- ⚠️ Solo actualiza facturas existentes (no crea nuevas)
-- ⚠️ Requiere `intuit_invoice_id` válido
-- ⚠️ Limitado por rate limits de QuickBooks API
-- ⚠️ No maneja renovación automática de tokens
+- Solo actualiza facturas existentes (no crea nuevas)
+- Requiere `intuit_invoice_id` válido
+- Limitado por rate limits de QuickBooks API
+- No maneja renovación automática de tokens
 
 ### Mejores Prácticas
-1. 🔍 **Siempre usar dry-run primero**
-2. 📊 **Monitorear logs durante ejecución**
-3. ⏰ **Ejecutar en horarios de bajo tráfico**
-4. 🔄 **Verificar resultados en QuickBooks**
-5. 📋 **Documentar cualquier problema encontrado**
+1. **Siempre usar dry-run primero**
+2. **Monitorear logs durante ejecución**
+3.  **Ejecutar en horarios de bajo tráfico**
+4. **Verificar resultados en QuickBooks**
+5. **Documentar cualquier problema encontrado**
 
-## 🚀 Próximos Pasos
+## Próximos Pasos
 
 ### Implementación Inmediata
 1. Probar en ambiente de desarrollo
@@ -231,7 +231,7 @@ POST https://sandbox-quickbooks.api.intuit.com/v3/company/{companyId}/invoice
 4. **Dashboard de monitoreo**
 5. **Bulk operations optimization**
 
-## 📝 Notas Técnicas
+## Notas Técnicas
 
 - **Patrón de estados granulares** para mejor tracking
 - **Cache temporal** para monitoreo en tiempo real
@@ -240,4 +240,4 @@ POST https://sandbox-quickbooks.api.intuit.com/v3/company/{companyId}/invoice
 - **Compatible con arquitectura multi-tenant** existente
 - **Sin cambios de base de datos** - usa campos existentes
 
-¡La implementación está completa y lista para usar! 🎉
+¡La implementación está completa y lista para usar! 

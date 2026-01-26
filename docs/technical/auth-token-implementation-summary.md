@@ -173,7 +173,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
 - Modo refresh (solo renovación)
 - Modo complete (login + renovación)
 - Almacenamiento de token en `/tmp/docucenter_test_token.txt`
-- Output con colores (✓ ✗ ⚠ ℹ)
+- Output con colores (✓ ✗ ℹ)
 - Detección de errores específicos
 - Configuración con variables de entorno
 - Verificación de salud del servidor
@@ -540,9 +540,9 @@ Ya existente:
 - ✓ Observabilidad (logging detallado)
 
 ### Consideraciones
-- ⚠ Dependencia de API remota (503 si caída)
-- ⚠ Latencia adicional en login/refresh (llamada HTTP)
-- ⚠ Requiere conectividad para operar
+- Dependencia de API remota (503 si caída)
+- Latencia adicional en login/refresh (llamada HTTP)
+- Requiere conectividad para operar
 
 ### Mitigaciones
 - Cache de respuestas de API remota (implementar si necesario)
@@ -564,6 +564,6 @@ Implementación completa y robusta de API de autenticación con renovación de t
 - Manejo de errores completo
 - Advertencias proactivas
 
-**Estado**: ✅ Listo para testing en ambiente de desarrollo
+**Estado**: Listo para testing en ambiente de desarrollo
 
 **Próximo paso**: Validar con datos reales y casos de borde

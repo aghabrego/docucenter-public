@@ -6,7 +6,7 @@
 
 ---
 
-## 📋 Índice
+## Índice
 
 1. [Problema a Resolver](#problema-a-resolver)
 2. [Arquitectura Propuesta](#arquitectura-propuesta)
@@ -51,7 +51,7 @@ BD Organización 3 (9_734_1672_58)
 ├─> Customers_Imp (datos org 3)
 └─> Sales_Header_Imp (datos org 3)
 
-❌ PROBLEMA: Sage no puede acceder a datos de Org 1 + Org 2 + Org 3
+PROBLEMA: Sage no puede acceder a datos de Org 1 + Org 2 + Org 3
 ```
 
 ### Arquitectura Deseada
@@ -85,7 +85,7 @@ BD Compañía 100 (company_100) - DESTINO CONSOLIDADO
     ├─> Ventas de Org 1: org_source_id = 1, ID_compania = 100
     └─> Ventas de Org 2: org_source_id = 2, ID_compania = 100
 
-✅ SOLUCIÓN: Sage Connector se conecta a company_100 y ve TODO
+SOLUCIÓN: Sage Connector se conecta a company_100 y ve TODO
 ```
 
 ---
@@ -120,11 +120,11 @@ BD Compañía 100 (company_100) - DESTINO CONSOLIDADO
 **SOLUCIÓN SIMPLIFICADA:** Agregar `org_source_id` en **TODAS** las BDs
 
 **Ventajas de esta aproximación:**
-- ✅ Modelos Eloquent compatibles entre BDs
-- ✅ Misma estructura en org y company
-- ✅ Migraciones más simples
-- ✅ Testing más fácil
-- ✅ Sin problemas de esquema
+- Modelos Eloquent compatibles entre BDs
+- Misma estructura en org y company
+- Migraciones más simples
+- Testing más fácil
+- Sin problemas de esquema
 
 **En BDs de Organizaciones:**
 
@@ -208,18 +208,18 @@ relay-log = mysql-relay-bin
 ```
 
 #### Ventajas
-✅ Replicación en tiempo real (segundos de delay)
-✅ Nativo de MySQL, estable y probado
-✅ Automático, no requiere intervención manual
+Replicación en tiempo real (segundos de delay)
+Nativo de MySQL, estable y probado
+Automático, no requiere intervención manual
 
 #### Desventajas
-❌ **NO soporta múltiples masters a un slave con misma tabla**
-❌ Conflictos de PRIMARY KEY entre organizaciones
-❌ Complejo de mantener con N organizaciones dinámicas
-❌ Requiere configuración de servidor MySQL avanzada
+**NO soporta múltiples masters a un slave con misma tabla**
+Conflictos de PRIMARY KEY entre organizaciones
+Complejo de mantener con N organizaciones dinámicas
+Requiere configuración de servidor MySQL avanzada
 
 #### Viabilidad
-**⚠️ NO RECOMENDADO** - MySQL no soporta nativamente multi-master a single-slave para mismas tablas
+**NO RECOMENDADO** - MySQL no soporta nativamente multi-master a single-slave para mismas tablas
 
 ---
 
@@ -265,20 +265,20 @@ protected function schedule(Schedule $schedule)
 ```
 
 #### Ventajas
-✅ Control total sobre el proceso
-✅ Puede transformar datos antes de copiar
-✅ Maneja conflictos de forma explícita
-✅ Fácil de debuggear y mantener
-✅ Puede agregar org_source_id automáticamente
-✅ No requiere configuración de MySQL
+Control total sobre el proceso
+Puede transformar datos antes de copiar
+Maneja conflictos de forma explícita
+Fácil de debuggear y mantener
+Puede agregar org_source_id automáticamente
+No requiere configuración de MySQL
 
 #### Desventajas
-⚠️ Delay de hasta N minutos (no tiempo real)
-⚠️ Requiere desarrollo de lógica de sincronización
-⚠️ Consume recursos del servidor Laravel
+Delay de hasta N minutos (no tiempo real)
+Requiere desarrollo de lógica de sincronización
+Consume recursos del servidor Laravel
 
 #### Viabilidad
-**✅ RECOMENDADO** - Solución pragmática y controlable
+**RECOMENDADO** - Solución pragmática y controlable
 
 ---
 
@@ -308,19 +308,19 @@ DELIMITER ;
 ```
 
 #### Ventajas
-✅ Tiempo real (instantáneo)
-✅ No requiere Jobs externos
-✅ Automático, transparente para aplicación
+Tiempo real (instantáneo)
+No requiere Jobs externos
+Automático, transparente para aplicación
 
 #### Desventajas
-❌ **MUY COMPLEJO de mantener** (43+ tablas × N organizaciones)
-❌ Difícil debuggear problemas
-❌ Triggers pueden fallar silenciosamente
-❌ No soporta transformaciones complejas
-❌ Performance degradado en escrituras
+**MUY COMPLEJO de mantener** (43+ tablas × N organizaciones)
+Difícil debuggear problemas
+Triggers pueden fallar silenciosamente
+No soporta transformaciones complejas
+Performance degradado en escrituras
 
 #### Viabilidad
-**❌ NO RECOMENDADO** - Complejidad muy alta
+**NO RECOMENDADO** - Complejidad muy alta
 
 ---
 
@@ -345,19 +345,19 @@ SELECT *, 2 as org_source_id FROM Customers_Imp_Org2;
 ```
 
 #### Ventajas
-✅ Datos siempre actualizados (tiempo real)
-✅ No duplicación de datos
-✅ Queries transparentes para Sage
+Datos siempre actualizados (tiempo real)
+No duplicación de datos
+Queries transparentes para Sage
 
 #### Desventajas
-❌ **FEDERATED no viene habilitado por defecto en MariaDB**
-❌ Performance muy pobre en queries complejos
-❌ Requiere conexión permanente entre BDs
-❌ No soporta transacciones
-❌ Sage puede tener problemas con VIEWS
+**FEDERATED no viene habilitado por defecto en MariaDB**
+Performance muy pobre en queries complejos
+Requiere conexión permanente entre BDs
+No soporta transacciones
+Sage puede tener problemas con VIEWS
 
 #### Viabilidad
-**⚠️ NO RECOMENDADO** - Performance y estabilidad cuestionables
+**NO RECOMENDADO** - Performance y estabilidad cuestionables
 
 ---
 
@@ -406,17 +406,17 @@ class SyncOrganizationsToCompany extends Command
 ```
 
 #### Ventajas
-✅ Control manual total
-✅ Puede ejecutarse en horarios específicos (cron)
-✅ Útil para debugging
-✅ Bajo riesgo, ejecución explícita
+Control manual total
+Puede ejecutarse en horarios específicos (cron)
+Útil para debugging
+Bajo riesgo, ejecución explícita
 
 #### Desventajas
-⚠️ Requiere ejecución manual/programada
-⚠️ No es automático
+Requiere ejecución manual/programada
+No es automático
 
 #### Viabilidad
-**✅ COMPLEMENTO** - Usar junto con Jobs automáticos
+**COMPLEMENTO** - Usar junto con Jobs automáticos
 
 ---
 
@@ -426,27 +426,27 @@ class SyncOrganizationsToCompany extends Command
 
 | Criterio | Replicación Nativa | Laravel Jobs | Triggers | FEDERATED | Manual |
 |----------|-------------------|--------------|----------|-----------|--------|
-| **Tiempo Real** | ⭐⭐⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐ |
-| **Facilidad Implementación** | ⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐⭐ |
-| **Mantenibilidad** | ⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐ | ⭐⭐ | ⭐⭐⭐⭐ |
-| **Performance** | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐ | ⭐⭐⭐⭐ |
-| **Estabilidad** | ⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐ | ⭐⭐⭐⭐⭐ |
-| **Debugging** | ⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐ | ⭐⭐ | ⭐⭐⭐⭐⭐ |
-| **Escalabilidad** | ⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐ | ⭐⭐ | ⭐⭐⭐⭐ |
-| **Viabilidad Técnica** | ❌ | ✅ | ⚠️ | ❌ | ✅ |
+| **Tiempo Real** | | | | | |
+| **Facilidad Implementación** | | | | | |
+| **Mantenibilidad** | | | | | |
+| **Performance** | | | | | |
+| **Estabilidad** | | | | | |
+| **Debugging** | | | | | |
+| **Escalabilidad** | | | | | |
+| **Viabilidad Técnica** | | | | | |
 
 ### Recomendación Final
 
-**🏆 SOLUCIÓN RECOMENDADA: Laravel Jobs Asíncronos (Opción 2) + Manual (Opción 5)**
+**SOLUCIÓN RECOMENDADA: Laravel Jobs Asíncronos (Opción 2) + Manual (Opción 5)**
 
 **Razones:**
-1. ✅ **Control total**: Laravel maneja toda la lógica
-2. ✅ **Mantenible**: Código PHP estándar, fácil de debuggear
-3. ✅ **Flexible**: Puede transformar datos antes de copiar
-4. ✅ **Escalable**: Agregar nuevas organizaciones es trivial
-5. ✅ **No requiere cambios en MySQL**: Usa configuración actual
-6. ✅ **Testeable**: Unit tests y feature tests fáciles
-7. ✅ **Monitoreable**: Logs, estados, reintentos incorporados
+1. **Control total**: Laravel maneja toda la lógica
+2. **Mantenible**: Código PHP estándar, fácil de debuggear
+3. **Flexible**: Puede transformar datos antes de copiar
+4. **Escalable**: Agregar nuevas organizaciones es trivial
+5. **No requiere cambios en MySQL**: Usa configuración actual
+6. **Testeable**: Unit tests y feature tests fáciles
+7. **Monitoreable**: Logs, estados, reintentos incorporados
 
 ---
 
@@ -590,7 +590,7 @@ class SyncOrganizationToCompanyJob implements ShouldQueue
         foreach ($records as $record) {
             $data = (array) $record;
             
-            // ⭐ IMPORTANTE: Asignar org_source_id (está NULL en origen)
+            // IMPORTANTE: Asignar org_source_id (está NULL en origen)
             $data['org_source_id'] = $org->id;
             
             // Construir unique key compuesto (ID + org_source_id)
@@ -651,16 +651,16 @@ class SyncOrganizationsToCompany extends Command
 
     public function handle()
     {
-        $this->info("🚀 Iniciando sincronización de organizaciones a compañía...\n");
+        $this->info("Iniciando sincronización de organizaciones a compañía...\n");
 
         $organizations = $this->getOrganizationsToSync();
 
         if ($organizations->isEmpty()) {
-            $this->error("❌ No se encontraron organizaciones para sincronizar");
+            $this->error("No se encontraron organizaciones para sincronizar");
             return 1;
         }
 
-        $this->info("📊 Organizaciones a sincronizar: {$organizations->count()}\n");
+        $this->info("Organizaciones a sincronizar: {$organizations->count()}\n");
 
         $bar = $this->output->createProgressBar($organizations->count());
 
@@ -671,7 +671,7 @@ class SyncOrganizationsToCompany extends Command
 
         $bar->finish();
 
-        $this->info("\n\n✅ Sincronización completada");
+        $this->info("\n\nSincronización completada");
         return 0;
     }
 
@@ -696,7 +696,7 @@ class SyncOrganizationsToCompany extends Command
     protected function syncOrganization(Organization $org)
     {
         if (!$org->company_id) {
-            $this->warn("⚠️  Organización {$org->id} no tiene compañía asignada");
+            $this->warn("Organización {$org->id} no tiene compañía asignada");
             return;
         }
 
@@ -762,11 +762,11 @@ bash scripts/add-org-source-id-to-company.sh
 ```
 
 **Ventajas:**
-- ✅ Misma estructura de columnas en todas las BDs
-- ✅ Modelos Eloquent funcionan en ambos contextos
-- ✅ Migraciones más simples
-- ✅ En BDs org: columna queda NULL (no se usa)
-- ✅ En BD company: columna se llena por Job sync
+- Misma estructura de columnas en todas las BDs
+- Modelos Eloquent funcionan en ambos contextos
+- Migraciones más simples
+- En BDs org: columna queda NULL (no se usa)
+- En BD company: columna se llena por Job sync
 
 ---
 
@@ -774,9 +774,9 @@ bash scripts/add-org-source-id-to-company.sh
 
 ### Fase 1: Preparación (1 semana)
 
-**Estado:** ✅ Stubs actualizados (38/45) | ⏳ BD modifications pendientes
+**Estado:** Stubs actualizados (38/45) |  BD modifications pendientes
 
-#### 1.1 Actualizar Stubs SQL ✅ COMPLETADO
+#### 1.1 Actualizar Stubs SQL COMPLETADO
 
 Los stubs SQL ya incluyen la columna `org_source_id`:
 
@@ -804,7 +804,7 @@ php artisan make:migration add_company_id_to_organizations_table
 php artisan make:migration create_company_sync_logs_table
 ```
 
-#### 1.4 Agregar columna `org_source_id` a TODAS las BDs ⏳ PENDIENTE
+#### 1.4 Agregar columna `org_source_id` a TODAS las BDs  PENDIENTE
 
 **a) BDs de Organizaciones (usar comando Artisan):**
 
@@ -840,10 +840,10 @@ bash scripts/add-org-source-id-to-company.sh
 ```
 
 **VENTAJAS de este enfoque:**
-- ✅ Modelos Eloquent compatibles en ambos contextos
-- ✅ Misma estructura facilita testing
-- ✅ Columna nullable en orgs (queda sin usar)
-- ✅ Columna populated en company (por Job sync)
+- Modelos Eloquent compatibles en ambos contextos
+- Misma estructura facilita testing
+- Columna nullable en orgs (queda sin usar)
+- Columna populated en company (por Job sync)
 
 ### Fase 2: Desarrollo (1 semana)
 
@@ -988,8 +988,8 @@ Customers_Imp:
 - Sage ve el cambio con máximo 5 min de retraso
 
 **¿Es aceptable?** 
-- ✅ SÍ para la mayoría de casos
-- ⚠️ Si requiere tiempo real, reducir a 1 minuto
+- SÍ para la mayoría de casos
+- Si requiere tiempo real, reducir a 1 minuto
 
 ### 4. **Volumen de Datos**
 
@@ -1018,19 +1018,19 @@ Customers_Imp:
 ### KPIs
 
 1. **Sincronización:**
-   - ✅ Delay promedio < 5 minutos
-   - ✅ Success rate > 99%
-   - ✅ 0 pérdida de datos
+   - Delay promedio < 5 minutos
+   - Success rate > 99%
+   - 0 pérdida de datos
 
 2. **Performance:**
-   - ✅ Sage Connector conecta correctamente
-   - ✅ Queries de Sage < 2 segundos
-   - ✅ Jobs de sincronización < 5 minutos
+   - Sage Connector conecta correctamente
+   - Queries de Sage < 2 segundos
+   - Jobs de sincronización < 5 minutos
 
 3. **Estabilidad:**
-   - ✅ 0 duplicados en BD de compañía
-   - ✅ Integridad referencial mantenida
-   - ✅ Logs sin errores críticos
+   - 0 duplicados en BD de compañía
+   - Integridad referencial mantenida
+   - Logs sin errores críticos
 
 ---
 
@@ -1049,13 +1049,13 @@ Customers_Imp:
 
 ## Conclusión
 
-**✅ SOLUCIÓN VIABLE Y RECOMENDADA:**
+**SOLUCIÓN VIABLE Y RECOMENDADA:**
 
 La replicación mediante **Laravel Jobs Asíncronos** es la solución más:
-- ✅ **Pragmática**: No requiere configuración compleja de MySQL
-- ✅ **Mantenible**: Código PHP estándar de Laravel
-- ✅ **Escalable**: Agregar organizaciones es trivial
-- ✅ **Flexible**: Control total sobre transformaciones
-- ✅ **Debuggeable**: Logs, reintentos, monitoreo incorporado
+- **Pragmática**: No requiere configuración compleja de MySQL
+- **Mantenible**: Código PHP estándar de Laravel
+- **Escalable**: Agregar organizaciones es trivial
+- **Flexible**: Control total sobre transformaciones
+- **Debuggeable**: Logs, reintentos, monitoreo incorporado
 
 **Próximo Paso:** Implementar Fase 1 - Preparación de estructura de BDs y modelos.

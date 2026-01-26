@@ -28,34 +28,34 @@ La API está diseñada para recibir webhooks de Lightspeed con el siguiente form
 
 | Campo | Tipo | Requerido | Descripción |
 |-------|------|-----------|-------------|
-| `retailer_id` | integer | ✅ | ID del retailer en Lightspeed |
-| `active` | boolean | ✅ | Si el webhook está activo |
-| `url` | string | ✅ | URL del webhook |
-| `type` | string | ✅ | Tipo de evento ("sale.update") |
+| `retailer_id` | integer | | ID del retailer en Lightspeed |
+| `active` | boolean | | Si el webhook está activo |
+| `url` | string | | URL del webhook |
+| `type` | string | | Tipo de evento ("sale.update") |
 
 #### Datos de la Venta
 
 | Campo | Tipo | Requerido | Descripción |
 |-------|------|-----------|-------------|
-| `sale.sale_id` | integer | ✅ | ID único de la venta |
-| `sale.register_id` | integer | ✅ | ID del registro/caja |
-| `sale.customer_id` | integer | ❌ | ID del cliente |
-| `sale.employee_id` | integer | ✅ | ID del empleado |
-| `sale.shop_id` | integer | ✅ | ID de la tienda |
-| `sale.total` | string | ✅ | Total de la venta |
-| `sale.subtotal` | string | ✅ | Subtotal antes de impuestos |
-| `sale.tax_total` | string | ✅ | Total de impuestos |
-| `sale.completed_at` | string | ✅ | Fecha de completado |
+| `sale.sale_id` | integer | | ID único de la venta |
+| `sale.register_id` | integer | | ID del registro/caja |
+| `sale.customer_id` | integer | | ID del cliente |
+| `sale.employee_id` | integer | | ID del empleado |
+| `sale.shop_id` | integer | | ID de la tienda |
+| `sale.total` | string | | Total de la venta |
+| `sale.subtotal` | string | | Subtotal antes de impuestos |
+| `sale.tax_total` | string | | Total de impuestos |
+| `sale.completed_at` | string | | Fecha de completado |
 
 #### Items de la Venta
 
 | Campo | Tipo | Requerido | Descripción |
 |-------|------|-----------|-------------|
-| `sale.items[].item_id` | integer | ✅ | ID del item |
-| `sale.items[].quantity` | integer | ✅ | Cantidad vendida |
-| `sale.items[].unit_price` | string | ✅ | Precio unitario |
-| `sale.items[].total_price` | string | ✅ | Precio total del item |
-| `sale.items[].tax_total` | string | ✅ | Impuestos del item |
+| `sale.items[].item_id` | integer | | ID del item |
+| `sale.items[].quantity` | integer | | Cantidad vendida |
+| `sale.items[].unit_price` | string | | Precio unitario |
+| `sale.items[].total_price` | string | | Precio total del item |
+| `sale.items[].tax_total` | string | | Impuestos del item |
 
 ### Ejemplo de Request (Basado en Webhook Lightspeed)
 

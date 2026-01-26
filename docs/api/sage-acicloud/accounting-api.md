@@ -11,19 +11,19 @@
 
 | Campo | Tipo | Requerido | Descripción | Ejemplo |
 |-------|------|-----------|-------------|---------|
-| `entry_number` | string | ✅ | Número único del asiento | `"GJE-2025-001"` |
-| `date` | string | ✅ | Fecha del asiento (YYYY-MM-DD) | `"2025-01-29"` |
-| `description` | string | ✅ | Descripción del asiento | `"Ajuste de depreciación enero"` |
-| `reference` | string | ❌ | Referencia externa | `"DEP-2025-01"` |
-| `source` | string | ❌ | Origen del asiento | `"MANUAL"` |
-| `lines` | array | ✅ | Líneas del asiento (mín. 2) | `[]` |
-| `lines[].account_code` | string | ✅ | Código de cuenta contable | `"1200"` |
-| `lines[].description` | string | ✅ | Descripción de la línea | `"Depreciación acumulada equipos"` |
-| `lines[].debit_amount` | decimal | ❌ | Monto débito | `1500.00` |
-| `lines[].credit_amount` | decimal | ❌ | Monto crédito | `0.00` |
-| `lines[].department` | string | ❌ | Departamento | `"ADMIN"` |
-| `lines[].project` | string | ❌ | Proyecto asociado | `"PROJ001"` |
-| `lines[].memo` | string | ❌ | Memo adicional | `"Depreciación mensual"` |
+| `entry_number` | string | | Número único del asiento | `"GJE-2025-001"` |
+| `date` | string | | Fecha del asiento (YYYY-MM-DD) | `"2025-01-29"` |
+| `description` | string | | Descripción del asiento | `"Ajuste de depreciación enero"` |
+| `reference` | string | | Referencia externa | `"DEP-2025-01"` |
+| `source` | string | | Origen del asiento | `"MANUAL"` |
+| `lines` | array | | Líneas del asiento (mín. 2) | `[]` |
+| `lines[].account_code` | string | | Código de cuenta contable | `"1200"` |
+| `lines[].description` | string | | Descripción de la línea | `"Depreciación acumulada equipos"` |
+| `lines[].debit_amount` | decimal | | Monto débito | `1500.00` |
+| `lines[].credit_amount` | decimal | | Monto crédito | `0.00` |
+| `lines[].department` | string | | Departamento | `"ADMIN"` |
+| `lines[].project` | string | | Proyecto asociado | `"PROJ001"` |
+| `lines[].memo` | string | | Memo adicional | `"Depreciación mensual"` |
 
 ### Validaciones
 
@@ -96,10 +96,10 @@
 
 | Campo | Tipo | Requerido | Descripción | Ejemplo |
 |-------|------|-----------|-------------|---------|
-| `batch_number` | string | ✅ | Número de lote | `"BATCH-2025-001"` |
-| `batch_date` | string | ✅ | Fecha del lote | `"2025-01-29"` |
-| `batch_description` | string | ✅ | Descripción del lote | `"Asientos de cierre enero 2025"` |
-| `entries` | array | ✅ | Lista de asientos contables | `[]` |
+| `batch_number` | string | | Número de lote | `"BATCH-2025-001"` |
+| `batch_date` | string | | Fecha del lote | `"2025-01-29"` |
+| `batch_description` | string | | Descripción del lote | `"Asientos de cierre enero 2025"` |
+| `entries` | array | | Lista de asientos contables | `[]` |
 
 Cada elemento en `entries` debe tener la misma estructura que el endpoint individual.
 
@@ -199,11 +199,11 @@ Cada elemento en `entries` debe tener la misma estructura que el endpoint indivi
 
 | Parámetro | Tipo | Requerido | Descripción | Ejemplo |
 |-----------|------|-----------|-------------|---------|
-| `page` | integer | ❌ | Página a obtener | `2` |
-| `per_page` | integer | ❌ | Registros por página | `50` |
-| `batch_number` | string | ❌ | Filtrar por lote | `"BATCH-2025-001"` |
-| `date_from` | string | ❌ | Fecha desde | `"2025-01-01"` |
-| `date_to` | string | ❌ | Fecha hasta | `"2025-01-31"` |
+| `page` | integer | | Página a obtener | `2` |
+| `per_page` | integer | | Registros por página | `50` |
+| `batch_number` | string | | Filtrar por lote | `"BATCH-2025-001"` |
+| `date_from` | string | | Fecha desde | `"2025-01-01"` |
+| `date_to` | string | | Fecha hasta | `"2025-01-31"` |
 
 ### Respuesta de Éxito
 
@@ -271,21 +271,21 @@ Cada elemento en `entries` debe tener la misma estructura que el endpoint indivi
 
 | Campo | Tipo | Requerido | Descripción | Ejemplo |
 |-------|------|-----------|-------------|---------|
-| `sale_number` | string | ✅ | Número de venta | `"SALE-2025-001"` |
-| `customer_id` | string | ✅ | ID del cliente | `"CUST001"` |
-| `date` | string | ✅ | Fecha de la venta | `"2025-01-29"` |
-| `due_date` | string | ❌ | Fecha de vencimiento | `"2025-02-28"` |
-| `currency` | string | ❌ | Moneda | `"USD"` |
-| `exchange_rate` | decimal | ❌ | Tipo de cambio | `1.00` |
-| `payment_terms` | string | ❌ | Términos de pago | `"NET30"` |
-| `reference` | string | ❌ | Referencia | `"ORD-001"` |
-| `items` | array | ✅ | Items de venta | `[]` |
-| `items[].product_code` | string | ✅ | Código del producto | `"PROD001"` |
-| `items[].description` | string | ✅ | Descripción | `"Laptop Dell"` |
-| `items[].quantity` | decimal | ✅ | Cantidad | `2.00` |
-| `items[].unit_price` | decimal | ✅ | Precio unitario | `1200.00` |
-| `items[].tax_rate` | decimal | ❌ | Tasa de impuesto | `0.07` |
-| `items[].discount_percent` | decimal | ❌ | Descuento porcentual | `5.00` |
+| `sale_number` | string | | Número de venta | `"SALE-2025-001"` |
+| `customer_id` | string | | ID del cliente | `"CUST001"` |
+| `date` | string | | Fecha de la venta | `"2025-01-29"` |
+| `due_date` | string | | Fecha de vencimiento | `"2025-02-28"` |
+| `currency` | string | | Moneda | `"USD"` |
+| `exchange_rate` | decimal | | Tipo de cambio | `1.00` |
+| `payment_terms` | string | | Términos de pago | `"NET30"` |
+| `reference` | string | | Referencia | `"ORD-001"` |
+| `items` | array | | Items de venta | `[]` |
+| `items[].product_code` | string | | Código del producto | `"PROD001"` |
+| `items[].description` | string | | Descripción | `"Laptop Dell"` |
+| `items[].quantity` | decimal | | Cantidad | `2.00` |
+| `items[].unit_price` | decimal | | Precio unitario | `1200.00` |
+| `items[].tax_rate` | decimal | | Tasa de impuesto | `0.07` |
+| `items[].discount_percent` | decimal | | Descuento porcentual | `5.00` |
 
 ### Ejemplo de Request
 

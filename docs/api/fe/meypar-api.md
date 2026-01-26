@@ -18,71 +18,71 @@ Crea y emite una factura electrónica basada en datos provenientes del sistema M
 
 | Campo | Tipo | Requerido | Descripción | Límite |
 |-------|------|-----------|-------------|---------|
-| `documento.tipo_documento` | string | ✅ | Tipo de documento | - |
-| `documento.numero` | string | ✅ | Número del documento | **20 caracteres** |
-| `documento.fecha` | string | ✅ | Fecha del documento (YYYY-MM-DD) | - |
+| `documento.tipo_documento` | string | | Tipo de documento | - |
+| `documento.numero` | string | | Número del documento | **20 caracteres** |
+| `documento.fecha` | string | | Fecha del documento (YYYY-MM-DD) | - |
 
 #### Emisor
 
 | Campo | Tipo | Requerido | Descripción | Límite |
 |-------|------|-----------|-------------|---------|
-| `documento.emisor.nombre` | string | ✅ | Nombre del emisor | **100 caracteres** |
-| `documento.emisor.nit` | string | ✅ | NIT del emisor | **50 caracteres** |
-| `documento.emisor.direccion` | string | ❌ | Dirección del emisor | - |
-| `documento.emisor.telefono` | string | ❌ | Teléfono del emisor | - |
-| `documento.emisor.email` | string | ❌ | Email del emisor | - |
+| `documento.emisor.nombre` | string | | Nombre del emisor | **100 caracteres** |
+| `documento.emisor.nit` | string | | NIT del emisor | **50 caracteres** |
+| `documento.emisor.direccion` | string | | Dirección del emisor | - |
+| `documento.emisor.telefono` | string | | Teléfono del emisor | - |
+| `documento.emisor.email` | string | | Email del emisor | - |
 
 #### Adquiriente
 
 | Campo | Tipo | Requerido | Descripción | Límite |
 |-------|------|-----------|-------------|---------|
-| `documento.adquiriente.nombre` | string | ✅ | Nombre del cliente | **39 caracteres** |
-| `documento.adquiriente.nit` | string | ❌ | NIT del cliente | **20 caracteres** |
-| `documento.adquiriente.email` | string | ❌ | Email del cliente | **100 caracteres** |
-| `documento.adquiriente.direccion` | string | ❌ | Dirección del cliente | **200 caracteres** |
-| `documento.adquiriente.telefono` | string | ❌ | Teléfono del cliente | **20 caracteres** |
+| `documento.adquiriente.nombre` | string | | Nombre del cliente | **39 caracteres** |
+| `documento.adquiriente.nit` | string | | NIT del cliente | **20 caracteres** |
+| `documento.adquiriente.email` | string | | Email del cliente | **100 caracteres** |
+| `documento.adquiriente.direccion` | string | | Dirección del cliente | **200 caracteres** |
+| `documento.adquiriente.telefono` | string | | Teléfono del cliente | **20 caracteres** |
 
 #### Terminal
 
 | Campo | Tipo | Requerido | Descripción | Límite |
 |-------|------|-----------|-------------|---------|
-| `documento.terminal.CodigoTerminal` | integer | ❌ | Código del terminal | - |
-| `documento.terminal.CodigoExterno` | string | ❌ | Código externo del terminal | **20 caracteres** |
-| `documento.terminal.NombreTerminal` | string | ❌ | Nombre del terminal | **100 caracteres** |
+| `documento.terminal.CodigoTerminal` | integer | | Código del terminal | - |
+| `documento.terminal.CodigoExterno` | string | | Código externo del terminal | **20 caracteres** |
+| `documento.terminal.NombreTerminal` | string | | Nombre del terminal | **100 caracteres** |
 
 #### Items del Documento
 
 | Campo | Tipo | Requerido | Descripción | Límite |
 |-------|------|-----------|-------------|---------|
-| `documento.items.*.cantidad` | decimal | ✅ | Cantidad del item | **decimal(12,2)** |
-| `documento.items.*.descripcion` | string | ✅ | Descripción del item | **255 caracteres** |
-| `documento.items.*.precioUnitario` | decimal | ✅ | Precio unitario | **decimal(16,4)** |
-| `documento.items.*.codigoProducto` | string | ✅ | Código del producto | **50 caracteres** |
-| `documento.items.*.unidadMedida` | string | ❌ | Unidad de medida | **10 caracteres** |
-| `documento.items.*.precioTotalFinalDetalle` | decimal | ✅ | Precio total final | **decimal(16,4)** |
+| `documento.items.*.cantidad` | decimal | | Cantidad del item | **decimal(12,2)** |
+| `documento.items.*.descripcion` | string | | Descripción del item | **255 caracteres** |
+| `documento.items.*.precioUnitario` | decimal | | Precio unitario | **decimal(16,4)** |
+| `documento.items.*.codigoProducto` | string | | Código del producto | **50 caracteres** |
+| `documento.items.*.unidadMedida` | string | | Unidad de medida | **10 caracteres** |
+| `documento.items.*.precioTotalFinalDetalle` | decimal | | Precio total final | **decimal(16,4)** |
 
 #### Medios de Pago
 
 | Campo | Tipo | Requerido | Descripción | Límite |
 |-------|------|-----------|-------------|---------|
-| `documento.medios_pago.*.codigoMedioPago` | integer | ✅ | 1=Efectivo, 2=Tarjeta, 3=Cheque, 4=Transferencia | - |
-| `documento.medios_pago.*.importeMedioPago` | decimal | ✅ | Importe del medio de pago | **decimal(16,4)** |
+| `documento.medios_pago.*.codigoMedioPago` | integer | | 1=Efectivo, 2=Tarjeta, 3=Cheque, 4=Transferencia | - |
+| `documento.medios_pago.*.importeMedioPago` | decimal | | Importe del medio de pago | **decimal(16,4)** |
 
 #### Totales
 
 | Campo | Tipo | Requerido | Descripción | Límite |
 |-------|------|-----------|-------------|---------|
-| `documento.totales.total` | decimal | ✅ | Total del documento | **decimal(16,4)** |
-| `documento.totales.subtotal` | decimal | ❌ | Subtotal (antes de impuestos) | **decimal(16,4)** |
-| `documento.totales.impuestos` | decimal | ❌ | Total de impuestos | **decimal(16,4)** |
-| `documento.totales.descuentos` | decimal | ❌ | Total de descuentos | **decimal(16,4)** |
+| `documento.totales.total` | decimal | | Total del documento | **decimal(16,4)** |
+| `documento.totales.subtotal` | decimal | | Subtotal (antes de impuestos) | **decimal(16,4)** |
+| `documento.totales.impuestos` | decimal | | Total de impuestos | **decimal(16,4)** |
+| `documento.totales.descuentos` | decimal | | Total de descuentos | **decimal(16,4)** |
 
 #### Autorización de Prefijo (Opcional)
 
 | Campo | Tipo | Requerido | Descripción | Límite |
 |-------|------|-----------|-------------|---------|
-| `documento.autorizacion_prefijo.PrefijoId` | string | ❌ | ID del prefijo | **10 caracteres** |
-| `documento.autorizacion_prefijo.ResolucionNumero` | string | ❌ | Número de resolución | **50 caracteres** |
+| `documento.autorizacion_prefijo.PrefijoId` | string | | ID del prefijo | **10 caracteres** |
+| `documento.autorizacion_prefijo.ResolucionNumero` | string | | Número de resolución | **50 caracteres** |
 
 ### Ejemplo de Request (Estructura Oficial MEYPAR)
 
@@ -247,7 +247,7 @@ Crea y emite una factura electrónica basada en datos provenientes del sistema M
 - Si un campo excede el límite, se trunca automáticamente
 - Se registra un log de advertencia con el valor original y truncado
 
-**💰 Campos Decimales**
+**Campos Decimales**
 - Todos los precios y cantidades usan regex específicos para validar precisión
 - Formato esperado: hasta 12 dígitos enteros con máximo 4 decimales
 - Regex: `/^\d{1,12}(\.\d{1,4})?$/`

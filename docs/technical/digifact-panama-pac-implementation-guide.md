@@ -1404,12 +1404,12 @@ Digifact representa una opción robusta y moderna para la certificación de fact
 
 ### Próximos Pasos
 
-1. ✅ Análisis de documentación completado
-2. ⏳ Solicitar credenciales TEST
-3. ⏳ Desarrollar DigifactService
-4. ⏳ Implementar generación XML DGI
-5. ⏳ Testing integral
-6. ⏳ Migración a productivo
+1. Análisis de documentación completado
+2.  Solicitar credenciales TEST
+3.  Desarrollar DigifactService
+4.  Implementar generación XML DGI
+5.  Testing integral
+6.  Migración a productivo
 
 ---
 

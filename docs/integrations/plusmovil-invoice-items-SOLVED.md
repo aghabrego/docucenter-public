@@ -1,14 +1,14 @@
-# ✅ SOLUCIÓN: Items de Facturas en PlusMovil API
+# SOLUCIÓN: Items de Facturas en PlusMovil API
 
 **Fecha:** 6 de noviembre de 2025  
-**Estado:** ✅ **RESUELTO**  
+**Estado:** **RESUELTO**  
 **Endpoint:** `GET /com-invoices/{id}`
 
 ---
 
-## 🎉 Descubrimiento Crítico
+## Descubrimiento Crítico
 
-### ✅ **Los items SÍ están disponibles con autenticación Cognito**
+### **Los items SÍ están disponibles con autenticación Cognito**
 
 **Endpoint correcto**: `GET /com-invoices/{id}`
 
@@ -19,7 +19,7 @@ El endpoint individual de factura **SÍ incluye** los items completos:
 
 ---
 
-## 📊 Estructura de Respuesta Completa
+## Estructura de Respuesta Completa
 
 ### Ejemplo Real - Factura #86
 
@@ -61,7 +61,7 @@ curl -X GET "https://xka96gucj8.execute-api.us-east-1.amazonaws.com/qa/com-invoi
     "status": 1,
     "comments": "Factura generada desde la app",
     
-    // ✅ ITEMS DE LA FACTURA
+    // ITEMS DE LA FACTURA
     "com_invoice_item": [
       {
         "id": 135,
@@ -128,10 +128,10 @@ curl -X GET "https://xka96gucj8.execute-api.us-east-1.amazonaws.com/qa/com-invoi
       }
     ],
     
-    // ✅ DETALLES ADICIONALES (vacío en este caso)
+    // DETALLES ADICIONALES (vacío en este caso)
     "com_invoice_detail": [],
     
-    // ✅ RESUMEN DE PAGOS (vacío en este caso)
+    // RESUMEN DE PAGOS (vacío en este caso)
     "com_invoice_payment_summary": [],
     
     // ... relaciones
@@ -146,7 +146,7 @@ curl -X GET "https://xka96gucj8.execute-api.us-east-1.amazonaws.com/qa/com-invoi
 
 ---
 
-## 📋 Estructura de `com_invoice_item`
+## Estructura de `com_invoice_item`
 
 Cada item incluye:
 
@@ -174,7 +174,7 @@ Cada item incluye:
 
 ---
 
-## 🔑 Características Especiales
+## Características Especiales
 
 ### 1. **Productos Serializados con Rangos**
 
@@ -204,19 +204,19 @@ La API agrupa items del mismo producto en rangos consecutivos:
 
 ---
 
-## 📊 Casos de Prueba Validados
+## Casos de Prueba Validados
 
-### ✅ Factura con Items (ID: 86)
+### Factura con Items (ID: 86)
 - **Total**: $344.55
 - **Items**: 3 líneas agrupadas
 - **Productos**: Tarjetas prepago de $3, $5 y $6
 - **Unidades totales**: 75 (25 + 25 + 25)
 
-### ⚠️ Factura sin Items (ID: 303, 297, 300, 301, 302)
+### Factura sin Items (ID: 303, 297, 300, 301, 302)
 - **Arrays vacíos**: `com_invoice_item: []`
 - **Razón confirmada**: **NO venden productos serializados**
 
-### 🔍 **Análisis Detallado: ¿Por qué algunas facturas NO tienen items?**
+### **Análisis Detallado: ¿Por qué algunas facturas NO tienen items?**
 
 **Hallazgo Clave**: La API de PlusMovil **solo incluye items para productos físicos serializados**.
 
@@ -237,10 +237,10 @@ La API agrupa items del mismo producto en rangos consecutivos:
 ```
 
 **Características**:
-- ✅ Productos físicos con series individuales
-- ✅ Campos `range_start` y `range_end` presentes
-- ✅ Trazabilidad completa por unidad
-- 📦 Ejemplos: Tarjetas prepago, SIM cards, dispositivos
+- Productos físicos con series individuales
+- Campos `range_start` y `range_end` presentes
+- Trazabilidad completa por unidad
+- Ejemplos: Tarjetas prepago, SIM cards, dispositivos
 
 #### Facturas SIN Items:
 ```json
@@ -251,12 +251,12 @@ La API agrupa items del mismo producto en rangos consecutivos:
 ```
 
 **Características**:
-- ❌ Productos virtuales o servicios
-- ❌ No requieren tracking de series individuales
-- ❌ API no devuelve items en respuesta
-- 🔄 Ejemplos: Recargas electrónicas, pagos de servicios
+- Productos virtuales o servicios
+- No requieren tracking de series individuales
+- API no devuelve items en respuesta
+- Ejemplos: Recargas electrónicas, pagos de servicios
 
-#### 📊 Estadísticas del Análisis:
+#### Estadísticas del Análisis:
 
 | Periodo | Total Facturas | Con Items | Sin Items | % Con Items |
 |---------|----------------|-----------|-----------|-------------|
@@ -266,27 +266,27 @@ La API agrupa items del mismo producto en rangos consecutivos:
 
 **Patrón identificado**: A partir de septiembre 2025, aumentó la proporción de facturas de servicios/recargas electrónicas vs productos físicos.
 
-#### 🎯 Comportamiento del Sistema:
+#### Comportamiento del Sistema:
 
 ```
 Tipo de Venta          → Items en API
 ─────────────────────────────────────
-Tarjeta Prepago        → ✅ SÍ (con ranges)
-SIM Card               → ✅ SÍ (con ranges)
-Dispositivo Móvil      → ✅ SÍ (con serie)
+Tarjeta Prepago        → SÍ (con ranges)
+SIM Card               → SÍ (con ranges)
+Dispositivo Móvil      → SÍ (con serie)
 ─────────────────────────────────────
-Recarga Electrónica    → ❌ NO
-Pago de Servicio       → ❌ NO
-Crédito Virtual        → ❌ NO
+Recarga Electrónica    → NO
+Pago de Servicio       → NO
+Crédito Virtual        → NO
 ```
 
 Este es un **comportamiento de negocio intencional**, no un error del sistema.
 
 ---
 
-## 🚀 Implicaciones para DocuCenter
+## Implicaciones para DocuCenter
 
-### ✅ **Sincronización Completa Posible** (con limitaciones)
+### **Sincronización Completa Posible** (con limitaciones)
 
 Ahora podemos sincronizar:
 1. **Headers de Facturas**: Endpoint `/com-invoices` (lista) - TODAS las facturas
@@ -294,20 +294,20 @@ Ahora podemos sincronizar:
 3. **Productos**: Información completa de cada producto físico vendido
 4. **Series/Rangos**: Trazabilidad de productos serializados
 
-### ⚠️ **Limitaciones Identificadas**
+### **Limitaciones Identificadas**
 
 **Items NO disponibles para**:
-- ❌ Recargas electrónicas
-- ❌ Pagos de servicios
-- ❌ Créditos virtuales
-- ❌ Cualquier producto no serializado
+- Recargas electrónicas
+- Pagos de servicios
+- Créditos virtuales
+- Cualquier producto no serializado
 
 **Impacto**:
 - Solo ~29-100% de facturas tendrán items (varía por mes/tipo de negocio)
 - Los totales de factura siempre están disponibles (header)
 - No podemos hacer reportes detallados por producto en facturas de servicios
 
-### 💡 **Recomendaciones**
+### **Recomendaciones**
 
 1. **Sincronización en 2 fases**:
    - Fase 1: Headers de TODAS las facturas
@@ -335,7 +335,7 @@ Ahora podemos sincronizar:
 
 
 
-### 📝 **Plan de Implementación Actualizado**
+### **Plan de Implementación Actualizado**
 
 #### Fase 1: Sincronización de Headers
 ```php
@@ -413,21 +413,21 @@ $stats = [
 
 ---
 
-## 🔄 Diferencias: Listado vs Individual
+## Diferencias: Listado vs Individual
 
 | Característica | `/com-invoices` | `/com-invoices/{id}` |
 |----------------|-----------------|----------------------|
-| **Headers** | ✅ Completos | ✅ Completos |
-| **Items** | ❌ NO incluidos | ✅ SÍ incluidos |
-| **Detalles** | ❌ NO incluidos | ✅ SÍ incluidos |
-| **Pagos summary** | ❌ NO incluidos | ✅ SÍ incluidos |
-| **Relaciones** | ✅ Objetos completos | ✅ Objetos completos |
-| **Paginación** | ✅ Soportado | N/A (individual) |
-| **Filtros** | ✅ Dinámicos | N/A (por ID) |
+| **Headers** | Completos | Completos |
+| **Items** | NO incluidos | SÍ incluidos |
+| **Detalles** | NO incluidos | SÍ incluidos |
+| **Pagos summary** | NO incluidos | SÍ incluidos |
+| **Relaciones** | Objetos completos | Objetos completos |
+| **Paginación** | Soportado | N/A (individual) |
+| **Filtros** | Dinámicos | N/A (por ID) |
 
 ---
 
-## 📝 Scripts de Testing
+## Scripts de Testing
 
 ### Script para probar items de factura:
 
@@ -437,22 +437,22 @@ $stats = [
 
 source docs/testing/.plusmovil-token-QA.txt
 
-echo "🔍 Probando items de factura..."
+echo "Probando items de factura..."
 echo
 
 # 1. Buscar facturas con monto mayor
-echo "1️⃣ Buscando facturas con items..."
+echo "1⃣ Buscando facturas con items..."
 INVOICE_ID=$(curl -s -X GET \
   "https://xka96gucj8.execute-api.us-east-1.amazonaws.com/qa/com-invoices?limit=10&total_gte=100&order_by=id&order_dir=desc" \
   -H "Authorization: Bearer $ACCESS_TOKEN" \
   -H "Content-Type: application/json" \
   | jq -r '.data[0].id')
 
-echo "✅ Factura encontrada: ID $INVOICE_ID"
+echo "Factura encontrada: ID $INVOICE_ID"
 echo
 
 # 2. Obtener detalles completos
-echo "2️⃣ Obteniendo items de factura $INVOICE_ID..."
+echo "2⃣ Obteniendo items de factura $INVOICE_ID..."
 curl -s -X GET \
   "https://xka96gucj8.execute-api.us-east-1.amazonaws.com/qa/com-invoices/$INVOICE_ID" \
   -H "Authorization: Bearer $ACCESS_TOKEN" \
@@ -474,55 +474,55 @@ curl -s -X GET \
     }'
 
 echo
-echo "✅ Prueba completada"
+echo "Prueba completada"
 ```
 
 ---
 
-## 🎯 Conclusión
+## Conclusión
 
-### ✅ **Problema Resuelto (con matices)**
+### **Problema Resuelto (con matices)**
 
 La investigación inicial sobre `/com-invoice-items` nos llevó por el camino equivocado. El endpoint correcto es:
 
 **`GET /com-invoices/{id}`** 
 
 Este endpoint:
-- ✅ Usa autenticación Cognito (no requiere AWS Signature)
-- ✅ Incluye items de la factura **SOLO para productos físicos serializados**
-- ✅ Incluye información completa de productos con trazabilidad
-- ✅ Maneja productos serializados con rangos
-- ✅ Es eficiente (agrupación inteligente)
+- Usa autenticación Cognito (no requiere AWS Signature)
+- Incluye items de la factura **SOLO para productos físicos serializados**
+- Incluye información completa de productos con trazabilidad
+- Maneja productos serializados con rangos
+- Es eficiente (agrupación inteligente)
 
-### ⚠️ **Limitación Importante**
+### **Limitación Importante**
 
 **NO todos los tipos de venta incluyen items:**
-- ✅ Productos físicos (tarjetas, SIM, dispositivos) → **SÍ tienen items**
-- ❌ Servicios/recargas electrónicas → **NO tienen items**
-- 📊 Proporción estimada: 29-100% de facturas con items (varía por periodo)
+- Productos físicos (tarjetas, SIM, dispositivos) → **SÍ tienen items**
+- Servicios/recargas electrónicas → **NO tienen items**
+- Proporción estimada: 29-100% de facturas con items (varía por periodo)
 
 Esto es un **comportamiento intencional del sistema**, no un bug.
 
-### 📊 **Próximos Pasos**
+### **Próximos Pasos**
 
-1. ✅ ~~Actualizar documentación~~ (este archivo)
-2. ✅ ~~Crear script de testing para items~~
-3. ✅ ~~Analizar por qué algunas facturas no tienen items~~
-4. ⏳ Implementar PlusMovilInvoiceService con método `getInvoiceWithItems($id)`
-5. ⏳ Crear Job `SyncPlusMovilInvoiceItemsJob` con lógica selectiva
-6. ⏳ Agregar flags `item_type` y `has_physical_items` a Sales_Header_Imp
-7. ⏳ Mapear items a `Sales_Line_Imp` (solo facturas con productos físicos)
-8. ⏳ Crear dashboard de métricas de sincronización
-9. ⏳ Probar sincronización completa (headers + items selectivos)
+1. ~~Actualizar documentación~~ (este archivo)
+2. ~~Crear script de testing para items~~
+3. ~~Analizar por qué algunas facturas no tienen items~~
+4.  Implementar PlusMovilInvoiceService con método `getInvoiceWithItems($id)`
+5.  Crear Job `SyncPlusMovilInvoiceItemsJob` con lógica selectiva
+6.  Agregar flags `item_type` y `has_physical_items` a Sales_Header_Imp
+7.  Mapear items a `Sales_Line_Imp` (solo facturas con productos físicos)
+8.  Crear dashboard de métricas de sincronización
+9.  Probar sincronización completa (headers + items selectivos)
 
-### 🔄 **Documentos Actualizados**
+### **Documentos Actualizados**
 
-- ❌ ~~`plusmovil-invoice-items-investigation.md`~~ - Investigación preliminar (obsoleta)
-- ✅ **`plusmovil-invoice-items-SOLVED.md`** - Este documento (solución final + análisis)
-- ✅ ~~`plusmovil-api-testing-results.md`~~ - Actualizado con hallazgos
-- ✅ ~~`test-com-invoice-items.sh`~~ - Script de testing creado
+- ~~`plusmovil-invoice-items-investigation.md`~~ - Investigación preliminar (obsoleta)
+- **`plusmovil-invoice-items-SOLVED.md`** - Este documento (solución final + análisis)
+- ~~`plusmovil-api-testing-results.md`~~ - Actualizado con hallazgos
+- ~~`test-com-invoice-items.sh`~~ - Script de testing creado
 
-### 💡 **Lecciones Aprendidas**
+### **Lecciones Aprendidas**
 
 1. **No asumir que todas las facturas tienen items** - Depende del tipo de producto
 2. **Los totales siempre están en el header** - Confiable para reportes financieros

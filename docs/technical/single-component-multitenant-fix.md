@@ -62,17 +62,17 @@ public function mount(SalesHeaderImp $sale)
 
 ## Flujo Corregido
 
-1. ✅ `mount()` llama primero a `setOrganization()`
-2. ✅ `setOrganization()` establece la conexión correcta: `DB::connection()->useDatabase($organization->database)`
-3. ✅ Ahora las consultas a `customerImp` y `customerExp` buscan en la BD de la organización
-4. ✅ Las tablas `Customers_Imp` y `Customers_Exp` se encuentran correctamente
+1. `mount()` llama primero a `setOrganization()`
+2. `setOrganization()` establece la conexión correcta: `DB::connection()->useDatabase($organization->database)`
+3. Ahora las consultas a `customerImp` y `customerExp` buscan en la BD de la organización
+4. Las tablas `Customers_Imp` y `Customers_Exp` se encuentran correctamente
 
 ## Beneficios
 
-- ✅ **Multi-tenant correcto**: Cada organización accede a su propia BD
-- ✅ **Robustez**: No más errores de tabla no encontrada
-- ✅ **Consistencia**: Mismo patrón que otros componentes del sistema
-- ✅ **Compatibilidad**: Mantiene toda la funcionalidad existente
+- **Multi-tenant correcto**: Cada organización accede a su propia BD
+- **Robustez**: No más errores de tabla no encontrada
+- **Consistencia**: Mismo patrón que otros componentes del sistema
+- **Compatibilidad**: Mantiene toda la funcionalidad existente
 
 ## Archivos Modificados
 

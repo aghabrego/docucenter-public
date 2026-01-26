@@ -1,12 +1,12 @@
 # Correcciones Críticas Error PAC 201 - TheFactoryHKA
 
-## 📋 Resumen de Problema
+## Resumen de Problema
 
 **Error**: PAC 201 "Error al procesar solicitud" persistía después de corregir campos prohibidos para extranjeros.
 
 **Análisis**: El problema no era solo los campos prohibidos, sino múltiples validaciones PAC que causaban rechazo.
 
-## 🔍 Problemas Identificados
+## Problemas Identificados
 
 ### 1. Código de Item Vacío
 - **Problema**: Items con `codigo: ""` (cadena vacía)
@@ -28,7 +28,7 @@
 - **Impacto**: Estructura enviada contenía campos innecesarios
 - **Solución**: Filtrado inteligente con lista blanca de campos cero permitidos
 
-## ✅ Correcciones Implementadas
+## Correcciones Implementadas
 
 ### HKAService.php - Validación de Items
 
@@ -92,13 +92,13 @@ if (floatval($totalITBMS) > 0) {
 Se creó script de testing integral: `docs/testing/test-correcciones-pac-201.php`
 
 ### Resultados de Testing:
-- ✅ **Campos prohibidos extranjeros**: Verificados como null
-- ✅ **Código item vacío**: Corregido a 'ITEM001'
-- ✅ **Descripción larga**: Truncada de 109 a 100 caracteres
-- ✅ **Campos cero items**: Omitidos correctamente
-- ✅ **Campos cero totales**: Omitidos correctamente
+- **Campos prohibidos extranjeros**: Verificados como null
+- **Código item vacío**: Corregido a 'ITEM001'
+- **Descripción larga**: Truncada de 109 a 100 caracteres
+- **Campos cero items**: Omitidos correctamente
+- **Campos cero totales**: Omitidos correctamente
 
-## 📚 Archivos Modificados
+## Archivos Modificados
 
 ### Principales:
 - `app/Services/HKAService.php`: Correcciones en validación de items y filtrado
@@ -110,7 +110,7 @@ Se creó script de testing integral: `docs/testing/test-correcciones-pac-201.php
 - Verificación de omisión correcta de campos cero
 - Comprobación de campos prohibidos para extranjeros
 
-## 🎯 Próximos Pasos
+## Próximos Pasos
 
 1. **Testing en Producción**: Probar factura de exportación con cliente extranjero
 2. **Validación PAC**: Confirmar que error 201 se resuelve
@@ -123,7 +123,7 @@ Se creó script de testing integral: `docs/testing/test-correcciones-pac-201.php
 - **Código 109**: "El campo [campo] no debe ser informado"
 - **Código 201**: "Error al procesar solicitud"
 
-## 🔗 Commits Relacionados
+## Commits Relacionados
 
 - Commit anterior: Corrección campos prohibidos extranjeros
 - Este commit: Correcciones adicionales para error 201 completo

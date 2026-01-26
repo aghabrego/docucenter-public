@@ -5,17 +5,17 @@
 
 ---
 
-## 📋 Estado Actual
+## Estado Actual
 
 ### 1. **PlusMovilInvoiceService** 
 **Ubicación:** `app/Services/PlusMovilInvoiceService.php`
 
 **Estado actual:**
-- ✅ Tiene método `setAccessToken()` para recibir el token
-- ✅ Usa Bearer token en headers
-- ❌ **NO tiene implementación de Cognito**
-- ❌ Solo valida que exista token, no lo genera
-- ✅ Consulta endpoint `/com-invoices` correctamente
+- Tiene método `setAccessToken()` para recibir el token
+- Usa Bearer token en headers
+- **NO tiene implementación de Cognito**
+- Solo valida que exista token, no lo genera
+- Consulta endpoint `/com-invoices` correctamente
 
 **Métodos disponibles:**
 ```php
@@ -33,7 +33,7 @@
 
 ---
 
-## 📦 Modelo Connection
+## Modelo Connection
 
 ### Estructura Actual
 **Tabla:** `connections`
@@ -69,7 +69,7 @@
 
 ---
 
-## 🎯 Requerimientos para PlusMóvil
+## Requerimientos para PlusMóvil
 
 ### Settings necesarios (campo serializado):
 
@@ -93,7 +93,7 @@
 
 ---
 
-## 🔧 Cambios Necesarios
+## Cambios Necesarios
 
 ### 1. **Actualizar `Connection` Create Component**
 
@@ -308,7 +308,7 @@ public function getInvoiceWithItems($invoiceId)
 
 ---
 
-## 🔒 Seguridad
+## Seguridad
 
 ### Encriptación de Password
 
@@ -329,7 +329,7 @@ if ($this->application === 'plusmovil') {
 
 ---
 
-## 📝 Ejemplo de Settings Guardados
+## Ejemplo de Settings Guardados
 
 ```php
 [
@@ -343,7 +343,7 @@ if ($this->application === 'plusmovil') {
 
 ---
 
-## ✅ Checklist de Implementación
+## Checklist de Implementación
 
 ### Fase 1: Modelo y Base de Datos
 - [ ] Verificar que tabla `connections` soporta campo `settings` como text
@@ -376,7 +376,7 @@ if ($this->application === 'plusmovil') {
 
 ---
 
-## 🚀 Próximos Pasos
+## Próximos Pasos
 
 1. **Implementar cambios en componente Create**
 2. **Actualizar PlusMovilInvoiceService con Cognito**
@@ -387,7 +387,7 @@ if ($this->application === 'plusmovil') {
 
 ---
 
-## 📚 Referencias
+## Referencias
 
 - [plusmovil-cognito-upgrade-analysis.md](./plusmovil-cognito-upgrade-analysis.md)
 - [plusmovil-invoice-items-SOLVED.md](./plusmovil-invoice-items-SOLVED.md)

@@ -55,21 +55,21 @@
 
 | Campo | Tipo | Requerido | Descripción | Validación | Ejemplo |
 |-------|------|-----------|-------------|------------|---------|
-| `CustomerID` | string | ✅ | ID único del cliente | Máx. 20 caracteres, único | `"CUST001"` |
-| `Customer_Bill_Name` | string | ✅ | Nombre de facturación | Máx. 39 caracteres | `"Empresa Ejemplo S.A."` |
-| `AddressLine1` | string | ❌ | Dirección línea 1 | - | `"Calle 50, Edificio Torre"` |
-| `AddressLine2` | string | ❌ | Dirección línea 2 | - | `"Piso 15, Oficina 1501"` |
-| `City` | string | ❌ | Ciudad | - | `"Ciudad de Panamá"` |
-| `State` | string | ❌ | Estado/Provincia | Máx. 2 caracteres | `"PA"` |
-| `Zip` | string | ❌ | Código postal | Máx. 12 caracteres | `"0000"` |
-| `Country` | string | ❌ | País | - | `"Panamá"` |
-| `Telephone1` | string | ❌ | Teléfono principal | Máx. 20 caracteres | `"+507 1234-5678"` |
-| `Email` | string | ❌ | Correo electrónico | Máx. 64 caracteres | `"cliente@empresa.com"` |
-| `RUC` | string | ❌ | RUC del cliente | Alfanumérico, máx. 40 | `"1234567890123"` |
-| `DV` | string | ❌ | Dígito verificador | Alfanumérico, máx. 40 | `"12"` |
-| `Custom_field3` | string | ❌ | Campo personalizado 3 | Alfanumérico, máx. 40 | `"Sector Financiero"` |
-| `Custom_field4` | string | ❌ | Campo personalizado 4 | Alfanumérico, máx. 40 | `"VIP"` |
-| `Custom_field5` | string | ❌ | Campo personalizado 5 | Alfanumérico, máx. 40 | `"Corporativo"` |
+| `CustomerID` | string | | ID único del cliente | Máx. 20 caracteres, único | `"CUST001"` |
+| `Customer_Bill_Name` | string | | Nombre de facturación | Máx. 39 caracteres | `"Empresa Ejemplo S.A."` |
+| `AddressLine1` | string | | Dirección línea 1 | - | `"Calle 50, Edificio Torre"` |
+| `AddressLine2` | string | | Dirección línea 2 | - | `"Piso 15, Oficina 1501"` |
+| `City` | string | | Ciudad | - | `"Ciudad de Panamá"` |
+| `State` | string | | Estado/Provincia | Máx. 2 caracteres | `"PA"` |
+| `Zip` | string | | Código postal | Máx. 12 caracteres | `"0000"` |
+| `Country` | string | | País | - | `"Panamá"` |
+| `Telephone1` | string | | Teléfono principal | Máx. 20 caracteres | `"+507 1234-5678"` |
+| `Email` | string | | Correo electrónico | Máx. 64 caracteres | `"cliente@empresa.com"` |
+| `RUC` | string | | RUC del cliente | Alfanumérico, máx. 40 | `"1234567890123"` |
+| `DV` | string | | Dígito verificador | Alfanumérico, máx. 40 | `"12"` |
+| `Custom_field3` | string | | Campo personalizado 3 | Alfanumérico, máx. 40 | `"Sector Financiero"` |
+| `Custom_field4` | string | | Campo personalizado 4 | Alfanumérico, máx. 40 | `"VIP"` |
+| `Custom_field5` | string | | Campo personalizado 5 | Alfanumérico, máx. 40 | `"Corporativo"` |
 
 ### Reglas de Validación Detalladas
 

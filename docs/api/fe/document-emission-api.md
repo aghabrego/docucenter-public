@@ -9,10 +9,10 @@
 
 ### Características del Endpoint
 
-- ✅ **Procesamiento Asíncrono**: Utiliza `EmitObjectJob` para procesamiento en segundo plano
-- ✅ **Detección Automática de Ambiente**: Identifica automáticamente si es sandbox o producción
-- ✅ **Validación PAC**: Verifica configuración PAC antes de procesar
-- ✅ **Multi-tenant**: Compatible con múltiples organizaciones
+- **Procesamiento Asíncrono**: Utiliza `EmitObjectJob` para procesamiento en segundo plano
+- **Detección Automática de Ambiente**: Identifica automáticamente si es sandbox o producción
+- **Validación PAC**: Verifica configuración PAC antes de procesar
+- **Multi-tenant**: Compatible con múltiples organizaciones
 
 ### Validación Previa Requerida
 
@@ -26,14 +26,14 @@
 
 | Campo | Tipo | Requerido | Descripción | Ejemplo |
 |-------|------|-----------|-------------|---------|
-| `dGen` | object | ✅ | Datos generales del documento | Ver estructura detallada |
-| `dGen.iAmb` | integer | 🔄 | Ambiente (auto-detectado) | `1` (prod), `2` (test) |
-| `dGen.dNroDF` | string | ✅ | Número del documento fiscal | `"001-001-000000123"` |
-| `dGen.dPtoFac` | string | ✅ | Punto de facturación | `"001"` |
-| `dGen.dSerie` | string | ✅ | Serie del documento | `"001"` |
-| `dGen.dNroDocFis` | string | ✅ | Número documento fiscal | `"000000123"` |
-| `dGen.dFeEm` | string | ✅ | Fecha de emisión | `"2025-08-12"` |
-| `dGen.dTipoEm` | string | ✅ | Tipo de emisión | `"01"` |
+| `dGen` | object | | Datos generales del documento | Ver estructura detallada |
+| `dGen.iAmb` | integer | | Ambiente (auto-detectado) | `1` (prod), `2` (test) |
+| `dGen.dNroDF` | string | | Número del documento fiscal | `"001-001-000000123"` |
+| `dGen.dPtoFac` | string | | Punto de facturación | `"001"` |
+| `dGen.dSerie` | string | | Serie del documento | `"001"` |
+| `dGen.dNroDocFis` | string | | Número documento fiscal | `"000000123"` |
+| `dGen.dFeEm` | string | | Fecha de emisión | `"2025-08-12"` |
+| `dGen.dTipoEm` | string | | Tipo de emisión | `"01"` |
 
 ### Estructura Completa del Request
 
@@ -204,17 +204,17 @@ El sistema detecta automáticamente el ambiente basado en el endpoint PAC:
 
 ### Características del Endpoint
 
-- ✅ **Múltiples Archivos**: Soporte para subir varios archivos XML simultáneamente
-- ✅ **Procesamiento Asíncrono**: Utiliza `ImportXmlJob` para procesamiento
-- ✅ **Almacenamiento Seguro**: Archivos almacenados con `FileUploadService`
-- ✅ **Validación XML**: Valida estructura y esquema de documentos fiscales
+- **Múltiples Archivos**: Soporte para subir varios archivos XML simultáneamente
+- **Procesamiento Asíncrono**: Utiliza `ImportXmlJob` para procesamiento
+- **Almacenamiento Seguro**: Archivos almacenados con `FileUploadService`
+- **Validación XML**: Valida estructura y esquema de documentos fiscales
 
 ### Parámetros de Request
 
 | Campo | Tipo | Requerido | Descripción |
 |-------|------|-----------|-------------|
-| `files` | array | ✅ | Array de archivos XML |
-| `files.*` | file | ✅ | Archivo XML válido |
+| `files` | array | | Array de archivos XML |
+| `files.*` | file | | Archivo XML válido |
 
 ### Validaciones de Archivos
 
@@ -302,24 +302,24 @@ fetch('/api/v1/fe/import_xml', {
 
 | Parámetro | Tipo | Requerido | Descripción |
 |-----------|------|-----------|-------------|
-| `id` | integer | ✅ | ID del documento fiscal |
+| `id` | integer | | ID del documento fiscal |
 
 ### Parámetros de Query
 
 | Campo | Tipo | Requerido | Descripción | Ejemplo |
 |-------|------|-----------|-------------|---------|
-| `codigoSucursalEmisor` | string | ✅ | Código de sucursal emisora | `"001"` |
-| `numeroDocumentoFiscal` | string | ✅ | Número del documento fiscal | `"000000123"` |
-| `puntoFacturacionFiscal` | string | ✅ | Punto de facturación | `"001"` |
-| `tipoDocumento` | string | ✅ | Tipo de documento | `"01"` |
-| `tipoEmision` | string | ✅ | Tipo de emisión | `"01"` |
+| `codigoSucursalEmisor` | string | | Código de sucursal emisora | `"001"` |
+| `numeroDocumentoFiscal` | string | | Número del documento fiscal | `"000000123"` |
+| `puntoFacturacionFiscal` | string | | Punto de facturación | `"001"` |
+| `tipoDocumento` | string | | Tipo de documento | `"01"` |
+| `tipoEmision` | string | | Tipo de emisión | `"01"` |
 
 ### PACs Soportados
 
 | PAC | Soporte | Funcionalidad |
 |-----|---------|---------------|
-| **TheFactoryHKA** | ✅ Completo | Descarga XML via API |
-| **alanube** | ⏳ En desarrollo | Funcionalidad básica |
+| **TheFactoryHKA** | Completo | Descarga XML via API |
+| **alanube** |  En desarrollo | Funcionalidad básica |
 
 ### Ejemplo de Request
 

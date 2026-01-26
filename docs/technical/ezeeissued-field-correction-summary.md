@@ -155,16 +155,16 @@ $saleModel->save();                             // Una sola operación de BD
 ## Impacto en Producción
 
 ### Beneficios
-✅ **Consistencia de Datos**: Campo EzeeIssued se actualiza correctamente
-✅ **Experiencia de Usuario**: Interface muestra estado real de emisión
-✅ **Confiabilidad**: Eliminación de problemas de conexión durante emisión
-✅ **Mantenibilidad**: Código más limpio y predecible
+**Consistencia de Datos**: Campo EzeeIssued se actualiza correctamente
+**Experiencia de Usuario**: Interface muestra estado real de emisión
+**Confiabilidad**: Eliminación de problemas de conexión durante emisión
+**Mantenibilidad**: Código más limpio y predecible
 
 ### Riesgos Mitigados
-- ❌ Facturas emitidas que aparecen como no emitidas
-- ❌ Posibilidad de doble emisión por error de UI
-- ❌ Inconsistencias entre estado real y mostrado
-- ❌ Problemas de conexión de BD durante save
+- Facturas emitidas que aparecen como no emitidas
+- Posibilidad de doble emisión por error de UI
+- Inconsistencias entre estado real y mostrado
+- Problemas de conexión de BD durante save
 
 ## Siguientes Pasos
 

@@ -18,48 +18,48 @@ Crea una factura electrónica basada en la estructura dGen (Datos Generales) y g
 
 | Campo | Tipo | Requerido | Descripción |
 |-------|------|-----------|-------------|
-| `dGen.dFechaEm` | string | ✅ | Fecha de emisión (DD/MM/YYYY) |
-| `dGen.dSalCond` | integer | ✅ | Condición de la operación (1=Contado, 2=Crédito) |
-| `dGen.dTiOpe` | integer | ✅ | Tipo de operación |
-| `dGen.iNatVen` | integer | ✅ | Naturaleza de la venta |
+| `dGen.dFechaEm` | string | | Fecha de emisión (DD/MM/YYYY) |
+| `dGen.dSalCond` | integer | | Condición de la operación (1=Contado, 2=Crédito) |
+| `dGen.dTiOpe` | integer | | Tipo de operación |
+| `dGen.iNatVen` | integer | | Naturaleza de la venta |
 
 #### Datos del Receptor (gDatRec)
 
 | Campo | Tipo | Requerido | Descripción |
 |-------|------|-----------|-------------|
-| `gDatRec.iNatRec` | integer | ✅ | Naturaleza del receptor (1=Contribuyente, 2=No contribuyente) |
-| `gDatRec.iTipoRec` | integer | ✅ | Tipo de receptor (1=Natural, 2=Jurídica) |
-| `gDatRec.cPaisRec` | string | ✅ | País del receptor (código ISO) |
-| `gDatRec.dNombRec` | string | ✅ | Nombre del receptor |
-| `gDatRec.dRucRec` | string | ✅ | RUC del receptor |
-| `gDatRec.dDVRec` | string | ✅ | Dígito verificador |
-| `gDatRec.dTelRec` | string | ❌ | Teléfono del receptor |
-| `gDatRec.dCorElecRec` | string | ✅ | Email del receptor |
-| `gDatRec.dDirRec` | string | ❌ | Dirección del receptor |
+| `gDatRec.iNatRec` | integer | | Naturaleza del receptor (1=Contribuyente, 2=No contribuyente) |
+| `gDatRec.iTipoRec` | integer | | Tipo de receptor (1=Natural, 2=Jurídica) |
+| `gDatRec.cPaisRec` | string | | País del receptor (código ISO) |
+| `gDatRec.dNombRec` | string | | Nombre del receptor |
+| `gDatRec.dRucRec` | string | | RUC del receptor |
+| `gDatRec.dDVRec` | string | | Dígito verificador |
+| `gDatRec.dTelRec` | string | | Teléfono del receptor |
+| `gDatRec.dCorElecRec` | string | | Email del receptor |
+| `gDatRec.dDirRec` | string | | Dirección del receptor |
 
 #### Ítems/Productos (gItem)
 
 | Campo | Tipo | Requerido | Descripción |
 |-------|------|-----------|-------------|
-| `gItem[].dCodProd` | string | ✅ | Código del producto |
-| `gItem[].dDesProd` | string | ✅ | Descripción del producto |
-| `gItem[].cUnidad` | string | ✅ | Unidad de medida |
-| `gItem[].dCantCodInt` | number | ✅ | Cantidad |
-| `gItem[].dPrUnit` | number | ✅ | Precio unitario |
-| `gItem[].dPrUnitDesc` | number | ❌ | Precio unitario con descuento |
-| `gItem[].dPrItem` | number | ✅ | Precio total del ítem |
-| `gItem[].dPrAcarItem` | number | ❌ | Precio acarreado del ítem |
-| `gItem[].dValTotItem` | number | ✅ | Valor total del ítem |
+| `gItem[].dCodProd` | string | | Código del producto |
+| `gItem[].dDesProd` | string | | Descripción del producto |
+| `gItem[].cUnidad` | string | | Unidad de medida |
+| `gItem[].dCantCodInt` | number | | Cantidad |
+| `gItem[].dPrUnit` | number | | Precio unitario |
+| `gItem[].dPrUnitDesc` | number | | Precio unitario con descuento |
+| `gItem[].dPrItem` | number | | Precio total del ítem |
+| `gItem[].dPrAcarItem` | number | | Precio acarreado del ítem |
+| `gItem[].dValTotItem` | number | | Valor total del ítem |
 
 #### Totales (gTot)
 
 | Campo | Tipo | Requerido | Descripción |
 |-------|------|-----------|-------------|
-| `gTot.dSub` | number | ✅ | Subtotal |
-| `gTot.dDescGlobal` | number | ❌ | Descuento global |
-| `gTot.dVTot` | number | ✅ | Valor total antes de impuestos |
-| `gTot.dTotImp` | number | ✅ | Total de impuestos |
-| `gTot.dVTotFact` | number | ✅ | Valor total de la factura |
+| `gTot.dSub` | number | | Subtotal |
+| `gTot.dDescGlobal` | number | | Descuento global |
+| `gTot.dVTot` | number | | Valor total antes de impuestos |
+| `gTot.dTotImp` | number | | Total de impuestos |
+| `gTot.dVTotFact` | number | | Valor total de la factura |
 
 ### Ejemplo de Request (Estructura Completa)
 

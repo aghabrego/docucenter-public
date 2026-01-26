@@ -1,26 +1,26 @@
 # Plan de Continuación: Integración PlusMóvil
 
 **Fecha:** 9 de noviembre de 2025  
-**Estado Actual:** ✅ Implementación completa, 1 conexión creada  
+**Estado Actual:** Implementación completa, 1 conexión creada  
 **Siguiente Fase:** Testing y Importación Automática
 
 ---
 
-## 📊 Estado Actual
+## Estado Actual
 
-### ✅ Completado (Fases 1-2)
-- ✅ Modelo Connection con métodos AWS Cognito
-- ✅ AWS SDK instalado (`aws/aws-sdk-php`)
-- ✅ Componente Livewire para crear conexiones
-- ✅ Vista de formulario PlusMóvil
-- ✅ Servicio PlusMovilInvoiceService mejorado
-- ✅ Comando de testing (`plusmovil:test-connection`)
-- ✅ URLs corregidas (xka96gucj8/qa y /prod)
-- ✅ **1 conexión PlusMóvil creada en BD**
+### Completado (Fases 1-2)
+- Modelo Connection con métodos AWS Cognito
+- AWS SDK instalado (`aws/aws-sdk-php`)
+- Componente Livewire para crear conexiones
+- Vista de formulario PlusMóvil
+- Servicio PlusMovilInvoiceService mejorado
+- Comando de testing (`plusmovil:test-connection`)
+- URLs corregidas (xka96gucj8/qa y /prod)
+- **1 conexión PlusMóvil creada en BD**
 
 ---
 
-## 🎯 Fase 3: Testing de Conexión Existente
+## Fase 3: Testing de Conexión Existente
 
 ### Paso 1: Verificar Datos de la Conexión
 
@@ -40,7 +40,7 @@ echo 'Base URL: ' . (\$conn->settings['base_url'] ?? 'N/A') . PHP_EOL;
 echo 'Client ID: ' . substr(\$conn->settings['client_id'] ?? 'N/A', 0, 20) . '...' . PHP_EOL;
 echo '───────────────────────────────────────' . PHP_EOL;
 echo 'Tiene token: ' . (!empty(\$conn->settings['access_token']) ? 'Sí' : 'No') . PHP_EOL;
-echo 'Token válido: ' . (\$conn->hasPlusMovilValidToken() ? 'Sí ✅' : 'No ❌') . PHP_EOL;
+echo 'Token válido: ' . (\$conn->hasPlusMovilValidToken() ? 'Sí ' : 'No ') . PHP_EOL;
 if (!empty(\$conn->settings['token_expires_at'])) {
     echo 'Expira en: ' . \$conn->settings['token_expires_at'] . PHP_EOL;
 }
@@ -49,9 +49,9 @@ echo '════════════════════════�
 ```
 
 **Resultado esperado:**
-- ✅ Muestra todos los datos de configuración
-- ✅ Indica si tiene token válido
-- ✅ Muestra fecha de expiración
+- Muestra todos los datos de configuración
+- Indica si tiene token válido
+- Muestra fecha de expiración
 
 ### Paso 2: Ejecutar Test Completo
 
@@ -67,10 +67,10 @@ docker exec -it docucenter_laravel.test php artisan plusmovil:test-connection 1 
 
 **Resultado esperado:**
 ```
-🔍 Probando conexión PlusMóvil ID: 1
-📅 Rango de fechas: 2025-10-01 a 2025-11-09
+Probando conexión PlusMóvil ID: 1
+ Rango de fechas: 2025-10-01 a 2025-11-09
 
-✅ Conexión encontrada: PlusMóvil QA
+Conexión encontrada: PlusMóvil QA
 ┌────────────┬──────────────────────────────────┐
 │ Campo      │ Valor                            │
 ├────────────┼──────────────────────────────────┤
@@ -78,15 +78,15 @@ docker exec -it docucenter_laravel.test php artisan plusmovil:test-connection 1 
 │ Nombre     │ PlusMóvil QA                     │
 │ Ambiente   │ qa                               │
 │ Usuario    │ usuario@empresa.com              │
-│ Token      │ Sí ✅                            │
+│ Token      │ Sí │
 └────────────┴──────────────────────────────────┘
 
-🔐 Probando autenticación...
-✅ Token obtenido exitosamente
+ Probando autenticación...
+Token obtenido exitosamente
    Token (primeros 20 caracteres): eyJraWQiOiJc...
 
-📋 Consultando facturas...
-✅ Facturas obtenidas: 25
+Consultando facturas...
+Facturas obtenidas: 25
 
 ┌────┬────────────┬────────────┬──────────────┬─────────┬─────────┐
 │ ID │ Número     │ Fecha      │ Cliente      │ Total   │ Estado  │
@@ -120,7 +120,7 @@ docker exec -it docucenter_laravel.test grep -i "plusmovil" storage/logs/laravel
 docker exec -it docucenter_laravel.test php artisan tinker --execute="
 \$conn = \App\Models\Connection::find(1);
 \$token = \$conn->refreshPlusMovilToken();
-echo 'Token regenerado: ' . (!empty(\$token) ? 'Sí ✅' : 'No ❌') . PHP_EOL;
+echo 'Token regenerado: ' . (!empty(\$token) ? 'Sí ' : 'No ') . PHP_EOL;
 "
 ```
 
@@ -154,11 +154,11 @@ echo 'Debería ser: https://xka96gucj8.execute-api.us-east-1.amazonaws.com/qa' .
 
 ---
 
-## 🎯 Fase 4: Importación de Facturas
+## Fase 4: Importación de Facturas
 
 ### Archivos Creados
-- ✅ `app/Jobs/PlusMóvil/ImportInvoicesJob.php` - Job de importación
-- ✅ `app/Console/Commands/PlusMóvil/ImportInvoicesCommand.php` - Comando para ejecutar
+- `app/Jobs/PlusMóvil/ImportInvoicesJob.php` - Job de importación
+- `app/Console/Commands/PlusMóvil/ImportInvoicesCommand.php` - Comando para ejecutar
 
 ### Paso 1: Revisar Estructura de Tablas
 
@@ -171,8 +171,8 @@ docker exec -it docucenter_laravel.test php artisan tinker --execute="
 \Illuminate\Support\Facades\DB::connection()->useDatabase(\$org->database);
 
 echo 'Base de datos: ' . \$org->database . PHP_EOL;
-echo 'Tabla SalesHeaderImp existe: ' . (\Illuminate\Support\Facades\Schema::hasTable('Sales_Header_Imp') ? 'Sí ✅' : 'No ❌') . PHP_EOL;
-echo 'Tabla SalesDetailImp existe: ' . (\Illuminate\Support\Facades\Schema::hasTable('Sales_Detail_Imp') ? 'Sí ✅' : 'No ❌') . PHP_EOL;
+echo 'Tabla SalesHeaderImp existe: ' . (\Illuminate\Support\Facades\Schema::hasTable('Sales_Header_Imp') ? 'Sí ' : 'No ') . PHP_EOL;
+echo 'Tabla SalesDetailImp existe: ' . (\Illuminate\Support\Facades\Schema::hasTable('Sales_Detail_Imp') ? 'Sí ' : 'No ') . PHP_EOL;
 
 \Illuminate\Support\Facades\DB::connection()->useDatabase(env('DB_DATABASE'));
 "
@@ -195,17 +195,17 @@ docker exec -it docucenter_laravel.test php artisan plusmovil:import-invoices 1 
 
 **Resultado esperado:**
 ```
-📥 Importando facturas PlusMóvil
-🔍 Conexión ID: 1
-📅 Rango: 2025-11-01 a 2025-11-09
+ Importando facturas PlusMóvil
+Conexión ID: 1
+ Rango: 2025-11-01 a 2025-11-09
 
-✅ Conexión encontrada: PlusMóvil QA
-🏢 Organización ID: 1
+Conexión encontrada: PlusMóvil QA
+Organización ID: 1
 
-⏳ Ejecutando importación (puede tomar varios minutos)...
+ Ejecutando importación (puede tomar varios minutos)...
 
-✅ Importación completada
-📊 Revisa los detalles en: storage/logs/laravel.log
+Importación completada
+Revisa los detalles en: storage/logs/laravel.log
 ```
 
 ### Paso 3: Verificar Facturas Importadas
@@ -263,7 +263,7 @@ Luego edita `ImportInvoicesJob.php` método `importInvoice()` para mapear correc
 
 ---
 
-## 🎯 Fase 5: Automatización (Opcional)
+## Fase 5: Automatización (Opcional)
 
 ### Opción A: Programar Importación Diaria
 
@@ -296,9 +296,9 @@ protected function schedule(Schedule $schedule)
 
 ---
 
-## 📋 Checklist de Continuación
+## Checklist de Continuación
 
-### Fase 3: Testing ⬅️ **EMPEZAR AQUÍ**
+### Fase 3: Testing ⬅**EMPEZAR AQUÍ**
 - [ ] Verificar datos de conexión existente
 - [ ] Ejecutar comando `plusmovil:test-connection`
 - [ ] Verificar que obtiene token correctamente
@@ -323,7 +323,7 @@ protected function schedule(Schedule $schedule)
 
 ---
 
-## 🚀 Comandos Rápidos
+## Comandos Rápidos
 
 ```bash
 # Testing de conexión
@@ -352,7 +352,7 @@ DB::connection()->useDatabase(env('DB_DATABASE'));
 
 ---
 
-## 📞 Soporte
+##  Soporte
 
 Si encuentras problemas:
 

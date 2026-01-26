@@ -131,13 +131,13 @@ try {
 
 El archivo `tests/Unit/Services/MaxgymServiceRucValidationTest.php` incluye tests para:
 
-- ✅ Validación de RUC de empresa válido
-- ✅ Validación de RUC de persona válido  
-- ✅ Validación de RUC inválido
-- ✅ Validación de consumidor final
-- ✅ Casos límite y formatos específicos de Panamá
-- ✅ Determinación automática de ReceiverType
-- ✅ Validación de todas las provincias de Panamá
+- Validación de RUC de empresa válido
+- Validación de RUC de persona válido  
+- Validación de RUC inválido
+- Validación de consumidor final
+- Casos límite y formatos específicos de Panamá
+- Determinación automática de ReceiverType
+- Validación de todas las provincias de Panamá
 
 ### Ejecutar Tests
 ```bash

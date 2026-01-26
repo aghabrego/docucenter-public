@@ -51,26 +51,26 @@ GOOGLE_DOCUMENT_AI_USE_CUSTOM=false
 ```env
 GOOGLE_DOCUMENT_AI_USE_CUSTOM=false
 ```
-- ✅ Funcionando ahora
-- ✅ Menor costo ($1.50/1000)
-- ⚠️ Menor precisión (65-75%)
-- ✅ No requiere entrenamiento
+- Funcionando ahora
+- Menor costo ($1.50/1000)
+- Menor precisión (65-75%)
+- No requiere entrenamiento
 
 ### Opción 2: Usar Custom (Después de entrenar)
 ```env
 GOOGLE_DOCUMENT_AI_USE_CUSTOM=true
 ```
-- ⏳ Requiere entrenamiento previo
-- ✅ Mayor precisión (85-95%)
-- ⚠️ Mayor costo ($3.00/1000)
-- ✅ Mejor para producción
+-  Requiere entrenamiento previo
+- Mayor precisión (85-95%)
+- Mayor costo ($3.00/1000)
+- Mejor para producción
 
 ## Pasos para Activar Custom Processor
 
 ### 1. Preparar Dataset
-- ✅ Subir 20-100 facturas en el módulo de entrenamiento
-- ✅ Anotar todos los documentos
-- ✅ Exportar JSON de entrenamiento
+- Subir 20-100 facturas en el módulo de entrenamiento
+- Anotar todos los documentos
+- Exportar JSON de entrenamiento
 
 ### 2. Entrenar en Google Cloud
 
@@ -219,19 +219,19 @@ ROI: 99,925%
 
 ## Recomendaciones
 
-### ✅ Activar Custom Processor Si:
+### Activar Custom Processor Si:
 - Procesas >50 facturas/mes
 - Requieres >85% precisión
 - Tienes dataset de 100+ facturas anotadas
 - El tiempo de revisión manual es costoso
 
-### ⏸️ Mantener Pre-trained Si:
+### ⏸Mantener Pre-trained Si:
 - Procesas <50 facturas/mes
 - La precisión actual es suficiente
 - No tienes tiempo para entrenar
 - Prefieres simplicidad sobre precisión
 
-### 🔄 Usar Ambos:
+### Usar Ambos:
 - Custom para operación normal
 - Pre-trained como fallback si Custom falla
 - Testing A/B para comparar resultados
@@ -267,13 +267,13 @@ echo $GOOGLE_DOCUMENT_AI_CUSTOM_PROCESSOR_ID
 
 ## Próximos Pasos
 
-1. ✅ **Configuración completada** - Ambos procesadores listos
-2. ⏳ **Recolectar dataset** - 100+ facturas variadas
-3. ⏳ **Anotar documentos** - Revisar y corregir extracción
-4. ⏳ **Exportar JSON** - Descargar dataset de entrenamiento
-5. ⏳ **Entrenar Custom** - Subir a Google Cloud y entrenar
-6. ⏳ **Activar Custom** - Cambiar `GOOGLE_DOCUMENT_AI_USE_CUSTOM=true`
-7. ✅ **Monitorear** - Comparar precisión y costos
+1. **Configuración completada** - Ambos procesadores listos
+2.  **Recolectar dataset** - 100+ facturas variadas
+3.  **Anotar documentos** - Revisar y corregir extracción
+4.  **Exportar JSON** - Descargar dataset de entrenamiento
+5.  **Entrenar Custom** - Subir a Google Cloud y entrenar
+6.  **Activar Custom** - Cambiar `GOOGLE_DOCUMENT_AI_USE_CUSTOM=true`
+7. **Monitorear** - Comparar precisión y costos
 
 ---
 

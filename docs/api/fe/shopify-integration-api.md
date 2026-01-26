@@ -9,75 +9,75 @@
 
 ### Características del Endpoint
 
-- ✅ **Integración Shopify**: Específicamente diseñado para órdenes de Shopify
-- ✅ **Procesamiento Asíncrono**: Utiliza `CreateSaleShopifyJob` 
-- ✅ **Webhook Compatible**: Ideal para webhooks de Shopify
-- ✅ **Multi-tenant**: Compatible con múltiples organizaciones
-- ✅ **Logging Detallado**: Tracking con order_number específico
+- **Integración Shopify**: Específicamente diseñado para órdenes de Shopify
+- **Procesamiento Asíncrono**: Utiliza `CreateSaleShopifyJob` 
+- **Webhook Compatible**: Ideal para webhooks de Shopify
+- **Multi-tenant**: Compatible con múltiples organizaciones
+- **Logging Detallado**: Tracking con order_number específico
 
 ### Parámetros Principales de Request
 
 | Campo | Tipo | Requerido | Descripción | Ejemplo |
 |-------|------|-----------|-------------|---------|
-| `order_number` | string | ✅ | Número de orden de Shopify | `"SH-1001"` |
-| `order_id` | integer | ✅ | ID interno de Shopify | `12345678` |
-| `created_at` | string | ✅ | Fecha de creación de la orden | `"2025-08-12T10:30:00Z"` |
-| `total_price` | string | ✅ | Total de la orden | `"107.00"` |
-| `subtotal_price` | string | ✅ | Subtotal sin impuestos | `"100.00"` |
-| `total_tax` | string | ✅ | Total de impuestos | `"7.00"` |
-| `currency` | string | ✅ | Moneda de la transacción | `"PAB"` |
-| `financial_status` | string | ✅ | Estado financiero | `"paid"` |
-| `fulfillment_status` | string | ❌ | Estado de cumplimiento | `"fulfilled"` |
+| `order_number` | string | | Número de orden de Shopify | `"SH-1001"` |
+| `order_id` | integer | | ID interno de Shopify | `12345678` |
+| `created_at` | string | | Fecha de creación de la orden | `"2025-08-12T10:30:00Z"` |
+| `total_price` | string | | Total de la orden | `"107.00"` |
+| `subtotal_price` | string | | Subtotal sin impuestos | `"100.00"` |
+| `total_tax` | string | | Total de impuestos | `"7.00"` |
+| `currency` | string | | Moneda de la transacción | `"PAB"` |
+| `financial_status` | string | | Estado financiero | `"paid"` |
+| `fulfillment_status` | string | | Estado de cumplimiento | `"fulfilled"` |
 
 ### Datos del Cliente
 
 | Campo | Tipo | Requerido | Descripción | Ejemplo |
 |-------|------|-----------|-------------|---------|
-| `customer.id` | integer | ✅ | ID del cliente en Shopify | `67890` |
-| `customer.email` | string | ✅ | Email del cliente | `"cliente@email.com"` |
-| `customer.first_name` | string | ✅ | Nombre del cliente | `"María"` |
-| `customer.last_name` | string | ✅ | Apellido del cliente | `"García"` |
-| `customer.phone` | string | ❌ | Teléfono del cliente | `"+507 1234-5678"` |
-| `customer.verified_email` | boolean | ❌ | Email verificado | `true` |
+| `customer.id` | integer | | ID del cliente en Shopify | `67890` |
+| `customer.email` | string | | Email del cliente | `"cliente@email.com"` |
+| `customer.first_name` | string | | Nombre del cliente | `"María"` |
+| `customer.last_name` | string | | Apellido del cliente | `"García"` |
+| `customer.phone` | string | | Teléfono del cliente | `"+507 1234-5678"` |
+| `customer.verified_email` | boolean | | Email verificado | `true` |
 
 ### Dirección de Facturación
 
 | Campo | Tipo | Requerido | Descripción | Ejemplo |
 |-------|------|-----------|-------------|---------|
-| `billing_address.first_name` | string | ✅ | Nombre en dirección | `"María"` |
-| `billing_address.last_name` | string | ✅ | Apellido en dirección | `"García"` |
-| `billing_address.address1` | string | ✅ | Dirección línea 1 | `"Calle 50, Edificio Torre"` |
-| `billing_address.address2` | string | ❌ | Dirección línea 2 | `"Piso 10, Oficina 1001"` |
-| `billing_address.city` | string | ✅ | Ciudad | `"Ciudad de Panamá"` |
-| `billing_address.province` | string | ✅ | Provincia | `"Panamá"` |
-| `billing_address.country` | string | ✅ | País | `"PA"` |
-| `billing_address.zip` | string | ❌ | Código postal | `"0000"` |
-| `billing_address.phone` | string | ❌ | Teléfono | `"+507 1234-5678"` |
+| `billing_address.first_name` | string | | Nombre en dirección | `"María"` |
+| `billing_address.last_name` | string | | Apellido en dirección | `"García"` |
+| `billing_address.address1` | string | | Dirección línea 1 | `"Calle 50, Edificio Torre"` |
+| `billing_address.address2` | string | | Dirección línea 2 | `"Piso 10, Oficina 1001"` |
+| `billing_address.city` | string | | Ciudad | `"Ciudad de Panamá"` |
+| `billing_address.province` | string | | Provincia | `"Panamá"` |
+| `billing_address.country` | string | | País | `"PA"` |
+| `billing_address.zip` | string | | Código postal | `"0000"` |
+| `billing_address.phone` | string | | Teléfono | `"+507 1234-5678"` |
 
 ### Items de la Orden (Line Items)
 
 | Campo | Tipo | Requerido | Descripción | Ejemplo |
 |-------|------|-----------|-------------|---------|
-| `line_items[].id` | integer | ✅ | ID del item en Shopify | `987654321` |
-| `line_items[].product_id` | integer | ✅ | ID del producto | `123456789` |
-| `line_items[].variant_id` | integer | ✅ | ID de la variante | `555666777` |
-| `line_items[].title` | string | ✅ | Título del producto | `"Camiseta Premium - Talla M"` |
-| `line_items[].name` | string | ✅ | Nombre completo | `"Camiseta Premium - Talla M - Azul"` |
-| `line_items[].sku` | string | ❌ | SKU del producto | `"CAM-PREM-M-AZUL"` |
-| `line_items[].quantity` | integer | ✅ | Cantidad | `2` |
-| `line_items[].price` | string | ✅ | Precio unitario | `"35.00"` |
-| `line_items[].total_discount` | string | ❌ | Descuento total | `"5.00"` |
-| `line_items[].fulfillment_status` | string | ❌ | Estado de envío | `"fulfilled"` |
-| `line_items[].taxable` | boolean | ❌ | Sujeto a impuestos | `true` |
+| `line_items[].id` | integer | | ID del item en Shopify | `987654321` |
+| `line_items[].product_id` | integer | | ID del producto | `123456789` |
+| `line_items[].variant_id` | integer | | ID de la variante | `555666777` |
+| `line_items[].title` | string | | Título del producto | `"Camiseta Premium - Talla M"` |
+| `line_items[].name` | string | | Nombre completo | `"Camiseta Premium - Talla M - Azul"` |
+| `line_items[].sku` | string | | SKU del producto | `"CAM-PREM-M-AZUL"` |
+| `line_items[].quantity` | integer | | Cantidad | `2` |
+| `line_items[].price` | string | | Precio unitario | `"35.00"` |
+| `line_items[].total_discount` | string | | Descuento total | `"5.00"` |
+| `line_items[].fulfillment_status` | string | | Estado de envío | `"fulfilled"` |
+| `line_items[].taxable` | boolean | | Sujeto a impuestos | `true` |
 
 ### Información de Pago
 
 | Campo | Tipo | Requerido | Descripción | Ejemplo |
 |-------|------|-----------|-------------|---------|
-| `payment_details.credit_card_bin` | string | ❌ | BIN de tarjeta | `"424242"` |
-| `payment_details.credit_card_company` | string | ❌ | Compañía de tarjeta | `"Visa"` |
-| `payment_details.credit_card_number` | string | ❌ | Últimos 4 dígitos | `"XXXX-XXXX-XXXX-4242"` |
-| `gateway` | string | ❌ | Gateway de pago usado | `"shopify_payments"` |
+| `payment_details.credit_card_bin` | string | | BIN de tarjeta | `"424242"` |
+| `payment_details.credit_card_company` | string | | Compañía de tarjeta | `"Visa"` |
+| `payment_details.credit_card_number` | string | | Últimos 4 dígitos | `"XXXX-XXXX-XXXX-4242"` |
+| `gateway` | string | | Gateway de pago usado | `"shopify_payments"` |
 
 ### Ejemplo de Request Completo
 

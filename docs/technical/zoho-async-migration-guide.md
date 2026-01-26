@@ -1,10 +1,10 @@
 # Migración de Zoho Purchase Orders a Procesamiento Asíncrono
 
-## 📋 Resumen
+## Resumen
 
 Se migró el endpoint `createPurchaseOrderZoho` de procesamiento síncrono a asíncrono usando Jobs de Laravel con Redis, mejorando significativamente la respuesta a webhooks de Zoho.
 
-## ⚡ Mejoras Obtenidas
+## Mejoras Obtenidas
 
 ### Antes (Síncrono)
 - **Tiempo respuesta**: 300-650ms
@@ -18,7 +18,7 @@ Se migró el endpoint `createPurchaseOrderZoho` de procesamiento síncrono a as�
 - **Escalabilidad**: Ilimitada con workers Redis
 - **Manejo errores**: Reintentos automáticos + logging detallado
 
-## 🏗️ Arquitectura Implementada
+## Arquitectura Implementada
 
 ```
 Zoho Webhook → Controller → Job Queue → Worker → Database
@@ -28,7 +28,7 @@ Zoho Webhook → Controller → Job Queue → Worker → Database
               Response              + Log
 ```
 
-## 📁 Archivos Creados/Modificados
+##  Archivos Creados/Modificados
 
 ### Nuevos Archivos
 1. **`app/Jobs/ProcessZohoPurchaseOrderJob.php`**
@@ -52,7 +52,7 @@ Zoho Webhook → Controller → Job Queue → Worker → Database
    - Respuesta HTTP 202 inmediata
    - Dispatch de job asíncrono
 
-## 🔧 Configuración Requerida
+## Configuración Requerida
 
 ### 1. Variables de Entorno
 ```env
@@ -106,7 +106,7 @@ tail -f storage/logs/laravel.log | grep "Zoho Purchase Order"
 redis-cli info
 ```
 
-## 📊 Métricas y Logging
+## Métricas y Logging
 
 ### Estados de Job Tracking
 - **queued**: Job enviado a cola
@@ -132,7 +132,7 @@ redis-cli info
 
 ## 🚦 Ventajas vs Desventajas
 
-### ✅ Ventajas
+### Ventajas
 1. **Respuesta ultrarrápida** a Zoho (< 50ms)
 2. **Eliminación de timeouts** en webhooks
 3. **Reintentos automáticos** en caso de errores
@@ -140,13 +140,13 @@ redis-cli info
 5. **Mejor observabilidad** con jobs dashboard
 6. **Aislamiento de errores** sin afectar otros endpoints
 
-### ⚠️ Consideraciones
+### Consideraciones
 1. **Complejidad adicional** en arquitectura
 2. **Dependencia de Redis** para funcionamiento
 3. **Debugging más complejo** (logs asíncronos)
 4. **Configuración supervisor** requerida en producción
 
-## 🔄 Plan de Rollback
+## Plan de Rollback
 
 Si surgen problemas, se puede revertir fácilmente:
 
@@ -154,7 +154,7 @@ Si surgen problemas, se puede revertir fácilmente:
 2. **Restaurar código síncrono** original
 3. **Verificar que Redis/Supervisor** funcionen independientemente
 
-## 📈 Próximos Pasos
+## Próximos Pasos
 
 1. **Monitorear métricas** de rendimiento en producción
 2. **Implementar dashboard** de jobs para usuarios
@@ -162,6 +162,6 @@ Si surgen problemas, se puede revertir fácilmente:
 4. **Optimizar workers** según volumen de órdenes
 5. **Implementar alertas** por fallos en jobs
 
-## 🎯 Conclusión
+## Conclusión
 
 La migración a procesamiento asíncrono resuelve definitivamente los problemas de timeout con webhooks de Zoho, mejora la escalabilidad del sistema y proporciona mejor manejo de errores. El overhead de complejidad es mínimo comparado con los beneficios obtenidos.

@@ -7,7 +7,7 @@
 
 ---
 
-## 📋 Índice
+## Índice
 
 1. [Problema Identificado](#problema-identificado)
 2. [Tablas Afectadas](#tablas-afectadas)
@@ -22,7 +22,7 @@
 
 ---
 
-## 🎯 Problema Identificado
+## Problema Identificado
 
 Cuando se consolidan datos de múltiples organizaciones en una sola compañía (company), las tablas con relaciones **Header → Detail** tienen IDs auto-incrementales que **COLISIONARÁN** entre organizaciones diferentes.
 
@@ -34,40 +34,40 @@ Cuando se consolidan datos de múltiples organizaciones en una sola compañía (
 
 ---
 
-## 📊 Tablas Afectadas
+## Tablas Afectadas
 
 ### Pares Header-Detail Identificados (9 pares)
 
 | # | Header Table | Detail Table(s) | Columna Relación | Auto Increment | Prioridad |
 |---|--------------|-----------------|------------------|----------------|-----------|
-| 1 | `Customer_Credit_Memo_Header_Imp` | `Customer_Credit_Memo_Detail_Imp` | `TransactionID` | ✅ SÍ | Alta |
-| 2 | `GJE_Header_Imp` | `GJE_Detail_Imp` | `TransactionID` | ✅ SÍ | **Implementado** |
-| 3 | `Purchase_Header_Imp` | `Purchase_Detail_Imp` | `TransactionID` | ✅ SÍ | Alta |
-| 4 | `customer_receipt_header_imp` | `customer_receipt_detail_imp` | `UniqueReceiptID` | ✅ SÍ | Alta |
-| 5 | `vendor_payment_header_imp` | `vendor_payment_detail_imp` | `UniquePaymentID` | ✅ SÍ | Alta |
-| 6 | `fe_header` | `fe_detail`, `fe_payment` | `feHeaderId` / `id` | ✅ SÍ | Media |
-| 7 | `PurOrdr_Header_Exp` | `PurOrdr_Detail_Exp` | `TransactionID` | ⚠️ **Por verificar** | Baja |
-| 8 | `SalesInvoice_Header_Exp` | `SalesInvoice_Detail_Exp` | `TransactionID` | ⚠️ **Por verificar** | Baja |
-| 9 | `SalesOrder_Header_Exp` | `SalesOrder_Detail_Exp` | `TransactionID` | ⚠️ **Por verificar** | Baja |
+| 1 | `Customer_Credit_Memo_Header_Imp` | `Customer_Credit_Memo_Detail_Imp` | `TransactionID` | SÍ | Alta |
+| 2 | `GJE_Header_Imp` | `GJE_Detail_Imp` | `TransactionID` | SÍ | **Implementado** |
+| 3 | `Purchase_Header_Imp` | `Purchase_Detail_Imp` | `TransactionID` | SÍ | Alta |
+| 4 | `customer_receipt_header_imp` | `customer_receipt_detail_imp` | `UniqueReceiptID` | SÍ | Alta |
+| 5 | `vendor_payment_header_imp` | `vendor_payment_detail_imp` | `UniquePaymentID` | SÍ | Alta |
+| 6 | `fe_header` | `fe_detail`, `fe_payment` | `feHeaderId` / `id` | SÍ | Media |
+| 7 | `PurOrdr_Header_Exp` | `PurOrdr_Detail_Exp` | `TransactionID` | **Por verificar** | Baja |
+| 8 | `SalesInvoice_Header_Exp` | `SalesInvoice_Detail_Exp` | `TransactionID` | **Por verificar** | Baja |
+| 9 | `SalesOrder_Header_Exp` | `SalesOrder_Detail_Exp` | `TransactionID` | **Por verificar** | Baja |
 
 ### Primary Keys por Modelo
 
 ```php
 // Verificado en app/Models/
 CustomerCreditMemoHeaderImp::$primaryKey = 'TransactionID';  // auto_increment = true
-GJEHeaderImp::$primaryKey = 'TransactionID';                 // auto_increment = true  ✅ YA IMPLEMENTADO
+GJEHeaderImp::$primaryKey = 'TransactionID';                 // auto_increment = true  YA IMPLEMENTADO
 PurchaseHeaderImp::$primaryKey = 'TransactionID';            // auto_increment = true
 CustomerReceiptHeaderImp::$primaryKey = 'UniqueReceiptID';   // auto_increment = true
 VendorPaymentHeaderImp::$primaryKey = 'UniquePaymentID';     // auto_increment = true
 FeHeader::$primaryKey = 'id';                                // auto_increment = true
-PurOrdrHeaderExp::$primaryKey = 'ID';                        // ⚠️ verificar
-SalesInvoiceHeaderExp::$primaryKey = 'id';                   // ⚠️ verificar
-SalesOrderHeaderExp::$primaryKey = 'ID';                     // ⚠️ verificar
+PurOrdrHeaderExp::$primaryKey = 'ID';                        // verificar
+SalesInvoiceHeaderExp::$primaryKey = 'id';                   // verificar
+SalesOrderHeaderExp::$primaryKey = 'ID';                     // verificar
 ```
 
 ---
 
-## 🔍 Análisis del Código Actual
+## Análisis del Código Actual
 
 ### Implementación Parcial Existente
 
@@ -82,9 +82,9 @@ if ($table === 'GJE_Header_Imp' && isset($recordArray['TransactionID'])) {
 }
 ```
 
-**✅ ESTA ES LA ESTRATEGIA CORRECTA**
+**ESTA ES LA ESTRATEGIA CORRECTA**
 
-**❌ PROBLEMA:** Solo está aplicada a `GJE_Header_Imp`, faltan 5 tablas más (o 8 si incluimos las Export).
+**PROBLEMA:** Solo está aplicada a `GJE_Header_Imp`, faltan 5 tablas más (o 8 si incluimos las Export).
 
 ### Comportamiento Actual del Chunk Processing
 
@@ -103,7 +103,7 @@ DB::table($table)->orderBy($orderByColumn)->chunk($chunkSize, function ($records
     }
     
     if (!empty($batchData)) {
-        $this->insertBatch($table, $batchData);  // ❌ No captura IDs generados
+        $this->insertBatch($table, $batchData);  // No captura IDs generados
         $syncedCount += count($batchData);
     }
 });
@@ -147,23 +147,23 @@ DetailID | TransactionID | Item_id  | Description    | org_source_id
 3        | 2             | SERV003  | Service Z      | NULL
 ```
 
-#### ❌ Resultado Sin Estrategia (Colisión)
+#### Resultado Sin Estrategia (Colisión)
 
 ```sql
 -- Company BD Consolidada
 -- Customer_Credit_Memo_Header_Imp
 TransactionID | ID_compania | CreditNumber | org_source_id | source_transaction_id
 1             | 50          | CM001        | 100           | NULL
-❌ ERROR: Duplicate entry '1' for key 'PRIMARY' al intentar insertar Org B
+ERROR: Duplicate entry '1' for key 'PRIMARY' al intentar insertar Org B
 
 -- Customer_Credit_Memo_Detail_Imp
 DetailID | TransactionID | Item_id  | org_source_id
 1        | 1             | PROD001  | 100
 2        | 1             | PROD002  | 100
-❌ Detail de Org B no se puede insertar porque header falló
+Detail de Org B no se puede insertar porque header falló
 ```
 
-#### ✅ Resultado Con Estrategia (Correcto)
+#### Resultado Con Estrategia (Correcto)
 
 ```sql
 -- Company BD Consolidada
@@ -179,14 +179,14 @@ DetailID | TransactionID | Item_id  | org_source_id
 1        | 1             | PROD001  | 100
 2        | 1             | PROD002  | 100
 3        | 2             | PROD003  | 100
-4        | 3             | SERV001  | 101  -- ✅ Usa NUEVO TransactionID (3)
-5        | 3             | SERV002  | 101  -- ✅ Usa NUEVO TransactionID (3)
-6        | 4             | SERV003  | 101  -- ✅ Usa NUEVO TransactionID (4)
+4        | 3             | SERV001  | 101  -- Usa NUEVO TransactionID (3)
+5        | 3             | SERV002  | 101  -- Usa NUEVO TransactionID (3)
+6        | 4             | SERV003  | 101  -- Usa NUEVO TransactionID (4)
 ```
 
 ---
 
-## ✅ Solución Propuesta
+## Solución Propuesta
 
 ### Estrategia: Generar Nuevos IDs + Columna Source Tracking
 
@@ -222,7 +222,7 @@ DetailID | TransactionID | Item_id  | org_source_id
 
 ---
 
-## 🛠 Implementación Necesaria
+## Implementación Necesaria
 
 ### Fase 1: Migraciones de Base de Datos
 
@@ -589,7 +589,7 @@ protected function syncTable(Organization $organization, Companysession $company
 
         $syncedCount = 0;
 
-        // ✅ NUEVO: Detectar si es tabla Header con auto-increment
+        // NUEVO: Detectar si es tabla Header con auto-increment
         $headerConfig = $this->getHeaderConfig($table);
         $isHeader = !empty($headerConfig);
         $idMapping = []; // Para mapear IDs viejos → nuevos
@@ -637,7 +637,7 @@ protected function syncTable(Organization $organization, Companysession $company
                     }
                 }
 
-                // ✅ NUEVO: Manejo especial para Headers con auto-increment
+                // NUEVO: Manejo especial para Headers con auto-increment
                 if ($isHeader) {
                     $oldId = $recordArray[$headerConfig['pk']] ?? null;
                     if ($oldId) {
@@ -654,7 +654,7 @@ protected function syncTable(Organization $organization, Companysession $company
             }
 
             if (!empty($batchData)) {
-                // ✅ NUEVO: Si es header, insertar uno por uno para capturar IDs
+                // NUEVO: Si es header, insertar uno por uno para capturar IDs
                 if ($isHeader) {
                     foreach ($batchData as $data) {
                         try {
@@ -683,7 +683,7 @@ protected function syncTable(Organization $organization, Companysession $company
 
         Log::info("Synced {$syncedCount} records from {$table} (Org: {$organization->id})");
 
-        // ✅ NUEVO: Si es header, sincronizar sus details
+        // NUEVO: Si es header, sincronizar sus details
         if ($isHeader && !empty($idMapping)) {
             $detailsSynced = $this->syncDetails($organization, $company, $table, $headerConfig, $idMapping);
             Log::info("Synced {$detailsSynced} detail records for {$table}");
@@ -700,11 +700,11 @@ protected function syncTable(Organization $organization, Companysession $company
 
 ---
 
-## 🔧 Consideraciones Adicionales
+## Consideraciones Adicionales
 
 ### 1. Tablas Export (PurOrdr, SalesInvoice, SalesOrder)
 
-**⚠️ ACCIÓN REQUERIDA:** Verificar en stubs SQL si tienen `AUTO_INCREMENT`:
+**ACCIÓN REQUERIDA:** Verificar en stubs SQL si tienen `AUTO_INCREMENT`:
 
 ```bash
 # Buscar en stubs
@@ -758,7 +758,7 @@ grep -r "AUTO_INCREMENT" app/Models/stubs/*.sql.stub | grep -E "(PurOrdr|SalesIn
 
 ---
 
-## 📝 Plan de Acción
+## Plan de Acción
 
 ### Sprint 1: Preparación y Testing (Estimado: 3-4 horas)
 
@@ -959,18 +959,18 @@ for ($i = 1; $i <= 1000; $i++) {
 
 ---
 
-## ⚠️ Riesgos y Mitigaciones
+## Riesgos y Mitigaciones
 
 | # | Riesgo | Probabilidad | Impacto | Mitigación |
 |---|--------|--------------|---------|------------|
-| 1 | Pérdida de referencia a ID original | Baja | Alto | ✅ Columnas `source_*` preservan ID original |
-| 2 | Colisión de IDs en consolidación | Alta | Crítico | ✅ Auto-increment genera nuevos IDs |
-| 3 | Details huérfanos (sin header) | Media | Alto | ✅ Validar FK antes de insertar, logging de errores |
-| 4 | Mapeo incorrecto de IDs | Media | Crítico | ✅ Testing exhaustivo, logs detallados |
-| 5 | Performance degradado con muchos registros | Media | Medio | ✅ Chunk processing, liberar memoria |
-| 6 | Fallo en medio de sincronización | Media | Alto | ✅ Transacciones por chunk, retry logic |
-| 7 | Sage50 Connector no encuentra registros | Baja | Alto | ✅ Usar `source_*` + `org_source_id` para búsqueda |
-| 8 | Columnas `source_*` no existen en BD antigua | Baja | Medio | ✅ Migración verifica existencia, agrega si falta |
+| 1 | Pérdida de referencia a ID original | Baja | Alto | Columnas `source_*` preservan ID original |
+| 2 | Colisión de IDs en consolidación | Alta | Crítico | Auto-increment genera nuevos IDs |
+| 3 | Details huérfanos (sin header) | Media | Alto | Validar FK antes de insertar, logging de errores |
+| 4 | Mapeo incorrecto de IDs | Media | Crítico | Testing exhaustivo, logs detallados |
+| 5 | Performance degradado con muchos registros | Media | Medio | Chunk processing, liberar memoria |
+| 6 | Fallo en medio de sincronización | Media | Alto | Transacciones por chunk, retry logic |
+| 7 | Sage50 Connector no encuentra registros | Baja | Alto | Usar `source_*` + `org_source_id` para búsqueda |
+| 8 | Columnas `source_*` no existen en BD antigua | Baja | Medio | Migración verifica existencia, agrega si falta |
 
 ### Plan de Rollback
 
@@ -986,18 +986,18 @@ Si algo falla durante implementación:
 
 ---
 
-## 📈 Métricas de Éxito
+## Métricas de Éxito
 
 ### Criterios de Aceptación
 
-- ✅ Todos los headers se sincronizan sin colisiones de PK
-- ✅ Todos los details mantienen relación correcta con nuevos headers
-- ✅ 100% de registros incluyen `org_source_id` correcto
-- ✅ Columnas `source_*` contienen IDs originales
-- ✅ No hay details huérfanos
-- ✅ Performance aceptable (< 5 min para 1000 headers)
-- ✅ Logging completo para troubleshooting
-- ✅ Tests pasan al 100%
+- Todos los headers se sincronizan sin colisiones de PK
+- Todos los details mantienen relación correcta con nuevos headers
+- 100% de registros incluyen `org_source_id` correcto
+- Columnas `source_*` contienen IDs originales
+- No hay details huérfanos
+- Performance aceptable (< 5 min para 1000 headers)
+- Logging completo para troubleshooting
+- Tests pasan al 100%
 
 ### KPIs Post-Implementación
 
@@ -1011,7 +1011,7 @@ Si algo falla durante implementación:
 
 ---
 
-## 📚 Referencias
+## Referencias
 
 ### Código Relacionado
 
@@ -1028,7 +1028,7 @@ Si algo falla durante implementación:
 
 ---
 
-## 🔄 Historial de Cambios
+## Historial de Cambios
 
 | Fecha | Versión | Cambios | Autor |
 |-------|---------|---------|-------|
@@ -1036,7 +1036,7 @@ Si algo falla durante implementación:
 
 ---
 
-## ✅ Próximos Pasos
+## Próximos Pasos
 
 1. **Validar tablas Export** - Verificar auto-increment en stubs SQL
 2. **Crear migraciones** - Script para agregar columnas source_*

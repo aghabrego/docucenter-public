@@ -5,41 +5,41 @@
 **Error**: PAC 201 "Error al procesar solicitud"  
 **Causa**: **Envío de campos PROHIBIDOS para clientes extranjeros**
 
-## 🚨 **PROBLEMA IDENTIFICADO**
+## **PROBLEMA IDENTIFICADO**
 
 Según la documentación oficial de TheFactoryHKA ([Método Enviar](https://felwiki.thefactoryhka.com.pa/enviar)), para clientes extranjeros (`tipoClienteFE = 04`) existen **campos que NO DEBEN SER ENVIADOS**.
 
-### ❌ **CAMPOS PROHIBIDOS PARA EXTRANJEROS**
+### **CAMPOS PROHIBIDOS PARA EXTRANJEROS**
 
 Según especificación oficial: **"No debe ser enviado cuando tipoClienteFE = 04"**
 
-1. **`tipoContribuyente`** - ❌ No debe ser enviado
-2. **`numeroRUC`** - ❌ No debe ser enviado  
-3. **`digitoVerificadorRUC`** - ❌ No debe ser enviado
-4. **`codigoUbicacion`** - ❌ No debe ser enviado
-5. **`provincia`** - ❌ No debe ser enviado
-6. **`distrito`** - ❌ No debe ser enviado
-7. **`corregimiento`** - ❌ No debe ser enviado
+1. **`tipoContribuyente`** - No debe ser enviado
+2. **`numeroRUC`** - No debe ser enviado  
+3. **`digitoVerificadorRUC`** - No debe ser enviado
+4. **`codigoUbicacion`** - No debe ser enviado
+5. **`provincia`** - No debe ser enviado
+6. **`distrito`** - No debe ser enviado
+7. **`corregimiento`** - No debe ser enviado
 
-### ✅ **CAMPOS PERMITIDOS PARA EXTRANJEROS**
+### **CAMPOS PERMITIDOS PARA EXTRANJEROS**
 
 Solo estos campos pueden ser enviados para `tipoClienteFE = 04`:
 
-1. **`razonSocial`** - ✅ Permitido
-2. **`direccion`** - ✅ Permitido
-3. **`telefono1`** - ✅ Permitido (opcional)
-4. **`correoElectronico1`** - ✅ Permitido (opcional)
-5. **`tipoIdentificacion`** - ✅ Requerido (01: Pasaporte, 02: Número Tributario, 99: Otro)
-6. **`nroIdentificacionExtranjero`** - ✅ Requerido
-7. **`paisExtranjero`** - ✅ Permitido (solo para pasaportes)
-8. **`pais`** - ✅ Requerido (código de país)
-9. **`paisOtro`** - ✅ Condicional (si país = ZZ)
+1. **`razonSocial`** - Permitido
+2. **`direccion`** - Permitido
+3. **`telefono1`** - Permitido (opcional)
+4. **`correoElectronico1`** - Permitido (opcional)
+5. **`tipoIdentificacion`** - Requerido (01: Pasaporte, 02: Número Tributario, 99: Otro)
+6. **`nroIdentificacionExtranjero`** - Requerido
+7. **`paisExtranjero`** - Permitido (solo para pasaportes)
+8. **`pais`** - Requerido (código de país)
+9. **`paisOtro`** - Condicional (si país = ZZ)
 
-## 🔧 **CORRECCIÓN IMPLEMENTADA**
+## **CORRECCIÓN IMPLEMENTADA**
 
 ### **Archivo**: `app/Services/HKAService.php`
 
-**ANTES** (❌ INCORRECTO):
+**ANTES** (INCORRECTO):
 ```php
 // Asignaba TODOS los campos a TODOS los tipos de cliente
 $cliente->numeroRUC = $this->getNestedValue($doc, 'dGen.gDatRec.gRucRec.dRuc');
@@ -48,10 +48,10 @@ $cliente->codigoUbicacion = $this->getNestedValue($doc, 'dGen.gDatRec.gUbiRec.dC
 $cliente->provincia = $this->getNestedValue($doc, 'dGen.gDatRec.gUbiRec.dProv');
 $cliente->distrito = $this->getNestedValue($doc, 'dGen.gDatRec.gUbiRec.dDistr');
 $cliente->corregimiento = $this->getNestedValue($doc, 'dGen.gDatRec.gUbiRec.dCorreg');
-// ❌ VIOLABA especificación PAC para extranjeros
+// VIOLABA especificación PAC para extranjeros
 ```
 
-**DESPUÉS** (✅ CORRECTO):
+**DESPUÉS** (CORRECTO):
 ```php
 if ($cliente->tipoClienteFE === '04') {
     // EXTRANJEROS: Solo campos permitidos según documentación oficial
@@ -110,21 +110,21 @@ private function filterNullValues($object)
 }
 ```
 
-## 📊 **IMPACTO ESPERADO**
+## **IMPACTO ESPERADO**
 
-### ✅ **Antes vs Después**
+### **Antes vs Después**
 
 **ANTES** - XML enviado al PAC para extranjero:
 ```xml
 <ser:cliente>
     <ser:tipoClienteFE>04</ser:tipoClienteFE>
-    <ser:tipoContribuyente>2</ser:tipoContribuyente>     <!-- ❌ PROHIBIDO -->
-    <ser:numeroRUC></ser:numeroRUC>                      <!-- ❌ PROHIBIDO -->
-    <ser:digitoVerificadorRUC></ser:digitoVerificadorRUC> <!-- ❌ PROHIBIDO -->
-    <ser:codigoUbicacion>1-1-1</ser:codigoUbicacion>     <!-- ❌ PROHIBIDO -->
-    <ser:provincia>Florida</ser:provincia>                <!-- ❌ PROHIBIDO -->
-    <ser:distrito>Miami</ser:distrito>                    <!-- ❌ PROHIBIDO -->
-    <ser:corregimiento>Miami</ser:corregimiento>          <!-- ❌ PROHIBIDO -->
+    <ser:tipoContribuyente>2</ser:tipoContribuyente>     <!-- PROHIBIDO -->
+    <ser:numeroRUC></ser:numeroRUC>                      <!-- PROHIBIDO -->
+    <ser:digitoVerificadorRUC></ser:digitoVerificadorRUC> <!-- PROHIBIDO -->
+    <ser:codigoUbicacion>1-1-1</ser:codigoUbicacion>     <!-- PROHIBIDO -->
+    <ser:provincia>Florida</ser:provincia>                <!-- PROHIBIDO -->
+    <ser:distrito>Miami</ser:distrito>                    <!-- PROHIBIDO -->
+    <ser:corregimiento>Miami</ser:corregimiento>          <!-- PROHIBIDO -->
     <ser:razonSocial>Cliente Export USA</ser:razonSocial>
     <ser:tipoIdentificacion>01</ser:tipoIdentificacion>
     <ser:nroIdentificacionExtranjero>US123456789</ser:nroIdentificacionExtranjero>
@@ -136,7 +136,7 @@ private function filterNullValues($object)
 ```xml
 <ser:cliente>
     <ser:tipoClienteFE>04</ser:tipoClienteFE>
-    <!-- ✅ Campos prohibidos OMITIDOS -->
+    <!-- Campos prohibidos OMITIDOS -->
     <ser:razonSocial>Cliente Export USA</ser:razonSocial>
     <ser:direccion>Miami Street 123</ser:direccion>
     <ser:telefono1>+1-555-1234</ser:telefono1>
@@ -159,19 +159,19 @@ include 'docs/testing/test-campos-permitidos-extranjeros.php';
 ```
 
 ### **Casos de Prueba**:
-1. ✅ **Cliente Nacional** → Incluye RUC, ubicación, tipoContribuyente
-2. ✅ **Cliente Extranjero** → Solo campos permitidos, sin RUC/ubicación
-3. ✅ **Factura Exportación** → Cliente extranjero sin campos prohibidos
+1. **Cliente Nacional** → Incluye RUC, ubicación, tipoContribuyente
+2. **Cliente Extranjero** → Solo campos permitidos, sin RUC/ubicación
+3. **Factura Exportación** → Cliente extranjero sin campos prohibidos
 
-## 🎯 **RESULTADO ESPERADO**
+## **RESULTADO ESPERADO**
 
-- ✅ **Error PAC 201**: Debería RESOLVERSE
-- ✅ **Conformidad PAC**: 100% según especificación oficial
-- ✅ **Facturas Exportación**: Procesan sin errores
-- ✅ **Clientes Extranjeros**: Procesan sin errores
-- ✅ **XML Limpio**: Solo campos requeridos/permitidos
+- **Error PAC 201**: Debería RESOLVERSE
+- **Conformidad PAC**: 100% según especificación oficial
+- **Facturas Exportación**: Procesan sin errores
+- **Clientes Extranjeros**: Procesan sin errores
+- **XML Limpio**: Solo campos requeridos/permitidos
 
-## 🔗 **REFERENCIAS**
+## **REFERENCIAS**
 
 - [Método Enviar - TheFactoryHKA](https://felwiki.thefactoryhka.com.pa/enviar)
 - [Catálogo Códigos Retorno](https://felwiki.thefactoryhka.com.pa/_media/catalogo_de_codigos_de_retorno_del_servicio-08-2023.pdf)
@@ -179,7 +179,7 @@ include 'docs/testing/test-campos-permitidos-extranjeros.php';
 
 ---
 
-## ⚠️ **REGLA CRÍTICA**
+## **REGLA CRÍTICA**
 
 **NUNCA enviar campos marcados como "No debe ser enviado cuando tipoClienteFE = 04"**
 
@@ -188,6 +188,6 @@ include 'docs/testing/test-campos-permitidos-extranjeros.php';
 
 ---
 
-**Estado**: ✅ **IMPLEMENTADO**  
-**Testing**: ✅ **SCRIPT CREADO**  
-**Documentado**: ✅ **COMPLETO**
+**Estado**: **IMPLEMENTADO**  
+**Testing**: **SCRIPT CREADO**  
+**Documentado**: **COMPLETO**

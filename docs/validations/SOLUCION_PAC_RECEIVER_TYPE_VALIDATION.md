@@ -28,8 +28,8 @@ Según `database/seeders/csv/receiver_type.csv`:
 ### Error específico
 El RUC '1808755-1-706832' tiene:
 - Parte 1: '1808755' (7 caracteres) - DNI permite máximo 3
-- Parte 2: '1' (1 dígito) - ✅ Válido
-- Parte 3: '706832' (6 dígitos) - ✅ Válido
+- Parte 2: '1' (1 dígito) - Válido
+- Parte 3: '706832' (6 dígitos) - Válido
 
 **El problema:** tipo consumidor final + formato empresa → inconsistencia PAC
 
@@ -78,21 +78,21 @@ $gDatRec = self::removeNullValues([
 ### Antes (causaba error)
 - iTipoRec: '1' (valor original del usuario)
 - dRuc: '1808755-1-706832' (formato empresa)
-- ❌ PAC rechaza por inconsistencia
+- PAC rechaza por inconsistencia
 
 ### Después (funciona correctamente)
 - iTipoRec: '01' (Contribuyente) - auto-detectado según documentación oficial
 - dRuc: '1808755-1-706832' (formato empresa)
-- ✅ PAC acepta por consistencia
+- PAC acepta por consistencia
 
 ## Casos de prueba
 
 | RUC | Tipo Auto-detectado | Descripción | Resultado |
 |-----|---------------------|-------------|-----------|
-| 1808755-1-706832 | 01 | Contribuyente | ✅ Empresa |
-| 8-888-888888 | 02 | Consumidor final | ✅ Persona |
-| 1234567-1-123456 | 01 | Contribuyente | ✅ Empresa |
-| E-123-456789 | 02 | Consumidor final | ✅ Extranjero |
+| 1808755-1-706832 | 01 | Contribuyente | Empresa |
+| 8-888-888888 | 02 | Consumidor final | Persona |
+| 1234567-1-123456 | 01 | Contribuyente | Empresa |
+| E-123-456789 | 02 | Consumidor final | Extranjero |
 
 ## Archivos modificados
 
@@ -109,11 +109,11 @@ $gDatRec = self::removeNullValues([
 
 ## Errores PAC resueltos
 
-✅ **Error 1**: `instance.items[0].itbms requires property rate` → Resuelto por `formatTaxStructure()`
+**Error 1**: `instance.items[0].itbms requires property rate` → Resuelto por `formatTaxStructure()`
 
-✅ **Error 2**: `instance.receiver.ruc requires property type` → Resuelto por `formatRucStructure()`
+**Error 2**: `instance.receiver.ruc requires property type` → Resuelto por `formatRucStructure()`
 
-✅ **Error 3**: `instance.receiver.ruc.ruc is not valid dni or is tax payer when instance.receiver.type is final consumer` → **Resuelto por `detectReceiverType()`**
+**Error 3**: `instance.receiver.ruc.ruc is not valid dni or is tax payer when instance.receiver.type is final consumer` → **Resuelto por `detectReceiverType()`**
 
 ## Beneficios
 

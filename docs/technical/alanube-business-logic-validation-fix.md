@@ -60,7 +60,7 @@ private static function determineDestination(array $data): int
 
 ## Escenarios de Testing
 
-### Caso 1: Internal Operation con Receptor Extranjero ✅
+### Caso 1: Internal Operation con Receptor Extranjero 
 ```php
 $data = [
     'dGen' => [
@@ -71,7 +71,7 @@ $data = [
 // Resultado: destination = 1 (Nacional) - NO genera error PAC
 ```
 
-### Caso 2: Exportation con Receptor Extranjero ✅
+### Caso 2: Exportation con Receptor Extranjero 
 ```php
 $data = [
     'dGen' => [
@@ -118,12 +118,12 @@ $data = [
 
 ## Impacto en Funcionalidad
 
-### Antes de la Solución ❌
+### Antes de la Solución 
 - Facturas internas con receptores extranjeros fallaban
 - Error de validación PAC interrumpía procesamiento
 - Facturas no se completaban correctamente
 
-### Después de la Solución ✅
+### Después de la Solución 
 - Facturas internas procesan correctamente independientemente del país del receptor
 - Validación PAC pasa exitosamente
 - Funcionalidad completa para escenarios de negocio reales

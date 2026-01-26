@@ -56,12 +56,12 @@
 
 ## Conclusión Crítica
 
-✅ **CORRECCIÓN NECESARIA**: El código debe usar **"um"** para facturas de exportación según:
+**CORRECCIÓN NECESARIA**: El código debe usar **"um"** para facturas de exportación según:
 1. **Ejemplo oficial TheFactoryHKA**
 2. **Documentación oficial DGI** (Tabla 29)
 3. **Campo es opcional** pero si se usa debe ser de la lista oficial
 
-❌ **PROBLEMA**: "UND" NO aparece en la Tabla 29 oficial de la DGI como símbolo válido
+**PROBLEMA**: "UND" NO aparece en la Tabla 29 oficial de la DGI como símbolo válido
 
 ## Recomendaciones
 

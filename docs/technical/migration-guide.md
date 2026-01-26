@@ -1,17 +1,17 @@
 # Guía de Migración: Actualizar Componentes al Nuevo Sidebar
 
-## 📋 Objetivo
+## Objetivo
 Migrar componentes Livewire progresivamente para usar el nuevo sidebar reorganizado sin afectar el resto del sistema.
 
-## 🎯 Estrategia: Migración Progresiva
+## Estrategia: Migración Progresiva
 
-### ✅ Ventajas de este Enfoque
+### Ventajas de este Enfoque
 - No afecta componentes existentes
 - Permite testing individual
 - Rollback fácil por componente
 - Sin riesgo para producción
 
-## 🔧 Cómo Actualizar un Componente
+## Cómo Actualizar un Componente
 
 ### Antes (Layout Antiguo)
 ```php
@@ -36,7 +36,7 @@ public function render()
 }
 ```
 
-## 📝 Checklist de Migración
+## Checklist de Migración
 
 ### Por Componente:
 - [ ] Identificar archivo del componente Livewire
@@ -53,9 +53,9 @@ public function render()
 - [ ] Documentar cambios
 - [ ] Marcar módulo como migrado
 
-## 🗂️ Componentes por Migrar (Prioridad)
+## 🗂Componentes por Migrar (Prioridad)
 
-### 🟢 Alta Prioridad - Facturación Electrónica
+### Alta Prioridad - Facturación Electrónica
 ```bash
 # Componentes nuevos/recientes
 app/Http/Livewire/Admin/Einvoice/LightspeedSerieR/ManageShop.php
@@ -65,14 +65,14 @@ app/Http/Livewire/Admin/Einvoice/Configuration.php
 app/Http/Livewire/Admin/Einvoice/BranchClient.php
 ```
 
-### 🟡 Media Prioridad - Integraciones
+### Media Prioridad - Integraciones
 ```bash
 app/Http/Livewire/Admin/Connections/Lists.php
 app/Http/Livewire/Admin/Databases/Lists.php
 app/Http/Livewire/Admin/Tables/Lists.php
 ```
 
-### 🔵 Baja Prioridad - Administración
+### Baja Prioridad - Administración
 ```bash
 app/Http/Livewire/Admin/Users/Lists.php
 app/Http/Livewire/Admin/Role/Lists.php
@@ -86,32 +86,32 @@ app/Http/Livewire/Admin/PersonalAccess/Lists.php
 ```bash
 # Acceder a la ruta del componente
 # Verificar:
-- ✅ Sidebar reorganizado aparece
-- ✅ Badge de organización visible
-- ✅ Secciones agrupadas correctamente
-- ✅ Item actual resaltado en verde
-- ✅ Submenús funcionan
+- Sidebar reorganizado aparece
+- Badge de organización visible
+- Secciones agrupadas correctamente
+- Item actual resaltado en verde
+- Submenús funcionan
 ```
 
 ### 2. Testing Funcional
 ```bash
 # Probar funcionalidad del componente
-- ✅ CRUD funciona
-- ✅ Formularios funcionan
-- ✅ Navegación a otros módulos
-- ✅ Permisos respetados
+- CRUD funciona
+- Formularios funcionan
+- Navegación a otros módulos
+- Permisos respetados
 ```
 
 ### 3. Testing de Navegación
 ```bash
 # Desde el componente migrado:
-- ✅ Navegar a Dashboard
-- ✅ Navegar a otros módulos
-- ✅ Logout funciona
-- ✅ Cambio de organización (si aplica)
+- Navegar a Dashboard
+- Navegar a otros módulos
+- Logout funciona
+- Cambio de organización (si aplica)
 ```
 
-## 📊 Seguimiento de Migración
+## Seguimiento de Migración
 
 ### Estado Actual
 ```
@@ -125,7 +125,7 @@ Progreso: 0%
 - [ ] ManageShop (Lightspeed Serie R)
 - [ ] [Agregar aquí según se migren]
 
-## 🚀 Ejemplo Completo: Migrar ManageShop
+## Ejemplo Completo: Migrar ManageShop
 
 ### Paso 1: Localizar el Componente
 ```bash
@@ -149,15 +149,15 @@ public function render()
 http://localhost/admin/einvoice/lightspeed-serie-r-shop
 
 # 2. Verificar visualmente
-- Badge de organización: ✅
-- Sidebar reorganizado: ✅
-- Sección "Facturación Electrónica" visible: ✅
-- Item "Lightspeed Serie R" resaltado: ✅
+- Badge de organización: 
+- Sidebar reorganizado: 
+- Sección "Facturación Electrónica" visible: 
+- Item "Lightspeed Serie R" resaltado: 
 
 # 3. Probar funcionalidad
-- Cargar organizaciones: ✅
-- Guardar configuración: ✅
-- Validaciones: ✅
+- Cargar organizaciones: 
+- Guardar configuración: 
+- Validaciones: 
 ```
 
 ### Paso 4: Commit
@@ -166,22 +166,22 @@ git add app/Http/Livewire/Admin/Einvoice/LightspeedSerieR/ManageShop.php
 git commit -m "refactor: migrar ManageShop al nuevo sidebar reorganizado"
 ```
 
-## ⚠️ Precauciones
+## Precauciones
 
 ### NO Hacer:
-- ❌ NO cambiar todos los componentes al mismo tiempo
-- ❌ NO eliminar el layout antiguo todavía
-- ❌ NO modificar componentes sin testing
-- ❌ NO afectar rutas en producción sin validar
+- NO cambiar todos los componentes al mismo tiempo
+- NO eliminar el layout antiguo todavía
+- NO modificar componentes sin testing
+- NO afectar rutas en producción sin validar
 
 ### SÍ Hacer:
-- ✅ Migrar componente por componente
-- ✅ Testing individual de cada cambio
-- ✅ Commit por cada componente migrado
-- ✅ Documentar problemas encontrados
-- ✅ Rollback si hay problemas
+- Migrar componente por componente
+- Testing individual de cada cambio
+- Commit por cada componente migrado
+- Documentar problemas encontrados
+- Rollback si hay problemas
 
-## 🔄 Rollback Individual
+## Rollback Individual
 
 Si un componente presenta problemas después de migrar:
 
@@ -200,7 +200,7 @@ O revertir el commit:
 git revert HEAD
 ```
 
-## 📞 Soporte
+##  Soporte
 
 Si encuentras problemas durante la migración:
 1. Verificar que el componente existe en el sidebar nuevo
@@ -209,7 +209,7 @@ Si encuentras problemas durante la migración:
 4. Consultar logs de Laravel
 5. Hacer rollback si es necesario
 
-## 🎯 Siguientes Pasos
+## Siguientes Pasos
 
 1. **Comenzar con ManageShop** (ya está listo el código)
 2. Testing completo

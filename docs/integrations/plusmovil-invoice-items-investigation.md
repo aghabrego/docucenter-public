@@ -8,7 +8,7 @@
 
 ## Hallazgos
 
-### ❌ NO Incluidos en `/com-invoices`
+### NO Incluidos en `/com-invoices`
 
 El endpoint `/com-invoices` **NO incluye** los items/detalles de las facturas en la respuesta.
 
@@ -28,9 +28,9 @@ El endpoint `/com-invoices` **NO incluye** los items/detalles de las facturas en
 ```
 
 **Observaciones:**
-- ✅ Tiene `total_quantity` pero generalmente es `null`
-- ✅ Tiene referencia `com_order_id` pero el objeto `com_order` no incluye items
-- ❌ No tiene campo `com_invoice_items`, `items`, `details`, etc.
+- Tiene `total_quantity` pero generalmente es `null`
+- Tiene referencia `com_order_id` pero el objeto `com_order` no incluye items
+- No tiene campo `com_invoice_items`, `items`, `details`, etc.
 
 ---
 
@@ -38,7 +38,7 @@ El endpoint `/com-invoices` **NO incluye** los items/detalles de las facturas en
 
 ### 1. `/com-invoice-details`
 **URL:** `/com-invoice-details?com_invoice_id=303`  
-**Resultado:** ❌ **Error 403** - Requiere AWS Signature (no Cognito Bearer token)
+**Resultado:** **Error 403** - Requiere AWS Signature (no Cognito Bearer token)
 
 ```json
 {
@@ -48,7 +48,7 @@ El endpoint `/com-invoices` **NO incluye** los items/detalles de las facturas en
 
 ### 2. `/com-invoice-items`
 **URL:** `/com-invoice-items?com_invoice_id=303`  
-**Resultado:** ❌ **Error 403** - Requiere AWS Signature (no Cognito Bearer token)
+**Resultado:** **Error 403** - Requiere AWS Signature (no Cognito Bearer token)
 
 ```json
 {
@@ -58,7 +58,7 @@ El endpoint `/com-invoices` **NO incluye** los items/detalles de las facturas en
 
 ### 3. `/com-orders`
 **URL:** `/com-orders?id=30`  
-**Resultado:** ✅ Funciona con Cognito, pero **NO incluye items**
+**Resultado:** Funciona con Cognito, pero **NO incluye items**
 
 ```json
 {
@@ -75,16 +75,16 @@ El endpoint `/com-invoices` **NO incluye** los items/detalles de las facturas en
 
 ## Conclusiones
 
-### 🔍 Situación Actual
+### Situación Actual
 
 1. **Endpoint de facturas (`/com-invoices`):**
-   - ✅ Funciona con Cognito Bearer token
-   - ✅ Incluye información completa de la factura (header)
-   - ❌ NO incluye items/líneas de detalle
+   - Funciona con Cognito Bearer token
+   - Incluye información completa de la factura (header)
+   - NO incluye items/líneas de detalle
 
 2. **Endpoints de detalles:**
-   - ❌ `/com-invoice-details` - Bloqueado (requiere AWS Signature)
-   - ❌ `/com-invoice-items` - Bloqueado (requiere AWS Signature)
+   - `/com-invoice-details` - Bloqueado (requiere AWS Signature)
+   - `/com-invoice-items` - Bloqueado (requiere AWS Signature)
 
 3. **Patrón detectado:**
    - Algunos endpoints usan **Cognito** (Bearer token)
@@ -94,14 +94,14 @@ El endpoint `/com-invoices` **NO incluye** los items/detalles de las facturas en
 
 ## Recomendaciones
 
-### 📋 Opción 1: Solicitar a PlusMovil
+### Opción 1: Solicitar a PlusMovil
 
 **Contactar al equipo de PlusMovil para:**
 
-1. ✅ Confirmar el endpoint correcto para obtener items de factura
-2. ✅ Solicitar acceso/documentación para endpoints de detalles
-3. ✅ Verificar si pueden habilitar autenticación Cognito para `/com-invoice-items`
-4. ✅ Obtener Swagger completo con todos los endpoints disponibles
+1. Confirmar el endpoint correcto para obtener items de factura
+2. Solicitar acceso/documentación para endpoints de detalles
+3. Verificar si pueden habilitar autenticación Cognito para `/com-invoice-items`
+4. Obtener Swagger completo con todos los endpoints disponibles
 
 **Preguntas específicas:**
 ```
@@ -121,7 +121,7 @@ Actualmente obtenemos error 403 en estos endpoints con nuestro token de Cognito.
 Gracias.
 ```
 
-### 📋 Opción 2: Verificar Documentación Swagger
+### Opción 2: Verificar Documentación Swagger
 
 **Acciones:**
 1. Acceder a la aplicación web de PlusMovil
@@ -129,7 +129,7 @@ Gracias.
 3. Identificar endpoint de items/detalles
 4. Verificar método de autenticación requerido
 
-### 📋 Opción 3: Endpoint Alternativo (si existe)
+### Opción 3: Endpoint Alternativo (si existe)
 
 **Posibles alternativas a probar cuando PlusMovil responda:**
 
@@ -154,17 +154,17 @@ GET /com-invoices?id=303&expand=items
 
 ## Impacto en Integración DocuCenter
 
-### ⚠️ Funcionalidad Limitada Actual
+### Funcionalidad Limitada Actual
 
 **Sin acceso a items de factura:**
-- ❌ No podemos sincronizar líneas de detalle (`Sales_Detail_Imp`)
-- ❌ No podemos validar totales por item
-- ❌ No podemos sincronizar productos vendidos
-- ❌ No podemos generar reportes de productos más vendidos
-- ✅ SÍ podemos sincronizar headers de factura (`Sales_Header_Imp`)
-- ✅ SÍ podemos sincronizar totales generales
+- No podemos sincronizar líneas de detalle (`Sales_Detail_Imp`)
+- No podemos validar totales por item
+- No podemos sincronizar productos vendidos
+- No podemos generar reportes de productos más vendidos
+- SÍ podemos sincronizar headers de factura (`Sales_Header_Imp`)
+- SÍ podemos sincronizar totales generales
 
-### 🔧 Implementación Sugerida (dos fases)
+### Implementación Sugerida (dos fases)
 
 **Fase 1: Sin items (implementar ahora)**
 ```php
@@ -221,20 +221,20 @@ public function syncInvoiceDetails($invoiceId) {
 ## Próximos Pasos
 
 ### Inmediatos:
-1. ✅ **Contactar a PlusMovil** para confirmar endpoint de items
-2. ✅ **Solicitar acceso** si requiere permisos adicionales
-3. ✅ **Documentar respuesta** cuando obtengamos acceso
+1. **Contactar a PlusMovil** para confirmar endpoint de items
+2. **Solicitar acceso** si requiere permisos adicionales
+3. **Documentar respuesta** cuando obtengamos acceso
 
 ### Mientras tanto:
-1. ✅ Implementar sincronización de **headers** de facturas
-2. ✅ Guardar referencia `external_invoice_id` para asociar items después
-3. ✅ Implementar flag `has_details` en Sales_Header_Imp
+1. Implementar sincronización de **headers** de facturas
+2. Guardar referencia `external_invoice_id` para asociar items después
+3. Implementar flag `has_details` en Sales_Header_Imp
 
 ### Cuando se resuelva:
-1. ⏳ Crear script de prueba para endpoint de items
-2. ⏳ Documentar estructura completa
-3. ⏳ Implementar sincronización de detalles
-4. ⏳ Actualizar facturas existentes con items
+1.  Crear script de prueba para endpoint de items
+2.  Documentar estructura completa
+3.  Implementar sincronización de detalles
+4.  Actualizar facturas existentes con items
 
 ---
 
@@ -261,9 +261,9 @@ curl -s "https://xka96gucj8.execute-api.us-east-1.amazonaws.com/qa/com-invoices/
 
 | Aspecto | Estado | Acción |
 |---------|--------|--------|
-| **Headers de factura** | ✅ Disponible | Implementar ya |
-| **Items de factura** | ❌ Bloqueado | Contactar PlusMovil |
-| **Autenticación Cognito** | ✅ Funciona | Para headers |
-| **Endpoint de items** | ⏳ Por confirmar | Pendiente respuesta |
+| **Headers de factura** | Disponible | Implementar ya |
+| **Items de factura** | Bloqueado | Contactar PlusMovil |
+| **Autenticación Cognito** | Funciona | Para headers |
+| **Endpoint de items** |  Por confirmar | Pendiente respuesta |
 
 **Conclusión:** Podemos implementar la sincronización de facturas (headers) ahora, pero necesitamos confirmar con PlusMovil el endpoint correcto para obtener los items/detalles de cada factura.

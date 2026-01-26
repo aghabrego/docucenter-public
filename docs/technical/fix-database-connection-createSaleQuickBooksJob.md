@@ -10,7 +10,7 @@ SQLSTATE[42S22]: Column not found: 1054 Unknown column 'intuit_sync_status' in '
 
 ## Causa Raíz
 
-1. **Primer Update (línea ~106)**: ✅ Funcionaba correctamente
+1. **Primer Update (línea ~106)**: Funcionaba correctamente
    ```php
    $sale->update(['intuit_sync_status' => 'synced']);
    ```
@@ -19,7 +19,7 @@ SQLSTATE[42S22]: Column not found: 1054 Unknown column 'intuit_sync_status' in '
    - Este método cambia temporalmente a BD de organización
    - Al final restaura conexión a BD principal: `useDatabase(env('DB_DATABASE'))`
 
-3. **Segundo Update (línea ~172)**: ❌ Fallaba
+3. **Segundo Update (línea ~172)**: Fallaba
    ```php
    $sale->update(['intuit_sync_status' => 'completed']);
    ```
@@ -47,14 +47,14 @@ $sale->update([
 
 ## Resultado
 
-✅ **RESUELTO**: El job ahora mantiene la conexión correcta a la BD de organización durante todo el proceso, evitando el error de columna no encontrada.
+**RESUELTO**: El job ahora mantiene la conexión correcta a la BD de organización durante todo el proceso, evitando el error de columna no encontrada.
 
 ## Testing
 
 El error se manifestaba al completar emisión de facturas desde QuickBooks. La solución asegura que:
 
-1. ✅ Primer update funciona (ya funcionaba)
-2. ✅ Procesamiento FE funciona (ya funcionaba)  
-3. ✅ **Segundo update ahora funciona** (problema resuelto)
+1. Primer update funciona (ya funcionaba)
+2. Procesamiento FE funciona (ya funcionaba)  
+3. **Segundo update ahora funciona** (problema resuelto)
 
 **Estado**: Listo para testing en producción

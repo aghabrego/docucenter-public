@@ -1,6 +1,6 @@
 # Análisis de Campos del Modelo Pacconnection para Alanube
 
-## 📋 Datos Proporcionados
+## Datos Proporcionados
 ```json
 {
     "id": 19,
@@ -22,9 +22,9 @@
 }
 ```
 
-## 🔍 Análisis Detallado de Campos
+## Análisis Detallado de Campos
 
-### 📊 Campos Estándar del Modelo
+### Campos Estándar del Modelo
 | Campo | Valor | Tipo | Descripción |
 |-------|-------|------|-------------|
 | `id` | 19 | INTEGER | Identificador único de la conexión PAC |
@@ -34,7 +34,7 @@
 | `created_at` | "2025-08-23 15:32:31" | TIMESTAMP | Fecha de creación |
 | `updated_at` | "2025-08-23 15:32:31" | TIMESTAMP | Fecha de última actualización |
 
-### 🔐 Campos de Autenticación
+###  Campos de Autenticación
 | Campo | Valor | Análisis |
 |-------|-------|----------|
 | `token` | JWT Token (largo) | Token de autenticación válido para Alanube |
@@ -42,27 +42,27 @@
 | `username` | null | No requerido para Alanube (usa token) |
 | `password` | null | No requerido para Alanube (usa token) |
 
-### 🌐 Configuración de Endpoint
+### Configuración de Endpoint
 | Campo | Valor | Análisis |
 |-------|-------|----------|
 | `endpoint` | "https://sandbox-api.alanube.co/pan/v1" | URL de ambiente sandbox para Panamá |
 | País detectado | 🇵🇦 Panamá | Basado en `/pan/v1` en la URL |
 | Ambiente | Sandbox/Testing | Basado en `sandbox-api.alanube.co` |
 
-### 🏢 Campos Específicos de Alanube
+### Campos Específicos de Alanube
 | Campo | Valor | Propósito |
 |-------|-------|-----------|
 | `id_company` | "01GWNA4PGNAQBHPRT5W8BJTATC" | Identificador de la empresa en Alanube |
 | `id_office` | "01H05QF4MDR9HKCQ3MBG7NTCFA" | Identificador de la oficina/sucursal en Alanube |
 
-### 📝 Campos Descriptivos
+### Campos Descriptivos
 | Campo | Valor | Análisis |
 |-------|-------|----------|
 | `description` | Texto descriptivo largo | Información oficial de Alanube como PAC autorizado |
 | `branch_code` | null | Campo serializado para códigos de sucursal (opcional) |
 | `billing_point` | null | Campo serializado para puntos de facturación (opcional) |
 
-## 🔧 Análisis del Token JWT
+## Análisis del Token JWT
 
 ### Decodificación del Header
 ```json
@@ -93,25 +93,25 @@
 - **Expired**: 11717340222 (fecha muy lejana - token de larga duración)
 - **Subject**: ID único de usuario en sistema Alanube
 
-## 🎯 Campos Clave para Funcionalidad
+## Campos Clave para Funcionalidad
 
-### ✅ Campos Obligatorios para Alanube
+### Campos Obligatorios para Alanube
 1. **name**: `"alanube"` - Identifica el tipo de PAC
 2. **token**: JWT válido - Autenticación con API Alanube
 3. **endpoint**: URL válida - Define país y ambiente
 4. **id_company**: ID de empresa - Requerido para todas las peticiones
 5. **id_office**: ID de oficina - Requerido para emisión de documentos
 
-### 🔄 Lógica de Detección de País
+### Lógica de Detección de País
 El sistema detecta automáticamente el país basado en el endpoint:
 - `/pan/v1` → 🇵🇦 Panamá
 - `/dom/v1` → 🇩🇴 República Dominicana
 
-### 🌐 Detección de Ambiente
+### Detección de Ambiente
 - `sandbox-api.alanube.co` → Testing/Sandbox
 - `api.alanube.co` → Producción
 
-## 📋 Atributo Virtual `pac_type`
+## Atributo Virtual `pac_type`
 
 **Nota Importante**: El campo `pac_type` no existe físicamente en la base de datos, pero se usa extensivamente en el código. Se deriva de:
 
@@ -126,7 +126,7 @@ if ($pacConnection->name === 'alanube') {
 }
 ```
 
-## 🚨 Campos Vacíos/No Utilizados para Alanube
+## Campos Vacíos/No Utilizados para Alanube
 
 - `expiration`: null (token JWT maneja su propia expiración)
 - `username`: null (no requerido para autenticación por token)
@@ -134,32 +134,32 @@ if ($pacConnection->name === 'alanube') {
 - `branch_code`: null (opcional, para configuraciones avanzadas)
 - `billing_point`: null (opcional, para configuraciones avanzadas)
 
-## 📊 Estado de Configuración
+## Estado de Configuración
 
-### ✅ Configuración Válida Detectada
-- **PAC Provider**: Alanube ✅
-- **País**: Panamá 🇵🇦 ✅
-- **Ambiente**: Sandbox ✅
-- **Autenticación**: JWT válido ✅
-- **Empresa configurada**: Sí ✅
-- **Oficina configurada**: Sí ✅
+### Configuración Válida Detectada
+- **PAC Provider**: Alanube 
+- **País**: Panamá 🇵🇦 
+- **Ambiente**: Sandbox 
+- **Autenticación**: JWT válido 
+- **Empresa configurada**: Sí 
+- **Oficina configurada**: Sí 
 
-### 🎯 Funcionalidades Habilitadas
+### Funcionalidades Habilitadas
 Con esta configuración, la organización puede:
-- ✅ Emitir facturas electrónicas
-- ✅ Emitir notas de crédito
-- ✅ Consultar RUC panameños
-- ✅ Descargar documentos XML/PDF
-- ✅ Realizar validaciones PAC
+- Emitir facturas electrónicas
+- Emitir notas de crédito
+- Consultar RUC panameños
+- Descargar documentos XML/PDF
+- Realizar validaciones PAC
 
-## 🔧 Recomendaciones de Uso
+## Recomendaciones de Uso
 
 1. **Para Producción**: Cambiar endpoint a `https://api.alanube.co/pan/v1`
 2. **Token**: Verificar periódicamente la validez del JWT
 3. **Monitoring**: Supervisar logs de emisión para detectar errores
 4. **Backup**: Mantener respaldo de `id_company` e `id_office`
 
-## 📚 Referencias de Código
+## Referencias de Código
 
 - Modelo: `app/Models/Pacconnection.php`
 - Servicio: `app/Services/AlanubeService.php`

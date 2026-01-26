@@ -2,14 +2,14 @@
 
 Sistema para migrar y completar `fiscal_document_number` en facturas existentes que ya tienen CUFE pero no tienen el número fiscal extraído.
 
-## 🎯 Propósito
+## Propósito
 
 Este Job es útil para:
 - **Migrar datos históricos**: Facturas procesadas antes de la implementación del campo `fiscal_document_number`
 - **Completar datos faltantes**: Facturas que tienen CUFE en `intuit_extracted_cufe` o `InvoiceNote` pero no el número fiscal
 - **Reparar inconsistencias**: Datos incompletos o corruptos en el campo fiscal
 
-## 🏗️ Arquitectura
+## Arquitectura
 
 ### UpdateFiscalDocumentNumberJob
 **Ubicación**: `app/Jobs/UpdateFiscalDocumentNumberJob.php`
@@ -30,7 +30,7 @@ Este Job es útil para:
 - Modo dry-run para ver qué se procesaría sin ejecutar
 - Batch processing con seguimiento de progreso
 
-## 🚀 Uso
+## Uso
 
 ### Comando Artisan
 
@@ -65,7 +65,7 @@ Bus::batch($jobs)
    ->dispatch();
 ```
 
-## 🔍 Lógica de Procesamiento
+## Lógica de Procesamiento
 
 ### Criterios de Selección
 El Job procesa facturas que cumplan:
@@ -114,7 +114,7 @@ El Job procesa facturas que cumplan:
    - Almacenar `fiscal_document_number`
    - Si se extrajo CUFE del InvoiceNote, también almacenar `intuit_extracted_cufe`
 
-## 📊 Monitoreo y Logging
+## Monitoreo y Logging
 
 ### Logs Principales
 
@@ -148,7 +148,7 @@ El Job procesa facturas que cumplan:
 - **ERROR**: Errores procesando facturas específicas
 - **CRITICAL**: Fallo completo del Job
 
-## ⚠️ Consideraciones
+## Consideraciones
 
 ### Performance
 - Usa `cursor()` para eficiencia de memoria en grandes volúmenes
@@ -167,7 +167,7 @@ El Job procesa facturas que cumplan:
 - Logs detallados para debugging
 - Estadísticas completas de cada ejecución
 
-## 📋 Casos de Uso Típicos
+## Casos de Uso Típicos
 
 ### 1. Migración Inicial Post-Implementación
 ```bash
@@ -188,7 +188,7 @@ php artisan quickbooks:update-fiscal-numbers --organization-id=456
 php artisan quickbooks:update-fiscal-numbers --organization-id=789 --dry-run
 ```
 
-## 🔗 Integración
+## Integración
 
 ### Con Sistemas Existentes
 - Compatible con `CufeValidationHelper`
@@ -200,7 +200,7 @@ php artisan quickbooks:update-fiscal-numbers --organization-id=789 --dry-run
 - Respeta arquitectura multi-tenant
 - Conexiones dinámicas por organización
 
-## 📈 Métricas de Éxito
+## Métricas de Éxito
 
 - **Tasa de extracción**: % de CUFEs procesados exitosamente
 - **Precisión**: % de números fiscales extraídos correctamente

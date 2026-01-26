@@ -9,20 +9,20 @@
 
 ### Características del Endpoint
 
-- ✅ **Filtrado Avanzado**: Soporte para múltiples filtros y operadores
-- ✅ **Paginación**: Resultados paginados automáticamente
-- ✅ **Ordenamiento**: Ordenar por cualquier campo
-- ✅ **Multi-tenant**: Respeta el contexto de organización activa
+- **Filtrado Avanzado**: Soporte para múltiples filtros y operadores
+- **Paginación**: Resultados paginados automáticamente
+- **Ordenamiento**: Ordenar por cualquier campo
+- **Multi-tenant**: Respeta el contexto de organización activa
 
 ### Parámetros de Query (Opcionales)
 
 | Parámetro | Tipo | Requerido | Descripción | Ejemplo |
 |-----------|------|-----------|-------------|---------|
-| `page` | integer | ❌ | Página a obtener | `2` |
-| `per_page` | integer | ❌ | Registros por página (máx 100) | `50` |
-| `sort` | string | ❌ | Campo para ordenar | `"name"` |
-| `order` | string | ❌ | Dirección del ordenamiento | `"asc"` o `"desc"` |
-| `filter` | object | ❌ | Filtros aplicados (ver sección de filtros) | `{}` |
+| `page` | integer | | Página a obtener | `2` |
+| `per_page` | integer | | Registros por página (máx 100) | `50` |
+| `sort` | string | | Campo para ordenar | `"name"` |
+| `order` | string | | Dirección del ordenamiento | `"asc"` o `"desc"` |
+| `filter` | object | | Filtros aplicados (ver sección de filtros) | `{}` |
 
 ### Sistema de Filtros Avanzados
 
@@ -120,21 +120,21 @@ GET /api/acicloud/vendors?filter[name][operator]=contains&filter[name][value]=Di
 
 | Campo | Tipo | Requerido | Descripción | Validación | Ejemplo |
 |-------|------|-----------|-------------|------------|---------|
-| `VendorID` | string | ✅ | ID único del proveedor | Único, máx. 20 chars | `"VENDOR001"` |
-| `VendrName` | string | ✅ | Nombre del proveedor | Máx. 39 characters | `"Distribuidora Nacional S.A."` |
-| `PhoneNumber` | string | ❌ | Teléfono del proveedor | Máx. 20 characters | `"+507 6789-1234"` |
-| `Email` | string | ❌ | Email del proveedor | Email válido, único, máx. 64 | `"compras@distribuidora.com"` |
-| `AddressLine1` | string | ❌ | Dirección línea 1 | - | `"Calle 50, Edificio Global Bank"` |
-| `AddressLine2` | string | ❌ | Dirección línea 2 | - | `"Piso 12, Oficina 1201"` |
-| `City` | string | ✅ | Ciudad | Requerido | `"Ciudad de Panamá"` |
-| `State` | string | ✅ | Estado/Provincia | Requerido, máx. 2 chars | `"PA"` |
-| `Zip` | string | ❌ | Código postal | Máx. 12 characters | `"0833-01234"` |
-| `Country` | string | ✅ | País | Requerido | `"Panamá"` |
-| `RUC` | string | ❌ | RUC del proveedor | Alfanumérico, máx. 40 | `"87654321-1-123456"` |
-| `DV` | string | ❌ | Dígito verificador | Alfanumérico, máx. 40 | `"56"` |
-| `VendorType` | string | ✅ | Tipo de proveedor | Requerido, alfanumérico, máx. 40 | `"Regular"` |
-| `TaxpayerType` | string | ✅ | Tipo de contribuyente | Requerido, alfanumérico, máx. 40 | `"Contributor"` |
-| `Custom_field5` | string | ✅ | Campo personalizado 5 | Requerido, alfanumérico, máx. 40 | `"Activo"` |
+| `VendorID` | string | | ID único del proveedor | Único, máx. 20 chars | `"VENDOR001"` |
+| `VendrName` | string | | Nombre del proveedor | Máx. 39 characters | `"Distribuidora Nacional S.A."` |
+| `PhoneNumber` | string | | Teléfono del proveedor | Máx. 20 characters | `"+507 6789-1234"` |
+| `Email` | string | | Email del proveedor | Email válido, único, máx. 64 | `"compras@distribuidora.com"` |
+| `AddressLine1` | string | | Dirección línea 1 | - | `"Calle 50, Edificio Global Bank"` |
+| `AddressLine2` | string | | Dirección línea 2 | - | `"Piso 12, Oficina 1201"` |
+| `City` | string | | Ciudad | Requerido | `"Ciudad de Panamá"` |
+| `State` | string | | Estado/Provincia | Requerido, máx. 2 chars | `"PA"` |
+| `Zip` | string | | Código postal | Máx. 12 characters | `"0833-01234"` |
+| `Country` | string | | País | Requerido | `"Panamá"` |
+| `RUC` | string | | RUC del proveedor | Alfanumérico, máx. 40 | `"87654321-1-123456"` |
+| `DV` | string | | Dígito verificador | Alfanumérico, máx. 40 | `"56"` |
+| `VendorType` | string | | Tipo de proveedor | Requerido, alfanumérico, máx. 40 | `"Regular"` |
+| `TaxpayerType` | string | | Tipo de contribuyente | Requerido, alfanumérico, máx. 40 | `"Contributor"` |
+| `Custom_field5` | string | | Campo personalizado 5 | Requerido, alfanumérico, máx. 40 | `"Activo"` |
 
 ### Reglas de Validación Detalladas
 

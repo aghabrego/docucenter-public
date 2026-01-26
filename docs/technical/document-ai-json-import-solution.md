@@ -173,13 +173,13 @@ Una vez importados los 20 documentos:
 
 ## Lecciones Aprendidas
 
-### ❌ Lo que NO Funciona
+### Lo que NO Funciona
 - Importar PDFs primero y luego agregar anotaciones via API
 - Endpoints de update/patch/batch en v1beta3 (todos retornan 404)
 - Document protos con campo `content` (50MB límite)
 - textAnchors sin tener el texto OCR completo
 
-### ✅ Lo que SÍ Funciona
+### Lo que SÍ Funciona
 - Archivos JSON individuales con Document proto completo
 - OCR generado por Document AI (garantiza formato correcto)
 - textAnchors que referencian posiciones en el texto OCR
@@ -244,11 +244,11 @@ $possiblePaths = [
 
 ### API Documentation
 **Document AI API v1beta3**:
-- ProcessDocument: ✅ Funciona (usado para OCR)
-- ImportDocuments: ✅ Funciona (importa JSON files)
-- UpdateDocument: ❌ No existe (404)
-- ListDocuments: ❌ No existe (404)
-- DeleteDocument: ❌ No existe (404)
+- ProcessDocument: Funciona (usado para OCR)
+- ImportDocuments: Funciona (importa JSON files)
+- UpdateDocument: No existe (404)
+- ListDocuments: No existe (404)
+- DeleteDocument: No existe (404)
 
 ## Código Relacionado
 
@@ -286,11 +286,11 @@ $possiblePaths = [
 
 La solución correcta para importar documentos anotados programáticamente a Document AI Workbench es:
 
-1. ✅ Procesar PDFs con Document AI para obtener OCR completo
-2. ✅ Construir entities con textAnchors basados en el texto OCR
-3. ✅ Generar archivos JSON individuales con Document proto completo
-4. ✅ Subir JSON files a GCS
-5. ✅ Importar desde GCS en Workbench Console
+1. Procesar PDFs con Document AI para obtener OCR completo
+2. Construir entities con textAnchors basados en el texto OCR
+3. Generar archivos JSON individuales con Document proto completo
+4. Subir JSON files a GCS
+5. Importar desde GCS en Workbench Console
 
 **NO intentar** agregar anotaciones post-importación via API - esos endpoints no existen en v1beta3.
 

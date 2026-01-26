@@ -383,12 +383,12 @@ PacErrorCaptureService::captureError([
 
 ## Próximos Pasos
 
-1. ✅ Migración ejecutada
-2. ⏳ Integrar en emisiones individuales (Create.php, CreateFast.php, CreateFastJob.php)
-3. ⏳ Agregar al sidebar de navegación
-4. ⏳ Configurar permisos ACL
-5. ⏳ Testing con errores reales
-6. ⏳ Documentación de usuario final
+1. Migración ejecutada
+2.  Integrar en emisiones individuales (Create.php, CreateFast.php, CreateFastJob.php)
+3.  Agregar al sidebar de navegación
+4.  Configurar permisos ACL
+5.  Testing con errores reales
+6.  Documentación de usuario final
 
 ## Notas Importantes
 

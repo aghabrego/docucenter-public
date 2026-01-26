@@ -66,20 +66,20 @@ php artisan db:add-column-to-organizations-table \
 6. **Reporta** el resultado para cada organización
 
 ### Características de Seguridad:
-- ✅ **No duplica columnas** - Verifica existencia antes de crear
-- ✅ **Validación de tablas** - Solo procesa si la tabla existe
-- ✅ **Rollback automático** - Si falla en una BD, continúa con las demás
-- ✅ **Logs detallados** - Informa éxito/error para cada organización
+- **No duplica columnas** - Verifica existencia antes de crear
+- **Validación de tablas** - Solo procesa si la tabla existe
+- **Rollback automático** - Si falla en una BD, continúa con las demás
+- **Logs detallados** - Informa éxito/error para cada organización
 
 ## Ventajas sobre Comandos Específicos
 
-### ✅ Comando Genérico (`db:add-column-to-organizations-table`):
+### Comando Genérico (`db:add-column-to-organizations-table`):
 - **Reutilizable** para cualquier tabla y columna
 - **Flexible** con múltiples tipos de datos y opciones
 - **Mantenible** - Un solo código para todas las necesidades
 - **Probado** en producción con múltiples columnas
 
-### ❌ Comandos Específicos (como `AddFiscalDocumentNumberColumnCommand`):
+### Comandos Específicos (como `AddFiscalDocumentNumberColumnCommand`):
 - Código duplicado para cada columna
 - Difícil de mantener múltiples archivos
 - Menos flexible para cambios futuros

@@ -51,26 +51,26 @@ case '2':
 
 ## Beneficios
 
-- ✅ **Compatibilidad PAC**: Evita errores de validación en TheFactoryHKA y Alanube
-- ✅ **Flexibilidad**: Permite facturas a consumidores sin RUC
-- ✅ **Cumplimiento DGI**: Mantiene estructura correcta según ficha técnica
-- ✅ **Robustez**: Maneja casos edge como RUC genérico "0-0-0"
+- **Compatibilidad PAC**: Evita errores de validación en TheFactoryHKA y Alanube
+- **Flexibilidad**: Permite facturas a consumidores sin RUC
+- **Cumplimiento DGI**: Mantiene estructura correcta según ficha técnica
+- **Robustez**: Maneja casos edge como RUC genérico "0-0-0"
 
 ## Casos de Uso
 
-### ✅ Caso 1: Consumidor sin RUC
+### Caso 1: Consumidor sin RUC
 ```php
 $this->receptor_ruc = null; // o ''
 // Resultado: NO se incluye gRucRec en XML
 ```
 
-### ✅ Caso 2: Consumidor con RUC genérico  
+### Caso 2: Consumidor con RUC genérico  
 ```php
 $this->receptor_ruc = '0-0-0';
 // Resultado: NO se incluye gRucRec en XML
 ```
 
-### ✅ Caso 3: Consumidor con RUC válido
+### Caso 3: Consumidor con RUC válido
 ```php
 $this->receptor_ruc = '8-123-456';
 // Resultado: SÍ se incluye gRucRec con dRuc: '8-123-456'

@@ -30,8 +30,8 @@ Authorization: Bearer {token}
 ```
 
 **Estado**: 
-- ⚠️ **Endpoint existe** pero requiere autenticación Bearer Token
-- ⚠️ **No está documentado** en el PDF oficial
+- **Endpoint existe** pero requiere autenticación Bearer Token
+- **No está documentado** en el PDF oficial
 - ❓ **Formato desconocido**: ¿Acepta JSON DGI o JSON NUC?
 
 ---
@@ -334,12 +334,12 @@ Authorization: Bearer {token}
 ## 5. Recomendación de Implementación
 
 ### Opción 1: XML Transformer (Recomendada - Documentada)
-✅ **Ventajas**:
+**Ventajas**:
 - Formato **oficialmente documentado**
 - Endpoint **estable y probado**
 - No requiere autenticación Bearer (solo query params)
 
-❌ **Desventajas**:
+**Desventajas**:
 - Requiere construcción completa de XML
 - Mayor código de transformación
 
@@ -382,7 +382,7 @@ class DigifactXmlBuilder {
 ```
 
 ### Opción 2: JSON Endpoint (No Recomendada - Sin Documentar)
-⚠️ **Advertencias**:
+**Advertencias**:
 - Endpoint **no documentado oficialmente**
 - Formato de entrada **desconocido**
 - Requiere autenticación Bearer Token
@@ -398,20 +398,20 @@ class DigifactXmlBuilder {
 ## 6. Próximos Pasos
 
 ### Implementar XML Transformer
-1. ✅ Crear `DigifactXmlBuilder` en `app/Services/`
-2. ✅ Mapear todos los campos DGI → NUC XML
-3. ✅ Implementar helpers para:
+1. Crear `DigifactXmlBuilder` en `app/Services/`
+2. Mapear todos los campos DGI → NUC XML
+3. Implementar helpers para:
    - Zero padding (NumeroDF, DocType, etc.)
    - Formato de decimales (4 y 6 decimales)
    - Elementos `<Info Name="" Value=""/>`
-4. ⏳ Actualizar `DigifactService->certifyDocument()` para usar XML
-5. ⏳ Probar certificación con endpoint `/transform/nuc`
+4.  Actualizar `DigifactService->certifyDocument()` para usar XML
+5.  Probar certificación con endpoint `/transform/nuc`
 
 ### Investigar JSON Endpoint (Opcional)
-1. ⏳ Contactar soporte Digifact (soporte@digifact.com.gt)
-2. ⏳ Preguntar por documentación de `/transform/nuc_json`
-3. ⏳ Confirmar formato JSON aceptado
-4. ⏳ Evaluar implementación según respuesta
+1.  Contactar soporte Digifact (soporte@digifact.com.gt)
+2.  Preguntar por documentación de `/transform/nuc_json`
+3.  Confirmar formato JSON aceptado
+4.  Evaluar implementación según respuesta
 
 ---
 

@@ -4,22 +4,22 @@
 **PAC**: TheFactoryHKA
 **Fuente**: [Documentación Oficial PAC](https://felwiki.thefactoryhka.com.pa/)
 
-## 🚨 Problema Identificado
+## Problema Identificado
 
 El sistema DocuCenter estaba enviando el campo `tipoContribuyente` para clientes extranjeros (`tipoClienteFE = '04'`), causando errores PAC 201 "Error al procesar solicitud".
 
-## 📋 Regla Oficial TheFactoryHKA
+## Regla Oficial TheFactoryHKA
 
-### ✅ Campo tipoContribuyente DEBE estar presente para:
+### Campo tipoContribuyente DEBE estar presente para:
 - **Clientes Nacionales**: `tipoClienteFE ∈ ['01', '02', '03']`
 - **Con RUC válido**: `numeroRUC` no vacío
 
-### ❌ Campo tipoContribuyente NO DEBE estar presente para:
+### Campo tipoContribuyente NO DEBE estar presente para:
 - **Clientes Extranjeros**: `tipoClienteFE = '04'`
 - **Facturas de Exportación**: `tipoDocumento = '03'`
 - **Facturas a Clientes Extranjeros**: `tipoDocumento = '01'` + `tipoClienteFE = '04'`
 
-## 🔍 Evidencia Documental
+## Evidencia Documental
 
 ### Ejemplo 1: Factura de Exportación
 **URL**: https://felwiki.thefactoryhka.com.pa/factura_de_exportacion
@@ -27,7 +27,7 @@ El sistema DocuCenter estaba enviando el campo `tipoContribuyente` para clientes
 ```xml
 <ser:cliente>
     <ser:tipoClienteFE>04</ser:tipoClienteFE>
-    <!-- ❌ NO HAY tipoContribuyente -->
+    <!-- NO HAY tipoContribuyente -->
     <ser:razonSocial>TFHKA</ser:razonSocial>
     <ser:direccion>Ave. La Paz</ser:direccion>
     <ser:tipoIdentificacion>99</ser:tipoIdentificacion>
@@ -42,7 +42,7 @@ El sistema DocuCenter estaba enviando el campo `tipoContribuyente` para clientes
 ```xml
 <ser:cliente>
     <ser:tipoClienteFE>04</ser:tipoClienteFE>
-    <!-- ❌ NO HAY tipoContribuyente -->
+    <!-- NO HAY tipoContribuyente -->
     <ser:razonSocial>Cliente Extranjero</ser:razonSocial>
     <ser:tipoIdentificacion>01</ser:tipoIdentificacion>
     <ser:nroIdentificacionExtranjero>123456789</ser:nroIdentificacionExtranjero>
@@ -51,23 +51,23 @@ El sistema DocuCenter estaba enviando el campo `tipoContribuyente` para clientes
 </ser:cliente>
 ```
 
-## 🔧 Corrección Implementada
+## Corrección Implementada
 
 ### Archivo: `app/Services/HKAService.php`
 
 **ANTES:**
 ```php
-// ❌ INCORRECTO: Asignaba tipoContribuyente a TODOS los clientes
+// INCORRECTO: Asignaba tipoContribuyente a TODOS los clientes
 if (!empty($cliente->numeroRUC)) {
     $cliente->tipoContribuyente = $this->getNestedValue($doc, 'dGen.gDatRec.gRucRec.dTipoRuc', 1);
 } else {
-    $cliente->tipoContribuyente = "2"; // ❌ Error para extranjeros
+    $cliente->tipoContribuyente = "2"; // Error para extranjeros
 }
 ```
 
 **DESPUÉS:**
 ```php
-// ✅ CORRECTO: Solo asignar tipoContribuyente a clientes nacionales
+// CORRECTO: Solo asignar tipoContribuyente a clientes nacionales
 if ($cliente->tipoClienteFE !== '04' && !empty($cliente->numeroRUC)) {
     $cliente->tipoContribuyente = $this->getNestedValue($doc, 'dGen.gDatRec.gRucRec.dTipoRuc', 1);
 }
@@ -83,27 +83,27 @@ if ($cliente->tipoClienteFE === '04') {
 }
 ```
 
-## 🎯 Resultado Esperado
+## Resultado Esperado
 
-- ✅ **Facturas a Extranjeros**: Ya no incluyen `tipoContribuyente`
-- ✅ **Facturas de Exportación**: Cliente extranjero sin `tipoContribuyente`
-- ✅ **Error PAC 201**: Resuelto para casos de clientes extranjeros
-- ✅ **Conformidad PAC**: 100% según documentación oficial
+- **Facturas a Extranjeros**: Ya no incluyen `tipoContribuyente`
+- **Facturas de Exportación**: Cliente extranjero sin `tipoContribuyente`
+- **Error PAC 201**: Resuelto para casos de clientes extranjeros
+- **Conformidad PAC**: 100% según documentación oficial
 
-## 📊 Casos de Prueba
+## Casos de Prueba
 
 ### Test 1: Factura Exportación (Tipo 03)
 ```php
 $doc->tipoDocumento = '03';
 $doc->tipoClienteFE = '04'; // Extranjero
-// Resultado: tipoContribuyente = null ✅
+// Resultado: tipoContribuyente = null 
 ```
 
 ### Test 2: Factura a Cliente Extranjero (Tipo 01)
 ```php
 $doc->tipoDocumento = '01';
 $doc->tipoClienteFE = '04'; // Extranjero
-// Resultado: tipoContribuyente = null ✅
+// Resultado: tipoContribuyente = null 
 ```
 
 ### Test 3: Factura a Cliente Nacional (Tipo 01)
@@ -111,10 +111,10 @@ $doc->tipoClienteFE = '04'; // Extranjero
 $doc->tipoDocumento = '01';
 $doc->tipoClienteFE = '02'; // Nacional
 $doc->numeroRUC = '1234567890123';
-// Resultado: tipoContribuyente = '1' ✅
+// Resultado: tipoContribuyente = '1' 
 ```
 
-## 🔗 Referencias
+## Referencias
 
 - [Documentación TheFactoryHKA](https://felwiki.thefactoryhka.com.pa/)
 - [Factura de Exportación](https://felwiki.thefactoryhka.com.pa/factura_de_exportacion)

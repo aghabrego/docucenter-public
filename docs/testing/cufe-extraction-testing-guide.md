@@ -78,8 +78,8 @@ php docs/testing/simple-extract-cufe-test.php
 ## Resultados Esperados
 
 Todos los tests deben pasar exitosamente:
-- ✅ 10/10 tests en `ExtractCufeFromInvoiceNoteTest.php`
-- ✅ 7/7 tests en `simple-extract-cufe-test.php`
+- 10/10 tests en `ExtractCufeFromInvoiceNoteTest.php`
+- 7/7 tests en `simple-extract-cufe-test.php`
 
 ## Casos Edge Manejados
 

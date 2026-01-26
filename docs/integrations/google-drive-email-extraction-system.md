@@ -312,30 +312,30 @@ Timestamp  Unique ID       Hostname          Size    Flags
 
 ## Diseño de la Solución
 
-### ⭐ Opción Recomendada: Usar webklex/laravel-imap (Ya Implementado)
+### Opción Recomendada: Usar webklex/laravel-imap (Ya Implementado)
 
 #### Ventajas
-✅ **Ya funciona**: Librería instalada y configurada  
-✅ **Código existente**: `ExtractOrganizationConfigurationEmailsJob` como base  
-✅ **Sin permisos especiales**: No requiere acceso al filesystem  
-✅ **Abstracción completa**: No necesita parsing manual de Maildir  
-✅ **Mantenible**: API documentada y soportada  
-✅ **Eliminar emails**: Método `delete()` integrado  
+**Ya funciona**: Librería instalada y configurada  
+**Código existente**: `ExtractOrganizationConfigurationEmailsJob` como base  
+**Sin permisos especiales**: No requiere acceso al filesystem  
+**Abstracción completa**: No necesita parsing manual de Maildir  
+**Mantenible**: API documentada y soportada  
+**Eliminar emails**: Método `delete()` integrado  
 
 #### Consideraciones
-⚠️ Límite de 10 conexiones simultáneas (manejable con colas)  
-⚠️ Depende de servicio IMAP (ya funcionando en producción)  
+Límite de 10 conexiones simultáneas (manejable con colas)  
+Depende de servicio IMAP (ya funcionando en producción)  
 
 #### Implementación - Aprovechar Código Existente
 
 **Job Nuevo: ExtractReadEmailsToGoogleDriveJob**
 
 Diferencias clave con el job existente:
-1. ✅ **Procesa emails LEÍDOS** (no solo unseen)
-2. ✅ **Elimina PERMANENTEMENTE** con `expunge()`
-3. ✅ **Sube directo a Google Drive** (sin almacenar localmente)
-4. ✅ **Libera espacio en disco** del servidor
-5. ✅ **Auditoría completa** de cada operación
+1. **Procesa emails LEÍDOS** (no solo unseen)
+2. **Elimina PERMANENTEMENTE** con `expunge()`
+3. **Sube directo a Google Drive** (sin almacenar localmente)
+4. **Libera espacio en disco** del servidor
+5. **Auditoría completa** de cada operación
 
 ```php
 // Diferencia clave: Obtener emails LEÍDOS con XML
@@ -373,10 +373,10 @@ $folder->expunge(); // Elimina permanentemente los emails marcados
 - Para operaciones de recuperación/mantenimiento
 
 #### Desventajas
-⚠️ Requiere permisos de sistema en `/var/vmail/`  
-⚠️ Parsing manual de formato Maildir  
-⚠️ Mayor complejidad de implementación  
-⚠️ Requiere librería adicional para parsing MIME  
+Requiere permisos de sistema en `/var/vmail/`  
+Parsing manual de formato Maildir  
+Mayor complejidad de implementación  
+Requiere librería adicional para parsing MIME  
 
 **Recomendación**: Mantener esta opción como fallback, pero usar IMAP como solución principal.  
 
@@ -674,10 +674,10 @@ class GoogleDriveService
 **Ubicación**: `app/Jobs/ExtractReadEmailsToGoogleDriveJob.php`
 
 **Características Clave**:
-- ✅ Procesa **emails LEÍDOS** (sin filtro unseen)
-- ✅ Eliminación **PERMANENTE** con expunge()
-- ✅ Libera **espacio en disco** inmediatamente
-- ✅ Sin almacenamiento local temporal
+- Procesa **emails LEÍDOS** (sin filtro unseen)
+- Eliminación **PERMANENTE** con expunge()
+- Libera **espacio en disco** inmediatamente
+- Sin almacenamiento local temporal
 
 ```php
 <?php
@@ -958,9 +958,9 @@ class ExtractReadEmailsToGoogleDriveJob implements ShouldQueue
 | Filtro fecha | `since($date)` | Sin filtro |
 | Límite | 50 emails | 100 emails |
 | Eliminación | `delete()` simple | `delete()` + `expunge()` |
-| Espacio disco | No libera | ✅ Libera inmediatamente |
+| Espacio disco | No libera | Libera inmediatamente |
 | Procesamiento | Chunks de 10 | Chunks de 10 + expunge |
-| Auditoría | Básica | ✅ Incluye espacio liberado |
+| Auditoría | Básica | Incluye espacio liberado |
 
 ### 3. Modelo: GoogleDriveUpload
 
@@ -1128,16 +1128,16 @@ class ExtractEmailToDriveCommand extends Command
         } elseif ($all) {
             $configurations = Configurationemailorganization::with('organization')->get();
         } else {
-            $this->error('❌ Debe especificar --org-id o --all');
+            $this->error('Debe especificar --org-id o --all');
             return Command::FAILURE;
         }
         
         if ($configurations->isEmpty()) {
-            $this->error('❌ No se encontraron configuraciones de email');
+            $this->error('No se encontraron configuraciones de email');
             return Command::FAILURE;
         }
         
-        $this->info("📊 Configuraciones a procesar: {$configurations->count()}");
+        $this->info("Configuraciones a procesar: {$configurations->count()}");
         $this->newLine();
         
         $queued = 0;
@@ -1147,26 +1147,26 @@ class ExtractEmailToDriveCommand extends Command
             $organization = $config->organization;
             
             if (!$organization) {
-                $this->warn("⚠️  Configuración {$config->id} sin organización asociada");
+                $this->warn("Configuración {$config->id} sin organización asociada");
                 continue;
             }
             
-            $this->info("🏢 Organización: {$organization->nombre}");
-            $this->info("📄 RUC: {$organization->ruc}-{$organization->dv}");
+            $this->info("Organización: {$organization->nombre}");
+            $this->info(" RUC: {$organization->ruc}-{$organization->dv}");
             $this->info("📧 Email: {$config->email}");
             
             if ($useQueue) {
                 ExtractEmailToGoogleDriveJob::dispatch($config);
-                $this->info("✅ Job agregado a la cola");
+                $this->info("Job agregado a la cola");
                 $queued++;
             } else {
-                $this->info("⏳ Ejecutando síncronamente...");
+                $this->info(" Ejecutando síncronamente...");
                 try {
                     ExtractEmailToGoogleDriveJob::dispatchSync($config);
-                    $this->info("✅ Completado");
+                    $this->info("Completado");
                     $processed++;
                 } catch (\Exception $e) {
-                    $this->error("❌ Error: {$e->getMessage()}");
+                    $this->error("Error: {$e->getMessage()}");
                 }
             }
             
@@ -1175,10 +1175,10 @@ class ExtractEmailToDriveCommand extends Command
         
         $this->newLine();
         if ($useQueue) {
-            $this->info("✅ {$queued} jobs agregados a la cola");
-            $this->info("📊 Monitorea el progreso en: storage/logs/laravel.log");
+            $this->info("{$queued} jobs agregados a la cola");
+            $this->info("Monitorea el progreso en: storage/logs/laravel.log");
         } else {
-            $this->info("✅ {$processed} configuraciones procesadas");
+            $this->info("{$processed} configuraciones procesadas");
         }
 
 ---
@@ -1315,11 +1315,11 @@ if ($allSuccess) {
 ```
 
 **Política de Seguridad**:
-1. ✅ Subir a Google Drive primero
-2. ✅ Verificar subida exitosa
-3. ✅ Crear registro en BD
-4. ✅ SOLO ENTONCES marcar para eliminar
-5. ✅ Expunge al final del chunk exitoso
+1. Subir a Google Drive primero
+2. Verificar subida exitosa
+3. Crear registro en BD
+4. SOLO ENTONCES marcar para eliminar
+5. Expunge al final del chunk exitoso
 
 **Nunca se perderán datos**: El email solo se elimina si está respaldado en Google Drive.
 
@@ -1496,7 +1496,7 @@ print_error() {
 }
 
 print_warning() {
-    echo -e "${YELLOW}⚠ $1${NC}"
+    echo -e "${YELLOW}$1${NC}"
 }
 
 # Función de ayuda
@@ -1791,21 +1791,21 @@ print_success "Test completado"
 
 ### Próximos Pasos
 
-1. ✅ Instalar librería PHP MIME parser (si no existe)
-2. ✅ Configurar Service Account en Google Cloud
-3. ✅ Implementar `GoogleDriveService`
-4. ✅ Implementar `MaildirReaderService`
-5. ✅ Crear `ExtractMaildirXmlJob`
-6. ✅ Probar en ambiente de desarrollo
-7. ✅ Desplegar en producción
+1. Instalar librería PHP MIME parser (si no existe)
+2. Configurar Service Account en Google Cloud
+3. Implementar `GoogleDriveService`
+4. Implementar `MaildirReaderService`
+5. Crear `ExtractMaildirXmlJob`
+6. Probar en ambiente de desarrollo
+7. Desplegar en producción
 
 ### Métricas de Éxito
 
-- ✅ 100% de emails con XML procesados
-- ✅ 0% pérdida de datos
-- ✅ Estructura organizada por RUC-DV
-- ✅ Auditoría completa de operaciones
-- ✅ Emails eliminados solo después de subida exitosa
+- 100% de emails con XML procesados
+- 0% pérdida de datos
+- Estructura organizada por RUC-DV
+- Auditoría completa de operaciones
+- Emails eliminados solo después de subida exitosa
 
 ---
 

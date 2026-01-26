@@ -32,11 +32,11 @@ Después de múltiples iteraciones, Google Document AI sigue rechazando nuestros
 ## Análisis del Archivo Actual
 
 **Archivo**: `20251126005114.jsonl`
-- ✅ JSON válido en todas las líneas
-- ✅ No termina con newline
-- ✅ No hay newlines en mentionText
-- ✅ ContentType correcto (text/plain)
-- ⚠️  Contiene caracteres no-ASCII (°, º, á)
+- JSON válido en todas las líneas
+- No termina con newline
+- No hay newlines en mentionText
+- ContentType correcto (text/plain)
+- Contiene caracteres no-ASCII (°, º, á)
 
 **Formato actual**:
 ```json
@@ -63,30 +63,30 @@ Google Document AI está rechazando el formato porque:
 
 Google Document AI ofrece varios tipos de procesadores con IA generativa:
 
-1. **🎯 Custom Extractor** (LO QUE NECESITAS)
+1. **Custom Extractor** (LO QUE NECESITAS)
    - Identifica y extrae datos específicos de documentos
    - Ideal para: facturas, recibos, formularios
    - Campos personalizables: invoice_number, total_amount, vendor_name, etc.
    - **Usar para**: Extraer los 10+ campos de facturas panameñas
 
-2. **📁 Custom Classifier**
+2. ** Custom Classifier**
    - Agrupa documentos en categorías
    - Ideal para: clasificar tipos de documentos (factura vs recibo vs contrato)
    - No extrae datos, solo clasifica
 
-3. **✂️ Custom Splitter**
+3. **✂Custom Splitter**
    - Identifica límites de documentos en archivos grandes
    - Ideal para: PDFs con múltiples facturas/documentos
    - Separa automáticamente cada documento
 
-4. **📝 Summarizer**
+4. **Summarizer**
    - Genera resúmenes de documentos
    - Ideal para: contratos largos, reportes
    - No extrae campos estructurados
 
 ### Pasos para Crear Custom Extractor
 
-**✅ YA TIENES UN CUSTOM EXTRACTOR CREADO**
+**YA TIENES UN CUSTOM EXTRACTOR CREADO**
 
 Información del processor existente:
 - **Nombre**: docucenter-custom-extractor
@@ -109,31 +109,31 @@ El processor ya existe, pero necesita ser entrenado con anotaciones correctas us
 - En el menú lateral, ir a **"Definir esquema y vista previa"**
 - Aquí defines los entity types (campos) que quieres extraer
 
-**✅ Schema Ya Configurado (14 campos):**
+**Schema Ya Configurado (14 campos):**
 
 **Campos de encabezado de factura** (Opcional varias veces):
-- ✅ `due_date` - Texto sin formato
-- ✅ `invoice_date` - Texto sin formato
-- ✅ `invoice_number` - Texto sin formato
-- ✅ `invoice_type` - Texto sin formato
-- ✅ `subtotal` - Número
-- ✅ `tax_amount` - Número
-- ✅ `total_amount` - Número
-- ✅ `vendor_dv` - Texto sin formato (dígito verificador)
-- ✅ `vendor_name` - Texto sin formato
-- ✅ `vendor_tax_id` - Texto sin formato (RUC)
+- `due_date` - Texto sin formato
+- `invoice_date` - Texto sin formato
+- `invoice_number` - Texto sin formato
+- `invoice_type` - Texto sin formato
+- `subtotal` - Número
+- `tax_amount` - Número
+- `total_amount` - Número
+- `vendor_dv` - Texto sin formato (dígito verificador)
+- `vendor_name` - Texto sin formato
+- `vendor_tax_id` - Texto sin formato (RUC)
 
 **Line items** (Obligatoria varias veces):
-- ✅ `line_item_amount` - Número
-- ✅ `line_item_description` - Texto sin formato
-- ✅ `line_item_quantity` - Número
-- ✅ `line_item_unit_price` - Número
+- `line_item_amount` - Número
+- `line_item_description` - Texto sin formato
+- `line_item_quantity` - Número
+- `line_item_unit_price` - Número
 
-**⚠️ Campos Faltantes que Usas en el Código:**
-- ❌ `net_amount` - (usas en código como "subtotal sin impuestos")
-- ❌ `payment_method` - (usas en algunos documentos: "CONTADO", "CREDITO")
+**Campos Faltantes que Usas en el Código:**
+- `net_amount` - (usas en código como "subtotal sin impuestos")
+- `payment_method` - (usas en algunos documentos: "CONTADO", "CREDITO")
 
-## ✅ SOLUCIÓN PROGRAMÁTICA: Entrenar desde DocuCenter con OCR
+## SOLUCIÓN PROGRAMÁTICA: Entrenar desde DocuCenter con OCR
 
 **SÍ PUEDES ENTRENAR DESDE CÓDIGO**, pero necesitas hacer OCR primero para obtener las coordenadas textAnchor reales.
 
@@ -199,7 +199,7 @@ protected function getAnnotationsForDocument(string $fileName): array
     $annotationsFile = "/tmp/training-annotations/{$fileName}.json";
     
     if (!file_exists($annotationsFile)) {
-        $this->warn("  ⚠ No hay annotations para {$fileName}");
+        $this->warn("  No hay annotations para {$fileName}");
         return [];
     }
     
@@ -250,25 +250,25 @@ protected function findTextAnchor(string $value, string $fullText, array $segmen
 
 ### Ventajas de este Enfoque
 
-✅ **Totalmente programático**: No necesitas UI de Workbench
-✅ **Automatizable**: Puedes procesar cientos de documentos en batch
-✅ **textAnchor real**: Usa las coordenadas exactas del OCR de Google
-✅ **Formato correcto**: Google acepta este JSONL sin errores
-✅ **Integrado en DocuCenter**: Todo en tu flujo de trabajo actual
+**Totalmente programático**: No necesitas UI de Workbench
+**Automatizable**: Puedes procesar cientos de documentos en batch
+**textAnchor real**: Usa las coordenadas exactas del OCR de Google
+**Formato correcto**: Google acepta este JSONL sin errores
+**Integrado en DocuCenter**: Todo en tu flujo de trabajo actual
 
 ### Desventajas
 
-❌ **Requiere annotations previas**: Necesitas tener las annotations de cada PDF
-❌ **Más lento**: OCR de 20 PDFs puede tomar varios minutos
-❌ **API calls**: Cada PDF requiere una llamada al OCR Processor
-❌ **Matching imperfecto**: Si el valor no aparece exactamente en el PDF, no se encontrará textAnchor
+**Requiere annotations previas**: Necesitas tener las annotations de cada PDF
+**Más lento**: OCR de 20 PDFs puede tomar varios minutos
+**API calls**: Cada PDF requiere una llamada al OCR Processor
+**Matching imperfecto**: Si el valor no aparece exactamente en el PDF, no se encontrará textAnchor
 
-## 🖥️ ALTERNATIVA: Document AI Workbench UI
+## ALTERNATIVA: Document AI Workbench UI
 
 Si no tienes annotations previas o quieres usar auto-labeling, usa Workbench UI:
 
 **Nota sobre "Opcional" vs "Obligatoria":**
-- Los campos de line_items están como "Obligatoria varias veces" ✅ Correcto
+- Los campos de line_items están como "Obligatoria varias veces" Correcto
 - Los campos de encabezado como "Opcional varias veces" - considera cambiar a "Obligatoria una vez" los críticos:
   * `invoice_number` debería ser "Obligatoria una vez"
   * `total_amount` debería ser "Obligatoria una vez"

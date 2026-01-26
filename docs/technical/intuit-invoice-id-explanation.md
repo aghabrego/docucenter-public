@@ -123,7 +123,7 @@ protected function registerInQuickBooks(string $email, string $password, array $
 
 ### 7. **Problemas Comunes**
 
-#### ❌ **Facturas sin `intuit_invoice_id`**
+#### **Facturas sin `intuit_invoice_id`**
 **Causa**: 
 - Job `SendSaleToQuickBooksJob` falló antes de completarse
 - Error en la comunicación con API de QuickBooks
@@ -138,7 +138,7 @@ php artisan quickbooks:send-sale {organization_id} --invoice_ids=123,456,789
 grep "SendSaleToQuickBooks" storage/logs/laravel.log
 ```
 
-#### ⚠️ **IDs Desactualizados**
+#### **IDs Desactualizados**
 **Causa**: Factura fue eliminada/modificada manualmente en QuickBooks
 
 **Solución**:

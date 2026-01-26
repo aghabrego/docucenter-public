@@ -1,10 +1,10 @@
 # Prefijos de Factura por Tienda - Lightspeed X-Series
 
-## 📋 Resumen
+## Resumen
 
 Sistema de prefijos configurables por tienda (outlet) en Lightspeed X-Series para evitar colisiones de números de factura entre múltiples tiendas de una misma organización.
 
-## 🎯 Problema Resuelto
+## Problema Resuelto
 
 Cuando una organización tiene múltiples tiendas en Lightspeed X-Series, pueden existir números de factura idénticos entre diferentes tiendas, lo que causa colisiones en el sistema de facturación electrónica de DocuCenter.
 
@@ -18,7 +18,7 @@ Cuando una organización tiene múltiples tiendas en Lightspeed X-Series, pueden
 - Tienda B (prefijo: "T2-") → Factura "T2-1001"
 - Sin colisión, facturas únicas en el sistema
 
-## 🔧 Implementación
+## Implementación
 
 ### 1. Cambios en la Base de Datos
 
@@ -151,7 +151,7 @@ protected function getInvoicePrefixForOutlet(Organization $organization, $outlet
 - Retorna string vacío si no encuentra configuración
 - Busca por ID de outlet
 
-## 🔄 Flujo de Procesamiento
+## Flujo de Procesamiento
 
 ```mermaid
 graph TD
@@ -168,7 +168,7 @@ graph TD
     I --> J[Crear/Actualizar factura]
 ```
 
-## 📝 Ejemplos de Uso
+## Ejemplos de Uso
 
 ### Caso 1: Sin Prefijo Configurado
 ```php
@@ -215,7 +215,7 @@ $request = [
 // Resultado: 'T1-1001' (sin duplicar)
 ```
 
-## 🎨 Cambios en Menú
+## Cambios en Menú
 
 **Archivo:** `resources/views/partials/menu/facturacion.blade.php`
 
@@ -225,7 +225,7 @@ El nombre del menú fue actualizado de "Lightspeed" a "Lightspeed X-Series" para
 <span class="hide-menu">{{ __('Lightspeed X-Series') }}</span>
 ```
 
-## 🌐 Traducciones
+## Traducciones
 
 **Archivos:**
 - `lang/es_panel.json`
@@ -239,13 +239,13 @@ El nombre del menú fue actualizado de "Lightspeed" a "Lightspeed X-Series" para
 }
 ```
 
-## ✅ Mejores Prácticas
+## Mejores Prácticas
 
 ### Definición de Prefijos
 
 1. **Usar identificadores cortos y descriptivos:**
-   - ✅ Bueno: "T1-", "T2-", "SUC1-"
-   - ❌ Malo: "TIENDA_PRINCIPAL_", "123456-"
+   - Bueno: "T1-", "T2-", "SUC1-"
+   - Malo: "TIENDA_PRINCIPAL_", "123456-"
 
 2. **Mantener consistencia:**
    - Usar el mismo formato para todas las tiendas
@@ -280,7 +280,7 @@ WHERE IdStore = '12345'
 AND InvoiceNumber NOT LIKE 'T1-%';
 ```
 
-## 🐛 Troubleshooting
+## Troubleshooting
 
 ### Problema: Facturas aún se duplican
 
@@ -323,7 +323,7 @@ El sistema registra:
 - Organization ID y Outlet ID involucrados
 - Mensajes de error específicos
 
-## 📊 Casos de Uso Reales
+## Casos de Uso Reales
 
 ### Organización Multi-Tienda
 
@@ -362,21 +362,21 @@ El sistema registra:
 
 Sin colisiones entre tiendas.
 
-## 🔐 Seguridad
+##  Seguridad
 
 - Validación de longitud máxima (10 caracteres)
 - Sanitización de entrada
 - Manejo seguro de excepciones
 - Logging de errores sin exponer datos sensibles
 
-## 📈 Métricas de Éxito
+## Métricas de Éxito
 
-- ✅ Cero colisiones de números de factura
-- ✅ Identificación clara de origen de factura
-- ✅ Configuración flexible por tienda
-- ✅ Compatibilidad con facturas existentes
+- Cero colisiones de números de factura
+- Identificación clara de origen de factura
+- Configuración flexible por tienda
+- Compatibilidad con facturas existentes
 
-## 🔄 Actualizaciones Futuras
+## Actualizaciones Futuras
 
 Posibles mejoras:
 1. Validación de unicidad de prefijos en UI
@@ -385,7 +385,7 @@ Posibles mejoras:
 4. Bulk update de prefijos
 5. Validación de formato de prefijo
 
-## 📚 Referencias
+## Referencias
 
 - [Documentación Lightspeed X-Series API](../api/fe/lightspeed-api.md)
 - [Modelo Lightspeedconfiguration](../../app/Models/Lightspeedconfiguration.php)

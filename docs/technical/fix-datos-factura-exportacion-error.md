@@ -62,12 +62,12 @@ Se agregó logging detallado para tracking:
 
 ## Impacto
 
-### ✅ Resuelto
+### Resuelto
 - Error "El campo datosFacturaExportacion es requerido" en facturas de exportación
 - Compatibilidad con PAC Alanube para Panamá y República Dominicana
 - Facturas de exportación (tipo 03) ahora se procesan correctamente
 
-### 🔍 Estructura JSON Resultado
+### Estructura JSON Resultado
 
 **Antes del fix**:
 ```json
@@ -124,9 +124,9 @@ php docs/testing/test-datos-factura-exportacion-fix.php
 ## Contexto de Desarrollo
 
 ### Issues Relacionados
-- Fix previo de preservación de datos de customer ✅
-- Validación de moneda USD/PAB para Panamá ✅
-- Error "datosFacturaExportacion es requerido" ✅
+- Fix previo de preservación de datos de customer 
+- Validación de moneda USD/PAB para Panamá 
+- Error "datosFacturaExportacion es requerido" 
 
 ### Proceso de Debug
 1. Búsqueda del campo en código fuente → No encontrado
@@ -154,6 +154,6 @@ php docs/testing/test-datos-factura-exportacion-fix.php
 
 ---
 
-**Estado**: ✅ RESUELTO  
+**Estado**: RESUELTO  
 **Fecha**: 2025-01-27  
 **Responsable**: DocuCenter AI Assistant

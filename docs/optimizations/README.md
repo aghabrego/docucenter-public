@@ -4,7 +4,7 @@ Este directorio contiene documentación sobre optimizaciones de rendimiento, bas
 
 ## Documentos Disponibles
 
-### 📈 Optimizaciones de Performance
+### Optimizaciones de Performance
 
 - **[customer-supplier-optimizations.md](./customer-supplier-optimizations.md)** - Optimizaciones para el manejo eficiente de grandes volúmenes de clientes y proveedores
 - **[mysql-optimization-circuit-breaker.md](./mysql-optimization-circuit-breaker.md)** - Estrategias de optimización MySQL 8.0 y implementación de circuit breaker

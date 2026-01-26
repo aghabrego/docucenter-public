@@ -104,18 +104,18 @@ cd /path/to/docucenter
 
 ¿Continuar con la ejecución? (y/N): y
 
-📋 PASO 1/2: Agregando columna 'origin'...
+PASO 1/2: Agregando columna 'origin'...
 Columna 'origin' de tipo 'string' agregada a la tabla 'Sales_Header_Imp': 'org_1_db'.
 Columna 'origin' de tipo 'string' agregada a la tabla 'Sales_Header_Imp': 'org_2_db'.
 ...
-✅ Columna 'origin' agregada exitosamente
+Columna 'origin' agregada exitosamente
 
-📋 PASO 2/2: Agregando columna 'intuit_sync_attempts'...
+PASO 2/2: Agregando columna 'intuit_sync_attempts'...
 Columna 'intuit_sync_attempts' de tipo 'integer' agregada a la tabla 'Sales_Header_Imp': 'org_1_db'.
 ...
-✅ Columna 'intuit_sync_attempts' agregada exitosamente
+Columna 'intuit_sync_attempts' agregada exitosamente
 
-🎉 PROCESO COMPLETADO EXITOSAMENTE
+PROCESO COMPLETADO EXITOSAMENTE
 ```
 
 ### **Paso 3: Verificar Instalación**
@@ -125,13 +125,13 @@ Columna 'intuit_sync_attempts' de tipo 'integer' agregada a la tabla 'Sales_Head
 
 **Salida esperada**:
 ```
-📊 REPORTE DE VERIFICACIÓN:
+REPORTE DE VERIFICACIÓN:
 Total organizaciones: 25
 Errores encontrados: 0
 
-✅ TODAS LAS ORGANIZACIONES TIENEN LAS COLUMNAS CORRECTAS
+TODAS LAS ORGANIZACIONES TIENEN LAS COLUMNAS CORRECTAS
 
-📊 ESTADÍSTICAS FINALES:
+ESTADÍSTICAS FINALES:
 Organizaciones OK: 25/25
 Porcentaje éxito: 100.00%
 ```

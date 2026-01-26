@@ -1,10 +1,10 @@
 # Análisis del Problema: Google2FA Session Timeout
 
-## 🔍 Problema Identificado
+## Problema Identificado
 
 El sistema está pidiendo el código 2FA después de un tiempo o redirigiendo al login, incluso cuando el usuario marcó "Recordar sesión".
 
-## 📊 Configuración Actual
+## Configuración Actual
 
 ### 1. Google2FA Config (`config/google2fa.php`)
 ```php
@@ -25,20 +25,20 @@ SESSION_LIFETIME=120  # ← PROBLEMA: Solo 2 horas
 # OTP_KEEP_ALIVE no está definido (usa default true)
 ```
 
-## 🐛 Causa Raíz del Problema
+## Causa Raíz del Problema
 
 **El problema NO es con Google2FA, sino con la SESIÓN de Laravel:**
 
-1. ✅ Google2FA está configurado para durar eternamente (`lifetime = 0`)
-2. ✅ Google2FA renueva en cada request (`keep_alive = true`)
-3. ❌ **La sesión de Laravel expira a las 2 horas** (`SESSION_LIFETIME=120`)
+1. Google2FA está configurado para durar eternamente (`lifetime = 0`)
+2. Google2FA renueva en cada request (`keep_alive = true`)
+3. **La sesión de Laravel expira a las 2 horas** (`SESSION_LIFETIME=120`)
 
 ### Flujo del Problema:
 ```
 Usuario inicia sesión → ✓
 Usuario valida 2FA → ✓ (se guarda en sesión como 'google2fa')
-Usuario usa el sistema por 2+ horas → ❌ Sesión de Laravel expira
-Middleware 2FA verifica sesión → ❌ Sesión expiró, no encuentra 'google2fa'
+Usuario usa el sistema por 2+ horas → Sesión de Laravel expira
+Middleware 2FA verifica sesión → Sesión expiró, no encuentra 'google2fa'
 Sistema pide 2FA nuevamente o redirige a login
 ```
 
@@ -54,7 +54,7 @@ Según la documentación oficial de `pragmarx/google2fa-laravel`:
 ### Importante:
 **El lifetime de 2FA depende de la sesión de Laravel**. Si la sesión expira, el estado de 2FA también se pierde, sin importar el `lifetime` configurado.
 
-## ✅ Solución
+## Solución
 
 ### Opción 1: Remember Me Dinámico (RECOMENDADO)
 
@@ -122,7 +122,7 @@ OTP_KEEP_ALIVE=true               # Renovar 2FA en cada request
 'expire_on_close' => env('SESSION_EXPIRE_ON_CLOSE', false),
 ```
 
-## 🎯 Solución Recomendada
+## Solución Recomendada
 
 ### Implementación Completa
 
@@ -181,7 +181,7 @@ protected $middlewareGroups = [
 ];
 ```
 
-## 🔧 Verificación
+## Verificación
 
 ### Comprobar configuración actual:
 ```bash
@@ -207,15 +207,15 @@ php artisan tinker
 >>> session()->get('login_web_*')  # Sesión de auth
 ```
 
-## 📝 Conclusión
+## Conclusión
 
 El problema NO es con Google2FA, sino con **SESSION_LIFETIME de Laravel**.
 
 **Soluciones en orden de preferencia:**
 
-1. ✅ **MEJOR**: Aumentar `SESSION_LIFETIME=43200` (30 días) en `.env`
-2. ✅ **ALTERNATIVA**: Crear middleware para lifetime dinámico según "remember"
-3. ✅ **ADICIONAL**: Cambiar a `SESSION_DRIVER=database` para mayor persistencia
+1. **MEJOR**: Aumentar `SESSION_LIFETIME=43200` (30 días) en `.env`
+2. **ALTERNATIVA**: Crear middleware para lifetime dinámico según "remember"
+3. **ADICIONAL**: Cambiar a `SESSION_DRIVER=database` para mayor persistencia
 
 **Cambios mínimos requeridos:**
 

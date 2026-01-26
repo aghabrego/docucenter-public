@@ -4,14 +4,14 @@
 
 Las **notas de crédito electrónicas** en Panamá son documentos fiscales que permiten anular o corregir facturas previamente emitidas. El servicio AlanubeService incluye soporte completo para la emisión de notas de crédito según las normativas de la DGI de Panamá.
 
-### 🎯 Características Principales
-- ✅ **Documentos referenciados obligatorios**
-- ✅ **4 tipos de referencia** (ID, CUFE, PAPER, PRINTER)
-- ✅ **Validaciones DGI** específicas para notas de crédito
-- ✅ **Procesamiento síncrono y asíncrono**
-- ✅ **Endpoint dedicado** `/pan/v1/credit-notes`
+### Características Principales
+- **Documentos referenciados obligatorios**
+- **4 tipos de referencia** (ID, CUFE, PAPER, PRINTER)
+- **Validaciones DGI** específicas para notas de crédito
+- **Procesamiento síncrono y asíncrono**
+- **Endpoint dedicado** `/pan/v1/credit-notes`
 
-## 📋 Diferencias con Facturas
+## Diferencias con Facturas
 
 | Aspecto | Facturas | Notas de Crédito |
 |---------|----------|------------------|
@@ -21,7 +21,7 @@ Las **notas de crédito electrónicas** en Panamá son documentos fiscales que p
 | **Tipo de Documento** | `01-03, 08-10` | `04` |
 | **Validaciones Adicionales** | - | Validación de referencias |
 
-## 🔧 Uso Básico
+## Uso Básico
 
 ### 1. Método Principal del Servicio
 
@@ -111,7 +111,7 @@ $creditNoteData = AlanubeEmissionHelper::transformDocuCenterToCreditNote($docuCe
 $result = AlanubeEmissionHelper::emitCreditNote($organization, $creditNoteData);
 ```
 
-## 📄 Documentos Referenciados
+##  Documentos Referenciados
 
 Las notas de crédito **DEBEN** incluir al menos un documento referenciado. Hay 4 tipos de referencia:
 
@@ -163,7 +163,7 @@ Las notas de crédito **DEBEN** incluir al menos un documento referenciado. Hay 
 ]
 ```
 
-## 🔍 Validaciones Automáticas
+## Validaciones Automáticas
 
 El sistema valida automáticamente:
 
@@ -193,7 +193,7 @@ if (!$validation['valid']) {
 - Documentos referenciados obligatorios
 - Configuración PAC válida
 
-## 🚀 Procesamiento Asíncrono
+## Procesamiento Asíncrono
 
 ### Job Específico para Notas de Crédito
 
@@ -246,7 +246,7 @@ php artisan test:alanube 1 --credit-note --async
 ./scripts/test-alanube-panama.sh complete 1
 ```
 
-## 📊 Ejemplos de Datos Completos
+## Ejemplos de Datos Completos
 
 ### Nota de Crédito Básica
 
@@ -391,7 +391,7 @@ $exportCreditNote = [
 ];
 ```
 
-## 🔄 Integración con Módulos Existentes
+## Integración con Módulos Existentes
 
 ### Para Módulos de Ventas
 
@@ -474,7 +474,7 @@ class ReturnsController extends Controller
 }
 ```
 
-## 📈 Monitoreo y Logging
+## Monitoreo y Logging
 
 ### Logs Automáticos
 
@@ -507,7 +507,7 @@ Log::error('[AlanubeService] Error emitiendo nota de crédito: ' . $e->getMessag
 - **Tipos de referencia** más utilizados
 - **Errores de validación** más comunes
 
-## 🚨 Manejo de Errores Comunes
+## Manejo de Errores Comunes
 
 ### 1. Documentos Referenciados Faltantes
 
@@ -528,8 +528,8 @@ $creditNoteData['referencedDocuments'] = [
 ```php
 // Error: "Tipo de emisión inválido"
 // Solución: Usar solo ID, CUFE, PAPER, PRINTER
-$doc['emissionType'] = 'ID'; // ✅ Correcto
-$doc['emissionType'] = 'INVALID'; // ❌ Incorrecto
+$doc['emissionType'] = 'ID'; // Correcto
+$doc['emissionType'] = 'INVALID'; // Incorrecto
 ```
 
 ### 3. Identificación Faltante
@@ -551,7 +551,7 @@ switch ($emissionType) {
 }
 ```
 
-## 💡 Mejores Prácticas
+## Mejores Prácticas
 
 ### 1. Validación Previa
 
@@ -613,7 +613,7 @@ if (count($creditNotes) > 5) {
 }
 ```
 
-## ✅ Checklist de Implementación
+## Checklist de Implementación
 
 - [ ] Configuración PAC con `pac_type = 'alanube_panama'`
 - [ ] Token de Alanube configurado

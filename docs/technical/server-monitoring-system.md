@@ -94,14 +94,14 @@ La vista usa Livewire polling para actualización automática:
 ## Compatibilidad
 
 ### Producción (Sin Docker)
-- ✅ Acceso directo a `/proc/meminfo`, `/proc/stat`, `/proc/cpuinfo`
-- ✅ Métricas reales del servidor físico/VPS
-- ✅ Todas las funcionalidades disponibles
+- Acceso directo a `/proc/meminfo`, `/proc/stat`, `/proc/cpuinfo`
+- Métricas reales del servidor físico/VPS
+- Todas las funcionalidades disponibles
 
 ### Desarrollo (Con Docker)
-- ✅ Métricas del contenedor Docker
-- ⚠️ No muestra métricas del host físico
-- ℹ️ Para ver métricas del host se requiere bind mount de `/proc` o Docker API
+- Métricas del contenedor Docker
+- No muestra métricas del host físico
+- ℹPara ver métricas del host se requiere bind mount de `/proc` o Docker API
 
 ## Instalación y Uso
 
@@ -269,12 +269,12 @@ En Docker, las métricas son del contenedor, no del host. Esto es comportamiento
 
 ### Compatibilidad
 
-- ✅ Laravel 9+
-- ✅ Livewire 2.x
-- ✅ PHP 8.0+
-- ✅ Linux (Ubuntu, Debian, CentOS)
-- ⚠️ Windows: Funcionalidad limitada (solo disco)
-- ⚠️ macOS: Funcionalidad limitada
+- Laravel 9+
+- Livewire 2.x
+- PHP 8.0+
+- Linux (Ubuntu, Debian, CentOS)
+- Windows: Funcionalidad limitada (solo disco)
+- macOS: Funcionalidad limitada
 
 ## Autor
 

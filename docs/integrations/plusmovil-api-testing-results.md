@@ -2,7 +2,7 @@
 
 **Fecha:** 31 de octubre de 2025  
 **Ambiente:** QA  
-**Estado:** ✅ Autenticación funcionando, algunos endpoints con errores del servidor
+**Estado:** Autenticación funcionando, algunos endpoints con errores del servidor
 
 ---
 
@@ -33,7 +33,7 @@ Se completó con éxito la integración de autenticación con AWS Cognito para l
 
 ## Resultados de Pruebas
 
-### ✅ Autenticación Cognito
+### Autenticación Cognito
 
 ```bash
 aws cognito-idp initiate-auth \
@@ -43,17 +43,17 @@ aws cognito-idp initiate-auth \
     --auth-parameters USERNAME=xxx,PASSWORD=xxx
 ```
 
-**Estado:** ✅ **EXITOSO**  
+**Estado:** **EXITOSO**  
 **Respuesta:** Token de acceso obtenido correctamente  
 **Duración:** ~2 segundos
 
 ---
 
-### ⚠️ Endpoint: `/sys-logs`
+### Endpoint: `/sys-logs`
 
 **URL:** `https://xka96gucj8.execute-api.us-east-1.amazonaws.com/qa/sys-logs`  
 **Método:** GET  
-**Autenticación:** ✅ Token aceptado  
+**Autenticación:** Token aceptado  
 
 **Parámetros Soportados:**
 - `limit` - Número de registros (default: 10)
@@ -78,18 +78,18 @@ aws cognito-idp initiate-auth \
 **HTTP Status:** 500 Internal Server Error
 
 **Análisis:**
-- ✅ El token es **válido y aceptado**
-- ❌ Error de configuración en el modelo `sys_log` del servidor
-- ❌ Falta definir la relación `created_user` en el modelo Eloquent/Sequelize
-- 🔧 **Acción requerida:** Equipo de PlusMovil debe corregir la configuración del modelo
+- El token es **válido y aceptado**
+- Error de configuración en el modelo `sys_log` del servidor
+- Falta definir la relación `created_user` en el modelo Eloquent/Sequelize
+- **Acción requerida:** Equipo de PlusMovil debe corregir la configuración del modelo
 
 ---
 
-### ❌ Endpoint: `/invoices`
+### Endpoint: `/invoices`
 
 **URL:** `https://xka96gucj8.execute-api.us-east-1.amazonaws.com/qa/invoices`  
 **Método:** GET  
-**Autenticación:** ❌ Token rechazado  
+**Autenticación:** Token rechazado  
 
 **Resultado:**
 ```json
@@ -101,18 +101,18 @@ aws cognito-idp initiate-auth \
 **HTTP Status:** 403 Forbidden
 
 **Análisis:**
-- ❌ El endpoint rechaza el Bearer token de Cognito
+- El endpoint rechaza el Bearer token de Cognito
 - 🤔 Mensaje sugiere que espera **AWS Signature Version 4** (formato key=value)
 - 🤔 Posible configuración mixta: algunos endpoints con Cognito, otros con AWS IAM
-- 🔧 **Acción requerida:** Confirmar con equipo de PlusMovil el método de autenticación para este endpoint
+- **Acción requerida:** Confirmar con equipo de PlusMovil el método de autenticación para este endpoint
 
 ---
 
-### ✅ Endpoint: `/inv-products`
+### Endpoint: `/inv-products`
 
 **URL:** `https://xka96gucj8.execute-api.us-east-1.amazonaws.com/qa/inv-products`  
 **Método:** GET  
-**Autenticación:** ✅ Token aceptado  
+**Autenticación:** Token aceptado  
 
 **Parámetros Soportados:**
 - `limit` - Número máximo de resultados (default: sin límite)
@@ -169,13 +169,13 @@ aws cognito-idp initiate-auth \
 **HTTP Status:** 200 OK
 
 **Análisis:**
-- ✅ Token de Cognito **aceptado y funcionando**
-- ✅ Respuesta incluye relaciones: `cat_product` y `inv_warehouse`
-- ✅ Filtros dinámicos funcionan correctamente
-- ✅ Ordenamiento simple y múltiple probado exitosamente
-- ✅ Paginación operativa con `limit` y `offset`
-- ⚠️ Sin filtros devuelve 502 (timeout o límite de datos)
-- ✅ Con `limit` funciona perfectamente
+- Token de Cognito **aceptado y funcionando**
+- Respuesta incluye relaciones: `cat_product` y `inv_warehouse`
+- Filtros dinámicos funcionan correctamente
+- Ordenamiento simple y múltiple probado exitosamente
+- Paginación operativa con `limit` y `offset`
+- Sin filtros devuelve 502 (timeout o límite de datos)
+- Con `limit` funciona perfectamente
 
 **Campos Disponibles:**
 - `id` - ID único del producto en inventario
@@ -236,18 +236,18 @@ GET /inv-products?status=5&inv_warehouse_id=7756&code_like=878&order_by=created_
 ```
 
 **Notas Importantes:**
-- ⚠️ **SIEMPRE usar `limit`** para evitar timeouts (502)
-- ✅ Respuestas bien estructuradas con metadata (`code`, `message`, `error`, `data`)
-- ✅ Incluye relaciones automáticamente (no requiere `include` param)
-- 📊 Ideal para sincronización de inventario con DocuCenter
+- **SIEMPRE usar `limit`** para evitar timeouts (502)
+- Respuestas bien estructuradas con metadata (`code`, `message`, `error`, `data`)
+- Incluye relaciones automáticamente (no requiere `include` param)
+- Ideal para sincronización de inventario con DocuCenter
 
 ---
 
-### ✅ Endpoint: `/com-invoices`
+### Endpoint: `/com-invoices`
 
 **URL:** `https://xka96gucj8.execute-api.us-east-1.amazonaws.com/qa/com-invoices`  
 **Método:** GET  
-**Autenticación:** ✅ Token aceptado  
+**Autenticación:** Token aceptado  
 
 **Parámetros Soportados:**
 - `limit` - Número máximo de resultados
@@ -346,16 +346,16 @@ GET /inv-products?status=5&inv_warehouse_id=7756&code_like=878&order_by=created_
 **HTTP Status:** 200 OK
 
 **Análisis:**
-- ✅ Token de Cognito **aceptado y funcionando**
-- ✅ Respuesta incluye múltiples relaciones: `com_distributor`, `com_branch`, `com_pos`, `com_seller`, `ops_route`, `created_user`
-- ✅ Filtros dinámicos funcionan correctamente
-- ✅ Incluye resumen de pagos: `com_invoice_payment_summary`
-- ✅ Campos financieros completos: `sub_total`, `discount`, `tax_amount`, `total`, `balance`
-- ✅ Información de cliente completa
+- Token de Cognito **aceptado y funcionando**
+- Respuesta incluye múltiples relaciones: `com_distributor`, `com_branch`, `com_pos`, `com_seller`, `ops_route`, `created_user`
+- Filtros dinámicos funcionan correctamente
+- Incluye resumen de pagos: `com_invoice_payment_summary`
+- Campos financieros completos: `sub_total`, `discount`, `tax_amount`, `total`, `balance`
+- Información de cliente completa
 
 **Campos Principales:**
 - `id` - ID único de la factura
-- `invoice_number` - Número de factura (⚠️ muchas con valor "0")
+- `invoice_number` - Número de factura (muchas con valor "0")
 - `invoice_date` - Fecha de emisión
 - `invoice_type` - Tipo de factura (0, 1, 2...)
 - `customer_name` - Nombre del cliente
@@ -438,12 +438,12 @@ GET /com-invoices?com_seller_id=86&limit=30
 ```
 
 **Observaciones Importantes:**
-- ⚠️ Muchas facturas tienen `invoice_number: "0"` - posiblemente se genera después
-- ⚠️ Campo `customer_vat_number` puede tener valor "PENDIENTE"
-- ✅ `balance` permite identificar facturas pagadas/pendientes
-- ✅ Incluye información completa de vendedor, sucursal y punto de venta
-- ✅ Campo `comments` útil para rastrear origen ("Factura generada desde la app")
-- ✅ `com_invoice_payment_summary` array para detalles de pagos
+- Muchas facturas tienen `invoice_number: "0"` - posiblemente se genera después
+- Campo `customer_vat_number` puede tener valor "PENDIENTE"
+- `balance` permite identificar facturas pagadas/pendientes
+- Incluye información completa de vendedor, sucursal y punto de venta
+- Campo `comments` útil para rastrear origen ("Factura generada desde la app")
+- `com_invoice_payment_summary` array para detalles de pagos
 
 **Mapeo Sugerido a DocuCenter (`Sales_Header_Imp`):**
 
@@ -464,21 +464,21 @@ GET /com-invoices?com_seller_id=86&limit=30
 | `com_seller_id` | `seller_id` | Si existe en DocuCenter |
 
 **Próximos Pasos:**
-1. ✅ Mapear valores de `status` (0, 1, 2, 3...)
-2. ✅ Mapear valores de `invoice_type`
-3. ✅ **RESUELTO: Items disponibles en `/com-invoices/{id}`** (ver `plusmovil-invoice-items-SOLVED.md`)
-4. 📋 Implementar sincronización de headers + items
-5. 📋 Manejar facturas sin número ("0")
-6. 📋 Integrar con módulo de CXC usando campo `balance`
-7. 📋 Sincronizar información de clientes
-8. 📋 Implementar expansión de rangos de series si se requiere
+1. Mapear valores de `status` (0, 1, 2, 3...)
+2. Mapear valores de `invoice_type`
+3. **RESUELTO: Items disponibles en `/com-invoices/{id}`** (ver `plusmovil-invoice-items-SOLVED.md`)
+4. Implementar sincronización de headers + items
+5. Manejar facturas sin número ("0")
+6. Integrar con módulo de CXC usando campo `balance`
+7. Sincronizar información de clientes
+8. Implementar expansión de rangos de series si se requiere
 
-**🎉 Actualización Importante:**
-- ✅ **SÍ se encontraron items/detalles en `/com-invoices/{id}`**
-- ✅ Endpoint individual usa autenticación Cognito (NO requiere AWS Signature)
-- ✅ Se puede sincronizar headers Y detalles completos
-- ✅ Soporte para productos serializados con rangos
-- 📋 Ver solución completa en: `docs/integrations/plusmovil-invoice-items-SOLVED.md`
+**Actualización Importante:**
+- **SÍ se encontraron items/detalles en `/com-invoices/{id}`**
+- Endpoint individual usa autenticación Cognito (NO requiere AWS Signature)
+- Se puede sincronizar headers Y detalles completos
+- Soporte para productos serializados con rangos
+- Ver solución completa en: `docs/integrations/plusmovil-invoice-items-SOLVED.md`
 
 ---
 
@@ -512,14 +512,14 @@ public function createdUser() {
 **Problema:** Algunos endpoints aceptan Cognito Bearer token, otros requieren AWS Signature
 
 **Endpoints con Cognito:**
-- ✅ `/sys-logs` (con error del servidor, pero acepta token)
-- ✅ `/inv-products` (funcionando correctamente)
-- ✅ `/com-invoices` (funcionando correctamente)
+- `/sys-logs` (con error del servidor, pero acepta token)
+- `/inv-products` (funcionando correctamente)
+- `/com-invoices` (funcionando correctamente)
 
 **Endpoints con AWS Signature:**
-- ❌ `/invoices`
-- ❌ `/invoices/stats`
-- ❌ `/health`
+- `/invoices`
+- `/invoices/stats`
+- `/health`
 
 **Solución recomendada:**
 1. **Opción A:** Unificar todos los endpoints con Cognito Bearer token
@@ -539,12 +539,12 @@ public function createdUser() {
 ```
 
 **Características:**
-- ✅ Selección de ambiente (QA/Prod)
-- ✅ Ingreso seguro de credenciales
-- ✅ Validación de token
-- ✅ Guardado automático en archivo `.plusmovil-token-{ENV}.txt`
-- ✅ Agregado automático a `.gitignore`
-- ✅ Prueba opcional del token con endpoint
+- Selección de ambiente (QA/Prod)
+- Ingreso seguro de credenciales
+- Validación de token
+- Guardado automático en archivo `.plusmovil-token-{ENV}.txt`
+- Agregado automático a `.gitignore`
+- Prueba opcional del token con endpoint
 
 ### 2. `test-plusmovil-api.sh`
 **Ubicación:** `docs/testing/test-plusmovil-api.sh`  
@@ -555,9 +555,9 @@ public function createdUser() {
 ```
 
 **Características:**
-- ✅ Pruebas de endpoints con y sin filtros
-- ✅ Ejemplos de todos los tipos de filtros soportados
-- ✅ Documentación interactiva de parámetros
+- Pruebas de endpoints con y sin filtros
+- Ejemplos de todos los tipos de filtros soportados
+- Documentación interactiva de parámetros
 
 ### 3. `test-invoices-endpoint.sh`
 **Ubicación:** `docs/testing/test-invoices-endpoint.sh`  
@@ -576,13 +576,13 @@ public function createdUser() {
 ```
 
 **Características:**
-- ✅ Pruebas de paginación (limit, offset)
-- ✅ Búsquedas parciales (code_like, barcode_like)
-- ✅ Filtros por status y warehouse
-- ✅ Rangos numéricos y de fechas
-- ✅ Ordenamiento simple y múltiple
-- ✅ Consultas complejas personalizadas
-- ✅ Modo interactivo con ejemplos
+- Pruebas de paginación (limit, offset)
+- Búsquedas parciales (code_like, barcode_like)
+- Filtros por status y warehouse
+- Rangos numéricos y de fechas
+- Ordenamiento simple y múltiple
+- Consultas complejas personalizadas
+- Modo interactivo con ejemplos
 
 ---
 
@@ -591,16 +591,16 @@ public function createdUser() {
 ### Acciones Inmediatas
 
 1. **Reportar a PlusMovil:**
-   - ❌ Error de relación `created_user` en endpoint `/sys-logs`
-   - ❌ Inconsistencia de autenticación en endpoint `/invoices`
-   - 📋 Solicitar documentación completa de endpoints disponibles
-   - 📋 Solicitar Swagger/OpenAPI actualizado
+   - Error de relación `created_user` en endpoint `/sys-logs`
+   - Inconsistencia de autenticación en endpoint `/invoices`
+   - Solicitar documentación completa de endpoints disponibles
+   - Solicitar Swagger/OpenAPI actualizado
 
 3. **Implementación en DocuCenter:**
-   - ✅ Scripts de autenticación listos para uso
-   - ✅ Endpoint `/inv-products` validado y documentado
-   - ⏳ Pendiente: Implementar servicio PHP para `/inv-products`
-   - ⏳ Pendiente: Implementar sincronización de inventario
+   - Scripts de autenticación listos para uso
+   - Endpoint `/inv-products` validado y documentado
+   -  Pendiente: Implementar servicio PHP para `/inv-products`
+   -  Pendiente: Implementar sincronización de inventario
 
 ### Acciones Pendientes (cuando PlusMovil corrija)
 

@@ -18,9 +18,9 @@ Emite un documento de facturación electrónica usando un objeto JSON estructura
 
 | Campo | Tipo | Requerido | Descripción |
 |-------|------|-----------|-------------|
-| `documento` | object | ✅ | Documento a emitir |
-| `ambiente` | string | ❌ | Ambiente (auto-detectado) |
-| `pac_provider` | string | ❌ | Proveedor PAC (auto-detectado) |
+| `documento` | object | | Documento a emitir |
+| `ambiente` | string | | Ambiente (auto-detectado) |
+| `pac_provider` | string | | Proveedor PAC (auto-detectado) |
 
 #### Estructura del Documento
 
@@ -28,10 +28,10 @@ El documento debe seguir la estructura estándar de facturación electrónica pa
 
 | Campo | Tipo | Requerido | Descripción |
 |-------|------|-----------|-------------|
-| `documento.dGen` | object | ✅ | Datos generales |
-| `documento.gDatRec` | object | ✅ | Datos del receptor |
-| `documento.gItem` | array | ✅ | Items/productos |
-| `documento.gTot` | object | ✅ | Totales |
+| `documento.dGen` | object | | Datos generales |
+| `documento.gDatRec` | object | | Datos del receptor |
+| `documento.gItem` | array | | Items/productos |
+| `documento.gTot` | object | | Totales |
 
 ### Ejemplo de Request Completo
 

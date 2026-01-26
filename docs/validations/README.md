@@ -4,7 +4,7 @@ Este directorio contiene documentación sobre validaciones específicas implemen
 
 ## Documentos Disponibles
 
-### 🔐 Validaciones PAC (Proveedores de Autorización Calificados)
+###  Validaciones PAC (Proveedores de Autorización Calificados)
 
 - **[SOLUCION_PAC_RECEIVER_TYPE_VALIDATION.md](./SOLUCION_PAC_RECEIVER_TYPE_VALIDATION.md)** - Solución completa para error PAC "receiver.ruc.ruc is not valid dni" con auto-detección de tipos de receptor según documentación oficial de Panamá
 - **[SOLUCION_PAC_ITBMS_RATE.md](./SOLUCION_PAC_ITBMS_RATE.md)** - Documentación sobre validaciones de tasas ITBMS en facturas PAC
@@ -22,16 +22,16 @@ Este directorio contiene documentación sobre validaciones específicas implemen
 
 ## Tipos de Validaciones
 
-### 📋 Validaciones de Negocio
+### Validaciones de Negocio
 Reglas específicas del dominio empresarial que deben cumplirse para mantener la integridad de los datos.
 
-### 🔍 Validaciones de Formato
+### Validaciones de Formato
 Verificaciones de formato de datos como RUC, cédulas, correos electrónicos, etc.
 
-### ⚖️ Validaciones Fiscales
+### ⚖Validaciones Fiscales
 Validaciones específicas requeridas por regulaciones fiscales y tributarias.
 
-### 🔗 Validaciones de Integración
+### Validaciones de Integración
 Validaciones específicas para datos provenientes de sistemas externos o integraciones.
 
 ## Estructura de Documentos de Validación

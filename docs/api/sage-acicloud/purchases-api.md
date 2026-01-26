@@ -9,20 +9,20 @@
 
 ### Características del Endpoint
 
-- ✅ **Filtrado Avanzado**: Múltiples filtros y operadores
-- ✅ **Paginación**: Resultados paginados automáticamente  
-- ✅ **Ordenamiento**: Ordenar por cualquier campo
-- ✅ **Multi-tenant**: Respeta el contexto de organización activa
+- **Filtrado Avanzado**: Múltiples filtros y operadores
+- **Paginación**: Resultados paginados automáticamente  
+- **Ordenamiento**: Ordenar por cualquier campo
+- **Multi-tenant**: Respeta el contexto de organización activa
 
 ### Parámetros de Query (Opcionales)
 
 | Parámetro | Tipo | Requerido | Descripción | Ejemplo |
 |-----------|------|-----------|-------------|---------|
-| `page` | integer | ❌ | Página a obtener | `2` |
-| `per_page` | integer | ❌ | Registros por página (máx 100) | `50` |
-| `sort` | string | ❌ | Campo para ordenar | `"date"` |
-| `order` | string | ❌ | Dirección del ordenamiento | `"desc"` |
-| `filter` | object | ❌ | Filtros aplicados | `{}` |
+| `page` | integer | | Página a obtener | `2` |
+| `per_page` | integer | | Registros por página (máx 100) | `50` |
+| `sort` | string | | Campo para ordenar | `"date"` |
+| `order` | string | | Dirección del ordenamiento | `"desc"` |
+| `filter` | object | | Filtros aplicados | `{}` |
 
 ### Respuesta de Éxito
 
@@ -91,20 +91,20 @@
 
 | Campo | Tipo | Requerido | Descripción | Ejemplo |
 |-------|------|-----------|-------------|---------|
-| `purchase_order_number` | string | ✅ | Número de orden de compra | `"PO-2025-001"` |
-| `vendor_id` | string | ✅ | ID del proveedor | `"VENDOR001"` |
-| `date` | string | ✅ | Fecha de la compra (YYYY-MM-DD) | `"2025-01-29"` |
-| `due_date` | string | ❌ | Fecha de vencimiento | `"2025-02-28"` |
-| `currency` | string | ❌ | Moneda (USD, PAB) | `"USD"` |
-| `reference` | string | ❌ | Referencia adicional | `"REF-001"` |
-| `notes` | string | ❌ | Notas adicionales | `"Compra urgente"` |
-| `items` | array | ✅ | Lista de productos/servicios | `[]` |
-| `items[].item_code` | string | ✅ | Código del producto | `"PROD001"` |
-| `items[].description` | string | ✅ | Descripción del item | `"Producto Ejemplo"` |
-| `items[].quantity` | decimal | ✅ | Cantidad | `10.00` |
-| `items[].unit_price` | decimal | ✅ | Precio unitario | `150.00` |
-| `items[].tax_rate` | decimal | ❌ | Tasa de impuesto (0.07 = 7%) | `0.07` |
-| `items[].account_code` | string | ❌ | Código de cuenta contable | `"5100"` |
+| `purchase_order_number` | string | | Número de orden de compra | `"PO-2025-001"` |
+| `vendor_id` | string | | ID del proveedor | `"VENDOR001"` |
+| `date` | string | | Fecha de la compra (YYYY-MM-DD) | `"2025-01-29"` |
+| `due_date` | string | | Fecha de vencimiento | `"2025-02-28"` |
+| `currency` | string | | Moneda (USD, PAB) | `"USD"` |
+| `reference` | string | | Referencia adicional | `"REF-001"` |
+| `notes` | string | | Notas adicionales | `"Compra urgente"` |
+| `items` | array | | Lista de productos/servicios | `[]` |
+| `items[].item_code` | string | | Código del producto | `"PROD001"` |
+| `items[].description` | string | | Descripción del item | `"Producto Ejemplo"` |
+| `items[].quantity` | decimal | | Cantidad | `10.00` |
+| `items[].unit_price` | decimal | | Precio unitario | `150.00` |
+| `items[].tax_rate` | decimal | | Tasa de impuesto (0.07 = 7%) | `0.07` |
+| `items[].account_code` | string | | Código de cuenta contable | `"5100"` |
 
 ### Validaciones
 
@@ -243,10 +243,10 @@ Obtiene las órdenes de compra del sistema Sage ACICloud.
 
 | Parámetro | Tipo | Requerido | Descripción | Ejemplo |
 |-----------|------|-----------|-------------|---------|
-| `status` | string | ❌ | Filtrar por estado | `"pending"` |
-| `vendor_id` | string | ❌ | Filtrar por proveedor | `"VENDOR001"` |
-| `date_from` | string | ❌ | Fecha desde (YYYY-MM-DD) | `"2025-01-01"` |
-| `date_to` | string | ❌ | Fecha hasta (YYYY-MM-DD) | `"2025-01-31"` |
+| `status` | string | | Filtrar por estado | `"pending"` |
+| `vendor_id` | string | | Filtrar por proveedor | `"VENDOR001"` |
+| `date_from` | string | | Fecha desde (YYYY-MM-DD) | `"2025-01-01"` |
+| `date_to` | string | | Fecha hasta (YYYY-MM-DD) | `"2025-01-31"` |
 
 ### Estados Posibles
 

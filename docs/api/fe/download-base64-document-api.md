@@ -24,13 +24,13 @@ Descarga un documento de facturación electrónica en formato Base64 desde el pr
 
 | Campo | Tipo | Requerido | Descripción |
 |-------|------|-----------|-------------|
-| `path` | string | ✅ | Tipo de documento (`invoices` o `credit-notes`) |
-| `cufe` | string | ✅ | CUFE del documento |
-| `codigoSucursalEmisor` | string | ✅ | Código de sucursal (máx. 4 caracteres) |
-| `numeroDocumentoFiscal` | integer | ✅ | Número del documento fiscal |
-| `puntoFacturacionFiscal` | string | ✅ | Punto de facturación (máx. 3 caracteres) |
-| `tipoDocumento` | string | ✅ | Tipo documento (`01`, `02`, `03`, `04`) |
-| `tipoEmision` | string | ✅ | Tipo emisión (`01`, `02`) |
+| `path` | string | | Tipo de documento (`invoices` o `credit-notes`) |
+| `cufe` | string | | CUFE del documento |
+| `codigoSucursalEmisor` | string | | Código de sucursal (máx. 4 caracteres) |
+| `numeroDocumentoFiscal` | integer | | Número del documento fiscal |
+| `puntoFacturacionFiscal` | string | | Punto de facturación (máx. 3 caracteres) |
+| `tipoDocumento` | string | | Tipo documento (`01`, `02`, `03`, `04`) |
+| `tipoEmision` | string | | Tipo emisión (`01`, `02`) |
 
 #### Parámetros Opcionales
 

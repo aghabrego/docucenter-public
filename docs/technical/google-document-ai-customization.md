@@ -4,7 +4,7 @@
 
 **Sí, hay 3 niveles de personalización disponibles:**
 
-## 1. Custom Document Extractor (Recomendado) ⭐
+## 1. Custom Document Extractor (Recomendado) 
 
 ### Características
 - **Entrenamiento supervisado** con tus propios documentos
@@ -151,7 +151,7 @@ Post-procesamiento con regex para mejorar detección (ya lo tienes):
 // app/Services/DocumentAIService.php
 protected function enhanceDataFromText(array $data): array
 {
-    // ✅ Ya implementado
+    // Ya implementado
     // - Número de factura
     // - RUC del proveedor
     // - DV (Dígito Verificador)
@@ -175,19 +175,19 @@ protected function enhanceDataFromText(array $data): array
 ## Recomendación por Volumen
 
 ### <100 facturas/mes
-- ✅ **Pre-trained + Post-processing** (actual)
+- **Pre-trained + Post-processing** (actual)
 - Costo: ~$15/mes
 - Precisión: 75-85%
 
 ### 100-500 facturas/mes
-- ✅ **Custom Processor**
+- **Custom Processor**
 - Inversión inicial: $50
 - Costo mensual: ~$150/mes
 - Precisión: 85-95%
 - ROI: 2-3 meses
 
 ### >500 facturas/mes
-- ✅ **Custom Processor + HITL para casos complejos**
+- **Custom Processor + HITL para casos complejos**
 - Inversión inicial: $100
 - Costo mensual: ~$300/mes
 - Precisión: 95-98%
@@ -316,10 +316,10 @@ DocumentAIMetric::create([
 
 ## Próximos Pasos
 
-1. ✅ **Implementado**: Post-processing con regex (DV, RUC, vendor_name)
-2. 🔄 **En progreso**: Validación de coherencia de totales
-3. ⏳ **Pendiente**: Decidir si crear Custom Processor (depende del volumen)
-4. ⏳ **Futuro**: Sistema HITL para casos de baja confianza
+1. **Implementado**: Post-processing con regex (DV, RUC, vendor_name)
+2. **En progreso**: Validación de coherencia de totales
+3.  **Pendiente**: Decidir si crear Custom Processor (depende del volumen)
+4.  **Futuro**: Sistema HITL para casos de baja confianza
 
 ## Recursos Adicionales
 

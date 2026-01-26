@@ -18,7 +18,7 @@ El país del cliente debe ser PA si el destino de la operación es 1= Panamá
 En el método `createDefaultClient` (línea ~578), la lógica de asignación por defecto sobrescribía el país corregido:
 
 ```php
-// ❌ Código problemático
+// Código problemático
 'Country' => array_get($request, 'Country', ($tipoReceptor === '04' ? 'US' : 'PA'))
 ```
 
@@ -29,7 +29,7 @@ Esta línea asignaba automáticamente `US` como país por defecto para extranjer
 ### 1. Corrección de Lógica de País
 
 ```php
-// ✅ Código corregido
+// Código corregido
 $countryFromRequest = array_get($request, 'Country');
 $defaultCountry = ($tipoReceptor === '04' ? 'US' : 'PA');
 $finalCountry = $countryFromRequest ?? $defaultCountry;
@@ -139,7 +139,7 @@ Validar la corrección con:
 
 ## Notas Técnicas
 
-- **Backward Compatibility**: ✅ Mantiene compatibilidad con lógica existente
+- **Backward Compatibility**: Mantiene compatibilidad con lógica existente
 - **Performance**: Mínimo impacto, solo agregar logging
 - **Database**: No requiere cambios de esquema
 - **Configuration**: No requiere cambios de configuración

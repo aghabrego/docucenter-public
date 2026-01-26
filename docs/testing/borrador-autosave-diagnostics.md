@@ -31,12 +31,12 @@
 ```
 
 Este script muestra en tiempo real todos los eventos de auto-guardado con colores:
-- 🔵 INICIO: Cuando se inicia el auto-guardado
-- 🟢 CREAR: Cuando se crea un nuevo borrador
-- 🟡 ACTUALIZAR: Cuando se actualiza un borrador existente
-- ✅ ÉXITO: Cuando se completa exitosamente
-- ❌ ERROR: Cuando ocurre un error
-- ⚫ SKIP: Cuando está deshabilitado
+- INICIO: Cuando se inicia el auto-guardado
+- CREAR: Cuando se crea un nuevo borrador
+- ACTUALIZAR: Cuando se actualiza un borrador existente
+- ÉXITO: Cuando se completa exitosamente
+- ERROR: Cuando ocurre un error
+- SKIP: Cuando está deshabilitado
 
 ### 2. Verificar Borradores en Producción
 

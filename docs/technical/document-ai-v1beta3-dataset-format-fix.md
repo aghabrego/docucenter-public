@@ -216,13 +216,13 @@ gs://bucket-name/
 - **Total recomendado**: 50+ documentos
 
 ### Formato JSONL Requerido
-✅ **Correcto**:
+**Correcto**:
 - `document.uri`: GCS URI del PDF
 - `annotations[].type`: Nombre del campo
 - `annotations[].mentionText`: Valor extraído
 - `annotations[].textSegment`: Posiciones en el documento
 
-❌ **Incorrecto**:
+**Incorrecto**:
 - `document.content`: Base64 embebido
 - Anotaciones sin `textSegment`
 - GCS prefix en lugar de URIs específicos
@@ -378,10 +378,10 @@ Ahora usa estructura: document.uri + annotations con startIndex/endIndex
 
 ## Próximos Pasos
 
-1. ✅ Implementar formato correcto de dataset
-2. ✅ Agregar split train/test
-3. ✅ Crear script de testing
-4. ⏳ Ejecutar prueba completa con 20+ documentos
-5. ⏳ Monitorear entrenamiento en Google Cloud Console
-6. ⏳ Implementar extracción real de posiciones de texto
-7. ⏳ Agregar validación de requisitos mínimos
+1. Implementar formato correcto de dataset
+2. Agregar split train/test
+3. Crear script de testing
+4.  Ejecutar prueba completa con 20+ documentos
+5.  Monitorear entrenamiento en Google Cloud Console
+6.  Implementar extracción real de posiciones de texto
+7.  Agregar validación de requisitos mínimos

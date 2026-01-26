@@ -11,7 +11,7 @@
 
 | Parámetro | Tipo | Requerido | Descripción | Ejemplo |
 |-----------|------|-----------|-------------|---------|
-| `salesOrderNumber` | string | ✅ | Número de orden de venta | `"SO-2025-001"` |
+| `salesOrderNumber` | string | | Número de orden de venta | `"SO-2025-001"` |
 
 ### Respuesta de Éxito
 
@@ -99,39 +99,39 @@
 
 | Campo | Tipo | Requerido | Descripción | Validación | Ejemplo |
 |-------|------|-----------|-------------|------------|---------|
-| `SalesOrderNumber` | string | ✅ | Número único de orden | Único, máx. 20 chars | `"SO-2025-001"` |
-| `CustomerID` | string | ✅ | ID del cliente | Máx. 50 characters | `"CUST001"` |
-| `CustomerPO` | string | ❌ | Orden de compra del cliente | Máx. 50 characters | `"PO-ABC-2025-001"` |
-| `CustomerName` | string | ✅ | Nombre del cliente | Máx. 39 characters | `"ABC Corporation S.A."` |
-| `Subtotal` | decimal | ✅ | Subtotal de la orden | Decimal (4 decimales) | `2500.0000` |
-| `TaxID` | string | ✅ | ID del impuesto | Máx. 8 characters | `"TAX001"` |
-| `OrderTax` | decimal | ✅ | Impuesto de la orden | Decimal (4 decimales) | `175.0000` |
-| `NetDue` | decimal | ✅ | Total neto | Decimal (4 decimales) | `2675.0000` |
-| `ARAccount` | string | ❌ | Cuenta contable AR | Máx. 15 characters | `"1200"` |
-| `ShipToName` | string | ✅ | Nombre para envío | Máx. 100 characters | `"ABC Corp Warehouse"` |
-| `ShipToAddressLine1` | string | ❌ | Dirección línea 1 | - | `"Calle 50, Torre Global"` |
-| `ShipToAddressLine2` | string | ❌ | Dirección línea 2 | - | `"Piso 15"` |
-| `ShipToCity` | string | ❌ | Ciudad de envío | - | `"Ciudad de Panamá"` |
-| `ShipToState` | string | ❌ | Estado/Provincia | Máx. 2 characters | `"PA"` |
-| `ShipToZip` | string | ❌ | Código postal | Máx. 12 characters | `"0833"` |
-| `ShipToCountry` | string | ❌ | País de envío | - | `"Panamá"` |
-| `SalesRepID` | string | ❌ | ID representante de ventas | Máx. 20 characters | `"REP001"` |
+| `SalesOrderNumber` | string | | Número único de orden | Único, máx. 20 chars | `"SO-2025-001"` |
+| `CustomerID` | string | | ID del cliente | Máx. 50 characters | `"CUST001"` |
+| `CustomerPO` | string | | Orden de compra del cliente | Máx. 50 characters | `"PO-ABC-2025-001"` |
+| `CustomerName` | string | | Nombre del cliente | Máx. 39 characters | `"ABC Corporation S.A."` |
+| `Subtotal` | decimal | | Subtotal de la orden | Decimal (4 decimales) | `2500.0000` |
+| `TaxID` | string | | ID del impuesto | Máx. 8 characters | `"TAX001"` |
+| `OrderTax` | decimal | | Impuesto de la orden | Decimal (4 decimales) | `175.0000` |
+| `NetDue` | decimal | | Total neto | Decimal (4 decimales) | `2675.0000` |
+| `ARAccount` | string | | Cuenta contable AR | Máx. 15 characters | `"1200"` |
+| `ShipToName` | string | | Nombre para envío | Máx. 100 characters | `"ABC Corp Warehouse"` |
+| `ShipToAddressLine1` | string | | Dirección línea 1 | - | `"Calle 50, Torre Global"` |
+| `ShipToAddressLine2` | string | | Dirección línea 2 | - | `"Piso 15"` |
+| `ShipToCity` | string | | Ciudad de envío | - | `"Ciudad de Panamá"` |
+| `ShipToState` | string | | Estado/Provincia | Máx. 2 characters | `"PA"` |
+| `ShipToZip` | string | | Código postal | Máx. 12 characters | `"0833"` |
+| `ShipToCountry` | string | | País de envío | - | `"Panamá"` |
+| `SalesRepID` | string | | ID representante de ventas | Máx. 20 characters | `"REP001"` |
 
 ### Campos de Request (Items)
 
 | Campo | Tipo | Requerido | Descripción | Validación | Ejemplo |
 |-------|------|-----------|-------------|------------|---------|
-| `Items[].SalesOrderNumber` | string | ✅ | Número de orden (debe coincidir) | Máx. 20 characters | `"SO-2025-001"` |
-| `Items[].Taxable` | integer | ✅ | Si aplica impuesto | 1 o 2 | `1` |
-| `Items[].ItemOrd` | string | ❌ | Orden del item | Máx. 20 characters | `"1"` |
-| `Items[].ItemId` | string | ✅ | ID del producto | Máx. 20 characters | `"PROD001"` |
-| `Items[].Description` | string | ✅ | Descripción del item | Máx. 160 characters | `"Laptop Dell Inspiron 15"` |
-| `Items[].Quantity` | decimal | ✅ | Cantidad | Decimal (5 decimales) | `5.00000` |
-| `Items[].UnitPrice` | decimal | ✅ | Precio unitario | Decimal (4 decimales) | `1200.0000` |
-| `Items[].NetLine` | decimal | ✅ | Línea neta | Decimal (4 decimales) | `6000.0000` |
-| `Items[].JobId` | string | ❌ | ID del trabajo | Máx. 20 characters | `"JOB001"` |
-| `Items[].JobPhaseID` | string | ❌ | ID de fase del trabajo | Máx. 20 characters | `"PHASE01"` |
-| `Items[].JobCostCodeID` | string | ❌ | ID código de costo | Máx. 20 characters | `"COST001"` |
+| `Items[].SalesOrderNumber` | string | | Número de orden (debe coincidir) | Máx. 20 characters | `"SO-2025-001"` |
+| `Items[].Taxable` | integer | | Si aplica impuesto | 1 o 2 | `1` |
+| `Items[].ItemOrd` | string | | Orden del item | Máx. 20 characters | `"1"` |
+| `Items[].ItemId` | string | | ID del producto | Máx. 20 characters | `"PROD001"` |
+| `Items[].Description` | string | | Descripción del item | Máx. 160 characters | `"Laptop Dell Inspiron 15"` |
+| `Items[].Quantity` | decimal | | Cantidad | Decimal (5 decimales) | `5.00000` |
+| `Items[].UnitPrice` | decimal | | Precio unitario | Decimal (4 decimales) | `1200.0000` |
+| `Items[].NetLine` | decimal | | Línea neta | Decimal (4 decimales) | `6000.0000` |
+| `Items[].JobId` | string | | ID del trabajo | Máx. 20 characters | `"JOB001"` |
+| `Items[].JobPhaseID` | string | | ID de fase del trabajo | Máx. 20 characters | `"PHASE01"` |
+| `Items[].JobCostCodeID` | string | | ID código de costo | Máx. 20 characters | `"COST001"` |
 
 ### Ejemplo de Request
 
@@ -254,12 +254,12 @@
 
 | Parámetro | Tipo | Requerido | Descripción | Ejemplo |
 |-----------|------|-----------|-------------|---------|
-| `status` | string | ❌ | Filtrar por estado | `"pending"` |
-| `customer_id` | string | ❌ | Filtrar por cliente | `"CUST001"` |
-| `date_from` | string | ❌ | Fecha desde | `"2025-01-01"` |
-| `date_to` | string | ❌ | Fecha hasta | `"2025-01-31"` |
-| `page` | integer | ❌ | Página | `1` |
-| `per_page` | integer | ❌ | Registros por página | `25` |
+| `status` | string | | Filtrar por estado | `"pending"` |
+| `customer_id` | string | | Filtrar por cliente | `"CUST001"` |
+| `date_from` | string | | Fecha desde | `"2025-01-01"` |
+| `date_to` | string | | Fecha hasta | `"2025-01-31"` |
+| `page` | integer | | Página | `1` |
+| `per_page` | integer | | Registros por página | `25` |
 
 ### Respuesta de Éxito
 
@@ -350,20 +350,20 @@
 
 | Campo | Tipo | Requerido | Descripción | Ejemplo |
 |-------|------|-----------|-------------|---------|
-| `receipt_number` | string | ✅ | Número del recibo | `"REC-2025-001"` |
-| `customer_id` | string | ✅ | ID del cliente | `"CUST001"` |
-| `date` | string | ✅ | Fecha del recibo | `"2025-01-29"` |
-| `payment_method` | string | ✅ | Método de pago | `"check"` |
-| `amount` | decimal | ✅ | Monto del pago | `2500.00` |
-| `currency` | string | ❌ | Moneda | `"USD"` |
-| `exchange_rate` | decimal | ❌ | Tipo de cambio | `1.00` |
-| `reference` | string | ❌ | Referencia del pago | `"CHK-123456"` |
-| `bank_account` | string | ❌ | Cuenta bancaria | `"1100"` |
-| `memo` | string | ❌ | Memo del recibo | `"Pago factura SO-2025-001"` |
-| `applied_invoices` | array | ❌ | Facturas aplicadas | `[]` |
-| `applied_invoices[].invoice_number` | string | ❌ | Número de factura | `"INV-2025-001"` |
-| `applied_invoices[].amount_applied` | decimal | ❌ | Monto aplicado | `2500.00` |
-| `applied_invoices[].discount_taken` | decimal | ❌ | Descuento tomado | `0.00` |
+| `receipt_number` | string | | Número del recibo | `"REC-2025-001"` |
+| `customer_id` | string | | ID del cliente | `"CUST001"` |
+| `date` | string | | Fecha del recibo | `"2025-01-29"` |
+| `payment_method` | string | | Método de pago | `"check"` |
+| `amount` | decimal | | Monto del pago | `2500.00` |
+| `currency` | string | | Moneda | `"USD"` |
+| `exchange_rate` | decimal | | Tipo de cambio | `1.00` |
+| `reference` | string | | Referencia del pago | `"CHK-123456"` |
+| `bank_account` | string | | Cuenta bancaria | `"1100"` |
+| `memo` | string | | Memo del recibo | `"Pago factura SO-2025-001"` |
+| `applied_invoices` | array | | Facturas aplicadas | `[]` |
+| `applied_invoices[].invoice_number` | string | | Número de factura | `"INV-2025-001"` |
+| `applied_invoices[].amount_applied` | decimal | | Monto aplicado | `2500.00` |
+| `applied_invoices[].discount_taken` | decimal | | Descuento tomado | `0.00` |
 
 ### Métodos de Pago Válidos
 
@@ -429,19 +429,19 @@
 
 | Campo | Tipo | Requerido | Descripción | Ejemplo |
 |-------|------|-----------|-------------|---------|
-| `credit_memo_number` | string | ✅ | Número de nota de crédito | `"CM-2025-001"` |
-| `customer_id` | string | ✅ | ID del cliente | `"CUST001"` |
-| `date` | string | ✅ | Fecha de la nota | `"2025-01-29"` |
-| `reason` | string | ✅ | Razón de la nota de crédito | `"Product return"` |
-| `reference_invoice` | string | ❌ | Factura de referencia | `"INV-2025-001"` |
-| `currency` | string | ❌ | Moneda | `"USD"` |
-| `items` | array | ✅ | Items de la nota de crédito | `[]` |
-| `items[].product_code` | string | ✅ | Código del producto | `"PROD001"` |
-| `items[].description` | string | ✅ | Descripción | `"Laptop Dell devuelta"` |
-| `items[].quantity` | decimal | ✅ | Cantidad | `1.00` |
-| `items[].unit_price` | decimal | ✅ | Precio unitario | `1200.00` |
-| `items[].tax_rate` | decimal | ❌ | Tasa de impuesto | `0.07` |
-| `items[].reason` | string | ❌ | Razón específica del item | `"Defective unit"` |
+| `credit_memo_number` | string | | Número de nota de crédito | `"CM-2025-001"` |
+| `customer_id` | string | | ID del cliente | `"CUST001"` |
+| `date` | string | | Fecha de la nota | `"2025-01-29"` |
+| `reason` | string | | Razón de la nota de crédito | `"Product return"` |
+| `reference_invoice` | string | | Factura de referencia | `"INV-2025-001"` |
+| `currency` | string | | Moneda | `"USD"` |
+| `items` | array | | Items de la nota de crédito | `[]` |
+| `items[].product_code` | string | | Código del producto | `"PROD001"` |
+| `items[].description` | string | | Descripción | `"Laptop Dell devuelta"` |
+| `items[].quantity` | decimal | | Cantidad | `1.00` |
+| `items[].unit_price` | decimal | | Precio unitario | `1200.00` |
+| `items[].tax_rate` | decimal | | Tasa de impuesto | `0.07` |
+| `items[].reason` | string | | Razón específica del item | `"Defective unit"` |
 
 ### Ejemplo de Request
 

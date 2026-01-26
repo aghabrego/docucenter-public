@@ -1,13 +1,13 @@
 # Investigación PAC Error 2152 - Punto de Transformación Identificado
 
-## Estado: 🔍 INVESTIGANDO TRANSFORMACIÓN SOAP
+## Estado: INVESTIGANDO TRANSFORMACIÓN SOAP
 
 **Fecha**: 2024-12-19  
 **Error**: `2152-Item 1: Monto del ITBMS del ítem inválido`  
 
 ## Análisis de la Cadena de Transformación
 
-### ✅ **1. Create.php → HKAService (CORRECTO)**
+### **1. Create.php → HKAService (CORRECTO)**
 ```json
 "gTotData": {
   "dTotRec": "5.99",
@@ -16,7 +16,7 @@
 }
 ```
 
-### ✅ **2. HKAService → DocumentoElectronico (CORRECTO)**
+### **2. HKAService → DocumentoElectronico (CORRECTO)**
 ```json
 "totalesSubTotales": {
   "totalValorRecibido": "5.99",
@@ -25,16 +25,16 @@
 }
 ```
 
-### 🔍 **3. DocumentoElectronico → SOAP Request (INVESTIGANDO)**
+### **3. DocumentoElectronico → SOAP Request (INVESTIGANDO)**
 - Método: `filterNullValues((array) $documentoElectronico)` en línea 278
 - Convierte objeto a array antes del envío SOAP
 - **Nuevo logging agregado** para capturar valores exactos
 
-### ❌ **4. SOAP Response → XML Final (INCORRECTO)**
+### **4. SOAP Response → XML Final (INCORRECTO)**
 ```xml
-<dTotRec>5.60</dTotRec>        <!-- ❌ Debería ser 5.99 -->
-<iPzPag>5.60</iPzPag>          <!-- ❌ Debería ser 1 -->
-<dVTotItems>5.60</dVTotItems>  <!-- ❌ Debería ser 5.99 -->
+<dTotRec>5.60</dTotRec>        <!-- Debería ser 5.99 -->
+<iPzPag>5.60</iPzPag>          <!-- Debería ser 1 -->
+<dVTotItems>5.60</dVTotItems>  <!-- Debería ser 5.99 -->
 ```
 
 ## Hipótesis del Problema
@@ -91,15 +91,15 @@ $response = $client->__soapCall('Enviar', array($parametros));
 ## Archivos Investigados
 
 ### **`app/Services/HKAService.php`**
-- ✅ Logging agregado en línea 285
-- 🔍 Método `filterNullValues` (línea 231)
-- 🔍 Array conversion `(array) $documentoElectronico` (línea 278)
+- Logging agregado en línea 285
+- Método `filterNullValues` (línea 231)
+- Array conversion `(array) $documentoElectronico` (línea 278)
 
 ### **`app/Utils/hka/Totales.php`**
-- ✅ Estructura de clase verificada - sin problemas aparentes
+- Estructura de clase verificada - sin problemas aparentes
 
 ### **`app/Utils/hka/DocumentoElectronico.php`**
-- ✅ Estructura de clase verificada - sin problemas aparentes
+- Estructura de clase verificada - sin problemas aparentes
 
 ## Evidencia Acumulada
 

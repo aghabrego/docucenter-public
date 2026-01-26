@@ -1,6 +1,6 @@
 # Análisis del Flujo de Conexión QuickBooks - ACI Cloud
 
-## 📊 Flujo Completo de Datos
+## Flujo Completo de Datos
 
 ### 1. Creación de Conexión (Create.php)
 
@@ -11,15 +11,15 @@
 if (isset($customer['organizations']) && !empty($customer['organizations'])) {
     $this->settings['Organizations'] = array_map(function ($org) {
         return [
-            'Id' => $org['id'],              // ❌ ID NUMÉRICO de QuickBooks (ej: 119)
-            'Name' => $org['Nombre'],         // ✅ Nombre de la org
-            'RealmId' => $org['realmId'],     // ✅ RealmId de QuickBooks
+            'Id' => $org['id'],              // ID NUMÉRICO de QuickBooks (ej: 119)
+            'Name' => $org['Nombre'],         // Nombre de la org
+            'RealmId' => $org['realmId'],     // RealmId de QuickBooks
         ];
     }, $customer['organizations']);
 }
 ```
 
-#### 📝 Estructura de la Respuesta de la API QuickBooks:
+#### Estructura de la Respuesta de la API QuickBooks:
 
 ```json
 {
@@ -27,7 +27,7 @@ if (isset($customer['organizations']) && !empty($customer['organizations'])) {
   "IdCliente": "9341454854054771",
   "organizations": [
     {
-      "id": 119,                           // ❌ ID INTERNO DE QUICKBOOKS
+      "id": 119,                           // ID INTERNO DE QUICKBOOKS
       "Nombre": "Sandbox Company_US_1",
       "realmId": "9341454854054771"
     }
@@ -35,12 +35,12 @@ if (isset($customer['organizations']) && !empty($customer['organizations'])) {
 }
 ```
 
-#### 💾 Guardado en Base de Datos:
+#### Guardado en Base de Datos:
 
 ```php
 // La conexión se guarda así:
 Connection::create([
-    'organization_id' => $this->organization_id,  // ✅ ID DE DOCUCENTER (Rw8DunJnEnxY1MS2QHVH)
+    'organization_id' => $this->organization_id,  // ID DE DOCUCENTER (Rw8DunJnEnxY1MS2QHVH)
     'name' => $this->name,
     'application' => 'acicloud',
     'settings' => [
@@ -49,7 +49,7 @@ Connection::create([
         'IdCliente' => '9341454854054771',
         'Organizations' => [
             [
-                'Id' => 119,                      // ❌ ID DE QUICKBOOKS (numérico)
+                'Id' => 119,                      // ID DE QUICKBOOKS (numérico)
                 'Name' => 'Sandbox Company_US_1',
                 'RealmId' => '9341454854054771'
             ]
@@ -80,12 +80,12 @@ function connection_application_filtered(string $applicationDefault = '', string
 }
 ```
 
-#### 📤 Retorna:
+####  Retorna:
 
 ```php
 [
     'id' => 25,
-    'organization_id' => 'Rw8DunJnEnxY1MS2QHVH',  // ✅ SID de Firestore de DocuCenter
+    'organization_id' => 'Rw8DunJnEnxY1MS2QHVH',  // SID de Firestore de DocuCenter
     'name' => 'QuickBooks Connection',
     'application' => 'acicloud',
     'settings' => [
@@ -93,7 +93,7 @@ function connection_application_filtered(string $applicationDefault = '', string
         'IdCliente' => '9341454854054771',
         'Organizations' => [
             [
-                'Id' => 119,                      // ❌ ID DE QUICKBOOKS (numérico)
+                'Id' => 119,                      // ID DE QUICKBOOKS (numérico)
                 'Name' => 'Sandbox Company_US_1',
                 'RealmId' => '9341454854054771'
             ]
@@ -108,7 +108,7 @@ function connection_application_filtered(string $applicationDefault = '', string
 
 **Archivo**: `app/Http/Livewire/Admin/Einvoice/Read.php`
 
-#### ❌ PROBLEMA (Código Anterior):
+#### PROBLEMA (Código Anterior):
 
 ```php
 $quickbooksConnections = connection_application_filtered('acicloud', 'quickbooks');
@@ -119,16 +119,16 @@ $settings = $connectionData['settings'];
 foreach ($settings['Organizations'] as $org) {
     if ($org['RealmId'] === $this->selectedOrganizationRealmId) {
         $targetRealmId = $org['RealmId'];
-        $targetOrganizationId = $org['Id'];  // ❌ USA ID DE QUICKBOOKS (119)
+        $targetOrganizationId = $org['Id'];  // USA ID DE QUICKBOOKS (119)
         break;
     }
 }
 
 // Fallback cuando no hay Organizations
-$targetOrganizationId = $connectionData['organization_id'];  // ✅ USA SID DE DOCUCENTER
+$targetOrganizationId = $connectionData['organization_id'];  // USA SID DE DOCUCENTER
 ```
 
-#### 🚨 CONSECUENCIA:
+#### CONSECUENCIA:
 
 Se enviaban **2 valores diferentes** a la API del webhook:
 
@@ -142,7 +142,7 @@ Esto creaba **2 configuraciones en Firestore**:
 {
   "DocId": "TMxcK8mY1DwJ0UQQeWma",
   "RealmId": "9341454854054771",
-  "OrganizationId": "Rw8DunJnEnxY1MS2QHVH",  // ✅ SID de DocuCenter
+  "OrganizationId": "Rw8DunJnEnxY1MS2QHVH",  // SID de DocuCenter
   "DocucenterEnabled": true
 }
 
@@ -150,7 +150,7 @@ Esto creaba **2 configuraciones en Firestore**:
 {
   "DocId": "z8ywLjyJKX4FzQnWBWYY",
   "RealmId": "9341454854054771",
-  "OrganizationId": "119",                    // ❌ ID de QuickBooks
+  "OrganizationId": "119",                    // ID de QuickBooks
   "DocucenterEnabled": true
 }
 ```
@@ -159,7 +159,7 @@ Esto creaba **2 configuraciones en Firestore**:
 
 ### 4. Fix Implementado (Read.php - DESPUÉS)
 
-#### ✅ SOLUCIÓN:
+#### SOLUCIÓN:
 
 ```php
 $quickbooksConnections = connection_application_filtered('acicloud', 'quickbooks');
@@ -168,28 +168,28 @@ $settings = $connectionData['settings'];
 
 // IMPORTANTE: Siempre usar el organization_id de DocuCenter (sid de Firestore)
 // NO usar el Id de QuickBooks que es numérico
-$targetOrganizationId = $connectionData['organization_id'];  // ✅ SIEMPRE SID
+$targetOrganizationId = $connectionData['organization_id'];  // SIEMPRE SID
 
 // Solo buscar el RealmId y Name en Organizations
 if (isset($settings['Organizations']) && is_array($settings['Organizations'])) {
     foreach ($settings['Organizations'] as $org) {
         if ($org['RealmId'] === $this->selectedOrganizationRealmId) {
-            $targetRealmId = $org['RealmId'];          // ✅ RealmId de QuickBooks
-            $targetOrganizationName = $org['Name'];    // ✅ Nombre
+            $targetRealmId = $org['RealmId'];          // RealmId de QuickBooks
+            $targetOrganizationName = $org['Name'];    // Nombre
             break;
         }
     }
 }
 ```
 
-#### 📤 Enviado a la API:
+####  Enviado a la API:
 
 ```php
 POST https://us-central1-zoho-books-edocs-integracion.cloudfunctions.net/aciv2/quickbooks/webhook_processing_config
 
 {
   "realmId": "9341454854054771",
-  "organizationId": "Rw8DunJnEnxY1MS2QHVH",  // ✅ SIEMPRE SID de DocuCenter
+  "organizationId": "Rw8DunJnEnxY1MS2QHVH",  // SIEMPRE SID de DocuCenter
   "docucenterEnabled": true,
   "reason": "Configuración desde interfaz para 'Sandbox Company_US_1' - Habilitado"
 }
@@ -197,27 +197,27 @@ POST https://us-central1-zoho-books-edocs-integracion.cloudfunctions.net/aciv2/q
 
 ---
 
-## 🔍 Tabla Comparativa
+## Tabla Comparativa
 
 | Campo | Origen | Tipo | Uso Correcto | Uso Incorrecto |
 |-------|--------|------|--------------|----------------|
-| `organization_id` | BD DocuCenter | String | ✅ Enviar a API webhook | - |
-| `$org['Id']` | API QuickBooks | Numérico | ❌ Solo para display | ❌ NO enviar a API |
-| `RealmId` | API QuickBooks | String | ✅ Identificar org QB | ✅ Enviar a API |
-| `Name` | API QuickBooks | String | ✅ Display en UI | ✅ Logs/mensajes |
+| `organization_id` | BD DocuCenter | String | Enviar a API webhook | - |
+| `$org['Id']` | API QuickBooks | Numérico | Solo para display | NO enviar a API |
+| `RealmId` | API QuickBooks | String | Identificar org QB | Enviar a API |
+| `Name` | API QuickBooks | String | Display en UI | Logs/mensajes |
 
 ---
 
-## 📌 Reglas Clave
+## Reglas Clave
 
-### ✅ HACER:
+### HACER:
 
 1. **Siempre usar `$connectionData['organization_id']`** para identificar la organización de DocuCenter
 2. **Usar `$org['RealmId']`** para identificar la organización en QuickBooks
 3. **Usar `$org['Name']`** para mostrar nombre amigable
 4. **Validar que `organizationId` sea string** antes de enviar a API
 
-### ❌ NO HACER:
+### NO HACER:
 
 1. **NUNCA usar `$org['Id']`** como identificador de organización de DocuCenter
 2. **NO confundir** ID interno de QuickBooks con SID de Firestore
@@ -226,7 +226,7 @@ POST https://us-central1-zoho-books-edocs-integracion.cloudfunctions.net/aciv2/q
 
 ---
 
-## 🔧 Campos en Diferentes Contextos
+## Campos en Diferentes Contextos
 
 ### BD DocuCenter (Tabla `connection_applications`):
 
@@ -256,7 +256,7 @@ DocucenterEnabled: true
 
 ---
 
-## 🎯 Validación
+## Validación
 
 ### Script de Verificación:
 
@@ -267,7 +267,7 @@ DocucenterEnabled: true
 ### Salida Esperada Después del Fix:
 
 ```
-✅ No hay configuraciones duplicadas para eliminar
+No hay configuraciones duplicadas para eliminar
 ```
 
 ### Query Manual en Firestore:
@@ -289,7 +289,7 @@ Debe retornar **solo 1 configuración** con `OrganizationId` tipo string.
 
 ---
 
-## 📚 Referencias
+## Referencias
 
 - **Fix implementado**: [quickbooks-webhook-organizationid-fix.md](./quickbooks-webhook-organizationid-fix.md)
 - **Script de limpieza**: [quickbooks-webhook-cleanup-duplicate.sh](../testing/quickbooks-webhook-cleanup-duplicate.sh)

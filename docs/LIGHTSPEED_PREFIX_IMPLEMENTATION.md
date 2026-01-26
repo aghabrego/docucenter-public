@@ -1,10 +1,10 @@
 # Resumen de Implementación: Prefijos de Factura Lightspeed X-Series
 
-## 🎯 Objetivo
+## Objetivo
 
 Implementar sistema de prefijos configurables por tienda en Lightspeed X-Series para evitar colisiones de números de factura entre múltiples tiendas.
 
-## ✅ Cambios Realizados
+## Cambios Realizados
 
 ### 1. Actualización de Menú
 **Archivo:** `resources/views/partials/menu/facturacion.blade.php`
@@ -41,7 +41,7 @@ Implementar sistema de prefijos configurables por tienda en Lightspeed X-Series 
 - Guías de troubleshooting
 - Mejores prácticas
 
-## 🔧 Cómo Funciona
+## Cómo Funciona
 
 ```
 1. API recibe venta con invoice_number y outlet_id
@@ -51,17 +51,17 @@ Implementar sistema de prefijos configurables por tienda en Lightspeed X-Series 
 4. Continúa con procesamiento normal
 ```
 
-## 📝 Ejemplo
+## Ejemplo
 
 **Sin prefijos:**
 - Tienda A: Factura "1001"
-- Tienda B: Factura "1001" ❌ COLISIÓN
+- Tienda B: Factura "1001" COLISIÓN
 
 **Con prefijos:**
-- Tienda A (T1-): Factura "T1-1001" ✅
-- Tienda B (T2-): Factura "T2-1001" ✅
+- Tienda A (T1-): Factura "T1-1001" 
+- Tienda B (T2-): Factura "T2-1001" 
 
-## 🚀 Instrucciones de Uso
+## Instrucciones de Uso
 
 1. Acceder a: `admin/e_invoice/configuration/lightspeed_settings`
 2. Seleccionar organización
@@ -71,29 +71,29 @@ Implementar sistema de prefijos configurables por tienda en Lightspeed X-Series 
 4. Guardar configuración
 5. Los nuevos pedidos automáticamente usarán los prefijos
 
-## 📊 Archivos Modificados
+## Archivos Modificados
 
-- ✅ `resources/views/partials/menu/facturacion.blade.php`
-- ✅ `resources/views/livewire/admin/einvoice/lightspeed_setting.blade.php`
-- ✅ `app/Http/Livewire/Admin/Einvoice/AssignBranch.php`
-- ✅ `app/Services/LightspeedService.php`
-- ✅ `lang/es_panel.json`
-- ✅ `lang/en_panel.json`
+- `resources/views/partials/menu/facturacion.blade.php`
+- `resources/views/livewire/admin/einvoice/lightspeed_setting.blade.php`
+- `app/Http/Livewire/Admin/Einvoice/AssignBranch.php`
+- `app/Services/LightspeedService.php`
+- `lang/es_panel.json`
+- `lang/en_panel.json`
 
-## 📄 Archivos Creados
+##  Archivos Creados
 
-- ✅ `docs/technical/lightspeed-invoice-prefix.md`
-- ✅ `docs/LIGHTSPEED_PREFIX_IMPLEMENTATION.md` (este archivo)
+- `docs/technical/lightspeed-invoice-prefix.md`
+- `docs/LIGHTSPEED_PREFIX_IMPLEMENTATION.md` (este archivo)
 
-## ✨ Características
+## Características
 
-- ✅ Configuración flexible por tienda
-- ✅ Validación de longitud (máx 10 caracteres)
-- ✅ Evita duplicación automática de prefijos
-- ✅ Logging para debugging
-- ✅ Manejo seguro de errores
-- ✅ Compatible con facturas existentes
-- ✅ Interfaz intuitiva en español e inglés
+- Configuración flexible por tienda
+- Validación de longitud (máx 10 caracteres)
+- Evita duplicación automática de prefijos
+- Logging para debugging
+- Manejo seguro de errores
+- Compatible con facturas existentes
+- Interfaz intuitiva en español e inglés
 
 ## 🧪 Testing
 
@@ -118,7 +118,7 @@ docker exec -it docucenter-app-1 php artisan tinker
 >>> SalesHeaderImp::where('InvoiceNumber', 'LIKE', '%1001%')->get();
 ```
 
-## 🐛 Troubleshooting
+## Troubleshooting
 
 ### Verificar configuración:
 ```bash
@@ -132,7 +132,7 @@ docker exec -it docucenter-app-1 php artisan tinker
 docker exec -it docucenter-app-1 tail -f storage/logs/laravel.log | grep "prefijo"
 ```
 
-## 📞 Soporte
+##  Soporte
 
 Para más información:
 - Documentación técnica: `docs/technical/lightspeed-invoice-prefix.md`
@@ -142,5 +142,5 @@ Para más información:
 ---
 
 **Fecha:** Enero 10, 2026  
-**Estado:** ✅ COMPLETADO  
+**Estado:** COMPLETADO  
 **Versión:** 1.0

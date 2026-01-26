@@ -21,10 +21,10 @@ Crea y emite una factura electrónica basada en datos provenientes del sistema S
 
 | Campo | Tipo | Requerido | Descripción |
 |-------|------|-----------|-------------|
-| `dGen.gDatRec.iTipoRec` | string | ✅ | Tipo de receptor |
-| `dGen.gDatRec.gRucRec.dTipoRuc` | string | ✅ | Tipo de RUC (default: "1") |
-| `gTot.gFormaPago[].iFormaPago` | string | ✅ | Forma de pago |
-| `gItem[].gITBMSItem.dTasaITBMS` | string | ✅ | Tasa de ITBMS |
+| `dGen.gDatRec.iTipoRec` | string | | Tipo de receptor |
+| `dGen.gDatRec.gRucRec.dTipoRuc` | string | | Tipo de RUC (default: "1") |
+| `gTot.gFormaPago[].iFormaPago` | string | | Forma de pago |
+| `gItem[].gITBMSItem.dTasaITBMS` | string | | Tasa de ITBMS |
 
 ### Ejemplo de Request
 
@@ -142,7 +142,7 @@ Descarga un documento de factura electrónica en formato Base64.
 
 | Parámetro | Tipo | Requerido | Descripción |
 |-----------|------|-----------|-------------|
-| `id` | integer | ✅ | ID del documento FE |
+| `id` | integer | | ID del documento FE |
 
 ---
 

@@ -1,10 +1,10 @@
 # Resumen: Sistema de Monitoreo del Servidor
 
-## 🎯 Implementación Completada
+## Implementación Completada
 
 Se ha implementado exitosamente un **sistema de monitoreo en tiempo real** de recursos del servidor para DocuCenter.
 
-## 📂 Archivos Creados
+## Archivos Creados
 
 ### 1. Servicio de Métricas
 **Ubicación**: `app/Services/ServerMetricsService.php`
@@ -44,7 +44,7 @@ Script para verificar funcionamiento en Docker/producción.
 
 Documentación completa del sistema.
 
-## 🔧 Configuración
+## Configuración
 
 ### Ruta Agregada
 ```php
@@ -60,7 +60,7 @@ Agregadas en:
 - `lang/es_panel.json` (español)
 - `lang/en_panel.json` (inglés)
 
-## ✨ Características Principales
+## Características Principales
 
 ### Métricas Monitoreadas
 
@@ -88,17 +88,17 @@ Agregadas en:
 
 ### Funcionalidades
 
-- ✅ **Auto-refresh**: Cada 5 segundos (configurable)
-- ✅ **Refresh manual**: Botón por cada métrica
-- ✅ **Toggle auto-refresh**: Activar/desactivar
-- ✅ **Código de colores**:
+- **Auto-refresh**: Cada 5 segundos (configurable)
+- **Refresh manual**: Botón por cada métrica
+- **Toggle auto-refresh**: Activar/desactivar
+- **Código de colores**:
   - Verde: < 60% (Normal)
   - Amarillo: 60-80% (Advertencia)
   - Rojo: > 80% (Crítico)
-- ✅ **Responsive**: Funciona en móvil y desktop
-- ✅ **Timestamp**: Última actualización visible
+- **Responsive**: Funciona en móvil y desktop
+- **Timestamp**: Última actualización visible
 
-## 🔐 Seguridad
+##  Seguridad
 
 - Protegido por middleware `dynamicAcl` y `check.active.organization`
 - Solo lectura de archivos del sistema
@@ -127,26 +127,26 @@ php -r "print_r(sys_getloadavg());"
 # Resultado: Array con load averages
 ```
 
-## 📊 Compatibilidad
+## Compatibilidad
 
 ### Producción (Linux sin Docker)
-✅ **Totalmente funcional**
+**Totalmente funcional**
 - Acceso directo a /proc/*
 - Métricas reales del servidor
 - Todas las características disponibles
 
 ### Desarrollo (Docker)
-⚠️ **Métricas del contenedor**
+**Métricas del contenedor**
 - Muestra datos del contenedor, no del host
 - Funcional para desarrollo
 - Para métricas del host requiere configuración adicional
 
 ### Sistemas Operativos
-- ✅ Linux (Ubuntu, Debian, CentOS)
-- ⚠️ Windows (solo disco)
-- ⚠️ macOS (funcionalidad limitada)
+- Linux (Ubuntu, Debian, CentOS)
+- Windows (solo disco)
+- macOS (funcionalidad limitada)
 
-## 🚀 Uso
+## Uso
 
 ### Acceso
 1. Iniciar sesión en DocuCenter
@@ -161,17 +161,17 @@ Para cambiar el intervalo, editar en `ServerMonitor.php`:
 public $refreshInterval = 5; // Cambiar a segundos deseados
 ```
 
-## 📝 Convenciones Seguidas
+## Convenciones Seguidas
 
-- ✅ Comentarios en español
-- ✅ NO usar emojis en código
-- ✅ Sistema de traducciones integrado
-- ✅ Middleware de seguridad aplicado
-- ✅ Documentación en docs/technical/
-- ✅ Scripts de testing en scripts/
-- ✅ Logging apropiado de errores
+- Comentarios en español
+- NO usar emojis en código
+- Sistema de traducciones integrado
+- Middleware de seguridad aplicado
+- Documentación en docs/technical/
+- Scripts de testing en scripts/
+- Logging apropiado de errores
 
-## 🔄 Próximos Pasos Sugeridos
+## Próximos Pasos Sugeridos
 
 1. **Históricos**: Almacenar métricas para gráficos temporales
 2. **Alertas**: Email cuando se superan umbrales
@@ -179,7 +179,7 @@ public $refreshInterval = 5; // Cambiar a segundos deseados
 4. **Métricas de aplicación**: Jobs, cache, sesiones de Laravel
 5. **Exportación**: Generar reportes en PDF/CSV
 
-## ✅ Verificación de Implementación
+## Verificación de Implementación
 
 - [x] Servicio de métricas creado
 - [x] Componente Livewire implementado
@@ -191,7 +191,7 @@ public $refreshInterval = 5; // Cambiar a segundos deseados
 - [x] Documentación completa
 - [x] Pruebas básicas realizadas
 
-## 📞 Soporte
+##  Soporte
 
 Para problemas o mejoras:
 1. Revisar logs: `storage/logs/laravel.log`

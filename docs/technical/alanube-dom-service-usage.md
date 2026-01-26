@@ -6,13 +6,13 @@ El `AlanubeDomService` es el servicio principal para la emisión de documentos e
 
 ## Características Principales
 
-### ✨ Detección Automática de Tipos
+### Detección Automática de Tipos
 - **Análisis inteligente** de datos de entrada
 - **Selección automática** del endpoint correcto
 - **Validaciones específicas** por tipo de documento
 - **Formateo automático** según especificaciones
 
-### 📋 Tipos de Documentos Soportados
+### Tipos de Documentos Soportados
 - **31** - Factura de Crédito Fiscal (FCF)
 - **32** - Factura de Consumo
 - **45** - Factura Gubernamental
@@ -53,17 +53,17 @@ if ($result['success']) {
     $documentType = $result['document_type']; // Tipo detectado
     $typeCode = $result['type_code'];     // Código numérico
     
-    echo "✅ Factura emitida: {$encf}";
-    echo "📄 Tipo: {$documentType} ({$typeCode})";
+    echo "Factura emitida: {$encf}";
+    echo " Tipo: {$documentType} ({$typeCode})";
 } else {
-    echo "❌ Error: {$result['message']}";
-    echo "🔍 Detalle: {$result['error']}";
+    echo "Error: {$result['message']}";
+    echo "Detalle: {$result['error']}";
 }
 ```
 
 ## Detección Automática de Tipos
 
-### 🌍 Factura de Exportación (46)
+### Factura de Exportación (46)
 
 **Indicadores de Detección**:
 - Campos de información adicional de exportación
@@ -115,11 +115,11 @@ $exportData = [
     ]
 ];
 
-// ✅ Se detecta automáticamente como EXPORT_SUPPORT (46)
+// Se detecta automáticamente como EXPORT_SUPPORT (46)
 $result = $service->emitInvoice($organization, $exportData);
 ```
 
-### 🏛️ Factura Gubernamental (45)
+### 🏛Factura Gubernamental (45)
 
 **Indicadores de Detección**:
 - RNC gubernamental (prefijos 10, 11)
@@ -156,7 +156,7 @@ $governmentalData = [
     ]
 ];
 
-// ✅ Se detecta automáticamente como GOVERNMENTAL (45)
+// Se detecta automáticamente como GOVERNMENTAL (45)
 $result = $service->emitInvoice($organization, $governmentalData);
 ```
 
@@ -188,11 +188,11 @@ $consumerData = [
     'payment_method' => 'cash'                      // Efectivo típico
 ];
 
-// ✅ Se detecta automáticamente como INVOICE (32)
+// Se detecta automáticamente como INVOICE (32)
 $result = $service->emitInvoice($organization, $consumerData);
 ```
 
-### 🏢 Factura Fiscal/Crédito Fiscal (31)
+### Factura Fiscal/Crédito Fiscal (31)
 
 **Indicadores de Detección**:
 - RNC empresarial válido
@@ -238,7 +238,7 @@ $fiscalData = [
     ]
 ];
 
-// ✅ Se detecta automáticamente como FISCAL_INVOICE (31)
+// Se detecta automáticamente como FISCAL_INVOICE (31)
 $result = $service->emitInvoice($organization, $fiscalData);
 ```
 
@@ -629,17 +629,17 @@ Todos los valores monetarios se formatean automáticamente con 2 decimales segú
 ### 1. Detección Automática vs Manual
 
 ```php
-// ✅ Recomendado: Detección automática
+// Recomendado: Detección automática
 $result = $service->emitInvoice($organization, $data);
 
-// ⚠️ Solo si conoces el tipo exacto
+// Solo si conoces el tipo exacto
 $result = $service->emitExportInvoice($organization, $data);
 ```
 
 ### 2. Manejo de Respuestas
 
 ```php
-// ✅ Verificar success antes de usar datos
+// Verificar success antes de usar datos
 if ($result['success']) {
     $encf = $result['encf'];
     // Procesar datos...
@@ -685,13 +685,13 @@ if (empty($pacConnection->token)) {
 
 El `AlanubeDomService` proporciona:
 
-- ✅ **Detección automática** de tipos de documento
-- ✅ **Validaciones específicas** por tipo
-- ✅ **Endpoints correctos** automáticamente
-- ✅ **Logging detallado** para debugging
-- ✅ **Manejo robusto** de errores
-- ✅ **Formateo automático** de datos
-- ✅ **Soporte completo** para todos los tipos
+- **Detección automática** de tipos de documento
+- **Validaciones específicas** por tipo
+- **Endpoints correctos** automáticamente
+- **Logging detallado** para debugging
+- **Manejo robusto** de errores
+- **Formateo automático** de datos
+- **Soporte completo** para todos los tipos
 
 **Uso recomendado**: Utilizar siempre `emitInvoice()` con detección automática para máxima flexibilidad y menor complejidad en el código cliente.
 

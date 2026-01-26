@@ -451,11 +451,11 @@ class ExportInvoiceTest extends TestCase
 ## Conclusiones
 
 ### Cobertura de Testing
-- ✅ **Validaciones**: Estructura, límites, indicadores
-- ✅ **Enhancement**: Generación, preparación, constantes
-- ✅ **Servicio**: Detección, integración, formateo
-- ✅ **Job**: Estados, configuración, métodos
-- ✅ **Integración**: Flujo completo end-to-end
+- **Validaciones**: Estructura, límites, indicadores
+- **Enhancement**: Generación, preparación, constantes
+- **Servicio**: Detección, integración, formateo
+- **Job**: Estados, configuración, métodos
+- **Integración**: Flujo completo end-to-end
 
 ### Calidad del Testing
 - **Automatizado**: Script ejecutable con múltiples opciones

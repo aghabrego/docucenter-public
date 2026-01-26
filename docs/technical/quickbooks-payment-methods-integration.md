@@ -144,29 +144,29 @@ php docs/testing/analyze-payment-methods.php
 
 ## Ventajas del Sistema
 
-### ✅ Simplicidad
+### Simplicidad
 - Lógica clara basada en balance de QB
 - Manejo automático de todos los escenarios
 
-### ✅ Flexibilidad
+### Flexibilidad
 - Se adapta a cambios en el estado de pago
 - Soporte para pagos parciales
 
-### ✅ Trazabilidad
+### Trazabilidad
 - Logging detallado para debugging
 - Identificación clara de escenarios
 
-### ✅ Consistencia
+### Consistencia
 - Suma de pagos siempre = total factura
 - Estados coherentes con QuickBooks
 
 ## Limitaciones Actuales
 
-### ⚠️ Asunciones Simplificadas
+### Asunciones Simplificadas
 - Todo lo pagado se asume como "CREDIT_CARD"
 - No distingue métodos de pago reales (efectivo, transferencia, etc.)
 
-### ⚠️ Información Limitada
+### Información Limitada
 - QuickBooks puede tener más detalles sobre métodos de pago
 - No se consultan datos de payments reales de la API
 

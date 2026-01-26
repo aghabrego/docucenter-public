@@ -17,16 +17,16 @@ $modelSt = new \App\Models\STCostOfGoods(['configuration' => $this->configuratio
 
 // Aplicar filtro por Store ID si está configurado
 if (!is_null($this->configuration->store_id)) {
-    $modelSt = $modelSt->where('StoreID', $this->configuration->store_id); // ❌ $modelSt ahora es Builder
+    $modelSt = $modelSt->where('StoreID', $this->configuration->store_id); // $modelSt ahora es Builder
 } else {
     // ...
 }
 
 /** @var \Illuminate\Database\Eloquent\Builder $subquery */
-$subquery = $modelSt->select(/* ... */); // ❌ $modelSt ya es Builder aquí
+$subquery = $modelSt->select(/* ... */); // $modelSt ya es Builder aquí
 
 /** @var \Illuminate\Database\Eloquent\Builder $modelQuery */
-$modelQuery = $modelSt->query(); // ❌ ERROR: Builder::query() no existe
+$modelQuery = $modelSt->query(); // ERROR: Builder::query() no existe
 ```
 
 #### ¿Por qué falla?
@@ -60,7 +60,7 @@ $subquery = $baseQuery->select(
 
 // Crear nueva instancia de query para la consulta principal
 /** @var \Illuminate\Database\Eloquent\Builder $modelQuery */
-$modelQuery = $modelSt->newQuery(); // ✅ CORRECTO: Model::newQuery()
+$modelQuery = $modelSt->newQuery(); // CORRECTO: Model::newQuery()
 
 // Aplicar filtro también en la consulta principal
 if (!is_null($this->configuration->store_id)) {
@@ -74,12 +74,12 @@ if (!is_null($this->configuration->store_id)) {
 |----------|----------------|-----------|
 | Desde Model | `$model->query()` | Builder |
 | Desde Model | `$model->newQuery()` | Builder |
-| Desde Builder | `$builder->newQuery()` | ❌ No existe |
-| Desde Builder | `$builder->query()` | ❌ No existe |
+| Desde Builder | `$builder->newQuery()` | No existe |
+| Desde Builder | `$builder->query()` | No existe |
 
 ### Patrones Recomendados
 
-#### ✅ Patrón Correcto 1: Mantener referencia al Model
+#### Patrón Correcto 1: Mantener referencia al Model
 ```php
 $model = new MyModel();
 $baseQuery = $model->newQuery();
@@ -92,7 +92,7 @@ $subquery = $model->newQuery()->select(/* ... */);
 $mainQuery = $model->newQuery()->joinSub($subquery, /* ... */);
 ```
 
-#### ✅ Patrón Correcto 2: Clonar queries
+#### Patrón Correcto 2: Clonar queries
 ```php
 $model = new MyModel();
 $baseQuery = $model->newQuery();
@@ -108,15 +108,15 @@ $mainQuery = clone $baseQuery;
 $mainQuery->joinSub($subquery, /* ... */);
 ```
 
-#### ❌ Patrón Incorrecto: Reasignar variable con Builder
+#### Patrón Incorrecto: Reasignar variable con Builder
 ```php
 $model = new MyModel();
 
 if ($condition) {
-    $model = $model->where('field', $value); // ❌ $model ahora es Builder
+    $model = $model->where('field', $value); // $model ahora es Builder
 }
 
-$query = $model->query(); // ❌ ERROR: Builder no tiene query()
+$query = $model->query(); // ERROR: Builder no tiene query()
 ```
 
 ### Casos Similares a Revisar
@@ -127,16 +127,16 @@ Este error es común en:
 - Queries con subconsultas complejas
 
 **Archivos que podrían tener el mismo patrón**:
-- `STInvoiceJob.php` (✅ ya correcto)
-- `STCostOfGoodsOfCategoryJob.php` (✅ corregido)
+- `STInvoiceJob.php` (ya correcto)
+- `STCostOfGoodsOfCategoryJob.php` (corregido)
 - Otros jobs en `app/Jobs/SqlServer/`
 
 ### Verificación
 
-1. **Sintaxis**: ✅ Sin errores PHP
-2. **Lógica**: ✅ Filtros aplicados correctamente
-3. **Performance**: ✅ Queries optimizados
-4. **Funcionalidad**: ✅ Filtro StoreID mantenido
+1. **Sintaxis**: Sin errores PHP
+2. **Lógica**: Filtros aplicados correctamente
+3. **Performance**: Queries optimizados
+4. **Funcionalidad**: Filtro StoreID mantenido
 
 ### Resultado
 

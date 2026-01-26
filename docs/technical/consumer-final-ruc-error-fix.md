@@ -98,10 +98,10 @@ Los campos condicionales para zona franca están correctamente configurados:
 
 Tras estas correcciones:
 
-1. ✅ **TheFactoryHKA**: Las facturas de consumidor final ya no envían `gRucRec` cuando no es necesario
-2. ✅ **Alanube**: El formateador maneja correctamente la ausencia de `gRucRec` para consumidor final
-3. ✅ **Multi-tenant**: Conexión de base de datos correcta antes de acceder a relaciones
-4. ✅ **Zona Franca**: Campos condicionales funcionando correctamente
+1. **TheFactoryHKA**: Las facturas de consumidor final ya no envían `gRucRec` cuando no es necesario
+2. **Alanube**: El formateador maneja correctamente la ausencia de `gRucRec` para consumidor final
+3. **Multi-tenant**: Conexión de base de datos correcta antes de acceder a relaciones
+4. **Zona Franca**: Campos condicionales funcionando correctamente
 
 ## Testing Recomendado
 

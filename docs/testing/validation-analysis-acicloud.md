@@ -136,7 +136,7 @@
 
 ## Análisis de Validaciones
 
-### ❌ ERRORES CRÍTICOS ENCONTRADOS
+### ERRORES CRÍTICOS ENCONTRADOS
 
 #### 1. **iTipoRec**: Valor inválido
 - **Actual**: `"1"`
@@ -152,7 +152,7 @@
 - **Requerido**: Campo obligatorio cuando `iTipoRec` es `"01"`
 - **Actual**: Campo ausente
 
-### ⚠️ PROBLEMAS DE FORMATO
+### PROBLEMAS DE FORMATO
 
 #### 4. **Números como string vs integer**
 - `iDoc`, `iNatOp`, `iTipoOp` deben ser integers
@@ -161,7 +161,7 @@
 #### 5. **Valores numéricos en strings**
 - Los precios están como strings, deberían ser numeric
 
-### ✅ CAMPOS CORRECTOS
+### CAMPOS CORRECTOS
 
 - `dNroDF`: Correcto (máximo 10 caracteres)
 - `dPtoFacDF`: Correcto (máximo 3 caracteres)

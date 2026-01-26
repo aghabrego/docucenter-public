@@ -1,33 +1,33 @@
 # Mejoras para Factura de Consumo Electrónica (32) - Alanube DOM
 
-## 📋 Resumen de Mejoras Implementadas
+## Resumen de Mejoras Implementadas
 
 Basado en la documentación oficial de Alanube DOM, se implementaron las siguientes mejoras específicas para **Factura de Consumo Electrónica (32)**:
 
-### 🔄 Procesamiento Síncronvo vs Asíncrono
+### Procesamiento Síncronvo vs Asíncrono
 
 | Monto de Factura | Tipo de Procesamiento | Límite de Ítems | RNC Comprador |
 |-----------------|----------------------|------------------|---------------|
 | < DOP$250,000   | Síncrono (inmediato) | 10,000 ítems    | Opcional      |
 | ≥ DOP$250,000   | Asíncrono (DGII)     | 1,000 ítems     | **Obligatorio** |
 
-### 🚨 Validaciones Automáticas
+### Validaciones Automáticas
 
-#### ✅ Límites de Ítems
+#### Límites de Ítems
 ```php
 // Factura < DOP$250,000: máximo 10,000 ítems
 // Factura ≥ DOP$250,000: máximo 1,000 ítems
 AlanubeDomConsumerInvoiceEnhancement::validateConsumerInvoiceLimits($request);
 ```
 
-#### ✅ RNC Condicional
+#### RNC Condicional
 ```php
 // RNC solo obligatorio si monto ≥ DOP$250,000
 $requiresRnc = AlanubeDomConsumerInvoiceEnhancement::requiresBuyerRnc($request);
 $buyer = AlanubeDomConsumerInvoiceEnhancement::buildBuyerWithConditionalRnc($request, $requiresRnc);
 ```
 
-#### ✅ Detección de Respuesta Asíncrona
+#### Detección de Respuesta Asíncrona
 ```php
 // Detectar si DGII responde con código AEP2006 (timeout)
 $isAsync = AlanubeDomConsumerInvoiceEnhancement::isAsyncResponse($responseData);
@@ -43,7 +43,7 @@ $isAsync = AlanubeDomConsumerInvoiceEnhancement::isAsyncResponse($responseData);
 }
 ```
 
-### 🎯 Uso desde Módulos
+### Uso desde Módulos
 
 #### Método Recomendado
 ```php
@@ -81,7 +81,7 @@ $alanubeDomData = $service->transformKart21ToAlanubeFiscal(
 $result = $service->emitConsumerInvoice($organization, $alanubeDomData);
 ```
 
-### 🔧 Campos Específicos Implementados
+### Campos Específicos Implementados
 
 #### IdDoc (Identificación del Documento)
 ```php
@@ -118,7 +118,7 @@ $result = $service->emitConsumerInvoice($organization, $alanubeDomData);
 'stampDate' => date('Y-m-d')  // Fecha actual en formato YYYY-MM-DD
 ```
 
-### 📡 URLs de API
+###  URLs de API
 
 ```php
 // Sandbox (Pruebas)
@@ -143,7 +143,7 @@ php artisan test:alanube-dom --organization=1
 # - Verificación de RNC condicional
 ```
 
-### 📁 Nuevos Archivos
+###  Nuevos Archivos
 
 1. **AlanubeDomConsumerInvoiceEnhancement.php**
    - Validaciones específicas para Factura de Consumo
@@ -157,7 +157,7 @@ php artisan test:alanube-dom --organization=1
    - eNCF con prefijos correctos
    - Campo `stampDate` obligatorio
 
-### ⚠️ Consideraciones Importantes
+### Consideraciones Importantes
 
 1. **Webhooks Recomendados**: Para facturas ≥ DOP$250,000, configure webhooks para recibir notificaciones automáticas del estado final.
 
@@ -167,7 +167,7 @@ php artisan test:alanube-dom --organization=1
 
 4. **Testing**: Siempre pruebe con el sandbox antes de producción, especialmente para facturas de alto monto.
 
-### 🔄 Flujo de Trabajo Recomendado
+### Flujo de Trabajo Recomendado
 
 ```mermaid
 graph TD

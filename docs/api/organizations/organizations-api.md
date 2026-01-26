@@ -418,12 +418,12 @@ Accept: application/json
 
 | Campo | Tipo | Requerido | Validación |
 |-------|------|-----------|------------|
-| `aci_organizacion_id` | string | ✅ | Máximo 20 caracteres |
-| `zoho_invoice_id` | string | ✅ | Máximo 20 caracteres |
-| `date` | string | ✅ | Fecha válida (YYYY-MM-DD) |
-| `status` | string | ✅ | Máximo 15 caracteres |
-| `type` | string | ✅ | Máximo 15 caracteres |
-| `message` | string | ❌ | Mensaje opcional |
+| `aci_organizacion_id` | string | | Máximo 20 caracteres |
+| `zoho_invoice_id` | string | | Máximo 20 caracteres |
+| `date` | string | | Fecha válida (YYYY-MM-DD) |
+| `status` | string | | Máximo 15 caracteres |
+| `type` | string | | Máximo 15 caracteres |
+| `message` | string | | Mensaje opcional |
 
 #### Respuesta Exitosa (200)
 

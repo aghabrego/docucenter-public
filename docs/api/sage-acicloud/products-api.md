@@ -9,20 +9,20 @@
 
 ### Características del Endpoint
 
-- ✅ **Filtrado Avanzado**: Múltiples filtros y operadores
-- ✅ **Paginación**: Resultados paginados automáticamente
-- ✅ **Ordenamiento**: Ordenar por cualquier campo
-- ✅ **Multi-tenant**: Respeta el contexto de organización activa
+- **Filtrado Avanzado**: Múltiples filtros y operadores
+- **Paginación**: Resultados paginados automáticamente
+- **Ordenamiento**: Ordenar por cualquier campo
+- **Multi-tenant**: Respeta el contexto de organización activa
 
 ### Parámetros de Query (Opcionales)
 
 | Parámetro | Tipo | Requerido | Descripción | Ejemplo |
 |-----------|------|-----------|-------------|---------|
-| `page` | integer | ❌ | Página a obtener | `2` |
-| `per_page` | integer | ❌ | Registros por página (máx 100) | `50` |
-| `sort` | string | ❌ | Campo para ordenar | `"code"` |
-| `order` | string | ❌ | Dirección del ordenamiento | `"asc"` |
-| `filter` | object | ❌ | Filtros aplicados | `{}` |
+| `page` | integer | | Página a obtener | `2` |
+| `per_page` | integer | | Registros por página (máx 100) | `50` |
+| `sort` | string | | Campo para ordenar | `"code"` |
+| `order` | string | | Dirección del ordenamiento | `"asc"` |
+| `filter` | object | | Filtros aplicados | `{}` |
 
 ### Ejemplo de Request con Filtros
 
@@ -112,34 +112,34 @@ GET /api/acicloud/products?filter[description][operator]=contains&filter[descrip
 
 | Campo | Tipo | Requerido | Descripción | Ejemplo |
 |-------|------|-----------|-------------|---------|
-| `code` | string | ✅ | Código único del producto | `"PROD001"` |
-| `description` | string | ✅ | Descripción del producto | `"Laptop Dell Inspiron 15"` |
-| `type` | string | ✅ | Tipo de producto | `"inventory"` |
-| `category_code` | string | ❌ | Código de categoría | `"ELEC"` |
-| `unit_of_measure` | string | ✅ | Unidad de medida | `"EA"` |
-| `cost_price` | decimal | ❌ | Precio de costo | `850.00` |
-| `sales_price` | decimal | ✅ | Precio de venta | `1200.00` |
-| `tax_info` | object | ❌ | Información de impuestos | `{}` |
-| `tax_info.tax_code` | string | ❌ | Código de impuesto | `"STD"` |
-| `tax_info.tax_rate` | decimal | ❌ | Tasa de impuesto | `0.07` |
-| `tax_info.taxable` | boolean | ❌ | Es gravable | `true` |
-| `inventory` | object | ❌ | Información de inventario | `{}` |
-| `inventory.current_stock` | decimal | ❌ | Stock actual | `25.00` |
-| `inventory.minimum_stock` | decimal | ❌ | Stock mínimo | `5.00` |
-| `inventory.maximum_stock` | decimal | ❌ | Stock máximo | `100.00` |
-| `accounting` | object | ❌ | Cuentas contables | `{}` |
-| `accounting.income_account` | string | ❌ | Cuenta de ingresos | `"4100"` |
-| `accounting.expense_account` | string | ❌ | Cuenta de gastos | `"5100"` |
-| `accounting.inventory_account` | string | ❌ | Cuenta de inventario | `"1300"` |
-| `supplier` | object | ❌ | Información del proveedor | `{}` |
-| `supplier.vendor_id` | string | ❌ | ID del proveedor principal | `"VENDOR001"` |
-| `supplier.supplier_code` | string | ❌ | Código del proveedor | `"DELL-INSP-15"` |
-| `dimensions` | object | ❌ | Dimensiones del producto | `{}` |
-| `dimensions.length` | decimal | ❌ | Largo | `35.5` |
-| `dimensions.width` | decimal | ❌ | Ancho | `24.0` |
-| `dimensions.height` | decimal | ❌ | Alto | `2.5` |
-| `dimensions.weight` | decimal | ❌ | Peso | `2.1` |
-| `active` | boolean | ❌ | Estado activo (default: true) | `true` |
+| `code` | string | | Código único del producto | `"PROD001"` |
+| `description` | string | | Descripción del producto | `"Laptop Dell Inspiron 15"` |
+| `type` | string | | Tipo de producto | `"inventory"` |
+| `category_code` | string | | Código de categoría | `"ELEC"` |
+| `unit_of_measure` | string | | Unidad de medida | `"EA"` |
+| `cost_price` | decimal | | Precio de costo | `850.00` |
+| `sales_price` | decimal | | Precio de venta | `1200.00` |
+| `tax_info` | object | | Información de impuestos | `{}` |
+| `tax_info.tax_code` | string | | Código de impuesto | `"STD"` |
+| `tax_info.tax_rate` | decimal | | Tasa de impuesto | `0.07` |
+| `tax_info.taxable` | boolean | | Es gravable | `true` |
+| `inventory` | object | | Información de inventario | `{}` |
+| `inventory.current_stock` | decimal | | Stock actual | `25.00` |
+| `inventory.minimum_stock` | decimal | | Stock mínimo | `5.00` |
+| `inventory.maximum_stock` | decimal | | Stock máximo | `100.00` |
+| `accounting` | object | | Cuentas contables | `{}` |
+| `accounting.income_account` | string | | Cuenta de ingresos | `"4100"` |
+| `accounting.expense_account` | string | | Cuenta de gastos | `"5100"` |
+| `accounting.inventory_account` | string | | Cuenta de inventario | `"1300"` |
+| `supplier` | object | | Información del proveedor | `{}` |
+| `supplier.vendor_id` | string | | ID del proveedor principal | `"VENDOR001"` |
+| `supplier.supplier_code` | string | | Código del proveedor | `"DELL-INSP-15"` |
+| `dimensions` | object | | Dimensiones del producto | `{}` |
+| `dimensions.length` | decimal | | Largo | `35.5` |
+| `dimensions.width` | decimal | | Ancho | `24.0` |
+| `dimensions.height` | decimal | | Alto | `2.5` |
+| `dimensions.weight` | decimal | | Peso | `2.1` |
+| `active` | boolean | | Estado activo (default: true) | `true` |
 
 ### Tipos de Producto Válidos
 
@@ -403,17 +403,17 @@ Todos los campos son opcionales. Solo se actualizarán los campos enviados.
 
 | Campo | Tipo | Requerido | Descripción | Ejemplo |
 |-------|------|-----------|-------------|---------|
-| `adjustment_number` | string | ✅ | Número de ajuste | `"ADJ-2025-001"` |
-| `date` | string | ✅ | Fecha del ajuste (YYYY-MM-DD) | `"2025-01-29"` |
-| `reason` | string | ✅ | Razón del ajuste | `"Physical count adjustment"` |
-| `reference` | string | ❌ | Referencia adicional | `"COUNT-2025-01"` |
-| `items` | array | ✅ | Lista de ajustes por producto | `[]` |
-| `items[].product_code` | string | ✅ | Código del producto | `"PROD001"` |
-| `items[].current_quantity` | decimal | ✅ | Cantidad actual en sistema | `25.00` |
-| `items[].physical_quantity` | decimal | ✅ | Cantidad física contada | `23.00` |
-| `items[].adjustment_quantity` | decimal | ✅ | Cantidad de ajuste (+/-) | `-2.00` |
-| `items[].unit_cost` | decimal | ❌ | Costo unitario | `850.00` |
-| `items[].reason` | string | ❌ | Razón específica del item | `"Damaged units"` |
+| `adjustment_number` | string | | Número de ajuste | `"ADJ-2025-001"` |
+| `date` | string | | Fecha del ajuste (YYYY-MM-DD) | `"2025-01-29"` |
+| `reason` | string | | Razón del ajuste | `"Physical count adjustment"` |
+| `reference` | string | | Referencia adicional | `"COUNT-2025-01"` |
+| `items` | array | | Lista de ajustes por producto | `[]` |
+| `items[].product_code` | string | | Código del producto | `"PROD001"` |
+| `items[].current_quantity` | decimal | | Cantidad actual en sistema | `25.00` |
+| `items[].physical_quantity` | decimal | | Cantidad física contada | `23.00` |
+| `items[].adjustment_quantity` | decimal | | Cantidad de ajuste (+/-) | `-2.00` |
+| `items[].unit_cost` | decimal | | Costo unitario | `850.00` |
+| `items[].reason` | string | | Razón específica del item | `"Damaged units"` |
 
 ### Ejemplo de Request
 

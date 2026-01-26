@@ -63,10 +63,10 @@ GOOGLE_DOCUMENT_AI_PROCESSOR_ID=abc123def456  # Tu nuevo processor ID
 ## Opción 2: Post-Procesamiento Mejorado (Implementado)
 
 Ya implementamos patrones regex que extraen del texto OCR:
-- ✅ Número de factura: `COMPRA Nro.60825`
-- ✅ RUC: `155764420-2-2025`
-- ✅ Nombre proveedor: Detecta S.A., S.R.L., etc.
-- ✅ Totales: `Total Operación: B/.285.00`
+- Número de factura: `COMPRA Nro.60825`
+- RUC: `155764420-2-2025`
+- Nombre proveedor: Detecta S.A., S.R.L., etc.
+- Totales: `Total Operación: B/.285.00`
 
 ### Mejoras Adicionales Posibles
 

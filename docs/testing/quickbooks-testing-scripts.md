@@ -2,7 +2,7 @@
 
 Scripts de prueba completos para validar la integración con QuickBooks Online, específicamente el sistema de cálculo de impuestos ITBMS.
 
-## 📋 Scripts Disponibles
+## Scripts Disponibles
 
 ### 1. `test-qb-tax-validation.php`
 **Propósito**: Validación simplificada de cálculos de impuestos  
@@ -39,12 +39,12 @@ Scripts de prueba completos para validar la integración con QuickBooks Online, 
 **Uso**: `./docs/testing/test-qb-flow.sh [organization_id]`  
 **Descripción**: Ejecuta múltiples validaciones QB con un solo comando.
 
-### 8. `test-intuit-tax-codes.php` 🆕
+### 8. `test-intuit-tax-codes.php` 
 **Propósito**: Testing de códigos de impuesto en UpdateIntuitOrdersJob  
 **Uso**: `docker exec -it docucenter_laravel.test php docs/testing/test-intuit-tax-codes.php`  
 **Descripción**: Valida la función determineTaxCode con múltiples escenarios de tasas ITBMS.
 
-## 🎯 Casos de Uso
+## Casos de Uso
 
 ### Testing Básico de Impuestos
 ```bash
@@ -73,7 +73,7 @@ php docs/testing/test-qb-invoice-creation-flow.php
 php docs/testing/test-qb-request-processing.php
 ```
 
-## 🔧 Configuración Requerida
+## Configuración Requerida
 
 ### Variables de Entorno
 ```env
@@ -91,7 +91,7 @@ DB_DATABASE=nombre_bd_principal
 - **Items QB**: Scripts usan item ID `48` (PUBLICIDAD EN PANTALLAS)
 - **Cliente QB**: Scripts usan cliente ID `1440` (ANUAR MATA)
 
-## 📊 Resultados Esperados
+## Resultados Esperados
 
 ### Cálculos de Impuestos Correctos
 - **Subtotal**: $100.00
@@ -99,10 +99,10 @@ DB_DATABASE=nombre_bd_principal
 - **Total**: $107.00
 
 ### Estados de Validación
-- ✅ **CORRECTO**: Cálculos coinciden con valores esperados
-- ❌ **INCORRECTO**: Discrepancias en cálculos (problema identificado)
+- **CORRECTO**: Cálculos coinciden con valores esperados
+- **INCORRECTO**: Discrepancias en cálculos (problema identificado)
 
-## 🚀 Resolución de Problemas
+## Resolución de Problemas
 
 ### Problema Original
 **Síntoma**: Impuestos se almacenaban como $0.00 en lugar de $7.00  
@@ -114,7 +114,7 @@ DB_DATABASE=nombre_bd_principal
 2. **test-qb-tax-real-data.php** - Validar cálculos con datos reales
 3. **test-qb-online-service.php** - Confirmar almacenamiento correcto
 
-## 📝 Notas de Implementación
+## Notas de Implementación
 
 ### Datos QB Multi-Fuente
 Los scripts validan múltiples fuentes de datos fiscales:
@@ -129,17 +129,17 @@ Lista de campos QB protegidos en validación:
 - Line items: `Amount`, `DetailType`, `SalesItemLineDetail`
 - Tax fields: `TotalTax`, `TaxLine`, `TaxCode`, `rateValue`
 
-## 🔄 Flujo de Testing Recomendado
+## Flujo de Testing Recomendado
 
 1. **Validación Básica**: `test-qb-tax-validation.php`
 2. **Datos Reales**: `test-qb-tax-real-data.php`
 3. **Flujo Completo**: `test-qb-invoice-creation-flow.php`
 4. **Diagnóstico**: `test-qb-request-processing.php` (si hay problemas)
 
-## 🎉 Estado Actual
+## Estado Actual
 
-**✅ RESUELTO**: Los impuestos ITBMS se calculan y almacenan correctamente  
-**✅ VALIDADO**: Scripts confirman funcionalidad end-to-end  
-**✅ DOCUMENTADO**: Casos de uso y procedimientos completos  
+**RESUELTO**: Los impuestos ITBMS se calculan y almacenan correctamente  
+**VALIDADO**: Scripts confirman funcionalidad end-to-end  
+**DOCUMENTADO**: Casos de uso y procedimientos completos  
 
 Todos los scripts están listos para uso en testing y debugging de la integración QuickBooks.

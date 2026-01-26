@@ -1,6 +1,6 @@
 # Resumen Ejecutivo - Comandos NO Incluidos en Kernel
 
-## 📊 Vista General
+## Vista General
 
 **Total de comandos analizados**: 91
 **Comandos en Kernel (automatizados)**: 19 (21%)
@@ -8,9 +8,9 @@
 
 ---
 
-## 🎯 Comandos por Categoría (NO incluidos en Kernel)
+## Comandos por Categoría (NO incluidos en Kernel)
 
-### 🔍 1. DIAGNÓSTICO Y DEBUG (32 comandos - 44%)
+### 1. DIAGNÓSTICO Y DEBUG (32 comandos - 44%)
 
 #### Análisis de Facturas (5 comandos)
 ```bash
@@ -67,7 +67,7 @@ php artisan testing:test-lightspeed-credit-note
 
 ---
 
-### 🏢 2. INTEGRACIONES EMPRESARIALES (8 comandos - 11%)
+### 2. INTEGRACIONES EMPRESARIALES (8 comandos - 11%)
 
 #### Zoho
 ```bash
@@ -123,7 +123,7 @@ php artisan app:create-credit-notes-summary
 
 ---
 
-### 🗄️ 4. CONFIGURACIÓN Y MANTENIMIENTO (5 comandos - 7%)
+### 🗄4. CONFIGURACIÓN Y MANTENIMIENTO (5 comandos - 7%)
 
 ```bash
 php artisan config:alter-column-increment
@@ -135,7 +135,7 @@ php artisan config:remove-column-to-organizations-table
 
 ---
 
-### 📊 5. ANÁLISIS Y REPORTES (1 comando - 1%)
+### 5. ANÁLISIS Y REPORTES (1 comando - 1%)
 
 ```bash
 php artisan app:panama-daily-entry
@@ -143,7 +143,7 @@ php artisan app:panama-daily-entry
 
 ---
 
-## 🎯 Comandos Candidatos para Automatización
+## Comandos Candidatos para Automatización
 
 ### Alta Prioridad
 ```bash
@@ -168,7 +168,7 @@ php artisan app:analyze-lightspeed-credit-note
 
 ---
 
-## ⚠️ Comandos de Solo Ejecución Manual
+## Comandos de Solo Ejecución Manual
 
 ### Testing y Debug
 - Todos los comandos en `testing:*`
@@ -185,7 +185,7 @@ php artisan app:analyze-lightspeed-credit-note
 
 ---
 
-## 📋 Lista de Verificación para Automatización
+## Lista de Verificación para Automatización
 
 Antes de agregar un comando al Kernel, verificar:
 
@@ -197,7 +197,7 @@ Antes de agregar un comando al Kernel, verificar:
 
 ---
 
-## 🔗 Referencias
+## Referencias
 
 - **Documentación completa**: [comandos-no-incluidos-kernel-por-operacion.md](./comandos-no-incluidos-kernel-por-operacion.md)
 - **Comandos en Kernel**: [kernel-commands-verification-checklist.md](./kernel-commands-verification-checklist.md)

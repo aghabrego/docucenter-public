@@ -1,11 +1,11 @@
 # Análisis de Error: "datosFacturaExportacion es requerido" - QuickBooks Export
 
-## 🚨 Error Identificado
+## Error Identificado
 **Mensaje**: "El campo datosFacturaExportacion es requerido"  
 **Contexto**: Factura de exportación para cliente extranjero (Guatemala)  
 **Causa**: Faltan campos obligatorios de exportación según DGI Panamá
 
-## 📋 Objeto QuickBooks Analizado
+## Objeto QuickBooks Analizado
 ```json
 {
   "Line": [{"Amount": 107, "DetailType": "SalesItemLineDetail"}],
@@ -16,7 +16,7 @@
 }
 ```
 
-## 🔍 Análisis Técnico
+## Análisis Técnico
 
 ### Clasificación del Documento
 - **Tipo de Documento**: 03 (Factura de Exportación)
@@ -24,29 +24,29 @@
 - **País Destino**: Guatemala (extranjero)
 - **Moneda**: USD
 
-### ❌ Campos Faltantes Obligatorios
+### Campos Faltantes Obligatorios
 
 #### **Estructura gFExp Requerida (datosFacturaExportacion)**
 ```php
 'gFExp' => [
-    'cCondEntr' => null,        // ❌ INCOTERM FALTANTE (OBLIGATORIO)
-    'cMoneda' => 'USD',         // ✅ Moneda disponible
-    'dCambio' => null,          // ❌ Tipo cambio FALTANTE
-    'dVTotEst' => '107.00',     // ✅ Monto disponible
-    'dPuertoEmbarq' => null     // ❌ Puerto embarque FALTANTE
+    'cCondEntr' => null,        // INCOTERM FALTANTE (OBLIGATORIO)
+    'cMoneda' => 'USD',         // Moneda disponible
+    'dCambio' => null,          // Tipo cambio FALTANTE
+    'dVTotEst' => '107.00',     // Monto disponible
+    'dPuertoEmbarq' => null     // Puerto embarque FALTANTE
 ]
 ```
 
 #### **Campos Adicionales de Exportación**
 ```php
-'paisOrigenMercancia' => null,      // ❌ B507 - País origen FALTANTE
-'paisDestinoMercancia' => 'GT',     // ✅ Guatemala (extraible de BillAddr)
-'terminalEmbarque' => null,         // ❌ B509 - Terminal FALTANTE
-'numeroContenedor' => null,         // ❌ B510 - Contenedor FALTANTE
-'pesoTotalMercancia' => null        // ❌ B511 - Peso FALTANTE
+'paisOrigenMercancia' => null,      // B507 - País origen FALTANTE
+'paisDestinoMercancia' => 'GT',     // Guatemala (extraible de BillAddr)
+'terminalEmbarque' => null,         // B509 - Terminal FALTANTE
+'numeroContenedor' => null,         // B510 - Contenedor FALTANTE
+'pesoTotalMercancia' => null        // B511 - Peso FALTANTE
 ```
 
-## 🔧 Soluciones Propuestas
+## Soluciones Propuestas
 
 ### **Opción 1: Valores por Defecto (Recomendada)**
 ```php
@@ -88,7 +88,7 @@ private function mapQuickBooksToExport($qbInvoice) {
 }
 ```
 
-## 📝 Validaciones DGI Aplicables
+## Validaciones DGI Aplicables
 
 ### **Para Tipo 03 (Exportación)**
 ```php
@@ -104,7 +104,7 @@ $rules = [
 ];
 ```
 
-## 🎯 Implementación Inmediata
+## Implementación Inmediata
 
 ### **1. Modificar QuickBooksContactValidator.php**
 ```php
@@ -159,16 +159,16 @@ class ExportValidationHelper {
 }
 ```
 
-## 🏆 Resultado Esperado
+## Resultado Esperado
 
 Después de implementar las correcciones:
 
-✅ **Facturas de QuickBooks con clientes extranjeros** procesarán correctamente  
-✅ **Campos de exportación obligatorios** se completarán automáticamente  
-✅ **Validación DGI** pasará sin errores  
-✅ **PAC Alanube** aceptará la estructura completa  
+**Facturas de QuickBooks con clientes extranjeros** procesarán correctamente  
+**Campos de exportación obligatorios** se completarán automáticamente  
+**Validación DGI** pasará sin errores  
+**PAC Alanube** aceptará la estructura completa  
 
-## 📚 Referencias Técnicas
+## Referencias Técnicas
 
 - **Ficha Técnica DGI**: Campos B50x (exportación) obligatorios para tipo 03
 - **Documentación DocuCenter**: `/docs/technical/panama-document-conditional-fields-mapping.md`

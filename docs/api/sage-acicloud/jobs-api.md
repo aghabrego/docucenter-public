@@ -9,20 +9,20 @@
 
 ### Características del Endpoint
 
-- ✅ **Filtrado Avanzado**: Múltiples filtros y operadores
-- ✅ **Paginación**: Resultados paginados automáticamente
-- ✅ **Ordenamiento**: Ordenar por cualquier campo
-- ✅ **Multi-tenant**: Respeta el contexto de organización activa
+- **Filtrado Avanzado**: Múltiples filtros y operadores
+- **Paginación**: Resultados paginados automáticamente
+- **Ordenamiento**: Ordenar por cualquier campo
+- **Multi-tenant**: Respeta el contexto de organización activa
 
 ### Parámetros de Query (Opcionales)
 
 | Parámetro | Tipo | Requerido | Descripción | Ejemplo |
 |-----------|------|-----------|-------------|---------|
-| `page` | integer | ❌ | Página a obtener | `2` |
-| `per_page` | integer | ❌ | Registros por página (máx 100) | `50` |
-| `sort` | string | ❌ | Campo para ordenar | `"start_date"` |
-| `order` | string | ❌ | Dirección del ordenamiento | `"desc"` |
-| `filter` | object | ❌ | Filtros aplicados | `{}` |
+| `page` | integer | | Página a obtener | `2` |
+| `per_page` | integer | | Registros por página (máx 100) | `50` |
+| `sort` | string | | Campo para ordenar | `"start_date"` |
+| `order` | string | | Dirección del ordenamiento | `"desc"` |
+| `filter` | object | | Filtros aplicados | `{}` |
 
 ### Respuesta de Éxito
 
@@ -86,33 +86,33 @@
 
 | Campo | Tipo | Requerido | Descripción | Ejemplo |
 |-------|------|-----------|-------------|---------|
-| `job_number` | string | ✅ | Número único del trabajo | `"JOB-2025-001"` |
-| `job_name` | string | ✅ | Nombre del trabajo | `"Instalación Sistema ERP Cliente ABC"` |
-| `customer_id` | string | ✅ | ID del cliente | `"CUST001"` |
-| `type` | string | ✅ | Tipo de trabajo | `"service"` |
-| `priority` | string | ❌ | Prioridad del trabajo | `"high"` |
-| `status` | string | ❌ | Estado inicial | `"planned"` |
-| `description` | string | ❌ | Descripción detallada | `"Implementación completa de ERP"` |
-| `start_date` | string | ✅ | Fecha de inicio (YYYY-MM-DD) | `"2025-01-15"` |
-| `end_date` | string | ✅ | Fecha de finalización | `"2025-02-28"` |
-| `estimated_completion` | string | ❌ | Fecha estimada de completación | `"2025-02-15"` |
-| `budget` | object | ❌ | Presupuesto del trabajo | `{}` |
-| `budget.estimated_cost` | decimal | ❌ | Costo estimado | `15000.00` |
-| `budget.estimated_revenue` | decimal | ❌ | Ingresos estimados | `25000.00` |
-| `team` | object | ❌ | Equipo de trabajo | `{}` |
-| `team.project_manager` | string | ❌ | Gerente del proyecto | `"Juan Pérez"` |
-| `team.members` | array | ❌ | Miembros del equipo | `[]` |
-| `team.members[].name` | string | ❌ | Nombre del miembro | `"María González"` |
-| `team.members[].role` | string | ❌ | Rol del miembro | `"Developer"` |
-| `team.members[].hours_allocated` | integer | ❌ | Horas asignadas | `120` |
-| `location` | object | ❌ | Ubicación del trabajo | `{}` |
-| `location.address` | string | ❌ | Dirección | `"Calle 50, Torre Global Bank"` |
-| `location.city` | string | ❌ | Ciudad | `"Ciudad de Panamá"` |
-| `location.province` | string | ❌ | Provincia | `"Panamá"` |
-| `milestones` | array | ❌ | Hitos del proyecto | `[]` |
-| `milestones[].name` | string | ❌ | Nombre del hito | `"Phase 1 Complete"` |
-| `milestones[].date` | string | ❌ | Fecha del hito | `"2025-01-30"` |
-| `milestones[].description` | string | ❌ | Descripción del hito | `"Configuration completed"` |
+| `job_number` | string | | Número único del trabajo | `"JOB-2025-001"` |
+| `job_name` | string | | Nombre del trabajo | `"Instalación Sistema ERP Cliente ABC"` |
+| `customer_id` | string | | ID del cliente | `"CUST001"` |
+| `type` | string | | Tipo de trabajo | `"service"` |
+| `priority` | string | | Prioridad del trabajo | `"high"` |
+| `status` | string | | Estado inicial | `"planned"` |
+| `description` | string | | Descripción detallada | `"Implementación completa de ERP"` |
+| `start_date` | string | | Fecha de inicio (YYYY-MM-DD) | `"2025-01-15"` |
+| `end_date` | string | | Fecha de finalización | `"2025-02-28"` |
+| `estimated_completion` | string | | Fecha estimada de completación | `"2025-02-15"` |
+| `budget` | object | | Presupuesto del trabajo | `{}` |
+| `budget.estimated_cost` | decimal | | Costo estimado | `15000.00` |
+| `budget.estimated_revenue` | decimal | | Ingresos estimados | `25000.00` |
+| `team` | object | | Equipo de trabajo | `{}` |
+| `team.project_manager` | string | | Gerente del proyecto | `"Juan Pérez"` |
+| `team.members` | array | | Miembros del equipo | `[]` |
+| `team.members[].name` | string | | Nombre del miembro | `"María González"` |
+| `team.members[].role` | string | | Rol del miembro | `"Developer"` |
+| `team.members[].hours_allocated` | integer | | Horas asignadas | `120` |
+| `location` | object | | Ubicación del trabajo | `{}` |
+| `location.address` | string | | Dirección | `"Calle 50, Torre Global Bank"` |
+| `location.city` | string | | Ciudad | `"Ciudad de Panamá"` |
+| `location.province` | string | | Provincia | `"Panamá"` |
+| `milestones` | array | | Hitos del proyecto | `[]` |
+| `milestones[].name` | string | | Nombre del hito | `"Phase 1 Complete"` |
+| `milestones[].date` | string | | Fecha del hito | `"2025-01-30"` |
+| `milestones[].description` | string | | Descripción del hito | `"Configuration completed"` |
 
 ### Tipos de Trabajo Válidos
 

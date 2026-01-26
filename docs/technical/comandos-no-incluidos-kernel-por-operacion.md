@@ -1,6 +1,6 @@
 # Comandos NO Incluidos en el Kernel - Organizados por Tipo de Operación
 
-## 📋 Resumen
+## Resumen
 
 Este documento categoriza todos los comandos **NO incluidos** en el Kernel (`app/Console/Kernel.php`) por tipo de operación. Estos comandos están disponibles para ejecución manual o programática según necesidades específicas.
 
@@ -29,7 +29,7 @@ Los siguientes comandos YA están incluidos en el scheduler automático:
 
 ---
 
-## 🔍 1. DIAGNÓSTICO Y DEBUG (32 comandos)
+## 1. DIAGNÓSTICO Y DEBUG (32 comandos)
 
 ### Comandos de Análisis de Facturas
 - **`app:diagnose-kart-invoice`** - Diagnóstico detallado de facturas Kart
@@ -92,7 +92,7 @@ Los siguientes comandos YA están incluidos en el scheduler automático:
 
 ---
 
-## 🏢 2. INTEGRACIONES EMPRESARIALES (8 comandos)
+## 2. INTEGRACIONES EMPRESARIALES (8 comandos)
 
 ### Zoho Integration
 - **`app:test-zoho-connection`** - Testing de conexión con Zoho Books API
@@ -140,7 +140,7 @@ Los siguientes comandos YA están incluidos en el scheduler automático:
 
 ---
 
-## 🗄️ 4. CONFIGURACIÓN Y MANTENIMIENTO (5 comandos)
+## 🗄4. CONFIGURACIÓN Y MANTENIMIENTO (5 comandos)
 
 ### Configuración de Base de Datos
 - **`config:alter-column-increment`** - Alterar columnas con auto-incremento
@@ -151,7 +151,7 @@ Los siguientes comandos YA están incluidos en el scheduler automático:
 
 ---
 
-## 📊 5. ANÁLISIS Y REPORTES (1 comando)
+## 5. ANÁLISIS Y REPORTES (1 comando)
 
 ### Análisis de Datos Específicos
 - **`app:panama-daily-entry`** - Análisis de entradas diarias de Panamá
@@ -164,7 +164,7 @@ Los comandos de testing están centralizados en el directorio `app/Console/Comma
 
 ---
 
-## 📈 Estadísticas de Comandos
+## Estadísticas de Comandos
 
 - **Total de comandos en el proyecto**: 91
 - **Comandos incluidos en Kernel**: 19 (21%)
@@ -180,7 +180,7 @@ Los comandos de testing están centralizados en el directorio `app/Console/Comma
 
 ---
 
-## 🎯 Recomendaciones
+## Recomendaciones
 
 ### Comandos Candidatos para Automatización
 Los siguientes comandos podrían considerarse para inclusión en el Kernel según necesidades específicas:
@@ -197,7 +197,7 @@ Los comandos de configuración de BD deben ejecutarse solo cuando sea necesario 
 
 ---
 
-## 📝 Notas de Implementación
+## Notas de Implementación
 
 - Todos los comandos de testing están centralizados en `Testing/` para mejor organización
 - Los comandos de configuración modifican estructura de BD y requieren cuidado especial

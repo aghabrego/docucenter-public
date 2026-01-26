@@ -18,54 +18,54 @@ Crea y emite una factura electrónica basada en datos provenientes de Maxgym (si
 
 | Campo | Tipo | Requerido | Descripción |
 |-------|------|-----------|-------------|
-| `idEvent` | string | ✅ | ID único del evento (UUID) |
-| `dateCreated` | string | ✅ | Fecha de creación (ISO 8601) |
-| `eventType` | string | ✅ | Tipo de evento ("payment.succeeded") |
+| `idEvent` | string | | ID único del evento (UUID) |
+| `dateCreated` | string | | Fecha de creación (ISO 8601) |
+| `eventType` | string | | Tipo de evento ("payment.succeeded") |
 
 #### Datos de la Transacción
 
 | Campo | Tipo | Requerido | Descripción |
 |-------|------|-----------|-------------|
-| `data.id` | string | ✅ | ID único de la transacción |
-| `data.idMember` | string | ✅ | ID del miembro/cliente |
-| `data.status` | integer | ✅ | Estado del pago (1 = approved) |
-| `data.statusName` | string | ✅ | Nombre del estado |
-| `data.paymentDate` | string | ✅ | Fecha de pago (ISO 8601) |
-| `data.transactionDate` | string | ✅ | Fecha de transacción |
-| `data.basePrice` | string | ✅ | Precio base |
-| `data.price` | string | ✅ | Precio final |
-| `data.discount` | number | ✅ | Descuento aplicado |
-| `data.units` | integer | ✅ | Cantidad de unidades |
+| `data.id` | string | | ID único de la transacción |
+| `data.idMember` | string | | ID del miembro/cliente |
+| `data.status` | integer | | Estado del pago (1 = approved) |
+| `data.statusName` | string | | Nombre del estado |
+| `data.paymentDate` | string | | Fecha de pago (ISO 8601) |
+| `data.transactionDate` | string | | Fecha de transacción |
+| `data.basePrice` | string | | Precio base |
+| `data.price` | string | | Precio final |
+| `data.discount` | number | | Descuento aplicado |
+| `data.units` | integer | | Cantidad de unidades |
 
 #### Datos del Miembro/Cliente
 
 | Campo | Tipo | Requerido | Descripción |
 |-------|------|-----------|-------------|
-| `data.member.name` | string | ✅ | Nombre del cliente |
-| `data.member.lastName` | string | ✅ | Apellido del cliente |
-| `data.member.email` | string | ✅ | Email del cliente |
-| `data.member.documentNumber` | string | ✅ | Número de documento/RUC |
-| `data.member.address` | string | ❌ | Dirección del cliente |
-| `data.member.cp` | string | ❌ | Código postal |
-| `data.member.countryCode` | string | ❌ | Código del país |
+| `data.member.name` | string | | Nombre del cliente |
+| `data.member.lastName` | string | | Apellido del cliente |
+| `data.member.email` | string | | Email del cliente |
+| `data.member.documentNumber` | string | | Número de documento/RUC |
+| `data.member.address` | string | | Dirección del cliente |
+| `data.member.cp` | string | | Código postal |
+| `data.member.countryCode` | string | | Código del país |
 
 #### Líneas/Productos
 
 | Campo | Tipo | Requerido | Descripción |
 |-------|------|-----------|-------------|
-| `data.lines[].idProduct` | string | ✅ | ID del producto/servicio |
-| `data.lines[].name` | string | ✅ | Nombre del producto |
-| `data.lines[].price` | string | ✅ | Precio del producto |
+| `data.lines[].idProduct` | string | | ID del producto/servicio |
+| `data.lines[].name` | string | | Nombre del producto |
+| `data.lines[].price` | string | | Precio del producto |
 
 #### Método de Pago
 
 | Campo | Tipo | Requerido | Descripción |
 |-------|------|-----------|-------------|
-| `data.paymentMethod.name` | string | ❌ | Nombre del método |
-| `data.paymentMethod.last4` | string | ❌ | Últimos 4 dígitos (tarjetas) |
-| `data.paymentMethod.brand` | string | ❌ | Marca de la tarjeta |
-| `data.paymentMethod.type` | integer | ✅ | Tipo de pago (2 = card) |
-| `data.paymentMethod.typeName` | string | ✅ | Nombre del tipo |
+| `data.paymentMethod.name` | string | | Nombre del método |
+| `data.paymentMethod.last4` | string | | Últimos 4 dígitos (tarjetas) |
+| `data.paymentMethod.brand` | string | | Marca de la tarjeta |
+| `data.paymentMethod.type` | integer | | Tipo de pago (2 = card) |
+| `data.paymentMethod.typeName` | string | | Nombre del tipo |
 
 ### Ejemplo de Request (Basado en Test)
 

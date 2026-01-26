@@ -1,15 +1,15 @@
 # Guía de Entrenamiento de Document AI - Workflow Completo
 
-## 📋 Resumen Ejecutivo
+## Resumen Ejecutivo
 
 Este sistema permite entrenar un modelo custom de Google Document AI para extraer datos de facturas panameñas automáticamente, usando una interfaz web en DocuCenter.
 
-**Estado actual**: ✅ Sistema funcional y optimizado
+**Estado actual**: Sistema funcional y optimizado
 **Última actualización**: 26 de noviembre de 2025
 
 ---
 
-## 🎯 ¿Qué hace este sistema?
+## ¿Qué hace este sistema?
 
 1. **Sube PDFs** de facturas a DocuCenter
 2. **Anota manualmente** los campos importantes (vendor, tax ID, totales, etc.)
@@ -19,7 +19,7 @@ Este sistema permite entrenar un modelo custom de Google Document AI para extrae
 
 ---
 
-## 🚀 Workflow Paso a Paso
+## Workflow Paso a Paso
 
 ### Paso 1: Subir Documentos (DocuCenter)
 
@@ -73,13 +73,13 @@ Este sistema permite entrenar un modelo custom de Google Document AI para extrae
 **Cuándo hacer esto**: Cuando tengas 20+ documentos anotados
 
 1. Verificar en el panel de estadísticas:
-   - ✅ "Annotated" debe ser ≥ 20
-   - ⚠️ "Pending JSON" muestra cuántos faltan por generar
+   - "Annotated" debe ser ≥ 20
+   - "Pending JSON" muestra cuántos faltan por generar
 
 2. Click en botón **"Generate JSON Files (X)"**
 
 3. El sistema ejecuta en **segundo plano** (Job):
-   - Verifica qué PDFs ya están en GCS (no los sube de nuevo) ⚡
+   - Verifica qué PDFs ya están en GCS (no los sube de nuevo) 
    - Sube PDFs nuevos a GCS
    - Procesa cada PDF con OCR de Document AI
    - Mapea cada anotación a su posición exacta en el texto
@@ -95,7 +95,7 @@ Este sistema permite entrenar un modelo custom de Google Document AI para extrae
    - Verás un alert con el estado:
      - "QUEUED" → Job iniciado
      - "GENERATING" → Procesando X/Y documentos
-     - "COMPLETED" → ✅ Listos para importar
+     - "COMPLETED" → Listos para importar
 
 6. **Al completar**, verás:
    - Ruta GCS donde están los JSONs
@@ -105,7 +105,7 @@ Este sistema permite entrenar un modelo custom de Google Document AI para extrae
 
 ### Paso 4: Importar en Google Cloud Workbench (Manual)
 
-**⚠️ IMPORTANTE**: Este paso se hace en Google Cloud Console, NO en DocuCenter
+**IMPORTANTE**: Este paso se hace en Google Cloud Console, NO en DocuCenter
 
 #### 4.1 Acceder a Workbench
 
@@ -121,38 +121,38 @@ Este sistema permite entrenar un modelo custom de Google Document AI para extrae
 
 3. **Configuración de la importación**:
    
-   **📁 Ruta de acceso fuente**:
+   ** Ruta de acceso fuente**:
    ```
    gs://docucenter-aci-document-ai-training/training-pdfs/
    ```
-   ⚠️ **MUY IMPORTANTE**: Usar la carpeta de PDFs, NO la carpeta `json/`
+   **MUY IMPORTANTE**: Usar la carpeta de PDFs, NO la carpeta `json/`
    
-   **📊 División de datos** (Dataset split):
+   **División de datos** (Dataset split):
    - **Training**: 80%
    - **Test**: 20%
    
-   **🏷️ Etiquetado automático**:
-   - ✅ **Activar** "Importar con etiquetado automático"
+   **🏷Etiquetado automático**:
+   - **Activar** "Importar con etiquetado automático"
    - Esto usará los archivos JSON para etiquetar los PDFs automáticamente
 
 4. Click **"Import"** (botón al final del formulario)
 
 #### 4.3 Esperar Importación
 
-- ⏱️ **Tiempo**: 5-15 minutos dependiendo de cantidad
-- 📊 **Progreso**: Verás una barra de progreso en Workbench
-- ✅ **Status**: Verificar que los documentos aparezcan en la lista con sus etiquetas
+- ⏱**Tiempo**: 5-15 minutos dependiendo de cantidad
+- **Progreso**: Verás una barra de progreso en Workbench
+- **Status**: Verificar que los documentos aparezcan en la lista con sus etiquetas
 
 #### 4.4 Verificar Documentos Importados
 
 1. Los documentos deben aparecer en la lista de Workbench
 2. Cada documento debe mostrar:
-   - ✅ Thumbnail del PDF
-   - ✅ Etiquetas aplicadas (vendor_name, invoice_number, etc.)
-   - ✅ Estado "Labeled" o "Etiquetado"
+   - Thumbnail del PDF
+   - Etiquetas aplicadas (vendor_name, invoice_number, etc.)
+   - Estado "Labeled" o "Etiquetado"
 3. Verifica que el conteo sea correcto (21 documentos en tu caso)
 
-**⚠️ Nota sobre la estructura de carpetas**:
+**Nota sobre la estructura de carpetas**:
 - Google Cloud Workbench busca los PDFs en la ruta que especifiques
 - Automáticamente busca archivos JSON con el mismo nombre en la carpeta `json/`
 - **Ejemplo**: 
@@ -163,7 +163,7 @@ Este sistema permite entrenar un modelo custom de Google Document AI para extrae
 
 ### Paso 5: Entrenar Modelo (Google Cloud Console)
 
-**⚠️ Este paso también es manual en Google Cloud**
+**Este paso también es manual en Google Cloud**
 
 #### 5.1 Iniciar Training
 
@@ -178,9 +178,9 @@ Este sistema permite entrenar un modelo custom de Google Document AI para extrae
 
 #### 5.2 Esperar Training
 
-- ⏱️ **Duración**: 1-3 horas típicamente
-- 📊 **Progreso**: Visible en Google Cloud Console
-- 🔔 **Notificación**: Email cuando termine
+- ⏱**Duración**: 1-3 horas típicamente
+- **Progreso**: Visible en Google Cloud Console
+- **Notificación**: Email cuando termine
 
 #### 5.3 Validar Resultados
 
@@ -191,62 +191,62 @@ Este sistema permite entrenar un modelo custom de Google Document AI para extrae
 
 ---
 
-## 📊 Panel de Estadísticas Explicado
+## Panel de Estadísticas Explicado
 
-### 🔵 Total Documents
+### Total Documents
 - **Qué es**: Total de PDFs subidos
 - **Acción**: Ninguna
 
-### ✅ Annotated
+### Annotated
 - **Qué es**: Documentos con anotaciones completas
 - **Meta**: ≥ 20 para entrenar
 - **Acción**: Anotar más documentos
 
-### ☁️ PDFs in GCS
+### ☁PDFs in GCS
 - **Qué es**: PDFs ya subidos a Google Cloud
 - **Optimización**: No se suben de nuevo (ahorra tiempo y $)
 - **Acción**: Ninguna
 
-### 📄 JSON Generated
+###  JSON Generated
 - **Qué es**: JSONs con anotaciones ya en GCS
 - **Estado**: Listos para importar en Workbench
 - **Acción**: Importar en Google Cloud Console
 
-### ⏰ Pending JSON
+###  Pending JSON
 - **Qué es**: Documentos anotados sin JSON generado
 - **Acción**: Click "Generate JSON Files"
 
-### 🏆 Training Status
+### Training Status
 - **Listo**: ≥ 20 anotados
 - **Pendiente**: Muestra cuántos faltan
 
 ---
 
-## 🔧 Optimizaciones Implementadas
+## Optimizaciones Implementadas
 
-### 1. **Control de Subidas Duplicadas** ✅
+### 1. **Control de Subidas Duplicadas** 
 - Los PDFs ya subidos a GCS NO se suben de nuevo
 - Se guarda `gcs_pdf_uri` en base de datos
 - Ahorra bandwidth y tiempo
 
-### 2. **Procesamiento en Background** ✅
+### 2. **Procesamiento en Background** 
 - Generación de JSON usa Laravel Jobs
 - No bloquea la interfaz de usuario
 - Progreso visible en tiempo real
 
-### 3. **Tracking de Estado** ✅
+### 3. **Tracking de Estado** 
 - Saber qué documentos están en cada etapa
 - Badges visuales: "Annotated", "En GCS", "JSON"
 - Estadísticas actualizadas en tiempo real
 
-### 4. **Mapeo Inteligente de Texto** ✅
+### 4. **Mapeo Inteligente de Texto** 
 - Busca cada valor en el texto OCR
 - Genera `textAnchor` con posición exacta
 - Permite a Document AI aprender ubicaciones
 
 ---
 
-## ⚙️ Configuración Técnica
+## Configuración Técnica
 
 ### Base de Datos
 
@@ -308,7 +308,7 @@ php artisan queue:work redis --timeout=3600 --tries=3
 
 ---
 
-## 🐛 Troubleshooting
+## Troubleshooting
 
 ### Problema: "No hay documentos pendientes de generar JSON"
 
@@ -357,7 +357,7 @@ docker exec -it docucenter_laravel.test supervisorctl status
 
 ---
 
-## 📝 Comandos Útiles
+## Comandos Útiles
 
 ### Generar JSONs por línea de comandos
 
@@ -385,25 +385,25 @@ php artisan queue:listen --queue=default
 
 ---
 
-## 🔄 Workflow Resumido (TL;DR)
+## Workflow Resumido (TL;DR)
 
 ```
 1. DocuCenter: Subir PDFs ➜ Anotar campos
-                           ⬇️
+                           ⬇
 2. DocuCenter: Click "Generate JSON Files"
-                           ⬇️
+                           ⬇
 3. Job en background: PDF → OCR → JSON → GCS
-                           ⬇️
+                           ⬇
 4. Google Cloud Workbench: Import JSON files
-                           ⬇️
+                           ⬇
 5. Google Cloud Console: Train model (1-3 hrs)
-                           ⬇️
-6. ✅ Modelo entrenado listo para producción
+                           ⬇
+6. Modelo entrenado listo para producción
 ```
 
 ---
 
-## 📚 Referencias Técnicas
+## Referencias Técnicas
 
 ### Documentación Google Document AI
 - [Custom Extractors](https://cloud.google.com/document-ai/docs/custom-extractor)
@@ -422,9 +422,9 @@ php artisan queue:listen --queue=default
 
 ---
 
-## ✨ Funcionalidades Destacadas
+## Funcionalidades Destacadas
 
-### ✅ Lo que el sistema HACE automáticamente:
+### Lo que el sistema HACE automáticamente:
 - Extracción inicial con OCR
 - Detección automática de tipo de documento
 - Pre-llenado de campos en anotación
@@ -434,7 +434,7 @@ php artisan queue:listen --queue=default
 - Tracking de estado
 - Control de duplicados
 
-### ⚠️ Lo que debes hacer MANUALMENTE:
+### Lo que debes hacer MANUALMENTE:
 - Revisar y corregir anotaciones
 - Importar JSONs en Google Cloud Workbench
 - Iniciar training del modelo
@@ -456,7 +456,7 @@ php artisan queue:listen --queue=default
 
 ---
 
-## 🎓 Próximos Pasos Sugeridos
+## Próximos Pasos Sugeridos
 
 1. **Entrenar modelo inicial** con 20-50 documentos
 2. **Evaluar precisión** con documentos de test
@@ -466,4 +466,4 @@ php artisan queue:listen --queue=default
 
 ---
 
-**¡Éxito entrenando tu modelo! 🚀**
+**¡Éxito entrenando tu modelo! **

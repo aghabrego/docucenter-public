@@ -32,7 +32,7 @@ En la creación de clientes extranjeros desde QuickBooks, el sistema no estaba e
 En `app/Services/QuickBooksOnlineService.php` línea 715:
 
 ```php
-// ❌ ANTES - País hardcodeado
+// ANTES - País hardcodeado
 'Country' => 'PA', // Default country, adjust as needed
 ```
 
@@ -41,14 +41,14 @@ En `app/Services/QuickBooksOnlineService.php` línea 715:
 ### 1. Extracción de País de CustomerRef
 
 ```php
-// ✅ DESPUÉS - Extracción dinámica de país
+// DESPUÉS - Extracción dinámica de país
 'Country' => array_get($customerRef, 'Country', array_get($customerRef, 'BillAddr.Country', 'PA')),
 ```
 
 ### 2. Extracción de PASAPORTE
 
 ```php
-// ✅ Agregado - Extracción de PASAPORTE
+// Agregado - Extracción de PASAPORTE
 'PASAPORTE' => array_get($customerRef, 'PASAPORTE'),
 ```
 
@@ -125,13 +125,13 @@ php artisan test:foreign-customer --org-id=1 --country=Chile --passport=XYZABC12
 
 ## Impacto
 
-### ✅ Beneficios
+### Beneficios
 - **Precisión de datos**: País real del cliente extranjero
 - **Compatibilidad**: Maneja múltiples estructuras de QuickBooks
 - **Cumplimiento**: Datos correctos para facturación electrónica internacional
 - **Trazabilidad**: Información completa para reportes fiscales
 
-### 🔍 Monitoreo
+### Monitoreo
 - Verificar que clientes extranjeros tengan el país correcto
 - Validar que TIPO_RECEPTOR '04' funcione con PACs
 - Confirmar que el país se use correctamente en facturación electrónica

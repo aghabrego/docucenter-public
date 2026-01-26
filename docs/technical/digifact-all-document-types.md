@@ -56,12 +56,12 @@ Todos los documentos comparten esta estructura base:
 **Naturaleza Operación Típica**: 01 (Venta)  
 **Destino Operación**: 1 (Panamá)  
 **Campos Requeridos**:
-- ✅ Header completo
-- ✅ Seller (Emisor)
-- ✅ Buyer (Receptor)
-- ✅ Items (Productos/Servicios)
-- ✅ Totals (Totales con ITBMS)
-- ✅ Payments (Formas de pago)
+- Header completo
+- Seller (Emisor)
+- Buyer (Receptor)
+- Items (Productos/Servicios)
+- Totals (Totales con ITBMS)
+- Payments (Formas de pago)
 
 **Campos Opcionales**:
 - ThirdParty (Terceros como transportistas)
@@ -88,9 +88,9 @@ Todos los documentos comparten esta estructura base:
 **Naturaleza Operación Típica**: 02 (Exportación)  
 **Destino Operación**: 2 (Extranjero)  
 **Campos Requeridos Adicionales**:
-- ✅ Currency (Moneda de la operación)
-- ✅ ExchangeRate (Tipo de cambio)
-- ✅ Buyer.AddressInfo.Country (País destino)
+- Currency (Moneda de la operación)
+- ExchangeRate (Tipo de cambio)
+- Buyer.AddressInfo.Country (País destino)
 
 **Campos Opcionales Adicionales**:
 - Header.AdditionalIssueDocInfo → FechaSalida (Fecha salida mercancías)
@@ -107,7 +107,7 @@ Todos los documentos comparten esta estructura base:
 **Uso**: Ajuste negativo sobre una o varias facturas electrónicas previamente emitidas
 
 **Campos Obligatorios Adicionales**:
-- ✅ AdditionalDocumentInfo.Data (Documentos referenciados)
+- AdditionalDocumentInfo.Data (Documentos referenciados)
 
 **Estructura de Referencia**:
 
@@ -174,8 +174,8 @@ Todos los documentos comparten esta estructura base:
 **Uso**: Ajuste negativo sin referencia a factura específica
 
 **Características**:
-- ❌ **NO requiere** AdditionalDocumentInfo.Data con referencias
-- ✅ Puede incluir información adicional descriptiva
+- **NO requiere** AdditionalDocumentInfo.Data con referencias
+- Puede incluir información adicional descriptiva
 - Items con montos negativos o descripción de ajuste
 
 **Casos de Uso**:
@@ -190,8 +190,8 @@ Todos los documentos comparten esta estructura base:
 **Uso**: Ajuste positivo sin referencia a factura específica
 
 **Características**:
-- ❌ **NO requiere** AdditionalDocumentInfo.Data con referencias
-- ✅ Items con montos positivos
+- **NO requiere** AdditionalDocumentInfo.Data con referencias
+- Items con montos positivos
 - Usualmente por cargos adicionales no facturados previamente
 
 **Casos de Uso**:
@@ -299,17 +299,17 @@ Campos Info opcionales para todos los documentos:
 
 | DocType | Requiere Referencias | Campo Obligatorio |
 |---------|---------------------|-------------------|
-| 04 | ✅ SÍ | AdditionalDocumentInfo.Data |
-| 05 | ✅ SÍ | AdditionalDocumentInfo.Data |
-| 06 | ❌ NO | - |
-| 07 | ❌ NO | - |
+| 04 | SÍ | AdditionalDocumentInfo.Data |
+| 05 | SÍ | AdditionalDocumentInfo.Data |
+| 06 | NO | - |
+| 07 | NO | - |
 
 ### Documentos con Moneda Extranjera
 
 | DocType | Requiere Currency/ExchangeRate |
 |---------|-------------------------------|
 | 02 | Recomendado |
-| 03 | ✅ Obligatorio |
+| 03 | Obligatorio |
 | Otros | Opcional |
 
 ### Documentos con Terceros (ThirdParty)

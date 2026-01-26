@@ -1,15 +1,15 @@
-# 🔍 Comandos a Verificar para Inclusión en Kernel
+# Comandos a Verificar para Inclusión en Kernel
 
-## ⚠️ **Comandos Identificados para Revisión**
+## **Comandos Identificados para Revisión**
 
 Los siguientes comandos requieren verificación antes de ser incluidos automáticamente en el Kernel de Laravel:
 
-### **🚨 Alta Prioridad - Revisar Inmediatamente**
+### **Alta Prioridad - Revisar Inmediatamente**
 
 #### 1. **CreateAccessTokenSerieRCommand.php**
 ```bash
 # Comando: word:create-access-token-serie-r
-# Estado: ✅ INCLUIDO en Kernel actualizado
+# Estado: INCLUIDO en Kernel actualizado
 # Frecuencia: Cada 5 minutos
 # Propósito: Token de autenticación para Lightspeed Serie R
 ```
@@ -17,7 +17,7 @@ Los siguientes comandos requieren verificación antes de ser incluidos automáti
 #### 2. **CorrectElectronicInvoicesWithErrors.php**
 ```bash
 # Comando: word:correct-electronic-invoices-with-errors
-# Estado: ✅ INCLUIDO en Kernel actualizado
+# Estado: INCLUIDO en Kernel actualizado
 # Frecuencia: Cada 30 minutos
 # Propósito: Corregir automáticamente facturas electrónicas con errores
 ```
@@ -25,7 +25,7 @@ Los siguientes comandos requieren verificación antes de ser incluidos automáti
 #### 3. **UpdateAppointmentStatus.php**
 ```bash
 # Comando: update:appointment-status
-# Estado: ✅ INCLUIDO en Kernel actualizado
+# Estado: INCLUIDO en Kernel actualizado
 # Frecuencia: Cada hora
 # Propósito: Actualizar estado de citas/appointments
 ```
@@ -33,17 +33,17 @@ Los siguientes comandos requieren verificación antes de ser incluidos automáti
 #### 4. **EzeeteCommand.php**
 ```bash
 # Comando: ezete:process
-# Estado: ✅ INCLUIDO en Kernel actualizado
+# Estado: INCLUIDO en Kernel actualizado
 # Frecuencia: Cada 10 minutos
 # Propósito: Procesar operaciones Ezete
 ```
 
-### **🔄 Media Prioridad - Evaluación Condicional**
+### **Media Prioridad - Evaluación Condicional**
 
 #### 5. **UpdateBooqableModule.php**
 ```bash
 # Comando: word:update-booqable-module
-# Estado: ✅ INCLUIDO con condición
+# Estado: INCLUIDO con condición
 # Frecuencia: Cada 30 minutos (solo si está habilitado)
 # Propósito: Sincronización con sistema Booqable
 # Nota: Incluido con verificación condicional
@@ -52,7 +52,7 @@ Los siguientes comandos requieren verificación antes de ser incluidos automáti
 #### 6. **UpdateLightspeedSerierModule.php** 🧪
 ```bash
 # Comando: word:update-lightspeed-serie-r
-# Estado: ✅ INCLUIDO - TESTING DISPONIBLE
+# Estado: INCLUIDO - TESTING DISPONIBLE
 # Frecuencia: Cada 5 minutos
 # Propósito: Descarga de ventas Lightspeed Serie R
 # Testing: Ticket real 220000038728 (VOGLIA MULTIPLAZA, Account ID: 192176)
@@ -63,13 +63,13 @@ Los siguientes comandos requieren verificación antes de ser incluidos automáti
 #### 7. **TestZohoConnection.php & TestKartToZoho.php**
 ```bash
 # Comando: zoho:test-connection & kart:send-to-zoho
-# Estado: ⏳ PENDIENTE evaluación
+# Estado:  PENDIENTE evaluación
 # Frecuencia: Por evaluar
 # Propósito: Integración con Zoho Books
 # Nota: Evaluar si las organizaciones usan Zoho activamente
 ```
 
-### **📊 Comandos de Análisis - Evaluación Manual**
+### **Comandos de Análisis - Evaluación Manual**
 
 #### 7. **CreateCreditNotesSummaryCommand.php**
 ```bash
@@ -97,31 +97,31 @@ Los siguientes comandos requieren verificación antes de ser incluidos automáti
 
 ---
 
-## 📋 **Criterios de Evaluación**
+## **Criterios de Evaluación**
 
-### **✅ Incluir en Kernel si:**
-- ✅ Es crítico para operaciones normales
-- ✅ Requiere ejecución automática periódica
-- ✅ No interfiere con rendimiento del sistema
-- ✅ Maneja errores gracefully
-- ✅ Tiene logging apropiado
+### **Incluir en Kernel si:**
+- Es crítico para operaciones normales
+- Requiere ejecución automática periódica
+- No interfiere con rendimiento del sistema
+- Maneja errores gracefully
+- Tiene logging apropiado
 
-### **❌ NO incluir en Kernel si:**
-- ❌ Es solo para testing/debugging
-- ❌ Es de uso manual/administrativo
-- ❌ Consume muchos recursos
-- ❌ Es específico de desarrollo
-- ❌ Requiere intervención manual
+### **NO incluir en Kernel si:**
+- Es solo para testing/debugging
+- Es de uso manual/administrativo
+- Consume muchos recursos
+- Es específico de desarrollo
+- Requiere intervención manual
 
-### **⚠️ Incluir CONDICIONALMENTE si:**
-- ⚠️ Solo algunas organizaciones lo necesitan
-- ⚠️ Depende de configuraciones específicas
-- ⚠️ Es opcional por plan de servicio
-- ⚠️ Tiene horarios específicos de ejecución
+### **Incluir CONDICIONALMENTE si:**
+- Solo algunas organizaciones lo necesitan
+- Depende de configuraciones específicas
+- Es opcional por plan de servicio
+- Tiene horarios específicos de ejecución
 
 ---
 
-## 🔧 **Pasos de Verificación**
+## **Pasos de Verificación**
 
 ### **Para cada comando candidato:**
 
@@ -155,32 +155,32 @@ Los siguientes comandos requieren verificación antes de ser incluidos automáti
 
 ---
 
-## 📝 **Checklist de Implementación**
+## **Checklist de Implementación**
 
 ### **Antes de agregar al Kernel:**
 
-- [ ] ✅ Comando ejecuta sin errores
-- [ ] ✅ Maneja excepciones apropiadamente
-- [ ] ✅ Tiene logging para monitoreo
-- [ ] ✅ No bloquea otros procesos
-- [ ] ✅ Respeta timeouts configurados
-- [ ] ✅ Puede ejecutarse en paralelo
-- [ ] ✅ Documentado en `docs/technical/`
+- [ ] Comando ejecuta sin errores
+- [ ] Maneja excepciones apropiadamente
+- [ ] Tiene logging para monitoreo
+- [ ] No bloquea otros procesos
+- [ ] Respeta timeouts configurados
+- [ ] Puede ejecutarse en paralelo
+- [ ] Documentado en `docs/technical/`
 
 ### **Después de agregar al Kernel:**
 
-- [ ] 📊 Monitorear logs por 48 horas
-- [ ] 📈 Verificar impacto en performance
-- [ ] 🔍 Confirmar ejecución exitosa
-- [ ] 📝 Documentar horarios y propósito
-- [ ] 🚨 Configurar alertas si fallan
-- [ ] ✅ Comunicar a equipo de soporte
+- [ ] Monitorear logs por 48 horas
+- [ ] Verificar impacto en performance
+- [ ] Confirmar ejecución exitosa
+- [ ] Documentar horarios y propósito
+- [ ] Configurar alertas si fallan
+- [ ] Comunicar a equipo de soporte
 
 ---
 
-## 🎯 **Estado Actual Post-Reorganización**
+## **Estado Actual Post-Reorganización**
 
-### **✅ Incluidos en Kernel Actualizado (Total: 19)**
+### **Incluidos en Kernel Actualizado (Total: 19)**
 
 #### **Mantenimiento (4):**
 - `word:clear-log`
@@ -191,7 +191,7 @@ Los siguientes comandos requieren verificación antes de ser incluidos automáti
 #### **Tokens (3):**
 - `word:create-access-token`
 - `word:create-access-token-apc`
-- `word:create-access-token-serie-r` ⭐ **NUEVO**
+- `word:create-access-token-serie-r` **NUEVO**
 
 #### **Integraciones POS (6):**
 - `word:type-payment-lightspeed`
@@ -207,29 +207,29 @@ Los siguientes comandos requieren verificación antes de ser incluidos automáti
 
 #### **Facturación Electrónica (2):**
 - `fe:verify-or-issue-faith-from-issuance`
-- `word:correct-electronic-invoices-with-errors` ⭐ **NUEVO**
+- `word:correct-electronic-invoices-with-errors` **NUEVO**
 
 #### **Procesos de Negocio (2):**
-- `update:appointment-status` ⭐ **NUEVO**
-- `ezete:process` ⭐ **NUEVO**
+- `update:appointment-status` **NUEVO**
+- `ezete:process` **NUEVO**
 
 #### **Condicionales (1):**
-- `word:update-booqable-module` ⭐ **NUEVO** (con condición)
+- `word:update-booqable-module` **NUEVO** (con condición)
 
-### **📋 Pendientes de Evaluación: ~115 comandos**
+### **Pendientes de Evaluación: ~115 comandos**
 
 La mayoría son comandos de testing, debug, configuración manual o específicos de desarrollo que **NO** deben incluirse en ejecución automática.
 
 ---
 
-## 💡 **Recomendación Final**
+## **Recomendación Final**
 
 El Kernel ha sido **reorganizado y optimizado** con:
-- ✅ **4 comandos nuevos críticos** agregados
-- ✅ **1 comando condicional** para Booqable
-- ✅ **Categorización clara** por tipo de operación
-- ✅ **Comentarios descriptivos** mejorados
-- ✅ **Estructura lógica** de ejecución
+- **4 comandos nuevos críticos** agregados
+- **1 comando condicional** para Booqable
+- **Categorización clara** por tipo de operación
+- **Comentarios descriptivos** mejorados
+- **Estructura lógica** de ejecución
 
 **Total: 19 comandos programados** (vs. 15 anteriores)
 
