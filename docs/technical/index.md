@@ -183,51 +183,21 @@
 ### Testing
 
 1. **Framework de Testing**
-   - [Test QuickBooks Error Handling](../testing/test-registerpaymentsqb-error-handling.md) - Testing de manejo de errores registerPaymentsQB ⭐ **NUEVO**
-   - [Testing Infrastructure](testing-infrastructure.md) - Infraestructura de testing para DocuCenter
+   - [RegisterPaymentsQB Error Handling](registerpayments-error-handling-improvements.md) - Testing de manejo de errores registerPaymentsQB
+   - Ver más documentación en la [sección Testing](../testing/README.md)
 
 ### Troubleshooting y Soluciones
 
 1. **Errores de OrganizationService**
-   - [Solución: Error getOrganizationActive()](../troubleshooting/organization-service-method-error-fix.md) - Fix completo para métodos inexistentes
+   - Ver documentación en la [sección Troubleshooting](../troubleshooting/README.md)
 
-```
-docs/technical/
-├── index.md                                               # Este archivo
-├── organization-access-control-system.md                 # Sistema de control de acceso
-├── implementation-guide-organization-access.md           # Guía de implementación
-├── organization-access-implementation-summary.md         # Resumen de implementación
-├── alanube-dom-consumer-invoice-improvements.md
-├── TESTING_SYSTEM_SUMMARY.md
-├── alanube-panama-complete-integration.md               # Implementación del servicio
-├── alanube-panama-service-usage.md                     # Manual de uso del servicio
-├── alanube-panama-credit-notes-guide.md                # Guía de notas de crédito
-├── validation-system-overview.md
-├── alanube-validation.md
-├── customer-search-optimization.md
-├── search-components-implementation.md
-└── testing-infrastructure.md
-```
+## Estructura de Archivos
+
+Ver el índice principal [README.md](README.md) para la lista completa de documentación técnica organizada por categorías.
 
 ## Scripts de Automatización
 
-```
-scripts/
-├── implement-organization-access.sh                     # Script de implementación automatizada
-├── diagnose-kart-invoice.sh
-├── docs-cleanup.sh
-├── simulate-kart-test.sh
-└── ...
-```
-
-## Componentes Enhanced
-
-```
-app/Http/Livewire/Setting/Enhanced/
-├── InvuposEnhanced.php                                  # Ejemplo completo con control de acceso
-├── ImportEnhanced.php                                   # Importación con múltiples tipos
-└── ...
-```
+Los scripts de automatización se encuentran en el repositorio principal del proyecto.
 
 ## Convenciones
 
