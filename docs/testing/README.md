@@ -65,6 +65,39 @@ php docs/testing/test-qb-tax-validation.php
 ./docs/testing/test-qb-flow.sh 2
 ```
 
+### 🚨 **[Reportes de Error PlusMóvil Producción](PLUSMOVIL-PRODUCTION-ERROR-REPORT.md)** 🆕
+Reporte detallado de errores en el endpoint `/com-invoices` del API de PlusMóvil en ambiente de producción.
+
+**Archivos disponibles**:
+- `PLUSMOVIL-PRODUCTION-ERROR-REPORT.md` - Documentación completa en formato Markdown
+- `plusmovil-production-error-report.json` - Reporte estructurado en JSON con todos los detalles
+- `plusmovil-prod-error-report.json` - Formato simplificado del reporte
+
+**Contenido del reporte**:
+- Descripción del error: Internal Server Error (500) en endpoint `/com-invoices`
+- Ambiente afectado: Producción (QA funciona correctamente)
+- Cliente afectado: EL NAWAL (Organization ID: 28)
+- Casos de prueba ejecutados con diferentes parámetros
+- Comparación con ambiente QA funcionando
+- Impacto en funcionalidades de importación de facturas
+- Acciones recomendadas priorizadas
+
+**Uso rápido**:
+```bash
+# Ver reporte completo
+cat docs/testing/PLUSMOVIL-PRODUCTION-ERROR-REPORT.md
+
+# Ver datos estructurados
+cat docs/testing/plusmovil-production-error-report.json
+
+# Ejemplos de curl para reproducir el error
+curl -X GET "https://0m2jyxhl41.execute-api.us-east-1.amazonaws.com/prod/com-invoices?limit=10" \
+  -H "Authorization: Bearer <TOKEN>" \
+  -H "Content-Type: application/json"
+```
+
+**Severidad**: Alta - Bloquea importación automática de facturas desde PlusMóvil
+
 ### 🎯 **Validaciones PAC - Alanube Panamá**PHP de Testing
 
 ### `check_sales.php`

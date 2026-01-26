@@ -29,6 +29,20 @@ Documentación de todas las integraciones con sistemas externos disponibles en D
 - Sincronización de productos
 - Webhooks para actualizaciones en tiempo real
 
+### 📱 PlusMóvil ERP
+**Estado**: ⚠️ En Producción (Con errores reportados)
+- Integración con sistema ERP PlusMóvil para facturación
+- Autenticación mediante AWS Cognito
+- Importación de facturas, clientes y productos
+- **[Ver reporte de errores en producción](../testing/PLUSMOVIL-PRODUCTION-ERROR-REPORT.md)**
+- Documentación disponible:
+  - [Resumen de implementación](plusmovil-implementation-summary.md)
+  - [Análisis de implementación](plusmovil-implementation-analysis.md)
+  - [Resultados de pruebas API](plusmovil-api-testing-results.md)
+  - [Estrategia de almacenamiento de tokens](plusmovil-token-storage-strategy.md)
+  - [Plan de continuación](plusmovil-continuation-plan.md)
+  - [Próximos pasos](plusmovil-next-steps.md)
+
 ## 📊 Estadísticas de Integraciones
 
 | Integración | Estado | Tipo | Complejidad | Mantenimiento |
@@ -37,6 +51,7 @@ Documentación de todas las integraciones con sistemas externos disponibles en D
 | **Lightspeed** | ✅ Activa | API REST | Media | Regular |
 | **QuickBooks** | ✅ Activa | OAuth + API | Alta | Regular |
 | **Shopify** | ✅ Activa | Webhooks + API | Media | Mínimo |
+| **PlusMóvil** | ⚠️ Con errores | AWS Cognito + API | Media | En investigación |
 
 ## 🎯 Próximas Integraciones
 

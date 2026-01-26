@@ -1788,6 +1788,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#reportes-de-error-plusmovil-produccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🚨 Reportes de Error PlusMóvil Producción 🆕
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#validaciones-pac-alanube-panamaphp-de-testing" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2632,6 +2643,33 @@ php<span class="w"> </span>docs/testing/test-qb-tax-validation.php
 <span class="c1"># Flujo completo</span>
 ./docs/testing/test-qb-flow.sh<span class="w"> </span><span class="m">2</span>
 </code></pre></div></p>
+<h3 id="reportes-de-error-plusmovil-produccion">🚨 <strong><a href="PLUSMOVIL-PRODUCTION-ERROR-REPORT/">Reportes de Error PlusMóvil Producción</a></strong> 🆕<a class="headerlink" href="#reportes-de-error-plusmovil-produccion" title="Permanent link">&para;</a></h3>
+<p>Reporte detallado de errores en el endpoint <code>/com-invoices</code> del API de PlusMóvil en ambiente de producción.</p>
+<p><strong>Archivos disponibles</strong>:
+- <code>PLUSMOVIL-PRODUCTION-ERROR-REPORT.md</code> - Documentación completa en formato Markdown
+- <code>plusmovil-production-error-report.json</code> - Reporte estructurado en JSON con todos los detalles
+- <code>plusmovil-prod-error-report.json</code> - Formato simplificado del reporte</p>
+<p><strong>Contenido del reporte</strong>:
+- Descripción del error: Internal Server Error (500) en endpoint <code>/com-invoices</code>
+- Ambiente afectado: Producción (QA funciona correctamente)
+- Cliente afectado: EL NAWAL (Organization ID: 28)
+- Casos de prueba ejecutados con diferentes parámetros
+- Comparación con ambiente QA funcionando
+- Impacto en funcionalidades de importación de facturas
+- Acciones recomendadas priorizadas</p>
+<p><strong>Uso rápido</strong>:
+<div class="highlight"><pre><span></span><code><span class="c1"># Ver reporte completo</span>
+cat<span class="w"> </span>docs/testing/PLUSMOVIL-PRODUCTION-ERROR-REPORT.md
+
+<span class="c1"># Ver datos estructurados</span>
+cat<span class="w"> </span>docs/testing/plusmovil-production-error-report.json
+
+<span class="c1"># Ejemplos de curl para reproducir el error</span>
+curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span><span class="s2">&quot;https://0m2jyxhl41.execute-api.us-east-1.amazonaws.com/prod/com-invoices?limit=10&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Authorization: Bearer &lt;TOKEN&gt;&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Content-Type: application/json&quot;</span>
+</code></pre></div></p>
+<p><strong>Severidad</strong>: Alta - Bloquea importación automática de facturas desde PlusMóvil</p>
 <h3 id="validaciones-pac-alanube-panamaphp-de-testing">🎯 **Validaciones PAC - Alanube Panamá**PHP de Testing<a class="headerlink" href="#validaciones-pac-alanube-panamaphp-de-testing" title="Permanent link">&para;</a></h3>
 <h3 id="check_salesphp"><code>check_sales.php</code><a class="headerlink" href="#check_salesphp" title="Permanent link">&para;</a></h3>
 <p>Script de verificación de facturas para diagnóstico de base de datos.</p>
