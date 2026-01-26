@@ -56,6 +56,7 @@ Documentación sobre validaciones específicas implementadas:
 ### [Documentación Técnica](./technical/)
 Análisis técnicos y soluciones a problemas específicos:
 
+- **[Estandarización de Custom Fields](./technical/custom-fields-standardization.md)** - Implementación completa del estándar global para los 5 campos custom en facturación electrónica
 - **[Sistema de Monitoreo del Servidor](./technical/server-monitoring-system.md)** - Sistema completo de monitoreo en tiempo real de recursos del servidor (disco, RAM, CPU)
 - **[Resumen de Implementación - Monitoreo del Servidor](./technical/server-monitoring-implementation-summary.md)** - Resumen de implementación del sistema de monitoreo
 - **[SOLUCIÓN COMPLETA: Cliente Solmary Identificación](./technical/receptor-extranjero-solmary-complete-solution.md)** - Solución completa con x-data + auto-llenado campos B406-B416
