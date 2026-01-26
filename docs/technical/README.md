@@ -1,12 +1,12 @@
-# 📚 Documentación Técnica - DocuCenter
+# Documentación Técnica - DocuCenter
 
 Este directorio contiene documentación técnica sobre implementaciones específicas, soluciones a problemas técnicos y análisis de funcionalidades del sistema DocuCenter.
 
-## 📋 Índice de Documentación
+## Índice de Documentación
 
-### 🔗 **Integraciones - QuickBooks**
+### Integraciones - QuickBooks
 
-#### [quickbooks-webhook-organizationid-fix.md](./quickbooks-webhook-organizationid-fix.md) 🆕
+#### [quickbooks-webhook-organizationid-fix.md](./quickbooks-webhook-organizationid-fix.md)
 **Descripción**: Fix de configuraciones duplicadas de webhook por uso inconsistente de IDs
 **Contenido**:
 - Análisis de causa raíz: ID numérico de QuickBooks vs String ID de DocuCenter
@@ -15,9 +15,9 @@ Este directorio contiene documentación técnica sobre implementaciones específ
 - Reglas de prevención y code review checklist
 - Ejemplo real: RealmId 9341454854054771 con 2 configs (119 vs Rw8DunJnEnxY1MS2QHVH)
 
-### 🤖 **Document AI (Google Cloud)**
+### Document AI (Google Cloud)
 
-#### [document-ai-import-to-workbench.md](./document-ai-import-to-workbench.md) 🆕
+#### [document-ai-import-to-workbench.md](./document-ai-import-to-workbench.md)
 **Descripción**: Sistema de importación de documentos anotados a Google Cloud Workbench
 **Contenido**:
 - Implementación completa de Import API
@@ -26,7 +26,7 @@ Este directorio contiene documentación técnica sobre implementaciones específ
 - División automática training/test (80/20)
 - Guía de troubleshooting y debugging
 
-#### [document-ai-import-implementation-summary.md](./document-ai-import-implementation-summary.md) 🆕
+#### [document-ai-import-implementation-summary.md](./document-ai-import-implementation-summary.md)
 **Descripción**: Resumen ejecutivo de implementación Import to Workbench
 **Contenido**:
 - 7 archivos modificados/creados
@@ -35,7 +35,7 @@ Este directorio contiene documentación técnica sobre implementaciones específ
 - Comando de testing interactivo
 - Métricas y estado final
 
-### 🔧 **Soluciones de Problemas Técnicos**
+### Soluciones de Problemas Técnicos
 
 #### [ezeeissued-solution-summary.md](./ezeeissued-solution-summary.md)
 **Descripción**: Solución completa al problema de campo EzeeIssued no actualizado tras emisión
@@ -61,7 +61,7 @@ Este directorio contiene documentación técnica sobre implementaciones específ
 - Patrones de conexión multi-tenant aplicados
 - Documentación de testing y validación
 
-### 🌐 **Integraciones Alanube DOM (República Dominicana)**
+### Integraciones Alanube DOM (República Dominicana)
 
 #### [alanube-dom-service-usage.md](./alanube-dom-service-usage.md)
 **Descripción**: Guía completa de uso del servicio AlanubeDomService con detección automática
@@ -97,7 +97,7 @@ Este directorio contiene documentación técnica sobre implementaciones específ
 - Validaciones específicas de API
 - Detección automática inteligente
 
-### 💼 **Sistema de Transacciones**
+### Sistema de Transacciones
 
 #### [TRANSACTION_SYSTEM_COMPLETE.md](./TRANSACTION_SYSTEM_COMPLETE.md)
 **Descripción**: Documentación completa del sistema de transacciones
@@ -106,7 +106,7 @@ Este directorio contiene documentación técnica sobre implementaciones específ
 - Modelos y relaciones
 - Validaciones y procesamiento
 
-### ⚡ **Componentes Livewire y Frontend**
+### Componentes Livewire y Frontend
 
 #### [solucion-tabla-items-factura-electronica.md](./solucion-tabla-items-factura-electronica.md)
 **Descripción**: Solución completa para visualización y gestión de ítems en facturación electrónica
@@ -118,14 +118,14 @@ Este directorio contiene documentación técnica sobre implementaciones específ
 - Casos de uso cubiertos y testing implementado
 - Integración con sistemas de pago
 
-### 💰 **Gestión de Pagos y Cálculos**
+### Gestión de Pagos y Cálculos
 
 - **[payment-calculation-fix.md](./payment-calculation-fix.md)** - Análisis y solución de discrepancias en cálculo de pagos y vueltos
 - **[solucion-sincronizacion-pagos.md](./solucion-sincronizacion-pagos.md)** - Implementación de sincronización de pagos entre sistemas
 
-### 📊 **Integración QuickBooks**
+### Integración QuickBooks
 
-#### [quickbooks-bills-job-graceful-validation.md](./quickbooks-bills-job-graceful-validation.md) 🆕
+#### [quickbooks-bills-job-graceful-validation.md](./quickbooks-bills-job-graceful-validation.md)
 **Descripción**: Fix para validación graceful de tablas en CreateIntuitBillsJob
 **Contenido**:
 - Problema: Organizaciones sin módulo de compras generaban errores innecesarios
@@ -134,7 +134,7 @@ Este directorio contiene documentación técnica sobre implementaciones específ
 - Testing para organizaciones con/sin tablas de compras
 - Logs informativos en lugar de errores de stack trace
 
-#### [quickbooks-fiscal-number-validation-system.md](./quickbooks-fiscal-number-validation-system.md) ⭐
+#### [quickbooks-fiscal-number-validation-system.md](./quickbooks-fiscal-number-validation-system.md)
 **Descripción**: Sistema completo de validación de números fiscales para prevenir duplicación de documentos QuickBooks
 **Contenido**:
 - Extracción automática de números fiscales desde CUFE panameño
@@ -144,16 +144,16 @@ Este directorio contiene documentación técnica sobre implementaciones específ
 - Tests unitarios y de integración completos
 - Arquitectura multi-tenant con manejo de conexiones dinámicas
 
-## 🎯 **Implementaciones por Tipo de Documento**
+## Implementaciones por Tipo de Documento
 
 ### Facturas Alanube DOM
 
 | Tipo | Documento | Estado | Archivo Enhancement |
 |------|-----------|--------|-------------------|
-| 31 | Factura de Crédito Fiscal | ✅ Implementado | `AlanubeDomFiscalCreditEnhancement.php` |
-| 32 | Factura de Consumo | ✅ Implementado | `AlanubeDomConsumerInvoiceEnhancement.php` |
-| 45 | Factura Gubernamental | ✅ Implementado | `AlanubeDomGovernmentalEnhancement.php` |
-| 46 | Factura de Exportación | ✅ Implementado | `AlanubeDomExportInvoiceEnhancement.php` |
+| 31 | Factura de Crédito Fiscal | Implementado | `AlanubeDomFiscalCreditEnhancement.php` |
+| 32 | Factura de Consumo | Implementado | `AlanubeDomConsumerInvoiceEnhancement.php` |
+| 45 | Factura Gubernamental | Implementado | `AlanubeDomGovernmentalEnhancement.php` |
+| 46 | Factura de Exportación | Implementado | `AlanubeDomExportInvoiceEnhancement.php` |
 
 ### Características Técnicas
 
@@ -164,16 +164,16 @@ Este directorio contiene documentación técnica sobre implementaciones específ
 
 ## Categorías de Documentación
 
-### 🔧 Soluciones Técnicas
+### Soluciones Técnicas
 Documentación que describe la resolución de problemas específicos encontrados en el sistema y las implementaciones técnicas correspondientes.
 
-### 📊 Análisis de Funcionalidades
+### Análisis de Funcionalidades
 Análisis detallados de funcionalidades específicas del sistema, incluyendo casos edge y comportamientos especiales.
 
-### 🔄 Integraciones y Sincronizaciones
+### Integraciones y Sincronizaciones
 Documentación sobre procesos de sincronización entre diferentes sistemas y plataformas integradas.
 
-### 🗄️ **Integraciones SQL Server**
+### Integraciones SQL Server
 
 #### [sql-server-complete-store-id-filtering.md](./sql-server-complete-store-id-filtering.md)
 **Descripción**: Implementación completa de filtrado por Store ID en toda la cadena de jobs SQL Server
@@ -185,11 +185,11 @@ Documentación sobre procesos de sincronización entre diferentes sistemas y pla
 - Patrón de implementación reutilizable
 
 **Características principales**:
-- ✅ **Filtrado selectivo**: Procesa solo tienda específica cuando está configurada
-- ✅ **Retrocompatibilidad**: Sin configuración procesa todas las tiendas
-- ✅ **Performance optimizada**: Consultas SQL filtradas en origen
-- ✅ **Logging granular**: Trazabilidad completa del procesamiento
-- ✅ **Testing integrado**: Comandos de prueba y verificación
+- **Filtrado selectivo**: Procesa solo tienda específica cuando está configurada
+- **Retrocompatibilidad**: Sin configuración procesa todas las tiendas
+- **Performance optimizada**: Consultas SQL filtradas en origen
+- **Logging granular**: Trazabilidad completa del procesamiento
+- **Testing integrado**: Comandos de prueba y verificación
 
 #### [sql-server-store-id-filtering.md](./sql-server-store-id-filtering.md)
 **Descripción**: Implementación específica de filtrado por Store ID en STInvoiceJob
@@ -216,7 +216,7 @@ Cada documento técnico sigue esta estructura estándar:
 - **Referencias**: Enlaces a archivos de código relacionados
 - **Logs de ejemplo**: Para facilitar debugging
 
-### 🆕 **Implementación General de Documentos JSch09 iDoc**
+### Implementación General de Documentos JSch09 iDoc
 
 #### [general-document-types-implementation.md](./general-document-types-implementation.md)
 **Descripción**: Implementación universal de tipos de documentos JSch09 iDoc para todos los PACs
@@ -229,11 +229,11 @@ Cada documento técnico sigue esta estructura estándar:
 - Arquitectura extensible para futuros PACs
 
 **Características principales**:
-- ✅ **PanamaDocumentTypesService**: Servicio central para tipos oficiales
-- ✅ **ElectronicDocumentService**: Capa de abstracción PAC-agnóstica
-- ✅ **Detección automática**: PAC y país detectados por configuración
-- ✅ **Compatibilidad hacia atrás**: Mantiene funcionalidad existente
-- ✅ **Extensibilidad**: Preparado para nuevos proveedores
+- **PanamaDocumentTypesService**: Servicio central para tipos oficiales
+- **ElectronicDocumentService**: Capa de abstracción PAC-agnóstica
+- **Detección automática**: PAC y país detectados por configuración
+- **Compatibilidad hacia atrás**: Mantiene funcionalidad existente
+- **Extensibilidad**: Preparado para nuevos proveedores
 
 **Script de implementación**:
 ```bash
