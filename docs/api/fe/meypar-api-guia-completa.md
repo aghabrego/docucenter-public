@@ -99,11 +99,11 @@ Accept: application/json
 |-------|------|-------------|---------|
 | `idFacturador` | string | ID único del facturador | `"12345678"` |
 | `ambiente` | integer | Ambiente de ejecución: 1=Producción, 2=Pruebas | `1` |
-| `documento` | string | Número de documento | `"32323"` |
+| `documento` | string | Documento de identificación del adquiriente (NIT del adquirente/usuario del parking) | `"32323"` |
 | `codigo` | integer | Código de operación | `2` |
 | `tipoDocumento` | integer | Tipo de documento fiscal | `1` |
 | `prefijo` | string | Prefijo del documento | `"A132"` |
-| `numero` | integer | Número consecutivo | `123` |
+| `numero` | integer | Número consecutivo de la factura | `123` |
 | `medioPago` | integer | 1=Efectivo, 2=Tarjeta, 3=Cheque, 4=Transferencia | `2` |
 | `fechaFactura` | string | Fecha formato YYYY-MM-DD | `"2024-02-06"` |
 
