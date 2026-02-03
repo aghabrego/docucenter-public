@@ -6,7 +6,7 @@ Las APIs de Facturación Electrónica (FE) permiten la integración con el siste
 
 ## Documentación Complementaria
 
-- **[Comparación Tax Code: MEYPAR vs QuickBooks](./meypar-quickbooks-tax-code-comparison.md)** - Análisis técnico comparativo del manejo de códigos de impuesto, campo `origin` y diferencias en procesamiento de impuestos entre MEYPAR y QuickBooks
+- **[Sistema Tax Code QuickBooks](./quickbooks-tax-code-system.md)** - Documentación técnica del sistema híbrido de extracción de Tax Code en QuickBooks: 4 niveles de prioridad, logging detallado, prevención de loops y ejemplos prácticos
 
 ---
 

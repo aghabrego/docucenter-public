@@ -12,7 +12,7 @@ Esta es la documentación completa del sistema DocuCenter, organizada por catego
 Documentación completa de todas las APIs disponibles en el sistema:
 
 - **[Facturación Electrónica (FE)](./api/fe/)** - APIs para emisión de documentos fiscales electrónicos
-  - **[Comparación Tax Code: MEYPAR vs QuickBooks](./api/fe/meypar-quickbooks-tax-code-comparison.md)** - Documentación técnica comparativa del manejo de códigos de impuesto y campo origin
+  - **[Sistema Tax Code QuickBooks](./api/fe/quickbooks-tax-code-system.md)** - Sistema híbrido de extracción de impuestos en QuickBooks (4 niveles de prioridad)
 - **[Sage ACICloud](./api/sage-acicloud/)** - Integración con sistema ERP Sage
 - **[Organizaciones](./api/organizations/)** - Gestión de organizaciones y configuraciones
 - **[Ubicaciones](./api/locations/)** - Manejo de ubicaciones geográficas
