@@ -65,10 +65,10 @@ Cuando QuickBooks envía el objeto completo con la tasa de impuesto:
 ```
 
 **Características:**
-- ✅ Incluye `rateValue` con el porcentaje exacto
-- ✅ Permite cálculo directo: `Amount × (rateValue / 100)`
-- ✅ Mayor precisión
-- ✅ Método preferido cuando está disponible
+- Incluye `rateValue` con el porcentaje exacto
+- Permite cálculo directo: `Amount × (rateValue / 100)`
+- Mayor precisión
+- Método preferido cuando está disponible
 
 ---
 
@@ -107,10 +107,10 @@ Cuando QuickBooks solo envía la referencia del código:
 ```
 
 **Características:**
-- ⚠️ NO incluye `rateValue`
-- ⚠️ Solo tiene referencia al código
-- ✅ Incluye total de impuestos en `TxnTaxDetail`
-- ✅ Requiere distribución proporcional
+- NO incluye `rateValue`
+- Solo tiene referencia al código
+- Incluye total de impuestos en `TxnTaxDetail`
+- Requiere distribución proporcional
 
 ---
 
@@ -118,7 +118,7 @@ Cuando QuickBooks solo envía la referencia del código:
 
 El sistema implementa **4 niveles de prioridad** para extraer impuestos de manera robusta:
 
-### 🥇 PRIORIDAD 1: TaxCode.rateValue (Método Preferido)
+### PRIORIDAD 1: TaxCode.rateValue (Método Preferido)
 
 Cuando QuickBooks envía el objeto `TaxCode` completo:
 
@@ -138,13 +138,13 @@ if (isset($salesItemDetail['TaxCode']['rateValue']) &&
 - Cálculo: $1,400.00 × 7% = $98.00
 
 **Ventajas:**
-- ✅ Más preciso
-- ✅ Cálculo directo
-- ✅ No depende de totales de factura
+- Más preciso
+- Cálculo directo
+- No depende de totales de factura
 
 ---
 
-### 🥈 PRIORIDAD 2: TaxAmount (Campo Directo)
+### PRIORIDAD 2: TaxAmount (Campo Directo)
 
 Cuando hay un campo `TaxAmount` en el detalle:
 
@@ -158,12 +158,12 @@ elseif (isset($salesItemDetail['TaxAmount']) &&
 ```
 
 **Ventajas:**
-- ✅ Valor directo
-- ✅ Sin cálculos adicionales
+- Valor directo
+- Sin cálculos adicionales
 
 ---
 
-### 🥉 PRIORIDAD 3: Flat TaxAmount (Campo Plano)
+### PRIORIDAD 3: Flat TaxAmount (Campo Plano)
 
 Cuando el impuesto viene en formato plano:
 
@@ -178,7 +178,7 @@ elseif (isset($line['SalesItemLineDetail.TaxAmount']) &&
 
 ---
 
-### 🏅 PRIORIDAD 4: Distribución Proporcional (Fallback)
+### PRIORIDAD 4: Distribución Proporcional (Fallback)
 
 Cuando solo hay total de impuestos en la factura:
 
@@ -196,9 +196,9 @@ elseif ($fullAmountTax > 0 && $subtotal > 0) {
 - Cálculo: $148.47 × ($2,069 / $2,121) = $144.83
 
 **Características:**
-- ✅ Funciona siempre que haya total de impuestos
-- ✅ Distribución justa según monto de línea
-- ⚠️ Puede tener pequeñas diferencias de redondeo
+- Funciona siempre que haya total de impuestos
+- Distribución justa según monto de línea
+- Puede tener pequeñas diferencias de redondeo
 
 ---
 
@@ -269,9 +269,9 @@ Log::info('QuickBooks Line Tax Calculation', [
 ```
 
 **Procesamiento:**
-- ✅ Método usado: `tax_code_rate_value`
-- ✅ Cálculo: $100.00 × 7% = $7.00
-- ✅ `origin` = `'quickbooks'`
+- Método usado: `tax_code_rate_value`
+- Cálculo: $100.00 × 7% = $7.00
+- `origin` = `'quickbooks'`
 
 ---
 
@@ -303,9 +303,9 @@ Log::info('QuickBooks Line Tax Calculation', [
 ```
 
 **Procesamiento:**
-- ✅ Método usado: `proportional_distribution`
-- ✅ Cálculo: ($100 / $100) × $7.00 = $7.00
-- ✅ `origin` = `'quickbooks'`
+- Método usado: `proportional_distribution`
+- Cálculo: ($100 / $100) × $7.00 = $7.00
+- `origin` = `'quickbooks'`
 
 ---
 
@@ -325,7 +325,7 @@ DETALLE DE LÍNEAS:
 
 VALIDACIÓN: 
 - ITBMS Total Factura: $148.47
-- ITBMS Calculado: $144.83 + $2.52 + $1.12 = $148.47 ✅ MATCH
+- ITBMS Calculado: $144.83 + $2.52 + $1.12 = $148.47 MATCH
 ```
 
 **Cálculos:**
@@ -333,7 +333,7 @@ VALIDACIÓN:
 Línea 1: ($2,069 / $2,121) × $148.47 = $144.83
 Línea 2: ($36 / $2,121) × $148.47 = $2.52
 Línea 3: ($16 / $2,121) × $148.47 = $1.12
-Total: $148.47 ✅
+Total: $148.47
 ```
 
 ---
@@ -353,9 +353,9 @@ $salesToSync = SalesHeaderImp::where('organization_id', $orgId)
 ```
 
 **Lógica:**
-- ✅ Ventas con `origin='docucenter'` → SÍ se envían a QuickBooks
-- ✅ Ventas con `origin=NULL` → SÍ se envían a QuickBooks (legacy)
-- ❌ Ventas con `origin='quickbooks'` → NO se re-envían (previene loop)
+- Ventas con `origin='docucenter'` → SÍ se envían a QuickBooks
+- Ventas con `origin=NULL` → SÍ se envían a QuickBooks (legacy)
+- Ventas con `origin='quickbooks'` → NO se re-envían (previene loop)
 
 ---
 
@@ -402,8 +402,8 @@ docker exec -it docucenter_laravel.test php artisan qb:test-itbms-extraction
 
 **Output esperado:**
 ```
-Test 1: Formato mínimo (Proportional) ✅
-Test 2: Formato completo (TaxCode.rateValue) ✅
+Test 1: Formato mínimo (Proportional) OK
+Test 2: Formato completo (TaxCode.rateValue) OK
 TODOS LOS TESTS PASARON
 ```
 
@@ -434,18 +434,18 @@ grep "QuickBooks.*org_id: 123" storage/logs/laravel.log
 
 ### Para Implementaciones
 
-1. ✅ **Monitorear logs**: Ver qué método de extracción predomina
-2. ✅ **Preferir formato completo**: Cuando sea posible, configurar QB para enviar `rateValue`
-3. ✅ **Verificar campo origin**: Prevenir loops de sincronización
-4. ✅ **Testing periódico**: Ejecutar `qb:test-itbms-extraction` regularmente
-5. ✅ **Validar totales**: Siempre comparar totales calculados vs totales de factura
+1. **Monitorear logs**: Ver qué método de extracción predomina
+2. **Preferir formato completo**: Cuando sea posible, configurar QB para enviar `rateValue`
+3. **Verificar campo origin**: Prevenir loops de sincronización
+4. **Testing periódico**: Ejecutar `qb:test-itbms-extraction` regularmente
+5. **Validar totales**: Siempre comparar totales calculados vs totales de factura
 
 ### Para Debugging
 
-1. 🔍 **Revisar logs**: El `calculation_method` indica qué ruta se usó
-2. 🔍 **Verificar estructura**: Confirmar si viene `TaxCode` o solo `TaxCodeRef`
-3. 🔍 **Comparar totales**: Validar que la suma de impuestos coincida
-4. 🔍 **Filtrar por origin**: Asegurar que no haya loops
+1. **Revisar logs**: El `calculation_method` indica qué ruta se usó
+2. **Verificar estructura**: Confirmar si viene `TaxCode` o solo `TaxCodeRef`
+3. **Comparar totales**: Validar que la suma de impuestos coincida
+4. **Filtrar por origin**: Asegurar que no haya loops
 
 ---
 
@@ -453,10 +453,10 @@ grep "QuickBooks.*org_id: 123" storage/logs/laravel.log
 
 | Método | Precisión | Disponibilidad | Complejidad | Recomendado |
 |--------|-----------|----------------|-------------|-------------|
-| **tax_code_rate_value** | Excelente | Formato completo | Baja | ✅ Sí |
-| **tax_amount_field** | Excelente | Variable | Baja | ✅ Sí |
-| **flat_tax_amount** | Excelente | Raro | Baja | ✅ Sí |
-| **proportional_distribution** | Buena | Siempre (fallback) | Media | ⚠️ Fallback |
+| **tax_code_rate_value** | Excelente | Formato completo | Baja | Sí |
+| **tax_amount_field** | Excelente | Variable | Baja | Sí |
+| **flat_tax_amount** | Excelente | Raro | Baja | Sí |
+| **proportional_distribution** | Buena | Siempre (fallback) | Media | Fallback |
 
 ---
 
@@ -480,11 +480,11 @@ grep "QuickBooks.*org_id: 123" storage/logs/laravel.log
 
 El sistema de Tax Code de QuickBooks es **robusto y adaptable**:
 
-✅ **Sistema Híbrido**: 4 niveles de prioridad  
-✅ **Compatibilidad Total**: Funciona con ambos formatos de QB  
-✅ **Logging Detallado**: Trazabilidad completa del método usado  
-✅ **Prevención de Loops**: Campo `origin` evita re-procesamiento  
-✅ **Testing Completo**: Comando dedicado para validación  
+- **Sistema Híbrido**: 4 niveles de prioridad  
+- **Compatibilidad Total**: Funciona con ambos formatos de QB  
+- **Logging Detallado**: Trazabilidad completa del método usado  
+- **Prevención de Loops**: Campo `origin` evita re-procesamiento  
+- **Testing Completo**: Comando dedicado para validación  
 
 **Estado:** PRODUCCIÓN  
 **Validación:** COMPLETA  
