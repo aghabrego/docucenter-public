@@ -4,6 +4,10 @@
 
 Las APIs de Facturación Electrónica (FE) permiten la integración con el sistema de facturación electrónica de Panamá, facilitando la emisión de facturas electrónicas desde diferentes plataformas y sistemas ERP.
 
+## Documentación Complementaria
+
+- **[Comparación Tax Code: MEYPAR vs QuickBooks](./meypar-quickbooks-tax-code-comparison.md)** - Análisis técnico comparativo del manejo de códigos de impuesto, campo `origin` y diferencias en procesamiento de impuestos entre MEYPAR y QuickBooks
+
 ---
 
 ## Emitir Factura desde ACICloud

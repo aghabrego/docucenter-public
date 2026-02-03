@@ -251,6 +251,37 @@ Accept: application/json
 
 ---
 
+## **Identificación de Fuente (Origin)**
+
+Todas las ventas creadas desde la API MEYPAR se marcan automáticamente con el campo `origin` en la base de datos para identificar su procedencia.
+
+### **Campo Origin en SalesHeaderImp**
+
+```php
+'origin' => 'meypar'
+```
+
+### **Valores de Origin por Sistema:**
+- `'meypar'` - Ventas provenientes de MEYPAR
+- `'quickbooks'` - Ventas provenientes de QuickBooks Online
+- `'shopify'` - Ventas provenientes de Shopify
+- `'lightspeed'` - Ventas provenientes de Lightspeed
+- `'acicloud'` - Ventas provenientes de ACI Cloud ERP
+- `'maxgym'` - Ventas provenientes de Maxgym
+- `'kart21'` - Ventas provenientes de Kart21
+- `'docucenter'` - Ventas creadas nativamente (default)
+
+### **Propósito del Campo Origin**
+
+1. **Tracking de origen**: Identificar de qué sistema proviene cada venta
+2. **Prevención de loops**: Evitar re-procesamiento de ventas
+3. **Auditoría**: Facilitar rastreo y debugging
+4. **Filtrado**: Permitir consultas específicas por origen
+
+**Nota:** Este campo se asigna automáticamente por el sistema y no requiere ser especificado en el request.
+
+---
+
 ## **Respuestas de la API**
 
 ### **Respuesta Exitosa - create_sale_meypar (200)**
@@ -267,7 +298,8 @@ Accept: application/json
       "subtotal": 15.75,
       "net_due": 15.75,
       "date": "2024-02-06",
-      "issued": false
+      "issued": false,
+      "origin": "meypar"
     }
   }
 }
@@ -288,7 +320,8 @@ Accept: application/json
       "subtotal": 15.75,
       "net_due": 15.75,
       "date": "2024-02-06",
-      "issued": true
+      "issued": true,
+      "origin": "meypar"
     },
     "emission": {
       "document_id": 67890,
@@ -509,9 +542,42 @@ curl -X POST \
 | Request Validation | Completo | PDF Oficial |
 | Service Processing | Completo | PDF Oficial |  
 | Reintentos Inteligentes | Completo | Producción |
+| **Campo Origin (Fuente)** | Completo | Tracking |
 | Auditoría de Transacciones | Completo | Tracking |
 | Unit Tests | Completo | Estructura Oficial |
 | Error Messages | Completo | Español |
+
+---
+
+## **Integración con Otros Sistemas**
+
+### **Documentación Complementaria**
+
+Para entender en detalle cómo funciona el manejo de impuestos y códigos de tax en MEYPAR comparado con QuickBooks, consulta:
+
+- **[Comparación Tax Code: MEYPAR vs QuickBooks](./meypar-quickbooks-tax-code-comparison.md)** - Documentación técnica completa que explica:
+  - ✅ Diferencias en estructura de datos de impuestos
+  - ✅ Sistema directo de MEYPAR vs sistema híbrido de QuickBooks
+  - ✅ Funcionamiento del campo `origin` (fuente)
+  - ✅ Prevención de loops entre sistemas
+  - ✅ Ejemplos comparativos detallados
+  - ✅ Comandos de testing y debugging
+
+### **Compatibilidad con QuickBooks**
+
+Las ventas creadas desde MEYPAR (`origin='meypar'`) son **compatibles** con el sistema de sincronización de QuickBooks. Sin embargo:
+
+- Ventas con `origin='meypar'` **NO se sincronizan** automáticamente a QuickBooks
+- Ventas con `origin='quickbooks'` **NO se re-envían** a QuickBooks (prevención de loops)
+- Ventas con `origin='docucenter'` **SÍ se sincronizan** a QuickBooks si está configurado
+
+### **Tracking Multi-Sistema**
+
+El campo `origin` permite:
+- Identificar la fuente exacta de cada venta
+- Prevenir duplicaciones entre sistemas
+- Facilitar debugging y auditoría
+- Aplicar lógica de negocio específica por origen
 
 ---
 
@@ -522,17 +588,20 @@ La API MEYPAR está **completamente implementada y funcional** con **DOS ENDPOIN
 ### **Básico**: `/api/v1/fe/create_sale_meypar`
 - Solo almacena la venta
 - Para control manual de emisión
+- Marca automáticamente: `origin='meypar'`
 
 ### **Avanzado**: `/api/v1/fe/create_sale_meypar_with_emission` 
 - Proceso completo automatizado
 - Reintentos inteligentes
 - **Recomendado para producción**
+- Marca automáticamente: `origin='meypar'`
 
 **Lista para producción**  
 **Validada con documentación oficial**  
 **Tests implementados**  
 **Documentación completa**  
-**Dos opciones de integración**
+**Dos opciones de integración**  
+**Tracking de origen implementado**
 
 **Commits relacionados:**
 - `863860e` - Optimizaciones de performance
