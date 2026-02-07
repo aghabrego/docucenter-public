@@ -1,8 +1,9 @@
 # Sistema de Tax Code en QuickBooks
 
-**Fecha:** 2026-02-03  
+**Fecha:** 2026-02-03 (Actualizado: 2026-02-07)  
 **Tipo:** Documentación Técnica  
-**Estado:** Completo
+**Estado:** Completo  
+**Última Actualización:** Sistema de Origin implementado en 7 APIs FE
 
 ## Introducción
 
@@ -12,6 +13,10 @@ Esta documentación explica en detalle cómo funciona el **sistema de extracció
 
 ## Campo Origin (Fuente)
 
+### Sistema de Tracking Unificado
+
+**Novedad (Febrero 2026):** El campo `origin` ahora está implementado en **todas las APIs del grupo FE** (7 integraciones), formando un sistema unificado de tracking de origen.
+
 ### Identificación Automática
 
 Todas las ventas provenientes de QuickBooks se marcan automáticamente con:
@@ -20,14 +25,29 @@ Todas las ventas provenientes de QuickBooks se marcan automáticamente con:
 'origin' => 'quickbooks'
 ```
 
+### Valores de Origin por Sistema
+
+El campo `origin` identifica el sistema de procedencia de cada venta:
+
+- `'quickbooks'` - QuickBooks Online
+- `'kart21'` - Sistema Kart21
+- `'maxgym'` - Sistema Maxgym
+- `'shopify'` - Shopify eCommerce
+- `'lightspeed'` - Lightspeed POS
+- `'acicloud'` - ACI Cloud ERP
+- `'meypar'` - Meypar Colombia
+- `'docucenter'` - Sistema nativo (default)
+- `NULL` - Ventas legacy (compatibilidad retroactiva)
+
 ### Propósito del Campo Origin
 
-1. **Tracking de origen**: Identificar que la venta proviene de QuickBooks
-2. **Prevención de loops**: Evitar que las ventas se re-envíen infinitamente a QB
-3. **Auditoría**: Facilitar rastreo y debugging
-4. **Filtrado**: Permitir consultas específicas
+1. **Tracking de origen**: Identificar qué sistema generó cada venta
+2. **Prevención de loops**: Evitar que las ventas se re-envíen infinitamente entre sistemas
+3. **Auditoría**: Facilitar rastreo y debugging de transacciones
+4. **Filtrado**: Permitir consultas y reportes específicos por origen
+5. **Integración Multi-Sistema**: Base para ecosistema de integraciones escalable
 
-**Importante:** Este campo se asigna automáticamente por el sistema.
+**Importante:** Este campo se asigna automáticamente por el sistema y no requiere especificación manual.
 
 ---
 
@@ -361,7 +381,7 @@ $salesToSync = SalesHeaderImp::where('organization_id', $orgId)
 
 ## Consultas SQL
 
-### Filtrar ventas de QuickBooks
+### Filtrar ventas por origen
 
 ```sql
 -- Todas las ventas de QuickBooks
@@ -373,14 +393,38 @@ SELECT * FROM Sales_Header_Imp
 WHERE origin = 'quickbooks' 
   AND DATE_FORMAT(created_at, '%Y-%m') = '2024-02';
 
--- Contar ventas por origen
+-- Contar ventas por origen (todas las integraciones)
 SELECT origin, COUNT(*) as total 
 FROM Sales_Header_Imp 
-GROUP BY origin;
+GROUP BY origin
+ORDER BY total DESC;
 
 -- Ventas que SÍ se sincronizarían a QB
 SELECT * FROM Sales_Header_Imp 
 WHERE (origin = 'docucenter' OR origin IS NULL);
+
+-- Ventas de sistemas externos (todas las integraciones)
+SELECT * FROM Sales_Header_Imp
+WHERE origin IN ('quickbooks', 'shopify', 'lightspeed', 'kart21', 'maxgym', 'acicloud', 'meypar');
+
+-- Distribución por origen con porcentajes
+SELECT 
+    origin,
+    COUNT(*) as total,
+    ROUND(COUNT(*) * 100.0 / (SELECT COUNT(*) FROM Sales_Header_Imp), 2) as porcentaje
+FROM Sales_Header_Imp 
+GROUP BY origin
+ORDER BY total DESC;
+
+-- Ventas del último mes por origen
+SELECT 
+    origin,
+    COUNT(*) as total,
+    SUM(Net_Due) as monto_total
+FROM Sales_Header_Imp
+WHERE created_at >= DATE_SUB(NOW(), INTERVAL 1 MONTH)
+GROUP BY origin
+ORDER BY total DESC;
 ```
 
 ---
@@ -468,11 +512,21 @@ grep "QuickBooks.*org_id: 123" storage/logs/laravel.log
 - `app/Jobs/Intuit/UpdateIntuitOrdersJob.php` - Sincronización a QB
 - `app/Console/Commands/TestQuickBooksItbmsExtraction.php` - Testing
 
+### Servicios con Campo Origin Implementado (7 Sistemas)
+- `app/Services/QuickBooksOnlineService.php` - QuickBooks
+- `app/Services/Kart21Service.php` - Kart21
+- `app/Services/MaxgymService.php` - Maxgym  
+- `app/Services/ShopifyService.php` - Shopify
+- `app/Services/LightspeedService.php` - Lightspeed
+- `app/Services/ACIcloudService.php` - ACI Cloud
+- `app/Services/MeyparService.php` - Meypar
+
 ### Documentación
 - [QuickBooks ITBMS Hybrid System](../../technical/quickbooks-itbms-hybrid-system.md)
 - [QuickBooks ITBMS Extraction Fix](../../technical/quickbooks-itbms-extraction-fix.md)
 - [QuickBooks Loop Solution](../../technical/quickbooks-loop-solution.md)
-- [Origin Field Implementation](../../technical/origin-field-implementation-summary.md)
+- **[Origin Field Implementation - Implementación Completa](../../technical/origin-field-implementation-summary.md)** ⭐
+- [MEYPAR API - Sistema de Origin](meypar-api-guia-completa.md)
 
 ---
 
@@ -485,7 +539,8 @@ El sistema de Tax Code de QuickBooks es **robusto y adaptable**:
 - **Logging Detallado**: Trazabilidad completa del método usado  
 - **Prevención de Loops**: Campo `origin` evita re-procesamiento  
 - **Testing Completo**: Comando dedicado para validación  
+- **Integración Multi-Sistema**: Campo `origin` implementado en 7 APIs FE (Febrero 2026)
 
 **Estado:** PRODUCCIÓN  
 **Validación:** COMPLETA  
-**Documentación:** ACTUALIZADA
+**Documentación:** ACTUALIZADA (Última actualización: 2026-02-07)
