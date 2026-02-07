@@ -525,7 +525,7 @@ grep "QuickBooks.*org_id: 123" storage/logs/laravel.log
 - [QuickBooks ITBMS Hybrid System](../../technical/quickbooks-itbms-hybrid-system.md)
 - [QuickBooks ITBMS Extraction Fix](../../technical/quickbooks-itbms-extraction-fix.md)
 - [QuickBooks Loop Solution](../../technical/quickbooks-loop-solution.md)
-- **[Origin Field Implementation - Implementación Completa](../../technical/origin-field-implementation-summary.md)** ⭐
+- **[Origin Field Implementation - Implementación Completa](../../technical/origin-field-implementation-summary.md)**
 - [MEYPAR API - Sistema de Origin](meypar-api-guia-completa.md)
 
 ---

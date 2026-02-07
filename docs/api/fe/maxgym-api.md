@@ -272,7 +272,7 @@ Todas las ventas creadas desde la API MaxGym se marcan automáticamente con el c
 ### Documentación Relacionada
 
 - **[Sistema de Origin - Implementación Completa](../../technical/origin-field-implementation-summary.md)** - Tracking unificado en 7 APIs FE
-- **[MaxGym Amount Calculation Fix](../../technical/maxgym-amount-calculation-fix.md)** ⭐ **NUEVO** - Detección automática de tipos de precio en webhooks
+- **[MaxGym Amount Calculation Fix](../../technical/maxgym-amount-calculation-fix.md)** - Detección automática de tipos de precio en webhooks
 - [QuickBooks Tax Code System](quickbooks-tax-code-system.md) - Sistema de origin en QuickBooks
 - [MEYPAR API - Guía Completa](meypar-api-guia-completa.md) - Sistema de origin en MEYPAR
 - [Validación de RUC en MaxGym](../../validations/maxgym-ruc-validation.md) - Validación RUC específica

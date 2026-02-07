@@ -22,7 +22,7 @@ La API de MaxGym envía webhooks con **dos estructuras inconsistentes**:
     }
 }
 ```
-**Cálculo**: $425 (base) + $29.75 (tax 7%) = $454.75 ✓
+**Cálculo**: $425 (base) + $29.75 (tax 7%) = $454.75
 
 #### Webhook Tipo 2: lines[].price = TOTAL (con impuestos)
 ```json
@@ -36,18 +36,18 @@ La API de MaxGym envía webhooks con **dos estructuras inconsistentes**:
     }
 }
 ```
-**Cálculo**: $55 (base) + $3.85 (tax 7%) = $58.85 ✓
+**Cálculo**: $55 (base) + $3.85 (tax 7%) = $58.85
 
 ### Código Original (Incorrecto)
 ```php
 // Asumía que lines[].price SIEMPRE era el base
-$baseAmount = $linePrice; // ✓ Funciona para Tipo 1, ✗ Falla para Tipo 2
+$baseAmount = $linePrice; // Funciona para Tipo 1, Falla para Tipo 2
 $totalLinePrice = $linePrice + $finalTaxAmount;
 ```
 
 **Resultado**: 
-- Tipo 1 (Personal Trainer): ✅ Procesaba correctamente
-- Tipo 2 (PYMES): ❌ Fallaba con "Subtotal mismatch"
+- Tipo 1 (Personal Trainer): Procesaba correctamente
+- Tipo 2 (PYMES): Fallaba con "Subtotal mismatch"
 
 ## Solución Implementada
 
@@ -115,18 +115,18 @@ if (abs($linePrice - $finalReceivedBasePrice) < $tolerance) {
 
 **1. MaxgymAmountDetectionTest.php** - Lógica de detección
 ```bash
-✓ Logica deteccion automatica
-✓ Implementacion completa  
-✓ Codigo propuesto maxgym service
-✓ Ventajas enfoque
+Logica deteccion automatica
+Implementacion completa  
+Codigo propuesto maxgym service
+Ventajas enfoque
 
 OK (4 tests, 10 assertions)
 ```
 
 **2. MaxgymBothWebhooksTest.php** - Validación de ambos webhooks
 ```bash
-✓ Ambos webhooks funcionan
-✓ Resumen solucion
+Ambos webhooks funcionan
+Resumen solucion
 
 OK (2 tests, 9 assertions)
 ```
@@ -228,10 +228,10 @@ Log::debug('MaxGym: linePrice detectado como TOTAL', [
 ```
 
 **Procesamiento**:
-1. Comparar: `425.00 ≈ 425.00` (basePrice) ✓
+1. Comparar: `425.00 ≈ 425.00` (basePrice)
 2. Detectar: Tipo BASE
 3. Calcular: base=425.00, total=425.00+29.75=454.75
-4. Validar: ✓ Todos los montos coinciden
+4. Validar: Todos los montos coinciden
 
 ### Ejemplo 2: PYMES ($55 + 7% ITBMS)
 

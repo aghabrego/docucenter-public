@@ -556,12 +556,12 @@ curl -X POST \
 Para entender en detalle cómo funciona el sistema de Tax Code en QuickBooks (que es más complejo que el sistema directo de MEYPAR), consulta:
 
 - **[Sistema Tax Code QuickBooks](./quickbooks-tax-code-system.md)** - Documentación técnica del sistema híbrido de QuickBooks:
-  - ✅ 4 niveles de prioridad para extracción de impuestos
-  - ✅ Dos formatos diferentes que maneja QB
-  - ✅ Logging detallado con método usado
-  - ✅ Sistema de prevención de loops con campo `origin`
-  - ✅ Ejemplos prácticos y comandos de testing
-  - ✅ Comparación: MEYPAR usa sistema directo simple, QB usa sistema híbrido complejo
+  - 4 niveles de prioridad para extracción de impuestos
+  - Dos formatos diferentes que maneja QB
+  - Logging detallado con método usado
+  - Sistema de prevención de loops con campo `origin`
+  - Ejemplos prácticos y comandos de testing
+  - Comparación: MEYPAR usa sistema directo simple, QB usa sistema híbrido complejo
 
 ### **Compatibilidad con QuickBooks**
 

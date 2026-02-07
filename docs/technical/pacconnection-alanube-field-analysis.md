@@ -6,7 +6,7 @@
     "id": 19,
     "organization_id": 2,
     "name": "alanube",
-    "token": "eyJhbGciOiJSUzI1NiIsImtpZCI6ImU1ZTEzYzFiLTJiYTgtNGYzOC1hNWMxLTQ5NWEzMjk3ZjE4ZiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI5OTI0NDFjYy1jMmQ4LTQxNTAtYWE2Mi04NzhlODI1MDRmZWQiLCJlbWFpbCI6ImFwY29udGVzdEBhbGFudWJlLmNvIiwic2NvcGUiOiJjLmQuci51OmFwaXBhbl9mdWxsX2FjY2VzcyBnZW5lcmljIiwiaXNzIjoic2FuZC1hdXRoLWFwaS5hbGVncmEuY29tIiwiaWF0IjoxNjYzMTY0MTUxLCJleHAiOjExNzE3MzQwMjIsImp0aSI6IjliZTRmYTg3LWI4MzMtNDgxZi1hMWNjLTg3YzA3OTNiNWQzZiJ9.bH0VsJ2WbRj5_hetqfyXq95Gm7Ex4fceQpuQpYcBK0wA8ne-nF1qN8yIVl1Q9VC92-KI6oTo7q1hrAT6pXbVyT6erYZNzeP7OHjQ3_iEfjxaUi4_YPzaivSZN3zckaeB8LI4Dc0a3aTYoVMSkb7dpRLKFfu0AOFMwfdWVQRiHuKmKUBAUbgoTwZGdsLeDzN9_56NMYm17X8br_XU6WDOa8dJGd4G4WsndVeNtlaDhu57e3N-d7bnftCD0RAXyD7mq3NHyZp_GO6vOlCVbRPKZ3MQkF3YGNSTAHaayXNDC5fVimPRmApX9G-AduPypmtHb-i9NTp_ejfJy-lSIzO3Bg",
+    "token": "[TOKEN_JWT_REMOVIDO_POR_SEGURIDAD]",
     "expiration": null,
     "endpoint": "https://sandbox-api.alanube.co/pan/v1",
     "description": "Documento validado por ALANUBE SOLUCIONES, S.A. con RUC 155709116-2-2021, es Proveedor Autorizado Calificado, Resolución No. 201-6113 de 06/09/2022.",
