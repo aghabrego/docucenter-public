@@ -245,11 +245,11 @@ Log::debug('MaxGym: linePrice detectado como TOTAL', [
 ```
 
 **Procesamiento**:
-1. Comparar: `58.85 ≉ 55.00` (basePrice) ✗
-2. Comparar: `58.85 ≈ 58.85` (price) ✓
+1. Comparar: `58.85 ≉ 55.00` (basePrice)
+2. Comparar: `58.85 ≈ 58.85` (price)
 3. Detectar: Tipo TOTAL
 4. Calcular: base=58.85-3.85=55.00, total=58.85
-5. Validar: ✓ Todos los montos coinciden
+5. Validar: Todos los montos coinciden
 
 ## Estructura de Datos MaxGym
 
@@ -270,7 +270,7 @@ Log::debug('MaxGym: linePrice detectado como TOTAL', [
 4. **Validar matemáticamente** que los cálculos sean correctos
 5. **Logear el tipo detectado** para auditoría y debugging
 
-## 📝 Commit
+## Commit
 
 ```
 fix: implementar deteccion automatica de tipo de precio en webhook MaxGym
@@ -362,15 +362,15 @@ transacciones de MaxGym fallaran.
 Verificado con webhook real y tests unitarios.
 ```
 
-## 🎯 Próximos Pasos
+## Próximos Pasos
 
-1. ✅ **Corrección aplicada** en `MaxgymService.php`
-2. ✅ **Tests unitarios creados** para validar el cálculo
-3. ⏳ **Pendiente**: Test de integración completo (requiere configuración de entorno)
-4. ⏳ **Pendiente**: Verificar en staging con webhooks reales de MaxGym
-5. ⏳ **Pendiente**: Desplegar a producción
+1. **Corrección aplicada** en `MaxgymService.php`
+2. **Tests unitarios creados** para validar el cálculo
+3. **Pendiente**: Test de integración completo (requiere configuración de entorno)
+4. **Pendiente**: Verificar en staging con webhooks reales de MaxGym
+5. **Pendiente**: Desplegar a producción
 
-## 📚 Referencias
+## Referencias
 
 - **Servicio**: `app/Services/MaxgymService.php`
 - **Job**: `app/Jobs/CreateSaleMaxgymJob.php`
@@ -383,4 +383,4 @@ Verificado con webhook real y tests unitarios.
 
 **Fecha**: 2026-02-06  
 **Issue**: Procesamiento incorrecto de montos en webhook MaxGym  
-**Status**: ✅ Resuelto
+**Status**: Resuelto
