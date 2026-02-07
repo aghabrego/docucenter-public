@@ -6,7 +6,7 @@
 
 ---
 
-## 📋 Tabla de Contenidos
+## Tabla de Contenidos
 
 1. [Resumen Ejecutivo](#resumen-ejecutivo)
 2. [Análisis del Sistema Actual](#análisis-del-sistema-actual)
@@ -21,19 +21,19 @@
 
 ---
 
-## 🎯 Resumen Ejecutivo
+## Resumen Ejecutivo
 
 Este documento describe la implementación de un **sistema de reintento masivo de transacciones** con capacidades avanzadas de configuración de fechas para el módulo de Gestión de Transacciones de DocuCenter. El sistema permitirá:
 
-- ✅ **Procesamiento masivo** de hasta 50 transacciones simultáneas
-- ✅ **Configuración flexible de fechas** (Date y DueDate)
-- ✅ **Feedback en tiempo real** del progreso de cada transacción
-- ✅ **Manejo seguro de tokens** Sanctum de un solo uso
-- ✅ **Validación por módulo** según especificaciones de cada API
+- **Procesamiento masivo** de hasta 50 transacciones simultáneas
+- **Configuración flexible de fechas** (Date y DueDate)
+- **Feedback en tiempo real** del progreso de cada transacción
+- **Manejo seguro de tokens** Sanctum de un solo uso
+- **Validación por módulo** según especificaciones de cada API
 
 ---
 
-## 🔍 Análisis del Sistema Actual
+## Análisis del Sistema Actual
 
 ### Ubicación del Código
 
@@ -99,15 +99,15 @@ private function cleanUpOldSingleUseTokens($organizationId)
 
 ### Limitaciones Actuales
 
-❌ **No hay selección múltiple** de transacciones  
-❌ **No hay procesamiento masivo**  
-❌ **No hay configuración de fechas** Date/DueDate  
-❌ **No hay barra de progreso** para múltiples operaciones  
-❌ **No hay reporte consolidado** de resultados masivos  
+**No hay selección múltiple** de transacciones  
+**No hay procesamiento masivo**  
+**No hay configuración de fechas** Date/DueDate  
+**No hay barra de progreso** para múltiples operaciones  
+**No hay reporte consolidado** de resultados masivos  
 
 ---
 
-## 💡 Propuesta de Mejora
+## Propuesta de Mejora
 
 ### Nuevas Funcionalidades
 
@@ -142,8 +142,8 @@ private function cleanUpOldSingleUseTokens($organizationId)
 │  │  ( ) Usar fecha actual (2026-02-07)     │   │
 │  │  ( ) Usar fechas personalizadas:        │   │
 │  │                                         │   │
-│  │      Date:    [YYYY-MM-DD] 📅          │   │
-│  │      DueDate: [YYYY-MM-DD] 📅          │   │
+│  │      Date:    [YYYY-MM-DD]          │   │
+│  │      DueDate: [YYYY-MM-DD]          │   │
 │  │                                         │   │
 │  └─────────────────────────────────────────┘   │
 │                                                 │
@@ -161,11 +161,11 @@ private function cleanUpOldSingleUseTokens($organizationId)
 │  Progreso: 3 / 5 (60%)                         │
 │  ▓▓▓▓▓▓▓▓▓▓▓▓░░░░░░░░ 60%                      │
 │                                                 │
-│  ✅ ORD-001: Exitoso                           │
-│  ✅ ORD-002: Exitoso                           │
-│  ⏳ ORD-003: Procesando...                     │
-│  ⏸️  ORD-004: Pendiente                         │
-│  ⏸️  ORD-005: Pendiente                         │
+│  ORD-001: Exitoso                           │
+│  ORD-002: Exitoso                           │
+│  ORD-003: Procesando...                     │
+│   ORD-004: Pendiente                         │
+│   ORD-005: Pendiente                         │
 │                                                 │
 │  Tiempo estimado: 12 segundos                  │
 └─────────────────────────────────────────────────┘
@@ -179,15 +179,15 @@ private function cleanUpOldSingleUseTokens($organizationId)
 ├─────────────────────────────────────────────────┤
 │                                                 │
 │  Total procesadas: 5                           │
-│  ✅ Exitosas: 4 (80%)                          │
-│  ❌ Fallidas: 1 (20%)                          │
+│  Exitosas: 4 (80%)                          │
+│  Fallidas: 1 (20%)                          │
 │                                                 │
 │  Detalle:                                      │
-│  ✅ ORD-001 - Exitoso                          │
-│  ✅ ORD-002 - Exitoso                          │
-│  ✅ ORD-003 - Exitoso                          │
-│  ❌ ORD-004 - Error: Invalid token             │
-│  ✅ ORD-005 - Exitoso                          │
+│  ORD-001 - Exitoso                          │
+│  ORD-002 - Exitoso                          │
+│  ORD-003 - Exitoso                          │
+│  ORD-004 - Error: Invalid token             │
+│  ORD-005 - Exitoso                          │
 │                                                 │
 │  [Descargar Reporte] [Cerrar]                 │
 └─────────────────────────────────────────────────┘
@@ -195,7 +195,7 @@ private function cleanUpOldSingleUseTokens($organizationId)
 
 ---
 
-## 🏗️ Arquitectura de la Solución
+## Arquitectura de la Solución
 
 ### Diagrama de Flujo
 
@@ -306,7 +306,7 @@ const MAX_BULK_TRANSACTIONS = 50;           // Límite de selección
 
 ---
 
-## 📅 Mapeo de Fechas por Módulo
+## Mapeo de Fechas por Módulo
 
 Análisis de cómo cada módulo utiliza los campos `Date` y `DueDate` en `SalesHeaderImp`:
 
@@ -1550,7 +1550,7 @@ Un lote de 20 transacciones de MaxGym falló ayer por un problema temporal en el
    - Usuario: Usuario con token válido
    - Módulo: MaxGym
    - API: Crear Venta MaxGym
-   - Fechas: ✅ **Usar fecha actual**
+   - Fechas: **Usar fecha actual**
 5. Clic en "Procesar 20 Transacciones"
 6. Ver progreso en tiempo real
 7. Revisar reporte de resultados
@@ -1573,7 +1573,7 @@ Un lote de 20 transacciones de MaxGym falló ayer por un problema temporal en el
    - Usuario: Usuario autorizado
    - Módulo: Shopify
    - API: Crear Venta Shopify
-   - Fechas: ✅ **Usar fechas personalizadas**
+   - Fechas: **Usar fechas personalizadas**
      - Date: 2026-01-15
      - DueDate: 2026-01-15
 5. Procesar
@@ -1592,7 +1592,7 @@ Un lote de 20 transacciones de MaxGym falló ayer por un problema temporal en el
 1. Filtrar por módulo Lightspeed y estado `failed`
 2. Seleccionar las 30 transacciones
 3. Configurar procesamiento masivo:
-   - Fechas: ✅ **Usar fecha original de la transacción**
+   - Fechas: **Usar fecha original de la transacción**
 4. Procesar
 
 **Resultado Esperado:**
@@ -1788,7 +1788,7 @@ public function aplica_fechas_personalizadas_correctamente()
 
 ---
 
-## 📊 Métricas de Performance
+## Métricas de Performance
 
 ### Tiempos Estimados
 
@@ -1808,7 +1808,7 @@ public function aplica_fechas_personalizadas_correctamente()
 
 ---
 
-## 🚀 Plan de Implementación
+## Plan de Implementación
 
 ### Fase 1: Backend (2-3 horas)
 - [ ] Agregar nuevas properties al componente Manage
@@ -1841,16 +1841,16 @@ public function aplica_fechas_personalizadas_correctamente()
 
 ---
 
-## 📝 Conclusiones
+## Conclusiones
 
 Este sistema de reintento masivo de transacciones proporciona:
 
-✅ **Eficiencia operativa** - Procesar hasta 50 transacciones simultáneamente  
-✅ **Flexibilidad de fechas** - Múltiples opciones según necesidad del negocio  
-✅ **Seguridad robusta** - Tokens de un solo uso y validaciones múltiples  
-✅ **Feedback en tiempo real** - Progreso y resultados detallados  
-✅ **Trazabilidad completa** - Logs detallados y reportes exportables  
-✅ **Escalabilidad** - Base sólida para implementar Jobs asíncronos en el futuro
+**Eficiencia operativa** - Procesar hasta 50 transacciones simultáneamente  
+**Flexibilidad de fechas** - Múltiples opciones según necesidad del negocio  
+**Seguridad robusta** - Tokens de un solo uso y validaciones múltiples  
+**Feedback en tiempo real** - Progreso y resultados detallados  
+**Trazabilidad completa** - Logs detallados y reportes exportables  
+**Escalabilidad** - Base sólida para implementar Jobs asíncronos en el futuro
 
 ### Próximos Pasos
 
