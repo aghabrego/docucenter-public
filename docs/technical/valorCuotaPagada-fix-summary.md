@@ -42,7 +42,7 @@ El problema crítico estaba en `/app/Services/HKAService.php` línea 317:
 $totales->listaFormaPago[] = [
     'formaPagoFact' => $this->getNestedValue($formaPago, 'iFormaPago'),
     'valorCuotaPagada' => $this->normalizeNumericValueToTwoDecimals($this->getNestedValue($formaPago, 'dVlrCuota')),
-    // Siempre usaba dVlrCuota, ignorando valorCuotaPagada del array original
+    // ⬆️ Siempre usaba dVlrCuota, ignorando valorCuotaPagada del array original
     'descFormaPago' => $this->getNestedValue($formaPago, 'dFormaPagoDesc'),
 ];
 ```
@@ -85,8 +85,8 @@ $payments[] = $this->validArray([
     'iFormaPago' => $type->code,
     ...$type->code === '99' ? ['dFormaPagoDesc' => $type->name] : [],
     'dVlrCuota' => $this->numberFormat($totalValue),
-    'valorCuotaPagada' => $this->numberFormat($totalValue), // AGREGADO
-    'cNroAutoriza' => '', // AGREGADO
+    'valorCuotaPagada' => $this->numberFormat($totalValue), // ✅ AGREGADO
+    'cNroAutoriza' => '', // ✅ AGREGADO
 ]);
 
 // En pago adicional para descuentos
@@ -94,8 +94,8 @@ $payments[] = $this->validArray([
     'iFormaPago' => $type->code,
     ...$type->code === '99' ? ['dFormaPagoDesc' => $type->name] : [],
     'dVlrCuota' => $this->numberFormat($montoDescuentos),
-    'valorCuotaPagada' => $this->numberFormat($montoDescuentos), // AGREGADO
-    'cNroAutoriza' => '', // AGREGADO
+    'valorCuotaPagada' => $this->numberFormat($montoDescuentos), // ✅ AGREGADO
+    'cNroAutoriza' => '', // ✅ AGREGADO
 ]);
 ```
 
@@ -109,7 +109,7 @@ $lastIndex = count($payments) - 1;
 $adjustment = $dVTot - ($totalPayments - $payments[$lastIndex]['dVlrCuota']);
 $payments[$lastIndex]['dVlrCuota'] = $this->numberFormat($adjustment, 2);
 // CRÍTICO: Sincronizar valorCuotaPagada con el ajuste
-$payments[$lastIndex]['valorCuotaPagada'] = $this->numberFormat($adjustment, 2); // AGREGADO
+$payments[$lastIndex]['valorCuotaPagada'] = $this->numberFormat($adjustment, 2); // ✅ AGREGADO
 ```
 
 ### 3. Corregir HKAService para Leer Campo Correcto
@@ -243,9 +243,9 @@ El campo `cNroAutoriza` (número de autorización) se agrega como string vacío 
 
 El método `validArray()` (definido en `vendor/weirdo/helper/src/Helper/Traits/HelperArray.php`) filtra valores `null` y strings vacíos usando `!empty($value)`. Por eso:
 
-- `'valorCuotaPagada' => '100.00'` - Se mantiene (tiene valor)
-- `'cNroAutoriza' => ''` - Se elimina (string vacío)
-- `'valorCuotaPagada' => 0` - Se elimina (0 es empty)
+- ✅ `'valorCuotaPagada' => '100.00'` - Se mantiene (tiene valor)
+- ❌ `'cNroAutoriza' => ''` - Se elimina (string vacío)
+- ✅ `'valorCuotaPagada' => 0` - Se elimina (0 es empty)
 
 **Recomendación**: Para campos numéricos que pueden ser 0, no usar `validArray()` o agregar lógica especial.
 

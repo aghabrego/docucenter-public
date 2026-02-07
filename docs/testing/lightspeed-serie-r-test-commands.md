@@ -1,8 +1,8 @@
-#  Comandos de Testing para Lightspeed Serie R
+# 🧪 Comandos de Testing para Lightspeed Serie R
 
 ## **Número de Ticket Real para Testing**
 
-### **Datos de Testing Identificados**
+### **📋 Datos de Testing Identificados**
 
 **Organización de Prueba:**
 - **Nombre**: VOGLIA MULTIPLAZA, S.A.
@@ -10,7 +10,7 @@
 - **Ticket Number**: `220000038728`
 - **Sale ID**: `38728`
 
-### **Comandos de Testing Disponibles**
+### **🚀 Comandos de Testing Disponibles**
 
 #### **1. Comando Principal con Ticket Específico**
 ```bash
@@ -46,7 +46,7 @@ docker exec -it docucenter-app-1 php artisan word:create-access-token-serie-r \
   --organization_id=[ORG_ID]
 ```
 
-### **Verificación de Datos de Testing**
+### **🔍 Verificación de Datos de Testing**
 
 #### **Buscar Organization ID de VOGLIA MULTIPLAZA**
 ```bash
@@ -66,7 +66,7 @@ docker exec -it docucenter-app-1 php artisan tinker
   ->get(['id', 'organization_id', 'application', 'created_at']);
 ```
 
-### **Datos de Testing Verificados en el Código**
+### **📊 Datos de Testing Verificados en el Código**
 
 #### **Archivo**: `tests/Unit/LightspeedTest.php`
 ```php
@@ -87,7 +87,7 @@ $saleId = 38728;
 - **Account ID hardcodeado**: `192176` (múltiples líneas)
 - **Soporte para ticket_number**: Líneas 269-270
 
-### **Casos de Uso para Testing**
+### **🎯 Casos de Uso para Testing**
 
 #### **Caso 1: Testing de Ticket Específico**
 ```bash
@@ -116,7 +116,7 @@ docker exec -it docucenter-app-1 tail -f storage/logs/laravel.log | grep "shop_n
 # 2. SetSalesOrdersJob (con ticket específico si se proporciona)
 ```
 
-### **Logging y Debugging**
+### **📝 Logging y Debugging**
 
 #### **Monitorear Ejecución**
 ```bash
@@ -139,22 +139,22 @@ KEYS *jobs*
 LLEN default
 ```
 
-### **Consideraciones Importantes**
+### **🚨 Consideraciones Importantes**
 
 #### **Account ID Hardcodeado**
-**NOTA CRÍTICA**: El Job `SetSalesOrdersJob.php` tiene el Account ID `192176` hardcodeado en múltiples líneas. Esto significa que:
+⚠️ **NOTA CRÍTICA**: El Job `SetSalesOrdersJob.php` tiene el Account ID `192176` hardcodeado en múltiples líneas. Esto significa que:
 
 1. **Solo funciona para la organización VOGLIA MULTIPLAZA**
 2. **Otras organizaciones Serie R pueden fallar**
 3. **Es necesario refactorizar para usar Account ID dinámico**
 
 #### **Datos de Testing Reales**
-**CONFIRMADO**: Los datos de testing son reales:
+✅ **CONFIRMADO**: Los datos de testing son reales:
 - Ticket `220000038728` existe en el sistema
 - Account ID `192176` es válido
 - Sale ID `38728` corresponde al ticket
 
-### **Comando de Testing Recomendado**
+### **🔧 Comando de Testing Recomendado**
 
 ```bash
 # Comando completo para testing con datos reales
@@ -165,14 +165,14 @@ docker exec -it docucenter-app-1 php artisan word:update-lightspeed-serie-r \
 ```
 
 Este comando:
-1. Usa datos de testing reales verificados
-2. Procesa un ticket específico conocido
-3. Incluye pausa para debugging
-4. Funciona con la configuración actual hardcodeada
+1. ✅ Usa datos de testing reales verificados
+2. ✅ Procesa un ticket específico conocido
+3. ✅ Incluye pausa para debugging
+4. ✅ Funciona con la configuración actual hardcodeada
 
 ---
 
-## Referencias
+## 📚 Referencias
 
 - **Archivo de Test**: `tests/Unit/LightspeedTest.php`
 - **Job Principal**: `app/Jobs/LightspeedSerieR/SetSalesOrdersJob.php`

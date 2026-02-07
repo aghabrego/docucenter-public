@@ -18,40 +18,40 @@ Crea y emite una factura electrónica basada en datos provenientes de Shopify (�
 
 | Campo | Tipo | Requerido | Descripción |
 |-------|------|-----------|-------------|
-| `order.id` | integer | | ID único de la orden en Shopify |
-| `order.admin_graphql_api_id` | string | | ID de GraphQL API |
-| `order.number` | integer | | Número de la orden |
-| `order.email` | string | | Email del cliente |
-| `order.created_at` | string | | Fecha de creación ISO 8601 |
-| `order.currency` | string | | Moneda (USD, PAB) |
-| `order.current_total_price` | string | | Total de la orden |
-| `order.current_subtotal_price` | string | | Subtotal de la orden |
-| `order.current_total_tax` | string | | Total de impuestos |
+| `order.id` | integer | ✅ | ID único de la orden en Shopify |
+| `order.admin_graphql_api_id` | string | ✅ | ID de GraphQL API |
+| `order.number` | integer | ✅ | Número de la orden |
+| `order.email` | string | ✅ | Email del cliente |
+| `order.created_at` | string | ✅ | Fecha de creación ISO 8601 |
+| `order.currency` | string | ✅ | Moneda (USD, PAB) |
+| `order.current_total_price` | string | ✅ | Total de la orden |
+| `order.current_subtotal_price` | string | ✅ | Subtotal de la orden |
+| `order.current_total_tax` | string | ✅ | Total de impuestos |
 
 #### Cliente
 
 | Campo | Tipo | Requerido | Descripción |
 |-------|------|-----------|-------------|
-| `order.customer.id` | integer | | ID del cliente en Shopify |
-| `order.customer.email` | string | | Email del cliente |
-| `order.customer.first_name` | string | | Nombre del cliente |
-| `order.customer.last_name` | string | | Apellido del cliente |
-| `order.customer.phone` | string | | Teléfono del cliente |
+| `order.customer.id` | integer | ✅ | ID del cliente en Shopify |
+| `order.customer.email` | string | ✅ | Email del cliente |
+| `order.customer.first_name` | string | ❌ | Nombre del cliente |
+| `order.customer.last_name` | string | ❌ | Apellido del cliente |
+| `order.customer.phone` | string | ❌ | Teléfono del cliente |
 
 #### Dirección de Facturación
 
 | Campo | Tipo | Requerido | Descripción |
 |-------|------|-----------|-------------|
-| `order.billing_address.first_name` | string | | Nombre |
-| `order.billing_address.last_name` | string | | Apellido |
-| `order.billing_address.company` | string | | Empresa |
-| `order.billing_address.address1` | string | | Dirección línea 1 |
-| `order.billing_address.address2` | string | | Dirección línea 2 |
-| `order.billing_address.city` | string | | Ciudad |
-| `order.billing_address.province` | string | | Provincia/Estado |
-| `order.billing_address.country` | string | | País |
-| `order.billing_address.zip` | string | | Código postal |
-| `order.billing_address.phone` | string | | Teléfono |
+| `order.billing_address.first_name` | string | ✅ | Nombre |
+| `order.billing_address.last_name` | string | ✅ | Apellido |
+| `order.billing_address.company` | string | ❌ | Empresa |
+| `order.billing_address.address1` | string | ✅ | Dirección línea 1 |
+| `order.billing_address.address2` | string | ❌ | Dirección línea 2 |
+| `order.billing_address.city` | string | ✅ | Ciudad |
+| `order.billing_address.province` | string | ✅ | Provincia/Estado |
+| `order.billing_address.country` | string | ✅ | País |
+| `order.billing_address.zip` | string | ✅ | Código postal |
+| `order.billing_address.phone` | string | ❌ | Teléfono |
 
 ### Ejemplo de Request (Basado en Test)
 

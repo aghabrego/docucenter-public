@@ -1,14 +1,14 @@
 # Análisis: Actualización PlusMovil API con AWS Cognito
 
-## NOTA IMPORTANTE: URL Correcta
+## ⚠️ NOTA IMPORTANTE: URL Correcta
 
 **URL que funciona:**
-- QA: `https://kg0zs65dq0.execute-api.us-east-1.amazonaws.com/qa` 
-- Prod: `https://0m2jyxhl41.execute-api.us-east-1.amazonaws.com/prod` 
+- QA: `https://kg0zs65dq0.execute-api.us-east-1.amazonaws.com/qa` ✅
+- Prod: `https://0m2jyxhl41.execute-api.us-east-1.amazonaws.com/prod` ✅
 
 **URL que NO funciona** (DNS no resuelve):
-- `https://xka96gucj8.execute-api.us-east-1.amazonaws.com/qa`
-- `https://xka96gucj8.execute-api.us-east-1.amazonaws.com/prod`
+- ❌ `https://xka96gucj8.execute-api.us-east-1.amazonaws.com/qa`
+- ❌ `https://xka96gucj8.execute-api.us-east-1.amazonaws.com/prod`
 
 Verificado en pruebas del 31 de octubre de 2025. Ver `plusmovil-test-results.md`.
 

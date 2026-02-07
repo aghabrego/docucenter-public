@@ -6,13 +6,13 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Documentación técnica y de usuario de DocuCenter - Sistema de facturación electrónica">
+        <meta name="description" content="Documentación técnica y de usuario de Docucenter">
       
       
         <meta name="author" content="aghabrego">
       
       
-        <link rel="canonical" href="https://aghabrego.github.io/docucenter-public/document-ai-training-workflow/">
+        <link rel="canonical" href="https://aghabrego.github.io/docucenter/document-ai-training-workflow/">
       
       
       
@@ -20,19 +20,16 @@
         
       
       
-      <link rel="icon" href="https://home.apconpanama.me/wp-content/uploads/2024/03/logo3.png">
+      <link rel="icon" href="../docs/favicon.ico">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
     
     
       
-        <title>Guía de Entrenamiento de Document AI - Workflow Completo - DocuCenter</title>
+        <title>Guía de Entrenamiento de Document AI - Workflow Completo - Docucenter</title>
       
     
     
       <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
-      
-        
-        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -60,14 +57,7 @@
   </head>
   
   
-    
-    
-      
-    
-    
-    
-    
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="light-blue">
+    <body dir="ltr">
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -88,11 +78,13 @@
     
       
 
-<header class="md-header" data-md-component="header">
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Cabecera">
-    <a href=".." title="DocuCenter" class="md-header__button md-logo" aria-label="DocuCenter" data-md-component="logo">
+    <a href=".." title="Docucenter" class="md-header__button md-logo" aria-label="Docucenter" data-md-component="logo">
       
-  <img src="https://home.apconpanama.me/wp-content/uploads/2024/03/logo3.png" alt="logo">
+  <img src="../docs/logo.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -103,7 +95,7 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            DocuCenter
+            Docucenter
           </span>
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
@@ -115,18 +107,6 @@
         </div>
       </div>
     </div>
-    
-      
-        <form class="md-header__option" data-md-component="palette">
-  
-    
-    
-    
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="light-blue"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
-    
-  
-</form>
-      
     
     
       <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
@@ -158,8 +138,6 @@
         </button>
       </nav>
       
-        <div class="md-search__suggest" data-md-component="search-suggest"></div>
-      
     </form>
     <div class="md-search__output">
       <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
@@ -177,13 +155,13 @@
     
     
       <div class="md-header__source">
-        <a href="https://github.com/aghabrego/docucenter-public" title="Ir al repositorio" class="md-source" data-md-component="source">
+        <a href="https://github.com/aghabrego/docucenter" title="Ir al repositorio" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
   </div>
   <div class="md-source__repository">
-    aghabrego/docucenter-public
+    aghabrego/docucenter
   </div>
 </a>
       </div>
@@ -196,154 +174,6 @@
       
       
         
-          
-            
-<nav class="md-tabs" aria-label="Pestañas" data-md-component="tabs">
-  <div class="md-grid">
-    <ul class="md-tabs__list">
-      
-        
-  
-  
-  
-  
-    <li class="md-tabs__item">
-      <a href=".." class="md-tabs__link">
-        
-  
-  
-    
-  
-  Inicio
-
-      </a>
-    </li>
-  
-
-      
-        
-  
-  
-  
-  
-    
-    
-      <li class="md-tabs__item">
-        <a href="../api/" class="md-tabs__link">
-          
-  
-  
-  APIs
-
-        </a>
-      </li>
-    
-  
-
-      
-        
-  
-  
-  
-  
-    
-    
-      <li class="md-tabs__item">
-        <a href="../optimizations/" class="md-tabs__link">
-          
-  
-  
-  Optimizaciones
-
-        </a>
-      </li>
-    
-  
-
-      
-        
-  
-  
-  
-  
-    
-    
-      <li class="md-tabs__item">
-        <a href="../technical/" class="md-tabs__link">
-          
-  
-  
-  Documentación Técnica
-
-        </a>
-      </li>
-    
-  
-
-      
-        
-  
-  
-  
-  
-    
-    
-      <li class="md-tabs__item">
-        <a href="../validations/" class="md-tabs__link">
-          
-  
-  
-  Validaciones
-
-        </a>
-      </li>
-    
-  
-
-      
-        
-  
-  
-  
-  
-    
-    
-      <li class="md-tabs__item">
-        <a href="../testing/" class="md-tabs__link">
-          
-  
-  
-  Testing
-
-        </a>
-      </li>
-    
-  
-
-      
-        
-  
-  
-  
-  
-    
-    
-      <li class="md-tabs__item">
-        <a href="../integrations/" class="md-tabs__link">
-          
-  
-  
-  Integraciones
-
-        </a>
-      </li>
-    
-  
-
-      
-    </ul>
-  </div>
-</nav>
           
         
       
@@ -358,27 +188,25 @@
                     
 
 
-  
 
-
-<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navegación" data-md-level="0">
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="DocuCenter" class="md-nav__button md-logo" aria-label="DocuCenter" data-md-component="logo">
+    <a href=".." title="Docucenter" class="md-nav__button md-logo" aria-label="Docucenter" data-md-component="logo">
       
-  <img src="https://home.apconpanama.me/wp-content/uploads/2024/03/logo3.png" alt="logo">
+  <img src="../docs/logo.png" alt="logo">
 
     </a>
-    DocuCenter
+    Docucenter
   </label>
   
     <div class="md-nav__source">
-      <a href="https://github.com/aghabrego/docucenter-public" title="Ir al repositorio" class="md-source" data-md-component="source">
+      <a href="https://github.com/aghabrego/docucenter" title="Ir al repositorio" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
   </div>
   <div class="md-source__repository">
-    aghabrego/docucenter-public
+    aghabrego/docucenter
   </div>
 </a>
     </div>
@@ -422,19 +250,12 @@
     
     
     
-      
-      
-        
-      
-    
     
     <li class="md-nav__item md-nav__item--nested">
       
         
         
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
         
           
           <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
@@ -444,7 +265,7 @@
   <span class="md-ellipsis">
     
   
-    APIs
+    API Documentation
   
 
     
@@ -460,7 +281,54 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    APIs
+    API Documentation
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sage ACICloud
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Sage ACICloud
   
 
           </label>
@@ -473,14 +341,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../api/" class="md-nav__link">
+      <a href="../api/sage-acicloud/invoices-api/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    APIs de DocuCenter
+    Facturación - Invoices
   
 
     
@@ -500,23 +368,248 @@
   
   
   
-    
-    
-    
-    
-      
-      
+    <li class="md-nav__item">
+      <a href="../api/sage-acicloud/customers-api/" class="md-nav__link">
         
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Clientes - Customers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/sage-acicloud/vendors-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Proveedores - Vendors
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/sage-acicloud/purchases-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Compras - Purchases
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/sage-acicloud/products-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Productos - Products
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/sage-acicloud/jobs-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trabajos - Jobs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/sage-acicloud/accounting-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contabilidad General
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/sage-acicloud/payments-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pagos y Créditos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/sage-acicloud/inventory-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inventario - Inventory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
     
     
     <li class="md-nav__item md-nav__item--nested">
       
         
         
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
         
           
           <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
@@ -562,147 +655,7 @@
   <span class="md-ellipsis">
     
   
-    API Facturación Electrónica (FE) - DocuCenter
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../api/fe/acicloud-fe-api/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    API Facturación Electrónica - Integración ACICloud FE
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../api/fe/document-emission-api/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    API Facturación Electrónica - Emisión de Documentos
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../api/fe/shopify-api/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    API Facturación Electrónica - Integración Shopify
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../api/fe/lightspeed-api/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    API Facturación Electrónica - Integración Lightspeed
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../api/fe/maxgym-api/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    API Facturación Electrónica - Integración Maxgym
+    APIs de Facturación Electrónica
   
 
     
@@ -730,7 +683,35 @@
   <span class="md-ellipsis">
     
   
-    API Facturación Electrónica - Integración Meypar
+    Integración Meypar
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/fe/shopify-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integración Shopify
   
 
     
@@ -758,7 +739,175 @@
   <span class="md-ellipsis">
     
   
-    API Facturación Electrónica - Integración Kart21
+    Integración Kart21
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/fe/lightspeed-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integración Lightspeed
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/fe/maxgym-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integración Maxgym
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/fe/acicloud-fe-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ACICloud FE
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/fe/import-xml-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Import XML
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/fe/emit-json-object-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Emit JSON Object
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/fe/download-base64-document-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Download Base64 Document
   
 
     
@@ -790,280 +939,15 @@
     
     
     
-      
-      
-        
-      
-    
     
     <li class="md-nav__item md-nav__item--nested">
       
         
         
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
         
           
           <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Sage ACICloud
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2_3">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Sage ACICloud
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../api/sage-acicloud/customers-api/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    API Sage ACICloud - Módulo Clientes
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../api/sage-acicloud/products-api/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    API Productos - Sage ACICloud
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../api/sage-acicloud/sales-orders-api/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    API Sage ACICloud - Módulo Órdenes de Venta
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../api/sage-acicloud/purchases-api/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    API Compras - Sage ACICloud
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../api/sage-acicloud/payments-api/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    API Pagos y Créditos - Sage ACICloud
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../api/sage-acicloud/inventory-api/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    API Inventario - Sage ACICloud
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../api/sage-acicloud/jobs-api/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    API Trabajos/Jobs - Sage ACICloud
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_4" >
-        
-          
-          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
             
   
   
@@ -1081,8 +965,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2_4">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -1106,7 +990,90 @@
   <span class="md-ellipsis">
     
   
-    API de Organizaciones
+    Gestión de Organizaciones
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ubicaciones Geográficas
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Ubicaciones Geográficas
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/locations/locations-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API de Ubicaciones
   
 
     
@@ -1145,19 +1112,12 @@
     
     
     
-      
-      
-        
-      
-    
     
     <li class="md-nav__item md-nav__item--nested">
       
         
         
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
         
           
           <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
@@ -1167,7 +1127,7 @@
   <span class="md-ellipsis">
     
   
-    Optimizaciones
+    Sistema de Testing
   
 
     
@@ -1183,7 +1143,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Optimizaciones
+    Sistema de Testing
   
 
           </label>
@@ -1196,96 +1156,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../optimizations/" class="md-nav__link">
+      <a href="../testing/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Optimizaciones - DocuCenter
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_2" >
-        
-          
-          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Performance
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_3_2">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Performance
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../optimizations/customer-supplier-optimizations/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Optimizaciones para el manejo de muchos clientes
+    Índice de Testing
   
 
     
@@ -1306,14 +1184,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../optimizations/mysql-optimization-circuit-breaker/" class="md-nav__link">
+      <a href="../TESTING_SYSTEM_SUMMARY/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Optimización MySQL 8.0 y Circuit Breaker para DocuCenter
+    Resumen Ejecutivo
   
 
     
@@ -1322,14 +1200,6 @@
   
 
       </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
     </li>
   
 
@@ -1352,19 +1222,12 @@
     
     
     
-      
-      
-        
-      
-    
     
     <li class="md-nav__item md-nav__item--nested">
       
         
         
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
         
           
           <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
@@ -1403,96 +1266,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../technical/" class="md-nav__link">
+      <a href="../technical/README.md" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Documentación Técnica - DocuCenter
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_2" >
-        
-          
-          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    QuickBooks
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4_2">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    QuickBooks
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../technical/quickbooks-webhook-organizationid-fix/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Fix: QuickBooks Webhook OrganizationId Duplicado
+    Soluciones
   
 
     
@@ -1513,660 +1294,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../technical/quickbooks-bills-job-graceful-validation/" class="md-nav__link">
+      <a href="../technical/lightspeed_audit_improvement/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Fix: Validación Graceful de Tablas en CreateIntuitBillsJob
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../technical/quickbooks-fiscal-number-validation-system/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Sistema de Validación de Números Fiscales QuickBooks
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_3" >
-        
-          
-          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    MaxGym
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4_3">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    MaxGym
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../technical/maxgym-amount-calculation-fix/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Corrección de Cálculo de Montos en MaxGym API
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_4" >
-        
-          
-          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Document AI
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4_4">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Document AI
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../technical/document-ai-import-to-workbench/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Document AI - Importación a Workbench
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../technical/document-ai-import-implementation-summary/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Document AI - Implementación Import to Workbench
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_5" >
-        
-          
-          <label class="md-nav__link" for="__nav_4_5" id="__nav_4_5_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Alanube DOM
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_5_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4_5">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Alanube DOM
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../technical/alanube-dom-service-usage/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Guía de Uso del Servicio AlanubeDomService
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../technical/alanube-dom-export-invoices/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Facturas de Exportación Electrónica (46) - Alanube DOM
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../technical/ALANUBE_DOM_COMPLETE_INTEGRATION/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Integración Completa Alanube DOM - República Dominicana
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../technical/FISCAL_CREDIT_IMPLEMENTATION_SUMMARY/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Implementación Completa de Facturas de Crédito Fiscal (31) - Alanube DOM
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_6" >
-        
-          
-          <label class="md-nav__link" for="__nav_4_6" id="__nav_4_6_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Soluciones Técnicas
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_6_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4_6">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Soluciones Técnicas
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../technical/ezeeissued-solution-summary/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Solución Implementada - Campo EzeeIssued
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../technical/getsaleproperty-optimizations-summary/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Optimizaciones Completas - getSaleProperty() - Create.php
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../technical/ezeeissued-field-correction-summary/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Corrección de Campo EzeeIssued - Resumen Técnico
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_7" >
-        
-          
-          <label class="md-nav__link" for="__nav_4_7" id="__nav_4_7_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Pagos y Cálculos
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_7_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4_7">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Pagos y Cálculos
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../technical/payment-calculation-fix/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Análisis de Discrepancias en Cálculo de Pagos - Facturación Electrónica
+    Auditoría Lightspeed
   
 
     
@@ -2194,97 +1329,7 @@
   <span class="md-ellipsis">
     
   
-    Solución Final: Sincronización Completa de Pagos en Facturación Electrónica
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_8" >
-        
-          
-          <label class="md-nav__link" for="__nav_4_8" id="__nav_4_8_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    SQL Server
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_8_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4_8">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    SQL Server
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../technical/sql-server-complete-store-id-filtering/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Implementación Completa de Filtrado por Store ID en Jobs SQL Server
+    Sincronización de Pagos
   
 
     
@@ -2305,14 +1350,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../technical/sql-server-store-id-filtering/" class="md-nav__link">
+      <a href="../technical/payment-calculation-fix/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Implementación de Filtrado por Store ID en STInvoiceJob
+    Corrección Cálculo Pagos
   
 
     
@@ -2332,14 +1377,6 @@
     </li>
   
 
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
     
       
       
@@ -2350,20 +1387,13 @@
     
     
     
-    
-      
-      
-        
-      
     
     
     <li class="md-nav__item md-nav__item--nested">
       
         
         
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
         
           
           <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
@@ -2409,7 +1439,7 @@
   <span class="md-ellipsis">
     
   
-    Validaciones - DocuCenter
+    Resumen
   
 
     
@@ -2429,60 +1459,6 @@
   
   
   
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5_2" >
-        
-          
-          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Documentos Fiscales
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_5_2">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Documentos Fiscales
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
     <li class="md-nav__item">
       <a href="../validations/createSale-ruc-validation/" class="md-nav__link">
         
@@ -2491,7 +1467,7 @@
   <span class="md-ellipsis">
     
   
-    Validación de RUC en CreateSaleMaxgymRequest
+    Validación RUC CreateSale
   
 
     
@@ -2519,365 +1495,7 @@
   <span class="md-ellipsis">
     
   
-    Validación de RUC en MaxgymService
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
-        
-          
-          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Testing
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_6">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Testing
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../testing/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Sistema de Testing DocuCenter
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6_2" >
-        
-          
-          <label class="md-nav__link" for="__nav_6_2" id="__nav_6_2_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Reportes de Error
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_2_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_6_2">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Reportes de Error
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../testing/PLUSMOVIL-PRODUCTION-ERROR-REPORT/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Reporte Error PlusMóvil Producción
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
-        
-          
-          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Integraciones
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_7">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Integraciones
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../integrations/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Integraciones Disponibles
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7_2" >
-        
-          
-          <label class="md-nav__link" for="__nav_7_2" id="__nav_7_2_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    PlusMóvil
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_2_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_7_2">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    PlusMóvil
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../integrations/plusmovil-implementation-summary/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Resumen Implementación
+    Validación RUC Maxgym
   
 
     
@@ -2898,14 +1516,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../integrations/plusmovil-implementation-analysis/" class="md-nav__link">
+      <a href="../validations/meypar-validations/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Análisis
+    Validaciones MEYPAR
   
 
     
@@ -2926,14 +1544,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../integrations/plusmovil-api-testing-results/" class="md-nav__link">
+      <a href="../validations/validation_comparison/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Resultados Testing API
+    Comparación Validaciones
   
 
     
@@ -2942,70 +1560,6 @@
   
 
       </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../integrations/plusmovil-continuation-plan/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Plan Continuación
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../integrations/plusmovil-next-steps/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Próximos Pasos
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
     </li>
   
 
@@ -3048,7 +1602,7 @@
   <a href="#resumen-ejecutivo" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Resumen Ejecutivo
+        📋 Resumen Ejecutivo
       
     </span>
   </a>
@@ -3059,7 +1613,7 @@
   <a href="#que-hace-este-sistema" class="md-nav__link">
     <span class="md-ellipsis">
       
-        ¿Qué hace este sistema?
+        🎯 ¿Qué hace este sistema?
       
     </span>
   </a>
@@ -3070,12 +1624,12 @@
   <a href="#workflow-paso-a-paso" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Workflow Paso a Paso
+        🚀 Workflow Paso a Paso
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Workflow Paso a Paso">
+    <nav class="md-nav" aria-label="🚀 Workflow Paso a Paso">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -3259,19 +1813,19 @@
   <a href="#panel-de-estadisticas-explicado" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Panel de Estadísticas Explicado
+        📊 Panel de Estadísticas Explicado
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Panel de Estadísticas Explicado">
+    <nav class="md-nav" aria-label="📊 Panel de Estadísticas Explicado">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#total-documents" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Total Documents
+        🔵 Total Documents
       
     </span>
   </a>
@@ -3282,7 +1836,7 @@
   <a href="#annotated" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Annotated
+        ✅ Annotated
       
     </span>
   </a>
@@ -3293,7 +1847,7 @@
   <a href="#pdfs-in-gcs" class="md-nav__link">
     <span class="md-ellipsis">
       
-        PDFs in GCS
+        ☁️ PDFs in GCS
       
     </span>
   </a>
@@ -3304,7 +1858,7 @@
   <a href="#json-generated" class="md-nav__link">
     <span class="md-ellipsis">
       
-        JSON Generated
+        📄 JSON Generated
       
     </span>
   </a>
@@ -3315,7 +1869,7 @@
   <a href="#pending-json" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Pending JSON
+        ⏰ Pending JSON
       
     </span>
   </a>
@@ -3326,7 +1880,7 @@
   <a href="#training-status" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Training Status
+        🏆 Training Status
       
     </span>
   </a>
@@ -3342,19 +1896,19 @@
   <a href="#optimizaciones-implementadas" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Optimizaciones Implementadas
+        🔧 Optimizaciones Implementadas
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Optimizaciones Implementadas">
+    <nav class="md-nav" aria-label="🔧 Optimizaciones Implementadas">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#1-control-de-subidas-duplicadas" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Control de Subidas Duplicadas
+        1. Control de Subidas Duplicadas ✅
       
     </span>
   </a>
@@ -3365,7 +1919,7 @@
   <a href="#2-procesamiento-en-background" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Procesamiento en Background
+        2. Procesamiento en Background ✅
       
     </span>
   </a>
@@ -3376,7 +1930,7 @@
   <a href="#3-tracking-de-estado" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Tracking de Estado
+        3. Tracking de Estado ✅
       
     </span>
   </a>
@@ -3387,7 +1941,7 @@
   <a href="#4-mapeo-inteligente-de-texto" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4. Mapeo Inteligente de Texto
+        4. Mapeo Inteligente de Texto ✅
       
     </span>
   </a>
@@ -3403,12 +1957,12 @@
   <a href="#configuracion-tecnica" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Configuración Técnica
+        ⚙️ Configuración Técnica
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Configuración Técnica">
+    <nav class="md-nav" aria-label="⚙️ Configuración Técnica">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -3464,12 +2018,12 @@
   <a href="#troubleshooting" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Troubleshooting
+        🐛 Troubleshooting
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Troubleshooting">
+    <nav class="md-nav" aria-label="🐛 Troubleshooting">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -3525,12 +2079,12 @@
   <a href="#comandos-utiles" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Comandos Útiles
+        📝 Comandos Útiles
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Comandos Útiles">
+    <nav class="md-nav" aria-label="📝 Comandos Útiles">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -3575,7 +2129,7 @@
   <a href="#workflow-resumido-tldr" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Workflow Resumido (TL;DR)
+        🔄 Workflow Resumido (TL;DR)
       
     </span>
   </a>
@@ -3586,12 +2140,12 @@
   <a href="#referencias-tecnicas" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Referencias Técnicas
+        📚 Referencias Técnicas
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Referencias Técnicas">
+    <nav class="md-nav" aria-label="📚 Referencias Técnicas">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -3636,19 +2190,19 @@
   <a href="#funcionalidades-destacadas" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Funcionalidades Destacadas
+        ✨ Funcionalidades Destacadas
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Funcionalidades Destacadas">
+    <nav class="md-nav" aria-label="✨ Funcionalidades Destacadas">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#lo-que-el-sistema-hace-automaticamente" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Lo que el sistema HACE automáticamente:
+        ✅ Lo que el sistema HACE automáticamente:
       
     </span>
   </a>
@@ -3659,7 +2213,7 @@
   <a href="#lo-que-debes-hacer-manualmente" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Lo que debes hacer MANUALMENTE:
+        ⚠️ Lo que debes hacer MANUALMENTE:
       
     </span>
   </a>
@@ -3675,7 +2229,7 @@
   <a href="#equipo-y-soporte" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Equipo y Soporte
+        👥 Equipo y Soporte
       
     </span>
   </a>
@@ -3686,7 +2240,7 @@
   <a href="#proximos-pasos-sugeridos" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Próximos Pasos Sugeridos
+        🎓 Próximos Pasos Sugeridos
       
     </span>
   </a>
@@ -3713,13 +2267,13 @@
   
 
 
-<h1 id="guia-de-entrenamiento-de-document-ai-workflow-completo">Guía de Entrenamiento de Document AI - Workflow Completo<a class="headerlink" href="#guia-de-entrenamiento-de-document-ai-workflow-completo" title="Permanent link">&para;</a></h1>
-<h2 id="resumen-ejecutivo">Resumen Ejecutivo<a class="headerlink" href="#resumen-ejecutivo" title="Permanent link">&para;</a></h2>
+<h1 id="guia-de-entrenamiento-de-document-ai-workflow-completo">Guía de Entrenamiento de Document AI - Workflow Completo</h1>
+<h2 id="resumen-ejecutivo">📋 Resumen Ejecutivo</h2>
 <p>Este sistema permite entrenar un modelo custom de Google Document AI para extraer datos de facturas panameñas automáticamente, usando una interfaz web en DocuCenter.</p>
-<p><strong>Estado actual</strong>: Sistema funcional y optimizado
+<p><strong>Estado actual</strong>: ✅ Sistema funcional y optimizado
 <strong>Última actualización</strong>: 26 de noviembre de 2025</p>
 <hr />
-<h2 id="que-hace-este-sistema">¿Qué hace este sistema?<a class="headerlink" href="#que-hace-este-sistema" title="Permanent link">&para;</a></h2>
+<h2 id="que-hace-este-sistema">🎯 ¿Qué hace este sistema?</h2>
 <ol>
 <li><strong>Sube PDFs</strong> de facturas a DocuCenter</li>
 <li><strong>Anota manualmente</strong> los campos importantes (vendor, tax ID, totales, etc.)</li>
@@ -3728,8 +2282,8 @@
 <li><strong>Listo para importar</strong> manualmente en Google Cloud Workbench Console</li>
 </ol>
 <hr />
-<h2 id="workflow-paso-a-paso">Workflow Paso a Paso<a class="headerlink" href="#workflow-paso-a-paso" title="Permanent link">&para;</a></h2>
-<h3 id="paso-1-subir-documentos-docucenter">Paso 1: Subir Documentos (DocuCenter)<a class="headerlink" href="#paso-1-subir-documentos-docucenter" title="Permanent link">&para;</a></h3>
+<h2 id="workflow-paso-a-paso">🚀 Workflow Paso a Paso</h2>
+<h3 id="paso-1-subir-documentos-docucenter">Paso 1: Subir Documentos (DocuCenter)</h3>
 <p><strong>Ubicación</strong>: <code>/admin/sage50/document-ai-training</code></p>
 <ol>
 <li>Ir a la sección "Upload Training Documents"</li>
@@ -3742,9 +2296,9 @@
 </ol>
 <p><strong>Requisito mínimo</strong>: 20 documentos anotados para entrenar</p>
 <hr />
-<h3 id="paso-2-anotar-documentos-docucenter">Paso 2: Anotar Documentos (DocuCenter)<a class="headerlink" href="#paso-2-anotar-documentos-docucenter" title="Permanent link">&para;</a></h3>
+<h3 id="paso-2-anotar-documentos-docucenter">Paso 2: Anotar Documentos (DocuCenter)</h3>
 <p><strong>Importante</strong>: Debes anotar manualmente cada campo en los PDFs</p>
-<h4 id="campos-a-anotar">Campos a anotar:<a class="headerlink" href="#campos-a-anotar" title="Permanent link">&para;</a></h4>
+<h4 id="campos-a-anotar">Campos a anotar:</h4>
 <table>
 <thead>
 <tr>
@@ -3811,7 +2365,7 @@
 </tr>
 </tbody>
 </table>
-<h4 id="proceso-de-anotacion">Proceso de anotación:<a class="headerlink" href="#proceso-de-anotacion" title="Permanent link">&para;</a></h4>
+<h4 id="proceso-de-anotacion">Proceso de anotación:</h4>
 <ol>
 <li>Click en botón "Annotate" en cada documento</li>
 <li>Revisar y corregir campos pre-llenados por OCR</li>
@@ -3820,13 +2374,13 @@
 </ol>
 <p><strong>Tip</strong>: El sistema pre-llena con los valores extraídos por OCR, solo corrígelos si están mal.</p>
 <hr />
-<h3 id="paso-3-generar-jsons-docucenter">Paso 3: Generar JSONs (DocuCenter)<a class="headerlink" href="#paso-3-generar-jsons-docucenter" title="Permanent link">&para;</a></h3>
+<h3 id="paso-3-generar-jsons-docucenter">Paso 3: Generar JSONs (DocuCenter)</h3>
 <p><strong>Cuándo hacer esto</strong>: Cuando tengas 20+ documentos anotados</p>
 <ol>
 <li>Verificar en el panel de estadísticas:</li>
-<li>"Annotated" debe ser ≥ 20</li>
+<li>✅ "Annotated" debe ser ≥ 20</li>
 <li>
-<p>"Pending JSON" muestra cuántos faltan por generar</p>
+<p>⚠️ "Pending JSON" muestra cuántos faltan por generar</p>
 </li>
 <li>
 <p>Click en botón <strong>"Generate JSON Files (X)"</strong></p>
@@ -3834,7 +2388,7 @@
 <li>
 <p>El sistema ejecuta en <strong>segundo plano</strong> (Job):</p>
 </li>
-<li>Verifica qué PDFs ya están en GCS (no los sube de nuevo) </li>
+<li>Verifica qué PDFs ya están en GCS (no los sube de nuevo) ⚡</li>
 <li>Sube PDFs nuevos a GCS</li>
 <li>Procesa cada PDF con OCR de Document AI</li>
 <li>Mapea cada anotación a su posición exacta en el texto</li>
@@ -3858,7 +2412,7 @@
 <ul>
 <li>"QUEUED" → Job iniciado</li>
 <li>"GENERATING" → Procesando X/Y documentos</li>
-<li>"COMPLETED" → Listos para importar</li>
+<li>"COMPLETED" → ✅ Listos para importar</li>
 </ul>
 </li>
 <li>
@@ -3868,15 +2422,15 @@
 <li>Link directo a Google Cloud Workbench Console</li>
 </ol>
 <hr />
-<h3 id="paso-4-importar-en-google-cloud-workbench-manual">Paso 4: Importar en Google Cloud Workbench (Manual)<a class="headerlink" href="#paso-4-importar-en-google-cloud-workbench-manual" title="Permanent link">&para;</a></h3>
-<p><strong>IMPORTANTE</strong>: Este paso se hace en Google Cloud Console, NO en DocuCenter</p>
-<h4 id="41-acceder-a-workbench">4.1 Acceder a Workbench<a class="headerlink" href="#41-acceder-a-workbench" title="Permanent link">&para;</a></h4>
+<h3 id="paso-4-importar-en-google-cloud-workbench-manual">Paso 4: Importar en Google Cloud Workbench (Manual)</h3>
+<p><strong>⚠️ IMPORTANTE</strong>: Este paso se hace en Google Cloud Console, NO en DocuCenter</p>
+<h4 id="41-acceder-a-workbench">4.1 Acceder a Workbench</h4>
 <ol>
-<li>Ir a: <a href="https://console.cloud.google.com/ai/document-ai/workbench">https://console.cloud.google.com/ai/document-ai/workbench</a></li>
+<li>Ir a: https://console.cloud.google.com/ai/document-ai/workbench</li>
 <li>Seleccionar proyecto: <code>docucenter-aci</code></li>
 <li>Seleccionar processor: <code>Custom Extractor</code> (ID: <code>d6eea813b0c73fc8</code>)</li>
 </ol>
-<h4 id="42-importar-documentos">4.2 Importar Documentos<a class="headerlink" href="#42-importar-documentos" title="Permanent link">&para;</a></h4>
+<h4 id="42-importar-documentos">4.2 Importar Documentos</h4>
 <ol>
 <li>
 <p>En Workbench, click en <strong>"Import"</strong> (botón azul)</p>
@@ -3888,44 +2442,43 @@
 <p><strong>Configuración de la importación</strong>:</p>
 </li>
 </ol>
-<p>** Ruta de acceso fuente**:
-   <div class="highlight"><pre><span></span><code>gs://docucenter-aci-document-ai-training/training-pdfs/
-</code></pre></div>
-   <strong>MUY IMPORTANTE</strong>: Usar la carpeta de PDFs, NO la carpeta <code>json/</code></p>
-<p><strong>División de datos</strong> (Dataset split):
+<p><strong>📁 Ruta de acceso fuente</strong>:
+   <code>gs://docucenter-aci-document-ai-training/training-pdfs/</code>
+   ⚠️ <strong>MUY IMPORTANTE</strong>: Usar la carpeta de PDFs, NO la carpeta <code>json/</code></p>
+<p><strong>📊 División de datos</strong> (Dataset split):
    - <strong>Training</strong>: 80%
    - <strong>Test</strong>: 20%</p>
-<p><strong>Etiquetado automático</strong>:
-   - <strong>Activar</strong> "Importar con etiquetado automático"
+<p><strong>🏷️ Etiquetado automático</strong>:
+   - ✅ <strong>Activar</strong> "Importar con etiquetado automático"
    - Esto usará los archivos JSON para etiquetar los PDFs automáticamente</p>
 <ol>
 <li>Click <strong>"Import"</strong> (botón al final del formulario)</li>
 </ol>
-<h4 id="43-esperar-importacion">4.3 Esperar Importación<a class="headerlink" href="#43-esperar-importacion" title="Permanent link">&para;</a></h4>
+<h4 id="43-esperar-importacion">4.3 Esperar Importación</h4>
 <ul>
-<li><strong>Tiempo</strong>: 5-15 minutos dependiendo de cantidad</li>
-<li><strong>Progreso</strong>: Verás una barra de progreso en Workbench</li>
-<li><strong>Status</strong>: Verificar que los documentos aparezcan en la lista con sus etiquetas</li>
+<li>⏱️ <strong>Tiempo</strong>: 5-15 minutos dependiendo de cantidad</li>
+<li>📊 <strong>Progreso</strong>: Verás una barra de progreso en Workbench</li>
+<li>✅ <strong>Status</strong>: Verificar que los documentos aparezcan en la lista con sus etiquetas</li>
 </ul>
-<h4 id="44-verificar-documentos-importados">4.4 Verificar Documentos Importados<a class="headerlink" href="#44-verificar-documentos-importados" title="Permanent link">&para;</a></h4>
+<h4 id="44-verificar-documentos-importados">4.4 Verificar Documentos Importados</h4>
 <ol>
 <li>Los documentos deben aparecer en la lista de Workbench</li>
 <li>Cada documento debe mostrar:</li>
-<li>Thumbnail del PDF</li>
-<li>Etiquetas aplicadas (vendor_name, invoice_number, etc.)</li>
-<li>Estado "Labeled" o "Etiquetado"</li>
+<li>✅ Thumbnail del PDF</li>
+<li>✅ Etiquetas aplicadas (vendor_name, invoice_number, etc.)</li>
+<li>✅ Estado "Labeled" o "Etiquetado"</li>
 <li>Verifica que el conteo sea correcto (21 documentos en tu caso)</li>
 </ol>
-<p><strong>Nota sobre la estructura de carpetas</strong>:
+<p><strong>⚠️ Nota sobre la estructura de carpetas</strong>:
 - Google Cloud Workbench busca los PDFs en la ruta que especifiques
 - Automáticamente busca archivos JSON con el mismo nombre en la carpeta <code>json/</code>
 - <strong>Ejemplo</strong>: 
   - PDF: <code>gs://.../training-pdfs/20251126230000/factura1.pdf</code>
   - JSON: <code>gs://.../json/factura1.json</code> (se encuentra automáticamente)</p>
 <hr />
-<h3 id="paso-5-entrenar-modelo-google-cloud-console">Paso 5: Entrenar Modelo (Google Cloud Console)<a class="headerlink" href="#paso-5-entrenar-modelo-google-cloud-console" title="Permanent link">&para;</a></h3>
-<p><strong>Este paso también es manual en Google Cloud</strong></p>
-<h4 id="51-iniciar-training">5.1 Iniciar Training<a class="headerlink" href="#51-iniciar-training" title="Permanent link">&para;</a></h4>
+<h3 id="paso-5-entrenar-modelo-google-cloud-console">Paso 5: Entrenar Modelo (Google Cloud Console)</h3>
+<p><strong>⚠️ Este paso también es manual en Google Cloud</strong></p>
+<h4 id="51-iniciar-training">5.1 Iniciar Training</h4>
 <ol>
 <li>En Workbench, verificar que tienes:</li>
 <li>Mínimo 20 documentos importados</li>
@@ -3936,13 +2489,13 @@
 <li><strong>Model version</strong>: Nueva versión</li>
 <li>Click <strong>"Start Training"</strong></li>
 </ol>
-<h4 id="52-esperar-training">5.2 Esperar Training<a class="headerlink" href="#52-esperar-training" title="Permanent link">&para;</a></h4>
+<h4 id="52-esperar-training">5.2 Esperar Training</h4>
 <ul>
-<li><strong>Duración</strong>: 1-3 horas típicamente</li>
-<li><strong>Progreso</strong>: Visible en Google Cloud Console</li>
-<li><strong>Notificación</strong>: Email cuando termine</li>
+<li>⏱️ <strong>Duración</strong>: 1-3 horas típicamente</li>
+<li>📊 <strong>Progreso</strong>: Visible en Google Cloud Console</li>
+<li>🔔 <strong>Notificación</strong>: Email cuando termine</li>
 </ul>
-<h4 id="53-validar-resultados">5.3 Validar Resultados<a class="headerlink" href="#53-validar-resultados" title="Permanent link">&para;</a></h4>
+<h4 id="53-validar-resultados">5.3 Validar Resultados</h4>
 <ol>
 <li>Ver métricas de precision/recall</li>
 <li>Probar con documentos de test</li>
@@ -3950,71 +2503,71 @@
 <li>Si está mal → Agregar más documentos y re-entrenar</li>
 </ol>
 <hr />
-<h2 id="panel-de-estadisticas-explicado">Panel de Estadísticas Explicado<a class="headerlink" href="#panel-de-estadisticas-explicado" title="Permanent link">&para;</a></h2>
-<h3 id="total-documents">Total Documents<a class="headerlink" href="#total-documents" title="Permanent link">&para;</a></h3>
+<h2 id="panel-de-estadisticas-explicado">📊 Panel de Estadísticas Explicado</h2>
+<h3 id="total-documents">🔵 Total Documents</h3>
 <ul>
 <li><strong>Qué es</strong>: Total de PDFs subidos</li>
 <li><strong>Acción</strong>: Ninguna</li>
 </ul>
-<h3 id="annotated">Annotated<a class="headerlink" href="#annotated" title="Permanent link">&para;</a></h3>
+<h3 id="annotated">✅ Annotated</h3>
 <ul>
 <li><strong>Qué es</strong>: Documentos con anotaciones completas</li>
 <li><strong>Meta</strong>: ≥ 20 para entrenar</li>
 <li><strong>Acción</strong>: Anotar más documentos</li>
 </ul>
-<h3 id="pdfs-in-gcs">PDFs in GCS<a class="headerlink" href="#pdfs-in-gcs" title="Permanent link">&para;</a></h3>
+<h3 id="pdfs-in-gcs">☁️ PDFs in GCS</h3>
 <ul>
 <li><strong>Qué es</strong>: PDFs ya subidos a Google Cloud</li>
 <li><strong>Optimización</strong>: No se suben de nuevo (ahorra tiempo y $)</li>
 <li><strong>Acción</strong>: Ninguna</li>
 </ul>
-<h3 id="json-generated">JSON Generated<a class="headerlink" href="#json-generated" title="Permanent link">&para;</a></h3>
+<h3 id="json-generated">📄 JSON Generated</h3>
 <ul>
 <li><strong>Qué es</strong>: JSONs con anotaciones ya en GCS</li>
 <li><strong>Estado</strong>: Listos para importar en Workbench</li>
 <li><strong>Acción</strong>: Importar en Google Cloud Console</li>
 </ul>
-<h3 id="pending-json">Pending JSON<a class="headerlink" href="#pending-json" title="Permanent link">&para;</a></h3>
+<h3 id="pending-json">⏰ Pending JSON</h3>
 <ul>
 <li><strong>Qué es</strong>: Documentos anotados sin JSON generado</li>
 <li><strong>Acción</strong>: Click "Generate JSON Files"</li>
 </ul>
-<h3 id="training-status">Training Status<a class="headerlink" href="#training-status" title="Permanent link">&para;</a></h3>
+<h3 id="training-status">🏆 Training Status</h3>
 <ul>
 <li><strong>Listo</strong>: ≥ 20 anotados</li>
 <li><strong>Pendiente</strong>: Muestra cuántos faltan</li>
 </ul>
 <hr />
-<h2 id="optimizaciones-implementadas">Optimizaciones Implementadas<a class="headerlink" href="#optimizaciones-implementadas" title="Permanent link">&para;</a></h2>
-<h3 id="1-control-de-subidas-duplicadas">1. <strong>Control de Subidas Duplicadas</strong><a class="headerlink" href="#1-control-de-subidas-duplicadas" title="Permanent link">&para;</a></h3>
+<h2 id="optimizaciones-implementadas">🔧 Optimizaciones Implementadas</h2>
+<h3 id="1-control-de-subidas-duplicadas">1. <strong>Control de Subidas Duplicadas</strong> ✅</h3>
 <ul>
 <li>Los PDFs ya subidos a GCS NO se suben de nuevo</li>
 <li>Se guarda <code>gcs_pdf_uri</code> en base de datos</li>
 <li>Ahorra bandwidth y tiempo</li>
 </ul>
-<h3 id="2-procesamiento-en-background">2. <strong>Procesamiento en Background</strong><a class="headerlink" href="#2-procesamiento-en-background" title="Permanent link">&para;</a></h3>
+<h3 id="2-procesamiento-en-background">2. <strong>Procesamiento en Background</strong> ✅</h3>
 <ul>
 <li>Generación de JSON usa Laravel Jobs</li>
 <li>No bloquea la interfaz de usuario</li>
 <li>Progreso visible en tiempo real</li>
 </ul>
-<h3 id="3-tracking-de-estado">3. <strong>Tracking de Estado</strong><a class="headerlink" href="#3-tracking-de-estado" title="Permanent link">&para;</a></h3>
+<h3 id="3-tracking-de-estado">3. <strong>Tracking de Estado</strong> ✅</h3>
 <ul>
 <li>Saber qué documentos están en cada etapa</li>
 <li>Badges visuales: "Annotated", "En GCS", "JSON"</li>
 <li>Estadísticas actualizadas en tiempo real</li>
 </ul>
-<h3 id="4-mapeo-inteligente-de-texto">4. <strong>Mapeo Inteligente de Texto</strong><a class="headerlink" href="#4-mapeo-inteligente-de-texto" title="Permanent link">&para;</a></h3>
+<h3 id="4-mapeo-inteligente-de-texto">4. <strong>Mapeo Inteligente de Texto</strong> ✅</h3>
 <ul>
 <li>Busca cada valor en el texto OCR</li>
 <li>Genera <code>textAnchor</code> con posición exacta</li>
 <li>Permite a Document AI aprender ubicaciones</li>
 </ul>
 <hr />
-<h2 id="configuracion-tecnica">Configuración Técnica<a class="headerlink" href="#configuracion-tecnica" title="Permanent link">&para;</a></h2>
-<h3 id="base-de-datos">Base de Datos<a class="headerlink" href="#base-de-datos" title="Permanent link">&para;</a></h3>
+<h2 id="configuracion-tecnica">⚙️ Configuración Técnica</h2>
+<h3 id="base-de-datos">Base de Datos</h3>
 <p><strong>Tabla</strong>: <code>document_ai_training_documents</code></p>
-<div class="highlight"><pre><span></span><code><span class="o">-</span><span class="w"> </span><span class="n">id</span><span class="p">:</span><span class="w"> </span><span class="nb">bigint</span>
+<div class="codehilite"><pre><span></span><code><span class="o">-</span><span class="w"> </span><span class="n">id</span><span class="p">:</span><span class="w"> </span><span class="nb">bigint</span>
 <span class="o">-</span><span class="w"> </span><span class="n">filename</span><span class="p">:</span><span class="w"> </span><span class="nb">varchar</span>
 <span class="o">-</span><span class="w"> </span><span class="n">file_path</span><span class="p">:</span><span class="w"> </span><span class="nb">varchar</span><span class="w"> </span><span class="p">(</span><span class="k">storage</span><span class="o">/</span><span class="n">app</span><span class="o">/</span><span class="n">training</span><span class="o">-</span><span class="n">documents</span><span class="o">/</span><span class="p">)</span>
 <span class="o">-</span><span class="w"> </span><span class="n">extracted_data</span><span class="p">:</span><span class="w"> </span><span class="n">json</span><span class="w"> </span><span class="p">(</span><span class="n">OCR</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">entities</span><span class="p">)</span>
@@ -4029,110 +2582,118 @@
 <span class="o">-</span><span class="w"> </span><span class="n">gcs_pdf_uri</span><span class="p">:</span><span class="w"> </span><span class="nb">varchar</span><span class="w"> </span><span class="p">(</span><span class="n">gs</span><span class="p">:</span><span class="o">//</span><span class="n">bucket</span><span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">file</span><span class="p">.</span><span class="n">pdf</span><span class="p">)</span>
 <span class="o">-</span><span class="w"> </span><span class="n">pdf_uploaded_at</span><span class="p">:</span><span class="w"> </span><span class="k">timestamp</span>
 </code></pre></div>
-<h3 id="google-cloud-storage">Google Cloud Storage<a class="headerlink" href="#google-cloud-storage" title="Permanent link">&para;</a></h3>
+
+<h3 id="google-cloud-storage">Google Cloud Storage</h3>
 <p><strong>Bucket</strong>: <code>docucenter-aci-document-ai-training</code></p>
-<p><strong>Estructura</strong>:
-<div class="highlight"><pre><span></span><code>gs://docucenter-aci-document-ai-training/
- training-pdfs/
-    20251126230000/
-        factura1.pdf
-        factura2.pdf
-        ...
- json/
-     factura1.json
-     factura2.json
-     ...
-</code></pre></div></p>
-<h3 id="document-ai-processor">Document AI Processor<a class="headerlink" href="#document-ai-processor" title="Permanent link">&para;</a></h3>
+<p><strong>Estructura</strong>:</p>
+<div class="codehilite"><pre><span></span><code>gs://docucenter-aci-document-ai-training/
+├── training-pdfs/
+│   └── 20251126230000/
+│       ├── factura1.pdf
+│       ├── factura2.pdf
+│       └── ...
+└── json/
+    ├── factura1.json
+    ├── factura2.json
+    └── ...
+</code></pre></div>
+
+<h3 id="document-ai-processor">Document AI Processor</h3>
 <ul>
 <li><strong>Project</strong>: <code>docucenter-aci</code></li>
 <li><strong>Processor Type</strong>: Custom Document Extractor</li>
 <li><strong>Processor ID</strong>: <code>d6eea813b0c73fc8</code></li>
 <li><strong>Location</strong>: <code>us</code></li>
 </ul>
-<h3 id="laravel-jobs">Laravel Jobs<a class="headerlink" href="#laravel-jobs" title="Permanent link">&para;</a></h3>
+<h3 id="laravel-jobs">Laravel Jobs</h3>
 <p><strong>Job</strong>: <code>GenerateDocumentAIJSONFilesJob</code>
 - <strong>Queue</strong>: <code>default</code>
 - <strong>Timeout</strong>: 3600 segundos (1 hora)
 - <strong>Tracking</strong>: Cache con key <code>json_generation_status_{sessionId}</code></p>
-<p><strong>Para ejecutar manualmente</strong>:
-<div class="highlight"><pre><span></span><code>php<span class="w"> </span>artisan<span class="w"> </span>queue:work<span class="w"> </span>redis<span class="w"> </span>--timeout<span class="o">=</span><span class="m">3600</span><span class="w"> </span>--tries<span class="o">=</span><span class="m">3</span>
-</code></pre></div></p>
+<p><strong>Para ejecutar manualmente</strong>:</p>
+<div class="codehilite"><pre><span></span><code>php<span class="w"> </span>artisan<span class="w"> </span>queue:work<span class="w"> </span>redis<span class="w"> </span>--timeout<span class="o">=</span><span class="m">3600</span><span class="w"> </span>--tries<span class="o">=</span><span class="m">3</span>
+</code></pre></div>
+
 <hr />
-<h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2>
-<h3 id="problema-no-hay-documentos-pendientes-de-generar-json">Problema: "No hay documentos pendientes de generar JSON"<a class="headerlink" href="#problema-no-hay-documentos-pendientes-de-generar-json" title="Permanent link">&para;</a></h3>
+<h2 id="troubleshooting">🐛 Troubleshooting</h2>
+<h3 id="problema-no-hay-documentos-pendientes-de-generar-json">Problema: "No hay documentos pendientes de generar JSON"</h3>
 <p><strong>Causa</strong>: Todos los documentos anotados ya tienen JSON generado</p>
 <p><strong>Solución</strong>: 
 1. Anotar más documentos
 2. O re-generar borrando campo <code>imported_at</code> en BD</p>
 <hr />
-<h3 id="problema-pdf-no-encontrado-en-gcs">Problema: "PDF no encontrado en GCS"<a class="headerlink" href="#problema-pdf-no-encontrado-en-gcs" title="Permanent link">&para;</a></h3>
+<h3 id="problema-pdf-no-encontrado-en-gcs">Problema: "PDF no encontrado en GCS"</h3>
 <p><strong>Causa</strong>: El PDF no existe en ninguna ruta conocida</p>
 <p><strong>Solución</strong>:
 1. Verificar que <code>file_path</code> en BD sea correcto
 2. Verificar que archivo existe en <code>storage/app/training-documents/</code>
 3. El Job lo subirá automáticamente si existe localmente</p>
 <hr />
-<h3 id="problema-job-no-procesa">Problema: Job no procesa<a class="headerlink" href="#problema-job-no-procesa" title="Permanent link">&para;</a></h3>
+<h3 id="problema-job-no-procesa">Problema: Job no procesa</h3>
 <p><strong>Causa</strong>: Queue worker no está corriendo</p>
-<p><strong>Solución</strong>:
-<div class="highlight"><pre><span></span><code><span class="c1"># En Docker</span>
+<p><strong>Solución</strong>:</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># En Docker</span>
 docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>docucenter_laravel.test<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>queue:work<span class="w"> </span>redis
 
 <span class="c1"># O verificar que Supervisor esté corriendo</span>
 docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>docucenter_laravel.test<span class="w"> </span>supervisorctl<span class="w"> </span>status
-</code></pre></div></p>
+</code></pre></div>
+
 <hr />
-<h3 id="problema-valor-no-encontrado-en-ocr">Problema: "Valor no encontrado en OCR"<a class="headerlink" href="#problema-valor-no-encontrado-en-ocr" title="Permanent link">&para;</a></h3>
+<h3 id="problema-valor-no-encontrado-en-ocr">Problema: "Valor no encontrado en OCR"</h3>
 <p><strong>Causa</strong>: El valor anotado no coincide exactamente con el texto OCR</p>
 <p><strong>Solución</strong>:
 1. Verificar que la anotación sea igual al texto en el PDF
 2. Revisar espacios, mayúsculas, caracteres especiales
 3. El sistema busca coincidencia exacta</p>
 <hr />
-<h2 id="comandos-utiles">Comandos Útiles<a class="headerlink" href="#comandos-utiles" title="Permanent link">&para;</a></h2>
-<h3 id="generar-jsons-por-linea-de-comandos">Generar JSONs por línea de comandos<a class="headerlink" href="#generar-jsons-por-linea-de-comandos" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># Dentro del contenedor Docker</span>
+<h2 id="comandos-utiles">📝 Comandos Útiles</h2>
+<h3 id="generar-jsons-por-linea-de-comandos">Generar JSONs por línea de comandos</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Dentro del contenedor Docker</span>
 php<span class="w"> </span>artisan<span class="w"> </span>docai:generate-json-files
 
 <span class="c1"># Ver logs</span>
 tail<span class="w"> </span>-f<span class="w"> </span>storage/logs/laravel.log
 </code></pre></div>
-<h3 id="limpiar-cache">Limpiar cache<a class="headerlink" href="#limpiar-cache" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>php<span class="w"> </span>artisan<span class="w"> </span>cache:clear
+
+<h3 id="limpiar-cache">Limpiar cache</h3>
+<div class="codehilite"><pre><span></span><code>php<span class="w"> </span>artisan<span class="w"> </span>cache:clear
 php<span class="w"> </span>artisan<span class="w"> </span>view:clear
 php<span class="w"> </span>artisan<span class="w"> </span>config:clear
 </code></pre></div>
-<h3 id="verificar-jobs-en-cola">Verificar Jobs en cola<a class="headerlink" href="#verificar-jobs-en-cola" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>php<span class="w"> </span>artisan<span class="w"> </span>queue:listen<span class="w"> </span>--queue<span class="o">=</span>default
+
+<h3 id="verificar-jobs-en-cola">Verificar Jobs en cola</h3>
+<div class="codehilite"><pre><span></span><code>php<span class="w"> </span>artisan<span class="w"> </span>queue:listen<span class="w"> </span>--queue<span class="o">=</span>default
 </code></pre></div>
+
 <hr />
-<h2 id="workflow-resumido-tldr">Workflow Resumido (TL;DR)<a class="headerlink" href="#workflow-resumido-tldr" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code>1. DocuCenter: Subir PDFs  Anotar campos
-
-2. DocuCenter: Click &quot;Generate JSON Files&quot;
-
-3. Job en background: PDF → OCR → JSON → GCS
-
-4. Google Cloud Workbench: Import JSON files
-
-5. Google Cloud Console: Train model (1-3 hrs)
-
-6. Modelo entrenado listo para producción
+<h2 id="workflow-resumido-tldr">🔄 Workflow Resumido (TL;DR)</h2>
+<div class="codehilite"><pre><span></span><code><span class="mf">1.</span><span class="w"> </span><span class="n">DocuCenter</span><span class="p">:</span><span class="w"> </span><span class="n">Subir</span><span class="w"> </span><span class="n">PDFs</span><span class="w"> </span><span class="err">➜</span><span class="w"> </span><span class="n">Anotar</span><span class="w"> </span><span class="n">campos</span>
+<span class="w">                           </span><span class="err">⬇️</span>
+<span class="mf">2.</span><span class="w"> </span><span class="n">DocuCenter</span><span class="p">:</span><span class="w"> </span><span class="n">Click</span><span class="w"> </span><span class="s">&quot;Generate JSON Files&quot;</span>
+<span class="w">                           </span><span class="err">⬇️</span>
+<span class="mf">3.</span><span class="w"> </span><span class="n">Job</span><span class="w"> </span><span class="n">en</span><span class="w"> </span><span class="n">background</span><span class="p">:</span><span class="w"> </span><span class="n">PDF</span><span class="w"> </span><span class="err">→</span><span class="w"> </span><span class="n">OCR</span><span class="w"> </span><span class="err">→</span><span class="w"> </span><span class="n">JSON</span><span class="w"> </span><span class="err">→</span><span class="w"> </span><span class="n">GCS</span>
+<span class="w">                           </span><span class="err">⬇️</span>
+<span class="mf">4.</span><span class="w"> </span><span class="kr">Go</span><span class="n">ogle</span><span class="w"> </span><span class="n">Cloud</span><span class="w"> </span><span class="n">Workbench</span><span class="p">:</span><span class="w"> </span><span class="n">Import</span><span class="w"> </span><span class="n">JSON</span><span class="w"> </span><span class="n">files</span>
+<span class="w">                           </span><span class="err">⬇️</span>
+<span class="mf">5.</span><span class="w"> </span><span class="kr">Go</span><span class="n">ogle</span><span class="w"> </span><span class="n">Cloud</span><span class="w"> </span><span class="n">Console</span><span class="p">:</span><span class="w"> </span><span class="n">Train</span><span class="w"> </span><span class="n">model</span><span class="w"> </span><span class="p">(</span><span class="mf">1</span><span class="o">-</span><span class="mf">3</span><span class="w"> </span><span class="n">hrs</span><span class="p">)</span>
+<span class="w">                           </span><span class="err">⬇️</span>
+<span class="mf">6.</span><span class="w"> </span><span class="err">✅</span><span class="w"> </span><span class="n">Modelo</span><span class="w"> </span><span class="n">entrenado</span><span class="w"> </span><span class="kr">list</span><span class="n">o</span><span class="w"> </span><span class="n">para</span><span class="w"> </span><span class="n">producción</span>
 </code></pre></div>
+
 <hr />
-<h2 id="referencias-tecnicas">Referencias Técnicas<a class="headerlink" href="#referencias-tecnicas" title="Permanent link">&para;</a></h2>
-<h3 id="documentacion-google-document-ai">Documentación Google Document AI<a class="headerlink" href="#documentacion-google-document-ai" title="Permanent link">&para;</a></h3>
+<h2 id="referencias-tecnicas">📚 Referencias Técnicas</h2>
+<h3 id="documentacion-google-document-ai">Documentación Google Document AI</h3>
 <ul>
 <li><a href="https://cloud.google.com/document-ai/docs/custom-extractor">Custom Extractors</a></li>
 <li><a href="https://cloud.google.com/document-ai/docs/document-proto">Document Proto Format</a></li>
 <li><a href="https://cloud.google.com/document-ai/docs/train-model">Training Guide</a></li>
 </ul>
-<h3 id="articulos-clave">Artículos Clave<a class="headerlink" href="#articulos-clave" title="Permanent link">&para;</a></h3>
+<h3 id="articulos-clave">Artículos Clave</h3>
 <ul>
 <li><a href="https://medium.com/@neilkolban/google-document-ai-pre-labeled-data-import-bb0f9c9e3d2a">Medium: Neil Kolban - Pre-labeled Import Method</a></li>
 </ul>
-<h3 id="codigo-fuente">Código Fuente<a class="headerlink" href="#codigo-fuente" title="Permanent link">&para;</a></h3>
+<h3 id="codigo-fuente">Código Fuente</h3>
 <ul>
 <li><strong>Livewire Component</strong>: <code>app/Http/Livewire/Admin/DocumentAI/TrainingManager.php</code></li>
 <li><strong>Job</strong>: <code>app/Jobs/GenerateDocumentAIJSONFilesJob.php</code></li>
@@ -4141,8 +2702,8 @@ php<span class="w"> </span>artisan<span class="w"> </span>config:clear
 <li><strong>Vista</strong>: <code>resources/views/livewire/admin/document-ai/training-manager.blade.php</code></li>
 </ul>
 <hr />
-<h2 id="funcionalidades-destacadas">Funcionalidades Destacadas<a class="headerlink" href="#funcionalidades-destacadas" title="Permanent link">&para;</a></h2>
-<h3 id="lo-que-el-sistema-hace-automaticamente">Lo que el sistema HACE automáticamente:<a class="headerlink" href="#lo-que-el-sistema-hace-automaticamente" title="Permanent link">&para;</a></h3>
+<h2 id="funcionalidades-destacadas">✨ Funcionalidades Destacadas</h2>
+<h3 id="lo-que-el-sistema-hace-automaticamente">✅ Lo que el sistema HACE automáticamente:</h3>
 <ul>
 <li>Extracción inicial con OCR</li>
 <li>Detección automática de tipo de documento</li>
@@ -4153,7 +2714,7 @@ php<span class="w"> </span>artisan<span class="w"> </span>config:clear
 <li>Tracking de estado</li>
 <li>Control de duplicados</li>
 </ul>
-<h3 id="lo-que-debes-hacer-manualmente">Lo que debes hacer MANUALMENTE:<a class="headerlink" href="#lo-que-debes-hacer-manualmente" title="Permanent link">&para;</a></h3>
+<h3 id="lo-que-debes-hacer-manualmente">⚠️ Lo que debes hacer MANUALMENTE:</h3>
 <ul>
 <li>Revisar y corregir anotaciones</li>
 <li>Importar JSONs en Google Cloud Workbench</li>
@@ -4161,7 +2722,7 @@ php<span class="w"> </span>artisan<span class="w"> </span>config:clear
 <li>Desplegar a producción</li>
 </ul>
 <hr />
-<h2 id="equipo-y-soporte">Equipo y Soporte<a class="headerlink" href="#equipo-y-soporte" title="Permanent link">&para;</a></h2>
+<h2 id="equipo-y-soporte">👥 Equipo y Soporte</h2>
 <p><strong>Desarrollador</strong>: Sistema implementado en DocuCenter
 <strong>Fecha</strong>: Noviembre 2025
 <strong>Versión Laravel</strong>: 9.x
@@ -4171,7 +2732,7 @@ php<span class="w"> </span>artisan<span class="w"> </span>config:clear
 2. Verificar estado de Jobs en base de datos tabla <code>jobs</code>
 3. Consultar documentación de Google Document AI</p>
 <hr />
-<h2 id="proximos-pasos-sugeridos">Próximos Pasos Sugeridos<a class="headerlink" href="#proximos-pasos-sugeridos" title="Permanent link">&para;</a></h2>
+<h2 id="proximos-pasos-sugeridos">🎓 Próximos Pasos Sugeridos</h2>
 <ol>
 <li><strong>Entrenar modelo inicial</strong> con 20-50 documentos</li>
 <li><strong>Evaluar precisión</strong> con documentos de test</li>
@@ -4180,7 +2741,7 @@ php<span class="w"> </span>artisan<span class="w"> </span>config:clear
 <li><strong>Desplegar a producción</strong> cuando precision &gt; 90%</li>
 </ol>
 <hr />
-<p>**¡Éxito entrenando tu modelo! **</p>
+<p><strong>¡Éxito entrenando tu modelo! 🚀</strong></p>
 
 
 
@@ -4200,12 +2761,6 @@ php<span class="w"> </span>artisan<span class="w"> </span>config:clear
           
 <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
         </div>
-        
-          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
-  Volver al principio
-</button>
         
       </main>
       
@@ -4252,7 +2807,7 @@ php<span class="w"> </span>artisan<span class="w"> </span>config:clear
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.highlight", "search.suggest"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": [], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
     
     
       <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>

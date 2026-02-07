@@ -1,8 +1,8 @@
-# Mejoras en Manejo de Errores - Lightspeed Serie R
+# 🔧 Mejoras en Manejo de Errores - Lightspeed Serie R
 
 ## **Implementación de Error Handling Detallado**
 
-### **Mejoras Implementadas**
+### **📋 Mejoras Implementadas**
 
 #### **1. Error Handling en `refreshAccessToken()`**
 
@@ -41,20 +41,20 @@ throw new \Exception($errorMessage . " | Detalles: " . json_encode($detailedErro
 #### **2. Error Handling en `executeWithRateLimit()`**
 
 **Características Agregadas:**
-- **Decodificación JSON** de respuestas de error
-- **Logging detallado** con contexto de conexión y organización
-- **Manejo específico** de errores de refresh token
-- **Información completa** en excepciones
+- ✅ **Decodificación JSON** de respuestas de error
+- ✅ **Logging detallado** con contexto de conexión y organización
+- ✅ **Manejo específico** de errores de refresh token
+- ✅ **Información completa** en excepciones
 
 #### **3. Error Handling en `executeWithRateLimitAdvanced()`**
 
 **Características Mejoradas:**
-- **Headers HTTP** incluidos en logs
-- **Retry-After** header respetado
-- **Contexto completo** de debugging
-- **Mensajes de error** más descriptivos
+- ✅ **Headers HTTP** incluidos en logs
+- ✅ **Retry-After** header respetado
+- ✅ **Contexto completo** de debugging
+- ✅ **Mensajes de error** más descriptivos
 
-### **Tipos de Error Manejados**
+### **🚨 Tipos de Error Manejados**
 
 #### **Token Errors (OAuth)**
 ```json
@@ -66,9 +66,9 @@ throw new \Exception($errorMessage . " | Detalles: " . json_encode($detailedErro
 ```
 
 **Respuesta Mejorada:**
-- **Mensaje claro**: "Token de refresco ha sido revocado - se requiere re-autorización manual"
-- **Código HTTP**: Preservado (400, 401, etc.)
-- **Contexto**: Connection ID, Organization ID incluidos
+- ✅ **Mensaje claro**: "Token de refresco ha sido revocado - se requiere re-autorización manual"
+- ✅ **Código HTTP**: Preservado (400, 401, etc.)
+- ✅ **Contexto**: Connection ID, Organization ID incluidos
 
 #### **Rate Limit Errors (429)**
 ```json
@@ -80,9 +80,9 @@ throw new \Exception($errorMessage . " | Detalles: " . json_encode($detailedErro
 ```
 
 **Respuesta Mejorada:**
-- **Retry-After header**: Respetado automáticamente
-- **Backoff exponencial**: Implementado
-- **Logging detallado**: Con attempt number y wait time
+- ✅ **Retry-After header**: Respetado automáticamente
+- ✅ **Backoff exponencial**: Implementado
+- ✅ **Logging detallado**: Con attempt number y wait time
 
 #### **API Errors (4xx, 5xx)**
 ```json
@@ -94,12 +94,12 @@ throw new \Exception($errorMessage . " | Detalles: " . json_encode($detailedErro
 ```
 
 **Respuesta Mejorada:**
-- **Error type**: Identificado y categorizado
-- **Description**: Error específico de la API
-- **Hint**: Sugerencias cuando están disponibles
-- **Raw response**: Incluido para debugging
+- ✅ **Error type**: Identificado y categorizado
+- ✅ **Description**: Error específico de la API
+- ✅ **Hint**: Sugerencias cuando están disponibles
+- ✅ **Raw response**: Incluido para debugging
 
-### **Información de Debugging Incluida**
+### **📊 Información de Debugging Incluida**
 
 #### **En Logs:**
 ```json
@@ -132,33 +132,33 @@ $detailedError = [
 throw new \Exception($errorMessage . " | Detalles: " . json_encode($detailedError), $statusCode);
 ```
 
-### **Beneficios de las Mejoras**
+### **🎯 Beneficios de las Mejoras**
 
 #### **1. Debugging Mejorado**
-- **Información completa** sobre el error
-- **Contexto de organización** y conexión
-- **Raw response** para análisis detallado
-- **Timestamp** para correlación temporal
+- ✅ **Información completa** sobre el error
+- ✅ **Contexto de organización** y conexión
+- ✅ **Raw response** para análisis detallado
+- ✅ **Timestamp** para correlación temporal
 
 #### **2. Manejo Específico de Errores**
-- **Token revocado**: Mensaje claro sobre re-autorización
-- **Credenciales inválidas**: Identificación específica
-- **Rate limits**: Manejo automático con tiempos de espera
-- **API errors**: Descripción detallada del problema
+- ✅ **Token revocado**: Mensaje claro sobre re-autorización
+- ✅ **Credenciales inválidas**: Identificación específica
+- ✅ **Rate limits**: Manejo automático con tiempos de espera
+- ✅ **API errors**: Descripción detallada del problema
 
 #### **3. Logging Estructurado**
-- **JSON format**: Fácil parsing y análisis
-- **Context fields**: Connection ID, Organization ID
-- **Error categorization**: Por tipo de error
-- **Attempt tracking**: Para reintentos y debugging
+- ✅ **JSON format**: Fácil parsing y análisis
+- ✅ **Context fields**: Connection ID, Organization ID
+- ✅ **Error categorization**: Por tipo de error
+- ✅ **Attempt tracking**: Para reintentos y debugging
 
 #### **4. Experiencia de Usuario**
-- **Mensajes claros**: En español, descriptivos
-- **Acciones sugeridas**: Qué hacer en cada caso
-- **Información técnica**: Para soporte técnico
-- **Preservación de códigos**: HTTP status codes
+- ✅ **Mensajes claros**: En español, descriptivos
+- ✅ **Acciones sugeridas**: Qué hacer en cada caso
+- ✅ **Información técnica**: Para soporte técnico
+- ✅ **Preservación de códigos**: HTTP status codes
 
-### **Casos de Uso Mejorados**
+### **📝 Casos de Uso Mejorados**
 
 #### **Caso 1: Token Revocado**
 **Antes:**
@@ -194,7 +194,7 @@ Error al obtener el cliente: Bad Request
 Error al obtener información de la tienda: Invalid shop ID provided | Status: 400 | Type: invalid_request | Detalles: {"error":"invalid_request","error_description":"Shop ID does not exist","hint":"Check your shop ID parameter"}
 ```
 
-### **Configuración Recomendada**
+### **🔧 Configuración Recomendada**
 
 #### **Log Level Configuration**
 ```php

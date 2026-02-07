@@ -6,13 +6,13 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Documentación técnica y de usuario de DocuCenter - Sistema de facturación electrónica">
+        <meta name="description" content="Documentación técnica y de usuario de Docucenter">
       
       
         <meta name="author" content="aghabrego">
       
       
-        <link rel="canonical" href="https://aghabrego.github.io/docucenter-public/technical/valorCuotaPagada-fix-summary/">
+        <link rel="canonical" href="https://aghabrego.github.io/docucenter/technical/valorCuotaPagada-fix-summary/">
       
       
       
@@ -20,19 +20,16 @@
         
       
       
-      <link rel="icon" href="https://home.apconpanama.me/wp-content/uploads/2024/03/logo3.png">
+      <link rel="icon" href="../../docs/favicon.ico">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
     
     
       
-        <title>Solución al Error PAC: Campo valorCuotaPagada Requerido - DocuCenter</title>
+        <title>Solución al Error PAC: Campo valorCuotaPagada Requerido - Docucenter</title>
       
     
     
       <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
-      
-        
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -60,14 +57,7 @@
   </head>
   
   
-    
-    
-      
-    
-    
-    
-    
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="light-blue">
+    <body dir="ltr">
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -88,11 +78,13 @@
     
       
 
-<header class="md-header" data-md-component="header">
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Cabecera">
-    <a href="../.." title="DocuCenter" class="md-header__button md-logo" aria-label="DocuCenter" data-md-component="logo">
+    <a href="../.." title="Docucenter" class="md-header__button md-logo" aria-label="Docucenter" data-md-component="logo">
       
-  <img src="https://home.apconpanama.me/wp-content/uploads/2024/03/logo3.png" alt="logo">
+  <img src="../../docs/logo.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -103,7 +95,7 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            DocuCenter
+            Docucenter
           </span>
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
@@ -115,18 +107,6 @@
         </div>
       </div>
     </div>
-    
-      
-        <form class="md-header__option" data-md-component="palette">
-  
-    
-    
-    
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="light-blue"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
-    
-  
-</form>
-      
     
     
       <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
@@ -158,8 +138,6 @@
         </button>
       </nav>
       
-        <div class="md-search__suggest" data-md-component="search-suggest"></div>
-      
     </form>
     <div class="md-search__output">
       <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
@@ -177,13 +155,13 @@
     
     
       <div class="md-header__source">
-        <a href="https://github.com/aghabrego/docucenter-public" title="Ir al repositorio" class="md-source" data-md-component="source">
+        <a href="https://github.com/aghabrego/docucenter" title="Ir al repositorio" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
   </div>
   <div class="md-source__repository">
-    aghabrego/docucenter-public
+    aghabrego/docucenter
   </div>
 </a>
       </div>
@@ -196,154 +174,6 @@
       
       
         
-          
-            
-<nav class="md-tabs" aria-label="Pestañas" data-md-component="tabs">
-  <div class="md-grid">
-    <ul class="md-tabs__list">
-      
-        
-  
-  
-  
-  
-    <li class="md-tabs__item">
-      <a href="../.." class="md-tabs__link">
-        
-  
-  
-    
-  
-  Inicio
-
-      </a>
-    </li>
-  
-
-      
-        
-  
-  
-  
-  
-    
-    
-      <li class="md-tabs__item">
-        <a href="../../api/" class="md-tabs__link">
-          
-  
-  
-  APIs
-
-        </a>
-      </li>
-    
-  
-
-      
-        
-  
-  
-  
-  
-    
-    
-      <li class="md-tabs__item">
-        <a href="../../optimizations/" class="md-tabs__link">
-          
-  
-  
-  Optimizaciones
-
-        </a>
-      </li>
-    
-  
-
-      
-        
-  
-  
-  
-  
-    
-    
-      <li class="md-tabs__item">
-        <a href="../" class="md-tabs__link">
-          
-  
-  
-  Documentación Técnica
-
-        </a>
-      </li>
-    
-  
-
-      
-        
-  
-  
-  
-  
-    
-    
-      <li class="md-tabs__item">
-        <a href="../../validations/" class="md-tabs__link">
-          
-  
-  
-  Validaciones
-
-        </a>
-      </li>
-    
-  
-
-      
-        
-  
-  
-  
-  
-    
-    
-      <li class="md-tabs__item">
-        <a href="../../testing/" class="md-tabs__link">
-          
-  
-  
-  Testing
-
-        </a>
-      </li>
-    
-  
-
-      
-        
-  
-  
-  
-  
-    
-    
-      <li class="md-tabs__item">
-        <a href="../../integrations/" class="md-tabs__link">
-          
-  
-  
-  Integraciones
-
-        </a>
-      </li>
-    
-  
-
-      
-    </ul>
-  </div>
-</nav>
           
         
       
@@ -358,27 +188,25 @@
                     
 
 
-  
 
-
-<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navegación" data-md-level="0">
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../.." title="DocuCenter" class="md-nav__button md-logo" aria-label="DocuCenter" data-md-component="logo">
+    <a href="../.." title="Docucenter" class="md-nav__button md-logo" aria-label="Docucenter" data-md-component="logo">
       
-  <img src="https://home.apconpanama.me/wp-content/uploads/2024/03/logo3.png" alt="logo">
+  <img src="../../docs/logo.png" alt="logo">
 
     </a>
-    DocuCenter
+    Docucenter
   </label>
   
     <div class="md-nav__source">
-      <a href="https://github.com/aghabrego/docucenter-public" title="Ir al repositorio" class="md-source" data-md-component="source">
+      <a href="https://github.com/aghabrego/docucenter" title="Ir al repositorio" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
   </div>
   <div class="md-source__repository">
-    aghabrego/docucenter-public
+    aghabrego/docucenter
   </div>
 </a>
     </div>
@@ -422,19 +250,12 @@
     
     
     
-      
-      
-        
-      
-    
     
     <li class="md-nav__item md-nav__item--nested">
       
         
         
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
         
           
           <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
@@ -444,7 +265,7 @@
   <span class="md-ellipsis">
     
   
-    APIs
+    API Documentation
   
 
     
@@ -460,7 +281,54 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    APIs
+    API Documentation
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sage ACICloud
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Sage ACICloud
   
 
           </label>
@@ -473,14 +341,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../api/" class="md-nav__link">
+      <a href="../../api/sage-acicloud/invoices-api/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    APIs de DocuCenter
+    Facturación - Invoices
   
 
     
@@ -500,23 +368,248 @@
   
   
   
-    
-    
-    
-    
-      
-      
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/customers-api/" class="md-nav__link">
         
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Clientes - Customers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/vendors-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Proveedores - Vendors
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/purchases-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Compras - Purchases
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/products-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Productos - Products
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/jobs-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trabajos - Jobs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/accounting-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contabilidad General
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/payments-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pagos y Créditos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/inventory-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inventario - Inventory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
     
     
     <li class="md-nav__item md-nav__item--nested">
       
         
         
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
         
           
           <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
@@ -562,147 +655,7 @@
   <span class="md-ellipsis">
     
   
-    API Facturación Electrónica (FE) - DocuCenter
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../api/fe/acicloud-fe-api/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    API Facturación Electrónica - Integración ACICloud FE
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../api/fe/document-emission-api/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    API Facturación Electrónica - Emisión de Documentos
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../api/fe/shopify-api/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    API Facturación Electrónica - Integración Shopify
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../api/fe/lightspeed-api/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    API Facturación Electrónica - Integración Lightspeed
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../api/fe/maxgym-api/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    API Facturación Electrónica - Integración Maxgym
+    APIs de Facturación Electrónica
   
 
     
@@ -730,7 +683,35 @@
   <span class="md-ellipsis">
     
   
-    API Facturación Electrónica - Integración Meypar
+    Integración Meypar
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/shopify-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integración Shopify
   
 
     
@@ -758,7 +739,175 @@
   <span class="md-ellipsis">
     
   
-    API Facturación Electrónica - Integración Kart21
+    Integración Kart21
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/lightspeed-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integración Lightspeed
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/maxgym-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integración Maxgym
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/acicloud-fe-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ACICloud FE
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/import-xml-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Import XML
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/emit-json-object-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Emit JSON Object
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/download-base64-document-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Download Base64 Document
   
 
     
@@ -790,280 +939,15 @@
     
     
     
-      
-      
-        
-      
-    
     
     <li class="md-nav__item md-nav__item--nested">
       
         
         
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
         
           
           <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Sage ACICloud
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2_3">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Sage ACICloud
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../api/sage-acicloud/customers-api/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    API Sage ACICloud - Módulo Clientes
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../api/sage-acicloud/products-api/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    API Productos - Sage ACICloud
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../api/sage-acicloud/sales-orders-api/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    API Sage ACICloud - Módulo Órdenes de Venta
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../api/sage-acicloud/purchases-api/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    API Compras - Sage ACICloud
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../api/sage-acicloud/payments-api/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    API Pagos y Créditos - Sage ACICloud
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../api/sage-acicloud/inventory-api/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    API Inventario - Sage ACICloud
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../api/sage-acicloud/jobs-api/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    API Trabajos/Jobs - Sage ACICloud
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_4" >
-        
-          
-          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
             
   
   
@@ -1081,8 +965,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2_4">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -1106,7 +990,90 @@
   <span class="md-ellipsis">
     
   
-    API de Organizaciones
+    Gestión de Organizaciones
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ubicaciones Geográficas
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Ubicaciones Geográficas
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/locations/locations-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API de Ubicaciones
   
 
     
@@ -1145,19 +1112,12 @@
     
     
     
-      
-      
-        
-      
-    
     
     <li class="md-nav__item md-nav__item--nested">
       
         
         
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
         
           
           <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
@@ -1167,7 +1127,7 @@
   <span class="md-ellipsis">
     
   
-    Optimizaciones
+    Sistema de Testing
   
 
     
@@ -1183,7 +1143,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Optimizaciones
+    Sistema de Testing
   
 
           </label>
@@ -1196,96 +1156,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../optimizations/" class="md-nav__link">
+      <a href="../../testing/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Optimizaciones - DocuCenter
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_2" >
-        
-          
-          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Performance
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_3_2">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Performance
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../optimizations/customer-supplier-optimizations/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Optimizaciones para el manejo de muchos clientes
+    Índice de Testing
   
 
     
@@ -1306,14 +1184,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../optimizations/mysql-optimization-circuit-breaker/" class="md-nav__link">
+      <a href="../../TESTING_SYSTEM_SUMMARY/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Optimización MySQL 8.0 y Circuit Breaker para DocuCenter
+    Resumen Ejecutivo
   
 
     
@@ -1322,14 +1200,6 @@
   
 
       </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
     </li>
   
 
@@ -1352,19 +1222,12 @@
     
     
     
-      
-      
-        
-      
-    
     
     <li class="md-nav__item md-nav__item--nested">
       
         
         
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
         
           
           <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
@@ -1403,96 +1266,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
+      <a href="../README.md" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Documentación Técnica - DocuCenter
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_2" >
-        
-          
-          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    QuickBooks
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4_2">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    QuickBooks
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../quickbooks-webhook-organizationid-fix/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Fix: QuickBooks Webhook OrganizationId Duplicado
+    Soluciones
   
 
     
@@ -1513,660 +1294,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../quickbooks-bills-job-graceful-validation/" class="md-nav__link">
+      <a href="../lightspeed_audit_improvement/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Fix: Validación Graceful de Tablas en CreateIntuitBillsJob
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../quickbooks-fiscal-number-validation-system/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Sistema de Validación de Números Fiscales QuickBooks
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_3" >
-        
-          
-          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    MaxGym
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4_3">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    MaxGym
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../maxgym-amount-calculation-fix/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Corrección de Cálculo de Montos en MaxGym API
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_4" >
-        
-          
-          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Document AI
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4_4">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Document AI
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../document-ai-import-to-workbench/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Document AI - Importación a Workbench
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../document-ai-import-implementation-summary/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Document AI - Implementación Import to Workbench
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_5" >
-        
-          
-          <label class="md-nav__link" for="__nav_4_5" id="__nav_4_5_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Alanube DOM
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_5_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4_5">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Alanube DOM
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../alanube-dom-service-usage/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Guía de Uso del Servicio AlanubeDomService
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../alanube-dom-export-invoices/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Facturas de Exportación Electrónica (46) - Alanube DOM
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../ALANUBE_DOM_COMPLETE_INTEGRATION/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Integración Completa Alanube DOM - República Dominicana
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../FISCAL_CREDIT_IMPLEMENTATION_SUMMARY/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Implementación Completa de Facturas de Crédito Fiscal (31) - Alanube DOM
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_6" >
-        
-          
-          <label class="md-nav__link" for="__nav_4_6" id="__nav_4_6_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Soluciones Técnicas
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_6_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4_6">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Soluciones Técnicas
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../ezeeissued-solution-summary/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Solución Implementada - Campo EzeeIssued
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../getsaleproperty-optimizations-summary/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Optimizaciones Completas - getSaleProperty() - Create.php
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../ezeeissued-field-correction-summary/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Corrección de Campo EzeeIssued - Resumen Técnico
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_7" >
-        
-          
-          <label class="md-nav__link" for="__nav_4_7" id="__nav_4_7_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Pagos y Cálculos
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_7_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4_7">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Pagos y Cálculos
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../payment-calculation-fix/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Análisis de Discrepancias en Cálculo de Pagos - Facturación Electrónica
+    Auditoría Lightspeed
   
 
     
@@ -2194,97 +1329,7 @@
   <span class="md-ellipsis">
     
   
-    Solución Final: Sincronización Completa de Pagos en Facturación Electrónica
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_8" >
-        
-          
-          <label class="md-nav__link" for="__nav_4_8" id="__nav_4_8_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    SQL Server
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_8_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4_8">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    SQL Server
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../sql-server-complete-store-id-filtering/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Implementación Completa de Filtrado por Store ID en Jobs SQL Server
+    Sincronización de Pagos
   
 
     
@@ -2305,14 +1350,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../sql-server-store-id-filtering/" class="md-nav__link">
+      <a href="../payment-calculation-fix/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Implementación de Filtrado por Store ID en STInvoiceJob
+    Corrección Cálculo Pagos
   
 
     
@@ -2332,14 +1377,6 @@
     </li>
   
 
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
     
       
       
@@ -2350,20 +1387,13 @@
     
     
     
-    
-      
-      
-        
-      
     
     
     <li class="md-nav__item md-nav__item--nested">
       
         
         
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
         
           
           <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
@@ -2409,7 +1439,7 @@
   <span class="md-ellipsis">
     
   
-    Validaciones - DocuCenter
+    Resumen
   
 
     
@@ -2429,60 +1459,6 @@
   
   
   
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5_2" >
-        
-          
-          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Documentos Fiscales
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_5_2">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Documentos Fiscales
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
     <li class="md-nav__item">
       <a href="../../validations/createSale-ruc-validation/" class="md-nav__link">
         
@@ -2491,7 +1467,7 @@
   <span class="md-ellipsis">
     
   
-    Validación de RUC en CreateSaleMaxgymRequest
+    Validación RUC CreateSale
   
 
     
@@ -2519,365 +1495,7 @@
   <span class="md-ellipsis">
     
   
-    Validación de RUC en MaxgymService
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
-        
-          
-          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Testing
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_6">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Testing
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../testing/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Sistema de Testing DocuCenter
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6_2" >
-        
-          
-          <label class="md-nav__link" for="__nav_6_2" id="__nav_6_2_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Reportes de Error
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_2_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_6_2">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Reportes de Error
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../testing/PLUSMOVIL-PRODUCTION-ERROR-REPORT/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Reporte Error PlusMóvil Producción
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
-        
-          
-          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Integraciones
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_7">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Integraciones
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../integrations/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Integraciones Disponibles
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7_2" >
-        
-          
-          <label class="md-nav__link" for="__nav_7_2" id="__nav_7_2_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    PlusMóvil
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_2_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_7_2">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    PlusMóvil
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../integrations/plusmovil-implementation-summary/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Resumen Implementación
+    Validación RUC Maxgym
   
 
     
@@ -2898,14 +1516,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../integrations/plusmovil-implementation-analysis/" class="md-nav__link">
+      <a href="../../validations/meypar-validations/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Análisis
+    Validaciones MEYPAR
   
 
     
@@ -2926,14 +1544,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../integrations/plusmovil-api-testing-results/" class="md-nav__link">
+      <a href="../../validations/validation_comparison/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Resultados Testing API
+    Comparación Validaciones
   
 
     
@@ -2942,70 +1560,6 @@
   
 
       </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../integrations/plusmovil-continuation-plan/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Plan Continuación
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../integrations/plusmovil-next-steps/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Próximos Pasos
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
     </li>
   
 
@@ -3330,14 +1884,14 @@
   
 
 
-<h1 id="solucion-al-error-pac-campo-valorcuotapagada-requerido">Solución al Error PAC: Campo valorCuotaPagada Requerido<a class="headerlink" href="#solucion-al-error-pac-campo-valorcuotapagada-requerido" title="Permanent link">&para;</a></h1>
-<h2 id="problema-reportado">Problema Reportado<a class="headerlink" href="#problema-reportado" title="Permanent link">&para;</a></h2>
+<h1 id="solucion-al-error-pac-campo-valorcuotapagada-requerido">Solución al Error PAC: Campo valorCuotaPagada Requerido</h1>
+<h2 id="problema-reportado">Problema Reportado</h2>
 <p>Error PAC de TheFactoryHKA: <strong>"En la ocurrencia [2] de FormaPago, El campo valorCuotaPagada es requerido"</strong></p>
 <p>Este error ocurría específicamente en la emisión de facturas desde Lightspeed Serie R.</p>
-<h2 id="analisis-del-problema">Análisis del Problema<a class="headerlink" href="#analisis-del-problema" title="Permanent link">&para;</a></h2>
-<h3 id="1-estructura-de-pagos-en-dgi-panama">1. Estructura de Pagos en DGI Panamá<a class="headerlink" href="#1-estructura-de-pagos-en-dgi-panama" title="Permanent link">&para;</a></h3>
+<h2 id="analisis-del-problema">Análisis del Problema</h2>
+<h3 id="1-estructura-de-pagos-en-dgi-panama">1. Estructura de Pagos en DGI Panamá</h3>
 <p>Según la documentación de DGI y TheFactoryHKA PAC, cada forma de pago requiere:</p>
-<div class="highlight"><pre><span></span><code><span class="x">[</span>
+<div class="codehilite"><pre><span></span><code><span class="x">[</span>
 <span class="x">    &#39;iFormaPago&#39; =&gt; &#39;01&#39;,           // Código de forma de pago (requerido)</span>
 <span class="x">    &#39;dVlrCuota&#39; =&gt; 100.00,          // Valor de la cuota (requerido)</span>
 <span class="x">    &#39;valorCuotaPagada&#39; =&gt; 100.00,   // Valor pagado (requerido por TheFactoryHKA)</span>
@@ -3345,29 +1899,31 @@
 <span class="x">    &#39;cNroAutoriza&#39; =&gt; &#39;&#39;,           // Número de autorización (opcional)</span>
 <span class="x">]</span>
 </code></pre></div>
+
 <p><strong>Nota importante</strong>: <code>valorCuotaPagada</code> es un campo requerido por <strong>TheFactoryHKA PAC</strong>, pero <strong>NO por Alanube</strong> (que usa estructura diferente).</p>
-<h3 id="2-causa-raiz-encontrada">2. Causa Raíz Encontrada<a class="headerlink" href="#2-causa-raiz-encontrada" title="Permanent link">&para;</a></h3>
+<h3 id="2-causa-raiz-encontrada">2. Causa Raíz Encontrada</h3>
 <p>El error "En la ocurrencia [2]" indicaba que el problema estaba en el <strong>segundo pago</strong> del array, que típicamente es el pago adicional agregado para equiparar los descuentos.</p>
 <p>Se identificaron <strong>DOS problemas</strong>:</p>
-<h4 id="problema-a-campo-valorcuotapagada-faltante-inicialmente">Problema A: Campo valorCuotaPagada faltante inicialmente<a class="headerlink" href="#problema-a-campo-valorcuotapagada-faltante-inicialmente" title="Permanent link">&para;</a></h4>
+<h4 id="problema-a-campo-valorcuotapagada-faltante-inicialmente">Problema A: Campo valorCuotaPagada faltante inicialmente</h4>
 <ul>
 <li>El campo <code>valorCuotaPagada</code> no se incluía en la construcción inicial de pagos</li>
 <li>Solo se incluía <code>dVlrCuota</code></li>
 </ul>
-<h4 id="problema-b-hkaservice-sobrescribia-el-campo">Problema B: HKAService sobrescribía el campo<a class="headerlink" href="#problema-b-hkaservice-sobrescribia-el-campo" title="Permanent link">&para;</a></h4>
+<h4 id="problema-b-hkaservice-sobrescribia-el-campo">Problema B: HKAService sobrescribía el campo</h4>
 <p>El problema crítico estaba en <code>/app/Services/HKAService.php</code> línea 317:</p>
-<div class="highlight"><pre><span></span><code><span class="x">// CÓDIGO ANTERIOR (INCORRECTO)</span>
+<div class="codehilite"><pre><span></span><code><span class="x">// CÓDIGO ANTERIOR (INCORRECTO)</span>
 <span class="x">$totales-&gt;listaFormaPago[] = [</span>
 <span class="x">    &#39;formaPagoFact&#39; =&gt; $this-&gt;getNestedValue($formaPago, &#39;iFormaPago&#39;),</span>
 <span class="x">    &#39;valorCuotaPagada&#39; =&gt; $this-&gt;normalizeNumericValueToTwoDecimals($this-&gt;getNestedValue($formaPago, &#39;dVlrCuota&#39;)),</span>
-<span class="x">    // Siempre usaba dVlrCuota, ignorando valorCuotaPagada del array original</span>
+<span class="x">    // ⬆️ Siempre usaba dVlrCuota, ignorando valorCuotaPagada del array original</span>
 <span class="x">    &#39;descFormaPago&#39; =&gt; $this-&gt;getNestedValue($formaPago, &#39;dFormaPagoDesc&#39;),</span>
 <span class="x">];</span>
 </code></pre></div>
+
 <p><strong>El servicio siempre tomaba el valor de <code>dVlrCuota</code> y lo asignaba a <code>valorCuotaPagada</code></strong>, ignorando el campo <code>valorCuotaPagada</code> que estábamos agregando en los componentes.</p>
-<h4 id="problema-c-hkaservice-usaba-arrays-en-vez-de-objetos-formapago">Problema C: HKAService usaba arrays en vez de objetos FormaPago<a class="headerlink" href="#problema-c-hkaservice-usaba-arrays-en-vez-de-objetos-formapago" title="Permanent link">&para;</a></h4>
+<h4 id="problema-c-hkaservice-usaba-arrays-en-vez-de-objetos-formapago">Problema C: HKAService usaba arrays en vez de objetos FormaPago</h4>
 <p><strong>CRÍTICO</strong>: Aunque corregimos la lectura del campo <code>valorCuotaPagada</code>, el servicio usaba <strong>arrays</strong> en vez de crear instancias de la clase <code>FormaPago</code>. Esto causaba que el campo <strong>NO se escribiera en el XML</strong> enviado al PAC.</p>
-<div class="highlight"><pre><span></span><code><span class="x">// INCORRECTO: Usar array</span>
+<div class="codehilite"><pre><span></span><code><span class="x">// INCORRECTO: Usar array</span>
 <span class="x">$totales-&gt;listaFormaPago[] = [</span>
 <span class="x">    &#39;formaPagoFact&#39; =&gt; &#39;01&#39;,</span>
 <span class="x">    &#39;valorCuotaPagada&#39; =&gt; &#39;100.00&#39;,</span>
@@ -3381,20 +1937,21 @@
 <span class="x">$totales-&gt;listaFormaPago[] = $formaPago;</span>
 <span class="x">// Resultado: XML incluye &lt;valorCuotaPagada&gt;</span>
 </code></pre></div>
-<h2 id="solucion-implementada">Solución Implementada<a class="headerlink" href="#solucion-implementada" title="Permanent link">&para;</a></h2>
-<h3 id="1-agregar-valorcuotapagada-en-construccion-de-pagos">1. Agregar valorCuotaPagada en Construcción de Pagos<a class="headerlink" href="#1-agregar-valorcuotapagada-en-construccion-de-pagos" title="Permanent link">&para;</a></h3>
+
+<h2 id="solucion-implementada">Solución Implementada</h2>
+<h3 id="1-agregar-valorcuotapagada-en-construccion-de-pagos">1. Agregar valorCuotaPagada en Construcción de Pagos</h3>
 <p><strong>Archivos modificados:</strong>
 - <code>/app/Http/Livewire/Admin/Einvoice/CreateFastJob.php</code>
 - <code>/app/Http/Livewire/Admin/Einvoice/CreateFast.php</code>
 - <code>/app/Http/Livewire/Admin/Einvoice/Create.php</code></p>
 <p><strong>Cambios aplicados:</strong></p>
-<div class="highlight"><pre><span></span><code><span class="x">// En foreach de pagos principales</span>
+<div class="codehilite"><pre><span></span><code><span class="x">// En foreach de pagos principales</span>
 <span class="x">$payments[] = $this-&gt;validArray([</span>
 <span class="x">    &#39;iFormaPago&#39; =&gt; $type-&gt;code,</span>
 <span class="x">    ...$type-&gt;code === &#39;99&#39; ? [&#39;dFormaPagoDesc&#39; =&gt; $type-&gt;name] : [],</span>
 <span class="x">    &#39;dVlrCuota&#39; =&gt; $this-&gt;numberFormat($totalValue),</span>
-<span class="x">    &#39;valorCuotaPagada&#39; =&gt; $this-&gt;numberFormat($totalValue), // AGREGADO</span>
-<span class="x">    &#39;cNroAutoriza&#39; =&gt; &#39;&#39;, // AGREGADO</span>
+<span class="x">    &#39;valorCuotaPagada&#39; =&gt; $this-&gt;numberFormat($totalValue), // ✅ AGREGADO</span>
+<span class="x">    &#39;cNroAutoriza&#39; =&gt; &#39;&#39;, // ✅ AGREGADO</span>
 <span class="x">]);</span>
 
 <span class="x">// En pago adicional para descuentos</span>
@@ -3402,22 +1959,24 @@
 <span class="x">    &#39;iFormaPago&#39; =&gt; $type-&gt;code,</span>
 <span class="x">    ...$type-&gt;code === &#39;99&#39; ? [&#39;dFormaPagoDesc&#39; =&gt; $type-&gt;name] : [],</span>
 <span class="x">    &#39;dVlrCuota&#39; =&gt; $this-&gt;numberFormat($montoDescuentos),</span>
-<span class="x">    &#39;valorCuotaPagada&#39; =&gt; $this-&gt;numberFormat($montoDescuentos), // AGREGADO</span>
-<span class="x">    &#39;cNroAutoriza&#39; =&gt; &#39;&#39;, // AGREGADO</span>
+<span class="x">    &#39;valorCuotaPagada&#39; =&gt; $this-&gt;numberFormat($montoDescuentos), // ✅ AGREGADO</span>
+<span class="x">    &#39;cNroAutoriza&#39; =&gt; &#39;&#39;, // ✅ AGREGADO</span>
 <span class="x">]);</span>
 </code></pre></div>
-<h3 id="2-sincronizar-valorcuotapagada-en-ajustes">2. Sincronizar valorCuotaPagada en Ajustes<a class="headerlink" href="#2-sincronizar-valorcuotapagada-en-ajustes" title="Permanent link">&para;</a></h3>
+
+<h3 id="2-sincronizar-valorcuotapagada-en-ajustes">2. Sincronizar valorCuotaPagada en Ajustes</h3>
 <p>Cuando se ajusta el último pago para equiparar totales:</p>
-<div class="highlight"><pre><span></span><code><span class="x">// Ajustar el último pago para que la suma sea exacta</span>
+<div class="codehilite"><pre><span></span><code><span class="x">// Ajustar el último pago para que la suma sea exacta</span>
 <span class="x">$lastIndex = count($payments) - 1;</span>
 <span class="x">$adjustment = $dVTot - ($totalPayments - $payments[$lastIndex][&#39;dVlrCuota&#39;]);</span>
 <span class="x">$payments[$lastIndex][&#39;dVlrCuota&#39;] = $this-&gt;numberFormat($adjustment, 2);</span>
 <span class="x">// CRÍTICO: Sincronizar valorCuotaPagada con el ajuste</span>
-<span class="x">$payments[$lastIndex][&#39;valorCuotaPagada&#39;] = $this-&gt;numberFormat($adjustment, 2); // AGREGADO</span>
+<span class="x">$payments[$lastIndex][&#39;valorCuotaPagada&#39;] = $this-&gt;numberFormat($adjustment, 2); // ✅ AGREGADO</span>
 </code></pre></div>
-<h3 id="3-corregir-hkaservice-para-leer-campo-correcto">3. Corregir HKAService para Leer Campo Correcto<a class="headerlink" href="#3-corregir-hkaservice-para-leer-campo-correcto" title="Permanent link">&para;</a></h3>
+
+<h3 id="3-corregir-hkaservice-para-leer-campo-correcto">3. Corregir HKAService para Leer Campo Correcto</h3>
 <p><strong>Archivo:</strong> <code>/app/Services/HKAService.php</code> líneas 314-327</p>
-<div class="highlight"><pre><span></span><code><span class="x">// CÓDIGO NUEVO (CORRECTO)</span>
+<div class="codehilite"><pre><span></span><code><span class="x">// CÓDIGO NUEVO (CORRECTO)</span>
 <span class="x">$gFormaPago = $this-&gt;getNestedValue($doc, &#39;gTot.gFormaPago&#39;, []);</span>
 <span class="x">foreach ($gFormaPago as $formaPago) {</span>
 <span class="x">    $valorCuotaPagada = $this-&gt;getNestedValue($formaPago, &#39;valorCuotaPagada&#39;);</span>
@@ -3433,11 +1992,12 @@
 <span class="x">    ];</span>
 <span class="x">}</span>
 </code></pre></div>
+
 <p><strong>Cambio clave:</strong> Ahora primero intenta leer <code>valorCuotaPagada</code> del array, y solo usa <code>dVlrCuota</code> como fallback si no existe.</p>
-<h3 id="4-usar-objetos-formapago-en-vez-de-arrays">4. Usar Objetos FormaPago en Vez de Arrays<a class="headerlink" href="#4-usar-objetos-formapago-en-vez-de-arrays" title="Permanent link">&para;</a></h3>
+<h3 id="4-usar-objetos-formapago-en-vez-de-arrays">4. Usar Objetos FormaPago en Vez de Arrays</h3>
 <p><strong>Archivo:</strong> <code>/app/Services/HKAService.php</code> líneas 5-7 y 314-328</p>
 <p><strong>CRÍTICO</strong>: La solución definitiva fue cambiar de usar arrays a usar objetos de la clase <code>FormaPago</code>:</p>
-<div class="highlight"><pre><span></span><code><span class="x">// Agregar import</span>
+<div class="codehilite"><pre><span></span><code><span class="x">// Agregar import</span>
 <span class="x">use App\Utils\hka\FormaPago;</span>
 
 <span class="x">// Código corregido</span>
@@ -3456,10 +2016,11 @@
 <span class="x">    $totales-&gt;listaFormaPago[] = $formaPagoObj;</span>
 <span class="x">}</span>
 </code></pre></div>
+
 <p><strong>Por qué es importante</strong>: Solo al usar objetos de la clase <code>FormaPago</code>, el serializador XML incluye correctamente el tag <code>&lt;valorCuotaPagada&gt;</code> en el XML enviado al PAC. Con arrays, solo se incluía <code>&lt;dVlrCuota&gt;</code>.</p>
-<h3 id="5-agregar-logging-para-debugging">5. Agregar Logging para Debugging<a class="headerlink" href="#5-agregar-logging-para-debugging" title="Permanent link">&para;</a></h3>
+<h3 id="5-agregar-logging-para-debugging">5. Agregar Logging para Debugging</h3>
 <p>En <code>CreateFastJob.php</code>:</p>
-<div class="highlight"><pre><span></span><code><span class="x">// DEBUG: Logging para verificar estructura de pagos antes de ajuste</span>
+<div class="codehilite"><pre><span></span><code><span class="x">// DEBUG: Logging para verificar estructura de pagos antes de ajuste</span>
 <span class="x">Log::info(&#39;CreateFastJob - Pagos antes del ajuste&#39;, [</span>
 <span class="x">    &#39;payments&#39; =&gt; $payments,</span>
 <span class="x">    &#39;dTotRec&#39; =&gt; $dTotRec,</span>
@@ -3476,15 +2037,16 @@
 <span class="x">    &#39;count&#39; =&gt; count($payments),</span>
 <span class="x">]);</span>
 </code></pre></div>
+
 <p>Esto permite verificar en logs que el campo <code>valorCuotaPagada</code> se mantiene en todos los pagos.</p>
-<h2 id="archivos-modificados">Archivos Modificados<a class="headerlink" href="#archivos-modificados" title="Permanent link">&para;</a></h2>
+<h2 id="archivos-modificados">Archivos Modificados</h2>
 <ol>
 <li><strong>CreateFastJob.php</strong> - Trait para emisión rápida desde Lightspeed</li>
 <li><strong>CreateFast.php</strong> - Componente de emisión rápida estándar</li>
 <li><strong>Create.php</strong> - Componente de emisión paso a paso</li>
 <li><strong>HKAService.php</strong> - Servicio de formateo para TheFactoryHKA PAC</li>
 </ol>
-<h2 id="commits-realizados">Commits Realizados<a class="headerlink" href="#commits-realizados" title="Permanent link">&para;</a></h2>
+<h2 id="commits-realizados">Commits Realizados</h2>
 <ol>
 <li><strong>Commit 1:</strong> <code>fix: agregar campo valorCuotaPagada a todos los pagos en CreateFast y componentes relacionados</code></li>
 <li><strong>Commit 2:</strong> <code>fix: sincronizar valorCuotaPagada al ajustar pagos para equiparar totales</code></li>
@@ -3493,47 +2055,47 @@
 <li>Este fue el commit definitivo que resolvió el problema</li>
 <li>Cambió de usar arrays a objetos FormaPago para asegurar que el campo se incluya en el XML</li>
 </ol>
-<h2 id="validacion">Validación<a class="headerlink" href="#validacion" title="Permanent link">&para;</a></h2>
+<h2 id="validacion">Validación</h2>
 <p>Para verificar que el problema está resuelto:</p>
 <ol>
 <li>
 <p><strong>Revisar logs</strong> en <code>storage/logs/laravel.log</code>:
-   <div class="highlight"><pre><span></span><code>tail<span class="w"> </span>-f<span class="w"> </span>storage/logs/laravel.log<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;CreateFastJob - Pagos&quot;</span>
-</code></pre></div></p>
+   <code>bash
+   tail -f storage/logs/laravel.log | grep "CreateFastJob - Pagos"</code></p>
 </li>
 <li>
 <p><strong>Verificar estructura de pagos</strong>: Debe incluir <code>valorCuotaPagada</code> en TODOS los pagos, especialmente en la ocurrencia [2].</p>
 </li>
 <li>
 <p><strong>Verificar XML generado</strong>: El log <code>SignedXml</code> debe mostrar el tag <code>&lt;valorCuotaPagada&gt;</code> en cada <code>&lt;gFormaPago&gt;</code>:
-   <div class="highlight"><pre><span></span><code><span class="nt">&lt;gFormaPago&gt;</span>
-<span class="w">    </span><span class="nt">&lt;iFormaPago&gt;</span>03<span class="nt">&lt;/iFormaPago&gt;</span>
-<span class="w">    </span><span class="nt">&lt;dVlrCuota&gt;</span>20.97<span class="nt">&lt;/dVlrCuota&gt;</span>
-<span class="w">    </span><span class="nt">&lt;valorCuotaPagada&gt;</span>20.97<span class="nt">&lt;/valorCuotaPagada&gt;</span>
-<span class="nt">&lt;/gFormaPago&gt;</span>
-</code></pre></div></p>
+   <code>xml
+   &lt;gFormaPago&gt;
+       &lt;iFormaPago&gt;03&lt;/iFormaPago&gt;
+       &lt;dVlrCuota&gt;20.97&lt;/dVlrCuota&gt;
+       &lt;valorCuotaPagada&gt;20.97&lt;/valorCuotaPagada&gt;
+   &lt;/gFormaPago&gt;</code></p>
 </li>
 <li>
 <p><strong>Probar emisión</strong>: Emitir una factura desde Lightspeed Serie R con descuentos (para generar el segundo pago).</p>
 </li>
 </ol>
-<h2 id="notas-importantes">Notas Importantes<a class="headerlink" href="#notas-importantes" title="Permanent link">&para;</a></h2>
-<h3 id="diferencias-entre-pacs">Diferencias entre PACs<a class="headerlink" href="#diferencias-entre-pacs" title="Permanent link">&para;</a></h3>
+<h2 id="notas-importantes">Notas Importantes</h2>
+<h3 id="diferencias-entre-pacs">Diferencias entre PACs</h3>
 <ul>
 <li><strong>TheFactoryHKA</strong>: Requiere campo <code>valorCuotaPagada</code> separado de <code>dVlrCuota</code></li>
 <li><strong>Alanube</strong>: Usa estructura diferente con campo <code>amount</code> en vez de <code>valorCuotaPagada</code></li>
 </ul>
-<h3 id="campo-cnroautoriza">Campo cNroAutoriza<a class="headerlink" href="#campo-cnroautoriza" title="Permanent link">&para;</a></h3>
+<h3 id="campo-cnroautoriza">Campo cNroAutoriza</h3>
 <p>El campo <code>cNroAutoriza</code> (número de autorización) se agrega como string vacío <code>''</code>. Aunque <code>validArray()</code> filtra strings vacíos, este campo es opcional y no causa problemas si se elimina.</p>
-<h3 id="metodo-validarray">Método validArray()<a class="headerlink" href="#metodo-validarray" title="Permanent link">&para;</a></h3>
+<h3 id="metodo-validarray">Método validArray()</h3>
 <p>El método <code>validArray()</code> (definido en <code>vendor/weirdo/helper/src/Helper/Traits/HelperArray.php</code>) filtra valores <code>null</code> y strings vacíos usando <code>!empty($value)</code>. Por eso:</p>
 <ul>
-<li><code>'valorCuotaPagada' =&gt; '100.00'</code> - Se mantiene (tiene valor)</li>
-<li><code>'cNroAutoriza' =&gt; ''</code> - Se elimina (string vacío)</li>
-<li><code>'valorCuotaPagada' =&gt; 0</code> - Se elimina (0 es empty)</li>
+<li>✅ <code>'valorCuotaPagada' =&gt; '100.00'</code> - Se mantiene (tiene valor)</li>
+<li>❌ <code>'cNroAutoriza' =&gt; ''</code> - Se elimina (string vacío)</li>
+<li>✅ <code>'valorCuotaPagada' =&gt; 0</code> - Se elimina (0 es empty)</li>
 </ul>
 <p><strong>Recomendación</strong>: Para campos numéricos que pueden ser 0, no usar <code>validArray()</code> o agregar lógica especial.</p>
-<h2 id="lecciones-aprendidas">Lecciones Aprendidas<a class="headerlink" href="#lecciones-aprendidas" title="Permanent link">&para;</a></h2>
+<h2 id="lecciones-aprendidas">Lecciones Aprendidas</h2>
 <ol>
 <li><strong>Verificar formatters</strong>: Los servicios de formateo (HKAService, AlanubeFormatterHelper) pueden sobrescribir o ignorar campos del array original</li>
 <li><strong>Logging es crítico</strong>: Agregar logging antes y después de transformaciones ayuda a identificar dónde se pierde información</li>
@@ -3542,7 +2104,7 @@
 <li><strong>Arrays vs Objetos en XML</strong>: <strong>CRÍTICO</strong> - Al serializar a XML, usar objetos de clases específicas en vez de arrays asegura que TODOS los campos se incluyan correctamente en el XML. Los arrays pueden causar que campos se omitan en la serialización.</li>
 <li><strong>Revisar el XML generado</strong>: Siempre verificar el XML final (log <code>SignedXml</code>) para confirmar que los campos esperados están presentes, no solo la estructura de datos en memoria</li>
 </ol>
-<h2 id="referencias">Referencias<a class="headerlink" href="#referencias" title="Permanent link">&para;</a></h2>
+<h2 id="referencias">Referencias</h2>
 <ul>
 <li>Documentación DGI Panamá: Estructura gFormaPago</li>
 <li>Documentación TheFactoryHKA PAC: Validaciones de campos requeridos</li>
@@ -3567,12 +2129,6 @@
           
 <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
         </div>
-        
-          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
-  Volver al principio
-</button>
         
       </main>
       
@@ -3619,7 +2175,7 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.highlight", "search.suggest"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
     
     
       <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>

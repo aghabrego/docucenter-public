@@ -14,89 +14,108 @@ Crea y emite una factura electrónica basada en datos provenientes del sistema M
 
 ### Estructura del Request
 
-#### Campos Principales
+#### Campos Principales (Estructura Oficial MEYPAR)
 
 | Campo | Tipo | Requerido | Descripción | Límite |
 |-------|------|-----------|-------------|---------|
-| `documento.tipo_documento` | string | | Tipo de documento | - |
-| `documento.numero` | string | | Número del documento | **20 caracteres** |
-| `documento.fecha` | string | | Fecha del documento (YYYY-MM-DD) | - |
+| `idFacturador` | integer | ✅ | ID del obligado a facturar | - |
+| `ambiente` | integer | ✅ | Ambiente (1=Producción, 2=Pruebas) | - |
+| `documento` | string | ✅ | **NIT del adquiriente** (usuario del parking) | **50 caracteres** |
+| `tipoDocumento` | integer | ✅ | Tipo de documento (1=FE, 2=DEE) | - |
+| `prefijo` | string | ✅ | Prefijo de numeración | **10 caracteres** |
+| `numero` | integer | ✅ | **Número de factura** | - |
+| `medioPago` | integer | ✅ | Medio de pago (0-4) | - |
+| `fechaFactura` | string | ✅ | Fecha de factura (YYYY-MM-DD) | - |
+
+**Notas Importantes:**
+- **`documento`**: Es el NIT/documento del **cliente** (adquiriente), NO el número de factura
+- **`numero`**: Es el **número de la factura**, se convierte en `InvoiceNumber`
+- **Consumidor Final**: Usar `documento = "222222222222"` para consumidor final en Panamá
 
 #### Emisor
 
 | Campo | Tipo | Requerido | Descripción | Límite |
 |-------|------|-----------|-------------|---------|
-| `documento.emisor.nombre` | string | | Nombre del emisor | **100 caracteres** |
-| `documento.emisor.nit` | string | | NIT del emisor | **50 caracteres** |
-| `documento.emisor.direccion` | string | | Dirección del emisor | - |
-| `documento.emisor.telefono` | string | | Teléfono del emisor | - |
-| `documento.emisor.email` | string | | Email del emisor | - |
+| `documento.emisor.nombre` | string | ✅ | Nombre del emisor | **100 caracteres** |
+| `documento.emisor.nit` | string | ✅ | NIT del emisor | **50 caracteres** |
+| `documento.emisor.direccion` | string | ❌ | Dirección del emisor | - |
+| `documento.emisor.telefono` | string | ❌ | Teléfono del emisor | - |
+| `documento.emisor.email` | string | ❌ | Email del emisor | - |
 
-#### Adquiriente
+#### Adquiriente (Estructura Simplificada - Opcional)
+
+**⚠️ Nota**: Esta es una estructura alternativa simplificada de DocuCenter. La estructura oficial MEYPAR usa el campo raíz `documento` para el NIT del cliente.
 
 | Campo | Tipo | Requerido | Descripción | Límite |
 |-------|------|-----------|-------------|---------|
-| `documento.adquiriente.nombre` | string | | Nombre del cliente | **39 caracteres** |
-| `documento.adquiriente.nit` | string | | NIT del cliente | **20 caracteres** |
-| `documento.adquiriente.email` | string | | Email del cliente | **100 caracteres** |
-| `documento.adquiriente.direccion` | string | | Dirección del cliente | **200 caracteres** |
-| `documento.adquiriente.telefono` | string | | Teléfono del cliente | **20 caracteres** |
+| `documento.adquiriente.nombre` | string | ❌ | Nombre del cliente | **39 caracteres** |
+| `documento.adquiriente.nit` | string | ❌ | NIT del cliente (redundante con campo `documento`) | **20 caracteres** |
+| `documento.adquiriente.email` | string | ❌ | Email del cliente | **100 caracteres** |
+| `documento.adquiriente.direccion` | string | ❌ | Dirección del cliente | **200 caracteres** |
+| `documento.adquiriente.telefono` | string | ❌ | Teléfono del cliente | **20 caracteres** |
+
+**Referencia Oficial MEYPAR:**
+- El campo `documento` (raíz) es el NIT del adquiriente según PDF técnico LogTech
+- Formato: String alfanumérico, máximo 50 caracteres
+- Consumidor Final Panamá: `"222222222222"`
 
 #### Terminal
 
 | Campo | Tipo | Requerido | Descripción | Límite |
 |-------|------|-----------|-------------|---------|
-| `documento.terminal.CodigoTerminal` | integer | | Código del terminal | - |
-| `documento.terminal.CodigoExterno` | string | | Código externo del terminal | **20 caracteres** |
-| `documento.terminal.NombreTerminal` | string | | Nombre del terminal | **100 caracteres** |
+| `documento.terminal.CodigoTerminal` | integer | ❌ | Código del terminal | - |
+| `documento.terminal.CodigoExterno` | string | ❌ | Código externo del terminal | **20 caracteres** |
+| `documento.terminal.NombreTerminal` | string | ❌ | Nombre del terminal | **100 caracteres** |
 
 #### Items del Documento
 
 | Campo | Tipo | Requerido | Descripción | Límite |
 |-------|------|-----------|-------------|---------|
-| `documento.items.*.cantidad` | decimal | | Cantidad del item | **decimal(12,2)** |
-| `documento.items.*.descripcion` | string | | Descripción del item | **255 caracteres** |
-| `documento.items.*.precioUnitario` | decimal | | Precio unitario | **decimal(16,4)** |
-| `documento.items.*.codigoProducto` | string | | Código del producto | **50 caracteres** |
-| `documento.items.*.unidadMedida` | string | | Unidad de medida | **10 caracteres** |
-| `documento.items.*.precioTotalFinalDetalle` | decimal | | Precio total final | **decimal(16,4)** |
+| `documento.items.*.cantidad` | decimal | ✅ | Cantidad del item | **decimal(12,2)** |
+| `documento.items.*.descripcion` | string | ✅ | Descripción del item | **255 caracteres** |
+| `documento.items.*.precioUnitario` | decimal | ✅ | Precio unitario | **decimal(16,4)** |
+| `documento.items.*.codigoProducto` | string | ✅ | Código del producto | **50 caracteres** |
+| `documento.items.*.unidadMedida` | string | ❌ | Unidad de medida | **10 caracteres** |
+| `documento.items.*.precioTotalFinalDetalle` | decimal | ✅ | Precio total final | **decimal(16,4)** |
 
 #### Medios de Pago
 
 | Campo | Tipo | Requerido | Descripción | Límite |
 |-------|------|-----------|-------------|---------|
-| `documento.medios_pago.*.codigoMedioPago` | integer | | 1=Efectivo, 2=Tarjeta, 3=Cheque, 4=Transferencia | - |
-| `documento.medios_pago.*.importeMedioPago` | decimal | | Importe del medio de pago | **decimal(16,4)** |
+| `documento.medios_pago.*.codigoMedioPago` | integer | ✅ | 1=Efectivo, 2=Tarjeta, 3=Cheque, 4=Transferencia | - |
+| `documento.medios_pago.*.importeMedioPago` | decimal | ✅ | Importe del medio de pago | **decimal(16,4)** |
 
 #### Totales
 
 | Campo | Tipo | Requerido | Descripción | Límite |
 |-------|------|-----------|-------------|---------|
-| `documento.totales.total` | decimal | | Total del documento | **decimal(16,4)** |
-| `documento.totales.subtotal` | decimal | | Subtotal (antes de impuestos) | **decimal(16,4)** |
-| `documento.totales.impuestos` | decimal | | Total de impuestos | **decimal(16,4)** |
-| `documento.totales.descuentos` | decimal | | Total de descuentos | **decimal(16,4)** |
+| `documento.totales.total` | decimal | ✅ | Total del documento | **decimal(16,4)** |
+| `documento.totales.subtotal` | decimal | ❌ | Subtotal (antes de impuestos) | **decimal(16,4)** |
+| `documento.totales.impuestos` | decimal | ❌ | Total de impuestos | **decimal(16,4)** |
+| `documento.totales.descuentos` | decimal | ❌ | Total de descuentos | **decimal(16,4)** |
 
 #### Autorización de Prefijo (Opcional)
 
 | Campo | Tipo | Requerido | Descripción | Límite |
 |-------|------|-----------|-------------|---------|
-| `documento.autorizacion_prefijo.PrefijoId` | string | | ID del prefijo | **10 caracteres** |
-| `documento.autorizacion_prefijo.ResolucionNumero` | string | | Número de resolución | **50 caracteres** |
+| `documento.autorizacion_prefijo.PrefijoId` | string | ❌ | ID del prefijo | **10 caracteres** |
+| `documento.autorizacion_prefijo.ResolucionNumero` | string | ❌ | Número de resolución | **50 caracteres** |
 
 ### Ejemplo de Request (Estructura Oficial MEYPAR)
 
 ```json
 {
-  "idFacturador": "12345678",
+  "idFacturador": 12345678,
+  "ambiente": 1,
+  "documento": "900123456-1",
   "codigo": 2,
   "tipoDocumento": 1,
   "prefijo": "A132",
-  "numero": 2,
+  "numero": 2025,
   "medioPago": 2,
   "referenciaPago": "123456789",
   "fechaFactura": "2024-02-06",
-  "mensaje": "formato incorrecto",
+  "mensaje": "Estacionamiento - 2 horas",
   "observacion": null,
   "autorizacionPrefijo": {
     "PrefijoId": "C1PQ",
@@ -198,17 +217,27 @@ Crea y emite una factura electrónica basada en datos provenientes del sistema M
 }
 ```
 
-### Validaciones Específicas
-
-#### Campos Principales Requeridos
+### Validaciones Específicas (Estructura Oficial MEYPAR)
 
 | Campo | Tipo | Validación | Descripción |
 |-------|------|------------|-------------|
-| `idFacturador` | string | required, max:50 | ID del facturador |
-| `codigo` | integer | required | Código de operación |
-| `tipoDocumento` | integer | required | Tipo de documento |
+| `idFacturador` | integer | required | ID del obligado a facturar |
+| `ambiente` | integer | required, in:1,2 | Ambiente (1=Producción, 2=Pruebas) |
+| `documento` | string | required, max:50 | **NIT del adquiriente** (cliente/usuario parking) |
+| `codigo` | integer | nullable | Código de operación |
+| `tipoDocumento` | integer | required, in:1,2 | Tipo documento (1=Factura, 2=DEE) |
 | `prefijo` | string | required, max:10 | Prefijo del documento |
-| `numero` | integer | required | Número del documento |
+| `numero` | integer | required | **Número de factura** |
+| `medioPago` | integer | required, in:0,1,2,3,4 | Medio de pago principal |
+| `referenciaPago` | string | nullable, max:50 | Referencia de pago |
+| `fechaFactura` | string | required, Y-m-d | Fecha de la factura |
+| `mensaje` | string | nullable, max:255 | Mensaje adicional |
+| `observacion` | string | nullable, max:500 | Observación general |
+
+**⚠️ Diferencia Crítica:**
+- **`documento`**: NIT del **cliente** (ej: `"900123456-1"` o `"222222222222"` para consumidor final)
+- **`numero`**: **Número de la factura** (ej: `2025`, `10001`, etc.)
+- El `numero` se convierte en `InvoiceNumber` en la base de datos
 | `medioPago` | integer | required, in:1,2,3,4 | Medio de pago principal |
 | `fechaFactura` | string | required, Y-m-d | Fecha de la factura |
 
@@ -242,12 +271,12 @@ Crea y emite una factura electrónica basada en datos provenientes del sistema M
 | `detalleMedioPagoList[].codigoMedioPago` | integer | required, in:1,2,3,4 | 1=Efectivo, 2=Tarjeta, 3=Cheque, 4=Transferencia |
 | `detalleMedioPagoList[].importeMedioPago` | numeric | required, decimal(16,4) | Importe del medio de pago |
 
-** Campos de Texto**
+**📏 Campos de Texto**
 - Todos los campos de texto tienen límites específicos según la estructura de BD
 - Si un campo excede el límite, se trunca automáticamente
 - Se registra un log de advertencia con el valor original y truncado
 
-**Campos Decimales**
+**💰 Campos Decimales**
 - Todos los precios y cantidades usan regex específicos para validar precisión
 - Formato esperado: hasta 12 dígitos enteros con máximo 4 decimales
 - Regex: `/^\d{1,12}(\.\d{1,4})?$/`

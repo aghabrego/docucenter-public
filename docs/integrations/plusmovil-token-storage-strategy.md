@@ -5,23 +5,23 @@
 
 ---
 
-## Ventajas de Almacenar Token en Connection
+## 🎯 Ventajas de Almacenar Token en Connection
 
-### Beneficios
+### ✅ Beneficios
 1. **Persistencia**: Token sobrevive a reinicios del servidor
 2. **Sin Cache Externa**: No dependemos de Redis/Cache
 3. **Por Organización**: Cada organización tiene su token independiente
 4. **Auditable**: Podemos ver cuándo se actualizó el token
 5. **Más Simple**: Menos dependencias, todo en el modelo
 
-### Sin Cache
-- Token se pierde al reiniciar servidor
-- Requiere Redis/Memcached
-- Más complejo de gestionar
+### ❌ Sin Cache
+- ❌ Token se pierde al reiniciar servidor
+- ❌ Requiere Redis/Memcached
+- ❌ Más complejo de gestionar
 
 ---
 
-## Estructura de Settings Actualizada
+## 📦 Estructura de Settings Actualizada
 
 ### Settings para PlusMóvil con Token
 
@@ -43,7 +43,7 @@
 
 ---
 
-## Métodos Necesarios en Connection Model
+## 🔧 Métodos Necesarios en Connection Model
 
 ### 1. Helper para verificar si token es válido
 
@@ -191,7 +191,7 @@ public function refreshPlusMovilToken(): ?string
 
 ---
 
-## Flujo de Uso del Token
+## 🔄 Flujo de Uso del Token
 
 ### En PlusMovilInvoiceService
 
@@ -237,7 +237,7 @@ class PlusMovilInvoiceService
 
 ---
 
-## Uso en Jobs
+## 📝 Uso en Jobs
 
 ### Ejemplo: ImportPlusMovilInvoicesJob
 
@@ -269,12 +269,12 @@ class ImportPlusMovilInvoicesJob implements ShouldQueue
 
 ---
 
-## Consideraciones de Seguridad
+## 🔒 Consideraciones de Seguridad
 
 ### 1. **Access Token en Settings**
-- Se guarda en BD (ya es seguro)
-- No se expone en respuestas API
-- **Importante**: No incluir en logs completos
+- ✅ Se guarda en BD (ya es seguro)
+- ✅ No se expone en respuestas API
+- ⚠️ **Importante**: No incluir en logs completos
 
 ### 2. **Password Encriptado**
 ```php
@@ -287,10 +287,10 @@ $password = decrypt($settings['password']);
 
 ### 3. **Logs Seguros**
 ```php
-// MAL
+// ❌ MAL
 Log::info('Settings', $connection->settings);
 
-// BIEN
+// ✅ BIEN
 Log::info('Connection', [
     'id' => $connection->id,
     'application' => $connection->application,
@@ -301,7 +301,7 @@ Log::info('Connection', [
 
 ---
 
-## Ventajas de Esta Estrategia
+## ✅ Ventajas de Esta Estrategia
 
 ### 1. **Automático**
 ```php
@@ -340,23 +340,23 @@ $connection->updated_at; // Última actualización de token
 
 ---
 
-## Comparación: Cache vs Settings
+## 📊 Comparación: Cache vs Settings
 
 | Aspecto | Cache | Settings (BD) |
 |---------|-------|---------------|
-| Persistencia | Se pierde al reiniciar | Permanente |
-| Dependencias | Requiere Redis | Solo BD |
-| Complejidad | Media | Simple |
-| Por Organización | Sí | Sí |
-| Auto-renovación | Manual | Automático |
-| Auditoría | No | Sí (updated_at) |
-| Performance | Más rápido | Query a BD |
+| Persistencia | ❌ Se pierde al reiniciar | ✅ Permanente |
+| Dependencias | ❌ Requiere Redis | ✅ Solo BD |
+| Complejidad | ⚠️ Media | ✅ Simple |
+| Por Organización | ✅ Sí | ✅ Sí |
+| Auto-renovación | ⚠️ Manual | ✅ Automático |
+| Auditoría | ❌ No | ✅ Sí (updated_at) |
+| Performance | ✅ Más rápido | ⚠️ Query a BD |
 
 **Conclusión**: Settings es mejor para tokens de larga duración con auto-renovación.
 
 ---
 
-## Implementación
+## 🚀 Implementación
 
 ### Orden de Implementación
 
@@ -377,7 +377,7 @@ $connection->updated_at; // Última actualización de token
 
 ---
 
-## Ejemplo de Settings Final
+## 📝 Ejemplo de Settings Final
 
 ```php
 // Al crear la conexión
@@ -396,21 +396,21 @@ $connection->updated_at; // Última actualización de token
     'password' => 'eyJpdiI6Ik...',
     'environment' => 'qa',
     'base_url' => 'https://xka96gucj8.execute-api.us-east-1.amazonaws.com/qa',
-    'access_token' => 'eyJraWQiOiJc...',           // Auto-generado
-    'token_expires_at' => '2025-11-09 15:30:00',   // Auto-calculado
-    'refresh_token' => 'eyJjdHk6...',              // Opcional
+    'access_token' => 'eyJraWQiOiJc...',           // ✅ Auto-generado
+    'token_expires_at' => '2025-11-09 15:30:00',   // ✅ Auto-calculado
+    'refresh_token' => 'eyJjdHk6...',              // ✅ Opcional
 ]
 ```
 
 ---
 
-## Conclusión
+## ✅ Conclusión
 
 **Esta estrategia es superior porque:**
-- Más simple (sin cache externo)
-- Más robusto (persiste reiniciados)
-- Auto-renovación transparente
-- Un solo lugar para gestionar credenciales
-- Auditable vía `updated_at`
+- ✅ Más simple (sin cache externo)
+- ✅ Más robusto (persiste reiniciados)
+- ✅ Auto-renovación transparente
+- ✅ Un solo lugar para gestionar credenciales
+- ✅ Auditable vía `updated_at`
 
 **Siguiente paso:** Implementar los métodos en el modelo Connection.

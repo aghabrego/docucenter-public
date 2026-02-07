@@ -10,39 +10,39 @@
 
 | Campo | Tipo | Requerido | Descripción | Validación | Ejemplo |
 |-------|------|-----------|-------------|------------|---------|
-| `SalesOrderNumber` | string | | Número de orden único | Máx. 20 caracteres, único | `"SO-2025-001"` |
-| `CustomerID` | string | | ID del cliente | Máx. 50 caracteres | `"CUST001"` |
-| `CustomerPO` | string | | Número de PO del cliente | Máx. 50 caracteres | `"PO-REF-123"` |
-| `CustomerName` | string | | Nombre del cliente | Máx. 39 caracteres | `"Cliente Ejemplo"` |
-| `Subtotal` | decimal | | Subtotal de la orden | 4 decimales | `100.00` |
-| `TaxID` | string | | ID del impuesto | Máx. 8 caracteres | `"TAX001"` |
-| `OrderTax` | decimal | | Total de impuestos | 4 decimales | `7.00` |
-| `NetDue` | decimal | | Total neto a pagar | 4 decimales | `107.00` |
-| `ARAccount` | string | | Cuenta de cuentas por cobrar | Máx. 15 caracteres | `"1200"` |
-| `ShipToName` | string | | Nombre para envío | Máx. 100 caracteres | `"Cliente Ejemplo"` |
-| `ShipToAddressLine1` | string | | Dirección de envío línea 1 | - | `"Calle Principal 123"` |
-| `ShipToAddressLine2` | string | | Dirección de envío línea 2 | - | `"Apto 2B"` |
-| `ShipToCity` | string | | Ciudad de envío | - | `"Ciudad de Panamá"` |
-| `ShipToState` | string | | Estado de envío | Máx. 2 caracteres | `"PA"` |
-| `ShipToZip` | string | | Código postal de envío | Máx. 12 caracteres | `"0000"` |
-| `ShipToCountry` | string | | País de envío | - | `"Panamá"` |
-| `SalesRepID` | string | | ID del representante de ventas | Máx. 20 caracteres | `"REP001"` |
+| `SalesOrderNumber` | string | ✅ | Número de orden único | Máx. 20 caracteres, único | `"SO-2025-001"` |
+| `CustomerID` | string | ✅ | ID del cliente | Máx. 50 caracteres | `"CUST001"` |
+| `CustomerPO` | string | ❌ | Número de PO del cliente | Máx. 50 caracteres | `"PO-REF-123"` |
+| `CustomerName` | string | ✅ | Nombre del cliente | Máx. 39 caracteres | `"Cliente Ejemplo"` |
+| `Subtotal` | decimal | ✅ | Subtotal de la orden | 4 decimales | `100.00` |
+| `TaxID` | string | ✅ | ID del impuesto | Máx. 8 caracteres | `"TAX001"` |
+| `OrderTax` | decimal | ✅ | Total de impuestos | 4 decimales | `7.00` |
+| `NetDue` | decimal | ✅ | Total neto a pagar | 4 decimales | `107.00` |
+| `ARAccount` | string | ❌ | Cuenta de cuentas por cobrar | Máx. 15 caracteres | `"1200"` |
+| `ShipToName` | string | ✅ | Nombre para envío | Máx. 100 caracteres | `"Cliente Ejemplo"` |
+| `ShipToAddressLine1` | string | ❌ | Dirección de envío línea 1 | - | `"Calle Principal 123"` |
+| `ShipToAddressLine2` | string | ❌ | Dirección de envío línea 2 | - | `"Apto 2B"` |
+| `ShipToCity` | string | ❌ | Ciudad de envío | - | `"Ciudad de Panamá"` |
+| `ShipToState` | string | ❌ | Estado de envío | Máx. 2 caracteres | `"PA"` |
+| `ShipToZip` | string | ❌ | Código postal de envío | Máx. 12 caracteres | `"0000"` |
+| `ShipToCountry` | string | ❌ | País de envío | - | `"Panamá"` |
+| `SalesRepID` | string | ❌ | ID del representante de ventas | Máx. 20 caracteres | `"REP001"` |
 
 ### Parámetros de Items (Array)
 
 | Campo | Tipo | Requerido | Descripción | Validación | Ejemplo |
 |-------|------|-----------|-------------|------------|---------|
-| `SalesOrderNumber` | string | | Número de orden (debe coincidir) | Máx. 20 caracteres | `"SO-2025-001"` |
-| `Taxable` | integer | | Si el item es gravable | 1 (gravable) o 2 (no gravable) | `1` |
-| `ItemOrd` | string | | Orden del item | Máx. 20 caracteres | `"1"` |
-| `ItemId` | string | | ID del producto/item | Máx. 20 caracteres | `"PROD001"` |
-| `Description` | string | | Descripción del item | Máx. 160 caracteres | `"Producto Ejemplo"` |
-| `Quantity` | decimal | | Cantidad | 5 decimales | `2.00000` |
-| `UnitPrice` | decimal | | Precio unitario | 4 decimales | `50.0000` |
-| `NetLine` | decimal | | Total de la línea | 4 decimales | `100.0000` |
-| `JobId` | string | | ID del trabajo/proyecto | Máx. 20 caracteres | `"JOB001"` |
-| `JobPhaseID` | string | | ID de la fase del trabajo | Máx. 20 caracteres | `"PHASE1"` |
-| `JobCostCodeID` | string | | ID del código de costo | Máx. 20 caracteres | `"CODE1"` |
+| `SalesOrderNumber` | string | ✅ | Número de orden (debe coincidir) | Máx. 20 caracteres | `"SO-2025-001"` |
+| `Taxable` | integer | ✅ | Si el item es gravable | 1 (gravable) o 2 (no gravable) | `1` |
+| `ItemOrd` | string | ❌ | Orden del item | Máx. 20 caracteres | `"1"` |
+| `ItemId` | string | ✅ | ID del producto/item | Máx. 20 caracteres | `"PROD001"` |
+| `Description` | string | ✅ | Descripción del item | Máx. 160 caracteres | `"Producto Ejemplo"` |
+| `Quantity` | decimal | ✅ | Cantidad | 5 decimales | `2.00000` |
+| `UnitPrice` | decimal | ✅ | Precio unitario | 4 decimales | `50.0000` |
+| `NetLine` | decimal | ✅ | Total de la línea | 4 decimales | `100.0000` |
+| `JobId` | string | ❌ | ID del trabajo/proyecto | Máx. 20 caracteres | `"JOB001"` |
+| `JobPhaseID` | string | ❌ | ID de la fase del trabajo | Máx. 20 caracteres | `"PHASE1"` |
+| `JobCostCodeID` | string | ❌ | ID del código de costo | Máx. 20 caracteres | `"CODE1"` |
 
 ### Ejemplo de Request Completo
 
@@ -187,7 +187,7 @@
 
 | Parámetro | Tipo | Requerido | Descripción |
 |-----------|------|-----------|-------------|
-| `salesOrderNumber` | string | | Número de la orden de venta |
+| `salesOrderNumber` | string | ✅ | Número de la orden de venta |
 
 ### Ejemplo de Request
 

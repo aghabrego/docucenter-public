@@ -1,6 +1,6 @@
 # Validación DGI Panamá: Destino vs Tipo de Documento
 
-## Regla Oficial DGI
+## 📋 Regla Oficial DGI
 
 **Fuente**: Anexo 3 - Ficha Técnica Factura Electrónica Proveedores Autorización Calificados V1.0
 
@@ -11,7 +11,7 @@
 - **Tipo**: Error de Rechazo (R)
 - **Versión**: 1.00
 
-## Explicación Técnica
+## 🔍 Explicación Técnica
 
 ### Campos Involucrados
 
@@ -42,7 +42,7 @@ ENTONCES Destino_Operacion DEBE SER = "1" (Nacional)
 
 **Violación**: Si B06=01 AND B14=2 → Error 1534 (Rechazo)
 
-## Justificación Legal/Fiscal
+## 🏛️ Justificación Legal/Fiscal
 
 ### Concepto: "Operación Interna"
 Una **Factura de Operación Interna** (tipo 01) por definición legal es:
@@ -56,7 +56,7 @@ Una **Factura de Operación Interna** (tipo 01) por definición legal es:
 2. **Destino Extranjero** = Fuera de jurisdicción fiscal panameña
 3. **Contradicción** = Una operación no puede ser simultáneamente interna Y externa
 
-## Implementación en DocuCenter
+## 🔧 Implementación en DocuCenter
 
 ### Solución en AlanubeFormatterHelper.php
 ```php
@@ -74,7 +74,7 @@ private static function determineDestination(array $data): int
 
 ### Casos de Uso Cubiertos
 
-#### Escenario Válido: Factura Interna Nacional
+#### ✅ Escenario Válido: Factura Interna Nacional
 ```json
 {
   "iTipoDoc": "01",  // Factura Operación Interna
@@ -83,7 +83,7 @@ private static function determineDestination(array $data): int
 // Estado: APROBADO por DGI
 ```
 
-#### Escenario Inválido: Factura Interna Extranjera
+#### ❌ Escenario Inválido: Factura Interna Extranjera
 ```json
 {
   "iTipoDoc": "01",  // Factura Operación Interna
@@ -92,7 +92,7 @@ private static function determineDestination(array $data): int
 // Estado: RECHAZADO por DGI (Error 1534)
 ```
 
-#### Escenario Válido: Exportación Extranjera
+#### ✅ Escenario Válido: Exportación Extranjera
 ```json
 {
   "iTipoDoc": "03",  // Factura de Exportación
@@ -101,19 +101,19 @@ private static function determineDestination(array $data): int
 // Estado: APROBADO por DGI
 ```
 
-## Matriz de Validaciones por Tipo
+## 📊 Matriz de Validaciones por Tipo
 
 | Tipo Doc | Descripción | Destino=1 | Destino=2 | Validación DGI |
 |----------|-------------|-----------|-----------|----------------|
-| 01 | Op. Interna | Válido | Error 1534 | **FORZADO Nacional** |
-| 02 | Importación | Válido | Válido | Según origen |
-| 03 | Exportación | Válido | Válido | Según destino |
-| 04 | Nota Crédito | Válido | Válido* | Hereda del original |
-| 05 | Nota Débito | Válido | Válido* | Hereda del original |
+| 01 | Op. Interna | ✅ Válido | ❌ Error 1534 | **FORZADO Nacional** |
+| 02 | Importación | ✅ Válido | ✅ Válido | Según origen |
+| 03 | Exportación | ✅ Válido | ✅ Válido | Según destino |
+| 04 | Nota Crédito | ✅ Válido | ✅ Válido* | Hereda del original |
+| 05 | Nota Débito | ✅ Válido | ✅ Válido* | Hereda del original |
 
 *Dependiendo del documento referenciado
 
-##  Casos de Error Relacionados
+## 🚫 Casos de Error Relacionados
 
 ### Error 1533 - Exportación Nacional
 - **Condición**: B06=03 Y B14=1
@@ -125,7 +125,7 @@ private static function determineDestination(array $data): int
 - **Descripción**: Factura de Operación Interna no puede tener destino Extranjero
 - **Lógica**: Operación interna implica dentro del país
 
-## Impacto en Integración PAC
+## 📈 Impacto en Integración PAC
 
 ### Antes de la Corrección
 ```
@@ -149,7 +149,7 @@ Pasa validación DGI 1534
 Factura APROBADA
 ```
 
-## Notas de Implementación
+## 📝 Notas de Implementación
 
 ### Prioridad de Reglas
 1. **Tipo de Documento** (prioritario sobre país)
@@ -163,7 +163,7 @@ Factura APROBADA
 - Factura tipo 03 con receptor extranjero → destination=2
 - Verificar logs de validación DGI
 
-## Referencias Oficiales
+## 🔗 Referencias Oficiales
 
 - **Documento**: Anexo 3 - Ficha Técnica FE para PAC V1.0
 - **Sección**: Validaciones de Estructura y Contenido

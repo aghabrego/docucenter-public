@@ -79,7 +79,7 @@ $params = [
     'realmId' => $targetRealmId,
     'organizationId' => $targetOrganizationId,
     'docucenterEnabled' => $this->webhookAction === 'enable',
-    'autoEmitFeEnabled' => $this->autoEmitFeEnabled, // Parámetro incluido
+    'autoEmitFeEnabled' => $this->autoEmitFeEnabled, // ✅ Parámetro incluido
     'reason' => "Configuración desde interfaz para '{$targetOrganizationName}' - " . 
                 ($this->webhookAction === 'enable' ? 'Habilitado' : 'Deshabilitado') . 
                 " | Auto-FE: " . ($this->autoEmitFeEnabled ? 'Sí' : 'No')
@@ -173,37 +173,37 @@ docker exec docucenter_laravel.test php artisan test:auto-emit-fe-qb --org_id=2
 
 **Resultado de Prueba**:
 ```
- Testing Auto-Emit FE para QuickBooks en Organización 2
-Organización: 
-Conexión encontrada: ID 19
-Módulo QuickBooks confirmado
-Usando primera organización:
+🧪 Testing Auto-Emit FE para QuickBooks en Organización 2
+🏢 Organización: 
+🔗 Conexión encontrada: ID 19
+✅ Módulo QuickBooks confirmado
+📊 Usando primera organización:
    • RealmId: 9341454701621418
    • OrgId: 4vid4dwjApnFylowFFQW
    • Name: APCON DOCUCENTER INTEGRATION
-Consultando configuración webhook...
-Configuración webhook obtenida:
+🔍 Consultando configuración webhook...
+✅ Configuración webhook obtenida:
    • Auto-Emit FE: HABILITADO
    • DocuCenter: HABILITADO
    • Actualizado: 2025-08-11T15:08:42.044Z
    • Por: SFUhiwF313Pyf1jndx6mc0FKbzg1
 
-RESULTADO DEL TEST:
-Las ventas de create_sale_quickbooks SÍ generarán FE automáticamente
+🎯 RESULTADO DEL TEST:
+✅ Las ventas de create_sale_quickbooks SÍ generarán FE automáticamente
 ```
 
 ### 2. Script de Verificación
 **Archivo**: `scripts/test-auto-emit-fe-quickbooks.sh`
 
 Verifica:
-- Modal incluye checkbox auto-emit FE
-- Modal usa wire:model autoEmitFeEnabled  
-- Propiedad autoEmitFeEnabled definida
-- Validación boolean para autoEmitFeEnabled
-- Parámetro enviado a API webhook
-- Método shouldAutoEmitFe implementado
-- Lógica condicional para emisión FE
-- Consulta configuración de webhook
+- ✅ Modal incluye checkbox auto-emit FE
+- ✅ Modal usa wire:model autoEmitFeEnabled  
+- ✅ Propiedad autoEmitFeEnabled definida
+- ✅ Validación boolean para autoEmitFeEnabled
+- ✅ Parámetro enviado a API webhook
+- ✅ Método shouldAutoEmitFe implementado
+- ✅ Lógica condicional para emisión FE
+- ✅ Consulta configuración de webhook
 
 ## Flujo Completo
 
@@ -282,4 +282,4 @@ Verifica:
 
 **Implementación completada el**: 2025-01-23  
 **Commit hash**: `b52513c`  
-**Estado**: Funcional y probado en producción
+**Estado**: ✅ Funcional y probado en producción

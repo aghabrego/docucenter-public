@@ -5,12 +5,12 @@
 El `AlanubeService` es el servicio principal para la emisión de documentos electrónicos a través del proveedor PAC Alanube Panamá. Este servicio incluye **detección automática de tipos de documento** y manejo específico para cada tipo de factura según las normativas fiscales panameñas de la DGI.
 
 ### Características Principales
-- **Detección automática** de tipo de documento
-- **6 tipos de factura** soportados
-- **Validaciones DGI** completas
-- **Procesamiento asíncrono** opcional
-- **Transformación automática** de datos
-- **Helper para módulos externos**
+- ✅ **Detección automática** de tipo de documento
+- ✅ **6 tipos de factura** soportados
+- ✅ **Validaciones DGI** completas
+- ✅ **Procesamiento asíncrono** opcional
+- ✅ **Transformación automática** de datos
+- ✅ **Helper para módulos externos**
 
 ## Uso Básico del Servicio
 
@@ -44,7 +44,7 @@ if ($result['success']) {
 
 ## Detección Automática de Tipos
 
-### Factura de Exportación (03)
+### 🌍 Factura de Exportación (03)
 
 **Indicadores de Detección**:
 - Datos de exportación presentes
@@ -86,7 +86,7 @@ $exportData = [
 $result = $service->emitInvoice($organization, $exportData);
 ```
 
-###  Factura de Importación (02)
+### 🏭 Factura de Importación (02)
 
 **Indicadores de Detección**:
 - Naturaleza de operación = '21' (NATURE_IMPORT)
@@ -119,7 +119,7 @@ $importData = [
 $result = $service->emitInvoice($organization, $importData);
 ```
 
-### Factura de Operación Interna (01)
+### 🏢 Factura de Operación Interna (01)
 
 **Indicadores de Detección**:
 - Tipo por defecto para ventas locales
@@ -154,7 +154,7 @@ $internalData = [
 $result = $service->emitInvoice($organization, $internalData);
 ```
 
-###  Factura de Zona Franca (08)
+### 🏭 Factura de Zona Franca (08)
 
 **Indicadores de Detección**:
 - Información de zona franca presente

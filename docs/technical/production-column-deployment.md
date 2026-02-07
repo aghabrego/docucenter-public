@@ -28,7 +28,7 @@ KEY `sales_header_imp_origin_index` (`origin`)
 
 ## Scripts de Ejecución
 
-###  **Script Individual - Columna `origin`**
+### 🔹 **Script Individual - Columna `origin`**
 ```bash
 ./scripts/add-origin-column-production.sh
 ```
@@ -45,7 +45,7 @@ php artisan db:add-column-to-organizations-table \
   --index=1
 ```
 
-###  **Script Individual - Columna `intuit_sync_attempts`**
+### 🔹 **Script Individual - Columna `intuit_sync_attempts`**
 ```bash
 ./scripts/add-intuit-sync-attempts-column-production.sh
 ```
@@ -62,7 +62,7 @@ php artisan db:add-column-to-organizations-table \
   --index=0
 ```
 
-###  **Script Combinado - Ambas Columnas** (RECOMENDADO)
+### 🔹 **Script Combinado - Ambas Columnas** (RECOMENDADO)
 ```bash
 ./scripts/add-quickbooks-loop-columns-production.sh
 ```
@@ -73,7 +73,7 @@ php artisan db:add-column-to-organizations-table \
 - Validación de errores entre pasos
 - Reporte final de éxito/fallo
 
-###  **Script de Verificación**
+### 🔹 **Script de Verificación**
 ```bash
 ./scripts/verify-quickbooks-loop-columns.sh
 ```
@@ -104,18 +104,18 @@ cd /path/to/docucenter
 
 ¿Continuar con la ejecución? (y/N): y
 
-PASO 1/2: Agregando columna 'origin'...
+📋 PASO 1/2: Agregando columna 'origin'...
 Columna 'origin' de tipo 'string' agregada a la tabla 'Sales_Header_Imp': 'org_1_db'.
 Columna 'origin' de tipo 'string' agregada a la tabla 'Sales_Header_Imp': 'org_2_db'.
 ...
-Columna 'origin' agregada exitosamente
+✅ Columna 'origin' agregada exitosamente
 
-PASO 2/2: Agregando columna 'intuit_sync_attempts'...
+📋 PASO 2/2: Agregando columna 'intuit_sync_attempts'...
 Columna 'intuit_sync_attempts' de tipo 'integer' agregada a la tabla 'Sales_Header_Imp': 'org_1_db'.
 ...
-Columna 'intuit_sync_attempts' agregada exitosamente
+✅ Columna 'intuit_sync_attempts' agregada exitosamente
 
-PROCESO COMPLETADO EXITOSAMENTE
+🎉 PROCESO COMPLETADO EXITOSAMENTE
 ```
 
 ### **Paso 3: Verificar Instalación**
@@ -125,13 +125,13 @@ PROCESO COMPLETADO EXITOSAMENTE
 
 **Salida esperada**:
 ```
-REPORTE DE VERIFICACIÓN:
+📊 REPORTE DE VERIFICACIÓN:
 Total organizaciones: 25
 Errores encontrados: 0
 
-TODAS LAS ORGANIZACIONES TIENEN LAS COLUMNAS CORRECTAS
+✅ TODAS LAS ORGANIZACIONES TIENEN LAS COLUMNAS CORRECTAS
 
-ESTADÍSTICAS FINALES:
+📊 ESTADÍSTICAS FINALES:
 Organizaciones OK: 25/25
 Porcentaje éxito: 100.00%
 ```

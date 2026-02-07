@@ -45,7 +45,7 @@ La validación de campos en `Items` depende de dos factores principales:
 1. **`Prepayment`** (a nivel de header)  
 2. **`ApplyTo`** (a nivel de item)
 
-###  PREPAYMENT = true (Pago por adelantado)
+### 🔹 PREPAYMENT = true (Pago por adelantado)
 **Características especiales para prepagos:**
 - `Quantity`: **OPCIONAL** - Puede ser null
 - `Item_id`: **OPCIONAL** - Puede ser null  
@@ -54,7 +54,7 @@ La validación de campos en `Items` depende de dos factores principales:
 - `Total`: **PUEDE SER NEGATIVO** - Permite devoluciones
 - `InvoiceNumber`: Depende de `ApplyTo`
 
-**Ejemplo válido - Prepago positivo:**
+✅ **Ejemplo válido - Prepago positivo:**
 ```json
 {
     "Prepayment": true,
@@ -70,7 +70,7 @@ La validación de campos en `Items` depende de dos factores principales:
 }
 ```
 
-**Ejemplo válido - Devolución prepago:**
+✅ **Ejemplo válido - Devolución prepago:**
 ```json
 {
     "Prepayment": true,
@@ -87,13 +87,13 @@ La validación de campos en `Items` depende de dos factores principales:
 }
 ```
 
-###  PREPAYMENT = false + ApplyTo = true (Aplicar a factura existente)
+### 🔹 PREPAYMENT = false + ApplyTo = true (Aplicar a factura existente)
 - `InvoiceNumber`: **REQUERIDO** - Debe especificar factura
 - `Quantity`: **OPCIONAL** - No necesario para aplicar a factura
 - `Item_id`: **OPCIONAL** - No necesario para aplicar a factura
 - `Unit_Price`: **OPCIONAL** - No necesario para aplicar a factura
 
-**Ejemplo válido:**
+✅ **Ejemplo válido:**
 ```json
 {
     "Prepayment": false,
@@ -108,13 +108,13 @@ La validación de campos en `Items` depende de dos factores principales:
 }
 ```
 
-###  PREPAYMENT = false + ApplyTo = false (Producto/servicio nuevo)
+### 🔹 PREPAYMENT = false + ApplyTo = false (Producto/servicio nuevo)
 - `InvoiceNumber`: **OPCIONAL** - No aplica a factura existente
 - `Quantity`: **REQUERIDO** - Cantidad del producto/servicio
 - `Item_id`: **OPCIONAL** - ID del producto (nullable)
 - `Unit_Price`: **REQUERIDO** - Precio unitario del producto/servicio
 
-**Ejemplo válido:**
+✅ **Ejemplo válido:**
 ```json
 {
     "Prepayment": false,
@@ -130,7 +130,7 @@ La validación de campos en `Items` depende de dos factores principales:
 }
 ```
 
-**Ejemplo inválido:**
+❌ **Ejemplo inválido:**
 ```json
 {
     "Prepayment": false,
@@ -139,8 +139,8 @@ La validación de campos en `Items` depende de dos factores principales:
         "InvoiceNumber": null,
         "Description": "Falta Quantity y Unit_Price",
         "Net_line": 30.0,
-        "Quantity": null,  // REQUERIDO cuando Prepayment=false + ApplyTo=false
-        "Unit_Price": null // REQUERIDO cuando Prepayment=false + ApplyTo=false
+        "Quantity": null,  // ❌ REQUERIDO cuando Prepayment=false + ApplyTo=false
+        "Unit_Price": null // ❌ REQUERIDO cuando Prepayment=false + ApplyTo=false
     }]
 }
 ```
@@ -164,9 +164,9 @@ Tu ejemplo original **es completamente correcto** porque es un **PREPAGO**:
 }
 ```
 
-- `ApplyTo = false` → `InvoiceNumber` es opcional
-- `InvoiceNumber = null` → Permitido cuando `ApplyTo = false`
-- Validación pasa exitosamente
+- ✅ `ApplyTo = false` → `InvoiceNumber` es opcional
+- ✅ `InvoiceNumber = null` → Permitido cuando `ApplyTo = false`
+- ✅ Validación pasa exitosamente
 
 ## Correcciones Aplicadas
 
@@ -213,7 +213,7 @@ Tu ejemplo original **es completamente correcto** porque es un **PREPAGO**:
 
 ## Casos de Prueba Recomendados
 
-### Casos Válidos
+### ✅ Casos Válidos
 
 #### 1. **Prepago positivo**: Prepayment=true, campos opcionales null
 ```json
@@ -248,7 +248,7 @@ Tu ejemplo original **es completamente correcto** porque es un **PREPAGO**:
 }
 ```
 
-### Casos Inválidos
+### ❌ Casos Inválidos
 
 #### 1. **Reference vacío**: Debe fallar (required)
 #### 2. **ApplyTo=true sin InvoiceNumber**: Debe fallar (required_if)
@@ -270,20 +270,20 @@ Ejecutar scripts de pruebas:
 
 ### Casos de Prueba Ejecutados
 
-#### Tu Objeto Original - VÁLIDO
+#### ✅ Tu Objeto Original - VÁLIDO
 ```json
-{"ApplyTo": false, "InvoiceNumber": null} // Pasa validación
+{"ApplyTo": false, "InvoiceNumber": null} // ✅ Pasa validación
 ```
 
-#### Otros Casos Válidos
+#### ✅ Otros Casos Válidos
 ```json
-{"ApplyTo": true, "InvoiceNumber": "FE001"}   // Pasa validación  
-{"ApplyTo": false, "InvoiceNumber": "REF001"} // Pasa validación
+{"ApplyTo": true, "InvoiceNumber": "FE001"}   // ✅ Pasa validación  
+{"ApplyTo": false, "InvoiceNumber": "REF001"} // ✅ Pasa validación
 ```
 
-#### Caso Inválido
+#### ❌ Caso Inválido
 ```json
-{"ApplyTo": true, "InvoiceNumber": null} // Falla validación
+{"ApplyTo": true, "InvoiceNumber": null} // ❌ Falla validación
 ```
 
 ## Referencias

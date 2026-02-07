@@ -162,10 +162,10 @@ curl -X POST http://localhost/api/v1/auth/refresh_token \
 
 | Estado Token | Estado Licencia | Resultado |
 |--------------|-----------------|-----------|
-| Vigente | Vigente | Renovación permitida |
-| Vigente | Expirada | Bloqueado (403) |
-| Expirado | Vigente | Requiere login (401) |
-| Expirado | Expirada | Bloqueado (401/403) |
+| Vigente | Vigente | ✅ Renovación permitida |
+| Vigente | Expirada | ❌ Bloqueado (403) |
+| Expirado | Vigente | ❌ Requiere login (401) |
+| Expirado | Expirada | ❌ Bloqueado (401/403) |
 
 ### Principio de Seguridad
 

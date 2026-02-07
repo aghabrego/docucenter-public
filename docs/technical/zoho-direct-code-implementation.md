@@ -1,10 +1,10 @@
-# Zoho Self Client: Autorización Directa con Código
+# 🔑 Zoho Self Client: Autorización Directa con Código
 
-## Funcionalidad Implementada
+## ✅ Funcionalidad Implementada
 
 Se ha agregado soporte para **autorización directa usando código** generado desde Zoho Developer Console, eliminando la necesidad de configurar redirección para Self Client.
 
-### Características del Código Directo
+### 📋 Características del Código Directo
 
 #### **Zoho Self Client - Código de Autorización**
 - **Duración**: 3 minutos de validez
@@ -12,7 +12,7 @@ Se ha agregado soporte para **autorización directa usando código** generado de
 - **Scope**: `ZohoBooks.fullaccess.all`
 - **Sin redirección**: No requiere configurar Redirect URI
 
-### Generación del Código en Zoho Console
+### 🔧 Generación del Código en Zoho Console
 
 #### **Pasos para obtener el código:**
 1. Ir a [Zoho Developer Console](https://api-console.zoho.com/)
@@ -22,7 +22,7 @@ Se ha agregado soporte para **autorización directa usando código** generado de
 5. Seleccionar scope: **`ZohoBooks.fullaccess.all`**
 6. Copiar el código generado (válido por 3 minutos)
 
-### Uso en DocuCenter
+### 🚀 Uso en DocuCenter
 
 #### **Opción 1: Autorización Directa (Recomendado para Self Client)**
 ```
@@ -35,7 +35,7 @@ Se ha agregado soporte para **autorización directa usando código** generado de
 4. Generar código en Zoho Console
 5. Pegar código en "Código de Autorización Directo"
 6. Clic en "Autorizar con Código Directo"
-   Conexión creada automáticamente
+   ✅ Conexión creada automáticamente
 ```
 
 #### **Opción 2: OAuth Tradicional (Opcional)**
@@ -46,7 +46,7 @@ Se ha agregado soporte para **autorización directa usando código** generado de
 2. Clic en "Crear" para iniciar flujo OAuth
 ```
 
-### Re-autorización en Conexiones Existentes
+### 🔄 Re-autorización en Conexiones Existentes
 
 #### **Re-autorización Directa**
 ```
@@ -55,10 +55,10 @@ Se ha agregado soporte para **autorización directa usando código** generado de
 3. Generar nuevo código en Zoho Console
 4. Pegar en "Código de Autorización Directo"
 5. Clic en "Re-autorizar con Código Directo"
-   Tokens renovados automáticamente
+   ✅ Tokens renovados automáticamente
 ```
 
-### Código Implementado
+### 💻 Código Implementado
 
 #### **Método de Autorización Directa**
 ```php
@@ -108,30 +108,30 @@ private function exchangeDirectCodeForToken($code)
 }
 ```
 
-### Ventajas del Código Directo
+### 🎯 Ventajas del Código Directo
 
 | Aspecto | Código Directo | OAuth Tradicional |
 |---------|----------------|-------------------|
-| **Configuración** | Mínima | Requiere Redirect URI |
-| **Tiempo** | Inmediato | Requiere popup |
-| **Validez** | 3 minutos | Configuración permanente |
-| **Self Client** | Nativo | Funciona |
-| **Producción** | Ideal | También funciona |
+| **Configuración** | ✅ Mínima | ❌ Requiere Redirect URI |
+| **Tiempo** | ✅ Inmediato | ❌ Requiere popup |
+| **Validez** | ⚠️ 3 minutos | ✅ Configuración permanente |
+| **Self Client** | ✅ Nativo | ✅ Funciona |
+| **Producción** | ✅ Ideal | ✅ También funciona |
 
-###  Consideraciones de Seguridad
+### 🔐 Consideraciones de Seguridad
 
 #### **Código Directo**
-- **Válido solo 3 minutos** - Minimiza exposición
-- **Una sola vez** - Se invalida después del uso
-- **Sin redirección** - Menos superficie de ataque
-- **Manual** - Requiere regenerar para re-autorización
+- ✅ **Válido solo 3 minutos** - Minimiza exposición
+- ✅ **Una sola vez** - Se invalida después del uso
+- ✅ **Sin redirección** - Menos superficie de ataque
+- ⚠️ **Manual** - Requiere regenerar para re-autorización
 
 #### **OAuth Tradicional**
-- **Configuración permanente** - Una vez configurado, siempre funciona
-- **Automático** - Sin intervención manual
-- **Redirect URI** - Debe ser configurado correctamente
+- ✅ **Configuración permanente** - Una vez configurado, siempre funciona
+- ✅ **Automático** - Sin intervención manual
+- ⚠️ **Redirect URI** - Debe ser configurado correctamente
 
-### Interfaz de Usuario
+### 🎨 Interfaz de Usuario
 
 #### **Vista Create**
 ```html
@@ -156,7 +156,7 @@ private function exchangeDirectCodeForToken($code)
 </button>
 ```
 
-### Flujo Comparativo
+### 📊 Flujo Comparativo
 
 #### **Flujo con Código Directo**
 ```mermaid
@@ -165,7 +165,7 @@ graph TD
     B --> C[Clic en 'Autorizar con Código Directo']
     C --> D[Intercambia código por tokens]
     D --> E[Crea/actualiza conexión]
-    E --> F[Listo - Sin redirección]
+    E --> F[✅ Listo - Sin redirección]
 ```
 
 #### **Flujo OAuth Tradicional**
@@ -176,30 +176,30 @@ graph TD
     C --> D[Usuario autoriza en popup]
     D --> E[Callback con código]
     E --> F[Intercambia código por tokens]
-    F --> G[Listo - Con redirección]
+    F --> G[✅ Listo - Con redirección]
 ```
 
-### Resultado Final
+### 🎉 Resultado Final
 
 **AMBAS OPCIONES IMPLEMENTADAS:**
 
-#### **Código Directo (Recomendado para Self Client)**
+#### **✅ Código Directo (Recomendado para Self Client)**
 - Configuración mínima
 - Sin Redirect URI necesario
 - Autorización inmediata
 - Ideal para desarrollo y producción
 
-#### **OAuth Tradicional (Funciona también)**
+#### **✅ OAuth Tradicional (Funciona también)**
 - Configuración completa con Redirect URI
 - Popup automático
 - Una vez configurado, siempre funciona
 - Compatible con otros tipos de aplicación
 
-### Recomendación de Uso
+### 🔧 Recomendación de Uso
 
 **Para Self Client en producción:**
 1. **Usar código directo** para configuración inicial rápida
 2. **Configurar OAuth tradicional** como respaldo
 3. **Renovar con código directo** cuando sea necesario
 
-¡La implementación ofrece **máxima flexibilidad** para diferentes necesidades! 
+¡La implementación ofrece **máxima flexibilidad** para diferentes necesidades! 🚀

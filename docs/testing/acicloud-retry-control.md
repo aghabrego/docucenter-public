@@ -1,6 +1,6 @@
 # Control de Reintentos - ACI Cloud API
 
-## **Sistema de Control de Reintentos Implementado**
+## 🔒 **Sistema de Control de Reintentos Implementado**
 
 ### **Lógica de Verificación**
 ```php
@@ -15,7 +15,7 @@ if ($attemptCounter > 1) {
 
 ### **Escenarios de Uso**
 
-#### **Primer Intento (Exitoso)**
+#### ✅ **Primer Intento (Exitoso)**
 ```json
 {
   "success": true,
@@ -30,7 +30,7 @@ if ($attemptCounter > 1) {
 }
 ```
 
-#### **Segundo Intento (Última Oportunidad)**
+#### ✅ **Segundo Intento (Última Oportunidad)**
 ```json
 {
   "success": true,
@@ -45,7 +45,7 @@ if ($attemptCounter > 1) {
 }
 ```
 
-#### **Tercer Intento (Rechazado)**
+#### ❌ **Tercer Intento (Rechazado)**
 ```json
 {
   "success": false,
@@ -77,7 +77,7 @@ Log::info("CreateSaleAciCloudWithEmission: Procesamiento completado exitosamente
 ]);
 ```
 
-### **Beneficios del Control de Reintentos**
+### **🎯 Beneficios del Control de Reintentos**
 
 1. **Previene Loops Infinitos**
    - Evita intentos excesivos que podrían sobrecargar el sistema
@@ -95,7 +95,7 @@ Log::info("CreateSaleAciCloudWithEmission: Procesamiento completado exitosamente
    - Historial de intentos en base de datos
    - Logs detallados para troubleshooting
 
-### **Flujo de Trabajo**
+### **📊 Flujo de Trabajo**
 
 ```mermaid
 graph TD
@@ -111,19 +111,19 @@ graph TD
     H --> J[Log Success + Success Response]
 ```
 
-### **Casos de Uso del Control**
+### **⚠️ Casos de Uso del Control**
 
 #### **Cuándo se Activa**
-- Documento ya procesado previamente con error
-- Reintento manual del mismo documento
-- Error en primera emisión y segundo intento
+- ✅ Documento ya procesado previamente con error
+- ✅ Reintento manual del mismo documento
+- ✅ Error en primera emisión y segundo intento
 
 #### **Cuándo NO se Activa**
-- Primera emisión de documento nuevo
-- Documentos con números diferentes
-- Reinicio del contador (manual/automático)
+- ✅ Primera emisión de documento nuevo
+- ✅ Documentos con números diferentes
+- ✅ Reinicio del contador (manual/automático)
 
-### **Configuración**
+### **🔧 Configuración**
 
 El límite está hardcodeado en **2 intentos máximo**:
 - **Intento 1**: Counter = 0 → Permitido

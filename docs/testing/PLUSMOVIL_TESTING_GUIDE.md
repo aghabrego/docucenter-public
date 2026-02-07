@@ -1,6 +1,6 @@
 # Guía Rápida: Testing de PlusMovil API
 
-## Inicio Rápido
+## 🚀 Inicio Rápido
 
 ### Credenciales Disponibles
 ```
@@ -23,11 +23,11 @@ sudo apt install awscli
 ```
 
 Este script:
-- Se autentica automáticamente con las credenciales
-- Obtiene el Access Token de AWS Cognito
-- Lo guarda en `/tmp/plusmovil_access_token.txt`
-- Te lo muestra para copiar
-- Opcionalmente prueba el token con la API
+- ✅ Se autentica automáticamente con las credenciales
+- ✅ Obtiene el Access Token de AWS Cognito
+- ✅ Lo guarda en `/tmp/plusmovil_access_token.txt`
+- ✅ Te lo muestra para copiar
+- ✅ Opcionalmente prueba el token con la API
 
 ### Paso 3: Probar API
 ```bash
@@ -69,7 +69,7 @@ aws cognito-idp initiate-auth \
 
 Copia el `AccessToken` de la respuesta.
 
-## Problemas Comunes
+## ❌ Problemas Comunes
 
 ### Error: "ResourceNotFoundException"
 **Causa**: Client ID incorrecto o User Pool no encontrado
@@ -91,7 +91,7 @@ Copia el `AccessToken` de la respuesta.
 sudo apt install awscli
 ```
 
-## Información Necesaria del Equipo PlusMovil
+## 📋 Información Necesaria del Equipo PlusMovil
 
 Para autenticación completa necesitamos:
 - [ ] **User Pool ID** de AWS Cognito (formato: `us-east-1_XXXXXXXXX`)
@@ -100,7 +100,7 @@ Para autenticación completa necesitamos:
 
 Con esta información, el script `get-cognito-token.sh` funcionará al 100%.
 
-## Estructura de Token Válido
+## 🎯 Estructura de Token Válido
 
 Un Access Token de AWS Cognito se ve así:
 
@@ -114,27 +114,27 @@ Características:
 - Tres partes separadas por puntos (`.`)
 - Es un JWT (JSON Web Token)
 
-## Qué Probar
+## 📊 Qué Probar
 
 Una vez tengas el token, el script de testing probará:
 
-1. Endpoint `/sys-logs` sin filtros
-2. Endpoint con paginación (`limit=10&offset=0`)
-3. Filtros personalizados:
+1. ✅ Endpoint `/sys-logs` sin filtros
+2. ✅ Endpoint con paginación (`limit=10&offset=0`)
+3. ✅ Filtros personalizados:
    - Búsqueda parcial: `module_name_like=invoice`
    - Múltiples valores: `action_type_in=create,update`
    - Rangos de fechas: `created_at_between=2024-01-01,2024-12-31`
    - Ordenamiento: `order_by=created_at&order_dir=desc`
 
-## Seguridad
+## 🔒 Seguridad
 
-**IMPORTANTE**: Las credenciales en este documento son de prueba.
+⚠️ **IMPORTANTE**: Las credenciales en este documento son de prueba.
 
 - NO commitear credenciales reales en git
 - Usar variables de entorno en producción
 - Rotar credenciales después de testing
 
-## Notas
+## 📝 Notas
 
 - Los tokens de Cognito expiran típicamente en 1 hora
 - El script guarda el token en `/tmp/plusmovil_access_token.txt`

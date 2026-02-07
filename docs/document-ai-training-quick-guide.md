@@ -1,21 +1,21 @@
 # Guía Rápida: Entrenar Document AI con Documentos Anotados
 
-## Estado Actual 
+## Estado Actual ✅
 
 **20 documentos JSON con anotaciones** listos en GCS:
 ```
 gs://docucenter-aci-document-ai-training/json/
- document-1.json
- document-2.json
- ...
- document-20.json
+├── document-1.json
+├── document-2.json
+├── ...
+└── document-20.json
 ```
 
 Cada JSON contiene:
-- OCR completo del PDF
-- Imagen Base64 (PNG)
-- 4-8 entities anotadas por documento
-- textAnchors con posiciones exactas
+- ✅ OCR completo del PDF
+- ✅ Imagen Base64 (PNG)
+- ✅ 4-8 entities anotadas por documento
+- ✅ textAnchors con posiciones exactas
 
 ## Próximos Pasos (Manual)
 
@@ -113,9 +113,9 @@ Una vez completado el entrenamiento:
    ```
 
 **Métricas Aceptables**:
-- **Excelente**: F1 > 0.90
-- **Bueno**: F1 > 0.80
-- **Insuficiente**: F1 < 0.80 (necesita más datos/ajustes)
+- ✅ **Excelente**: F1 > 0.90
+- ⚠️ **Bueno**: F1 > 0.80
+- ❌ **Insuficiente**: F1 < 0.80 (necesita más datos/ajustes)
 
 ### 7. Deploy del Modelo (2 minutos)
 
@@ -201,9 +201,9 @@ docker exec -it docucenter_laravel.test php artisan docai:generate-json-files
 ### Problema: Métricas bajas después de entrenar
 
 **Causas posibles**:
-1. Pocas muestras de entrenamiento (< 10)
-2. Anotaciones inconsistentes
-3. Variabilidad alta en formatos de documento
+1. ❌ Pocas muestras de entrenamiento (< 10)
+2. ❌ Anotaciones inconsistentes
+3. ❌ Variabilidad alta en formatos de documento
 
 **Soluciones**:
 1. Agregar más documentos anotados (objetivo: 30-50)

@@ -173,7 +173,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
 - Modo refresh (solo renovación)
 - Modo complete (login + renovación)
 - Almacenamiento de token en `/tmp/docucenter_test_token.txt`
-- Output con colores (  ℹ)
+- Output con colores (✓ ✗ ⚠ ℹ)
 - Detección de errores específicos
 - Configuración con variables de entorno
 - Verificación de salud del servidor
@@ -194,10 +194,10 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
 | Estado Token | Estado Licencia | Acción | HTTP Code |
 |--------------|-----------------|--------|-----------|
-| Vigente | Vigente |  Renovar | 200 |
-| Vigente | Expirada |  Bloqueado | 403 |
-| Expirado | Vigente |  Requiere login | 401 |
-| Expirado | Expirada |  Bloqueado | 401/403 |
+| Vigente | Vigente | ✓ Renovar | 200 |
+| Vigente | Expirada | ✗ Bloqueado | 403 |
+| Expirado | Vigente | ✗ Requiere login | 401 |
+| Expirado | Expirada | ✗ Bloqueado | 401/403 |
 
 ### Principio de Seguridad
 **Tokens expirados NO se pueden renovar** - Requieren autenticación completa con credenciales.
@@ -372,20 +372,20 @@ Log::error('Error al verificar licencia para refresh token', [
 ### Validaciones de Negocio
 
 **Login**:
--  Usuario existe con email
--  Password es correcto (Hash::check)
--  Usuario tiene acceso a organization_id
--  Organización existe
--  Licencia no está expirada
--  API remota responde correctamente
+- ✓ Usuario existe con email
+- ✓ Password es correcto (Hash::check)
+- ✓ Usuario tiene acceso a organization_id
+- ✓ Organización existe
+- ✓ Licencia no está expirada
+- ✓ API remota responde correctamente
 
 **Refresh Token**:
--  Token existe y es válido (Sanctum)
--  Token NO está expirado
--  Token tiene organization_id y point_sale
--  Organización existe
--  Licencia no está expirada
--  API remota responde correctamente
+- ✓ Token existe y es válido (Sanctum)
+- ✓ Token NO está expirado
+- ✓ Token tiene organization_id y point_sale
+- ✓ Organización existe
+- ✓ Licencia no está expirada
+- ✓ API remota responde correctamente
 
 ---
 
@@ -414,14 +414,14 @@ chmod +x scripts/test-auth-token.sh
 ```
 
 ### Casos de Prueba Cubiertos
-1.  Login exitoso con licencia vigente
-2.  Login con credenciales incorrectas
-3.  Login con licencia expirada
-4.  Renovación de token vigente
-5.  Renovación con token expirado
-6.  Advertencia de licencia próxima a vencer
-7.  Login con organización sin acceso
-8.  API de licencia no disponible
+1. ✓ Login exitoso con licencia vigente
+2. ✓ Login con credenciales incorrectas
+3. ✓ Login con licencia expirada
+4. ✓ Renovación de token vigente
+5. ✓ Renovación con token expirado
+6. ✓ Advertencia de licencia próxima a vencer
+7. ✓ Login con organización sin acceso
+8. ✓ API de licencia no disponible
 
 ---
 
@@ -532,17 +532,17 @@ Ya existente:
 ## Impacto en el Sistema
 
 ### Positivo
--  Autenticación API robusta
--  Validación de licencia en tiempo real
--  Seguridad mejorada (tokens expirados no renovables)
--  Experiencia de desarrollador mejorada (docs + script)
--  Mantenibilidad (código centralizado y documentado)
--  Observabilidad (logging detallado)
+- ✓ Autenticación API robusta
+- ✓ Validación de licencia en tiempo real
+- ✓ Seguridad mejorada (tokens expirados no renovables)
+- ✓ Experiencia de desarrollador mejorada (docs + script)
+- ✓ Mantenibilidad (código centralizado y documentado)
+- ✓ Observabilidad (logging detallado)
 
 ### Consideraciones
-- Dependencia de API remota (503 si caída)
-- Latencia adicional en login/refresh (llamada HTTP)
-- Requiere conectividad para operar
+- ⚠ Dependencia de API remota (503 si caída)
+- ⚠ Latencia adicional en login/refresh (llamada HTTP)
+- ⚠ Requiere conectividad para operar
 
 ### Mitigaciones
 - Cache de respuestas de API remota (implementar si necesario)
@@ -564,6 +564,6 @@ Implementación completa y robusta de API de autenticación con renovación de t
 - Manejo de errores completo
 - Advertencias proactivas
 
-**Estado**: Listo para testing en ambiente de desarrollo
+**Estado**: ✅ Listo para testing en ambiente de desarrollo
 
 **Próximo paso**: Validar con datos reales y casos de borde

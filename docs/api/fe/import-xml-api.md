@@ -18,7 +18,7 @@ Permite importar archivos XML de facturación electrónica para procesamiento ma
 
 | Campo | Tipo | Requerido | Descripción |
 |-------|------|-----------|-------------|
-| `files[]` | file | | Uno o más archivos XML/TXT |
+| `files[]` | file | ✅ | Uno o más archivos XML/TXT |
 
 ### Validaciones de Archivo
 

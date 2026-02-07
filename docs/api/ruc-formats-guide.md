@@ -1,10 +1,10 @@
-# Guía de Formatos de RUC en Panamá
+# 📋 Guía de Formatos de RUC en Panamá
 
 ## Tipos de RUC Soportados por la API
 
 La API de consulta de RUC de DocuCenter soporta todos los formatos oficiales de RUC utilizados en Panamá:
 
-### 1.  Persona Natural (Cédula)
+### 1. 🧑 Persona Natural (Cédula)
 **Formato**: `D-DDD-DDD`
 **Ejemplo**: `8-123-456`
 **Descripción**: RUC basado en la cédula de identidad panameña
@@ -15,7 +15,7 @@ curl -X GET "https://tu-dominio.com/api/v1/fe/check_ruc/8-123-456" \
   -H "Accept: application/json"
 ```
 
-### 2. Persona Extranjera
+### 2. 🌍 Persona Extranjera
 **Formato**: `PE-D-DDDDDD`
 **Ejemplo**: `PE-8-123456`
 **Descripción**: RUC para personas extranjeras residentes
@@ -26,7 +26,7 @@ curl -X GET "https://tu-dominio.com/api/v1/fe/check_ruc/PE-8-123456" \
   -H "Accept: application/json"
 ```
 
-### 3. Empresa (RUC Jurídico)
+### 3. 🏢 Empresa (RUC Jurídico)
 **Formato**: `DDDDDDDDD-D-YYYY`
 **Ejemplo**: `155750453-2-2024`
 **Descripción**: RUC empresarial que incluye el año de constitución
@@ -41,26 +41,26 @@ curl -X GET "https://tu-dominio.com/api/v1/fe/check_ruc/155750453-2-2024" \
   -H "Accept: application/json"
 ```
 
-## Validación Automática
+## 🔍 Validación Automática
 
 La API valida automáticamente todos estos formatos usando la expresión regular:
 ```regex
 /^[0-9\-PE]+$/
 ```
 
-### Ejemplos Válidos
+### ✅ Ejemplos Válidos
 - `8-123-456` (persona natural)
 - `PE-8-123456` (persona extranjera)
 - `155750453-2-2024` (empresa)
 - `8-123-456789` (formato extendido)
 
-### Ejemplos Inválidos
+### ❌ Ejemplos Inválidos
 - `123456789` (sin guiones)
 - `8-123-456@` (caracteres especiales)
 - `ABC-123-456` (letras no permitidas excepto PE)
 - `8.123.456` (puntos en lugar de guiones)
 
-##  Testing de Formatos
+## 🧪 Testing de Formatos
 
 ### Script Automatizado
 El script de testing incluye casos para todos los formatos:
@@ -88,7 +88,7 @@ php artisan test:check-ruc 1 "PE-8-123456"
 php artisan test:check-ruc 1 "155750453-2-2024"
 ```
 
-## Respuesta de la API
+## 📊 Respuesta de la API
 
 La API retorna la misma estructura para todos los tipos de RUC:
 
@@ -110,7 +110,7 @@ La API retorna la misma estructura para todos los tipos de RUC:
 }
 ```
 
-## Casos de Uso por Tipo
+## 🎯 Casos de Uso por Tipo
 
 ### Persona Natural
 - Facturación a consumidores finales
@@ -128,7 +128,7 @@ La API retorna la misma estructura para todos los tipos de RUC:
 - Corporaciones y grandes empresas
 - Entidades jurídicas en general
 
-## Integración en Sistemas
+## 🔧 Integración en Sistemas
 
 ### Validación en Frontend
 ```javascript
@@ -153,10 +153,10 @@ function validateRucFormat(ruc) {
 }
 
 // Ejemplos de uso
-console.log(validateRucFormat('8-123-456'));        // válido
-console.log(validateRucFormat('PE-8-123456'));      // válido  
-console.log(validateRucFormat('155750453-2-2024')); // válido
-console.log(validateRucFormat('123456789'));        // inválido
+console.log(validateRucFormat('8-123-456'));        // ✅ válido
+console.log(validateRucFormat('PE-8-123456'));      // ✅ válido  
+console.log(validateRucFormat('155750453-2-2024')); // ✅ válido
+console.log(validateRucFormat('123456789'));        // ❌ inválido
 ```
 
 ### Validación en Backend PHP
@@ -181,7 +181,7 @@ function validateRucFormat(string $ruc): array
 }
 ```
 
-## Referencias
+## 📚 Referencias
 
 - **API Principal**: `docs/api/check-ruc-api.md`
 - **Testing**: `docs/testing/README.md`

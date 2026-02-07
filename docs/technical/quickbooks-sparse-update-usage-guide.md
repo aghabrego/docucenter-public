@@ -134,16 +134,16 @@ const qboApiUrl = `${baseUrl}/v3/company/${realmId}/invoice?operation=update${is
 
 ## Beneficios
 
-### Preserva Cambios
+### ✅ Preserva Cambios
 - No sobrescribe información modificada en QuickBooks
 - Mantiene datos de líneas, fechas, clientes, etc.
 
-### Mejor Performance
+### ✅ Mejor Performance
 - Transfiere menos datos
 - Procesamiento más rápido
 - Menor uso de ancho de banda
 
-### Menor Riesgo
+### ✅ Menor Riesgo
 - Reduce errores por campos faltantes
 - Evita conflictos de concurrencia
 - Mayor compatibilidad con QB

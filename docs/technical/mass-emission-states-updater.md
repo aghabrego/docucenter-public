@@ -182,7 +182,7 @@ $query = SalesHeaderImp::query()
 
 Para cada organización:
 ```
- Procesando organización: Empresa Demo (ID: 1)
+📁 Procesando organización: Empresa Demo (ID: 1)
   Estado ANTES:
     Total facturas: 1500
     EzeeIssued=true: 800
@@ -195,9 +195,9 @@ Para cada organización:
       - Retry needed: 50
       - Sin estado: 350
 
-  800 facturas emitidas marcadas como 'success'
-  150 facturas no emitidas marcadas para 'retry_needed'  
-  350 facturas inicializadas como 'pending'
+  ✅ 800 facturas emitidas marcadas como 'success'
+  ✅ 150 facturas no emitidas marcadas para 'retry_needed'  
+  ✅ 350 facturas inicializadas como 'pending'
 
   Estado DESPUÉS:
     [estadísticas actualizadas...]
@@ -269,12 +269,12 @@ php artisan mass-emission:update-states --environment=production --force
 ```
 
 ### Verificaciones Incluidas
-1. Comando disponible en Artisan
-2. Ayuda del comando funcional  
-3. Modo dry-run (sin --force)
-4. Actualización real con confirmación
-5. Verificación de consistencia post-actualización
-6. Prueba de filtros por organización
+1. ✅ Comando disponible en Artisan
+2. ✅ Ayuda del comando funcional  
+3. ✅ Modo dry-run (sin --force)
+4. ✅ Actualización real con confirmación
+5. ✅ Verificación de consistencia post-actualización
+6. ✅ Prueba de filtros por organización
 
 ## Troubleshooting
 
@@ -282,7 +282,7 @@ php artisan mass-emission:update-states --environment=production --force
 
 **Error: Tabla no encontrada**
 ```
-Tabla o columnas faltantes en db_organization_123
+⚠️  Tabla o columnas faltantes en db_organization_123
 ```
 **Solución:** Ejecutar migraciones de emisión masiva en esa BD
 
@@ -319,19 +319,19 @@ GROUP BY mass_emission_status;
 ## Integración con Sistema Existente
 
 ### Componente Livewire Actualizado
-- Filtros para mostrar solo facturas procesadas
-- Validación anti-reintentos en facturas exitosas  
-- Estadísticas precisas de emisión masiva
+- ✅ Filtros para mostrar solo facturas procesadas
+- ✅ Validación anti-reintentos en facturas exitosas  
+- ✅ Estadísticas precisas de emisión masiva
 
 ### Jobs de Emisión
-- Compatible con `IssueMassInvoicesJob` existente
-- Respeta estados actualizados por el comando
-- No interfiere con lógica de reintentos automáticos
+- ✅ Compatible con `IssueMassInvoicesJob` existente
+- ✅ Respeta estados actualizados por el comando
+- ✅ No interfiere con lógica de reintentos automáticos
 
 ### Base de Datos
-- No modifica estructura existente
-- Solo actualiza datos basado en lógica de negocio
-- Mantiene integridad referencial
+- ✅ No modifica estructura existente
+- ✅ Solo actualiza datos basado en lógica de negocio
+- ✅ Mantiene integridad referencial
 
 ## Próximos Pasos Recomendados
 

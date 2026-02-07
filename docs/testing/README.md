@@ -1,8 +1,8 @@
-#  Sistema de Testing DocuCenter
+# 🧪 Sistema de Testing DocuCenter
 
-## Scrip###  Scripts de Prueba Reutilizables
+## 📋 Scrip### 🧪 Scripts de Prueba Reutilizables
 
-### **[API Consulta de RUC](../api/check-ruc-api.md)** 
+### 🔍 **[API Consulta de RUC](../api/check-ruc-api.md)** 🆕
 Testing de la nueva API para consulta de RUCs panameños usando Alanube.
 
 **Scripts disponibles**:
@@ -23,7 +23,7 @@ curl -X GET "http://localhost:8000/api/v1/fe/check_ruc/8-123-456" \
   -H "Accept: application/json"
 ```
 
-### **[iDoc Preservation Testing](test-idoc-6-preservation.md)** 
+### 🎯 **[iDoc Preservation Testing](test-idoc-6-preservation.md)** 🆕
 Pruebas especializadas para verificar conservación del campo `iDoc` en API ACI Cloud.
 
 **Scripts disponibles**:
@@ -44,7 +44,7 @@ php artisan test:idoc-preservation {org_id}
 ./scripts/demo-idoc-test.sh
 ```
 
-### **[QuickBooks Integration Testing](quickbooks-testing-scripts.md)**
+### 📊 **[QuickBooks Integration Testing](quickbooks-testing-scripts.md)**
 Suite completa de scripts para testing de integración QuickBooks con validación de impuestos ITBMS.
 
 **Scripts disponibles**:
@@ -65,40 +65,42 @@ php docs/testing/test-qb-tax-validation.php
 ./docs/testing/test-qb-flow.sh 2
 ```
 
-### **[Reportes de Error PlusMóvil Producción](PLUSMOVIL-PRODUCTION-ERROR-REPORT.md)** 
-Reporte detallado de errores en el endpoint `/com-invoices` del API de PlusMóvil en ambiente de producción.
+### 🎯 **[QuickBooks Multi-Tax con rateValue - PRUEBA01](PRUEBA01-test-results.md)** 🆕
+Testing completo del sistema de multi-tasa ITBMS usando PRIORIDAD 1 (rateValue) sin dependencia de ACI Cloud API.
 
-**Archivos disponibles**:
-- `PLUSMOVIL-PRODUCTION-ERROR-REPORT.md` - Documentación completa en formato Markdown
-- `plusmovil-production-error-report.json` - Reporte estructurado en JSON con todos los detalles
-- `plusmovil-prod-error-report.json` - Formato simplificado del reporte
+**Scripts disponibles**:
+- `test-qb-multi-tax-prueba01.php` - Test automatizado completo con validación
+- `test-qb-tax-calculation-simple.sh` - Script visual de verificación de lógica
+- `docker-cheatsheet.sh` - Utilidad para ejecutar comandos en contenedores
+- [PRUEBA01-verification-guide.md](PRUEBA01-verification-guide.md) - Guía paso a paso
 
-**Contenido del reporte**:
-- Descripción del error: Internal Server Error (500) en endpoint `/com-invoices`
-- Ambiente afectado: Producción (QA funciona correctamente)
-- Cliente afectado: EL NAWAL (Organization ID: 28)
-- Casos de prueba ejecutados con diferentes parámetros
-- Comparación con ambiente QA funcionando
-- Impacto en funcionalidades de importación de facturas
-- Acciones recomendadas priorizadas
+**Resultado del Test**:
+```
+✅ Línea 1: $1.00 × 10% = $0.10 CORRECTO
+✅ Línea 2: $1.00 × 7% = $0.07 CORRECTO
+✅ Total ITBMS: $0.17 CORRECTO
+✅ Método: tax_code_rate_value (PRIORIDAD 1)
+✅ Sin llamadas a ACI Cloud API
+```
 
 **Uso rápido**:
 ```bash
-# Ver reporte completo
-cat docs/testing/PLUSMOVIL-PRODUCTION-ERROR-REPORT.md
+# Encontrar contenedor
+bash docs/testing/docker-cheatsheet.sh find
 
-# Ver datos estructurados
-cat docs/testing/plusmovil-production-error-report.json
+# Ejecutar test completo
+bash docs/testing/docker-cheatsheet.sh test-prueba01
 
-# Ejemplos de curl para reproducir el error
-curl -X GET "https://0m2jyxhl41.execute-api.us-east-1.amazonaws.com/prod/com-invoices?limit=10" \
-  -H "Authorization: Bearer <TOKEN>" \
-  -H "Content-Type: application/json"
+# Ver logs de impuestos en tiempo real
+bash docs/testing/docker-cheatsheet.sh logs-tax
+
+# Script visual de lógica
+bash docs/testing/test-qb-tax-calculation-simple.sh
 ```
 
-**Severidad**: Alta - Bloquea importación automática de facturas desde PlusMóvil
+**Documentación completa**: [PRUEBA01-test-results.md](PRUEBA01-test-results.md)
 
-### **Validaciones PAC - Alanube Panamá**PHP de Testing
+### 🎯 **Validaciones PAC - Alanube Panamá**PHP de Testing
 
 ### `check_sales.php`
 Script de verificación de facturas para diagnóstico de base de datos.
@@ -115,37 +117,37 @@ php docs/testing/check_sales.php
 - Muestra las últimas facturas creadas
 - Útil para debugging de emisión PAC
 
-### [Sistema Principal de Testing](../../app/Console/Commands/Testing/README.md)
+### 🎯 [Sistema Principal de Testing](../../app/Console/Commands/Testing/README.md)
 Documentación completa del sistema de testing implementado en `app/Console/Commands/Testing/`
 
-### [Resumen Ejecutivo](../TESTING_SYSTEM_SUMMARY.md)
+### 📊 [Resumen Ejecutivo](../TESTING_SYSTEM_SUMMARY.md)
 Resumen completo de la implementación del sistema de testing con todas las funcionalidades.
 
-### [Comandos de Testing](../../app/Console/Commands/Testing/README.md) 
+### 🚀 [Comandos de Testing](../../app/Console/Commands/Testing/README.md) ⭐
 Colección completa de comandos Artisan PHP y scripts bash para testing automático.
 
-### [Script de Automatización Principal](../../app/Console/Commands/Testing/testing.sh)
+### 🔧 [Script de Automatización Principal](../../app/Console/Commands/Testing/testing.sh)
 Script bash maestro para automatizar flujos completos de testing con Docker.esting DocuCenter
 
 Documentación completa del sistema de testing y validaciones de DocuCenter.
 
-## Índice de Testing
+## 📋 Índice de Testing
 
-### [Sistema Principal de Testing](../app/Console/Commands/Testing/README.md)
+### 🎯 [Sistema Principal de Testing](../app/Console/Commands/Testing/README.md)
 Documentación completa del sistema de testing implementado en `app/Console/Commands/Testing/`
 
-### [Resumen Ejecutivo](../TESTING_SYSTEM_SUMMARY.md)
+### 📊 [Resumen Ejecutivo](../TESTING_SYSTEM_SUMMARY.md)
 Resumen completo de la implementación del sistema de testing con todas las funcionalidades.
 
-###  [Comandos de Testing](commands/README.md) 
+### � [Comandos de Testing](commands/README.md) 🆕
 Colección completa de scripts bash para testing específico y validaciones automáticas.
 
-### [Script de Automatización Principal](commands/testing.sh)
+### �🔧 [Script de Automatización Principal](commands/testing.sh)
 Script bash maestro para automatizar flujos completos de testing con Docker.
 
-##  Scripts de Prueba Reutilizables
+## 🧪 Scripts de Prueba Reutilizables
 
-###  **Validaciones PAC - Alanube Panamá**
+### � **Validaciones PAC - Alanube Panamá**
 
 #### `test_dni_vs_ruc_analysis.php`
 **Propósito**: Análisis detallado del problema de validación DNI vs RUC para tipos de receptor.
@@ -180,7 +182,7 @@ php docs/testing/test_official_documentation.php
 #### `test_auto_detection.php`
 **Propósito**: Testing de auto-detección de tipos de receptor en facturas.
 
-### **Testing de Transformadores**
+### 🔧 **Testing de Transformadores**
 
 #### `test-close-po-conversion.sh`
 **Propósito**: Validación de conversión booleana en PurOrdrHeaderTransform.
@@ -211,7 +213,7 @@ cd /home/weirdolabs/code/docucenter
 #### `TestPurOrdrHeaderTransformSimple.php`
 **Propósito**: Comando de test reutilizable para validación booleana.
 
-###  **Testing de Identificadores de Transacción**
+### 🆔 **Testing de Identificadores de Transacción**
 
 #### `test-parent-transaction-id.sh`
 **Propósito**: Validación de funcionalidad ParentTransactionId en CustomerCreditMemoHeaderImp.
@@ -230,11 +232,11 @@ cd /home/weirdolabs/code/docucenter
 - Testing automático con Docker
 
 **Características Validadas**:
-- Columna existe en tablas de organizaciones
-- Tipo: bigint(20) nullable con default NULL
-- Incluido en fillable del modelo
-- Regla de validación: nullable|integer
-- Compatibilidad con API ACIcloud
+- ✅ Columna existe en tablas de organizaciones
+- ✅ Tipo: bigint(20) nullable con default NULL
+- ✅ Incluido en fillable del modelo
+- ✅ Regla de validación: nullable|integer
+- ✅ Compatibilidad con API ACIcloud
 
 #### `test-kart21-improvements.sh`
 **Propósito**: Validación de mejoras implementadas en Kart21Service para resolver discrepancias de precisión decimal.
@@ -252,17 +254,17 @@ cd /home/weirdolabs/code/docucenter
 - Confirmación de preservación de datos originales
 
 **Mejoras Validadas**:
-- Configuración decimal: `totals: 3 decimales` (antes 2)
-- Análisis automático: `analyzeDataDiscrepancies()` implementado
-- Logging: Registro automático de inconsistencias
-- Precisión: Valores como `17.013` preservados correctamente
-- Rendimiento: Tiempo de ejecución ~13-25ms
+- ✅ Configuración decimal: `totals: 3 decimales` (antes 2)
+- ✅ Análisis automático: `analyzeDataDiscrepancies()` implementado
+- ✅ Logging: Registro automático de inconsistencias
+- ✅ Precisión: Valores como `17.013` preservados correctamente
+- ✅ Rendimiento: Tiempo de ejecución ~13-25ms
 
 **Características Validadas**:
-- Eliminación de pérdida de precisión en totales
-- Detección automática de discrepancias > 0.001
-- Logging estructurado para debugging
-- Compatibilidad con datos reales de Kart21
+- ✅ Eliminación de pérdida de precisión en totales
+- ✅ Detección automática de discrepancias > 0.001
+- ✅ Logging estructurado para debugging
+- ✅ Compatibilidad con datos reales de Kart21
 
 #### `TestPurOrdrHeaderTransformSimple.php`
 **Propósito**: Prueba del sistema de auto-detección de tipos de receptor.
@@ -294,7 +296,7 @@ php docs/testing/test_user_data_analysis.php
 - Verificación de estructura final para PAC
 - Confirmación de resolución del error
 
-###  **Facturas de Crédito Fiscal - Alanube DOM**
+### �📄 **Facturas de Crédito Fiscal - Alanube DOM**
 
 #### `test_fiscal_credit_detection.php`
 **Propósito**: Prueba de detección automática de tipos de documento para facturas de crédito fiscal.
@@ -333,7 +335,7 @@ php docs/testing/test_fiscal_credit_complete.php
 - Impuestos adicionales
 - Soporte para monedas extranjeras (USD)
 
-### **Instrucciones de Reutilización**
+### 📝 **Instrucciones de Reutilización**
 
 1. **Para desarrollo**: Copiar scripts a root temporalmente para pruebas rápidas
 2. **Para CI/CD**: Referenciar desde `docs/testing/` en scripts de automatización
@@ -341,23 +343,23 @@ php docs/testing/test_fiscal_credit_complete.php
 
 ---
 
-##  Tipos de Testing Disponibles
+## 🧪 Tipos de Testing Disponibles
 
-### **Testing de Webhooks**
+### 🌐 **Testing de Webhooks**
 - **[CreateSaleMaxgymJob](../app/Console/Commands/Testing/TestCreateSaleMaxgymJob.php)** - Testing de webhooks de pagos Maxgym
 - **Datos de Prueba**: [test_payment_data.json](../storage/testing/data/test_payment_data.json)
 
-###  **Testing de Cálculos**  
+### 🧮 **Testing de Cálculos**  
 - **[CreateFastJobCalculation](../app/Console/Commands/Testing/TestCreateFastJobCalculation.php)** - Cálculos de facturación sin PAC
 - **[Trait de Cálculos](../app/Traits/CreateFastJobCalculation.php)** - Lógica de cálculo independiente
 
-### **Testing de Infraestructura**
+### 🏗️ **Testing de Infraestructura**
 - **[CreateTableFromStub](../app/Console/Commands/Configuration/CreateTableFromStubCommand.php)** - Creación automática de tablas
 - **[Configuración](../config/testing.php)** - Configuración centralizada de testing
 
 ---
 
-## Inicio Rápido
+## 🚀 Inicio Rápido
 
 ### Opción 1: Script de Automatización (Recomendado)
 ```bash
@@ -385,74 +387,74 @@ docker-compose exec laravel.test php artisan test:create-fast-calculation --show
 
 ---
 
-##  Validaciones Específicas
+## 📁 Validaciones Específicas
 
-### [Validaciones MEYPAR](./validations/meypar-validations.md)
+### ✅ [Validaciones MEYPAR](./validations/meypar-validations.md)
 Documentación completa de validaciones para la integración MEYPAR.
 
-### [Validaciones RUC](./validations/createSale-ruc-validation.md)
+### ✅ [Validaciones RUC](./validations/createSale-ruc-validation.md)
 Validaciones de RUC en el proceso de creación de ventas.
 
-### [Validaciones Maxgym](./validations/maxgym-ruc-validation.md)
+### ✅ [Validaciones Maxgym](./validations/maxgym-ruc-validation.md)
 Validaciones específicas para webhooks de Maxgym.
 
-### [Comparación de Validaciones](./validations/validation_comparison.md)
+### ✅ [Comparación de Validaciones](./validations/validation_comparison.md)
 Análisis comparativo de diferentes sistemas de validación.
 
 ---
 
-## Flujos de Testing
+## 🔄 Flujos de Testing
 
-### **Testing de Desarrollo**
+### 🎯 **Testing de Desarrollo**
 1. **Configuración**: `./scripts/testing.sh setup 1`
 2. **Prueba específica**: `./scripts/testing.sh test-maxgym 1`
 3. **Verificación**: `./scripts/testing.sh test-calculations 1`
 
-###  **Testing Completo**
+### 🧪 **Testing Completo**
 1. **Estado del sistema**: `./scripts/testing.sh status`
 2. **Todas las pruebas**: `./scripts/testing.sh test-all 1`
 3. **Revisión de logs**: Verificar `storage/logs/laravel.log`
 
-### **Debugging Avanzado**
+### 🔍 **Debugging Avanzado**
 1. **Detalles completos**: `--show_details` en comandos
 2. **Logs específicos**: Revisar output de comandos individuales
 3. **Tablas faltantes**: `./scripts/testing.sh create-table [tabla] 1`
 
 ---
 
-## Reportes de Testing
+## 📊 Reportes de Testing
 
-### **Resultados Esperados**
+### 🎯 **Resultados Esperados**
 
-#### Testing Exitoso de Webhooks
+#### ✅ Testing Exitoso de Webhooks
 ```
- Datos JSON cargados correctamente
- Organización encontrada
- Usuario encontrado
- Job ejecutado exitosamente
+✓ Datos JSON cargados correctamente
+✓ Organización encontrada
+✓ Usuario encontrado
+✓ Job ejecutado exitosamente
 ```
 
-#### Testing Exitoso de Cálculos
+#### ✅ Testing Exitoso de Cálculos
 ```
- Cálculos completados exitosamente
- Total general coincide
- Cantidad de items coincide
- ITBMS coincide
- Todos los cálculos son consistentes
+✓ Cálculos completados exitosamente
+✓ Total general coincide
+✓ Cantidad de items coincide
+✓ ITBMS coincide
+✓ Todos los cálculos son consistentes
 ```
 
 ---
 
-## Configuración Avanzada
+## 🛠️ Configuración Avanzada
 
-### [Configuración de Testing](../config/testing.php)
+### ⚙️ [Configuración de Testing](../config/testing.php)
 - Configuraciones predeterminadas
 - Rutas de archivos de datos
 - Configuración de debugging
 - Mocks para testing
 - Validaciones de estructura
 
-### Variables de Entorno
+### 🔧 Variables de Entorno
 ```bash
 TESTING_DEFAULT_ORG_ID=1
 TESTING_SYNC_EXECUTION=true
@@ -462,9 +464,9 @@ TESTING_LOG_LEVEL=debug
 
 ---
 
-## Troubleshooting
+## 🐛 Troubleshooting
 
-### Errores Comunes
+### ❌ Errores Comunes
 
 #### "Tabla no existe"
 ```bash
@@ -483,27 +485,27 @@ Los comandos de testing están diseñados para **NO** usar PAC. Verificar que se
 
 ---
 
-## Documentación Adicional
+## 📚 Documentación Adicional
 
 - **[README Principal](../README.md)** - Información general del proyecto
-- **[Guías de Desarrollo](../.github/guias-desarrollo.md)** - Guías de desarrollo
+- **[Copilot Instructions](../.github/copilot-instructions.md)** - Guías para AI/Copilot
 - **[Scripts Disponibles](../scripts/README.md)** - Documentación de todos los scripts
 
 ---
 
-## Beneficios del Sistema
+## 🏆 Beneficios del Sistema
 
-### **Seguridad**
+### 🛡️ **Seguridad**
 - Testing sin afectar producción
 - Sin conexiones PAC durante testing
 - Validaciones robustas
 
-### **Productividad**
+### 📈 **Productividad**
 - Configuración automática
 - Scripts simplificados
 - Documentación completa
 
-### **Mantenibilidad**
+### 🔧 **Mantenibilidad**
 - Código organizado
 - Configuración centralizada
 - Documentación actualizada

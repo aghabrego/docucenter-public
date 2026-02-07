@@ -1,6 +1,6 @@
 # Plan de Debug - Error "instance requires property exportation"
 
-## Diagnóstico Paso a Paso
+## 🔍 Diagnóstico Paso a Paso
 
 ### 1. Verificar los logs añadidos
 Los logs de debug se han agregado al código. Para ver qué está pasando exactamente:
@@ -112,7 +112,7 @@ var_dump(isset($result['receiver']['exportation']));
 
 ---
 
-## Acción Inmediata
+## 🎯 Acción Inmediata
 
 1. **Procesar una factura problemática**
 2. **Revisar logs**: `tail -f storage/logs/laravel.log | grep exportation`

@@ -2,14 +2,14 @@
 
 **Fecha**: 28 de octubre de 2025
 
-## Éxitos Logrados
+## ✅ Éxitos Logrados
 
 ### 1. Instalación de AWS CLI
 ```bash
 sudo snap install aws-cli --classic
 ```
-- Instalado correctamente: `aws-cli/1.42.61`
-- Funciona correctamente
+- ✅ Instalado correctamente: `aws-cli/1.42.61`
+- ✅ Funciona correctamente
 
 ### 2. Autenticación con AWS Cognito
 ```bash
@@ -20,12 +20,12 @@ aws cognito-idp initiate-auth \
   --auth-parameters USERNAME=larosemena_el_nawal,PASSWORD='7162384Li*'
 ```
 
-**Resultado**: **EXITOSO**
+**Resultado**: ✅ **EXITOSO**
 
 **Tokens obtenidos**:
-- Access Token generado correctamente
-- Expira en 60 minutos
-- Token guardado en `/tmp/plusmovil_access_token.txt`
+- ✅ Access Token generado correctamente
+- ✅ Expira en 60 minutos
+- ✅ Token guardado en `/tmp/plusmovil_access_token.txt`
 
 **Access Token** (primeros 50 caracteres):
 ```
@@ -50,7 +50,7 @@ eyJraWQiOiJJVEFMS1hTUmdFeStGWHJ2NjdcL2ZiUzlhTXRSR0...
 
 **User Pool ID encontrado**: `us-east-1_xMaEibiru`
 
-## Problemas Identificados
+## ❌ Problemas Identificados
 
 ### Problema: DNS no resuelve el endpoint
 
@@ -65,11 +65,11 @@ https://28cwop8rj6.execute-api.us-east-1.amazonaws.com/dev/sys-logs
 ```
 
 **Diagnóstico**:
-1. Internet funciona correctamente (ping a google.com exitoso)
-2. DNS no resuelve el hostname específico de la API
-3.  La URL podría ser incorrecta o el endpoint no existe
+1. ✅ Internet funciona correctamente (ping a google.com exitoso)
+2. ❌ DNS no resuelve el hostname específico de la API
+3. ❓ La URL podría ser incorrecta o el endpoint no existe
 
-## Posibles Causas
+## 🔍 Posibles Causas
 
 ### 1. URL Incorrecta
 Es posible que la URL proporcionada no sea correcta o esté desactualizada.
@@ -89,28 +89,28 @@ El endpoint podría estar en otra región o stage.
 
 **Solución**: Confirmar región y stage correcto (`dev` vs `prod`).
 
-## Información Confirmada
+## 📋 Información Confirmada
 
-### Credenciales Válidas 
+### Credenciales Válidas ✅
 ```
 Usuario: larosemena_el_nawal
 Password: 7162384Li*
 ```
 
-### AWS Cognito 
+### AWS Cognito ✅
 ```
 Client ID: 7t3s7lb4tfg6ssal586l929ovl
 User Pool ID: us-east-1_xMaEibiru
 Región: us-east-1
 ```
 
-### Token de Acceso 
+### Token de Acceso ✅
 - Generación: Exitosa
 - Validez: 60 minutos
 - Formato: JWT válido
 - Scope: `aws.cognito.signin.user.admin`
 
-## Próximos Pasos
+## 🎯 Próximos Pasos
 
 ### 1. Verificar URL del Endpoint
 Solicitar al equipo de PlusMovil:
@@ -130,7 +130,7 @@ Si tienen otros endpoints documentados:
 - [ ] Verificar base URL diferente
 - [ ] Confirmar stage (`/dev` vs `/prod`)
 
-## Alternativas Inmediatas
+## 💡 Alternativas Inmediatas
 
 ### Opción A: Probar desde la Web
 Si la aplicación web funciona:
@@ -151,19 +151,19 @@ Solicitar al equipo de Plus Movil:
 - URL de Swagger/OpenAPI
 - Ejemplos de curl funcionando
 
-## Resumen
+## 📊 Resumen
 
 | Componente | Estado | Notas |
 |------------|--------|-------|
-| AWS CLI | Instalado | Versión 1.42.61 |
-| Credenciales | Válidas | Usuario y password correctos |
-| AWS Cognito | Funcional | Autenticación exitosa |
-| Access Token | Generado | Token JWT válido por 60 min |
-| User Pool | Confirmado | `us-east-1_xMaEibiru` |
-| DNS Endpoint | No resuelve | URL podría ser incorrecta |
-| API Gateway |  Sin confirmar | No se pudo probar conectividad |
+| AWS CLI | ✅ Instalado | Versión 1.42.61 |
+| Credenciales | ✅ Válidas | Usuario y password correctos |
+| AWS Cognito | ✅ Funcional | Autenticación exitosa |
+| Access Token | ✅ Generado | Token JWT válido por 60 min |
+| User Pool | ✅ Confirmado | `us-east-1_xMaEibiru` |
+| DNS Endpoint | ❌ No resuelve | URL podría ser incorrecta |
+| API Gateway | ❓ Sin confirmar | No se pudo probar conectividad |
 
-## Scripts Funcionales
+## 🔧 Scripts Funcionales
 
 Los siguientes scripts están listos y funcionando:
 
@@ -182,7 +182,7 @@ Los siguientes scripts están listos y funcionando:
 ./docs/testing/get-token-simple.sh
 ```
 
-## Token Actual
+## 📝 Token Actual
 
 El token está guardado y disponible en:
 ```bash
@@ -191,7 +191,7 @@ cat /tmp/plusmovil_access_token.txt
 
 Válido hasta: **~60 minutos desde generación** (28/10/2025 ~21:13)
 
-## Preguntas para el Equipo de PlusMovil
+## ✉️ Preguntas para el Equipo de PlusMovil
 
 1. **¿Cuál es la URL correcta del API Gateway?**
    - URL actual no resuelve DNS: `28cwop8rj6.execute-api.us-east-1.amazonaws.com`
@@ -204,14 +204,14 @@ Válido hasta: **~60 minutos desde generación** (28/10/2025 ~21:13)
 
 5. **¿El stage es correcto?** (`/dev` vs `/prod`)
 
-## Conclusión
+## 🎉 Conclusión
 
-**Autenticación: 100% Exitosa** 
+**Autenticación: 100% Exitosa** ✅
 - Las credenciales son válidas
 - AWS Cognito funciona perfectamente
 - Token JWT generado correctamente
 
-**API Testing: Bloqueado por DNS** 
+**API Testing: Bloqueado por DNS** ❌
 - Endpoint no resuelve
 - Necesitamos URL correcta del equipo
 

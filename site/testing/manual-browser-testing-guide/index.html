@@ -6,13 +6,13 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Documentación técnica y de usuario de DocuCenter - Sistema de facturación electrónica">
+        <meta name="description" content="Documentación técnica y de usuario de Docucenter">
       
       
         <meta name="author" content="aghabrego">
       
       
-        <link rel="canonical" href="https://aghabrego.github.io/docucenter-public/testing/manual-browser-testing-guide/">
+        <link rel="canonical" href="https://aghabrego.github.io/docucenter/testing/manual-browser-testing-guide/">
       
       
       
@@ -20,19 +20,16 @@
         
       
       
-      <link rel="icon" href="https://home.apconpanama.me/wp-content/uploads/2024/03/logo3.png">
+      <link rel="icon" href="../../docs/favicon.ico">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
     
     
       
-        <title>Guía de Testing Manual en Navegador - Campos Condicionales DGI - DocuCenter</title>
+        <title>Guía de Testing Manual en Navegador - Campos Condicionales DGI - Docucenter</title>
       
     
     
       <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
-      
-        
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -60,14 +57,7 @@
   </head>
   
   
-    
-    
-      
-    
-    
-    
-    
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="light-blue">
+    <body dir="ltr">
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -88,11 +78,13 @@
     
       
 
-<header class="md-header" data-md-component="header">
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Cabecera">
-    <a href="../.." title="DocuCenter" class="md-header__button md-logo" aria-label="DocuCenter" data-md-component="logo">
+    <a href="../.." title="Docucenter" class="md-header__button md-logo" aria-label="Docucenter" data-md-component="logo">
       
-  <img src="https://home.apconpanama.me/wp-content/uploads/2024/03/logo3.png" alt="logo">
+  <img src="../../docs/logo.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -103,7 +95,7 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            DocuCenter
+            Docucenter
           </span>
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
@@ -115,18 +107,6 @@
         </div>
       </div>
     </div>
-    
-      
-        <form class="md-header__option" data-md-component="palette">
-  
-    
-    
-    
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="light-blue"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
-    
-  
-</form>
-      
     
     
       <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
@@ -158,8 +138,6 @@
         </button>
       </nav>
       
-        <div class="md-search__suggest" data-md-component="search-suggest"></div>
-      
     </form>
     <div class="md-search__output">
       <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
@@ -177,13 +155,13 @@
     
     
       <div class="md-header__source">
-        <a href="https://github.com/aghabrego/docucenter-public" title="Ir al repositorio" class="md-source" data-md-component="source">
+        <a href="https://github.com/aghabrego/docucenter" title="Ir al repositorio" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
   </div>
   <div class="md-source__repository">
-    aghabrego/docucenter-public
+    aghabrego/docucenter
   </div>
 </a>
       </div>
@@ -196,154 +174,6 @@
       
       
         
-          
-            
-<nav class="md-tabs" aria-label="Pestañas" data-md-component="tabs">
-  <div class="md-grid">
-    <ul class="md-tabs__list">
-      
-        
-  
-  
-  
-  
-    <li class="md-tabs__item">
-      <a href="../.." class="md-tabs__link">
-        
-  
-  
-    
-  
-  Inicio
-
-      </a>
-    </li>
-  
-
-      
-        
-  
-  
-  
-  
-    
-    
-      <li class="md-tabs__item">
-        <a href="../../api/" class="md-tabs__link">
-          
-  
-  
-  APIs
-
-        </a>
-      </li>
-    
-  
-
-      
-        
-  
-  
-  
-  
-    
-    
-      <li class="md-tabs__item">
-        <a href="../../optimizations/" class="md-tabs__link">
-          
-  
-  
-  Optimizaciones
-
-        </a>
-      </li>
-    
-  
-
-      
-        
-  
-  
-  
-  
-    
-    
-      <li class="md-tabs__item">
-        <a href="../../technical/" class="md-tabs__link">
-          
-  
-  
-  Documentación Técnica
-
-        </a>
-      </li>
-    
-  
-
-      
-        
-  
-  
-  
-  
-    
-    
-      <li class="md-tabs__item">
-        <a href="../../validations/" class="md-tabs__link">
-          
-  
-  
-  Validaciones
-
-        </a>
-      </li>
-    
-  
-
-      
-        
-  
-  
-  
-  
-    
-    
-      <li class="md-tabs__item">
-        <a href="../" class="md-tabs__link">
-          
-  
-  
-  Testing
-
-        </a>
-      </li>
-    
-  
-
-      
-        
-  
-  
-  
-  
-    
-    
-      <li class="md-tabs__item">
-        <a href="../../integrations/" class="md-tabs__link">
-          
-  
-  
-  Integraciones
-
-        </a>
-      </li>
-    
-  
-
-      
-    </ul>
-  </div>
-</nav>
           
         
       
@@ -358,27 +188,25 @@
                     
 
 
-  
 
-
-<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navegación" data-md-level="0">
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../.." title="DocuCenter" class="md-nav__button md-logo" aria-label="DocuCenter" data-md-component="logo">
+    <a href="../.." title="Docucenter" class="md-nav__button md-logo" aria-label="Docucenter" data-md-component="logo">
       
-  <img src="https://home.apconpanama.me/wp-content/uploads/2024/03/logo3.png" alt="logo">
+  <img src="../../docs/logo.png" alt="logo">
 
     </a>
-    DocuCenter
+    Docucenter
   </label>
   
     <div class="md-nav__source">
-      <a href="https://github.com/aghabrego/docucenter-public" title="Ir al repositorio" class="md-source" data-md-component="source">
+      <a href="https://github.com/aghabrego/docucenter" title="Ir al repositorio" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
   </div>
   <div class="md-source__repository">
-    aghabrego/docucenter-public
+    aghabrego/docucenter
   </div>
 </a>
     </div>
@@ -422,19 +250,12 @@
     
     
     
-      
-      
-        
-      
-    
     
     <li class="md-nav__item md-nav__item--nested">
       
         
         
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
         
           
           <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
@@ -444,7 +265,7 @@
   <span class="md-ellipsis">
     
   
-    APIs
+    API Documentation
   
 
     
@@ -460,7 +281,54 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    APIs
+    API Documentation
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sage ACICloud
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Sage ACICloud
   
 
           </label>
@@ -473,14 +341,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../api/" class="md-nav__link">
+      <a href="../../api/sage-acicloud/invoices-api/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    APIs de DocuCenter
+    Facturación - Invoices
   
 
     
@@ -500,23 +368,248 @@
   
   
   
-    
-    
-    
-    
-      
-      
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/customers-api/" class="md-nav__link">
         
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Clientes - Customers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/vendors-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Proveedores - Vendors
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/purchases-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Compras - Purchases
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/products-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Productos - Products
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/jobs-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trabajos - Jobs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/accounting-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contabilidad General
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/payments-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pagos y Créditos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/inventory-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inventario - Inventory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
     
     
     <li class="md-nav__item md-nav__item--nested">
       
         
         
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
         
           
           <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
@@ -562,147 +655,7 @@
   <span class="md-ellipsis">
     
   
-    API Facturación Electrónica (FE) - DocuCenter
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../api/fe/acicloud-fe-api/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    API Facturación Electrónica - Integración ACICloud FE
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../api/fe/document-emission-api/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    API Facturación Electrónica - Emisión de Documentos
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../api/fe/shopify-api/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    API Facturación Electrónica - Integración Shopify
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../api/fe/lightspeed-api/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    API Facturación Electrónica - Integración Lightspeed
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../api/fe/maxgym-api/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    API Facturación Electrónica - Integración Maxgym
+    APIs de Facturación Electrónica
   
 
     
@@ -730,7 +683,35 @@
   <span class="md-ellipsis">
     
   
-    API Facturación Electrónica - Integración Meypar
+    Integración Meypar
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/shopify-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integración Shopify
   
 
     
@@ -758,7 +739,175 @@
   <span class="md-ellipsis">
     
   
-    API Facturación Electrónica - Integración Kart21
+    Integración Kart21
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/lightspeed-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integración Lightspeed
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/maxgym-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integración Maxgym
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/acicloud-fe-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ACICloud FE
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/import-xml-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Import XML
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/emit-json-object-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Emit JSON Object
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/download-base64-document-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Download Base64 Document
   
 
     
@@ -790,280 +939,15 @@
     
     
     
-      
-      
-        
-      
-    
     
     <li class="md-nav__item md-nav__item--nested">
       
         
         
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
         
           
           <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Sage ACICloud
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2_3">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Sage ACICloud
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../api/sage-acicloud/customers-api/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    API Sage ACICloud - Módulo Clientes
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../api/sage-acicloud/products-api/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    API Productos - Sage ACICloud
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../api/sage-acicloud/sales-orders-api/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    API Sage ACICloud - Módulo Órdenes de Venta
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../api/sage-acicloud/purchases-api/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    API Compras - Sage ACICloud
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../api/sage-acicloud/payments-api/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    API Pagos y Créditos - Sage ACICloud
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../api/sage-acicloud/inventory-api/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    API Inventario - Sage ACICloud
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../api/sage-acicloud/jobs-api/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    API Trabajos/Jobs - Sage ACICloud
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_4" >
-        
-          
-          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
             
   
   
@@ -1081,8 +965,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2_4">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -1106,7 +990,90 @@
   <span class="md-ellipsis">
     
   
-    API de Organizaciones
+    Gestión de Organizaciones
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ubicaciones Geográficas
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Ubicaciones Geográficas
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/locations/locations-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API de Ubicaciones
   
 
     
@@ -1145,19 +1112,12 @@
     
     
     
-      
-      
-        
-      
-    
     
     <li class="md-nav__item md-nav__item--nested">
       
         
         
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
         
           
           <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
@@ -1167,7 +1127,7 @@
   <span class="md-ellipsis">
     
   
-    Optimizaciones
+    Sistema de Testing
   
 
     
@@ -1183,7 +1143,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Optimizaciones
+    Sistema de Testing
   
 
           </label>
@@ -1196,96 +1156,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../optimizations/" class="md-nav__link">
+      <a href="../" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Optimizaciones - DocuCenter
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_2" >
-        
-          
-          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Performance
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_3_2">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Performance
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../optimizations/customer-supplier-optimizations/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Optimizaciones para el manejo de muchos clientes
+    Índice de Testing
   
 
     
@@ -1306,14 +1184,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../optimizations/mysql-optimization-circuit-breaker/" class="md-nav__link">
+      <a href="../../TESTING_SYSTEM_SUMMARY/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Optimización MySQL 8.0 y Circuit Breaker para DocuCenter
+    Resumen Ejecutivo
   
 
     
@@ -1322,14 +1200,6 @@
   
 
       </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
     </li>
   
 
@@ -1352,19 +1222,12 @@
     
     
     
-      
-      
-        
-      
-    
     
     <li class="md-nav__item md-nav__item--nested">
       
         
         
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
         
           
           <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
@@ -1403,96 +1266,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../technical/" class="md-nav__link">
+      <a href="../../technical/README.md" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Documentación Técnica - DocuCenter
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_2" >
-        
-          
-          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    QuickBooks
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4_2">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    QuickBooks
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../technical/quickbooks-webhook-organizationid-fix/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Fix: QuickBooks Webhook OrganizationId Duplicado
+    Soluciones
   
 
     
@@ -1513,660 +1294,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../technical/quickbooks-bills-job-graceful-validation/" class="md-nav__link">
+      <a href="../../technical/lightspeed_audit_improvement/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Fix: Validación Graceful de Tablas en CreateIntuitBillsJob
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../technical/quickbooks-fiscal-number-validation-system/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Sistema de Validación de Números Fiscales QuickBooks
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_3" >
-        
-          
-          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    MaxGym
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4_3">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    MaxGym
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../technical/maxgym-amount-calculation-fix/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Corrección de Cálculo de Montos en MaxGym API
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_4" >
-        
-          
-          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Document AI
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4_4">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Document AI
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../technical/document-ai-import-to-workbench/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Document AI - Importación a Workbench
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../technical/document-ai-import-implementation-summary/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Document AI - Implementación Import to Workbench
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_5" >
-        
-          
-          <label class="md-nav__link" for="__nav_4_5" id="__nav_4_5_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Alanube DOM
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_5_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4_5">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Alanube DOM
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../technical/alanube-dom-service-usage/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Guía de Uso del Servicio AlanubeDomService
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../technical/alanube-dom-export-invoices/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Facturas de Exportación Electrónica (46) - Alanube DOM
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../technical/ALANUBE_DOM_COMPLETE_INTEGRATION/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Integración Completa Alanube DOM - República Dominicana
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../technical/FISCAL_CREDIT_IMPLEMENTATION_SUMMARY/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Implementación Completa de Facturas de Crédito Fiscal (31) - Alanube DOM
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_6" >
-        
-          
-          <label class="md-nav__link" for="__nav_4_6" id="__nav_4_6_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Soluciones Técnicas
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_6_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4_6">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Soluciones Técnicas
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../technical/ezeeissued-solution-summary/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Solución Implementada - Campo EzeeIssued
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../technical/getsaleproperty-optimizations-summary/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Optimizaciones Completas - getSaleProperty() - Create.php
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../technical/ezeeissued-field-correction-summary/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Corrección de Campo EzeeIssued - Resumen Técnico
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_7" >
-        
-          
-          <label class="md-nav__link" for="__nav_4_7" id="__nav_4_7_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Pagos y Cálculos
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_7_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4_7">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Pagos y Cálculos
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../technical/payment-calculation-fix/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Análisis de Discrepancias en Cálculo de Pagos - Facturación Electrónica
+    Auditoría Lightspeed
   
 
     
@@ -2194,97 +1329,7 @@
   <span class="md-ellipsis">
     
   
-    Solución Final: Sincronización Completa de Pagos en Facturación Electrónica
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_8" >
-        
-          
-          <label class="md-nav__link" for="__nav_4_8" id="__nav_4_8_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    SQL Server
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_8_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4_8">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    SQL Server
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../technical/sql-server-complete-store-id-filtering/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Implementación Completa de Filtrado por Store ID en Jobs SQL Server
+    Sincronización de Pagos
   
 
     
@@ -2305,14 +1350,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../technical/sql-server-store-id-filtering/" class="md-nav__link">
+      <a href="../../technical/payment-calculation-fix/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Implementación de Filtrado por Store ID en STInvoiceJob
+    Corrección Cálculo Pagos
   
 
     
@@ -2332,14 +1377,6 @@
     </li>
   
 
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
     
       
       
@@ -2350,20 +1387,13 @@
     
     
     
-    
-      
-      
-        
-      
     
     
     <li class="md-nav__item md-nav__item--nested">
       
         
         
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
         
           
           <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
@@ -2409,7 +1439,7 @@
   <span class="md-ellipsis">
     
   
-    Validaciones - DocuCenter
+    Resumen
   
 
     
@@ -2429,60 +1459,6 @@
   
   
   
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5_2" >
-        
-          
-          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Documentos Fiscales
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_5_2">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Documentos Fiscales
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
     <li class="md-nav__item">
       <a href="../../validations/createSale-ruc-validation/" class="md-nav__link">
         
@@ -2491,7 +1467,7 @@
   <span class="md-ellipsis">
     
   
-    Validación de RUC en CreateSaleMaxgymRequest
+    Validación RUC CreateSale
   
 
     
@@ -2519,365 +1495,7 @@
   <span class="md-ellipsis">
     
   
-    Validación de RUC en MaxgymService
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
-        
-          
-          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Testing
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_6">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Testing
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Sistema de Testing DocuCenter
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6_2" >
-        
-          
-          <label class="md-nav__link" for="__nav_6_2" id="__nav_6_2_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Reportes de Error
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_2_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_6_2">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Reportes de Error
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../PLUSMOVIL-PRODUCTION-ERROR-REPORT/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Reporte Error PlusMóvil Producción
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
-        
-          
-          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Integraciones
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_7">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Integraciones
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../integrations/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Integraciones Disponibles
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7_2" >
-        
-          
-          <label class="md-nav__link" for="__nav_7_2" id="__nav_7_2_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    PlusMóvil
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_2_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_7_2">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    PlusMóvil
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../integrations/plusmovil-implementation-summary/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Resumen Implementación
+    Validación RUC Maxgym
   
 
     
@@ -2898,14 +1516,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../integrations/plusmovil-implementation-analysis/" class="md-nav__link">
+      <a href="../../validations/meypar-validations/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Análisis
+    Validaciones MEYPAR
   
 
     
@@ -2926,14 +1544,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../integrations/plusmovil-api-testing-results/" class="md-nav__link">
+      <a href="../../validations/validation_comparison/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Resultados Testing API
+    Comparación Validaciones
   
 
     
@@ -2942,70 +1560,6 @@
   
 
       </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../integrations/plusmovil-continuation-plan/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Plan Continuación
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../integrations/plusmovil-next-steps/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Próximos Pasos
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
     </li>
   
 
@@ -3048,7 +1602,7 @@
   <a href="#testing-manual-del-sistema-de-campos-condicionales" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Testing Manual del Sistema de Campos Condicionales
+        🌐 Testing Manual del Sistema de Campos Condicionales
       
     </span>
   </a>
@@ -3059,12 +1613,12 @@
   <a href="#pre-requisitos" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Pre-requisitos
+        📋 Pre-requisitos
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Pre-requisitos">
+    <nav class="md-nav" aria-label="📋 Pre-requisitos">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -3098,12 +1652,12 @@
   <a href="#plan-de-testing-por-tipo-de-documento" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Plan de Testing por Tipo de Documento
+        🎯 Plan de Testing por Tipo de Documento
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Plan de Testing por Tipo de Documento">
+    <nav class="md-nav" aria-label="🎯 Plan de Testing por Tipo de Documento">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -3133,7 +1687,7 @@
   <a href="#resultados-esperados" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Resultados Esperados:
+        ✅ Resultados Esperados:
       
     </span>
   </a>
@@ -3144,7 +1698,7 @@
   <a href="#verificaciones" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Verificaciones:
+        📝 Verificaciones:
       
     </span>
   </a>
@@ -3183,7 +1737,7 @@
   <a href="#resultados-esperados_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Resultados Esperados:
+        ✅ Resultados Esperados:
       
     </span>
   </a>
@@ -3194,7 +1748,7 @@
   <a href="#verificaciones_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Verificaciones:
+        📝 Verificaciones:
       
     </span>
   </a>
@@ -3233,7 +1787,7 @@
   <a href="#resultados-esperados_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Resultados Esperados:
+        ✅ Resultados Esperados:
       
     </span>
   </a>
@@ -3244,7 +1798,7 @@
   <a href="#verificaciones_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Verificaciones:
+        📝 Verificaciones:
       
     </span>
   </a>
@@ -3283,7 +1837,7 @@
   <a href="#resultados-esperados_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Resultados Esperados:
+        ✅ Resultados Esperados:
       
     </span>
   </a>
@@ -3294,7 +1848,7 @@
   <a href="#verificaciones_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Verificaciones:
+        📝 Verificaciones:
       
     </span>
   </a>
@@ -3333,7 +1887,7 @@
   <a href="#resultados-esperados_4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Resultados Esperados:
+        ✅ Resultados Esperados:
       
     </span>
   </a>
@@ -3344,7 +1898,7 @@
   <a href="#verificaciones_4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Verificaciones:
+        📝 Verificaciones:
       
     </span>
   </a>
@@ -3383,7 +1937,7 @@
   <a href="#resultados-esperados_5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Resultados Esperados:
+        ✅ Resultados Esperados:
       
     </span>
   </a>
@@ -3394,7 +1948,7 @@
   <a href="#verificaciones_5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Verificaciones:
+        📝 Verificaciones:
       
     </span>
   </a>
@@ -3415,12 +1969,12 @@
   <a href="#testing-de-reactividad-alpinejs" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Testing de Reactividad Alpine.js
+        🔄 Testing de Reactividad Alpine.js
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Testing de Reactividad Alpine.js">
+    <nav class="md-nav" aria-label="🔄 Testing de Reactividad Alpine.js">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -3450,7 +2004,7 @@
   <a href="#verificaciones_6" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Verificaciones:
+        ✅ Verificaciones:
       
     </span>
   </a>
@@ -3471,12 +2025,12 @@
   <a href="#testing-de-validaciones" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Testing de Validaciones
+        🧪 Testing de Validaciones
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Testing de Validaciones">
+    <nav class="md-nav" aria-label="🧪 Testing de Validaciones">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -3506,7 +2060,7 @@
   <a href="#verificaciones_7" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Verificaciones:
+        ✅ Verificaciones:
       
     </span>
   </a>
@@ -3527,12 +2081,12 @@
   <a href="#testing-de-responsividad" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Testing de Responsividad
+        📱 Testing de Responsividad
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Testing de Responsividad">
+    <nav class="md-nav" aria-label="📱 Testing de Responsividad">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -3562,7 +2116,7 @@
   <a href="#verificaciones_8" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Verificaciones:
+        ✅ Verificaciones:
       
     </span>
   </a>
@@ -3583,12 +2137,12 @@
   <a href="#testing-de-casos-extremos" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Testing de Casos Extremos
+        🚨 Testing de Casos Extremos
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Testing de Casos Extremos">
+    <nav class="md-nav" aria-label="🚨 Testing de Casos Extremos">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -3618,7 +2172,7 @@
   <a href="#verificaciones_9" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Verificaciones:
+        ✅ Verificaciones:
       
     </span>
   </a>
@@ -3639,12 +2193,12 @@
   <a href="#checklist-final" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Checklist Final
+        📊 Checklist Final
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Checklist Final">
+    <nav class="md-nav" aria-label="📊 Checklist Final">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -3689,7 +2243,7 @@
   <a href="#resultado-esperado-final" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Resultado Esperado Final
+        🎯 Resultado Esperado Final
       
     </span>
   </a>
@@ -3700,7 +2254,7 @@
   <a href="#soporte" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Soporte
+        📞 Soporte
       
     </span>
   </a>
@@ -3727,34 +2281,35 @@
   
 
 
-<h1 id="guia-de-testing-manual-en-navegador-campos-condicionales-dgi">Guía de Testing Manual en Navegador - Campos Condicionales DGI<a class="headerlink" href="#guia-de-testing-manual-en-navegador-campos-condicionales-dgi" title="Permanent link">&para;</a></h1>
-<h2 id="testing-manual-del-sistema-de-campos-condicionales">Testing Manual del Sistema de Campos Condicionales<a class="headerlink" href="#testing-manual-del-sistema-de-campos-condicionales" title="Permanent link">&para;</a></h2>
+<h1 id="guia-de-testing-manual-en-navegador-campos-condicionales-dgi">Guía de Testing Manual en Navegador - Campos Condicionales DGI</h1>
+<h2 id="testing-manual-del-sistema-de-campos-condicionales">🌐 Testing Manual del Sistema de Campos Condicionales</h2>
 <p><strong>Fecha</strong>: 23 de Septiembre, 2025<br />
 <strong>Versión</strong>: 98% DGI Compliance<br />
 <strong>Estado</strong>: Ready for Manual Testing</p>
 <hr />
-<h2 id="pre-requisitos">Pre-requisitos<a class="headerlink" href="#pre-requisitos" title="Permanent link">&para;</a></h2>
-<h3 id="antes-de-comenzar">Antes de Comenzar<a class="headerlink" href="#antes-de-comenzar" title="Permanent link">&para;</a></h3>
+<h2 id="pre-requisitos">📋 Pre-requisitos</h2>
+<h3 id="antes-de-comenzar">Antes de Comenzar</h3>
 <ol>
-<li><strong>Sistema funcionando</strong>: Servidor Laravel activo</li>
-<li><strong>Base de datos</strong>: Conexión establecida</li>
-<li><strong>Organización</strong>: PAC configurado (Alanube Panamá preferido)</li>
-<li><strong>Usuario</strong>: Sesión activa con permisos de facturación</li>
+<li>✅ <strong>Sistema funcionando</strong>: Servidor Laravel activo</li>
+<li>✅ <strong>Base de datos</strong>: Conexión establecida</li>
+<li>✅ <strong>Organización</strong>: PAC configurado (Alanube Panamá preferido)</li>
+<li>✅ <strong>Usuario</strong>: Sesión activa con permisos de facturación</li>
 </ol>
-<h3 id="acceso-al-sistema">Acceso al Sistema<a class="headerlink" href="#acceso-al-sistema" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>URL: http://localhost/admin/einvoice/create
-Ruta: Admin → Facturación Electrónica → Crear Factura
+<h3 id="acceso-al-sistema">Acceso al Sistema</h3>
+<div class="codehilite"><pre><span></span><code><span class="n">URL</span><span class="o">:</span><span class="w"> </span><span class="n">http</span><span class="o">://</span><span class="n">localhost</span><span class="sr">/admin/einvoice/</span><span class="n">create</span>
+<span class="n">Ruta</span><span class="o">:</span><span class="w"> </span><span class="n">Admin</span><span class="w"> </span><span class="err">→</span><span class="w"> </span><span class="n">Facturación</span><span class="w"> </span><span class="n">Electrónica</span><span class="w"> </span><span class="err">→</span><span class="w"> </span><span class="n">Crear</span><span class="w"> </span><span class="n">Factura</span>
 </code></pre></div>
+
 <hr />
-<h2 id="plan-de-testing-por-tipo-de-documento">Plan de Testing por Tipo de Documento<a class="headerlink" href="#plan-de-testing-por-tipo-de-documento" title="Permanent link">&para;</a></h2>
-<h3 id="test-1-tipo-01-factura-de-operacion-interna"><strong>Test 1: Tipo 01 - Factura de Operación Interna</strong><a class="headerlink" href="#test-1-tipo-01-factura-de-operacion-interna" title="Permanent link">&para;</a></h3>
-<h4 id="pasos-a-seguir">Pasos a Seguir:<a class="headerlink" href="#pasos-a-seguir" title="Permanent link">&para;</a></h4>
+<h2 id="plan-de-testing-por-tipo-de-documento">🎯 Plan de Testing por Tipo de Documento</h2>
+<h3 id="test-1-tipo-01-factura-de-operacion-interna"><strong>Test 1: Tipo 01 - Factura de Operación Interna</strong></h3>
+<h4 id="pasos-a-seguir">Pasos a Seguir:</h4>
 <ol>
 <li><strong>Paso 1</strong>: Seleccionar "Factura de operación interna" (01)</li>
 <li><strong>Paso 2</strong>: Completar campos básicos (sucursal, fecha, etc.)</li>
 <li><strong>Paso 3</strong>: Verificar campos condicionales</li>
 </ol>
-<h4 id="resultados-esperados">Resultados Esperados:<a class="headerlink" href="#resultados-esperados" title="Permanent link">&para;</a></h4>
+<h4 id="resultados-esperados">✅ Resultados Esperados:</h4>
 <ul>
 <li><strong>Card visible</strong>: "Información Adicional Factura Interna"</li>
 <li><strong>Campos mostrados</strong>:</li>
@@ -3764,23 +2319,23 @@ Ruta: Admin → Facturación Electrónica → Crear Factura
 <li><strong>Icono</strong>: fa-file-invoice</li>
 <li><strong>Alert</strong>: Información sobre campos opcionales</li>
 </ul>
-<h4 id="verificaciones">Verificaciones:<a class="headerlink" href="#verificaciones" title="Permanent link">&para;</a></h4>
-<ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Card se muestra al seleccionar tipo 01</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Campos son opcionales (sin asterisco rojo)</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Placeholder correcto en campos</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Textarea funciona correctamente</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Card se oculta al cambiar a otro tipo</li>
+<h4 id="verificaciones">📝 Verificaciones:</h4>
+<ul>
+<li>[ ] Card se muestra al seleccionar tipo 01</li>
+<li>[ ] Campos son opcionales (sin asterisco rojo)</li>
+<li>[ ] Placeholder correcto en campos</li>
+<li>[ ] Textarea funciona correctamente</li>
+<li>[ ] Card se oculta al cambiar a otro tipo</li>
 </ul>
 <hr />
-<h3 id="test-2-tipos-020308-exportacionimportacionzona-franca"><strong>Test 2: Tipos 02,03,08 - Exportación/Importación/Zona Franca</strong><a class="headerlink" href="#test-2-tipos-020308-exportacionimportacionzona-franca" title="Permanent link">&para;</a></h3>
-<h4 id="pasos-a-seguir_1">Pasos a Seguir:<a class="headerlink" href="#pasos-a-seguir_1" title="Permanent link">&para;</a></h4>
+<h3 id="test-2-tipos-020308-exportacionimportacionzona-franca"><strong>Test 2: Tipos 02,03,08 - Exportación/Importación/Zona Franca</strong></h3>
+<h4 id="pasos-a-seguir_1">Pasos a Seguir:</h4>
 <ol>
 <li><strong>Paso 1</strong>: Seleccionar "Factura de importación" (02), "Factura de exportación" (03), o "Factura de Zona Franca" (08)</li>
 <li><strong>Paso 2</strong>: Completar campos básicos</li>
 <li><strong>Paso 3</strong>: Verificar campos condicionales</li>
 </ol>
-<h4 id="resultados-esperados_1">Resultados Esperados:<a class="headerlink" href="#resultados-esperados_1" title="Permanent link">&para;</a></h4>
+<h4 id="resultados-esperados_1">✅ Resultados Esperados:</h4>
 <ul>
 <li><strong>Card visible</strong>: "Campos de Exportación e Importación"</li>
 <li><strong>Campos mostrados</strong>:</li>
@@ -3798,24 +2353,24 @@ Ruta: Admin → Facturación Electrónica → Crear Factura
 <li><strong>Color del card</strong>: Verde (bg-success)</li>
 <li><strong>Icono</strong>: fa-ship</li>
 </ul>
-<h4 id="verificaciones_1">Verificaciones:<a class="headerlink" href="#verificaciones_1" title="Permanent link">&para;</a></h4>
-<ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Card se muestra para tipos 02, 03, 08</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> INCOTERMS dropdown funciona</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Campos condicionales aparecen según moneda seleccionada</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> País destino excluye "PA" (Panamá)</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Campos numéricos aceptan decimales</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Validaciones de campos obligatorios funcionan</li>
+<h4 id="verificaciones_1">📝 Verificaciones:</h4>
+<ul>
+<li>[ ] Card se muestra para tipos 02, 03, 08</li>
+<li>[ ] INCOTERMS dropdown funciona</li>
+<li>[ ] Campos condicionales aparecen según moneda seleccionada</li>
+<li>[ ] País destino excluye "PA" (Panamá)</li>
+<li>[ ] Campos numéricos aceptan decimales</li>
+<li>[ ] Validaciones de campos obligatorios funcionan</li>
 </ul>
 <hr />
-<h3 id="test-3-tipos-0405-notas-de-creditodebito"><strong>Test 3: Tipos 04,05 - Notas de Crédito/Débito</strong><a class="headerlink" href="#test-3-tipos-0405-notas-de-creditodebito" title="Permanent link">&para;</a></h3>
-<h4 id="pasos-a-seguir_2">Pasos a Seguir:<a class="headerlink" href="#pasos-a-seguir_2" title="Permanent link">&para;</a></h4>
+<h3 id="test-3-tipos-0405-notas-de-creditodebito"><strong>Test 3: Tipos 04,05 - Notas de Crédito/Débito</strong></h3>
+<h4 id="pasos-a-seguir_2">Pasos a Seguir:</h4>
 <ol>
 <li><strong>Paso 1</strong>: Seleccionar "Nota de Crédito referente a una o varias FE" (04) o "Nota de Débito referente a una o varias FE" (05)</li>
 <li><strong>Paso 2</strong>: Completar campos básicos</li>
 <li><strong>Paso 3</strong>: Verificar campos condicionales</li>
 </ol>
-<h4 id="resultados-esperados_2">Resultados Esperados:<a class="headerlink" href="#resultados-esperados_2" title="Permanent link">&para;</a></h4>
+<h4 id="resultados-esperados_2">✅ Resultados Esperados:</h4>
 <ul>
 <li><strong>Card visible</strong>: "Campos de Referencia (Notas de Crédito/Débito)"</li>
 <li><strong>Campos mostrados</strong>:</li>
@@ -3827,24 +2382,24 @@ Ruta: Admin → Facturación Electrónica → Crear Factura
 <li><strong>Color del card</strong>: Amarillo (bg-warning)</li>
 <li><strong>Icono</strong>: fa-link</li>
 </ul>
-<h4 id="verificaciones_2">Verificaciones:<a class="headerlink" href="#verificaciones_2" title="Permanent link">&para;</a></h4>
-<ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Card se muestra para tipos 04, 05</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Campo CUFE acepta exactamente 96 caracteres</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Fecha no permite fechas futuras</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Fecha no permite fechas &gt; 180 días atrás</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Todos los campos obligatorios tienen asterisco rojo</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Campo B602 es opcional</li>
+<h4 id="verificaciones_2">📝 Verificaciones:</h4>
+<ul>
+<li>[ ] Card se muestra para tipos 04, 05</li>
+<li>[ ] Campo CUFE acepta exactamente 96 caracteres</li>
+<li>[ ] Fecha no permite fechas futuras</li>
+<li>[ ] Fecha no permite fechas &gt; 180 días atrás</li>
+<li>[ ] Todos los campos obligatorios tienen asterisco rojo</li>
+<li>[ ] Campo B602 es opcional</li>
 </ul>
 <hr />
-<h3 id="test-4-tipos-0607-notas-genericas"><strong>Test 4: Tipos 06,07 - Notas Genéricas</strong><a class="headerlink" href="#test-4-tipos-0607-notas-genericas" title="Permanent link">&para;</a></h3>
-<h4 id="pasos-a-seguir_3">Pasos a Seguir:<a class="headerlink" href="#pasos-a-seguir_3" title="Permanent link">&para;</a></h4>
+<h3 id="test-4-tipos-0607-notas-genericas"><strong>Test 4: Tipos 06,07 - Notas Genéricas</strong></h3>
+<h4 id="pasos-a-seguir_3">Pasos a Seguir:</h4>
 <ol>
 <li><strong>Paso 1</strong>: Seleccionar "Nota de Crédito genérica" (06) o "Nota de Débito genérica" (07)</li>
 <li><strong>Paso 2</strong>: Completar campos básicos</li>
 <li><strong>Paso 3</strong>: Verificar campos condicionales</li>
 </ol>
-<h4 id="resultados-esperados_3">Resultados Esperados:<a class="headerlink" href="#resultados-esperados_3" title="Permanent link">&para;</a></h4>
+<h4 id="resultados-esperados_3">✅ Resultados Esperados:</h4>
 <ul>
 <li><strong>Card visible</strong>: "Campos para Notas Genéricas"</li>
 <li><strong>Campos mostrados</strong>:</li>
@@ -3854,23 +2409,23 @@ Ruta: Admin → Facturación Electrónica → Crear Factura
 <li><strong>Icono</strong>: fa-file-alt</li>
 <li><strong>Alert</strong>: Información sobre notas genéricas</li>
 </ul>
-<h4 id="verificaciones_3">Verificaciones:<a class="headerlink" href="#verificaciones_3" title="Permanent link">&para;</a></h4>
-<ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Card se muestra para tipos 06, 07</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Textarea de concepto funciona correctamente</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Campo período tiene placeholder adecuado</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Alert informativo visible</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Ambos campos son opcionales</li>
+<h4 id="verificaciones_3">📝 Verificaciones:</h4>
+<ul>
+<li>[ ] Card se muestra para tipos 06, 07</li>
+<li>[ ] Textarea de concepto funciona correctamente</li>
+<li>[ ] Campo período tiene placeholder adecuado</li>
+<li>[ ] Alert informativo visible</li>
+<li>[ ] Ambos campos son opcionales</li>
 </ul>
 <hr />
-<h3 id="test-5-tipo-09-reembolso"><strong>Test 5: Tipo 09 - Reembolso</strong><a class="headerlink" href="#test-5-tipo-09-reembolso" title="Permanent link">&para;</a></h3>
-<h4 id="pasos-a-seguir_4">Pasos a Seguir:<a class="headerlink" href="#pasos-a-seguir_4" title="Permanent link">&para;</a></h4>
+<h3 id="test-5-tipo-09-reembolso"><strong>Test 5: Tipo 09 - Reembolso</strong></h3>
+<h4 id="pasos-a-seguir_4">Pasos a Seguir:</h4>
 <ol>
 <li><strong>Paso 1</strong>: Seleccionar "Reembolso" (09)</li>
 <li><strong>Paso 2</strong>: Completar campos básicos</li>
 <li><strong>Paso 3</strong>: Verificar campos condicionales</li>
 </ol>
-<h4 id="resultados-esperados_4">Resultados Esperados:<a class="headerlink" href="#resultados-esperados_4" title="Permanent link">&para;</a></h4>
+<h4 id="resultados-esperados_4">✅ Resultados Esperados:</h4>
 <ul>
 <li><strong>Card visible</strong>: "Campos de Reembolso"</li>
 <li><strong>Campos mostrados</strong>:</li>
@@ -3881,136 +2436,136 @@ Ruta: Admin → Facturación Electrónica → Crear Factura
 <li><strong>Icono</strong>: fa-undo</li>
 <li><strong>Alert</strong>: Advertencia sobre información específica</li>
 </ul>
-<h4 id="verificaciones_4">Verificaciones:<a class="headerlink" href="#verificaciones_4" title="Permanent link">&para;</a></h4>
-<ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Card se muestra para tipo 09</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Todos los campos son obligatorios</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Date picker funciona correctamente</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Textarea de razón funciona</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Alert de advertencia visible</li>
+<h4 id="verificaciones_4">📝 Verificaciones:</h4>
+<ul>
+<li>[ ] Card se muestra para tipo 09</li>
+<li>[ ] Todos los campos son obligatorios</li>
+<li>[ ] Date picker funciona correctamente</li>
+<li>[ ] Textarea de razón funciona</li>
+<li>[ ] Alert de advertencia visible</li>
 </ul>
 <hr />
-<h3 id="test-6-otros-tipos-sin-campos-adicionales"><strong>Test 6: Otros Tipos - Sin Campos Adicionales</strong><a class="headerlink" href="#test-6-otros-tipos-sin-campos-adicionales" title="Permanent link">&para;</a></h3>
-<h4 id="pasos-a-seguir_5">Pasos a Seguir:<a class="headerlink" href="#pasos-a-seguir_5" title="Permanent link">&para;</a></h4>
+<h3 id="test-6-otros-tipos-sin-campos-adicionales"><strong>Test 6: Otros Tipos - Sin Campos Adicionales</strong></h3>
+<h4 id="pasos-a-seguir_5">Pasos a Seguir:</h4>
 <ol>
 <li><strong>Paso 1</strong>: Seleccionar cualquier tipo no implementado específicamente</li>
 <li><strong>Paso 2</strong>: Completar campos básicos</li>
 <li><strong>Paso 3</strong>: Verificar mensaje por defecto</li>
 </ol>
-<h4 id="resultados-esperados_5">Resultados Esperados:<a class="headerlink" href="#resultados-esperados_5" title="Permanent link">&para;</a></h4>
+<h4 id="resultados-esperados_5">✅ Resultados Esperados:</h4>
 <ul>
 <li><strong>Card visible</strong>: "Sin Campos Adicionales"</li>
 <li><strong>Mensaje</strong>: "El tipo de documento seleccionado no requiere campos condicionales adicionales"</li>
 <li><strong>Color del card</strong>: Gris claro (bg-light)</li>
 <li><strong>Icono</strong>: fa-check-circle text-success</li>
 </ul>
-<h4 id="verificaciones_5">Verificaciones:<a class="headerlink" href="#verificaciones_5" title="Permanent link">&para;</a></h4>
-<ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Card por defecto se muestra</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Mensaje es claro y profesional</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Icono de check verde visible</li>
+<h4 id="verificaciones_5">📝 Verificaciones:</h4>
+<ul>
+<li>[ ] Card por defecto se muestra</li>
+<li>[ ] Mensaje es claro y profesional</li>
+<li>[ ] Icono de check verde visible</li>
 </ul>
 <hr />
-<h2 id="testing-de-reactividad-alpinejs">Testing de Reactividad Alpine.js<a class="headerlink" href="#testing-de-reactividad-alpinejs" title="Permanent link">&para;</a></h2>
-<h3 id="test-de-cambio-dinamico"><strong>Test de Cambio Dinámico</strong><a class="headerlink" href="#test-de-cambio-dinamico" title="Permanent link">&para;</a></h3>
-<h4 id="procedimiento">Procedimiento:<a class="headerlink" href="#procedimiento" title="Permanent link">&para;</a></h4>
+<h2 id="testing-de-reactividad-alpinejs">🔄 Testing de Reactividad Alpine.js</h2>
+<h3 id="test-de-cambio-dinamico"><strong>Test de Cambio Dinámico</strong></h3>
+<h4 id="procedimiento">Procedimiento:</h4>
 <ol>
 <li>Iniciar con tipo 01</li>
 <li>Cambiar secuencialmente a cada tipo (02, 03, 04, 05, 06, 07, 08, 09)</li>
 <li>Observar transiciones</li>
 </ol>
-<h4 id="verificaciones_6">Verificaciones:<a class="headerlink" href="#verificaciones_6" title="Permanent link">&para;</a></h4>
-<ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Cards aparecen/desaparecen instantáneamente</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> No hay flickers o parpadeos</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Solo un card visible a la vez</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Transiciones suaves</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> No errores de JavaScript en consola</li>
+<h4 id="verificaciones_6">✅ Verificaciones:</h4>
+<ul>
+<li>[ ] Cards aparecen/desaparecen instantáneamente</li>
+<li>[ ] No hay flickers o parpadeos</li>
+<li>[ ] Solo un card visible a la vez</li>
+<li>[ ] Transiciones suaves</li>
+<li>[ ] No errores de JavaScript en consola</li>
 </ul>
 <hr />
-<h2 id="testing-de-validaciones">Testing de Validaciones<a class="headerlink" href="#testing-de-validaciones" title="Permanent link">&para;</a></h2>
-<h3 id="test-de-campos-obligatorios"><strong>Test de Campos Obligatorios</strong><a class="headerlink" href="#test-de-campos-obligatorios" title="Permanent link">&para;</a></h3>
-<h4 id="para-tipos-con-campos-obligatorios-03-04-05-09">Para Tipos con Campos Obligatorios (03, 04, 05, 09):<a class="headerlink" href="#para-tipos-con-campos-obligatorios-03-04-05-09" title="Permanent link">&para;</a></h4>
+<h2 id="testing-de-validaciones">🧪 Testing de Validaciones</h2>
+<h3 id="test-de-campos-obligatorios"><strong>Test de Campos Obligatorios</strong></h3>
+<h4 id="para-tipos-con-campos-obligatorios-03-04-05-09">Para Tipos con Campos Obligatorios (03, 04, 05, 09):</h4>
 <ol>
 <li>Completar todos los pasos hasta el final</li>
 <li>Intentar enviar sin completar campos obligatorios</li>
 <li>Verificar mensajes de error</li>
 </ol>
-<h4 id="verificaciones_7">Verificaciones:<a class="headerlink" href="#verificaciones_7" title="Permanent link">&para;</a></h4>
-<ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Campos obligatorios marcados con asterisco rojo</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Validación client-side funciona</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Mensajes de error claros</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Focus automático en campos con error</li>
+<h4 id="verificaciones_7">✅ Verificaciones:</h4>
+<ul>
+<li>[ ] Campos obligatorios marcados con asterisco rojo</li>
+<li>[ ] Validación client-side funciona</li>
+<li>[ ] Mensajes de error claros</li>
+<li>[ ] Focus automático en campos con error</li>
 </ul>
 <hr />
-<h2 id="testing-de-responsividad">Testing de Responsividad<a class="headerlink" href="#testing-de-responsividad" title="Permanent link">&para;</a></h2>
-<h3 id="test-multi-dispositivo"><strong>Test Multi-dispositivo</strong><a class="headerlink" href="#test-multi-dispositivo" title="Permanent link">&para;</a></h3>
-<h4 id="procedimientos">Procedimientos:<a class="headerlink" href="#procedimientos" title="Permanent link">&para;</a></h4>
+<h2 id="testing-de-responsividad">📱 Testing de Responsividad</h2>
+<h3 id="test-multi-dispositivo"><strong>Test Multi-dispositivo</strong></h3>
+<h4 id="procedimientos">Procedimientos:</h4>
 <ol>
 <li><strong>Desktop</strong>: Resolución 1920x1080</li>
 <li><strong>Tablet</strong>: Resolución 768x1024</li>
 <li><strong>Mobile</strong>: Resolución 375x667</li>
 </ol>
-<h4 id="verificaciones_8">Verificaciones:<a class="headerlink" href="#verificaciones_8" title="Permanent link">&para;</a></h4>
-<ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Cards se adaptan correctamente</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Campos mantienen usabilidad</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Grid responsive funciona (col-md-*)</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Texto legible en todos los tamaños</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Botones accesibles</li>
+<h4 id="verificaciones_8">✅ Verificaciones:</h4>
+<ul>
+<li>[ ] Cards se adaptan correctamente</li>
+<li>[ ] Campos mantienen usabilidad</li>
+<li>[ ] Grid responsive funciona (col-md-*)</li>
+<li>[ ] Texto legible en todos los tamaños</li>
+<li>[ ] Botones accesibles</li>
 </ul>
 <hr />
-<h2 id="testing-de-casos-extremos">Testing de Casos Extremos<a class="headerlink" href="#testing-de-casos-extremos" title="Permanent link">&para;</a></h2>
-<h3 id="test-de-datos-limite"><strong>Test de Datos Límite</strong><a class="headerlink" href="#test-de-datos-limite" title="Permanent link">&para;</a></h3>
-<h4 id="casos-a-probar">Casos a Probar:<a class="headerlink" href="#casos-a-probar" title="Permanent link">&para;</a></h4>
+<h2 id="testing-de-casos-extremos">🚨 Testing de Casos Extremos</h2>
+<h3 id="test-de-datos-limite"><strong>Test de Datos Límite</strong></h3>
+<h4 id="casos-a-probar">Casos a Probar:</h4>
 <ol>
 <li><strong>CUFE</strong>: Exactamente 96 caracteres</li>
 <li><strong>Fechas</strong>: Límite de 180 días</li>
 <li><strong>Campos numéricos</strong>: Decimales y números grandes</li>
 <li><strong>Textareas</strong>: Texto muy largo</li>
 </ol>
-<h4 id="verificaciones_9">Verificaciones:<a class="headerlink" href="#verificaciones_9" title="Permanent link">&para;</a></h4>
-<ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Validaciones de longitud funcionan</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Campos numéricos aceptan formato correcto</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Fechas respetan límites</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> No hay desbordamiento visual</li>
+<h4 id="verificaciones_9">✅ Verificaciones:</h4>
+<ul>
+<li>[ ] Validaciones de longitud funcionan</li>
+<li>[ ] Campos numéricos aceptan formato correcto</li>
+<li>[ ] Fechas respetan límites</li>
+<li>[ ] No hay desbordamiento visual</li>
 </ul>
 <hr />
-<h2 id="checklist-final">Checklist Final<a class="headerlink" href="#checklist-final" title="Permanent link">&para;</a></h2>
-<h3 id="funcionalidad-general"><strong>Funcionalidad General</strong><a class="headerlink" href="#funcionalidad-general" title="Permanent link">&para;</a></h3>
-<ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Paso 3 "Conditional Fields" ya no aparece vacío</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Todos los 9 tipos JSch09 tienen campos específicos</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Lógica condicional Alpine.js funciona</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Validaciones Livewire operativas</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> UI profesional y consistente</li>
+<h2 id="checklist-final">📊 Checklist Final</h2>
+<h3 id="funcionalidad-general"><strong>Funcionalidad General</strong></h3>
+<ul>
+<li>[ ] Paso 3 "Conditional Fields" ya no aparece vacío</li>
+<li>[ ] Todos los 9 tipos JSch09 tienen campos específicos</li>
+<li>[ ] Lógica condicional Alpine.js funciona</li>
+<li>[ ] Validaciones Livewire operativas</li>
+<li>[ ] UI profesional y consistente</li>
 </ul>
-<h3 id="experiencia-de-usuario"><strong>Experiencia de Usuario</strong><a class="headerlink" href="#experiencia-de-usuario" title="Permanent link">&para;</a></h3>
-<ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Navegación intuitiva entre pasos</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Campos claramente etiquetados</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Ayuda contextual disponible</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Colores distintivos por tipo</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Iconos apropiados</li>
+<h3 id="experiencia-de-usuario"><strong>Experiencia de Usuario</strong></h3>
+<ul>
+<li>[ ] Navegación intuitiva entre pasos</li>
+<li>[ ] Campos claramente etiquetados</li>
+<li>[ ] Ayuda contextual disponible</li>
+<li>[ ] Colores distintivos por tipo</li>
+<li>[ ] Iconos apropiados</li>
 </ul>
-<h3 id="compliance-dgi"><strong>Compliance DGI</strong><a class="headerlink" href="#compliance-dgi" title="Permanent link">&para;</a></h3>
-<ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Campos B507-B511 para exportación</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Campos B602/B503 para referencias</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Validaciones críticas activas</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Formato de datos correcto</li>
+<h3 id="compliance-dgi"><strong>Compliance DGI</strong></h3>
+<ul>
+<li>[ ] Campos B507-B511 para exportación</li>
+<li>[ ] Campos B602/B503 para referencias</li>
+<li>[ ] Validaciones críticas activas</li>
+<li>[ ] Formato de datos correcto</li>
 </ul>
 <hr />
-<h2 id="resultado-esperado-final">Resultado Esperado Final<a class="headerlink" href="#resultado-esperado-final" title="Permanent link">&para;</a></h2>
+<h2 id="resultado-esperado-final">🎯 Resultado Esperado Final</h2>
 <p>Al completar este testing manual, deberías confirmar:</p>
-<p><strong>Sistema 100% Funcional</strong><br />
-<strong>98% DGI Compliance Verificado</strong><br />
-<strong>Ready for PAC Certification</strong><br />
-<strong>Production Ready</strong></p>
+<p>✅ <strong>Sistema 100% Funcional</strong><br />
+✅ <strong>98% DGI Compliance Verificado</strong><br />
+✅ <strong>Ready for PAC Certification</strong><br />
+✅ <strong>Production Ready</strong></p>
 <hr />
-<h2 id="soporte">Soporte<a class="headerlink" href="#soporte" title="Permanent link">&para;</a></h2>
+<h2 id="soporte">📞 Soporte</h2>
 <p>Si encuentras algún problema durante el testing:</p>
 <ol>
 <li><strong>Verificar consola del navegador</strong> para errores JavaScript</li>
@@ -4019,10 +2574,10 @@ Ruta: Admin → Facturación Electrónica → Crear Factura
 <li><strong>Verificar configuración PAC</strong> si hay errores específicos</li>
 </ol>
 <hr />
-<p><strong>Fecha de Testing</strong>: ___________<br />
-<strong>Testeado por</strong>: ___________<br />
-<strong>Navegador</strong>: ___________<br />
-<strong>Resultado</strong>: APROBADO / REQUIERE CORRECCIONES</p>
+<p><strong>Fecha de Testing</strong>: <strong><em>_</em></strong><strong><em>_<br />
+<strong>Testeado por</strong>: </em></strong><strong><em>_</em></strong>_<br />
+<strong>Navegador</strong>: <strong><em>_</em></strong>____<br />
+<strong>Resultado</strong>: ✅ APROBADO / ❌ REQUIERE CORRECCIONES</p>
 
 
 
@@ -4042,12 +2597,6 @@ Ruta: Admin → Facturación Electrónica → Crear Factura
           
 <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
         </div>
-        
-          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
-  Volver al principio
-</button>
         
       </main>
       
@@ -4094,7 +2643,7 @@ Ruta: Admin → Facturación Electrónica → Crear Factura
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.highlight", "search.suggest"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
     
     
       <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>

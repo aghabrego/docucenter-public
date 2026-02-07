@@ -14,7 +14,7 @@ Análisis completo del archivo `laravel.log` de producción del 14-16 de septiem
 
 ## Problemas Críticos Identificados
 
-### 1. Errores de Integración con Lightspeed (Prioridad Alta)
+### 1. 🔴 Errores de Integración con Lightspeed (Prioridad Alta)
 **Frecuencia**: 3,272 errores relacionados con tokens de acceso
 **Patrón**: Error recurrente cada minuto
 
@@ -33,7 +33,7 @@ Error al refrescar el token: Client error: POST https://cloud.lightspeedapp.com/
 - Implementar notificación automática de tokens vencidos
 - Configurar rate limiting inteligente para APIs externas
 
-### 2. Problemas con QuickBooks Integration (Prioridad Alta)
+### 2. 🔴 Problemas con QuickBooks Integration (Prioridad Alta)
 **Frecuencia**: 2,798 errores
 **Patrón**: Jobs `CreateSaleQuickBooks` exceden límite de intentos
 
@@ -53,7 +53,7 @@ final_error: "Se excede la cantidad de intentos permitidos"
 - Añadir validación de estado de conexión antes de procesar
 - Crear sistema de cola separada para QuickBooks con prioridad
 
-### 3. Exceso de Conexiones IMAP (Prioridad Media)
+### 3. 🟡 Exceso de Conexiones IMAP (Prioridad Media)
 **Frecuencia**: 191 errores
 **Patrón**: `Maximum number of connections from user+IP exceeded (mail_max_userip_connections=10)`
 
@@ -67,7 +67,7 @@ final_error: "Se excede la cantidad de intentos permitidos"
 - Implementar cache para configuraciones de email
 - Configurar timeout más corto para conexiones inactivas
 
-### 4. Validación de RUC Inválida (Prioridad Media)
+### 4. 🟡 Validación de RUC Inválida (Prioridad Media)
 **Frecuencia**: Múltiples errores en MaxGym integration
 **Patrón**: `El campo numeroRUC es inválido`
 
@@ -78,7 +78,7 @@ final_error: "Se excede la cantidad de intentos permitidos"
 - Crear mapping automático de tipos de documento
 - Añadir transformación de datos antes de validación fiscal
 
-### 5. Duplicación de CUFE (Prioridad Media)
+### 5. 🟡 Duplicación de CUFE (Prioridad Media)
 **Frecuencia**: Múltiples errores críticos
 **Patrón**: `Factura ya tiene CUFE en InvoiceNote`
 

@@ -6,13 +6,13 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Documentación técnica y de usuario de DocuCenter - Sistema de facturación electrónica">
+        <meta name="description" content="Documentación técnica y de usuario de Docucenter">
       
       
         <meta name="author" content="aghabrego">
       
       
-        <link rel="canonical" href="https://aghabrego.github.io/docucenter-public/technical/digifact-panama-pac-implementation-guide/">
+        <link rel="canonical" href="https://aghabrego.github.io/docucenter/technical/digifact-panama-pac-implementation-guide/">
       
       
       
@@ -20,19 +20,16 @@
         
       
       
-      <link rel="icon" href="https://home.apconpanama.me/wp-content/uploads/2024/03/logo3.png">
+      <link rel="icon" href="../../docs/favicon.ico">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
     
     
       
-        <title>Guía de Implementación PAC Digifact Panamá - DocuCenter</title>
+        <title>Guía de Implementación PAC Digifact Panamá - Docucenter</title>
       
     
     
       <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
-      
-        
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -60,14 +57,7 @@
   </head>
   
   
-    
-    
-      
-    
-    
-    
-    
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="light-blue">
+    <body dir="ltr">
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -88,11 +78,13 @@
     
       
 
-<header class="md-header" data-md-component="header">
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Cabecera">
-    <a href="../.." title="DocuCenter" class="md-header__button md-logo" aria-label="DocuCenter" data-md-component="logo">
+    <a href="../.." title="Docucenter" class="md-header__button md-logo" aria-label="Docucenter" data-md-component="logo">
       
-  <img src="https://home.apconpanama.me/wp-content/uploads/2024/03/logo3.png" alt="logo">
+  <img src="../../docs/logo.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -103,7 +95,7 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            DocuCenter
+            Docucenter
           </span>
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
@@ -115,18 +107,6 @@
         </div>
       </div>
     </div>
-    
-      
-        <form class="md-header__option" data-md-component="palette">
-  
-    
-    
-    
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="light-blue"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
-    
-  
-</form>
-      
     
     
       <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
@@ -158,8 +138,6 @@
         </button>
       </nav>
       
-        <div class="md-search__suggest" data-md-component="search-suggest"></div>
-      
     </form>
     <div class="md-search__output">
       <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
@@ -177,13 +155,13 @@
     
     
       <div class="md-header__source">
-        <a href="https://github.com/aghabrego/docucenter-public" title="Ir al repositorio" class="md-source" data-md-component="source">
+        <a href="https://github.com/aghabrego/docucenter" title="Ir al repositorio" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
   </div>
   <div class="md-source__repository">
-    aghabrego/docucenter-public
+    aghabrego/docucenter
   </div>
 </a>
       </div>
@@ -196,154 +174,6 @@
       
       
         
-          
-            
-<nav class="md-tabs" aria-label="Pestañas" data-md-component="tabs">
-  <div class="md-grid">
-    <ul class="md-tabs__list">
-      
-        
-  
-  
-  
-  
-    <li class="md-tabs__item">
-      <a href="../.." class="md-tabs__link">
-        
-  
-  
-    
-  
-  Inicio
-
-      </a>
-    </li>
-  
-
-      
-        
-  
-  
-  
-  
-    
-    
-      <li class="md-tabs__item">
-        <a href="../../api/" class="md-tabs__link">
-          
-  
-  
-  APIs
-
-        </a>
-      </li>
-    
-  
-
-      
-        
-  
-  
-  
-  
-    
-    
-      <li class="md-tabs__item">
-        <a href="../../optimizations/" class="md-tabs__link">
-          
-  
-  
-  Optimizaciones
-
-        </a>
-      </li>
-    
-  
-
-      
-        
-  
-  
-  
-  
-    
-    
-      <li class="md-tabs__item">
-        <a href="../" class="md-tabs__link">
-          
-  
-  
-  Documentación Técnica
-
-        </a>
-      </li>
-    
-  
-
-      
-        
-  
-  
-  
-  
-    
-    
-      <li class="md-tabs__item">
-        <a href="../../validations/" class="md-tabs__link">
-          
-  
-  
-  Validaciones
-
-        </a>
-      </li>
-    
-  
-
-      
-        
-  
-  
-  
-  
-    
-    
-      <li class="md-tabs__item">
-        <a href="../../testing/" class="md-tabs__link">
-          
-  
-  
-  Testing
-
-        </a>
-      </li>
-    
-  
-
-      
-        
-  
-  
-  
-  
-    
-    
-      <li class="md-tabs__item">
-        <a href="../../integrations/" class="md-tabs__link">
-          
-  
-  
-  Integraciones
-
-        </a>
-      </li>
-    
-  
-
-      
-    </ul>
-  </div>
-</nav>
           
         
       
@@ -358,27 +188,25 @@
                     
 
 
-  
 
-
-<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navegación" data-md-level="0">
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../.." title="DocuCenter" class="md-nav__button md-logo" aria-label="DocuCenter" data-md-component="logo">
+    <a href="../.." title="Docucenter" class="md-nav__button md-logo" aria-label="Docucenter" data-md-component="logo">
       
-  <img src="https://home.apconpanama.me/wp-content/uploads/2024/03/logo3.png" alt="logo">
+  <img src="../../docs/logo.png" alt="logo">
 
     </a>
-    DocuCenter
+    Docucenter
   </label>
   
     <div class="md-nav__source">
-      <a href="https://github.com/aghabrego/docucenter-public" title="Ir al repositorio" class="md-source" data-md-component="source">
+      <a href="https://github.com/aghabrego/docucenter" title="Ir al repositorio" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
   </div>
   <div class="md-source__repository">
-    aghabrego/docucenter-public
+    aghabrego/docucenter
   </div>
 </a>
     </div>
@@ -422,19 +250,12 @@
     
     
     
-      
-      
-        
-      
-    
     
     <li class="md-nav__item md-nav__item--nested">
       
         
         
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
         
           
           <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
@@ -444,7 +265,7 @@
   <span class="md-ellipsis">
     
   
-    APIs
+    API Documentation
   
 
     
@@ -460,7 +281,54 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    APIs
+    API Documentation
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sage ACICloud
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Sage ACICloud
   
 
           </label>
@@ -473,14 +341,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../api/" class="md-nav__link">
+      <a href="../../api/sage-acicloud/invoices-api/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    APIs de DocuCenter
+    Facturación - Invoices
   
 
     
@@ -500,23 +368,248 @@
   
   
   
-    
-    
-    
-    
-      
-      
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/customers-api/" class="md-nav__link">
         
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Clientes - Customers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/vendors-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Proveedores - Vendors
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/purchases-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Compras - Purchases
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/products-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Productos - Products
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/jobs-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trabajos - Jobs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/accounting-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contabilidad General
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/payments-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pagos y Créditos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/inventory-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inventario - Inventory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
     
     
     <li class="md-nav__item md-nav__item--nested">
       
         
         
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
         
           
           <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
@@ -562,147 +655,7 @@
   <span class="md-ellipsis">
     
   
-    API Facturación Electrónica (FE) - DocuCenter
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../api/fe/acicloud-fe-api/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    API Facturación Electrónica - Integración ACICloud FE
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../api/fe/document-emission-api/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    API Facturación Electrónica - Emisión de Documentos
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../api/fe/shopify-api/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    API Facturación Electrónica - Integración Shopify
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../api/fe/lightspeed-api/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    API Facturación Electrónica - Integración Lightspeed
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../api/fe/maxgym-api/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    API Facturación Electrónica - Integración Maxgym
+    APIs de Facturación Electrónica
   
 
     
@@ -730,7 +683,35 @@
   <span class="md-ellipsis">
     
   
-    API Facturación Electrónica - Integración Meypar
+    Integración Meypar
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/shopify-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integración Shopify
   
 
     
@@ -758,7 +739,175 @@
   <span class="md-ellipsis">
     
   
-    API Facturación Electrónica - Integración Kart21
+    Integración Kart21
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/lightspeed-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integración Lightspeed
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/maxgym-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integración Maxgym
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/acicloud-fe-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ACICloud FE
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/import-xml-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Import XML
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/emit-json-object-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Emit JSON Object
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/download-base64-document-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Download Base64 Document
   
 
     
@@ -790,280 +939,15 @@
     
     
     
-      
-      
-        
-      
-    
     
     <li class="md-nav__item md-nav__item--nested">
       
         
         
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
         
           
           <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Sage ACICloud
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2_3">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Sage ACICloud
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../api/sage-acicloud/customers-api/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    API Sage ACICloud - Módulo Clientes
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../api/sage-acicloud/products-api/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    API Productos - Sage ACICloud
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../api/sage-acicloud/sales-orders-api/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    API Sage ACICloud - Módulo Órdenes de Venta
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../api/sage-acicloud/purchases-api/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    API Compras - Sage ACICloud
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../api/sage-acicloud/payments-api/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    API Pagos y Créditos - Sage ACICloud
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../api/sage-acicloud/inventory-api/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    API Inventario - Sage ACICloud
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../api/sage-acicloud/jobs-api/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    API Trabajos/Jobs - Sage ACICloud
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_4" >
-        
-          
-          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
             
   
   
@@ -1081,8 +965,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2_4">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -1106,7 +990,90 @@
   <span class="md-ellipsis">
     
   
-    API de Organizaciones
+    Gestión de Organizaciones
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ubicaciones Geográficas
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Ubicaciones Geográficas
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/locations/locations-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API de Ubicaciones
   
 
     
@@ -1145,19 +1112,12 @@
     
     
     
-      
-      
-        
-      
-    
     
     <li class="md-nav__item md-nav__item--nested">
       
         
         
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
         
           
           <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
@@ -1167,7 +1127,7 @@
   <span class="md-ellipsis">
     
   
-    Optimizaciones
+    Sistema de Testing
   
 
     
@@ -1183,7 +1143,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Optimizaciones
+    Sistema de Testing
   
 
           </label>
@@ -1196,96 +1156,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../optimizations/" class="md-nav__link">
+      <a href="../../testing/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Optimizaciones - DocuCenter
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_2" >
-        
-          
-          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Performance
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_3_2">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Performance
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../optimizations/customer-supplier-optimizations/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Optimizaciones para el manejo de muchos clientes
+    Índice de Testing
   
 
     
@@ -1306,14 +1184,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../optimizations/mysql-optimization-circuit-breaker/" class="md-nav__link">
+      <a href="../../TESTING_SYSTEM_SUMMARY/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Optimización MySQL 8.0 y Circuit Breaker para DocuCenter
+    Resumen Ejecutivo
   
 
     
@@ -1322,14 +1200,6 @@
   
 
       </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
     </li>
   
 
@@ -1352,19 +1222,12 @@
     
     
     
-      
-      
-        
-      
-    
     
     <li class="md-nav__item md-nav__item--nested">
       
         
         
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
         
           
           <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
@@ -1403,96 +1266,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
+      <a href="../README.md" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Documentación Técnica - DocuCenter
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_2" >
-        
-          
-          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    QuickBooks
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4_2">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    QuickBooks
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../quickbooks-webhook-organizationid-fix/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Fix: QuickBooks Webhook OrganizationId Duplicado
+    Soluciones
   
 
     
@@ -1513,660 +1294,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../quickbooks-bills-job-graceful-validation/" class="md-nav__link">
+      <a href="../lightspeed_audit_improvement/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Fix: Validación Graceful de Tablas en CreateIntuitBillsJob
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../quickbooks-fiscal-number-validation-system/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Sistema de Validación de Números Fiscales QuickBooks
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_3" >
-        
-          
-          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    MaxGym
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4_3">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    MaxGym
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../maxgym-amount-calculation-fix/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Corrección de Cálculo de Montos en MaxGym API
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_4" >
-        
-          
-          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Document AI
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4_4">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Document AI
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../document-ai-import-to-workbench/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Document AI - Importación a Workbench
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../document-ai-import-implementation-summary/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Document AI - Implementación Import to Workbench
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_5" >
-        
-          
-          <label class="md-nav__link" for="__nav_4_5" id="__nav_4_5_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Alanube DOM
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_5_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4_5">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Alanube DOM
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../alanube-dom-service-usage/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Guía de Uso del Servicio AlanubeDomService
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../alanube-dom-export-invoices/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Facturas de Exportación Electrónica (46) - Alanube DOM
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../ALANUBE_DOM_COMPLETE_INTEGRATION/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Integración Completa Alanube DOM - República Dominicana
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../FISCAL_CREDIT_IMPLEMENTATION_SUMMARY/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Implementación Completa de Facturas de Crédito Fiscal (31) - Alanube DOM
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_6" >
-        
-          
-          <label class="md-nav__link" for="__nav_4_6" id="__nav_4_6_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Soluciones Técnicas
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_6_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4_6">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Soluciones Técnicas
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../ezeeissued-solution-summary/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Solución Implementada - Campo EzeeIssued
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../getsaleproperty-optimizations-summary/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Optimizaciones Completas - getSaleProperty() - Create.php
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../ezeeissued-field-correction-summary/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Corrección de Campo EzeeIssued - Resumen Técnico
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_7" >
-        
-          
-          <label class="md-nav__link" for="__nav_4_7" id="__nav_4_7_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Pagos y Cálculos
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_7_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4_7">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Pagos y Cálculos
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../payment-calculation-fix/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Análisis de Discrepancias en Cálculo de Pagos - Facturación Electrónica
+    Auditoría Lightspeed
   
 
     
@@ -2194,97 +1329,7 @@
   <span class="md-ellipsis">
     
   
-    Solución Final: Sincronización Completa de Pagos en Facturación Electrónica
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_8" >
-        
-          
-          <label class="md-nav__link" for="__nav_4_8" id="__nav_4_8_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    SQL Server
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_8_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4_8">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    SQL Server
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../sql-server-complete-store-id-filtering/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Implementación Completa de Filtrado por Store ID en Jobs SQL Server
+    Sincronización de Pagos
   
 
     
@@ -2305,14 +1350,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../sql-server-store-id-filtering/" class="md-nav__link">
+      <a href="../payment-calculation-fix/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Implementación de Filtrado por Store ID en STInvoiceJob
+    Corrección Cálculo Pagos
   
 
     
@@ -2332,14 +1377,6 @@
     </li>
   
 
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
     
       
       
@@ -2350,20 +1387,13 @@
     
     
     
-    
-      
-      
-        
-      
     
     
     <li class="md-nav__item md-nav__item--nested">
       
         
         
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
         
           
           <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
@@ -2409,7 +1439,7 @@
   <span class="md-ellipsis">
     
   
-    Validaciones - DocuCenter
+    Resumen
   
 
     
@@ -2429,60 +1459,6 @@
   
   
   
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5_2" >
-        
-          
-          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Documentos Fiscales
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_5_2">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Documentos Fiscales
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
     <li class="md-nav__item">
       <a href="../../validations/createSale-ruc-validation/" class="md-nav__link">
         
@@ -2491,7 +1467,7 @@
   <span class="md-ellipsis">
     
   
-    Validación de RUC en CreateSaleMaxgymRequest
+    Validación RUC CreateSale
   
 
     
@@ -2519,365 +1495,7 @@
   <span class="md-ellipsis">
     
   
-    Validación de RUC en MaxgymService
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
-        
-          
-          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Testing
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_6">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Testing
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../testing/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Sistema de Testing DocuCenter
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6_2" >
-        
-          
-          <label class="md-nav__link" for="__nav_6_2" id="__nav_6_2_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Reportes de Error
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_2_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_6_2">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Reportes de Error
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../testing/PLUSMOVIL-PRODUCTION-ERROR-REPORT/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Reporte Error PlusMóvil Producción
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
-        
-          
-          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Integraciones
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_7">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Integraciones
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../integrations/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Integraciones Disponibles
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7_2" >
-        
-          
-          <label class="md-nav__link" for="__nav_7_2" id="__nav_7_2_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    PlusMóvil
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_2_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_7_2">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    PlusMóvil
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../integrations/plusmovil-implementation-summary/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Resumen Implementación
+    Validación RUC Maxgym
   
 
     
@@ -2898,14 +1516,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../integrations/plusmovil-implementation-analysis/" class="md-nav__link">
+      <a href="../../validations/meypar-validations/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Análisis
+    Validaciones MEYPAR
   
 
     
@@ -2926,14 +1544,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../integrations/plusmovil-api-testing-results/" class="md-nav__link">
+      <a href="../../validations/validation_comparison/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Resultados Testing API
+    Comparación Validaciones
   
 
     
@@ -2942,70 +1560,6 @@
   
 
       </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../integrations/plusmovil-continuation-plan/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Plan Continuación
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../integrations/plusmovil-next-steps/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Próximos Pasos
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
     </li>
   
 
@@ -3919,13 +2473,13 @@
   
 
 
-<h1 id="guia-de-implementacion-pac-digifact-panama">Guía de Implementación PAC Digifact Panamá<a class="headerlink" href="#guia-de-implementacion-pac-digifact-panama" title="Permanent link">&para;</a></h1>
+<h1 id="guia-de-implementacion-pac-digifact-panama">Guía de Implementación PAC Digifact Panamá</h1>
 <p><strong>Versión API</strong>: 1.0.4<br />
 <strong>Fecha de Análisis</strong>: 26 de diciembre de 2025<br />
 <strong>Sistema</strong>: DocuCenter - Facturación Electrónica Panamá<br />
 <strong>Proveedor</strong>: Digifact Servicios, S.A.</p>
 <hr />
-<h2 id="indice">Índice<a class="headerlink" href="#indice" title="Permanent link">&para;</a></h2>
+<h2 id="indice">Índice</h2>
 <ol>
 <li><a href="#resumen-ejecutivo">Resumen Ejecutivo</a></li>
 <li><a href="#arquitectura-de-la-api">Arquitectura de la API</a></li>
@@ -3941,9 +2495,9 @@
 <li><a href="#consideraciones-técnicas">Consideraciones Técnicas</a></li>
 </ol>
 <hr />
-<h2 id="resumen-ejecutivo">Resumen Ejecutivo<a class="headerlink" href="#resumen-ejecutivo" title="Permanent link">&para;</a></h2>
+<h2 id="resumen-ejecutivo">Resumen Ejecutivo</h2>
 <p>Digifact es un proveedor de certificación (PAC) autorizado por la DGI de Panamá para emitir, transmitir, certificar y conservar facturas electrónicas bajo el régimen establecido por la Ley N°256 del 26 de noviembre de 2021.</p>
-<h3 id="caracteristicas-principales">Características Principales<a class="headerlink" href="#caracteristicas-principales" title="Permanent link">&para;</a></h3>
+<h3 id="caracteristicas-principales">Características Principales</h3>
 <ul>
 <li><strong>Protocolo</strong>: API REST con JSON y XML</li>
 <li><strong>Autenticación</strong>: Bearer Token (JWT) con vigencia de 30 días</li>
@@ -3952,7 +2506,7 @@
 <li><strong>Throughput</strong>: No especificado en documentación</li>
 <li><strong>Firma Electrónica</strong>: Requerida para ambiente productivo</li>
 </ul>
-<h3 id="ventajas-sobre-otros-pacs">Ventajas sobre Otros PACs<a class="headerlink" href="#ventajas-sobre-otros-pacs" title="Permanent link">&para;</a></h3>
+<h3 id="ventajas-sobre-otros-pacs">Ventajas sobre Otros PACs</h3>
 <ul>
 <li>API REST moderna y estándar</li>
 <li>Soporte para múltiples formatos de respuesta (PDF|HTML|XML)</li>
@@ -3961,32 +2515,35 @@
 <li>Validación completa según normativas DGI</li>
 </ul>
 <hr />
-<h2 id="arquitectura-de-la-api">Arquitectura de la API<a class="headerlink" href="#arquitectura-de-la-api" title="Permanent link">&para;</a></h2>
-<h3 id="urls-base">URLs Base<a class="headerlink" href="#urls-base" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>Test:       https://pactest.digifact.com.pa/pa.com.apinuc/api
-Productivo: https://apinuc.digifact.com.pa/api
+<h2 id="arquitectura-de-la-api">Arquitectura de la API</h2>
+<h3 id="urls-base">URLs Base</h3>
+<div class="codehilite"><pre><span></span><code><span class="n">Test</span><span class="o">:</span><span class="w">       </span><span class="n">https</span><span class="o">://</span><span class="n">pactest</span><span class="o">.</span><span class="na">digifact</span><span class="o">.</span><span class="na">com</span><span class="o">.</span><span class="na">pa</span><span class="sr">/pa.com.apinuc/</span><span class="n">api</span>
+<span class="n">Productivo</span><span class="o">:</span><span class="w"> </span><span class="n">https</span><span class="o">://</span><span class="n">apinuc</span><span class="o">.</span><span class="na">digifact</span><span class="o">.</span><span class="na">com</span><span class="o">.</span><span class="na">pa</span><span class="o">/</span><span class="n">api</span>
 </code></pre></div>
-<h3 id="estructura-de-endpoints">Estructura de Endpoints<a class="headerlink" href="#estructura-de-endpoints" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>/login/get_token                  → Autenticación (POST)
+
+<h3 id="estructura-de-endpoints">Estructura de Endpoints</h3>
+<div class="codehilite"><pre><span></span><code>/login/get_token                  → Autenticación (POST)
 /transform/nuc                    → Certificación de documentos (POST)
 /SHAREDINFO                       → Consultas generales (GET)
 /GetDocument                      → Obtener documento por CUFE (GET)
 </code></pre></div>
+
 <hr />
-<h2 id="configuracion-y-credenciales">Configuración y Credenciales<a class="headerlink" href="#configuracion-y-credenciales" title="Permanent link">&para;</a></h2>
-<h3 id="credenciales-de-acceso">Credenciales de Acceso<a class="headerlink" href="#credenciales-de-acceso" title="Permanent link">&para;</a></h3>
+<h2 id="configuracion-y-credenciales">Configuración y Credenciales</h2>
+<h3 id="credenciales-de-acceso">Credenciales de Acceso</h3>
 <p>Las credenciales se solicitan vía:
-- <strong>Email</strong>: <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#115;&#111;&#112;&#111;&#114;&#116;&#101;&#64;&#100;&#105;&#103;&#105;&#102;&#97;&#99;&#116;&#46;&#99;&#111;&#109;&#46;&#103;&#116;">&#115;&#111;&#112;&#111;&#114;&#116;&#101;&#64;&#100;&#105;&#103;&#105;&#102;&#97;&#99;&#116;&#46;&#99;&#111;&#109;&#46;&#103;&#116;</a> con subject "Solicitud de credenciales TEST"
+- <strong>Email</strong>: soporte@digifact.com.gt con subject "Solicitud de credenciales TEST"
 - <strong>Teléfono</strong>: 2319-1921, opción 2</p>
 <p><strong>Formato de credenciales recibidas</strong>:</p>
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;codigo_acceso&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;23824-0930-212623&quot;</span><span class="p">,</span><span class="w">  </span><span class="c1">// RUC del usuario</span>
 <span class="w">  </span><span class="nt">&quot;empresa&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;LA LECHITA, SOCIEDAD ANÓNIMA&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;usuario&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;USER_TEST&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;contrasena&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;s142$%SAF&quot;</span>
 <span class="p">}</span>
 </code></pre></div>
-<h3 id="requisitos-para-ambiente-productivo">Requisitos para Ambiente Productivo<a class="headerlink" href="#requisitos-para-ambiente-productivo" title="Permanent link">&para;</a></h3>
+
+<h3 id="requisitos-para-ambiente-productivo">Requisitos para Ambiente Productivo</h3>
 <ol>
 <li><strong>Firma electrónica</strong>: Archivo de firma digital obtenido en agencia virtual DGI</li>
 <li><strong>Contraseña de firma</strong>: Contraseña asignada a la firma electrónica</li>
@@ -3994,58 +2551,66 @@ Productivo: https://apinuc.digifact.com.pa/api
 </ol>
 <p><strong>IMPORTANTE</strong>: Los servicios productivos solo funcionan con credenciales productivas cuando el RUC está registrado en Digifact.</p>
 <hr />
-<h2 id="autenticacion">Autenticación<a class="headerlink" href="#autenticacion" title="Permanent link">&para;</a></h2>
-<h3 id="obtener-token-jwt">Obtener Token JWT<a class="headerlink" href="#obtener-token-jwt" title="Permanent link">&para;</a></h3>
-<p><strong>Endpoint</strong>:
-<div class="highlight"><pre><span></span><code>POST /login/get_token
-</code></pre></div></p>
-<p><strong>Request</strong>:
-<div class="highlight"><pre><span></span><code><span class="err">POST /login/get_token</span>
+<h2 id="autenticacion">Autenticación</h2>
+<h3 id="obtener-token-jwt">Obtener Token JWT</h3>
+<p><strong>Endpoint</strong>:</p>
+<div class="codehilite"><pre><span></span><code>POST /login/get_token
+</code></pre></div>
+
+<p><strong>Request</strong>:</p>
+<div class="codehilite"><pre><span></span><code><span class="err">POST /login/get_token</span>
 <span class="err">Content-Type: application/json</span>
 
 <span class="err">{</span>
 <span class="err">  &quot;Username&quot;: &quot;PA.155704849-2-2021.USER_TEST&quot;,</span>
 <span class="err">  &quot;Password&quot;: &quot;s142$%SAF&quot;</span>
 <span class="err">}</span>
-</code></pre></div></p>
-<p><strong>Formato de Username</strong>:
-<div class="highlight"><pre><span></span><code>PA + &quot;.&quot; + &lt;RUC_USUARIO&gt; + &quot;.&quot; + &lt;NOMBRE_USUARIO&gt;
+</code></pre></div>
+
+<p><strong>Formato de Username</strong>:</p>
+<div class="codehilite"><pre><span></span><code>PA + &quot;.&quot; + &lt;RUC_USUARIO&gt; + &quot;.&quot; + &lt;NOMBRE_USUARIO&gt;
 
 Ejemplo: PA.155704849-2-2021.USER_TEST
-</code></pre></div></p>
-<p><strong>Response</strong>:
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
+</code></pre></div>
+
+<p><strong>Response</strong>:</p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;token&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlx...&quot;</span>
 <span class="p">}</span>
-</code></pre></div></p>
-<h3 id="uso-del-token">Uso del Token<a class="headerlink" href="#uso-del-token" title="Permanent link">&para;</a></h3>
-<p>El token debe enviarse en cada request como header:</p>
-<div class="highlight"><pre><span></span><code><span class="err">Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlx...</span>
 </code></pre></div>
-<h3 id="vigencia-y-renovacion">Vigencia y Renovación<a class="headerlink" href="#vigencia-y-renovacion" title="Permanent link">&para;</a></h3>
+
+<h3 id="uso-del-token">Uso del Token</h3>
+<p>El token debe enviarse en cada request como header:</p>
+<div class="codehilite"><pre><span></span><code><span class="err">Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlx...</span>
+</code></pre></div>
+
+<h3 id="vigencia-y-renovacion">Vigencia y Renovación</h3>
 <ul>
 <li><strong>Vigencia</strong>: 30 días desde la generación</li>
 <li><strong>Expiración</strong>: Retorna código 401 (Unauthorized)</li>
 <li><strong>Renovación</strong>: Generar nuevo token con mismo procedimiento</li>
 </ul>
 <hr />
-<h2 id="endpoints-principales">Endpoints Principales<a class="headerlink" href="#endpoints-principales" title="Permanent link">&para;</a></h2>
-<h3 id="1-certificate_fe_xml_tosign-certificacion-de-documentos">1. CERTIFICATE_FE_XML_TOSIGN - Certificación de Documentos<a class="headerlink" href="#1-certificate_fe_xml_tosign-certificacion-de-documentos" title="Permanent link">&para;</a></h3>
-<p><strong>Endpoint</strong>:
-<div class="highlight"><pre><span></span><code>POST /transform/nuc
-</code></pre></div></p>
-<p><strong>Headers</strong>:
-<div class="highlight"><pre><span></span><code><span class="err">Content-Type: application/xml</span>
+<h2 id="endpoints-principales">Endpoints Principales</h2>
+<h3 id="1-certificate_fe_xml_tosign-certificacion-de-documentos">1. CERTIFICATE_FE_XML_TOSIGN - Certificación de Documentos</h3>
+<p><strong>Endpoint</strong>:</p>
+<div class="codehilite"><pre><span></span><code>POST /transform/nuc
+</code></pre></div>
+
+<p><strong>Headers</strong>:</p>
+<div class="codehilite"><pre><span></span><code><span class="err">Content-Type: application/xml</span>
 <span class="err">Authorization: Bearer {token}</span>
-</code></pre></div></p>
-<p><strong>Parámetros Query String</strong>:
-<div class="highlight"><pre><span></span><code>TAXID: 23824-0930-212623        // RUC del usuario
-FORMAT: PDF|HTML|XML            // Formatos deseados separados por pipe
-USERNAME: La_Lechita            // Usuario asignado
-</code></pre></div></p>
+</code></pre></div>
+
+<p><strong>Parámetros Query String</strong>:</p>
+<div class="codehilite"><pre><span></span><code><span class="n">TAXID</span><span class="o">:</span><span class="w"> </span><span class="mi">23824</span><span class="o">-</span><span class="mi">0930</span><span class="o">-</span><span class="mi">212623</span><span class="w">        </span><span class="c1">// RUC del usuario</span>
+<span class="n">FORMAT</span><span class="o">:</span><span class="w"> </span><span class="n">PDF</span><span class="o">|</span><span class="n">HTML</span><span class="o">|</span><span class="n">XML</span><span class="w">            </span><span class="c1">// Formatos deseados separados por pipe</span>
+<span class="n">USERNAME</span><span class="o">:</span><span class="w"> </span><span class="n">La_Lechita</span><span class="w">            </span><span class="c1">// Usuario asignado</span>
+</code></pre></div>
+
 <p><strong>Body</strong>: XML del documento según esquema DGI NUC</p>
-<p><strong>Ejemplo de Request</strong>:
-<div class="highlight"><pre><span></span><code><span class="err">POST /transform/nuc?TAXID=23824-0930-212623&amp;FORMAT=PDF|HTML|XML&amp;USERNAME=La_Lechita</span>
+<p><strong>Ejemplo de Request</strong>:</p>
+<div class="codehilite"><pre><span></span><code><span class="err">POST /transform/nuc?TAXID=23824-0930-212623&amp;FORMAT=PDF|HTML|XML&amp;USERNAME=La_Lechita</span>
 <span class="err">Content-Type: application/xml</span>
 <span class="err">Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...</span>
 
@@ -4054,9 +2619,10 @@ USERNAME: La_Lechita            // Usuario asignado
 <span class="err">     xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&gt;</span>
 <span class="err">  &lt;!-- Contenido XML según esquema DGI --&gt;</span>
 <span class="err">&lt;/rFE&gt;</span>
-</code></pre></div></p>
-<p><strong>Response Structure</strong>:
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
+</code></pre></div>
+
+<p><strong>Response Structure</strong>:</p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;codigo&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;200&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;mensaje&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Certificación exitosa&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;descripcion&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Documento certificado correctamente&quot;</span><span class="p">,</span>
@@ -4081,31 +2647,36 @@ USERNAME: La_Lechita            // Usuario asignado
 <span class="w">  </span><span class="nt">&quot;fecha_de_certificacion&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2024-12-26T10:30:15&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;backprocessor&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;DIGIFACT&quot;</span>
 <span class="p">}</span>
-</code></pre></div></p>
-<h3 id="2-shared_getdocinfo-consultar-documento">2. SHARED_GETDOCINFO - Consultar Documento<a class="headerlink" href="#2-shared_getdocinfo-consultar-documento" title="Permanent link">&para;</a></h3>
-<p><strong>Endpoint</strong>:
-<div class="highlight"><pre><span></span><code>GET /SHAREDINFO
-</code></pre></div></p>
-<p><strong>Parámetros</strong>:
-<div class="highlight"><pre><span></span><code>TRANSACTION: SHARED_INFO
-RUC: 23824-0930-212623
-DATA1: SHARED_GETDOCINFO
-DATA2: AUTHNUMBER|FE0120000155704849-2-2021320001202205018539617752001120008136739
-USERNAME: Test_User
-</code></pre></div></p>
-<p><strong>Headers</strong>:
-<div class="highlight"><pre><span></span><code><span class="err">Authorization: Bearer {token}</span>
-</code></pre></div></p>
-<p><strong>Ejemplo de URL</strong>:
-<div class="highlight"><pre><span></span><code>https://pactest.digifact.com.pa/pa.com.apinuc/api/SHAREDINFO?
+</code></pre></div>
+
+<h3 id="2-shared_getdocinfo-consultar-documento">2. SHARED_GETDOCINFO - Consultar Documento</h3>
+<p><strong>Endpoint</strong>:</p>
+<div class="codehilite"><pre><span></span><code>GET /SHAREDINFO
+</code></pre></div>
+
+<p><strong>Parámetros</strong>:</p>
+<div class="codehilite"><pre><span></span><code><span class="n">TRANSACTION</span><span class="o">:</span><span class="w"> </span><span class="n">SHARED_INFO</span>
+<span class="n">RUC</span><span class="o">:</span><span class="w"> </span><span class="mi">23824</span><span class="o">-</span><span class="mi">0930</span><span class="o">-</span><span class="mi">212623</span>
+<span class="n">DATA1</span><span class="o">:</span><span class="w"> </span><span class="n">SHARED_GETDOCINFO</span>
+<span class="n">DATA2</span><span class="o">:</span><span class="w"> </span><span class="n">AUTHNUMBER</span><span class="o">|</span><span class="n">FE0120000155704849</span><span class="o">-</span><span class="mi">2</span><span class="o">-</span><span class="mi">2021320001202205018539617752001120008136739</span>
+<span class="n">USERNAME</span><span class="o">:</span><span class="w"> </span><span class="n">Test_User</span>
+</code></pre></div>
+
+<p><strong>Headers</strong>:</p>
+<div class="codehilite"><pre><span></span><code><span class="err">Authorization: Bearer {token}</span>
+</code></pre></div>
+
+<p><strong>Ejemplo de URL</strong>:</p>
+<div class="codehilite"><pre><span></span><code>https://pactest.digifact.com.pa/pa.com.apinuc/api/SHAREDINFO?
   TRANSACTION=SHARED_INFO&amp;
   RUC=23824-0930-212623&amp;
   DATA1=SHARED_GETDOCINFO&amp;
   DATA2=AUTHNUMBER|FE0120000155704849-2-2021320001202205018539617752001120008136739&amp;
   USERNAME=Test_User
-</code></pre></div></p>
-<p><strong>Response Structure</strong>:
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
+</code></pre></div>
+
+<p><strong>Response Structure</strong>:</p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;REQUEST_DATA&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span>
 <span class="w">    </span><span class="nt">&quot;Respuesta&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;success&quot;</span><span class="p">,</span>
 <span class="w">    </span><span class="nt">&quot;Codigo&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;200&quot;</span><span class="p">,</span>
@@ -4123,35 +2694,41 @@ USERNAME: Test_User
 <span class="w">    </span><span class="nt">&quot;estado&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;CERTIFICADO&quot;</span>
 <span class="w">  </span><span class="p">}]</span>
 <span class="p">}</span>
-</code></pre></div></p>
-<h3 id="3-shared_getinfotaxcom-informacion-fiscal">3. SHARED_GETINFOTAXcom - Información Fiscal<a class="headerlink" href="#3-shared_getinfotaxcom-informacion-fiscal" title="Permanent link">&para;</a></h3>
-<p><strong>Endpoint</strong>:
-<div class="highlight"><pre><span></span><code>GET /SHAREDINFO
-</code></pre></div></p>
-<p><strong>Parámetros</strong>:
-<div class="highlight"><pre><span></span><code>TRANSACTION: SHARED_INFO
-RUC: 23824-0930-212623
-DATA1: SHARED_GETFEINFOTAXcom
-DATA2: RUC|00023824-0933-212623
-USERNAME: Test_User
-</code></pre></div></p>
+</code></pre></div>
+
+<h3 id="3-shared_getinfotaxcom-informacion-fiscal">3. SHARED_GETINFOTAXcom - Información Fiscal</h3>
+<p><strong>Endpoint</strong>:</p>
+<div class="codehilite"><pre><span></span><code>GET /SHAREDINFO
+</code></pre></div>
+
+<p><strong>Parámetros</strong>:</p>
+<div class="codehilite"><pre><span></span><code><span class="n">TRANSACTION</span><span class="o">:</span><span class="w"> </span><span class="n">SHARED_INFO</span>
+<span class="n">RUC</span><span class="o">:</span><span class="w"> </span><span class="mi">23824</span><span class="o">-</span><span class="mi">0930</span><span class="o">-</span><span class="mi">212623</span>
+<span class="n">DATA1</span><span class="o">:</span><span class="w"> </span><span class="n">SHARED_GETFEINFOTAXcom</span>
+<span class="n">DATA2</span><span class="o">:</span><span class="w"> </span><span class="n">RUC</span><span class="o">|</span><span class="mi">00023824</span><span class="o">-</span><span class="mi">0933</span><span class="o">-</span><span class="mi">212623</span>
+<span class="n">USERNAME</span><span class="o">:</span><span class="w"> </span><span class="n">Test_User</span>
+</code></pre></div>
+
 <p><strong>Nota</strong>: El RUC en DATA2 debe estar completado con ceros a la izquierda hasta 20 caracteres.</p>
-<p><strong>Ejemplo</strong>:
-<div class="highlight"><pre><span></span><code>RUC original: 23824-0930-212623 (19 caracteres)
+<p><strong>Ejemplo</strong>:</p>
+<div class="codehilite"><pre><span></span><code>RUC original: 23824-0930-212623 (19 caracteres)
 RUC formateado: 00023824-0930-212623 (20 caracteres)
-</code></pre></div></p>
-<h3 id="4-getdocument-obtener-documento-por-cufe">4. GetDocument - Obtener Documento por CUFE<a class="headerlink" href="#4-getdocument-obtener-documento-por-cufe" title="Permanent link">&para;</a></h3>
-<p><strong>Endpoint</strong>:
-<div class="highlight"><pre><span></span><code>GET /GetDocument
-</code></pre></div></p>
-<p><strong>Parámetros</strong>:
-<div class="highlight"><pre><span></span><code>CUFE: FE0120000155704849-2-2021320001202208048429617728001012000813673
-RUC: 23824-0930-212623
-FORMAT: HTML|PDF|XML
-USERNAME: TESTUSER
-</code></pre></div></p>
-<p><strong>Response Structure</strong>:
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
+</code></pre></div>
+
+<h3 id="4-getdocument-obtener-documento-por-cufe">4. GetDocument - Obtener Documento por CUFE</h3>
+<p><strong>Endpoint</strong>:</p>
+<div class="codehilite"><pre><span></span><code>GET /GetDocument
+</code></pre></div>
+
+<p><strong>Parámetros</strong>:</p>
+<div class="codehilite"><pre><span></span><code><span class="n">CUFE</span><span class="o">:</span><span class="w"> </span><span class="n">FE0120000155704849</span><span class="o">-</span><span class="mi">2</span><span class="o">-</span><span class="mi">2021320001202208048429617728001012000813673</span>
+<span class="n">RUC</span><span class="o">:</span><span class="w"> </span><span class="mi">23824</span><span class="o">-</span><span class="mi">0930</span><span class="o">-</span><span class="mi">212623</span>
+<span class="n">FORMAT</span><span class="o">:</span><span class="w"> </span><span class="n">HTML</span><span class="o">|</span><span class="n">PDF</span><span class="o">|</span><span class="n">XML</span>
+<span class="n">USERNAME</span><span class="o">:</span><span class="w"> </span><span class="n">TESTUSER</span>
+</code></pre></div>
+
+<p><strong>Response Structure</strong>:</p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;REQUEST_DATA&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span>
 <span class="w">    </span><span class="nt">&quot;Respuesta&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;success&quot;</span><span class="p">,</span>
 <span class="w">    </span><span class="nt">&quot;Codigo&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;200&quot;</span><span class="p">,</span>
@@ -4166,64 +2743,68 @@ USERNAME: TESTUSER
 <span class="w">    </span><span class="nt">&quot;ResponseData3&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;base64_pdf_content&quot;</span>
 <span class="w">  </span><span class="p">}]</span>
 <span class="p">}</span>
-</code></pre></div></p>
+</code></pre></div>
+
 <p><strong>Nota</strong>: Si un parámetro requerido no existe, RESPONSE será un arreglo vacío: <code>"RESPONSE": []</code></p>
 <hr />
-<h2 id="flujo-de-certificacion">Flujo de Certificación<a class="headerlink" href="#flujo-de-certificacion" title="Permanent link">&para;</a></h2>
-<h3 id="diagrama-de-flujo">Diagrama de Flujo<a class="headerlink" href="#diagrama-de-flujo" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code> 1. Solicitar Credenciales                               
-    → Email: soporte@digifact.com.gt                     
-    → Tel: 2319-1921 opción 2                            
-
-                       ↓
-
- 2. Recibir Credenciales                                 
-    → RUC (TAXID)                                        
-    → Usuario                                            
-    → Contraseña                                         
-
-                       ↓
-
- 3. Obtener Token JWT (Vigencia: 30 días)               
-    POST /login/get_token                                
-    Body: { Username, Password }                         
-
-                       ↓
-
- 4. Generar XML según Esquema DGI                        
-    → Validar estructura XML                             
-    → Incluir todos los campos requeridos                
-
-                       ↓
-
- 5. Enviar a Certificación                               
-    POST /transform/nuc                                  
-    Headers: Authorization, Content-Type                 
-    Params: TAXID, FORMAT, USERNAME                      
-    Body: XML del documento                              
-
-                       ↓
-
- 6. Recibir Respuesta de DGI                             
-    → Acuse de Recibo (CUFE)                             
-    → Documentos en formatos solicitados (base64)        
-    → Códigos de validación                              
-
-                       ↓
-
- 7. Procesar y Almacenar                                 
-    → Decodificar base64                                 
-    → Guardar archivos (XML, PDF, HTML)                  
-    → Registrar CUFE y acuse de recibo                   
+<h2 id="flujo-de-certificacion">Flujo de Certificación</h2>
+<h3 id="diagrama-de-flujo">Diagrama de Flujo</h3>
+<div class="codehilite"><pre><span></span><code><span class="err">┌─────────────────────────────────────────────────────────┐</span>
+<span class="err">│</span><span class="w"> </span><span class="mf">1.</span><span class="w"> </span><span class="n">Solicitar</span><span class="w"> </span><span class="n">Credenciales</span><span class="w">                               </span><span class="err">│</span>
+<span class="err">│</span><span class="w">    </span><span class="err">→</span><span class="w"> </span><span class="nl">Email</span><span class="p">:</span><span class="w"> </span><span class="n">soporte</span><span class="nv">@digifact</span><span class="p">.</span><span class="n">com</span><span class="p">.</span><span class="n">gt</span><span class="w">                     </span><span class="err">│</span>
+<span class="err">│</span><span class="w">    </span><span class="err">→</span><span class="w"> </span><span class="nl">Tel</span><span class="p">:</span><span class="w"> </span><span class="mi">2319</span><span class="o">-</span><span class="mi">1921</span><span class="w"> </span><span class="n">opción</span><span class="w"> </span><span class="mi">2</span><span class="w">                            </span><span class="err">│</span>
+<span class="err">└──────────────────────┬──────────────────────────────────┘</span>
+<span class="w">                       </span><span class="err">↓</span>
+<span class="err">┌─────────────────────────────────────────────────────────┐</span>
+<span class="err">│</span><span class="w"> </span><span class="mf">2.</span><span class="w"> </span><span class="n">Recibir</span><span class="w"> </span><span class="n">Credenciales</span><span class="w">                                 </span><span class="err">│</span>
+<span class="err">│</span><span class="w">    </span><span class="err">→</span><span class="w"> </span><span class="n">RUC</span><span class="w"> </span><span class="p">(</span><span class="n">TAXID</span><span class="p">)</span><span class="w">                                        </span><span class="err">│</span>
+<span class="err">│</span><span class="w">    </span><span class="err">→</span><span class="w"> </span><span class="n">Usuario</span><span class="w">                                            </span><span class="err">│</span>
+<span class="err">│</span><span class="w">    </span><span class="err">→</span><span class="w"> </span><span class="n">Contraseña</span><span class="w">                                         </span><span class="err">│</span>
+<span class="err">└──────────────────────┬──────────────────────────────────┘</span>
+<span class="w">                       </span><span class="err">↓</span>
+<span class="err">┌─────────────────────────────────────────────────────────┐</span>
+<span class="err">│</span><span class="w"> </span><span class="mf">3.</span><span class="w"> </span><span class="n">Obtener</span><span class="w"> </span><span class="n">Token</span><span class="w"> </span><span class="n">JWT</span><span class="w"> </span><span class="p">(</span><span class="nl">Vigencia</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="w"> </span><span class="n">días</span><span class="p">)</span><span class="w">               </span><span class="err">│</span>
+<span class="err">│</span><span class="w">    </span><span class="n">POST</span><span class="w"> </span><span class="o">/</span><span class="n">login</span><span class="o">/</span><span class="n">get_token</span><span class="w">                                </span><span class="err">│</span>
+<span class="err">│</span><span class="w">    </span><span class="nl">Body</span><span class="p">:</span><span class="w"> </span><span class="err">{</span><span class="w"> </span><span class="n">Username</span><span class="p">,</span><span class="w"> </span><span class="n">Password</span><span class="w"> </span><span class="err">}</span><span class="w">                         </span><span class="err">│</span>
+<span class="err">└──────────────────────┬──────────────────────────────────┘</span>
+<span class="w">                       </span><span class="err">↓</span>
+<span class="err">┌─────────────────────────────────────────────────────────┐</span>
+<span class="err">│</span><span class="w"> </span><span class="mf">4.</span><span class="w"> </span><span class="n">Generar</span><span class="w"> </span><span class="nc">XML</span><span class="w"> </span><span class="n">según</span><span class="w"> </span><span class="n">Esquema</span><span class="w"> </span><span class="n">DGI</span><span class="w">                        </span><span class="err">│</span>
+<span class="err">│</span><span class="w">    </span><span class="err">→</span><span class="w"> </span><span class="n">Validar</span><span class="w"> </span><span class="n">estructura</span><span class="w"> </span><span class="nc">XML</span><span class="w">                             </span><span class="err">│</span>
+<span class="err">│</span><span class="w">    </span><span class="err">→</span><span class="w"> </span><span class="n">Incluir</span><span class="w"> </span><span class="n">todos</span><span class="w"> </span><span class="n">los</span><span class="w"> </span><span class="n">campos</span><span class="w"> </span><span class="n">requeridos</span><span class="w">                </span><span class="err">│</span>
+<span class="err">└──────────────────────┬──────────────────────────────────┘</span>
+<span class="w">                       </span><span class="err">↓</span>
+<span class="err">┌─────────────────────────────────────────────────────────┐</span>
+<span class="err">│</span><span class="w"> </span><span class="mf">5.</span><span class="w"> </span><span class="n">Enviar</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">Certificación</span><span class="w">                               </span><span class="err">│</span>
+<span class="err">│</span><span class="w">    </span><span class="n">POST</span><span class="w"> </span><span class="o">/</span><span class="n">transform</span><span class="o">/</span><span class="n">nuc</span><span class="w">                                  </span><span class="err">│</span>
+<span class="err">│</span><span class="w">    </span><span class="nl">Headers</span><span class="p">:</span><span class="w"> </span><span class="k">Authorization</span><span class="p">,</span><span class="w"> </span><span class="n">Content</span><span class="o">-</span><span class="n">Type</span><span class="w">                 </span><span class="err">│</span>
+<span class="err">│</span><span class="w">    </span><span class="nl">Params</span><span class="p">:</span><span class="w"> </span><span class="n">TAXID</span><span class="p">,</span><span class="w"> </span><span class="nf">FORMAT</span><span class="p">,</span><span class="w"> </span><span class="n">USERNAME</span><span class="w">                      </span><span class="err">│</span>
+<span class="err">│</span><span class="w">    </span><span class="nl">Body</span><span class="p">:</span><span class="w"> </span><span class="nc">XML</span><span class="w"> </span><span class="n">del</span><span class="w"> </span><span class="n">documento</span><span class="w">                              </span><span class="err">│</span>
+<span class="err">└──────────────────────┬──────────────────────────────────┘</span>
+<span class="w">                       </span><span class="err">↓</span>
+<span class="err">┌─────────────────────────────────────────────────────────┐</span>
+<span class="err">│</span><span class="w"> </span><span class="mf">6.</span><span class="w"> </span><span class="n">Recibir</span><span class="w"> </span><span class="n">Respuesta</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">DGI</span><span class="w">                             </span><span class="err">│</span>
+<span class="err">│</span><span class="w">    </span><span class="err">→</span><span class="w"> </span><span class="n">Acuse</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">Recibo</span><span class="w"> </span><span class="p">(</span><span class="n">CUFE</span><span class="p">)</span><span class="w">                             </span><span class="err">│</span>
+<span class="err">│</span><span class="w">    </span><span class="err">→</span><span class="w"> </span><span class="n">Documentos</span><span class="w"> </span><span class="n">en</span><span class="w"> </span><span class="n">formatos</span><span class="w"> </span><span class="n">solicitados</span><span class="w"> </span><span class="p">(</span><span class="n">base64</span><span class="p">)</span><span class="w">        </span><span class="err">│</span>
+<span class="err">│</span><span class="w">    </span><span class="err">→</span><span class="w"> </span><span class="n">Códigos</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">validación</span><span class="w">                              </span><span class="err">│</span>
+<span class="err">└──────────────────────┬──────────────────────────────────┘</span>
+<span class="w">                       </span><span class="err">↓</span>
+<span class="err">┌─────────────────────────────────────────────────────────┐</span>
+<span class="err">│</span><span class="w"> </span><span class="mf">7.</span><span class="w"> </span><span class="n">Procesar</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="n">Almacenar</span><span class="w">                                 </span><span class="err">│</span>
+<span class="err">│</span><span class="w">    </span><span class="err">→</span><span class="w"> </span><span class="n">Decodificar</span><span class="w"> </span><span class="n">base64</span><span class="w">                                 </span><span class="err">│</span>
+<span class="err">│</span><span class="w">    </span><span class="err">→</span><span class="w"> </span><span class="n">Guardar</span><span class="w"> </span><span class="n">archivos</span><span class="w"> </span><span class="p">(</span><span class="nc">XML</span><span class="p">,</span><span class="w"> </span><span class="n">PDF</span><span class="p">,</span><span class="w"> </span><span class="n">HTML</span><span class="p">)</span><span class="w">                  </span><span class="err">│</span>
+<span class="err">│</span><span class="w">    </span><span class="err">→</span><span class="w"> </span><span class="n">Registrar</span><span class="w"> </span><span class="n">CUFE</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="n">acuse</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">recibo</span><span class="w">                   </span><span class="err">│</span>
+<span class="err">└─────────────────────────────────────────────────────────┘</span>
 </code></pre></div>
-<h3 id="validaciones-realizadas-por-digifact">Validaciones Realizadas por Digifact<a class="headerlink" href="#validaciones-realizadas-por-digifact" title="Permanent link">&para;</a></h3>
+
+<h3 id="validaciones-realizadas-por-digifact">Validaciones Realizadas por Digifact</h3>
 <p>Digifact ejecuta todas las validaciones según:
 1. Documentación técnica DGI
 2. Régimen FE publicado en Gaceta Oficial
 3. Esquema XSD del NUC (Nuevo Formato Único de Comprobación)</p>
 <hr />
-<h2 id="operaciones-get">Operaciones GET<a class="headerlink" href="#operaciones-get" title="Permanent link">&para;</a></h2>
-<h3 id="tabla-comparativa-de-operaciones">Tabla Comparativa de Operaciones<a class="headerlink" href="#tabla-comparativa-de-operaciones" title="Permanent link">&para;</a></h3>
+<h2 id="operaciones-get">Operaciones GET</h2>
+<h3 id="tabla-comparativa-de-operaciones">Tabla Comparativa de Operaciones</h3>
 <table>
 <thead>
 <tr>
@@ -4254,8 +2835,8 @@ USERNAME: TESTUSER
 </tr>
 </tbody>
 </table>
-<h3 id="estructura-estandar-de-respuesta-get">Estructura Estándar de Respuesta GET<a class="headerlink" href="#estructura-estandar-de-respuesta-get" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<h3 id="estructura-estandar-de-respuesta-get">Estructura Estándar de Respuesta GET</h3>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;REQUEST_DATA&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <span class="w">    </span><span class="p">{</span>
 <span class="w">      </span><span class="nt">&quot;Respuesta&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;success|error&quot;</span><span class="p">,</span>
@@ -4272,9 +2853,10 @@ USERNAME: TESTUSER
 <span class="w">  </span><span class="p">]</span>
 <span class="p">}</span>
 </code></pre></div>
+
 <hr />
-<h2 id="formatos-de-respuesta">Formatos de Respuesta<a class="headerlink" href="#formatos-de-respuesta" title="Permanent link">&para;</a></h2>
-<h3 id="codigos-de-estado">Códigos de Estado<a class="headerlink" href="#codigos-de-estado" title="Permanent link">&para;</a></h3>
+<h2 id="formatos-de-respuesta">Formatos de Respuesta</h2>
+<h3 id="codigos-de-estado">Códigos de Estado</h3>
 <p>Basado en la documentación del NUC (sección 5):</p>
 <table>
 <thead>
@@ -4312,34 +2894,36 @@ USERNAME: TESTUSER
 </tr>
 </tbody>
 </table>
-<h3 id="formatos-de-documento">Formatos de Documento<a class="headerlink" href="#formatos-de-documento" title="Permanent link">&para;</a></h3>
+<h3 id="formatos-de-documento">Formatos de Documento</h3>
 <p>Los documentos se entregan en <strong>base64</strong> en los campos:</p>
 <ul>
 <li><code>responseData1</code>: XML</li>
 <li><code>responseData2</code>: HTML  </li>
 <li><code>responseData3</code>: PDF</li>
 </ul>
-<p><strong>Decodificación</strong>:
-<div class="highlight"><pre><span></span><code><span class="x">$xmlContent = base64_decode($response[&#39;responseData1&#39;]);</span>
+<p><strong>Decodificación</strong>:</p>
+<div class="codehilite"><pre><span></span><code><span class="x">$xmlContent = base64_decode($response[&#39;responseData1&#39;]);</span>
 <span class="x">$htmlContent = base64_decode($response[&#39;responseData2&#39;]);</span>
 <span class="x">$pdfContent = base64_decode($response[&#39;responseData3&#39;]);</span>
-</code></pre></div></p>
-<h3 id="cufe-codigo-unico-de-factura-electronica">CUFE (Código Único de Factura Electrónica)<a class="headerlink" href="#cufe-codigo-unico-de-factura-electronica" title="Permanent link">&para;</a></h3>
-<p><strong>Formato</strong>: <code>FE + Tipo + Serie + Número + Identificadores</code></p>
-<p><strong>Ejemplo</strong>:
-<div class="highlight"><pre><span></span><code>FE0120000155704849-2-2021320001202205018539617752001120008136739
+</code></pre></div>
 
-                                                        Checksum
-  Serie y número
-  RUC emisor
-  Tipo de documento
- Prefijo FE (Factura Electrónica)
-</code></pre></div></p>
+<h3 id="cufe-codigo-unico-de-factura-electronica">CUFE (Código Único de Factura Electrónica)</h3>
+<p><strong>Formato</strong>: <code>FE + Tipo + Serie + Número + Identificadores</code></p>
+<p><strong>Ejemplo</strong>:</p>
+<div class="codehilite"><pre><span></span><code>FE0120000155704849-2-2021320001202205018539617752001120008136739
+│ │││                                                      │
+│ │││                                                      └─ Checksum
+│ ││└─ Serie y número
+│ │└── RUC emisor
+│ └─── Tipo de documento
+└───── Prefijo FE (Factura Electrónica)
+</code></pre></div>
+
 <hr />
-<h2 id="integracion-con-docucenter">Integración con DocuCenter<a class="headerlink" href="#integracion-con-docucenter" title="Permanent link">&para;</a></h2>
-<h3 id="modelo-pacconnection">Modelo: Pacconnection<a class="headerlink" href="#modelo-pacconnection" title="Permanent link">&para;</a></h3>
+<h2 id="integracion-con-docucenter">Integración con DocuCenter</h2>
+<h3 id="modelo-pacconnection">Modelo: Pacconnection</h3>
 <p>Agregar nuevo tipo de PAC:</p>
-<div class="highlight"><pre><span></span><code><span class="x">// En migration</span>
+<div class="codehilite"><pre><span></span><code><span class="x">// En migration</span>
 <span class="x">Schema::table(&#39;pacconnections&#39;, function (Blueprint $table) {</span>
 <span class="x">    // Campos específicos para Digifact</span>
 <span class="x">    $table-&gt;string(&#39;username&#39;)-&gt;nullable()-&gt;after(&#39;token&#39;);</span>
@@ -4365,10 +2949,11 @@ USERNAME: TESTUSER
 <span class="x">    }</span>
 <span class="x">}</span>
 </code></pre></div>
-<h3 id="servicio-digifactservice">Servicio: DigifactService<a class="headerlink" href="#servicio-digifactservice" title="Permanent link">&para;</a></h3>
+
+<h3 id="servicio-digifactservice">Servicio: DigifactService</h3>
 <p><strong>Ubicación</strong>: <code>app/Services/DigifactService.php</code></p>
 <p><strong>Estructura</strong>:</p>
-<div class="highlight"><pre><span></span><code><span class="x">namespace App\Services;</span>
+<div class="codehilite"><pre><span></span><code><span class="x">namespace App\Services;</span>
 
 <span class="x">use App\Models\Pacconnection;</span>
 <span class="x">use Illuminate\Support\Facades\Http;</span>
@@ -4576,9 +3161,10 @@ USERNAME: TESTUSER
 <span class="x">    }</span>
 <span class="x">}</span>
 </code></pre></div>
-<h3 id="job-certifydigifactinvoicejob">Job: CertifyDigifactInvoiceJob<a class="headerlink" href="#job-certifydigifactinvoicejob" title="Permanent link">&para;</a></h3>
+
+<h3 id="job-certifydigifactinvoicejob">Job: CertifyDigifactInvoiceJob</h3>
 <p><strong>Ubicación</strong>: <code>app/Jobs/CertifyDigifactInvoiceJob.php</code></p>
-<div class="highlight"><pre><span></span><code><span class="x">namespace App\Jobs;</span>
+<div class="codehilite"><pre><span></span><code><span class="x">namespace App\Jobs;</span>
 
 <span class="x">use App\Models\Order;</span>
 <span class="x">use App\Models\Pacconnection;</span>
@@ -4705,20 +3291,21 @@ USERNAME: TESTUSER
 <span class="x">    }</span>
 <span class="x">}</span>
 </code></pre></div>
+
 <hr />
-<h2 id="plan-de-implementacion">Plan de Implementación<a class="headerlink" href="#plan-de-implementacion" title="Permanent link">&para;</a></h2>
-<h3 id="fase-1-configuracion-inicial-2-3-dias">Fase 1: Configuración Inicial (2-3 días)<a class="headerlink" href="#fase-1-configuracion-inicial-2-3-dias" title="Permanent link">&para;</a></h3>
+<h2 id="plan-de-implementacion">Plan de Implementación</h2>
+<h3 id="fase-1-configuracion-inicial-2-3-dias">Fase 1: Configuración Inicial (2-3 días)</h3>
 <ol>
 <li><strong>Solicitar credenciales TEST</strong></li>
-<li>Email a <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#115;&#111;&#112;&#111;&#114;&#116;&#101;&#64;&#100;&#105;&#103;&#105;&#102;&#97;&#99;&#116;&#46;&#99;&#111;&#109;&#46;&#103;&#116;">&#115;&#111;&#112;&#111;&#114;&#116;&#101;&#64;&#100;&#105;&#103;&#105;&#102;&#97;&#99;&#116;&#46;&#99;&#111;&#109;&#46;&#103;&#116;</a></li>
+<li>Email a soporte@digifact.com.gt</li>
 <li>Proporcionar información requerida</li>
 <li>
 <p>Esperar habilitación</p>
 </li>
 <li>
 <p><strong>Crear migración para Pacconnection</strong>
-   <div class="highlight"><pre><span></span><code>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>docucenter-app-1<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>make:migration<span class="w"> </span>add_digifact_fields_to_pacconnections
-</code></pre></div></p>
+   <code>bash
+   docker exec -it docucenter-app-1 php artisan make:migration add_digifact_fields_to_pacconnections</code></p>
 </li>
 <li>
 <p><strong>Actualizar modelo Pacconnection</strong></p>
@@ -4727,12 +3314,12 @@ USERNAME: TESTUSER
 <li>Agregar campos específicos</li>
 <li>Implementar método <code>isTokenExpired()</code></li>
 </ol>
-<h3 id="fase-2-desarrollo-del-servicio-3-5-dias">Fase 2: Desarrollo del Servicio (3-5 días)<a class="headerlink" href="#fase-2-desarrollo-del-servicio-3-5-dias" title="Permanent link">&para;</a></h3>
+<h3 id="fase-2-desarrollo-del-servicio-3-5-dias">Fase 2: Desarrollo del Servicio (3-5 días)</h3>
 <ol>
 <li>
 <p><strong>Crear DigifactService</strong>
-   <div class="highlight"><pre><span></span><code>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>docucenter-app-1<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>make:class<span class="w"> </span>Services/DigifactService
-</code></pre></div></p>
+   <code>bash
+   docker exec -it docucenter-app-1 php artisan make:class Services/DigifactService</code></p>
 </li>
 <li>
 <p><strong>Implementar métodos</strong>:</p>
@@ -4746,11 +3333,11 @@ USERNAME: TESTUSER
 </li>
 <li>
 <p><strong>Testing unitario</strong>
-   <div class="highlight"><pre><span></span><code>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>docucenter-app-1<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>make:test<span class="w"> </span>DigifactServiceTest
-</code></pre></div></p>
+   <code>bash
+   docker exec -it docucenter-app-1 php artisan make:test DigifactServiceTest</code></p>
 </li>
 </ol>
-<h3 id="fase-3-generacion-de-xml-dgi-5-7-dias">Fase 3: Generación de XML DGI (5-7 días)<a class="headerlink" href="#fase-3-generacion-de-xml-dgi-5-7-dias" title="Permanent link">&para;</a></h3>
+<h3 id="fase-3-generacion-de-xml-dgi-5-7-dias">Fase 3: Generación de XML DGI (5-7 días)</h3>
 <ol>
 <li><strong>Estudiar esquema DGI NUC</strong></li>
 <li>Revisar documentación técnica DGI</li>
@@ -4760,8 +3347,7 @@ USERNAME: TESTUSER
 </li>
 <li>
 <p><strong>Crear template Blade para XML</strong>
-   <div class="highlight"><pre><span></span><code>resources/views/xml/digifact/invoice.blade.php
-</code></pre></div></p>
+   <code>resources/views/xml/digifact/invoice.blade.php</code></p>
 </li>
 <li>
 <p><strong>Validaciones XML</strong></p>
@@ -4769,12 +3355,12 @@ USERNAME: TESTUSER
 <li>Crear validador contra XSD DGI</li>
 <li>Implementar reglas de negocio</li>
 </ol>
-<h3 id="fase-4-job-de-certificacion-2-3-dias">Fase 4: Job de Certificación (2-3 días)<a class="headerlink" href="#fase-4-job-de-certificacion-2-3-dias" title="Permanent link">&para;</a></h3>
+<h3 id="fase-4-job-de-certificacion-2-3-dias">Fase 4: Job de Certificación (2-3 días)</h3>
 <ol>
 <li>
 <p><strong>Crear Job</strong>
-   <div class="highlight"><pre><span></span><code>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>docucenter-app-1<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>make:job<span class="w"> </span>CertifyDigifactInvoiceJob
-</code></pre></div></p>
+   <code>bash
+   docker exec -it docucenter-app-1 php artisan make:job CertifyDigifactInvoiceJob</code></p>
 </li>
 <li>
 <p><strong>Implementar estados granulares</strong></p>
@@ -4786,16 +3372,16 @@ USERNAME: TESTUSER
 </li>
 <li>
 <p><strong>Testing del Job</strong>
-   <div class="highlight"><pre><span></span><code>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>docucenter-app-1<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>make:test<span class="w"> </span>CertifyDigifactInvoiceJobTest
-</code></pre></div></p>
+   <code>bash
+   docker exec -it docucenter-app-1 php artisan make:test CertifyDigifactInvoiceJobTest</code></p>
 </li>
 </ol>
-<h3 id="fase-5-interfaz-de-usuario-3-4-dias">Fase 5: Interfaz de Usuario (3-4 días)<a class="headerlink" href="#fase-5-interfaz-de-usuario-3-4-dias" title="Permanent link">&para;</a></h3>
+<h3 id="fase-5-interfaz-de-usuario-3-4-dias">Fase 5: Interfaz de Usuario (3-4 días)</h3>
 <ol>
 <li>
 <p><strong>Componente Livewire para configuración</strong>
-   <div class="highlight"><pre><span></span><code>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>docucenter-app-1<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>make:livewire<span class="w"> </span>DigifactConnectionForm
-</code></pre></div></p>
+   <code>bash
+   docker exec -it docucenter-app-1 php artisan make:livewire DigifactConnectionForm</code></p>
 </li>
 <li>
 <p><strong>Formulario de configuración</strong>:</p>
@@ -4815,7 +3401,7 @@ USERNAME: TESTUSER
 <li>Validación de credenciales</li>
 <li>Feedback visual</li>
 </ol>
-<h3 id="fase-6-testing-integral-3-5-dias">Fase 6: Testing Integral (3-5 días)<a class="headerlink" href="#fase-6-testing-integral-3-5-dias" title="Permanent link">&para;</a></h3>
+<h3 id="fase-6-testing-integral-3-5-dias">Fase 6: Testing Integral (3-5 días)</h3>
 <ol>
 <li><strong>Testing en ambiente TEST</strong></li>
 <li>Crear script en <code>docs/testing/digifact-test.sh</code></li>
@@ -4825,8 +3411,8 @@ USERNAME: TESTUSER
 </li>
 <li>
 <p><strong>Command de prueba</strong>
-   <div class="highlight"><pre><span></span><code>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>docucenter-app-1<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>make:command<span class="w"> </span>DigifactTestCommand
-</code></pre></div></p>
+   <code>bash
+   docker exec -it docucenter-app-1 php artisan make:command DigifactTestCommand</code></p>
 </li>
 <li>
 <p><strong>Casos de prueba</strong>:</p>
@@ -4837,7 +3423,7 @@ USERNAME: TESTUSER
 <li>Certificación exitosa</li>
 <li>Consulta de documentos</li>
 </ol>
-<h3 id="fase-7-migracion-a-productivo-2-3-dias">Fase 7: Migración a Productivo (2-3 días)<a class="headerlink" href="#fase-7-migracion-a-productivo-2-3-dias" title="Permanent link">&para;</a></h3>
+<h3 id="fase-7-migracion-a-productivo-2-3-dias">Fase 7: Migración a Productivo (2-3 días)</h3>
 <ol>
 <li><strong>Solicitar credenciales productivas</strong></li>
 <li><strong>Proporcionar firma electrónica</strong></li>
@@ -4845,7 +3431,7 @@ USERNAME: TESTUSER
 <li><strong>Pruebas con factura real</strong></li>
 <li>**Monitoreo inicial</li>
 </ol>
-<h3 id="fase-8-documentacion-2-dias">Fase 8: Documentación (2 días)<a class="headerlink" href="#fase-8-documentacion-2-dias" title="Permanent link">&para;</a></h3>
+<h3 id="fase-8-documentacion-2-dias">Fase 8: Documentación (2 días)</h3>
 <ol>
 <li><strong>Documentación técnica</strong></li>
 <li>Ubicar en <code>docs/technical/digifact/</code></li>
@@ -4861,10 +3447,10 @@ USERNAME: TESTUSER
 <li>FAQ</li>
 </ol>
 <hr />
-<h2 id="testing-y-validacion">Testing y Validación<a class="headerlink" href="#testing-y-validacion" title="Permanent link">&para;</a></h2>
-<h3 id="script-de-testing">Script de Testing<a class="headerlink" href="#script-de-testing" title="Permanent link">&para;</a></h3>
+<h2 id="testing-y-validacion">Testing y Validación</h2>
+<h3 id="script-de-testing">Script de Testing</h3>
 <p><strong>Ubicación</strong>: <code>docs/testing/digifact-test.sh</code></p>
-<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+<div class="codehilite"><pre><span></span><code><span class="ch">#!/bin/bash</span>
 
 <span class="c1"># Script de testing para Digifact PAC</span>
 <span class="c1"># Ubicación: docs/testing/digifact-test.sh</span>
@@ -4933,8 +3519,9 @@ test_complete<span class="o">()</span><span class="w"> </span><span class="o">{<
 <span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;  Testing completado&quot;</span>
 <span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;======================================&quot;</span>
 </code></pre></div>
-<h3 id="command-digifacttestcommand">Command: DigifactTestCommand<a class="headerlink" href="#command-digifacttestcommand" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">namespace App\Console\Commands;</span>
+
+<h3 id="command-digifacttestcommand">Command: DigifactTestCommand</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">namespace App\Console\Commands;</span>
 
 <span class="x">use App\Models\Organization;</span>
 <span class="x">use App\Models\Pacconnection;</span>
@@ -4997,12 +3584,12 @@ test_complete<span class="o">()</span><span class="w"> </span><span class="o">{<
 <span class="x">        $result = $service-&gt;authenticate();</span>
 
 <span class="x">        if ($result[&#39;success&#39;]) {</span>
-<span class="x">            $this-&gt;info(&quot; Authentication successful&quot;);</span>
+<span class="x">            $this-&gt;info(&quot;✓ Authentication successful&quot;);</span>
 <span class="x">            $this-&gt;line(&quot;Token: &quot; . substr($result[&#39;token&#39;], 0, 50) . &quot;...&quot;);</span>
 <span class="x">            return 0;</span>
 <span class="x">        }</span>
 
-<span class="x">        $this-&gt;error(&quot; Authentication failed&quot;);</span>
+<span class="x">        $this-&gt;error(&quot;✗ Authentication failed&quot;);</span>
 <span class="x">        $this-&gt;line(&quot;Error: &quot; . $result[&#39;error&#39;]);</span>
 <span class="x">        return 1;</span>
 <span class="x">    }</span>
@@ -5022,13 +3609,13 @@ test_complete<span class="o">()</span><span class="w"> </span><span class="o">{<
 <span class="x">        $result = $service-&gt;certifyDocument($xml);</span>
 
 <span class="x">        if ($result[&#39;success&#39;]) {</span>
-<span class="x">            $this-&gt;info(&quot; Certification successful&quot;);</span>
+<span class="x">            $this-&gt;info(&quot;✓ Certification successful&quot;);</span>
 <span class="x">            $this-&gt;line(&quot;CUFE: &quot; . $result[&#39;cufe&#39;]);</span>
 <span class="x">            $this-&gt;line(&quot;Acuse Recibo: &quot; . $result[&#39;acuse_recibo&#39;]);</span>
 <span class="x">            return 0;</span>
 <span class="x">        }</span>
 
-<span class="x">        $this-&gt;error(&quot; Certification failed&quot;);</span>
+<span class="x">        $this-&gt;error(&quot;✗ Certification failed&quot;);</span>
 <span class="x">        $this-&gt;line(&quot;Error: &quot; . $result[&#39;error&#39;]);</span>
 <span class="x">        return 1;</span>
 <span class="x">    }</span>
@@ -5045,12 +3632,12 @@ test_complete<span class="o">()</span><span class="w"> </span><span class="o">{<
 <span class="x">        $result = $service-&gt;getDocument($cufe);</span>
 
 <span class="x">        if ($result[&#39;success&#39;]) {</span>
-<span class="x">            $this-&gt;info(&quot; Query successful&quot;);</span>
+<span class="x">            $this-&gt;info(&quot;✓ Query successful&quot;);</span>
 <span class="x">            $this-&gt;line(&quot;Document found and retrieved&quot;);</span>
 <span class="x">            return 0;</span>
 <span class="x">        }</span>
 
-<span class="x">        $this-&gt;error(&quot; Query failed&quot;);</span>
+<span class="x">        $this-&gt;error(&quot;✗ Query failed&quot;);</span>
 <span class="x">        $this-&gt;line(&quot;Error: &quot; . $result[&#39;error&#39;]);</span>
 <span class="x">        return 1;</span>
 <span class="x">    }</span>
@@ -5066,10 +3653,11 @@ test_complete<span class="o">()</span><span class="w"> </span><span class="o">{<
 <span class="x">    }</span>
 <span class="x">}</span>
 </code></pre></div>
+
 <hr />
-<h2 id="consideraciones-tecnicas">Consideraciones Técnicas<a class="headerlink" href="#consideraciones-tecnicas" title="Permanent link">&para;</a></h2>
-<h3 id="1-multi-tenant-con-digifact">1. Multi-Tenant con Digifact<a class="headerlink" href="#1-multi-tenant-con-digifact" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">// En Job o Service</span>
+<h2 id="consideraciones-tecnicas">Consideraciones Técnicas</h2>
+<h3 id="1-multi-tenant-con-digifact">1. Multi-Tenant con Digifact</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">// En Job o Service</span>
 <span class="x">protected function setDatabaseConnection(Organization $organization)</span>
 <span class="x">{</span>
 <span class="x">    DB::connection()-&gt;useDatabase($organization-&gt;database);</span>
@@ -5085,19 +3673,21 @@ test_complete<span class="o">()</span><span class="w"> </span><span class="o">{<
 <span class="x">// ... operaciones en BD específica</span>
 <span class="x">$this-&gt;setDefaultConnection();</span>
 </code></pre></div>
-<h3 id="2-manejo-de-token">2. Manejo de Token<a class="headerlink" href="#2-manejo-de-token" title="Permanent link">&para;</a></h3>
+
+<h3 id="2-manejo-de-token">2. Manejo de Token</h3>
 <ul>
 <li><strong>Almacenar fecha de expiración</strong>: <code>token_expires_at</code></li>
 <li><strong>Verificar antes de cada request</strong>: <code>isTokenExpired()</code></li>
 <li><strong>Renovar automáticamente</strong>: En método <code>certifyDocument()</code></li>
 </ul>
-<div class="highlight"><pre><span></span><code><span class="x">if ($this-&gt;connection-&gt;isTokenExpired()) {</span>
+<div class="codehilite"><pre><span></span><code><span class="x">if ($this-&gt;connection-&gt;isTokenExpired()) {</span>
 <span class="x">    $this-&gt;authenticate();</span>
 <span class="x">}</span>
 </code></pre></div>
-<h3 id="3-formatos-de-respuesta">3. Formatos de Respuesta<a class="headerlink" href="#3-formatos-de-respuesta" title="Permanent link">&para;</a></h3>
+
+<h3 id="3-formatos-de-respuesta">3. Formatos de Respuesta</h3>
 <p>Todos los documentos vienen en <strong>base64</strong>:</p>
-<div class="highlight"><pre><span></span><code><span class="x">// Decodificar y guardar</span>
+<div class="codehilite"><pre><span></span><code><span class="x">// Decodificar y guardar</span>
 <span class="x">$pdfContent = base64_decode($result[&#39;pdf_base64&#39;]);</span>
 <span class="x">Storage::put($path, $pdfContent);</span>
 
@@ -5106,44 +3696,49 @@ test_complete<span class="o">()</span><span class="w"> </span><span class="o">{<
 <span class="x">    -&gt;header(&#39;Content-Type&#39;, &#39;application/pdf&#39;)</span>
 <span class="x">    -&gt;header(&#39;Content-Disposition&#39;, &#39;inline; filename=&quot;invoice.pdf&quot;&#39;);</span>
 </code></pre></div>
-<h3 id="4-validacion-de-ruc">4. Validación de RUC<a class="headerlink" href="#4-validacion-de-ruc" title="Permanent link">&para;</a></h3>
+
+<h3 id="4-validacion-de-ruc">4. Validación de RUC</h3>
 <p>Para <code>SHARED_GETINFOTAXcom</code>, el RUC debe tener 20 caracteres:</p>
-<div class="highlight"><pre><span></span><code><span class="x">$formattedRuc = str_pad($ruc, 20, &#39;0&#39;, STR_PAD_LEFT);</span>
+<div class="codehilite"><pre><span></span><code><span class="x">$formattedRuc = str_pad($ruc, 20, &#39;0&#39;, STR_PAD_LEFT);</span>
 <span class="x">// 23824-0930-212623 → 00023824-0930-212623</span>
 </code></pre></div>
-<h3 id="5-throughput-y-colas-redis">5. Throughput y Colas Redis<a class="headerlink" href="#5-throughput-y-colas-redis" title="Permanent link">&para;</a></h3>
+
+<h3 id="5-throughput-y-colas-redis">5. Throughput y Colas Redis</h3>
 <ul>
 <li><strong>Configurar worker dedicado</strong> para Digifact</li>
 <li><strong>Rate limiting</strong> si es necesario</li>
 <li><strong>Retry strategy</strong> para errores transitorios</li>
 </ul>
-<div class="highlight"><pre><span></span><code><span class="x">// En Job</span>
+<div class="codehilite"><pre><span></span><code><span class="x">// En Job</span>
 <span class="x">public $tries = 3;</span>
 <span class="x">public $backoff = [60, 300, 900]; // 1min, 5min, 15min</span>
 </code></pre></div>
-<h3 id="6-logging-y-debugging">6. Logging y Debugging<a class="headerlink" href="#6-logging-y-debugging" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">Log::channel(&#39;digifact&#39;)-&gt;info(&#39;Request&#39;, [</span>
+
+<h3 id="6-logging-y-debugging">6. Logging y Debugging</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">Log::channel(&#39;digifact&#39;)-&gt;info(&#39;Request&#39;, [</span>
 <span class="x">    &#39;organization_id&#39; =&gt; $this-&gt;organization-&gt;id,</span>
 <span class="x">    &#39;order_id&#39; =&gt; $this-&gt;order-&gt;id,</span>
 <span class="x">    &#39;state&#39; =&gt; $this-&gt;state,</span>
 <span class="x">    &#39;endpoint&#39; =&gt; $endpoint,</span>
 <span class="x">]);</span>
 </code></pre></div>
+
 <p>Crear canal específico en <code>config/logging.php</code>:</p>
-<div class="highlight"><pre><span></span><code><span class="x">&#39;digifact&#39; =&gt; [</span>
+<div class="codehilite"><pre><span></span><code><span class="x">&#39;digifact&#39; =&gt; [</span>
 <span class="x">    &#39;driver&#39; =&gt; &#39;daily&#39;,</span>
 <span class="x">    &#39;path&#39; =&gt; storage_path(&#39;logs/digifact.log&#39;),</span>
 <span class="x">    &#39;level&#39; =&gt; &#39;debug&#39;,</span>
 <span class="x">    &#39;days&#39; =&gt; 14,</span>
 <span class="x">],</span>
 </code></pre></div>
-<h3 id="7-firma-electronica-productivo">7. Firma Electrónica (Productivo)<a class="headerlink" href="#7-firma-electronica-productivo" title="Permanent link">&para;</a></h3>
+
+<h3 id="7-firma-electronica-productivo">7. Firma Electrónica (Productivo)</h3>
 <ul>
 <li><strong>Archivo</strong>: Formato .pfx o .p12</li>
 <li><strong>Contraseña</strong>: Requerida para usar firma</li>
 <li><strong>Almacenamiento</strong>: Cifrado en base de datos o storage seguro</li>
 </ul>
-<div class="highlight"><pre><span></span><code><span class="x">// Migration</span>
+<div class="codehilite"><pre><span></span><code><span class="x">// Migration</span>
 <span class="x">$table-&gt;binary(&#39;firma_electronica&#39;)-&gt;nullable();</span>
 <span class="x">$table-&gt;string(&#39;firma_password&#39;)-&gt;nullable();</span>
 
@@ -5153,8 +3748,9 @@ test_complete<span class="o">()</span><span class="w"> </span><span class="o">{<
 <span class="x">// Descifrar al usar</span>
 <span class="x">decrypt($this-&gt;connection-&gt;firma_password)</span>
 </code></pre></div>
-<h3 id="8-manejo-de-errores">8. Manejo de Errores<a class="headerlink" href="#8-manejo-de-errores" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">try {</span>
+
+<h3 id="8-manejo-de-errores">8. Manejo de Errores</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">try {</span>
 <span class="x">    $result = $service-&gt;certifyDocument($xml);</span>
 <span class="x">} catch (\Exception $e) {</span>
 <span class="x">    // Clasificar error</span>
@@ -5172,9 +3768,10 @@ test_complete<span class="o">()</span><span class="w"> </span><span class="o">{<
 <span class="x">    }</span>
 <span class="x">}</span>
 </code></pre></div>
+
 <hr />
-<h2 id="comparacion-con-otros-pacs">Comparación con Otros PACs<a class="headerlink" href="#comparacion-con-otros-pacs" title="Permanent link">&para;</a></h2>
-<h3 id="digifact-vs-thefactoryhka">Digifact vs TheFactoryHKA<a class="headerlink" href="#digifact-vs-thefactoryhka" title="Permanent link">&para;</a></h3>
+<h2 id="comparacion-con-otros-pacs">Comparación con Otros PACs</h2>
+<h3 id="digifact-vs-thefactoryhka">Digifact vs TheFactoryHKA</h3>
 <table>
 <thead>
 <tr>
@@ -5221,7 +3818,7 @@ test_complete<span class="o">()</span><span class="w"> </span><span class="o">{<
 </tr>
 </tbody>
 </table>
-<h3 id="digifact-vs-alanube">Digifact vs Alanube<a class="headerlink" href="#digifact-vs-alanube" title="Permanent link">&para;</a></h3>
+<h3 id="digifact-vs-alanube">Digifact vs Alanube</h3>
 <table>
 <thead>
 <tr>
@@ -5259,34 +3856,34 @@ test_complete<span class="o">()</span><span class="w"> </span><span class="o">{<
 </tbody>
 </table>
 <hr />
-<h2 id="recursos-y-soporte">Recursos y Soporte<a class="headerlink" href="#recursos-y-soporte" title="Permanent link">&para;</a></h2>
-<h3 id="contacto-digifact">Contacto Digifact<a class="headerlink" href="#contacto-digifact" title="Permanent link">&para;</a></h3>
+<h2 id="recursos-y-soporte">Recursos y Soporte</h2>
+<h3 id="contacto-digifact">Contacto Digifact</h3>
 <ul>
-<li><strong>Email</strong>: <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#115;&#111;&#112;&#111;&#114;&#116;&#101;&#64;&#100;&#105;&#103;&#105;&#102;&#97;&#99;&#116;&#46;&#99;&#111;&#109;&#46;&#103;&#116;">&#115;&#111;&#112;&#111;&#114;&#116;&#101;&#64;&#100;&#105;&#103;&#105;&#102;&#97;&#99;&#116;&#46;&#99;&#111;&#109;&#46;&#103;&#116;</a></li>
+<li><strong>Email</strong>: soporte@digifact.com.gt</li>
 <li><strong>Teléfono</strong>: 2319-1921 (Panamá)</li>
 <li>Opción 2: Soporte Técnico</li>
-<li><strong>Website</strong>: <a href="https://www.digifact.com.pa">https://www.digifact.com.pa</a></li>
+<li><strong>Website</strong>: https://www.digifact.com.pa</li>
 </ul>
-<h3 id="formato-de-consultas-por-email">Formato de Consultas por Email<a class="headerlink" href="#formato-de-consultas-por-email" title="Permanent link">&para;</a></h3>
+<h3 id="formato-de-consultas-por-email">Formato de Consultas por Email</h3>
 <p><strong>Subject</strong>: <code>[RUC] Tipo Consulta_REST</code></p>
 <p>Ejemplo: <code>[23824-0930-212623] Tipo Consulta_REST</code></p>
-<h3 id="tipos-de-consulta">Tipos de Consulta<a class="headerlink" href="#tipos-de-consulta" title="Permanent link">&para;</a></h3>
+<h3 id="tipos-de-consulta">Tipos de Consulta</h3>
 <ul>
 <li><strong>REST</strong>: Dudas sobre API REST</li>
 <li><strong>GENERAL</strong>: Consultas generales</li>
 <li><strong>VENTAS</strong>: Aspectos comerciales</li>
 <li><strong>ADMON</strong>: Aspectos contractuales</li>
 </ul>
-<h3 id="recursos-dgi">Recursos DGI<a class="headerlink" href="#recursos-dgi" title="Permanent link">&para;</a></h3>
+<h3 id="recursos-dgi">Recursos DGI</h3>
 <ul>
-<li><strong>Documentación Técnica</strong>: <a href="https://dgi.mef.gob.pa/_7FacturaElectronica/source/GacetaNo_28608b_20180910FA.pdf">https://dgi.mef.gob.pa/_7FacturaElectronica/source/GacetaNo_28608b_20180910FA.pdf</a></li>
-<li><strong>Proyecto Piloto</strong>: <a href="https://dgi.mef.gob.pa/_7FacturaElectronica/ftpiloto.php">https://dgi.mef.gob.pa/_7FacturaElectronica/ftpiloto.php</a></li>
+<li><strong>Documentación Técnica</strong>: https://dgi.mef.gob.pa/_7FacturaElectronica/source/GacetaNo_28608b_20180910FA.pdf</li>
+<li><strong>Proyecto Piloto</strong>: https://dgi.mef.gob.pa/_7FacturaElectronica/ftpiloto.php</li>
 <li><strong>Agencia Virtual</strong>: Para obtener firma electrónica</li>
 </ul>
 <hr />
-<h2 id="conclusion">Conclusión<a class="headerlink" href="#conclusion" title="Permanent link">&para;</a></h2>
+<h2 id="conclusion">Conclusión</h2>
 <p>Digifact representa una opción robusta y moderna para la certificación de facturas electrónicas en Panamá. Su API REST es estándar y bien documentada, facilitando la integración con DocuCenter.</p>
-<h3 id="ventajas-principales">Ventajas Principales<a class="headerlink" href="#ventajas-principales" title="Permanent link">&para;</a></h3>
+<h3 id="ventajas-principales">Ventajas Principales</h3>
 <ol>
 <li><strong>API REST moderna</strong>: Fácil de consumir</li>
 <li><strong>Token de larga duración</strong>: Menos overhead de autenticación</li>
@@ -5294,19 +3891,19 @@ test_complete<span class="o">()</span><span class="w"> </span><span class="o">{<
 <li><strong>Soporte bilingüe</strong>: Email y teléfono</li>
 <li><strong>Documentación clara</strong>: Ejemplos concretos</li>
 </ol>
-<h3 id="proximos-pasos">Próximos Pasos<a class="headerlink" href="#proximos-pasos" title="Permanent link">&para;</a></h3>
+<h3 id="proximos-pasos">Próximos Pasos</h3>
 <ol>
-<li>Análisis de documentación completado</li>
-<li>Solicitar credenciales TEST</li>
-<li>Desarrollar DigifactService</li>
-<li>Implementar generación XML DGI</li>
-<li>Testing integral</li>
-<li>Migración a productivo</li>
+<li>✅ Análisis de documentación completado</li>
+<li>⏳ Solicitar credenciales TEST</li>
+<li>⏳ Desarrollar DigifactService</li>
+<li>⏳ Implementar generación XML DGI</li>
+<li>⏳ Testing integral</li>
+<li>⏳ Migración a productivo</li>
 </ol>
 <hr />
-<h2 id="anexos">Anexos<a class="headerlink" href="#anexos" title="Permanent link">&para;</a></h2>
-<h3 id="a-estructura-xml-basica-dgi">A. Estructura XML Básica DGI<a class="headerlink" href="#a-estructura-xml-basica-dgi" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
+<h2 id="anexos">Anexos</h2>
+<h3 id="a-estructura-xml-basica-dgi">A. Estructura XML Básica DGI</h3>
+<div class="codehilite"><pre><span></span><code><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
 <span class="nt">&lt;rFE</span><span class="w"> </span><span class="na">xmlns:xsd=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema&quot;</span><span class="w"> </span>
 <span class="w">     </span><span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><span class="nt">&gt;</span>
 <span class="w">  </span><span class="nt">&lt;dFechaEmis&gt;</span>2024-12-26<span class="nt">&lt;/dFechaEmis&gt;</span>
@@ -5321,7 +3918,8 @@ test_complete<span class="o">()</span><span class="w"> </span><span class="o">{<
 <span class="w">  </span><span class="nt">&lt;/dFactura&gt;</span>
 <span class="nt">&lt;/rFE&gt;</span>
 </code></pre></div>
-<h3 id="b-codigos-de-respuesta-comunes">B. Códigos de Respuesta Comunes<a class="headerlink" href="#b-codigos-de-respuesta-comunes" title="Permanent link">&para;</a></h3>
+
+<h3 id="b-codigos-de-respuesta-comunes">B. Códigos de Respuesta Comunes</h3>
 <table>
 <thead>
 <tr>
@@ -5358,20 +3956,20 @@ test_complete<span class="o">()</span><span class="w"> </span><span class="o">{<
 </tr>
 </tbody>
 </table>
-<h3 id="c-checklist-de-implementacion">C. Checklist de Implementación<a class="headerlink" href="#c-checklist-de-implementacion" title="Permanent link">&para;</a></h3>
-<ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Solicitar credenciales TEST</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Crear migración para Pacconnection</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Implementar DigifactService</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Crear Job de certificación</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Generar XML según esquema DGI</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Implementar UI de configuración</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Testing en ambiente TEST</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Solicitar credenciales productivas</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Proporcionar firma electrónica</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Testing en ambiente productivo</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Documentación final</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Capacitación a usuarios</li>
+<h3 id="c-checklist-de-implementacion">C. Checklist de Implementación</h3>
+<ul>
+<li>[ ] Solicitar credenciales TEST</li>
+<li>[ ] Crear migración para Pacconnection</li>
+<li>[ ] Implementar DigifactService</li>
+<li>[ ] Crear Job de certificación</li>
+<li>[ ] Generar XML según esquema DGI</li>
+<li>[ ] Implementar UI de configuración</li>
+<li>[ ] Testing en ambiente TEST</li>
+<li>[ ] Solicitar credenciales productivas</li>
+<li>[ ] Proporcionar firma electrónica</li>
+<li>[ ] Testing en ambiente productivo</li>
+<li>[ ] Documentación final</li>
+<li>[ ] Capacitación a usuarios</li>
 </ul>
 <hr />
 <p><strong>Documento generado</strong>: 26 de diciembre de 2025<br />
@@ -5397,12 +3995,6 @@ test_complete<span class="o">()</span><span class="w"> </span><span class="o">{<
           
 <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
         </div>
-        
-          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
-  Volver al principio
-</button>
         
       </main>
       
@@ -5449,7 +4041,7 @@ test_complete<span class="o">()</span><span class="w"> </span><span class="o">{<
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.highlight", "search.suggest"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
     
     
       <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>

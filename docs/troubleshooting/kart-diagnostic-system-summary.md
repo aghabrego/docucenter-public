@@ -1,10 +1,10 @@
-# Sistema de Diagnóstico Kart → Facturación Electrónica
+# 🎯 Sistema de Diagnóstico Kart → Facturación Electrónica
 
-## Resumen de Implementación
+## 📋 Resumen de Implementación
 
 Se ha creado un sistema completo de diagnóstico y reparación para resolver problemas cuando las órdenes de Kart21 no se emiten automáticamente como facturas electrónicas en DocuCenter.
 
-### Herramientas Implementadas
+### 🚀 Herramientas Implementadas
 
 #### 1. Comandos Artisan
 
@@ -18,11 +18,11 @@ Se ha creado un sistema completo de diagnóstico y reparación para resolver pro
 
 | Script | Propósito | Características |
 |--------|-----------|-----------------|
-| `diagnose-kart-invoice.sh` | Script principal de diagnóstico | Diagnóstico completo, Forzar emisión,  Análisis de logs |
-| `test-kart-order-12720.sh` | Prueba específica orden #12720 |  Datos reales, Búsqueda múltiple, Simulación |
-| `test-kart-to-zoho.sh` | Integración Kart → Zoho | Testing de integración, Transformación de datos |
+| `diagnose-kart-invoice.sh` | Script principal de diagnóstico | 🔍 Diagnóstico completo, 🚀 Forzar emisión, 📄 Análisis de logs |
+| `test-kart-order-12720.sh` | Prueba específica orden #12720 | 🧪 Datos reales, 🔍 Búsqueda múltiple, 🛠️ Simulación |
+| `test-kart-to-zoho.sh` | Integración Kart → Zoho | 🔗 Testing de integración, 📊 Transformación de datos |
 
-### Caso Específico: Orden Kart #12720
+### 🎯 Caso Específico: Orden Kart #12720
 
 #### Datos de la Orden Problemática
 ```json
@@ -52,13 +52,13 @@ Se ha creado un sistema completo de diagnóstico y reparación para resolver pro
 ./scripts/diagnose-kart-invoice.sh simulate 1
 ```
 
-### Proceso de Diagnóstico Automatizado
+### 🔍 Proceso de Diagnóstico Automatizado
 
 #### Paso 1: Verificación de Configuración
-- Organización existe y está activa
-- Configuración PAC disponible y activa
-- Token PAC válido y configurado
-- Base de datos específica accesible
+- ✅ Organización existe y está activa
+- 🔗 Configuración PAC disponible y activa
+- 🔑 Token PAC válido y configurado
+- 📊 Base de datos específica accesible
 
 #### Paso 2: Búsqueda de Factura en Sistema
 ```sql
@@ -79,16 +79,16 @@ grep -i "error.*kart.*12720" storage/logs/laravel.log
 ```
 
 #### Paso 4: Verificación de Emisión Automática
-- Verifica si `Kart21Service` tiene trait `CreateFastJob`
-- Comprueba método `issueInvoice` disponible
-- Analiza estado `EzeeIssued` de facturas
--  Revisa jobs en cola y fallidos
+- 🔧 Verifica si `Kart21Service` tiene trait `CreateFastJob`
+- 📋 Comprueba método `issueInvoice` disponible
+- 🚀 Analiza estado `EzeeIssued` de facturas
+- ⏳ Revisa jobs en cola y fallidos
 
-### Soluciones Identificadas
+### 💡 Soluciones Identificadas
 
 #### Problema 1: Configuración PAC Faltante
 **Síntomas:**
-- Error: "No se encontró configuración PAC"
+- ❌ Error: "No se encontró configuración PAC"
 - Facturas se crean pero no se emiten
 
 **Solución Automática:**
@@ -99,8 +99,8 @@ grep -i "error.*kart.*12720" storage/logs/laravel.log
 
 #### Problema 2: Kart21Service Sin Emisión Automática
 **Síntomas:**
-- Factura creada en DocuCenter
-- `EzeeIssued = 0` (no emitida)
+- ✅ Factura creada en DocuCenter
+- ❌ `EzeeIssued = 0` (no emitida)
 
 **Solución:**
 ```php
@@ -119,7 +119,7 @@ class Kart21Service implements Kart21ServiceContract
 
 #### Problema 3: Webhook No Procesado
 **Síntomas:**
-- No hay factura en DocuCenter
+- ❌ No hay factura en DocuCenter
 - Sin logs de procesamiento
 
 **Solución:**
@@ -133,7 +133,7 @@ class Kart21Service implements Kart21ServiceContract
 
 #### Problema 4: Job Fallido
 **Síntomas:**
-- Jobs en estado `failed`
+- ⚠️ Jobs en estado `failed`
 - Logs con excepciones
 
 **Solución:**
@@ -145,7 +145,7 @@ class Kart21Service implements Kart21ServiceContract
 ./scripts/diagnose-kart-invoice.sh force-emit-all 1 --dry-run
 ```
 
-### Comandos de Uso Frecuente
+### 🛠️ Comandos de Uso Frecuente
 
 #### Diagnóstico Rápido
 ```bash
@@ -174,13 +174,13 @@ class Kart21Service implements Kart21ServiceContract
 ./scripts/test-kart-to-zoho.sh 21
 ```
 
-### Métricas y Monitoreo
+### 📊 Métricas y Monitoreo
 
 #### Indicadores de Salud del Sistema
-- **Facturas Creadas**: Kart21Service.storeOrder() exitoso
-- **Facturas Emitidas**: EzeeIssued = 1
--  **Jobs Pendientes**: Cola de CreateSaleKart21Job
-- **Jobs Fallidos**: Tabla failed_jobs
+- ✅ **Facturas Creadas**: Kart21Service.storeOrder() exitoso
+- 🚀 **Facturas Emitidas**: EzeeIssued = 1
+- ⏳ **Jobs Pendientes**: Cola de CreateSaleKart21Job
+- ❌ **Jobs Fallidos**: Tabla failed_jobs
 
 #### Comandos de Monitoreo
 ```bash
@@ -197,7 +197,7 @@ php artisan tinker --execute="
 "
 ```
 
-### Integración con Zoho Books
+### 🔗 Integración con Zoho Books
 
 Se incluye integración completa para enviar órdenes de Kart a Zoho Books:
 
@@ -211,7 +211,7 @@ Se incluye integración completa para enviar órdenes de Kart a Zoho Books:
 # • Orden: KART-12720 → Zoho Sales Order
 ```
 
-### Documentación Creada
+### 📚 Documentación Creada
 
 | Documento | Propósito | Ubicación |
 |-----------|-----------|-----------|
@@ -220,7 +220,7 @@ Se incluye integración completa para enviar órdenes de Kart a Zoho Books:
 | **Comandos Testing** | Scripts ejecutables | `scripts/diagnose-kart-invoice.sh` |
 | **Caso Específico** | Orden #12720 | `scripts/test-kart-order-12720.sh` |
 
-### Próximos Pasos Recomendados
+### 🎯 Próximos Pasos Recomendados
 
 1. **Ejecutar Diagnóstico:**
    ```bash

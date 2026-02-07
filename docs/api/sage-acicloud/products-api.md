@@ -9,20 +9,20 @@
 
 ### Características del Endpoint
 
-- **Filtrado Avanzado**: Múltiples filtros y operadores
-- **Paginación**: Resultados paginados automáticamente
-- **Ordenamiento**: Ordenar por cualquier campo
-- **Multi-tenant**: Respeta el contexto de organización activa
+- ✅ **Filtrado Avanzado**: Múltiples filtros y operadores
+- ✅ **Paginación**: Resultados paginados automáticamente
+- ✅ **Ordenamiento**: Ordenar por cualquier campo
+- ✅ **Multi-tenant**: Respeta el contexto de organización activa
 
 ### Parámetros de Query (Opcionales)
 
 | Parámetro | Tipo | Requerido | Descripción | Ejemplo |
 |-----------|------|-----------|-------------|---------|
-| `page` | integer | | Página a obtener | `2` |
-| `per_page` | integer | | Registros por página (máx 100) | `50` |
-| `sort` | string | | Campo para ordenar | `"code"` |
-| `order` | string | | Dirección del ordenamiento | `"asc"` |
-| `filter` | object | | Filtros aplicados | `{}` |
+| `page` | integer | ❌ | Página a obtener | `2` |
+| `per_page` | integer | ❌ | Registros por página (máx 100) | `50` |
+| `sort` | string | ❌ | Campo para ordenar | `"code"` |
+| `order` | string | ❌ | Dirección del ordenamiento | `"asc"` |
+| `filter` | object | ❌ | Filtros aplicados | `{}` |
 
 ### Ejemplo de Request con Filtros
 
@@ -112,34 +112,34 @@ GET /api/acicloud/products?filter[description][operator]=contains&filter[descrip
 
 | Campo | Tipo | Requerido | Descripción | Ejemplo |
 |-------|------|-----------|-------------|---------|
-| `code` | string | | Código único del producto | `"PROD001"` |
-| `description` | string | | Descripción del producto | `"Laptop Dell Inspiron 15"` |
-| `type` | string | | Tipo de producto | `"inventory"` |
-| `category_code` | string | | Código de categoría | `"ELEC"` |
-| `unit_of_measure` | string | | Unidad de medida | `"EA"` |
-| `cost_price` | decimal | | Precio de costo | `850.00` |
-| `sales_price` | decimal | | Precio de venta | `1200.00` |
-| `tax_info` | object | | Información de impuestos | `{}` |
-| `tax_info.tax_code` | string | | Código de impuesto | `"STD"` |
-| `tax_info.tax_rate` | decimal | | Tasa de impuesto | `0.07` |
-| `tax_info.taxable` | boolean | | Es gravable | `true` |
-| `inventory` | object | | Información de inventario | `{}` |
-| `inventory.current_stock` | decimal | | Stock actual | `25.00` |
-| `inventory.minimum_stock` | decimal | | Stock mínimo | `5.00` |
-| `inventory.maximum_stock` | decimal | | Stock máximo | `100.00` |
-| `accounting` | object | | Cuentas contables | `{}` |
-| `accounting.income_account` | string | | Cuenta de ingresos | `"4100"` |
-| `accounting.expense_account` | string | | Cuenta de gastos | `"5100"` |
-| `accounting.inventory_account` | string | | Cuenta de inventario | `"1300"` |
-| `supplier` | object | | Información del proveedor | `{}` |
-| `supplier.vendor_id` | string | | ID del proveedor principal | `"VENDOR001"` |
-| `supplier.supplier_code` | string | | Código del proveedor | `"DELL-INSP-15"` |
-| `dimensions` | object | | Dimensiones del producto | `{}` |
-| `dimensions.length` | decimal | | Largo | `35.5` |
-| `dimensions.width` | decimal | | Ancho | `24.0` |
-| `dimensions.height` | decimal | | Alto | `2.5` |
-| `dimensions.weight` | decimal | | Peso | `2.1` |
-| `active` | boolean | | Estado activo (default: true) | `true` |
+| `code` | string | ✅ | Código único del producto | `"PROD001"` |
+| `description` | string | ✅ | Descripción del producto | `"Laptop Dell Inspiron 15"` |
+| `type` | string | ✅ | Tipo de producto | `"inventory"` |
+| `category_code` | string | ❌ | Código de categoría | `"ELEC"` |
+| `unit_of_measure` | string | ✅ | Unidad de medida | `"EA"` |
+| `cost_price` | decimal | ❌ | Precio de costo | `850.00` |
+| `sales_price` | decimal | ✅ | Precio de venta | `1200.00` |
+| `tax_info` | object | ❌ | Información de impuestos | `{}` |
+| `tax_info.tax_code` | string | ❌ | Código de impuesto | `"STD"` |
+| `tax_info.tax_rate` | decimal | ❌ | Tasa de impuesto | `0.07` |
+| `tax_info.taxable` | boolean | ❌ | Es gravable | `true` |
+| `inventory` | object | ❌ | Información de inventario | `{}` |
+| `inventory.current_stock` | decimal | ❌ | Stock actual | `25.00` |
+| `inventory.minimum_stock` | decimal | ❌ | Stock mínimo | `5.00` |
+| `inventory.maximum_stock` | decimal | ❌ | Stock máximo | `100.00` |
+| `accounting` | object | ❌ | Cuentas contables | `{}` |
+| `accounting.income_account` | string | ❌ | Cuenta de ingresos | `"4100"` |
+| `accounting.expense_account` | string | ❌ | Cuenta de gastos | `"5100"` |
+| `accounting.inventory_account` | string | ❌ | Cuenta de inventario | `"1300"` |
+| `supplier` | object | ❌ | Información del proveedor | `{}` |
+| `supplier.vendor_id` | string | ❌ | ID del proveedor principal | `"VENDOR001"` |
+| `supplier.supplier_code` | string | ❌ | Código del proveedor | `"DELL-INSP-15"` |
+| `dimensions` | object | ❌ | Dimensiones del producto | `{}` |
+| `dimensions.length` | decimal | ❌ | Largo | `35.5` |
+| `dimensions.width` | decimal | ❌ | Ancho | `24.0` |
+| `dimensions.height` | decimal | ❌ | Alto | `2.5` |
+| `dimensions.weight` | decimal | ❌ | Peso | `2.1` |
+| `active` | boolean | ❌ | Estado activo (default: true) | `true` |
 
 ### Tipos de Producto Válidos
 
@@ -258,140 +258,6 @@ Obtiene la lista de productos que han sido importados/creados a través de la AP
 
 ---
 
-## Consultar Producto Específico
-
-**Endpoint:** `GET /api/acicloud/product_imp/{identifier}`  
-**Autenticación:** Bearer Token requerido  
-**Middleware:** `check.activate.organization`
-
-Obtiene los detalles de un producto específico por su identificador.
-
-### Parámetros de URL
-
-| Campo | Tipo | Descripción |
-|-------|------|-------------|
-| `identifier` | string | ProductID o ID interno del producto |
-
-### Ejemplo de Request
-
-```bash
-GET /api/acicloud/product_imp/PROD001
-```
-
-### Respuesta de Éxito
-
-```json
-{
-  "success": true,
-  "data": {
-    "id": 1,
-    "ProductID": "PROD001",
-    "Description": "Laptop Dell Inspiron 15",
-    "QtyOnHand": "50.00000",
-    "Price1": "899.99",
-    "Price2": "850.00",
-    "Price3": "800.00",
-    "ItemType": "physical",
-    "Location": "Almacén Principal",
-    "Weight": "2.5000",
-    "SalesDescription": "Laptop Dell Inspiron 15, 8GB RAM, 256GB SSD",
-    "PartNumber": "DELL-INS15-001",
-    "sage_id": "SAGE_PROD_001",
-    "import_status": "completed",
-    "created_at": "2025-01-29 21:30:00",
-    "updated_at": "2025-01-29 21:30:00"
-  }
-}
-```
-
-### Respuesta de Error
-
-```json
-{
-  "success": false,
-  "message": "Producto no encontrado"
-}
-```
-
----
-
-## Actualizar Producto
-
-**Endpoint:** `PUT /api/acicloud/product_imp/{id}`  
-**Autenticación:** Bearer Token requerido  
-**Middleware:** `check.activate.organization`
-
-Actualiza los datos de un producto existente.
-
-### Parámetros de URL
-
-| Campo | Tipo | Descripción |
-|-------|------|-------------|
-| `id` | integer | ID interno del producto |
-
-### Parámetros de Request
-
-Todos los campos son opcionales. Solo se actualizarán los campos enviados.
-
-| Campo | Tipo | Descripción | Validación |
-|-------|------|-------------|------------|
-| `ProductID` | string | Código único del producto | Máx. 20 caracteres |
-| `Description` | string | Descripción del producto | Máx. 40 caracteres |
-| `QtyOnHand` | numeric | Cantidad en inventario | Decimal (8,5) |
-| `Price1` | numeric | Precio nivel 1 | Decimal (8,4) |
-| `Price2` | numeric | Precio nivel 2 | Decimal (8,4) |
-| `Price3` | numeric | Precio nivel 3 | Decimal (8,4) |
-| `ItemType` | string | Tipo de ítem | physical/service/non-inventory |
-| `Location` | string | Ubicación | Máx. 15 caracteres |
-| `Weight` | numeric | Peso del producto | Decimal (8,4) |
-| `SalesDescription` | string | Descripción de ventas | - |
-| `PartNumber` | string | Número de parte | Máx. 30 caracteres |
-
-### Ejemplo de Request
-
-```json
-{
-  "Description": "Laptop Dell Inspiron 15 - Actualizada",
-  "Price1": "949.99",
-  "QtyOnHand": "75.00000",
-  "SalesDescription": "Laptop Dell Inspiron 15, 16GB RAM, 512GB SSD"
-}
-```
-
-### Respuesta de Éxito
-
-```json
-{
-  "success": true,
-  "message": "Producto actualizado exitosamente",
-  "data": {
-    "id": 1,
-    "ProductID": "PROD001",
-    "Description": "Laptop Dell Inspiron 15 - Actualizada",
-    "Price1": "949.99",
-    "QtyOnHand": "75.00000",
-    "SalesDescription": "Laptop Dell Inspiron 15, 16GB RAM, 512GB SSD",
-    "updated_at": "2025-01-16 10:00:00"
-  }
-}
-```
-
-### Respuesta de Error
-
-```json
-{
-  "success": false,
-  "message": "Error al actualizar producto",
-  "errors": {
-    "Price1": [
-      "El precio debe ser un valor numérico válido"
-    ]
-  }
-}
-```
-
----
-
 ## Ajuste de Inventario
 
 **Endpoint:** `POST /api/acicloud/inventory_adjust`  
@@ -403,17 +269,17 @@ Todos los campos son opcionales. Solo se actualizarán los campos enviados.
 
 | Campo | Tipo | Requerido | Descripción | Ejemplo |
 |-------|------|-----------|-------------|---------|
-| `adjustment_number` | string | | Número de ajuste | `"ADJ-2025-001"` |
-| `date` | string | | Fecha del ajuste (YYYY-MM-DD) | `"2025-01-29"` |
-| `reason` | string | | Razón del ajuste | `"Physical count adjustment"` |
-| `reference` | string | | Referencia adicional | `"COUNT-2025-01"` |
-| `items` | array | | Lista de ajustes por producto | `[]` |
-| `items[].product_code` | string | | Código del producto | `"PROD001"` |
-| `items[].current_quantity` | decimal | | Cantidad actual en sistema | `25.00` |
-| `items[].physical_quantity` | decimal | | Cantidad física contada | `23.00` |
-| `items[].adjustment_quantity` | decimal | | Cantidad de ajuste (+/-) | `-2.00` |
-| `items[].unit_cost` | decimal | | Costo unitario | `850.00` |
-| `items[].reason` | string | | Razón específica del item | `"Damaged units"` |
+| `adjustment_number` | string | ✅ | Número de ajuste | `"ADJ-2025-001"` |
+| `date` | string | ✅ | Fecha del ajuste (YYYY-MM-DD) | `"2025-01-29"` |
+| `reason` | string | ✅ | Razón del ajuste | `"Physical count adjustment"` |
+| `reference` | string | ❌ | Referencia adicional | `"COUNT-2025-01"` |
+| `items` | array | ✅ | Lista de ajustes por producto | `[]` |
+| `items[].product_code` | string | ✅ | Código del producto | `"PROD001"` |
+| `items[].current_quantity` | decimal | ✅ | Cantidad actual en sistema | `25.00` |
+| `items[].physical_quantity` | decimal | ✅ | Cantidad física contada | `23.00` |
+| `items[].adjustment_quantity` | decimal | ✅ | Cantidad de ajuste (+/-) | `-2.00` |
+| `items[].unit_cost` | decimal | ❌ | Costo unitario | `850.00` |
+| `items[].reason` | string | ❌ | Razón específica del item | `"Damaged units"` |
 
 ### Ejemplo de Request
 

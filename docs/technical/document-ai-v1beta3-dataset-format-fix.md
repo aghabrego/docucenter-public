@@ -198,14 +198,14 @@ Después de ejecutar el entrenamiento:
 
 ```
 gs://bucket-name/
- training-pdfs/
-    20251124215223/          # Timestamp del entrenamiento
-        document-1.pdf
-        document-2.pdf
-        ...
- datasets/
-     training-dataset-20251124215223.jsonl
-     test-dataset-20251124215223.jsonl
+├── training-pdfs/
+│   └── 20251124215223/          # Timestamp del entrenamiento
+│       ├── document-1.pdf
+│       ├── document-2.pdf
+│       └── ...
+└── datasets/
+    ├── training-dataset-20251124215223.jsonl
+    └── test-dataset-20251124215223.jsonl
 ```
 
 ## Requisitos de Document AI v1beta3
@@ -216,13 +216,13 @@ gs://bucket-name/
 - **Total recomendado**: 50+ documentos
 
 ### Formato JSONL Requerido
-**Correcto**:
+✅ **Correcto**:
 - `document.uri`: GCS URI del PDF
 - `annotations[].type`: Nombre del campo
 - `annotations[].mentionText`: Valor extraído
 - `annotations[].textSegment`: Posiciones en el documento
 
-**Incorrecto**:
+❌ **Incorrecto**:
 - `document.content`: Base64 embebido
 - Anotaciones sin `textSegment`
 - GCS prefix en lugar de URIs específicos
@@ -378,10 +378,10 @@ Ahora usa estructura: document.uri + annotations con startIndex/endIndex
 
 ## Próximos Pasos
 
-1. Implementar formato correcto de dataset
-2. Agregar split train/test
-3. Crear script de testing
-4.  Ejecutar prueba completa con 20+ documentos
-5.  Monitorear entrenamiento en Google Cloud Console
-6.  Implementar extracción real de posiciones de texto
-7.  Agregar validación de requisitos mínimos
+1. ✅ Implementar formato correcto de dataset
+2. ✅ Agregar split train/test
+3. ✅ Crear script de testing
+4. ⏳ Ejecutar prueba completa con 20+ documentos
+5. ⏳ Monitorear entrenamiento en Google Cloud Console
+6. ⏳ Implementar extracción real de posiciones de texto
+7. ⏳ Agregar validación de requisitos mínimos

@@ -1,13 +1,13 @@
 # Debug Plan: Diagnosing Destination Foreign Error
 
-## Status: Error Persiste
+## 🐛 Status: Error Persiste
 **Error**: "The destination of the operation cannot be Foreign if the Document Type is Internal Operation Invoice"
 
-## Hallazgos del Debug
+## 🔍 Hallazgos del Debug
 
 ### 1. Campo de Tipo de Documento Corregido
-- **Antes**: Buscando `iTipoDoc` (era null)
-- **Ahora**: Buscando `iDoc` (es "01")
+- ❌ **Antes**: Buscando `iTipoDoc` (era null)
+- ✅ **Ahora**: Buscando `iDoc` (es "01")
 
 ### 2. Logs Anteriores Mostraban:
 ```json
@@ -21,11 +21,11 @@
 ```
 
 ### 3. Problemas Identificados:
-- Campo equivocado en `determineDestination()` CORREGIDO
-- Debug logging agregado en `AlanubeService` AGREGADO
-- Verificación de constantes AGREGADO
+- Campo equivocado en `determineDestination()` ✅ CORREGIDO
+- Debug logging agregado en `AlanubeService` ✅ AGREGADO
+- Verificación de constantes ✅ AGREGADO
 
-## Cambios Aplicados
+## 🔧 Cambios Aplicados
 
 ### AlanubeFormatterHelper.php
 ```php
@@ -47,7 +47,7 @@ $documentType = $data['dGen']['iDoc'] ?? null; // "01"
 ]);
 ```
 
-## Próximo Test
+## 🎯 Próximo Test
 
 ### Expectativas para el siguiente intento:
 1. **AlanubeFormatterHelper** logs:
@@ -65,9 +65,9 @@ $documentType = $data['dGen']['iDoc'] ?? null; // "01"
 3. **PAC Response**: Sin error AP3040
 
 ### Si el error persiste después de estos cambios:
-- Confirmar que ambas capas están forzando destination=1
-- Investigar si hay transformación posterior que revierte el cambio
-- Verificar JSON enviado al PAC para confirmar destination=1
+- ✅ Confirmar que ambas capas están forzando destination=1
+- 🔍 Investigar si hay transformación posterior que revierte el cambio
+- 🔍 Verificar JSON enviado al PAC para confirmar destination=1
 
-## Status: LISTO PARA RETRY
+## 📝 Status: LISTO PARA RETRY
 **Confianza**: 85% - Campo corregido + debug completo

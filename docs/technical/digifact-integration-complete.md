@@ -502,71 +502,71 @@ public function certifyDocument(array $documentData, string $format = 'PDF'): ar
 
 | Campo DGI | Campo NUC | Transformación | Requerido |
 |-----------|-----------|----------------|-----------|
-| `dGen.iDoc` | `Header.DocType` | Directo (01-09) | |
-| `dGen.dFechaEm` | `Header.IssuedDateTime` | Formato ISO8601 | |
-| `dGen.iTipoEmision` | `AdditionalIssueDocInfo.Info[TipoEmision]` | Directo | |
-| `dGen.iTipoOp` | `AdditionalIssueDocInfo.Info[TipoOperacion]` | Directo | |
-| - | `AdditionalIssueDocInfo.Info[SecurityCode]` | Generado (9 dígitos) | |
+| `dGen.iDoc` | `Header.DocType` | Directo (01-09) | ✅ |
+| `dGen.dFechaEm` | `Header.IssuedDateTime` | Formato ISO8601 | ✅ |
+| `dGen.iTipoEmision` | `AdditionalIssueDocInfo.Info[TipoEmision]` | Directo | ✅ |
+| `dGen.iTipoOp` | `AdditionalIssueDocInfo.Info[TipoOperacion]` | Directo | ✅ |
+| - | `AdditionalIssueDocInfo.Info[SecurityCode]` | Generado (9 dígitos) | ✅ |
 
 ### Emisor (Seller)
 
 | Campo DGI | Campo NUC | Transformación | Requerido |
 |-----------|-----------|----------------|-----------|
-| `gEmis.dRuc` | `Seller.TaxID` | Normalizar RUC | |
-| `gEmis.dDV` | `Seller.TaxIDAdditionalInfo.Info[DV]` | Zero-pad 2 dígitos | |
-| `gEmis.dNombEm` | `Seller.Contact.Info[Nombre]` | Directo | |
-| `gEmis.dEmail` | `Seller.Contact.Info[CorreoElectronico]` | Directo | |
-| `gEmis.dSuc` | `Seller.BranchInfo.Info[Sucursal]` | Zero-pad 4 dígitos | |
-| `gEmis.dPuntoFact` | `Seller.BranchInfo.Info[PuntoFacturacion]` | Zero-pad 3 dígitos | |
+| `gEmis.dRuc` | `Seller.TaxID` | Normalizar RUC | ✅ |
+| `gEmis.dDV` | `Seller.TaxIDAdditionalInfo.Info[DV]` | Zero-pad 2 dígitos | ✅ |
+| `gEmis.dNombEm` | `Seller.Contact.Info[Nombre]` | Directo | ✅ |
+| `gEmis.dEmail` | `Seller.Contact.Info[CorreoElectronico]` | Directo | ⚠️ |
+| `gEmis.dSuc` | `Seller.BranchInfo.Info[Sucursal]` | Zero-pad 4 dígitos | ✅ |
+| `gEmis.dPuntoFact` | `Seller.BranchInfo.Info[PuntoFacturacion]` | Zero-pad 3 dígitos | ✅ |
 
 ### Receptor (Buyer)
 
 | Campo DGI | Campo NUC | Transformación | Requerido |
 |-----------|-----------|----------------|-----------|
-| `gDatRec.dRucRec` | `Buyer.TaxID` | Normalizar RUC/Cédula | |
-| `gDatRec.dDVRec` | `Buyer.TaxIDAdditionalInfo.Info[DV]` | Zero-pad 2 dígitos | |
-| `gDatRec.dNombRec` | `Buyer.AddressInfo.Info[RazonSocial]` | Directo | |
-| `gDatRec.dDirecRec` | `Buyer.AddressInfo.Info[Direccion]` | Directo | |
-| `gDatRec.dEmailRec` | `Buyer.AddressInfo.Info[CorreoElectronico]` | Directo | |
+| `gDatRec.dRucRec` | `Buyer.TaxID` | Normalizar RUC/Cédula | ✅ |
+| `gDatRec.dDVRec` | `Buyer.TaxIDAdditionalInfo.Info[DV]` | Zero-pad 2 dígitos | ✅ |
+| `gDatRec.dNombRec` | `Buyer.AddressInfo.Info[RazonSocial]` | Directo | ✅ |
+| `gDatRec.dDirecRec` | `Buyer.AddressInfo.Info[Direccion]` | Directo | ⚠️ |
+| `gDatRec.dEmailRec` | `Buyer.AddressInfo.Info[CorreoElectronico]` | Directo | ⚠️ |
 
 ### Items
 
 | Campo DGI | Campo NUC | Transformación | Requerido |
 |-----------|-----------|----------------|-----------|
-| `gItem[].dCodProd` | `Item.Codes.Code[Type=INT]` | Directo | |
-| `gItem[].dCodEAN` | `Item.Codes.Code[Type=EAN]` | Directo | |
-| `gItem[].dDesProd` | `Item.Description` | Directo | |
-| `gItem[].dCantCodInt` | `Item.Quantity` | 4 decimales | |
-| `gItem[].dPrUnit` | `Item.UnitPrice` | 4 decimales | |
-| `gItem[].gDescItem[].dMontoDescIt` | `Item.Discounts.Discount.Amount` | 4 decimales | |
-| `gItem[].gITBMSItem[].dTasaITBMS` | `Item.Taxes.Tax.TaxRate` | 4 decimales | |
-| `gItem[].gITBMSItem[].dValorITBMS` | `Item.Taxes.Tax.TaxAmount` | 4 decimales | |
+| `gItem[].dCodProd` | `Item.Codes.Code[Type=INT]` | Directo | ✅ |
+| `gItem[].dCodEAN` | `Item.Codes.Code[Type=EAN]` | Directo | ⚠️ |
+| `gItem[].dDesProd` | `Item.Description` | Directo | ✅ |
+| `gItem[].dCantCodInt` | `Item.Quantity` | 4 decimales | ✅ |
+| `gItem[].dPrUnit` | `Item.UnitPrice` | 4 decimales | ✅ |
+| `gItem[].gDescItem[].dMontoDescIt` | `Item.Discounts.Discount.Amount` | 4 decimales | ⚠️ |
+| `gItem[].gITBMSItem[].dTasaITBMS` | `Item.Taxes.Tax.TaxRate` | 4 decimales | ⚠️ |
+| `gItem[].gITBMSItem[].dValorITBMS` | `Item.Taxes.Tax.TaxAmount` | 4 decimales | ⚠️ |
 
 ### Totales (Totals)
 
 | Campo DGI | Campo NUC | Transformación | Requerido |
 |-----------|-----------|----------------|-----------|
-| `gTot.dSubTotal` | `Totals.Total.Info[TotalGravado]` | 4 decimales | |
-| `gTot.dTotDesc` | `Totals.Total.Info[TotalDescuento]` | 4 decimales | |
-| `gTot.dTotITBMS` | `Totals.Total.Info[TotalImpuesto]` | 4 decimales | |
-| `gTot.dTotNeto` | `Totals.Total.Info[TotalVenta]` | 4 decimales | |
-| `gTot.dTotNeto` | `Totals.Total.Info[TotalAPagar]` | 4 decimales | |
+| `gTot.dSubTotal` | `Totals.Total.Info[TotalGravado]` | 4 decimales | ✅ |
+| `gTot.dTotDesc` | `Totals.Total.Info[TotalDescuento]` | 4 decimales | ✅ |
+| `gTot.dTotITBMS` | `Totals.Total.Info[TotalImpuesto]` | 4 decimales | ✅ |
+| `gTot.dTotNeto` | `Totals.Total.Info[TotalVenta]` | 4 decimales | ✅ |
+| `gTot.dTotNeto` | `Totals.Total.Info[TotalAPagar]` | 4 decimales | ✅ |
 
 ### Pagos (Payments)
 
 | Campo DGI | Campo NUC | Transformación | Requerido |
 |-----------|-----------|----------------|-----------|
-| `gPag[].iFormaPago` | `Payment.PaymentMethodCode` | Directo | |
-| `gPag[].dMontoP` | `Payment.PaymentAmount` | 4 decimales | |
+| `gPag[].iFormaPago` | `Payment.PaymentMethodCode` | Directo | ✅ |
+| `gPag[].dMontoP` | `Payment.PaymentAmount` | 4 decimales | ✅ |
 
 ### Referencias (AdditionalDocumentInfo) - Solo para tipos 04, 05
 
 | Campo DGI | Campo NUC | Transformación | Requerido |
 |-----------|-----------|----------------|-----------|
-| `gInfDoRef[].dCUFERe` | `DataEl[Name=CUFERef]` | Directo | |
-| `gInfDoRef[].dFechDoRe` | `DataEl[Name=FechaRef]` | ISO8601 | |
-| `gInfDoRef[].iTipoDocRe` | `DataEl[Name=TipoDocRef]` | Directo | |
-| `gInfDoRef[].dNumDocRe` | `DataEl[Name=NroDocRef]` | Directo | |
+| `gInfDoRef[].dCUFERe` | `DataEl[Name=CUFERef]` | Directo | ✅ |
+| `gInfDoRef[].dFechDoRe` | `DataEl[Name=FechaRef]` | ISO8601 | ✅ |
+| `gInfDoRef[].iTipoDocRe` | `DataEl[Name=TipoDocRef]` | Directo | ✅ |
+| `gInfDoRef[].dNumDocRe` | `DataEl[Name=NroDocRef]` | Directo | ⚠️ |
 
 ## Testing
 
@@ -971,13 +971,13 @@ Log::info('Digifact performance', [
 
 ## Checklist de Implementación
 
-### Fase 1: Setup Básico 
+### Fase 1: Setup Básico ✅
 - [x] DigifactService con autenticación
 - [x] DigifactXmlBuilder con transformación completa
 - [x] Validaciones por tipo de documento
 - [x] Integración en CreateFastJob
 
-### Fase 2: Testing 
+### Fase 2: Testing 🔄
 - [ ] Test con documento tipo 01 (Factura Interna)
 - [ ] Test con documento tipo 03 (Exportación)
 - [ ] Test con documento tipo 04 (NC Referente)
@@ -985,7 +985,7 @@ Log::info('Digifact performance', [
 - [ ] Validar PDF generado
 - [ ] Validar XML generado
 
-### Fase 3: Producción 
+### Fase 3: Producción ⏳
 - [ ] Obtener credenciales de producción
 - [ ] Configurar endpoint producción
 - [ ] Migrar clientes de prueba

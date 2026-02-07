@@ -54,9 +54,9 @@ public function down()
 **Archivo**: `app/Http/Livewire/Admin/Reports/PacErrorsDashboard.php`
 
 **Cambios**:
-- Eliminado: `$this->setDatabaseConnection($this->organization)`
-- Eliminados: métodos `setDatabaseConnection()` y `setDefaultConnection()`
-- Agregado: Comentario explicativo
+- ❌ Eliminado: `$this->setDatabaseConnection($this->organization)`
+- ❌ Eliminados: métodos `setDatabaseConnection()` y `setDefaultConnection()`
+- ✅ Agregado: Comentario explicativo
 
 ```php
 public function mount()
@@ -156,10 +156,10 @@ docker exec -it <contenedor> php artisan tinker
 
 ## Archivos Modificados
 
-- `app/Models/PacEmissionError.php` - Agregado `$connection = 'mysql'`
-- `database/migrations/2025_12_17_000001_create_pac_emission_errors_table.php` - Usa `Schema::connection('mysql')`
-- `app/Http/Livewire/Admin/Reports/PacErrorsDashboard.php` - Eliminado cambio de conexión
-- `scripts/migrate-pac-errors.sh` - Script de migración creado
+- ✅ `app/Models/PacEmissionError.php` - Agregado `$connection = 'mysql'`
+- ✅ `database/migrations/2025_12_17_000001_create_pac_emission_errors_table.php` - Usa `Schema::connection('mysql')`
+- ✅ `app/Http/Livewire/Admin/Reports/PacErrorsDashboard.php` - Eliminado cambio de conexión
+- ✅ `scripts/migrate-pac-errors.sh` - Script de migración creado
 
 ## Notas Importantes
 

@@ -2,9 +2,9 @@
 
 Este directorio contiene toda la documentación de las APIs REST disponibles en el sistema DocuCenter.
 
-##  APIs Disponibles
+## 🔌 APIs Disponibles
 
-###  [Facturación Electrónica (FE)](./fe/)
+### 📄 [Facturación Electrónica (FE)](./fe/)
 APIs para la emisión de documentos fiscales electrónicos y integración con diferentes plataformas:
 
 - **Emisión de documentos**: Crear facturas, notas de crédito, etc.
@@ -13,7 +13,7 @@ APIs para la emisión de documentos fiscales electrónicos y integración con di
 - **[Consulta de RUC](./check-ruc-api.md)**: Validación de RUCs panameños con Alanube
 - **[Guía de Formatos RUC](./ruc-formats-guide.md)**: Tipos de RUC soportados (natural, extranjero, empresarial)
 
-### [Alanube Service](./alanube-service-usage.md)
+### 🔗 [Alanube Service](./alanube-service-usage.md)
 Servicio para emisión de documentos electrónicos en República Dominicana y Panamá:
 
 - **[Guía de Uso](./alanube-service-usage.md)**: Documentación completa del servicio
@@ -21,7 +21,7 @@ Servicio para emisión de documentos electrónicos en República Dominicana y Pa
 - **Dual-Country**: Soporte automático para ambos países
 - **Auto-Detection**: Detección automática de país por configuración PAC
 
-### [Sage ACICloud](./sage-acicloud/)
+### 🏢 [Sage ACICloud](./sage-acicloud/)
 API completa para integración con el sistema ERP Sage ACICloud:
 
 - **Clientes**: Gestión de clientes y proveedores
@@ -31,13 +31,13 @@ API completa para integración con el sistema ERP Sage ACICloud:
 - **Pagos**: Procesamiento y conciliación de pagos
 - **Inventario**: Control de stock y movimientos
 
-### [Organizaciones](./organizations/)
+### 🏗️ [Organizaciones](./organizations/)
 APIs para la gestión de organizaciones y configuraciones del sistema.
 
-###  [Ubicaciones](./locations/)
+### 📍 [Ubicaciones](./locations/)
 APIs para el manejo de ubicaciones geográficas y direcciones.
 
-## Guía de Inicio Rápido
+## 🚀 Guía de Inicio Rápido
 
 ### Autenticación
 La mayoría de las APIs utilizan autenticación Bearer Token (Laravel Sanctum):
@@ -73,7 +73,7 @@ curl -X POST "https://tu-dominio.com/api/fe/create_sale" \
   }'
 ```
 
-## Convenciones de la API
+## 📋 Convenciones de la API
 
 ### Códigos de Respuesta HTTP
 - `200` - OK: Petición exitosa
@@ -108,14 +108,14 @@ curl -X POST "https://tu-dominio.com/api/fe/create_sale" \
 }
 ```
 
-## Recursos Útiles
+## 🔍 Recursos Útiles
 
 - **Postman Collection**: Solicita acceso al equipo de desarrollo
 - **Sandbox Environment**: Usa `https://sandbox.tu-dominio.com/api/` para pruebas
 - **Rate Limiting**: Las APIs tienen límite de 1000 peticiones por hora por token
 - **Webhooks**: Disponibles para notificaciones en tiempo real
 
-##  Soporte
+## 📞 Soporte
 
 Para dudas específicas sobre las APIs:
 

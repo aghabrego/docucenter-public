@@ -105,11 +105,11 @@ UPDATE users SET branch_code = '25' WHERE id = 1;
 
 ## Resultados Esperados
 
-**ÉXITO**: Todos los códigos de sucursal formatados a 4 dígitos
-**ÉXITO**: branch_code del usuario usado como base
-**ÉXITO**: Fallback a "0000" cuando branch_code está vacío
-**ÉXITO**: Override de Lightspeed funciona y mantiene formato
-**ÉXITO**: Compatibilidad con billing_point existente
+✅ **ÉXITO**: Todos los códigos de sucursal formatados a 4 dígitos
+✅ **ÉXITO**: branch_code del usuario usado como base
+✅ **ÉXITO**: Fallback a "0000" cuando branch_code está vacío
+✅ **ÉXITO**: Override de Lightspeed funciona y mantiene formato
+✅ **ÉXITO**: Compatibilidad con billing_point existente
 
 ## Notas Técnicas
 

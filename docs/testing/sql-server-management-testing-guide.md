@@ -209,14 +209,14 @@ Durante la ejecución del comando de testing, verificar:
 
 ## Resultados Esperados
 
-### Pruebas Exitosas
+### ✅ Pruebas Exitosas
 - Todas las operaciones CRUD funcionan correctamente
 - Validaciones funcionan como se espera
 - UI responde adecuadamente
 - No hay errores en logs
 - Base de datos se actualiza correctamente
 
-### Problemas Comunes
+### ❌ Problemas Comunes
 - **Error 500**: Verificar logs de aplicación
 - **Campos no validados**: Revisar reglas de validación
 - **UI no responde**: Verificar JavaScript y CSS

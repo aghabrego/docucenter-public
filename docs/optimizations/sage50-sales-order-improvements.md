@@ -26,7 +26,7 @@ public function addProduct(array $detail)
         // ... más campos ...
     ];
 
-    // PROBLEMA: Recalcula TODOS los items cada vez
+    // ⚠️ PROBLEMA: Recalcula TODOS los items cada vez
     $this->calcularTotales();  // Línea 661
     
     $this->dispatchBrowserEvent('close-modal-add-product');
@@ -45,7 +45,7 @@ public function calcularTotales()
     $this->otroPrecioFinal = 0;
     $this->totalDescuento = 0;
     
-    // PROBLEMA: Loop sobre TODOS los items
+    // ⚠️ PROBLEMA: Loop sobre TODOS los items
     foreach ($this->items as $item) {
         $this->totalPrecioFinal = $this->totalPrecioFinal + $item['precioFinal'];
         $this->totalDescuento = $this->totalDescuento + $item['descuento'];
@@ -92,8 +92,8 @@ $header = SalesOrderHeaderImp::query()->create([
     'SalesOrderNumber' => $this->strPad($this->sales_order_number, 10),
     'CustomerID' => $this->customer_id,
     // ... más campos ...
-    'Enviado' => 0,  // Siempre 0 al crear
-    'Error' => 0,    // Siempre 0 al crear
+    'Enviado' => 0,  // ⚠️ Siempre 0 al crear
+    'Error' => 0,    // ⚠️ Siempre 0 al crear
 ]);
 ```
 
@@ -150,7 +150,7 @@ public function addProduct(array $detail)
     
     $this->items[] = $itemData;
 
-    // MEJORA: Cálculo incremental en lugar de recalcular todo
+    // ✅ MEJORA: Cálculo incremental en lugar de recalcular todo
     $this->calcularTotalesIncremental($itemData);
 
     $this->dispatchBrowserEvent('close-modal-add-product');
@@ -380,7 +380,7 @@ protected function guardarOrden()
 
         $now = docucenter_date_format(now('America/Panama'), 'Y-m-d H:i:s', get_user_timezone());
 
-        // Estado según si es borrador o completado
+        // ✅ Estado según si es borrador o completado
         $estadoEnviado = $this->guardarComoBorrador 
             ? SalesOrderHeaderImp::ESTADO_BORRADOR 
             : SalesOrderHeaderImp::ESTADO_COMPLETADO;
@@ -404,7 +404,7 @@ protected function guardarOrden()
             'WithinRadius' => $whereClient === true ? 1 : 0,
             'LAST_CHANGE' => $now,
             'date' => $now,
-            'Enviado' => $estadoEnviado,  // Borrador o Completado
+            'Enviado' => $estadoEnviado,  // ✅ Borrador o Completado
             'Error' => 0,
         ]);
 
@@ -666,9 +666,9 @@ $ordenes = SalesOrderHeaderImp::query()
 
 ## Próximos Pasos
 
-1. Revisar y aprobar propuestas
-2.  Implementar Opción 1A (Rendimiento)
-3.  Implementar Opción 2A (Borradores)
-4.  Testing en desarrollo
-5.  Documentar en manual de usuario
-6.  Desplegar a producción
+1. ✅ Revisar y aprobar propuestas
+2. ⏳ Implementar Opción 1A (Rendimiento)
+3. ⏳ Implementar Opción 2A (Borradores)
+4. ⏳ Testing en desarrollo
+5. ⏳ Documentar en manual de usuario
+6. ⏳ Desplegar a producción

@@ -1,0 +1,2590 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentación técnica y de usuario de Docucenter">
+      
+      
+        <meta name="author" content="aghabrego">
+      
+      
+        <link rel="canonical" href="https://aghabrego.github.io/docucenter/technical/HELPERS-USAGE-GUIDE/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../docs/favicon.ico">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Guía de Uso: ReceiverTypeHelper y CustomFieldsValidator - Docucenter</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#guia-de-uso-receivertypehelper-y-customfieldsvalidator" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="Docucenter" class="md-header__button md-logo" aria-label="Docucenter" data-md-component="logo">
+      
+  <img src="../../docs/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Docucenter
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Guía de Uso: ReceiverTypeHelper y CustomFieldsValidator
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/aghabrego/docucenter" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    aghabrego/docucenter
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Docucenter" class="md-nav__button md-logo" aria-label="Docucenter" data-md-component="logo">
+      
+  <img src="../../docs/logo.png" alt="logo">
+
+    </a>
+    Docucenter
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/aghabrego/docucenter" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    aghabrego/docucenter
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Documentation
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    API Documentation
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sage ACICloud
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Sage ACICloud
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/invoices-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Facturación - Invoices
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/customers-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Clientes - Customers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/vendors-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Proveedores - Vendors
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/purchases-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Compras - Purchases
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/products-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Productos - Products
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/jobs-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trabajos - Jobs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/accounting-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contabilidad General
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/payments-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pagos y Créditos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/inventory-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inventario - Inventory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Facturación Electrónica (FE)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Facturación Electrónica (FE)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/fe-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    APIs de Facturación Electrónica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/meypar-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integración Meypar
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/shopify-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integración Shopify
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/kart21-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integración Kart21
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/lightspeed-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integración Lightspeed
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/maxgym-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integración Maxgym
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/acicloud-fe-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ACICloud FE
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/import-xml-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Import XML
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/emit-json-object-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Emit JSON Object
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/download-base64-document-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Download Base64 Document
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Organizaciones
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Organizaciones
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/organizations/organizations-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gestión de Organizaciones
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ubicaciones Geográficas
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Ubicaciones Geográficas
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/locations/locations-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API de Ubicaciones
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sistema de Testing
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Sistema de Testing
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Índice de Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../TESTING_SYSTEM_SUMMARY/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resumen Ejecutivo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Documentación Técnica
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Documentación Técnica
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../README.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Soluciones
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lightspeed_audit_improvement/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Auditoría Lightspeed
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../solucion-sincronizacion-pagos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sincronización de Pagos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../payment-calculation-fix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Corrección Cálculo Pagos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validaciones
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Validaciones
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../validations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resumen
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../validations/createSale-ruc-validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validación RUC CreateSale
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../validations/maxgym-ruc-validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validación RUC Maxgym
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../validations/meypar-validations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validaciones MEYPAR
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../validations/validation_comparison/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Comparación Validaciones
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-receivertypehelper" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. ReceiverTypeHelper
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. ReceiverTypeHelper">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-caracteristicas-principales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1. Características Principales
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-constantes-disponibles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2. Constantes Disponibles
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-metodos-principales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3. Métodos Principales
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.3. Métodos Principales">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#obtener-ids-consultan-bd-con-cache" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Obtener IDs (consultan BD con cache)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mapeo-code-id" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mapeo CODE → ID
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mapeo-id-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mapeo ID → CODE
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#auto-deteccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Auto-Detección
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validaciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validaciones
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#utilidades" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Utilidades
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-ejemplos-de-uso-en-servicios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4. Ejemplos de Uso en Servicios
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.4. Ejemplos de Uso en Servicios">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#quickbooksonlineservice" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        QuickBooksOnlineService
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#updateintuitordersjob" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        UpdateIntuitOrdersJob
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-customfieldsvalidator" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. CustomFieldsValidator
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. CustomFieldsValidator">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-caracteristicas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1. Características
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-metodos-principales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2. Métodos Principales
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.2. Métodos Principales">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#validatecustomerfields" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        validateCustomerFields()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#checkconsistency" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        checkConsistency()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#autofix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        autoFix()
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-ejemplos-de-uso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3. Ejemplos de Uso
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.3. Ejemplos de Uso">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#acicloudservice" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ACIcloudService
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validar-cliente-existente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validar Cliente Existente
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-comando-artisan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Comando Artisan
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Comando Artisan">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-uso-basico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1. Uso Básico
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-ejemplos-con-docker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2. Ejemplos con Docker
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-salida-del-comando" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3. Salida del Comando
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-best-practices" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Best Practices
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Best Practices">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-al-crear-clientes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1. Al Crear Clientes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-al-mapear-codes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2. Al Mapear CODEs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-al-validar-tipos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3. Al Validar Tipos
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Troubleshooting
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Troubleshooting">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-cliente-con-tipo_receptor-incorrecto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1. Cliente con TIPO_RECEPTOR incorrecto
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-cache-desactualizado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2. Cache desactualizado
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-migracion-de-codigo-existente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Migración de Código Existente
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Migración de Código Existente">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-antes-quickbooksonlineservice" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1. Antes (QuickBooksOnlineService)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-despues-con-helpers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2. Después (con helpers)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-referencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Referencias
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="guia-de-uso-receivertypehelper-y-customfieldsvalidator">Guía de Uso: ReceiverTypeHelper y CustomFieldsValidator</h1>
+<p><strong>Fecha</strong>: 2026-01-26<br />
+<strong>Versión</strong>: 1.0<br />
+<strong>Propósito</strong>: Documentar uso de helpers para validación y normalización de Custom Fields</p>
+<hr />
+<h2 id="1-receivertypehelper">1. ReceiverTypeHelper</h2>
+<p>Helper centralizado para manejo de Tipos de Receptor en facturación electrónica panameña.</p>
+<h3 id="11-caracteristicas-principales">1.1. Características Principales</h3>
+<ul>
+<li>✅ <strong>Mapeo CODE ↔ ID</strong>: Convierte entre códigos DGI (01-04) e IDs de base de datos</li>
+<li>✅ <strong>Cache automático</strong>: Consultas a BD con cache de 1 hora</li>
+<li>✅ <strong>Multi-ambiente</strong>: Resiliente entre dev/staging/prod</li>
+<li>✅ <strong>Auto-detección</strong>: Detecta tipo receptor basado en datos disponibles</li>
+</ul>
+<h3 id="12-constantes-disponibles">1.2. Constantes Disponibles</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">use App\Helpers\ReceiverTypeHelper;</span>
+
+<span class="x">ReceiverTypeHelper::CONTRIBUYENTE_CODE;      // &#39;01&#39;</span>
+<span class="x">ReceiverTypeHelper::CONSUMIDOR_FINAL_CODE;   // &#39;02&#39;</span>
+<span class="x">ReceiverTypeHelper::GOBIERNO_CODE;           // &#39;03&#39;</span>
+<span class="x">ReceiverTypeHelper::EXTRANJERO_CODE;         // &#39;04&#39;</span>
+</code></pre></div>
+
+<h3 id="13-metodos-principales">1.3. Métodos Principales</h3>
+<h4 id="obtener-ids-consultan-bd-con-cache">Obtener IDs (consultan BD con cache)</h4>
+<div class="codehilite"><pre><span></span><code><span class="x">// Obtener ID de Contribuyente</span>
+<span class="x">$id = ReceiverTypeHelper::getContribuyenteId();  // Retorna: 1</span>
+
+<span class="x">// Obtener ID de Consumidor Final</span>
+<span class="x">$id = ReceiverTypeHelper::getConsumidorFinalId(); // Retorna: 2</span>
+
+<span class="x">// Obtener ID de Extranjero</span>
+<span class="x">$id = ReceiverTypeHelper::getExtranjeroId();  // Retorna: 3</span>
+
+<span class="x">// Obtener ID de Gobierno</span>
+<span class="x">$id = ReceiverTypeHelper::getGobiernoId();  // Retorna: 4</span>
+</code></pre></div>
+
+<h4 id="mapeo-code-id">Mapeo CODE → ID</h4>
+<div class="codehilite"><pre><span></span><code><span class="x">// Normaliza CODEs a IDs de BD</span>
+<span class="x">$id = ReceiverTypeHelper::mapCodeToId(&#39;01&#39;);  // Retorna: 1</span>
+<span class="x">$id = ReceiverTypeHelper::mapCodeToId(&#39;04&#39;);  // Retorna: 3 (Extranjero)</span>
+<span class="x">$id = ReceiverTypeHelper::mapCodeToId(&#39;03&#39;);  // Retorna: 4 (Gobierno)</span>
+
+<span class="x">// Acepta valores sin padding</span>
+<span class="x">$id = ReceiverTypeHelper::mapCodeToId(&#39;1&#39;);   // Retorna: 1</span>
+<span class="x">$id = ReceiverTypeHelper::mapCodeToId(&#39;4&#39;);   // Retorna: 3</span>
+
+<span class="x">// Valores inválidos retornan Consumidor Final</span>
+<span class="x">$id = ReceiverTypeHelper::mapCodeToId(&#39;99&#39;);  // Retorna: 2</span>
+</code></pre></div>
+
+<h4 id="mapeo-id-code">Mapeo ID → CODE</h4>
+<div class="codehilite"><pre><span></span><code><span class="x">// Convierte IDs a CODEs normativa DGI</span>
+<span class="x">$code = ReceiverTypeHelper::mapIdToCode(1);  // Retorna: &#39;01&#39;</span>
+<span class="x">$code = ReceiverTypeHelper::mapIdToCode(3);  // Retorna: &#39;04&#39; (Extranjero)</span>
+<span class="x">$code = ReceiverTypeHelper::mapIdToCode(4);  // Retorna: &#39;03&#39; (Gobierno)</span>
+</code></pre></div>
+
+<h4 id="auto-deteccion">Auto-Detección</h4>
+<div class="codehilite"><pre><span></span><code><span class="x">// Detecta tipo receptor automáticamente</span>
+<span class="x">$tipoReceptor = ReceiverTypeHelper::detectReceiverType(</span>
+<span class="x">    $ruc,        // RUC o null</span>
+<span class="x">    $pasaporte,  // Pasaporte o null</span>
+<span class="x">    $country     // País o null</span>
+<span class="x">);</span>
+
+<span class="x">// Ejemplos:</span>
+<span class="x">ReceiverTypeHelper::detectReceiverType(null, &#39;ABC123&#39;, null);     // 3 (Extranjero por pasaporte)</span>
+<span class="x">ReceiverTypeHelper::detectReceiverType(null, null, &#39;US&#39;);         // 3 (Extranjero por país)</span>
+<span class="x">ReceiverTypeHelper::detectReceiverType(&#39;8-123-4567&#39;, null, &#39;PA&#39;); // 1 (Contribuyente por RUC)</span>
+<span class="x">ReceiverTypeHelper::detectReceiverType(null, null, null);         // 2 (Consumidor Final por defecto)</span>
+</code></pre></div>
+
+<h4 id="validaciones">Validaciones</h4>
+<div class="codehilite"><pre><span></span><code><span class="x">// Verificar si requiere tipo contribuyente</span>
+<span class="x">$needsTipo = ReceiverTypeHelper::needsTipoContribuyente(1);  // true (Contribuyente)</span>
+<span class="x">$needsTipo = ReceiverTypeHelper::needsTipoContribuyente(3);  // false (Extranjero)</span>
+
+<span class="x">// Verificar si es extranjero</span>
+<span class="x">$isExtranjero = ReceiverTypeHelper::isExtranjero(3);  // true</span>
+<span class="x">$isExtranjero = ReceiverTypeHelper::isExtranjero(1);  // false</span>
+
+<span class="x">// Verificar si requiere RUC</span>
+<span class="x">$needsRuc = ReceiverTypeHelper::needsRuc(1);  // true (Contribuyente)</span>
+<span class="x">$needsRuc = ReceiverTypeHelper::needsRuc(2);  // false (Consumidor Final)</span>
+
+<span class="x">// Verificar si requiere pasaporte</span>
+<span class="x">$needsPasaporte = ReceiverTypeHelper::needsPasaporte(3);  // true (Extranjero)</span>
+<span class="x">$needsPasaporte = ReceiverTypeHelper::needsPasaporte(1);  // false (Contribuyente)</span>
+</code></pre></div>
+
+<h4 id="utilidades">Utilidades</h4>
+<div class="codehilite"><pre><span></span><code><span class="x">// Obtener nombre del tipo</span>
+<span class="x">$nombre = ReceiverTypeHelper::getName(1);  // &#39;Contribuyente&#39;</span>
+<span class="x">$nombre = ReceiverTypeHelper::getName(3);  // &#39;Extranjero&#39;</span>
+
+<span class="x">// Obtener país por defecto</span>
+<span class="x">$pais = ReceiverTypeHelper::getDefaultCountry(1);  // &#39;PA&#39;</span>
+<span class="x">$pais = ReceiverTypeHelper::getDefaultCountry(3);  // &#39;US&#39; (Extranjero)</span>
+
+<span class="x">// Limpiar cache (si se modifica tabla)</span>
+<span class="x">ReceiverTypeHelper::clearCache();</span>
+</code></pre></div>
+
+<h3 id="14-ejemplos-de-uso-en-servicios">1.4. Ejemplos de Uso en Servicios</h3>
+<h4 id="quickbooksonlineservice">QuickBooksOnlineService</h4>
+<div class="codehilite"><pre><span></span><code><span class="x">// Normalizar TIPO_RECEPTOR desde request</span>
+<span class="x">$tipoReceptorFromRequest = $request-&gt;get(&#39;TIPO_RECEPTOR&#39;);  // &#39;04&#39;</span>
+<span class="x">$tipoReceptor = ReceiverTypeHelper::mapCodeToId($tipoReceptorFromRequest);  // 3</span>
+
+<span class="x">// Validar si es extranjero</span>
+<span class="x">if (ReceiverTypeHelper::isExtranjero($tipoReceptor)) {</span>
+<span class="x">    $ruc = null;</span>
+<span class="x">    $pasaporte = $request-&gt;get(&#39;PASAPORTE&#39;);</span>
+<span class="x">    $country = ReceiverTypeHelper::getDefaultCountry($tipoReceptor);  // &#39;US&#39;</span>
+<span class="x">}</span>
+
+<span class="x">// Crear cliente</span>
+<span class="x">$customer = CustomersImp::create([</span>
+<span class="x">    &#39;Custom_field1&#39; =&gt; $pasaporte,</span>
+<span class="x">    &#39;Custom_field2&#39; =&gt; null,</span>
+<span class="x">    &#39;Custom_field3&#39; =&gt; $tipoReceptor,  // 3</span>
+<span class="x">    &#39;Custom_field4&#39; =&gt; null,</span>
+<span class="x">    &#39;Custom_field5&#39; =&gt; null,</span>
+<span class="x">    &#39;Country&#39; =&gt; $country</span>
+<span class="x">]);</span>
+</code></pre></div>
+
+<h4 id="updateintuitordersjob">UpdateIntuitOrdersJob</h4>
+<div class="codehilite"><pre><span></span><code><span class="x">// Crear cliente auto-creado como extranjero</span>
+<span class="x">$customer = Customer::create([</span>
+<span class="x">    &#39;Name&#39; =&gt; $invoiceData[&#39;CustomerRef&#39;][&#39;name&#39;],</span>
+<span class="x">    &#39;Custom_field1&#39; =&gt; &#39;QB-&#39; . $invoiceData[&#39;CustomerRef&#39;][&#39;value&#39;],</span>
+<span class="x">    &#39;Custom_field2&#39; =&gt; null,</span>
+<span class="x">    &#39;Custom_field3&#39; =&gt; ReceiverTypeHelper::getExtranjeroId(),  // 3</span>
+<span class="x">    &#39;Custom_field4&#39; =&gt; null,</span>
+<span class="x">    &#39;Custom_field5&#39; =&gt; null,</span>
+<span class="x">    &#39;Country&#39; =&gt; &#39;US&#39;</span>
+<span class="x">]);</span>
+</code></pre></div>
+
+<hr />
+<h2 id="2-customfieldsvalidator">2. CustomFieldsValidator</h2>
+<p>Validador centralizado para todos los Custom Fields de un cliente.</p>
+<h3 id="21-caracteristicas">2.1. Características</h3>
+<ul>
+<li>✅ <strong>Validación completa</strong>: Verifica consistencia de todos los custom fields</li>
+<li>✅ <strong>Normalización automática</strong>: Mapea CODEs a IDs usando ReceiverTypeHelper</li>
+<li>✅ <strong>Auto-detección</strong>: Detecta valores faltantes basado en datos disponibles</li>
+<li>✅ <strong>Logging detallado</strong>: Registra validaciones y normalizaciones</li>
+<li>✅ <strong>Auto-corrección</strong>: Aplica correcciones automáticas a datos inconsistentes</li>
+</ul>
+<h3 id="22-metodos-principales">2.2. Métodos Principales</h3>
+<h4 id="validatecustomerfields">validateCustomerFields()</h4>
+<p>Valida y normaliza todos los custom fields de un cliente.</p>
+<div class="codehilite"><pre><span></span><code><span class="x">use App\Helpers\CustomFieldsValidator;</span>
+
+<span class="x">$data = [</span>
+<span class="x">    &#39;ruc&#39; =&gt; &#39;8-123-4567&#39;,</span>
+<span class="x">    &#39;dv&#39; =&gt; &#39;01&#39;,</span>
+<span class="x">    &#39;tipo_receptor&#39; =&gt; &#39;01&#39;,  // CODE o ID</span>
+<span class="x">    &#39;tipo_contribuyente&#39; =&gt; &#39;1&#39;,</span>
+<span class="x">    &#39;ubicacion&#39; =&gt; &#39;8-1-1&#39;,</span>
+<span class="x">    &#39;country&#39; =&gt; &#39;PA&#39;</span>
+<span class="x">];</span>
+
+<span class="x">$validated = CustomFieldsValidator::validateCustomerFields($data, &#39;QuickBooks&#39;);</span>
+
+<span class="x">// Resultado:</span>
+<span class="x">// [</span>
+<span class="x">//     &#39;Custom_field1&#39; =&gt; &#39;8-123-4567&#39;,</span>
+<span class="x">//     &#39;Custom_field2&#39; =&gt; &#39;01&#39;,</span>
+<span class="x">//     &#39;Custom_field3&#39; =&gt; 1,   // Normalizado a ID</span>
+<span class="x">//     &#39;Custom_field4&#39; =&gt; &#39;1&#39;,</span>
+<span class="x">//     &#39;Custom_field5&#39; =&gt; &#39;8-1-1&#39;</span>
+<span class="x">// ]</span>
+</code></pre></div>
+
+<p><strong>Parámetros</strong>:
+- <code>$data</code> (array): Datos del cliente con keys flexibles
+- <code>$source</code> (string): Fuente de datos para logging (ej: 'QuickBooks', 'Shopify')</p>
+<p><strong>Keys soportadas</strong> (flexibles):
+- <code>ruc</code> o <code>Custom_field1</code>
+- <code>dv</code> o <code>Custom_field2</code>
+- <code>tipo_receptor</code> o <code>Custom_field3</code>
+- <code>tipo_contribuyente</code> o <code>Custom_field4</code>
+- <code>ubicacion</code> o <code>Custom_field5</code>
+- <code>pasaporte</code>
+- <code>country</code> o <code>Country</code></p>
+<h4 id="checkconsistency">checkConsistency()</h4>
+<p>Verifica si los custom fields son consistentes.</p>
+<div class="codehilite"><pre><span></span><code><span class="x">$customFields = [</span>
+<span class="x">    &#39;Custom_field1&#39; =&gt; &#39;8-123-4567&#39;,</span>
+<span class="x">    &#39;Custom_field2&#39; =&gt; &#39;01&#39;,</span>
+<span class="x">    &#39;Custom_field3&#39; =&gt; 1,</span>
+<span class="x">    &#39;Custom_field4&#39; =&gt; &#39;1&#39;,</span>
+<span class="x">    &#39;Custom_field5&#39; =&gt; &#39;8-1-1&#39;</span>
+<span class="x">];</span>
+
+<span class="x">$result = CustomFieldsValidator::checkConsistency($customFields);</span>
+
+<span class="x">// Resultado:</span>
+<span class="x">// [</span>
+<span class="x">//     &#39;is_consistent&#39; =&gt; true,</span>
+<span class="x">//     &#39;issues&#39; =&gt; [],</span>
+<span class="x">//     &#39;receiver_type&#39; =&gt; &#39;Contribuyente&#39;,</span>
+<span class="x">//     &#39;receiver_type_id&#39; =&gt; 1</span>
+<span class="x">// ]</span>
+</code></pre></div>
+
+<p><strong>Validaciones realizadas</strong>:
+- Custom_field3 (TIPO_RECEPTOR) no está vacío
+- Extranjeros tienen pasaporte en Custom_field1
+- Extranjeros NO tienen DV, tipo contribuyente ni ubicación
+- Nacionales tienen RUC y tipo contribuyente</p>
+<h4 id="autofix">autoFix()</h4>
+<p>Aplica correcciones automáticas a custom fields inconsistentes.</p>
+<div class="codehilite"><pre><span></span><code><span class="x">$customFields = [</span>
+<span class="x">    &#39;Custom_field1&#39; =&gt; &#39;ABC123&#39;,  // Pasaporte</span>
+<span class="x">    &#39;Custom_field2&#39; =&gt; &#39;01&#39;,      // ❌ Extranjero no debe tener DV</span>
+<span class="x">    &#39;Custom_field3&#39; =&gt; 3,         // Extranjero</span>
+<span class="x">    &#39;Custom_field4&#39; =&gt; &#39;1&#39;,       // ❌ Extranjero no debe tener tipo contribuyente</span>
+<span class="x">    &#39;Custom_field5&#39; =&gt; &#39;8-1-1&#39;    // ❌ Extranjero no debe tener ubicación</span>
+<span class="x">];</span>
+
+<span class="x">$fixed = CustomFieldsValidator::autoFix($customFields);</span>
+
+<span class="x">// Resultado:</span>
+<span class="x">// [</span>
+<span class="x">//     &#39;Custom_field1&#39; =&gt; &#39;ABC123&#39;,</span>
+<span class="x">//     &#39;Custom_field2&#39; =&gt; null,  // ✓ Limpiado</span>
+<span class="x">//     &#39;Custom_field3&#39; =&gt; 3,</span>
+<span class="x">//     &#39;Custom_field4&#39; =&gt; null,  // ✓ Limpiado</span>
+<span class="x">//     &#39;Custom_field5&#39; =&gt; null   // ✓ Limpiado</span>
+<span class="x">// ]</span>
+</code></pre></div>
+
+<h3 id="23-ejemplos-de-uso">2.3. Ejemplos de Uso</h3>
+<h4 id="acicloudservice">ACIcloudService</h4>
+<div class="codehilite"><pre><span></span><code><span class="x">// En método customersImp()</span>
+<span class="x">$customFields = CustomFieldsValidator::validateCustomerFields([</span>
+<span class="x">    &#39;ruc&#39; =&gt; $request-&gt;get(&#39;RUC&#39;),</span>
+<span class="x">    &#39;dv&#39; =&gt; $request-&gt;get(&#39;DV&#39;),</span>
+<span class="x">    &#39;tipo_receptor&#39; =&gt; $request-&gt;get(&#39;Custom_field3&#39;),</span>
+<span class="x">    &#39;tipo_contribuyente&#39; =&gt; $request-&gt;get(&#39;Custom_field4&#39;),</span>
+<span class="x">    &#39;ubicacion&#39; =&gt; $request-&gt;get(&#39;Custom_field5&#39;),</span>
+<span class="x">    &#39;country&#39; =&gt; $request-&gt;get(&#39;Country&#39;)</span>
+<span class="x">], &#39;ACIcloud&#39;);</span>
+
+<span class="x">$customer = CustomersImp::create(array_merge([</span>
+<span class="x">    &#39;ID_compania&#39; =&gt; $company-&gt;ID_compania,</span>
+<span class="x">    &#39;Customer_Bill_Name&#39; =&gt; $request-&gt;get(&#39;Customer_Bill_Name&#39;),</span>
+<span class="x">    &#39;CustomerID&#39; =&gt; $request-&gt;get(&#39;CustomerID&#39;),</span>
+<span class="x">], $customFields));</span>
+</code></pre></div>
+
+<h4 id="validar-cliente-existente">Validar Cliente Existente</h4>
+<div class="codehilite"><pre><span></span><code><span class="x">// Obtener cliente</span>
+<span class="x">$customer = CustomersImp::find($customerId);</span>
+
+<span class="x">// Verificar consistencia</span>
+<span class="x">$result = CustomFieldsValidator::checkConsistency([</span>
+<span class="x">    &#39;Custom_field1&#39; =&gt; $customer-&gt;Custom_field1,</span>
+<span class="x">    &#39;Custom_field2&#39; =&gt; $customer-&gt;Custom_field2,</span>
+<span class="x">    &#39;Custom_field3&#39; =&gt; $customer-&gt;Custom_field3,</span>
+<span class="x">    &#39;Custom_field4&#39; =&gt; $customer-&gt;Custom_field4,</span>
+<span class="x">    &#39;Custom_field5&#39; =&gt; $customer-&gt;Custom_field5,</span>
+<span class="x">]);</span>
+
+<span class="x">if (!$result[&#39;is_consistent&#39;]) {</span>
+<span class="x">    Log::warning(&#39;Cliente con Custom Fields inconsistentes&#39;, [</span>
+<span class="x">        &#39;customer_id&#39; =&gt; $customer-&gt;CustomerID,</span>
+<span class="x">        &#39;issues&#39; =&gt; $result[&#39;issues&#39;]</span>
+<span class="x">    ]);</span>
+
+<span class="x">    // Aplicar corrección</span>
+<span class="x">    $fixed = CustomFieldsValidator::autoFix([...]);</span>
+<span class="x">    $customer-&gt;update($fixed);</span>
+<span class="x">}</span>
+</code></pre></div>
+
+<hr />
+<h2 id="3-comando-artisan">3. Comando Artisan</h2>
+<h3 id="31-uso-basico">3.1. Uso Básico</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Validar todos los clientes</span>
+php<span class="w"> </span>artisan<span class="w"> </span>customers:validate-fields
+
+<span class="c1"># Validar organización específica</span>
+php<span class="w"> </span>artisan<span class="w"> </span>customers:validate-fields<span class="w"> </span>--organization<span class="o">=</span><span class="m">1</span>
+
+<span class="c1"># Validar con detalles</span>
+php<span class="w"> </span>artisan<span class="w"> </span>customers:validate-fields<span class="w"> </span>--verbose
+
+<span class="c1"># Aplicar correcciones automáticas</span>
+php<span class="w"> </span>artisan<span class="w"> </span>customers:validate-fields<span class="w"> </span>--fix
+
+<span class="c1"># Limitar número de clientes por organización</span>
+php<span class="w"> </span>artisan<span class="w"> </span>customers:validate-fields<span class="w"> </span>--limit<span class="o">=</span><span class="m">50</span>
+</code></pre></div>
+
+<h3 id="32-ejemplos-con-docker">3.2. Ejemplos con Docker</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># En desarrollo</span>
+docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>docucenter_laravel.test<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>customers:validate-fields<span class="w"> </span>--verbose
+
+<span class="c1"># En producción (validar primero sin fix)</span>
+docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>docucenter_laravel.test<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>customers:validate-fields<span class="w"> </span>--organization<span class="o">=</span><span class="m">5</span><span class="w"> </span>--verbose
+
+<span class="c1"># Aplicar correcciones solo a una organización</span>
+docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>docucenter_laravel.test<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>customers:validate-fields<span class="w"> </span>--organization<span class="o">=</span><span class="m">5</span><span class="w"> </span>--fix
+</code></pre></div>
+
+<h3 id="33-salida-del-comando">3.3. Salida del Comando</h3>
+<div class="codehilite"><pre><span></span><code><span class="err">🔍</span><span class="w"> </span><span class="n">Iniciando</span><span class="w"> </span><span class="n">validación</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">Custom</span><span class="w"> </span><span class="n">Fields</span><span class="p">...</span>
+
+<span class="err">📂</span><span class="w"> </span><span class="nl">Organización:</span><span class="w"> </span><span class="n">Mi</span><span class="w"> </span><span class="n">Empresa</span><span class="w"> </span><span class="p">(</span><span class="nl">ID:</span><span class="w"> </span><span class="mh">1</span><span class="p">)</span>
+<span class="w">   </span><span class="n">Base</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="nl">datos:</span><span class="w"> </span><span class="mh">9</span><span class="n">_734_1672_56</span>
+<span class="w">   </span><span class="n">Total</span><span class="w"> </span><span class="nl">clientes:</span><span class="w"> </span><span class="mh">150</span>
+
+<span class="w">   </span><span class="err">⚠️</span><span class="w">  </span><span class="nl">Cliente:</span><span class="w"> </span><span class="mh">8</span><span class="o">-</span><span class="mh">123</span><span class="o">-</span><span class="mh">4567</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">Juan</span><span class="w"> </span><span class="n">Pérez</span>
+<span class="w">      </span><span class="n">Tipo</span><span class="w"> </span><span class="nl">Receptor:</span><span class="w"> </span><span class="n">Contribuyente</span><span class="w"> </span><span class="p">(</span><span class="nl">ID:</span><span class="w"> </span><span class="mh">1</span><span class="p">)</span>
+<span class="w">      </span><span class="err">•</span><span class="w"> </span><span class="n">Contribuyente</span><span class="o">/</span><span class="n">Gobierno</span><span class="w"> </span><span class="n">sin</span><span class="w"> </span><span class="n">tipo</span><span class="w"> </span><span class="n">contribuyente</span><span class="w"> </span><span class="n">en</span><span class="w"> </span><span class="n">Custom_field4</span>
+
+<span class="w">   </span><span class="err">⚠️</span><span class="w">  </span><span class="nl">Cliente:</span><span class="w"> </span><span class="n">ABC123</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">Foreign</span><span class="w"> </span><span class="n">Corp</span>
+<span class="w">      </span><span class="n">Tipo</span><span class="w"> </span><span class="nl">Receptor:</span><span class="w"> </span><span class="n">Extranjero</span><span class="w"> </span><span class="p">(</span><span class="nl">ID:</span><span class="w"> </span><span class="mh">3</span><span class="p">)</span>
+<span class="w">      </span><span class="err">•</span><span class="w"> </span><span class="n">Extranjero</span><span class="w"> </span><span class="n">no</span><span class="w"> </span><span class="n">debe</span><span class="w"> </span><span class="n">tener</span><span class="w"> </span><span class="n">DV</span><span class="w"> </span><span class="n">en</span><span class="w"> </span><span class="n">Custom_field2</span>
+
+<span class="w">   </span><span class="err">📊</span><span class="w"> </span><span class="nl">Resultados:</span>
+<span class="w">      </span><span class="o">-</span><span class="w"> </span><span class="n">Problemas</span><span class="w"> </span><span class="nl">encontrados:</span><span class="w"> </span><span class="mh">2</span>
+<span class="w">      </span><span class="o">-</span><span class="w"> </span><span class="nl">Corregidos:</span><span class="w"> </span><span class="mh">2</span>
+
+<span class="err">═══════════════════════════════════════════════════</span>
+<span class="err">📈</span><span class="w"> </span><span class="n">RESUMEN</span><span class="w"> </span><span class="n">FINAL</span>
+<span class="err">═══════════════════════════════════════════════════</span>
+<span class="n">Organizaciones</span><span class="w"> </span><span class="nl">procesadas:</span><span class="w"> </span><span class="mh">1</span>
+<span class="n">Clientes</span><span class="w"> </span><span class="nl">revisados:</span><span class="w"> </span><span class="mh">150</span>
+<span class="n">Problemas</span><span class="w"> </span><span class="nl">encontrados:</span><span class="w"> </span><span class="mh">2</span>
+<span class="n">Correcciones</span><span class="w"> </span><span class="nl">aplicadas:</span><span class="w"> </span><span class="mh">2</span>
+</code></pre></div>
+
+<hr />
+<h2 id="4-best-practices">4. Best Practices</h2>
+<h3 id="41-al-crear-clientes">4.1. Al Crear Clientes</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">// ✅ CORRECTO: Usar CustomFieldsValidator</span>
+<span class="x">$validated = CustomFieldsValidator::validateCustomerFields($data, &#39;Integration&#39;);</span>
+<span class="x">$customer = CustomersImp::create($validated);</span>
+
+<span class="x">// ❌ INCORRECTO: Guardar valores directos</span>
+<span class="x">$customer = CustomersImp::create([</span>
+<span class="x">    &#39;Custom_field3&#39; =&gt; $request-&gt;get(&#39;TipoReceptor&#39;)  // Puede ser CODE o ID</span>
+<span class="x">]);</span>
+</code></pre></div>
+
+<h3 id="42-al-mapear-codes">4.2. Al Mapear CODEs</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">// ✅ CORRECTO: Usar ReceiverTypeHelper</span>
+<span class="x">$tipoReceptor = ReceiverTypeHelper::mapCodeToId($tipoReceptorCode);</span>
+
+<span class="x">// ❌ INCORRECTO: Mapeo manual</span>
+<span class="x">$tipoReceptor = (int)ltrim($tipoReceptorCode, &#39;0&#39;);  // &#39;04&#39; → 4 (INCORRECTO)</span>
+</code></pre></div>
+
+<h3 id="43-al-validar-tipos">4.3. Al Validar Tipos</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">// ✅ CORRECTO: Usar métodos del helper</span>
+<span class="x">if (ReceiverTypeHelper::isExtranjero($tipoReceptor)) {</span>
+<span class="x">    // Lógica extranjeros</span>
+<span class="x">}</span>
+
+<span class="x">// ❌ INCORRECTO: Comparación hardcoded</span>
+<span class="x">if ($tipoReceptor === 4) {  // Asume ID=4 es extranjero (INCORRECTO)</span>
+<span class="x">    // Lógica extranjeros</span>
+<span class="x">}</span>
+</code></pre></div>
+
+<hr />
+<h2 id="5-troubleshooting">5. Troubleshooting</h2>
+<h3 id="51-cliente-con-tipo_receptor-incorrecto">5.1. Cliente con TIPO_RECEPTOR incorrecto</h3>
+<p><strong>Síntoma</strong>: Cliente extranjero guardado con Custom_field3=4 en lugar de 3</p>
+<p><strong>Solución</strong>:</p>
+<div class="codehilite"><pre><span></span><code><span class="x">// Validar y corregir</span>
+<span class="x">$customFields = [</span>
+<span class="x">    &#39;Custom_field1&#39; =&gt; $customer-&gt;Custom_field1,</span>
+<span class="x">    &#39;Custom_field2&#39; =&gt; $customer-&gt;Custom_field2,</span>
+<span class="x">    &#39;Custom_field3&#39; =&gt; $customer-&gt;Custom_field3,</span>
+<span class="x">    &#39;Custom_field4&#39; =&gt; $customer-&gt;Custom_field4,</span>
+<span class="x">    &#39;Custom_field5&#39; =&gt; $customer-&gt;Custom_field5,</span>
+<span class="x">];</span>
+
+<span class="x">$fixed = CustomFieldsValidator::autoFix($customFields);</span>
+<span class="x">$customer-&gt;update($fixed);</span>
+</code></pre></div>
+
+<h3 id="52-cache-desactualizado">5.2. Cache desactualizado</h3>
+<p><strong>Síntoma</strong>: IDs no coinciden después de modificar tabla Receivertype</p>
+<p><strong>Solución</strong>:</p>
+<div class="codehilite"><pre><span></span><code><span class="x">// Limpiar cache</span>
+<span class="x">ReceiverTypeHelper::clearCache();</span>
+
+<span class="x">// O desde artisan</span>
+<span class="x">php artisan cache:clear</span>
+</code></pre></div>
+
+<hr />
+<h2 id="6-migracion-de-codigo-existente">6. Migración de Código Existente</h2>
+<h3 id="61-antes-quickbooksonlineservice">6.1. Antes (QuickBooksOnlineService)</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">// ❌ Código antiguo con mapeo incorrecto</span>
+<span class="x">$tipoReceptorValue = (int)ltrim((string)$tipoReceptorFromRequest, &#39;0&#39;);</span>
+
+<span class="x">if ($tipoReceptor === 4) {  // Asume 4 es extranjero</span>
+<span class="x">    $pasaporte = $pasaporteFromRequest;</span>
+<span class="x">}</span>
+</code></pre></div>
+
+<h3 id="62-despues-con-helpers">6.2. Después (con helpers)</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">// ✅ Código nuevo con ReceiverTypeHelper</span>
+<span class="x">$tipoReceptor = ReceiverTypeHelper::mapCodeToId($tipoReceptorFromRequest);</span>
+
+<span class="x">if (ReceiverTypeHelper::isExtranjero($tipoReceptor)) {</span>
+<span class="x">    $pasaporte = $pasaporteFromRequest;</span>
+<span class="x">}</span>
+</code></pre></div>
+
+<hr />
+<h2 id="7-referencias">7. Referencias</h2>
+<ul>
+<li><a href="../ANALISIS-CUSTOM-FIELDS-INTEGRACIONES/">ANALISIS-CUSTOM-FIELDS-INTEGRACIONES.md</a></li>
+<li><a href="../MEYPAR-COLOMBIA-LOGIC/">MEYPAR-COLOMBIA-LOGIC.md</a></li>
+<li>ReceiverTypeHelper: <code>app/Helpers/ReceiverTypeHelper.php</code></li>
+<li>CustomFieldsValidator: <code>app/Helpers/CustomFieldsValidator.php</code></li>
+<li>Comando validación: <code>app/Console/Commands/ValidateCustomerFieldsCommand.php</code></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/aghabrego/docucenter" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

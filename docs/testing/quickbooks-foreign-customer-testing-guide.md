@@ -84,10 +84,10 @@ php artisan test:foreign-customer --interactive
 ## Validaciones
 
 ### Extracción de Datos
-- **País**: `array_get($customerRef, 'Country', array_get($customerRef, 'BillAddr.Country', 'PA'))`
-- **Pasaporte**: `array_get($customerRef, 'PASAPORTE')`
-- **Tipo Receptor**: `array_get($customerRef, 'TIPO_RECEPTOR', '02')`
-- **Dirección**: `array_get($customerRef, 'BillAddr.Line1', '')`
+- ✅ **País**: `array_get($customerRef, 'Country', array_get($customerRef, 'BillAddr.Country', 'PA'))`
+- ✅ **Pasaporte**: `array_get($customerRef, 'PASAPORTE')`
+- ✅ **Tipo Receptor**: `array_get($customerRef, 'TIPO_RECEPTOR', '02')`
+- ✅ **Dirección**: `array_get($customerRef, 'BillAddr.Line1', '')`
 
 ### Estructura de Salida
 ```php
@@ -103,8 +103,8 @@ php artisan test:foreign-customer --interactive
     'Email' => 'test@example.com',
     'AddressLine1' => 'Test Address 123',
     'AddressLine2' => '',
-    'Country' => 'Chile',           // Extraído correctamente
-    'PASAPORTE' => 'XYZABC123',     // Extraído correctamente
+    'Country' => 'Chile',           // ✅ Extraído correctamente
+    'PASAPORTE' => 'XYZABC123',     // ✅ Extraído correctamente
 ]
 ```
 
@@ -204,7 +204,7 @@ tail -f storage/logs/laravel.log | grep "Customer Data Extract"
 
 ## Métricas de Éxito
 
-### Criterios de Aceptación
+### ✅ Criterios de Aceptación
 1. **País extraído correctamente** de CustomerRef.Country
 2. **País extraído correctamente** de CustomerRef.BillAddr.Country  
 3. **Default 'PA'** cuando no hay país especificado
@@ -212,7 +212,7 @@ tail -f storage/logs/laravel.log | grep "Customer Data Extract"
 5. **TIPO_RECEPTOR '04'** para clientes extranjeros
 6. **Sin errores** en la creación de clientes
 
-### KPIs
+### 📊 KPIs
 - **0 clientes extranjeros** con Country = 'PA' (a menos que sean realmente de Panamá)
 - **100% clientes extranjeros** con PASAPORTE no vacío  
 - **100% clientes extranjeros** con TIPO_RECEPTOR = '04'

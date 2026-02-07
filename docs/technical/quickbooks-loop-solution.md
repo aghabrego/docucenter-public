@@ -10,7 +10,7 @@
 
 ## Solución Implementada
 
-###  **Campo `origin` en SalesHeaderImp**
+### 🔹 **Campo `origin` en SalesHeaderImp**
 
 **Propósito**: Identificar el origen de cada factura para aplicar lógica diferencial.
 
@@ -27,7 +27,7 @@ KEY `sales_header_imp_origin_index` (`origin`)
 - `'lightspeed'`: Factura recibida desde Lightspeed
 - etc.
 
-###  **Modificación CreateSaleQuickBooksJob**
+### 🔹 **Modificación CreateSaleQuickBooksJob**
 
 **Antes**:
 ```php
@@ -51,7 +51,7 @@ $sale->update([
 // NO enviar de vuelta a QuickBooks (evita loop)
 ```
 
-###  **Modificación UpdateIntuitOrdersJob**
+### 🔹 **Modificación UpdateIntuitOrdersJob**
 
 **Filtro agregado**:
 ```php
@@ -75,7 +75,7 @@ Log::info("UpdateIntuitOrdersJob: Iniciando procesamiento de facturas DocuCenter
 
 ## Flujo Corregido
 
-###  **DocuCenter → QuickBooks** (Comando)
+### 📤 **DocuCenter → QuickBooks** (Comando)
 ```mermaid
 graph TD
     A[Factura creada en DocuCenter] --> B[origin = 'docucenter']
@@ -85,7 +85,7 @@ graph TD
     E --> F[Marca como exportada]
 ```
 
-###  **QuickBooks → DocuCenter** (API)
+### 📥 **QuickBooks → DocuCenter** (API)
 ```mermaid
 graph TD
     A[Factura creada en QB] --> B[API create_sale_quickbooks]
@@ -115,7 +115,7 @@ WHERE origin IS NULL
 
 ### **Casos de Prueba**
 
-#### **Caso 1: Factura DocuCenter → QB**
+#### ✅ **Caso 1: Factura DocuCenter → QB**
 ```bash
 # 1. Crear factura en DocuCenter
 # 2. Ejecutar comando: php artisan word:update-intuit-orders
@@ -123,7 +123,7 @@ WHERE origin IS NULL
 # 4. Verificar: origin = 'docucenter', EzeeExport = true
 ```
 
-#### **Caso 2: Factura QB → DocuCenter**
+#### ✅ **Caso 2: Factura QB → DocuCenter**
 ```bash
 # 1. Crear factura en QuickBooks
 # 2. Llamar API: POST /api/v1/fe/create_sale_quickbooks
@@ -132,7 +132,7 @@ WHERE origin IS NULL
 # 5. Verificar: NO aparece duplicada en QB
 ```
 
-#### **Caso 3: Loop Evitado**
+#### ✅ **Caso 3: Loop Evitado**
 ```bash
 # 1. Factura QB → DocuCenter (API)
 # 2. Ejecutar comando: php artisan word:update-intuit-orders
@@ -156,11 +156,11 @@ WHERE origin IS NULL
 
 ## Beneficios
 
-1. **Elimina loop infinito** entre comando y API
-2. **Visibilidad total** del origen de cada factura
-3. **Performance mejorado** - menos procesamiento redundante
-4. **Compatibilidad** con facturas existentes
-5. ** Escalable** para futuras integraciones (Shopify, etc.)
+1. **🔄 Elimina loop infinito** entre comando y API
+2. **📊 Visibilidad total** del origen de cada factura
+3. **⚡ Performance mejorado** - menos procesamiento redundante
+4. **🔒 Compatibilidad** con facturas existentes
+5. **🧩 Escalable** para futuras integraciones (Shopify, etc.)
 
 ## Monitoreo
 

@@ -537,7 +537,7 @@ class AlanubeTestingExample
         $panUrl = $alanubeService->buildApiUrl($panConnection, 'credit-notes');
         assert($panUrl === 'https://sandbox-api.alanube.co/pan/v1/credit-notes');
         
-        echo "Todos los tests de dual-country pasaron correctamente\n";
+        echo "✅ Todos los tests de dual-country pasaron correctamente\n";
     }
 
     public function testDocumentValidation()
@@ -551,7 +551,7 @@ class AlanubeTestingExample
             $response = $alanubeService->emitDocument($invalidData, $this->getTestConnection());
             assert(false, 'Debería haber fallado con datos inválidos');
         } catch (Exception $e) {
-            echo "Validación de datos funcionando correctamente\n";
+            echo "✅ Validación de datos funcionando correctamente\n";
         }
     }
 }

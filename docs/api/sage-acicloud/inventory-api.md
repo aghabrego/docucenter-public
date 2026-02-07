@@ -12,16 +12,16 @@
 
 | Campo | Tipo | Requerido | Descripción | Validación | Ejemplo |
 |-------|------|-----------|-------------|------------|---------|
-| `ItemID` | string | | ID del producto | Máx. 20 characters | `"PROD001"` |
-| `Reference` | string | | Referencia del ajuste | Máx. 20 characters | `"ADJ-2025-001"` |
-| `ReasonToAdjust` | string | | Razón del ajuste | Máx. 35 characters | `"Inventory recount adjustment"` |
-| `Account` | string | | Cuenta contable | Máx. 15 characters | `"1200"` |
-| `UnitCost` | decimal | | Costo unitario | Decimal (4 decimales) | `850.0000` |
-| `Quantity` | decimal | | Cantidad a ajustar | Decimal (4 decimales) | `5.0000` |
-| `Date` | string | | Fecha del ajuste | YYYY-MM-DD | `"2025-01-29"` |
-| `JobID` | string | | ID del trabajo | Máx. 50 characters | `"JOB001"` |
-| `JobPhaseID` | string | | ID de fase del trabajo | Máx. 20 characters | `"PHASE01"` |
-| `JobCostCodeID` | string | | ID código de costo | Máx. 20 characters | `"COST001"` |
+| `ItemID` | string | ✅ | ID del producto | Máx. 20 characters | `"PROD001"` |
+| `Reference` | string | ✅ | Referencia del ajuste | Máx. 20 characters | `"ADJ-2025-001"` |
+| `ReasonToAdjust` | string | ❌ | Razón del ajuste | Máx. 35 characters | `"Inventory recount adjustment"` |
+| `Account` | string | ❌ | Cuenta contable | Máx. 15 characters | `"1200"` |
+| `UnitCost` | decimal | ❌ | Costo unitario | Decimal (4 decimales) | `850.0000` |
+| `Quantity` | decimal | ✅ | Cantidad a ajustar | Decimal (4 decimales) | `5.0000` |
+| `Date` | string | ✅ | Fecha del ajuste | YYYY-MM-DD | `"2025-01-29"` |
+| `JobID` | string | ❌ | ID del trabajo | Máx. 50 characters | `"JOB001"` |
+| `JobPhaseID` | string | ❌ | ID de fase del trabajo | Máx. 20 characters | `"PHASE01"` |
+| `JobCostCodeID` | string | ❌ | ID código de costo | Máx. 20 characters | `"COST001"` |
 
 ### Reglas de Validación Detalladas
 
@@ -182,11 +182,11 @@ Obtiene la lista de ajustes de inventario que han sido importados/creados a trav
 
 | Parámetro | Tipo | Requerido | Descripción | Ejemplo |
 |-----------|------|-----------|-------------|---------|
-| `item_id` | string | | Filtrar por producto | `"PROD001"` |
-| `date_from` | string | | Fecha desde | `"2025-01-01"` |
-| `date_to` | string | | Fecha hasta | `"2025-01-31"` |
-| `page` | integer | | Página | `1` |
-| `per_page` | integer | | Registros por página | `25` |
+| `item_id` | string | ❌ | Filtrar por producto | `"PROD001"` |
+| `date_from` | string | ❌ | Fecha desde | `"2025-01-01"` |
+| `date_to` | string | ❌ | Fecha hasta | `"2025-01-31"` |
+| `page` | integer | ❌ | Página | `1` |
+| `per_page` | integer | ❌ | Registros por página | `25` |
 
 ### Respuesta de Éxito
 

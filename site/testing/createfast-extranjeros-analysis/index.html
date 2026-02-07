@@ -1,0 +1,2252 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentación técnica y de usuario de Docucenter">
+      
+      
+        <meta name="author" content="aghabrego">
+      
+      
+        <link rel="canonical" href="https://aghabrego.github.io/docucenter/testing/createfast-extranjeros-analysis/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../docs/favicon.ico">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Análisis CreateFast.php - Manejo de Clientes Extranjeros - Docucenter</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#analisis-createfastphp-manejo-de-clientes-extranjeros" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="Docucenter" class="md-header__button md-logo" aria-label="Docucenter" data-md-component="logo">
+      
+  <img src="../../docs/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Docucenter
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Análisis CreateFast.php - Manejo de Clientes Extranjeros
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/aghabrego/docucenter" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    aghabrego/docucenter
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Docucenter" class="md-nav__button md-logo" aria-label="Docucenter" data-md-component="logo">
+      
+  <img src="../../docs/logo.png" alt="logo">
+
+    </a>
+    Docucenter
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/aghabrego/docucenter" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    aghabrego/docucenter
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Documentation
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    API Documentation
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sage ACICloud
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Sage ACICloud
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/invoices-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Facturación - Invoices
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/customers-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Clientes - Customers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/vendors-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Proveedores - Vendors
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/purchases-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Compras - Purchases
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/products-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Productos - Products
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/jobs-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trabajos - Jobs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/accounting-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contabilidad General
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/payments-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pagos y Créditos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/inventory-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inventario - Inventory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Facturación Electrónica (FE)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Facturación Electrónica (FE)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/fe-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    APIs de Facturación Electrónica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/meypar-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integración Meypar
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/shopify-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integración Shopify
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/kart21-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integración Kart21
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/lightspeed-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integración Lightspeed
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/maxgym-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integración Maxgym
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/acicloud-fe-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ACICloud FE
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/import-xml-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Import XML
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/emit-json-object-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Emit JSON Object
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/download-base64-document-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Download Base64 Document
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Organizaciones
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Organizaciones
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/organizations/organizations-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gestión de Organizaciones
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ubicaciones Geográficas
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Ubicaciones Geográficas
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/locations/locations-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API de Ubicaciones
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sistema de Testing
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Sistema de Testing
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Índice de Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../TESTING_SYSTEM_SUMMARY/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resumen Ejecutivo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Documentación Técnica
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Documentación Técnica
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../technical/README.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Soluciones
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../technical/lightspeed_audit_improvement/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Auditoría Lightspeed
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../technical/solucion-sincronizacion-pagos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sincronización de Pagos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../technical/payment-calculation-fix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Corrección Cálculo Pagos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validaciones
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Validaciones
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../validations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resumen
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../validations/createSale-ruc-validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validación RUC CreateSale
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../validations/maxgym-ruc-validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validación RUC Maxgym
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../validations/meypar-validations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validaciones MEYPAR
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../validations/validation_comparison/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Comparación Validaciones
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#estado-actual-en-bd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📊 Estado Actual en BD
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#problemas-identificados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🚨 Problemas Identificados
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🚨 Problemas Identificados">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#problema-1-linea-123-normalizacion-de-tipo_receptor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Problema 1: Línea 123 - Normalización de TIPO_RECEPTOR
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problema-2-linea-134-receptor_tipocontribuyente-para-extranjeros" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Problema 2: Línea 134 - receptor_tipoContribuyente para Extranjeros
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problema-3-linea-742-validacion-tipo-4-extranjero" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Problema 3: Línea 742 - Validación Tipo 4 (Extranjero)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problema-4-linea-777-storecustomerdata-campos-invertidos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Problema 4: Línea 777 - storeCustomerData() Campos Invertidos
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#analisis-de-flujo-actual" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔍 Análisis de Flujo Actual
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔍 Análisis de Flujo Actual">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mount1-inicializacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mount1() - Inicialización
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validatestep4-validacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ValidateStep4() - Validación
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#storecustomerdata-guardado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        StoreCustomerData() - Guardado
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#soluciones-propuestas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ✅ Soluciones Propuestas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="✅ Soluciones Propuestas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#solucion-1-normalizacion-de-tipo_receptor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Solución 1: Normalización de TIPO_RECEPTOR
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#solucion-2-logica-de-receptor_tipocontribuyente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Solución 2: Lógica de receptor_tipoContribuyente
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#solucion-3-validacion-tipo-4-corregida" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Solución 3: Validación Tipo 4 Corregida
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#solucion-4-storecustomerdata-corregido" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Solución 4: storeCustomerData() Corregido
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#plan-de-implementacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📋 Plan de Implementación
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#casos-de-prueba" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🎯 Casos de Prueba
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🎯 Casos de Prueba">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#caso-1-cliente-extranjero-tipo-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Caso 1: Cliente Extranjero (Tipo 4)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#caso-2-cliente-contribuyente-tipo-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Caso 2: Cliente Contribuyente (Tipo 1)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#proximos-pasos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔧 Próximos Pasos
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="analisis-createfastphp-manejo-de-clientes-extranjeros">Análisis CreateFast.php - Manejo de Clientes Extranjeros</h1>
+<p><strong>Fecha:</strong> 2026-01-26<br />
+<strong>Base de Datos:</strong> db_18257061709732_90<br />
+<strong>Cliente de Prueba:</strong> XYZABC123 (Solmary - Chile)</p>
+<hr />
+<h2 id="estado-actual-en-bd">📊 Estado Actual en BD</h2>
+<div class="codehilite"><pre><span></span><code><span class="n">CustomerID</span><span class="o">:</span><span class="w"> </span><span class="n">XYZABC123</span>
+<span class="n">Customer_Bill_Name</span><span class="o">:</span><span class="w"> </span><span class="n">Solmary</span>
+<span class="n">Custom_field1</span><span class="w"> </span><span class="o">(</span><span class="n">PASAPORTE</span><span class="o">):</span><span class="w"> </span><span class="n">XYZABC123</span><span class="w">  </span><span class="err">✅</span><span class="w"> </span><span class="n">Correcto</span>
+<span class="n">Custom_field2</span><span class="w"> </span><span class="o">(</span><span class="n">DV</span><span class="o">):</span><span class="w"> </span><span class="kc">null</span><span class="w">               </span><span class="err">✅</span><span class="w"> </span><span class="n">Correcto</span>
+<span class="n">Custom_field3</span><span class="w"> </span><span class="o">(</span><span class="n">TIPO_RECEPTOR</span><span class="o">):</span><span class="w"> </span><span class="s2">&quot;04&quot;</span><span class="w">    </span><span class="err">⚠️</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">en</span><span class="w"> </span><span class="n">vez</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">int</span>
+<span class="n">Custom_field4</span><span class="w"> </span><span class="o">(</span><span class="n">TIPO_CONTRIBUYENTE</span><span class="o">):</span><span class="w"> </span><span class="mi">2</span><span class="w">  </span><span class="err">❌</span><span class="w"> </span><span class="n">INCORRECTO</span><span class="w"> </span><span class="o">(</span><span class="n">debería</span><span class="w"> </span><span class="n">ser</span><span class="w"> </span><span class="kc">null</span><span class="o">)</span>
+<span class="n">Custom_field5</span><span class="w"> </span><span class="o">(</span><span class="n">LOCATION_CODE</span><span class="o">):</span><span class="w"> </span><span class="kc">null</span><span class="w">    </span><span class="err">✅</span><span class="w"> </span><span class="n">Correcto</span>
+<span class="n">Country</span><span class="o">:</span><span class="w"> </span><span class="n">Chile</span><span class="w">                         </span><span class="err">✅</span><span class="w"> </span><span class="n">Correcto</span>
+</code></pre></div>
+
+<hr />
+<h2 id="problemas-identificados">🚨 Problemas Identificados</h2>
+<h3 id="problema-1-linea-123-normalizacion-de-tipo_receptor">Problema 1: Línea 123 - Normalización de TIPO_RECEPTOR</h3>
+<p><strong>Código Actual:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="x">$receptorTipo = !empty($this-&gt;customer-&gt;Custom_field3) ? $this-&gt;customer-&gt;Custom_field3 : &#39;2&#39;;</span>
+</code></pre></div>
+
+<p><strong>Problema:</strong>
+- <code>Custom_field3</code> puede venir como string "04" o int 4
+- No normaliza el valor antes de buscar en Receivertype</p>
+<p><strong>Impacto:</strong>
+- Búsqueda puede fallar si viene "04" pero se busca código "04" con strPad</p>
+<h3 id="problema-2-linea-134-receptor_tipocontribuyente-para-extranjeros">Problema 2: Línea 134 - receptor_tipoContribuyente para Extranjeros</h3>
+<p><strong>Código Actual:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="x">$this-&gt;receptor_tipoContribuyente = in_array($this-&gt;receptor_tipo, [&#39;1&#39;, &#39;4&#39;]) </span>
+<span class="x">    ? $this-&gt;customer-&gt;Custom_field4 </span>
+<span class="x">    : null;</span>
+</code></pre></div>
+
+<p><strong>Problema:</strong>
+- Para tipo 4 (extranjeros), asigna <code>Custom_field4</code> que ahora es <code>null</code>
+- Luego la validación falla porque requiere este campo</p>
+<p><strong>Lógica Incorrecta:</strong>
+- Tipo 1 (Contribuyente): ✅ SÍ necesita tipoContribuyente
+- Tipo 4 (Extranjero): ❌ NO necesita tipoContribuyente panameño</p>
+<p><strong>Corrección:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="x">$this-&gt;receptor_tipoContribuyente = ($this-&gt;receptor_tipo === &#39;1&#39;) </span>
+<span class="x">    ? $this-&gt;customer-&gt;Custom_field4 </span>
+<span class="x">    : null;</span>
+</code></pre></div>
+
+<h3 id="problema-3-linea-742-validacion-tipo-4-extranjero">Problema 3: Línea 742 - Validación Tipo 4 (Extranjero)</h3>
+<p><strong>Código Actual:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="x">case &quot;4&quot;:</span>
+<span class="x">    $this-&gt;validate([</span>
+<span class="x">        &#39;receptor_tipoContribuyente&#39; =&gt; &#39;required&#39;,  // ← PROBLEMA</span>
+<span class="x">        &#39;receptor_paisDestinoOperacion&#39; =&gt; &#39;required&#39;,</span>
+<span class="x">        &#39;receptor_razonSocial&#39; =&gt; &#39;required|string&#39;,</span>
+<span class="x">        &#39;receptor_provincia&#39; =&gt; &#39;required|string&#39;,</span>
+<span class="x">        &#39;receptor_distrito&#39; =&gt; &#39;required|string&#39;,</span>
+<span class="x">        &#39;receptor_corregimiento&#39; =&gt; &#39;required|string&#39;,</span>
+<span class="x">        &#39;receptor_ruc&#39; =&gt; &#39;required|string&#39;,</span>
+<span class="x">        &#39;receptor_direccion&#39; =&gt; &#39;required|string&#39;,</span>
+<span class="x">        &#39;receptor_correoElectronico&#39; =&gt; &#39;required|string&#39;,</span>
+<span class="x">        &#39;receptor_DV&#39; =&gt; &#39;required|string&#39;,</span>
+<span class="x">    ]);</span>
+</code></pre></div>
+
+<p><strong>Problemas Múltiples:</strong>
+1. <code>receptor_tipoContribuyente</code> NO debería ser required para extranjeros
+2. <code>receptor_provincia</code>, <code>receptor_distrito</code>, <code>receptor_corregimiento</code> NO aplican para extranjeros
+3. <code>receptor_ruc</code> NO aplican para extranjeros (usan pasaporte)
+4. <code>receptor_DV</code> NO aplican para extranjeros</p>
+<p><strong>Tipo 4 es INCORRECTO</strong> - Está mezclado con validación de Contribuyente</p>
+<p><strong>Validación Correcta para Extranjeros:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="x">case &quot;4&quot;:</span>
+<span class="x">    $this-&gt;validate([</span>
+<span class="x">        &#39;receptor_pasaporteIdentidadExtranjera&#39; =&gt; &#39;required|string&#39;,</span>
+<span class="x">        &#39;receptor_paisDestinoOperacion&#39; =&gt; &#39;required&#39;,</span>
+<span class="x">        &#39;receptor_razonSocial&#39; =&gt; &#39;required|string&#39;,</span>
+<span class="x">        &#39;receptor_paisNacionalidad&#39; =&gt; &#39;required&#39;,</span>
+<span class="x">        &#39;receptor_correoElectronico&#39; =&gt; &#39;required|string|email&#39;,</span>
+<span class="x">    ]);</span>
+</code></pre></div>
+
+<h3 id="problema-4-linea-777-storecustomerdata-campos-invertidos">Problema 4: Línea 777 - storeCustomerData() Campos Invertidos</h3>
+<p><strong>Código Actual:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="x">public function storeCustomerData()</span>
+<span class="x">{</span>
+<span class="x">    $this-&gt;customer-&gt;update([</span>
+<span class="x">        &#39;Customer_Bill_Name&#39; =&gt; $this-&gt;receptor_razonSocial,</span>
+<span class="x">        &#39;AddressLine1&#39; =&gt; $this-&gt;receptor_direccion,</span>
+<span class="x">        &#39;Custom_field1&#39; =&gt; $this-&gt;receptor_ruc,           // ← INCORRECTO para extranjeros</span>
+<span class="x">        &#39;Custom_field2&#39; =&gt; $this-&gt;receptor_DV,</span>
+<span class="x">        &#39;Custom_field3&#39; =&gt; null,                          // ← INCORRECTO</span>
+<span class="x">        &#39;Custom_field4&#39; =&gt; $this-&gt;receptor_tipo,          // ← INCORRECTO</span>
+<span class="x">        &#39;Custom_field5&#39; =&gt; null,</span>
+<span class="x">    ]);</span>
+<span class="x">}</span>
+</code></pre></div>
+
+<p><strong>Problemas:</strong>
+1. <code>Custom_field3</code> = null - Debería ser <code>$this-&gt;receptor_tipo</code>
+2. <code>Custom_field4</code> = <code>$this-&gt;receptor_tipo</code> - Debería ser <code>$this-&gt;receptor_tipoContribuyente</code>
+3. <code>Custom_field1</code> = <code>$this-&gt;receptor_ruc</code> - Para extranjeros debería ser pasaporte
+4. No maneja lógica condicional para extranjeros</p>
+<p><strong>Corrección Necesaria:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="x">public function storeCustomerData()</span>
+<span class="x">{</span>
+<span class="x">    $isExtranjero = in_array($this-&gt;receptor_tipo, [&#39;3&#39;, &#39;4&#39;]);</span>
+
+<span class="x">    $this-&gt;customer-&gt;update([</span>
+<span class="x">        &#39;Customer_Bill_Name&#39; =&gt; $this-&gt;receptor_razonSocial,</span>
+<span class="x">        &#39;AddressLine1&#39; =&gt; $this-&gt;receptor_direccion,</span>
+<span class="x">        &#39;Custom_field1&#39; =&gt; $isExtranjero </span>
+<span class="x">            ? $this-&gt;receptor_pasaporteIdentidadExtranjera </span>
+<span class="x">            : $this-&gt;receptor_ruc,</span>
+<span class="x">        &#39;Custom_field2&#39; =&gt; $isExtranjero ? null : $this-&gt;receptor_DV,</span>
+<span class="x">        &#39;Custom_field3&#39; =&gt; $this-&gt;receptor_tipo,                    // TIPO_RECEPTOR</span>
+<span class="x">        &#39;Custom_field4&#39; =&gt; $isExtranjero ? null : $this-&gt;receptor_tipoContribuyente,  // TIPO_CONTRIBUYENTE</span>
+<span class="x">        &#39;Custom_field5&#39; =&gt; $isExtranjero ? null : $this-&gt;buildLocationCode(),</span>
+<span class="x">        &#39;Country&#39; =&gt; $isExtranjero </span>
+<span class="x">            ? $this-&gt;getCountryCodeByNacionalidad($this-&gt;receptor_paisNacionalidad)</span>
+<span class="x">            : &#39;PA&#39;,</span>
+<span class="x">    ]);</span>
+<span class="x">}</span>
+</code></pre></div>
+
+<hr />
+<h2 id="analisis-de-flujo-actual">🔍 Análisis de Flujo Actual</h2>
+<h3 id="mount1-inicializacion">Mount1() - Inicialización</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">// Línea 123</span>
+<span class="x">$receptorTipo = !empty($this-&gt;customer-&gt;Custom_field3) ? $this-&gt;customer-&gt;Custom_field3 : &#39;2&#39;;</span>
+<span class="x">// Resultado: &quot;04&quot; (string)</span>
+
+<span class="x">// Línea 125-130</span>
+<span class="x">$receptor = \App\Models\Receivertype::query()</span>
+<span class="x">    -&gt;where(&#39;code&#39;, $this-&gt;strPad($receptorTipo, 2))  // &quot;04&quot;</span>
+<span class="x">    -&gt;first();</span>
+<span class="x">// Resultado: Encuentra Receivertype con code=&quot;04&quot;</span>
+
+<span class="x">// Línea 131-133</span>
+<span class="x">if ($receptor instanceof \App\Models\Receivertype) {</span>
+<span class="x">    $this-&gt;receptor_tipo = (string)$receptor-&gt;id;  // &quot;4&quot;</span>
+<span class="x">}</span>
+
+<span class="x">// Línea 134</span>
+<span class="x">$this-&gt;receptor_tipoContribuyente = in_array($this-&gt;receptor_tipo, [&#39;1&#39;, &#39;4&#39;]) </span>
+<span class="x">    ? $this-&gt;customer-&gt;Custom_field4  // &quot;2&quot; (INCORRECTO)</span>
+<span class="x">    : null;</span>
+<span class="x">// Resultado: &quot;2&quot; (debería ser null)</span>
+</code></pre></div>
+
+<h3 id="validatestep4-validacion">ValidateStep4() - Validación</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">// Línea 742</span>
+<span class="x">case &quot;4&quot;:</span>
+<span class="x">    $this-&gt;validate([</span>
+<span class="x">        &#39;receptor_tipoContribuyente&#39; =&gt; &#39;required&#39;,  // ✅ Pasa porque vale &quot;2&quot;</span>
+<span class="x">        // ... validaciones que NO aplican para extranjeros</span>
+<span class="x">    ]);</span>
+</code></pre></div>
+
+<p><strong>Resultado:</strong> Valida correctamente pero con datos INCORRECTOS</p>
+<h3 id="storecustomerdata-guardado">StoreCustomerData() - Guardado</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">// Línea 777</span>
+<span class="x">&#39;Custom_field3&#39; =&gt; null,                    // ❌ Pierde TIPO_RECEPTOR</span>
+<span class="x">&#39;Custom_field4&#39; =&gt; $this-&gt;receptor_tipo,    // ❌ Guarda &quot;4&quot; en campo incorrecto</span>
+</code></pre></div>
+
+<p><strong>Resultado:</strong> Datos guardados incorrectamente</p>
+<hr />
+<h2 id="soluciones-propuestas">✅ Soluciones Propuestas</h2>
+<h3 id="solucion-1-normalizacion-de-tipo_receptor">Solución 1: Normalización de TIPO_RECEPTOR</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">// Línea 123</span>
+<span class="x">$receptorTipoRaw = !empty($this-&gt;customer-&gt;Custom_field3) ? $this-&gt;customer-&gt;Custom_field3 : &#39;2&#39;;</span>
+<span class="x">// Normalizar: &quot;04&quot; → &quot;4&quot;, &quot;01&quot; → &quot;1&quot;, etc.</span>
+<span class="x">$receptorTipo = is_string($receptorTipoRaw) ? ltrim($receptorTipoRaw, &#39;0&#39;) : $receptorTipoRaw;</span>
+</code></pre></div>
+
+<h3 id="solucion-2-logica-de-receptor_tipocontribuyente">Solución 2: Lógica de receptor_tipoContribuyente</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">// Línea 134</span>
+<span class="x">// Solo Contribuyentes (tipo 1) tienen tipoContribuyente</span>
+<span class="x">$this-&gt;receptor_tipoContribuyente = ($this-&gt;receptor_tipo === &#39;1&#39;) </span>
+<span class="x">    ? $this-&gt;customer-&gt;Custom_field4 </span>
+<span class="x">    : null;</span>
+</code></pre></div>
+
+<h3 id="solucion-3-validacion-tipo-4-corregida">Solución 3: Validación Tipo 4 Corregida</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">case &quot;4&quot;:</span>
+<span class="x">    $this-&gt;validate([</span>
+<span class="x">        &#39;receptor_pasaporteIdentidadExtranjera&#39; =&gt; &#39;required|string&#39;,</span>
+<span class="x">        &#39;receptor_paisDestinoOperacion&#39; =&gt; &#39;required&#39;,</span>
+<span class="x">        &#39;receptor_razonSocial&#39; =&gt; &#39;required|string&#39;,</span>
+<span class="x">        &#39;receptor_paisNacionalidad&#39; =&gt; &#39;required&#39;,</span>
+<span class="x">        &#39;receptor_correoElectronico&#39; =&gt; &#39;required|string|email&#39;,</span>
+<span class="x">    ]);</span>
+<span class="x">    break;</span>
+</code></pre></div>
+
+<h3 id="solucion-4-storecustomerdata-corregido">Solución 4: storeCustomerData() Corregido</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">public function storeCustomerData()</span>
+<span class="x">{</span>
+<span class="x">    $isExtranjero = in_array($this-&gt;receptor_tipo, [&#39;3&#39;, &#39;4&#39;]);</span>
+
+<span class="x">    // Para extranjeros: construir código ubicación si tienen provincia/distrito/corregimiento</span>
+<span class="x">    $locationCode = null;</span>
+<span class="x">    if (!$isExtranjero &amp;&amp; !empty($this-&gt;receptor_provincia)) {</span>
+<span class="x">        $provincia = \App\Models\Province::find($this-&gt;receptor_provincia);</span>
+<span class="x">        $distrito = \App\Models\District::find($this-&gt;receptor_distrito);</span>
+<span class="x">        $corregimiento = \App\Models\Corregimiento::find($this-&gt;receptor_corregimiento);</span>
+
+<span class="x">        if ($provincia &amp;&amp; $distrito &amp;&amp; $corregimiento) {</span>
+<span class="x">            $locationCode = sprintf(&#39;%s-%s-%s&#39;, </span>
+<span class="x">                $provincia-&gt;codigo, </span>
+<span class="x">                $distrito-&gt;codigo, </span>
+<span class="x">                $corregimiento-&gt;codigo</span>
+<span class="x">            );</span>
+<span class="x">        }</span>
+<span class="x">    }</span>
+
+<span class="x">    $this-&gt;customer-&gt;update([</span>
+<span class="x">        &#39;Customer_Bill_Name&#39; =&gt; $this-&gt;receptor_razonSocial,</span>
+<span class="x">        &#39;AddressLine1&#39; =&gt; $this-&gt;receptor_direccion ?? &#39;&#39;,</span>
+<span class="x">        &#39;Email&#39; =&gt; $this-&gt;receptor_correoElectronico,</span>
+<span class="x">        &#39;Custom_field1&#39; =&gt; $isExtranjero </span>
+<span class="x">            ? $this-&gt;receptor_pasaporteIdentidadExtranjera </span>
+<span class="x">            : $this-&gt;receptor_ruc,</span>
+<span class="x">        &#39;Custom_field2&#39; =&gt; $isExtranjero ? null : $this-&gt;receptor_DV,</span>
+<span class="x">        &#39;Custom_field3&#39; =&gt; $this-&gt;receptor_tipo,</span>
+<span class="x">        &#39;Custom_field4&#39; =&gt; $isExtranjero ? null : $this-&gt;receptor_tipoContribuyente,</span>
+<span class="x">        &#39;Custom_field5&#39; =&gt; $locationCode,</span>
+<span class="x">        &#39;Country&#39; =&gt; $isExtranjero </span>
+<span class="x">            ? $this-&gt;getCountryCode($this-&gt;receptor_paisNacionalidad)</span>
+<span class="x">            : &#39;PA&#39;,</span>
+<span class="x">    ]);</span>
+<span class="x">}</span>
+
+<span class="x">private function getCountryCode($paisNacionalidadId)</span>
+<span class="x">{</span>
+<span class="x">    if (empty($paisNacionalidadId)) {</span>
+<span class="x">        return &#39;PA&#39;;</span>
+<span class="x">    }</span>
+
+<span class="x">    $pais = \App\Models\Destinationcountryoperation::find($paisNacionalidadId);</span>
+<span class="x">    return $pais ? $pais-&gt;code : &#39;PA&#39;;</span>
+<span class="x">}</span>
+</code></pre></div>
+
+<hr />
+<h2 id="plan-de-implementacion">📋 Plan de Implementación</h2>
+<ol>
+<li>✅ <strong>Corregir QuickBooksOnlineService.php</strong> - COMPLETADO</li>
+<li>
+<p>Limpiar tipoContribuyente para extranjeros</p>
+</li>
+<li>
+<p>⏳ <strong>Corregir CreateFast.php</strong> - PENDIENTE</p>
+</li>
+<li>Normalizar TIPO_RECEPTOR</li>
+<li>Ajustar receptor_tipoContribuyente (solo tipo 1)</li>
+<li>Corregir validación tipo 4</li>
+<li>
+<p>Corregir storeCustomerData()</p>
+</li>
+<li>
+<p>⏳ <strong>Testing</strong> - PENDIENTE</p>
+</li>
+<li>Probar con cliente XYZABC123</li>
+<li>Verificar guardado correcto de campos</li>
+<li>Validar envío a PAC</li>
+</ol>
+<hr />
+<h2 id="casos-de-prueba">🎯 Casos de Prueba</h2>
+<h3 id="caso-1-cliente-extranjero-tipo-4">Caso 1: Cliente Extranjero (Tipo 4)</h3>
+<p><strong>Input:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="x">receptor_tipo: &quot;4&quot;</span>
+<span class="x">receptor_pasaporteIdentidadExtranjera: &quot;XYZABC123&quot;</span>
+<span class="x">receptor_razonSocial: &quot;Solmary&quot;</span>
+<span class="x">receptor_paisNacionalidad: ID de Chile</span>
+<span class="x">receptor_correoElectronico: &quot;solmary@example.com&quot;</span>
+</code></pre></div>
+
+<p><strong>Output Esperado:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="x">Custom_field1: &quot;XYZABC123&quot;  // PASAPORTE</span>
+<span class="x">Custom_field2: null</span>
+<span class="x">Custom_field3: &quot;4&quot;          // TIPO_RECEPTOR</span>
+<span class="x">Custom_field4: null         // Sin tipo contribuyente PA</span>
+<span class="x">Custom_field5: null</span>
+<span class="x">Country: &quot;CL&quot;</span>
+</code></pre></div>
+
+<h3 id="caso-2-cliente-contribuyente-tipo-1">Caso 2: Cliente Contribuyente (Tipo 1)</h3>
+<p><strong>Input:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="x">receptor_tipo: &quot;1&quot;</span>
+<span class="x">receptor_ruc: &quot;8-745-2395&quot;</span>
+<span class="x">receptor_DV: &quot;45&quot;</span>
+<span class="x">receptor_tipoContribuyente: &quot;2&quot;  // Persona Jurídica</span>
+<span class="x">receptor_provincia: &quot;8&quot;</span>
+<span class="x">receptor_distrito: &quot;1&quot;</span>
+<span class="x">receptor_corregimiento: &quot;1&quot;</span>
+</code></pre></div>
+
+<p><strong>Output Esperado:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="x">Custom_field1: &quot;8-745-2395&quot;</span>
+<span class="x">Custom_field2: &quot;45&quot;</span>
+<span class="x">Custom_field3: &quot;1&quot;</span>
+<span class="x">Custom_field4: &quot;2&quot;</span>
+<span class="x">Custom_field5: &quot;8-1-1&quot;</span>
+<span class="x">Country: &quot;PA&quot;</span>
+</code></pre></div>
+
+<hr />
+<h2 id="proximos-pasos">🔧 Próximos Pasos</h2>
+<ol>
+<li>Implementar correcciones en CreateFast.php</li>
+<li>Ejecutar tests con cliente XYZABC123</li>
+<li>Validar campos en BD después de guardar</li>
+<li>Probar emisión de factura a PAC</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/aghabrego/docucenter" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

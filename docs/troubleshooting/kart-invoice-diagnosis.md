@@ -1,8 +1,8 @@
-# Diagnóstico y Reparación: Kart → Facturación Electrónica
+# 🔍 Diagnóstico y Reparación: Kart → Facturación Electrónica
 
 Este sistema de diagnóstico está diseñado para identificar y resolver problemas cuando las órdenes de Kart21 no se emiten automáticamente como facturas electrónicas en DocuCenter.
 
-## Caso de Uso: Orden Kart #12720
+## 📋 Caso de Uso: Orden Kart #12720
 
 ### Datos de la Orden Problemática
 
@@ -31,7 +31,7 @@ Este sistema de diagnóstico está diseñado para identificar y resolver problem
 }
 ```
 
-## Herramientas de Diagnóstico
+## 🛠️ Herramientas de Diagnóstico
 
 ### 1. Script Principal de Diagnóstico
 
@@ -40,12 +40,12 @@ Este sistema de diagnóstico está diseñado para identificar y resolver problem
 ```
 
 **Funcionalidades:**
-- Verificación de configuración PAC
-- Búsqueda de facturas en el sistema
--  Análisis de logs de procesamiento
--  Simulación de procesamiento
--  Estado de jobs en cola
-- Recomendaciones de solución
+- ✅ Verificación de configuración PAC
+- 📋 Búsqueda de facturas en el sistema
+- 📄 Análisis de logs de procesamiento
+- 🧪 Simulación de procesamiento
+- ⏳ Estado de jobs en cola
+- 💡 Recomendaciones de solución
 
 ### 2. Comandos Artisan Específicos
 
@@ -59,7 +59,7 @@ php artisan kart:diagnose-invoice <organization_id> [kart_order_id]
 php artisan kart:force-emission <organization_id> [invoice_id] [--all] [--dry-run]
 ```
 
-## Proceso de Diagnóstico
+## 🔍 Proceso de Diagnóstico
 
 ### Paso 1: Verificación de Configuración
 
@@ -68,10 +68,10 @@ php artisan kart:force-emission <organization_id> [invoice_id] [--all] [--dry-ru
 ```
 
 **Verifica:**
-- Organización existe
-- Configuración PAC activa
-- Token PAC válido
-- Base de datos específica
+- ✅ Organización existe
+- 🔗 Configuración PAC activa
+- 🔑 Token PAC válido
+- 📊 Base de datos específica
 
 ### Paso 2: Búsqueda de Factura
 
@@ -97,12 +97,12 @@ php artisan kart:force-emission <organization_id> [invoice_id] [--all] [--dry-ru
 - Configuración PAC permite emisión
 - Factura ya fue emitida (`EzeeIssued = 1`)
 
-## Soluciones Comunes
+## 🚀 Soluciones Comunes
 
 ### Problema 1: No hay configuración PAC
 
 **Síntomas:**
-- Error: "No se encontró configuración PAC"
+- ❌ Error: "No se encontró configuración PAC"
 - Facturas se crean pero no se emiten
 
 **Solución:**
@@ -115,8 +115,8 @@ php artisan kart:force-emission <organization_id> [invoice_id] [--all] [--dry-ru
 ### Problema 2: Kart21Service sin emisión automática
 
 **Síntomas:**
-- Factura se crea en DocuCenter
-- No se emite automáticamente
+- ✅ Factura se crea en DocuCenter
+- ❌ No se emite automáticamente
 - `EzeeIssued = 0`
 
 **Solución:**
@@ -133,7 +133,7 @@ class Kart21Service implements Kart21ServiceContract
 ### Problema 3: Webhook no llegó correctamente
 
 **Síntomas:**
-- No hay factura en DocuCenter
+- ❌ No hay factura en DocuCenter
 - No hay logs de procesamiento
 - Job no se ejecutó
 
@@ -149,7 +149,7 @@ php artisan kart:send-to-zoho 21 --dry-run
 ### Problema 4: Job falló en procesamiento
 
 **Síntomas:**
-- Jobs en estado failed
+- ⚠️ Jobs en estado failed
 - Logs con errores de excepción
 - Factura parcialmente creada
 
@@ -165,7 +165,7 @@ php artisan queue:retry <job_id>
 ./scripts/diagnose-kart-invoice.sh force-emit 1 123
 ```
 
-## Ejemplos de Uso
+## 📊 Ejemplos de Uso
 
 ### Diagnóstico Completo
 ```bash
@@ -203,7 +203,7 @@ php artisan queue:retry <job_id>
 ./scripts/diagnose-kart-invoice.sh simulate 1
 ```
 
-## Flujo de Procesamiento Normal
+## 🔄 Flujo de Procesamiento Normal
 
 ```mermaid
 graph TD
@@ -217,7 +217,7 @@ graph TD
     F --> I[EzeeIssued = 0]
 ```
 
-## Implementación de Emisión Automática
+## ⚡ Implementación de Emisión Automática
 
 Para habilitar emisión automática en Kart21Service:
 
@@ -247,27 +247,27 @@ class Kart21Service implements Kart21ServiceContract
 }
 ```
 
-## Checklist de Verificación
+## 📋 Checklist de Verificación
 
-### Pre-requisitos
+### ✅ Pre-requisitos
 - [ ] Organización configurada
 - [ ] Conexión PAC activa
 - [ ] Token PAC válido
 - [ ] Endpoint PAC correcto
 
-### Procesamiento
+### ✅ Procesamiento
 - [ ] Webhook recibido correctamente
 - [ ] Job CreateSaleKart21Job ejecutado
 - [ ] Factura creada en DocuCenter
 - [ ] Cliente asociado correctamente
 
-### Emisión
+### ✅ Emisión
 - [ ] Trait CreateFastJob implementado
 - [ ] Método issueInvoice disponible
 - [ ] Emisión PAC exitosa
 - [ ] EzeeIssued = 1
 
-##  Soporte y Troubleshooting
+## 🆘 Soporte y Troubleshooting
 
 ### Logs Importantes
 ```bash
@@ -298,7 +298,7 @@ php artisan queue:work --once
 
 ---
 
-## Casos de Uso Específicos
+## 🎯 Casos de Uso Específicos
 
 ### Caso 1: Orden #12720 no se emitió
 ```bash

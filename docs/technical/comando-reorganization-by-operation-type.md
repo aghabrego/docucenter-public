@@ -1,20 +1,20 @@
-# Reorganización de Comandos Artisan por Tipo de Operación
+# 📋 Reorganización de Comandos Artisan por Tipo de Operación
 
-## **Comandos Incluidos en Kernel.php**
+## 📊 **Comandos Incluidos en Kernel.php**
 
 Los siguientes comandos ya están programados en el `App\Console\Kernel`:
 
-### **Mantenimiento del Sistema**
+### **🔄 Mantenimiento del Sistema**
 - `word:clear-log` - Limpieza de logs (Dom 7:00 AM)
 - `maintenance:clean-transactions --days=90` - Limpieza transacciones (Dom 3:00 AM)
 - `maintenance:clean-archives --days=90` - Limpieza archivos (Dom 4:00 AM)
 - `queue:prune-batches` - Limpieza lotes de cola (Diario)
 
-### **Gestión de Tokens**
+### **🔑 Gestión de Tokens**
 - `word:create-access-token` - Token Invupos (Cada 5 min)
 - `word:create-access-token-apc` - Token PAC (Cada 5 min)
 
-### ** Integraciones POS**
+### **🏪 Integraciones POS**
 - `word:type-payment-lightspeed` - Tipos pago Lightspeed (1:00 AM)
 - `word:update-invu-pos-module` - Lotes Invupos (Cada 30 min)
 - `word:update-lightspeed-serie-r` - Lightspeed Serie R (Cada 5 min)
@@ -22,20 +22,20 @@ Los siguientes comandos ya están programados en el `App\Console\Kernel`:
 - `word:update-sql-server-module` - SQL Server (6:00 AM)
 - `word:update-intuit-orders` - QuickBooks (2:00 AM)
 
-### **Configuración Automática**
+### **⚙️ Configuración Automática**
 - `word:extract-organization-configuration-emails` - Config emails (Cada 5 min)
 - `word:extract-organization-configuration-pac` - Config PAC (Cada hora)
 
-### ** Facturación Electrónica**
+### **📄 Facturación Electrónica**
 - `fe:verify-or-issue-faith-from-issuance` - Verificar/Emitir FE (Cada 5 min)
 
 ---
 
-## **Comandos NO Incluidos en Kernel - Organizados por Tipo**
+## 📂 **Comandos NO Incluidos en Kernel - Organizados por Tipo**
 
-### **1. COMANDOS DE DIAGNÓSTICO Y DEBUG**
+### **🔧 1. COMANDOS DE DIAGNÓSTICO Y DEBUG**
 
-#### **Kart21 Diagnosis**
+#### **🏎️ Kart21 Diagnosis**
 - `DiagnoseKartInvoiceCommand.php` → `kart:diagnose-invoice`
 - `EmitKartOrderCommand.php` → `kart:emit-order`
 - `EmitKartWithCashPayment.php` → `kart:emit-cash-payment`
@@ -46,7 +46,7 @@ Los siguientes comandos ya están programados en el `App\Console\Kernel`:
 - `TestKart21ServiceCommand.php` → `kart21:test-service`
 - `TestKart21DecimalPrecision.php` → `kart21:test-precision`
 
-#### ** PAC y Facturación Debug**
+#### **🏭 PAC y Facturación Debug**
 - `DebugCreateFastJobVuelto.php` → `debug:createfastjob-vuelto`
 - `DebugTheFactoryHKARequest.php` → `debug:thefactoryhka-request`
 - `TestTheFactoryHKAPayload.php` → `test:thefactoryhka-payload`
@@ -55,7 +55,7 @@ Los siguientes comandos ya están programados en el `App\Console\Kernel`:
 - `TraceInvoiceNumberFlow.php` → `trace:invoice-number-flow`
 - `DebugInvoiceNumberMapping.php` → `debug:invoice-number-mapping`
 
-#### **Testing General**
+#### **🔍 Testing General**
 - `TestACIcloudApiWithEmission.php` → `test:acicloud-api-emission`
 - `TestACIcloudRealData.php` → `test:acicloud-real-data`
 - `TestACIcloudRegistration.php` → `test:acicloud-registration`
@@ -65,27 +65,27 @@ Los siguientes comandos ya están programados en el `App\Console\Kernel`:
 - `TestAlanubeService.php` → `test:alanube-service`
 - `TestApiReceptorProblem.php` → `test:api-receptor-problem`
 
-### **2. COMANDOS DE INTEGRACIONES EMPRESARIALES**
+### **💼 2. COMANDOS DE INTEGRACIONES EMPRESARIALES**
 
-#### **Zoho Books**
+#### **📚 Zoho Books**
 - `TestZohoConnection.php` → `zoho:test-connection`
 - `TestKartToZoho.php` → `kart:send-to-zoho`
 
-#### **QuickBooks/Intuit**
+#### **💰 QuickBooks/Intuit**
 - `UploadSalesGeneralDiaryIntuitCommand.php` → `intuit:upload-sales-diary`
 - `UploadSalesIntuitCommand.php` → `intuit:upload-sales`
 - `IntuitSyncStatusCommand.php` → `intuit:sync-status`
 
-#### **Lightspeed**
+#### **⚡ Lightspeed**
 - `AnalyzeLightspeedCreditNoteCommand.php` → `lightspeed:analyze-credit-note`
 - `TestLightspeedCreditNoteCommand.php` → `test:lightspeed-credit-note`
 - `TestLightspeedPacEmission.php` → `test:lightspeed-pac-emission`
 - `TestLightspeedPacEmissionReal.php` → `test:lightspeed-pac-real`
 - `ValidateLightspeedCreditNoteFix.php` → `validate:lightspeed-credit-note-fix`
 
-### ** 3. COMANDOS DE SINCRONIZACIÓN POS**
+### **🏪 3. COMANDOS DE SINCRONIZACIÓN POS**
 
-#### **Invupos**
+#### **📦 Invupos**
 - `CategoryInvuposCommand.php` → `word:category-invupos`
 - `CustomerInvuposCommand.php` → `word:customer-invupos`
 - `ProductInvuposCommand.php` → `word:product-invupos`
@@ -94,44 +94,44 @@ Los siguientes comandos ya están programados en el `App\Console\Kernel`:
 - `SubCategoryInvuposCommand.php` → `word:subcategory-invupos`
 - `TypePaymentInvuposCommand.php` → `word:type-payment-invupos`
 
-#### **General POS**
+#### **🔄 General POS**
 - `CreditNotesCommand.php` → `word:credit-notes`
 - `ItemMenuCommand.php` → `word:item-menu`
 - `PurchaseOrdersCommand.php` → `word:purchase-orders`
 - `SalesOrdersCommand.php` → `word:sales-orders`
 
-### **4. COMANDOS DE ANÁLISIS Y REPORTES**
+### **📊 4. COMANDOS DE ANÁLISIS Y REPORTES**
 
-#### **Resúmenes y Análisis**
+#### **📈 Resúmenes y Análisis**
 - `CreateCreditNotesSummaryCommand.php` → `create:credit-notes-summary`
 - `CreateSalesOrderSummary.php` → `create:sales-order-summary`
 - `PanamaDailyEntryCommand.php` → `panama:daily-entry`
 
-#### ** Testing de Cálculos**
+#### **🧮 Testing de Cálculos**
 - `TestCreateFastJobCalculation.php` → `test:createfastjob-calculation`
 - `TestInvoiceQuantityNormalization.php` → `test:invoice-quantity-normalization`
 
-### **5. COMANDOS DE CONFIGURACIÓN Y MANTENIMIENTO**
+### **🛠️ 5. COMANDOS DE CONFIGURACIÓN Y MANTENIMIENTO**
 
-#### **Configuración de Base de Datos**
+#### **🏗️ Configuración de Base de Datos**
 - `AddColumnToOrganizationsTableCommand.php` → `config:add-column-organizations`
 - `AlterColumnIncrementCommand.php` → `config:alter-column-increment`
 - `CreateTableFromStubCommand.php` → `config:create-table-from-stub`
 - `RemoveColumnToOrganizationsTableCommand.php` → `config:remove-column-organizations`
 - `RemoveColumnsGjeHeaderImp.php` → `config:remove-columns-gje-header`
 
-#### ** Limpieza Manual**
+#### **🧹 Limpieza Manual**
 - `CleanOldArchivesCommand.php` → `maintenance:clean-archives`
 - `CleanOldTransactionsCommand.php` → `maintenance:clean-transactions`
 - `ClearLogFile.php` → `word:clear-log`
 
-#### ** Importación/Exportación**
+#### **📤 Importación/Exportación**
 - `ExportData.php` → `export:data`
 - `ImportData.php` → `import:data`
 
-### **6. COMANDOS ESPECÍFICOS DE TESTING**
+### **🎯 6. COMANDOS ESPECÍFICOS DE TESTING**
 
-#### ** Testing de Meypar**
+#### **🧪 Testing de Meypar**
 - `DebugMeyparEmission.php` → `debug:meypar-emission`
 - `MeyparTestComplete.php` → `meypar:test-complete`
 - `TestMeyparApiNormalization.php` → `test:meypar-api-normalization`
@@ -142,7 +142,7 @@ Los siguientes comandos ya están programados en el `App\Console\Kernel`:
 - `TestMeyparRealFlow.php` → `test:meypar-real-flow`
 - `TestMeyparSpecificData.php` → `test:meypar-specific-data`
 
-#### ** Testing de Procesos**
+#### **🔬 Testing de Procesos**
 - `CreateAlanubeConfigAndTestMeypar.php` → `create:alanube-config-test-meypar`
 - `CreateFastJobWrapper.php` → `create:fastjob-wrapper`
 - `CreateFastJobWrapperFixed.php` → `create:fastjob-wrapper-fixed`
@@ -150,23 +150,23 @@ Los siguientes comandos ya están programados en el `App\Console\Kernel`:
 - `TestTransactionSystem.php` → `test:transaction-system`
 - `TestingIndex.php` → `testing:index`
 
-### ** 7. COMANDOS DE PROCESOS PERIÓDICOS**
+### **📅 7. COMANDOS DE PROCESOS PERIÓDICOS**
 
-#### ** Actualizaciones de Estado**
+#### **⏰ Actualizaciones de Estado**
 - `UpdateAppointmentStatus.php` → `update:appointment-status`
 - `UpdateBooqableModule.php` → `word:update-booqable-module`
 
-#### ** Tokens Específicos**
+#### **🔐 Tokens Específicos**
 - `CreateAccessTokenSerieRCommand.php` → `word:create-access-token-serie-r`
 
-#### ** Procesos Ezete**
+#### **🤖 Procesos Ezete**
 - `EzeeteCommand.php` → `ezete:process`
 
 ---
 
-## **Recomendaciones de Reorganización**
+## 📝 **Recomendaciones de Reorganización**
 
-### **Comandos Críticos que Deberían Incluirse en Kernel:**
+### **🚨 Comandos Críticos que Deberían Incluirse en Kernel:**
 
 #### **Alta Prioridad - Producción**
 ```php
@@ -195,13 +195,13 @@ $schedule->command('kart:send-to-zoho')->hourly()->when(function () {
 $schedule->command('word:update-booqable-module')->everyThirtyMinutes();
 ```
 
-### ** Comandos de Testing - Solo para Desarrollo**
+### **🧪 Comandos de Testing - Solo para Desarrollo**
 Los comandos en la carpeta `Testing/` y comandos de debug deberían:
 - **Mantenerse** en desarrollo/staging
 - **Excluirse** de producción via environment check
 - **Documentarse** en `docs/testing/`
 
-### **Comandos Manuales - Administrativos**
+### **🗂️ Comandos Manuales - Administrativos**
 Los comandos de configuración y análisis deberían:
 - **Ejecutarse** manualmente por administradores
 - **Documentarse** en `docs/technical/`
@@ -209,7 +209,7 @@ Los comandos de configuración y análisis deberían:
 
 ---
 
-## **Estructura Recomendada del Kernel**
+## 📋 **Estructura Recomendada del Kernel**
 
 ```php
 protected function schedule(Schedule $schedule)
@@ -254,13 +254,13 @@ protected function schedule(Schedule $schedule)
 
 ---
 
-## **Resumen Ejecutivo**
+## 🎯 **Resumen Ejecutivo**
 
-- **Incluidos en Kernel**: 15 comandos programados
-- **Disponibles**: ~120 comandos adicionales
-- **Críticos para incluir**: 4 comandos
-- **Opcionales para incluir**: 2 comandos
-- ** Solo testing**: ~30 comandos
-- **Solo manuales**: ~70 comandos
+- **✅ Incluidos en Kernel**: 15 comandos programados
+- **📋 Disponibles**: ~120 comandos adicionales
+- **🚨 Críticos para incluir**: 4 comandos
+- **🔄 Opcionales para incluir**: 2 comandos
+- **🧪 Solo testing**: ~30 comandos
+- **🔧 Solo manuales**: ~70 comandos
 
 **Total: ~135 comandos artisan en el sistema DocuCenter**

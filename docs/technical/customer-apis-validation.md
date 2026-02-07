@@ -198,7 +198,7 @@ cd /home/weirdolabs/code/docucenter
 
 ---
 
-**Autor**: Equipo DocuCenter  
+**Autor**: GitHub Copilot  
 **Fecha**: $(date)  
 **Versión**: 1.0  
 **Estado**: Implementado y Probado

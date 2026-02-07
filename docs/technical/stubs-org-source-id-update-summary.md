@@ -37,61 +37,61 @@ KEY `{tabla}_org_source_id_index` (`org_source_id`)
 
 Tablas críticas procesadas primero manualmente:
 
-1. `Customers_Imp.sql.stub`
-2. `Vendors_Imp.sql.stub`
-3. `Products_Imp.sql.stub`
-4. `Sales_Header_Imp.sql.stub`
-5. `Sales_Detail_Imp.sql.stub`
-6. `Purchase_Header_Imp.sql.stub`
-7. `Purchase_Detail_Imp.sql.stub`
-8. `SalesOrder_Header_Imp.sql.stub`
-9. `Jobs_Imp.sql.stub`
+1. ✅ `Customers_Imp.sql.stub`
+2. ✅ `Vendors_Imp.sql.stub`
+3. ✅ `Products_Imp.sql.stub`
+4. ✅ `Sales_Header_Imp.sql.stub`
+5. ✅ `Sales_Detail_Imp.sql.stub`
+6. ✅ `Purchase_Header_Imp.sql.stub`
+7. ✅ `Purchase_Detail_Imp.sql.stub`
+8. ✅ `SalesOrder_Header_Imp.sql.stub`
+9. ✅ `Jobs_Imp.sql.stub`
 
 ### Procesados Automáticamente (29)
 
 Procesados con script Python `update-stubs-org-source-id.py`:
 
-1. `Chart_Exp.sql.stub`
-2. `CompanySession.sql.stub`
-3. `Customer_Credit_Memo_Detail_Imp.sql.stub`
-4. `Customer_Credit_Memo_Header_Imp.sql.stub`
-5. `Customers_Exp.sql.stub`
-6. `GJE_Detail_Imp.sql.stub`
-7. `GJE_Header_Imp.sql.stub`
-8. `InventoryAdjust_Imp.sql.stub`
-9. `Job_Cost_Codes_Exp.sql.stub`
-10. `Job_Phases_Exp.sql.stub`
-11. `Jobs_Exp.sql.stub`
-12. `Products_Exp.sql.stub`
-13. `PurOrdr_Detail_Exp.sql.stub`
-14. `PurOrdr_Header_Exp.sql.stub`
-15. `Purchase_Detail_Exp.sql.stub`
-16. `Purchase_Header_Exp.sql.stub`
-17. `SageConnectTransferSummary.sql.stub`
-18. `SalesInvoice_Detail_Exp.sql.stub`
-19. `SalesInvoice_Header_Exp.sql.stub`
-20. `SalesOrder_Detail_Exp.sql.stub`
-21. `SalesOrder_Detail_Imp.sql.stub`
-22. `SalesOrder_Header_Exp.sql.stub`
-23. `Sales_Representative_Exp.sql.stub`
-24. `Vendors_Exp.sql.stub`
-25. `customer_receipt_detail_imp.sql.stub`
-26. `customer_receipt_header_imp.sql.stub`
-27. `fe_header.sql.stub`
-28. `vendor_payment_detail_imp.sql.stub`
-29. `vendor_payment_header_imp.sql.stub`
+1. ✅ `Chart_Exp.sql.stub`
+2. ✅ `CompanySession.sql.stub`
+3. ✅ `Customer_Credit_Memo_Detail_Imp.sql.stub`
+4. ✅ `Customer_Credit_Memo_Header_Imp.sql.stub`
+5. ✅ `Customers_Exp.sql.stub`
+6. ✅ `GJE_Detail_Imp.sql.stub`
+7. ✅ `GJE_Header_Imp.sql.stub`
+8. ✅ `InventoryAdjust_Imp.sql.stub`
+9. ✅ `Job_Cost_Codes_Exp.sql.stub`
+10. ✅ `Job_Phases_Exp.sql.stub`
+11. ✅ `Jobs_Exp.sql.stub`
+12. ✅ `Products_Exp.sql.stub`
+13. ✅ `PurOrdr_Detail_Exp.sql.stub`
+14. ✅ `PurOrdr_Header_Exp.sql.stub`
+15. ✅ `Purchase_Detail_Exp.sql.stub`
+16. ✅ `Purchase_Header_Exp.sql.stub`
+17. ✅ `SageConnectTransferSummary.sql.stub`
+18. ✅ `SalesInvoice_Detail_Exp.sql.stub`
+19. ✅ `SalesInvoice_Header_Exp.sql.stub`
+20. ✅ `SalesOrder_Detail_Exp.sql.stub`
+21. ✅ `SalesOrder_Detail_Imp.sql.stub`
+22. ✅ `SalesOrder_Header_Exp.sql.stub`
+23. ✅ `Sales_Representative_Exp.sql.stub`
+24. ✅ `Vendors_Exp.sql.stub`
+25. ✅ `customer_receipt_detail_imp.sql.stub`
+26. ✅ `customer_receipt_header_imp.sql.stub`
+27. ✅ `fe_header.sql.stub`
+28. ✅ `vendor_payment_detail_imp.sql.stub`
+29. ✅ `vendor_payment_header_imp.sql.stub`
 
 ### Archivos No Procesados (7)
 
 Stubs que no requieren cambios (no tienen `ID_compania`):
 
-1. ⏭`Create_Database.sql.stub` - Script de creación de BD
-2. ⏭`Sales_Detail_Imp_Discounts.sql.stub` - Sin ID_compania
-3. ⏭`customer_note.sql.stub` - Tabla auxiliar
-4. ⏭`fe_detail.sql.stub` - Relacionado con facturación electrónica
-5. ⏭`fe_payment.sql.stub` - Relacionado con pagos
-6. ⏭`migrations.sql.stub` - Laravel migrations
-7. ⏭`sessions.sql.stub` - Sesiones PHP
+1. ⏭️ `Create_Database.sql.stub` - Script de creación de BD
+2. ⏭️ `Sales_Detail_Imp_Discounts.sql.stub` - Sin ID_compania
+3. ⏭️ `customer_note.sql.stub` - Tabla auxiliar
+4. ⏭️ `fe_detail.sql.stub` - Relacionado con facturación electrónica
+5. ⏭️ `fe_payment.sql.stub` - Relacionado con pagos
+6. ⏭️ `migrations.sql.stub` - Laravel migrations
+7. ⏭️ `sessions.sql.stub` - Sesiones PHP
 
 ## Scripts Creados
 
@@ -207,17 +207,17 @@ Customers_Imp:
 
 ## Próximos Pasos
 
-1. **Stubs actualizados** - 38 de 45 archivos procesados
-2.  **Ejecutar scripts de modificación BD:**
+1. ✅ **Stubs actualizados** - 38 de 45 archivos procesados
+2. ⏳ **Ejecutar scripts de modificación BD:**
    - Ejecutar `add-org-source-id-to-organizations.sh` en producción
    - Ejecutar `add-org-source-id-to-company.sh` en producción
-3.  **Actualizar modelos Eloquent:**
+3. ⏳ **Actualizar modelos Eloquent:**
    - Agregar `org_source_id` al `$fillable` array
    - Documentar uso en docblocks
-4.  **Implementar SyncOrganizationToCompanyJob:**
+4. ⏳ **Implementar SyncOrganizationToCompanyJob:**
    - Job que sincroniza datos de orgs → company
    - Popula `org_source_id` durante sync
-5.  **Testing:**
+5. ⏳ **Testing:**
    - Crear factories con `org_source_id`
    - Tests de sincronización
    - Validar PRIMARY KEY compuesto
@@ -266,7 +266,7 @@ docker exec -it docucenter-app-1 php artisan \
 
 ---
 
-**Estado:** Completado  
+**Estado:** ✅ Completado  
 **Total procesado:** 38 de 45 stubs SQL  
 **Errores:** 0  
 **Siguiente fase:** Ejecución de scripts en producción

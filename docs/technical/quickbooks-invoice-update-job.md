@@ -70,10 +70,10 @@ dispatch($job);
 
 El job actualiza facturas que cumplan **TODOS** estos criterios:
 
-- `origin = 'quickbooks'` (originadas en QuickBooks)
-- `EzeeIssued = 1` (facturas emitidas)
-- `InvoiceNote IS NOT NULL` (con datos de facturación)
-- `intuit_invoice_id IS NOT NULL` (ya existen en QuickBooks)
+- ✅ `origin = 'quickbooks'` (originadas en QuickBooks)
+- ✅ `EzeeIssued = 1` (facturas emitidas)
+- ✅ `InvoiceNote IS NOT NULL` (con datos de facturación)
+- ✅ `intuit_invoice_id IS NOT NULL` (ya existen en QuickBooks)
 
 ### Filtros Adicionales
 
@@ -260,24 +260,24 @@ $this->onQueue('default');     // Cola a usar
 
 ### Antes de Ejecutar
 
-1. Verificar que la conexión QuickBooks esté activa
-2. Confirmar que los tokens de acceso sean válidos
-3. Hacer backup de datos críticos
-4. Usar `--dry-run` para validar
+1. ✅ Verificar que la conexión QuickBooks esté activa
+2. ✅ Confirmar que los tokens de acceso sean válidos
+3. ✅ Hacer backup de datos críticos
+4. ✅ Usar `--dry-run` para validar
 
 ### Durante la Ejecución
 
-1. Monitorear logs en tiempo real
-2. Verificar estados en cache
-3. Estar atento a errores de API
-4. Supervisar uso de recursos
+1. 📊 Monitorear logs en tiempo real
+2. 🔍 Verificar estados en cache
+3. ⚠️ Estar atento a errores de API
+4. 📈 Supervisar uso de recursos
 
 ### Después de Ejecutar
 
-1. Validar contadores de éxito/error
-2. Revisar facturas con estado 'error'
-3. Verificar sincronización en QuickBooks
-4. Documentar cualquier issue encontrado
+1. ✅ Validar contadores de éxito/error
+2. 🔍 Revisar facturas con estado 'error'
+3. 📊 Verificar sincronización en QuickBooks
+4. 📝 Documentar cualquier issue encontrado
 
 ## Troubleshooting
 

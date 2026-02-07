@@ -1,31 +1,31 @@
 # Guía de Detección Automática - Alanube Panamá
 
-##  Descripción General
+## 🤖 Descripción General
 
 El servicio de Alanube Panamá incluye un sistema de **detección automática** que puede determinar si un conjunto de datos representa una **factura electrónica** o una **nota de crédito** sin necesidad de especificar manualmente el tipo de documento.
 
-## Objetivo
+## 🎯 Objetivo
 
 Permitir que el sistema procese documentos automáticamente detectando su tipo basándose en el análisis de los datos proporcionados, simplificando la integración y reduciendo errores humanos.
 
-## Algoritmo de Detección
+## 🔍 Algoritmo de Detección
 
 El sistema utiliza **7 criterios** para determinar si un documento es una nota de crédito:
 
-### 1. Documentos Referenciados 
+### 1. Documentos Referenciados ✅
 - **Criterio más fuerte**: Presencia del campo `referencedDocuments`
 - Las notas de crédito **siempre** deben referenciar documentos anteriores
 - Si existe este campo, **automáticamente** se considera nota de crédito
 
-### 2. Tipo de Documento Explícito 
+### 2. Tipo de Documento Explícito ✅
 - Verificación del campo `documentType = '04'`
 - Tipo 04 corresponde específicamente a notas de crédito en Panamá
 
-### 3. Naturaleza de Devolución 
+### 3. Naturaleza de Devolución ✅
 - Campo `generalInformation.nature = '11'`
 - Naturaleza 11 indica operaciones de devolución/reverso
 
-### 4. Palabras Clave en Items 
+### 4. Palabras Clave en Items ✅
 - Análisis de descripciones de productos/servicios
 - Palabras detectadas:
   - `devolución`
@@ -35,7 +35,7 @@ El sistema utiliza **7 criterios** para determinar si un documento es una nota d
   - `reverso`
   - `cancelación`
 
-### 5. Cantidades o Precios Negativos 
+### 5. Cantidades o Precios Negativos ✅
 - Verificación en items:
   - `quantity < 0`
   - `unitPrice < 0`
@@ -45,16 +45,16 @@ El sistema utiliza **7 criterios** para determinar si un documento es una nota d
   - `totalAmount < 0`
   - `taxTotal < 0`
 
-### 6. Palabras Clave Generales 
+### 6. Palabras Clave Generales ✅
 - Análisis en campos de información general
 - Búsqueda en `notes`, `comments`, `observations`
 - Mismas palabras clave que criterio #4
 
-### 7. Tipo de Receptor 
+### 7. Tipo de Receptor ✅
 - Campo `receiver.type = 'credit_note'`
 - Indicador específico para módulos externos
 
-## Métodos Disponibles
+## 🚀 Métodos Disponibles
 
 ### AlanubeService
 
@@ -79,7 +79,7 @@ $response = AlanubeEmissionHelper::emitDocumentAuto($organization, $documentData
 $response = AlanubeEmissionHelper::emitDocumentAuto($organization, $documentData, null, true);
 ```
 
-## Estructura de Respuesta
+## 📊 Estructura de Respuesta
 
 ```php
 [
@@ -99,7 +99,7 @@ $response = AlanubeEmissionHelper::emitDocumentAuto($organization, $documentData
 ]
 ```
 
-##  Testing
+## 🧪 Testing
 
 ### Comando Artisan
 
@@ -121,7 +121,7 @@ php artisan test:alanube 123 --auto-detect --test-data --async
 ./scripts/test-alanube-panama.sh interactive
 ```
 
-## Ejemplos de Uso
+## 📝 Ejemplos de Uso
 
 ### Ejemplo 1: Documento de Factura
 
@@ -209,7 +209,7 @@ $ambiguousData = [
 $response = $alanubeService->emitDocumentAuto($organization, $ambiguousData);
 ```
 
-## Procesamiento Asíncrono
+## ⚡ Procesamiento Asíncrono
 
 La detección automática también funciona con el sistema de colas:
 
@@ -221,14 +221,14 @@ CreateInvoiceAlanubeJob::dispatch($organizationId, $documentData);
 AlanubeEmissionHelper::emitDocumentAuto($organization, $documentData, null, true);
 ```
 
-## Consideraciones de Seguridad
+## 🔒 Consideraciones de Seguridad
 
 1. **Validación**: Siempre se validan los datos antes de la detección
 2. **Logging**: Todas las detecciones se registran con criterios utilizados
 3. **Fallback**: Si falla la detección, se trata como factura por defecto
 4. **Auditoría**: Resumen de criterios disponible para debugging
 
-## Logging y Debugging
+## 📋 Logging y Debugging
 
 ```php
 // Ver resumen de detección
@@ -249,7 +249,7 @@ $summary = $alanubeService->getDetectionSummary($documentData);
 $isCredit = $alanubeService->isCreditNoteDocument($documentData);
 ```
 
-## Casos de Uso
+## 🎯 Casos de Uso
 
 ### 1. Integración con Módulos Externos
 - Los módulos no necesitan especificar el tipo de documento
@@ -267,14 +267,14 @@ $isCredit = $alanubeService->isCreditNoteDocument($documentData);
 - Procesar documentos históricos sin metadata de tipo
 - Clasificación automática basada en contenido
 
-##  Limitaciones
+## 🚧 Limitaciones
 
 1. **Dependencia de Datos**: La precisión depende de la calidad de los datos
 2. **Documentos Atípicos**: Casos edge pueden requerir especificación manual
 3. **Idioma**: Palabras clave optimizadas para español principalmente
 4. **Contexto**: No considera contexto de negocio, solo datos técnicos
 
-## Flujo de Trabajo
+## 🔄 Flujo de Trabajo
 
 ```mermaid
 graph TD
@@ -287,7 +287,7 @@ graph TD
     F --> H[Respuesta con document_type='invoice']
 ```
 
-## Mejores Prácticas
+## 💡 Mejores Prácticas
 
 1. **Usar Indicadores Claros**: Incluir campos como `documentType` cuando sea posible
 2. **Documentos Referenciados**: Siempre incluir para notas de crédito
@@ -297,7 +297,7 @@ graph TD
 
 ---
 
-##  Soporte
+## 📞 Soporte
 
 Para dudas sobre la detección automática:
 - Revisar logs de la aplicación

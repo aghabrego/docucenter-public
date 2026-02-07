@@ -332,52 +332,52 @@ USERNAME: TESTUSER
 ### Diagrama de Flujo
 
 ```
-
- 1. Solicitar Credenciales                               
-    → Email: soporte@digifact.com.gt                     
-    → Tel: 2319-1921 opción 2                            
-
+┌─────────────────────────────────────────────────────────┐
+│ 1. Solicitar Credenciales                               │
+│    → Email: soporte@digifact.com.gt                     │
+│    → Tel: 2319-1921 opción 2                            │
+└──────────────────────┬──────────────────────────────────┘
                        ↓
-
- 2. Recibir Credenciales                                 
-    → RUC (TAXID)                                        
-    → Usuario                                            
-    → Contraseña                                         
-
+┌─────────────────────────────────────────────────────────┐
+│ 2. Recibir Credenciales                                 │
+│    → RUC (TAXID)                                        │
+│    → Usuario                                            │
+│    → Contraseña                                         │
+└──────────────────────┬──────────────────────────────────┘
                        ↓
-
- 3. Obtener Token JWT (Vigencia: 30 días)               
-    POST /login/get_token                                
-    Body: { Username, Password }                         
-
+┌─────────────────────────────────────────────────────────┐
+│ 3. Obtener Token JWT (Vigencia: 30 días)               │
+│    POST /login/get_token                                │
+│    Body: { Username, Password }                         │
+└──────────────────────┬──────────────────────────────────┘
                        ↓
-
- 4. Generar XML según Esquema DGI                        
-    → Validar estructura XML                             
-    → Incluir todos los campos requeridos                
-
+┌─────────────────────────────────────────────────────────┐
+│ 4. Generar XML según Esquema DGI                        │
+│    → Validar estructura XML                             │
+│    → Incluir todos los campos requeridos                │
+└──────────────────────┬──────────────────────────────────┘
                        ↓
-
- 5. Enviar a Certificación                               
-    POST /transform/nuc                                  
-    Headers: Authorization, Content-Type                 
-    Params: TAXID, FORMAT, USERNAME                      
-    Body: XML del documento                              
-
+┌─────────────────────────────────────────────────────────┐
+│ 5. Enviar a Certificación                               │
+│    POST /transform/nuc                                  │
+│    Headers: Authorization, Content-Type                 │
+│    Params: TAXID, FORMAT, USERNAME                      │
+│    Body: XML del documento                              │
+└──────────────────────┬──────────────────────────────────┘
                        ↓
-
- 6. Recibir Respuesta de DGI                             
-    → Acuse de Recibo (CUFE)                             
-    → Documentos en formatos solicitados (base64)        
-    → Códigos de validación                              
-
+┌─────────────────────────────────────────────────────────┐
+│ 6. Recibir Respuesta de DGI                             │
+│    → Acuse de Recibo (CUFE)                             │
+│    → Documentos en formatos solicitados (base64)        │
+│    → Códigos de validación                              │
+└──────────────────────┬──────────────────────────────────┘
                        ↓
-
- 7. Procesar y Almacenar                                 
-    → Decodificar base64                                 
-    → Guardar archivos (XML, PDF, HTML)                  
-    → Registrar CUFE y acuse de recibo                   
-
+┌─────────────────────────────────────────────────────────┐
+│ 7. Procesar y Almacenar                                 │
+│    → Decodificar base64                                 │
+│    → Guardar archivos (XML, PDF, HTML)                  │
+│    → Registrar CUFE y acuse de recibo                   │
+└─────────────────────────────────────────────────────────┘
 ```
 
 ### Validaciones Realizadas por Digifact
@@ -458,12 +458,12 @@ $pdfContent = base64_decode($response['responseData3']);
 **Ejemplo**:
 ```
 FE0120000155704849-2-2021320001202205018539617752001120008136739
-                                                       
-                                                        Checksum
-  Serie y número
-  RUC emisor
-  Tipo de documento
- Prefijo FE (Factura Electrónica)
+│ │││                                                      │
+│ │││                                                      └─ Checksum
+│ ││└─ Serie y número
+│ │└── RUC emisor
+│ └─── Tipo de documento
+└───── Prefijo FE (Factura Electrónica)
 ```
 
 ---
@@ -1128,12 +1128,12 @@ class DigifactTestCommand extends Command
         $result = $service->authenticate();
 
         if ($result['success']) {
-            $this->info(" Authentication successful");
+            $this->info("✓ Authentication successful");
             $this->line("Token: " . substr($result['token'], 0, 50) . "...");
             return 0;
         }
 
-        $this->error(" Authentication failed");
+        $this->error("✗ Authentication failed");
         $this->line("Error: " . $result['error']);
         return 1;
     }
@@ -1153,13 +1153,13 @@ class DigifactTestCommand extends Command
         $result = $service->certifyDocument($xml);
 
         if ($result['success']) {
-            $this->info(" Certification successful");
+            $this->info("✓ Certification successful");
             $this->line("CUFE: " . $result['cufe']);
             $this->line("Acuse Recibo: " . $result['acuse_recibo']);
             return 0;
         }
 
-        $this->error(" Certification failed");
+        $this->error("✗ Certification failed");
         $this->line("Error: " . $result['error']);
         return 1;
     }
@@ -1176,12 +1176,12 @@ class DigifactTestCommand extends Command
         $result = $service->getDocument($cufe);
 
         if ($result['success']) {
-            $this->info(" Query successful");
+            $this->info("✓ Query successful");
             $this->line("Document found and retrieved");
             return 0;
         }
 
-        $this->error(" Query failed");
+        $this->error("✗ Query failed");
         $this->line("Error: " . $result['error']);
         return 1;
     }
@@ -1404,12 +1404,12 @@ Digifact representa una opción robusta y moderna para la certificación de fact
 
 ### Próximos Pasos
 
-1. Análisis de documentación completado
-2.  Solicitar credenciales TEST
-3.  Desarrollar DigifactService
-4.  Implementar generación XML DGI
-5.  Testing integral
-6.  Migración a productivo
+1. ✅ Análisis de documentación completado
+2. ⏳ Solicitar credenciales TEST
+3. ⏳ Desarrollar DigifactService
+4. ⏳ Implementar generación XML DGI
+5. ⏳ Testing integral
+6. ⏳ Migración a productivo
 
 ---
 

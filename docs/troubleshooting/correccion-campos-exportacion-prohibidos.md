@@ -33,8 +33,8 @@ El ejemplo oficial de TheFactoryHKA **solo incluye 3 campos** en `datosFacturaEx
 $datos->datosFacturaExportacion = (object) [
     'condicionesEntrega' => $this->getNestedValue($gFExpData, 'cCondEntr', 'CFR'),
     'monedaOperExportacion' => $moneda,
-    'tipoDeCambio' => $moneda === 'USD' ? '1.00' : $this->getNestedValue($gFExpData, 'dCambio', '1.00'), // PROHIBIDO
-    'montoMonedaExtranjera' => $this->getNestedValue($gFExpData, 'dVTotEst', $totalFactura), // PROHIBIDO
+    'tipoDeCambio' => $moneda === 'USD' ? '1.00' : $this->getNestedValue($gFExpData, 'dCambio', '1.00'), // ❌ PROHIBIDO
+    'montoMonedaExtranjera' => $this->getNestedValue($gFExpData, 'dVTotEst', $totalFactura), // ❌ PROHIBIDO
     'puertoEmbarque' => $this->getNestedValue($gFExpData, 'dPuertoEmbarq', 'PANAMA'),
 ];
 ```
@@ -58,10 +58,10 @@ $datos->datosFacturaExportacion = (object) [
 #### Antes (INCORRECTO):
 ```php
 if (empty($export->tipoCambio)) {
-    $export->tipoCambio = $export->monedaOperExportacion === 'USD' ? '1.00' : '1.00'; // Campo prohibido
+    $export->tipoCambio = $export->monedaOperExportacion === 'USD' ? '1.00' : '1.00'; // ❌ Campo prohibido
 }
 if (empty($export->montoMonedaExtranjera)) {
-    $export->montoMonedaExtranjera = $documentoElectronico->totalesSubTotales->totalFactura; // Campo prohibido
+    $export->montoMonedaExtranjera = $documentoElectronico->totalesSubTotales->totalFactura; // ❌ Campo prohibido
 }
 ```
 
@@ -114,13 +114,13 @@ Log::info('HKAService - Datos exportación según ejemplo oficial TheFactoryHKA'
 ## Resultado Esperado
 
 ### Antes:
-- Error PAC 201: "El campo [tipoDeCambio] no debe ser informado"
-- 5 campos enviados (incluyendo prohibidos)
+- ❌ Error PAC 201: "El campo [tipoDeCambio] no debe ser informado"
+- ❌ 5 campos enviados (incluyendo prohibidos)
 
 ### Después:
-- Solo 3 campos enviados según especificación oficial
-- Conformidad total con documentación TheFactoryHKA
-- Sin campos prohibidos que causen error PAC 201
+- ✅ Solo 3 campos enviados según especificación oficial
+- ✅ Conformidad total con documentación TheFactoryHKA
+- ✅ Sin campos prohibidos que causen error PAC 201
 
 ## Próximos Pasos
 
@@ -136,6 +136,6 @@ Log::info('HKAService - Datos exportación según ejemplo oficial TheFactoryHKA'
 
 ---
 
-**Estado**: **CORRECCIONES APLICADAS Y VALIDADAS**
+**Estado**: ✅ **CORRECCIONES APLICADAS Y VALIDADAS**
 
 **Impacto**: Sistema ahora 100% conforme a especificación oficial TheFactoryHKA para facturas de exportación.

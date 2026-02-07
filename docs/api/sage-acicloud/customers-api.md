@@ -1,14 +1,6 @@
 # API Sage ACICloud - Módulo Clientes
 
-## Crear Cliente
-
-**Endpoint:** `POST /api/acicloud/customer`
-**Request Class:** `CustomersImpRequest`
-**Autenticación:** Bearer Token requerido
-
-### Ejemplo de Request
-
-```json
+## Crear Clie```json
 {
   "CustomerID": "12345",
   "Customer_Bill_Name": "John Doe",
@@ -55,21 +47,21 @@
 
 | Campo | Tipo | Requerido | Descripción | Validación | Ejemplo |
 |-------|------|-----------|-------------|------------|---------|
-| `CustomerID` | string | | ID único del cliente | Máx. 20 caracteres, único | `"CUST001"` |
-| `Customer_Bill_Name` | string | | Nombre de facturación | Máx. 39 caracteres | `"Empresa Ejemplo S.A."` |
-| `AddressLine1` | string | | Dirección línea 1 | - | `"Calle 50, Edificio Torre"` |
-| `AddressLine2` | string | | Dirección línea 2 | - | `"Piso 15, Oficina 1501"` |
-| `City` | string | | Ciudad | - | `"Ciudad de Panamá"` |
-| `State` | string | | Estado/Provincia | Máx. 2 caracteres | `"PA"` |
-| `Zip` | string | | Código postal | Máx. 12 caracteres | `"0000"` |
-| `Country` | string | | País | - | `"Panamá"` |
-| `Telephone1` | string | | Teléfono principal | Máx. 20 caracteres | `"+507 1234-5678"` |
-| `Email` | string | | Correo electrónico | Máx. 64 caracteres | `"cliente@empresa.com"` |
-| `RUC` | string | | RUC del cliente | Alfanumérico, máx. 40 | `"1234567890123"` |
-| `DV` | string | | Dígito verificador | Alfanumérico, máx. 40 | `"12"` |
-| `Custom_field3` | string | | Campo personalizado 3 | Alfanumérico, máx. 40 | `"Sector Financiero"` |
-| `Custom_field4` | string | | Campo personalizado 4 | Alfanumérico, máx. 40 | `"VIP"` |
-| `Custom_field5` | string | | Campo personalizado 5 | Alfanumérico, máx. 40 | `"Corporativo"` |
+| `CustomerID` | string | ✅ | ID único del cliente | Máx. 20 caracteres, único | `"CUST001"` |
+| `Customer_Bill_Name` | string | ✅ | Nombre de facturación | Máx. 39 caracteres | `"Empresa Ejemplo S.A."` |
+| `AddressLine1` | string | ❌ | Dirección línea 1 | - | `"Calle 50, Edificio Torre"` |
+| `AddressLine2` | string | ❌ | Dirección línea 2 | - | `"Piso 15, Oficina 1501"` |
+| `City` | string | ❌ | Ciudad | - | `"Ciudad de Panamá"` |
+| `State` | string | ❌ | Estado/Provincia | Máx. 2 caracteres | `"PA"` |
+| `Zip` | string | ❌ | Código postal | Máx. 12 caracteres | `"0000"` |
+| `Country` | string | ❌ | País | - | `"Panamá"` |
+| `Telephone1` | string | ❌ | Teléfono principal | Máx. 20 caracteres | `"+507 1234-5678"` |
+| `Email` | string | ❌ | Correo electrónico | Máx. 64 caracteres | `"cliente@empresa.com"` |
+| `RUC` | string | ❌ | RUC del cliente | Alfanumérico, máx. 40 | `"1234567890123"` |
+| `DV` | string | ❌ | Dígito verificador | Alfanumérico, máx. 40 | `"12"` |
+| `Custom_field3` | string | ❌ | Campo personalizado 3 | Alfanumérico, máx. 40 | `"Sector Financiero"` |
+| `Custom_field4` | string | ❌ | Campo personalizado 4 | Alfanumérico, máx. 40 | `"VIP"` |
+| `Custom_field5` | string | ❌ | Campo personalizado 5 | Alfanumérico, máx. 40 | `"Corporativo"` |
 
 ### Reglas de Validación Detalladas
 
@@ -272,140 +264,6 @@
       "per_page": 50,
       "total": 150
     }
-  }
-}
-```
-
----
-
-## Consultar Cliente Específico
-
-**Endpoint:** `GET /api/acicloud/customer_imp/{identifier}`  
-**Autenticación:** Bearer Token requerido  
-**Middleware:** `check.activate.organization`
-
-Obtiene los detalles de un cliente específico por su identificador.
-
-### Parámetros de URL
-
-| Campo | Tipo | Descripción |
-|-------|------|-------------|
-| `identifier` | string | CustomerID o ID interno del cliente |
-
-### Ejemplo de Request
-
-```bash
-GET /api/acicloud/customer_imp/CUST001
-```
-
-### Respuesta de Éxito
-
-```json
-{
-  "success": true,
-  "data": {
-    "id": 1,
-    "CustomerID": "CUST001",
-    "Customer_Bill_Name": "Empresa Ejemplo S.A.",
-    "AddressLine1": "Calle 50, Edificio Torre Global",
-    "AddressLine2": "Piso 15, Oficina 1501",
-    "City": "Ciudad de Panamá",
-    "State": "PA",
-    "Zip": "0000",
-    "Country": "Panamá",
-    "Telephone1": "+507 1234-5678",
-    "Email": "contacto@empresaejemplo.com",
-    "RUC": "1234567890123",
-    "DV": "12",
-    "sage_id": "SAGE_CUST_001",
-    "import_status": "completed",
-    "created_at": "2025-01-29 21:30:00",
-    "updated_at": "2025-01-29 21:30:00"
-  }
-}
-```
-
-### Respuesta de Error
-
-```json
-{
-  "success": false,
-  "message": "Cliente no encontrado"
-}
-```
-
----
-
-## Actualizar Cliente
-
-**Endpoint:** `PUT /api/acicloud/customer_imp/{id}`  
-**Autenticación:** Bearer Token requerido  
-**Middleware:** `check.activate.organization`
-
-Actualiza los datos de un cliente existente.
-
-### Parámetros de URL
-
-| Campo | Tipo | Descripción |
-|-------|------|-------------|
-| `id` | integer | ID interno del cliente |
-
-### Parámetros de Request
-
-Todos los campos son opcionales. Solo se actualizarán los campos enviados.
-
-| Campo | Tipo | Descripción | Validación |
-|-------|------|-------------|------------|
-| `CustomerID` | string | ID único del cliente | Máx. 20 caracteres |
-| `Customer_Bill_Name` | string | Nombre de facturación | Máx. 39 caracteres |
-| `AddressLine1` | string | Dirección línea 1 | - |
-| `AddressLine2` | string | Dirección línea 2 | - |
-| `City` | string | Ciudad | - |
-| `State` | string | Estado/Provincia | Máx. 2 caracteres |
-| `Zip` | string | Código postal | Máx. 12 caracteres |
-| `Country` | string | País | - |
-| `Telephone1` | string | Teléfono principal | Máx. 20 caracteres |
-| `Email` | string | Correo electrónico | Máx. 64 caracteres |
-| `RUC` | string | RUC del cliente | Alfanumérico, máx. 40 |
-| `DV` | string | Dígito verificador | Alfanumérico, máx. 40 |
-
-### Ejemplo de Request
-
-```json
-{
-  "Customer_Bill_Name": "Empresa Ejemplo S.A. - Actualizada",
-  "Email": "nuevoemail@empresaejemplo.com",
-  "Telephone1": "+507 9876-5432"
-}
-```
-
-### Respuesta de Éxito
-
-```json
-{
-  "success": true,
-  "message": "Cliente actualizado exitosamente",
-  "data": {
-    "id": 1,
-    "CustomerID": "CUST001",
-    "Customer_Bill_Name": "Empresa Ejemplo S.A. - Actualizada",
-    "Email": "nuevoemail@empresaejemplo.com",
-    "Telephone1": "+507 9876-5432",
-    "updated_at": "2025-01-16 10:00:00"
-  }
-}
-```
-
-### Respuesta de Error
-
-```json
-{
-  "success": false,
-  "message": "Error al actualizar cliente",
-  "errors": {
-    "Email": [
-      "El formato del correo electrónico no es válido"
-    ]
   }
 }
 ```

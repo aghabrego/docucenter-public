@@ -1,10 +1,10 @@
 # QuickBooks Sync Monitor - Implementación
 
-## Descripción
+## 📋 Descripción
 
 Panel de monitoreo para clientes que permite visualizar y gestionar el estado de sincronización de facturas con QuickBooks Online.
 
-##  Archivos Creados
+## 📁 Archivos Creados
 
 ### 1. Componente Livewire
 **Ubicación**: `app/Http/Livewire/Admin/Reports/QuickBooksSyncMonitor.php`
@@ -35,7 +35,7 @@ Route::get('/admin/reports/quickbooks_sync', QuickBooksSyncMonitor::class)
     ->name('admin.reports.quickbooks_sync');
 ```
 
-## Funcionalidades
+## 🎯 Funcionalidades
 
 ### Visualización
 - **Estadísticas Generales**:
@@ -68,7 +68,7 @@ Route::get('/admin/reports/quickbooks_sync', QuickBooksSyncMonitor::class)
 3. **Reintentar Todas las Fallidas**: Botón masivo con confirmación
 4. **Ver Error Detallado**: Modal con información completa del error
 
-## Pasos de Sincronización
+## 🔄 Pasos de Sincronización
 
 | Paso | Descripción | Proceso |
 |------|-------------|---------|
@@ -80,7 +80,7 @@ Route::get('/admin/reports/quickbooks_sync', QuickBooksSyncMonitor::class)
 | 5 | Enviando factura | `registerInvoiceQB()` |
 | 6 | Completado | Sincronización exitosa |
 
-## Estados de Sincronización
+## 📊 Estados de Sincronización
 
 | Estado | Descripción | Badge |
 |--------|-------------|-------|
@@ -89,14 +89,14 @@ Route::get('/admin/reports/quickbooks_sync', QuickBooksSyncMonitor::class)
 | `completed` | Exitosa | Verde (success) |
 | `failed` | Fallida | Rojo (danger) |
 
-##  Seguridad y Permisos
+## 🔐 Seguridad y Permisos
 
 - **Middleware**: `dynamicAcl`, `check.active.organization`
 - **Alcance**: Solo facturas de la organización activa
 - **Usuarios**: Clientes con acceso a reportes
 - **Base de Datos**: Usa la BD específica de la organización
 
-## Métodos Principales
+## 🛠️ Métodos Principales
 
 ### `loadStatistics()`
 Carga estadísticas agregadas de sincronización.
@@ -119,7 +119,7 @@ Retorna nombre descriptivo del paso de sincronización.
 ### `getStatusBadgeClass($status)`
 Retorna clase CSS Bootstrap para el badge de estado.
 
-## Columnas Requeridas en `Sales_Header_Imp`
+## 📝 Columnas Requeridas en `Sales_Header_Imp`
 
 ```sql
 intuit_sync_status VARCHAR(20) NULL     -- completed|failed|processing
@@ -131,7 +131,7 @@ intuit_invoice_id BIGINT NULL            -- ID en QuickBooks
 intuit_extracted_cufe VARCHAR(255) NULL  -- CUFE usado
 ```
 
-## Uso
+## 🚀 Uso
 
 ### Acceso
 ```
@@ -148,7 +148,7 @@ intuit_extracted_cufe VARCHAR(255) NULL  -- CUFE usado
 2. Click en "Retry Selected"
 3. O usar "Retry All Failed" para todas
 
-## Consideraciones
+## ⚠️ Consideraciones
 
 1. **Columnas Faltantes**: Las columnas de tracking deben existir en la BD de la organización. Si no existen, ejecutar stub/migración correspondiente.
 
@@ -160,7 +160,7 @@ intuit_extracted_cufe VARCHAR(255) NULL  -- CUFE usado
 
 5. **Logging**: Todos los eventos se registran en `storage/logs/laravel.log` con contexto completo.
 
-## Troubleshooting
+## 🔍 Troubleshooting
 
 ### No se muestran facturas
 - Verificar que existan columnas `intuit_sync_*` en la tabla
@@ -177,14 +177,14 @@ intuit_extracted_cufe VARCHAR(255) NULL  -- CUFE usado
 - Verificar que existan datos en `Sales_Header_Imp`
 - Revisar logs del componente
 
-## Referencias
+## 📚 Referencias
 
 - Job Principal: `app/Jobs/SendSaleToQuickBooksJob.php`
 - Trait: `app/Traits/UpdateIntuitOrdersTrait.php`
 - Modelo: `app/Models/SalesHeaderImp.php`
 - Documentación QB: `docs/technical/quickbooks-*`
 
-## Testing
+## ✅ Testing
 
 Para probar el panel:
 
@@ -194,7 +194,7 @@ Para probar el panel:
 4. Acceder a `/admin/reports/quickbooks_sync`
 5. Probar filtros y reintentos
 
-## Personalización
+## 🎨 Personalización
 
 Para personalizar colores o estilos, editar:
 - Badges de estado en `getStatusBadgeClass()`
@@ -204,5 +204,5 @@ Para personalizar colores o estilos, editar:
 ---
 
 **Fecha de Implementación**: 26 de Diciembre, 2025
-**Autor**: Equipo DocuCenter
+**Autor**: GitHub Copilot
 **Versión**: 1.0.0

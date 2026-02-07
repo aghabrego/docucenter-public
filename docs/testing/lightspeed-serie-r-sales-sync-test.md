@@ -92,34 +92,34 @@ docker exec -it docucenter-app-1 php artisan lightspeed:test-serie-r-sync 123 --
 El comando muestra:
 
 ```
-
+═══════════════════════════════════════════════════════
   Test Lightspeed Serie R - Sincronización de Ventas
+═══════════════════════════════════════════════════════
 
-
-Organización: VOGLIA (ID: 123)
+📋 Organización: VOGLIA (ID: 123)
    Base de datos: 9_734_1672_56
 
-Conexión encontrada (ID: 45)
+✅ Conexión encontrada (ID: 45)
 
- Configuración de Shop:
+🏪 Configuración de Shop:
    Shop ID: 9
    Shop Name: VOGLIA Multiplaza
    Account ID: 192176
-   Estado: Activo
+   Estado: ✅ Activo
 
- Parámetros de API:
+📡 Parámetros de API:
    Limit: 20
    Sort: -completeTime
    Completed: true
-   Shop ID Filter: 9 
+   Shop ID Filter: 9 ✅
 
-Obteniendo preview de ventas...
+🔍 Obteniendo preview de ventas...
 
-Ventas encontradas: 15
+📊 Ventas encontradas: 15
 
-
-                    PREVIEW DE VENTAS                        
-
+┌─────────────────────────────────────────────────────────────┐
+│                    PREVIEW DE VENTAS                        │
+└─────────────────────────────────────────────────────────────┘
 +-----------------+-----------+----------+----------+---------------------+
 | Ticket          | Sale ID   | Shop ID  | Total    | Fecha              |
 +-----------------+-----------+----------+----------+---------------------+
@@ -128,34 +128,34 @@ Ventas encontradas: 15
 +-----------------+-----------+----------+----------+---------------------+
 ... y 13 ventas más
 
-Distribución por Shop:
-   Shop 9: 15 venta(s)
+📈 Distribución por Shop:
+   ✅ Shop 9: 15 venta(s)
 
-Filtro por shop_id funcionando correctamente
+✅ Filtro por shop_id funcionando correctamente
 
-Para ejecutar la sincronización real, usa: --sync
+💡 Para ejecutar la sincronización real, usa: --sync
 
-
+═══════════════════════════════════════════════════════
   Test completado
-
+═══════════════════════════════════════════════════════
 ```
 
 ## Validaciones que Realiza
 
 ### 1. Configuración de Organización
-- Organización existe
-- Tiene conexión Lightspeed Serie R
-- Configuración de shop (si existe)
+- ✅ Organización existe
+- ✅ Tiene conexión Lightspeed Serie R
+- ✅ Configuración de shop (si existe)
 
 ### 2. Filtro por Shop ID
-- Parámetro `shopID` se agrega al request
-- Solo se obtienen ventas del shop configurado
-- Alerta si se encuentran ventas de múltiples shops (filtro no funciona)
+- ✅ Parámetro `shopID` se agrega al request
+- ✅ Solo se obtienen ventas del shop configurado
+- ⚠️ Alerta si se encuentran ventas de múltiples shops (filtro no funciona)
 
 ### 3. Datos de Ventas
-- Cantidad de ventas encontradas
-- Preview de las primeras 10 ventas
-- Distribución por shop_id
+- 📊 Cantidad de ventas encontradas
+- 📋 Preview de las primeras 10 ventas
+- 📈 Distribución por shop_id
 
 ## Casos de Prueba
 
@@ -167,7 +167,7 @@ docker exec -it docucenter-app-1 php artisan lightspeed:test-serie-r-sync 456
 
 **Resultado Esperado:**
 ```
-No hay configuración de shop (se procesarán todas las tiendas)
+⚠️  No hay configuración de shop (se procesarán todas las tiendas)
 Shop ID Filter: No aplicado (todas las tiendas)
 ```
 
@@ -180,8 +180,8 @@ docker exec -it docucenter-app-1 php artisan lightspeed:test-serie-r-sync 123
 **Resultado Esperado:**
 ```
 Shop ID: 9
-Shop ID Filter: 9 
-Filtro por shop_id funcionando correctamente
+Shop ID Filter: 9 ✅
+✅ Filtro por shop_id funcionando correctamente
 ```
 
 ### Caso 3: Sobrescribir shop_id
@@ -192,8 +192,8 @@ docker exec -it docucenter-app-1 php artisan lightspeed:test-serie-r-sync 123 --
 
 **Resultado Esperado:**
 ```
-Usando shop_id personalizado: 15 (sobrescribe configuración)
-Shop ID Filter: 15 
+⚡ Usando shop_id personalizado: 15 (sobrescribe configuración)
+Shop ID Filter: 15 ✅
 ```
 
 ### Caso 4: No hay ventas
@@ -204,7 +204,7 @@ docker exec -it docucenter-app-1 php artisan lightspeed:test-serie-r-sync 123 --
 
 **Resultado Esperado:**
 ```
-No se encontraron ventas con los parámetros especificados
+⚠️  No se encontraron ventas con los parámetros especificados
 ```
 
 ## Monitoreo de Logs
@@ -265,9 +265,9 @@ docker exec -it docucenter-app-1 php artisan lightspeed:test-serie-r-sync $ORG_I
 
 # Capturar exit code
 if [ $? -eq 0 ]; then
-    echo "Test passed"
+    echo "✅ Test passed"
 else
-    echo "Test failed"
+    echo "❌ Test failed"
     exit 1
 fi
 ```

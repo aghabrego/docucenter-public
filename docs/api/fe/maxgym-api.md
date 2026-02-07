@@ -18,54 +18,54 @@ Crea y emite una factura electrónica basada en datos provenientes de Maxgym (si
 
 | Campo | Tipo | Requerido | Descripción |
 |-------|------|-----------|-------------|
-| `idEvent` | string | | ID único del evento (UUID) |
-| `dateCreated` | string | | Fecha de creación (ISO 8601) |
-| `eventType` | string | | Tipo de evento ("payment.succeeded") |
+| `idEvent` | string | ✅ | ID único del evento (UUID) |
+| `dateCreated` | string | ✅ | Fecha de creación (ISO 8601) |
+| `eventType` | string | ✅ | Tipo de evento ("payment.succeeded") |
 
 #### Datos de la Transacción
 
 | Campo | Tipo | Requerido | Descripción |
 |-------|------|-----------|-------------|
-| `data.id` | string | | ID único de la transacción |
-| `data.idMember` | string | | ID del miembro/cliente |
-| `data.status` | integer | | Estado del pago (1 = approved) |
-| `data.statusName` | string | | Nombre del estado |
-| `data.paymentDate` | string | | Fecha de pago (ISO 8601) |
-| `data.transactionDate` | string | | Fecha de transacción |
-| `data.basePrice` | string | | Precio base |
-| `data.price` | string | | Precio final |
-| `data.discount` | number | | Descuento aplicado |
-| `data.units` | integer | | Cantidad de unidades |
+| `data.id` | string | ✅ | ID único de la transacción |
+| `data.idMember` | string | ✅ | ID del miembro/cliente |
+| `data.status` | integer | ✅ | Estado del pago (1 = approved) |
+| `data.statusName` | string | ✅ | Nombre del estado |
+| `data.paymentDate` | string | ✅ | Fecha de pago (ISO 8601) |
+| `data.transactionDate` | string | ✅ | Fecha de transacción |
+| `data.basePrice` | string | ✅ | Precio base |
+| `data.price` | string | ✅ | Precio final |
+| `data.discount` | number | ✅ | Descuento aplicado |
+| `data.units` | integer | ✅ | Cantidad de unidades |
 
 #### Datos del Miembro/Cliente
 
 | Campo | Tipo | Requerido | Descripción |
 |-------|------|-----------|-------------|
-| `data.member.name` | string | | Nombre del cliente |
-| `data.member.lastName` | string | | Apellido del cliente |
-| `data.member.email` | string | | Email del cliente |
-| `data.member.documentNumber` | string | | Número de documento/RUC |
-| `data.member.address` | string | | Dirección del cliente |
-| `data.member.cp` | string | | Código postal |
-| `data.member.countryCode` | string | | Código del país |
+| `data.member.name` | string | ✅ | Nombre del cliente |
+| `data.member.lastName` | string | ✅ | Apellido del cliente |
+| `data.member.email` | string | ✅ | Email del cliente |
+| `data.member.documentNumber` | string | ✅ | Número de documento/RUC |
+| `data.member.address` | string | ❌ | Dirección del cliente |
+| `data.member.cp` | string | ❌ | Código postal |
+| `data.member.countryCode` | string | ❌ | Código del país |
 
 #### Líneas/Productos
 
 | Campo | Tipo | Requerido | Descripción |
 |-------|------|-----------|-------------|
-| `data.lines[].idProduct` | string | | ID del producto/servicio |
-| `data.lines[].name` | string | | Nombre del producto |
-| `data.lines[].price` | string | | Precio del producto |
+| `data.lines[].idProduct` | string | ✅ | ID del producto/servicio |
+| `data.lines[].name` | string | ✅ | Nombre del producto |
+| `data.lines[].price` | string | ✅ | Precio del producto |
 
 #### Método de Pago
 
 | Campo | Tipo | Requerido | Descripción |
 |-------|------|-----------|-------------|
-| `data.paymentMethod.name` | string | | Nombre del método |
-| `data.paymentMethod.last4` | string | | Últimos 4 dígitos (tarjetas) |
-| `data.paymentMethod.brand` | string | | Marca de la tarjeta |
-| `data.paymentMethod.type` | integer | | Tipo de pago (2 = card) |
-| `data.paymentMethod.typeName` | string | | Nombre del tipo |
+| `data.paymentMethod.name` | string | ❌ | Nombre del método |
+| `data.paymentMethod.last4` | string | ❌ | Últimos 4 dígitos (tarjetas) |
+| `data.paymentMethod.brand` | string | ❌ | Marca de la tarjeta |
+| `data.paymentMethod.type` | integer | ✅ | Tipo de pago (2 = card) |
+| `data.paymentMethod.typeName` | string | ✅ | Nombre del tipo |
 
 ### Ejemplo de Request (Basado en Test)
 
@@ -140,45 +140,6 @@ Crea y emite una factura electrónica basada en datos provenientes de Maxgym (si
 
 ### Validaciones Específicas
 
-#### Detección Automática de Tipo de Precio (Webhook)
-
-**Problema Identificado:** La API de MaxGym envía webhooks con **dos estructuras inconsistentes** donde `lines[].price` representa valores diferentes:
-
-- **Webhook Tipo 1**: `lines[].price` = BASE (sin impuestos)
-  - Ejemplo: Personal Trainer $425.00
-  - `lines[].price` coincide con `data.basePrice`
-  - Cálculo: base + tax = total
-
-- **Webhook Tipo 2**: `lines[].price` = TOTAL (con impuestos)
-  - Ejemplo: PYMES $58.85
-  - `lines[].price` coincide con `data.price`
-  - Cálculo: total - tax = base
-
-**Solución Implementada:** Detección automática comparando `lines[].price` con `data.basePrice` y `data.price`:
-
-```php
-if (abs($linePrice - $finalReceivedBasePrice) < $tolerance) {
-    // CASO 1: lines[].price es el BASE sin impuestos
-    $baseAmount = $linePrice;
-    $totalLinePrice = $linePrice + $finalTaxAmount;
-    
-} elseif (abs($linePrice - $receivedPrice) < $tolerance) {
-    // CASO 2: lines[].price es el TOTAL con impuestos
-    $baseAmount = $linePrice - $finalTaxAmount;
-    $totalLinePrice = $linePrice;
-}
-```
-
-**Ventajas**:
-- Maneja ambos tipos automáticamente
-- Usa campos consistentes del header como referencia
-- Falla explícitamente con estructuras desconocidas
-- Logs detallados para debugging
-
-**Documentación Técnica**: Ver [MaxGym Amount Calculation Fix](../../technical/maxgym-amount-calculation-fix.md) para detalles completos.
-
----
-
 #### Validación de RUC
 
 - **Persona Natural**: Formato `P-T-A` (ej: `8-123-456` o `PE-123-456`)
@@ -206,40 +167,6 @@ if (abs($linePrice - $finalReceivedBasePrice) < $tolerance) {
 - **Deportes**: Alquiler de equipos y espacios
 - **Wellness**: Servicios de bienestar y salud
 
----
-
-## Identificación de Fuente (Origin)
-
-Todas las ventas creadas desde la API MaxGym se marcan automáticamente con el campo `origin` en la base de datos para identificar su procedencia.
-
-### Campo Origin en SalesHeaderImp
-
-```php
-'origin' => 'maxgym'
-```
-
-### Valores de Origin por Sistema
-
-- `'maxgym'` - Ventas provenientes de MaxGym
-- `'quickbooks'` - Ventas provenientes de QuickBooks Online
-- `'shopify'` - Ventas provenientes de Shopify
-- `'lightspeed'` - Ventas provenientes de Lightspeed
-- `'kart21'` - Ventas provenientes de Kart21
-- `'acicloud'` - Ventas provenientes de ACI Cloud ERP
-- `'meypar'` - Ventas provenientes de Meypar Colombia
-- `'docucenter'` - Ventas creadas nativamente (default)
-
-### Propósito del Campo Origin
-
-1. **Tracking de origen**: Identificar de qué sistema proviene cada venta
-2. **Prevención de loops**: Evitar re-procesamiento de ventas
-3. **Auditoría**: Facilitar rastreo y debugging
-4. **Filtrado**: Permitir consultas específicas por origen
-
-**Nota:** Este campo se asigna automáticamente por el sistema y no requiere ser especificado en el request.
-
----
-
 ### Códigos de Respuesta HTTP
 
 | Código | Descripción |
@@ -254,34 +181,7 @@ Todas las ventas creadas desde la API MaxGym se marcan automáticamente con el c
 
 - **Procesamiento**: Asíncrono usando `CreateSaleMaxgymJob`
 - **Webhook**: Diseñado para recibir webhooks de Maxgym
-- **Detección Automática de Precios**: Maneja dos tipos de estructuras de webhook inconsistentes
-  - Tipo 1: `lines[].price` como BASE (sin impuestos)
-  - Tipo 2: `lines[].price` como TOTAL (con impuestos)
-  - Detección automática comparando con `data.basePrice` y `data.price`
 - **RUC**: Validación específica para RUC panameños
 - **Monedas**: USD, PAB soportadas
 - **Eventos**: Solo procesa eventos "payment.succeeded"
 - **Combos**: Soporte para paquetes y servicios combinados
-- **Origin Tracking**: Todas las ventas se marcan automáticamente con `origin='maxgym'`
-- **Precisión Decimal**: Sistema de control decimal configurable (items: 6, payments: 4, header: 2, taxes: 6)
-
----
-
-## Referencias
-
-### Documentación Relacionada
-
-- **[Sistema de Origin - Implementación Completa](../../technical/origin-field-implementation-summary.md)** - Tracking unificado en 7 APIs FE
-- **[MaxGym Amount Calculation Fix](../../technical/maxgym-amount-calculation-fix.md)** - Detección automática de tipos de precio en webhooks
-- [QuickBooks Tax Code System](quickbooks-tax-code-system.md) - Sistema de origin en QuickBooks
-- [MEYPAR API - Guía Completa](meypar-api-guia-completa.md) - Sistema de origin en MEYPAR
-- [Validación de RUC en MaxGym](../../validations/maxgym-ruc-validation.md) - Validación RUC específica
-
-### Código Fuente
-
-- `app/Services/MaxgymService.php` - Servicio principal con campo origin
-- `app/Jobs/CreateSaleMaxgymJob.php` - Job de procesamiento asíncrono
-- `app/Http/Requests/CreateSaleMaxgymRequest.php` - Validación de requests
-
-**Estado:** PRODUCCIÓN  
-**Última Actualización:** 2026-02-07
