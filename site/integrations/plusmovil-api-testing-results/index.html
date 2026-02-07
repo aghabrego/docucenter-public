@@ -1,0 +1,4379 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentación técnica y de usuario de DocuCenter - Sistema de facturación electrónica">
+      
+      
+        <meta name="author" content="aghabrego">
+      
+      
+        <link rel="canonical" href="https://aghabrego.github.io/docucenter-public/integrations/plusmovil-api-testing-results/">
+      
+      
+        <link rel="prev" href="../plusmovil-implementation-analysis/">
+      
+      
+        <link rel="next" href="../plusmovil-continuation-plan/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="https://home.apconpanama.me/wp-content/uploads/2024/03/logo3.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Resultados Testing API - DocuCenter</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="light-blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#resultados-de-pruebas-plusmovil-api" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="DocuCenter" class="md-header__button md-logo" aria-label="DocuCenter" data-md-component="logo">
+      
+  <img src="https://home.apconpanama.me/wp-content/uploads/2024/03/logo3.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            DocuCenter
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Resultados Testing API
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="light-blue"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/aghabrego/docucenter-public" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    aghabrego/docucenter-public
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Pestañas" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Inicio
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../api/" class="md-tabs__link">
+          
+  
+  
+  APIs
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../optimizations/" class="md-tabs__link">
+          
+  
+  
+  Optimizaciones
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../technical/" class="md-tabs__link">
+          
+  
+  
+  Documentación Técnica
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../validations/" class="md-tabs__link">
+          
+  
+  
+  Validaciones
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../testing/" class="md-tabs__link">
+          
+  
+  
+  Testing
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+  Integraciones
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="DocuCenter" class="md-nav__button md-logo" aria-label="DocuCenter" data-md-component="logo">
+      
+  <img src="https://home.apconpanama.me/wp-content/uploads/2024/03/logo3.png" alt="logo">
+
+    </a>
+    DocuCenter
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/aghabrego/docucenter-public" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    aghabrego/docucenter-public
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    APIs
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    APIs
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    APIs de DocuCenter
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Facturación Electrónica (FE)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Facturación Electrónica (FE)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/fe-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Facturación Electrónica (FE) - DocuCenter
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/acicloud-fe-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Facturación Electrónica - Integración ACICloud FE
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/document-emission-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Facturación Electrónica - Emisión de Documentos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/shopify-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Facturación Electrónica - Integración Shopify
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/lightspeed-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Facturación Electrónica - Integración Lightspeed
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/maxgym-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Facturación Electrónica - Integración Maxgym
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/meypar-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Facturación Electrónica - Integración Meypar
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/kart21-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Facturación Electrónica - Integración Kart21
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sage ACICloud
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Sage ACICloud
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/customers-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Sage ACICloud - Módulo Clientes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/products-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Productos - Sage ACICloud
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/sales-orders-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Sage ACICloud - Módulo Órdenes de Venta
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/purchases-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Compras - Sage ACICloud
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/payments-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Pagos y Créditos - Sage ACICloud
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/inventory-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Inventario - Sage ACICloud
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/jobs-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Trabajos/Jobs - Sage ACICloud
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Organizaciones
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Organizaciones
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/organizations/organizations-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API de Organizaciones
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Optimizaciones
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Optimizaciones
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optimizations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Optimizaciones - DocuCenter
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Performance
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Performance
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optimizations/customer-supplier-optimizations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Optimizaciones para el manejo de muchos clientes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optimizations/mysql-optimization-circuit-breaker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Optimización MySQL 8.0 y Circuit Breaker para DocuCenter
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Documentación Técnica
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Documentación Técnica
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../technical/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Documentación Técnica - DocuCenter
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    QuickBooks
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    QuickBooks
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../technical/quickbooks-webhook-organizationid-fix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fix: QuickBooks Webhook OrganizationId Duplicado
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../technical/quickbooks-bills-job-graceful-validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fix: Validación Graceful de Tablas en CreateIntuitBillsJob
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../technical/quickbooks-fiscal-number-validation-system/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sistema de Validación de Números Fiscales QuickBooks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Document AI
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Document AI
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../technical/document-ai-import-to-workbench/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Document AI - Importación a Workbench
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../technical/document-ai-import-implementation-summary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Document AI - Implementación Import to Workbench
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Alanube DOM
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Alanube DOM
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../technical/alanube-dom-service-usage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guía de Uso del Servicio AlanubeDomService
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../technical/alanube-dom-export-invoices/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Facturas de Exportación Electrónica (46) - Alanube DOM
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../technical/ALANUBE_DOM_COMPLETE_INTEGRATION/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integración Completa Alanube DOM - República Dominicana
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../technical/FISCAL_CREDIT_IMPLEMENTATION_SUMMARY/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Implementación Completa de Facturas de Crédito Fiscal (31) - Alanube DOM
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_5" id="__nav_4_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Soluciones Técnicas
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Soluciones Técnicas
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../technical/ezeeissued-solution-summary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Solución Implementada - Campo EzeeIssued
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../technical/getsaleproperty-optimizations-summary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Optimizaciones Completas - getSaleProperty() - Create.php
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../technical/ezeeissued-field-correction-summary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Corrección de Campo EzeeIssued - Resumen Técnico
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_6" id="__nav_4_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pagos y Cálculos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Pagos y Cálculos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../technical/payment-calculation-fix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Análisis de Discrepancias en Cálculo de Pagos - Facturación Electrónica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../technical/solucion-sincronizacion-pagos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Solución Final: Sincronización Completa de Pagos en Facturación Electrónica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_7" id="__nav_4_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SQL Server
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    SQL Server
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../technical/sql-server-complete-store-id-filtering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Implementación Completa de Filtrado por Store ID en Jobs SQL Server
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../technical/sql-server-store-id-filtering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Implementación de Filtrado por Store ID en STInvoiceJob
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validaciones
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Validaciones
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../validations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validaciones - DocuCenter
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Documentos Fiscales
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Documentos Fiscales
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../validations/createSale-ruc-validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validación de RUC en CreateSaleMaxgymRequest
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../validations/maxgym-ruc-validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validación de RUC en MaxgymService
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Testing
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Testing
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sistema de Testing DocuCenter
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_2" id="__nav_6_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reportes de Error
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Reportes de Error
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../testing/PLUSMOVIL-PRODUCTION-ERROR-REPORT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reporte Error PlusMóvil Producción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integraciones
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Integraciones
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integraciones Disponibles
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_7_2" id="__nav_7_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PlusMóvil
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_7_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    PlusMóvil
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../plusmovil-implementation-summary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resumen Implementación
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../plusmovil-implementation-analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Análisis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resultados Testing API
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resultados Testing API
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#resumen-ejecutivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumen Ejecutivo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuracion-confirmada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuración Confirmada
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuración Confirmada">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#endpoints-por-ambiente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Endpoints por Ambiente
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#autenticacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Autenticación
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resultados-de-pruebas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resultados de Pruebas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Resultados de Pruebas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#autenticacion-cognito" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Autenticación Cognito
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#endpoint-sys-logs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Endpoint: /sys-logs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#endpoint-invoices" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Endpoint: /invoices
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#endpoint-inv-products" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Endpoint: /inv-products
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#endpoint-com-invoices" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Endpoint: /com-invoices
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuracion-de-errores-identificados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuración de Errores Identificados
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuración de Errores Identificados">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-error-de-relacion-created_user-en-sys-logs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Error de Relación created_user en /sys-logs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-autenticacion-mixta-en-api-gateway" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Autenticación Mixta en API Gateway
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#scripts-creados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scripts Creados
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Scripts Creados">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-get-plusmovil-tokensh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. get-plusmovil-token.sh
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-test-plusmovil-apish" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. test-plusmovil-api.sh
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-test-invoices-endpointsh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. test-invoices-endpoint.sh
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-test-inv-products-endpointsh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. test-inv-products-endpoint.sh
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#proximos-pasos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Próximos Pasos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Próximos Pasos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#acciones-inmediatas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Acciones Inmediatas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#acciones-pendientes-cuando-plusmovil-corrija" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Acciones Pendientes (cuando PlusMovil corrija)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#contacto-con-plusmovil" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Contacto con PlusMovil
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Referencias
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#changelog" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Changelog
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../plusmovil-continuation-plan/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plan Continuación
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../plusmovil-next-steps/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Próximos Pasos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#resumen-ejecutivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumen Ejecutivo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuracion-confirmada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuración Confirmada
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuración Confirmada">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#endpoints-por-ambiente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Endpoints por Ambiente
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#autenticacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Autenticación
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resultados-de-pruebas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resultados de Pruebas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Resultados de Pruebas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#autenticacion-cognito" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Autenticación Cognito
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#endpoint-sys-logs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Endpoint: /sys-logs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#endpoint-invoices" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Endpoint: /invoices
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#endpoint-inv-products" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Endpoint: /inv-products
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#endpoint-com-invoices" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Endpoint: /com-invoices
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuracion-de-errores-identificados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuración de Errores Identificados
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuración de Errores Identificados">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-error-de-relacion-created_user-en-sys-logs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Error de Relación created_user en /sys-logs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-autenticacion-mixta-en-api-gateway" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Autenticación Mixta en API Gateway
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#scripts-creados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scripts Creados
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Scripts Creados">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-get-plusmovil-tokensh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. get-plusmovil-token.sh
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-test-plusmovil-apish" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. test-plusmovil-api.sh
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-test-invoices-endpointsh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. test-invoices-endpoint.sh
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-test-inv-products-endpointsh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. test-inv-products-endpoint.sh
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#proximos-pasos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Próximos Pasos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Próximos Pasos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#acciones-inmediatas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Acciones Inmediatas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#acciones-pendientes-cuando-plusmovil-corrija" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Acciones Pendientes (cuando PlusMovil corrija)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#contacto-con-plusmovil" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Contacto con PlusMovil
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Referencias
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#changelog" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Changelog
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="resultados-de-pruebas-plusmovil-api">Resultados de Pruebas: PlusMovil API<a class="headerlink" href="#resultados-de-pruebas-plusmovil-api" title="Permanent link">&para;</a></h1>
+<p><strong>Fecha:</strong> 31 de octubre de 2025<br />
+<strong>Ambiente:</strong> QA<br />
+<strong>Estado:</strong> Autenticación funcionando, algunos endpoints con errores del servidor</p>
+<hr />
+<h2 id="resumen-ejecutivo">Resumen Ejecutivo<a class="headerlink" href="#resumen-ejecutivo" title="Permanent link">&para;</a></h2>
+<p>Se completó con éxito la integración de autenticación con AWS Cognito para la API de PlusMovil. El token de acceso se obtiene correctamente y es aceptado por el API Gateway. Sin embargo, se identificaron problemas de configuración en el servidor que impiden el uso de ciertos endpoints.</p>
+<hr />
+<h2 id="configuracion-confirmada">Configuración Confirmada<a class="headerlink" href="#configuracion-confirmada" title="Permanent link">&para;</a></h2>
+<h3 id="endpoints-por-ambiente">Endpoints por Ambiente<a class="headerlink" href="#endpoints-por-ambiente" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Ambiente</th>
+<th>Base URL</th>
+<th>Client ID</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>QA</strong></td>
+<td><code>https://xka96gucj8.execute-api.us-east-1.amazonaws.com/qa</code></td>
+<td><code>7t3s7lb4tfg6ssal586l929ovl</code></td>
+</tr>
+<tr>
+<td><strong>Producción</strong></td>
+<td><code>https://0m2jyxhl41.execute-api.us-east-1.amazonaws.com/prod</code></td>
+<td><code>771vv2q1ararj5u1f084opsdg7</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="autenticacion">Autenticación<a class="headerlink" href="#autenticacion" title="Permanent link">&para;</a></h3>
+<p><strong>Método:</strong> AWS Cognito con User Pool<br />
+<strong>Región:</strong> us-east-1<br />
+<strong>Flow:</strong> USER_PASSWORD_AUTH<br />
+<strong>Header:</strong> <code>Authorization: Bearer {ACCESS_TOKEN}</code><br />
+<strong>Expiración:</strong> 60 minutos (3600 segundos)</p>
+<hr />
+<h2 id="resultados-de-pruebas">Resultados de Pruebas<a class="headerlink" href="#resultados-de-pruebas" title="Permanent link">&para;</a></h2>
+<h3 id="autenticacion-cognito">Autenticación Cognito<a class="headerlink" href="#autenticacion-cognito" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>aws<span class="w"> </span>cognito-idp<span class="w"> </span>initiate-auth<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--region<span class="w"> </span>us-east-1<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--auth-flow<span class="w"> </span>USER_PASSWORD_AUTH<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--client-id<span class="w"> </span>7t3s7lb4tfg6ssal586l929ovl<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--auth-parameters<span class="w"> </span><span class="nv">USERNAME</span><span class="o">=</span>xxx,PASSWORD<span class="o">=</span>xxx
+</code></pre></div>
+<p><strong>Estado:</strong> <strong>EXITOSO</strong><br />
+<strong>Respuesta:</strong> Token de acceso obtenido correctamente<br />
+<strong>Duración:</strong> ~2 segundos</p>
+<hr />
+<h3 id="endpoint-sys-logs">Endpoint: <code>/sys-logs</code><a class="headerlink" href="#endpoint-sys-logs" title="Permanent link">&para;</a></h3>
+<p><strong>URL:</strong> <code>https://xka96gucj8.execute-api.us-east-1.amazonaws.com/qa/sys-logs</code><br />
+<strong>Método:</strong> GET<br />
+<strong>Autenticación:</strong> Token aceptado  </p>
+<p><strong>Parámetros Soportados:</strong>
+- <code>limit</code> - Número de registros (default: 10)
+- <code>offset</code> - Paginación (default: 0)
+- <code>module_name_like</code> - Búsqueda parcial por módulo
+- <code>action_type_in</code> - Múltiples tipos de acción
+- <code>id_gte</code>, <code>id_lte</code> - Rangos numéricos
+- <code>created_at_between</code> - Rangos de fecha
+- <code>order_by</code>, <code>order_dir</code> - Ordenamiento</p>
+<p><strong>Resultado:</strong>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;module&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SysLogController&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Error al obtener los Logs&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;error&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Association with alias \&quot;created_user\&quot; does not exist on sys_log&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<p><strong>HTTP Status:</strong> 500 Internal Server Error</p>
+<p><strong>Análisis:</strong>
+- El token es <strong>válido y aceptado</strong>
+- Error de configuración en el modelo <code>sys_log</code> del servidor
+- Falta definir la relación <code>created_user</code> en el modelo Eloquent/Sequelize
+- <strong>Acción requerida:</strong> Equipo de PlusMovil debe corregir la configuración del modelo</p>
+<hr />
+<h3 id="endpoint-invoices">Endpoint: <code>/invoices</code><a class="headerlink" href="#endpoint-invoices" title="Permanent link">&para;</a></h3>
+<p><strong>URL:</strong> <code>https://xka96gucj8.execute-api.us-east-1.amazonaws.com/qa/invoices</code><br />
+<strong>Método:</strong> GET<br />
+<strong>Autenticación:</strong> Token rechazado  </p>
+<p><strong>Resultado:</strong>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Invalid key=value pair (missing equal-sign) in Authorization header (hashed with SHA-256 and encoded with Base64): &#39;VA7TJRPbAsXU3QrW46d3h8l61BHLHjXf7IqJX4it2CE=&#39;.&quot;</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<p><strong>HTTP Status:</strong> 403 Forbidden</p>
+<p><strong>Análisis:</strong>
+- El endpoint rechaza el Bearer token de Cognito
+-  Mensaje sugiere que espera <strong>AWS Signature Version 4</strong> (formato key=value)
+-  Posible configuración mixta: algunos endpoints con Cognito, otros con AWS IAM
+- <strong>Acción requerida:</strong> Confirmar con equipo de PlusMovil el método de autenticación para este endpoint</p>
+<hr />
+<h3 id="endpoint-inv-products">Endpoint: <code>/inv-products</code><a class="headerlink" href="#endpoint-inv-products" title="Permanent link">&para;</a></h3>
+<p><strong>URL:</strong> <code>https://xka96gucj8.execute-api.us-east-1.amazonaws.com/qa/inv-products</code><br />
+<strong>Método:</strong> GET<br />
+<strong>Autenticación:</strong> Token aceptado  </p>
+<p><strong>Parámetros Soportados:</strong>
+- <code>limit</code> - Número máximo de resultados (default: sin límite)
+- <code>offset</code> - Paginación (default: 0)
+- <code>field_like</code> - Búsqueda parcial (ej: <code>code_like=ABC</code>)
+- <code>field_in</code> - Múltiples valores (ej: <code>status_in=1,2,3</code>)
+- <code>field_gte</code>, <code>field_lte</code>, <code>field_gt</code>, <code>field_lt</code> - Rangos numéricos
+- <code>field_ne</code> - Valores distintos
+- <code>field_between</code> - Rangos entre dos valores
+- <code>order_by</code> - Campos para ordenar (separados por coma)
+- <code>order_dir</code> - Dirección de orden (asc/desc por campo)</p>
+<p><strong>Ejemplo de Resultado Exitoso:</strong>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Productos en Inventario obtenidos correctamente&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;error&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">62331</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;cat_product_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">18</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;inv_warehouse_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">7756</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;inv_batch_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;batch_number&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;16962&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;878812446&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;barcode&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;878812446&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;sku&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;878812446&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;stock_control_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;created_user_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">99068</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;created_at&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2025-08-26T21:42:49.000Z&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;updated_user_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;updated_at&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;cat_product&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">18</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;105380&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;TARJETA MAS MOVIL  B/6.00&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;stock_control_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;operator_unit_cost&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.0300&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;operator_list_price&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;5.4000&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;distributor_suggested_price&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;5.9064&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;public_price&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;6.0000&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;inv_warehouse&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">7756</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Daniel Sang&quot;</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<p><strong>HTTP Status:</strong> 200 OK</p>
+<p><strong>Análisis:</strong>
+- Token de Cognito <strong>aceptado y funcionando</strong>
+- Respuesta incluye relaciones: <code>cat_product</code> y <code>inv_warehouse</code>
+- Filtros dinámicos funcionan correctamente
+- Ordenamiento simple y múltiple probado exitosamente
+- Paginación operativa con <code>limit</code> y <code>offset</code>
+- Sin filtros devuelve 502 (timeout o límite de datos)
+- Con <code>limit</code> funciona perfectamente</p>
+<p><strong>Campos Disponibles:</strong>
+- <code>id</code> - ID único del producto en inventario
+- <code>cat_product_id</code> - Referencia a catálogo de productos
+- <code>inv_warehouse_id</code> - ID del almacén/bodega
+- <code>inv_batch_id</code> - ID del lote (nullable)
+- <code>batch_number</code> - Número de lote
+- <code>code</code> - Código del producto
+- <code>barcode</code> - Código de barras
+- <code>sku</code> - Stock Keeping Unit
+- <code>stock_control_type</code> - Tipo de control (0=sin control, 1=con control)
+- <code>status</code> - Estado (4=disponible?, 5=activo?)
+- <code>created_user_id</code> - Usuario que creó
+- <code>created_at</code> - Fecha de creación
+- <code>updated_user_id</code> - Usuario que actualizó
+- <code>updated_at</code> - Fecha de actualización</p>
+<p><strong>Relaciones Incluidas:</strong>
+<div class="highlight"><pre><span></span><code><span class="nt">&quot;cat_product&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="err">i</span><span class="kc">nte</span><span class="err">ger</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="err">s</span><span class="kc">tr</span><span class="err">i</span><span class="kc">n</span><span class="err">g</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="err">s</span><span class="kc">tr</span><span class="err">i</span><span class="kc">n</span><span class="err">g</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;stock_control_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="err">i</span><span class="kc">nte</span><span class="err">ger</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;operator_unit_cost&quot;</span><span class="p">:</span><span class="w"> </span><span class="err">decimal</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;operator_list_price&quot;</span><span class="p">:</span><span class="w"> </span><span class="err">decimal</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;distributor_suggested_price&quot;</span><span class="p">:</span><span class="w"> </span><span class="err">decimal</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;public_price&quot;</span><span class="p">:</span><span class="w"> </span><span class="err">decimal</span>
+<span class="p">},</span>
+<span class="nt">&quot;inv_warehouse&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="err">i</span><span class="kc">nte</span><span class="err">ger</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="err">s</span><span class="kc">tr</span><span class="err">i</span><span class="kc">n</span><span class="err">g</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<p><strong>Ejemplos de Uso:</strong>
+<div class="highlight"><pre><span></span><code><span class="c1"># Obtener últimos 10 productos</span>
+GET<span class="w"> </span>/inv-products?limit<span class="o">=</span><span class="m">10</span><span class="p">&amp;</span><span class="nv">order_by</span><span class="o">=</span>id<span class="p">&amp;</span><span class="nv">order_dir</span><span class="o">=</span>desc
+
+<span class="c1"># Buscar por código</span>
+GET<span class="w"> </span>/inv-products?code_like<span class="o">=</span><span class="m">878812</span><span class="p">&amp;</span><span class="nv">limit</span><span class="o">=</span><span class="m">10</span>
+
+<span class="c1"># Filtrar por status</span>
+GET<span class="w"> </span>/inv-products?status_in<span class="o">=</span><span class="m">4</span>,5<span class="p">&amp;</span><span class="nv">limit</span><span class="o">=</span><span class="m">20</span>
+
+<span class="c1"># Filtrar por warehouse</span>
+GET<span class="w"> </span>/inv-products?inv_warehouse_id<span class="o">=</span><span class="m">7756</span><span class="p">&amp;</span><span class="nv">limit</span><span class="o">=</span><span class="m">10</span>
+
+<span class="c1"># Rango de IDs</span>
+GET<span class="w"> </span>/inv-products?id_gte<span class="o">=</span><span class="m">60000</span><span class="p">&amp;</span><span class="nv">id_lte</span><span class="o">=</span><span class="m">65000</span><span class="p">&amp;</span><span class="nv">limit</span><span class="o">=</span><span class="m">50</span>
+
+<span class="c1"># Ordenamiento múltiple</span>
+GET<span class="w"> </span>/inv-products?order_by<span class="o">=</span>status,id<span class="p">&amp;</span><span class="nv">order_dir</span><span class="o">=</span>asc,desc<span class="p">&amp;</span><span class="nv">limit</span><span class="o">=</span><span class="m">20</span>
+
+<span class="c1"># Consulta compleja</span>
+GET<span class="w"> </span>/inv-products?status<span class="o">=</span><span class="m">5</span><span class="p">&amp;</span><span class="nv">inv_warehouse_id</span><span class="o">=</span><span class="m">7756</span><span class="p">&amp;</span><span class="nv">code_like</span><span class="o">=</span><span class="m">878</span><span class="p">&amp;</span><span class="nv">order_by</span><span class="o">=</span>created_at<span class="p">&amp;</span><span class="nv">order_dir</span><span class="o">=</span>desc<span class="p">&amp;</span><span class="nv">limit</span><span class="o">=</span><span class="m">15</span>
+</code></pre></div></p>
+<p><strong>Notas Importantes:</strong>
+- <strong>SIEMPRE usar <code>limit</code></strong> para evitar timeouts (502)
+- Respuestas bien estructuradas con metadata (<code>code</code>, <code>message</code>, <code>error</code>, <code>data</code>)
+- Incluye relaciones automáticamente (no requiere <code>include</code> param)
+- Ideal para sincronización de inventario con DocuCenter</p>
+<hr />
+<h3 id="endpoint-com-invoices">Endpoint: <code>/com-invoices</code><a class="headerlink" href="#endpoint-com-invoices" title="Permanent link">&para;</a></h3>
+<p><strong>URL:</strong> <code>https://xka96gucj8.execute-api.us-east-1.amazonaws.com/qa/com-invoices</code><br />
+<strong>Método:</strong> GET<br />
+<strong>Autenticación:</strong> Token aceptado  </p>
+<p><strong>Parámetros Soportados:</strong>
+- <code>limit</code> - Número máximo de resultados
+- <code>offset</code> - Paginación
+- <code>field_like</code> - Búsqueda parcial (ej: <code>customer_name_like=maria</code>)
+- <code>field_in</code> - Múltiples valores (ej: <code>status_in=1,2</code>)
+- <code>field_gte</code>, <code>field_lte</code>, <code>field_gt</code>, <code>field_lt</code> - Rangos numéricos y fechas
+- <code>field_ne</code> - Valores distintos
+- <code>field_between</code> - Rangos (ej: <code>invoice_date_between=2025-01-01,2025-12-31</code>)
+- <code>order_by</code> - Campos para ordenar
+- <code>order_dir</code> - Dirección de orden (asc/desc)</p>
+<p><strong>Ejemplo de Resultado Exitoso:</strong>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Facturas obtenidos correctamente&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;error&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">303</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;com_order_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;com_distributor_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">23</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;com_branch_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;com_pos_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">6870</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;com_seller_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">86</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;com_settlement_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;ops_route_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">41</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;invoice_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;invoice_number&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;invoice_date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2025-09-01T23:46:13.000Z&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;customer_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Super centro la gran via&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;customer_phone&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;61056889&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;customer_email&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;email@email.com&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;customer_vat_number&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;PENDIENTE&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;billing_address&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Auto pista Arraijan chorrers&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;sub_total&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;4.5981&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;discount&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.0000&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;tax_amount&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.3200&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;total&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;4.9200&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;balance&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;4.9200&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;comments&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Factura generada desde la app&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;liquidated_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;liquidated_at&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;created_user_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">99090</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;created_at&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2025-09-01T23:46:13.000Z&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;updated_user_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;updated_at&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;total_quantity&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;created_user&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">99090</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Humberto Zambrano&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;photo&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/images/profile/user-1.jpg&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;username&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;hzambrano_el_nawal&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;email&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;hzambrano@elnawal.com.pa&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;updated_user&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;com_order&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;com_distributor&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">23</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;DISTRIBUIDORA EL NAWAL S.A.&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1040798&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;legal_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;DISTRIBUIDORA EL NAWAL,S.A.&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;vat_number&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;155597688-2-2015&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;address&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Via España, Edif Dorchester piso 4 ofic 409&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;email&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;larosemena@elnawal.com.pa&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;phone&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;204-5715&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;com_branch&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;DISTRIBUIDORA EL NAWAL S.A. - LA CHORRERA&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1040798 - 002&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;com_pos&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">6870</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Super centro la gran via&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;133-232&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;com_seller&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">86</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Humberto Zambrano &quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;013&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;ops_route&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">41</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;13&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;13&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;com_invoice_payment_summary&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<p><strong>HTTP Status:</strong> 200 OK</p>
+<p><strong>Análisis:</strong>
+- Token de Cognito <strong>aceptado y funcionando</strong>
+- Respuesta incluye múltiples relaciones: <code>com_distributor</code>, <code>com_branch</code>, <code>com_pos</code>, <code>com_seller</code>, <code>ops_route</code>, <code>created_user</code>
+- Filtros dinámicos funcionan correctamente
+- Incluye resumen de pagos: <code>com_invoice_payment_summary</code>
+- Campos financieros completos: <code>sub_total</code>, <code>discount</code>, <code>tax_amount</code>, <code>total</code>, <code>balance</code>
+- Información de cliente completa</p>
+<p><strong>Campos Principales:</strong>
+- <code>id</code> - ID único de la factura
+- <code>invoice_number</code> - Número de factura (muchas con valor "0")
+- <code>invoice_date</code> - Fecha de emisión
+- <code>invoice_type</code> - Tipo de factura (0, 1, 2...)
+- <code>customer_name</code> - Nombre del cliente
+- <code>customer_phone</code> - Teléfono
+- <code>customer_email</code> - Email
+- <code>customer_vat_number</code> - RUC/NIT
+- <code>billing_address</code> - Dirección de facturación
+- <code>sub_total</code> - Subtotal antes de descuentos
+- <code>discount</code> - Monto de descuento
+- <code>tax_amount</code> - Monto de impuestos (ITBMS)
+- <code>total</code> - Total de la factura
+- <code>balance</code> - Saldo pendiente
+- <code>status</code> - Estado (0=pendiente?, 1=activa?, 2=pagada?, 3=anulada?)
+- <code>comments</code> - Comentarios</p>
+<p><strong>Relaciones Incluidas:</strong>
+<div class="highlight"><pre><span></span><code><span class="nt">&quot;com_distributor&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="err">i</span><span class="kc">nte</span><span class="err">ger</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="err">s</span><span class="kc">tr</span><span class="err">i</span><span class="kc">n</span><span class="err">g</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="err">s</span><span class="kc">tr</span><span class="err">i</span><span class="kc">n</span><span class="err">g</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;legal_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="err">s</span><span class="kc">tr</span><span class="err">i</span><span class="kc">n</span><span class="err">g</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;vat_number&quot;</span><span class="p">:</span><span class="w"> </span><span class="err">s</span><span class="kc">tr</span><span class="err">i</span><span class="kc">n</span><span class="err">g</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;address&quot;</span><span class="p">:</span><span class="w"> </span><span class="err">s</span><span class="kc">tr</span><span class="err">i</span><span class="kc">n</span><span class="err">g</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;email&quot;</span><span class="p">:</span><span class="w"> </span><span class="err">s</span><span class="kc">tr</span><span class="err">i</span><span class="kc">n</span><span class="err">g</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;phone&quot;</span><span class="p">:</span><span class="w"> </span><span class="err">s</span><span class="kc">tr</span><span class="err">i</span><span class="kc">n</span><span class="err">g</span>
+<span class="p">},</span>
+<span class="nt">&quot;com_branch&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="err">i</span><span class="kc">nte</span><span class="err">ger</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="err">s</span><span class="kc">tr</span><span class="err">i</span><span class="kc">n</span><span class="err">g</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="err">s</span><span class="kc">tr</span><span class="err">i</span><span class="kc">n</span><span class="err">g</span>
+<span class="p">},</span>
+<span class="nt">&quot;com_pos&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="err">i</span><span class="kc">nte</span><span class="err">ger</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="err">s</span><span class="kc">tr</span><span class="err">i</span><span class="kc">n</span><span class="err">g</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="err">s</span><span class="kc">tr</span><span class="err">i</span><span class="kc">n</span><span class="err">g</span>
+<span class="p">},</span>
+<span class="nt">&quot;com_seller&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="err">i</span><span class="kc">nte</span><span class="err">ger</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="err">s</span><span class="kc">tr</span><span class="err">i</span><span class="kc">n</span><span class="err">g</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="err">s</span><span class="kc">tr</span><span class="err">i</span><span class="kc">n</span><span class="err">g</span>
+<span class="p">},</span>
+<span class="nt">&quot;ops_route&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="err">i</span><span class="kc">nte</span><span class="err">ger</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="err">s</span><span class="kc">tr</span><span class="err">i</span><span class="kc">n</span><span class="err">g</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="err">s</span><span class="kc">tr</span><span class="err">i</span><span class="kc">n</span><span class="err">g</span>
+<span class="p">},</span>
+<span class="nt">&quot;created_user&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="err">i</span><span class="kc">nte</span><span class="err">ger</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="err">s</span><span class="kc">tr</span><span class="err">i</span><span class="kc">n</span><span class="err">g</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;username&quot;</span><span class="p">:</span><span class="w"> </span><span class="err">s</span><span class="kc">tr</span><span class="err">i</span><span class="kc">n</span><span class="err">g</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;email&quot;</span><span class="p">:</span><span class="w"> </span><span class="err">s</span><span class="kc">tr</span><span class="err">i</span><span class="kc">n</span><span class="err">g</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;photo&quot;</span><span class="p">:</span><span class="w"> </span><span class="err">s</span><span class="kc">tr</span><span class="err">i</span><span class="kc">n</span><span class="err">g</span>
+<span class="p">},</span>
+<span class="nt">&quot;com_invoice_payment_summary&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span>
+</code></pre></div></p>
+<p><strong>Ejemplos de Uso para DocuCenter:</strong>
+<div class="highlight"><pre><span></span><code><span class="c1"># Sincronización incremental (últimas facturas)</span>
+GET<span class="w"> </span>/com-invoices?invoice_date_gte<span class="o">=</span><span class="m">2025</span>-10-01<span class="p">&amp;</span><span class="nv">limit</span><span class="o">=</span><span class="m">100</span><span class="p">&amp;</span><span class="nv">order_by</span><span class="o">=</span>invoice_date<span class="p">&amp;</span><span class="nv">order_dir</span><span class="o">=</span>asc
+
+<span class="c1"># Facturas pendientes de pago</span>
+GET<span class="w"> </span>/com-invoices?balance_gt<span class="o">=</span><span class="m">0</span><span class="p">&amp;</span><span class="nv">status_ne</span><span class="o">=</span><span class="m">3</span><span class="p">&amp;</span><span class="nv">limit</span><span class="o">=</span><span class="m">50</span>
+
+<span class="c1"># Facturas de un cliente específico por RUC</span>
+GET<span class="w"> </span>/com-invoices?customer_vat_number<span class="o">=</span><span class="m">155597688</span>-2-2015<span class="p">&amp;</span><span class="nv">limit</span><span class="o">=</span><span class="m">20</span>
+
+<span class="c1"># Reporte diario</span>
+GET<span class="w"> </span>/com-invoices?invoice_date_between<span class="o">=</span><span class="m">2025</span>-11-04,2025-11-04<span class="p">&amp;</span><span class="nv">limit</span><span class="o">=</span><span class="m">100</span>
+
+<span class="c1"># Facturas por distribuidor</span>
+GET<span class="w"> </span>/com-invoices?com_distributor_id<span class="o">=</span><span class="m">23</span><span class="p">&amp;</span><span class="nv">limit</span><span class="o">=</span><span class="m">50</span>
+
+<span class="c1"># Búsqueda por cliente</span>
+GET<span class="w"> </span>/com-invoices?customer_name_like<span class="o">=</span>super<span class="p">&amp;</span><span class="nv">limit</span><span class="o">=</span><span class="m">20</span>
+
+<span class="c1"># Facturas por vendedor</span>
+GET<span class="w"> </span>/com-invoices?com_seller_id<span class="o">=</span><span class="m">86</span><span class="p">&amp;</span><span class="nv">limit</span><span class="o">=</span><span class="m">30</span>
+</code></pre></div></p>
+<p><strong>Observaciones Importantes:</strong>
+- Muchas facturas tienen <code>invoice_number: "0"</code> - posiblemente se genera después
+- Campo <code>customer_vat_number</code> puede tener valor "PENDIENTE"
+- <code>balance</code> permite identificar facturas pagadas/pendientes
+- Incluye información completa de vendedor, sucursal y punto de venta
+- Campo <code>comments</code> útil para rastrear origen ("Factura generada desde la app")
+- <code>com_invoice_payment_summary</code> array para detalles de pagos</p>
+<p><strong>Mapeo Sugerido a DocuCenter (<code>Sales_Header_Imp</code>):</strong></p>
+<table>
+<thead>
+<tr>
+<th>PlusMovil Campo</th>
+<th>DocuCenter Campo</th>
+<th>Notas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td><code>external_invoice_id</code></td>
+<td>Referencia externa</td>
+</tr>
+<tr>
+<td><code>invoice_number</code></td>
+<td><code>fiscal_document_number</code></td>
+<td>Si no es "0"</td>
+</tr>
+<tr>
+<td><code>invoice_date</code></td>
+<td><code>document_date</code></td>
+<td>Fecha de emisión</td>
+</tr>
+<tr>
+<td><code>customer_name</code></td>
+<td>Cliente o crear nuevo</td>
+<td></td>
+</tr>
+<tr>
+<td><code>customer_vat_number</code></td>
+<td>Buscar/crear cliente</td>
+<td>Validar "PENDIENTE"</td>
+</tr>
+<tr>
+<td><code>sub_total</code></td>
+<td><code>sub_total</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>discount</code></td>
+<td><code>discount</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>tax_amount</code></td>
+<td><code>tax_amount</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>total</code></td>
+<td><code>total</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>balance</code></td>
+<td>Campo personalizado</td>
+<td>Para CXC</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td><code>status</code></td>
+<td>Mapear valores</td>
+</tr>
+<tr>
+<td><code>com_distributor</code></td>
+<td><code>organization_id</code></td>
+<td>Mapear distribuidor</td>
+</tr>
+<tr>
+<td><code>com_seller_id</code></td>
+<td><code>seller_id</code></td>
+<td>Si existe en DocuCenter</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Próximos Pasos:</strong>
+1. Mapear valores de <code>status</code> (0, 1, 2, 3...)
+2. Mapear valores de <code>invoice_type</code>
+3. <strong>RESUELTO: Items disponibles en <code>/com-invoices/{id}</code></strong> (ver <code>plusmovil-invoice-items-SOLVED.md</code>)
+4. Implementar sincronización de headers + items
+5. Manejar facturas sin número ("0")
+6. Integrar con módulo de CXC usando campo <code>balance</code>
+7. Sincronizar información de clientes
+8. Implementar expansión de rangos de series si se requiere</p>
+<p><strong>Actualización Importante:</strong>
+- <strong>SÍ se encontraron items/detalles en <code>/com-invoices/{id}</code></strong>
+- Endpoint individual usa autenticación Cognito (NO requiere AWS Signature)
+- Se puede sincronizar headers Y detalles completos
+- Soporte para productos serializados con rangos
+- Ver solución completa en: <code>docs/integrations/plusmovil-invoice-items-SOLVED.md</code></p>
+<hr />
+<h2 id="configuracion-de-errores-identificados">Configuración de Errores Identificados<a class="headerlink" href="#configuracion-de-errores-identificados" title="Permanent link">&para;</a></h2>
+<h3 id="1-error-de-relacion-created_user-en-sys-logs">1. Error de Relación <code>created_user</code> en <code>/sys-logs</code><a class="headerlink" href="#1-error-de-relacion-created_user-en-sys-logs" title="Permanent link">&para;</a></h3>
+<p><strong>Ubicación en servidor:</strong> Modelo <code>sys_log</code></p>
+<p><strong>Causa probable:</strong>
+<div class="highlight"><pre><span></span><code><span class="x">// En el controlador o servicio se está haciendo:</span>
+<span class="x">$logs = SysLog::with(&#39;created_user&#39;)-&gt;get();</span>
+
+<span class="x">// Pero en el modelo SysLog falta:</span>
+<span class="x">public function createdUser() {</span>
+<span class="x">    return $this-&gt;belongsTo(User::class, &#39;created_by&#39;);</span>
+<span class="x">}</span>
+</code></pre></div></p>
+<p><strong>Solución sugerida para PlusMovil:</strong>
+<div class="highlight"><pre><span></span><code><span class="x">// En app/Models/SysLog.php o equivalente</span>
+<span class="x">public function createdUser() {</span>
+<span class="x">    return $this-&gt;belongsTo(User::class, &#39;created_by&#39;, &#39;id&#39;);</span>
+<span class="x">}</span>
+</code></pre></div></p>
+<h3 id="2-autenticacion-mixta-en-api-gateway">2. Autenticación Mixta en API Gateway<a class="headerlink" href="#2-autenticacion-mixta-en-api-gateway" title="Permanent link">&para;</a></h3>
+<p><strong>Problema:</strong> Algunos endpoints aceptan Cognito Bearer token, otros requieren AWS Signature</p>
+<p><strong>Endpoints con Cognito:</strong>
+- <code>/sys-logs</code> (con error del servidor, pero acepta token)
+- <code>/inv-products</code> (funcionando correctamente)
+- <code>/com-invoices</code> (funcionando correctamente)</p>
+<p><strong>Endpoints con AWS Signature:</strong>
+- <code>/invoices</code>
+- <code>/invoices/stats</code>
+- <code>/health</code></p>
+<p><strong>Solución recomendada:</strong>
+1. <strong>Opción A:</strong> Unificar todos los endpoints con Cognito Bearer token
+2. <strong>Opción B:</strong> Documentar claramente qué endpoints usan qué método
+3. <strong>Opción C:</strong> Implementar ambos métodos en DocuCenter según necesidad</p>
+<hr />
+<h2 id="scripts-creados">Scripts Creados<a class="headerlink" href="#scripts-creados" title="Permanent link">&para;</a></h2>
+<h3 id="1-get-plusmovil-tokensh">1. <code>get-plusmovil-token.sh</code><a class="headerlink" href="#1-get-plusmovil-tokensh" title="Permanent link">&para;</a></h3>
+<p><strong>Ubicación:</strong> <code>docs/testing/get-plusmovil-token.sh</code><br />
+<strong>Propósito:</strong> Obtener token de AWS Cognito interactivamente<br />
+<strong>Uso:</strong>
+<div class="highlight"><pre><span></span><code>./docs/testing/get-plusmovil-token.sh
+</code></pre></div></p>
+<p><strong>Características:</strong>
+- Selección de ambiente (QA/Prod)
+- Ingreso seguro de credenciales
+- Validación de token
+- Guardado automático en archivo <code>.plusmovil-token-{ENV}.txt</code>
+- Agregado automático a <code>.gitignore</code>
+- Prueba opcional del token con endpoint</p>
+<h3 id="2-test-plusmovil-apish">2. <code>test-plusmovil-api.sh</code><a class="headerlink" href="#2-test-plusmovil-apish" title="Permanent link">&para;</a></h3>
+<p><strong>Ubicación:</strong> <code>docs/testing/test-plusmovil-api.sh</code><br />
+<strong>Propósito:</strong> Probar endpoints de PlusMovil con diferentes filtros<br />
+<strong>Uso:</strong>
+<div class="highlight"><pre><span></span><code>./docs/testing/test-plusmovil-api.sh
+</code></pre></div></p>
+<p><strong>Características:</strong>
+- Pruebas de endpoints con y sin filtros
+- Ejemplos de todos los tipos de filtros soportados
+- Documentación interactiva de parámetros</p>
+<h3 id="3-test-invoices-endpointsh">3. <code>test-invoices-endpoint.sh</code><a class="headerlink" href="#3-test-invoices-endpointsh" title="Permanent link">&para;</a></h3>
+<p><strong>Ubicación:</strong> <code>docs/testing/test-invoices-endpoint.sh</code><br />
+<strong>Propósito:</strong> Pruebas específicas de endpoints de invoices<br />
+<strong>Uso:</strong>
+<div class="highlight"><pre><span></span><code>./docs/testing/test-invoices-endpoint.sh
+</code></pre></div></p>
+<h3 id="4-test-inv-products-endpointsh">4. <code>test-inv-products-endpoint.sh</code><a class="headerlink" href="#4-test-inv-products-endpointsh" title="Permanent link">&para;</a></h3>
+<p><strong>Ubicación:</strong> <code>docs/testing/test-inv-products-endpoint.sh</code><br />
+<strong>Propósito:</strong> Pruebas completas del endpoint /inv-products con filtros dinámicos<br />
+<strong>Uso:</strong>
+<div class="highlight"><pre><span></span><code>./docs/testing/test-inv-products-endpoint.sh
+</code></pre></div></p>
+<p><strong>Características:</strong>
+- Pruebas de paginación (limit, offset)
+- Búsquedas parciales (code_like, barcode_like)
+- Filtros por status y warehouse
+- Rangos numéricos y de fechas
+- Ordenamiento simple y múltiple
+- Consultas complejas personalizadas
+- Modo interactivo con ejemplos</p>
+<hr />
+<h2 id="proximos-pasos">Próximos Pasos<a class="headerlink" href="#proximos-pasos" title="Permanent link">&para;</a></h2>
+<h3 id="acciones-inmediatas">Acciones Inmediatas<a class="headerlink" href="#acciones-inmediatas" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Reportar a PlusMovil:</strong></li>
+<li>Error de relación <code>created_user</code> en endpoint <code>/sys-logs</code></li>
+<li>Inconsistencia de autenticación en endpoint <code>/invoices</code></li>
+<li>Solicitar documentación completa de endpoints disponibles</li>
+<li>
+<p>Solicitar Swagger/OpenAPI actualizado</p>
+</li>
+<li>
+<p><strong>Implementación en DocuCenter:</strong></p>
+</li>
+<li>Scripts de autenticación listos para uso</li>
+<li>Endpoint <code>/inv-products</code> validado y documentado</li>
+<li>Pendiente: Implementar servicio PHP para <code>/inv-products</code></li>
+<li>Pendiente: Implementar sincronización de inventario</li>
+</ol>
+<h3 id="acciones-pendientes-cuando-plusmovil-corrija">Acciones Pendientes (cuando PlusMovil corrija)<a class="headerlink" href="#acciones-pendientes-cuando-plusmovil-corrija" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>Crear Service en Laravel:</strong>
+<div class="highlight"><pre><span></span><code><span class="x">// app/Services/PlusMovilService.php</span>
+<span class="x">class PlusMovilService {</span>
+<span class="x">    public function authenticate() {</span>
+<span class="x">        // Usar AWS Cognito SDK</span>
+<span class="x">    }</span>
+
+<span class="x">    public function getSysLogs($filters = []) {</span>
+<span class="x">        // Llamar endpoint /sys-logs (cuando se corrija)</span>
+<span class="x">    }</span>
+
+<span class="x">    public function getInventoryProducts($filters = []) {</span>
+<span class="x">        // Llamar endpoint /inv-products</span>
+<span class="x">        // Soportar filtros: limit, offset, code_like, status_in, etc.</span>
+<span class="x">    }</span>
+
+<span class="x">    public function getInvoices($filters = []) {</span>
+<span class="x">        // Llamar endpoint /invoices (cuando funcione)</span>
+<span class="x">    }</span>
+<span class="x">}</span>
+</code></pre></div></p>
+</li>
+<li>
+<p><strong>Configurar en <code>.env</code>:</strong>
+<div class="highlight"><pre><span></span><code>PLUSMOVIL_ENVIRONMENT=qa
+PLUSMOVIL_CLIENT_ID=7t3s7lb4tfg6ssal586l929ovl
+PLUSMOVIL_USERNAME=xxx
+PLUSMOVIL_PASSWORD=xxx
+PLUSMOVIL_BASE_URL=https://xka96gucj8.execute-api.us-east-1.amazonaws.com/qa
+</code></pre></div></p>
+</li>
+<li>
+<p><strong>Testing automatizado:</strong></p>
+</li>
+<li>Crear Feature Tests en Laravel</li>
+<li>Mockear respuestas de Cognito</li>
+<li>Probar manejo de errores</li>
+</ol>
+<hr />
+<h2 id="contacto-con-plusmovil">Contacto con PlusMovil<a class="headerlink" href="#contacto-con-plusmovil" title="Permanent link">&para;</a></h2>
+<p><strong>Puntos a aclarar en próxima comunicación:</strong></p>
+<ol>
+<li>¿Cuándo estará corregido el error de <code>created_user</code> en <code>/sys-logs</code>?</li>
+<li>¿Los endpoints <code>/invoices</code> y similares deben usar Bearer token o AWS Signature?</li>
+<li>¿Existe documentación Swagger actualizada disponible?</li>
+<li>¿Qué otros endpoints están disponibles además de <code>/sys-logs</code> e <code>/invoices</code>?</li>
+<li>¿Hay rate limiting configurado? ¿Cuáles son los límites?</li>
+<li>¿Existe endpoint de health check para monitoreo?</li>
+</ol>
+<hr />
+<h2 id="referencias">Referencias<a class="headerlink" href="#referencias" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>AWS Cognito Documentation:</strong> <a href="https://docs.aws.amazon.com/cognito/">https://docs.aws.amazon.com/cognito/</a></li>
+<li><strong>AWS CLI Installation:</strong> <a href="https://aws.amazon.com/cli/">https://aws.amazon.com/cli/</a></li>
+<li><strong>API Gateway Authorization:</strong> <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-control-access-to-api.html">https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-control-access-to-api.html</a></li>
+<li><strong>Scripts de Prueba:</strong> <code>docs/testing/</code></li>
+</ul>
+<hr />
+<h2 id="changelog">Changelog<a class="headerlink" href="#changelog" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Fecha</th>
+<th>Cambio</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2025-10-31</td>
+<td>Documentación inicial de resultados de pruebas</td>
+</tr>
+<tr>
+<td>2025-10-31</td>
+<td>Confirmada autenticación Cognito funcionando</td>
+</tr>
+<tr>
+<td>2025-10-31</td>
+<td>Identificados errores del servidor en <code>/sys-logs</code> e <code>/invoices</code></td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/aghabrego/docucenter" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.highlight", "search.suggest"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

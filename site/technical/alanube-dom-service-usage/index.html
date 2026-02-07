@@ -1,0 +1,4712 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentación técnica y de usuario de DocuCenter - Sistema de facturación electrónica">
+      
+      
+        <meta name="author" content="aghabrego">
+      
+      
+        <link rel="canonical" href="https://aghabrego.github.io/docucenter-public/technical/alanube-dom-service-usage/">
+      
+      
+        <link rel="prev" href="../document-ai-import-implementation-summary/">
+      
+      
+        <link rel="next" href="../alanube-dom-export-invoices/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="https://home.apconpanama.me/wp-content/uploads/2024/03/logo3.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Guía de Uso del Servicio AlanubeDomService - DocuCenter</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="light-blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#guia-de-uso-del-servicio-alanubedomservice" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="DocuCenter" class="md-header__button md-logo" aria-label="DocuCenter" data-md-component="logo">
+      
+  <img src="https://home.apconpanama.me/wp-content/uploads/2024/03/logo3.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            DocuCenter
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Guía de Uso del Servicio AlanubeDomService
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="light-blue"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/aghabrego/docucenter-public" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    aghabrego/docucenter-public
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Pestañas" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Inicio
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../api/" class="md-tabs__link">
+          
+  
+  
+  APIs
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../optimizations/" class="md-tabs__link">
+          
+  
+  
+  Optimizaciones
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+  Documentación Técnica
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../validations/" class="md-tabs__link">
+          
+  
+  
+  Validaciones
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../testing/" class="md-tabs__link">
+          
+  
+  
+  Testing
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../integrations/" class="md-tabs__link">
+          
+  
+  
+  Integraciones
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="DocuCenter" class="md-nav__button md-logo" aria-label="DocuCenter" data-md-component="logo">
+      
+  <img src="https://home.apconpanama.me/wp-content/uploads/2024/03/logo3.png" alt="logo">
+
+    </a>
+    DocuCenter
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/aghabrego/docucenter-public" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    aghabrego/docucenter-public
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    APIs
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    APIs
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    APIs de DocuCenter
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Facturación Electrónica (FE)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Facturación Electrónica (FE)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/fe-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Facturación Electrónica (FE) - DocuCenter
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/acicloud-fe-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Facturación Electrónica - Integración ACICloud FE
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/document-emission-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Facturación Electrónica - Emisión de Documentos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/shopify-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Facturación Electrónica - Integración Shopify
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/lightspeed-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Facturación Electrónica - Integración Lightspeed
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/maxgym-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Facturación Electrónica - Integración Maxgym
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/meypar-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Facturación Electrónica - Integración Meypar
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/kart21-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Facturación Electrónica - Integración Kart21
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sage ACICloud
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Sage ACICloud
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/customers-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Sage ACICloud - Módulo Clientes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/products-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Productos - Sage ACICloud
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/sales-orders-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Sage ACICloud - Módulo Órdenes de Venta
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/purchases-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Compras - Sage ACICloud
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/payments-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Pagos y Créditos - Sage ACICloud
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/inventory-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Inventario - Sage ACICloud
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/jobs-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Trabajos/Jobs - Sage ACICloud
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Organizaciones
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Organizaciones
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/organizations/organizations-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API de Organizaciones
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Optimizaciones
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Optimizaciones
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optimizations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Optimizaciones - DocuCenter
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Performance
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Performance
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optimizations/customer-supplier-optimizations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Optimizaciones para el manejo de muchos clientes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optimizations/mysql-optimization-circuit-breaker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Optimización MySQL 8.0 y Circuit Breaker para DocuCenter
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Documentación Técnica
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Documentación Técnica
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Documentación Técnica - DocuCenter
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    QuickBooks
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    QuickBooks
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../quickbooks-webhook-organizationid-fix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fix: QuickBooks Webhook OrganizationId Duplicado
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../quickbooks-bills-job-graceful-validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fix: Validación Graceful de Tablas en CreateIntuitBillsJob
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../quickbooks-fiscal-number-validation-system/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sistema de Validación de Números Fiscales QuickBooks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Document AI
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Document AI
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../document-ai-import-to-workbench/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Document AI - Importación a Workbench
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../document-ai-import-implementation-summary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Document AI - Implementación Import to Workbench
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Alanube DOM
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Alanube DOM
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guía de Uso del Servicio AlanubeDomService
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guía de Uso del Servicio AlanubeDomService
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#descripcion-general" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Descripción General
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#caracteristicas-principales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Características Principales
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Características Principales">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#deteccion-automatica-de-tipos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Detección Automática de Tipos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tipos-de-documentos-soportados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tipos de Documentos Soportados
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#uso-basico-del-servicio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Uso Básico del Servicio
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Uso Básico del Servicio">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-importacion-y-configuracion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Importación y Configuración
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-metodo-principal-con-deteccion-automatica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Método Principal con Detección Automática
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deteccion-automatica-de-tipos_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Detección Automática de Tipos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Detección Automática de Tipos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#factura-de-exportacion-46" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Factura de Exportación (46)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#factura-gubernamental-45" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Factura Gubernamental (45)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#factura-de-consumo-32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Factura de Consumo (32)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#factura-fiscalcredito-fiscal-31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Factura Fiscal/Crédito Fiscal (31)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#metodos-especificos-por-tipo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Métodos Específicos por Tipo
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Métodos Específicos por Tipo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#llamada-directa-por-tipo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Llamada Directa por Tipo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#transformacion-desde-kart21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Transformación desde Kart21
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#logica-de-deteccion-automatica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lógica de Detección Automática
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Lógica de Detección Automática">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#orden-de-prioridad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Orden de Prioridad
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#funcion-determinedocumenttype" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Función determineDocumentType()
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#estructura-de-respuesta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Estructura de Respuesta
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Estructura de Respuesta">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#respuesta-exitosa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Respuesta Exitosa
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#respuesta-de-error" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Respuesta de Error
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuracion-de-endpoints" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuración de Endpoints
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuración de Endpoints">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mapeo-interno-de-endpoints" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mapeo Interno de Endpoints
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#urls-completas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        URLs Completas
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#manejo-de-errores" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Manejo de Errores
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Manejo de Errores">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#errores-comunes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Errores Comunes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#logging-automatico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Logging Automático
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejemplos-de-implementacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplos de Implementación
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Ejemplos de Implementación">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#controlador-laravel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Controlador Laravel
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#job-asincrono" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Job Asíncrono
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#precision-decimal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Precisión Decimal
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Precisión Decimal">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configuracion-interna" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuración Interna
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mejores-practicas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mejores Prácticas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Mejores Prácticas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-deteccion-automatica-vs-manual" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Detección Automática vs Manual
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-manejo-de-respuestas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Manejo de Respuestas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-logging-y-monitoreo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Logging y Monitoreo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-validacion-de-configuracion-pac" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Validación de Configuración PAC
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusiones" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conclusiones
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../alanube-dom-export-invoices/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Facturas de Exportación Electrónica (46) - Alanube DOM
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ALANUBE_DOM_COMPLETE_INTEGRATION/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integración Completa Alanube DOM - República Dominicana
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../FISCAL_CREDIT_IMPLEMENTATION_SUMMARY/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Implementación Completa de Facturas de Crédito Fiscal (31) - Alanube DOM
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_5" id="__nav_4_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Soluciones Técnicas
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Soluciones Técnicas
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ezeeissued-solution-summary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Solución Implementada - Campo EzeeIssued
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../getsaleproperty-optimizations-summary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Optimizaciones Completas - getSaleProperty() - Create.php
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ezeeissued-field-correction-summary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Corrección de Campo EzeeIssued - Resumen Técnico
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_6" id="__nav_4_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pagos y Cálculos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Pagos y Cálculos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../payment-calculation-fix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Análisis de Discrepancias en Cálculo de Pagos - Facturación Electrónica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../solucion-sincronizacion-pagos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Solución Final: Sincronización Completa de Pagos en Facturación Electrónica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_7" id="__nav_4_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SQL Server
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    SQL Server
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sql-server-complete-store-id-filtering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Implementación Completa de Filtrado por Store ID en Jobs SQL Server
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sql-server-store-id-filtering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Implementación de Filtrado por Store ID en STInvoiceJob
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validaciones
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Validaciones
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../validations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validaciones - DocuCenter
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Documentos Fiscales
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Documentos Fiscales
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../validations/createSale-ruc-validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validación de RUC en CreateSaleMaxgymRequest
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../validations/maxgym-ruc-validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validación de RUC en MaxgymService
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Testing
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Testing
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sistema de Testing DocuCenter
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_2" id="__nav_6_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reportes de Error
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Reportes de Error
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../testing/PLUSMOVIL-PRODUCTION-ERROR-REPORT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reporte Error PlusMóvil Producción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integraciones
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Integraciones
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../integrations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integraciones Disponibles
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_2" id="__nav_7_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PlusMóvil
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    PlusMóvil
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../integrations/plusmovil-implementation-summary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resumen Implementación
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../integrations/plusmovil-implementation-analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Análisis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../integrations/plusmovil-api-testing-results/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resultados Testing API
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../integrations/plusmovil-continuation-plan/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plan Continuación
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../integrations/plusmovil-next-steps/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Próximos Pasos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#descripcion-general" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Descripción General
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#caracteristicas-principales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Características Principales
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Características Principales">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#deteccion-automatica-de-tipos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Detección Automática de Tipos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tipos-de-documentos-soportados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tipos de Documentos Soportados
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#uso-basico-del-servicio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Uso Básico del Servicio
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Uso Básico del Servicio">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-importacion-y-configuracion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Importación y Configuración
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-metodo-principal-con-deteccion-automatica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Método Principal con Detección Automática
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deteccion-automatica-de-tipos_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Detección Automática de Tipos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Detección Automática de Tipos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#factura-de-exportacion-46" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Factura de Exportación (46)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#factura-gubernamental-45" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Factura Gubernamental (45)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#factura-de-consumo-32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Factura de Consumo (32)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#factura-fiscalcredito-fiscal-31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Factura Fiscal/Crédito Fiscal (31)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#metodos-especificos-por-tipo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Métodos Específicos por Tipo
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Métodos Específicos por Tipo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#llamada-directa-por-tipo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Llamada Directa por Tipo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#transformacion-desde-kart21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Transformación desde Kart21
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#logica-de-deteccion-automatica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lógica de Detección Automática
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Lógica de Detección Automática">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#orden-de-prioridad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Orden de Prioridad
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#funcion-determinedocumenttype" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Función determineDocumentType()
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#estructura-de-respuesta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Estructura de Respuesta
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Estructura de Respuesta">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#respuesta-exitosa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Respuesta Exitosa
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#respuesta-de-error" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Respuesta de Error
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuracion-de-endpoints" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuración de Endpoints
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuración de Endpoints">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mapeo-interno-de-endpoints" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mapeo Interno de Endpoints
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#urls-completas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        URLs Completas
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#manejo-de-errores" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Manejo de Errores
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Manejo de Errores">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#errores-comunes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Errores Comunes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#logging-automatico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Logging Automático
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejemplos-de-implementacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplos de Implementación
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Ejemplos de Implementación">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#controlador-laravel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Controlador Laravel
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#job-asincrono" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Job Asíncrono
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#precision-decimal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Precisión Decimal
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Precisión Decimal">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configuracion-interna" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuración Interna
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mejores-practicas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mejores Prácticas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Mejores Prácticas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-deteccion-automatica-vs-manual" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Detección Automática vs Manual
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-manejo-de-respuestas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Manejo de Respuestas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-logging-y-monitoreo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Logging y Monitoreo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-validacion-de-configuracion-pac" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Validación de Configuración PAC
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusiones" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conclusiones
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="guia-de-uso-del-servicio-alanubedomservice">Guía de Uso del Servicio AlanubeDomService<a class="headerlink" href="#guia-de-uso-del-servicio-alanubedomservice" title="Permanent link">&para;</a></h1>
+<h2 id="descripcion-general">Descripción General<a class="headerlink" href="#descripcion-general" title="Permanent link">&para;</a></h2>
+<p>El <code>AlanubeDomService</code> es el servicio principal para la emisión de documentos electrónicos a través del proveedor PAC Alanube DOM. Este servicio incluye <strong>detección automática de tipos de documento</strong> y manejo específico para cada tipo de factura según las normativas fiscales panameñas.</p>
+<h2 id="caracteristicas-principales">Características Principales<a class="headerlink" href="#caracteristicas-principales" title="Permanent link">&para;</a></h2>
+<h3 id="deteccion-automatica-de-tipos">Detección Automática de Tipos<a class="headerlink" href="#deteccion-automatica-de-tipos" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Análisis inteligente</strong> de datos de entrada</li>
+<li><strong>Selección automática</strong> del endpoint correcto</li>
+<li><strong>Validaciones específicas</strong> por tipo de documento</li>
+<li><strong>Formateo automático</strong> según especificaciones</li>
+</ul>
+<h3 id="tipos-de-documentos-soportados">Tipos de Documentos Soportados<a class="headerlink" href="#tipos-de-documentos-soportados" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>31</strong> - Factura de Crédito Fiscal (FCF)</li>
+<li><strong>32</strong> - Factura de Consumo</li>
+<li><strong>45</strong> - Factura Gubernamental</li>
+<li><strong>46</strong> - Factura de Exportación Electrónica</li>
+<li><strong>33</strong> - Nota de Débito</li>
+<li><strong>34</strong> - Nota de Crédito</li>
+<li><strong>41</strong> - Compras</li>
+<li><strong>43</strong> - Gastos Menores</li>
+<li><strong>44</strong> - Regímenes Especiales</li>
+<li><strong>47</strong> - Pagos al Exterior</li>
+</ul>
+<h2 id="uso-basico-del-servicio">Uso Básico del Servicio<a class="headerlink" href="#uso-basico-del-servicio" title="Permanent link">&para;</a></h2>
+<h3 id="1-importacion-y-configuracion">1. Importación y Configuración<a class="headerlink" href="#1-importacion-y-configuracion" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="x">use App\Services\AlanubeDomService;</span>
+<span class="x">use App\Models\Organization;</span>
+
+<span class="x">// Crear instancia del servicio</span>
+<span class="x">$service = new AlanubeDomService();</span>
+
+<span class="x">// Obtener organización</span>
+<span class="x">$organization = Organization::find($organizationId);</span>
+</code></pre></div>
+<h3 id="2-metodo-principal-con-deteccion-automatica">2. Método Principal con Detección Automática<a class="headerlink" href="#2-metodo-principal-con-deteccion-automatica" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="x">/**</span>
+<span class="x"> * Emisión con detección automática de tipo</span>
+<span class="x"> */</span>
+<span class="x">$result = $service-&gt;emitInvoice($organization, $invoiceData);</span>
+
+<span class="x">if ($result[&#39;success&#39;]) {</span>
+<span class="x">    $encf = $result[&#39;encf&#39;];              // e-NCF generado</span>
+<span class="x">    $stampDate = $result[&#39;stamp_date&#39;];   // Fecha de timbre</span>
+<span class="x">    $documentType = $result[&#39;document_type&#39;]; // Tipo detectado</span>
+<span class="x">    $typeCode = $result[&#39;type_code&#39;];     // Código numérico</span>
+
+<span class="x">    echo &quot;Factura emitida: {$encf}&quot;;</span>
+<span class="x">    echo &quot; Tipo: {$documentType} ({$typeCode})&quot;;</span>
+<span class="x">} else {</span>
+<span class="x">    echo &quot;Error: {$result[&#39;message&#39;]}&quot;;</span>
+<span class="x">    echo &quot;Detalle: {$result[&#39;error&#39;]}&quot;;</span>
+<span class="x">}</span>
+</code></pre></div>
+<h2 id="deteccion-automatica-de-tipos_1">Detección Automática de Tipos<a class="headerlink" href="#deteccion-automatica-de-tipos_1" title="Permanent link">&para;</a></h2>
+<h3 id="factura-de-exportacion-46">Factura de Exportación (46)<a class="headerlink" href="#factura-de-exportacion-46" title="Permanent link">&para;</a></h3>
+<p><strong>Indicadores de Detección</strong>:
+- Campos de información adicional de exportación
+- Datos de transporte internacional
+- Comprador con identificador extranjero
+- Indicador de facturación 3 (ITBIS 0%)</p>
+<div class="highlight"><pre><span></span><code><span class="x">$exportData = [</span>
+<span class="x">    &#39;additionalInformation&#39; =&gt; [</span>
+<span class="x">        &#39;shippingDocument&#39; =&gt; &#39;BL-001-2025&#39;,        // Documento de embarque</span>
+<span class="x">        &#39;destinationCountry&#39; =&gt; &#39;US&#39;,               // País destino</span>
+<span class="x">        &#39;transportMean&#39; =&gt; &#39;01&#39;,                    // Medio transporte (01=Marítimo)</span>
+<span class="x">        &#39;departurePort&#39; =&gt; &#39;Puerto de Balboa&#39;,      // Puerto salida</span>
+<span class="x">        &#39;loadingPort&#39; =&gt; &#39;Puerto de Colón&#39;,         // Puerto carga</span>
+<span class="x">        &#39;dischargePort&#39; =&gt; &#39;Puerto de Miami&#39;,       // Puerto descarga</span>
+<span class="x">        &#39;exportCurrency&#39; =&gt; &#39;USD&#39;,                  // Moneda exportación</span>
+<span class="x">        &#39;exportValue&#39; =&gt; 5000.00,                   // Valor exportación</span>
+<span class="x">        &#39;customsInformation&#39; =&gt; &#39;Productos electrónicos para exportación&#39;</span>
+<span class="x">    ],</span>
+<span class="x">    &#39;buyer&#39; =&gt; [</span>
+<span class="x">        &#39;foreignIdentifier&#39; =&gt; &#39;US123456789&#39;,       // ID extranjero</span>
+<span class="x">        &#39;companyName&#39; =&gt; &#39;Import Solutions Inc.&#39;,</span>
+<span class="x">        &#39;contactName&#39; =&gt; &#39;John Smith&#39;,</span>
+<span class="x">        &#39;email&#39; =&gt; &#39;export@importsolutions.com&#39;,</span>
+<span class="x">        &#39;phone&#39; =&gt; &#39;+1-555-0123&#39;,</span>
+<span class="x">        &#39;address&#39; =&gt; &#39;123 Export Street&#39;,</span>
+<span class="x">        &#39;country&#39; =&gt; &#39;US&#39;,                          // Código país</span>
+<span class="x">        &#39;city&#39; =&gt; &#39;Miami&#39;,</span>
+<span class="x">        &#39;postalCode&#39; =&gt; &#39;33101&#39;</span>
+<span class="x">    ],</span>
+<span class="x">    &#39;itemDetails&#39; =&gt; [</span>
+<span class="x">        [</span>
+<span class="x">            &#39;lineNumber&#39; =&gt; 1,</span>
+<span class="x">            &#39;billingIndicator&#39; =&gt; 3,                 // ITBIS 0% (obligatorio)</span>
+<span class="x">            &#39;itemName&#39; =&gt; &#39;Producto exportación&#39;,</span>
+<span class="x">            &#39;goodServiceIndicator&#39; =&gt; 1,            // Bien</span>
+<span class="x">            &#39;itemDescription&#39; =&gt; &#39;Producto electrónico&#39;,</span>
+<span class="x">            &#39;quantityItem&#39; =&gt; 10,</span>
+<span class="x">            &#39;unitMeasure&#39; =&gt; 1,                     // Unidad</span>
+<span class="x">            &#39;unitPriceItem&#39; =&gt; 500.00,</span>
+<span class="x">            &#39;itemAmount&#39; =&gt; 5000.00</span>
+<span class="x">        ]</span>
+<span class="x">    ],</span>
+<span class="x">    &#39;totals&#39; =&gt; [</span>
+<span class="x">        &#39;totalAmount&#39; =&gt; 5000.00,</span>
+<span class="x">        &#39;itbisTotal&#39; =&gt; 0.00,                       // Sin ITBIS</span>
+<span class="x">        &#39;i3AmountTaxed&#39; =&gt; 5000.00                  // Todo en tasa 0%</span>
+<span class="x">    ]</span>
+<span class="x">];</span>
+
+<span class="x">// Se detecta automáticamente como EXPORT_SUPPORT (46)</span>
+<span class="x">$result = $service-&gt;emitInvoice($organization, $exportData);</span>
+</code></pre></div>
+<h3 id="factura-gubernamental-45">Factura Gubernamental (45)<a class="headerlink" href="#factura-gubernamental-45" title="Permanent link">&para;</a></h3>
+<p><strong>Indicadores de Detección</strong>:
+- RNC gubernamental (prefijos 10, 11)
+- Campos específicos gubernamentales
+- Información de transporte</p>
+<div class="highlight"><pre><span></span><code><span class="x">$governmentalData = [</span>
+<span class="x">    &#39;customer&#39; =&gt; [</span>
+<span class="x">        &#39;tax_id&#39; =&gt; &#39;10123456789&#39;,                  // RNC gubernamental</span>
+<span class="x">        &#39;first_name&#39; =&gt; &#39;MINISTERIO DE SALUD PUBLICA&#39;,</span>
+<span class="x">        &#39;email&#39; =&gt; &#39;compras@mispas.gob.pa&#39;,</span>
+<span class="x">        &#39;address&#39; =&gt; &#39;Avenida Gorgas, Ancón&#39;</span>
+<span class="x">    ],</span>
+<span class="x">    &#39;income_type&#39; =&gt; &#39;01&#39;,                          // Tipo ingreso específico</span>
+<span class="x">    &#39;transport&#39; =&gt; [</span>
+<span class="x">        &#39;meansOfTransport&#39; =&gt; &#39;01&#39;,                 // Medio transporte</span>
+<span class="x">        &#39;originCountry&#39; =&gt; &#39;PA&#39;,</span>
+<span class="x">        &#39;destinationCountry&#39; =&gt; &#39;PA&#39;</span>
+<span class="x">    ],</span>
+<span class="x">    &#39;itemDetails&#39; =&gt; [</span>
+<span class="x">        [</span>
+<span class="x">            &#39;billingIndicator&#39; =&gt; 1,                // ITBIS 18%</span>
+<span class="x">            &#39;itemName&#39; =&gt; &#39;Suministros médicos&#39;,</span>
+<span class="x">            &#39;quantityItem&#39; =&gt; 100,</span>
+<span class="x">            &#39;unitPriceItem&#39; =&gt; 50.00,</span>
+<span class="x">            &#39;itemAmount&#39; =&gt; 5000.00</span>
+<span class="x">        ]</span>
+<span class="x">    ],</span>
+<span class="x">    &#39;totals&#39; =&gt; [</span>
+<span class="x">        &#39;totalAmount&#39; =&gt; 5900.00,</span>
+<span class="x">        &#39;itbisTotal&#39; =&gt; 900.00,</span>
+<span class="x">        &#39;i1AmountTaxed&#39; =&gt; 5000.00</span>
+<span class="x">    ]</span>
+<span class="x">];</span>
+
+<span class="x">// Se detecta automáticamente como GOVERNMENTAL (45)</span>
+<span class="x">$result = $service-&gt;emitInvoice($organization, $governmentalData);</span>
+</code></pre></div>
+<h3 id="factura-de-consumo-32">Factura de Consumo (32)<a class="headerlink" href="#factura-de-consumo-32" title="Permanent link">&para;</a></h3>
+<p><strong>Indicadores de Detección</strong>:
+- Cliente "Consumidor Final"
+- Monto menor a $250,000 DOP
+- Sin RNC o RNC genérico</p>
+<div class="highlight"><pre><span></span><code><span class="x">$consumerData = [</span>
+<span class="x">    &#39;customer&#39; =&gt; [</span>
+<span class="x">        &#39;id&#39; =&gt; &#39;Consumidor Final&#39;,                 // Cliente genérico</span>
+<span class="x">        &#39;first_name&#39; =&gt; &#39;Cliente&#39;,</span>
+<span class="x">        &#39;last_name&#39; =&gt; &#39;General&#39;</span>
+<span class="x">    ],</span>
+<span class="x">    &#39;total&#39; =&gt; 150.00,                              // Monto bajo</span>
+<span class="x">    &#39;subtotal&#39; =&gt; 127.12,</span>
+<span class="x">    &#39;tax&#39; =&gt; 22.88,</span>
+<span class="x">    &#39;items&#39; =&gt; [</span>
+<span class="x">        [</span>
+<span class="x">            &#39;product_name&#39; =&gt; &#39;Producto consumo&#39;,</span>
+<span class="x">            &#39;qty&#39; =&gt; 1,</span>
+<span class="x">            &#39;price&#39; =&gt; 127.12,</span>
+<span class="x">            &#39;discount&#39; =&gt; 0</span>
+<span class="x">        ]</span>
+<span class="x">    ],</span>
+<span class="x">    &#39;payment_method&#39; =&gt; &#39;cash&#39;                      // Efectivo típico</span>
+<span class="x">];</span>
+
+<span class="x">// Se detecta automáticamente como INVOICE (32)</span>
+<span class="x">$result = $service-&gt;emitInvoice($organization, $consumerData);</span>
+</code></pre></div>
+<h3 id="factura-fiscalcredito-fiscal-31">Factura Fiscal/Crédito Fiscal (31)<a class="headerlink" href="#factura-fiscalcredito-fiscal-31" title="Permanent link">&para;</a></h3>
+<p><strong>Indicadores de Detección</strong>:
+- RNC empresarial válido
+- Campos fiscales complejos
+- Formas de pago estructuradas</p>
+<div class="highlight"><pre><span></span><code><span class="x">$fiscalData = [</span>
+<span class="x">    &#39;customer&#39; =&gt; [</span>
+<span class="x">        &#39;tax_id&#39; =&gt; &#39;40123456789&#39;,                  // RNC empresarial</span>
+<span class="x">        &#39;first_name&#39; =&gt; &#39;EMPRESA ABC&#39;,</span>
+<span class="x">        &#39;last_name&#39; =&gt; &#39;S.A.&#39;,</span>
+<span class="x">        &#39;email&#39; =&gt; &#39;contabilidad@empresaabc.com&#39;,</span>
+<span class="x">        &#39;address&#39; =&gt; &#39;Calle 50, Ciudad de Panamá&#39;</span>
+<span class="x">    ],</span>
+<span class="x">    &#39;paymentFormsTable&#39; =&gt; [                        // Formas pago complejas</span>
+<span class="x">        [</span>
+<span class="x">            &#39;paymentMethod&#39; =&gt; 4,                   // Crédito</span>
+<span class="x">            &#39;paymentAmount&#39; =&gt; 800.00,</span>
+<span class="x">            &#39;paymentAccountNumber&#39; =&gt; &#39;CRE-001&#39;</span>
+<span class="x">        ],</span>
+<span class="x">        [</span>
+<span class="x">            &#39;paymentMethod&#39; =&gt; 2,                   // Transferencia</span>
+<span class="x">            &#39;paymentAmount&#39; =&gt; 200.00,</span>
+<span class="x">            &#39;bankPayment&#39; =&gt; &#39;Banco Nacional&#39;</span>
+<span class="x">        ]</span>
+<span class="x">    ],</span>
+<span class="x">    &#39;paymentDeadline&#39; =&gt; &#39;2025-09-21&#39;,              // Fecha límite pago</span>
+<span class="x">    &#39;paymentTerm&#39; =&gt; 30,                            // Plazo días</span>
+<span class="x">    &#39;itemDetails&#39; =&gt; [</span>
+<span class="x">        [</span>
+<span class="x">            &#39;billingIndicator&#39; =&gt; 1,                // ITBIS 18%</span>
+<span class="x">            &#39;itemName&#39; =&gt; &#39;Servicio consultoria&#39;,</span>
+<span class="x">            &#39;goodServiceIndicator&#39; =&gt; 2,            // Servicio</span>
+<span class="x">            &#39;quantityItem&#39; =&gt; 1,</span>
+<span class="x">            &#39;unitPriceItem&#39; =&gt; 1000.00,</span>
+<span class="x">            &#39;itemAmount&#39; =&gt; 1000.00,</span>
+<span class="x">            &#39;retention&#39; =&gt; [                        // Retenciones</span>
+<span class="x">                &#39;retentionType&#39; =&gt; &#39;ISR&#39;,</span>
+<span class="x">                &#39;retentionAmount&#39; =&gt; 100.00</span>
+<span class="x">            ]</span>
+<span class="x">        ]</span>
+<span class="x">    ]</span>
+<span class="x">];</span>
+
+<span class="x">// Se detecta automáticamente como FISCAL_INVOICE (31)</span>
+<span class="x">$result = $service-&gt;emitInvoice($organization, $fiscalData);</span>
+</code></pre></div>
+<h2 id="metodos-especificos-por-tipo">Métodos Específicos por Tipo<a class="headerlink" href="#metodos-especificos-por-tipo" title="Permanent link">&para;</a></h2>
+<h3 id="llamada-directa-por-tipo">Llamada Directa por Tipo<a class="headerlink" href="#llamada-directa-por-tipo" title="Permanent link">&para;</a></h3>
+<p>Si conoces el tipo exacto, puedes llamar directamente:</p>
+<div class="highlight"><pre><span></span><code><span class="x">// Factura de Exportación</span>
+<span class="x">$result = $service-&gt;emitExportInvoice($organization, $exportData);</span>
+
+<span class="x">// Factura Gubernamental  </span>
+<span class="x">$result = $service-&gt;emitGovernmentalInvoice($organization, $governmentalData);</span>
+
+<span class="x">// Factura de Consumo</span>
+<span class="x">$result = $service-&gt;emitConsumerInvoice($organization, $consumerData);</span>
+
+<span class="x">// Factura Fiscal</span>
+<span class="x">$result = $service-&gt;emitFiscalInvoice($organization, $fiscalData);</span>
+
+<span class="x">// Método legacy para crédito fiscal</span>
+<span class="x">$result = $service-&gt;emitFiscalCreditInvoice($organization, $fiscalData);</span>
+</code></pre></div>
+<h3 id="transformacion-desde-kart21">Transformación desde Kart21<a class="headerlink" href="#transformacion-desde-kart21" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="x">// Transformar datos de Kart21 a formato Alanube</span>
+<span class="x">$alanubeData = $service-&gt;transformKart21ToAlanubeFiscal(</span>
+<span class="x">    $organization, </span>
+<span class="x">    $kart21Data, </span>
+<span class="x">    AlanubeDomService::FISCAL_INVOICE</span>
+<span class="x">);</span>
+
+<span class="x">// Emitir factura transformada</span>
+<span class="x">$result = $service-&gt;emitInvoice($organization, $alanubeData);</span>
+</code></pre></div>
+<h2 id="logica-de-deteccion-automatica">Lógica de Detección Automática<a class="headerlink" href="#logica-de-deteccion-automatica" title="Permanent link">&para;</a></h2>
+<h3 id="orden-de-prioridad">Orden de Prioridad<a class="headerlink" href="#orden-de-prioridad" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Campo explícito</strong>: <code>document_type</code> si está presente</li>
+<li><strong>RNC gubernamental</strong>: Prefijos 10, 11 → Gubernamental (45)</li>
+<li><strong>Campos exportación</strong>: Transport, foreign buyer → Exportación (46)</li>
+<li><strong>Campos fiscales</strong>: paymentFormsTable, retention → Fiscal (31)</li>
+<li><strong>Cliente y monto</strong>: Consumidor final + &lt;250K → Consumo (32)</li>
+<li><strong>RNC empresarial</strong>: Prefijos 4,3,1,etc. → Fiscal (31)</li>
+<li><strong>Fallback</strong>: Factura de consumo por defecto</li>
+</ol>
+<h3 id="funcion-determinedocumenttype">Función <code>determineDocumentType()</code><a class="headerlink" href="#funcion-determinedocumenttype" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="x">public function determineDocumentType(array $request): int</span>
+<span class="x">{</span>
+<span class="x">    // 1. Tipo explícito</span>
+<span class="x">    if (isset($request[&#39;document_type&#39;])) {</span>
+<span class="x">        return intval($request[&#39;document_type&#39;]);</span>
+<span class="x">    }</span>
+
+<span class="x">    $total = floatval(array_get($request, &#39;total&#39;, 0));</span>
+<span class="x">    $customer = array_get($request, &#39;customer&#39;, []);</span>
+<span class="x">    $customerRnc = array_get($customer, &#39;tax_id&#39;, &#39;&#39;);</span>
+
+<span class="x">    // 2. RNC gubernamental</span>
+<span class="x">    if ($this-&gt;isGovernmentalRnc($customerRnc)) {</span>
+<span class="x">        return self::GOVERNMENTAL; // 45</span>
+<span class="x">    }</span>
+
+<span class="x">    // 3. Campos gubernamentales</span>
+<span class="x">    if (isset($request[&#39;income_type&#39;]) || isset($request[&#39;transport&#39;])) {</span>
+<span class="x">        return self::GOVERNMENTAL; // 45</span>
+<span class="x">    }</span>
+
+<span class="x">    // 4. Campos fiscales complejos</span>
+<span class="x">    if ($this-&gt;isFiscalCreditIndicator($request)) {</span>
+<span class="x">        return self::FISCAL_INVOICE; // 31</span>
+<span class="x">    }</span>
+
+<span class="x">    // 5. Campos de exportación</span>
+<span class="x">    if ($this-&gt;isExportInvoiceIndicator($request)) {</span>
+<span class="x">        return self::EXPORT_SUPPORT; // 46</span>
+<span class="x">    }</span>
+
+<span class="x">    // 6. Consumidor final con monto bajo</span>
+<span class="x">    if (empty($customer) || $customer[&#39;id&#39;] === &#39;Consumidor Final&#39;) {</span>
+<span class="x">        return $total &gt; 250000 ? self::FISCAL_INVOICE : self::INVOICE;</span>
+<span class="x">    }</span>
+
+<span class="x">    // 7. RNC empresarial válido</span>
+<span class="x">    if ($this-&gt;hasValidBusinessRnc($customerRnc)) {</span>
+<span class="x">        return self::FISCAL_INVOICE; // 31</span>
+<span class="x">    }</span>
+
+<span class="x">    // 8. Fallback</span>
+<span class="x">    return self::INVOICE; // 32</span>
+<span class="x">}</span>
+</code></pre></div>
+<h2 id="estructura-de-respuesta">Estructura de Respuesta<a class="headerlink" href="#estructura-de-respuesta" title="Permanent link">&para;</a></h2>
+<h3 id="respuesta-exitosa">Respuesta Exitosa<a class="headerlink" href="#respuesta-exitosa" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="x">[</span>
+<span class="x">    &#39;success&#39; =&gt; true,</span>
+<span class="x">    &#39;data&#39; =&gt; [</span>
+<span class="x">        &#39;encf&#39; =&gt; &#39;E31000000001234567890&#39;,          // e-NCF generado</span>
+<span class="x">        &#39;stamp_date&#39; =&gt; &#39;2025-08-22T10:30:00&#39;,     // Fecha timbre</span>
+<span class="x">        &#39;status&#39; =&gt; &#39;approved&#39;,</span>
+<span class="x">        // ... otros campos del PAC</span>
+<span class="x">    ],</span>
+<span class="x">    &#39;encf&#39; =&gt; &#39;E31000000001234567890&#39;,</span>
+<span class="x">    &#39;stamp_date&#39; =&gt; &#39;2025-08-22T10:30:00&#39;,</span>
+<span class="x">    &#39;document_type&#39; =&gt; &#39;Factura de Exportación Electrónica&#39;,</span>
+<span class="x">    &#39;type_code&#39; =&gt; 46,</span>
+<span class="x">    &#39;validation_details&#39; =&gt; [                       // Solo para exportación</span>
+<span class="x">        &#39;billing_indicator&#39; =&gt; &#39;Todos los ítems con ITBIS tasa 0%&#39;,</span>
+<span class="x">        &#39;export_specific&#39; =&gt; &#39;Documento configurado para exportación&#39;</span>
+<span class="x">    ]</span>
+<span class="x">]</span>
+</code></pre></div>
+<h3 id="respuesta-de-error">Respuesta de Error<a class="headerlink" href="#respuesta-de-error" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="x">[</span>
+<span class="x">    &#39;success&#39; =&gt; false,</span>
+<span class="x">    &#39;message&#39; =&gt; &#39;Error al emitir factura de exportación&#39;,</span>
+<span class="x">    &#39;error&#39; =&gt; &#39;Detalles específicos del error&#39;,</span>
+<span class="x">    &#39;document_type&#39; =&gt; &#39;Factura de Exportación Electrónica&#39;,</span>
+<span class="x">    &#39;type_code&#39; =&gt; 46,</span>
+<span class="x">    &#39;document_type_detected&#39; =&gt; &#39;export&#39;            // Tipo detectado</span>
+<span class="x">]</span>
+</code></pre></div>
+<h2 id="configuracion-de-endpoints">Configuración de Endpoints<a class="headerlink" href="#configuracion-de-endpoints" title="Permanent link">&para;</a></h2>
+<h3 id="mapeo-interno-de-endpoints">Mapeo Interno de Endpoints<a class="headerlink" href="#mapeo-interno-de-endpoints" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="x">protected $endpoints = [</span>
+<span class="x">    31 =&gt; &#39;fiscal-invoices&#39;,        // Factura Fiscal</span>
+<span class="x">    32 =&gt; &#39;invoices&#39;,              // Factura Consumo  </span>
+<span class="x">    33 =&gt; &#39;debitnotes&#39;,            // Nota Débito</span>
+<span class="x">    34 =&gt; &#39;creditnotes&#39;,           // Nota Crédito</span>
+<span class="x">    41 =&gt; &#39;purchases&#39;,             // Compras</span>
+<span class="x">    43 =&gt; &#39;minorexpenses&#39;,         // Gastos Menores</span>
+<span class="x">    44 =&gt; &#39;specialregimes&#39;,        // Regímenes Especiales</span>
+<span class="x">    45 =&gt; &#39;gubernamentals&#39;,        // Factura Gubernamental</span>
+<span class="x">    46 =&gt; &#39;export-supports&#39;,       // Factura Exportación</span>
+<span class="x">    47 =&gt; &#39;paymentabroadsupports&#39;  // Pagos Exterior</span>
+<span class="x">];</span>
+</code></pre></div>
+<h3 id="urls-completas">URLs Completas<a class="headerlink" href="#urls-completas" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="x">// Base URL: https://api.alanube.com/dom/v1/</span>
+<span class="x">// Ejemplo para exportación:</span>
+<span class="x">// https://api.alanube.com/dom/v1/export-supports</span>
+</code></pre></div>
+<h2 id="manejo-de-errores">Manejo de Errores<a class="headerlink" href="#manejo-de-errores" title="Permanent link">&para;</a></h2>
+<h3 id="errores-comunes">Errores Comunes<a class="headerlink" href="#errores-comunes" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="x">try {</span>
+<span class="x">    $result = $service-&gt;emitInvoice($organization, $invoiceData);</span>
+<span class="x">} catch (\Exception $e) {</span>
+<span class="x">    switch ($e-&gt;getMessage()) {</span>
+<span class="x">        case &#39;No se encontró configuración PAC&#39;:</span>
+<span class="x">            // Configurar conexión PAC para la organización</span>
+<span class="x">            break;</span>
+
+<span class="x">        case &#39;La configuración PAC no es para Alanube&#39;:</span>
+<span class="x">            // Verificar pac_type = &#39;alanube&#39;</span>
+<span class="x">            break;</span>
+
+<span class="x">        case &#39;Tipo de documento no soportado&#39;:</span>
+<span class="x">            // Verificar que el tipo esté en $endpoints</span>
+<span class="x">            break;</span>
+
+<span class="x">        default:</span>
+<span class="x">            // Error de red o PAC</span>
+<span class="x">            Log::error(&#39;Error AlanubeDomService: &#39; . $e-&gt;getMessage());</span>
+<span class="x">    }</span>
+<span class="x">}</span>
+</code></pre></div>
+<h3 id="logging-automatico">Logging Automático<a class="headerlink" href="#logging-automatico" title="Permanent link">&para;</a></h3>
+<p>El servicio incluye logging automático:</p>
+<div class="highlight"><pre><span></span><code><span class="x">// Logs de información</span>
+<span class="x">Log::info(&#39;[AlanubeDomService] Tipo de documento detectado: export&#39;);</span>
+<span class="x">Log::info(&#39;[AlanubeDomService] Factura emitida exitosamente&#39;, [&#39;encf&#39; =&gt; $encf]);</span>
+
+<span class="x">// Logs de error</span>
+<span class="x">Log::error(&#39;[AlanubeDomService] Error emitiendo factura: &#39; . $error);</span>
+<span class="x">Log::warning(&#39;[AlanubeDomService] Error en respuesta&#39;, [&#39;result&#39; =&gt; $result]);</span>
+</code></pre></div>
+<h2 id="ejemplos-de-implementacion">Ejemplos de Implementación<a class="headerlink" href="#ejemplos-de-implementacion" title="Permanent link">&para;</a></h2>
+<h3 id="controlador-laravel">Controlador Laravel<a class="headerlink" href="#controlador-laravel" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="cp">&lt;?php</span>
+
+<span class="k">namespace</span> <span class="nx">App\Http\Controllers</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Illuminate\Http\Request</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">App\Services\AlanubeDomService</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">App\Models\Organization</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">InvoiceController</span> <span class="k">extends</span> <span class="nx">Controller</span>
+<span class="p">{</span>
+    <span class="k">protected</span> <span class="nv">$alanubeDomService</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">(</span><span class="nx">AlanubeDomService</span> <span class="nv">$alanubeDomService</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">alanubeDomService</span> <span class="o">=</span> <span class="nv">$alanubeDomService</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * Emitir factura con detección automática</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">emit</span><span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">try</span> <span class="p">{</span>
+            <span class="nv">$organization</span> <span class="o">=</span> <span class="nx">Organization</span><span class="o">::</span><span class="na">find</span><span class="p">(</span><span class="nv">$request</span><span class="o">-&gt;</span><span class="na">organization_id</span><span class="p">);</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$organization</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">return</span> <span class="nx">response</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">json</span><span class="p">([</span>
+                    <span class="s1">&#39;success&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">,</span>
+                    <span class="s1">&#39;message&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Organización no encontrada&#39;</span>
+                <span class="p">],</span> <span class="mi">404</span><span class="p">);</span>
+            <span class="p">}</span>
+
+            <span class="c1">// El servicio detecta automáticamente el tipo</span>
+            <span class="nv">$result</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">alanubeDomService</span><span class="o">-&gt;</span><span class="na">emitInvoice</span><span class="p">(</span>
+                <span class="nv">$organization</span><span class="p">,</span> 
+                <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">all</span><span class="p">()</span>
+            <span class="p">);</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="nv">$result</span><span class="p">[</span><span class="s1">&#39;success&#39;</span><span class="p">])</span> <span class="p">{</span>
+                <span class="k">return</span> <span class="nx">response</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">json</span><span class="p">([</span>
+                    <span class="s1">&#39;success&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+                    <span class="s1">&#39;data&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+                        <span class="s1">&#39;encf&#39;</span> <span class="o">=&gt;</span> <span class="nv">$result</span><span class="p">[</span><span class="s1">&#39;encf&#39;</span><span class="p">],</span>
+                        <span class="s1">&#39;document_type&#39;</span> <span class="o">=&gt;</span> <span class="nv">$result</span><span class="p">[</span><span class="s1">&#39;document_type&#39;</span><span class="p">],</span>
+                        <span class="s1">&#39;type_code&#39;</span> <span class="o">=&gt;</span> <span class="nv">$result</span><span class="p">[</span><span class="s1">&#39;type_code&#39;</span><span class="p">],</span>
+                        <span class="s1">&#39;stamp_date&#39;</span> <span class="o">=&gt;</span> <span class="nv">$result</span><span class="p">[</span><span class="s1">&#39;stamp_date&#39;</span><span class="p">]</span>
+                    <span class="p">],</span>
+                    <span class="s1">&#39;message&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Factura emitida exitosamente&#39;</span>
+                <span class="p">]);</span>
+            <span class="p">}</span>
+
+            <span class="k">return</span> <span class="nx">response</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">json</span><span class="p">([</span>
+                <span class="s1">&#39;success&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">,</span>
+                <span class="s1">&#39;message&#39;</span> <span class="o">=&gt;</span> <span class="nv">$result</span><span class="p">[</span><span class="s1">&#39;message&#39;</span><span class="p">],</span>
+                <span class="s1">&#39;error&#39;</span> <span class="o">=&gt;</span> <span class="nv">$result</span><span class="p">[</span><span class="s1">&#39;error&#39;</span><span class="p">],</span>
+                <span class="s1">&#39;detected_type&#39;</span> <span class="o">=&gt;</span> <span class="nv">$result</span><span class="p">[</span><span class="s1">&#39;document_type_detected&#39;</span><span class="p">]</span> <span class="o">??</span> <span class="k">null</span>
+            <span class="p">],</span> <span class="mi">400</span><span class="p">);</span>
+
+        <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">\Exception</span> <span class="nv">$e</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">Log</span><span class="o">::</span><span class="na">error</span><span class="p">(</span><span class="s1">&#39;Error en emisión de factura&#39;</span><span class="p">,</span> <span class="p">[</span>
+                <span class="s1">&#39;error&#39;</span> <span class="o">=&gt;</span> <span class="nv">$e</span><span class="o">-&gt;</span><span class="na">getMessage</span><span class="p">(),</span>
+                <span class="s1">&#39;trace&#39;</span> <span class="o">=&gt;</span> <span class="nv">$e</span><span class="o">-&gt;</span><span class="na">getTraceAsString</span><span class="p">()</span>
+            <span class="p">]);</span>
+
+            <span class="k">return</span> <span class="nx">response</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">json</span><span class="p">([</span>
+                <span class="s1">&#39;success&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">,</span>
+                <span class="s1">&#39;message&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Error interno del servidor&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;error&#39;</span> <span class="o">=&gt;</span> <span class="nv">$e</span><span class="o">-&gt;</span><span class="na">getMessage</span><span class="p">()</span>
+            <span class="p">],</span> <span class="mi">500</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="sd">/**</span>
+<span class="sd">     * Emitir factura de exportación específica</span>
+<span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">emitExport</span><span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">try</span> <span class="p">{</span>
+            <span class="nv">$organization</span> <span class="o">=</span> <span class="nx">Organization</span><span class="o">::</span><span class="na">find</span><span class="p">(</span><span class="nv">$request</span><span class="o">-&gt;</span><span class="na">organization_id</span><span class="p">);</span>
+
+            <span class="c1">// Llamada directa para factura de exportación</span>
+            <span class="nv">$result</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">alanubeDomService</span><span class="o">-&gt;</span><span class="na">emitExportInvoice</span><span class="p">(</span>
+                <span class="nv">$organization</span><span class="p">,</span>
+                <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">all</span><span class="p">()</span>
+            <span class="p">);</span>
+
+            <span class="k">return</span> <span class="nx">response</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">json</span><span class="p">(</span><span class="nv">$result</span><span class="p">);</span>
+
+        <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">\Exception</span> <span class="nv">$e</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="nx">response</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">json</span><span class="p">([</span>
+                <span class="s1">&#39;success&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">,</span>
+                <span class="s1">&#39;message&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Error emitiendo factura de exportación&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;error&#39;</span> <span class="o">=&gt;</span> <span class="nv">$e</span><span class="o">-&gt;</span><span class="na">getMessage</span><span class="p">()</span>
+            <span class="p">],</span> <span class="mi">500</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="job-asincrono">Job Asíncrono<a class="headerlink" href="#job-asincrono" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="cp">&lt;?php</span>
+
+<span class="k">namespace</span> <span class="nx">App\Jobs</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Illuminate\Bus\Queueable</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Illuminate\Contracts\Queue\ShouldQueue</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Illuminate\Foundation\Bus\Dispatchable</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Illuminate\Queue\InteractsWithQueue</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Illuminate\Queue\SerializesModels</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">App\Services\AlanubeDomService</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">App\Models\Organization</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">EmitInvoiceJob</span> <span class="k">implements</span> <span class="nx">ShouldQueue</span>
+<span class="p">{</span>
+    <span class="k">use</span> <span class="nx">Dispatchable</span><span class="p">,</span> <span class="nx">InteractsWithQueue</span><span class="p">,</span> <span class="nx">Queueable</span><span class="p">,</span> <span class="nx">SerializesModels</span><span class="p">;</span>
+
+    <span class="k">protected</span> <span class="nv">$organizationId</span><span class="p">;</span>
+    <span class="k">protected</span> <span class="nv">$invoiceData</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">(</span><span class="nx">int</span> <span class="nv">$organizationId</span><span class="p">,</span> <span class="k">array</span> <span class="nv">$invoiceData</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">organizationId</span> <span class="o">=</span> <span class="nv">$organizationId</span><span class="p">;</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">invoiceData</span> <span class="o">=</span> <span class="nv">$invoiceData</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">handle</span><span class="p">(</span><span class="nx">AlanubeDomService</span> <span class="nv">$service</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$organization</span> <span class="o">=</span> <span class="nx">Organization</span><span class="o">::</span><span class="na">find</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">organizationId</span><span class="p">);</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$organization</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nx">\Exception</span><span class="p">(</span><span class="s1">&#39;Organización no encontrada&#39;</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="c1">// Emisión con detección automática</span>
+        <span class="nv">$result</span> <span class="o">=</span> <span class="nv">$service</span><span class="o">-&gt;</span><span class="na">emitInvoice</span><span class="p">(</span><span class="nv">$organization</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">invoiceData</span><span class="p">);</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$result</span><span class="p">[</span><span class="s1">&#39;success&#39;</span><span class="p">])</span> <span class="p">{</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nx">\Exception</span><span class="p">(</span><span class="s1">&#39;Error emitiendo factura: &#39;</span> <span class="o">.</span> <span class="nv">$result</span><span class="p">[</span><span class="s1">&#39;message&#39;</span><span class="p">]);</span>
+        <span class="p">}</span>
+
+        <span class="c1">// Procesar resultado exitoso</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">processSuccessfulEmission</span><span class="p">(</span><span class="nv">$result</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">protected</span> <span class="k">function</span> <span class="nf">processSuccessfulEmission</span><span class="p">(</span><span class="k">array</span> <span class="nv">$result</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// Guardar en base de datos, enviar notificaciones, etc.</span>
+        <span class="nx">Log</span><span class="o">::</span><span class="na">info</span><span class="p">(</span><span class="s1">&#39;Factura emitida en job asíncrono&#39;</span><span class="p">,</span> <span class="p">[</span>
+            <span class="s1">&#39;encf&#39;</span> <span class="o">=&gt;</span> <span class="nv">$result</span><span class="p">[</span><span class="s1">&#39;encf&#39;</span><span class="p">],</span>
+            <span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="nv">$result</span><span class="p">[</span><span class="s1">&#39;document_type&#39;</span><span class="p">],</span>
+            <span class="s1">&#39;organization_id&#39;</span> <span class="o">=&gt;</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">organizationId</span>
+        <span class="p">]);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="precision-decimal">Precisión Decimal<a class="headerlink" href="#precision-decimal" title="Permanent link">&para;</a></h2>
+<h3 id="configuracion-interna">Configuración Interna<a class="headerlink" href="#configuracion-interna" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="x">protected $decimalPrecision = [</span>
+<span class="x">    &#39;items&#39; =&gt; 2,      // Líneas de ítems con 2 decimales</span>
+<span class="x">    &#39;totals&#39; =&gt; 2,     // Totales con 2 decimales  </span>
+<span class="x">    &#39;payments&#39; =&gt; 2,   // Pagos con 2 decimales</span>
+<span class="x">    &#39;taxes&#39; =&gt; 2,      // Impuestos con 2 decimales</span>
+<span class="x">];</span>
+</code></pre></div>
+<p>Todos los valores monetarios se formatean automáticamente con 2 decimales según los requerimientos de Alanube DOM.</p>
+<h2 id="mejores-practicas">Mejores Prácticas<a class="headerlink" href="#mejores-practicas" title="Permanent link">&para;</a></h2>
+<h3 id="1-deteccion-automatica-vs-manual">1. Detección Automática vs Manual<a class="headerlink" href="#1-deteccion-automatica-vs-manual" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="x">// Recomendado: Detección automática</span>
+<span class="x">$result = $service-&gt;emitInvoice($organization, $data);</span>
+
+<span class="x">// Solo si conoces el tipo exacto</span>
+<span class="x">$result = $service-&gt;emitExportInvoice($organization, $data);</span>
+</code></pre></div>
+<h3 id="2-manejo-de-respuestas">2. Manejo de Respuestas<a class="headerlink" href="#2-manejo-de-respuestas" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="x">// Verificar success antes de usar datos</span>
+<span class="x">if ($result[&#39;success&#39;]) {</span>
+<span class="x">    $encf = $result[&#39;encf&#39;];</span>
+<span class="x">    // Procesar datos...</span>
+<span class="x">} else {</span>
+<span class="x">    // Manejar error...</span>
+<span class="x">    Log::error(&#39;Error emisión&#39;, $result);</span>
+<span class="x">}</span>
+</code></pre></div>
+<h3 id="3-logging-y-monitoreo">3. Logging y Monitoreo<a class="headerlink" href="#3-logging-y-monitoreo" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="x">// El servicio incluye logging automático, pero puedes agregar más</span>
+<span class="x">Log::info(&#39;Iniciando emisión factura&#39;, [</span>
+<span class="x">    &#39;organization_id&#39; =&gt; $organization-&gt;id,</span>
+<span class="x">    &#39;data_keys&#39; =&gt; array_keys($invoiceData)</span>
+<span class="x">]);</span>
+
+<span class="x">$result = $service-&gt;emitInvoice($organization, $invoiceData);</span>
+
+<span class="x">Log::info(&#39;Resultado emisión&#39;, [</span>
+<span class="x">    &#39;success&#39; =&gt; $result[&#39;success&#39;],</span>
+<span class="x">    &#39;type_detected&#39; =&gt; $result[&#39;type_code&#39;] ?? null</span>
+<span class="x">]);</span>
+</code></pre></div>
+<h3 id="4-validacion-de-configuracion-pac">4. Validación de Configuración PAC<a class="headerlink" href="#4-validacion-de-configuracion-pac" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="x">// Verificar configuración antes de emitir</span>
+<span class="x">$pacConnection = $organization-&gt;pacConnection;</span>
+
+<span class="x">if (!$pacConnection || $pacConnection-&gt;pac_type !== &#39;alanube&#39;) {</span>
+<span class="x">    throw new \Exception(&#39;Configuración PAC Alanube requerida&#39;);</span>
+<span class="x">}</span>
+
+<span class="x">if (empty($pacConnection-&gt;token)) {</span>
+<span class="x">    throw new \Exception(&#39;Token PAC no configurado&#39;);</span>
+<span class="x">}</span>
+</code></pre></div>
+<h2 id="conclusiones">Conclusiones<a class="headerlink" href="#conclusiones" title="Permanent link">&para;</a></h2>
+<p>El <code>AlanubeDomService</code> proporciona:</p>
+<ul>
+<li><strong>Detección automática</strong> de tipos de documento</li>
+<li><strong>Validaciones específicas</strong> por tipo</li>
+<li><strong>Endpoints correctos</strong> automáticamente</li>
+<li><strong>Logging detallado</strong> para debugging</li>
+<li><strong>Manejo robusto</strong> de errores</li>
+<li><strong>Formateo automático</strong> de datos</li>
+<li><strong>Soporte completo</strong> para todos los tipos</li>
+</ul>
+<p><strong>Uso recomendado</strong>: Utilizar siempre <code>emitInvoice()</code> con detección automática para máxima flexibilidad y menor complejidad en el código cliente.</p>
+<hr />
+<p><strong>Fecha de creación</strong>: 2025-08-22<br />
+<strong>Versión</strong>: 1.0.0<br />
+<strong>Autor</strong>: DocuCenter Development Team<br />
+<strong>Última actualización</strong>: 2025-08-22</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/aghabrego/docucenter" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.highlight", "search.suggest"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
