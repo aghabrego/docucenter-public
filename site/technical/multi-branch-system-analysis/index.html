@@ -1,0 +1,4523 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentación técnica y de usuario de DocuCenter - Sistema de facturación electrónica">
+      
+      
+        <meta name="author" content="aghabrego">
+      
+      
+        <link rel="canonical" href="https://aghabrego.github.io/docucenter-public/technical/multi-branch-system-analysis/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="https://home.apconpanama.me/wp-content/uploads/2024/03/logo3.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Análisis del Sistema Multi-Sucursal con ID_compania - DocuCenter</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="light-blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#analisis-del-sistema-multi-sucursal-con-id_compania" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="DocuCenter" class="md-header__button md-logo" aria-label="DocuCenter" data-md-component="logo">
+      
+  <img src="https://home.apconpanama.me/wp-content/uploads/2024/03/logo3.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            DocuCenter
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Análisis del Sistema Multi-Sucursal con ID_compania
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="light-blue"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/aghabrego/docucenter-public" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    aghabrego/docucenter-public
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Pestañas" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Inicio
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../api/" class="md-tabs__link">
+          
+  
+  
+  APIs
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../optimizations/" class="md-tabs__link">
+          
+  
+  
+  Optimizaciones
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+  Documentación Técnica
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../validations/" class="md-tabs__link">
+          
+  
+  
+  Validaciones
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../testing/" class="md-tabs__link">
+          
+  
+  
+  Testing
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../integrations/" class="md-tabs__link">
+          
+  
+  
+  Integraciones
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="DocuCenter" class="md-nav__button md-logo" aria-label="DocuCenter" data-md-component="logo">
+      
+  <img src="https://home.apconpanama.me/wp-content/uploads/2024/03/logo3.png" alt="logo">
+
+    </a>
+    DocuCenter
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/aghabrego/docucenter-public" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    aghabrego/docucenter-public
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    APIs
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    APIs
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    APIs de DocuCenter
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Facturación Electrónica (FE)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Facturación Electrónica (FE)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/fe-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Facturación Electrónica (FE) - DocuCenter
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/acicloud-fe-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Facturación Electrónica - Integración ACICloud FE
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/document-emission-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Facturación Electrónica - Emisión de Documentos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/shopify-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Facturación Electrónica - Integración Shopify
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/lightspeed-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Facturación Electrónica - Integración Lightspeed
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/maxgym-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Facturación Electrónica - Integración Maxgym
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/meypar-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Facturación Electrónica - Integración Meypar
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/kart21-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Facturación Electrónica - Integración Kart21
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sage ACICloud
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Sage ACICloud
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/customers-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Sage ACICloud - Módulo Clientes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/products-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Productos - Sage ACICloud
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/sales-orders-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Sage ACICloud - Módulo Órdenes de Venta
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/purchases-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Compras - Sage ACICloud
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/payments-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Pagos y Créditos - Sage ACICloud
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/inventory-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Inventario - Sage ACICloud
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/jobs-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Trabajos/Jobs - Sage ACICloud
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Organizaciones
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Organizaciones
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/organizations/organizations-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API de Organizaciones
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Optimizaciones
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Optimizaciones
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optimizations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Optimizaciones - DocuCenter
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Performance
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Performance
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optimizations/customer-supplier-optimizations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Optimizaciones para el manejo de muchos clientes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optimizations/mysql-optimization-circuit-breaker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Optimización MySQL 8.0 y Circuit Breaker para DocuCenter
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Documentación Técnica
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Documentación Técnica
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Documentación Técnica - DocuCenter
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    QuickBooks
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    QuickBooks
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../quickbooks-webhook-organizationid-fix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fix: QuickBooks Webhook OrganizationId Duplicado
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../quickbooks-bills-job-graceful-validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fix: Validación Graceful de Tablas en CreateIntuitBillsJob
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../quickbooks-fiscal-number-validation-system/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sistema de Validación de Números Fiscales QuickBooks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MaxGym
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    MaxGym
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../maxgym-amount-calculation-fix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Corrección de Cálculo de Montos en MaxGym API
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Document AI
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Document AI
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../document-ai-import-to-workbench/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Document AI - Importación a Workbench
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../document-ai-import-implementation-summary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Document AI - Implementación Import to Workbench
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_5" id="__nav_4_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Alanube DOM
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Alanube DOM
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../alanube-dom-service-usage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guía de Uso del Servicio AlanubeDomService
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../alanube-dom-export-invoices/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Facturas de Exportación Electrónica (46) - Alanube DOM
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ALANUBE_DOM_COMPLETE_INTEGRATION/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integración Completa Alanube DOM - República Dominicana
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../FISCAL_CREDIT_IMPLEMENTATION_SUMMARY/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Implementación Completa de Facturas de Crédito Fiscal (31) - Alanube DOM
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_6" id="__nav_4_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Soluciones Técnicas
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Soluciones Técnicas
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ezeeissued-solution-summary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Solución Implementada - Campo EzeeIssued
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../getsaleproperty-optimizations-summary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Optimizaciones Completas - getSaleProperty() - Create.php
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ezeeissued-field-correction-summary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Corrección de Campo EzeeIssued - Resumen Técnico
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_7" id="__nav_4_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pagos y Cálculos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Pagos y Cálculos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../payment-calculation-fix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Análisis de Discrepancias en Cálculo de Pagos - Facturación Electrónica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../solucion-sincronizacion-pagos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Solución Final: Sincronización Completa de Pagos en Facturación Electrónica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_8" id="__nav_4_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SQL Server
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    SQL Server
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sql-server-complete-store-id-filtering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Implementación Completa de Filtrado por Store ID en Jobs SQL Server
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sql-server-store-id-filtering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Implementación de Filtrado por Store ID en STInvoiceJob
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validaciones
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Validaciones
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../validations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validaciones - DocuCenter
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Documentos Fiscales
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Documentos Fiscales
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../validations/createSale-ruc-validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validación de RUC en CreateSaleMaxgymRequest
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../validations/maxgym-ruc-validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validación de RUC en MaxgymService
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Testing
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Testing
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sistema de Testing DocuCenter
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_2" id="__nav_6_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reportes de Error
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Reportes de Error
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../testing/PLUSMOVIL-PRODUCTION-ERROR-REPORT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reporte Error PlusMóvil Producción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integraciones
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Integraciones
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../integrations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integraciones Disponibles
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_2" id="__nav_7_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PlusMóvil
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    PlusMóvil
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../integrations/plusmovil-implementation-summary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resumen Implementación
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../integrations/plusmovil-implementation-analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Análisis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../integrations/plusmovil-api-testing-results/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resultados Testing API
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../integrations/plusmovil-continuation-plan/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plan Continuación
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../integrations/plusmovil-next-steps/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Próximos Pasos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#indice" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Índice
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#contexto-general" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Contexto General
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#arquitectura-actual" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Arquitectura Actual
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Arquitectura Actual">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#estructura-de-base-de-datos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Estructura de Base de Datos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#flujo-de-conexion-correcto-propuesto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Flujo de Conexión Correcto (Propuesto)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#relaciones-clave" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Relaciones Clave
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Relaciones Clave">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#relacion-correcta-flujo-propuesto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Relación CORRECTA (Flujo Propuesto)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modelo-de-datos-actualizado-flujo-correcto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Modelo de Datos Actualizado (Flujo Correcto)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relacion-organizacion-sucursal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Relación Organización → Sucursal
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#modelos-con-id_compania" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Modelos con ID_compania
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Modelos con ID_compania">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#inventario-de-tablas-43-tablas-en-total" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inventario de Tablas (43 tablas en total)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Inventario de Tablas (43 tablas en total)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#con-filtrado-implementado-7-modelos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Con Filtrado Implementado (7 modelos)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sin-filtrado-36-modelos-pendientes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sin Filtrado (36+ modelos pendientes)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#problema-identificado-actualizado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Problema Identificado - ACTUALIZADO
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Problema Identificado - ACTUALIZADO">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#aclaracion-importante" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ACLARACIÓN IMPORTANTE
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problema-real-consolidacion-para-sage-connector" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Problema Real: Consolidación para Sage Connector
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#escenario-problematico-anterior-descartado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Escenario Problemático ANTERIOR (Descartado)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="analisis-del-sistema-multi-sucursal-con-id_compania">Análisis del Sistema Multi-Sucursal con ID_compania<a class="headerlink" href="#analisis-del-sistema-multi-sucursal-con-id_compania" title="Permanent link">&para;</a></h1>
+<p><strong>Fecha:</strong> 3 de diciembre de 2025<br />
+<strong>Versión:</strong> 1.0<br />
+<strong>Estado:</strong> Análisis para Implementación</p>
+<hr />
+<h2 id="indice">Índice<a class="headerlink" href="#indice" title="Permanent link">&para;</a></h2>
+<ol>
+<li><a href="#contexto-general">Contexto General</a></li>
+<li><a href="#arquitectura-actual">Arquitectura Actual</a></li>
+<li><a href="#relaciones-clave">Relaciones Clave</a></li>
+<li><a href="#modelos-con-id_compania">Modelos con ID_compania</a></li>
+<li><a href="#problema-identificado">Problema Identificado</a></li>
+<li><a href="#soluciones-propuestas">Soluciones Propuestas</a></li>
+<li><a href="#plan-de-implementación">Plan de Implementación</a></li>
+</ol>
+<hr />
+<h2 id="contexto-general">Contexto General<a class="headerlink" href="#contexto-general" title="Permanent link">&para;</a></h2>
+<p>DocuCenter maneja un sistema multi-tenant donde:
+- Una <strong>Empresa/Matriz</strong> (CompanySession) puede tener múltiples <strong>Organizaciones</strong>
+- Cada <strong>Organización</strong> tiene su propia base de datos
+- Dentro de cada base de datos, existen múltiples <strong>Sucursales</strong> identificadas por <code>ID_compania</code>
+- Una organización puede gestionar múltiples sucursales de la misma empresa</p>
+<p><strong>Caso de Uso Real:</strong>
+- Empresa: "Restaurantes XYZ S.A." (CompanySession con ID_compania: 100)
+  - Organización 1: "RXY Regional Centro" (BD: rest_centro)
+    - Sucursal 1: Local Centro (ID_compania: 1)
+    - Sucursal 2: Local Plaza (ID_compania: 2)
+  - Organización 2: "RXY Regional Norte" (BD: rest_norte)
+    - Sucursal 3: Local Norte (ID_compania: 3)
+    - Sucursal 4: Local Costa (ID_compania: 4)
+  - Organización 3: "RXY Regional Sur" (BD: rest_sur)
+    - Sucursal 5: Local Sur (ID_compania: 5)</p>
+<hr />
+<h2 id="arquitectura-actual">Arquitectura Actual<a class="headerlink" href="#arquitectura-actual" title="Permanent link">&para;</a></h2>
+<h3 id="estructura-de-base-de-datos">Estructura de Base de Datos<a class="headerlink" href="#estructura-de-base-de-datos" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>  Base de Datos Principal (mysql)       
+
+  - organizations                        
+  - users                                
+  - user_organizations                   
+  - CompanySession (PRINCIPAL)        
+    &gt; Modelo Companysession lee AQUÍ  
+
+
+                     Cada org tiene su BD
+
+
+  Base de Datos Organización             
+  (ej: 9_734_1672_56)                   
+
+  - CompanySession (copia del stub)      
+    &gt; ID_compania (datos locales)     
+
+  - Customers_Imp (ID_compania)          
+  - Sales_Header_Imp (ID_compania)       
+  - Products_Imp (ID_compania)           
+  - ... (43+ tablas más)                 
+</code></pre></div>
+<p><strong>IMPORTANTE - Dualidad de CompanySession:</strong></p>
+<p>La tabla <code>CompanySession</code> existe en DOS ubicaciones:</p>
+<ol>
+<li><strong>Base de Datos Principal (<code>mysql</code>):</strong></li>
+<li>Tabla centralizada para gestión</li>
+<li><strong>El modelo <code>Companysession</code> SIEMPRE lee de aquí</strong></li>
+<li>Usa <code>setDefaultConnection()</code> en constructor</li>
+<li>
+<p>Relación: <code>organizations()</code> via <code>id_empresa</code></p>
+</li>
+<li>
+<p><strong>Base de Datos de cada Organización:</strong></p>
+</li>
+<li>Creada desde <code>CompanySession.sql.stub</code></li>
+<li>Copia local con datos específicos</li>
+<li><strong>NO es consultada por el modelo Eloquent</strong></li>
+<li>Posiblemente para importación/exportación de datos</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="x">// app/Models/Companysession.php</span>
+<span class="x">public function __construct(array $attributes = [])</span>
+<span class="x">{</span>
+<span class="x">    parent::__construct($attributes);</span>
+
+<span class="x">    // SIEMPRE usa BD principal</span>
+<span class="x">    $this-&gt;setDefaultConnection();</span>
+<span class="x">}</span>
+</code></pre></div>
+<h3 id="flujo-de-conexion-correcto-propuesto">Flujo de Conexión Correcto (Propuesto)<a class="headerlink" href="#flujo-de-conexion-correcto-propuesto" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="x">// 1. Usuario se autentica</span>
+<span class="x">User::find(1)</span>
+
+<span class="x">// 2. Obtiene la organización actual</span>
+<span class="x">→ UserOrganizations</span>
+<span class="x">  → Organization (id: 25, nombre: &quot;RXY Regional Centro&quot;, database: &quot;9_734_1672_56&quot;)</span>
+
+<span class="x">// 3. Cambia a la BD de la organización</span>
+<span class="x">DB::connection()-&gt;useDatabase(&quot;9_734_1672_56&quot;)</span>
+
+<span class="x">// 4. La BD contiene datos de MÚLTIPLES sucursales</span>
+<span class="x">→ CompanySession (registros con ID_compania: 1, 2, 3, 4, 5)</span>
+<span class="x">  → Customers_Imp (mezclados: ID_compania 1, 2, 3, 4, 5)</span>
+<span class="x">  → Sales_Header_Imp (mezclados: ID_compania 1, 2, 3, 4, 5)</span>
+
+<span class="x">// 5. PROBLEMA ACTUAL: Usuario ve TODOS los datos mezclados</span>
+<span class="x">// 6. SOLUCIÓN: Filtrar por las sucursales asignadas al usuario</span>
+</code></pre></div>
+<hr />
+<h2 id="relaciones-clave">Relaciones Clave<a class="headerlink" href="#relaciones-clave" title="Permanent link">&para;</a></h2>
+<h3 id="relacion-correcta-flujo-propuesto">Relación CORRECTA (Flujo Propuesto)<a class="headerlink" href="#relacion-correcta-flujo-propuesto" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>CompanySession (BD Principal)
+    &gt; ID_compania: 100 (Empresa/Matriz &quot;Restaurantes XYZ S.A.&quot;)
+    &gt; CompanyNameSage50: &quot;Restaurantes XYZ S.A.&quot;
+    &gt; organizations() → hasMany (UNA EMPRESA = MUCHAS ORGANIZACIONES)
+          &gt; Organization 1: &quot;RXY Regional Centro&quot; (BD: rest_centro)
+          &gt; Organization 2: &quot;RXY Regional Norte&quot; (BD: rest_norte)
+          &gt; Organization 3: &quot;RXY Regional Sur&quot; (BD: rest_sur)
+
+Organization (BD Principal)
+    &gt; id: 25
+    &gt; nombre: &quot;RXY Regional Centro&quot;
+    &gt; database: &quot;9_734_1672_56&quot;
+    &gt; id_empresa: 100 (FK a CompanySession - Empresa Matriz)
+    &gt; belongsTo(Companysession) → Empresa Matriz
+
+Dentro de BD Organización (9_734_1672_56):
+    &gt; CompanySession (UN SOLO ID_compania por organización)
+         &gt; ID_compania: 100 (la organización pertenece a esta compañía)
+    &gt; CompanySession (múltiples registros)
+         &gt; ID_compania: 1 (Sucursal Centro)
+         &gt; ID_compania: 2 (Sucursal Plaza)
+         &gt; ID_compania: 3 (Sucursal Mall)
+
+    &gt; Customers_Imp
+         &gt; Record 1: ID_compania = 1 (clientes de Sucursal Centro)
+         &gt; Record 2: ID_compania = 2 (clientes de Sucursal Plaza)
+         &gt; Record 3: ID_compania = 3 (clientes de Sucursal Mall)
+
+    &gt; Sales_Header_Imp (ventas mezcladas de todas las sucursales)
+
+**IMPORTANTE:** 
+- UNA EMPRESA (CompanySession en BD principal) = MUCHAS ORGANIZACIONES
+- UNA ORGANIZACIÓN (con su BD) = MUCHAS SUCURSALES (ID_compania en su BD)
+- Usuario debe ver solo las sucursales que le fueron asignadas
+</code></pre></div>
+<h3 id="modelo-de-datos-actualizado-flujo-correcto">Modelo de Datos Actualizado (Flujo Correcto)<a class="headerlink" href="#modelo-de-datos-actualizado-flujo-correcto" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>CompanySession (BD Principal) - Empresas Matriz
+  &gt; ID_compania: 100 (&quot;Restaurantes XYZ S.A.&quot;)
+        &gt; hasMany Organizations
+              &gt; Organization 1 (id_empresa: 100, BD: rest_centro)
+              &gt; Organization 2 (id_empresa: 100, BD: rest_norte)
+              &gt; Organization 3 (id_empresa: 100, BD: rest_sur)
+
+User (BD Principal)
+  &gt; UserOrganizations (N organizaciones)
+
+        &gt; Organization 1: &quot;RXY Regional Centro&quot; (BD: rest_centro)
+             &gt; id_empresa: 100 (Empresa Matriz)
+             &gt; Dentro de BD rest_centro:
+                   &gt; CompanySession: ID_compania 1, 2, 3
+                   &gt; Customers_Imp: mezclado (ID_compania 1,2,3)
+                   &gt; Sales_Header_Imp: mezclado (ID_compania 1,2,3)
+
+        &gt; Organization 2: &quot;RXY Regional Norte&quot; (BD: rest_norte)
+             &gt; id_empresa: 100 (Empresa Matriz)
+             &gt; Dentro de BD rest_norte:
+                   &gt; CompanySession: ID_compania 4, 5
+                   &gt; Customers_Imp: mezclado (ID_compania 4,5)
+                   &gt; Sales_Header_Imp: mezclado (ID_compania 4,5)
+
+        &gt; Organization 3: &quot;RXY Regional Sur&quot; (BD: rest_sur)
+              &gt; id_empresa: 100 (Empresa Matriz)
+              &gt; Dentro de BD rest_sur:
+                    &gt; CompanySession: ID_compania 6, 7, 8
+                    &gt; Customers_Imp: mezclado (ID_compania 6,7,8)
+                    &gt; Sales_Header_Imp: mezclado (ID_compania 6,7,8)
+
+**NUEVO REQUERIMIENTO:**
+User debe tener asignación de sucursales específicas:
+  - Juan puede ver: Org 1 (sucursales 1,2) + Org 2 (sucursal 4)
+  - María puede ver: Org 1 (sucursal 3) + Org 3 (sucursales 6,7)
+</code></pre></div>
+<h3 id="relacion-organizacion-sucursal">Relación Organización → Sucursal<a class="headerlink" href="#relacion-organizacion-sucursal" title="Permanent link">&para;</a></h3>
+<p><strong>En BD Principal (<code>organizations</code>):</strong>
+<div class="highlight"><pre><span></span><code><span class="x">class Organization extends Model</span>
+<span class="x">{</span>
+<span class="x">    protected $fillable = [</span>
+<span class="x">        &#39;id&#39;,           // 25</span>
+<span class="x">        &#39;nombre&#39;,       // &quot;Restaurante XYZ - Sucursal Centro&quot;</span>
+<span class="x">        &#39;database&#39;,     // &quot;9_734_1672_56&quot;</span>
+<span class="x">        &#39;id_empresa&#39;,   // 100 → FK a CompanySession.ID_compania</span>
+<span class="x">    ];</span>
+
+<span class="x">    public function company()</span>
+<span class="x">    {</span>
+<span class="x">        // Cambia a BD específica y busca por ID_compania</span>
+<span class="x">        return $this-&gt;belongsTo(Companysession::class, &#39;id_empresa&#39;, &#39;ID_compania&#39;);</span>
+<span class="x">    }</span>
+<span class="x">}</span>
+</code></pre></div></p>
+<p><strong>En BD Principal (<code>CompanySession</code>):</strong>
+<div class="highlight"><pre><span></span><code><span class="x">class Companysession extends Model</span>
+<span class="x">{</span>
+<span class="x">    protected $table = &#39;CompanySession&#39;;</span>
+
+<span class="x">    protected $fillable = [</span>
+<span class="x">        &#39;ID_compania&#39;,      // 100 (identificador de sucursal)</span>
+<span class="x">        &#39;CompanyNameSage50&#39; // &quot;Restaurante XYZ - Centro&quot;</span>
+<span class="x">    ];</span>
+
+<span class="x">    /**</span>
+<span class="x">     * SIEMPRE usa la base de datos principal</span>
+<span class="x">     */</span>
+<span class="x">    public function __construct(array $attributes = [])</span>
+<span class="x">    {</span>
+<span class="x">        parent::__construct($attributes);</span>
+
+<span class="x">        // Forzar conexión a BD principal (mysql)</span>
+<span class="x">        $this-&gt;setDefaultConnection();</span>
+<span class="x">    }</span>
+
+<span class="x">    public function organizations()</span>
+<span class="x">    {</span>
+<span class="x">        // UNA sucursal puede estar asociada a UNA organización</span>
+<span class="x">        return $this-&gt;hasMany(Organization::class, &#39;id_empresa&#39;, &#39;ID_compania&#39;);</span>
+<span class="x">    }</span>
+<span class="x">}</span>
+</code></pre></div></p>
+<p><strong>ACLARACIONES IMPORTANTES:</strong></p>
+<ol>
+<li><strong>Modelo de Relaciones Correcto:</strong></li>
+<li><strong>1 CompanySession (BD Principal)</strong> = 1 Empresa Matriz</li>
+<li><strong>1 Empresa Matriz</strong> → hasMany <strong>Organizaciones</strong> (N)</li>
+<li><strong>1 Organización</strong> → belongsTo <strong>Empresa Matriz</strong> (1)</li>
+<li>
+<p><strong>1 Organización (BD propia)</strong> → Contiene <strong>N Sucursales</strong> (ID_compania)</p>
+</li>
+<li>
+<p><strong>Dualidad de CompanySession:</strong></p>
+</li>
+<li><strong>BD Principal:</strong> CompanySession almacena las empresas matriz<ul>
+<li>Modelo Eloquent lee de aquí (setDefaultConnection)</li>
+<li>Gestión centralizada</li>
+</ul>
+</li>
+<li>
+<p><strong>BD de Organización:</strong> CompanySession almacena sucursales locales</p>
+<ul>
+<li>Creada desde stub, contiene múltiples ID_compania</li>
+<li>Datos operativos de cada sucursal</li>
+<li>NO consultada por modelo Eloquent Companysession</li>
+</ul>
+</li>
+<li>
+<p><strong>Problema Actual:</strong></p>
+</li>
+<li>Usuario con acceso a una Organización ve TODAS las sucursales mezcladas</li>
+<li>Falta filtrado por sucursales asignadas al usuario</li>
+<li>
+<p>Necesidad: Tabla intermedia user-branch o campo JSON en user_organizations</p>
+</li>
+<li>
+<p><strong>Solución Propuesta:</strong></p>
+</li>
+<li>Agregar asignación de sucursales por usuario</li>
+<li>Filtrar automáticamente por sucursales permitidas</li>
+<li>Mantener flexibilidad para reportes consolidados</li>
+</ol>
+<hr />
+<h2 id="modelos-con-id_compania">Modelos con ID_compania<a class="headerlink" href="#modelos-con-id_compania" title="Permanent link">&para;</a></h2>
+<h3 id="inventario-de-tablas-43-tablas-en-total">Inventario de Tablas (43 tablas en total)<a class="headerlink" href="#inventario-de-tablas-43-tablas-en-total" title="Permanent link">&para;</a></h3>
+<h4 id="con-filtrado-implementado-7-modelos">Con Filtrado Implementado (7 modelos)<a class="headerlink" href="#con-filtrado-implementado-7-modelos" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Modelo</th>
+<th>Scope</th>
+<th>Método</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>CustomersImp</code></td>
+<td><code>AddLocalFilterItems</code></td>
+<td><code>whereIn('ID_compania', $companiesIds)</code></td>
+</tr>
+<tr>
+<td><code>VendorsImp</code></td>
+<td><code>AddLocalFilterItems</code></td>
+<td><code>whereIn('ID_compania', $companiesIds)</code></td>
+</tr>
+<tr>
+<td><code>ProductsImp</code></td>
+<td><code>AddLocalFilterItems</code></td>
+<td><code>whereIn('ID_compania', $companiesIds)</code></td>
+</tr>
+<tr>
+<td><code>JobsImp</code></td>
+<td><code>AddLocalFilterItems</code></td>
+<td><code>whereIn('ID_compania', $companiesIds)</code></td>
+</tr>
+<tr>
+<td><code>JobsExp</code></td>
+<td><code>AddLocalFilterItems</code></td>
+<td><code>whereIn('ID_Compania', $companiesIds)</code></td>
+</tr>
+<tr>
+<td><code>GJEHeaderImp</code></td>
+<td><code>AddLocalFilterItems</code></td>
+<td><code>whereIn('ID_compania', $companiesIds)</code></td>
+</tr>
+<tr>
+<td><code>CustomerCreditMemoHeaderImp</code></td>
+<td><code>AddLocalFilterItems</code></td>
+<td><code>whereIn('ID_compania', $companiesIds)</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Ejemplo de implementación:</strong>
+<div class="highlight"><pre><span></span><code><span class="x">public function scopeAddLocalFilterItems(Builder $query, Request $request)</span>
+<span class="x">{</span>
+<span class="x">    $companiesIds = OrganizationFacade::getCompanyIds();</span>
+<span class="x">    $query-&gt;whereIn(&#39;ID_compania&#39;, $companiesIds);</span>
+<span class="x">    return $query;</span>
+<span class="x">}</span>
+</code></pre></div></p>
+<h4 id="sin-filtrado-36-modelos-pendientes">Sin Filtrado (36+ modelos pendientes)<a class="headerlink" href="#sin-filtrado-36-modelos-pendientes" title="Permanent link">&para;</a></h4>
+<p><strong>Ventas:</strong>
+- <code>SalesHeaderImp</code>
+- <code>SalesDetailImp</code>
+- <code>SalesDetailImpDiscounts</code>
+- <code>SalesOrderHeaderImp</code>
+- <code>SalesOrderDetailImp</code>
+- <code>SalesOrderHeaderExp</code>
+- <code>SalesOrderDetailExp</code>
+- <code>SalesInvoiceHeaderExp</code>
+- <code>SalesInvoiceDetailExp</code></p>
+<p><strong>Compras:</strong>
+- <code>PurchaseHeaderImp</code>
+- <code>PurchaseDetailImp</code>
+- <code>PurchaseHeaderExp</code>
+- <code>PurchaseDetailExp</code>
+- <code>PurOrdrHeaderExp</code>
+- <code>PurOrdrDetailExp</code></p>
+<p><strong>Pagos y Recibos:</strong>
+- <code>CustomerReceiptHeaderImp</code>
+- <code>CustomerReceiptDetailImp</code>
+- <code>VendorPaymentHeaderImp</code>
+- <code>VendorPaymentDetailImp</code></p>
+<p><strong>Facturación Electrónica:</strong>
+- <code>FeHeader</code>
+- <code>FeDetail</code>
+- <code>FePayment</code></p>
+<p><strong>Catálogos:</strong>
+- <code>CustomersExp</code>
+- <code>VendorsExp</code>
+- <code>ProductsExp</code>
+- <code>ChartExp</code></p>
+<p><strong>Jobs y Contabilidad:</strong>
+- <code>JobPhasesExp</code>
+- <code>JobCostCodesExp</code>
+- <code>SalesRepresentativeExp</code></p>
+<p><strong>Inventario:</strong>
+- <code>InventoryAdjustImp</code></p>
+<p><strong>Otros:</strong>
+- <code>GJEDetailImp</code>
+- <code>SageConnectTransferSummary</code></p>
+<hr />
+<h2 id="problema-identificado-actualizado">Problema Identificado - ACTUALIZADO<a class="headerlink" href="#problema-identificado-actualizado" title="Permanent link">&para;</a></h2>
+<h3 id="aclaracion-importante">ACLARACIÓN IMPORTANTE<a class="headerlink" href="#aclaracion-importante" title="Permanent link">&para;</a></h3>
+<p><strong>ARQUITECTURA REAL (Confirmada):</strong></p>
+<p>Cada organización tiene <strong>UN SOLO ID_compania</strong> en su base de datos, NO múltiples:</p>
+<div class="highlight"><pre><span></span><code>BD Organización (9_734_1672_56):
+  &gt; CompanySession (ID_compania: 100)  ← UN SOLO VALOR
+  &gt; Customers_Imp (todos con ID_compania: 100)
+  &gt; Sales_Header_Imp (todos con ID_compania: 100)
+</code></pre></div>
+<p><strong>NO es como se documentó inicialmente:</strong>
+<div class="highlight"><pre><span></span><code>INCORRECTO:
+BD Organización (9_734_1672_56):
+  &gt; CompanySession (ID_compania: 1, 2, 3)  ← Múltiples valores
+  &gt; Datos mezclados de varias sucursales
+</code></pre></div></p>
+<h3 id="problema-real-consolidacion-para-sage-connector">Problema Real: Consolidación para Sage Connector<a class="headerlink" href="#problema-real-consolidacion-para-sage-connector" title="Permanent link">&para;</a></h3>
+<p><strong>Limitación de Sage:</strong>
+- Sage Connector solo puede conectarse a <strong>UNA base de datos</strong>
+- Solo puede trabajar con <strong>UN solo ID_compania</strong></p>
+<p><strong>Problema Actual:</strong>
+<div class="highlight"><pre><span></span><code>Compañía 100 tiene 3 organizaciones:
+  - Org 1: BD rest_centro (ID_compania: 100)
+  - Org 2: BD rest_norte (ID_compania: 100)
+  - Org 3: BD rest_sur (ID_compania: 100)
+
+Sage NO puede acceder a las 3 BDs simultáneamente
+Necesita UNA BD consolidada con TODOS los datos
+</code></pre></div></p>
+<p><strong>Solución Propuesta:</strong>
+<div class="highlight"><pre><span></span><code>BD Company_100 (nueva - consolidada)
+  &gt; Customers_Imp (de Org 1 + Org 2 + Org 3)
+  &gt; Sales_Header_Imp (de Org 1 + Org 2 + Org 3)
+  &gt; org_source_id (identifica de qué org vino cada registro)
+
+Sage se conecta AQUÍ y ve TODO consolidado
+</code></pre></div></p>
+<p>Ver análisis completo en: <a href="../database-replication-analysis/">database-replication-analysis.md</a></p>
+<h3 id="escenario-problematico-anterior-descartado">Escenario Problemático ANTERIOR (Descartado)<a class="headerlink" href="#escenario-problematico-anterior-descartado" title="Permanent link">&para;</a></h3>
+<p><strong>NOTA:</strong> Esta sección ya NO aplica porque cada org tiene UN solo ID_compania</p>
+<details>
+<summary>Ver escenario anterior (solo referencia histórica)</summary>
+
+**Situación Anterior (incorrecta):**
+<div class="highlight"><pre><span></span><code>Usuario: Juan
+Organizaciones asignadas:
+  - Org 1: &quot;RXY Regional Centro&quot;  → BD: rest_centro
+    * Contiene sucursales: 1, 2, 3 (ID_compania)
+  - Org 2: &quot;RXY Regional Norte&quot;   → BD: rest_norte
+    * Contiene sucursales: 4, 5 (ID_compania)
+
+Problema asumido (NO real):
+  Juan selecciona Org 1 en el header
+  Sistema cambia a BD rest_centro
+  Al consultar Sales_Header_Imp ve TODAS las ventas:
+    - Ventas de sucursal 1 
+    - Ventas de sucursal 2 
+    - Ventas de sucursal 3 
+
+  Pero Juan solo debería ver:
+    - Ventas de sucursal 1 (asignada)
+    - Ventas de sucursal 2 (asignada)
+    NO la sucursal 3 (no asignada)
+
+Escenario Deseado:
+  Juan tiene asignadas específicamente:
+    - Org 1: sucursales 1, 2 (NO la 3)
+    - Org 2: sucursal 4 (NO la 5)
+
+  Filtrado automático:
+    WHERE ID_compania IN (1, 2) cuando usa Org 1
+    WHERE ID_compania IN (4) cuando usa Org 2
+</code></pre></div>
+
+### Código Actual vs Deseado
+
+**Código Actual:**
+<div class="highlight"><pre><span></span><code><span class="x">// En SalesHeaderImp (sin filtrado)</span>
+<span class="x">SalesHeaderImp::all();</span>
+<span class="x">// Retorna: TODAS las ventas de TODAS las sucursales en la BD</span>
+<span class="x">// Problema: Usuario ve sucursales no asignadas</span>
+
+<span class="x">// Ejemplo: BD rest_centro tiene sucursales 1,2,3</span>
+<span class="x">// Usuario solo tiene asignadas: 1,2</span>
+<span class="x">// Pero ve también las ventas de sucursal 3 </span>
+</code></pre></div>
+
+**Código Deseado:**
+<div class="highlight"><pre><span></span><code><span class="x">// Con filtrado automático</span>
+<span class="x">SalesHeaderImp::all();</span>
+<span class="x">// Retorna: Solo ventas de sucursales asignadas al usuario</span>
+
+<span class="x">// Ejemplo: BD rest_centro tiene sucursales 1,2,3</span>
+<span class="x">// Usuario tiene asignadas: 1,2</span>
+<span class="x">// Query automático: WHERE ID_compania IN (1, 2)</span>
+<span class="x">// Solo ve ventas de sucursales 1 y 2 </span>
+</code></pre></div>
+
+### Flujo Incorrecto Actual
+
+<div class="highlight"><pre><span></span><code>1. Usuario Juan tiene 2 organizaciones
+   &gt; Org 1: rest_centro (sucursales 1,2,3)
+   &gt; Org 2: rest_norte (sucursales 4,5)
+
+2. Juan selecciona Org 1 en el header
+   &gt; Sistema: DB::useDatabase(&#39;rest_centro&#39;)
+
+3. Query sin filtrado:
+   &gt; SalesHeaderImp::all()
+   &gt; PROBLEMA: Retorna TODAS las ventas (ID_compania 1,2,3)
+   &gt; Juan no debería ver sucursal 3
+
+4. Método actual getCompanyIds() no ayuda:
+   &gt; Retorna [100] (ID empresa matriz de BD principal)
+   &gt; No distingue entre sucursales de la BD organizacional
+</code></pre></div>
+
+### Flujo Correcto Propuesto
+
+<div class="highlight"><pre><span></span><code>1. Usuario Juan tiene 2 organizaciones CON sucursales asignadas
+   &gt; Org 1: rest_centro
+        &gt; Sucursales asignadas: [1, 2] (NO la 3)
+   &gt; Org 2: rest_norte
+        &gt; Sucursales asignadas: [4] (NO la 5)
+
+2. Juan selecciona Org 1 en el header
+   &gt; Sistema: DB::useDatabase(&#39;rest_centro&#39;)
+   &gt; Carga: assigned_branches = [1, 2]
+
+3. Query con filtrado automático:
+   &gt; SalesHeaderImp::all()
+   &gt; CompanyIdFilterScope aplica:
+        WHERE ID_compania IN (1, 2)
+   &gt; CORRECTO: Solo ventas de sucursales 1 y 2
+
+4. Método mejorado getBranchIds():
+   &gt; Retorna [1, 2] (sucursales asignadas en org actual)
+   &gt; Filtrado granular por sucursal
+</code></pre></div>
+
+---
+
+## Soluciones Propuestas
+
+### Solución Recomendada: Sistema de Asignación de Sucursales
+
+**Concepto Actualizado:**
+- **SÍ necesitamos** tabla intermedia usuario-organización-sucursales
+- 1 Organización (BD propia) = N Sucursales (múltiples ID_compania)
+- Usuario tiene acceso a organizaciones Y sucursales específicas dentro de cada org
+- Filtrar por los `ID_compania` asignados al usuario en la organización actual
+
+**Opciones de Implementación:**
+
+#### Opción A: Tabla Intermedia Dedicada (Recomendada)
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">user_organization_branches</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">BIGINT</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="n">AUTO_INCREMENT</span><span class="p">,</span>
+<span class="w">    </span><span class="n">user_id</span><span class="w"> </span><span class="nb">BIGINT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">organization_id</span><span class="w"> </span><span class="nb">BIGINT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
+<span class="w">    </span><span class="n">branch_id</span><span class="w"> </span><span class="nb">INT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w"> </span><span class="c1">-- ID_compania</span>
+<span class="w">    </span><span class="n">created_at</span><span class="w"> </span><span class="k">TIMESTAMP</span><span class="p">,</span>
+<span class="w">    </span><span class="n">updated_at</span><span class="w"> </span><span class="k">TIMESTAMP</span><span class="p">,</span>
+<span class="w">    </span><span class="k">UNIQUE</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">user_id</span><span class="p">,</span><span class="w"> </span><span class="n">organization_id</span><span class="p">,</span><span class="w"> </span><span class="n">branch_id</span><span class="p">),</span>
+<span class="w">    </span><span class="k">FOREIGN</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">user_id</span><span class="p">)</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">users</span><span class="p">(</span><span class="n">id</span><span class="p">),</span>
+<span class="w">    </span><span class="k">FOREIGN</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">organization_id</span><span class="p">)</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">organizations</span><span class="p">(</span><span class="n">id</span><span class="p">)</span>
+<span class="p">);</span>
+</code></pre></div>
+
+#### Opción B: Columna JSON en organizations_user
+<div class="highlight"><pre><span></span><code><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">organizations_user</span><span class="w"> </span>
+<span class="k">ADD</span><span class="w"> </span><span class="k">COLUMN</span><span class="w"> </span><span class="n">assigned_branches</span><span class="w"> </span><span class="n">JSON</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="k">NULL</span><span class="p">;</span>
+
+<span class="c1">-- Ejemplo de datos:</span>
+<span class="c1">-- assigned_branches: [1, 2, 5] -- IDs de sucursales permitidas</span>
+</code></pre></div>
+
+### 1⃣ Crear Tabla/Columna para Asignación de Sucursales
+
+**Opción A - Tabla Dedicada:**
+<div class="highlight"><pre><span></span><code><span class="x">// database/migrations/2025_12_03_create_user_organization_branches_table.php</span>
+<span class="x">Schema::create(&#39;user_organization_branches&#39;, function (Blueprint $table) {</span>
+<span class="x">    $table-&gt;id();</span>
+<span class="x">    $table-&gt;foreignId(&#39;user_id&#39;)-&gt;constrained()-&gt;onDelete(&#39;cascade&#39;);</span>
+<span class="x">    $table-&gt;foreignId(&#39;organization_id&#39;)-&gt;constrained()-&gt;onDelete(&#39;cascade&#39;);</span>
+<span class="x">    $table-&gt;integer(&#39;branch_id&#39;); // ID_compania</span>
+<span class="x">    $table-&gt;timestamps();</span>
+
+<span class="x">    $table-&gt;unique([&#39;user_id&#39;, &#39;organization_id&#39;, &#39;branch_id&#39;]);</span>
+<span class="x">});</span>
+</code></pre></div>
+
+**Opción B - Columna JSON:**
+<div class="highlight"><pre><span></span><code><span class="x">// database/migrations/2025_12_03_add_assigned_branches_to_organizations_user.php</span>
+<span class="x">Schema::table(&#39;organizations_user&#39;, function (Blueprint $table) {</span>
+<span class="x">    $table-&gt;json(&#39;assigned_branches&#39;)-&gt;nullable()-&gt;after(&#39;organization_id&#39;);</span>
+<span class="x">});</span>
+</code></pre></div>
+
+### 2⃣ Modificar OrganizationService
+
+<div class="highlight"><pre><span></span><code><span class="x">// app/Services/OrganizationService.php</span>
+
+<span class="x">/**</span>
+<span class="x"> * Obtiene los ID_compania (sucursales) asignadas al usuario</span>
+<span class="x"> * en la organización actual</span>
+<span class="x"> * </span>
+<span class="x"> * @return array</span>
+<span class="x"> */</span>
+<span class="x">public function getAssignedBranchIds(): array</span>
+<span class="x">{</span>
+<span class="x">    $organization = $this-&gt;getOrganization();</span>
+<span class="x">    $user = auth()-&gt;user();</span>
+
+<span class="x">    if (!$organization || !$user) {</span>
+<span class="x">        return [];</span>
+<span class="x">    }</span>
+
+<span class="x">    // Opción A: Desde tabla dedicada</span>
+<span class="x">    $branches = \DB::table(&#39;user_organization_branches&#39;)</span>
+<span class="x">        -&gt;where(&#39;user_id&#39;, $user-&gt;id)</span>
+<span class="x">        -&gt;where(&#39;organization_id&#39;, $organization-&gt;id)</span>
+<span class="x">        -&gt;pluck(&#39;branch_id&#39;)</span>
+<span class="x">        -&gt;toArray();</span>
+
+<span class="x">    // Opción B: Desde columna JSON</span>
+<span class="x">    // $pivot = $user-&gt;organizations()</span>
+<span class="x">    //     -&gt;where(&#39;organization_id&#39;, $organization-&gt;id)</span>
+<span class="x">    //     -&gt;first()</span>
+<span class="x">    //     ?-&gt;pivot;</span>
+<span class="x">    // $branches = $pivot?-&gt;assigned_branches ?? [];</span>
+
+<span class="x">    return $branches;</span>
+<span class="x">}</span>
+
+<span class="x">/**</span>
+<span class="x"> * Verifica si el usuario tiene sucursales asignadas</span>
+<span class="x"> * Si no tiene, retorna TODAS las sucursales de la org</span>
+<span class="x"> * </span>
+<span class="x"> * @return array</span>
+<span class="x"> */</span>
+<span class="x">public function getBranchIdsOrAll(): array</span>
+<span class="x">{</span>
+<span class="x">    $assignedBranches = $this-&gt;getAssignedBranchIds();</span>
+
+<span class="x">    // Si tiene asignación específica, usarla</span>
+<span class="x">    if (!empty($assignedBranches)) {</span>
+<span class="x">        return $assignedBranches;</span>
+<span class="x">    }</span>
+
+<span class="x">    // Si no, retornar todas las sucursales de la org</span>
+<span class="x">    $organization = $this-&gt;getOrganization();</span>
+<span class="x">    if (!$organization) {</span>
+<span class="x">        return [];</span>
+<span class="x">    }</span>
+
+<span class="x">    // Cambiar a BD de la org y obtener todos los ID_compania</span>
+<span class="x">    $previousDb = \DB::connection()-&gt;getDatabaseName();</span>
+<span class="x">    \DB::connection()-&gt;useDatabase($organization-&gt;database);</span>
+
+<span class="x">    $allBranches = \DB::table(&#39;CompanySession&#39;)</span>
+<span class="x">        -&gt;pluck(&#39;ID_compania&#39;)</span>
+<span class="x">        -&gt;unique()</span>
+<span class="x">        -&gt;values()</span>
+<span class="x">        -&gt;toArray();</span>
+
+<span class="x">    \DB::connection()-&gt;useDatabase($previousDb);</span>
+
+<span class="x">    return $allBranches;</span>
+<span class="x">}</span>
+
+<span class="x">/**</span>
+<span class="x"> * DEPRECADO: Mantener por compatibilidad</span>
+<span class="x"> */</span>
+<span class="x">public function getCompanyIds()</span>
+<span class="x">{</span>
+<span class="x">    return $this-&gt;getBranchIdsOrAll();</span>
+<span class="x">}</span>
+</code></pre></div>
+
+### 2⃣ Crear Global Scope Reutilizable
+
+<div class="highlight"><pre><span></span><code><span class="x">// app/Models/Scopes/CompanyIdFilterScope.php</span>
+
+<span class="x">namespace App\Models\Scopes;</span>
+
+<span class="x">use Illuminate\Database\Eloquent\Builder;</span>
+<span class="x">use Illuminate\Database\Eloquent\Model;</span>
+<span class="x">use Illuminate\Database\Eloquent\Scope;</span>
+
+<span class="x">class CompanyIdFilterScope implements Scope</span>
+<span class="x">{</span>
+<span class="x">    /**</span>
+<span class="x">     * Filtra automáticamente por ID_compania de las sucursales asignadas</span>
+<span class="x">     * en la organización actual</span>
+<span class="x">     */</span>
+<span class="x">    public function apply(Builder $builder, Model $model)</span>
+<span class="x">    {</span>
+<span class="x">        // Solo aplicar si hay usuario autenticado</span>
+<span class="x">        if (!auth()-&gt;check()) {</span>
+<span class="x">            return;</span>
+<span class="x">        }</span>
+
+<span class="x">        // Obtener IDs de sucursales asignadas al usuario</span>
+<span class="x">        $organizationService = app(\App\Contracts\OrganizationServiceContract::class);</span>
+<span class="x">        $branchIds = $organizationService-&gt;getAssignedBranchIds();</span>
+
+<span class="x">        // Si tiene sucursales asignadas, filtrar</span>
+<span class="x">        if (!empty($branchIds)) {</span>
+<span class="x">            $builder-&gt;whereIn(&#39;ID_compania&#39;, $branchIds);</span>
+<span class="x">        }</span>
+<span class="x">        // Si no tiene asignación, mostrar todas (comportamiento por defecto)</span>
+<span class="x">        // O podrías: $builder-&gt;where(&#39;ID_compania&#39;, -1); // No mostrar nada</span>
+<span class="x">    }</span>
+<span class="x">}</span>
+</code></pre></div>
+
+### 3⃣ Aplicar Scope a Todos los Modelos
+
+**Ejemplo de implementación:**
+
+<div class="highlight"><pre><span></span><code><span class="x">// app/Models/SalesHeaderImp.php</span>
+
+<span class="x">namespace App\Models;</span>
+
+<span class="x">use App\Models\Scopes\CompanyIdFilterScope;</span>
+<span class="x">use Illuminate\Database\Eloquent\Model;</span>
+
+<span class="x">class SalesHeaderImp extends Model</span>
+<span class="x">{</span>
+<span class="x">    protected $table = &#39;Sales_Header_Imp&#39;;</span>
+
+<span class="x">    protected $fillable = [</span>
+<span class="x">        &#39;ID_compania&#39;,</span>
+<span class="x">        &#39;InvoiceNumber&#39;,</span>
+<span class="x">        &#39;CustomerID&#39;,</span>
+<span class="x">        // ... otros campos</span>
+<span class="x">    ];</span>
+
+<span class="x">    /**</span>
+<span class="x">     * Bootstrap del modelo</span>
+<span class="x">     */</span>
+<span class="x">    protected static function booted()</span>
+<span class="x">    {</span>
+<span class="x">        // Aplicar filtrado automático por ID_compania</span>
+<span class="x">        static::addGlobalScope(new CompanyIdFilterScope);</span>
+<span class="x">    }</span>
+<span class="x">}</span>
+</code></pre></div>
+
+### 4⃣ Modelos que Deben Implementar el Scope
+
+**Prioridad ALTA (Transacciones):**
+<div class="highlight"><pre><span></span><code><span class="x">// Ventas</span>
+<span class="x">SalesHeaderImp::class</span>
+<span class="x">SalesDetailImp::class</span>
+<span class="x">SalesOrderHeaderImp::class</span>
+<span class="x">SalesOrderDetailImp::class</span>
+
+<span class="x">// Compras</span>
+<span class="x">PurchaseHeaderImp::class</span>
+<span class="x">PurchaseDetailImp::class</span>
+
+<span class="x">// Pagos</span>
+<span class="x">CustomerReceiptHeaderImp::class</span>
+<span class="x">VendorPaymentHeaderImp::class</span>
+
+<span class="x">// Facturación Electrónica</span>
+<span class="x">FeHeader::class</span>
+<span class="x">FeDetail::class</span>
+<span class="x">FePayment::class</span>
+</code></pre></div>
+
+**Prioridad MEDIA (Catálogos):**
+<div class="highlight"><pre><span></span><code><span class="x">// Ya implementados, pero cambiar de whereIn a where</span>
+<span class="x">CustomersImp::class</span>
+<span class="x">VendorsImp::class</span>
+<span class="x">ProductsImp::class</span>
+
+<span class="x">// Pendientes</span>
+<span class="x">CustomersExp::class</span>
+<span class="x">VendorsExp::class</span>
+<span class="x">ProductsExp::class</span>
+</code></pre></div>
+
+**Prioridad BAJA (Configuración):**
+<div class="highlight"><pre><span></span><code><span class="x">JobPhasesExp::class</span>
+<span class="x">JobCostCodesExp::class</span>
+<span class="x">SalesRepresentativeExp::class</span>
+<span class="x">ChartExp::class</span>
+</code></pre></div>
+
+### 5⃣ Casos Especiales: Reportes Consolidados
+
+**Problema:** Algunos reportes necesitan ver TODAS las sucursales
+
+**Solución:**
+<div class="highlight"><pre><span></span><code><span class="x">// En controllers o servicios de reportes</span>
+<span class="x">use Illuminate\Database\Eloquent\Builder;</span>
+
+<span class="x">// Desactivar scope globalmente</span>
+<span class="x">SalesHeaderImp::withoutGlobalScope(CompanyIdFilterScope::class)</span>
+<span class="x">    -&gt;whereIn(&#39;ID_compania&#39;, $allCompanyIds)</span>
+<span class="x">    -&gt;get();</span>
+
+<span class="x">// O crear método en el modelo</span>
+<span class="x">class SalesHeaderImp extends Model</span>
+<span class="x">{</span>
+<span class="x">    public function scopeAllBranches(Builder $query)</span>
+<span class="x">    {</span>
+<span class="x">        return $query-&gt;withoutGlobalScope(CompanyIdFilterScope::class);</span>
+<span class="x">    }</span>
+<span class="x">}</span>
+
+<span class="x">// Uso:</span>
+<span class="x">SalesHeaderImp::allBranches()-&gt;get();</span>
+</code></pre></div>
+
+### 6⃣ Jobs Asíncronos
+
+**Problema:** Jobs no tienen `auth()->user()`
+
+**Solución:**
+<div class="highlight"><pre><span></span><code><span class="x">// En Jobs, deshabilitar scope y filtrar manualmente</span>
+<span class="x">class ProcessSalesJob implements ShouldQueue</span>
+<span class="x">{</span>
+<span class="x">    protected $organizationId;</span>
+
+<span class="x">    public function handle()</span>
+<span class="x">    {</span>
+<span class="x">        $organization = Organization::find($this-&gt;organizationId);</span>
+<span class="x">        $companyId = $organization-&gt;id_empresa;</span>
+
+<span class="x">        // Cambiar a BD de la organización</span>
+<span class="x">        DB::connection()-&gt;useDatabase($organization-&gt;database);</span>
+
+<span class="x">        // Query sin scope, filtrado manual</span>
+<span class="x">        $sales = SalesHeaderImp::withoutGlobalScopes()</span>
+<span class="x">            -&gt;where(&#39;ID_compania&#39;, $companyId)</span>
+<span class="x">            -&gt;get();</span>
+
+<span class="x">        // Procesar...</span>
+<span class="x">    }</span>
+<span class="x">}</span>
+</code></pre></div>
+
+---
+
+## Plan de Implementación
+
+### Fase 1: Preparación (2-3 días)
+
+**1.1 Decidir Estrategia de Almacenamiento**
+- Opción A: Tabla `user_organization_branches` (más flexible)
+- Opción B: Columna JSON en `organizations_user` (más simple)
+- **Recomendación:** Opción A para mejor performance y queries
+
+**1.2 Crear Migration**
+<div class="highlight"><pre><span></span><code>php<span class="w"> </span>artisan<span class="w"> </span>make:migration<span class="w"> </span>create_user_organization_branches_table
+<span class="c1"># O</span>
+php<span class="w"> </span>artisan<span class="w"> </span>make:migration<span class="w"> </span>add_assigned_branches_to_organizations_user_table
+</code></pre></div>
+
+**1.3 Crear Scope Base**
+<div class="highlight"><pre><span></span><code>php<span class="w"> </span>artisan<span class="w"> </span>make:scope<span class="w"> </span>CompanyIdFilterScope
+</code></pre></div>
+
+**1.4 Modificar OrganizationService**
+- Agregar `getAssignedBranchIds()`
+- Agregar `getBranchIdsOrAll()`
+- Decidir comportamiento por defecto (ver todas vs ninguna)
+
+**1.5 Testing de Scope**
+<div class="highlight"><pre><span></span><code><span class="x">// tests/Unit/CompanyIdFilterScopeTest.php</span>
+<span class="x">test(&#39;filters by assigned branches in current organization&#39;, function () {</span>
+<span class="x">    $user = User::factory()-&gt;create();</span>
+<span class="x">    $org = Organization::factory()-&gt;create([&#39;database&#39; =&gt; &#39;test_db&#39;]);</span>
+<span class="x">    $user-&gt;organizations()-&gt;attach($org-&gt;id);</span>
+
+<span class="x">    // Asignar sucursales 1 y 2 al usuario</span>
+<span class="x">    assignBranchesToUser($user-&gt;id, $org-&gt;id, [1, 2]);</span>
+
+<span class="x">    $this-&gt;actingAs($user);</span>
+<span class="x">    DB::connection()-&gt;useDatabase(&#39;test_db&#39;);</span>
+
+<span class="x">    // Crear datos de prueba</span>
+<span class="x">    SalesHeaderImp::factory()-&gt;create([&#39;ID_compania&#39; =&gt; 1]);</span>
+<span class="x">    SalesHeaderImp::factory()-&gt;create([&#39;ID_compania&#39; =&gt; 2]);</span>
+<span class="x">    SalesHeaderImp::factory()-&gt;create([&#39;ID_compania&#39; =&gt; 3]); // No asignada</span>
+
+<span class="x">    $sales = SalesHeaderImp::all();</span>
+
+<span class="x">    expect($sales)-&gt;toHaveCount(2);</span>
+<span class="x">    expect($sales-&gt;pluck(&#39;ID_compania&#39;)-&gt;toArray())-&gt;toBe([1, 2]);</span>
+<span class="x">});</span>
+</code></pre></div>
+
+### Fase 2: Implementación Progresiva (4-6 días)
+
+**2.1 Crear UI para Asignación de Sucursales**
+- Componente Livewire para gestión de sucursales
+- Interface: checkboxes por organización
+- Validación: al menos una sucursal asignada
+- Bulk assignment para múltiples usuarios
+
+**2.2 Modelos de Alta Prioridad**
+1. `SalesHeaderImp` y `SalesDetailImp`
+2. `CustomerReceiptHeaderImp` y `CustomerReceiptDetailImp`
+3. `FeHeader`, `FeDetail`, `FePayment`
+
+**2.3 Actualizar Modelos Existentes con Filtrado Manual**
+- Cambiar de `whereIn('ID_compania', $companiesIds)` 
+- A `CompanyIdFilterScope` automático
+- Modelos: CustomersImp, VendorsImp, ProductsImp, etc.
+
+**2.4 Testing por Módulo**
+- Facturación Electrónica con sucursales mixtas
+- Ventas e Inventario multi-sucursal
+- Reportes consolidados
+- Jobs asíncronos (sin auth)
+
+### Fase 3: Migración y Despliegue (3-4 días)
+
+**3.1 Migración de Datos Existentes**
+<div class="highlight"><pre><span></span><code><span class="x">// Seeder para asignar todas las sucursales a usuarios existentes</span>
+<span class="x">// Mantener comportamiento actual (ver todas)</span>
+<span class="x">foreach (User::all() as $user) {</span>
+<span class="x">    foreach ($user-&gt;organizations as $org) {</span>
+<span class="x">        // Obtener todas las sucursales de la org</span>
+<span class="x">        DB::connection()-&gt;useDatabase($org-&gt;database);</span>
+<span class="x">        $branches = DB::table(&#39;CompanySession&#39;)-&gt;pluck(&#39;ID_compania&#39;);</span>
+
+<span class="x">        // Asignar todas al usuario</span>
+<span class="x">        foreach ($branches as $branchId) {</span>
+<span class="x">            UserOrganizationBranch::create([</span>
+<span class="x">                &#39;user_id&#39; =&gt; $user-&gt;id,</span>
+<span class="x">                &#39;organization_id&#39; =&gt; $org-&gt;id,</span>
+<span class="x">                &#39;branch_id&#39; =&gt; $branchId</span>
+<span class="x">            ]);</span>
+<span class="x">        }</span>
+<span class="x">    }</span>
+<span class="x">}</span>
+</code></pre></div>
+
+**3.2 Verificación de Jobs**
+- Identificar jobs que usan modelos con scope
+- Agregar `withoutGlobalScope()` donde sea necesario
+- Pasar branch_ids explícitamente
+
+**3.3 Actualizar Reportes**
+- Identificar reportes consolidados
+- Implementar `allBranches()` scope
+- Manejar cross-organization reports
+
+**3.4 Deploy Gradual**
+<div class="highlight"><pre><span></span><code><span class="c1"># 1. Deploy migration en staging</span>
+php<span class="w"> </span>artisan<span class="w"> </span>migrate
+
+<span class="c1"># 2. Seed de asignaciones por defecto</span>
+php<span class="w"> </span>artisan<span class="w"> </span>db:seed<span class="w"> </span>--class<span class="o">=</span>AssignAllBranchesToUsersSeeder
+
+<span class="c1"># 3. Testing completo con organizaciones multi-sucursal</span>
+<span class="c1"># 4. Deploy en producción</span>
+<span class="c1"># 5. Monitoreo de logs y queries</span>
+</code></pre></div>
+
+### Fase 4: Documentación (1 día)
+
+**4.1 Actualizar Guías de Desarrollo**
+<div class="highlight"><pre><span></span><code><span class="gu">## Filtrado por Sucursal (ID_compania) - ACTUALIZADO</span>
+
+<span class="gu">### Arquitectura Multi-Sucursal</span>
+<span class="k">-</span><span class="w"> </span>1 Empresa Matriz → N Organizaciones (cada una con BD propia)
+<span class="k">-</span><span class="w"> </span>1 Organización (BD) → N Sucursales (múltiples ID_compania)
+<span class="k">-</span><span class="w"> </span>Usuario → N Organizaciones → N Sucursales asignadas por org
+
+<span class="gu">### Asignación de Sucursales</span>
+<span class="k">-</span><span class="w"> </span>Tabla: <span class="sb">`user_organization_branches`</span>
+<span class="k">-</span><span class="w"> </span>Columnas: user_id, organization_id, branch_id (ID_compania)
+<span class="k">-</span><span class="w"> </span>Un usuario puede tener diferentes sucursales en cada organización
+
+<span class="gu">### Implementación en Modelos</span>
+TODOS los modelos con columna <span class="sb">`ID_compania`</span> DEBEN:
+<span class="k">1.</span> Implementar <span class="sb">`CompanyIdFilterScope`</span> en método <span class="sb">`booted()`</span>
+<span class="k">2.</span> Filtrado automático por sucursales asignadas al usuario
+<span class="k">3.</span> Usar <span class="sb">`withoutGlobalScope()`</span> solo en:
+<span class="w">   </span><span class="k">-</span><span class="w"> </span>Jobs asíncronos (sin auth)
+<span class="w">   </span><span class="k">-</span><span class="w"> </span>Reportes consolidados
+<span class="w">   </span><span class="k">-</span><span class="w"> </span>Operaciones administrativas
+
+Ejemplo:
+```php
+protected static function booted()
+{
+    static::addGlobalScope(new CompanyIdFilterScope);
+}
+</code></pre></div>
+
+### Para Jobs
+<div class="highlight"><pre><span></span><code><span class="x">// Deshabilitar scope y filtrar manualmente</span>
+<span class="x">$sales = SalesHeaderImp::withoutGlobalScopes()</span>
+<span class="x">    -&gt;whereIn(&#39;ID_compania&#39;, $assignedBranches)</span>
+<span class="x">    -&gt;get();</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>**4.2 Crear Migration Guide**
+- Para desarrolladores que agreguen nuevos modelos
+- Checklist de validación
+
+---
+
+## Ventajas de Esta Solución
+
+### Simplicidad
+- No requiere tabla intermedia
+- Usa relaciones existentes (Organization → Companysession)
+- Mínimo impacto en código existente
+
+### Seguridad
+- Filtrado automático a nivel de modelo
+- Imposible olvidar filtrar en queries
+- Protección contra acceso a datos de otras sucursales
+
+### Performance
+- Un solo filtro: `WHERE ID_compania = 100`
+- Índices ya existen en todas las tablas
+- Queries más rápidos (menos filas)
+
+### Mantenibilidad
+- Comportamiento consistente en todos los modelos
+- Scope reutilizable
+- Fácil de testear
+
+### Flexibilidad
+- Reportes consolidados: `withoutGlobalScope()`
+- Jobs: filtrado manual explícito
+- Compatible con arquitectura actual
+
+---
+
+## Casos de Uso Específicos
+
+### Caso 1: Usuario con 1 Organización, Múltiples Sucursales
+
+```php
+User: María
+Organizaciones: 1
+  &gt; Org: &quot;RXY Regional Centro&quot; (BD: rest_centro)
+      &gt; Sucursal 1: Local Centro (ID_compania: 1)
+      &gt; Sucursal 2: Local Plaza (ID_compania: 2)
+      &gt; Sucursal 3: Local Mall (ID_compania: 3)
+
+María tiene asignadas: sucursales 1 y 2 (NO la 3)
+
+// Todas las queries automáticamente filtran por sucursales asignadas
+SalesHeaderImp::all(); // WHERE ID_compania IN (1, 2)
+CustomersImp::all();   // WHERE ID_compania IN (1, 2)
+
+// María NO ve datos de sucursal 3
+</code></pre></div>
+
+### Caso 2: Usuario con Múltiples Organizaciones y Sucursales Selectivas
+
+<div class="highlight"><pre><span></span><code><span class="x">User: Juan</span>
+<span class="x">Organizaciones: 2</span>
+<span class="x">  &gt; Org 1: &quot;RXY Regional Centro&quot; (BD: rest_centro)</span>
+<span class="x">       &gt; Sucursales disponibles: 1, 2, 3</span>
+<span class="x">       &gt; Asignadas a Juan: 1, 2 (NO la 3)</span>
+
+<span class="x">  &gt; Org 2: &quot;RXY Regional Norte&quot; (BD: rest_norte)</span>
+<span class="x">        &gt; Sucursales disponibles: 4, 5, 6</span>
+<span class="x">        &gt; Asignadas a Juan: 4 (NO 5 ni 6)</span>
+
+<span class="x">// Juan selecciona Org 1 en el header</span>
+<span class="x">Session::put(&#39;organization_id&#39;, org1_id);</span>
+
+<span class="x">// Sistema cambia a BD rest_centro</span>
+<span class="x">DB::connection()-&gt;useDatabase(&#39;rest_centro&#39;);</span>
+
+<span class="x">// Queries filtran por sucursales asignadas en esa org</span>
+<span class="x">SalesHeaderImp::all(); // WHERE ID_compania IN (1, 2)</span>
+<span class="x">// Solo ve ventas de sucursales 1 y 2, NO la 3</span>
+
+<span class="x">// Juan selecciona Org 2</span>
+<span class="x">Session::put(&#39;organization_id&#39;, org2_id);</span>
+<span class="x">DB::connection()-&gt;useDatabase(&#39;rest_norte&#39;);</span>
+
+<span class="x">// Ahora filtra por sucursales de Org 2</span>
+<span class="x">SalesHeaderImp::all(); // WHERE ID_compania IN (4)</span>
+<span class="x">// Solo ve ventas de sucursal 4, NO 5 ni 6</span>
+</code></pre></div>
+
+### Caso 3: Reporte Consolidado Multi-Organización
+
+<div class="highlight"><pre><span></span><code><span class="x">// Supervisor necesita ver consolidado de múltiples organizaciones</span>
+<span class="x">// Cada organización tiene múltiples sucursales</span>
+
+<span class="x">$totalSales = 0;</span>
+<span class="x">$salesByBranch = [];</span>
+
+<span class="x">foreach ($user-&gt;organizations as $org) {</span>
+<span class="x">    // Cambiar a BD de la organización</span>
+<span class="x">    DB::connection()-&gt;useDatabase($org-&gt;database);</span>
+
+<span class="x">    // Obtener sucursales asignadas al usuario en esta org</span>
+<span class="x">    $assignedBranches = getUserAssignedBranches($user-&gt;id, $org-&gt;id);</span>
+
+<span class="x">    // Query sin scope, con filtrado manual</span>
+<span class="x">    $sales = SalesHeaderImp::withoutGlobalScope(CompanyIdFilterScope::class)</span>
+<span class="x">        -&gt;whereIn(&#39;ID_compania&#39;, $assignedBranches)</span>
+<span class="x">        -&gt;selectRaw(&#39;ID_compania, SUM(Net_due) as total&#39;)</span>
+<span class="x">        -&gt;groupBy(&#39;ID_compania&#39;)</span>
+<span class="x">        -&gt;get();</span>
+
+<span class="x">    foreach ($sales as $sale) {</span>
+<span class="x">        $salesByBranch[$org-&gt;nombre][$sale-&gt;ID_compania] = $sale-&gt;total;</span>
+<span class="x">        $totalSales += $sale-&gt;total;</span>
+<span class="x">    }</span>
+<span class="x">}</span>
+
+<span class="x">return [</span>
+<span class="x">    &#39;total&#39; =&gt; $totalSales,</span>
+<span class="x">    &#39;by_organization_and_branch&#39; =&gt; $salesByBranch</span>
+<span class="x">];</span>
+
+<span class="x">// Resultado:</span>
+<span class="x">// [</span>
+<span class="x">//   &#39;total&#39; =&gt; 150000,</span>
+<span class="x">//   &#39;by_organization_and_branch&#39; =&gt; [</span>
+<span class="x">//     &#39;RXY Regional Centro&#39; =&gt; [</span>
+<span class="x">//       1 =&gt; 50000,  // Sucursal 1</span>
+<span class="x">//       2 =&gt; 30000   // Sucursal 2</span>
+<span class="x">//     ],</span>
+<span class="x">//     &#39;RXY Regional Norte&#39; =&gt; [</span>
+<span class="x">//       4 =&gt; 70000   // Sucursal 4</span>
+<span class="x">//     ]</span>
+<span class="x">//   ]</span>
+<span class="x">// ]</span>
+</code></pre></div>
+
+---
+
+## Métricas de Éxito
+
+### KPIs
+
+1. **Seguridad:**
+   - 0 queries sin filtro ID_compania
+   - Auditoría: logs de acceso por sucursal
+
+2. **Performance:**
+   - Reducción de 60-80% en filas retornadas
+   - Queries 2-3x más rápidos
+
+3. **Calidad:**
+   - 100% cobertura de tests en modelos críticos
+   - 0 bugs relacionados con datos cruzados
+
+4. **Desarrollo:**
+   - 43 modelos con scope implementado
+   - Documentación actualizada
+
+---
+
+## Contacto y Soporte
+
+**Desarrollador Principal:** [Tu Nombre]  
+**Fecha de Análisis:** 3 de diciembre de 2025  
+**Última Actualización:** 3 de diciembre de 2025
+
+**Referencias:**
+- [Guías de Desarrollo](../../.github/guias-desarrollo.md)
+- [Organization Model](../../app/Models/Organization.php)
+- [OrganizationService](../../app/Services/OrganizationService.php)
+
+---
+
+## Conclusión
+
+El sistema actual necesita mejoras para manejar el escenario real:
+- 1 Empresa Matriz (CompanySession en BD principal) → N Organizaciones
+- 1 Organización (BD propia) → N Sucursales (múltiples ID_compania)
+- Columna ID_compania existe en 43+ tablas
+- Falta: Asignación de sucursales por usuario
+
+**Necesitamos implementar:**
+1. Tabla `user_organization_branches` o columna JSON `assigned_branches`
+2. Modificar `OrganizationService::getAssignedBranchIds()`
+3. Implementar `CompanyIdFilterScope` global con filtrado por sucursales asignadas
+4. Aplicarlo a 43+ modelos
+5. UI para asignar sucursales a usuarios
+6. Manejar caso: usuario sin asignación (¿ver todas o ninguna?)
+
+**NO necesitamos:**
+- Cambios estructurales mayores en BD
+- Modificar relación Organization → Companysession
+- Cambiar arquitectura multi-tenant
+
+**Impacto:** Riesgo medio, recompensa alta - requiere tabla intermedia y lógica de asignación
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/aghabrego/docucenter" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.highlight", "search.suggest"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
