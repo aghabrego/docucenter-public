@@ -303,7 +303,7 @@ Verificado con webhooks reales de Personal Trainer y PYMES.
 - **Pendiente**: Monitorear logs en producción
 - **Pendiente**: Desplegar a producción
 
-## 📚 Referencias
+## Referencias
 
 - **Servicio**: `app/Services/MaxgymService.php` (líneas 532-560)
 - **Job**: `app/Jobs/CreateSaleMaxgymJob.php`
@@ -343,7 +343,7 @@ Verificado con webhooks reales de Personal Trainer y PYMES.
 5. totalPrice = suma de todos los totalLine
 ```
 
-## 📝 Commit
+## Commit
 
 ```
 fix: corregir calculo de montos en webhook MaxGym
