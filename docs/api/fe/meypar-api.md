@@ -459,21 +459,30 @@ La estructura del request es **idéntica** a `createSaleMeypar`. Ver sección an
 
 ```json
 {
+  "resCodigo": 0,
+  "resMensaje": "Exitoso",
+  "cufe": "FE0120000155702081-2-2021-2600142026020500000000710040126897194708",
+  "qr": "https://dgi-fep.mef.gob.pa/Consultas/FacturasPorCUFE/FE0120000155702081-2-2021-2600142026020500000000710040126897194708",
   "success": true,
   "message": "Venta MEYPAR creada y emitida exitosamente",
   "attempt": 1,
+  "customer_name": "María Elena Rodríguez",
+  "customer_dv": "8",
+  "customer_ruc": "52123456-8-2020",
   "data": {
     "sale": {
       "id": 12345,
       "invoice_number": "MEYPAR-EMISSION-001",
       "customer_name": "María Elena Rodríguez",
-      "total": "8000.0000",
-      "invoice_date": "2025-08-12",
+      "subtotal": 8000.00,
+      "net_due": 8000.00,
+      "date": "2025-08-12T00:00:00.000000Z",
       "issued": true
     },
     "emission": {
       "success": true,
       "cufe": "FE0120000155702081-2-2021-2600002025081179999999990010127999999993",
+      "qr": "https://dgi-fep.mef.gob.pa/Consultas/FacturasPorCUFE/FE0120000155702081-2-2021-2600002025081179999999990010127999999993",
       "transition_id": "01K2G9PGACC8BDC4NYP5D5HMZE",
       "numeroDocumentoFiscal": "0000001234",
       "pac_response": {
@@ -497,14 +506,26 @@ La estructura del request es **idéntica** a `createSaleMeypar`. Ver sección an
 
 | Campo | Descripción |
 |-------|-------------|
+| `resCodigo` | Código de resultado (0 = éxito) |
+| `resMensaje` | Mensaje resultado ("Exitoso") |
+| `cufe` | Código Único de Facturación Electrónica |
+| `qr` | URL del código QR de verificación DGI |
 | `success` | Indica si el proceso fue exitoso |
 | `message` | Mensaje descriptivo del resultado |
 | `attempt` | Número de intento que fue exitoso (1-3) |
+| `customer_name` | Nombre del cliente/adquiriente |
+| `customer_dv` | Dígito verificador del RUC (extraído automáticamente) |
+| `customer_ruc` | RUC completo del cliente (formato: NÚMERO-DV-AÑO) |
 | `data.sale.id` | ID interno de la venta en DocuCenter |
 | `data.sale.invoice_number` | Número de factura MEYPAR |
+| `data.sale.subtotal` | Subtotal de la factura |
+| `data.sale.net_due` | Total de la factura |
+| `data.sale.date` | Fecha de la factura |
 | `data.sale.issued` | Indica si la factura fue emitida (`true`) |
-| `data.emission.cufe` | Código Único de Facturación Electrónica |
+| `data.emission.cufe` | CUFE de la factura emitida |
+| `data.emission.qr` | URL del código QR de verificación |
 | `data.emission.transition_id` | ID de transición del PAC |
+| `data.emission.numeroDocumentoFiscal` | Número de documento fiscal asignado por PAC |
 | `data.emission.pac_response.signedXml` | XML firmado en base64 (solo Alanube) |
 
 ### Respuesta de Error

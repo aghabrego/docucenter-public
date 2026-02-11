@@ -277,26 +277,49 @@ Accept: application/json
 
 ```json
 {
+  "resCodigo": 0,
+  "resMensaje": "Exitoso",
+  "cufe": "FE0120000155702081-2-2021-2600142026020500000000710040126897194708",
+  "qr": "https://dgi-fep.mef.gob.pa/Consultas/FacturasPorCUFE/FE0120000155702081-2-2021-2600142026020500000000710040126897194708",
   "success": true,
   "message": "Venta MEYPAR creada y emitida exitosamente",
   "attempt": 1,
+  "customer_name": "Consumidor Final",
+  "customer_dv": "26",
+  "customer_ruc": "155702081-2-2021",
   "data": {
     "sale": {
-      "id": 12345,
-      "invoice_number": "A001-123", 
-      "customer_name": "Cliente Test",
-      "subtotal": 15.75,
-      "net_due": 15.75,
-      "date": "2024-02-06",
+      "id": 179,
+      "invoice_number": "1018",
+      "customer_name": "Consumidor Final",
+      "subtotal": 0.05,
+      "net_due": 0.05,
+      "date": "2026-02-05T00:00:00.000000Z",
       "issued": true
     },
     "emission": {
-      "document_id": 67890,
-      "cufe": "abc123def456...",
-      "qr_code": "data:image/png;base64,...",
-      "pdf_url": "https://example.com/invoice.pdf",
-      "xml_url": "https://example.com/invoice.xml",
-      "status": "emitted"
+      "success": true,
+      "cufe": "FE0120000155702081-2-2021-2600142026020500000000710040126897194708",
+      "qr": "https://dgi-fep.mef.gob.pa/Consultas/FacturasPorCUFE/FE0120000155702081-2-2021-2600142026020500000000710040126897194708",
+      "transition_id": "01KH1GPKS271QDF7VEKBNMDKZH",
+      "numeroDocumentoFiscal": 71,
+      "pac_response": {
+        "sale": 179,
+        "path": "invoices",
+        "transition": "01KH1GPKS271QDF7VEKBNMDKZH",
+        "cufe": "FE0120000155702081-2-2021-2600142026020500000000710040126897194708",
+        "codigoSucursalEmisor": "0000",
+        "numeroDocumentoFiscal": 71,
+        "puntoFacturacionFiscal": "004",
+        "tipoDocumento": 1,
+        "tipoEmision": "01",
+        "pac_provider": "alanube",
+        "pac_response": {
+          "status": "PROCESSED",
+          "message": "Document created",
+          "http_status_code": 201
+        }
+      }
     }
   }
 }

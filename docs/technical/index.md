@@ -2,6 +2,61 @@
 
 ## Índice de Documentación
 
+### Sistema de Consolidación Multi-Organización
+
+- **[Implementación de Columnas Source](consolidation-source-columns-implementation.md)** 🚀 **IMPLEMENTADO - Guía de despliegue completa**
+  - Solución completa para colisión de PKs: 14 columnas source_* implementadas
+  - Comandos Artisan: db:update-stub-source-column genérico
+  - Job actualizado: Sincronización en 2 fases con mapeo de IDs
+  - Scripts de despliegue: add-source-columns-consolidation.sh
+  - UNIQUE constraints: add-unique-constraints-source-columns.sh
+  - Guía paso a paso para producción
+  - Validaciones post-despliegue y troubleshooting
+  - Estado: ✅ Código completo y listo para deploy
+
+- **[Análisis Completo de Tablas Detail](consolidation-detail-tables-analysis.md)** - Análisis crítico de colisión en tablas Detail con FKs ⭐ **MÁS CRÍTICO - NUEVO**
+  - Revelación: Details TAMBIÉN tienen PKs auto-incrementales que colisionan
+  - Problema doble: 8 tablas Detail + 7 tablas Header vulnerables
+  - FK Constraints activos en fe_detail/fe_payment
+  - FKs rotas: Details apuntan a headers inexistentes
+  - Solución completa en 2 FASES obligatorias con mapeo de IDs
+  - Código PHP: syncTableWithHeaderDetailRelation() con mapa de IDs
+  - Estadísticas críticas: 0% Details protegidos, 100% vulnerables
+  - Validaciones SQL post-sincronización
+  - Estimado: 10-12 días de desarrollo + testing
+
+- **[Análisis de Colisión de PKs Auto-Incrementales](consolidation-pk-collision-analysis.md)** - Análisis detallado del problema de colisión de llaves primarias en Headers ⭐ **CRÍTICO**
+  - Identificación precisa del problema con ejemplos reales
+  - Escenario de colisión: 2 organizaciones con ID=100
+  - Estado actual: 1/7 tablas header implementadas (14%)
+  - 6 tablas header vulnerables sin protección contra colisiones
+  - Solución propuesta completa con código PHP y SQL
+  - Manejo de relaciones Header-Detail con mapeo de FKs
+  - Plan de implementación por fases (8-10 días)
+  - Riesgos y métricas de éxito
+
+- **[Estado de la Documentación de Consolidación](consolidation-documentation-status.md)** - Verificación completa del estado de la documentación vs código implementado ⭐ **VERIFICADO**
+  - Resumen ejecutivo del sistema de consolidación
+  - Verificación de implementación vs documentación (96% completo)
+  - Identificación de componentes implementados y pendientes
+  - Métricas de calidad de documentación
+  - Próximos pasos y recomendaciones
+
+- **[Estrategia de Consolidación: Tablas Header-Detail](consolidation-header-detail-strategy.md)** - Análisis y estrategia para manejo de tablas con relaciones Header-Detail ⭐ **COMPLETO**
+  - Identificación de 9 pares de tablas Header-Detail con auto-increment
+  - Estrategia de mapeo de IDs (source_transaction_id, source_fe_id, etc.)
+  - Plan de implementación detallado
+  - Test cases específicos y riesgos documentados
+  - Métricas de éxito y criterios de aceptación
+
+- **[Análisis de Replicación de Bases de Datos](database-replication-analysis.md)** - Arquitectura y análisis completo del sistema de consolidación ⭐ **COMPLETO**
+  - Problema a resolver: Limitación de Sage Connector (una BD, un ID_compania)
+  - Arquitectura actual vs deseada (multi-organización → compañía consolidada)
+  - Opciones de replicación comparadas (MySQL Binlog, Laravel Jobs, etc.)
+  - Solución recomendada: Laravel Jobs Asíncronos con Redis
+  - Plan de implementación por fases
+  - Consideraciones de conflictos de IDs y sincronización bidireccional
+
 ### Resolución de Problemas Arquitecturales
 
 #### Livewire UI/UX Improvements

@@ -6,13 +6,13 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Documentación técnica y de usuario de DocuCenter - Sistema de facturación electrónica">
+        <meta name="description" content="Documentación técnica y de usuario de Docucenter">
       
       
         <meta name="author" content="aghabrego">
       
       
-        <link rel="canonical" href="https://aghabrego.github.io/docucenter-public/technical/consolidation-header-detail-strategy/">
+        <link rel="canonical" href="https://aghabrego.github.io/docucenter/technical/consolidation-header-detail-strategy/">
       
       
       
@@ -20,19 +20,16 @@
         
       
       
-      <link rel="icon" href="https://home.apconpanama.me/wp-content/uploads/2024/03/logo3.png">
+      <link rel="icon" href="../../docs/favicon.ico">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
     
     
       
-        <title>Estrategia de Consolidación: Tablas Header-Detail con Auto-Increment - DocuCenter</title>
+        <title>Estrategia de Consolidación: Tablas Header-Detail con Auto-Increment - Docucenter</title>
       
     
     
       <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
-      
-        
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -60,14 +57,7 @@
   </head>
   
   
-    
-    
-      
-    
-    
-    
-    
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="light-blue">
+    <body dir="ltr">
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -88,11 +78,13 @@
     
       
 
-<header class="md-header" data-md-component="header">
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Cabecera">
-    <a href="../.." title="DocuCenter" class="md-header__button md-logo" aria-label="DocuCenter" data-md-component="logo">
+    <a href="../.." title="Docucenter" class="md-header__button md-logo" aria-label="Docucenter" data-md-component="logo">
       
-  <img src="https://home.apconpanama.me/wp-content/uploads/2024/03/logo3.png" alt="logo">
+  <img src="../../docs/logo.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -103,7 +95,7 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            DocuCenter
+            Docucenter
           </span>
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
@@ -115,18 +107,6 @@
         </div>
       </div>
     </div>
-    
-      
-        <form class="md-header__option" data-md-component="palette">
-  
-    
-    
-    
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="light-blue"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
-    
-  
-</form>
-      
     
     
       <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
@@ -158,8 +138,6 @@
         </button>
       </nav>
       
-        <div class="md-search__suggest" data-md-component="search-suggest"></div>
-      
     </form>
     <div class="md-search__output">
       <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
@@ -177,13 +155,13 @@
     
     
       <div class="md-header__source">
-        <a href="https://github.com/aghabrego/docucenter-public" title="Ir al repositorio" class="md-source" data-md-component="source">
+        <a href="https://github.com/aghabrego/docucenter" title="Ir al repositorio" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
   </div>
   <div class="md-source__repository">
-    aghabrego/docucenter-public
+    aghabrego/docucenter
   </div>
 </a>
       </div>
@@ -196,154 +174,6 @@
       
       
         
-          
-            
-<nav class="md-tabs" aria-label="Pestañas" data-md-component="tabs">
-  <div class="md-grid">
-    <ul class="md-tabs__list">
-      
-        
-  
-  
-  
-  
-    <li class="md-tabs__item">
-      <a href="../.." class="md-tabs__link">
-        
-  
-  
-    
-  
-  Inicio
-
-      </a>
-    </li>
-  
-
-      
-        
-  
-  
-  
-  
-    
-    
-      <li class="md-tabs__item">
-        <a href="../../api/" class="md-tabs__link">
-          
-  
-  
-  APIs
-
-        </a>
-      </li>
-    
-  
-
-      
-        
-  
-  
-  
-  
-    
-    
-      <li class="md-tabs__item">
-        <a href="../../optimizations/" class="md-tabs__link">
-          
-  
-  
-  Optimizaciones
-
-        </a>
-      </li>
-    
-  
-
-      
-        
-  
-  
-  
-  
-    
-    
-      <li class="md-tabs__item">
-        <a href="../" class="md-tabs__link">
-          
-  
-  
-  Documentación Técnica
-
-        </a>
-      </li>
-    
-  
-
-      
-        
-  
-  
-  
-  
-    
-    
-      <li class="md-tabs__item">
-        <a href="../../validations/" class="md-tabs__link">
-          
-  
-  
-  Validaciones
-
-        </a>
-      </li>
-    
-  
-
-      
-        
-  
-  
-  
-  
-    
-    
-      <li class="md-tabs__item">
-        <a href="../../testing/" class="md-tabs__link">
-          
-  
-  
-  Testing
-
-        </a>
-      </li>
-    
-  
-
-      
-        
-  
-  
-  
-  
-    
-    
-      <li class="md-tabs__item">
-        <a href="../../integrations/" class="md-tabs__link">
-          
-  
-  
-  Integraciones
-
-        </a>
-      </li>
-    
-  
-
-      
-    </ul>
-  </div>
-</nav>
           
         
       
@@ -358,27 +188,25 @@
                     
 
 
-  
 
-
-<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navegación" data-md-level="0">
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../.." title="DocuCenter" class="md-nav__button md-logo" aria-label="DocuCenter" data-md-component="logo">
+    <a href="../.." title="Docucenter" class="md-nav__button md-logo" aria-label="Docucenter" data-md-component="logo">
       
-  <img src="https://home.apconpanama.me/wp-content/uploads/2024/03/logo3.png" alt="logo">
+  <img src="../../docs/logo.png" alt="logo">
 
     </a>
-    DocuCenter
+    Docucenter
   </label>
   
     <div class="md-nav__source">
-      <a href="https://github.com/aghabrego/docucenter-public" title="Ir al repositorio" class="md-source" data-md-component="source">
+      <a href="https://github.com/aghabrego/docucenter" title="Ir al repositorio" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
   </div>
   <div class="md-source__repository">
-    aghabrego/docucenter-public
+    aghabrego/docucenter
   </div>
 </a>
     </div>
@@ -422,19 +250,12 @@
     
     
     
-      
-      
-        
-      
-    
     
     <li class="md-nav__item md-nav__item--nested">
       
         
         
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
         
           
           <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
@@ -444,7 +265,7 @@
   <span class="md-ellipsis">
     
   
-    APIs
+    API Documentation
   
 
     
@@ -460,7 +281,54 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    APIs
+    API Documentation
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sage ACICloud
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Sage ACICloud
   
 
           </label>
@@ -473,14 +341,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../api/" class="md-nav__link">
+      <a href="../../api/sage-acicloud/invoices-api/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    APIs de DocuCenter
+    Facturación - Invoices
   
 
     
@@ -500,23 +368,248 @@
   
   
   
-    
-    
-    
-    
-      
-      
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/customers-api/" class="md-nav__link">
         
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Clientes - Customers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/vendors-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Proveedores - Vendors
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/purchases-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Compras - Purchases
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/products-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Productos - Products
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/jobs-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trabajos - Jobs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/accounting-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contabilidad General
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/payments-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pagos y Créditos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/inventory-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inventario - Inventory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
     
     
     <li class="md-nav__item md-nav__item--nested">
       
         
         
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
         
           
           <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
@@ -562,147 +655,7 @@
   <span class="md-ellipsis">
     
   
-    API Facturación Electrónica (FE) - DocuCenter
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../api/fe/acicloud-fe-api/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    API Facturación Electrónica - Integración ACICloud FE
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../api/fe/document-emission-api/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    API Facturación Electrónica - Emisión de Documentos
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../api/fe/shopify-api/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    API Facturación Electrónica - Integración Shopify
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../api/fe/lightspeed-api/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    API Facturación Electrónica - Integración Lightspeed
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../api/fe/maxgym-api/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    API Facturación Electrónica - Integración Maxgym
+    APIs de Facturación Electrónica
   
 
     
@@ -730,7 +683,35 @@
   <span class="md-ellipsis">
     
   
-    API Facturación Electrónica - Integración Meypar
+    Integración Meypar
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/shopify-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integración Shopify
   
 
     
@@ -758,7 +739,175 @@
   <span class="md-ellipsis">
     
   
-    API Facturación Electrónica - Integración Kart21
+    Integración Kart21
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/lightspeed-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integración Lightspeed
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/maxgym-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integración Maxgym
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/acicloud-fe-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ACICloud FE
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/import-xml-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Import XML
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/emit-json-object-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Emit JSON Object
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/download-base64-document-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Download Base64 Document
   
 
     
@@ -790,280 +939,15 @@
     
     
     
-      
-      
-        
-      
-    
     
     <li class="md-nav__item md-nav__item--nested">
       
         
         
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
         
           
           <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Sage ACICloud
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2_3">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Sage ACICloud
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../api/sage-acicloud/customers-api/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    API Sage ACICloud - Módulo Clientes
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../api/sage-acicloud/products-api/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    API Productos - Sage ACICloud
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../api/sage-acicloud/sales-orders-api/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    API Sage ACICloud - Módulo Órdenes de Venta
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../api/sage-acicloud/purchases-api/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    API Compras - Sage ACICloud
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../api/sage-acicloud/payments-api/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    API Pagos y Créditos - Sage ACICloud
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../api/sage-acicloud/inventory-api/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    API Inventario - Sage ACICloud
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../api/sage-acicloud/jobs-api/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    API Trabajos/Jobs - Sage ACICloud
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_4" >
-        
-          
-          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
             
   
   
@@ -1081,8 +965,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2_4">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -1106,7 +990,90 @@
   <span class="md-ellipsis">
     
   
-    API de Organizaciones
+    Gestión de Organizaciones
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ubicaciones Geográficas
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Ubicaciones Geográficas
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/locations/locations-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API de Ubicaciones
   
 
     
@@ -1145,19 +1112,12 @@
     
     
     
-      
-      
-        
-      
-    
     
     <li class="md-nav__item md-nav__item--nested">
       
         
         
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
         
           
           <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
@@ -1167,7 +1127,7 @@
   <span class="md-ellipsis">
     
   
-    Optimizaciones
+    Sistema de Testing
   
 
     
@@ -1183,7 +1143,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Optimizaciones
+    Sistema de Testing
   
 
           </label>
@@ -1196,96 +1156,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../optimizations/" class="md-nav__link">
+      <a href="../../testing/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Optimizaciones - DocuCenter
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_2" >
-        
-          
-          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Performance
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_3_2">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Performance
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../optimizations/customer-supplier-optimizations/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Optimizaciones para el manejo de muchos clientes
+    Índice de Testing
   
 
     
@@ -1306,14 +1184,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../optimizations/mysql-optimization-circuit-breaker/" class="md-nav__link">
+      <a href="../../TESTING_SYSTEM_SUMMARY/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Optimización MySQL 8.0 y Circuit Breaker para DocuCenter
+    Resumen Ejecutivo
   
 
     
@@ -1322,14 +1200,6 @@
   
 
       </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
     </li>
   
 
@@ -1352,19 +1222,12 @@
     
     
     
-      
-      
-        
-      
-    
     
     <li class="md-nav__item md-nav__item--nested">
       
         
         
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
         
           
           <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
@@ -1403,96 +1266,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
+      <a href="../README.md" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Documentación Técnica - DocuCenter
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_2" >
-        
-          
-          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    QuickBooks
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4_2">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    QuickBooks
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../quickbooks-webhook-organizationid-fix/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Fix: QuickBooks Webhook OrganizationId Duplicado
+    Soluciones
   
 
     
@@ -1513,660 +1294,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../quickbooks-bills-job-graceful-validation/" class="md-nav__link">
+      <a href="../lightspeed_audit_improvement/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Fix: Validación Graceful de Tablas en CreateIntuitBillsJob
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../quickbooks-fiscal-number-validation-system/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Sistema de Validación de Números Fiscales QuickBooks
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_3" >
-        
-          
-          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    MaxGym
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4_3">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    MaxGym
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../maxgym-amount-calculation-fix/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Corrección de Cálculo de Montos en MaxGym API
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_4" >
-        
-          
-          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Document AI
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4_4">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Document AI
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../document-ai-import-to-workbench/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Document AI - Importación a Workbench
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../document-ai-import-implementation-summary/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Document AI - Implementación Import to Workbench
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_5" >
-        
-          
-          <label class="md-nav__link" for="__nav_4_5" id="__nav_4_5_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Alanube DOM
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_5_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4_5">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Alanube DOM
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../alanube-dom-service-usage/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Guía de Uso del Servicio AlanubeDomService
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../alanube-dom-export-invoices/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Facturas de Exportación Electrónica (46) - Alanube DOM
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../ALANUBE_DOM_COMPLETE_INTEGRATION/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Integración Completa Alanube DOM - República Dominicana
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../FISCAL_CREDIT_IMPLEMENTATION_SUMMARY/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Implementación Completa de Facturas de Crédito Fiscal (31) - Alanube DOM
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_6" >
-        
-          
-          <label class="md-nav__link" for="__nav_4_6" id="__nav_4_6_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Soluciones Técnicas
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_6_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4_6">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Soluciones Técnicas
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../ezeeissued-solution-summary/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Solución Implementada - Campo EzeeIssued
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../getsaleproperty-optimizations-summary/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Optimizaciones Completas - getSaleProperty() - Create.php
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../ezeeissued-field-correction-summary/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Corrección de Campo EzeeIssued - Resumen Técnico
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_7" >
-        
-          
-          <label class="md-nav__link" for="__nav_4_7" id="__nav_4_7_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Pagos y Cálculos
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_7_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4_7">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Pagos y Cálculos
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../payment-calculation-fix/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Análisis de Discrepancias en Cálculo de Pagos - Facturación Electrónica
+    Auditoría Lightspeed
   
 
     
@@ -2194,97 +1329,7 @@
   <span class="md-ellipsis">
     
   
-    Solución Final: Sincronización Completa de Pagos en Facturación Electrónica
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_8" >
-        
-          
-          <label class="md-nav__link" for="__nav_4_8" id="__nav_4_8_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    SQL Server
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_8_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4_8">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    SQL Server
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../sql-server-complete-store-id-filtering/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Implementación Completa de Filtrado por Store ID en Jobs SQL Server
+    Sincronización de Pagos
   
 
     
@@ -2305,14 +1350,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../sql-server-store-id-filtering/" class="md-nav__link">
+      <a href="../payment-calculation-fix/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Implementación de Filtrado por Store ID en STInvoiceJob
+    Corrección Cálculo Pagos
   
 
     
@@ -2332,14 +1377,6 @@
     </li>
   
 
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
     
       
       
@@ -2350,20 +1387,13 @@
     
     
     
-    
-      
-      
-        
-      
     
     
     <li class="md-nav__item md-nav__item--nested">
       
         
         
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
         
           
           <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
@@ -2409,7 +1439,7 @@
   <span class="md-ellipsis">
     
   
-    Validaciones - DocuCenter
+    Resumen
   
 
     
@@ -2429,60 +1459,6 @@
   
   
   
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5_2" >
-        
-          
-          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Documentos Fiscales
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_5_2">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Documentos Fiscales
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
     <li class="md-nav__item">
       <a href="../../validations/createSale-ruc-validation/" class="md-nav__link">
         
@@ -2491,7 +1467,7 @@
   <span class="md-ellipsis">
     
   
-    Validación de RUC en CreateSaleMaxgymRequest
+    Validación RUC CreateSale
   
 
     
@@ -2519,365 +1495,7 @@
   <span class="md-ellipsis">
     
   
-    Validación de RUC en MaxgymService
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
-        
-          
-          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Testing
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_6">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Testing
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../testing/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Sistema de Testing DocuCenter
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6_2" >
-        
-          
-          <label class="md-nav__link" for="__nav_6_2" id="__nav_6_2_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Reportes de Error
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_2_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_6_2">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Reportes de Error
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../testing/PLUSMOVIL-PRODUCTION-ERROR-REPORT/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Reporte Error PlusMóvil Producción
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
-        
-          
-          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Integraciones
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_7">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Integraciones
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../integrations/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Integraciones Disponibles
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7_2" >
-        
-          
-          <label class="md-nav__link" for="__nav_7_2" id="__nav_7_2_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    PlusMóvil
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_2_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_7_2">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    PlusMóvil
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../integrations/plusmovil-implementation-summary/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Resumen Implementación
+    Validación RUC Maxgym
   
 
     
@@ -2898,14 +1516,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../integrations/plusmovil-implementation-analysis/" class="md-nav__link">
+      <a href="../../validations/meypar-validations/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Análisis
+    Validaciones MEYPAR
   
 
     
@@ -2926,14 +1544,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../integrations/plusmovil-api-testing-results/" class="md-nav__link">
+      <a href="../../validations/validation_comparison/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Resultados Testing API
+    Comparación Validaciones
   
 
     
@@ -2942,70 +1560,6 @@
   
 
       </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../integrations/plusmovil-continuation-plan/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Plan Continuación
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../integrations/plusmovil-next-steps/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Próximos Pasos
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
     </li>
   
 
@@ -3048,7 +1602,7 @@
   <a href="#indice" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Índice
+        📋 Índice
       
     </span>
   </a>
@@ -3059,12 +1613,12 @@
   <a href="#problema-identificado" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Problema Identificado
+        🎯 Problema Identificado
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Problema Identificado">
+    <nav class="md-nav" aria-label="🎯 Problema Identificado">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -3087,12 +1641,12 @@
   <a href="#tablas-afectadas" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Tablas Afectadas
+        📊 Tablas Afectadas
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Tablas Afectadas">
+    <nav class="md-nav" aria-label="📊 Tablas Afectadas">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -3126,12 +1680,12 @@
   <a href="#analisis-del-codigo-actual" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Análisis del Código Actual
+        🔍 Análisis del Código Actual
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Análisis del Código Actual">
+    <nav class="md-nav" aria-label="🔍 Análisis del Código Actual">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -3165,12 +1719,12 @@
   <a href="#escenario-de-colision" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Escenario de Colisión
+        💥 Escenario de Colisión
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Escenario de Colisión">
+    <nav class="md-nav" aria-label="💥 Escenario de Colisión">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -3211,7 +1765,7 @@
   <a href="#resultado-sin-estrategia-colision" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Resultado Sin Estrategia (Colisión)
+        ❌ Resultado Sin Estrategia (Colisión)
       
     </span>
   </a>
@@ -3222,7 +1776,7 @@
   <a href="#resultado-con-estrategia-correcto" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Resultado Con Estrategia (Correcto)
+        ✅ Resultado Con Estrategia (Correcto)
       
     </span>
   </a>
@@ -3243,12 +1797,12 @@
   <a href="#solucion-propuesta" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Solución Propuesta
+        ✅ Solución Propuesta
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Solución Propuesta">
+    <nav class="md-nav" aria-label="✅ Solución Propuesta">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -3310,12 +1864,12 @@
   <a href="#implementacion-necesaria" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Implementación Necesaria
+        🛠 Implementación Necesaria
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Implementación Necesaria">
+    <nav class="md-nav" aria-label="🛠 Implementación Necesaria">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -3455,12 +2009,12 @@
   <a href="#consideraciones-adicionales" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Consideraciones Adicionales
+        🔧 Consideraciones Adicionales
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Consideraciones Adicionales">
+    <nav class="md-nav" aria-label="🔧 Consideraciones Adicionales">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -3516,12 +2070,12 @@
   <a href="#plan-de-accion" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Plan de Acción
+        📝 Plan de Acción
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Plan de Acción">
+    <nav class="md-nav" aria-label="📝 Plan de Acción">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -3577,12 +2131,12 @@
   <a href="#testing" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Testing
+        🧪 Testing
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Testing">
+    <nav class="md-nav" aria-label="🧪 Testing">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -3638,12 +2192,12 @@
   <a href="#riesgos-y-mitigaciones" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Riesgos y Mitigaciones
+        ⚠️ Riesgos y Mitigaciones
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Riesgos y Mitigaciones">
+    <nav class="md-nav" aria-label="⚠️ Riesgos y Mitigaciones">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -3666,12 +2220,12 @@
   <a href="#metricas-de-exito" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Métricas de Éxito
+        📈 Métricas de Éxito
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Métricas de Éxito">
+    <nav class="md-nav" aria-label="📈 Métricas de Éxito">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -3705,12 +2259,12 @@
   <a href="#referencias" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Referencias
+        📚 Referencias
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Referencias">
+    <nav class="md-nav" aria-label="📚 Referencias">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -3744,7 +2298,7 @@
   <a href="#historial-de-cambios" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Historial de Cambios
+        🔄 Historial de Cambios
       
     </span>
   </a>
@@ -3755,7 +2309,7 @@
   <a href="#proximos-pasos" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Próximos Pasos
+        ✅ Próximos Pasos
       
     </span>
   </a>
@@ -3782,13 +2336,13 @@
   
 
 
-<h1 id="estrategia-de-consolidacion-tablas-header-detail-con-auto-increment">Estrategia de Consolidación: Tablas Header-Detail con Auto-Increment<a class="headerlink" href="#estrategia-de-consolidacion-tablas-header-detail-con-auto-increment" title="Permanent link">&para;</a></h1>
+<h1 id="estrategia-de-consolidacion-tablas-header-detail-con-auto-increment">Estrategia de Consolidación: Tablas Header-Detail con Auto-Increment</h1>
 <p><strong>Documento de Análisis y Planificación</strong><br />
 <strong>Fecha:</strong> 18 de diciembre, 2025<br />
 <strong>Estado:</strong> En Planificación<br />
 <strong>Ubicación:</strong> <code>docs/technical/consolidation-header-detail-strategy.md</code></p>
 <hr />
-<h2 id="indice">Índice<a class="headerlink" href="#indice" title="Permanent link">&para;</a></h2>
+<h2 id="indice">📋 Índice</h2>
 <ol>
 <li><a href="#problema-identificado">Problema Identificado</a></li>
 <li><a href="#tablas-afectadas">Tablas Afectadas</a></li>
@@ -3802,17 +2356,17 @@
 <li><a href="#riesgos-y-mitigaciones">Riesgos y Mitigaciones</a></li>
 </ol>
 <hr />
-<h2 id="problema-identificado">Problema Identificado<a class="headerlink" href="#problema-identificado" title="Permanent link">&para;</a></h2>
+<h2 id="problema-identificado">🎯 Problema Identificado</h2>
 <p>Cuando se consolidan datos de múltiples organizaciones en una sola compañía (company), las tablas con relaciones <strong>Header → Detail</strong> tienen IDs auto-incrementales que <strong>COLISIONARÁN</strong> entre organizaciones diferentes.</p>
-<h3 id="contexto">Contexto<a class="headerlink" href="#contexto" title="Permanent link">&para;</a></h3>
+<h3 id="contexto">Contexto</h3>
 <ul>
 <li><strong>Job Actual:</strong> <code>app/Jobs/SyncOrganizationToCompanyJob.php</code></li>
 <li><strong>Operación:</strong> Mover datos de BD de organización → BD de compañía consolidada</li>
 <li><strong>Problema:</strong> Los <code>TransactionID</code>, <code>UniqueReceiptID</code>, etc., se repiten entre organizaciones</li>
 </ul>
 <hr />
-<h2 id="tablas-afectadas">Tablas Afectadas<a class="headerlink" href="#tablas-afectadas" title="Permanent link">&para;</a></h2>
-<h3 id="pares-header-detail-identificados-9-pares">Pares Header-Detail Identificados (9 pares)<a class="headerlink" href="#pares-header-detail-identificados-9-pares" title="Permanent link">&para;</a></h3>
+<h2 id="tablas-afectadas">📊 Tablas Afectadas</h2>
+<h3 id="pares-header-detail-identificados-9-pares">Pares Header-Detail Identificados (9 pares)</h3>
 <table>
 <thead>
 <tr>
@@ -3830,7 +2384,7 @@
 <td><code>Customer_Credit_Memo_Header_Imp</code></td>
 <td><code>Customer_Credit_Memo_Detail_Imp</code></td>
 <td><code>TransactionID</code></td>
-<td>SÍ</td>
+<td>✅ SÍ</td>
 <td>Alta</td>
 </tr>
 <tr>
@@ -3838,7 +2392,7 @@
 <td><code>GJE_Header_Imp</code></td>
 <td><code>GJE_Detail_Imp</code></td>
 <td><code>TransactionID</code></td>
-<td>SÍ</td>
+<td>✅ SÍ</td>
 <td><strong>Implementado</strong></td>
 </tr>
 <tr>
@@ -3846,7 +2400,7 @@
 <td><code>Purchase_Header_Imp</code></td>
 <td><code>Purchase_Detail_Imp</code></td>
 <td><code>TransactionID</code></td>
-<td>SÍ</td>
+<td>✅ SÍ</td>
 <td>Alta</td>
 </tr>
 <tr>
@@ -3854,7 +2408,7 @@
 <td><code>customer_receipt_header_imp</code></td>
 <td><code>customer_receipt_detail_imp</code></td>
 <td><code>UniqueReceiptID</code></td>
-<td>SÍ</td>
+<td>✅ SÍ</td>
 <td>Alta</td>
 </tr>
 <tr>
@@ -3862,7 +2416,7 @@
 <td><code>vendor_payment_header_imp</code></td>
 <td><code>vendor_payment_detail_imp</code></td>
 <td><code>UniquePaymentID</code></td>
-<td>SÍ</td>
+<td>✅ SÍ</td>
 <td>Alta</td>
 </tr>
 <tr>
@@ -3870,7 +2424,7 @@
 <td><code>fe_header</code></td>
 <td><code>fe_detail</code>, <code>fe_payment</code></td>
 <td><code>feHeaderId</code> / <code>id</code></td>
-<td>SÍ</td>
+<td>✅ SÍ</td>
 <td>Media</td>
 </tr>
 <tr>
@@ -3878,7 +2432,7 @@
 <td><code>PurOrdr_Header_Exp</code></td>
 <td><code>PurOrdr_Detail_Exp</code></td>
 <td><code>TransactionID</code></td>
-<td><strong>Por verificar</strong></td>
+<td>⚠️ <strong>Por verificar</strong></td>
 <td>Baja</td>
 </tr>
 <tr>
@@ -3886,7 +2440,7 @@
 <td><code>SalesInvoice_Header_Exp</code></td>
 <td><code>SalesInvoice_Detail_Exp</code></td>
 <td><code>TransactionID</code></td>
-<td><strong>Por verificar</strong></td>
+<td>⚠️ <strong>Por verificar</strong></td>
 <td>Baja</td>
 </tr>
 <tr>
@@ -3894,38 +2448,40 @@
 <td><code>SalesOrder_Header_Exp</code></td>
 <td><code>SalesOrder_Detail_Exp</code></td>
 <td><code>TransactionID</code></td>
-<td><strong>Por verificar</strong></td>
+<td>⚠️ <strong>Por verificar</strong></td>
 <td>Baja</td>
 </tr>
 </tbody>
 </table>
-<h3 id="primary-keys-por-modelo">Primary Keys por Modelo<a class="headerlink" href="#primary-keys-por-modelo" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">// Verificado en app/Models/</span>
+<h3 id="primary-keys-por-modelo">Primary Keys por Modelo</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">// Verificado en app/Models/</span>
 <span class="x">CustomerCreditMemoHeaderImp::$primaryKey = &#39;TransactionID&#39;;  // auto_increment = true</span>
-<span class="x">GJEHeaderImp::$primaryKey = &#39;TransactionID&#39;;                 // auto_increment = true  YA IMPLEMENTADO</span>
+<span class="x">GJEHeaderImp::$primaryKey = &#39;TransactionID&#39;;                 // auto_increment = true  ✅ YA IMPLEMENTADO</span>
 <span class="x">PurchaseHeaderImp::$primaryKey = &#39;TransactionID&#39;;            // auto_increment = true</span>
 <span class="x">CustomerReceiptHeaderImp::$primaryKey = &#39;UniqueReceiptID&#39;;   // auto_increment = true</span>
 <span class="x">VendorPaymentHeaderImp::$primaryKey = &#39;UniquePaymentID&#39;;     // auto_increment = true</span>
 <span class="x">FeHeader::$primaryKey = &#39;id&#39;;                                // auto_increment = true</span>
-<span class="x">PurOrdrHeaderExp::$primaryKey = &#39;ID&#39;;                        // verificar</span>
-<span class="x">SalesInvoiceHeaderExp::$primaryKey = &#39;id&#39;;                   // verificar</span>
-<span class="x">SalesOrderHeaderExp::$primaryKey = &#39;ID&#39;;                     // verificar</span>
+<span class="x">PurOrdrHeaderExp::$primaryKey = &#39;ID&#39;;                        // ⚠️ verificar</span>
+<span class="x">SalesInvoiceHeaderExp::$primaryKey = &#39;id&#39;;                   // ⚠️ verificar</span>
+<span class="x">SalesOrderHeaderExp::$primaryKey = &#39;ID&#39;;                     // ⚠️ verificar</span>
 </code></pre></div>
+
 <hr />
-<h2 id="analisis-del-codigo-actual">Análisis del Código Actual<a class="headerlink" href="#analisis-del-codigo-actual" title="Permanent link">&para;</a></h2>
-<h3 id="implementacion-parcial-existente">Implementación Parcial Existente<a class="headerlink" href="#implementacion-parcial-existente" title="Permanent link">&para;</a></h3>
+<h2 id="analisis-del-codigo-actual">🔍 Análisis del Código Actual</h2>
+<h3 id="implementacion-parcial-existente">Implementación Parcial Existente</h3>
 <p><strong>Ubicación:</strong> <code>app/Jobs/SyncOrganizationToCompanyJob.php</code> (Líneas 144-166)</p>
-<div class="highlight"><pre><span></span><code><span class="x">// Para GJE_Header_Imp: mapear TransactionID origen a source_transaction_id</span>
+<div class="codehilite"><pre><span></span><code><span class="x">// Para GJE_Header_Imp: mapear TransactionID origen a source_transaction_id</span>
 <span class="x">if ($table === &#39;GJE_Header_Imp&#39; &amp;&amp; isset($recordArray[&#39;TransactionID&#39;])) {</span>
 <span class="x">    $filteredRecord[&#39;source_transaction_id&#39;] = $recordArray[&#39;TransactionID&#39;];</span>
 <span class="x">    // No enviar TransactionID para que sea AUTO_INCREMENT en consolidación</span>
 <span class="x">    unset($filteredRecord[&#39;TransactionID&#39;]);</span>
 <span class="x">}</span>
 </code></pre></div>
-<p><strong>ESTA ES LA ESTRATEGIA CORRECTA</strong></p>
-<p><strong>PROBLEMA:</strong> Solo está aplicada a <code>GJE_Header_Imp</code>, faltan 5 tablas más (o 8 si incluimos las Export).</p>
-<h3 id="comportamiento-actual-del-chunk-processing">Comportamiento Actual del Chunk Processing<a class="headerlink" href="#comportamiento-actual-del-chunk-processing" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">DB::table($table)-&gt;orderBy($orderByColumn)-&gt;chunk($chunkSize, function ($records) use (...) {</span>
+
+<p><strong>✅ ESTA ES LA ESTRATEGIA CORRECTA</strong></p>
+<p><strong>❌ PROBLEMA:</strong> Solo está aplicada a <code>GJE_Header_Imp</code>, faltan 5 tablas más (o 8 si incluimos las Export).</p>
+<h3 id="comportamiento-actual-del-chunk-processing">Comportamiento Actual del Chunk Processing</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">DB::table($table)-&gt;orderBy($orderByColumn)-&gt;chunk($chunkSize, function ($records) use (...) {</span>
 <span class="x">    DB::connection()-&gt;useDatabase($company-&gt;database);</span>
 <span class="x">    $batchData = [];</span>
 
@@ -3939,17 +2495,18 @@
 <span class="x">    }</span>
 
 <span class="x">    if (!empty($batchData)) {</span>
-<span class="x">        $this-&gt;insertBatch($table, $batchData);  // No captura IDs generados</span>
+<span class="x">        $this-&gt;insertBatch($table, $batchData);  // ❌ No captura IDs generados</span>
 <span class="x">        $syncedCount += count($batchData);</span>
 <span class="x">    }</span>
 <span class="x">});</span>
 </code></pre></div>
+
 <p><strong>Problema:</strong> <code>insertBatch()</code> usa <code>INSERT ... ON DUPLICATE KEY UPDATE</code> pero no retorna los IDs generados.</p>
 <hr />
-<h2 id="escenario-de-colision">Escenario de Colisión<a class="headerlink" href="#escenario-de-colision" title="Permanent link">&para;</a></h2>
-<h3 id="ejemplo-practico-customer_credit_memo">Ejemplo Práctico: Customer_Credit_Memo<a class="headerlink" href="#ejemplo-practico-customer_credit_memo" title="Permanent link">&para;</a></h3>
-<h4 id="organizacion-a-bd-9_734_1672_56-org_id-100">Organización A (BD: <code>9_734_1672_56</code>, org_id: 100)<a class="headerlink" href="#organizacion-a-bd-9_734_1672_56-org_id-100" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="c1">-- Customer_Credit_Memo_Header_Imp</span>
+<h2 id="escenario-de-colision">💥 Escenario de Colisión</h2>
+<h3 id="ejemplo-practico-customer_credit_memo">Ejemplo Práctico: Customer_Credit_Memo</h3>
+<h4 id="organizacion-a-bd-9_734_1672_56-org_id-100">Organización A (BD: <code>9_734_1672_56</code>, org_id: 100)</h4>
+<div class="codehilite"><pre><span></span><code><span class="c1">-- Customer_Credit_Memo_Header_Imp</span>
 <span class="n">TransactionID</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">ID_compania</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">CreditNumber</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">CustomerID</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">org_source_id</span>
 <span class="mi">1</span><span class="w">             </span><span class="o">|</span><span class="w"> </span><span class="mi">50</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="n">CM001</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">CUST001</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="k">NULL</span>
 <span class="mi">2</span><span class="w">             </span><span class="o">|</span><span class="w"> </span><span class="mi">50</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="n">CM002</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">CUST002</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="k">NULL</span>
@@ -3960,8 +2517,9 @@
 <span class="mi">2</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="mi">1</span><span class="w">             </span><span class="o">|</span><span class="w"> </span><span class="n">PROD002</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="n">Product</span><span class="w"> </span><span class="n">B</span><span class="w">      </span><span class="o">|</span><span class="w"> </span><span class="k">NULL</span>
 <span class="mi">3</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="mi">2</span><span class="w">             </span><span class="o">|</span><span class="w"> </span><span class="n">PROD003</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="n">Product</span><span class="w"> </span><span class="k">C</span><span class="w">      </span><span class="o">|</span><span class="w"> </span><span class="k">NULL</span>
 </code></pre></div>
-<h4 id="organizacion-b-bd-9_734_1672_57-org_id-101">Organización B (BD: <code>9_734_1672_57</code>, org_id: 101)<a class="headerlink" href="#organizacion-b-bd-9_734_1672_57-org_id-101" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="c1">-- Customer_Credit_Memo_Header_Imp</span>
+
+<h4 id="organizacion-b-bd-9_734_1672_57-org_id-101">Organización B (BD: <code>9_734_1672_57</code>, org_id: 101)</h4>
+<div class="codehilite"><pre><span></span><code><span class="c1">-- Customer_Credit_Memo_Header_Imp</span>
 <span class="n">TransactionID</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">ID_compania</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">CreditNumber</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">CustomerID</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">org_source_id</span>
 <span class="mi">1</span><span class="w">             </span><span class="o">|</span><span class="w"> </span><span class="mi">51</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="n">CM100</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">CUST100</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="k">NULL</span>
 <span class="mi">2</span><span class="w">             </span><span class="o">|</span><span class="w"> </span><span class="mi">51</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="n">CM101</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">CUST101</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="k">NULL</span>
@@ -3972,21 +2530,23 @@
 <span class="mi">2</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="mi">1</span><span class="w">             </span><span class="o">|</span><span class="w"> </span><span class="n">SERV002</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="n">Service</span><span class="w"> </span><span class="n">Y</span><span class="w">      </span><span class="o">|</span><span class="w"> </span><span class="k">NULL</span>
 <span class="mi">3</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="mi">2</span><span class="w">             </span><span class="o">|</span><span class="w"> </span><span class="n">SERV003</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="n">Service</span><span class="w"> </span><span class="n">Z</span><span class="w">      </span><span class="o">|</span><span class="w"> </span><span class="k">NULL</span>
 </code></pre></div>
-<h4 id="resultado-sin-estrategia-colision">Resultado Sin Estrategia (Colisión)<a class="headerlink" href="#resultado-sin-estrategia-colision" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="c1">-- Company BD Consolidada</span>
+
+<h4 id="resultado-sin-estrategia-colision">❌ Resultado Sin Estrategia (Colisión)</h4>
+<div class="codehilite"><pre><span></span><code><span class="c1">-- Company BD Consolidada</span>
 <span class="c1">-- Customer_Credit_Memo_Header_Imp</span>
 <span class="n">TransactionID</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">ID_compania</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">CreditNumber</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">org_source_id</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">source_transaction_id</span>
 <span class="mi">1</span><span class="w">             </span><span class="o">|</span><span class="w"> </span><span class="mi">50</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="n">CM001</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="mi">100</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="k">NULL</span>
-<span class="n">ERROR</span><span class="p">:</span><span class="w"> </span><span class="n">Duplicate</span><span class="w"> </span><span class="n">entry</span><span class="w"> </span><span class="s1">&#39;1&#39;</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="k">key</span><span class="w"> </span><span class="s1">&#39;PRIMARY&#39;</span><span class="w"> </span><span class="n">al</span><span class="w"> </span><span class="n">intentar</span><span class="w"> </span><span class="n">insertar</span><span class="w"> </span><span class="n">Org</span><span class="w"> </span><span class="n">B</span>
+<span class="err">❌</span><span class="w"> </span><span class="n">ERROR</span><span class="p">:</span><span class="w"> </span><span class="n">Duplicate</span><span class="w"> </span><span class="n">entry</span><span class="w"> </span><span class="s1">&#39;1&#39;</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="k">key</span><span class="w"> </span><span class="s1">&#39;PRIMARY&#39;</span><span class="w"> </span><span class="n">al</span><span class="w"> </span><span class="n">intentar</span><span class="w"> </span><span class="n">insertar</span><span class="w"> </span><span class="n">Org</span><span class="w"> </span><span class="n">B</span>
 
 <span class="c1">-- Customer_Credit_Memo_Detail_Imp</span>
 <span class="n">DetailID</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">TransactionID</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Item_id</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="n">org_source_id</span>
 <span class="mi">1</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="mi">1</span><span class="w">             </span><span class="o">|</span><span class="w"> </span><span class="n">PROD001</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="mi">100</span>
 <span class="mi">2</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="mi">1</span><span class="w">             </span><span class="o">|</span><span class="w"> </span><span class="n">PROD002</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="mi">100</span>
-<span class="n">Detail</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">Org</span><span class="w"> </span><span class="n">B</span><span class="w"> </span><span class="k">no</span><span class="w"> </span><span class="n">se</span><span class="w"> </span><span class="n">puede</span><span class="w"> </span><span class="n">insertar</span><span class="w"> </span><span class="n">porque</span><span class="w"> </span><span class="n">header</span><span class="w"> </span><span class="n">falló</span>
+<span class="err">❌</span><span class="w"> </span><span class="n">Detail</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">Org</span><span class="w"> </span><span class="n">B</span><span class="w"> </span><span class="k">no</span><span class="w"> </span><span class="n">se</span><span class="w"> </span><span class="n">puede</span><span class="w"> </span><span class="n">insertar</span><span class="w"> </span><span class="n">porque</span><span class="w"> </span><span class="n">header</span><span class="w"> </span><span class="n">falló</span>
 </code></pre></div>
-<h4 id="resultado-con-estrategia-correcto">Resultado Con Estrategia (Correcto)<a class="headerlink" href="#resultado-con-estrategia-correcto" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="c1">-- Company BD Consolidada</span>
+
+<h4 id="resultado-con-estrategia-correcto">✅ Resultado Con Estrategia (Correcto)</h4>
+<div class="codehilite"><pre><span></span><code><span class="c1">-- Company BD Consolidada</span>
 <span class="c1">-- Customer_Credit_Memo_Header_Imp</span>
 <span class="n">TransactionID</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">ID_compania</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">CreditNumber</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">org_source_id</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">source_transaction_id</span>
 <span class="mi">1</span><span class="w">             </span><span class="o">|</span><span class="w"> </span><span class="mi">50</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="n">CM001</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="mi">100</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="mi">1</span><span class="w">  </span><span class="c1">-- Original de Org A</span>
@@ -3999,45 +2559,47 @@
 <span class="mi">1</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="mi">1</span><span class="w">             </span><span class="o">|</span><span class="w"> </span><span class="n">PROD001</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="mi">100</span>
 <span class="mi">2</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="mi">1</span><span class="w">             </span><span class="o">|</span><span class="w"> </span><span class="n">PROD002</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="mi">100</span>
 <span class="mi">3</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="mi">2</span><span class="w">             </span><span class="o">|</span><span class="w"> </span><span class="n">PROD003</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="mi">100</span>
-<span class="mi">4</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="mi">3</span><span class="w">             </span><span class="o">|</span><span class="w"> </span><span class="n">SERV001</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="mi">101</span><span class="w">  </span><span class="c1">-- Usa NUEVO TransactionID (3)</span>
-<span class="mi">5</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="mi">3</span><span class="w">             </span><span class="o">|</span><span class="w"> </span><span class="n">SERV002</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="mi">101</span><span class="w">  </span><span class="c1">-- Usa NUEVO TransactionID (3)</span>
-<span class="mi">6</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="mi">4</span><span class="w">             </span><span class="o">|</span><span class="w"> </span><span class="n">SERV003</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="mi">101</span><span class="w">  </span><span class="c1">-- Usa NUEVO TransactionID (4)</span>
+<span class="mi">4</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="mi">3</span><span class="w">             </span><span class="o">|</span><span class="w"> </span><span class="n">SERV001</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="mi">101</span><span class="w">  </span><span class="c1">-- ✅ Usa NUEVO TransactionID (3)</span>
+<span class="mi">5</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="mi">3</span><span class="w">             </span><span class="o">|</span><span class="w"> </span><span class="n">SERV002</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="mi">101</span><span class="w">  </span><span class="c1">-- ✅ Usa NUEVO TransactionID (3)</span>
+<span class="mi">6</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="mi">4</span><span class="w">             </span><span class="o">|</span><span class="w"> </span><span class="n">SERV003</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="mi">101</span><span class="w">  </span><span class="c1">-- ✅ Usa NUEVO TransactionID (4)</span>
 </code></pre></div>
+
 <hr />
-<h2 id="solucion-propuesta">Solución Propuesta<a class="headerlink" href="#solucion-propuesta" title="Permanent link">&para;</a></h2>
-<h3 id="estrategia-generar-nuevos-ids-columna-source-tracking">Estrategia: Generar Nuevos IDs + Columna Source Tracking<a class="headerlink" href="#estrategia-generar-nuevos-ids-columna-source-tracking" title="Permanent link">&para;</a></h3>
-<h4 id="para-header-tables">Para HEADER Tables:<a class="headerlink" href="#para-header-tables" title="Permanent link">&para;</a></h4>
+<h2 id="solucion-propuesta">✅ Solución Propuesta</h2>
+<h3 id="estrategia-generar-nuevos-ids-columna-source-tracking">Estrategia: Generar Nuevos IDs + Columna Source Tracking</h3>
+<h4 id="para-header-tables">Para HEADER Tables:</h4>
 <ol>
 <li><strong>Agregar columna</strong> <code>source_*</code> para guardar ID original</li>
 <li><strong>NO enviar</strong> el PK al insertar (dejar auto-increment generar nuevo ID)</li>
 <li><strong>Capturar</strong> el nuevo ID generado</li>
 <li><strong>Mapear</strong> <code>ID_nuevo → ID_original</code> en memoria</li>
 </ol>
-<h4 id="para-detail-tables">Para DETAIL Tables:<a class="headerlink" href="#para-detail-tables" title="Permanent link">&para;</a></h4>
+<h4 id="para-detail-tables">Para DETAIL Tables:</h4>
 <ol>
 <li><strong>Esperar</strong> a que headers se inserten primero</li>
 <li><strong>Usar mapeo</strong> para actualizar FK con nuevo ID</li>
 <li><strong>Insertar</strong> details con nuevo ID de header</li>
 </ol>
-<h3 id="flujo-de-sincronizacion">Flujo de Sincronización<a class="headerlink" href="#flujo-de-sincronizacion" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>1. Detectar si tabla es Header con auto-increment
-   ↓
-2. Procesar Headers:
-   - Guardar TransactionID original en source_transaction_id
-   - Omitir TransactionID (auto-increment generará nuevo)
-   - Capturar nuevo ID: DB::getPdo()-&gt;lastInsertId()
-   - Guardar mapeo: [ID_original] =&gt; ID_nuevo
-   ↓
-3. Procesar Details relacionados:
-   - Buscar details con FK = ID_original
-   - Actualizar FK con ID_nuevo del mapeo
-   - Insertar en BD consolidada
+<h3 id="flujo-de-sincronizacion">Flujo de Sincronización</h3>
+<div class="codehilite"><pre><span></span><code><span class="mf">1.</span><span class="w"> </span><span class="n">Detectar</span><span class="w"> </span><span class="n">si</span><span class="w"> </span><span class="n">tabla</span><span class="w"> </span><span class="n">es</span><span class="w"> </span><span class="n">Header</span><span class="w"> </span><span class="n">con</span><span class="w"> </span><span class="n">auto</span><span class="o">-</span><span class="n">increment</span>
+<span class="w">   </span><span class="err">↓</span>
+<span class="mf">2.</span><span class="w"> </span><span class="n">Procesar</span><span class="w"> </span><span class="nl">Headers</span><span class="p">:</span>
+<span class="w">   </span><span class="o">-</span><span class="w"> </span><span class="n">Guardar</span><span class="w"> </span><span class="n">TransactionID</span><span class="w"> </span><span class="n">original</span><span class="w"> </span><span class="n">en</span><span class="w"> </span><span class="n">source_transaction_id</span>
+<span class="w">   </span><span class="o">-</span><span class="w"> </span><span class="n">Omitir</span><span class="w"> </span><span class="n">TransactionID</span><span class="w"> </span><span class="p">(</span><span class="n">auto</span><span class="o">-</span><span class="n">increment</span><span class="w"> </span><span class="n">generará</span><span class="w"> </span><span class="n">nuevo</span><span class="p">)</span>
+<span class="w">   </span><span class="o">-</span><span class="w"> </span><span class="n">Capturar</span><span class="w"> </span><span class="n">nuevo</span><span class="w"> </span><span class="nl">ID</span><span class="p">:</span><span class="w"> </span><span class="nl">DB</span><span class="p">:</span><span class="err">:</span><span class="n">getPdo</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">lastInsertId</span><span class="p">()</span>
+<span class="w">   </span><span class="o">-</span><span class="w"> </span><span class="n">Guardar</span><span class="w"> </span><span class="nl">mapeo</span><span class="p">:</span><span class="w"> </span><span class="o">[</span><span class="n">ID_original</span><span class="o">]</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">ID_nuevo</span>
+<span class="w">   </span><span class="err">↓</span>
+<span class="mf">3.</span><span class="w"> </span><span class="n">Procesar</span><span class="w"> </span><span class="n">Details</span><span class="w"> </span><span class="nl">relacionados</span><span class="p">:</span>
+<span class="w">   </span><span class="o">-</span><span class="w"> </span><span class="n">Buscar</span><span class="w"> </span><span class="n">details</span><span class="w"> </span><span class="n">con</span><span class="w"> </span><span class="n">FK</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ID_original</span>
+<span class="w">   </span><span class="o">-</span><span class="w"> </span><span class="n">Actualizar</span><span class="w"> </span><span class="n">FK</span><span class="w"> </span><span class="n">con</span><span class="w"> </span><span class="n">ID_nuevo</span><span class="w"> </span><span class="n">del</span><span class="w"> </span><span class="n">mapeo</span>
+<span class="w">   </span><span class="o">-</span><span class="w"> </span><span class="n">Insertar</span><span class="w"> </span><span class="n">en</span><span class="w"> </span><span class="n">BD</span><span class="w"> </span><span class="n">consolidada</span>
 </code></pre></div>
+
 <hr />
-<h2 id="implementacion-necesaria">Implementación Necesaria<a class="headerlink" href="#implementacion-necesaria" title="Permanent link">&para;</a></h2>
-<h3 id="fase-1-migraciones-de-base-de-datos">Fase 1: Migraciones de Base de Datos<a class="headerlink" href="#fase-1-migraciones-de-base-de-datos" title="Permanent link">&para;</a></h3>
-<h4 id="script-sql-para-columnas-source">Script SQL para Columnas Source<a class="headerlink" href="#script-sql-para-columnas-source" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="c1">-- 1. Customer_Credit_Memo_Header_Imp</span>
+<h2 id="implementacion-necesaria">🛠 Implementación Necesaria</h2>
+<h3 id="fase-1-migraciones-de-base-de-datos">Fase 1: Migraciones de Base de Datos</h3>
+<h4 id="script-sql-para-columnas-source">Script SQL para Columnas Source</h4>
+<div class="codehilite"><pre><span></span><code><span class="c1">-- 1. Customer_Credit_Memo_Header_Imp</span>
 <span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">Customer_Credit_Memo_Header_Imp</span><span class="w"> </span>
 <span class="k">ADD</span><span class="w"> </span><span class="k">COLUMN</span><span class="w"> </span><span class="n">source_transaction_id</span><span class="w"> </span><span class="nb">BIGINT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span>
 <span class="k">COMMENT</span><span class="w"> </span><span class="s1">&#39;TransactionID original del sistema fuente&#39;</span>
@@ -4084,12 +2646,14 @@
 
 <span class="c1">-- Nota: GJE_Header_Imp YA TIENE source_transaction_id</span>
 </code></pre></div>
-<h4 id="comando-artisan-para-ejecutar">Comando Artisan para Ejecutar<a class="headerlink" href="#comando-artisan-para-ejecutar" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>docucenter-app-1<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>make:command<span class="w"> </span>Database:AddSourceColumnsToConsolidation
+
+<h4 id="comando-artisan-para-ejecutar">Comando Artisan para Ejecutar</h4>
+<div class="codehilite"><pre><span></span><code>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>docucenter-app-1<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>make:command<span class="w"> </span>Database:AddSourceColumnsToConsolidation
 </code></pre></div>
-<h3 id="fase-2-actualizar-modelos">Fase 2: Actualizar Modelos<a class="headerlink" href="#fase-2-actualizar-modelos" title="Permanent link">&para;</a></h3>
-<h4 id="agregar-a-fillable-en-cada-modelo">Agregar a $fillable en cada modelo<a class="headerlink" href="#agregar-a-fillable-en-cada-modelo" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="x">// app/Models/CustomerCreditMemoHeaderImp.php</span>
+
+<h3 id="fase-2-actualizar-modelos">Fase 2: Actualizar Modelos</h3>
+<h4 id="agregar-a-fillable-en-cada-modelo">Agregar a $fillable en cada modelo</h4>
+<div class="codehilite"><pre><span></span><code><span class="x">// app/Models/CustomerCreditMemoHeaderImp.php</span>
 <span class="x">protected $fillable = [</span>
 <span class="x">    &#39;ID_compania&#39;,</span>
 <span class="x">    &#39;org_source_id&#39;,</span>
@@ -4134,9 +2698,10 @@
 <span class="x">    // ... resto de campos</span>
 <span class="x">];</span>
 </code></pre></div>
-<h3 id="fase-3-modificar-syncorganizationtocompanyjob">Fase 3: Modificar SyncOrganizationToCompanyJob<a class="headerlink" href="#fase-3-modificar-syncorganizationtocompanyjob" title="Permanent link">&para;</a></h3>
-<h4 id="a-agregar-metodo-de-configuracion">A. Agregar Método de Configuración<a class="headerlink" href="#a-agregar-metodo-de-configuracion" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="x">/**</span>
+
+<h3 id="fase-3-modificar-syncorganizationtocompanyjob">Fase 3: Modificar SyncOrganizationToCompanyJob</h3>
+<h4 id="a-agregar-metodo-de-configuracion">A. Agregar Método de Configuración</h4>
+<div class="codehilite"><pre><span></span><code><span class="x">/**</span>
 <span class="x"> * Configuración de tablas Header con auto-increment</span>
 <span class="x"> * </span>
 <span class="x"> * @param string $table</span>
@@ -4192,8 +2757,9 @@
 <span class="x">    return $configs[$table] ?? [];</span>
 <span class="x">}</span>
 </code></pre></div>
-<h4 id="b-metodo-para-insertar-header-y-capturar-id">B. Método para Insertar Header y Capturar ID<a class="headerlink" href="#b-metodo-para-insertar-header-y-capturar-id" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="x">/**</span>
+
+<h4 id="b-metodo-para-insertar-header-y-capturar-id">B. Método para Insertar Header y Capturar ID</h4>
+<div class="codehilite"><pre><span></span><code><span class="x">/**</span>
 <span class="x"> * Insertar header individual y obtener nuevo ID generado</span>
 <span class="x"> * </span>
 <span class="x"> * @param string $table</span>
@@ -4223,8 +2789,9 @@
 <span class="x">    }</span>
 <span class="x">}</span>
 </code></pre></div>
-<h4 id="c-metodo-para-sincronizar-details">C. Método para Sincronizar Details<a class="headerlink" href="#c-metodo-para-sincronizar-details" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="x">/**</span>
+
+<h4 id="c-metodo-para-sincronizar-details">C. Método para Sincronizar Details</h4>
+<div class="codehilite"><pre><span></span><code><span class="x">/**</span>
 <span class="x"> * Sincronizar tablas detail con nuevos IDs de header</span>
 <span class="x"> * </span>
 <span class="x"> * @param Organization $organization</span>
@@ -4354,8 +2921,9 @@
 <span class="x">    return $totalSynced;</span>
 <span class="x">}</span>
 </code></pre></div>
-<h4 id="d-modificar-metodo-synctable">D. Modificar Método syncTable()<a class="headerlink" href="#d-modificar-metodo-synctable" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="x">protected function syncTable(Organization $organization, Companysession $company, string $table): int</span>
+
+<h4 id="d-modificar-metodo-synctable">D. Modificar Método syncTable()</h4>
+<div class="codehilite"><pre><span></span><code><span class="x">protected function syncTable(Organization $organization, Companysession $company, string $table): int</span>
 <span class="x">{</span>
 <span class="x">    try {</span>
 <span class="x">        // Cambiar a BD de organización</span>
@@ -4377,7 +2945,7 @@
 
 <span class="x">        $syncedCount = 0;</span>
 
-<span class="x">        // NUEVO: Detectar si es tabla Header con auto-increment</span>
+<span class="x">        // ✅ NUEVO: Detectar si es tabla Header con auto-increment</span>
 <span class="x">        $headerConfig = $this-&gt;getHeaderConfig($table);</span>
 <span class="x">        $isHeader = !empty($headerConfig);</span>
 <span class="x">        $idMapping = []; // Para mapear IDs viejos → nuevos</span>
@@ -4425,7 +2993,7 @@
 <span class="x">                    }</span>
 <span class="x">                }</span>
 
-<span class="x">                // NUEVO: Manejo especial para Headers con auto-increment</span>
+<span class="x">                // ✅ NUEVO: Manejo especial para Headers con auto-increment</span>
 <span class="x">                if ($isHeader) {</span>
 <span class="x">                    $oldId = $recordArray[$headerConfig[&#39;pk&#39;]] ?? null;</span>
 <span class="x">                    if ($oldId) {</span>
@@ -4442,7 +3010,7 @@
 <span class="x">            }</span>
 
 <span class="x">            if (!empty($batchData)) {</span>
-<span class="x">                // NUEVO: Si es header, insertar uno por uno para capturar IDs</span>
+<span class="x">                // ✅ NUEVO: Si es header, insertar uno por uno para capturar IDs</span>
 <span class="x">                if ($isHeader) {</span>
 <span class="x">                    foreach ($batchData as $data) {</span>
 <span class="x">                        try {</span>
@@ -4471,7 +3039,7 @@
 
 <span class="x">        Log::info(&quot;Synced {$syncedCount} records from {$table} (Org: {$organization-&gt;id})&quot;);</span>
 
-<span class="x">        // NUEVO: Si es header, sincronizar sus details</span>
+<span class="x">        // ✅ NUEVO: Si es header, sincronizar sus details</span>
 <span class="x">        if ($isHeader &amp;&amp; !empty($idMapping)) {</span>
 <span class="x">            $detailsSynced = $this-&gt;syncDetails($organization, $company, $table, $headerConfig, $idMapping);</span>
 <span class="x">            Log::info(&quot;Synced {$detailsSynced} detail records for {$table}&quot;);</span>
@@ -4485,13 +3053,15 @@
 <span class="x">    }</span>
 <span class="x">}</span>
 </code></pre></div>
+
 <hr />
-<h2 id="consideraciones-adicionales">Consideraciones Adicionales<a class="headerlink" href="#consideraciones-adicionales" title="Permanent link">&para;</a></h2>
-<h3 id="1-tablas-export-purordr-salesinvoice-salesorder">1. Tablas Export (PurOrdr, SalesInvoice, SalesOrder)<a class="headerlink" href="#1-tablas-export-purordr-salesinvoice-salesorder" title="Permanent link">&para;</a></h3>
-<p><strong>ACCIÓN REQUERIDA:</strong> Verificar en stubs SQL si tienen <code>AUTO_INCREMENT</code>:</p>
-<div class="highlight"><pre><span></span><code><span class="c1"># Buscar en stubs</span>
+<h2 id="consideraciones-adicionales">🔧 Consideraciones Adicionales</h2>
+<h3 id="1-tablas-export-purordr-salesinvoice-salesorder">1. Tablas Export (PurOrdr, SalesInvoice, SalesOrder)</h3>
+<p><strong>⚠️ ACCIÓN REQUERIDA:</strong> Verificar en stubs SQL si tienen <code>AUTO_INCREMENT</code>:</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Buscar en stubs</span>
 grep<span class="w"> </span>-r<span class="w"> </span><span class="s2">&quot;AUTO_INCREMENT&quot;</span><span class="w"> </span>app/Models/stubs/*.sql.stub<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s2">&quot;(PurOrdr|SalesInvoice|SalesOrder)&quot;</span>
 </code></pre></div>
+
 <p><strong>Si NO tienen auto-increment:</strong>
 - No necesitan este tratamiento
 - Los TransactionID son asignados manualmente por Sage50
@@ -4499,15 +3069,15 @@ grep<span class="w"> </span>-r<span class="w"> </span><span class="s2">&quot;AUT
 <p><strong>Si SÍ tienen auto-increment:</strong>
 - Agregar a la configuración <code>getHeaderConfig()</code>
 - Seguir mismo proceso que Import tables</p>
-<h3 id="2-tabla-fe_header-especial">2. Tabla fe_header Especial<a class="headerlink" href="#2-tabla-fe_header-especial" title="Permanent link">&para;</a></h3>
+<h3 id="2-tabla-fe_header-especial">2. Tabla fe_header Especial</h3>
 <p><strong>Particularidades:</strong>
 - Tiene <strong>2 tablas detail</strong>: <code>fe_detail</code> y <code>fe_payment</code>
 - Ambas usan <code>feHeaderId</code> como FK
 - Ya está considerado en <code>getHeaderConfig()</code> con <code>detail_tables</code> (array)</p>
-<h3 id="3-indices-unicos-en-companysession">3. Índices Únicos en Companysession<a class="headerlink" href="#3-indices-unicos-en-companysession" title="Permanent link">&para;</a></h3>
+<h3 id="3-indices-unicos-en-companysession">3. Índices Únicos en Companysession</h3>
 <p><strong>Ubicación:</strong> <code>app/Models/Companysession.php</code> método <code>getUniqueIndexConfig()</code></p>
 <p><strong>Actualizar para incluir columnas source_*:</strong></p>
-<div class="highlight"><pre><span></span><code><span class="x">// Import tables - Headers</span>
+<div class="codehilite"><pre><span></span><code><span class="x">// Import tables - Headers</span>
 <span class="x">&#39;Customer_Credit_Memo_Header_Imp&#39; =&gt; [&#39;source_transaction_id&#39;, &#39;org_source_id&#39;],</span>
 <span class="x">&#39;GJE_Header_Imp&#39; =&gt; [&#39;source_transaction_id&#39;, &#39;org_source_id&#39;],</span>
 <span class="x">&#39;Purchase_Header_Imp&#39; =&gt; [&#39;source_transaction_id&#39;, &#39;org_source_id&#39;],</span>
@@ -4515,7 +3085,8 @@ grep<span class="w"> </span>-r<span class="w"> </span><span class="s2">&quot;AUT
 <span class="x">&#39;vendor_payment_header_imp&#39; =&gt; [&#39;source_payment_id&#39;, &#39;org_source_id&#39;],</span>
 <span class="x">&#39;fe_header&#39; =&gt; [&#39;source_fe_id&#39;, &#39;org_source_id&#39;],</span>
 </code></pre></div>
-<h3 id="4-performance-y-memoria">4. Performance y Memoria<a class="headerlink" href="#4-performance-y-memoria" title="Permanent link">&para;</a></h3>
+
+<h3 id="4-performance-y-memoria">4. Performance y Memoria</h3>
 <p><strong>Preocupación:</strong> El array <code>$idMapping</code> puede crecer mucho con muchos registros.</p>
 <p><strong>Solución:</strong>
 1. Procesar headers en chunks pequeños (ya implementado: 10-500)
@@ -4525,79 +3096,79 @@ grep<span class="w"> </span>-r<span class="w"> </span><span class="s2">&quot;AUT
 - Guardar mapeos temporalmente en Redis o tabla temporal
 - Clave: <code>sync:{org_id}:{table}:{old_id} =&gt; {new_id}</code></p>
 <hr />
-<h2 id="plan-de-accion">Plan de Acción<a class="headerlink" href="#plan-de-accion" title="Permanent link">&para;</a></h2>
-<h3 id="sprint-1-preparacion-y-testing-estimado-3-4-horas">Sprint 1: Preparación y Testing (Estimado: 3-4 horas)<a class="headerlink" href="#sprint-1-preparacion-y-testing-estimado-3-4-horas" title="Permanent link">&para;</a></h3>
-<ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <strong>Tarea 1.1:</strong> Verificar auto-increment en tablas Export</li>
+<h2 id="plan-de-accion">📝 Plan de Acción</h2>
+<h3 id="sprint-1-preparacion-y-testing-estimado-3-4-horas">Sprint 1: Preparación y Testing (Estimado: 3-4 horas)</h3>
+<ul>
+<li>[ ] <strong>Tarea 1.1:</strong> Verificar auto-increment en tablas Export</li>
 <li>Revisar stubs SQL</li>
 <li>Documentar hallazgos</li>
 <li>
 <p>Actualizar lista de tablas afectadas</p>
 </li>
-<li class="task-list-item">
-<p><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <strong>Tarea 1.2:</strong> Crear script de migración para columnas source_*</p>
+<li>
+<p>[ ] <strong>Tarea 1.2:</strong> Crear script de migración para columnas source_*</p>
 </li>
 <li>Crear comando Artisan</li>
 <li>Generar SQL para cada tabla</li>
 <li>
 <p>Testing en BD de desarrollo</p>
 </li>
-<li class="task-list-item">
-<p><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <strong>Tarea 1.3:</strong> Actualizar modelos con nuevos campos fillable</p>
+<li>
+<p>[ ] <strong>Tarea 1.3:</strong> Actualizar modelos con nuevos campos fillable</p>
 </li>
 <li>5 modelos Header</li>
 <li>Verificar casting si es necesario</li>
 <li>Commit: "feat: agregar columnas source para consolidación"</li>
 </ul>
-<h3 id="sprint-2-implementacion-core-estimado-4-5-horas">Sprint 2: Implementación Core (Estimado: 4-5 horas)<a class="headerlink" href="#sprint-2-implementacion-core-estimado-4-5-horas" title="Permanent link">&para;</a></h3>
-<ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <strong>Tarea 2.1:</strong> Implementar <code>getHeaderConfig()</code></li>
+<h3 id="sprint-2-implementacion-core-estimado-4-5-horas">Sprint 2: Implementación Core (Estimado: 4-5 horas)</h3>
+<ul>
+<li>[ ] <strong>Tarea 2.1:</strong> Implementar <code>getHeaderConfig()</code></li>
 <li>Agregar al job</li>
 <li>Configurar 6 tablas confirmadas</li>
 <li>
 <p>Testing unitario de configuración</p>
 </li>
-<li class="task-list-item">
-<p><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <strong>Tarea 2.2:</strong> Implementar <code>insertHeaderAndGetId()</code></p>
+<li>
+<p>[ ] <strong>Tarea 2.2:</strong> Implementar <code>insertHeaderAndGetId()</code></p>
 </li>
 <li>Manejo de errores</li>
 <li>Logging detallado</li>
 <li>
 <p>Testing con transacciones</p>
 </li>
-<li class="task-list-item">
-<p><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <strong>Tarea 2.3:</strong> Implementar <code>syncDetails()</code></p>
+<li>
+<p>[ ] <strong>Tarea 2.3:</strong> Implementar <code>syncDetails()</code></p>
 </li>
 <li>Soporte para múltiples detail tables (fe_header)</li>
 <li>Chunk processing</li>
 <li>
 <p>Validación de FK</p>
 </li>
-<li class="task-list-item">
-<p><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <strong>Tarea 2.4:</strong> Modificar <code>syncTable()</code></p>
+<li>
+<p>[ ] <strong>Tarea 2.4:</strong> Modificar <code>syncTable()</code></p>
 </li>
 <li>Integrar nueva lógica</li>
 <li>Mantener backward compatibility</li>
 <li>Testing con datos reales</li>
 </ul>
-<h3 id="sprint-3-testing-y-validacion-estimado-3-4-horas">Sprint 3: Testing y Validación (Estimado: 3-4 horas)<a class="headerlink" href="#sprint-3-testing-y-validacion-estimado-3-4-horas" title="Permanent link">&para;</a></h3>
-<ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <strong>Tarea 3.1:</strong> Testing con datos de prueba</li>
+<h3 id="sprint-3-testing-y-validacion-estimado-3-4-horas">Sprint 3: Testing y Validación (Estimado: 3-4 horas)</h3>
+<ul>
+<li>[ ] <strong>Tarea 3.1:</strong> Testing con datos de prueba</li>
 <li>Crear 2 organizaciones con IDs duplicados</li>
 <li>Ejecutar consolidación</li>
 <li>
 <p>Verificar mapeos correctos</p>
 </li>
-<li class="task-list-item">
-<p><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <strong>Tarea 3.2:</strong> Verificar integridad de datos</p>
+<li>
+<p>[ ] <strong>Tarea 3.2:</strong> Verificar integridad de datos</p>
 </li>
 <li>Contar registros origen vs destino</li>
 <li>Validar relaciones Header-Detail</li>
 <li>
 <p>Verificar org_source_id en todos los registros</p>
 </li>
-<li class="task-list-item">
-<p><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <strong>Tarea 3.3:</strong> Testing de edge cases</p>
+<li>
+<p>[ ] <strong>Tarea 3.3:</strong> Testing de edge cases</p>
 </li>
 <li>Headers sin details</li>
 <li>Details huérfanos</li>
@@ -4605,54 +3176,56 @@ grep<span class="w"> </span>-r<span class="w"> </span><span class="s2">&quot;AUT
 <li>
 <p>Registros muy grandes</p>
 </li>
-<li class="task-list-item">
-<p><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <strong>Tarea 3.4:</strong> Performance testing</p>
+<li>
+<p>[ ] <strong>Tarea 3.4:</strong> Performance testing</p>
 </li>
 <li>Medir tiempo con 1000+ headers</li>
 <li>Monitorear uso de memoria</li>
 <li>Optimizar si es necesario</li>
 </ul>
-<h3 id="sprint-4-documentacion-y-deploy-estimado-2-3-horas">Sprint 4: Documentación y Deploy (Estimado: 2-3 horas)<a class="headerlink" href="#sprint-4-documentacion-y-deploy-estimado-2-3-horas" title="Permanent link">&para;</a></h3>
-<ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <strong>Tarea 4.1:</strong> Documentar cambios</li>
+<h3 id="sprint-4-documentacion-y-deploy-estimado-2-3-horas">Sprint 4: Documentación y Deploy (Estimado: 2-3 horas)</h3>
+<ul>
+<li>[ ] <strong>Tarea 4.1:</strong> Documentar cambios</li>
 <li>Actualizar este documento con resultados</li>
 <li>Crear guía de troubleshooting</li>
 <li>
 <p>Documentar en docs/technical/</p>
 </li>
-<li class="task-list-item">
-<p><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <strong>Tarea 4.2:</strong> Code review</p>
+<li>
+<p>[ ] <strong>Tarea 4.2:</strong> Code review</p>
 </li>
 <li>Revisión de lógica</li>
 <li>Verificar convenciones</li>
 <li>
 <p>Testing de rollback</p>
 </li>
-<li class="task-list-item">
-<p><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <strong>Tarea 4.3:</strong> Deploy a producción</p>
+<li>
+<p>[ ] <strong>Tarea 4.3:</strong> Deploy a producción</p>
 </li>
 <li>Backup de BD</li>
 <li>Ejecutar migraciones</li>
 <li>Monitoring post-deploy</li>
 </ul>
 <hr />
-<h2 id="testing">Testing<a class="headerlink" href="#testing" title="Permanent link">&para;</a></h2>
-<h3 id="test-case-1-headers-con-ids-duplicados">Test Case 1: Headers con IDs Duplicados<a class="headerlink" href="#test-case-1-headers-con-ids-duplicados" title="Permanent link">&para;</a></h3>
-<p><strong>Setup:</strong>
-<div class="highlight"><pre><span></span><code><span class="c1">-- Org A (ID: 100)</span>
+<h2 id="testing">🧪 Testing</h2>
+<h3 id="test-case-1-headers-con-ids-duplicados">Test Case 1: Headers con IDs Duplicados</h3>
+<p><strong>Setup:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="c1">-- Org A (ID: 100)</span>
 <span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">Customer_Credit_Memo_Header_Imp</span><span class="w"> </span><span class="p">(</span><span class="n">TransactionID</span><span class="p">,</span><span class="w"> </span><span class="n">CreditNumber</span><span class="p">,</span><span class="w"> </span><span class="n">org_source_id</span><span class="p">)</span>
 <span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;CM001&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">NULL</span><span class="p">);</span>
 
 <span class="c1">-- Org B (ID: 101)  </span>
 <span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">Customer_Credit_Memo_Header_Imp</span><span class="w"> </span><span class="p">(</span><span class="n">TransactionID</span><span class="p">,</span><span class="w"> </span><span class="n">CreditNumber</span><span class="p">,</span><span class="w"> </span><span class="n">org_source_id</span><span class="p">)</span>
 <span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;CM100&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">NULL</span><span class="p">);</span>
-</code></pre></div></p>
-<p><strong>Ejecución:</strong>
-<div class="highlight"><pre><span></span><code>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>docucenter-app-1<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>sync:organization-to-company<span class="w"> </span><span class="m">100</span><span class="w"> </span><span class="m">5</span>
+</code></pre></div>
+
+<p><strong>Ejecución:</strong></p>
+<div class="codehilite"><pre><span></span><code>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>docucenter-app-1<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>sync:organization-to-company<span class="w"> </span><span class="m">100</span><span class="w"> </span><span class="m">5</span>
 docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>docucenter-app-1<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>sync:organization-to-company<span class="w"> </span><span class="m">101</span><span class="w"> </span><span class="m">5</span>
-</code></pre></div></p>
-<p><strong>Verificación:</strong>
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">TransactionID</span><span class="p">,</span><span class="w"> </span><span class="n">CreditNumber</span><span class="p">,</span><span class="w"> </span><span class="n">org_source_id</span><span class="p">,</span><span class="w"> </span><span class="n">source_transaction_id</span><span class="w"> </span>
+</code></pre></div>
+
+<p><strong>Verificación:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">TransactionID</span><span class="p">,</span><span class="w"> </span><span class="n">CreditNumber</span><span class="p">,</span><span class="w"> </span><span class="n">org_source_id</span><span class="p">,</span><span class="w"> </span><span class="n">source_transaction_id</span><span class="w"> </span>
 <span class="k">FROM</span><span class="w"> </span><span class="n">Customer_Credit_Memo_Header_Imp</span><span class="w"> </span>
 <span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">TransactionID</span><span class="p">;</span>
 
@@ -4660,18 +3233,20 @@ docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </spa
 <span class="c1">-- TransactionID | CreditNumber | org_source_id | source_transaction_id</span>
 <span class="c1">-- 1             | CM001        | 100           | 1</span>
 <span class="c1">-- 2             | CM100        | 101           | 1  ← Nuevo ID, source preservado</span>
-</code></pre></div></p>
-<h3 id="test-case-2-relaciones-header-detail">Test Case 2: Relaciones Header-Detail<a class="headerlink" href="#test-case-2-relaciones-header-detail" title="Permanent link">&para;</a></h3>
-<p><strong>Setup:</strong>
-<div class="highlight"><pre><span></span><code><span class="c1">-- Org A</span>
+</code></pre></div>
+
+<h3 id="test-case-2-relaciones-header-detail">Test Case 2: Relaciones Header-Detail</h3>
+<p><strong>Setup:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="c1">-- Org A</span>
 <span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">Customer_Credit_Memo_Header_Imp</span><span class="w"> </span><span class="p">(</span><span class="n">TransactionID</span><span class="p">,</span><span class="w"> </span><span class="n">CreditNumber</span><span class="p">)</span>
 <span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;CM005&#39;</span><span class="p">);</span>
 
 <span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">Customer_Credit_Memo_Detail_Imp</span><span class="w"> </span><span class="p">(</span><span class="n">DetailID</span><span class="p">,</span><span class="w"> </span><span class="n">TransactionID</span><span class="p">,</span><span class="w"> </span><span class="n">Item_id</span><span class="p">)</span>
 <span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;ITEM001&#39;</span><span class="p">),</span><span class="w"> </span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;ITEM002&#39;</span><span class="p">);</span>
-</code></pre></div></p>
-<p><strong>Verificación:</strong>
-<div class="highlight"><pre><span></span><code><span class="c1">-- Verificar que details usen el NUEVO TransactionID</span>
+</code></pre></div>
+
+<p><strong>Verificación:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="c1">-- Verificar que details usen el NUEVO TransactionID</span>
 <span class="k">SELECT</span><span class="w"> </span><span class="n">h</span><span class="p">.</span><span class="n">TransactionID</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">new_id</span><span class="p">,</span><span class="w"> </span><span class="n">h</span><span class="p">.</span><span class="n">source_transaction_id</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">old_id</span><span class="p">,</span><span class="w"> </span>
 <span class="w">       </span><span class="n">d</span><span class="p">.</span><span class="n">DetailID</span><span class="p">,</span><span class="w"> </span><span class="n">d</span><span class="p">.</span><span class="n">TransactionID</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">detail_fk</span><span class="p">,</span><span class="w"> </span><span class="n">d</span><span class="p">.</span><span class="n">Item_id</span>
 <span class="k">FROM</span><span class="w"> </span><span class="n">Customer_Credit_Memo_Header_Imp</span><span class="w"> </span><span class="n">h</span>
@@ -4679,18 +3254,20 @@ docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </spa
 <span class="k">WHERE</span><span class="w"> </span><span class="n">h</span><span class="p">.</span><span class="n">org_source_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span><span class="p">;</span>
 
 <span class="c1">-- Esperado: detail_fk == new_id (no old_id)</span>
-</code></pre></div></p>
-<h3 id="test-case-3-fe_header-con-multiples-details">Test Case 3: fe_header con Múltiples Details<a class="headerlink" href="#test-case-3-fe_header-con-multiples-details" title="Permanent link">&para;</a></h3>
-<p><strong>Setup:</strong>
-<div class="highlight"><pre><span></span><code><span class="c1">-- fe_header con id=10</span>
+</code></pre></div>
+
+<h3 id="test-case-3-fe_header-con-multiples-details">Test Case 3: fe_header con Múltiples Details</h3>
+<p><strong>Setup:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="c1">-- fe_header con id=10</span>
 <span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">fe_header</span><span class="w"> </span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">cufe</span><span class="p">,</span><span class="w"> </span><span class="n">org_source_id</span><span class="p">)</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;CUFE123&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">NULL</span><span class="p">);</span>
 
 <span class="c1">-- 2 tablas detail</span>
 <span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">fe_detail</span><span class="w"> </span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">feHeaderId</span><span class="p">,</span><span class="w"> </span><span class="n">dCodProd</span><span class="p">)</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;PROD1&#39;</span><span class="p">);</span>
 <span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">fe_payment</span><span class="w"> </span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">feHeaderId</span><span class="p">,</span><span class="w"> </span><span class="n">iFormaPago</span><span class="p">)</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
-</code></pre></div></p>
-<p><strong>Verificación:</strong>
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span>
+</code></pre></div>
+
+<p><strong>Verificación:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span>
 <span class="w">    </span><span class="n">h</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">new_header_id</span><span class="p">,</span><span class="w"> </span>
 <span class="w">    </span><span class="n">h</span><span class="p">.</span><span class="n">source_fe_id</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">old_header_id</span><span class="p">,</span>
 <span class="w">    </span><span class="n">d</span><span class="p">.</span><span class="n">feHeaderId</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">detail_fk</span><span class="p">,</span>
@@ -4701,10 +3278,11 @@ docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </spa
 <span class="k">WHERE</span><span class="w"> </span><span class="n">h</span><span class="p">.</span><span class="n">org_source_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span><span class="p">;</span>
 
 <span class="c1">-- Verificar que ambos details usen nuevo ID</span>
-</code></pre></div></p>
-<h3 id="test-case-4-performance-con-volumen">Test Case 4: Performance con Volumen<a class="headerlink" href="#test-case-4-performance-con-volumen" title="Permanent link">&para;</a></h3>
-<p><strong>Setup:</strong>
-<div class="highlight"><pre><span></span><code><span class="x">// Crear 1000 headers con 5 details cada uno</span>
+</code></pre></div>
+
+<h3 id="test-case-4-performance-con-volumen">Test Case 4: Performance con Volumen</h3>
+<p><strong>Setup:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="x">// Crear 1000 headers con 5 details cada uno</span>
 <span class="x">for ($i = 1; $i &lt;= 1000; $i++) {</span>
 <span class="x">    DB::table(&#39;Customer_Credit_Memo_Header_Imp&#39;)-&gt;insert([</span>
 <span class="x">        &#39;TransactionID&#39; =&gt; $i,</span>
@@ -4719,7 +3297,8 @@ docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </spa
 <span class="x">        ]);</span>
 <span class="x">    }</span>
 <span class="x">}</span>
-</code></pre></div></p>
+</code></pre></div>
+
 <p><strong>Métricas a medir:</strong>
 - Tiempo de ejecución
 - Uso de memoria (pico)
@@ -4730,7 +3309,7 @@ docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </spa
 - Memoria: &lt; 512MB
 - Éxito: 100% de registros sincronizados</p>
 <hr />
-<h2 id="riesgos-y-mitigaciones">Riesgos y Mitigaciones<a class="headerlink" href="#riesgos-y-mitigaciones" title="Permanent link">&para;</a></h2>
+<h2 id="riesgos-y-mitigaciones">⚠️ Riesgos y Mitigaciones</h2>
 <table>
 <thead>
 <tr>
@@ -4747,83 +3326,83 @@ docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </spa
 <td>Pérdida de referencia a ID original</td>
 <td>Baja</td>
 <td>Alto</td>
-<td>Columnas <code>source_*</code> preservan ID original</td>
+<td>✅ Columnas <code>source_*</code> preservan ID original</td>
 </tr>
 <tr>
 <td>2</td>
 <td>Colisión de IDs en consolidación</td>
 <td>Alta</td>
 <td>Crítico</td>
-<td>Auto-increment genera nuevos IDs</td>
+<td>✅ Auto-increment genera nuevos IDs</td>
 </tr>
 <tr>
 <td>3</td>
 <td>Details huérfanos (sin header)</td>
 <td>Media</td>
 <td>Alto</td>
-<td>Validar FK antes de insertar, logging de errores</td>
+<td>✅ Validar FK antes de insertar, logging de errores</td>
 </tr>
 <tr>
 <td>4</td>
 <td>Mapeo incorrecto de IDs</td>
 <td>Media</td>
 <td>Crítico</td>
-<td>Testing exhaustivo, logs detallados</td>
+<td>✅ Testing exhaustivo, logs detallados</td>
 </tr>
 <tr>
 <td>5</td>
 <td>Performance degradado con muchos registros</td>
 <td>Media</td>
 <td>Medio</td>
-<td>Chunk processing, liberar memoria</td>
+<td>✅ Chunk processing, liberar memoria</td>
 </tr>
 <tr>
 <td>6</td>
 <td>Fallo en medio de sincronización</td>
 <td>Media</td>
 <td>Alto</td>
-<td>Transacciones por chunk, retry logic</td>
+<td>✅ Transacciones por chunk, retry logic</td>
 </tr>
 <tr>
 <td>7</td>
 <td>Sage50 Connector no encuentra registros</td>
 <td>Baja</td>
 <td>Alto</td>
-<td>Usar <code>source_*</code> + <code>org_source_id</code> para búsqueda</td>
+<td>✅ Usar <code>source_*</code> + <code>org_source_id</code> para búsqueda</td>
 </tr>
 <tr>
 <td>8</td>
 <td>Columnas <code>source_*</code> no existen en BD antigua</td>
 <td>Baja</td>
 <td>Medio</td>
-<td>Migración verifica existencia, agrega si falta</td>
+<td>✅ Migración verifica existencia, agrega si falta</td>
 </tr>
 </tbody>
 </table>
-<h3 id="plan-de-rollback">Plan de Rollback<a class="headerlink" href="#plan-de-rollback" title="Permanent link">&para;</a></h3>
+<h3 id="plan-de-rollback">Plan de Rollback</h3>
 <p>Si algo falla durante implementación:</p>
 <ol>
 <li><strong>Backup completo</strong> de BD de company antes de sincronizar</li>
 <li><strong>Logging detallado</strong> de cada operación para debugging</li>
 <li><strong>Comando de rollback</strong>:
-   <div class="highlight"><pre><span></span><code>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>docucenter-app-1<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>sync:rollback-company<span class="w"> </span><span class="m">5</span>
-</code></pre></div></li>
+   <code>bash
+   docker exec -it docucenter-app-1 php artisan sync:rollback-company 5</code></li>
 <li><strong>Restaurar desde backup</strong> si es necesario</li>
 </ol>
 <hr />
-<h2 id="metricas-de-exito">Métricas de Éxito<a class="headerlink" href="#metricas-de-exito" title="Permanent link">&para;</a></h2>
-<h3 id="criterios-de-aceptacion">Criterios de Aceptación<a class="headerlink" href="#criterios-de-aceptacion" title="Permanent link">&para;</a></h3>
+<h2 id="metricas-de-exito">📈 Métricas de Éxito</h2>
+<h3 id="criterios-de-aceptacion">Criterios de Aceptación</h3>
 <ul>
-<li>Todos los headers se sincronizan sin colisiones de PK</li>
-<li>Todos los details mantienen relación correcta con nuevos headers</li>
-<li>100% de registros incluyen <code>org_source_id</code> correcto</li>
-<li>Columnas <code>source_*</code> contienen IDs originales</li>
-<li>No hay details huérfanos</li>
-<li>Performance aceptable (&lt; 5 min para 1000 headers)</li>
-<li>Logging completo para troubleshooting</li>
-<li>Tests pasan al 100%</li>
+<li>✅ Todos los headers se sincronizan sin colisiones de PK</li>
+<li>✅ Todos los details mantienen relación correcta con nuevos headers</li>
+<li>✅ 100% de registros incluyen <code>org_source_id</code> correcto</li>
+<li>✅ Columnas <code>source_*</code> contienen IDs originales</li>
+<li>✅ No hay details huérfanos</li>
+<li>✅ Performance aceptable (&lt; 5 min para 1000 headers)</li>
+<li>✅ Logging completo para troubleshooting</li>
+<li>✅ Tests pasan al 100%</li>
 </ul>
-<h3 id="kpis-post-implementacion">KPIs Post-Implementación<a class="headerlink" href="#kpis-post-implementacion" title="Permanent link">&para;</a></h3>
+<h3 id="kpis-post-implementacion">KPIs Post-Implementación</h3>
 <table>
 <thead>
 <tr>
@@ -4861,22 +3440,22 @@ docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </spa
 </tbody>
 </table>
 <hr />
-<h2 id="referencias">Referencias<a class="headerlink" href="#referencias" title="Permanent link">&para;</a></h2>
-<h3 id="codigo-relacionado">Código Relacionado<a class="headerlink" href="#codigo-relacionado" title="Permanent link">&para;</a></h3>
+<h2 id="referencias">📚 Referencias</h2>
+<h3 id="codigo-relacionado">Código Relacionado</h3>
 <ul>
 <li><code>app/Jobs/SyncOrganizationToCompanyJob.php</code> - Job principal de consolidación</li>
 <li><code>app/Models/Companysession.php</code> - Configuración de índices únicos</li>
 <li><code>app/Models/*HeaderImp.php</code> - Modelos de tablas header</li>
 <li><code>app/Models/*DetailImp.php</code> - Modelos de tablas detail</li>
 </ul>
-<h3 id="documentacion-relacionada">Documentación Relacionada<a class="headerlink" href="#documentacion-relacionada" title="Permanent link">&para;</a></h3>
+<h3 id="documentacion-relacionada">Documentación Relacionada</h3>
 <ul>
 <li><a href="./consolidation-system.md">Consolidation System</a> - Sistema completo de consolidación</li>
 <li><a href="./multi-tenant-architecture.md">Multi-Tenant Architecture</a> - Arquitectura multi-tenant</li>
 <li><a href="./database-switching.md">Database Switching Pattern</a> - Patrón de cambio de BD</li>
 </ul>
 <hr />
-<h2 id="historial-de-cambios">Historial de Cambios<a class="headerlink" href="#historial-de-cambios" title="Permanent link">&para;</a></h2>
+<h2 id="historial-de-cambios">🔄 Historial de Cambios</h2>
 <table>
 <thead>
 <tr>
@@ -4896,7 +3475,7 @@ docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </spa
 </tbody>
 </table>
 <hr />
-<h2 id="proximos-pasos">Próximos Pasos<a class="headerlink" href="#proximos-pasos" title="Permanent link">&para;</a></h2>
+<h2 id="proximos-pasos">✅ Próximos Pasos</h2>
 <ol>
 <li><strong>Validar tablas Export</strong> - Verificar auto-increment en stubs SQL</li>
 <li><strong>Crear migraciones</strong> - Script para agregar columnas source_*</li>
@@ -4928,12 +3507,6 @@ docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </spa
           
 <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
         </div>
-        
-          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
-  Volver al principio
-</button>
         
       </main>
       
@@ -4980,7 +3553,7 @@ docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </spa
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.highlight", "search.suggest"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
     
     
       <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>

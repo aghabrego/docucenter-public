@@ -1,0 +1,2637 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentación técnica y de usuario de Docucenter">
+      
+      
+        <meta name="author" content="aghabrego">
+      
+      
+        <link rel="canonical" href="https://aghabrego.github.io/docucenter/technical/consolidation-source-columns-implementation/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../docs/favicon.ico">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Implementación de Columnas Source para Consolidación - Docucenter</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#implementacion-de-columnas-source-para-consolidacion" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="Docucenter" class="md-header__button md-logo" aria-label="Docucenter" data-md-component="logo">
+      
+  <img src="../../docs/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Docucenter
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Implementación de Columnas Source para Consolidación
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/aghabrego/docucenter" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    aghabrego/docucenter
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Docucenter" class="md-nav__button md-logo" aria-label="Docucenter" data-md-component="logo">
+      
+  <img src="../../docs/logo.png" alt="logo">
+
+    </a>
+    Docucenter
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/aghabrego/docucenter" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    aghabrego/docucenter
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Documentation
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    API Documentation
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sage ACICloud
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Sage ACICloud
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/invoices-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Facturación - Invoices
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/customers-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Clientes - Customers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/vendors-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Proveedores - Vendors
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/purchases-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Compras - Purchases
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/products-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Productos - Products
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/jobs-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trabajos - Jobs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/accounting-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contabilidad General
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/payments-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pagos y Créditos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/inventory-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inventario - Inventory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Facturación Electrónica (FE)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Facturación Electrónica (FE)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/fe-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    APIs de Facturación Electrónica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/meypar-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integración Meypar
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/shopify-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integración Shopify
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/kart21-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integración Kart21
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/lightspeed-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integración Lightspeed
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/maxgym-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integración Maxgym
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/acicloud-fe-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ACICloud FE
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/import-xml-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Import XML
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/emit-json-object-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Emit JSON Object
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/download-base64-document-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Download Base64 Document
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Organizaciones
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Organizaciones
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/organizations/organizations-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gestión de Organizaciones
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ubicaciones Geográficas
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Ubicaciones Geográficas
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/locations/locations-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API de Ubicaciones
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sistema de Testing
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Sistema de Testing
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Índice de Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../TESTING_SYSTEM_SUMMARY/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resumen Ejecutivo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Documentación Técnica
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Documentación Técnica
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../README.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Soluciones
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lightspeed_audit_improvement/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Auditoría Lightspeed
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../solucion-sincronizacion-pagos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sincronización de Pagos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../payment-calculation-fix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Corrección Cálculo Pagos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validaciones
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Validaciones
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../validations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resumen
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../validations/createSale-ruc-validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validación RUC CreateSale
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../validations/maxgym-ruc-validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validación RUC Maxgym
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../validations/meypar-validations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validaciones MEYPAR
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../validations/validation_comparison/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Comparación Validaciones
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#resumen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📋 Resumen
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#problema-resuelto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔥 Problema Resuelto
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔥 Problema Resuelto">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#antes-sistema-vulnerable" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Antes (Sistema Vulnerable)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#despues-sistema-protegido" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Después (Sistema Protegido)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#componentes-implementados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📦 Componentes Implementados
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📦 Componentes Implementados">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-comandos-artisan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Comandos Artisan
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Comandos Artisan">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dbupdate-stub-source-column" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        db:update-stub-source-column
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dbadd-column-to-organizations-table-actualizado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        db:add-column-to-organizations-table (Actualizado)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-job-de-sincronizacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Job de Sincronización
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Job de Sincronización">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#syncorganizationtocompanyjob-actualizado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SyncOrganizationToCompanyJob (Actualizado)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-scripts-de-despliegue" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Scripts de Despliegue
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Scripts de Despliegue">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add-source-columns-consolidationsh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        add-source-columns-consolidation.sh
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-unique-constraints-source-columnssh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        add-unique-constraints-source-columns.sh
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#guia-de-despliegue" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🚀 Guía de Despliegue
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🚀 Guía de Despliegue">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#paso-1-backup-obligatorio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 1: Backup (OBLIGATORIO)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-2-agregar-columnas-source-en-bds-organizacionales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 2: Agregar Columnas Source en BDs Organizacionales
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-3-agregar-unique-constraints-en-bds-de-consolidacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 3: Agregar UNIQUE Constraints en BDs de Consolidación
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-4-verificar-implementacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 4: Verificar Implementación
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paso-5-probar-sincronizacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Paso 5: Probar Sincronización
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#estadisticas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📊 Estadísticas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📊 Estadísticas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#columnas-agregadas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Columnas Agregadas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pares-header-detail-sincronizados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pares Header-Detail Sincronizados
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#validaciones-post-despliegue" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ✅ Validaciones Post-Despliegue
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="✅ Validaciones Post-Despliegue">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-verificar-columnas-en-organizaciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Verificar Columnas en Organizaciones
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-verificar-unique-constraints-en-consolidacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Verificar UNIQUE Constraints en Consolidación
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-verificar-integridad-referencial" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Verificar Integridad Referencial
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-verificar-sincronizacion-funcionando" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Verificar Sincronización Funcionando
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔧 Troubleshooting
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔧 Troubleshooting">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#problema-1-column-already-exists" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Problema 1: "Column already exists"
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problema-2-orphan-details" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Problema 2: "Orphan details"
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problema-3-sincronizacion-lenta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Problema 3: Sincronización lenta
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#documentacion-relacionada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📚 Documentación Relacionada
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#proximos-pasos-opcional" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🎯 Próximos Pasos (Opcional)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🎯 Próximos Pasos (Opcional)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mejoras-futuras" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mejoras Futuras
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitoreo-recomendado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Monitoreo Recomendado
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="implementacion-de-columnas-source-para-consolidacion">Implementación de Columnas Source para Consolidación</h1>
+<p><strong>Fecha:</strong> 9 de febrero, 2026<br />
+<strong>Estado:</strong> ✅ Implementado y listo para despliegue<br />
+<strong>Prioridad:</strong> 🔥 CRÍTICO</p>
+<hr />
+<h2 id="resumen">📋 Resumen</h2>
+<p>Se implementó la solución completa para el problema de colisión de Primary Keys en el sistema de consolidación multi-organización. La solución incluye:</p>
+<ol>
+<li>✅ <strong>14 columnas source_</strong>* para preservar PKs originales (6 headers + 8 details)</li>
+<li>✅ <strong>UNIQUE constraints</strong> en (source_*, org_source_id) para prevenir duplicados</li>
+<li>✅ <strong>Sincronización en 2 fases</strong> para mantener integridad referencial Header-Detail</li>
+<li>✅ <strong>Scripts automatizados</strong> para despliegue en producción</li>
+</ol>
+<hr />
+<h2 id="problema-resuelto">🔥 Problema Resuelto</h2>
+<h3 id="antes-sistema-vulnerable">Antes (Sistema Vulnerable)</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1">-- Org1: GJE_Header_Imp tiene TransactionID=100</span>
+<span class="c1">-- Org2: GJE_Header_Imp tiene TransactionID=100</span>
+<span class="c1">-- Consolidación: ERROR - Duplicate PK &#39;100&#39;</span>
+
+<span class="c1">-- Org1: GJE_Detail_Imp tiene DetailID=1, FK TransactionID=100</span>
+<span class="c1">-- Org2: GJE_Detail_Imp tiene DetailID=1, FK TransactionID=100</span>
+<span class="c1">-- Consolidación: </span>
+<span class="c1">--   - DetailID=1 colisiona</span>
+<span class="c1">--   - FK apunta a header inexistente (100 cambió a 500)</span>
+<span class="c1">--   - Integridad referencial ROTA</span>
+</code></pre></div>
+
+<h3 id="despues-sistema-protegido">Después (Sistema Protegido)</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1">-- FASE 1: Headers</span>
+<span class="c1">-- Org1 → source_transaction_id=100, TransactionID=500 (nuevo)</span>
+<span class="c1">-- Org2 → source_transaction_id=100, TransactionID=501 (nuevo)</span>
+<span class="c1">-- Mapeo: {100_org1 =&gt; 500, 100_org2 =&gt; 501}</span>
+
+<span class="c1">-- FASE 2: Details</span>
+<span class="c1">-- Org1 Detail → source_detail_id=1, DetailID=1000 (nuevo), FK=500 ✅</span>
+<span class="c1">-- Org2 Detail → source_detail_id=1, DetailID=1001 (nuevo), FK=501 ✅</span>
+<span class="c1">-- Integridad referencial PRESERVADA</span>
+</code></pre></div>
+
+<hr />
+<h2 id="componentes-implementados">📦 Componentes Implementados</h2>
+<h3 id="1-comandos-artisan">1. Comandos Artisan</h3>
+<h4 id="dbupdate-stub-source-column"><code>db:update-stub-source-column</code></h4>
+<p><strong>Ubicación:</strong> <code>app/Console/Commands/Configuration/UpdateStubSourceColumnCommand.php</code></p>
+<p><strong>Propósito:</strong> Actualizar stubs SQL para incluir columnas source_* y UNIQUE constraints</p>
+<p><strong>Uso:</strong></p>
+<div class="codehilite"><pre><span></span><code>php<span class="w"> </span>artisan<span class="w"> </span>db:update-stub-source-column<span class="w"> </span><span class="o">{</span>table<span class="o">}</span><span class="w"> </span><span class="o">{</span>column<span class="o">}</span><span class="w"> </span><span class="o">[</span>--after<span class="o">=</span>org_source_id<span class="o">]</span>
+</code></pre></div>
+
+<p><strong>Ejemplo:</strong></p>
+<div class="codehilite"><pre><span></span><code>php<span class="w"> </span>artisan<span class="w"> </span>db:update-stub-source-column<span class="w"> </span>Sales_Header_Imp<span class="w"> </span>source_id
+</code></pre></div>
+
+<h4 id="dbadd-column-to-organizations-table-actualizado"><code>db:add-column-to-organizations-table</code> (Actualizado)</h4>
+<p><strong>Ubicación:</strong> <code>app/Console/Commands/Configuration/AddColumnToOrganizationsTableCommand.php</code></p>
+<p><strong>Mejora:</strong> Ahora detecta automáticamente columnas <code>source_*</code> y actualiza el stub antes de agregar a BDs organizacionales</p>
+<h3 id="2-job-de-sincronizacion">2. Job de Sincronización</h3>
+<h4 id="syncorganizationtocompanyjob-actualizado"><code>SyncOrganizationToCompanyJob</code> (Actualizado)</h4>
+<p><strong>Ubicación:</strong> <code>app/Jobs/SyncOrganizationToCompanyJob.php</code></p>
+<p><strong>Mejoras:</strong>
+- ✅ Nuevo método <code>syncTableWithHeaderDetailRelation()</code>: Sincronización en 2 fases
+- ✅ Nuevo método <code>getHeaderDetailPairs()</code>: Define 8 pares Header-Detail
+- ✅ Nuevo método <code>getSourceDetailColumn()</code>: Mapeo de nombres de columnas
+- ✅ <code>handle()</code> actualizado: Ejecuta pares Header-Detail primero, luego tablas independientes</p>
+<p><strong>Flujo de Sincronización:</strong>
+1. <strong>FASE 1:</strong> Sincronizar Headers → Crear mapa de IDs (oldId =&gt; newId)
+2. <strong>FASE 2:</strong> Sincronizar Details → Actualizar FKs usando mapa + Preservar PK original</p>
+<h3 id="3-scripts-de-despliegue">3. Scripts de Despliegue</h3>
+<h4 id="add-source-columns-consolidationsh"><code>add-source-columns-consolidation.sh</code></h4>
+<p><strong>Ubicación:</strong> <code>scripts/add-source-columns-consolidation.sh</code></p>
+<p><strong>Propósito:</strong> Agregar 14 columnas source_* a TODAS las BDs organizacionales existentes</p>
+<p><strong>Ejecución:</strong></p>
+<div class="codehilite"><pre><span></span><code>./scripts/add-source-columns-consolidation.sh
+</code></pre></div>
+
+<p><strong>Duración estimada:</strong> 30-60 minutos (depende del número de organizaciones)</p>
+<p><strong>Qué hace:</strong>
+1. Actualiza stub SQL automáticamente (comando lo hace)
+2. Agrega columna a cada BD organizacional
+3. Reporta progreso en tiempo real</p>
+<h4 id="add-unique-constraints-source-columnssh"><code>add-unique-constraints-source-columns.sh</code></h4>
+<p><strong>Ubicación:</strong> <code>scripts/add-unique-constraints-source-columns.sh</code></p>
+<p><strong>Propósito:</strong> Agregar UNIQUE constraints a BDs de consolidación existentes</p>
+<p><strong>Ejecución:</strong></p>
+<div class="codehilite"><pre><span></span><code>./scripts/add-unique-constraints-source-columns.sh
+</code></pre></div>
+
+<p><strong>Duración estimada:</strong> 5-10 minutos</p>
+<p><strong>Qué hace:</strong>
+1. Obtiene compañías con <code>enable_consolidation=true</code>
+2. Aplica ALTER TABLE ADD UNIQUE KEY en cada BD consolidada
+3. Ignora errores si constraint ya existe</p>
+<hr />
+<h2 id="guia-de-despliegue">🚀 Guía de Despliegue</h2>
+<h3 id="paso-1-backup-obligatorio">Paso 1: Backup (OBLIGATORIO)</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Backup de BDs organizacionales</span>
+docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>docucenter-app-1<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>backup:database:all
+
+<span class="c1"># Backup de BDs de consolidación</span>
+docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>docucenter-app-1<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>backup:database:consolidation
+</code></pre></div>
+
+<h3 id="paso-2-agregar-columnas-source-en-bds-organizacionales">Paso 2: Agregar Columnas Source en BDs Organizacionales</h3>
+<div class="codehilite"><pre><span></span><code>./scripts/add-source-columns-consolidation.sh
+</code></pre></div>
+
+<p><strong>⏱ Tiempo:</strong> ~30-60 minutos<br />
+<strong>Output esperado:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="err">✅</span><span class="w"> </span><span class="nl">Completado:</span><span class="w"> </span><span class="n">Sales_Header_Imp</span><span class="p">.</span><span class="n">source_id</span>
+<span class="err">✅</span><span class="w"> </span><span class="nl">Completado:</span><span class="w"> </span><span class="n">GJE_Detail_Imp</span><span class="p">.</span><span class="n">source_detail_id</span>
+<span class="p">...</span>
+<span class="err">✅</span><span class="w"> </span><span class="n">PARTE</span><span class="w"> </span><span class="mh">2</span><span class="w"> </span><span class="nl">COMPLETADA:</span><span class="w"> </span><span class="mh">8</span><span class="w"> </span><span class="n">columnas</span><span class="w"> </span><span class="n">source</span><span class="w"> </span><span class="n">en</span><span class="w"> </span><span class="n">Details</span>
+<span class="nl">Total:</span><span class="w"> </span><span class="mh">14</span><span class="w"> </span><span class="n">columnas</span><span class="w"> </span><span class="n">agregadas</span>
+</code></pre></div>
+
+<h3 id="paso-3-agregar-unique-constraints-en-bds-de-consolidacion">Paso 3: Agregar UNIQUE Constraints en BDs de Consolidación</h3>
+<div class="codehilite"><pre><span></span><code>./scripts/add-unique-constraints-source-columns.sh
+</code></pre></div>
+
+<p><strong>⏱ Tiempo:</strong> ~5-10 minutos<br />
+<strong>Output esperado:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="err">✅</span><span class="w"> </span><span class="n">Constraints</span><span class="w"> </span><span class="n">agregados</span><span class="w"> </span><span class="n">en</span><span class="p">:</span><span class="w"> </span><span class="n">company_100_consolidation</span>
+<span class="err">✅</span><span class="w"> </span><span class="n">Constraints</span><span class="w"> </span><span class="n">agregados</span><span class="w"> </span><span class="n">en</span><span class="p">:</span><span class="w"> </span><span class="n">company_101_consolidation</span>
+<span class="o">...</span>
+<span class="err">✅</span><span class="w"> </span><span class="n">UNIQUE</span><span class="w"> </span><span class="n">constraints</span><span class="w"> </span><span class="n">agregados</span><span class="w"> </span><span class="n">en</span><span class="w"> </span><span class="n">todas</span><span class="w"> </span><span class="n">las</span><span class="w"> </span><span class="n">BDs</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">consolidación</span>
+</code></pre></div>
+
+<h3 id="paso-4-verificar-implementacion">Paso 4: Verificar Implementación</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Verificar columna en BD organizacional</span>
+docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>docucenter-app-1<span class="w"> </span>mysql<span class="w"> </span>-u<span class="w"> </span>root<span class="w"> </span>-p<span class="si">${</span><span class="nv">MYSQL_ROOT_PASSWORD</span><span class="si">}</span><span class="w"> </span>9_734_1672_56<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-e<span class="w"> </span><span class="s2">&quot;DESCRIBE Sales_Header_Imp&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>source_id
+
+<span class="c1"># Verificar UNIQUE constraint en BD consolidada</span>
+docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>docucenter-app-1<span class="w"> </span>mysql<span class="w"> </span>-u<span class="w"> </span>root<span class="w"> </span>-p<span class="si">${</span><span class="nv">MYSQL_ROOT_PASSWORD</span><span class="si">}</span><span class="w"> </span>company_100<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-e<span class="w"> </span><span class="s2">&quot;SHOW INDEX FROM Sales_Header_Imp WHERE Key_name LIKE &#39;uk_source%&#39;&quot;</span>
+</code></pre></div>
+
+<p><strong>Output esperado:</strong></p>
+<div class="codehilite"><pre><span></span><code>source_id | bigint | YES | | NULL |
+uk_source_id_org_source_id | 1 | source_id | A | ...
+</code></pre></div>
+
+<h3 id="paso-5-probar-sincronizacion">Paso 5: Probar Sincronización</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Disparar Job de sincronización manualmente</span>
+docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>docucenter-app-1<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>tinker
+&gt;&gt;&gt;<span class="w"> </span>App<span class="se">\J</span>obs<span class="se">\S</span>yncOrganizationToCompanyJob::dispatch<span class="o">(</span><span class="m">1</span>,<span class="w"> </span><span class="m">100</span><span class="o">)</span><span class="p">;</span>
+&gt;&gt;&gt;<span class="w"> </span><span class="nb">exit</span>
+</code></pre></div>
+
+<p><strong>Verificar logs:</strong></p>
+<div class="codehilite"><pre><span></span><code>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>docucenter-app-1<span class="w"> </span>tail<span class="w"> </span>-f<span class="w"> </span>storage/logs/laravel.log<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;FASE&quot;</span>
+</code></pre></div>
+
+<p><strong>Output esperado:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="o">[</span><span class="n">INFO</span><span class="o">]</span><span class="w"> </span><span class="n">FASE</span><span class="w"> </span><span class="mi">1</span><span class="err">:</span><span class="w"> </span><span class="n">Syncing</span><span class="w"> </span><span class="n">header</span><span class="w"> </span><span class="nc">table</span><span class="w"> </span><span class="n">Sales_Header_Imp</span><span class="p">...</span>
+<span class="o">[</span><span class="n">INFO</span><span class="o">]</span><span class="w"> </span><span class="n">FASE</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="nl">completada</span><span class="p">:</span><span class="w"> </span><span class="n">Sales_Header_Imp</span><span class="w"> </span><span class="n">con</span><span class="w"> </span><span class="mi">150</span><span class="w"> </span><span class="n">registros</span><span class="w"> </span><span class="n">mapeados</span>
+<span class="o">[</span><span class="n">INFO</span><span class="o">]</span><span class="w"> </span><span class="n">FASE</span><span class="w"> </span><span class="mi">2</span><span class="err">:</span><span class="w"> </span><span class="n">Syncing</span><span class="w"> </span><span class="n">detail</span><span class="w"> </span><span class="nc">table</span><span class="w"> </span><span class="n">Sales_Detail_Imp</span><span class="p">...</span>
+<span class="o">[</span><span class="n">INFO</span><span class="o">]</span><span class="w"> </span><span class="n">FASE</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="nl">completada</span><span class="p">:</span><span class="w"> </span><span class="n">Sales_Detail_Imp</span>
+<span class="o">[</span><span class="n">INFO</span><span class="o">]</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">Details</span><span class="w"> </span><span class="nl">sincronizados</span><span class="p">:</span><span class="w"> </span><span class="mi">450</span>
+<span class="o">[</span><span class="n">INFO</span><span class="o">]</span><span class="w"> </span><span class="n">Completed</span><span class="w"> </span><span class="n">Header</span><span class="o">-</span><span class="n">Detail</span><span class="w"> </span><span class="nl">pair</span><span class="p">:</span><span class="w"> </span><span class="n">Sales_Header_Imp</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Sales_Detail_Imp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">600</span><span class="w"> </span><span class="n">records</span>
+</code></pre></div>
+
+<hr />
+<h2 id="estadisticas">📊 Estadísticas</h2>
+<h3 id="columnas-agregadas">Columnas Agregadas</h3>
+<table>
+<thead>
+<tr>
+<th>Tipo</th>
+<th>Tabla</th>
+<th>Columna</th>
+<th>Tipo Dato</th>
+<th>Nullable</th>
+<th>Index</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Header</td>
+<td>Sales_Header_Imp</td>
+<td>source_id</td>
+<td>bigint(20)</td>
+<td>YES</td>
+<td>UNIQUE</td>
+</tr>
+<tr>
+<td>Header</td>
+<td>Purchase_Header_Imp</td>
+<td>source_transaction_id</td>
+<td>bigint(20)</td>
+<td>YES</td>
+<td>UNIQUE</td>
+</tr>
+<tr>
+<td>Header</td>
+<td>Customer_Credit_Memo_Header_Imp</td>
+<td>source_transaction_id</td>
+<td>bigint(20)</td>
+<td>YES</td>
+<td>UNIQUE</td>
+</tr>
+<tr>
+<td>Header</td>
+<td>customer_receipt_header_imp</td>
+<td>source_receipt_id</td>
+<td>bigint(20)</td>
+<td>YES</td>
+<td>UNIQUE</td>
+</tr>
+<tr>
+<td>Header</td>
+<td>vendor_payment_header_imp</td>
+<td>source_payment_id</td>
+<td>bigint(20)</td>
+<td>YES</td>
+<td>UNIQUE</td>
+</tr>
+<tr>
+<td>Header</td>
+<td>fe_header</td>
+<td>source_fe_id</td>
+<td>bigint(20)</td>
+<td>YES</td>
+<td>UNIQUE</td>
+</tr>
+<tr>
+<td>Detail</td>
+<td>GJE_Detail_Imp</td>
+<td>source_detail_id</td>
+<td>bigint(20)</td>
+<td>YES</td>
+<td>UNIQUE</td>
+</tr>
+<tr>
+<td>Detail</td>
+<td>Sales_Detail_Imp</td>
+<td>source_sales_detail_id</td>
+<td>bigint(20)</td>
+<td>YES</td>
+<td>UNIQUE</td>
+</tr>
+<tr>
+<td>Detail</td>
+<td>Purchase_Detail_Imp</td>
+<td>source_purchase_detail_id</td>
+<td>bigint(20)</td>
+<td>YES</td>
+<td>UNIQUE</td>
+</tr>
+<tr>
+<td>Detail</td>
+<td>Customer_Credit_Memo_Detail_Imp</td>
+<td>source_credit_detail_id</td>
+<td>bigint(20)</td>
+<td>YES</td>
+<td>UNIQUE</td>
+</tr>
+<tr>
+<td>Detail</td>
+<td>customer_receipt_detail_imp</td>
+<td>source_receipt_detail_id</td>
+<td>bigint(20)</td>
+<td>YES</td>
+<td>UNIQUE</td>
+</tr>
+<tr>
+<td>Detail</td>
+<td>vendor_payment_detail_imp</td>
+<td>source_payment_detail_id</td>
+<td>bigint(20)</td>
+<td>YES</td>
+<td>UNIQUE</td>
+</tr>
+<tr>
+<td>Detail</td>
+<td>fe_detail</td>
+<td>source_fe_detail_id</td>
+<td>bigint(20)</td>
+<td>YES</td>
+<td>UNIQUE</td>
+</tr>
+<tr>
+<td>Detail</td>
+<td>fe_payment</td>
+<td>source_fe_payment_id</td>
+<td>bigint(20)</td>
+<td>YES</td>
+<td>UNIQUE</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Total:</strong> 14 columnas</p>
+<h3 id="pares-header-detail-sincronizados">Pares Header-Detail Sincronizados</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Header Table</th>
+<th>Detail Table</th>
+<th>Header PK</th>
+<th>Detail PK</th>
+<th>FK Column</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>GJE_Header_Imp</td>
+<td>GJE_Detail_Imp</td>
+<td>TransactionID</td>
+<td>DetailID</td>
+<td>TransactionID</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Sales_Header_Imp</td>
+<td>Sales_Detail_Imp</td>
+<td>ID</td>
+<td>SalesDetailId</td>
+<td>ID</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Purchase_Header_Imp</td>
+<td>Purchase_Detail_Imp</td>
+<td>TransactionID</td>
+<td>DetailID</td>
+<td>TransactionID</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Customer_Credit_Memo_Header_Imp</td>
+<td>Customer_Credit_Memo_Detail_Imp</td>
+<td>TransactionID</td>
+<td>DetailID</td>
+<td>TransactionID</td>
+</tr>
+<tr>
+<td>5</td>
+<td>customer_receipt_header_imp</td>
+<td>customer_receipt_detail_imp</td>
+<td>UniqueReceiptID</td>
+<td>DetailID</td>
+<td>UniqueReceiptID</td>
+</tr>
+<tr>
+<td>6</td>
+<td>vendor_payment_header_imp</td>
+<td>vendor_payment_detail_imp</td>
+<td>UniquePaymentID</td>
+<td>DetailID</td>
+<td>UniquePaymentID</td>
+</tr>
+<tr>
+<td>7</td>
+<td>fe_header</td>
+<td>fe_detail</td>
+<td>id</td>
+<td>id</td>
+<td>feHeaderId</td>
+</tr>
+<tr>
+<td>8</td>
+<td>fe_header</td>
+<td>fe_payment</td>
+<td>id</td>
+<td>id</td>
+<td>feHeaderId</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Total:</strong> 8 pares (16 tablas con sincronización especial)</p>
+<hr />
+<h2 id="validaciones-post-despliegue">✅ Validaciones Post-Despliegue</h2>
+<h3 id="1-verificar-columnas-en-organizaciones">1. Verificar Columnas en Organizaciones</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1">-- Ejecutar en cada BD organizacional</span>
+<span class="k">SELECT</span><span class="w"> </span>
+<span class="w">    </span><span class="k">TABLE_NAME</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="k">COLUMN_NAME</span><span class="p">,</span>
+<span class="w">    </span><span class="n">COLUMN_TYPE</span><span class="p">,</span>
+<span class="w">    </span><span class="n">IS_NULLABLE</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">INFORMATION_SCHEMA</span><span class="p">.</span><span class="n">COLUMNS</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">TABLE_SCHEMA</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">DATABASE</span><span class="p">()</span>
+<span class="w">  </span><span class="k">AND</span><span class="w"> </span><span class="k">COLUMN_NAME</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;source_%&#39;</span>
+<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="k">TABLE_NAME</span><span class="p">,</span><span class="w"> </span><span class="k">COLUMN_NAME</span><span class="p">;</span>
+</code></pre></div>
+
+<p><strong>Esperado:</strong> 14+ filas (puede haber más si hay source_transaction_id ya existente)</p>
+<h3 id="2-verificar-unique-constraints-en-consolidacion">2. Verificar UNIQUE Constraints en Consolidación</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1">-- Ejecutar en cada BD consolidada</span>
+<span class="k">SELECT</span><span class="w"> </span>
+<span class="w">    </span><span class="k">TABLE_NAME</span><span class="p">,</span>
+<span class="w">    </span><span class="k">CONSTRAINT_NAME</span><span class="p">,</span>
+<span class="w">    </span><span class="n">GROUP_CONCAT</span><span class="p">(</span><span class="k">COLUMN_NAME</span><span class="w"> </span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">ORDINAL_POSITION</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">COLUMNS</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">INFORMATION_SCHEMA</span><span class="p">.</span><span class="n">KEY_COLUMN_USAGE</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">TABLE_SCHEMA</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">DATABASE</span><span class="p">()</span>
+<span class="w">  </span><span class="k">AND</span><span class="w"> </span><span class="k">CONSTRAINT_NAME</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;uk_source%&#39;</span>
+<span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="k">TABLE_NAME</span><span class="p">,</span><span class="w"> </span><span class="k">CONSTRAINT_NAME</span>
+<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="k">TABLE_NAME</span><span class="p">;</span>
+</code></pre></div>
+
+<p><strong>Esperado:</strong> 14 constraints (1 por tabla)</p>
+<h3 id="3-verificar-integridad-referencial">3. Verificar Integridad Referencial</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1">-- Verificar que Details tienen FKs válidas (NO huérfanos)</span>
+<span class="k">SELECT</span><span class="w"> </span>
+<span class="w">    </span><span class="n">h</span><span class="p">.</span><span class="n">TransactionID</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">header_new_id</span><span class="p">,</span>
+<span class="w">    </span><span class="n">h</span><span class="p">.</span><span class="n">source_transaction_id</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">header_original_id</span><span class="p">,</span>
+<span class="w">    </span><span class="n">h</span><span class="p">.</span><span class="n">org_source_id</span><span class="p">,</span>
+<span class="w">    </span><span class="k">COUNT</span><span class="p">(</span><span class="n">d</span><span class="p">.</span><span class="n">DetailID</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">details_count</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">GJE_Header_Imp</span><span class="w"> </span><span class="n">h</span>
+<span class="k">LEFT</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">GJE_Detail_Imp</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">d</span><span class="p">.</span><span class="n">TransactionID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">h</span><span class="p">.</span><span class="n">TransactionID</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="n">d</span><span class="p">.</span><span class="n">org_source_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">h</span><span class="p">.</span><span class="n">org_source_id</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">h</span><span class="p">.</span><span class="n">org_source_id</span><span class="w"> </span><span class="k">IS</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span>
+<span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">h</span><span class="p">.</span><span class="n">TransactionID</span><span class="p">,</span><span class="w"> </span><span class="n">h</span><span class="p">.</span><span class="n">source_transaction_id</span><span class="p">,</span><span class="w"> </span><span class="n">h</span><span class="p">.</span><span class="n">org_source_id</span>
+<span class="k">HAVING</span><span class="w"> </span><span class="n">details_count</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+</code></pre></div>
+
+<p><strong>Esperado:</strong> Todas las relaciones FK válidas, sin NULL</p>
+<h3 id="4-verificar-sincronizacion-funcionando">4. Verificar Sincronización Funcionando</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Revisar últimos logs de sincronización</span>
+docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>docucenter-app-1<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>tinker<span class="w"> </span>--execute<span class="o">=</span><span class="s2">&quot;</span>
+<span class="s2">\$jobs = \App\Models\Job::where(&#39;queue&#39;, &#39;consolidation&#39;)</span>
+<span class="s2">    -&gt;orderBy(&#39;id&#39;, &#39;desc&#39;)</span>
+<span class="s2">    -&gt;limit(10)</span>
+<span class="s2">    -&gt;get([&#39;id&#39;, &#39;payload&#39;, &#39;attempts&#39;, &#39;reserved_at&#39;, &#39;available_at&#39;]);</span>
+<span class="s2">\$jobs-&gt;each(function(\$j) {</span>
+<span class="s2">    \$payload = json_decode(\$j-&gt;payload);</span>
+<span class="s2">    echo &#39;Job #&#39; . \$j-&gt;id . &#39;: &#39; . \$payload-&gt;displayName . &#39; - Attempts: &#39; . \$j-&gt;attempts . PHP_EOL;</span>
+<span class="s2">});</span>
+<span class="s2">&quot;</span>
+</code></pre></div>
+
+<hr />
+<h2 id="troubleshooting">🔧 Troubleshooting</h2>
+<h3 id="problema-1-column-already-exists">Problema 1: "Column already exists"</h3>
+<p><strong>Síntoma:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="n">Error</span><span class="o">:</span><span class="w"> </span><span class="n">Column</span><span class="w"> </span><span class="s1">&#39;source_id&#39;</span><span class="w"> </span><span class="n">already</span><span class="w"> </span><span class="n">exists</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">table</span><span class="w"> </span><span class="s1">&#39;Sales_Header_Imp&#39;</span>
+</code></pre></div>
+
+<p><strong>Solución:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Continuar script - el comando detecta columnas existentes automáticamente</span>
+<span class="c1"># El script mostrará &quot;✓ La columna &#39;source_id&#39; ya existe&quot; en lugar de error fatal</span>
+</code></pre></div>
+
+<h3 id="problema-2-orphan-details">Problema 2: "Orphan details"</h3>
+<p><strong>Síntoma:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="o">[</span><span class="n">WARNING</span><span class="o">]</span><span class="w"> </span><span class="n">Orphan</span><span class="w"> </span><span class="nl">detail</span><span class="p">:</span><span class="w"> </span><span class="n">GJE_Detail_Imp</span><span class="w"> </span><span class="n">FK</span><span class="w"> </span><span class="n">TransactionID</span><span class="o">=</span><span class="mi">100</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="k">found</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="k">map</span>
+</code></pre></div>
+
+<p><strong>Causa:</strong> Details tienen FK a headers que no existen en la organización origen</p>
+<p><strong>Solución:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="c1">-- Identificar details huérfanos en BD origen</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">d</span><span class="p">.</span><span class="o">*</span><span class="w"> </span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">GJE_Detail_Imp</span><span class="w"> </span><span class="n">d</span>
+<span class="k">LEFT</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">GJE_Header_Imp</span><span class="w"> </span><span class="n">h</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">h</span><span class="p">.</span><span class="n">TransactionID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">d</span><span class="p">.</span><span class="n">TransactionID</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">h</span><span class="p">.</span><span class="n">TransactionID</span><span class="w"> </span><span class="k">IS</span><span class="w"> </span><span class="k">NULL</span><span class="p">;</span>
+
+<span class="c1">-- Eliminar o corregir en BD origen ANTES de consolidar</span>
+<span class="k">DELETE</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">GJE_Detail_Imp</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">DetailID</span><span class="w"> </span><span class="k">IN</span><span class="w"> </span><span class="p">(...);</span>
+</code></pre></div>
+
+<h3 id="problema-3-sincronizacion-lenta">Problema 3: Sincronización lenta</h3>
+<p><strong>Síntoma:</strong> Job tarda más de 5 minutos</p>
+<p><strong>Diagnóstico:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Ver progreso en tiempo real</span>
+docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>docucenter-app-1<span class="w"> </span>tail<span class="w"> </span>-f<span class="w"> </span>storage/logs/laravel.log<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;chunk\|FASE&quot;</span>
+</code></pre></div>
+
+<p><strong>Optimización:</strong>
+- Reducir chunk size para tablas con XML/JSON pesados
+- Aumentar timeout del Job si es necesario
+- Verificar índices en tablas origen</p>
+<hr />
+<h2 id="documentacion-relacionada">📚 Documentación Relacionada</h2>
+<ul>
+<li><a href="../consolidation-detail-tables-analysis/">consolidation-detail-tables-analysis.md</a> - Análisis completo del problema</li>
+<li><a href="../consolidation-pk-collision-analysis/">consolidation-pk-collision-analysis.md</a> - Análisis de colisión PKs Headers</li>
+<li><a href="../consolidation-header-detail-strategy/">consolidation-header-detail-strategy.md</a> - Estrategia original</li>
+<li><a href="../database-replication-analysis/">database-replication-analysis.md</a> - Arquitectura general</li>
+</ul>
+<hr />
+<h2 id="proximos-pasos-opcional">🎯 Próximos Pasos (Opcional)</h2>
+<h3 id="mejoras-futuras">Mejoras Futuras</h3>
+<ol>
+<li>⚠️ Agregar columnas source_* a tablas Export (PurOrdr, SalesInvoice, SalesOrder)</li>
+<li>⚠️ Implementar sincronización incremental (solo registros nuevos/modificados)</li>
+<li>⚠️ Agregar métricas de performance en Dashboard</li>
+<li>⚠️ Implementar rollback automático si falla sincronización</li>
+</ol>
+<h3 id="monitoreo-recomendado">Monitoreo Recomendado</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Crear alerta si aparecen orphaned details</span>
+docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>docucenter-app-1<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>schedule:run<span class="w"> </span>consolidation:check-orphans
+</code></pre></div>
+
+<hr />
+<p><strong>Implementado por:</strong> Sistema AI<br />
+<strong>Revisado por:</strong> [Pendiente]<br />
+<strong>Aprobado para producción:</strong> [Pendiente]<br />
+<strong>Fecha de despliegue:</strong> [Pendiente]</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/aghabrego/docucenter" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

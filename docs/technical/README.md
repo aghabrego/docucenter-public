@@ -4,6 +4,82 @@ Este directorio contiene documentación técnica sobre implementaciones específ
 
 ## 📋 Índice de Documentación
 
+### 🏢 **Sistema de Consolidación Multi-Organización**
+
+#### [consolidation-source-columns-implementation.md](./consolidation-source-columns-implementation.md) 🆕 **[🚀 IMPLEMENTADO]**
+**Descripción**: Implementación completa de columnas source_* para consolidación multi-organización
+**Contenido:**
+- ✅ Solución implementada para colisión de PKs: 14 columnas agregadas
+- ✅ Comando Artisan: db:update-stub-source-column (genérico para source_*)
+- ✅ Job actualizado: SyncOrganizationToCompanyJob con 2 fases
+- ✅ Método syncTableWithHeaderDetailRelation() completo con mapeo IDs
+- ✅ Scripts automatizados: add-source-columns-consolidation.sh (14 columnas)
+- ✅ Scripts UNIQUE constraints: add-unique-constraints-source-columns.sh
+- ✅ Guía de despliegue paso a paso para producción
+- ✅ Validaciones SQL post-despliegue y troubleshooting
+- ✅ Estadísticas completas: 6 headers + 8 details protegidos
+- ⏱️ Duración estimada: 30-60 minutos para despliegue
+- 📊 Estado: Código completo, listo para ejecutar en producción
+
+#### [consolidation-detail-tables-analysis.md](./consolidation-detail-tables-analysis.md) 🆕 **[🔥 MÁS CRÍTICO]**
+**Descripción**: Análisis completo del problema doble - Headers Y Details con PKs colisionando**Contenido:**
+- Revelación crítica: Details TAMBIÉN tienen PKs auto-incrementales que colisionan
+- Inventario completo de 8 pares Header-Detail con estructura PKs/FKs
+- Análisis de FKs rotas: Details apuntan a IDs de headers que ya no existen
+- FK Constraints activos en fe_detail/fe_payment (MySQL rechaza inserts)
+- Solución en 2 FASES obligatorias: Headers → Mapeo IDs → Details
+- Código PHP completo: syncTableWithHeaderDetailRelation() con mapeo
+- Validaciones SQL para verificar integridad referencial post-sincronización
+- Estadísticas: 0% Details protegidos (8 de 8 vulnerables), 14% Headers protegidos
+- Conclusión: SIN esta solución, el sistema de consolidación NO FUNCIONA
+- Estimado: 10-12 días de desarrollo con testing exhaustivo
+
+#### [consolidation-pk-collision-analysis.md](./consolidation-pk-collision-analysis.md) 🆕 **[CRÍTICO]**
+**Descripción**: Análisis detallado de colisión de Primary Keys auto-incrementales en Headers
+**Contenido:**
+- Identificación precisa del problema con ejemplos SQL reales
+- Escenario de colisión: Org 1 ID=100 vs Org 2 ID=100 → ERROR
+- Estado actual: Solo 1 de 7 tablas header protegidas (14%)
+- Tablas vulnerables: Sales_Header, Purchase_Header, fe_header, etc.
+- Solución completa: columnas source_*, mapeo de FKs, sincronización por fases
+- Código PHP propuesto: mapHeaderTableSourceId()
+- Ejemplo completo de flujo: Antes → Después con trazabilidad
+- Plan de acción: 4 fases (8-10 días de desarrollo)
+- Riesgos documentados y métricas de éxito
+
+#### [consolidation-documentation-status.md](./consolidation-documentation-status.md) 🆕 **[VERIFICADO]**
+**Descripción**: Estado completo de la documentación de consolidación vs código implementado
+**Contenido**:
+- Resumen ejecutivo del sistema de consolidación
+- Verificación de 2 documentos principales (2,115 líneas)
+- Análisis de código: Companysession, Organization, SyncOrganizationToCompanyJob
+- Implementaciones verificadas: enable_consolidation, org_source_id, chunk processing
+- Implementación parcial: 1 de 9 tablas header-detail completadas (GJE)
+- Métricas de calidad: 96% completo
+- Próximos pasos y recomendaciones
+
+#### [consolidation-header-detail-strategy.md](./consolidation-header-detail-strategy.md) 🆕 **[COMPLETO]**
+**Descripción**: Estrategia de consolidación para tablas con relaciones Header-Detail y auto-increment
+**Contenido**:
+- Identificación de 9 pares de tablas Header-Detail con colisión de IDs
+- Estrategia de mapeo: source_transaction_id, source_fe_id, source_receipt_id, etc.
+- Plan de implementación detallado con código PHP/SQL
+- 4 test cases específicos para validación
+- Análisis de riesgos y mitigaciones (8 riesgos documentados)
+- Métricas de éxito y KPIs post-implementación
+- Referencias cruzadas a código y documentación
+
+#### [database-replication-analysis.md](./database-replication-analysis.md) 🆕 **[COMPLETO]**
+**Descripción**: Análisis completo de arquitectura de replicación de bases de datos para consolidación
+**Contenido**:
+- Problema: Limitación de Sage Connector (una BD, un ID_compania)
+- Arquitectura actual vs deseada (diagramas ASCII completos)
+- Comparación de 4 opciones: MySQL Binlog, Laravel Jobs, Vistas, Stored Procedures
+- Solución recomendada: Laravel Jobs Asíncronos con Redis (100 puntos)
+- Plan de implementación por 5 fases (preparación, modelos, job, testing, optimización)
+- Consideraciones importantes: conflictos de IDs, sincronización, performance
+- Métricas de éxito y KPIs operacionales
+
 ### 🔗 **Integraciones - QuickBooks**
 
 #### [ANALISIS-CUSTOM-FIELDS-INTEGRACIONES.md](./ANALISIS-CUSTOM-FIELDS-INTEGRACIONES.md) 🆕 **[CRÍTICO]**

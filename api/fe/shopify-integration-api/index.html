@@ -6,13 +6,13 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Documentación técnica y de usuario de DocuCenter - Sistema de facturación electrónica">
+        <meta name="description" content="Documentación técnica y de usuario de Docucenter">
       
       
         <meta name="author" content="aghabrego">
       
       
-        <link rel="canonical" href="https://aghabrego.github.io/docucenter-public/api/fe/shopify-integration-api/">
+        <link rel="canonical" href="https://aghabrego.github.io/docucenter/api/fe/shopify-integration-api/">
       
       
       
@@ -20,19 +20,16 @@
         
       
       
-      <link rel="icon" href="https://home.apconpanama.me/wp-content/uploads/2024/03/logo3.png">
+      <link rel="icon" href="../../../docs/favicon.ico">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
     
     
       
-        <title>API Facturación Electrónica - Integración Shopify - DocuCenter</title>
+        <title>API Facturación Electrónica - Integración Shopify - Docucenter</title>
       
     
     
       <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
-      
-        
-        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -60,14 +57,7 @@
   </head>
   
   
-    
-    
-      
-    
-    
-    
-    
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="light-blue">
+    <body dir="ltr">
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -88,11 +78,13 @@
     
       
 
-<header class="md-header" data-md-component="header">
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Cabecera">
-    <a href="../../.." title="DocuCenter" class="md-header__button md-logo" aria-label="DocuCenter" data-md-component="logo">
+    <a href="../../.." title="Docucenter" class="md-header__button md-logo" aria-label="Docucenter" data-md-component="logo">
       
-  <img src="https://home.apconpanama.me/wp-content/uploads/2024/03/logo3.png" alt="logo">
+  <img src="../../../docs/logo.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -103,7 +95,7 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            DocuCenter
+            Docucenter
           </span>
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
@@ -115,18 +107,6 @@
         </div>
       </div>
     </div>
-    
-      
-        <form class="md-header__option" data-md-component="palette">
-  
-    
-    
-    
-    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="light-blue"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
-    
-  
-</form>
-      
     
     
       <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
@@ -158,8 +138,6 @@
         </button>
       </nav>
       
-        <div class="md-search__suggest" data-md-component="search-suggest"></div>
-      
     </form>
     <div class="md-search__output">
       <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
@@ -177,13 +155,13 @@
     
     
       <div class="md-header__source">
-        <a href="https://github.com/aghabrego/docucenter-public" title="Ir al repositorio" class="md-source" data-md-component="source">
+        <a href="https://github.com/aghabrego/docucenter" title="Ir al repositorio" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
   </div>
   <div class="md-source__repository">
-    aghabrego/docucenter-public
+    aghabrego/docucenter
   </div>
 </a>
       </div>
@@ -196,154 +174,6 @@
       
       
         
-          
-            
-<nav class="md-tabs" aria-label="Pestañas" data-md-component="tabs">
-  <div class="md-grid">
-    <ul class="md-tabs__list">
-      
-        
-  
-  
-  
-  
-    <li class="md-tabs__item">
-      <a href="../../.." class="md-tabs__link">
-        
-  
-  
-    
-  
-  Inicio
-
-      </a>
-    </li>
-  
-
-      
-        
-  
-  
-  
-  
-    
-    
-      <li class="md-tabs__item">
-        <a href="../../" class="md-tabs__link">
-          
-  
-  
-  APIs
-
-        </a>
-      </li>
-    
-  
-
-      
-        
-  
-  
-  
-  
-    
-    
-      <li class="md-tabs__item">
-        <a href="../../../optimizations/" class="md-tabs__link">
-          
-  
-  
-  Optimizaciones
-
-        </a>
-      </li>
-    
-  
-
-      
-        
-  
-  
-  
-  
-    
-    
-      <li class="md-tabs__item">
-        <a href="../../../technical/" class="md-tabs__link">
-          
-  
-  
-  Documentación Técnica
-
-        </a>
-      </li>
-    
-  
-
-      
-        
-  
-  
-  
-  
-    
-    
-      <li class="md-tabs__item">
-        <a href="../../../validations/" class="md-tabs__link">
-          
-  
-  
-  Validaciones
-
-        </a>
-      </li>
-    
-  
-
-      
-        
-  
-  
-  
-  
-    
-    
-      <li class="md-tabs__item">
-        <a href="../../../testing/" class="md-tabs__link">
-          
-  
-  
-  Testing
-
-        </a>
-      </li>
-    
-  
-
-      
-        
-  
-  
-  
-  
-    
-    
-      <li class="md-tabs__item">
-        <a href="../../../integrations/" class="md-tabs__link">
-          
-  
-  
-  Integraciones
-
-        </a>
-      </li>
-    
-  
-
-      
-    </ul>
-  </div>
-</nav>
           
         
       
@@ -358,27 +188,25 @@
                     
 
 
-  
 
-
-<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navegación" data-md-level="0">
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../.." title="DocuCenter" class="md-nav__button md-logo" aria-label="DocuCenter" data-md-component="logo">
+    <a href="../../.." title="Docucenter" class="md-nav__button md-logo" aria-label="Docucenter" data-md-component="logo">
       
-  <img src="https://home.apconpanama.me/wp-content/uploads/2024/03/logo3.png" alt="logo">
+  <img src="../../../docs/logo.png" alt="logo">
 
     </a>
-    DocuCenter
+    Docucenter
   </label>
   
     <div class="md-nav__source">
-      <a href="https://github.com/aghabrego/docucenter-public" title="Ir al repositorio" class="md-source" data-md-component="source">
+      <a href="https://github.com/aghabrego/docucenter" title="Ir al repositorio" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
   </div>
   <div class="md-source__repository">
-    aghabrego/docucenter-public
+    aghabrego/docucenter
   </div>
 </a>
     </div>
@@ -422,19 +250,12 @@
     
     
     
-      
-      
-        
-      
-    
     
     <li class="md-nav__item md-nav__item--nested">
       
         
         
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
         
           
           <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
@@ -444,7 +265,7 @@
   <span class="md-ellipsis">
     
   
-    APIs
+    API Documentation
   
 
     
@@ -460,7 +281,54 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    APIs
+    API Documentation
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sage ACICloud
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Sage ACICloud
   
 
           </label>
@@ -473,14 +341,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../" class="md-nav__link">
+      <a href="../../sage-acicloud/invoices-api/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    APIs de DocuCenter
+    Facturación - Invoices
   
 
     
@@ -500,23 +368,248 @@
   
   
   
-    
-    
-    
-    
-      
-      
+    <li class="md-nav__item">
+      <a href="../../sage-acicloud/customers-api/" class="md-nav__link">
         
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Clientes - Customers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sage-acicloud/vendors-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Proveedores - Vendors
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sage-acicloud/purchases-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Compras - Purchases
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sage-acicloud/products-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Productos - Products
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sage-acicloud/jobs-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trabajos - Jobs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sage-acicloud/accounting-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contabilidad General
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sage-acicloud/payments-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pagos y Créditos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../sage-acicloud/inventory-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inventario - Inventory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
     
     
     <li class="md-nav__item md-nav__item--nested">
       
         
         
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
         
           
           <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
@@ -562,147 +655,7 @@
   <span class="md-ellipsis">
     
   
-    API Facturación Electrónica (FE) - DocuCenter
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../acicloud-fe-api/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    API Facturación Electrónica - Integración ACICloud FE
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../document-emission-api/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    API Facturación Electrónica - Emisión de Documentos
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../shopify-api/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    API Facturación Electrónica - Integración Shopify
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../lightspeed-api/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    API Facturación Electrónica - Integración Lightspeed
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../maxgym-api/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    API Facturación Electrónica - Integración Maxgym
+    APIs de Facturación Electrónica
   
 
     
@@ -730,7 +683,35 @@
   <span class="md-ellipsis">
     
   
-    API Facturación Electrónica - Integración Meypar
+    Integración Meypar
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../shopify-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integración Shopify
   
 
     
@@ -758,7 +739,175 @@
   <span class="md-ellipsis">
     
   
-    API Facturación Electrónica - Integración Kart21
+    Integración Kart21
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lightspeed-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integración Lightspeed
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../maxgym-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integración Maxgym
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../acicloud-fe-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ACICloud FE
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../import-xml-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Import XML
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../emit-json-object-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Emit JSON Object
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../download-base64-document-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Download Base64 Document
   
 
     
@@ -790,280 +939,15 @@
     
     
     
-      
-      
-        
-      
-    
     
     <li class="md-nav__item md-nav__item--nested">
       
         
         
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
         
           
           <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Sage ACICloud
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2_3">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Sage ACICloud
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../sage-acicloud/customers-api/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    API Sage ACICloud - Módulo Clientes
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../sage-acicloud/products-api/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    API Productos - Sage ACICloud
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../sage-acicloud/sales-orders-api/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    API Sage ACICloud - Módulo Órdenes de Venta
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../sage-acicloud/purchases-api/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    API Compras - Sage ACICloud
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../sage-acicloud/payments-api/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    API Pagos y Créditos - Sage ACICloud
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../sage-acicloud/inventory-api/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    API Inventario - Sage ACICloud
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../sage-acicloud/jobs-api/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    API Trabajos/Jobs - Sage ACICloud
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_4" >
-        
-          
-          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
             
   
   
@@ -1081,8 +965,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2_4">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -1106,7 +990,90 @@
   <span class="md-ellipsis">
     
   
-    API de Organizaciones
+    Gestión de Organizaciones
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ubicaciones Geográficas
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Ubicaciones Geográficas
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../locations/locations-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API de Ubicaciones
   
 
     
@@ -1145,19 +1112,12 @@
     
     
     
-      
-      
-        
-      
-    
     
     <li class="md-nav__item md-nav__item--nested">
       
         
         
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
         
           
           <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
@@ -1167,7 +1127,7 @@
   <span class="md-ellipsis">
     
   
-    Optimizaciones
+    Sistema de Testing
   
 
     
@@ -1183,7 +1143,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Optimizaciones
+    Sistema de Testing
   
 
           </label>
@@ -1196,96 +1156,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../optimizations/" class="md-nav__link">
+      <a href="../../../testing/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Optimizaciones - DocuCenter
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_2" >
-        
-          
-          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Performance
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_3_2">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Performance
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../optimizations/customer-supplier-optimizations/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Optimizaciones para el manejo de muchos clientes
+    Índice de Testing
   
 
     
@@ -1306,14 +1184,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../optimizations/mysql-optimization-circuit-breaker/" class="md-nav__link">
+      <a href="../../../TESTING_SYSTEM_SUMMARY/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Optimización MySQL 8.0 y Circuit Breaker para DocuCenter
+    Resumen Ejecutivo
   
 
     
@@ -1322,14 +1200,6 @@
   
 
       </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
     </li>
   
 
@@ -1352,19 +1222,12 @@
     
     
     
-      
-      
-        
-      
-    
     
     <li class="md-nav__item md-nav__item--nested">
       
         
         
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
         
           
           <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
@@ -1403,96 +1266,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../technical/" class="md-nav__link">
+      <a href="../../../technical/README.md" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Documentación Técnica - DocuCenter
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_2" >
-        
-          
-          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    QuickBooks
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4_2">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    QuickBooks
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../technical/quickbooks-webhook-organizationid-fix/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Fix: QuickBooks Webhook OrganizationId Duplicado
+    Soluciones
   
 
     
@@ -1513,660 +1294,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../technical/quickbooks-bills-job-graceful-validation/" class="md-nav__link">
+      <a href="../../../technical/lightspeed_audit_improvement/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Fix: Validación Graceful de Tablas en CreateIntuitBillsJob
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../technical/quickbooks-fiscal-number-validation-system/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Sistema de Validación de Números Fiscales QuickBooks
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_3" >
-        
-          
-          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    MaxGym
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4_3">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    MaxGym
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../technical/maxgym-amount-calculation-fix/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Corrección de Cálculo de Montos en MaxGym API
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_4" >
-        
-          
-          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Document AI
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4_4">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Document AI
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../technical/document-ai-import-to-workbench/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Document AI - Importación a Workbench
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../technical/document-ai-import-implementation-summary/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Document AI - Implementación Import to Workbench
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_5" >
-        
-          
-          <label class="md-nav__link" for="__nav_4_5" id="__nav_4_5_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Alanube DOM
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_5_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4_5">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Alanube DOM
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../technical/alanube-dom-service-usage/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Guía de Uso del Servicio AlanubeDomService
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../technical/alanube-dom-export-invoices/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Facturas de Exportación Electrónica (46) - Alanube DOM
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../technical/ALANUBE_DOM_COMPLETE_INTEGRATION/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Integración Completa Alanube DOM - República Dominicana
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../technical/FISCAL_CREDIT_IMPLEMENTATION_SUMMARY/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Implementación Completa de Facturas de Crédito Fiscal (31) - Alanube DOM
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_6" >
-        
-          
-          <label class="md-nav__link" for="__nav_4_6" id="__nav_4_6_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Soluciones Técnicas
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_6_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4_6">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Soluciones Técnicas
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../technical/ezeeissued-solution-summary/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Solución Implementada - Campo EzeeIssued
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../technical/getsaleproperty-optimizations-summary/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Optimizaciones Completas - getSaleProperty() - Create.php
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../technical/ezeeissued-field-correction-summary/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Corrección de Campo EzeeIssued - Resumen Técnico
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_7" >
-        
-          
-          <label class="md-nav__link" for="__nav_4_7" id="__nav_4_7_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Pagos y Cálculos
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_7_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4_7">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Pagos y Cálculos
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../technical/payment-calculation-fix/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Análisis de Discrepancias en Cálculo de Pagos - Facturación Electrónica
+    Auditoría Lightspeed
   
 
     
@@ -2194,97 +1329,7 @@
   <span class="md-ellipsis">
     
   
-    Solución Final: Sincronización Completa de Pagos en Facturación Electrónica
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_8" >
-        
-          
-          <label class="md-nav__link" for="__nav_4_8" id="__nav_4_8_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    SQL Server
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_8_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4_8">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    SQL Server
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../technical/sql-server-complete-store-id-filtering/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Implementación Completa de Filtrado por Store ID en Jobs SQL Server
+    Sincronización de Pagos
   
 
     
@@ -2305,14 +1350,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../technical/sql-server-store-id-filtering/" class="md-nav__link">
+      <a href="../../../technical/payment-calculation-fix/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Implementación de Filtrado por Store ID en STInvoiceJob
+    Corrección Cálculo Pagos
   
 
     
@@ -2332,14 +1377,6 @@
     </li>
   
 
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
     
       
       
@@ -2350,20 +1387,13 @@
     
     
     
-    
-      
-      
-        
-      
     
     
     <li class="md-nav__item md-nav__item--nested">
       
         
         
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
         
           
           <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
@@ -2409,7 +1439,7 @@
   <span class="md-ellipsis">
     
   
-    Validaciones - DocuCenter
+    Resumen
   
 
     
@@ -2429,60 +1459,6 @@
   
   
   
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5_2" >
-        
-          
-          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Documentos Fiscales
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_5_2">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Documentos Fiscales
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
     <li class="md-nav__item">
       <a href="../../../validations/createSale-ruc-validation/" class="md-nav__link">
         
@@ -2491,7 +1467,7 @@
   <span class="md-ellipsis">
     
   
-    Validación de RUC en CreateSaleMaxgymRequest
+    Validación RUC CreateSale
   
 
     
@@ -2519,365 +1495,7 @@
   <span class="md-ellipsis">
     
   
-    Validación de RUC en MaxgymService
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
-        
-          
-          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Testing
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_6">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Testing
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../testing/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Sistema de Testing DocuCenter
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6_2" >
-        
-          
-          <label class="md-nav__link" for="__nav_6_2" id="__nav_6_2_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Reportes de Error
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_2_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_6_2">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Reportes de Error
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../testing/PLUSMOVIL-PRODUCTION-ERROR-REPORT/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Reporte Error PlusMóvil Producción
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
-        
-          
-          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Integraciones
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_7">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Integraciones
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../integrations/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Integraciones Disponibles
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7_2" >
-        
-          
-          <label class="md-nav__link" for="__nav_7_2" id="__nav_7_2_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    PlusMóvil
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_2_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_7_2">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    PlusMóvil
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../integrations/plusmovil-implementation-summary/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Resumen Implementación
+    Validación RUC Maxgym
   
 
     
@@ -2898,14 +1516,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../integrations/plusmovil-implementation-analysis/" class="md-nav__link">
+      <a href="../../../validations/meypar-validations/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Análisis
+    Validaciones MEYPAR
   
 
     
@@ -2926,14 +1544,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../integrations/plusmovil-api-testing-results/" class="md-nav__link">
+      <a href="../../../validations/validation_comparison/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Resultados Testing API
+    Comparación Validaciones
   
 
     
@@ -2942,70 +1560,6 @@
   
 
       </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../integrations/plusmovil-continuation-plan/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Plan Continuación
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../integrations/plusmovil-next-steps/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Próximos Pasos
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
     </li>
   
 
@@ -3313,21 +1867,21 @@
   
 
 
-<h1 id="api-facturacion-electronica-integracion-shopify">API Facturación Electrónica - Integración Shopify<a class="headerlink" href="#api-facturacion-electronica-integracion-shopify" title="Permanent link">&para;</a></h1>
-<h2 id="crear-venta-desde-shopify">Crear Venta desde Shopify<a class="headerlink" href="#crear-venta-desde-shopify" title="Permanent link">&para;</a></h2>
+<h1 id="api-facturacion-electronica-integracion-shopify">API Facturación Electrónica - Integración Shopify</h1>
+<h2 id="crear-venta-desde-shopify">Crear Venta desde Shopify</h2>
 <p><strong>Endpoint:</strong> <code>POST /api/v1/fe/create_sale_shopify</code><br />
 <strong>Request Class:</strong> <code>CreateSaleShopifyRequest</code><br />
 <strong>Autenticación:</strong> Bearer Token requerido<br />
 <strong>Procesamiento:</strong> Asíncrono con Job</p>
-<h3 id="caracteristicas-del-endpoint">Características del Endpoint<a class="headerlink" href="#caracteristicas-del-endpoint" title="Permanent link">&para;</a></h3>
+<h3 id="caracteristicas-del-endpoint">Características del Endpoint</h3>
 <ul>
-<li><strong>Integración Shopify</strong>: Específicamente diseñado para órdenes de Shopify</li>
-<li><strong>Procesamiento Asíncrono</strong>: Utiliza <code>CreateSaleShopifyJob</code> </li>
-<li><strong>Webhook Compatible</strong>: Ideal para webhooks de Shopify</li>
-<li><strong>Multi-tenant</strong>: Compatible con múltiples organizaciones</li>
-<li><strong>Logging Detallado</strong>: Tracking con order_number específico</li>
+<li>✅ <strong>Integración Shopify</strong>: Específicamente diseñado para órdenes de Shopify</li>
+<li>✅ <strong>Procesamiento Asíncrono</strong>: Utiliza <code>CreateSaleShopifyJob</code> </li>
+<li>✅ <strong>Webhook Compatible</strong>: Ideal para webhooks de Shopify</li>
+<li>✅ <strong>Multi-tenant</strong>: Compatible con múltiples organizaciones</li>
+<li>✅ <strong>Logging Detallado</strong>: Tracking con order_number específico</li>
 </ul>
-<h3 id="parametros-principales-de-request">Parámetros Principales de Request<a class="headerlink" href="#parametros-principales-de-request" title="Permanent link">&para;</a></h3>
+<h3 id="parametros-principales-de-request">Parámetros Principales de Request</h3>
 <table>
 <thead>
 <tr>
@@ -3342,69 +1896,69 @@
 <tr>
 <td><code>order_number</code></td>
 <td>string</td>
-<td></td>
+<td>✅</td>
 <td>Número de orden de Shopify</td>
 <td><code>"SH-1001"</code></td>
 </tr>
 <tr>
 <td><code>order_id</code></td>
 <td>integer</td>
-<td></td>
+<td>✅</td>
 <td>ID interno de Shopify</td>
 <td><code>12345678</code></td>
 </tr>
 <tr>
 <td><code>created_at</code></td>
 <td>string</td>
-<td></td>
+<td>✅</td>
 <td>Fecha de creación de la orden</td>
 <td><code>"2025-08-12T10:30:00Z"</code></td>
 </tr>
 <tr>
 <td><code>total_price</code></td>
 <td>string</td>
-<td></td>
+<td>✅</td>
 <td>Total de la orden</td>
 <td><code>"107.00"</code></td>
 </tr>
 <tr>
 <td><code>subtotal_price</code></td>
 <td>string</td>
-<td></td>
+<td>✅</td>
 <td>Subtotal sin impuestos</td>
 <td><code>"100.00"</code></td>
 </tr>
 <tr>
 <td><code>total_tax</code></td>
 <td>string</td>
-<td></td>
+<td>✅</td>
 <td>Total de impuestos</td>
 <td><code>"7.00"</code></td>
 </tr>
 <tr>
 <td><code>currency</code></td>
 <td>string</td>
-<td></td>
+<td>✅</td>
 <td>Moneda de la transacción</td>
 <td><code>"PAB"</code></td>
 </tr>
 <tr>
 <td><code>financial_status</code></td>
 <td>string</td>
-<td></td>
+<td>✅</td>
 <td>Estado financiero</td>
 <td><code>"paid"</code></td>
 </tr>
 <tr>
 <td><code>fulfillment_status</code></td>
 <td>string</td>
-<td></td>
+<td>❌</td>
 <td>Estado de cumplimiento</td>
 <td><code>"fulfilled"</code></td>
 </tr>
 </tbody>
 </table>
-<h3 id="datos-del-cliente">Datos del Cliente<a class="headerlink" href="#datos-del-cliente" title="Permanent link">&para;</a></h3>
+<h3 id="datos-del-cliente">Datos del Cliente</h3>
 <table>
 <thead>
 <tr>
@@ -3419,48 +1973,48 @@
 <tr>
 <td><code>customer.id</code></td>
 <td>integer</td>
-<td></td>
+<td>✅</td>
 <td>ID del cliente en Shopify</td>
 <td><code>67890</code></td>
 </tr>
 <tr>
 <td><code>customer.email</code></td>
 <td>string</td>
-<td></td>
+<td>✅</td>
 <td>Email del cliente</td>
 <td><code>"cliente@email.com"</code></td>
 </tr>
 <tr>
 <td><code>customer.first_name</code></td>
 <td>string</td>
-<td></td>
+<td>✅</td>
 <td>Nombre del cliente</td>
 <td><code>"María"</code></td>
 </tr>
 <tr>
 <td><code>customer.last_name</code></td>
 <td>string</td>
-<td></td>
+<td>✅</td>
 <td>Apellido del cliente</td>
 <td><code>"García"</code></td>
 </tr>
 <tr>
 <td><code>customer.phone</code></td>
 <td>string</td>
-<td></td>
+<td>❌</td>
 <td>Teléfono del cliente</td>
 <td><code>"+507 1234-5678"</code></td>
 </tr>
 <tr>
 <td><code>customer.verified_email</code></td>
 <td>boolean</td>
-<td></td>
+<td>❌</td>
 <td>Email verificado</td>
 <td><code>true</code></td>
 </tr>
 </tbody>
 </table>
-<h3 id="direccion-de-facturacion">Dirección de Facturación<a class="headerlink" href="#direccion-de-facturacion" title="Permanent link">&para;</a></h3>
+<h3 id="direccion-de-facturacion">Dirección de Facturación</h3>
 <table>
 <thead>
 <tr>
@@ -3475,69 +2029,69 @@
 <tr>
 <td><code>billing_address.first_name</code></td>
 <td>string</td>
-<td></td>
+<td>✅</td>
 <td>Nombre en dirección</td>
 <td><code>"María"</code></td>
 </tr>
 <tr>
 <td><code>billing_address.last_name</code></td>
 <td>string</td>
-<td></td>
+<td>✅</td>
 <td>Apellido en dirección</td>
 <td><code>"García"</code></td>
 </tr>
 <tr>
 <td><code>billing_address.address1</code></td>
 <td>string</td>
-<td></td>
+<td>✅</td>
 <td>Dirección línea 1</td>
 <td><code>"Calle 50, Edificio Torre"</code></td>
 </tr>
 <tr>
 <td><code>billing_address.address2</code></td>
 <td>string</td>
-<td></td>
+<td>❌</td>
 <td>Dirección línea 2</td>
 <td><code>"Piso 10, Oficina 1001"</code></td>
 </tr>
 <tr>
 <td><code>billing_address.city</code></td>
 <td>string</td>
-<td></td>
+<td>✅</td>
 <td>Ciudad</td>
 <td><code>"Ciudad de Panamá"</code></td>
 </tr>
 <tr>
 <td><code>billing_address.province</code></td>
 <td>string</td>
-<td></td>
+<td>✅</td>
 <td>Provincia</td>
 <td><code>"Panamá"</code></td>
 </tr>
 <tr>
 <td><code>billing_address.country</code></td>
 <td>string</td>
-<td></td>
+<td>✅</td>
 <td>País</td>
 <td><code>"PA"</code></td>
 </tr>
 <tr>
 <td><code>billing_address.zip</code></td>
 <td>string</td>
-<td></td>
+<td>❌</td>
 <td>Código postal</td>
 <td><code>"0000"</code></td>
 </tr>
 <tr>
 <td><code>billing_address.phone</code></td>
 <td>string</td>
-<td></td>
+<td>❌</td>
 <td>Teléfono</td>
 <td><code>"+507 1234-5678"</code></td>
 </tr>
 </tbody>
 </table>
-<h3 id="items-de-la-orden-line-items">Items de la Orden (Line Items)<a class="headerlink" href="#items-de-la-orden-line-items" title="Permanent link">&para;</a></h3>
+<h3 id="items-de-la-orden-line-items">Items de la Orden (Line Items)</h3>
 <table>
 <thead>
 <tr>
@@ -3552,83 +2106,83 @@
 <tr>
 <td><code>line_items[].id</code></td>
 <td>integer</td>
-<td></td>
+<td>✅</td>
 <td>ID del item en Shopify</td>
 <td><code>987654321</code></td>
 </tr>
 <tr>
 <td><code>line_items[].product_id</code></td>
 <td>integer</td>
-<td></td>
+<td>✅</td>
 <td>ID del producto</td>
 <td><code>123456789</code></td>
 </tr>
 <tr>
 <td><code>line_items[].variant_id</code></td>
 <td>integer</td>
-<td></td>
+<td>✅</td>
 <td>ID de la variante</td>
 <td><code>555666777</code></td>
 </tr>
 <tr>
 <td><code>line_items[].title</code></td>
 <td>string</td>
-<td></td>
+<td>✅</td>
 <td>Título del producto</td>
 <td><code>"Camiseta Premium - Talla M"</code></td>
 </tr>
 <tr>
 <td><code>line_items[].name</code></td>
 <td>string</td>
-<td></td>
+<td>✅</td>
 <td>Nombre completo</td>
 <td><code>"Camiseta Premium - Talla M - Azul"</code></td>
 </tr>
 <tr>
 <td><code>line_items[].sku</code></td>
 <td>string</td>
-<td></td>
+<td>❌</td>
 <td>SKU del producto</td>
 <td><code>"CAM-PREM-M-AZUL"</code></td>
 </tr>
 <tr>
 <td><code>line_items[].quantity</code></td>
 <td>integer</td>
-<td></td>
+<td>✅</td>
 <td>Cantidad</td>
 <td><code>2</code></td>
 </tr>
 <tr>
 <td><code>line_items[].price</code></td>
 <td>string</td>
-<td></td>
+<td>✅</td>
 <td>Precio unitario</td>
 <td><code>"35.00"</code></td>
 </tr>
 <tr>
 <td><code>line_items[].total_discount</code></td>
 <td>string</td>
-<td></td>
+<td>❌</td>
 <td>Descuento total</td>
 <td><code>"5.00"</code></td>
 </tr>
 <tr>
 <td><code>line_items[].fulfillment_status</code></td>
 <td>string</td>
-<td></td>
+<td>❌</td>
 <td>Estado de envío</td>
 <td><code>"fulfilled"</code></td>
 </tr>
 <tr>
 <td><code>line_items[].taxable</code></td>
 <td>boolean</td>
-<td></td>
+<td>❌</td>
 <td>Sujeto a impuestos</td>
 <td><code>true</code></td>
 </tr>
 </tbody>
 </table>
-<h3 id="informacion-de-pago">Información de Pago<a class="headerlink" href="#informacion-de-pago" title="Permanent link">&para;</a></h3>
+<h3 id="informacion-de-pago">Información de Pago</h3>
 <table>
 <thead>
 <tr>
@@ -3643,35 +2197,35 @@
 <tr>
 <td><code>payment_details.credit_card_bin</code></td>
 <td>string</td>
-<td></td>
+<td>❌</td>
 <td>BIN de tarjeta</td>
 <td><code>"424242"</code></td>
 </tr>
 <tr>
 <td><code>payment_details.credit_card_company</code></td>
 <td>string</td>
-<td></td>
+<td>❌</td>
 <td>Compañía de tarjeta</td>
 <td><code>"Visa"</code></td>
 </tr>
 <tr>
 <td><code>payment_details.credit_card_number</code></td>
 <td>string</td>
-<td></td>
+<td>❌</td>
 <td>Últimos 4 dígitos</td>
 <td><code>"XXXX-XXXX-XXXX-4242"</code></td>
 </tr>
 <tr>
 <td><code>gateway</code></td>
 <td>string</td>
-<td></td>
+<td>❌</td>
 <td>Gateway de pago usado</td>
 <td><code>"shopify_payments"</code></td>
 </tr>
 </tbody>
 </table>
-<h3 id="ejemplo-de-request-completo">Ejemplo de Request Completo<a class="headerlink" href="#ejemplo-de-request-completo" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<h3 id="ejemplo-de-request-completo">Ejemplo de Request Completo</h3>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;order_number&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SH-1001&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;order_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">12345678</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;created_at&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2025-08-12T10:30:00Z&quot;</span><span class="p">,</span>
@@ -3769,8 +2323,9 @@
 <span class="w">  </span><span class="p">]</span>
 <span class="p">}</span>
 </code></pre></div>
-<h3 id="ejemplo-de-request-minimo">Ejemplo de Request Mínimo<a class="headerlink" href="#ejemplo-de-request-minimo" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
+
+<h3 id="ejemplo-de-request-minimo">Ejemplo de Request Mínimo</h3>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;order_number&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SH-1002&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;order_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">12345679</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;created_at&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2025-08-12T11:00:00Z&quot;</span><span class="p">,</span>
@@ -3806,8 +2361,9 @@
 <span class="w">  </span><span class="p">]</span>
 <span class="p">}</span>
 </code></pre></div>
-<h3 id="respuesta-de-exito">Respuesta de Éxito<a class="headerlink" href="#respuesta-de-exito" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
+
+<h3 id="respuesta-de-exito">Respuesta de Éxito</h3>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;response&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;HTTP: 201 OK&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Venta Shopify enviada para procesamiento. Se procesará en segundo plano.&quot;</span><span class="p">,</span>
@@ -3816,9 +2372,10 @@
 <span class="w">  </span><span class="nt">&quot;estimated_processing_time&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1-3 minutos&quot;</span>
 <span class="p">}</span>
 </code></pre></div>
-<h3 id="respuestas-de-error">Respuestas de Error<a class="headerlink" href="#respuestas-de-error" title="Permanent link">&para;</a></h3>
-<h4 id="error-de-validacion">Error de Validación<a class="headerlink" href="#error-de-validacion" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
+
+<h3 id="respuestas-de-error">Respuestas de Error</h3>
+<h4 id="error-de-validacion">Error de Validación</h4>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;response&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;HTTP: 201 OK&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Datos de orden Shopify inválidos.&quot;</span><span class="p">,</span>
@@ -3835,8 +2392,9 @@
 <span class="w">  </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
-<h4 id="error-de-cliente-duplicado">Error de Cliente Duplicado<a class="headerlink" href="#error-de-cliente-duplicado" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
+
+<h4 id="error-de-cliente-duplicado">Error de Cliente Duplicado</h4>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;response&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;HTTP: 201 OK&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;La orden Shopify ya ha sido procesada.&quot;</span><span class="p">,</span>
@@ -3844,15 +2402,17 @@
 <span class="w">  </span><span class="nt">&quot;order_number&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SH-1001&quot;</span>
 <span class="p">}</span>
 </code></pre></div>
-<h4 id="error-de-organizacion">Error de Organización<a class="headerlink" href="#error-de-organizacion" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
+
+<h4 id="error-de-organizacion">Error de Organización</h4>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;response&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;HTTP: 201 OK&quot;</span><span class="p">,</span><span class="w"> </span>
 <span class="w">  </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;No se encontró organización activa para procesar la orden.&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;error_code&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ORGANIZATION_NOT_FOUND&quot;</span>
 <span class="p">}</span>
 </code></pre></div>
-<h3 id="estados-financieros-validos">Estados Financieros Válidos<a class="headerlink" href="#estados-financieros-validos" title="Permanent link">&para;</a></h3>
+
+<h3 id="estados-financieros-validos">Estados Financieros Válidos</h3>
 <table>
 <thead>
 <tr>
@@ -3891,7 +2451,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="estados-de-cumplimiento">Estados de Cumplimiento<a class="headerlink" href="#estados-de-cumplimiento" title="Permanent link">&para;</a></h3>
+<h3 id="estados-de-cumplimiento">Estados de Cumplimiento</h3>
 <table>
 <thead>
 <tr>
@@ -3914,7 +2474,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="codigos-de-respuesta-http">Códigos de Respuesta HTTP<a class="headerlink" href="#codigos-de-respuesta-http" title="Permanent link">&para;</a></h3>
+<h3 id="codigos-de-respuesta-http">Códigos de Respuesta HTTP</h3>
 <table>
 <thead>
 <tr>
@@ -3949,20 +2509,19 @@
 </tr>
 </tbody>
 </table>
-<h3 id="configuracion-de-webhook-shopify">Configuración de Webhook Shopify<a class="headerlink" href="#configuracion-de-webhook-shopify" title="Permanent link">&para;</a></h3>
+<h3 id="configuracion-de-webhook-shopify">Configuración de Webhook Shopify</h3>
 <p>Para configurar el webhook en Shopify Admin:</p>
 <ol>
 <li><strong>URL del Webhook</strong>: <code>https://api.docucenter.com/api/v1/fe/create_sale_shopify</code></li>
 <li><strong>Evento</strong>: <code>Order creation</code> y <code>Order payment</code></li>
 <li><strong>Formato</strong>: JSON</li>
 <li><strong>Headers</strong>: 
-   <div class="highlight"><pre><span></span><code>Authorization: Bearer YOUR_API_TOKEN
-Content-Type: application/json
-</code></pre></div></li>
+   <code>Authorization: Bearer YOUR_API_TOKEN
+   Content-Type: application/json</code></li>
 </ol>
-<h3 id="ejemplos-de-curl">Ejemplos de cURL<a class="headerlink" href="#ejemplos-de-curl" title="Permanent link">&para;</a></h3>
-<h4 id="simular-webhook-de-shopify">Simular Webhook de Shopify<a class="headerlink" href="#simular-webhook-de-shopify" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="s2">&quot;https://api.docucenter.com/api/v1/fe/create_sale_shopify&quot;</span><span class="w"> </span><span class="se">\</span>
+<h3 id="ejemplos-de-curl">Ejemplos de cURL</h3>
+<h4 id="simular-webhook-de-shopify">Simular Webhook de Shopify</h4>
+<div class="codehilite"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="s2">&quot;https://api.docucenter.com/api/v1/fe/create_sale_shopify&quot;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Authorization: Bearer YOUR_TOKEN&quot;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Content-Type: application/json&quot;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>-d<span class="w"> </span><span class="s1">&#39;{</span>
@@ -3986,7 +2545,8 @@ Content-Type: application/json
 <span class="s1">    ]</span>
 <span class="s1">  }&#39;</span>
 </code></pre></div>
-<h3 id="notas-tecnicas">Notas Técnicas<a class="headerlink" href="#notas-tecnicas" title="Permanent link">&para;</a></h3>
+
+<h3 id="notas-tecnicas">Notas Técnicas</h3>
 <ul>
 <li><strong>Procesamiento Asíncrono</strong>: Utiliza Jobs de Laravel para procesamiento en background</li>
 <li><strong>Logging Específico</strong>: Incluye order_number en todos los logs para tracking</li>
@@ -4014,12 +2574,6 @@ Content-Type: application/json
           
 <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
         </div>
-        
-          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
-  Volver al principio
-</button>
         
       </main>
       
@@ -4066,7 +2620,7 @@ Content-Type: application/json
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.highlight", "search.suggest"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
     
     
       <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
