@@ -1,12 +1,12 @@
-# 🎯 API MEYPAR OFICIAL - Guía Completa de Uso
+# API MEYPAR OFICIAL - Guía Completa de Uso
 
-## ✅ Estado Actual: **COMPLETAMENTE IMPLEMENTADA Y VALIDADA**
+## Estado Actual: **COMPLETAMENTE IMPLEMENTADA Y VALIDADA**
 
 La API MEYPAR está **100% funcional** y coincide exactamente con la documentación oficial de MEYPAR encontrada en el análisis del PDF.
 
 ---
 
-## 📍 **Endpoints Disponibles**
+## **Endpoints Disponibles**
 
 ### 1. **Crear Venta MEYPAR (Solo Almacenar)**
 ```http
@@ -15,7 +15,7 @@ POST /api/v1/fe/create_sale_meypar
 - **Función**: Crea la venta en la base de datos **sin emitir** factura electrónica
 - **Uso**: Para almacenar datos y emitir después manualmente
 
-### 2. **Crear Venta MEYPAR con Emisión Automática** ⚡
+### 2. **Crear Venta MEYPAR con Emisión Automática** 
 ```http
 POST /api/v1/fe/create_sale_meypar_with_emission
 ```
@@ -32,68 +32,68 @@ Accept: application/json
 
 ---
 
-## 🏗️ **Estructura Oficial de la Request**
+## **Estructura Oficial de la Request**
 
 ### Ejemplo Completo (Estructura Oficial MEYPAR)
 
 ```json
 {
-  "idFacturador": "12345678",
-  "ambiente": 1,
-  "documento": "32323",
-  "codigo": 2,
-  "tipoDocumento": 1,
-  "prefijo": "A132",
-  "numero": 2,
-  "medioPago": 2,
-  "referenciaPago": "123456789",
-  "fechaFactura": "2024-02-06",
-  "mensaje": "Factura de estacionamiento",
-  "observacion": "Cliente frecuente",
-  
-  "terminalPagoID": {
-    "CodigoTerminal": 4,
-    "CodigoExterno": "TERM-001",
-    "NombreTerminal": "Terminal Principal Parking"
-  },
-  
-  "autorizacionPrefijo": {
-    "PrefijoId": "C1PQ",
-    "ResoluciónNumero": "132343423423432",
-    "VigenciaFecha": "2025-01-15",
-    "DuracionFecha": 24,
-    "CorrelativoInicialNum": 1,
-    "CorrelativoFinalNum": 30000
-  },
-  
-  "detalleMedioPagoList": [
-    {
-      "codigoMedioPago": 2,
-      "importeMedioPago": 15.75
-    }
-  ],
-  
-  "detalleFacturaList": [
-    {
-      "objectName": "WADetalleFactura",
-      "cantidad": 1,
-      "descripcion": "Estacionamiento 3 horas",
-      "precioUnitario": 15.75,
-      "codigoProducto": 1,
-      "codigoVehiculo": 101,
-      "unidadMedida": "HRA",
-      "precioTotalSinDescuento": 15.75,
-      "precioTotalFinalDetalle": 15.75
-    }
-  ]
+ "idFacturador": "12345678",
+ "ambiente": 1,
+ "documento": "32323",
+ "codigo": 2,
+ "tipoDocumento": 1,
+ "prefijo": "A132",
+ "numero": 2,
+ "medioPago": 2,
+ "referenciaPago": "123456789",
+ "fechaFactura": "2024-02-06",
+ "mensaje": "Factura de estacionamiento",
+ "observacion": "Cliente frecuente",
+ 
+ "terminalPagoID": {
+ "CodigoTerminal": 4,
+ "CodigoExterno": "TERM-001",
+ "NombreTerminal": "Terminal Principal Parking"
+ },
+ 
+ "autorizacionPrefijo": {
+ "PrefijoId": "C1PQ",
+ "ResoluciónNumero": "132343423423432",
+ "VigenciaFecha": "2025-01-15",
+ "DuracionFecha": 24,
+ "CorrelativoInicialNum": 1,
+ "CorrelativoFinalNum": 30000
+ },
+ 
+ "detalleMedioPagoList": [
+ {
+ "codigoMedioPago": 2,
+ "importeMedioPago": 15.75
+ }
+ ],
+ 
+ "detalleFacturaList": [
+ {
+ "objectName": "WADetalleFactura",
+ "cantidad": 1,
+ "descripcion": "Estacionamiento 3 horas",
+ "precioUnitario": 15.75,
+ "codigoProducto": 1,
+ "codigoVehiculo": 101,
+ "unidadMedida": "HRA",
+ "precioTotalSinDescuento": 15.75,
+ "precioTotalFinalDetalle": 15.75
+ }
+ ]
 }
 ```
 
 ---
 
-## 📋 **Campos Requeridos y Opcionales**
+## **Campos Requeridos y Opcionales**
 
-### ✅ **Campos Principales (Obligatorios)**
+### **Campos Principales (Obligatorios)**
 
 | Campo | Tipo | Descripción | Ejemplo |
 |-------|------|-------------|---------|
@@ -107,7 +107,7 @@ Accept: application/json
 | `medioPago` | integer | 1=Efectivo, 2=Tarjeta, 3=Cheque, 4=Transferencia | `2` |
 | `fechaFactura` | string | Fecha formato YYYY-MM-DD | `"2024-02-06"` |
 
-### 📋 **Campos Opcionales**
+### **Campos Opcionales**
 
 | Campo | Tipo | Descripción |
 |-------|------|-------------|
@@ -117,385 +117,385 @@ Accept: application/json
 
 ---
 
-## 🏢 **Objetos Anidados**
+## **Objetos Anidados**
 
-### 🖥️ **Terminal de Pago (terminalPagoID)**
+### ️ **Terminal de Pago (terminalPagoID)**
 
 ```json
 {
-  "terminalPagoID": {
-    "CodigoTerminal": 4,        // Código numérico del terminal
-    "CodigoExterno": "TERM-001", // Código alfanumérico personalizado
-    "NombreTerminal": "Terminal Principal"
-  }
+ "terminalPagoID": {
+ "CodigoTerminal": 4, // Código numérico del terminal
+ "CodigoExterno": "TERM-001", // Código alfanumérico personalizado
+ "NombreTerminal": "Terminal Principal"
+ }
 }
 ```
 
-### 📜 **Autorización de Prefijo (autorizacionPrefijo)**
+### **Autorización de Prefijo (autorizacionPrefijo)**
 
 ```json
 {
-  "autorizacionPrefijo": {
-    "PrefijoId": "C1PQ",
-    "ResoluciónNumero": "132343423423432",
-    "VigenciaFecha": "2025-01-15",
-    "DuracionFecha": 24,
-    "CorrelativoInicialNum": 1,
-    "CorrelativoFinalNum": 30000
-  }
+ "autorizacionPrefijo": {
+ "PrefijoId": "C1PQ",
+ "ResoluciónNumero": "132343423423432",
+ "VigenciaFecha": "2025-01-15",
+ "DuracionFecha": 24,
+ "CorrelativoInicialNum": 1,
+ "CorrelativoFinalNum": 30000
+ }
 }
 ```
 
 ---
 
-## 💳 **Array: Medios de Pago (detalleMedioPagoList)**
+## **Array: Medios de Pago (detalleMedioPagoList)**
 
-**⚠️ Obligatorio:** Mínimo 1 elemento
+**Obligatorio:** Mínimo 1 elemento
 
 ```json
 {
-  "detalleMedioPagoList": [
-    {
-      "codigoMedioPago": 1,        // 1=Efectivo, 2=Tarjeta, 3=Cheque, 4=Transferencia
-      "importeMedioPago": 10.50    // Decimal con máximo 4 decimales
-    },
-    {
-      "codigoMedioPago": 2,
-      "importeMedioPago": 5.25
-    }
-  ]
+ "detalleMedioPagoList": [
+ {
+ "codigoMedioPago": 1, // 1=Efectivo, 2=Tarjeta, 3=Cheque, 4=Transferencia
+ "importeMedioPago": 10.50 // Decimal con máximo 4 decimales
+ },
+ {
+ "codigoMedioPago": 2,
+ "importeMedioPago": 5.25
+ }
+ ]
 }
 ```
 
 ### Códigos de Medio de Pago
 - **1** = Efectivo
-- **2** = Tarjeta de crédito/débito  
+- **2** = Tarjeta de crédito/débito 
 - **3** = Cheque
 - **4** = Transferencia bancaria
 
 ---
 
-## 🧾 **Array: Detalles de Factura (detalleFacturaList)**
+## **Array: Detalles de Factura (detalleFacturaList)**
 
-**⚠️ Obligatorio:** Mínimo 1 elemento
+**Obligatorio:** Mínimo 1 elemento
 
 ```json
 {
-  "detalleFacturaList": [
-    {
-      "objectName": "WADetalleFactura",           // Siempre este valor
-      "cantidad": 2,                              // Cantidad de unidades
-      "descripcion": "Estacionamiento por horas", // Descripción del servicio
-      "precioUnitario": 5.00,                     // Precio por unidad
-      "codigoProducto": 1,                        // Código del producto/servicio
-      "codigoVehiculo": 101,                      // Código tipo vehículo (opcional)
-      "unidadMedida": "HRA",                      // UNI, HRA, MIN, etc.
-      "precioTotalSinDescuento": 10.00,           // Total antes descuentos
-      "precioTotalFinalDetalle": 9.50,            // Total final con descuentos
-      "observacion": "Observación del item"       // Observación opcional del detalle
-    }
-  ]
+ "detalleFacturaList": [
+ {
+ "objectName": "WADetalleFactura", // Siempre este valor
+ "cantidad": 2, // Cantidad de unidades
+ "descripcion": "Estacionamiento por horas", // Descripción del servicio
+ "precioUnitario": 5.00, // Precio por unidad
+ "codigoProducto": 1, // Código del producto/servicio
+ "codigoVehiculo": 101, // Código tipo vehículo (opcional)
+ "unidadMedida": "HRA", // UNI, HRA, MIN, etc.
+ "precioTotalSinDescuento": 10.00, // Total antes descuentos
+ "precioTotalFinalDetalle": 9.50, // Total final con descuentos
+ "observacion": "Observación del item" // Observación opcional del detalle
+ }
+ ]
 }
 ```
 
 ### Campos Obligatorios en Detalle
-- ✅ `objectName`: Siempre `"WADetalleFactura"`
-- ✅ `cantidad`: Cantidad numérica
-- ✅ `descripcion`: Texto descriptivo
-- ✅ `precioUnitario`: Precio por unidad
-- ✅ `codigoProducto`: Código del producto
-- ✅ `precioTotalSinDescuento`: Total sin descuento
-- ✅ `precioTotalFinalDetalle`: Total final
+- `objectName`: Siempre `"WADetalleFactura"`
+- `cantidad`: Cantidad numérica
+- `descripcion`: Texto descriptivo
+- `precioUnitario`: Precio por unidad
+- `codigoProducto`: Código del producto
+- `precioTotalSinDescuento`: Total sin descuento
+- `precioTotalFinalDetalle`: Total final
 
 ### Campos Opcionales en Detalle
-- 🔹 `codigoVehiculo`: Tipo de vehículo
-- 🔹 `unidadMedida`: Por defecto "UNI"
-- 🔹 `observacion`: Observación específica del item
+- `codigoVehiculo`: Tipo de vehículo
+- `unidadMedida`: Por defecto "UNI"
+- `observacion`: Observación específica del item
 
 ---
 
-## ✅ **Ejemplo de Request Mínimo**
+## **Ejemplo de Request Mínimo**
 
 ```json
 {
-  "idFacturador": "12345678",
-  "ambiente": 1,
-  "documento": "32323",
-  "codigo": 1,
-  "tipoDocumento": 1,
-  "prefijo": "A001",
-  "numero": 1,
-  "medioPago": 1,
-  "fechaFactura": "2024-02-06",
-  
-  "detalleMedioPagoList": [
-    {
-      "codigoMedioPago": 1,
-      "importeMedioPago": 5.00
-    }
-  ],
-  
-  "detalleFacturaList": [
-    {
-      "objectName": "WADetalleFactura",
-      "cantidad": 1,
-      "descripcion": "Ticket de estacionamiento",
-      "precioUnitario": 5.00,
-      "codigoProducto": 1,
-      "precioTotalSinDescuento": 5.00,
-      "precioTotalFinalDetalle": 5.00
-    }
-  ]
-}
-```
-
----
-
-## 🎯 **Respuestas de la API**
-
-### ✅ **Respuesta Exitosa - create_sale_meypar (200)**
-
-```json
-{
-  "success": true,
-  "message": "Venta MEYPAR creada exitosamente",
-  "data": {
-    "sale": {
-      "id": 12345,
-      "invoice_number": "A001-123",
-      "customer_name": "Cliente Test",
-      "subtotal": 15.75,
-      "net_due": 15.75,
-      "date": "2024-02-06",
-      "issued": false
-    }
-  }
-}
-```
-
-### ⚡ **Respuesta Exitosa - create_sale_meypar_with_emission (200)**
-
-```json
-{
-  "resCodigo": 0,
-  "resMensaje": "Exitoso",
-  "cufe": "FE0120000155702081-2-2021-2600142026020500000000710040126897194708",
-  "qr": "https://dgi-fep.mef.gob.pa/Consultas/FacturasPorCUFE/FE0120000155702081-2-2021-2600142026020500000000710040126897194708",
-  "success": true,
-  "message": "Venta MEYPAR creada y emitida exitosamente",
-  "attempt": 1,
-  "customer_name": "Consumidor Final",
-  "customer_dv": "26",
-  "customer_ruc": "155702081-2-2021",
-  "data": {
-    "sale": {
-      "id": 179,
-      "invoice_number": "1018",
-      "customer_name": "Consumidor Final",
-      "subtotal": 0.05,
-      "net_due": 0.05,
-      "date": "2026-02-05T00:00:00.000000Z",
-      "issued": true
-    },
-    "emission": {
-      "success": true,
-      "cufe": "FE0120000155702081-2-2021-2600142026020500000000710040126897194708",
-      "qr": "https://dgi-fep.mef.gob.pa/Consultas/FacturasPorCUFE/FE0120000155702081-2-2021-2600142026020500000000710040126897194708",
-      "transition_id": "01KH1GPKS271QDF7VEKBNMDKZH",
-      "numeroDocumentoFiscal": 71,
-      "pac_response": {
-        "sale": 179,
-        "path": "invoices",
-        "transition": "01KH1GPKS271QDF7VEKBNMDKZH",
-        "cufe": "FE0120000155702081-2-2021-2600142026020500000000710040126897194708",
-        "codigoSucursalEmisor": "0000",
-        "numeroDocumentoFiscal": 71,
-        "puntoFacturacionFiscal": "004",
-        "tipoDocumento": 1,
-        "tipoEmision": "01",
-        "pac_provider": "alanube",
-        "pac_response": {
-          "status": "PROCESSED",
-          "message": "Document created",
-          "http_status_code": 201
-        }
-      }
-    }
-  }
-}
-```
-
-### ❌ **Respuesta de Error (422)**
-
-```json
-{
-  "message": "Los datos proporcionados no son válidos.",
-  "errors": {
-    "idFacturador": [
-      "El ID del facturador es requerido"
-    ],
-    "detalleFacturaList": [
-      "Los detalles de la factura son requeridos"
-    ],
-    "detalleFacturaList.0.cantidad": [
-      "La cantidad del detalle es requerida"
-    ]
-  }
+ "idFacturador": "12345678",
+ "ambiente": 1,
+ "documento": "32323",
+ "codigo": 1,
+ "tipoDocumento": 1,
+ "prefijo": "A001",
+ "numero": 1,
+ "medioPago": 1,
+ "fechaFactura": "2024-02-06",
+ 
+ "detalleMedioPagoList": [
+ {
+ "codigoMedioPago": 1,
+ "importeMedioPago": 5.00
+ }
+ ],
+ 
+ "detalleFacturaList": [
+ {
+ "objectName": "WADetalleFactura",
+ "cantidad": 1,
+ "descripcion": "Ticket de estacionamiento",
+ "precioUnitario": 5.00,
+ "codigoProducto": 1,
+ "precioTotalSinDescuento": 5.00,
+ "precioTotalFinalDetalle": 5.00
+ }
+ ]
 }
 ```
 
 ---
 
-## 🧪 **Ejemplos de Uso con cURL**
+## **Respuestas de la API**
 
-### 📋 **Solo Almacenar (create_sale_meypar)**
+### **Respuesta Exitosa - create_sale_meypar (200)**
+
+```json
+{
+ "success": true,
+ "message": "Venta MEYPAR creada exitosamente",
+ "data": {
+ "sale": {
+ "id": 12345,
+ "invoice_number": "A001-123",
+ "customer_name": "Cliente Test",
+ "subtotal": 15.75,
+ "net_due": 15.75,
+ "date": "2024-02-06",
+ "issued": false
+ }
+ }
+}
+```
+
+### **Respuesta Exitosa - create_sale_meypar_with_emission (200)**
+
+```json
+{
+ "resCodigo": 0,
+ "resMensaje": "Exitoso",
+ "cufe": "FE0120000155702081-2-2021-2600142026020500000000710040126897194708",
+ "qr": "https://dgi-fep.mef.gob.pa/Consultas/FacturasPorCUFE/FE0120000155702081-2-2021-2600142026020500000000710040126897194708",
+ "success": true,
+ "message": "Venta MEYPAR creada y emitida exitosamente",
+ "attempt": 1,
+ "customer_name": "Consumidor Final",
+ "customer_dv": "26",
+ "customer_ruc": "155702081-2-2021",
+ "data": {
+ "sale": {
+ "id": 179,
+ "invoice_number": "1018",
+ "customer_name": "Consumidor Final",
+ "subtotal": 0.05,
+ "net_due": 0.05,
+ "date": "2026-02-05T00:00:00.000000Z",
+ "issued": true
+ },
+ "emission": {
+ "success": true,
+ "cufe": "FE0120000155702081-2-2021-2600142026020500000000710040126897194708",
+ "qr": "https://dgi-fep.mef.gob.pa/Consultas/FacturasPorCUFE/FE0120000155702081-2-2021-2600142026020500000000710040126897194708",
+ "transition_id": "01KH1GPKS271QDF7VEKBNMDKZH",
+ "numeroDocumentoFiscal": 71,
+ "pac_response": {
+ "sale": 179,
+ "path": "invoices",
+ "transition": "01KH1GPKS271QDF7VEKBNMDKZH",
+ "cufe": "FE0120000155702081-2-2021-2600142026020500000000710040126897194708",
+ "codigoSucursalEmisor": "0000",
+ "numeroDocumentoFiscal": 71,
+ "puntoFacturacionFiscal": "004",
+ "tipoDocumento": 1,
+ "tipoEmision": "01",
+ "pac_provider": "alanube",
+ "pac_response": {
+ "status": "PROCESSED",
+ "message": "Document created",
+ "http_status_code": 201
+ }
+ }
+ }
+ }
+}
+```
+
+### **Respuesta de Error (422)**
+
+```json
+{
+ "message": "Los datos proporcionados no son válidos.",
+ "errors": {
+ "idFacturador": [
+ "El ID del facturador es requerido"
+ ],
+ "detalleFacturaList": [
+ "Los detalles de la factura son requeridos"
+ ],
+ "detalleFacturaList.0.cantidad": [
+ "La cantidad del detalle es requerida"
+ ]
+ }
+}
+```
+
+---
+
+## **Ejemplos de Uso con cURL**
+
+### **Solo Almacenar (create_sale_meypar)**
 
 ```bash
 curl -X POST \
-  https://tu-dominio.com/api/v1/fe/create_sale_meypar \
-  -H 'Authorization: Bearer YOUR_TOKEN' \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "idFacturador": "12345678",
-    "codigo": 1,
-    "tipoDocumento": 1,
-    "prefijo": "A001",
-    "numero": 1,
-    "medioPago": 1,
-    "fechaFactura": "2024-02-06",
-    "detalleMedioPagoList": [
-      {
-        "codigoMedioPago": 1,
-        "importeMedioPago": 5.00
-      }
-    ],
-    "detalleFacturaList": [
-      {
-        "objectName": "WADetalleFactura",
-        "cantidad": 1,
-        "descripcion": "Parking ticket",
-        "precioUnitario": 5.00,
-        "codigoProducto": 1,
-        "precioTotalSinDescuento": 5.00,
-        "precioTotalFinalDetalle": 5.00
-      }
-    ]
-  }'
+ https://tu-dominio.com/api/v1/fe/create_sale_meypar \
+ -H 'Authorization: Bearer YOUR_TOKEN' \
+ -H 'Content-Type: application/json' \
+ -d '{
+ "idFacturador": "12345678",
+ "codigo": 1,
+ "tipoDocumento": 1,
+ "prefijo": "A001",
+ "numero": 1,
+ "medioPago": 1,
+ "fechaFactura": "2024-02-06",
+ "detalleMedioPagoList": [
+ {
+ "codigoMedioPago": 1,
+ "importeMedioPago": 5.00
+ }
+ ],
+ "detalleFacturaList": [
+ {
+ "objectName": "WADetalleFactura",
+ "cantidad": 1,
+ "descripcion": "Parking ticket",
+ "precioUnitario": 5.00,
+ "codigoProducto": 1,
+ "precioTotalSinDescuento": 5.00,
+ "precioTotalFinalDetalle": 5.00
+ }
+ ]
+ }'
 ```
 
-### ⚡ **Crear y Emitir Automáticamente (create_sale_meypar_with_emission)**
+### **Crear y Emitir Automáticamente (create_sale_meypar_with_emission)**
 
 ```bash
 curl -X POST \
-  https://tu-dominio.com/api/v1/fe/create_sale_meypar_with_emission \
-  -H 'Authorization: Bearer YOUR_TOKEN' \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "idFacturador": "12345678",
-    "ambiente": 1,
-    "documento": "32323",
-    "codigo": 1,
-    "tipoDocumento": 1,
-    "prefijo": "A001",
-    "numero": 1,
-    "medioPago": 1,
-    "fechaFactura": "2024-02-06",
-    "detalleMedioPagoList": [
-      {
-        "codigoMedioPago": 1,
-        "importeMedioPago": 5.00
-      }
-    ],
-    "detalleFacturaList": [
-      {
-        "objectName": "WADetalleFactura",
-        "cantidad": 1,
-        "descripcion": "Parking ticket",
-        "precioUnitario": 5.00,
-        "codigoProducto": 1,
-        "precioTotalSinDescuento": 5.00,
-        "precioTotalFinalDetalle": 5.00
-      }
-    ]
-  }'
+ https://tu-dominio.com/api/v1/fe/create_sale_meypar_with_emission \
+ -H 'Authorization: Bearer YOUR_TOKEN' \
+ -H 'Content-Type: application/json' \
+ -d '{
+ "idFacturador": "12345678",
+ "ambiente": 1,
+ "documento": "32323",
+ "codigo": 1,
+ "tipoDocumento": 1,
+ "prefijo": "A001",
+ "numero": 1,
+ "medioPago": 1,
+ "fechaFactura": "2024-02-06",
+ "detalleMedioPagoList": [
+ {
+ "codigoMedioPago": 1,
+ "importeMedioPago": 5.00
+ }
+ ],
+ "detalleFacturaList": [
+ {
+ "objectName": "WADetalleFactura",
+ "cantidad": 1,
+ "descripcion": "Parking ticket",
+ "precioUnitario": 5.00,
+ "codigoProducto": 1,
+ "precioTotalSinDescuento": 5.00,
+ "precioTotalFinalDetalle": 5.00
+ }
+ ]
+ }'
 ```
 
 ### Ejemplo con Múltiples Items
 
 ```bash
 curl -X POST \
-  https://tu-dominio.com/api/v1/fe/create_sale_meypar \
-  -H 'Authorization: Bearer YOUR_TOKEN' \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "idFacturador": "87654321",
-    "ambiente": 1,
-    "documento": "45678",
-    "codigo": 2,
-    "tipoDocumento": 1,
-    "prefijo": "B001",
-    "numero": 456,
-    "medioPago": 2,
-    "fechaFactura": "2024-02-07",
-    "detalleMedioPagoList": [
-      {
-        "codigoMedioPago": 1,
-        "importeMedioPago": 15.00
-      },
-      {
-        "codigoMedioPago": 2,
-        "importeMedioPago": 10.00
-      }
-    ],
-    "detalleFacturaList": [
-      {
-        "objectName": "WADetalleFactura",
-        "cantidad": 3,
-        "descripcion": "Estacionamiento por horas",
-        "precioUnitario": 5.00,
-        "codigoProducto": 1,
-        "unidadMedida": "HRA",
-        "precioTotalSinDescuento": 15.00,
-        "precioTotalFinalDetalle": 15.00
-      },
-      {
-        "objectName": "WADetalleFactura",
-        "cantidad": 1,
-        "descripcion": "Servicio de lavado",
-        "precioUnitario": 10.00,
-        "codigoProducto": 2,
-        "unidadMedida": "SER",
-        "precioTotalSinDescuento": 10.00,
-        "precioTotalFinalDetalle": 10.00
-      }
-    ]
-  }'
+ https://tu-dominio.com/api/v1/fe/create_sale_meypar \
+ -H 'Authorization: Bearer YOUR_TOKEN' \
+ -H 'Content-Type: application/json' \
+ -d '{
+ "idFacturador": "87654321",
+ "ambiente": 1,
+ "documento": "45678",
+ "codigo": 2,
+ "tipoDocumento": 1,
+ "prefijo": "B001",
+ "numero": 456,
+ "medioPago": 2,
+ "fechaFactura": "2024-02-07",
+ "detalleMedioPagoList": [
+ {
+ "codigoMedioPago": 1,
+ "importeMedioPago": 15.00
+ },
+ {
+ "codigoMedioPago": 2,
+ "importeMedioPago": 10.00
+ }
+ ],
+ "detalleFacturaList": [
+ {
+ "objectName": "WADetalleFactura",
+ "cantidad": 3,
+ "descripcion": "Estacionamiento por horas",
+ "precioUnitario": 5.00,
+ "codigoProducto": 1,
+ "unidadMedida": "HRA",
+ "precioTotalSinDescuento": 15.00,
+ "precioTotalFinalDetalle": 15.00
+ },
+ {
+ "objectName": "WADetalleFactura",
+ "cantidad": 1,
+ "descripcion": "Servicio de lavado",
+ "precioUnitario": 10.00,
+ "codigoProducto": 2,
+ "unidadMedida": "SER",
+ "precioTotalSinDescuento": 10.00,
+ "precioTotalFinalDetalle": 10.00
+ }
+ ]
+ }'
 ```
 
 ---
 
-## 🤔 **¿Cuál Endpoint Usar?**
+## **¿Cuál Endpoint Usar?**
 
-### 📋 **create_sale_meypar** - Solo Almacenar
-**✅ Usar cuando:**
+### **create_sale_meypar** - Solo Almacenar
+**Usar cuando:**
 - Necesitas guardar la venta para emitir después
 - Quieres controlar manualmente el momento de emisión
 - Necesitas validar datos antes de emitir
 - Proceso de aprobación manual requerido
 
-**💾 Resultado:**
+**Resultado:**
 - Venta guardada en base de datos
 - `"issued": false` en la respuesta
 - Puedes emitir después desde la interfaz admin
 
-### ⚡ **create_sale_meypar_with_emission** - Proceso Completo
-**✅ Usar cuando:**
+### **create_sale_meypar_with_emission** - Proceso Completo
+**Usar cuando:**
 - Quieres proceso automatizado completo
 - Producción con alta disponibilidad
 - Necesitas emisión inmediata
 - Integración con sistemas externos
 
-**🚀 Características Avanzadas:**
+**Características Avanzadas:**
 - **Reintentos inteligentes**: Hasta 3 intentos automáticos
 - **Auditoría completa**: Tracking de transacciones
 - **Recuperación de errores**: Manejo de fallos PAC
@@ -503,9 +503,9 @@ curl -X POST \
 
 ---
 
-## 🔐 **Validaciones Implementadas**
+## **Validaciones Implementadas**
 
-### ✅ **Validaciones Principales**
+### **Validaciones Principales**
 
 1. **Campos obligatorios**: idFacturador, ambiente, documento, codigo, tipoDocumento, prefijo, numero, medioPago, fechaFactura
 2. **Arrays obligatorios**: detalleMedioPagoList y detalleFacturaList (mínimo 1 elemento cada uno)
@@ -515,7 +515,7 @@ curl -X POST \
 5. **Decimales**: Formato correcto con máximo 4 decimales
 6. **ObjectName**: Automáticamente se asigna "WADetalleFactura" si no se envía
 
-### ⚡ **Funciones Automáticas**
+### **Funciones Automáticas**
 
 1. **Normalización de decimales**: 1.00 → 1, 1.50 → 1.5
 2. **ObjectName automático**: Se agrega si no existe
@@ -523,42 +523,42 @@ curl -X POST \
 
 ---
 
-## 📊 **Estado de Implementación**
+## **Estado de Implementación**
 
 | Componente | Estado | Validado |
 |------------|---------|----------|
-| ✅ **create_sale_meypar** | Completo | PDF Oficial |
-| ✅ **create_sale_meypar_with_emission** | Completo | PDF Oficial |
-| ✅ Request Validation | Completo | PDF Oficial |
-| ✅ Service Processing | Completo | PDF Oficial |  
-| ✅ Reintentos Inteligentes | Completo | Producción |
-| ✅ Auditoría de Transacciones | Completo | Tracking |
-| ✅ Unit Tests | Completo | Estructura Oficial |
-| ✅ Error Messages | Completo | Español |
+| **create_sale_meypar** | Completo | PDF Oficial |
+| **create_sale_meypar_with_emission** | Completo | PDF Oficial |
+| Request Validation | Completo | PDF Oficial |
+| Service Processing | Completo | PDF Oficial | 
+| Reintentos Inteligentes | Completo | Producción |
+| Auditoría de Transacciones | Completo | Tracking |
+| Unit Tests | Completo | Estructura Oficial |
+| Error Messages | Completo | Español |
 
 ---
 
-## 🎉 **Conclusión**
+## **Conclusión**
 
 La API MEYPAR está **completamente implementada y funcional** con **DOS ENDPOINTS**:
 
-### 📋 **Básico**: `/api/v1/fe/create_sale_meypar`
+### **Básico**: `/api/v1/fe/create_sale_meypar`
 - Solo almacena la venta
 - Para control manual de emisión
 
-### ⚡ **Avanzado**: `/api/v1/fe/create_sale_meypar_with_emission` 
+### **Avanzado**: `/api/v1/fe/create_sale_meypar_with_emission` 
 - Proceso completo automatizado
 - Reintentos inteligentes
 - **Recomendado para producción**
 
-**✅ Lista para producción**  
-**✅ Validada con documentación oficial**  
-**✅ Tests implementados**  
-**✅ Documentación completa**  
-**✅ Dos opciones de integración**
+**Lista para producción** 
+**Validada con documentación oficial** 
+**Tests implementados** 
+**Documentación completa** 
+**Dos opciones de integración**
 
 **Commits relacionados:**
 - `863860e` - Optimizaciones de performance
 - `86ed78f` - Implementación estructura oficial MEYPAR
 
-¡Todo está listo para usar! 🚀
+¡Todo está listo para usar! 

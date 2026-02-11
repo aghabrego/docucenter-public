@@ -2751,10 +2751,10 @@
 
 <h1 id="api-facturacion-electronica-integracion-meypar">API Facturación Electrónica - Integración Meypar</h1>
 <h2 id="crear-venta-meypar">Crear Venta Meypar</h2>
-<p><strong>Endpoint:</strong> <code>POST /api/v1/fe/create_sale_meypar</code><br />
-<strong>Controller:</strong> <code>FeController::createSaleMeypar</code><br />
-<strong>Request Class:</strong> <code>CreateSaleMeyparRequest</code><br />
-<strong>Autenticación:</strong> Bearer Token requerido<br />
+<p><strong>Endpoint:</strong> <code>POST /api/v1/fe/create_sale_meypar</code> 
+<strong>Controller:</strong> <code>FeController::createSaleMeypar</code> 
+<strong>Request Class:</strong> <code>CreateSaleMeyparRequest</code> 
+<strong>Autenticación:</strong> Bearer Token requerido 
 <strong>Middleware:</strong> <code>check.activate.organization</code></p>
 <h3 id="descripcion">Descripción</h3>
 <p>Crea y emite una factura electrónica basada en datos provenientes del sistema Meypar (estacionamientos y servicios de parqueo).</p>
@@ -2774,56 +2774,56 @@
 <tr>
 <td><code>idFacturador</code></td>
 <td>integer</td>
-<td>✅</td>
+<td></td>
 <td>ID del obligado a facturar</td>
 <td>-</td>
 </tr>
 <tr>
 <td><code>ambiente</code></td>
 <td>integer</td>
-<td>✅</td>
+<td></td>
 <td>Ambiente (1=Producción, 2=Pruebas)</td>
 <td>-</td>
 </tr>
 <tr>
 <td><code>documento</code></td>
 <td>string</td>
-<td>✅</td>
+<td></td>
 <td><strong>NIT del adquiriente</strong> (usuario del parking)</td>
 <td><strong>50 caracteres</strong></td>
 </tr>
 <tr>
 <td><code>tipoDocumento</code></td>
 <td>integer</td>
-<td>✅</td>
+<td></td>
 <td>Tipo de documento (1=FE, 2=DEE)</td>
 <td>-</td>
 </tr>
 <tr>
 <td><code>prefijo</code></td>
 <td>string</td>
-<td>✅</td>
+<td></td>
 <td>Prefijo de numeración</td>
 <td><strong>10 caracteres</strong></td>
 </tr>
 <tr>
 <td><code>numero</code></td>
 <td>integer</td>
-<td>✅</td>
+<td></td>
 <td><strong>Número de factura</strong></td>
 <td>-</td>
 </tr>
 <tr>
 <td><code>medioPago</code></td>
 <td>integer</td>
-<td>✅</td>
+<td></td>
 <td>Medio de pago (0-4)</td>
 <td>-</td>
 </tr>
 <tr>
 <td><code>fechaFactura</code></td>
 <td>string</td>
-<td>✅</td>
+<td></td>
 <td>Fecha de factura (YYYY-MM-DD)</td>
 <td>-</td>
 </tr>
@@ -2848,42 +2848,42 @@
 <tr>
 <td><code>documento.emisor.nombre</code></td>
 <td>string</td>
-<td>✅</td>
+<td></td>
 <td>Nombre del emisor</td>
 <td><strong>100 caracteres</strong></td>
 </tr>
 <tr>
 <td><code>documento.emisor.nit</code></td>
 <td>string</td>
-<td>✅</td>
+<td></td>
 <td>NIT del emisor</td>
 <td><strong>50 caracteres</strong></td>
 </tr>
 <tr>
 <td><code>documento.emisor.direccion</code></td>
 <td>string</td>
-<td>❌</td>
+<td></td>
 <td>Dirección del emisor</td>
 <td>-</td>
 </tr>
 <tr>
 <td><code>documento.emisor.telefono</code></td>
 <td>string</td>
-<td>❌</td>
+<td></td>
 <td>Teléfono del emisor</td>
 <td>-</td>
 </tr>
 <tr>
 <td><code>documento.emisor.email</code></td>
 <td>string</td>
-<td>❌</td>
+<td></td>
 <td>Email del emisor</td>
 <td>-</td>
 </tr>
 </tbody>
 </table>
 <h4 id="adquiriente-estructura-simplificada-opcional">Adquiriente (Estructura Simplificada - Opcional)</h4>
-<p><strong>⚠️ Nota</strong>: Esta es una estructura alternativa simplificada de DocuCenter. La estructura oficial MEYPAR usa el campo raíz <code>documento</code> para el NIT del cliente.</p>
+<p><strong>Nota</strong>: Esta es una estructura alternativa simplificada de DocuCenter. La estructura oficial MEYPAR usa el campo raíz <code>documento</code> para el NIT del cliente.</p>
 <table>
 <thead>
 <tr>
@@ -2898,35 +2898,35 @@
 <tr>
 <td><code>documento.adquiriente.nombre</code></td>
 <td>string</td>
-<td>❌</td>
+<td></td>
 <td>Nombre del cliente</td>
 <td><strong>39 caracteres</strong></td>
 </tr>
 <tr>
 <td><code>documento.adquiriente.nit</code></td>
 <td>string</td>
-<td>❌</td>
+<td></td>
 <td>NIT del cliente (redundante con campo <code>documento</code>)</td>
 <td><strong>20 caracteres</strong></td>
 </tr>
 <tr>
 <td><code>documento.adquiriente.email</code></td>
 <td>string</td>
-<td>❌</td>
+<td></td>
 <td>Email del cliente</td>
 <td><strong>100 caracteres</strong></td>
 </tr>
 <tr>
 <td><code>documento.adquiriente.direccion</code></td>
 <td>string</td>
-<td>❌</td>
+<td></td>
 <td>Dirección del cliente</td>
 <td><strong>200 caracteres</strong></td>
 </tr>
 <tr>
 <td><code>documento.adquiriente.telefono</code></td>
 <td>string</td>
-<td>❌</td>
+<td></td>
 <td>Teléfono del cliente</td>
 <td><strong>20 caracteres</strong></td>
 </tr>
@@ -2951,21 +2951,21 @@
 <tr>
 <td><code>documento.terminal.CodigoTerminal</code></td>
 <td>integer</td>
-<td>❌</td>
+<td></td>
 <td>Código del terminal</td>
 <td>-</td>
 </tr>
 <tr>
 <td><code>documento.terminal.CodigoExterno</code></td>
 <td>string</td>
-<td>❌</td>
+<td></td>
 <td>Código externo del terminal</td>
 <td><strong>20 caracteres</strong></td>
 </tr>
 <tr>
 <td><code>documento.terminal.NombreTerminal</code></td>
 <td>string</td>
-<td>❌</td>
+<td></td>
 <td>Nombre del terminal</td>
 <td><strong>100 caracteres</strong></td>
 </tr>
@@ -2986,42 +2986,42 @@
 <tr>
 <td><code>documento.items.*.cantidad</code></td>
 <td>decimal</td>
-<td>✅</td>
+<td></td>
 <td>Cantidad del item</td>
 <td><strong>decimal(12,2)</strong></td>
 </tr>
 <tr>
 <td><code>documento.items.*.descripcion</code></td>
 <td>string</td>
-<td>✅</td>
+<td></td>
 <td>Descripción del item</td>
 <td><strong>255 caracteres</strong></td>
 </tr>
 <tr>
 <td><code>documento.items.*.precioUnitario</code></td>
 <td>decimal</td>
-<td>✅</td>
+<td></td>
 <td>Precio unitario</td>
 <td><strong>decimal(16,4)</strong></td>
 </tr>
 <tr>
 <td><code>documento.items.*.codigoProducto</code></td>
 <td>string</td>
-<td>✅</td>
+<td></td>
 <td>Código del producto</td>
 <td><strong>50 caracteres</strong></td>
 </tr>
 <tr>
 <td><code>documento.items.*.unidadMedida</code></td>
 <td>string</td>
-<td>❌</td>
+<td></td>
 <td>Unidad de medida</td>
 <td><strong>10 caracteres</strong></td>
 </tr>
 <tr>
 <td><code>documento.items.*.precioTotalFinalDetalle</code></td>
 <td>decimal</td>
-<td>✅</td>
+<td></td>
 <td>Precio total final</td>
 <td><strong>decimal(16,4)</strong></td>
 </tr>
@@ -3042,14 +3042,14 @@
 <tr>
 <td><code>documento.medios_pago.*.codigoMedioPago</code></td>
 <td>integer</td>
-<td>✅</td>
+<td></td>
 <td>1=Efectivo, 2=Tarjeta, 3=Cheque, 4=Transferencia</td>
 <td>-</td>
 </tr>
 <tr>
 <td><code>documento.medios_pago.*.importeMedioPago</code></td>
 <td>decimal</td>
-<td>✅</td>
+<td></td>
 <td>Importe del medio de pago</td>
 <td><strong>decimal(16,4)</strong></td>
 </tr>
@@ -3070,28 +3070,28 @@
 <tr>
 <td><code>documento.totales.total</code></td>
 <td>decimal</td>
-<td>✅</td>
+<td></td>
 <td>Total del documento</td>
 <td><strong>decimal(16,4)</strong></td>
 </tr>
 <tr>
 <td><code>documento.totales.subtotal</code></td>
 <td>decimal</td>
-<td>❌</td>
+<td></td>
 <td>Subtotal (antes de impuestos)</td>
 <td><strong>decimal(16,4)</strong></td>
 </tr>
 <tr>
 <td><code>documento.totales.impuestos</code></td>
 <td>decimal</td>
-<td>❌</td>
+<td></td>
 <td>Total de impuestos</td>
 <td><strong>decimal(16,4)</strong></td>
 </tr>
 <tr>
 <td><code>documento.totales.descuentos</code></td>
 <td>decimal</td>
-<td>❌</td>
+<td></td>
 <td>Total de descuentos</td>
 <td><strong>decimal(16,4)</strong></td>
 </tr>
@@ -3112,14 +3112,14 @@
 <tr>
 <td><code>documento.autorizacion_prefijo.PrefijoId</code></td>
 <td>string</td>
-<td>❌</td>
+<td></td>
 <td>ID del prefijo</td>
 <td><strong>10 caracteres</strong></td>
 </tr>
 <tr>
 <td><code>documento.autorizacion_prefijo.ResolucionNumero</code></td>
 <td>string</td>
-<td>❌</td>
+<td></td>
 <td>Número de resolución</td>
 <td><strong>50 caracteres</strong></td>
 </tr>
@@ -3127,116 +3127,114 @@
 </table>
 <h3 id="ejemplo-de-request-estructura-oficial-meypar">Ejemplo de Request (Estructura Oficial MEYPAR)</h3>
 <div class="codehilite"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;idFacturador&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">12345678</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;ambiente&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;documento&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;900123456-1&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;codigo&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;tipoDocumento&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;prefijo&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;A132&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;numero&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2025</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;medioPago&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;referenciaPago&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;123456789&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;fechaFactura&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2024-02-06&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;mensaje&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Estacionamiento - 2 horas&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;observacion&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;autorizacionPrefijo&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;PrefijoId&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;C1PQ&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;ResoluciónNumero&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;132343423423432&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;VigenciaFecha&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2025-01-15&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;DuracionFecha&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">24</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;CorrelativoInicialNum&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;CorrelativoFinalNum&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">30000</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="nt">&quot;terminalPagoID&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;CodigoTerminal&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;CodigoExterno&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;NombreTerminal&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;PP1-Automatica3&quot;</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="nt">&quot;detalleMedioPagoList&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span>
-<span class="w">    </span><span class="nt">&quot;codigoMedioPago&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;importeMedioPago&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">1.03</span>
-<span class="w">  </span><span class="p">}],</span>
-<span class="w">  </span><span class="nt">&quot;detalleFacturaList&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span>
-<span class="w">    </span><span class="nt">&quot;objectName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;WADetalleFactura&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;cantidad&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;descripcion&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Cobro Ticket&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;precioUnitario&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">1.23</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;codigoProducto&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;codigoVehiculo&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;unidadMedida&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;UNI&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;precioTotalSinDescuento&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">1.23</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;precioTotalFinalDetalle&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">1.03</span>
-<span class="w">  </span><span class="p">}]</span>
+<span class="w"> </span><span class="nt">&quot;idFacturador&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">12345678</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;ambiente&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;documento&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;900123456-1&quot;</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;codigo&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;tipoDocumento&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;prefijo&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;A132&quot;</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;numero&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2025</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;medioPago&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;referenciaPago&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;123456789&quot;</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;fechaFactura&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2024-02-06&quot;</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;mensaje&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Estacionamiento - 2 horas&quot;</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;observacion&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;autorizacionPrefijo&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w"> </span><span class="nt">&quot;PrefijoId&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;C1PQ&quot;</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;ResoluciónNumero&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;132343423423432&quot;</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;VigenciaFecha&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2025-01-15&quot;</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;DuracionFecha&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">24</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;CorrelativoInicialNum&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;CorrelativoFinalNum&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">30000</span>
+<span class="w"> </span><span class="p">},</span>
+<span class="w"> </span><span class="nt">&quot;terminalPagoID&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w"> </span><span class="nt">&quot;CodigoTerminal&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;CodigoExterno&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;NombreTerminal&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;PP1-Automatica3&quot;</span>
+<span class="w"> </span><span class="p">},</span>
+<span class="w"> </span><span class="nt">&quot;detalleMedioPagoList&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span>
+<span class="w"> </span><span class="nt">&quot;codigoMedioPago&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;importeMedioPago&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">1.03</span>
+<span class="w"> </span><span class="p">}],</span>
+<span class="w"> </span><span class="nt">&quot;detalleFacturaList&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span>
+<span class="w"> </span><span class="nt">&quot;objectName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;WADetalleFactura&quot;</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;cantidad&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;descripcion&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Cobro Ticket&quot;</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;precioUnitario&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">1.23</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;codigoProducto&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;codigoVehiculo&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;unidadMedida&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;UNI&quot;</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;precioTotalSinDescuento&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">1.23</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;precioTotalFinalDetalle&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">1.03</span>
+<span class="w"> </span><span class="p">}]</span>
 <span class="p">}</span>
 </code></pre></div>
 
-<div class="codehilite"><pre><span></span><code>},
-&quot;terminal&quot;: {
-  &quot;CodigoTerminal&quot;: 7,
-  &quot;CodigoExterno&quot;: &quot;TERM-BOG-001&quot;,
-  &quot;NombreTerminal&quot;: &quot;Terminal Centro Comercial Unicentro&quot;
-},
-&quot;items&quot;: [
-  {
-    &quot;objectName&quot;: &quot;WADetalleFactura&quot;,
-    &quot;cantidad&quot;: 1,
-    &quot;descripcion&quot;: &quot;Cobro Estancia Vehiculo - 2 horas 30 min&quot;,
-    &quot;precioUnitario&quot;: 4500.00,
-    &quot;codigoProducto&quot;: &quot;EST-VEHICULO&quot;,
-    &quot;codigoVehiculo&quot;: 1,
-    &quot;unidadMedida&quot;: &quot;UNI&quot;,
-    &quot;precioTotalSinDescuento&quot;: 4500.00,
-    &quot;precioTotalFinalDetalle&quot;: 4500.00,
-    &quot;observacion&quot;: &quot;150min - Entrada: 14:30, Salida: 17:00&quot;
-  },
-  {
-    &quot;objectName&quot;: &quot;WADetalleFactura&quot;,
-    &quot;cantidad&quot;: 1,
-    &quot;descripcion&quot;: &quot;Recarga Electrica Vehiculo&quot;,
-    &quot;precioUnitario&quot;: 8000.00,
-    &quot;codigoProducto&quot;: &quot;RECARGA-ELECT&quot;,
-    &quot;codigoVehiculo&quot;: 1,
-    &quot;unidadMedida&quot;: &quot;KWH&quot;,
-    &quot;precioTotalSinDescuento&quot;: 8000.00,
-    &quot;precioTotalFinalDetalle&quot;: 8000.00,
-    &quot;observacion&quot;: &quot;15 KWH - Tiempo: 45min&quot;
-  }
-],
-&quot;medios_pago&quot;: [
-  {
-    &quot;objectName&quot;: &quot;WAMedioPagoFactura&quot;,
-    &quot;codigoMedioPago&quot;: 2,
-    &quot;importeMedioPago&quot;: 12500.00
-  }
-],
-&quot;totales&quot;: {
-  &quot;total&quot;: 12500.00,
-  &quot;subtotal&quot;: 12500.00,
-  &quot;impuestos&quot;: 0.00,
-  &quot;descuentos&quot;: 0.00,
-  &quot;moneda&quot;: &quot;COP&quot;
-},
-&quot;autorizacion_prefijo&quot;: {
-  &quot;objectName&quot;: &quot;WAAutorizacionPrefijo&quot;,
-  &quot;PrefijoId&quot;: &quot;UNI1&quot;,
-  &quot;ResolucionNumero&quot;: &quot;18764000000123&quot;,
-  &quot;VigenciaFecha&quot;: &quot;2026-12-31&quot;,
-  &quot;VigenciaDuracion&quot;: 24,
-  &quot;CorrelativoInicialNum&quot;: 1,
-  &quot;CorrelativoFinalNum&quot;: 50000
-}
-</code></pre></div>
-
-<p>}
+<p>},
+ "terminal": {
+ "CodigoTerminal": 7,
+ "CodigoExterno": "TERM-BOG-001",
+ "NombreTerminal": "Terminal Centro Comercial Unicentro"
+ },
+ "items": [
+ {
+ "objectName": "WADetalleFactura",
+ "cantidad": 1,
+ "descripcion": "Cobro Estancia Vehiculo - 2 horas 30 min",
+ "precioUnitario": 4500.00,
+ "codigoProducto": "EST-VEHICULO",
+ "codigoVehiculo": 1,
+ "unidadMedida": "UNI",
+ "precioTotalSinDescuento": 4500.00,
+ "precioTotalFinalDetalle": 4500.00,
+ "observacion": "150min - Entrada: 14:30, Salida: 17:00"
+ },
+ {
+ "objectName": "WADetalleFactura",
+ "cantidad": 1,
+ "descripcion": "Recarga Electrica Vehiculo",
+ "precioUnitario": 8000.00,
+ "codigoProducto": "RECARGA-ELECT",
+ "codigoVehiculo": 1,
+ "unidadMedida": "KWH",
+ "precioTotalSinDescuento": 8000.00,
+ "precioTotalFinalDetalle": 8000.00,
+ "observacion": "15 KWH - Tiempo: 45min"
+ }
+ ],
+ "medios_pago": [
+ {
+ "objectName": "WAMedioPagoFactura",
+ "codigoMedioPago": 2,
+ "importeMedioPago": 12500.00
+ }
+ ],
+ "totales": {
+ "total": 12500.00,
+ "subtotal": 12500.00,
+ "impuestos": 0.00,
+ "descuentos": 0.00,
+ "moneda": "COP"
+ },
+ "autorizacion_prefijo": {
+ "objectName": "WAAutorizacionPrefijo",
+ "PrefijoId": "UNI1",
+ "ResolucionNumero": "18764000000123",
+ "VigenciaFecha": "2026-12-31",
+ "VigenciaDuracion": 24,
+ "CorrelativoInicialNum": 1,
+ "CorrelativoFinalNum": 50000
+ }
+ }
 }</p>
 <div class="codehilite"><pre><span></span><code><span class="gu">##</span># Respuesta de Éxito (Test)
 
 ```json
 {
-  &quot;response&quot;: &quot;HTTP: 201 OK&quot;,
-  &quot;success&quot;: true,
-  &quot;message&quot;: &quot;Factura Meypar procesada exitosamente&quot;,
-  &quot;job_id&quot;: &quot;uuid-generated-job-id&quot;
+ &quot;response&quot;: &quot;HTTP: 201 OK&quot;,
+ &quot;success&quot;: true,
+ &quot;message&quot;: &quot;Factura Meypar procesada exitosamente&quot;,
+ &quot;job_id&quot;: &quot;uuid-generated-job-id&quot;
 }
 </code></pre></div>
 
@@ -3325,7 +3323,7 @@
 </tr>
 </tbody>
 </table>
-<p><strong>⚠️ Diferencia Crítica:</strong>
+<p><strong>Diferencia Crítica:</strong>
 - <strong><code>documento</code></strong>: NIT del <strong>cliente</strong> (ej: <code>"900123456-1"</code> o <code>"222222222222"</code> para consumidor final)
 - <strong><code>numero</code></strong>: <strong>Número de la factura</strong> (ej: <code>2025</code>, <code>10001</code>, etc.)
 - El <code>numero</code> se convierte en <code>InvoiceNumber</code> en la base de datos
@@ -3460,11 +3458,11 @@
 </tr>
 </tbody>
 </table>
-<p><strong>📏 Campos de Texto</strong>
+<p>** Campos de Texto**
 - Todos los campos de texto tienen límites específicos según la estructura de BD
 - Si un campo excede el límite, se trunca automáticamente
 - Se registra un log de advertencia con el valor original y truncado</p>
-<p><strong>💰 Campos Decimales</strong>
+<p>** Campos Decimales**
 - Todos los precios y cantidades usan regex específicos para validar precisión
 - Formato esperado: hasta 12 dígitos enteros con máximo 4 decimales
 - Regex: <code>/^\d{1,12}(\.\d{1,4})?$/</code></p>
@@ -3567,10 +3565,10 @@
 - Formateo decimal con validación de límites</p>
 <hr />
 <h2 id="crear-venta-meypar-con-emision-directa">Crear Venta Meypar con Emisión Directa</h2>
-<p><strong>Endpoint:</strong> <code>POST /api/v1/fe/create_sale_meypar_with_emission</code><br />
-<strong>Controller:</strong> <code>FeController::createSaleMeyparWithEmission</code><br />
-<strong>Request Class:</strong> <code>CreateSaleMeyparRequest</code><br />
-<strong>Autenticación:</strong> Bearer Token requerido<br />
+<p><strong>Endpoint:</strong> <code>POST /api/v1/fe/create_sale_meypar_with_emission</code> 
+<strong>Controller:</strong> <code>FeController::createSaleMeyparWithEmission</code> 
+<strong>Request Class:</strong> <code>CreateSaleMeyparRequest</code> 
+<strong>Autenticación:</strong> Bearer Token requerido 
 <strong>Middleware:</strong> <code>check.activate.organization</code></p>
 <h3 id="descripcion_1">Descripción</h3>
 <p>Crea y procesa una factura electrónica con emisión directa basada en datos del sistema Meypar. Este endpoint procesa la venta de manera síncrona incluyendo la emisión automática de la factura electrónica mediante el PAC configurado, con sistema de reintentos integrado.</p>
@@ -3615,103 +3613,103 @@
 <p>La estructura del request es <strong>idéntica</strong> a <code>createSaleMeypar</code>. Ver sección anterior para detalles completos.</p>
 <h3 id="ejemplo-de-request">Ejemplo de Request</h3>
 <div class="codehilite"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;documento&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;tipo_documento&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;numero&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;MEYPAR-EMISSION-001&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;fecha&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2025-08-12&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;emisor&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">      </span><span class="nt">&quot;nombre&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Estacionamientos MEYPAR Colombia SAS&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;nit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;900123456-1&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;direccion&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Calle 123 #45-67, Bogotá D.C.&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;telefono&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;+57 1 2345678&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;email&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;emisor@meypar.co&quot;</span>
-<span class="w">    </span><span class="p">},</span>
-<span class="w">    </span><span class="nt">&quot;adquiriente&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">      </span><span class="nt">&quot;nombre&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;María Elena Rodríguez&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;nit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;52123456-8&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;email&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;maria.rodriguez@hotmail.com&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;direccion&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Carrera 20 #40-25, Medellín&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;telefono&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;+57 300 1234567&quot;</span>
-<span class="w">    </span><span class="p">},</span>
-<span class="w">    </span><span class="nt">&quot;terminal&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">      </span><span class="nt">&quot;CodigoTerminal&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;CodigoExterno&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;TERM-MED-002&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;NombreTerminal&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Terminal Centro Comercial Santafé&quot;</span>
-<span class="w">    </span><span class="p">},</span>
-<span class="w">    </span><span class="nt">&quot;items&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">      </span><span class="p">{</span>
-<span class="w">        </span><span class="nt">&quot;objectName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;WADetalleFactura&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;cantidad&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;descripcion&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Estacionamiento VIP - 4 horas&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;precioUnitario&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">8000.00</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;codigoProducto&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;EST-VIP&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;codigoVehiculo&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;unidadMedida&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;UNI&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;precioTotalSinDescuento&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">8000.00</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;precioTotalFinalDetalle&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">8000.00</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;observacion&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;240min - Zona VIP Cubierta&quot;</span>
-<span class="w">      </span><span class="p">}</span>
-<span class="w">    </span><span class="p">],</span>
-<span class="w">    </span><span class="nt">&quot;medios_pago&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">      </span><span class="p">{</span>
-<span class="w">        </span><span class="nt">&quot;objectName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;WAMedioPagoFactura&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;codigoMedioPago&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;importeMedioPago&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">8000.00</span>
-<span class="w">      </span><span class="p">}</span>
-<span class="w">    </span><span class="p">],</span>
-<span class="w">    </span><span class="nt">&quot;totales&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">      </span><span class="nt">&quot;total&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">8000.00</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;subtotal&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">8000.00</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;impuestos&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.00</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;descuentos&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.00</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;moneda&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;COP&quot;</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">  </span><span class="p">}</span>
+<span class="w"> </span><span class="nt">&quot;documento&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w"> </span><span class="nt">&quot;tipo_documento&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1&quot;</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;numero&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;MEYPAR-EMISSION-001&quot;</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;fecha&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2025-08-12&quot;</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;emisor&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w"> </span><span class="nt">&quot;nombre&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Estacionamientos MEYPAR Colombia SAS&quot;</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;nit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;900123456-1&quot;</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;direccion&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Calle 123 #45-67, Bogotá D.C.&quot;</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;telefono&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;+57 1 2345678&quot;</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;email&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;emisor@meypar.co&quot;</span>
+<span class="w"> </span><span class="p">},</span>
+<span class="w"> </span><span class="nt">&quot;adquiriente&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w"> </span><span class="nt">&quot;nombre&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;María Elena Rodríguez&quot;</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;nit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;52123456-8&quot;</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;email&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;maria.rodriguez@hotmail.com&quot;</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;direccion&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Carrera 20 #40-25, Medellín&quot;</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;telefono&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;+57 300 1234567&quot;</span>
+<span class="w"> </span><span class="p">},</span>
+<span class="w"> </span><span class="nt">&quot;terminal&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w"> </span><span class="nt">&quot;CodigoTerminal&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;CodigoExterno&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;TERM-MED-002&quot;</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;NombreTerminal&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Terminal Centro Comercial Santafé&quot;</span>
+<span class="w"> </span><span class="p">},</span>
+<span class="w"> </span><span class="nt">&quot;items&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w"> </span><span class="p">{</span>
+<span class="w"> </span><span class="nt">&quot;objectName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;WADetalleFactura&quot;</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;cantidad&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;descripcion&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Estacionamiento VIP - 4 horas&quot;</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;precioUnitario&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">8000.00</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;codigoProducto&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;EST-VIP&quot;</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;codigoVehiculo&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;unidadMedida&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;UNI&quot;</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;precioTotalSinDescuento&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">8000.00</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;precioTotalFinalDetalle&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">8000.00</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;observacion&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;240min - Zona VIP Cubierta&quot;</span>
+<span class="w"> </span><span class="p">}</span>
+<span class="w"> </span><span class="p">],</span>
+<span class="w"> </span><span class="nt">&quot;medios_pago&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w"> </span><span class="p">{</span>
+<span class="w"> </span><span class="nt">&quot;objectName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;WAMedioPagoFactura&quot;</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;codigoMedioPago&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;importeMedioPago&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">8000.00</span>
+<span class="w"> </span><span class="p">}</span>
+<span class="w"> </span><span class="p">],</span>
+<span class="w"> </span><span class="nt">&quot;totales&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w"> </span><span class="nt">&quot;total&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">8000.00</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;subtotal&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">8000.00</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;impuestos&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.00</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;descuentos&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.00</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;moneda&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;COP&quot;</span>
+<span class="w"> </span><span class="p">}</span>
+<span class="w"> </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
 
 <h3 id="respuesta-de-exito">Respuesta de Éxito</h3>
 <div class="codehilite"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;resCodigo&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;resMensaje&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Exitoso&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;cufe&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FE0120000155702081-2-2021-2600142026020500000000710040126897194708&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;qr&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://dgi-fep.mef.gob.pa/Consultas/FacturasPorCUFE/FE0120000155702081-2-2021-2600142026020500000000710040126897194708&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Venta MEYPAR creada y emitida exitosamente&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;attempt&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;customer_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;María Elena Rodríguez&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;customer_dv&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;8&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;customer_ruc&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;52123456-8-2020&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;sale&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">      </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">12345</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;invoice_number&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;MEYPAR-EMISSION-001&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;customer_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;María Elena Rodríguez&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;subtotal&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">8000.00</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;net_due&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">8000.00</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2025-08-12T00:00:00.000000Z&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;issued&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
-<span class="w">    </span><span class="p">},</span>
-<span class="w">    </span><span class="nt">&quot;emission&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">      </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;cufe&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FE0120000155702081-2-2021-2600002025081179999999990010127999999993&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;qr&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://dgi-fep.mef.gob.pa/Consultas/FacturasPorCUFE/FE0120000155702081-2-2021-2600002025081179999999990010127999999993&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;transition_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;01K2G9PGACC8BDC4NYP5D5HMZE&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;numeroDocumentoFiscal&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0000001234&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;pac_response&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nt">&quot;sale&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">12345</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;invoices&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;transition&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;01K2G9PGACC8BDC4NYP5D5HMZE&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;cufe&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FE0120000155702081-2-2021-2600002025081179999999990010127999999993&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;codigoSucursalEmisor&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;001&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;numeroDocumentoFiscal&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0000001234&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;puntoFacturacionFiscal&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;001&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;tipoDocumento&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;01&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;tipoEmision&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;01&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;signedXml&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4...&quot;</span>
-<span class="w">      </span><span class="p">}</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">  </span><span class="p">}</span>
+<span class="w"> </span><span class="nt">&quot;resCodigo&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;resMensaje&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Exitoso&quot;</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;cufe&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FE0120000155702081-2-2021-2600142026020500000000710040126897194708&quot;</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;qr&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://dgi-fep.mef.gob.pa/Consultas/FacturasPorCUFE/FE0120000155702081-2-2021-2600142026020500000000710040126897194708&quot;</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Venta MEYPAR creada y emitida exitosamente&quot;</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;attempt&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;customer_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;María Elena Rodríguez&quot;</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;customer_dv&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;8&quot;</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;customer_ruc&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;52123456-8-2020&quot;</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w"> </span><span class="nt">&quot;sale&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w"> </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">12345</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;invoice_number&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;MEYPAR-EMISSION-001&quot;</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;customer_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;María Elena Rodríguez&quot;</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;subtotal&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">8000.00</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;net_due&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">8000.00</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2025-08-12T00:00:00.000000Z&quot;</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;issued&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="w"> </span><span class="p">},</span>
+<span class="w"> </span><span class="nt">&quot;emission&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w"> </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;cufe&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FE0120000155702081-2-2021-2600002025081179999999990010127999999993&quot;</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;qr&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://dgi-fep.mef.gob.pa/Consultas/FacturasPorCUFE/FE0120000155702081-2-2021-2600002025081179999999990010127999999993&quot;</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;transition_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;01K2G9PGACC8BDC4NYP5D5HMZE&quot;</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;numeroDocumentoFiscal&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0000001234&quot;</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;pac_response&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w"> </span><span class="nt">&quot;sale&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">12345</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;invoices&quot;</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;transition&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;01K2G9PGACC8BDC4NYP5D5HMZE&quot;</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;cufe&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FE0120000155702081-2-2021-2600002025081179999999990010127999999993&quot;</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;codigoSucursalEmisor&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;001&quot;</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;numeroDocumentoFiscal&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0000001234&quot;</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;puntoFacturacionFiscal&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;001&quot;</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;tipoDocumento&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;01&quot;</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;tipoEmision&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;01&quot;</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;signedXml&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4...&quot;</span>
+<span class="w"> </span><span class="p">}</span>
+<span class="w"> </span><span class="p">}</span>
+<span class="w"> </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
 
@@ -3813,42 +3811,42 @@
 <h3 id="respuesta-de-error">Respuesta de Error</h3>
 <p><strong>Error después de 3 reintentos:</strong></p>
 <div class="codehilite"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Falló después de 3 intentos&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;error&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Error procesando venta MEYPAR con emisión&quot;</span>
+<span class="w"> </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Falló después de 3 intentos&quot;</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;error&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Error procesando venta MEYPAR con emisión&quot;</span>
 <span class="p">}</span>
 </code></pre></div>
 
 <h4 id="tipos-de-errores-especificos">Tipos de errores específicos:</h4>
 <p><strong>1. Error de configuración PAC:</strong></p>
 <div class="codehilite"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;No se encontró configuración PAC para la organización&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;error&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Error procesando venta MEYPAR con emisión&quot;</span>
+<span class="w"> </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;No se encontró configuración PAC para la organización&quot;</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;error&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Error procesando venta MEYPAR con emisión&quot;</span>
 <span class="p">}</span>
 </code></pre></div>
 
 <p><strong>2. Error de validación de documentos:</strong></p>
 <div class="codehilite"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;The document has already been issued.&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;error&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Error procesando venta MEYPAR con emisión&quot;</span>
+<span class="w"> </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;The document has already been issued.&quot;</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;error&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Error procesando venta MEYPAR con emisión&quot;</span>
 <span class="p">}</span>
 </code></pre></div>
 
 <p><strong>3. Error de conexión PAC (Alanube):</strong></p>
 <div class="codehilite"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Connection timeout&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;error&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Error procesando venta MEYPAR con emisión&quot;</span>
+<span class="w"> </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Connection timeout&quot;</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;error&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Error procesando venta MEYPAR con emisión&quot;</span>
 <span class="p">}</span>
 </code></pre></div>
 
 <p><strong>4. Error de respuesta PAC (400/401):</strong></p>
 <div class="codehilite"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Error message from PAC response&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;error&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Error procesando venta MEYPAR con emisión&quot;</span>
+<span class="w"> </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Error message from PAC response&quot;</span><span class="p">,</span>
+<span class="w"> </span><span class="nt">&quot;error&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Error procesando venta MEYPAR con emisión&quot;</span>
 <span class="p">}</span>
 </code></pre></div>
 

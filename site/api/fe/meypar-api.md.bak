@@ -2,10 +2,10 @@
 
 ## Crear Venta Meypar
 
-**Endpoint:** `POST /api/v1/fe/create_sale_meypar` 
-**Controller:** `FeController::createSaleMeypar` 
-**Request Class:** `CreateSaleMeyparRequest` 
-**Autenticación:** Bearer Token requerido 
+**Endpoint:** `POST /api/v1/fe/create_sale_meypar`  
+**Controller:** `FeController::createSaleMeypar`  
+**Request Class:** `CreateSaleMeyparRequest`  
+**Autenticación:** Bearer Token requerido  
 **Middleware:** `check.activate.organization`
 
 ### Descripción
@@ -18,14 +18,14 @@ Crea y emite una factura electrónica basada en datos provenientes del sistema M
 
 | Campo | Tipo | Requerido | Descripción | Límite |
 |-------|------|-----------|-------------|---------|
-| `idFacturador` | integer | | ID del obligado a facturar | - |
-| `ambiente` | integer | | Ambiente (1=Producción, 2=Pruebas) | - |
-| `documento` | string | | **NIT del adquiriente** (usuario del parking) | **50 caracteres** |
-| `tipoDocumento` | integer | | Tipo de documento (1=FE, 2=DEE) | - |
-| `prefijo` | string | | Prefijo de numeración | **10 caracteres** |
-| `numero` | integer | | **Número de factura** | - |
-| `medioPago` | integer | | Medio de pago (0-4) | - |
-| `fechaFactura` | string | | Fecha de factura (YYYY-MM-DD) | - |
+| `idFacturador` | integer | ✅ | ID del obligado a facturar | - |
+| `ambiente` | integer | ✅ | Ambiente (1=Producción, 2=Pruebas) | - |
+| `documento` | string | ✅ | **NIT del adquiriente** (usuario del parking) | **50 caracteres** |
+| `tipoDocumento` | integer | ✅ | Tipo de documento (1=FE, 2=DEE) | - |
+| `prefijo` | string | ✅ | Prefijo de numeración | **10 caracteres** |
+| `numero` | integer | ✅ | **Número de factura** | - |
+| `medioPago` | integer | ✅ | Medio de pago (0-4) | - |
+| `fechaFactura` | string | ✅ | Fecha de factura (YYYY-MM-DD) | - |
 
 **Notas Importantes:**
 - **`documento`**: Es el NIT/documento del **cliente** (adquiriente), NO el número de factura
@@ -36,23 +36,23 @@ Crea y emite una factura electrónica basada en datos provenientes del sistema M
 
 | Campo | Tipo | Requerido | Descripción | Límite |
 |-------|------|-----------|-------------|---------|
-| `documento.emisor.nombre` | string | | Nombre del emisor | **100 caracteres** |
-| `documento.emisor.nit` | string | | NIT del emisor | **50 caracteres** |
-| `documento.emisor.direccion` | string | | Dirección del emisor | - |
-| `documento.emisor.telefono` | string | | Teléfono del emisor | - |
-| `documento.emisor.email` | string | | Email del emisor | - |
+| `documento.emisor.nombre` | string | ✅ | Nombre del emisor | **100 caracteres** |
+| `documento.emisor.nit` | string | ✅ | NIT del emisor | **50 caracteres** |
+| `documento.emisor.direccion` | string | ❌ | Dirección del emisor | - |
+| `documento.emisor.telefono` | string | ❌ | Teléfono del emisor | - |
+| `documento.emisor.email` | string | ❌ | Email del emisor | - |
 
 #### Adquiriente (Estructura Simplificada - Opcional)
 
-**Nota**: Esta es una estructura alternativa simplificada de DocuCenter. La estructura oficial MEYPAR usa el campo raíz `documento` para el NIT del cliente.
+**⚠️ Nota**: Esta es una estructura alternativa simplificada de DocuCenter. La estructura oficial MEYPAR usa el campo raíz `documento` para el NIT del cliente.
 
 | Campo | Tipo | Requerido | Descripción | Límite |
 |-------|------|-----------|-------------|---------|
-| `documento.adquiriente.nombre` | string | | Nombre del cliente | **39 caracteres** |
-| `documento.adquiriente.nit` | string | | NIT del cliente (redundante con campo `documento`) | **20 caracteres** |
-| `documento.adquiriente.email` | string | | Email del cliente | **100 caracteres** |
-| `documento.adquiriente.direccion` | string | | Dirección del cliente | **200 caracteres** |
-| `documento.adquiriente.telefono` | string | | Teléfono del cliente | **20 caracteres** |
+| `documento.adquiriente.nombre` | string | ❌ | Nombre del cliente | **39 caracteres** |
+| `documento.adquiriente.nit` | string | ❌ | NIT del cliente (redundante con campo `documento`) | **20 caracteres** |
+| `documento.adquiriente.email` | string | ❌ | Email del cliente | **100 caracteres** |
+| `documento.adquiriente.direccion` | string | ❌ | Dirección del cliente | **200 caracteres** |
+| `documento.adquiriente.telefono` | string | ❌ | Teléfono del cliente | **20 caracteres** |
 
 **Referencia Oficial MEYPAR:**
 - El campo `documento` (raíz) es el NIT del adquiriente según PDF técnico LogTech
@@ -63,146 +63,146 @@ Crea y emite una factura electrónica basada en datos provenientes del sistema M
 
 | Campo | Tipo | Requerido | Descripción | Límite |
 |-------|------|-----------|-------------|---------|
-| `documento.terminal.CodigoTerminal` | integer | | Código del terminal | - |
-| `documento.terminal.CodigoExterno` | string | | Código externo del terminal | **20 caracteres** |
-| `documento.terminal.NombreTerminal` | string | | Nombre del terminal | **100 caracteres** |
+| `documento.terminal.CodigoTerminal` | integer | ❌ | Código del terminal | - |
+| `documento.terminal.CodigoExterno` | string | ❌ | Código externo del terminal | **20 caracteres** |
+| `documento.terminal.NombreTerminal` | string | ❌ | Nombre del terminal | **100 caracteres** |
 
 #### Items del Documento
 
 | Campo | Tipo | Requerido | Descripción | Límite |
 |-------|------|-----------|-------------|---------|
-| `documento.items.*.cantidad` | decimal | | Cantidad del item | **decimal(12,2)** |
-| `documento.items.*.descripcion` | string | | Descripción del item | **255 caracteres** |
-| `documento.items.*.precioUnitario` | decimal | | Precio unitario | **decimal(16,4)** |
-| `documento.items.*.codigoProducto` | string | | Código del producto | **50 caracteres** |
-| `documento.items.*.unidadMedida` | string | | Unidad de medida | **10 caracteres** |
-| `documento.items.*.precioTotalFinalDetalle` | decimal | | Precio total final | **decimal(16,4)** |
+| `documento.items.*.cantidad` | decimal | ✅ | Cantidad del item | **decimal(12,2)** |
+| `documento.items.*.descripcion` | string | ✅ | Descripción del item | **255 caracteres** |
+| `documento.items.*.precioUnitario` | decimal | ✅ | Precio unitario | **decimal(16,4)** |
+| `documento.items.*.codigoProducto` | string | ✅ | Código del producto | **50 caracteres** |
+| `documento.items.*.unidadMedida` | string | ❌ | Unidad de medida | **10 caracteres** |
+| `documento.items.*.precioTotalFinalDetalle` | decimal | ✅ | Precio total final | **decimal(16,4)** |
 
 #### Medios de Pago
 
 | Campo | Tipo | Requerido | Descripción | Límite |
 |-------|------|-----------|-------------|---------|
-| `documento.medios_pago.*.codigoMedioPago` | integer | | 1=Efectivo, 2=Tarjeta, 3=Cheque, 4=Transferencia | - |
-| `documento.medios_pago.*.importeMedioPago` | decimal | | Importe del medio de pago | **decimal(16,4)** |
+| `documento.medios_pago.*.codigoMedioPago` | integer | ✅ | 1=Efectivo, 2=Tarjeta, 3=Cheque, 4=Transferencia | - |
+| `documento.medios_pago.*.importeMedioPago` | decimal | ✅ | Importe del medio de pago | **decimal(16,4)** |
 
 #### Totales
 
 | Campo | Tipo | Requerido | Descripción | Límite |
 |-------|------|-----------|-------------|---------|
-| `documento.totales.total` | decimal | | Total del documento | **decimal(16,4)** |
-| `documento.totales.subtotal` | decimal | | Subtotal (antes de impuestos) | **decimal(16,4)** |
-| `documento.totales.impuestos` | decimal | | Total de impuestos | **decimal(16,4)** |
-| `documento.totales.descuentos` | decimal | | Total de descuentos | **decimal(16,4)** |
+| `documento.totales.total` | decimal | ✅ | Total del documento | **decimal(16,4)** |
+| `documento.totales.subtotal` | decimal | ❌ | Subtotal (antes de impuestos) | **decimal(16,4)** |
+| `documento.totales.impuestos` | decimal | ❌ | Total de impuestos | **decimal(16,4)** |
+| `documento.totales.descuentos` | decimal | ❌ | Total de descuentos | **decimal(16,4)** |
 
 #### Autorización de Prefijo (Opcional)
 
 | Campo | Tipo | Requerido | Descripción | Límite |
 |-------|------|-----------|-------------|---------|
-| `documento.autorizacion_prefijo.PrefijoId` | string | | ID del prefijo | **10 caracteres** |
-| `documento.autorizacion_prefijo.ResolucionNumero` | string | | Número de resolución | **50 caracteres** |
+| `documento.autorizacion_prefijo.PrefijoId` | string | ❌ | ID del prefijo | **10 caracteres** |
+| `documento.autorizacion_prefijo.ResolucionNumero` | string | ❌ | Número de resolución | **50 caracteres** |
 
 ### Ejemplo de Request (Estructura Oficial MEYPAR)
 
 ```json
 {
- "idFacturador": 12345678,
- "ambiente": 1,
- "documento": "900123456-1",
- "codigo": 2,
- "tipoDocumento": 1,
- "prefijo": "A132",
- "numero": 2025,
- "medioPago": 2,
- "referenciaPago": "123456789",
- "fechaFactura": "2024-02-06",
- "mensaje": "Estacionamiento - 2 horas",
- "observacion": null,
- "autorizacionPrefijo": {
- "PrefijoId": "C1PQ",
- "ResoluciónNumero": "132343423423432",
- "VigenciaFecha": "2025-01-15",
- "DuracionFecha": 24,
- "CorrelativoInicialNum": 1,
- "CorrelativoFinalNum": 30000
- },
- "terminalPagoID": {
- "CodigoTerminal": 4,
- "CodigoExterno": null,
- "NombreTerminal": "PP1-Automatica3"
- },
- "detalleMedioPagoList": [{
- "codigoMedioPago": 2,
- "importeMedioPago": 1.03
- }],
- "detalleFacturaList": [{
- "objectName": "WADetalleFactura",
- "cantidad": 1,
- "descripcion": "Cobro Ticket",
- "precioUnitario": 1.23,
- "codigoProducto": 2,
- "codigoVehiculo": 1,
- "unidadMedida": "UNI",
- "precioTotalSinDescuento": 1.23,
- "precioTotalFinalDetalle": 1.03
- }]
+  "idFacturador": 12345678,
+  "ambiente": 1,
+  "documento": "900123456-1",
+  "codigo": 2,
+  "tipoDocumento": 1,
+  "prefijo": "A132",
+  "numero": 2025,
+  "medioPago": 2,
+  "referenciaPago": "123456789",
+  "fechaFactura": "2024-02-06",
+  "mensaje": "Estacionamiento - 2 horas",
+  "observacion": null,
+  "autorizacionPrefijo": {
+    "PrefijoId": "C1PQ",
+    "ResoluciónNumero": "132343423423432",
+    "VigenciaFecha": "2025-01-15",
+    "DuracionFecha": 24,
+    "CorrelativoInicialNum": 1,
+    "CorrelativoFinalNum": 30000
+  },
+  "terminalPagoID": {
+    "CodigoTerminal": 4,
+    "CodigoExterno": null,
+    "NombreTerminal": "PP1-Automatica3"
+  },
+  "detalleMedioPagoList": [{
+    "codigoMedioPago": 2,
+    "importeMedioPago": 1.03
+  }],
+  "detalleFacturaList": [{
+    "objectName": "WADetalleFactura",
+    "cantidad": 1,
+    "descripcion": "Cobro Ticket",
+    "precioUnitario": 1.23,
+    "codigoProducto": 2,
+    "codigoVehiculo": 1,
+    "unidadMedida": "UNI",
+    "precioTotalSinDescuento": 1.23,
+    "precioTotalFinalDetalle": 1.03
+  }]
 }
 ```
- },
- "terminal": {
- "CodigoTerminal": 7,
- "CodigoExterno": "TERM-BOG-001",
- "NombreTerminal": "Terminal Centro Comercial Unicentro"
- },
- "items": [
- {
- "objectName": "WADetalleFactura",
- "cantidad": 1,
- "descripcion": "Cobro Estancia Vehiculo - 2 horas 30 min",
- "precioUnitario": 4500.00,
- "codigoProducto": "EST-VEHICULO",
- "codigoVehiculo": 1,
- "unidadMedida": "UNI",
- "precioTotalSinDescuento": 4500.00,
- "precioTotalFinalDetalle": 4500.00,
- "observacion": "150min - Entrada: 14:30, Salida: 17:00"
- },
- {
- "objectName": "WADetalleFactura",
- "cantidad": 1,
- "descripcion": "Recarga Electrica Vehiculo",
- "precioUnitario": 8000.00,
- "codigoProducto": "RECARGA-ELECT",
- "codigoVehiculo": 1,
- "unidadMedida": "KWH",
- "precioTotalSinDescuento": 8000.00,
- "precioTotalFinalDetalle": 8000.00,
- "observacion": "15 KWH - Tiempo: 45min"
- }
- ],
- "medios_pago": [
- {
- "objectName": "WAMedioPagoFactura",
- "codigoMedioPago": 2,
- "importeMedioPago": 12500.00
- }
- ],
- "totales": {
- "total": 12500.00,
- "subtotal": 12500.00,
- "impuestos": 0.00,
- "descuentos": 0.00,
- "moneda": "COP"
- },
- "autorizacion_prefijo": {
- "objectName": "WAAutorizacionPrefijo",
- "PrefijoId": "UNI1",
- "ResolucionNumero": "18764000000123",
- "VigenciaFecha": "2026-12-31",
- "VigenciaDuracion": 24,
- "CorrelativoInicialNum": 1,
- "CorrelativoFinalNum": 50000
- }
- }
+    },
+    "terminal": {
+      "CodigoTerminal": 7,
+      "CodigoExterno": "TERM-BOG-001",
+      "NombreTerminal": "Terminal Centro Comercial Unicentro"
+    },
+    "items": [
+      {
+        "objectName": "WADetalleFactura",
+        "cantidad": 1,
+        "descripcion": "Cobro Estancia Vehiculo - 2 horas 30 min",
+        "precioUnitario": 4500.00,
+        "codigoProducto": "EST-VEHICULO",
+        "codigoVehiculo": 1,
+        "unidadMedida": "UNI",
+        "precioTotalSinDescuento": 4500.00,
+        "precioTotalFinalDetalle": 4500.00,
+        "observacion": "150min - Entrada: 14:30, Salida: 17:00"
+      },
+      {
+        "objectName": "WADetalleFactura",
+        "cantidad": 1,
+        "descripcion": "Recarga Electrica Vehiculo",
+        "precioUnitario": 8000.00,
+        "codigoProducto": "RECARGA-ELECT",
+        "codigoVehiculo": 1,
+        "unidadMedida": "KWH",
+        "precioTotalSinDescuento": 8000.00,
+        "precioTotalFinalDetalle": 8000.00,
+        "observacion": "15 KWH - Tiempo: 45min"
+      }
+    ],
+    "medios_pago": [
+      {
+        "objectName": "WAMedioPagoFactura",
+        "codigoMedioPago": 2,
+        "importeMedioPago": 12500.00
+      }
+    ],
+    "totales": {
+      "total": 12500.00,
+      "subtotal": 12500.00,
+      "impuestos": 0.00,
+      "descuentos": 0.00,
+      "moneda": "COP"
+    },
+    "autorizacion_prefijo": {
+      "objectName": "WAAutorizacionPrefijo",
+      "PrefijoId": "UNI1",
+      "ResolucionNumero": "18764000000123",
+      "VigenciaFecha": "2026-12-31",
+      "VigenciaDuracion": 24,
+      "CorrelativoInicialNum": 1,
+      "CorrelativoFinalNum": 50000
+    }
+  }
 }
 ```
 
@@ -210,10 +210,10 @@ Crea y emite una factura electrónica basada en datos provenientes del sistema M
 
 ```json
 {
- "response": "HTTP: 201 OK",
- "success": true,
- "message": "Factura Meypar procesada exitosamente",
- "job_id": "uuid-generated-job-id"
+  "response": "HTTP: 201 OK",
+  "success": true,
+  "message": "Factura Meypar procesada exitosamente",
+  "job_id": "uuid-generated-job-id"
 }
 ```
 
@@ -234,7 +234,7 @@ Crea y emite una factura electrónica basada en datos provenientes del sistema M
 | `mensaje` | string | nullable, max:255 | Mensaje adicional |
 | `observacion` | string | nullable, max:500 | Observación general |
 
-**Diferencia Crítica:**
+**⚠️ Diferencia Crítica:**
 - **`documento`**: NIT del **cliente** (ej: `"900123456-1"` o `"222222222222"` para consumidor final)
 - **`numero`**: **Número de la factura** (ej: `2025`, `10001`, etc.)
 - El `numero` se convierte en `InvoiceNumber` en la base de datos
@@ -271,12 +271,12 @@ Crea y emite una factura electrónica basada en datos provenientes del sistema M
 | `detalleMedioPagoList[].codigoMedioPago` | integer | required, in:1,2,3,4 | 1=Efectivo, 2=Tarjeta, 3=Cheque, 4=Transferencia |
 | `detalleMedioPagoList[].importeMedioPago` | numeric | required, decimal(16,4) | Importe del medio de pago |
 
-** Campos de Texto**
+**📏 Campos de Texto**
 - Todos los campos de texto tienen límites específicos según la estructura de BD
 - Si un campo excede el límite, se trunca automáticamente
 - Se registra un log de advertencia con el valor original y truncado
 
-** Campos Decimales**
+**💰 Campos Decimales**
 - Todos los precios y cantidades usan regex específicos para validar precisión
 - Formato esperado: hasta 12 dígitos enteros con máximo 4 decimales
 - Regex: `/^\d{1,12}(\.\d{1,4})?$/`
@@ -372,10 +372,10 @@ El sistema proporciona mensajes de error específicos y descriptivos:
 
 ## Crear Venta Meypar con Emisión Directa
 
-**Endpoint:** `POST /api/v1/fe/create_sale_meypar_with_emission` 
-**Controller:** `FeController::createSaleMeyparWithEmission` 
-**Request Class:** `CreateSaleMeyparRequest` 
-**Autenticación:** Bearer Token requerido 
+**Endpoint:** `POST /api/v1/fe/create_sale_meypar_with_emission`  
+**Controller:** `FeController::createSaleMeyparWithEmission`  
+**Request Class:** `CreateSaleMeyparRequest`  
+**Autenticación:** Bearer Token requerido  
 **Middleware:** `check.activate.organization`
 
 ### Descripción
@@ -400,58 +400,58 @@ La estructura del request es **idéntica** a `createSaleMeypar`. Ver sección an
 
 ```json
 {
- "documento": {
- "tipo_documento": "1",
- "numero": "MEYPAR-EMISSION-001",
- "fecha": "2025-08-12",
- "emisor": {
- "nombre": "Estacionamientos MEYPAR Colombia SAS",
- "nit": "900123456-1",
- "direccion": "Calle 123 #45-67, Bogotá D.C.",
- "telefono": "+57 1 2345678",
- "email": "emisor@meypar.co"
- },
- "adquiriente": {
- "nombre": "María Elena Rodríguez",
- "nit": "52123456-8",
- "email": "maria.rodriguez@hotmail.com",
- "direccion": "Carrera 20 #40-25, Medellín",
- "telefono": "+57 300 1234567"
- },
- "terminal": {
- "CodigoTerminal": 12,
- "CodigoExterno": "TERM-MED-002",
- "NombreTerminal": "Terminal Centro Comercial Santafé"
- },
- "items": [
- {
- "objectName": "WADetalleFactura",
- "cantidad": 1,
- "descripcion": "Estacionamiento VIP - 4 horas",
- "precioUnitario": 8000.00,
- "codigoProducto": "EST-VIP",
- "codigoVehiculo": 2,
- "unidadMedida": "UNI",
- "precioTotalSinDescuento": 8000.00,
- "precioTotalFinalDetalle": 8000.00,
- "observacion": "240min - Zona VIP Cubierta"
- }
- ],
- "medios_pago": [
- {
- "objectName": "WAMedioPagoFactura",
- "codigoMedioPago": 1,
- "importeMedioPago": 8000.00
- }
- ],
- "totales": {
- "total": 8000.00,
- "subtotal": 8000.00,
- "impuestos": 0.00,
- "descuentos": 0.00,
- "moneda": "COP"
- }
- }
+  "documento": {
+    "tipo_documento": "1",
+    "numero": "MEYPAR-EMISSION-001",
+    "fecha": "2025-08-12",
+    "emisor": {
+      "nombre": "Estacionamientos MEYPAR Colombia SAS",
+      "nit": "900123456-1",
+      "direccion": "Calle 123 #45-67, Bogotá D.C.",
+      "telefono": "+57 1 2345678",
+      "email": "emisor@meypar.co"
+    },
+    "adquiriente": {
+      "nombre": "María Elena Rodríguez",
+      "nit": "52123456-8",
+      "email": "maria.rodriguez@hotmail.com",
+      "direccion": "Carrera 20 #40-25, Medellín",
+      "telefono": "+57 300 1234567"
+    },
+    "terminal": {
+      "CodigoTerminal": 12,
+      "CodigoExterno": "TERM-MED-002",
+      "NombreTerminal": "Terminal Centro Comercial Santafé"
+    },
+    "items": [
+      {
+        "objectName": "WADetalleFactura",
+        "cantidad": 1,
+        "descripcion": "Estacionamiento VIP - 4 horas",
+        "precioUnitario": 8000.00,
+        "codigoProducto": "EST-VIP",
+        "codigoVehiculo": 2,
+        "unidadMedida": "UNI",
+        "precioTotalSinDescuento": 8000.00,
+        "precioTotalFinalDetalle": 8000.00,
+        "observacion": "240min - Zona VIP Cubierta"
+      }
+    ],
+    "medios_pago": [
+      {
+        "objectName": "WAMedioPagoFactura",
+        "codigoMedioPago": 1,
+        "importeMedioPago": 8000.00
+      }
+    ],
+    "totales": {
+      "total": 8000.00,
+      "subtotal": 8000.00,
+      "impuestos": 0.00,
+      "descuentos": 0.00,
+      "moneda": "COP"
+    }
+  }
 }
 ```
 
@@ -459,46 +459,46 @@ La estructura del request es **idéntica** a `createSaleMeypar`. Ver sección an
 
 ```json
 {
- "resCodigo": 0,
- "resMensaje": "Exitoso",
- "cufe": "FE0120000155702081-2-2021-2600142026020500000000710040126897194708",
- "qr": "https://dgi-fep.mef.gob.pa/Consultas/FacturasPorCUFE/FE0120000155702081-2-2021-2600142026020500000000710040126897194708",
- "success": true,
- "message": "Venta MEYPAR creada y emitida exitosamente",
- "attempt": 1,
- "customer_name": "María Elena Rodríguez",
- "customer_dv": "8",
- "customer_ruc": "52123456-8-2020",
- "data": {
- "sale": {
- "id": 12345,
- "invoice_number": "MEYPAR-EMISSION-001",
- "customer_name": "María Elena Rodríguez",
- "subtotal": 8000.00,
- "net_due": 8000.00,
- "date": "2025-08-12T00:00:00.000000Z",
- "issued": true
- },
- "emission": {
- "success": true,
- "cufe": "FE0120000155702081-2-2021-2600002025081179999999990010127999999993",
- "qr": "https://dgi-fep.mef.gob.pa/Consultas/FacturasPorCUFE/FE0120000155702081-2-2021-2600002025081179999999990010127999999993",
- "transition_id": "01K2G9PGACC8BDC4NYP5D5HMZE",
- "numeroDocumentoFiscal": "0000001234",
- "pac_response": {
- "sale": 12345,
- "path": "invoices",
- "transition": "01K2G9PGACC8BDC4NYP5D5HMZE",
- "cufe": "FE0120000155702081-2-2021-2600002025081179999999990010127999999993",
- "codigoSucursalEmisor": "001",
- "numeroDocumentoFiscal": "0000001234",
- "puntoFacturacionFiscal": "001",
- "tipoDocumento": "01",
- "tipoEmision": "01",
- "signedXml": "PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4..."
- }
- }
- }
+  "resCodigo": 0,
+  "resMensaje": "Exitoso",
+  "cufe": "FE0120000155702081-2-2021-2600142026020500000000710040126897194708",
+  "qr": "https://dgi-fep.mef.gob.pa/Consultas/FacturasPorCUFE/FE0120000155702081-2-2021-2600142026020500000000710040126897194708",
+  "success": true,
+  "message": "Venta MEYPAR creada y emitida exitosamente",
+  "attempt": 1,
+  "customer_name": "María Elena Rodríguez",
+  "customer_dv": "8",
+  "customer_ruc": "52123456-8-2020",
+  "data": {
+    "sale": {
+      "id": 12345,
+      "invoice_number": "MEYPAR-EMISSION-001",
+      "customer_name": "María Elena Rodríguez",
+      "subtotal": 8000.00,
+      "net_due": 8000.00,
+      "date": "2025-08-12T00:00:00.000000Z",
+      "issued": true
+    },
+    "emission": {
+      "success": true,
+      "cufe": "FE0120000155702081-2-2021-2600002025081179999999990010127999999993",
+      "qr": "https://dgi-fep.mef.gob.pa/Consultas/FacturasPorCUFE/FE0120000155702081-2-2021-2600002025081179999999990010127999999993",
+      "transition_id": "01K2G9PGACC8BDC4NYP5D5HMZE",
+      "numeroDocumentoFiscal": "0000001234",
+      "pac_response": {
+        "sale": 12345,
+        "path": "invoices",
+        "transition": "01K2G9PGACC8BDC4NYP5D5HMZE",
+        "cufe": "FE0120000155702081-2-2021-2600002025081179999999990010127999999993",
+        "codigoSucursalEmisor": "001",
+        "numeroDocumentoFiscal": "0000001234",
+        "puntoFacturacionFiscal": "001",
+        "tipoDocumento": "01",
+        "tipoEmision": "01",
+        "signedXml": "PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4..."
+      }
+    }
+  }
 }
 ```
 
@@ -533,9 +533,9 @@ La estructura del request es **idéntica** a `createSaleMeypar`. Ver sección an
 **Error después de 3 reintentos:**
 ```json
 {
- "success": false,
- "message": "Falló después de 3 intentos",
- "error": "Error procesando venta MEYPAR con emisión"
+  "success": false,
+  "message": "Falló después de 3 intentos",
+  "error": "Error procesando venta MEYPAR con emisión"
 }
 ```
 
@@ -544,36 +544,36 @@ La estructura del request es **idéntica** a `createSaleMeypar`. Ver sección an
 **1. Error de configuración PAC:**
 ```json
 {
- "success": false,
- "message": "No se encontró configuración PAC para la organización",
- "error": "Error procesando venta MEYPAR con emisión"
+  "success": false,
+  "message": "No se encontró configuración PAC para la organización",
+  "error": "Error procesando venta MEYPAR con emisión"
 }
 ```
 
 **2. Error de validación de documentos:**
 ```json
 {
- "success": false,
- "message": "The document has already been issued.",
- "error": "Error procesando venta MEYPAR con emisión"
+  "success": false,
+  "message": "The document has already been issued.",
+  "error": "Error procesando venta MEYPAR con emisión"
 }
 ```
 
 **3. Error de conexión PAC (Alanube):**
 ```json
 {
- "success": false,
- "message": "Connection timeout",
- "error": "Error procesando venta MEYPAR con emisión"
+  "success": false,
+  "message": "Connection timeout",
+  "error": "Error procesando venta MEYPAR con emisión"
 }
 ```
 
 **4. Error de respuesta PAC (400/401):**
 ```json
 {
- "success": false,
- "message": "Error message from PAC response",
- "error": "Error procesando venta MEYPAR con emisión"
+  "success": false,
+  "message": "Error message from PAC response",
+  "error": "Error procesando venta MEYPAR con emisión"
 }
 ```
 
