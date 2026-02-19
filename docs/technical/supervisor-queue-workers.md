@@ -351,7 +351,7 @@ Batch:           2 workers × 1024MB = 2048MB
 Total:           7 workers = 4608MB (4.5GB)
 ```
 
-**⚠️ IMPORTANTE**: Para servidor con 2GB RAM, considera reducir:
+** IMPORTANTE**: Para servidor con 2GB RAM, considera reducir:
 
 ### Configuración Ligera (Servidor 2GB RAM)
 
@@ -422,14 +422,14 @@ php artisan queue:flush
 
 ## Mejores Prácticas
 
-✅ **DO:**
+ **DO:**
 - Monitorear uso de memoria regularmente
 - Rotar logs automáticamente
 - Usar queues específicas por tipo de job
 - Configurar alertas para workers caídos
 - Hacer backups de configuraciones
 
-❌ **DON'T:**
+ **DON'T:**
 - No usar más workers de los que la RAM soporta
 - No mezclar jobs críticos con batch en la misma cola
 - No ignorar jobs fallidos acumulados

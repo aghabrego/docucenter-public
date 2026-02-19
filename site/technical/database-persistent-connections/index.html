@@ -1798,7 +1798,7 @@
   <a href="#importante-multi-tenant-con-cambio-dinamico-de-bd" class="md-nav__link">
     <span class="md-ellipsis">
       
-        ⚠️ IMPORTANTE: Multi-Tenant con Cambio Dinámico de BD
+        IMPORTANTE: Multi-Tenant con Cambio Dinámico de BD
       
     </span>
   </a>
@@ -1821,7 +1821,7 @@
   <a href="#no-recomendado-para" class="md-nav__link">
     <span class="md-ellipsis">
       
-        ❌ NO Recomendado Para:
+        NO Recomendado Para:
       
     </span>
   </a>
@@ -1832,7 +1832,7 @@
   <a href="#recomendado-para" class="md-nav__link">
     <span class="md-ellipsis">
       
-        ✅ Recomendado Para:
+        Recomendado Para:
       
     </span>
   </a>
@@ -1843,7 +1843,7 @@
   <a href="#usar-con-precaucion" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🟡 Usar con Precaución:
+        Usar con Precaución:
       
     </span>
   </a>
@@ -2060,18 +2060,18 @@
 </code></pre></div>
 
 <h2 id="ventajas">Ventajas</h2>
-<p>✅ <strong>Mejor Rendimiento</strong>: Reduce overhead de crear/destruir conexiones
-✅ <strong>Menor Latencia</strong>: Conexiones ya establecidas = respuestas más rápidas
-✅ <strong>Reducción de Carga</strong>: Menos trabajo para el servidor de BD
-✅ <strong>Ideal para Alto Tráfico</strong>: Aplicaciones con muchas peticiones concurrentes</p>
+<p><strong>Mejor Rendimiento</strong>: Reduce overhead de crear/destruir conexiones
+ <strong>Menor Latencia</strong>: Conexiones ya establecidas = respuestas más rápidas
+ <strong>Reducción de Carga</strong>: Menos trabajo para el servidor de BD
+ <strong>Ideal para Alto Tráfico</strong>: Aplicaciones con muchas peticiones concurrentes</p>
 <h2 id="desventajas-y-consideraciones">Desventajas y Consideraciones</h2>
-<p>⚠️ <strong>Transacciones No Cerradas</strong>: Pueden persistir entre peticiones
-⚠️ <strong>Locks de BD</strong>: Locks no liberados pueden causar problemas
-⚠️ <strong>Cambios de Estado</strong>: Variables de sesión de MySQL persisten
-⚠️ <strong>Consumo de Memoria</strong>: Conexiones abiertas consumen recursos
-⚠️ <strong>Pool Limitado</strong>: El servidor tiene un límite de conexiones</p>
+<p><strong>Transacciones No Cerradas</strong>: Pueden persistir entre peticiones
+ <strong>Locks de BD</strong>: Locks no liberados pueden causar problemas
+ <strong>Cambios de Estado</strong>: Variables de sesión de MySQL persisten
+ <strong>Consumo de Memoria</strong>: Conexiones abiertas consumen recursos
+ <strong>Pool Limitado</strong>: El servidor tiene un límite de conexiones</p>
 <h2 id="consideraciones-para-docucenter-multi-tenant">Consideraciones para DocuCenter Multi-Tenant</h2>
-<h3 id="importante-multi-tenant-con-cambio-dinamico-de-bd">⚠️ IMPORTANTE: Multi-Tenant con Cambio Dinámico de BD</h3>
+<h3 id="importante-multi-tenant-con-cambio-dinamico-de-bd">IMPORTANTE: Multi-Tenant con Cambio Dinámico de BD</h3>
 <p>DocuCenter usa un patrón multi-tenant donde <strong>cambia frecuentemente de base de datos</strong> mediante:</p>
 <div class="codehilite"><pre><span></span><code><span class="x">DB::connection()-&gt;useDatabase($organization-&gt;database);</span>
 </code></pre></div>
@@ -2089,19 +2089,19 @@
 </li>
 </ol>
 <h3 id="recomendaciones-para-docucenter">Recomendaciones para DocuCenter</h3>
-<h4 id="no-recomendado-para">❌ NO Recomendado Para:</h4>
+<h4 id="no-recomendado-para">NO Recomendado Para:</h4>
 <ul>
 <li><strong>Entornos de producción multi-tenant</strong> (riesgo de contaminación de datos)</li>
 <li><strong>Aplicaciones que cambian frecuentemente de BD</strong> (como DocuCenter)</li>
 <li><strong>Sistemas con muchas organizaciones activas simultáneamente</strong></li>
 </ul>
-<h4 id="recomendado-para">✅ Recomendado Para:</h4>
+<h4 id="recomendado-para">Recomendado Para:</h4>
 <ul>
 <li><strong>Ambientes de desarrollo/testing</strong> con una sola organización</li>
 <li><strong>Jobs de consola</strong> que procesan una sola BD (ej: <code>company:sync</code> con <code>--organization</code>)</li>
 <li><strong>APIs dedicadas</strong> que no cambian de BD</li>
 </ul>
-<h4 id="usar-con-precaucion">🟡 Usar con Precaución:</h4>
+<h4 id="usar-con-precaucion">Usar con Precaución:</h4>
 <ul>
 <li><strong>Production</strong>: Solo si se implementan controles estrictos</li>
 <li><strong>Monitoreo constante</strong> de conexiones y estado de BD</li>
@@ -2227,15 +2227,15 @@ SHOW<span class="w"> </span>STATUS<span class="w"> </span>WHERE<span class="w"> 
 <h2 id="recomendacion-final-para-docucenter">Recomendación Final para DocuCenter</h2>
 <p><strong>Mantener <code>DB_PERSISTENT=false</code> (deshabilitado) por defecto</strong> debido a:</p>
 <ol>
-<li>❌ Arquitectura multi-tenant con cambios frecuentes de BD</li>
-<li>❌ Riesgo de contaminación de datos entre organizaciones</li>
-<li>❌ Complejidad de mantener estado consistente</li>
-<li>❌ Jobs que procesan múltiples organizaciones (<code>company:sync --all</code>)</li>
+<li>Arquitectura multi-tenant con cambios frecuentes de BD</li>
+<li>Riesgo de contaminación de datos entre organizaciones</li>
+<li>Complejidad de mantener estado consistente</li>
+<li>Jobs que procesan múltiples organizaciones (<code>company:sync --all</code>)</li>
 </ol>
 <p><strong>Considerar habilitar solo en casos específicos:</strong>
-- ✅ Entornos de desarrollo con una sola organización
-- ✅ Servidores dedicados a procesamiento batch de una sola BD
-- ✅ APIs aisladas sin cambio de BD</p>
+-  Entornos de desarrollo con una sola organización
+-  Servidores dedicados a procesamiento batch de una sola BD
+-  APIs aisladas sin cambio de BD</p>
 <h2 id="referencias">Referencias</h2>
 <ul>
 <li><a href="https://www.php.net/manual/en/pdo.connections.php">PDO Persistent Connections</a></li>

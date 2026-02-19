@@ -27,22 +27,22 @@ La configuración se encuentra en [config/database.php](../../config/database.ph
 
 ## Ventajas
 
-✅ **Mejor Rendimiento**: Reduce overhead de crear/destruir conexiones
-✅ **Menor Latencia**: Conexiones ya establecidas = respuestas más rápidas
-✅ **Reducción de Carga**: Menos trabajo para el servidor de BD
-✅ **Ideal para Alto Tráfico**: Aplicaciones con muchas peticiones concurrentes
+ **Mejor Rendimiento**: Reduce overhead de crear/destruir conexiones
+ **Menor Latencia**: Conexiones ya establecidas = respuestas más rápidas
+ **Reducción de Carga**: Menos trabajo para el servidor de BD
+ **Ideal para Alto Tráfico**: Aplicaciones con muchas peticiones concurrentes
 
 ## Desventajas y Consideraciones
 
-⚠️ **Transacciones No Cerradas**: Pueden persistir entre peticiones
-⚠️ **Locks de BD**: Locks no liberados pueden causar problemas
-⚠️ **Cambios de Estado**: Variables de sesión de MySQL persisten
-⚠️ **Consumo de Memoria**: Conexiones abiertas consumen recursos
-⚠️ **Pool Limitado**: El servidor tiene un límite de conexiones
+ **Transacciones No Cerradas**: Pueden persistir entre peticiones
+ **Locks de BD**: Locks no liberados pueden causar problemas
+ **Cambios de Estado**: Variables de sesión de MySQL persisten
+ **Consumo de Memoria**: Conexiones abiertas consumen recursos
+ **Pool Limitado**: El servidor tiene un límite de conexiones
 
 ## Consideraciones para DocuCenter Multi-Tenant
 
-### ⚠️ IMPORTANTE: Multi-Tenant con Cambio Dinámico de BD
+###  IMPORTANTE: Multi-Tenant con Cambio Dinámico de BD
 
 DocuCenter usa un patrón multi-tenant donde **cambia frecuentemente de base de datos** mediante:
 
@@ -60,17 +60,17 @@ DB::connection()->useDatabase($organization->database);
 
 ### Recomendaciones para DocuCenter
 
-#### ❌ NO Recomendado Para:
+####  NO Recomendado Para:
 - **Entornos de producción multi-tenant** (riesgo de contaminación de datos)
 - **Aplicaciones que cambian frecuentemente de BD** (como DocuCenter)
 - **Sistemas con muchas organizaciones activas simultáneamente**
 
-#### ✅ Recomendado Para:
+####  Recomendado Para:
 - **Ambientes de desarrollo/testing** con una sola organización
 - **Jobs de consola** que procesan una sola BD (ej: `company:sync` con `--organization`)
 - **APIs dedicadas** que no cambian de BD
 
-#### 🟡 Usar con Precaución:
+####  Usar con Precaución:
 - **Production**: Solo si se implementan controles estrictos
 - **Monitoreo constante** de conexiones y estado de BD
 - **Testing exhaustivo** de cambios de BD entre organizaciones
@@ -217,15 +217,15 @@ ORDER BY TIME DESC;
 
 **Mantener `DB_PERSISTENT=false` (deshabilitado) por defecto** debido a:
 
-1. ❌ Arquitectura multi-tenant con cambios frecuentes de BD
-2. ❌ Riesgo de contaminación de datos entre organizaciones
-3. ❌ Complejidad de mantener estado consistente
-4. ❌ Jobs que procesan múltiples organizaciones (`company:sync --all`)
+1.  Arquitectura multi-tenant con cambios frecuentes de BD
+2.  Riesgo de contaminación de datos entre organizaciones
+3.  Complejidad de mantener estado consistente
+4.  Jobs que procesan múltiples organizaciones (`company:sync --all`)
 
 **Considerar habilitar solo en casos específicos:**
-- ✅ Entornos de desarrollo con una sola organización
-- ✅ Servidores dedicados a procesamiento batch de una sola BD
-- ✅ APIs aisladas sin cambio de BD
+-  Entornos de desarrollo con una sola organización
+-  Servidores dedicados a procesamiento batch de una sola BD
+-  APIs aisladas sin cambio de BD
 
 ## Referencias
 

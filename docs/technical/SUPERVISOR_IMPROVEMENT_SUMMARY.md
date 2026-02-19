@@ -198,28 +198,28 @@ crontab -e
 
 ## Ventajas de la Nueva Configuración
 
-### ✅ Optimización de Recursos
+###  Optimización de Recursos
 - **Separación por prioridad**: Jobs críticos procesados primero
 - **Memoria diferenciada**: Batch tiene más memoria (1GB vs 512MB)
 - **Timeouts ajustados**: Batch permite hasta 2 horas
 - **Max-jobs limit**: Workers se reinician después de 50 jobs (30 para batch) previniendo memory leaks
 
-### ✅ Mejor Manejo de Colas
+###  Mejor Manejo de Colas
 - **Sleep optimizado**: 1s para high, 3s para default, 5s para batch
 - **Backoff exponencial**: Reintentos más inteligentes
 - **Prioridades**: High inicia primero, batch último
 
-### ✅ Gestión de Logs Mejorada
+###  Gestión de Logs Mejorada
 - **Rotación automática**: No se llenan los discos
 - **Logs separados**: Troubleshooting más fácil
 - **Errores independientes**: stdout/stderr separados
 
-### ✅ Escalabilidad
+###  Escalabilidad
 - **Fácil ajuste**: Cambiar `numprocs` en archivos `.conf`
 - **Dos modos**: Full (7 workers) o Light (4 workers)
 - **Por grupo**: Escalar solo lo necesario
 
-### ✅  Herramientas de Gestión
+###   Herramientas de Gestión
 - **Monitoreo visual**: Script con emojis y colores
 - **Instalación automática**: Con backup y verificación
 - **Documentación completa**: 390+ líneas
@@ -252,12 +252,12 @@ crontab -e
 - Ajustar `numprocs` según carga real
 
 ### En General
-- ✅ Monitorear uso de memoria semanalmente
-- ✅ Revisar jobs fallidos diariamente
-- ✅ Ajustar sleep/timeout según patrones de uso
-- ✅ Configurar alertas para workers caídos
-- ❌ No exceder capacidad RAM del servidor
-- ❌ No ignorar logs de error
+-  Monitorear uso de memoria semanalmente
+-  Revisar jobs fallidos diariamente
+-  Ajustar sleep/timeout según patrones de uso
+-  Configurar alertas para workers caídos
+-  No exceder capacidad RAM del servidor
+-  No ignorar logs de error
 
 ## Troubleshooting
 
@@ -305,8 +305,8 @@ Ver [docs/technical/supervisor-queue-workers.md](docs/technical/supervisor-queue
 
 ## Próximos Pasos
 
-1. ✅ Instalar configuración (light o full según servidor)
-2. ✅ Monitorear durante 24-48 horas
+1.  Instalar configuración (light o full según servidor)
+2.  Monitorear durante 24-48 horas
 3. ⏳ Ajustar numprocs si es necesario
 4. ⏳ Configurar cron para monitoreo automático
 5. ⏳ Implementar alertas (Slack, email, etc.)

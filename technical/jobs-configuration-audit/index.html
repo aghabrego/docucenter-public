@@ -1736,12 +1736,12 @@
   <a href="#prioridad-critica-jobs-con-whiletrue" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🚨 Prioridad CRÍTICA: Jobs con while(true)
+        Prioridad CRÍTICA: Jobs con while(true)
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="🚨 Prioridad CRÍTICA: Jobs con while(true)">
+    <nav class="md-nav" aria-label="Prioridad CRÍTICA: Jobs con while(true)">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1775,7 +1775,7 @@
   <a href="#jobs-sin-tries-43-jobs" class="md-nav__link">
     <span class="md-ellipsis">
       
-        📋 Jobs Sin $tries (43 jobs)
+        Jobs Sin $tries (43 jobs)
       
     </span>
   </a>
@@ -1797,7 +1797,7 @@
   <a href="#jobs-sin-maxexceptions-67-jobs" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🛡️ Jobs Sin $maxExceptions (67 jobs)
+        ️ Jobs Sin $maxExceptions (67 jobs)
       
     </span>
   </a>
@@ -1808,12 +1808,12 @@
   <a href="#plan-de-accion-recomendado" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🎯 Plan de Acción Recomendado
+        Plan de Acción Recomendado
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="🎯 Plan de Acción Recomendado">
+    <nav class="md-nav" aria-label="Plan de Acción Recomendado">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1858,7 +1858,7 @@
   <a href="#template-de-configuracion-recomendada" class="md-nav__link">
     <span class="md-ellipsis">
       
-        📝 Template de Configuración Recomendada
+        Template de Configuración Recomendada
       
     </span>
   </a>
@@ -1869,7 +1869,7 @@
   <a href="#script-de-verificacion" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🔍 Script de Verificación
+        Script de Verificación
       
     </span>
   </a>
@@ -1880,7 +1880,7 @@
   <a href="#metricas-de-progreso" class="md-nav__link">
     <span class="md-ellipsis">
       
-        📊 Métricas de Progreso
+        Métricas de Progreso
       
     </span>
   </a>
@@ -1914,9 +1914,9 @@
 <hr />
 <h2 id="resumen-ejecutivo">Resumen Ejecutivo</h2>
 <p>De los 71 jobs analizados en el proyecto DocuCenter:
-- ✅ <strong>1 job (1.4%)</strong> tiene configuración completa de límites
-- ❌ <strong>70 jobs (98.6%)</strong> necesitan mejoras de configuración
-- 🚨 <strong>2 jobs (2.8%)</strong> tienen bucles <code>while(true)</code> potencialmente peligrosos</p>
+-  <strong>1 job (1.4%)</strong> tiene configuración completa de límites
+-  <strong>70 jobs (98.6%)</strong> necesitan mejoras de configuración
+-  <strong>2 jobs (2.8%)</strong> tienen bucles <code>while(true)</code> potencialmente peligrosos</p>
 <h2 id="metricas-detalladas">Métricas Detalladas</h2>
 <table>
 <thead>
@@ -1945,7 +1945,7 @@
 </tbody>
 </table>
 <hr />
-<h2 id="prioridad-critica-jobs-con-whiletrue">🚨 Prioridad CRÍTICA: Jobs con <code>while(true)</code></h2>
+<h2 id="prioridad-critica-jobs-con-whiletrue">Prioridad CRÍTICA: Jobs con <code>while(true)</code></h2>
 <p>Estos jobs tienen bucles infinitos que pueden causar problemas de rendimiento severos:</p>
 <h3 id="1-appjobsbooqablecustomerjobphp">1. app/Jobs/Booqable/CustomerJob.php</h3>
 <ul>
@@ -1960,7 +1960,7 @@
 <li><strong>Acción</strong>: Implementar límite de iteraciones + agregar timeouts</li>
 </ul>
 <hr />
-<h2 id="jobs-sin-tries-43-jobs">📋 Jobs Sin <code>$tries</code> (43 jobs)</h2>
+<h2 id="jobs-sin-tries-43-jobs">Jobs Sin <code>$tries</code> (43 jobs)</h2>
 <p>Sin límite de reintentos, estos jobs pueden reintentar indefinidamente:</p>
 <details>
 <summary>Ver lista completa (43 jobs)</summary>
@@ -2075,7 +2075,7 @@
 - Jobs normales (5-15 min): <code>public $timeout = 900;</code>
 - Jobs largos (15-30 min): <code>public $timeout = 1800;</code></p>
 <hr />
-<h2 id="jobs-sin-maxexceptions-67-jobs">🛡️ Jobs Sin <code>$maxExceptions</code> (67 jobs)</h2>
+<h2 id="jobs-sin-maxexceptions-67-jobs">️ Jobs Sin <code>$maxExceptions</code> (67 jobs)</h2>
 <p>Sin límite de excepciones, estos jobs pueden fallar repetidamente consumiendo recursos:</p>
 <details>
 <summary>Ver lista completa (67 jobs)</summary>
@@ -2152,10 +2152,10 @@
 
 <p><strong>Recomendación</strong>: Agregar <code>public $maxExceptions = 3;</code> a todos estos jobs.</p>
 <hr />
-<h2 id="plan-de-accion-recomendado">🎯 Plan de Acción Recomendado</h2>
+<h2 id="plan-de-accion-recomendado">Plan de Acción Recomendado</h2>
 <h3 id="fase-1-urgente-esta-semana">Fase 1: URGENTE (Esta semana)</h3>
 <ol>
-<li>✅ <strong>Arreglar jobs con <code>while(true)</code></strong></li>
+<li><strong>Arreglar jobs con <code>while(true)</code></strong></li>
 <li>[x] app/Jobs/Pac/DownloadPacFileJob.php ✓ (Ya completado)</li>
 <li>[ ] app/Jobs/Booqable/CustomerJob.php</li>
 <li>[ ] app/Jobs/CleanOldTransactionsJob.php</li>
@@ -2187,7 +2187,7 @@
 <li><strong>Resto de jobs</strong> (según prioridad de uso)</li>
 </ol>
 <hr />
-<h2 id="template-de-configuracion-recomendada">📝 Template de Configuración Recomendada</h2>
+<h2 id="template-de-configuracion-recomendada">Template de Configuración Recomendada</h2>
 <div class="codehilite"><pre><span></span><code><span class="x">class MiJob implements ShouldQueue</span>
 <span class="x">{</span>
 <span class="x">    use Batchable, Dispatchable, InteractsWithQueue, Queueable, SerializesModels;</span>
@@ -2242,13 +2242,13 @@
 </code></pre></div>
 
 <hr />
-<h2 id="script-de-verificacion">🔍 Script de Verificación</h2>
+<h2 id="script-de-verificacion">Script de Verificación</h2>
 <p>El script <code>/tmp/check_jobs_config.php</code> puede ejecutarse periódicamente para verificar el progreso:</p>
 <div class="codehilite"><pre><span></span><code>php<span class="w"> </span>/tmp/check_jobs_config.php
 </code></pre></div>
 
 <hr />
-<h2 id="metricas-de-progreso">📊 Métricas de Progreso</h2>
+<h2 id="metricas-de-progreso">Métricas de Progreso</h2>
 <table>
 <thead>
 <tr>

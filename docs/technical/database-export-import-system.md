@@ -353,15 +353,15 @@ php artisan word:export-data --legacy
 
 ## Ventajas del Sistema Mejorado
 
-✅ **Seguridad**: URLs firmadas criptográficamente
-✅ **Expiración**: Links temporales previenen accesos indefinidos
-✅ **Automático**: Limpieza automática de archivos antiguos
-✅ **Flexible**: Múltiples opciones de configuración
-✅ **Multi-Tenant**: Soporte completo para bases de datos específicas
-✅ **Compatible**: Modo legacy mantiene comportamiento anterior
-✅ **Informativo**: Detalles completos de archivo y expiración
-✅ **Interactivo**: Confirmación antes de sobrescribir datos
-✅ **Personalizable**: Nombres de archivo basados en BD específica
+ **Seguridad**: URLs firmadas criptográficamente
+ **Expiración**: Links temporales previenen accesos indefinidos
+ **Automático**: Limpieza automática de archivos antiguos
+ **Flexible**: Múltiples opciones de configuración
+ **Multi-Tenant**: Soporte completo para bases de datos específicas
+ **Compatible**: Modo legacy mantiene comportamiento anterior
+ **Informativo**: Detalles completos de archivo y expiración
+ **Interactivo**: Confirmación antes de sobrescribir datos
+ **Personalizable**: Nombres de archivo basados en BD específica
 
 ## Notas Técnicas
 
