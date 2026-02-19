@@ -1,0 +1,3420 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentación técnica y de usuario de DocuCenter - Sistema de facturación electrónica">
+      
+      
+        <meta name="author" content="aghabrego">
+      
+      
+        <link rel="canonical" href="https://aghabrego.github.io/docucenter-public/technical/panama-id-helper-analysis/">
+      
+      
+        <link rel="prev" href="../ruc-empresas-juridicas-analysis/">
+      
+      
+        <link rel="next" href="../listado-ruc-coverage-analysis/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="https://home.apconpanama.me/wp-content/uploads/2024/03/logo3.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Análisis del Método panamaID - Soporte para RUCs Gubernamentales - DocuCenter</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="light-blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#analisis-del-metodo-panamaid-soporte-para-rucs-gubernamentales" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="DocuCenter" class="md-header__button md-logo" aria-label="DocuCenter" data-md-component="logo">
+      
+  <img src="https://home.apconpanama.me/wp-content/uploads/2024/03/logo3.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            DocuCenter
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Análisis del Método panamaID - Soporte para RUCs Gubernamentales
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="light-blue"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/aghabrego/docucenter-public" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    aghabrego/docucenter-public
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Pestañas" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Inicio
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../api/" class="md-tabs__link">
+          
+  
+  
+  APIs
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../optimizations/" class="md-tabs__link">
+          
+  
+  
+  Optimizaciones
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+  Documentación Técnica
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../validations/" class="md-tabs__link">
+          
+  
+  
+  Validaciones
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="DocuCenter" class="md-nav__button md-logo" aria-label="DocuCenter" data-md-component="logo">
+      
+  <img src="https://home.apconpanama.me/wp-content/uploads/2024/03/logo3.png" alt="logo">
+
+    </a>
+    DocuCenter
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/aghabrego/docucenter-public" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    aghabrego/docucenter-public
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    APIs
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    APIs
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    APIs de DocuCenter
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Facturación Electrónica (FE)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Facturación Electrónica (FE)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/fe-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Facturación Electrónica (FE) - DocuCenter
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/acicloud-fe-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Facturación Electrónica - Integración ACICloud FE
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/document-emission-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Facturación Electrónica - Emisión de Documentos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/shopify-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Facturación Electrónica - Integración Shopify
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/lightspeed-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Facturación Electrónica - Integración Lightspeed
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/maxgym-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Facturación Electrónica - Integración Maxgym
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/meypar-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Facturación Electrónica - Integración Meypar
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/kart21-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Facturación Electrónica - Integración Kart21
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sage ACICloud
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Sage ACICloud
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/customers-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Sage ACICloud - Módulo Clientes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/products-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Productos - Sage ACICloud
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/sales-orders-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Sage ACICloud - Módulo Órdenes de Venta
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/purchases-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Compras - Sage ACICloud
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/payments-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Pagos y Créditos - Sage ACICloud
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/inventory-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Inventario - Sage ACICloud
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/jobs-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Trabajos/Jobs - Sage ACICloud
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Organizaciones
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Organizaciones
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/organizations/organizations-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API de Organizaciones
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Optimizaciones
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Optimizaciones
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optimizations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Optimizaciones - DocuCenter
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Performance
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Performance
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optimizations/customer-supplier-optimizations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Optimizaciones para el manejo de muchos clientes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optimizations/mysql-optimization-circuit-breaker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Optimización MySQL 8.0 y Circuit Breaker para DocuCenter
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Campos y Estructuras
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Campos y Estructuras
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optimizations/dcantcodint-field-expansion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Expansión del Campo dCantCodInt en fe_detail
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Documentación Técnica
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Documentación Técnica
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Soluciones Técnicas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pagos y Cálculos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Pagos y Cálculos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../payment-calculation-fix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Análisis de Discrepancias en Cálculo de Pagos - Facturación Electrónica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../solucion-sincronizacion-pagos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Solución Final: Sincronización Completa de Pagos en Facturación Electrónica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validación RUC Panamá
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Validación RUC Panamá
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ruc-personas-naturales-completo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Formatos de RUC para Personas Naturales en Panamá - Análisis Completo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ruc-empresas-juridicas-analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Análisis de Formatos de RUC para Empresas Jurídicas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Análisis del Método panamaID - Soporte para RUCs Gubernamentales
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Análisis del Método panamaID - Soporte para RUCs Gubernamentales
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#estado-actual" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📋 Estado Actual
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📋 Estado Actual">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#metodo-existente-lineas-798-822" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Método Existente (líneas 798-822)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#problemas-detectados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ❌ Problemas Detectados
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="❌ Problemas Detectados">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-expresion-onlyfirst-inconsistencia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Expresión $onlyFirst - Inconsistencia
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-no-soporta-rucs-gubernamentales-4-partes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. NO soporta RUCs Gubernamentales (4 partes)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-sufijos-gubernamentales-faltantes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Sufijos Gubernamentales Faltantes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#analisis-de-expresiones-regulares" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📊 Análisis de Expresiones Regulares
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📊 Análisis de Expresiones Regulares">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#expresion-correcta-para-provincias-1-13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Expresión Correcta para Provincias 1-13
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#propuesta-de-mejora" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🎯 Propuesta de Mejora
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🎯 Propuesta de Mejora">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#nuevos-patrones-a-agregar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Nuevos Patrones a Agregar
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Nuevos Patrones a Agregar">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-patron-para-ruc-gubernamental-4-partes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Patrón para RUC Gubernamental (4 partes)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-patron-para-solo-provincia-tipo-gubernamental" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Patrón para Solo Provincia + Tipo Gubernamental
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-patron-para-provincia-tipo-componente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Patrón para Provincia + Tipo + Componente
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#expresiones-mejoradas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔧 Expresiones Mejoradas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔧 Expresiones Mejoradas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#expresion-onlyfirst-corregida" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Expresión $onlyFirst - CORREGIDA
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#expresion-bookandtome-mejorada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Expresión $bookAndTome - MEJORADA
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#expresion-fullid-mejorada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Expresión $fullId - MEJORADA
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#metodo-completo-propuesto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📝 Método Completo Propuesto
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#casos-de-prueba" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🧪 Casos de Prueba
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🧪 Casos de Prueba">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cedulas-estandar-3-partes-deben-seguir-funcionando" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cédulas Estándar (3 partes) - Deben seguir funcionando
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rucs-gubernamentales-4-partes-nuevo-soporte" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RUCs Gubernamentales (4 partes) - NUEVO SOPORTE
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validaciones-parciales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validaciones Parciales
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#casos-invalidos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Casos Inválidos
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#matriz-de-compatibilidad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📊 Matriz de Compatibilidad
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#consideraciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⚠️ Consideraciones
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="⚠️ Consideraciones">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-orden-de-validacion-en-regex" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Orden de Validación en Regex
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-grupos-de-captura" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Grupos de Captura
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-case-insensitive" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Case-Insensitive
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-delimitador-personalizable" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Delimitador Personalizable
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#proximos-pasos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🎯 Próximos Pasos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📚 Referencias
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📚 Referencias">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#documentos-relacionados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Documentos Relacionados
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#codigo-relacionado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Código Relacionado
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#patrones-de-provincia-consistentes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Patrones de Provincia Consistentes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../listado-ruc-coverage-analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Análisis de Cobertura: ListadoRuc.pdf vs Documentación de Empresas Jurídicas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ruc-validation-coverage-analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Análisis de Cobertura de Validación de RUCs - Comparación con Documentación Oficial
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validaciones
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Validaciones
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../validations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validaciones - DocuCenter
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Documentos Fiscales
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Documentos Fiscales
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../validations/createSale-ruc-validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validación de RUC en CreateSaleMaxgymRequest
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../validations/maxgym-ruc-validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validación de RUC en MaxgymService
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../validations/acicloud-ruc-gubernamental-support/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Soporte de RUC Gubernamental en APIs de ACI Cloud
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#estado-actual" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📋 Estado Actual
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📋 Estado Actual">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#metodo-existente-lineas-798-822" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Método Existente (líneas 798-822)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#problemas-detectados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ❌ Problemas Detectados
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="❌ Problemas Detectados">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-expresion-onlyfirst-inconsistencia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Expresión $onlyFirst - Inconsistencia
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-no-soporta-rucs-gubernamentales-4-partes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. NO soporta RUCs Gubernamentales (4 partes)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-sufijos-gubernamentales-faltantes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Sufijos Gubernamentales Faltantes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#analisis-de-expresiones-regulares" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📊 Análisis de Expresiones Regulares
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📊 Análisis de Expresiones Regulares">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#expresion-correcta-para-provincias-1-13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Expresión Correcta para Provincias 1-13
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#propuesta-de-mejora" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🎯 Propuesta de Mejora
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🎯 Propuesta de Mejora">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#nuevos-patrones-a-agregar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Nuevos Patrones a Agregar
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Nuevos Patrones a Agregar">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-patron-para-ruc-gubernamental-4-partes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Patrón para RUC Gubernamental (4 partes)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-patron-para-solo-provincia-tipo-gubernamental" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Patrón para Solo Provincia + Tipo Gubernamental
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-patron-para-provincia-tipo-componente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Patrón para Provincia + Tipo + Componente
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#expresiones-mejoradas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🔧 Expresiones Mejoradas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔧 Expresiones Mejoradas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#expresion-onlyfirst-corregida" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Expresión $onlyFirst - CORREGIDA
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#expresion-bookandtome-mejorada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Expresión $bookAndTome - MEJORADA
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#expresion-fullid-mejorada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Expresión $fullId - MEJORADA
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#metodo-completo-propuesto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📝 Método Completo Propuesto
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#casos-de-prueba" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🧪 Casos de Prueba
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🧪 Casos de Prueba">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cedulas-estandar-3-partes-deben-seguir-funcionando" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cédulas Estándar (3 partes) - Deben seguir funcionando
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rucs-gubernamentales-4-partes-nuevo-soporte" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RUCs Gubernamentales (4 partes) - NUEVO SOPORTE
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validaciones-parciales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validaciones Parciales
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#casos-invalidos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Casos Inválidos
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#matriz-de-compatibilidad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📊 Matriz de Compatibilidad
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#consideraciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⚠️ Consideraciones
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="⚠️ Consideraciones">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-orden-de-validacion-en-regex" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Orden de Validación en Regex
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-grupos-de-captura" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Grupos de Captura
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-case-insensitive" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Case-Insensitive
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-delimitador-personalizable" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Delimitador Personalizable
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#proximos-pasos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🎯 Próximos Pasos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📚 Referencias
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📚 Referencias">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#documentos-relacionados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Documentos Relacionados
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#codigo-relacionado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Código Relacionado
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#patrones-de-provincia-consistentes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Patrones de Provincia Consistentes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="analisis-del-metodo-panamaid-soporte-para-rucs-gubernamentales">Análisis del Método panamaID - Soporte para RUCs Gubernamentales<a class="headerlink" href="#analisis-del-metodo-panamaid-soporte-para-rucs-gubernamentales" title="Permanent link">&para;</a></h1>
+<p><strong>Fecha:</strong> 2026-02-19<br />
+<strong>Archivo:</strong> <code>vendor/weirdo/helper/src/Helper/Traits/HelperArray.php</code><br />
+<strong>Método:</strong> <code>panamaID()</code><br />
+<strong>Objetivo:</strong> Agregar soporte para RUCs gubernamentales de 4 partes (ej: <code>4-NT-1-8346</code>)</p>
+<hr />
+<h2 id="estado-actual">📋 Estado Actual<a class="headerlink" href="#estado-actual" title="Permanent link">&para;</a></h2>
+<h3 id="metodo-existente-lineas-798-822">Método Existente (líneas 798-822)<a class="headerlink" href="#metodo-existente-lineas-798-822" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="x">/**</span>
+<span class="x"> * Accepted patterns:</span>
+<span class="x"> * - Regular (provincia-libro-tomo). Ej: 1-1234-12345</span>
+<span class="x"> * - Panameño nacido en el extranjero (PE-libro-tomo). Ej: PE-1234-12345</span>
+<span class="x"> * - Extranjero con cédula (E-libro-tomo). Ej: E-1234-123456</span>
+<span class="x"> * - Naturalizado (N-libro-tomo). Ej: N-1234-12345</span>
+<span class="x"> * - Panameños nacidos antes de la vigencia (provinciaAV-libro-tomo). Ej: 1AV-1234-12345</span>
+<span class="x"> * - Población indigena (provinciaPI-libro-tomo). Ej: 1PI-1234-12345</span>
+<span class="x"> *</span>
+<span class="x"> * @param string $id</span>
+<span class="x"> * @param int $tomo</span>
+<span class="x"> * @param int $folio</span>
+<span class="x"> * @param string $delimiter</span>
+<span class="x"> * @return array</span>
+<span class="x"> */</span>
+<span class="x">public function panamaID($id, $tomo = 4, $folio = 6, $delimiter = &#39;&#39;)</span>
+<span class="x">{</span>
+<span class="x">    $onlyFirst = &quot;^(?:PE|E|N|[23456789]|[23456789](?:A|P)?|1[0123]?|1[0123]?(?:A|P)?)$|^(?:PE|E|N|[23456789]|[23456789](?:AV|PI)?|1[0123]?|1[0123]?(?:AV|PI)?)$delimiter?$&quot;;</span>
+<span class="x">    $bookAndTome = &quot;^(?:PE|E|N|[23456789](?:AV|PI)?|1[0123]?(?:AV|PI)?)$delimiter(?:\d{1,$tomo})$delimiter?$&quot;;</span>
+<span class="x">    $fullId = &quot;^(PE|E|N|[23456789](?:AV|PI)?|1[0123]?(?:AV|PI)?)$delimiter(\d{1,$tomo})$delimiter(\d{1,$folio})&quot;;</span>
+
+<span class="x">    preg_match(&quot;/^P$|{$onlyFirst}|{$bookAndTome}|{$fullId}/i&quot;, $id, $matches);</span>
+
+<span class="x">    return $matches;</span>
+<span class="x">}</span>
+</code></pre></div>
+<hr />
+<h2 id="problemas-detectados">❌ Problemas Detectados<a class="headerlink" href="#problemas-detectados" title="Permanent link">&para;</a></h2>
+<h3 id="1-expresion-onlyfirst-inconsistencia">1. Expresión <code>$onlyFirst</code> - Inconsistencia<a class="headerlink" href="#1-expresion-onlyfirst-inconsistencia" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="x">// Línea 815 - Tiene DOS patrones diferentes repetidos:</span>
+<span class="x">&quot;^(?:PE|E|N|[23456789]|[23456789](?:A|P)?|...&quot;  // ❌ Patrón 1: (?:A|P)? incompleto</span>
+<span class="x">&quot;|^(?:PE|E|N|[23456789]|[23456789](?:AV|PI)?|...&quot; // ✅ Patrón 2: (?:AV|PI)? correcto</span>
+</code></pre></div>
+<p><strong>Problema:</strong> Duplicación innecesaria y patrón incorrecto <code>(?:A|P)?</code> que debería ser <code>(?:AV|PI)?</code></p>
+<h3 id="2-no-soporta-rucs-gubernamentales-4-partes">2. NO soporta RUCs Gubernamentales (4 partes)<a class="headerlink" href="#2-no-soporta-rucs-gubernamentales-4-partes" title="Permanent link">&para;</a></h3>
+<p><strong>Formato actual soportado (3 partes):</strong>
+<div class="highlight"><pre><span></span><code>provincia-libro-tomo
+8-123-456 ✅
+PE-123-456 ✅
+8AV-123-456 ✅
+</code></pre></div></p>
+<p><strong>Formato gubernamental NO soportado (4 partes):</strong>
+<div class="highlight"><pre><span></span><code>provincia-TIPO-componente-secuencia
+4-NT-1-8346 ❌
+8-PA-2-1234 ❌
+1-GO-3-5678 ❌
+</code></pre></div></p>
+<h3 id="3-sufijos-gubernamentales-faltantes">3. Sufijos Gubernamentales Faltantes<a class="headerlink" href="#3-sufijos-gubernamentales-faltantes" title="Permanent link">&para;</a></h3>
+<p><strong>Actualmente soportados:</strong>
+- ✅ <code>AV</code> (Antes de la Vigencia)
+- ✅ <code>PI</code> (Población Indígena)</p>
+<p><strong>NO soportados:</strong>
+- ❌ <code>NT</code> (No Tributario)
+- ❌ <code>PA</code> (Panamá especial)
+- ❌ <code>GO</code> (Gobierno)
+- ❌ <code>ED</code> (Educación)
+- ❌ <code>SA</code> (Salud)</p>
+<hr />
+<h2 id="analisis-de-expresiones-regulares">📊 Análisis de Expresiones Regulares<a class="headerlink" href="#analisis-de-expresiones-regulares" title="Permanent link">&para;</a></h2>
+<h3 id="expresion-correcta-para-provincias-1-13">Expresión Correcta para Provincias 1-13<a class="headerlink" href="#expresion-correcta-para-provincias-1-13" title="Permanent link">&para;</a></h3>
+<p><strong>Patrón actual (problemático):</strong>
+<div class="highlight"><pre><span></span><code>[23456789]|1[0123]?
+</code></pre></div></p>
+<p><strong>Problemas:</strong>
+- No es consistente con el usado en <code>ACIcloudService::determineRucType()</code>
+- Puede generar confusión</p>
+<p><strong>Patrón correcto (usado en ACIcloudService):</strong>
+<div class="highlight"><pre><span></span><code>1[0123]?|[23456789]
+</code></pre></div></p>
+<p><strong>Explicación:</strong>
+- <code>1[0123]?</code> → Captura: 1, 10, 11, 12, 13
+- <code>[23456789]</code> → Captura: 2, 3, 4, 5, 6, 7, 8, 9</p>
+<hr />
+<h2 id="propuesta-de-mejora">🎯 Propuesta de Mejora<a class="headerlink" href="#propuesta-de-mejora" title="Permanent link">&para;</a></h2>
+<h3 id="nuevos-patrones-a-agregar">Nuevos Patrones a Agregar<a class="headerlink" href="#nuevos-patrones-a-agregar" title="Permanent link">&para;</a></h3>
+<h4 id="1-patron-para-ruc-gubernamental-4-partes">1. Patrón para RUC Gubernamental (4 partes)<a class="headerlink" href="#1-patron-para-ruc-gubernamental-4-partes" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="x">// Formato: provincia-TIPO-componente-secuencia</span>
+<span class="x">// Ejemplo: 4-NT-1-8346</span>
+<span class="x">$governmentalId = &quot;^(1[0123]?|[23456789])$delimiter(NT|PA|GO|ED|SA)$delimiter(\d{1,$tomo})$delimiter(\d{1,$folio})&quot;;</span>
+</code></pre></div>
+<p><strong>Captura:</strong>
+- <code>$matches[1]</code> → Provincia (1-13)
+- <code>$matches[2]</code> → Tipo gubernamental (NT, PA, GO, ED, SA)
+- <code>$matches[3]</code> → Componente (hasta 4 dígitos por defecto)
+- <code>$matches[4]</code> → Secuencia (hasta 6 dígitos por defecto)</p>
+<h4 id="2-patron-para-solo-provincia-tipo-gubernamental">2. Patrón para Solo Provincia + Tipo Gubernamental<a class="headerlink" href="#2-patron-para-solo-provincia-tipo-gubernamental" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="x">// Validación parcial: provincia-TIPO</span>
+<span class="x">// Ejemplo: 4-NT</span>
+<span class="x">$governmentalPrefix = &quot;^(1[0123]?|[23456789])$delimiter(NT|PA|GO|ED|SA)$delimiter?$&quot;;</span>
+</code></pre></div>
+<h4 id="3-patron-para-provincia-tipo-componente">3. Patrón para Provincia + Tipo + Componente<a class="headerlink" href="#3-patron-para-provincia-tipo-componente" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="x">// Validación parcial: provincia-TIPO-componente</span>
+<span class="x">// Ejemplo: 4-NT-1</span>
+<span class="x">$governmentalPartial = &quot;^(1[0123]?|[23456789])$delimiter(NT|PA|GO|ED|SA)$delimiter(\d{1,$tomo})$delimiter?$&quot;;</span>
+</code></pre></div>
+<hr />
+<h2 id="expresiones-mejoradas">🔧 Expresiones Mejoradas<a class="headerlink" href="#expresiones-mejoradas" title="Permanent link">&para;</a></h2>
+<h3 id="expresion-onlyfirst-corregida">Expresión <code>$onlyFirst</code> - CORREGIDA<a class="headerlink" href="#expresion-onlyfirst-corregida" title="Permanent link">&para;</a></h3>
+<p><strong>Antes:</strong>
+<div class="highlight"><pre><span></span><code><span class="x">$onlyFirst = &quot;^(?:PE|E|N|[23456789]|[23456789](?:A|P)?|1[0123]?|1[0123]?(?:A|P)?)$|^(?:PE|E|N|[23456789]|[23456789](?:AV|PI)?|1[0123]?|1[0123]?(?:AV|PI)?)$delimiter?$&quot;;</span>
+</code></pre></div></p>
+<p><strong>Después (simplificada y corregida):</strong>
+<div class="highlight"><pre><span></span><code><span class="x">$onlyFirst = &quot;^(?:PE|E|N|1[0123]?(?:AV|PI)?|[23456789](?:AV|PI)?)$delimiter?$&quot;;</span>
+</code></pre></div></p>
+<p><strong>Cambios:</strong>
+- ✅ Eliminada duplicación innecesaria
+- ✅ Corregido patrón <code>(?:A|P)?</code> a <code>(?:AV|PI)?</code>
+- ✅ Reordenado para consistencia (provincias 1-13 primero)</p>
+<h3 id="expresion-bookandtome-mejorada">Expresión <code>$bookAndTome</code> - MEJORADA<a class="headerlink" href="#expresion-bookandtome-mejorada" title="Permanent link">&para;</a></h3>
+<p><strong>Antes:</strong>
+<div class="highlight"><pre><span></span><code><span class="x">$bookAndTome = &quot;^(?:PE|E|N|[23456789](?:AV|PI)?|1[0123]?(?:AV|PI)?)$delimiter(?:\d{1,$tomo})$delimiter?$&quot;;</span>
+</code></pre></div></p>
+<p><strong>Después (mismo orden que onlyFirst):</strong>
+<div class="highlight"><pre><span></span><code><span class="x">$bookAndTome = &quot;^(?:PE|E|N|1[0123]?(?:AV|PI)?|[23456789](?:AV|PI)?)$delimiter(\d{1,$tomo})$delimiter?$&quot;;</span>
+</code></pre></div></p>
+<p><strong>Cambios:</strong>
+- ✅ Reordenado para consistencia
+- ✅ Cambiado a grupo de captura <code>(\d{1,$tomo})</code> en vez de no captura <code>(?:\d{1,$tomo})</code></p>
+<h3 id="expresion-fullid-mejorada">Expresión <code>$fullId</code> - MEJORADA<a class="headerlink" href="#expresion-fullid-mejorada" title="Permanent link">&para;</a></h3>
+<p><strong>Antes:</strong>
+<div class="highlight"><pre><span></span><code><span class="x">$fullId = &quot;^(PE|E|N|[23456789](?:AV|PI)?|1[0123]?(?:AV|PI)?)$delimiter(\d{1,$tomo})$delimiter(\d{1,$folio})&quot;;</span>
+</code></pre></div></p>
+<p><strong>Después:</strong>
+<div class="highlight"><pre><span></span><code><span class="x">$fullId = &quot;^(PE|E|N|1[0123]?(?:AV|PI)?|[23456789](?:AV|PI)?)$delimiter(\d{1,$tomo})$delimiter(\d{1,$folio})&quot;;</span>
+</code></pre></div></p>
+<p><strong>Cambios:</strong>
+- ✅ Reordenado para consistencia</p>
+<hr />
+<h2 id="metodo-completo-propuesto">📝 Método Completo Propuesto<a class="headerlink" href="#metodo-completo-propuesto" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="x">/**</span>
+<span class="x"> * Accepted patterns:</span>
+<span class="x"> * - Regular (provincia-libro-tomo). Ej: 1-1234-12345</span>
+<span class="x"> * - Panameño nacido en el extranjero (PE-libro-tomo). Ej: PE-1234-12345</span>
+<span class="x"> * - Extranjero con cédula (E-libro-tomo). Ej: E-1234-123456</span>
+<span class="x"> * - Naturalizado (N-libro-tomo). Ej: N-1234-12345</span>
+<span class="x"> * - Panameños nacidos antes de la vigencia (provinciaAV-libro-tomo). Ej: 1AV-1234-12345</span>
+<span class="x"> * - Población indigena (provinciaPI-libro-tomo). Ej: 1PI-1234-12345</span>
+<span class="x"> * - RUC Gubernamental (provincia-TIPO-componente-secuencia). Ej: 4-NT-1-8346</span>
+<span class="x"> *</span>
+<span class="x"> * @param string $id</span>
+<span class="x"> * @param int $tomo</span>
+<span class="x"> * @param int $folio</span>
+<span class="x"> * @param string $delimiter</span>
+<span class="x"> * @return array</span>
+<span class="x"> */</span>
+<span class="x">public function panamaID($id, $tomo = 4, $folio = 6, $delimiter = &#39;&#39;)</span>
+<span class="x">{</span>
+<span class="x">    // 1. Solo primera parte (provincia, PE, E, N, o provincia con AV/PI)</span>
+<span class="x">    $onlyFirst = &quot;^(?:PE|E|N|1[0123]?(?:AV|PI)?|[23456789](?:AV|PI)?)$delimiter?$&quot;;</span>
+
+<span class="x">    // 2. Provincia + libro (2 partes)</span>
+<span class="x">    $bookAndTome = &quot;^(?:PE|E|N|1[0123]?(?:AV|PI)?|[23456789](?:AV|PI)?)$delimiter(\d{1,$tomo})$delimiter?$&quot;;</span>
+
+<span class="x">    // 3. Cédula completa (provincia-libro-tomo) - 3 partes</span>
+<span class="x">    $fullId = &quot;^(PE|E|N|1[0123]?(?:AV|PI)?|[23456789](?:AV|PI)?)$delimiter(\d{1,$tomo})$delimiter(\d{1,$folio})$&quot;;</span>
+
+<span class="x">    // 4. RUC Gubernamental - Solo provincia + tipo (2 partes)</span>
+<span class="x">    $governmentalPrefix = &quot;^(1[0123]?|[23456789])$delimiter(NT|PA|GO|ED|SA)$delimiter?$&quot;;</span>
+
+<span class="x">    // 5. RUC Gubernamental - Provincia + tipo + componente (3 partes)</span>
+<span class="x">    $governmentalPartial = &quot;^(1[0123]?|[23456789])$delimiter(NT|PA|GO|ED|SA)$delimiter(\d{1,$tomo})$delimiter?$&quot;;</span>
+
+<span class="x">    // 6. RUC Gubernamental completo (provincia-TIPO-componente-secuencia) - 4 partes</span>
+<span class="x">    $governmentalId = &quot;^(1[0123]?|[23456789])$delimiter(NT|PA|GO|ED|SA)$delimiter(\d{1,$tomo})$delimiter(\d{1,$folio})$&quot;;</span>
+
+<span class="x">    preg_match(</span>
+<span class="x">        &quot;/^P$|{$onlyFirst}|{$bookAndTome}|{$fullId}|{$governmentalPrefix}|{$governmentalPartial}|{$governmentalId}/i&quot;,</span>
+<span class="x">        $id,</span>
+<span class="x">        $matches</span>
+<span class="x">    );</span>
+
+<span class="x">    return $matches;</span>
+<span class="x">}</span>
+</code></pre></div>
+<hr />
+<h2 id="casos-de-prueba">🧪 Casos de Prueba<a class="headerlink" href="#casos-de-prueba" title="Permanent link">&para;</a></h2>
+<h3 id="cedulas-estandar-3-partes-deben-seguir-funcionando">Cédulas Estándar (3 partes) - Deben seguir funcionando<a class="headerlink" href="#cedulas-estandar-3-partes-deben-seguir-funcionando" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="x">$helper-&gt;panamaID(&#39;8-123-456&#39;, 4, 6, &#39;-&#39;);</span>
+<span class="x">// ✅ Debe capturar: [&#39;8-123-456&#39;, &#39;8&#39;, &#39;123&#39;, &#39;456&#39;]</span>
+
+<span class="x">$helper-&gt;panamaID(&#39;PE-123-456&#39;, 4, 6, &#39;-&#39;);</span>
+<span class="x">// ✅ Debe capturar: [&#39;PE-123-456&#39;, &#39;PE&#39;, &#39;123&#39;, &#39;456&#39;]</span>
+
+<span class="x">$helper-&gt;panamaID(&#39;8AV-123-456&#39;, 4, 6, &#39;-&#39;);</span>
+<span class="x">// ✅ Debe capturar: [&#39;8AV-123-456&#39;, &#39;8AV&#39;, &#39;123&#39;, &#39;456&#39;]</span>
+
+<span class="x">$helper-&gt;panamaID(&#39;1PI-123-456&#39;, 4, 6, &#39;-&#39;);</span>
+<span class="x">// ✅ Debe capturar: [&#39;1PI-123-456&#39;, &#39;1PI&#39;, &#39;123&#39;, &#39;456&#39;]</span>
+</code></pre></div>
+<h3 id="rucs-gubernamentales-4-partes-nuevo-soporte">RUCs Gubernamentales (4 partes) - NUEVO SOPORTE<a class="headerlink" href="#rucs-gubernamentales-4-partes-nuevo-soporte" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="x">$helper-&gt;panamaID(&#39;4-NT-1-8346&#39;, 4, 6, &#39;-&#39;);</span>
+<span class="x">// ✅ Debe capturar: [&#39;4-NT-1-8346&#39;, &#39;4&#39;, &#39;NT&#39;, &#39;1&#39;, &#39;8346&#39;]</span>
+
+<span class="x">$helper-&gt;panamaID(&#39;8-PA-2-1234&#39;, 4, 6, &#39;-&#39;);</span>
+<span class="x">// ✅ Debe capturar: [&#39;8-PA-2-1234&#39;, &#39;8&#39;, &#39;PA&#39;, &#39;2&#39;, &#39;1234&#39;]</span>
+
+<span class="x">$helper-&gt;panamaID(&#39;1-GO-3-5678&#39;, 4, 6, &#39;-&#39;);</span>
+<span class="x">// ✅ Debe capturar: [&#39;1-GO-3-5678&#39;, &#39;1&#39;, &#39;GO&#39;, &#39;3&#39;, &#39;5678&#39;]</span>
+
+<span class="x">$helper-&gt;panamaID(&#39;13-ED-1-9999&#39;, 4, 6, &#39;-&#39;);</span>
+<span class="x">// ✅ Debe capturar: [&#39;13-ED-1-9999&#39;, &#39;13&#39;, &#39;ED&#39;, &#39;1&#39;, &#39;9999&#39;]</span>
+</code></pre></div>
+<h3 id="validaciones-parciales">Validaciones Parciales<a class="headerlink" href="#validaciones-parciales" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="x">// Solo provincia</span>
+<span class="x">$helper-&gt;panamaID(&#39;8&#39;, 4, 6, &#39;-&#39;);</span>
+<span class="x">// ✅ Debe capturar: [&#39;8&#39;]</span>
+
+<span class="x">// Provincia + tipo gubernamental</span>
+<span class="x">$helper-&gt;panamaID(&#39;4-NT&#39;, 4, 6, &#39;-&#39;);</span>
+<span class="x">// ✅ Debe capturar: [&#39;4-NT&#39;, &#39;4&#39;, &#39;NT&#39;]</span>
+
+<span class="x">// Provincia + tipo + componente</span>
+<span class="x">$helper-&gt;panamaID(&#39;4-NT-1&#39;, 4, 6, &#39;-&#39;);</span>
+<span class="x">// ✅ Debe capturar: [&#39;4-NT-1&#39;, &#39;4&#39;, &#39;NT&#39;, &#39;1&#39;]</span>
+</code></pre></div>
+<h3 id="casos-invalidos">Casos Inválidos<a class="headerlink" href="#casos-invalidos" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="x">$helper-&gt;panamaID(&#39;14-123-456&#39;, 4, 6, &#39;-&#39;);</span>
+<span class="x">// ❌ Debe retornar: [] (provincia 14 no existe)</span>
+
+<span class="x">$helper-&gt;panamaID(&#39;8-XX-123-456&#39;, 4, 6, &#39;-&#39;);</span>
+<span class="x">// ❌ Debe retornar: [] (XX no es un tipo gubernamental válido)</span>
+
+<span class="x">$helper-&gt;panamaID(&#39;ABC-123-456&#39;, 4, 6, &#39;-&#39;);</span>
+<span class="x">// ❌ Debe retornar: [] (ABC no es un prefijo válido)</span>
+</code></pre></div>
+<hr />
+<h2 id="matriz-de-compatibilidad">📊 Matriz de Compatibilidad<a class="headerlink" href="#matriz-de-compatibilidad" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Patrón</th>
+<th>Formato</th>
+<th>Partes</th>
+<th>Ejemplo</th>
+<th>Soporte Actual</th>
+<th>Soporte Propuesto</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Cédula Regular</strong></td>
+<td><code>prov-libro-tomo</code></td>
+<td>3</td>
+<td><code>8-123-456</code></td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><strong>PE/E/N</strong></td>
+<td><code>tipo-libro-tomo</code></td>
+<td>3</td>
+<td><code>PE-123-456</code></td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><strong>AV/PI</strong></td>
+<td><code>provAV-libro-tomo</code></td>
+<td>3</td>
+<td><code>8AV-123-456</code></td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><strong>Gubernamental</strong></td>
+<td><code>prov-TIPO-comp-seq</code></td>
+<td>4</td>
+<td><code>4-NT-1-8346</code></td>
+<td>❌</td>
+<td>✅</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="consideraciones">⚠️ Consideraciones<a class="headerlink" href="#consideraciones" title="Permanent link">&para;</a></h2>
+<h3 id="1-orden-de-validacion-en-regex">1. Orden de Validación en Regex<a class="headerlink" href="#1-orden-de-validacion-en-regex" title="Permanent link">&para;</a></h3>
+<p>El orden es importante en la alternancia <code>|</code>:
+<div class="highlight"><pre><span></span><code><span class="x">// ✅ CORRECTO: De más específico a menos específico</span>
+<span class="x">$governmentalId      // 4 partes completas</span>
+<span class="x">$governmentalPartial // 3 partes</span>
+<span class="x">$governmentalPrefix  // 2 partes</span>
+<span class="x">$fullId              // 3 partes completas (cédula)</span>
+<span class="x">$bookAndTome         // 2 partes</span>
+<span class="x">$onlyFirst           // 1 parte</span>
+</code></pre></div></p>
+<h3 id="2-grupos-de-captura">2. Grupos de Captura<a class="headerlink" href="#2-grupos-de-captura" title="Permanent link">&para;</a></h3>
+<p>Los grupos de captura <code>()</code> permiten extraer las partes individuales:
+- Cédula: <code>['8-123-456', '8', '123', '456']</code> → [match completo, provincia, libro, tomo]
+- Gubernamental: <code>['4-NT-1-8346', '4', 'NT', '1', '8346']</code> → [match completo, provincia, tipo, componente, secuencia]</p>
+<h3 id="3-case-insensitive">3. Case-Insensitive<a class="headerlink" href="#3-case-insensitive" title="Permanent link">&para;</a></h3>
+<p>La bandera <code>/i</code> al final hace que sea case-insensitive:
+- <code>4-nt-1-8346</code> ✅
+- <code>4-NT-1-8346</code> ✅
+- <code>4-Nt-1-8346</code> ✅</p>
+<h3 id="4-delimitador-personalizable">4. Delimitador Personalizable<a class="headerlink" href="#4-delimitador-personalizable" title="Permanent link">&para;</a></h3>
+<p>El parámetro <code>$delimiter</code> permite usar diferentes separadores:
+- Con <code>-</code>: <code>4-NT-1-8346</code>
+- Con <code>_</code>: <code>4_NT_1_8346</code>
+- Sin delimitador: <code>4NT18346</code> (menos común)</p>
+<hr />
+<h2 id="proximos-pasos">🎯 Próximos Pasos<a class="headerlink" href="#proximos-pasos" title="Permanent link">&para;</a></h2>
+<ol>
+<li>✅ <strong>Revisión de documentación</strong> - Este documento</li>
+<li>⏳ <strong>Implementar cambios</strong> en <code>HelperArray.php</code></li>
+<li>⏳ <strong>Crear tests unitarios</strong> para validar todos los casos</li>
+<li>⏳ <strong>Actualizar PHPDoc</strong> con nuevos patrones</li>
+<li>⏳ <strong>Probar integración</strong> con sistemas existentes</li>
+</ol>
+<hr />
+<h2 id="referencias">📚 Referencias<a class="headerlink" href="#referencias" title="Permanent link">&para;</a></h2>
+<h3 id="documentos-relacionados">Documentos Relacionados<a class="headerlink" href="#documentos-relacionados" title="Permanent link">&para;</a></h3>
+<ul>
+<li><a href="../../validations/acicloud-ruc-gubernamental-support/">ACIcloudService RUC Gubernamental Support</a></li>
+<li><a href="../../validations/acicloud-ruc-gubernamental-support/#corrección-crítica-implementada">Corrección Crítica dTipoRuc</a></li>
+</ul>
+<h3 id="codigo-relacionado">Código Relacionado<a class="headerlink" href="#codigo-relacionado" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>vendor/weirdo/helper/src/Helper/Traits/HelperArray.php</code> → Método <code>panamaID()</code></li>
+<li><code>app/Services/ACIcloudService.php</code> → Método <code>determineRucType()</code></li>
+<li><code>app/Helpers/PanamaRucHelper.php</code> → Validación de RUCs</li>
+</ul>
+<h3 id="patrones-de-provincia-consistentes">Patrones de Provincia Consistentes<a class="headerlink" href="#patrones-de-provincia-consistentes" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>// Patrón usado en ACIcloudService::determineRucType()
+1[0123]?|[23456789]  // Provincias 1-13
+
+// Este mismo patrón se debe usar en panamaID() para consistencia
+</code></pre></div>
+<hr />
+<p><strong>Fecha de Análisis:</strong> 2026-02-19<br />
+<strong>Analizado por:</strong> GitHub Copilot<br />
+<strong>Estado:</strong> Listo para implementación</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/aghabrego/docucenter" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.highlight", "search.suggest"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
