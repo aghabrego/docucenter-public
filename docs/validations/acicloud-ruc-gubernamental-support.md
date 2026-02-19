@@ -456,5 +456,5 @@ POST /api/v1/fe/create_sale_acicloud_with_emission
 ---
 
 **Fecha de Análisis:** 2026-02-19  
-**Realizado por:** GitHub Copilot  
+**Realizado por:** Team de Docucenter  
 **Última Actualización:** 2026-02-19

@@ -369,4 +369,4 @@ Las únicas mejoras sugeridas son:
 **Fuente 1:** RESOLUCIÓN No.201-2416-ANEXO.pdf (16,018 empresas)  
 **Fuente 2:** ListadoRuc.pdf - Gaceta Oficial (159,284 RUCs totales)  
 **Fecha de Análisis:** 2026-02-19  
-**Analizado por:** GitHub Copilot
+**Analizado por:** Team de Docucenter

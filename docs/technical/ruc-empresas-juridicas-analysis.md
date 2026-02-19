@@ -401,4 +401,4 @@ foreach ($personas as $ruc) {
 **Fuente:** RESOLUCIÓN No.201-2416-ANEXO.pdf - DGI Panamá  
 **Total RUCs Analizados:** 16,018 empresas jurídicas registradas  
 **Fecha de Análisis:** 2026-02-19  
-**Analizado por:** GitHub Copilot
+**Analizado por:** Team de Docucenter

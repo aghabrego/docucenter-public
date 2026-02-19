@@ -461,4 +461,4 @@ if (preg_match("/^(PE|E|N|P|PI|R|SR|F|TPH|PC)$/i", $firstPart)) {
 
 **Fecha de Análisis:** 2026-02-19  
 **Basado en:** Especificación oficial DGI Panamá  
-**Analizado por:** GitHub Copilot
+**Analizado por:** Team de Docucenter
