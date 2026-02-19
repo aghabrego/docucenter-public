@@ -1,0 +1,2644 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentación técnica y de usuario de DocuCenter">
+      
+      
+        <meta name="author" content="aghabrego">
+      
+      
+        <link rel="canonical" href="https://aghabrego.github.io/docucenter-public/technical/SUPERVISOR_IMPROVEMENT_SUMMARY/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="https://home.apconpanama.me/wp-content/uploads/2024/03/logo3.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Mejora de Supervisor para Queue Workers - Resumen de Implementación - DocuCenter</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#mejora-de-supervisor-para-queue-workers-resumen-de-implementacion" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="DocuCenter" class="md-header__button md-logo" aria-label="DocuCenter" data-md-component="logo">
+      
+  <img src="https://home.apconpanama.me/wp-content/uploads/2024/03/logo3.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            DocuCenter
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Mejora de Supervisor para Queue Workers - Resumen de Implementación
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/aghabrego/docucenter-public" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    aghabrego/docucenter-public
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="DocuCenter" class="md-nav__button md-logo" aria-label="DocuCenter" data-md-component="logo">
+      
+  <img src="https://home.apconpanama.me/wp-content/uploads/2024/03/logo3.png" alt="logo">
+
+    </a>
+    DocuCenter
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/aghabrego/docucenter-public" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    aghabrego/docucenter-public
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Documentation
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    API Documentation
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sage ACICloud
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Sage ACICloud
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Índice
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/invoices-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Facturación - Invoices
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/customers-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Clientes - Customers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/vendors-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Proveedores - Vendors
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/purchases-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Compras - Purchases
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/products-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Productos - Products
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/jobs-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trabajos - Jobs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/accounting-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contabilidad General
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/payments-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pagos y Créditos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/inventory-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inventario - Inventory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Facturación Electrónica (FE)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Facturación Electrónica (FE)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Índice
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/fe-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    APIs de Facturación Electrónica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/meypar-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integración Meypar
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/shopify-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integración Shopify
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/kart21-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integración Kart21
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/lightspeed-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integración Lightspeed
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/maxgym-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integración Maxgym
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/acicloud-fe-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ACICloud FE
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/import-xml-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Import XML
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/emit-json-object-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Emit JSON Object
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/download-base64-document-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Download Base64 Document
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Organizaciones
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Organizaciones
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/organizations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Índice
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/organizations/organizations-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gestión de Organizaciones
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ubicaciones Geográficas
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Ubicaciones Geográficas
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/locations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Índice
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/locations/locations-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API de Ubicaciones
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sistema de Testing
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Sistema de Testing
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Índice de Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../TESTING_SYSTEM_SUMMARY/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resumen Ejecutivo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Documentación Técnica
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Documentación Técnica
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../README.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Soluciones
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lightspeed_audit_improvement/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Auditoría Lightspeed
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../solucion-sincronizacion-pagos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sincronización de Pagos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../payment-calculation-fix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Corrección Cálculo Pagos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validaciones
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Validaciones
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../validations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resumen
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../validations/createSale-ruc-validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validación RUC CreateSale
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../validations/maxgym-ruc-validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validación RUC Maxgym
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../validations/meypar-validations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validaciones MEYPAR
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../validations/validation_comparison/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Comparación Validaciones
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#cambios-realizados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cambios Realizados
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Cambios Realizados">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-separacion-de-workers-por-prioridad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Separación de Workers por Prioridad
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Separación de Workers por Prioridad">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#high-priority-workers-2-procesos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        High Priority Workers (2 procesos)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#default-workers-3-procesos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Default Workers (3 procesos)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#batch-workers-2-procesos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Batch Workers (2 procesos)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-configuracion-opcional-ligera" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Configuración Opcional Ligera
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-mejoras-en-gestion-de-logs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Mejoras en Gestión de Logs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-configuraciones-avanzadas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Configuraciones Avanzadas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Configuraciones Avanzadas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#backoff-exponencial" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Backoff Exponencial
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#graceful-shutdown" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Graceful Shutdown
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prioridades-de-inicio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prioridades de Inicio
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-herramientas-de-gestion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Herramientas de Gestión
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Herramientas de Gestión">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#script-de-monitoreo-monitor-workerssh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Script de Monitoreo (monitor-workers.sh)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#script-de-instalacion-install-supervisor-configsh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Script de Instalación (install-supervisor-config.sh)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#archivos-creados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Archivos Creados
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#instalacion-rapida" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Instalación Rápida
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Instalación Rápida">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#opcion-1-instalacion-automatica-recomendado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Opción 1: Instalación Automática (Recomendado)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#opcion-2-instalacion-manual" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Opción 2: Instalación Manual
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#comandos-utiles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comandos Útiles
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Comandos Útiles">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#gestion-de-workers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gestión de Workers
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitoreo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Monitoreo
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuracion-por-cron-opcional" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuración por Cron (Opcional)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ventajas-de-la-nueva-configuracion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ventajas de la Nueva Configuración
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Ventajas de la Nueva Configuración">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#optimizacion-de-recursos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ✅ Optimización de Recursos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mejor-manejo-de-colas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ✅ Mejor Manejo de Colas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gestion-de-logs-mejorada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ✅ Gestión de Logs Mejorada
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#escalabilidad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ✅ Escalabilidad
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#herramientas-de-gestion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ✅ Herramientas de Gestión
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#comparacion-antes-vs-despues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparación Antes vs Después
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#recomendaciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Recomendaciones
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Recomendaciones">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#para-servidor-de-2gb-ram" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Para Servidor de 2GB RAM
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#para-servidor-de-4gb-ram" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Para Servidor de 4GB+ RAM
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#en-general" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        En General
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Troubleshooting
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Troubleshooting">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#workers-no-inician" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Workers no inician
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#alto-uso-de-memoria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alto uso de memoria
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#jobs-se-acumulan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Jobs se acumulan
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#documentacion-adicional" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Documentación Adicional
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#proximos-pasos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Próximos Pasos
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="mejora-de-supervisor-para-queue-workers-resumen-de-implementacion">Mejora de Supervisor para Queue Workers - Resumen de Implementación</h1>
+<h2 id="cambios-realizados">Cambios Realizados</h2>
+<h3 id="1-separacion-de-workers-por-prioridad">1. Separación de Workers por Prioridad</h3>
+<p>Se reemplazó la configuración monolítica de 4 workers por un sistema optimizado de <strong>3 grupos</strong>:</p>
+<h4 id="high-priority-workers-2-procesos"><strong>High Priority Workers</strong> (2 procesos)</h4>
+<ul>
+<li><strong>Colas</strong>: <code>high</code></li>
+<li><strong>Memoria</strong>: 512MB por worker</li>
+<li><strong>Sleep</strong>: 1 segundo (respuesta rápida)</li>
+<li><strong>Timeout</strong>: 1 hora</li>
+<li><strong>Max Jobs</strong>: 50 jobs por worker antes de reiniciar</li>
+<li><strong>Uso</strong>: Operaciones críticas que requieren atención inmediata</li>
+</ul>
+<h4 id="default-workers-3-procesos"><strong>Default Workers</strong> (3 procesos)</h4>
+<ul>
+<li><strong>Colas</strong>: <code>default</code>, <code>sales</code>, <code>create_sale_maxgym</code>, <code>create_sale_kart</code></li>
+<li><strong>Memoria</strong>: 512MB por worker</li>
+<li><strong>Sleep</strong>: 3 segundos (balance)</li>
+<li><strong>Timeout</strong>: 1 hora</li>
+<li><strong>Max Jobs</strong>: 50 jobs por worker antes de reiniciar</li>
+<li><strong>Uso</strong>: Operaciones normales de ventas y procesamiento</li>
+</ul>
+<h4 id="batch-workers-2-procesos"><strong>Batch Workers</strong> (2 procesos)</h4>
+<ul>
+<li><strong>Colas</strong>: <code>issue_mass_invoices</code>, <code>maintenance</code></li>
+<li><strong>Memoria</strong>: 1024MB por worker</li>
+<li><strong>Sleep</strong>: 5 segundos (baja frecuencia)</li>
+<li><strong>Timeout</strong>: 2 horas</li>
+<li><strong>Max Jobs</strong>: 30 jobs por worker (menos porque son más pesados)</li>
+<li><strong>Uso</strong>: Emisión masiva de facturas y tareas de mantenimiento pesadas</li>
+</ul>
+<p><strong>Total</strong>: 7 workers (~4.6GB RAM estimado)</p>
+<h3 id="2-configuracion-opcional-ligera">2. Configuración Opcional Ligera</h3>
+<p>Para servidores con <strong>2GB RAM</strong>, se incluye configuración alternativa:
+- 1 High Priority worker (256MB)
+- 2 Default workers (256MB c/u)
+- 1 Batch worker (512MB)
+- <strong>Total</strong>: 4 workers (~1.3GB RAM)</p>
+<h3 id="3-mejoras-en-gestion-de-logs">3. Mejoras en Gestión de Logs</h3>
+<ul>
+<li><strong>Rotación automática</strong>: Límite de 50MB por archivo (100MB para batch)</li>
+<li><strong>Backups</strong>: 5 versiones antiguas (10 para batch)</li>
+<li><strong>Logs separados</strong>: Por grupo de workers para troubleshooting fácil</li>
+<li><strong>Errores independientes</strong>: stdout y stderr separados</li>
+</ul>
+<h3 id="4-configuraciones-avanzadas">4. Configuraciones Avanzadas</h3>
+<h4 id="backoff-exponencial">Backoff Exponencial</h4>
+<ul>
+<li><strong>High</strong>: 30s, 60s, 180s entre reintentos</li>
+<li><strong>Default</strong>: 60s, 180s, 300s</li>
+<li><strong>Batch</strong>: 300s, 600s</li>
+</ul>
+<h4 id="graceful-shutdown">Graceful Shutdown</h4>
+<ul>
+<li><strong>High/Default</strong>: 60 segundos de espera</li>
+<li><strong>Batch</strong>: 120 segundos (jobs más largos)</li>
+</ul>
+<h4 id="prioridades-de-inicio">Prioridades de Inicio</h4>
+<ul>
+<li><strong>High</strong>: Prioridad 100 (inicia primero)</li>
+<li><strong>Default</strong>: Prioridad 200</li>
+<li><strong>Batch</strong>: Prioridad 300 (inicia último)</li>
+</ul>
+<h3 id="5-herramientas-de-gestion">5. Herramientas de Gestión</h3>
+<h4 id="script-de-monitoreo-monitor-workerssh">Script de Monitoreo (<code>monitor-workers.sh</code>)</h4>
+<ul>
+<li>Estado de todos los workers con emojis visuales</li>
+<li>Uso de memoria y CPU en tiempo real</li>
+<li>Estado de colas Redis</li>
+<li>Conteo de jobs fallidos</li>
+<li>Últimos errores de cada grupo</li>
+<li><strong>Uso</strong>: <code>./scripts/monitor-workers.sh</code></li>
+</ul>
+<h4 id="script-de-instalacion-install-supervisor-configsh">Script de Instalación (<code>install-supervisor-config.sh</code>)</h4>
+<ul>
+<li>Instalación automatizada con backup de configuración anterior</li>
+<li>Modo <code>full</code> (7 workers) o <code>light</code> (4 workers)</li>
+<li>Creación automática de logs</li>
+<li>Verificación de estado post-instalación</li>
+<li><strong>Uso</strong>: <code>sudo ./scripts/install-supervisor-config.sh [light|full]</code></li>
+</ul>
+<h2 id="archivos-creados">Archivos Creados</h2>
+<div class="codehilite"><pre><span></span><code>config/supervisor/
+├── laravel-worker-high.conf      # Workers alta prioridad
+├── laravel-worker-default.conf   # Workers estándar
+├── laravel-worker-batch.conf     # Workers batch/mantenimiento
+└── laravel-worker-light.conf     # Configuración ligera (4 workers)
+
+scripts/
+├── monitor-workers.sh            # Script de monitoreo
+└── install-supervisor-config.sh  # Script de instalación automática
+
+docs/technical/
+└── supervisor-queue-workers.md   # Documentación completa (390+ líneas)
+</code></pre></div>
+
+<h2 id="instalacion-rapida">Instalación Rápida</h2>
+<h3 id="opcion-1-instalacion-automatica-recomendado">Opción 1: Instalación Automática (Recomendado)</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Configuración completa (7 workers, 4GB+ RAM)</span>
+<span class="nb">cd</span><span class="w"> </span>/home/desarrollo/code/docucenter
+sudo<span class="w"> </span>./scripts/install-supervisor-config.sh<span class="w"> </span>full
+
+<span class="c1"># Configuración ligera (4 workers, 2GB RAM)</span>
+sudo<span class="w"> </span>./scripts/install-supervisor-config.sh<span class="w"> </span>light
+</code></pre></div>
+
+<h3 id="opcion-2-instalacion-manual">Opción 2: Instalación Manual</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># 1. Backup de configuración actual</span>
+sudo<span class="w"> </span>cp<span class="w"> </span>/etc/supervisor/conf.d/laravel-worker.conf<span class="w"> </span>/etc/supervisor/conf.d/laravel-worker.conf.backup
+
+<span class="c1"># 2. Remover configuración antigua</span>
+sudo<span class="w"> </span>rm<span class="w"> </span>-f<span class="w"> </span>/etc/supervisor/conf.d/laravel-worker.conf
+
+<span class="c1"># 3. Copiar nuevas configuraciones (completa)</span>
+sudo<span class="w"> </span>cp<span class="w"> </span>config/supervisor/laravel-worker-high.conf<span class="w"> </span>/etc/supervisor/conf.d/
+sudo<span class="w"> </span>cp<span class="w"> </span>config/supervisor/laravel-worker-default.conf<span class="w"> </span>/etc/supervisor/conf.d/
+sudo<span class="w"> </span>cp<span class="w"> </span>config/supervisor/laravel-worker-batch.conf<span class="w"> </span>/etc/supervisor/conf.d/
+
+<span class="c1"># O configuración ligera (alternativa)</span>
+sudo<span class="w"> </span>cp<span class="w"> </span>config/supervisor/laravel-worker-light.conf<span class="w"> </span>/etc/supervisor/conf.d/
+
+<span class="c1"># 4. Crear logs</span>
+mkdir<span class="w"> </span>-p<span class="w"> </span>storage/logs
+touch<span class="w"> </span>storage/logs/worker-<span class="o">{</span>high,default,batch<span class="o">}{</span>,-error<span class="o">}</span>.log
+chmod<span class="w"> </span>-R<span class="w"> </span><span class="m">755</span><span class="w"> </span>storage/logs
+
+<span class="c1"># 5. Recargar supervisor</span>
+sudo<span class="w"> </span>supervisorctl<span class="w"> </span>stop<span class="w"> </span>all
+sudo<span class="w"> </span>supervisorctl<span class="w"> </span>reread
+sudo<span class="w"> </span>supervisorctl<span class="w"> </span>update
+sudo<span class="w"> </span>supervisorctl<span class="w"> </span>start<span class="w"> </span>all
+
+<span class="c1"># 6. Verificar</span>
+sudo<span class="w"> </span>supervisorctl<span class="w"> </span>status
+</code></pre></div>
+
+<h2 id="comandos-utiles">Comandos Útiles</h2>
+<h3 id="gestion-de-workers">Gestión de Workers</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Ver estado de todos los workers</span>
+sudo<span class="w"> </span>supervisorctl<span class="w"> </span>status
+
+<span class="c1"># Reiniciar todos</span>
+sudo<span class="w"> </span>supervisorctl<span class="w"> </span>restart<span class="w"> </span>all
+
+<span class="c1"># Reiniciar grupo específico</span>
+sudo<span class="w"> </span>supervisorctl<span class="w"> </span>restart<span class="w"> </span>laravel-worker-high:*
+sudo<span class="w"> </span>supervisorctl<span class="w"> </span>restart<span class="w"> </span>laravel-worker-default:*
+sudo<span class="w"> </span>supervisorctl<span class="w"> </span>restart<span class="w"> </span>laravel-worker-batch:*
+
+<span class="c1"># Detener todos</span>
+sudo<span class="w"> </span>supervisorctl<span class="w"> </span>stop<span class="w"> </span>all
+
+<span class="c1"># Ver logs en tiempo real</span>
+sudo<span class="w"> </span>supervisorctl<span class="w"> </span>tail<span class="w"> </span>-f<span class="w"> </span>laravel-worker-high
+tail<span class="w"> </span>-f<span class="w"> </span>storage/logs/worker-high.log
+</code></pre></div>
+
+<h3 id="monitoreo">Monitoreo</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Script de monitoreo completo</span>
+./scripts/monitor-workers.sh
+
+<span class="c1"># Ver uso de memoria</span>
+free<span class="w"> </span>-h
+ps<span class="w"> </span>aux<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;queue:work&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-v<span class="w"> </span>grep
+
+<span class="c1"># Ver jobs en cola</span>
+php<span class="w"> </span>artisan<span class="w"> </span>queue:monitor<span class="w"> </span>high,default,sales,create_sale_maxgym,create_sale_kart,issue_mass_invoices,maintenance
+
+<span class="c1"># Ver jobs fallidos</span>
+php<span class="w"> </span>artisan<span class="w"> </span>queue:failed
+
+<span class="c1"># Reintentar jobs fallidos</span>
+php<span class="w"> </span>artisan<span class="w"> </span>queue:retry<span class="w"> </span>all
+</code></pre></div>
+
+<h2 id="configuracion-por-cron-opcional">Configuración por Cron (Opcional)</h2>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Agregar a crontab para monitoreo automático</span>
+crontab<span class="w"> </span>-e
+
+<span class="c1"># Verificar cada 5 minutos y guardar log</span>
+*/5<span class="w"> </span>*<span class="w"> </span>*<span class="w"> </span>*<span class="w"> </span>*<span class="w"> </span>/home/desarrollo/code/docucenter/scripts/monitor-workers.sh<span class="w"> </span>&gt;&gt;<span class="w"> </span>/home/desarrollo/logs/worker-monitor.log<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span>
+</code></pre></div>
+
+<h2 id="ventajas-de-la-nueva-configuracion">Ventajas de la Nueva Configuración</h2>
+<h3 id="optimizacion-de-recursos">✅ Optimización de Recursos</h3>
+<ul>
+<li><strong>Separación por prioridad</strong>: Jobs críticos procesados primero</li>
+<li><strong>Memoria diferenciada</strong>: Batch tiene más memoria (1GB vs 512MB)</li>
+<li><strong>Timeouts ajustados</strong>: Batch permite hasta 2 horas</li>
+<li><strong>Max-jobs limit</strong>: Workers se reinician después de 50 jobs (30 para batch) previniendo memory leaks</li>
+</ul>
+<h3 id="mejor-manejo-de-colas">✅ Mejor Manejo de Colas</h3>
+<ul>
+<li><strong>Sleep optimizado</strong>: 1s para high, 3s para default, 5s para batch</li>
+<li><strong>Backoff exponencial</strong>: Reintentos más inteligentes</li>
+<li><strong>Prioridades</strong>: High inicia primero, batch último</li>
+</ul>
+<h3 id="gestion-de-logs-mejorada">✅ Gestión de Logs Mejorada</h3>
+<ul>
+<li><strong>Rotación automática</strong>: No se llenan los discos</li>
+<li><strong>Logs separados</strong>: Troubleshooting más fácil</li>
+<li><strong>Errores independientes</strong>: stdout/stderr separados</li>
+</ul>
+<h3 id="escalabilidad">✅ Escalabilidad</h3>
+<ul>
+<li><strong>Fácil ajuste</strong>: Cambiar <code>numprocs</code> en archivos <code>.conf</code></li>
+<li><strong>Dos modos</strong>: Full (7 workers) o Light (4 workers)</li>
+<li><strong>Por grupo</strong>: Escalar solo lo necesario</li>
+</ul>
+<h3 id="herramientas-de-gestion">✅  Herramientas de Gestión</h3>
+<ul>
+<li><strong>Monitoreo visual</strong>: Script con emojis y colores</li>
+<li><strong>Instalación automática</strong>: Con backup y verificación</li>
+<li><strong>Documentación completa</strong>: 390+ líneas</li>
+</ul>
+<h2 id="comparacion-antes-vs-despues">Comparación Antes vs Después</h2>
+<table>
+<thead>
+<tr>
+<th>Métrica</th>
+<th>Antes</th>
+<th>Después (Full)</th>
+<th>Después (Light)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Workers totales</td>
+<td>4</td>
+<td>7</td>
+<td>4</td>
+</tr>
+<tr>
+<td>RAM estimada</td>
+<td>~2GB</td>
+<td>~4.6GB</td>
+<td>~1.3GB</td>
+</tr>
+<tr>
+<td>Archivos config</td>
+<td>1</td>
+<td>3</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Colas separadas</td>
+<td>No</td>
+<td>Sí (3 grupos)</td>
+<td>Sí (3 grupos)</td>
+</tr>
+<tr>
+<td>Prioridades</td>
+<td>No</td>
+<td>Sí</td>
+<td>Sí</td>
+</tr>
+<tr>
+<td>Backoff exponencial</td>
+<td>No</td>
+<td>Sí</td>
+<td>Sí</td>
+</tr>
+<tr>
+<td>Max-jobs (anti leak)</td>
+<td>No</td>
+<td>Sí (50/30)</td>
+<td>Sí (50/30)</td>
+</tr>
+<tr>
+<td>Rotación logs</td>
+<td>No</td>
+<td>Sí</td>
+<td>Sí</td>
+</tr>
+<tr>
+<td>Monitoring</td>
+<td>No</td>
+<td>Sí</td>
+<td>Sí</td>
+</tr>
+<tr>
+<td>Escalabilidad</td>
+<td>Baja</td>
+<td>Alta</td>
+<td>Media</td>
+</tr>
+</tbody>
+</table>
+<h2 id="recomendaciones">Recomendaciones</h2>
+<h3 id="para-servidor-de-2gb-ram">Para Servidor de 2GB RAM</h3>
+<ul>
+<li>Usar configuración <strong>light</strong> (4 workers)</li>
+<li>Monitorear memoria con <code>free -h</code></li>
+<li>Considerar reducir más si hay problemas</li>
+</ul>
+<h3 id="para-servidor-de-4gb-ram">Para Servidor de 4GB+ RAM</h3>
+<ul>
+<li>Usar configuración <strong>full</strong> (7 workers)</li>
+<li>Monitorear rendimiento regularmente</li>
+<li>Ajustar <code>numprocs</code> según carga real</li>
+</ul>
+<h3 id="en-general">En General</h3>
+<ul>
+<li>✅ Monitorear uso de memoria semanalmente</li>
+<li>✅ Revisar jobs fallidos diariamente</li>
+<li>✅ Ajustar sleep/timeout según patrones de uso</li>
+<li>✅ Configurar alertas para workers caídos</li>
+<li>❌ No exceder capacidad RAM del servidor</li>
+<li>❌ No ignorar logs de error</li>
+</ul>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<h3 id="workers-no-inician">Workers no inician</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Ver logs de supervisor</span>
+sudo<span class="w"> </span>tail<span class="w"> </span>-100<span class="w"> </span>/var/log/supervisor/supervisord.log
+
+<span class="c1"># Verificar permisos</span>
+ls<span class="w"> </span>-la<span class="w"> </span>artisan
+sudo<span class="w"> </span>chown<span class="w"> </span>-R<span class="w"> </span>desarrollo:desarrollo<span class="w"> </span>/home/desarrollo/code/docucenter
+</code></pre></div>
+
+<h3 id="alto-uso-de-memoria">Alto uso de memoria</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Reducir numprocs en archivos .conf</span>
+sudo<span class="w"> </span>nano<span class="w"> </span>/etc/supervisor/conf.d/laravel-worker-default.conf
+<span class="c1"># Cambiar numprocs=3 a numprocs=2</span>
+
+<span class="c1"># Aplicar cambios</span>
+sudo<span class="w"> </span>supervisorctl<span class="w"> </span>reread
+sudo<span class="w"> </span>supervisorctl<span class="w"> </span>update
+</code></pre></div>
+
+<h3 id="jobs-se-acumulan">Jobs se acumulan</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Verificar workers corriendo</span>
+sudo<span class="w"> </span>supervisorctl<span class="w"> </span>status
+
+<span class="c1"># Aumentar workers temporalmente</span>
+sudo<span class="w"> </span>supervisorctl<span class="w"> </span>start<span class="w"> </span>laravel-worker-default:*
+
+<span class="c1"># O procesar manual</span>
+php<span class="w"> </span>artisan<span class="w"> </span>queue:work<span class="w"> </span>redis<span class="w"> </span>--queue<span class="o">=</span>default<span class="w"> </span>--once
+</code></pre></div>
+
+<h2 id="documentacion-adicional">Documentación Adicional</h2>
+<p>Ver <a href="docs/technical/supervisor-queue-workers.md">docs/technical/supervisor-queue-workers.md</a> para:
+- Configuración detallada de cada parámetro
+- Ejemplos de uso avanzado
+- Mejores prácticas de Redis
+- Performance tuning
+- Monitoring avanzado con cron</p>
+<h2 id="proximos-pasos">Próximos Pasos</h2>
+<ol>
+<li>✅ Instalar configuración (light o full según servidor)</li>
+<li>✅ Monitorear durante 24-48 horas</li>
+<li>⏳ Ajustar numprocs si es necesario</li>
+<li>⏳ Configurar cron para monitoreo automático</li>
+<li>⏳ Implementar alertas (Slack, email, etc.)</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/aghabrego/docucenter" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

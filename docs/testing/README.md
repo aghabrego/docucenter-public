@@ -2,7 +2,33 @@
 
 ## 📋 Scrip### 🧪 Scripts de Prueba Reutilizables
 
-### 🔍 **[API Consulta de RUC](../api/check-ruc-api.md)** 🆕
+### � **[Implementación gPedComGl_dNroPed](gPedComGl-dNroPed-implementation.md)** 🆕
+Implementación y testing del campo número de pedido de compra global en facturas electrónicas.
+
+**Scripts disponibles**:
+- `test-real-xml.php` - Verificar parsing básico del XML
+- `test-full-import-gped.php` - Verificar extracción con getFirstfilterData()
+- `test-import-simulation.php` - Simular flujo completo de importación
+
+**Cambios incluidos**:
+- ✅ Campo `gPedComGl_dNroPed` agregado a FeHeader model y base de datos
+- ✅ Extracción implementada en ImportData.php (métodos xml() y xmlGT())
+- ✅ **Fix crítico del parser XML.php** - Resuelve extracción de solo 2 claves
+- ✅ Documentación completa con casos de prueba
+
+**Uso rápido**:
+```bash
+# Verificar extracción básica
+docker exec docucenter_laravel.test php /var/www/html/scripts/test-real-xml.php
+
+# Prueba completa
+docker exec docucenter_laravel.test php /var/www/html/scripts/test-full-import-gped.php
+
+# Simulación de importación
+docker exec docucenter_laravel.test php /var/www/html/scripts/test-import-simulation.php
+```
+
+### �🔍 **[API Consulta de RUC](../api/check-ruc-api.md)** 🆕
 Testing de la nueva API para consulta de RUCs panameños usando Alanube.
 
 **Scripts disponibles**:

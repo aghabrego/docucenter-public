@@ -1,0 +1,2592 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentación técnica y de usuario de DocuCenter">
+      
+      
+        <meta name="author" content="aghabrego">
+      
+      
+        <link rel="canonical" href="https://aghabrego.github.io/docucenter-public/technical/jobs-configuration-implementation-summary/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="https://home.apconpanama.me/wp-content/uploads/2024/03/logo3.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Implementación de Configuración de Jobs - Resumen - DocuCenter</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#implementacion-de-configuracion-de-jobs-resumen" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="DocuCenter" class="md-header__button md-logo" aria-label="DocuCenter" data-md-component="logo">
+      
+  <img src="https://home.apconpanama.me/wp-content/uploads/2024/03/logo3.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            DocuCenter
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Implementación de Configuración de Jobs - Resumen
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/aghabrego/docucenter-public" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    aghabrego/docucenter-public
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="DocuCenter" class="md-nav__button md-logo" aria-label="DocuCenter" data-md-component="logo">
+      
+  <img src="https://home.apconpanama.me/wp-content/uploads/2024/03/logo3.png" alt="logo">
+
+    </a>
+    DocuCenter
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/aghabrego/docucenter-public" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    aghabrego/docucenter-public
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Documentation
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    API Documentation
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sage ACICloud
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Sage ACICloud
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Índice
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/invoices-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Facturación - Invoices
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/customers-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Clientes - Customers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/vendors-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Proveedores - Vendors
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/purchases-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Compras - Purchases
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/products-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Productos - Products
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/jobs-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trabajos - Jobs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/accounting-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contabilidad General
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/payments-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pagos y Créditos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/inventory-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inventario - Inventory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Facturación Electrónica (FE)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Facturación Electrónica (FE)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Índice
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/fe-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    APIs de Facturación Electrónica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/meypar-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integración Meypar
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/shopify-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integración Shopify
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/kart21-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integración Kart21
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/lightspeed-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integración Lightspeed
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/maxgym-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integración Maxgym
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/acicloud-fe-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ACICloud FE
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/import-xml-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Import XML
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/emit-json-object-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Emit JSON Object
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/download-base64-document-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Download Base64 Document
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Organizaciones
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Organizaciones
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/organizations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Índice
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/organizations/organizations-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gestión de Organizaciones
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ubicaciones Geográficas
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Ubicaciones Geográficas
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/locations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Índice
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/locations/locations-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API de Ubicaciones
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sistema de Testing
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Sistema de Testing
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Índice de Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../TESTING_SYSTEM_SUMMARY/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resumen Ejecutivo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Documentación Técnica
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Documentación Técnica
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../README.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Soluciones
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lightspeed_audit_improvement/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Auditoría Lightspeed
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../solucion-sincronizacion-pagos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sincronización de Pagos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../payment-calculation-fix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Corrección Cálculo Pagos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validaciones
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Validaciones
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../validations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resumen
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../validations/createSale-ruc-validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validación RUC CreateSale
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../validations/maxgym-ruc-validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validación RUC Maxgym
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../validations/meypar-validations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validaciones MEYPAR
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../validations/validation_comparison/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Comparación Validaciones
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#resumen-ejecutivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumen Ejecutivo
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Resumen Ejecutivo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#estado-final" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Estado Final
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mejora-lograda" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mejora Lograda
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#proceso-de-implementacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Proceso de Implementación
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Proceso de Implementación">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fase-1-jobs-criticos-manual" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fase 1: Jobs Críticos (Manual)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fase-2-automatizacion-masiva" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fase 2: Automatización Masiva
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Fase 2: Automatización Masiva">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#herramienta-creada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Herramienta Creada
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#jobs-procesados-por-categoria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Jobs Procesados por Categoría
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Jobs Procesados por Categoría">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#facturacion-7-jobs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Facturación (7 jobs) ✅
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#integraciones-3-jobs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Integraciones (3 jobs) ✅
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#invupos-14-jobs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Invupos (14 jobs) ✅
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sql-server-5-jobs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SQL Server (5 jobs) ✅
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#booqable-4-jobs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Booqable (4 jobs) ✅
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#intuitquickbooks-4-jobs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Intuit/QuickBooks (4 jobs) ✅
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#otros-jobs-32-jobs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Otros Jobs (32 jobs) ✅
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuracion-estandar-aplicada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuración Estándar Aplicada
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuración Estándar Aplicada">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#propiedades-base" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Propiedades Base
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metodo-failed-generado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Método failed() Generado
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#beneficios-implementados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Beneficios Implementados
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Beneficios Implementados">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-prevencion-de-bucles-infinitos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Prevención de Bucles Infinitos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-control-de-recursos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Control de Recursos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-observabilidad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Observabilidad
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-estabilidad-del-sistema" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Estabilidad del Sistema
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#commits-relacionados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Commits Relacionados
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#uso-del-comando-para-futuros-jobs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Uso del Comando para Futuros Jobs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Uso del Comando para Futuros Jobs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#procesar-job-individual" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Procesar job individual
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#procesar-todos-los-jobs-nuevos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Procesar todos los jobs nuevos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#con-configuracion-personalizada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Con configuración personalizada
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#recomendaciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Recomendaciones
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Recomendaciones">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#para-nuevos-jobs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Para Nuevos Jobs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#para-jobs-existentes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Para Jobs Existentes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mantenimiento" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mantenimiento
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#estado-del-sistema" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Estado del Sistema
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Estado del Sistema">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#antes-de-la-implementacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Antes de la Implementación
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#despues-de-la-implementacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Después de la Implementación
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conclusión
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="implementacion-de-configuracion-de-jobs-resumen">Implementación de Configuración de Jobs - Resumen</h1>
+<p><strong>Fecha</strong>: 2026-02-14<br />
+<strong>Implementado por</strong>: Automatización masiva<br />
+<strong>Total de jobs procesados</strong>: 71</p>
+<hr />
+<h2 id="resumen-ejecutivo">Resumen Ejecutivo</h2>
+<h3 id="estado-final">Estado Final</h3>
+<ul>
+<li>✅ <strong>71 jobs (100%)</strong> tienen configuración completa de límites</li>
+<li>✅ <strong>0 jobs</strong> sin configuración</li>
+<li>✅ <strong>0 jobs</strong> con bucles <code>while(true)</code> peligrosos</li>
+</ul>
+<h3 id="mejora-lograda">Mejora Lograda</h3>
+<ul>
+<li><strong>Antes</strong>: 1 job configurado (1.4%)</li>
+<li><strong>Después</strong>: 71 jobs configurados (100%)</li>
+<li><strong>Incremento</strong>: +7000% de cobertura</li>
+</ul>
+<hr />
+<h2 id="proceso-de-implementacion">Proceso de Implementación</h2>
+<h3 id="fase-1-jobs-criticos-manual">Fase 1: Jobs Críticos (Manual)</h3>
+<p><strong>Commit</strong>: <code>0570b5e3</code></p>
+<ol>
+<li><strong>DownloadPacFileJob</strong> - Reparado bucle <code>while(true)</code> con paginación</li>
+<li>Agregado: <code>$tries=3</code>, <code>$timeout=1800</code>, <code>$maxExceptions=3</code>, <code>$maxPages=50</code></li>
+<li>Implementado: Control de errores consecutivos</li>
+<li>
+<p>Agregado: Timeouts en GuzzleHttp</p>
+</li>
+<li>
+<p><strong>CleanOldTransactionsJob</strong> - Eliminado <code>while(true)</code> </p>
+</li>
+<li>Agregado: <code>$tries=3</code>, <code>$timeout=900</code>, <code>$maxExceptions=3</code></li>
+<li>Implementado: <code>$maxIterations=1000</code> con contador</li>
+<li>
+<p>Agregado: Warnings al alcanzar límite</p>
+</li>
+<li>
+<p><strong>Booqable\CustomerJob</strong> - Eliminado <code>while(true)</code></p>
+</li>
+<li>Agregado: <code>$tries=3</code>, <code>$timeout=900</code>, <code>$maxExceptions=3</code>, <code>$maxPages=100</code></li>
+<li>Implementado: Control de errores consecutivos</li>
+<li>Agregado: Timeouts en GuzzleHttp</li>
+</ol>
+<h3 id="fase-2-automatizacion-masiva">Fase 2: Automatización Masiva</h3>
+<p><strong>Commit</strong>: <code>9aa26cdf</code></p>
+<h4 id="herramienta-creada">Herramienta Creada</h4>
+<p><strong>Comando</strong>: <code>php artisan jobs:fix-config</code></p>
+<p><strong>Opciones</strong>:
+- <code>--category=&lt;nombre&gt;</code> - Procesar categoría específica
+- <code>--all</code> - Procesar todos los jobs
+- <code>--dry-run</code> - Simular sin aplicar cambios
+- <code>--tries=&lt;n&gt;</code> - Número de reintentos (default: 3)
+- <code>--timeout=&lt;s&gt;</code> - Timeout en segundos (default: 900)
+- <code>--max-exceptions=&lt;n&gt;</code> - Máximas excepciones (default: 3)</p>
+<p><strong>Capacidades</strong>:
+- Detección automática de propiedades faltantes
+- Generación de método <code>failed()</code> cuando no existe
+- Soporte para múltiples categorías de jobs
+- Modo dry-run para verificación segura</p>
+<hr />
+<h2 id="jobs-procesados-por-categoria">Jobs Procesados por Categoría</h2>
+<h3 id="facturacion-7-jobs">Facturación (7 jobs) ✅</h3>
+<div class="codehilite"><pre><span></span><code>✅ CreateSaleAlanubeDomJob
+✅ CreateInvoiceAlanubeJob
+✅ CreateFiscalCreditInvoiceAlanubeDomJob
+✅ CreateGovernmentalInvoiceAlanubeDomJob
+✅ CreateExportInvoiceAlanubeDomJob
+✅ IssueMassInvoicesJob
+✅ EmitObjectJob
+</code></pre></div>
+
+<p><strong>Configuración aplicada</strong>:
+- <code>$tries = 3</code>
+- <code>$timeout = 900</code> (15 minutos)
+- <code>$maxExceptions = 3</code>
+- Método <code>failed()</code> agregado donde faltaba</p>
+<h3 id="integraciones-3-jobs">Integraciones (3 jobs) ✅</h3>
+<div class="codehilite"><pre><span></span><code>✅ ExtractOrganizationConfigurationEmailsJob
+✅ Pac/ImportXMLAccordingToCreationDateJob
+✅ Pac/CreateAccessTokenJob
+</code></pre></div>
+
+<p><strong>Configuración aplicada</strong>:
+- <code>$tries = 3</code>
+- <code>$timeout = 900</code> (15 minutos)
+- <code>$maxExceptions = 3</code>
+- Método <code>failed()</code> agregado</p>
+<h3 id="invupos-14-jobs">Invupos (14 jobs) ✅</h3>
+<div class="codehilite"><pre><span></span><code><span class="err">✅</span><span class="w"> </span><span class="n">PurchaseOrdersJob</span>
+<span class="err">✅</span><span class="w"> </span><span class="n">SubCategoryJob</span>
+<span class="err">✅</span><span class="w"> </span><span class="n">CustomerJob</span>
+<span class="err">✅</span><span class="w"> </span><span class="n">CategoryJob</span>
+<span class="err">✅</span><span class="w"> </span><span class="n">UploadSalesIntuitJob</span>
+<span class="err">✅</span><span class="w"> </span><span class="n">PurchaseCategoryJob</span>
+<span class="err">✅</span><span class="w"> </span><span class="n">SalesOrdersJob</span>
+<span class="err">✅</span><span class="w"> </span><span class="n">TypePaymentJob</span>
+<span class="err">✅</span><span class="w"> </span><span class="n">CreditNotesJob</span>
+<span class="err">✅</span><span class="w"> </span><span class="n">ProductJob</span>
+<span class="err">✅</span><span class="w"> </span><span class="n">ItemMenuJob</span>
+<span class="err">✅</span><span class="w"> </span><span class="n">UploadSalesGeneralDiaryIntuitJob</span>
+<span class="err">✅</span><span class="w"> </span><span class="n">CreateAccessTokenJob</span>
+<span class="err">✅</span><span class="w"> </span><span class="n">ProviderJob</span>
+</code></pre></div>
+
+<p><strong>Configuración aplicada</strong>:
+- <code>$tries = 3</code>
+- <code>$timeout = 900</code> (15 minutos)
+- <code>$maxExceptions = 3</code>
+- Método <code>failed()</code> agregado a todos</p>
+<h3 id="sql-server-5-jobs">SQL Server (5 jobs) ✅</h3>
+<div class="codehilite"><pre><span></span><code>✅ STInvoiceJob
+✅ STCostOfGoodsOfCategoryJob
+✅ STVendorsJob
+✅ STCostOfGoodsJob
+✅ STCreateSummaryJob
+</code></pre></div>
+
+<p><strong>Configuración aplicada</strong>:
+- <code>$tries = 3</code>
+- <code>$timeout = 900</code> (15 minutos)
+- <code>$maxExceptions = 3</code>
+- Método <code>failed()</code> agregado</p>
+<h3 id="booqable-4-jobs">Booqable (4 jobs) ✅</h3>
+<div class="codehilite"><pre><span></span><code>✅ CustomerJob (ya configurado manualmente)
+✅ SalesOrdersV4Job
+✅ SalesOrdersJob
+✅ ProductJob
+</code></pre></div>
+
+<p><strong>Nota</strong>: CustomerJob ya tenía configuración completa del arreglo manual anterior.</p>
+<h3 id="intuitquickbooks-4-jobs">Intuit/QuickBooks (4 jobs) ✅</h3>
+<div class="codehilite"><pre><span></span><code>✅ UpdateIntuitFEJob
+✅ CreateIntuitBillsJob
+✅ UpdateQuickBooksInvoicesJob
+✅ UpdateIntuitOrdersJob
+</code></pre></div>
+
+<p><strong>Configuración aplicada</strong>:
+- <code>$timeout = 900</code> (15 minutos)
+- <code>$maxExceptions = 3</code>
+- Método <code>failed()</code> agregado donde faltaba</p>
+<h3 id="otros-jobs-32-jobs">Otros Jobs (32 jobs) ✅</h3>
+<div class="codehilite"><pre><span></span><code><span class="err">✅</span><span class="w"> </span><span class="n">ACI</span><span class="o">/</span><span class="n">VerifyOrIssueFaithFromIssuanceJob</span>
+<span class="err">✅</span><span class="w"> </span><span class="n">Booqable</span><span class="o">/</span><span class="n">DownloadSalesOrdersV4Job</span>
+<span class="err">✅</span><span class="w"> </span><span class="n">CleanExpiredTokensJob</span>
+<span class="err">✅</span><span class="w"> </span><span class="n">CleanFailedJobsJob</span>
+<span class="err">✅</span><span class="w"> </span><span class="n">CleanOldArchivesJob</span>
+<span class="err">✅</span><span class="w"> </span><span class="n">CleanOldTransactionsJob</span><span class="w"> </span><span class="p">(</span><span class="n">ya</span><span class="w"> </span><span class="n">configurado</span><span class="p">)</span>
+<span class="err">✅</span><span class="w"> </span><span class="n">CorrectElectronicInvoicesWithErrorsJob</span>
+<span class="err">✅</span><span class="w"> </span><span class="n">CreateSaleAciCloudJob</span>
+<span class="err">✅</span><span class="w"> </span><span class="n">CreateSaleKart21Job</span>
+<span class="err">✅</span><span class="w"> </span><span class="n">CreateSaleLightspeedJob</span>
+<span class="err">✅</span><span class="w"> </span><span class="n">CreateSaleMaxgymJob</span>
+<span class="err">✅</span><span class="w"> </span><span class="n">CreateSaleMeyparJob</span>
+<span class="err">✅</span><span class="w"> </span><span class="n">CreateSaleQuickBooksJob</span>
+<span class="err">✅</span><span class="w"> </span><span class="n">CreateSaleShopifyJob</span>
+<span class="err">✅</span><span class="w"> </span><span class="n">Ezee</span><span class="o">/</span><span class="n">SalesJob</span>
+<span class="err">✅</span><span class="w"> </span><span class="n">GenerateDocumentAIJSONFilesJob</span>
+<span class="err">✅</span><span class="w"> </span><span class="n">ImportXmlJob</span>
+<span class="err">✅</span><span class="w"> </span><span class="n">ImportZipXmlInvoicesJob</span>
+<span class="err">✅</span><span class="w"> </span><span class="n">Invupos</span><span class="o">/</span><span class="n">CreateCreditNotesSummaryJob</span>
+<span class="err">✅</span><span class="w"> </span><span class="n">Invupos</span><span class="o">/</span><span class="n">CreateSalesOrderSummaryJob</span>
+<span class="err">✅</span><span class="w"> </span><span class="n">Lightspeed</span><span class="o">/</span><span class="n">SetSalesOrdersJob</span>
+<span class="err">✅</span><span class="w"> </span><span class="n">LightspeedSerieR</span><span class="o">/</span><span class="n">CreateAccessTokenSerieRJob</span>
+<span class="err">✅</span><span class="w"> </span><span class="n">LightspeedSerieR</span><span class="o">/</span><span class="n">SetSalesOrdersJob</span>
+<span class="err">✅</span><span class="w"> </span><span class="n">MonitorDocumentAITraining</span>
+<span class="err">✅</span><span class="w"> </span><span class="n">Others</span><span class="o">/</span><span class="n">PanamaDailyEntryJob</span>
+<span class="err">✅</span><span class="w"> </span><span class="n">Others</span><span class="o">/</span><span class="n">PanamaPaymentsMadeJob</span>
+<span class="err">✅</span><span class="w"> </span><span class="n">Others</span><span class="o">/</span><span class="n">PanamaSettlementJob</span>
+<span class="err">✅</span><span class="w"> </span><span class="n">Pac</span><span class="o">/</span><span class="n">DownloadPacFileJob</span><span class="w"> </span><span class="p">(</span><span class="n">ya</span><span class="w"> </span><span class="n">configurado</span><span class="p">)</span>
+<span class="err">✅</span><span class="w"> </span><span class="n">PlusMovil</span><span class="o">/</span><span class="n">ImportInvoicesJob</span>
+<span class="err">✅</span><span class="w"> </span><span class="n">ProcessZohoPurchaseOrderJob</span>
+<span class="err">✅</span><span class="w"> </span><span class="n">SendSaleToQuickBooksJob</span>
+<span class="err">✅</span><span class="w"> </span><span class="n">SyncOrganizationToCompanyJob</span>
+<span class="err">✅</span><span class="w"> </span><span class="n">TypepaymentlightspeedJob</span>
+<span class="err">✅</span><span class="w"> </span><span class="n">UpdateFiscalDocumentNumberJob</span>
+</code></pre></div>
+
+<hr />
+<h2 id="configuracion-estandar-aplicada">Configuración Estándar Aplicada</h2>
+<h3 id="propiedades-base">Propiedades Base</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">/**</span>
+<span class="x"> * Número máximo de intentos del job</span>
+<span class="x"> */</span>
+<span class="x">public $tries = 3;</span>
+
+<span class="x">/**</span>
+<span class="x"> * Timeout en segundos (15 minutos)</span>
+<span class="x"> */</span>
+<span class="x">public $timeout = 900;</span>
+
+<span class="x">/**</span>
+<span class="x"> * Número máximo de excepciones no manejadas antes de fallar</span>
+<span class="x"> */</span>
+<span class="x">public $maxExceptions = 3;</span>
+</code></pre></div>
+
+<h3 id="metodo-failed-generado">Método failed() Generado</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">/**</span>
+<span class="x"> * Handle a job failure.</span>
+<span class="x"> *</span>
+<span class="x"> * @param  \Throwable  $exception</span>
+<span class="x"> * @return void</span>
+<span class="x"> */</span>
+<span class="x">public function failed(\Throwable $exception)</span>
+<span class="x">{</span>
+<span class="x">    Log::error(&#39;Job failed: &#39; . static::class, [</span>
+<span class="x">        &#39;error&#39; =&gt; $exception-&gt;getMessage(),</span>
+<span class="x">        &#39;trace&#39; =&gt; $exception-&gt;getTraceAsString()</span>
+<span class="x">    ]);</span>
+<span class="x">}</span>
+</code></pre></div>
+
+<hr />
+<h2 id="beneficios-implementados">Beneficios Implementados</h2>
+<h3 id="1-prevencion-de-bucles-infinitos">1. Prevención de Bucles Infinitos</h3>
+<ul>
+<li>✅ Todos los <code>while(true)</code> eliminados</li>
+<li>✅ Límites de páginas/iteraciones implementados</li>
+<li>✅ Protección contra errores consecutivos</li>
+</ul>
+<h3 id="2-control-de-recursos">2. Control de Recursos</h3>
+<ul>
+<li>✅ Timeouts de 15 minutos previenen ejecuciones eternas</li>
+<li>✅ Límite de 3 intentos evita consumo excesivo de cola</li>
+<li>✅ MaxExceptions previene fallos en cascada</li>
+</ul>
+<h3 id="3-observabilidad">3. Observabilidad</h3>
+<ul>
+<li>✅ Método <code>failed()</code> en todos los jobs</li>
+<li>✅ Logging estructurado de errores</li>
+<li>✅ Trazabilidad completa de fallos</li>
+</ul>
+<h3 id="4-estabilidad-del-sistema">4. Estabilidad del Sistema</h3>
+<ul>
+<li>✅ Redis queue protegida de sobrecarga</li>
+<li>✅ Workers no bloqueados indefinidamente</li>
+<li>✅ Recuperación automática de fallos temporales</li>
+</ul>
+<hr />
+<h2 id="commits-relacionados">Commits Relacionados</h2>
+<ol>
+<li><strong><code>7ace520d</code></strong> - Job Monitor con tab "En Ejecución"</li>
+<li>Nueva funcionalidad para monitorear jobs activos</li>
+<li>
+<p>Estadísticas en tiempo real</p>
+</li>
+<li>
+<p><strong><code>f017457b</code></strong> - Fix inicial DownloadPacFileJob</p>
+</li>
+<li>Primera implementación de configuración completa</li>
+<li>
+<p>Patrón base para otros jobs</p>
+</li>
+<li>
+<p><strong><code>0570b5e3</code></strong> - Fix jobs críticos con while(true)</p>
+</li>
+<li>Eliminación de bucles infinitos</li>
+<li>
+<p>Implementación de límites</p>
+</li>
+<li>
+<p><strong><code>9aa26cdf</code></strong> - Configuración masiva automatizada</p>
+</li>
+<li>68 jobs procesados automáticamente</li>
+<li>Herramienta de automatización creada</li>
+</ol>
+<hr />
+<h2 id="uso-del-comando-para-futuros-jobs">Uso del Comando para Futuros Jobs</h2>
+<h3 id="procesar-job-individual">Procesar job individual</h3>
+<div class="codehilite"><pre><span></span><code>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>docucenter_laravel.test<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>jobs:fix-config<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--category<span class="o">=</span>facturacion<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--dry-run
+</code></pre></div>
+
+<h3 id="procesar-todos-los-jobs-nuevos">Procesar todos los jobs nuevos</h3>
+<div class="codehilite"><pre><span></span><code>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>docucenter_laravel.test<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>jobs:fix-config<span class="w"> </span>--all
+</code></pre></div>
+
+<h3 id="con-configuracion-personalizada">Con configuración personalizada</h3>
+<div class="codehilite"><pre><span></span><code>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>docucenter_laravel.test<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>jobs:fix-config<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--category<span class="o">=</span>integraciones<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--tries<span class="o">=</span><span class="m">5</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--timeout<span class="o">=</span><span class="m">1800</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--max-exceptions<span class="o">=</span><span class="m">5</span>
+</code></pre></div>
+
+<hr />
+<h2 id="recomendaciones">Recomendaciones</h2>
+<h3 id="para-nuevos-jobs">Para Nuevos Jobs</h3>
+<ol>
+<li><strong>Siempre incluir</strong> <code>$tries</code>, <code>$timeout</code>, <code>$maxExceptions</code> desde el inicio</li>
+<li><strong>Implementar</strong> método <code>failed()</code> para tracking</li>
+<li><strong>Evitar</strong> <code>while(true)</code> - usar condiciones de salida</li>
+<li><strong>Agregar</strong> contadores de iteraciones en bucles</li>
+<li><strong>Implementar</strong> timeouts en HTTP clients</li>
+</ol>
+<h3 id="para-jobs-existentes">Para Jobs Existentes</h3>
+<ol>
+<li><strong>Revisar</strong> logs de jobs fallidos regularmente</li>
+<li><strong>Ajustar</strong> timeouts según duración real observada</li>
+<li><strong>Monitorear</strong> uso de memoria en jobs largos</li>
+<li><strong>Considerar</strong> chunking para procesamiento de grandes volúmenes</li>
+</ol>
+<h3 id="mantenimiento">Mantenimiento</h3>
+<ol>
+<li><strong>Ejecutar</strong> auditorías periódicas de configuración</li>
+<li><strong>Actualizar</strong> valores de timeout según métricas reales</li>
+<li><strong>Documentar</strong> cambios en configuración de jobs críticos</li>
+<li><strong>Probar</strong> con <code>--dry-run</code> antes de cambios masivos</li>
+</ol>
+<hr />
+<h2 id="estado-del-sistema">Estado del Sistema</h2>
+<h3 id="antes-de-la-implementacion">Antes de la Implementación</h3>
+<ul>
+<li>⚠️ 70/71 jobs sin protección de timeouts</li>
+<li>🚨 2 jobs con bucles infinitos peligrosos</li>
+<li>❌ 94% de jobs sin límite de excepciones</li>
+<li>⏱️ Riesgo alto de bloqueo de workers</li>
+</ul>
+<h3 id="despues-de-la-implementacion">Después de la Implementación</h3>
+<ul>
+<li>✅ 71/71 jobs con configuración completa</li>
+<li>✅ 0 jobs con bucles infinitos</li>
+<li>✅ 100% de jobs con límite de excepciones</li>
+<li>✅ Sistema de colas protegido y estable</li>
+</ul>
+<hr />
+<h2 id="conclusion">Conclusión</h2>
+<p>La implementación exitosa de configuración de límites en los 71 jobs del sistema representa una <strong>mejora crítica en la estabilidad y confiabilidad</strong> de DocuCenter. </p>
+<p><strong>Impacto cuantificable</strong>:
+- <strong>+7000%</strong> incremento en cobertura de configuración
+- <strong>100%</strong> eliminación de riesgos de bucles infinitos
+- <strong>71 jobs</strong> protegidos contra timeouts indefinidos
+- <strong>1 herramienta</strong> reutilizable para futuros jobs</p>
+<p>El comando <code>jobs:fix-config</code> queda disponible como herramienta permanente para mantener la calidad y seguridad del sistema de colas de Laravel.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/aghabrego/docucenter" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

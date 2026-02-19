@@ -1,0 +1,2521 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentación técnica y de usuario de DocuCenter">
+      
+      
+        <meta name="author" content="aghabrego">
+      
+      
+        <link rel="canonical" href="https://aghabrego.github.io/docucenter-public/technical/quickbooks-multi-tax-rates-support/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="https://home.apconpanama.me/wp-content/uploads/2024/03/logo3.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Soporte de Múltiples Tasas de Impuesto en QuickBooks - Implementación - DocuCenter</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#soporte-de-multiples-tasas-de-impuesto-en-quickbooks-implementacion" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="DocuCenter" class="md-header__button md-logo" aria-label="DocuCenter" data-md-component="logo">
+      
+  <img src="https://home.apconpanama.me/wp-content/uploads/2024/03/logo3.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            DocuCenter
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Soporte de Múltiples Tasas de Impuesto en QuickBooks - Implementación
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/aghabrego/docucenter-public" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    aghabrego/docucenter-public
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="DocuCenter" class="md-nav__button md-logo" aria-label="DocuCenter" data-md-component="logo">
+      
+  <img src="https://home.apconpanama.me/wp-content/uploads/2024/03/logo3.png" alt="logo">
+
+    </a>
+    DocuCenter
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/aghabrego/docucenter-public" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    aghabrego/docucenter-public
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Documentation
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    API Documentation
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sage ACICloud
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Sage ACICloud
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Índice
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/invoices-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Facturación - Invoices
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/customers-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Clientes - Customers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/vendors-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Proveedores - Vendors
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/purchases-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Compras - Purchases
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/products-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Productos - Products
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/jobs-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Trabajos - Jobs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/accounting-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contabilidad General
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/payments-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pagos y Créditos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/inventory-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inventario - Inventory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Facturación Electrónica (FE)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Facturación Electrónica (FE)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Índice
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/fe-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    APIs de Facturación Electrónica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/meypar-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integración Meypar
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/shopify-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integración Shopify
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/kart21-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integración Kart21
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/lightspeed-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integración Lightspeed
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/maxgym-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integración Maxgym
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/acicloud-fe-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ACICloud FE
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/import-xml-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Import XML
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/emit-json-object-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Emit JSON Object
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/download-base64-document-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Download Base64 Document
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Organizaciones
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Organizaciones
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/organizations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Índice
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/organizations/organizations-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gestión de Organizaciones
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ubicaciones Geográficas
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Ubicaciones Geográficas
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/locations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Índice
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/locations/locations-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API de Ubicaciones
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sistema de Testing
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Sistema de Testing
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Índice de Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../TESTING_SYSTEM_SUMMARY/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resumen Ejecutivo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Documentación Técnica
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Documentación Técnica
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../README.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Soluciones
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lightspeed_audit_improvement/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Auditoría Lightspeed
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../solucion-sincronizacion-pagos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sincronización de Pagos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../payment-calculation-fix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Corrección Cálculo Pagos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validaciones
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Validaciones
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../validations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Resumen
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../validations/createSale-ruc-validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validación RUC CreateSale
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../validations/maxgym-ruc-validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validación RUC Maxgym
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../validations/meypar-validations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validaciones MEYPAR
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../validations/validation_comparison/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Comparación Validaciones
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#problema-identificado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Problema Identificado
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Problema Identificado">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sintoma" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Síntoma
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#causa-raiz" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Causa Raíz
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#solucion-implementada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Solución Implementada
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Solución Implementada">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#flujo-de-integracion-con-aci-cloud" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Flujo de Integración con ACI Cloud
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nuevos-metodos-agregados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Nuevos Métodos Agregados
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Nuevos Métodos Agregados">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-gettaxcodedetailsfromacicloud" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. getTaxCodeDetailsFromACICloud()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-buildtaxcodemapping" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. buildTaxCodeMapping()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-calculatelinetax" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. calculateLineTax()
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modificaciones-al-metodo-storeorder" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Modificaciones al Método storeOrder()
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Modificaciones al Método storeOrder()">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#antes-lineas-956-974" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Antes (líneas 956-974)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#despues-lineas-953-1000" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Después (líneas 953-1000)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuracion-requerida" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuración Requerida
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuración Requerida">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-id-de-organizacion-de-aci-cloud" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. ID de Organización de ACI Cloud
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-fallback-sin-configuracion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Fallback Sin Configuración
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testing
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Testing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#script-de-verificacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Script de Verificación
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#script-de-analisis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Script de Análisis
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#logs-a-verificar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Logs a Verificar
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#casos-de-uso" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Casos de Uso
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Casos de Uso">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#caso-1-multiples-tasas-nuevo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Caso 1: Múltiples Tasas (NUEVO ✅)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#caso-2-una-sola-tasa-compatible" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Caso 2: Una Sola Tasa (Compatible ✅)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#caso-3-sin-aci-cloud-config-fallback" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Caso 3: Sin ACI Cloud Config (Fallback ✅)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#beneficios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Beneficios
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#impacto-en-codigo-existente" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Impacto en Código Existente
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Impacto en Código Existente">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sin-cambios-en" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sin Cambios en:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modificaciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Modificaciones:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#retrocompatibilidad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Retrocompatibilidad:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#monitoreo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Monitoreo
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Monitoreo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#metricas-a-observar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Métricas a Observar
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#alertas-recomendadas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alertas Recomendadas
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#proximos-pasos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Próximos Pasos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#archivos-modificados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Archivos Modificados
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Referencias
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="soporte-de-multiples-tasas-de-impuesto-en-quickbooks-implementacion">Soporte de Múltiples Tasas de Impuesto en QuickBooks - Implementación</h1>
+<h2 id="problema-identificado">Problema Identificado</h2>
+<p>El servicio <code>QuickBooksOnlineService</code> <strong>NO soportaba correctamente facturas con múltiples tasas de impuesto</strong> (ej: ITBMS 7% e ITBMS 10% en la misma factura).</p>
+<h3 id="sintoma">Síntoma</h3>
+<p>Cuando QuickBooks enviaba una factura con:
+- Línea 1: ITBMS 10%
+- Líneas 2-4: ITBMS 7%</p>
+<p>El sistema calculaba incorrectamente los impuestos por línea usando distribución proporcional, resultando en montos erróneos para cada línea individual.</p>
+<h3 id="causa-raiz">Causa Raíz</h3>
+<p>El código solo leía <code>TxnTaxDetail.TaxLine[0]</code> y distribuía el impuesto total proporcionalmente, sin considerar que cada línea podía tener una tasa diferente según su <code>TaxCodeRef</code>.</p>
+<h2 id="solucion-implementada">Solución Implementada</h2>
+<h3 id="flujo-de-integracion-con-aci-cloud">Flujo de Integración con ACI Cloud</h3>
+<div class="codehilite"><pre><span></span><code>QuickBooks Invoice
+    ↓
+TaxCodeRef por línea (ej: &quot;15&quot;, &quot;13&quot;)
+    ↓
+API ACI Cloud: GET /aciv2/quickbooks/taxcode/{taxCodeRef}/details
+    ↓
+Response.data.Name extraído (ej: &quot;ITBMS10&quot;, &quot;ITBMS7&quot;)
+    ↓
+Extraer número del nombre: ITBMS10 → 10%, ITBMS7 → 7%
+    ↓
+Mapeo TaxCodeRef → TaxPercent
+    ↓
+TaxPercent aplicado a cada línea
+</code></pre></div>
+
+<h3 id="nuevos-metodos-agregados">Nuevos Métodos Agregados</h3>
+<h4 id="1-gettaxcodedetailsfromacicloud">1. <code>getTaxCodeDetailsFromACICloud()</code></h4>
+<p>Consulta la API de ACI Cloud para obtener detalles de un código de impuesto:</p>
+<div class="codehilite"><pre><span></span><code><span class="x">protected function getTaxCodeDetailsFromACICloud(string $taxCodeRef, string $organizationId): ?array</span>
+</code></pre></div>
+
+<p><strong>Endpoint consultado:</strong></p>
+<div class="codehilite"><pre><span></span><code>GET https://us-central1-zoho-books-edocs-integracion.cloudfunctions.net/aciv2/quickbooks/taxcode/{taxCodeRef}/details?organization_id={orgId}
+</code></pre></div>
+
+<p><strong>Respuesta esperada:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;Name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ITBMS10&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;Description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ITBMS10%&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;Active&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;TaxGroup&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;SalesTaxRateList&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;TaxRateDetail&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span>
+<span class="w">                </span><span class="nt">&quot;TaxRateRef&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;20&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ITBMS10 (Ventas)&quot;</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}]</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p><strong>Valores posibles del campo <code>Name</code>:</strong>
+- <code>ITBMS0</code> → 0% (exento)
+- <code>ITBMS7</code> → 7%
+- <code>ITBMS10</code> → 10%
+- <code>ITBMS15</code> → 15%</p>
+<h4 id="2-buildtaxcodemapping">2. <code>buildTaxCodeMapping()</code></h4>
+<p>Construye un mapeo de TaxCodeRef → TaxPercent extrayendo el porcentaje del nombre:</p>
+<div class="codehilite"><pre><span></span><code><span class="x">protected function buildTaxCodeMapping(array $invoiceData, string $aciCloudOrgId): array</span>
+</code></pre></div>
+
+<p><strong>Proceso:</strong>
+1. Extrae todos los <code>TaxCodeRef</code> únicos de las líneas
+2. Para cada uno, consulta ACI Cloud
+3. Obtiene el campo <code>Name</code> del response (ej: "ITBMS7")
+4. Extrae el número usando regex: <code>/ITBMS(\d+)/</code>
+5. Ese número es el porcentaje de impuesto</p>
+<p><strong>Output:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="x">[</span>
+<span class="x">    &quot;15&quot; =&gt; [</span>
+<span class="x">        &quot;percent&quot; =&gt; 10,</span>
+<span class="x">        &quot;tax_code_name&quot; =&gt; &quot;ITBMS10&quot;</span>
+<span class="x">    ],</span>
+<span class="x">    &quot;13&quot; =&gt; [</span>
+<span class="x">        &quot;percent&quot; =&gt; 7,</span>
+<span class="x">        &quot;tax_code_name&quot; =&gt; &quot;ITBMS7&quot;</span>
+<span class="x">    ]</span>
+<span class="x">]</span>
+</code></pre></div>
+
+<h4 id="3-calculatelinetax">3. <code>calculateLineTax()</code></h4>
+<p>Método unificado para calcular impuesto por línea con prioridades:</p>
+<div class="codehilite"><pre><span></span><code><span class="x">protected function calculateLineTax(</span>
+<span class="x">    float $lineAmount,</span>
+<span class="x">    ?string $taxCodeRef,</span>
+<span class="x">    array $taxCodeMapping,</span>
+<span class="x">    array $salesItemDetail,</span>
+<span class="x">    float $fullAmountTax,</span>
+<span class="x">    float $subtotal</span>
+<span class="x">): array</span>
+</code></pre></div>
+
+<p><strong>Orden de Prioridad:</strong>
+1. ✅ <code>TaxCode.rateValue</code> (si QB lo envía directamente)
+2. ✅ <code>TaxAmount</code> (si está presente)
+3. ✅ <strong><code>TaxCodeMapping</code></strong> (NUEVO - usando ACI Cloud)
+4. ✅ Distribución proporcional (fallback)</p>
+<p><strong>Output:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="x">[</span>
+<span class="x">    &#39;tax&#39; =&gt; 20.85,</span>
+<span class="x">    &#39;method&#39; =&gt; &#39;tax_code_mapping&#39;,</span>
+<span class="x">    &#39;percent&#39; =&gt; 10</span>
+<span class="x">]</span>
+</code></pre></div>
+
+<h3 id="modificaciones-al-metodo-storeorder">Modificaciones al Método <code>storeOrder()</code></h3>
+<h4 id="antes-lineas-956-974">Antes (líneas 956-974)</h4>
+<div class="codehilite"><pre><span></span><code><span class="x">// Solo usaba TaxLine[0]</span>
+<span class="x">$taxPercent = 0;</span>
+<span class="x">if ($taxDetail !== null &amp;&amp; isset($taxDetail[&#39;TaxLine&#39;][0][&#39;TaxLineDetail&#39;])) {</span>
+<span class="x">    $taxLineDetail = $taxDetail[&#39;TaxLine&#39;][0][&#39;TaxLineDetail&#39;];</span>
+<span class="x">    $taxPercent = (float) ($taxLineDetail[&#39;TaxPercent&#39;] ?? 0);</span>
+<span class="x">}</span>
+
+<span class="x">// Distribución proporcional (única opción)</span>
+<span class="x">$tax = $fullAmountTax * ($lineAmount / $subtotal);</span>
+</code></pre></div>
+
+<h4 id="despues-lineas-953-1000">Después (líneas 953-1000)</h4>
+<div class="codehilite"><pre><span></span><code><span class="x">// Construir mapeo usando ACI Cloud</span>
+<span class="x">$aciCloudOrgId = // obtener desde connection o organization</span>
+<span class="x">$taxCodeMapping = $this-&gt;buildTaxCodeMapping($invoiceData, $aciCloudOrgId);</span>
+
+<span class="x">// Usar nuevo método unificado</span>
+<span class="x">$taxResult = $this-&gt;calculateLineTax(</span>
+<span class="x">    $lineAmount,</span>
+<span class="x">    $taxCodeRef,</span>
+<span class="x">    $taxCodeMapping,</span>
+<span class="x">    $salesItemDetail,</span>
+<span class="x">    $fullAmountTax,</span>
+<span class="x">    $subtotal</span>
+<span class="x">);</span>
+</code></pre></div>
+
+<h2 id="configuracion-requerida">Configuración Requerida</h2>
+<h3 id="1-id-de-organizacion-de-aci-cloud">1. ID de Organización de ACI Cloud</h3>
+<p>El sistema necesita el <code>aci_cloud_organization_id</code> para consultar la API. Se puede configurar en:</p>
+<p><strong>Opción A: Settings de Connection</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="x">$connection-&gt;settings = [</span>
+<span class="x">    &#39;aci_cloud_organization_id&#39; =&gt; &#39;iXbnm1E7Z1TkX74mccUi&#39;,</span>
+<span class="x">    // ... otros settings</span>
+<span class="x">];</span>
+</code></pre></div>
+
+<p><strong>Opción B: Campo en Organization</strong> (recomendado)</p>
+<div class="codehilite"><pre><span></span><code><span class="x">$organization-&gt;aci_cloud_organization_id = &#39;iXbnm1E7Z1TkX74mccUi&#39;;</span>
+</code></pre></div>
+
+<h3 id="2-fallback-sin-configuracion">2. Fallback Sin Configuración</h3>
+<p>Si no se configura <code>aci_cloud_organization_id</code>:
+- Se registra warning en logs
+- Se usa distribución proporcional (comportamiento anterior)
+- Funciona para facturas con una sola tasa</p>
+<h2 id="testing">Testing</h2>
+<h3 id="script-de-verificacion">Script de Verificación</h3>
+<div class="codehilite"><pre><span></span><code>./scripts/test-qb-multi-tax-implementation.sh
+</code></pre></div>
+
+<h3 id="script-de-analisis">Script de Análisis</h3>
+<div class="codehilite"><pre><span></span><code>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>docucenter_laravel.test<span class="w"> </span>php<span class="w"> </span>docs/testing/test-qb-multi-tax-rates.php
+</code></pre></div>
+
+<h3 id="logs-a-verificar">Logs a Verificar</h3>
+<p><strong>Mapeo construido:</strong></p>
+<div class="codehilite"><pre><span></span><code>QuickBooks Tax Code Mapping Built
+  <span class="k">-</span> mapping_count: 2
+  <span class="k">-</span> mapping: {&quot;15&quot;: {...}, &quot;13&quot;: {...}}
+</code></pre></div>
+
+<p><strong>Cálculo por línea:</strong></p>
+<div class="codehilite"><pre><span></span><code>QuickBooks Line Tax Calculation
+  <span class="k">-</span> calculation_method: tax_code_mapping
+  <span class="k">-</span> tax_percent_applied: 10
+  <span class="k">-</span> has_mapping: true
+</code></pre></div>
+
+<h2 id="casos-de-uso">Casos de Uso</h2>
+<h3 id="caso-1-multiples-tasas-nuevo">Caso 1: Múltiples Tasas (NUEVO ✅)</h3>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;Line&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span><span class="nt">&quot;TaxCodeRef&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;15&quot;</span><span class="p">}},</span><span class="w"> </span><span class="c1">// 10%</span>
+<span class="w">        </span><span class="p">{</span><span class="nt">&quot;TaxCodeRef&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;13&quot;</span><span class="p">}},</span><span class="w"> </span><span class="c1">// 7%</span>
+<span class="w">        </span><span class="p">{</span><span class="nt">&quot;TaxCodeRef&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;13&quot;</span><span class="p">}},</span><span class="w"> </span><span class="c1">// 7%</span>
+<span class="w">    </span><span class="p">],</span>
+<span class="w">    </span><span class="nt">&quot;TxnTaxDetail&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;TaxLine&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">            </span><span class="p">{</span><span class="nt">&quot;TaxPercent&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;TaxRateRef&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;20&quot;</span><span class="p">}},</span>
+<span class="w">            </span><span class="p">{</span><span class="nt">&quot;TaxPercent&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;TaxRateRef&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;18&quot;</span><span class="p">}}</span>
+<span class="w">        </span><span class="p">]</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p><strong>Resultado:</strong> Cada línea recibe su tasa correcta (10% o 7%)</p>
+<h3 id="caso-2-una-sola-tasa-compatible">Caso 2: Una Sola Tasa (Compatible ✅)</h3>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;Line&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span><span class="nt">&quot;TaxCodeRef&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;13&quot;</span><span class="p">}},</span><span class="w"> </span><span class="c1">// 7%</span>
+<span class="w">        </span><span class="p">{</span><span class="nt">&quot;TaxCodeRef&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;13&quot;</span><span class="p">}},</span><span class="w"> </span><span class="c1">// 7%</span>
+<span class="w">    </span><span class="p">],</span>
+<span class="w">    </span><span class="nt">&quot;TxnTaxDetail&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;TaxLine&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">            </span><span class="p">{</span><span class="nt">&quot;TaxPercent&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;TaxRateRef&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;18&quot;</span><span class="p">}}</span>
+<span class="w">        </span><span class="p">]</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p><strong>Resultado:</strong> Funciona con mapeo o distribución proporcional</p>
+<h3 id="caso-3-sin-aci-cloud-config-fallback">Caso 3: Sin ACI Cloud Config (Fallback ✅)</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1">// Sin aci_cloud_organization_id configurado</span>
+</code></pre></div>
+
+<p><strong>Resultado:</strong> Usa distribución proporcional (comportamiento anterior)</p>
+<h2 id="beneficios">Beneficios</h2>
+<ol>
+<li>✅ <strong>Precisión</strong>: Impuestos correctos por línea con múltiples tasas</li>
+<li>✅ <strong>Compatibilidad</strong>: Mantiene funcionamiento anterior si no hay config</li>
+<li>✅ <strong>Escalabilidad</strong>: Soporta N tasas diferentes en una factura</li>
+<li>✅ <strong>Auditoría</strong>: Logs detallados del proceso de mapeo</li>
+<li>✅ <strong>Fallbacks</strong>: Múltiples niveles de respaldo para cálculo</li>
+</ol>
+<h2 id="impacto-en-codigo-existente">Impacto en Código Existente</h2>
+<h3 id="sin-cambios-en">Sin Cambios en:</h3>
+<ul>
+<li>✅ Modelos (<code>SalesHeaderImp</code>, <code>SalesDetailImp</code>)</li>
+<li>✅ Base de datos (no requiere migraciones)</li>
+<li>✅ API endpoints</li>
+<li>✅ Validaciones (<code>CreateSaleQuickBooksRequest</code>)</li>
+</ul>
+<h3 id="modificaciones">Modificaciones:</h3>
+<ul>
+<li>✅ <code>QuickBooksOnlineService::storeOrder()</code> - Lógica de cálculo mejorada</li>
+<li>✅ Nuevos métodos helper agregados</li>
+</ul>
+<h3 id="retrocompatibilidad">Retrocompatibilidad:</h3>
+<ul>
+<li>✅ <strong>100% compatible</strong> con facturas existentes</li>
+<li>✅ Funciona sin configuración adicional (con fallback)</li>
+<li>✅ No rompe funcionalidad actual</li>
+</ul>
+<h2 id="monitoreo">Monitoreo</h2>
+<h3 id="metricas-a-observar">Métricas a Observar</h3>
+<ol>
+<li>Conteo de facturas usando <code>tax_code_mapping</code> vs <code>proportional_distribution</code></li>
+<li>Errores en llamadas a ACI Cloud API</li>
+<li>Diferencias entre impuesto calculado y total QB</li>
+</ol>
+<h3 id="alertas-recomendadas">Alertas Recomendadas</h3>
+<ul>
+<li>API ACI Cloud no disponible (usar cache/fallback)</li>
+<li>TaxCodeRef sin mapeo encontrado</li>
+<li>Diferencias &gt; $0.10 entre calculado y QB</li>
+</ul>
+<h2 id="proximos-pasos">Próximos Pasos</h2>
+<ol>
+<li>✅ Configurar <code>aci_cloud_organization_id</code> en producción</li>
+<li>⏳ Monitorear logs de primeras facturas procesadas</li>
+<li>⏳ Validar con casos reales de clientes</li>
+<li>⏳ Considerar cache de mapeos TaxCode para performance</li>
+<li>⏳ Documentar proceso de configuración para nuevos clientes</li>
+</ol>
+<h2 id="archivos-modificados">Archivos Modificados</h2>
+<div class="codehilite"><pre><span></span><code><span class="nx">app</span><span class="o">/</span><span class="nx">Services</span><span class="o">/</span><span class="nx">QuickBooksOnlineService</span><span class="p">.</span><span class="nx">php</span>
+<span class="w">  </span><span class="o">+</span><span class="w"> </span><span class="nx">getTaxCodeDetailsFromACICloud</span><span class="p">()</span><span class="w"> </span><span class="p">(</span><span class="nx">líneas</span><span class="w"> </span><span class="mi">1485</span><span class="o">-</span><span class="mi">1521</span><span class="p">)</span>
+<span class="w">  </span><span class="o">+</span><span class="w"> </span><span class="nx">buildTaxCodeMapping</span><span class="p">()</span><span class="w"> </span><span class="p">(</span><span class="nx">líneas</span><span class="w"> </span><span class="mi">1523</span><span class="o">-</span><span class="mi">1585</span><span class="p">)</span>
+<span class="w">  </span><span class="o">+</span><span class="w"> </span><span class="nx">calculateLineTax</span><span class="p">()</span><span class="w"> </span><span class="p">(</span><span class="nx">líneas</span><span class="w"> </span><span class="mi">1587</span><span class="o">-</span><span class="mi">1641</span><span class="p">)</span>
+<span class="w">  </span><span class="o">~</span><span class="w"> </span><span class="nx">storeOrder</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">Lógica</span><span class="w"> </span><span class="nx">de</span><span class="w"> </span><span class="nx">impuestos</span><span class="w"> </span><span class="nx">mejorada</span><span class="w"> </span><span class="p">(</span><span class="nx">líneas</span><span class="w"> </span><span class="mi">953</span><span class="o">-</span><span class="mi">1050</span><span class="p">)</span>
+
+<span class="nx">docs</span><span class="o">/</span><span class="nx">testing</span><span class="o">/</span><span class="nx">test</span><span class="o">-</span><span class="nx">qb</span><span class="o">-</span><span class="nx">multi</span><span class="o">-</span><span class="nx">tax</span><span class="o">-</span><span class="nx">rates</span><span class="p">.</span><span class="nx">php</span><span class="w"> </span><span class="p">(</span><span class="nx">NUEVO</span><span class="p">)</span>
+<span class="w">  </span><span class="o">-</span><span class="w"> </span><span class="nx">Script</span><span class="w"> </span><span class="nx">de</span><span class="w"> </span><span class="nx">análisis</span><span class="w"> </span><span class="nx">y</span><span class="w"> </span><span class="nx">verificación</span>
+
+<span class="nx">scripts</span><span class="o">/</span><span class="nx">test</span><span class="o">-</span><span class="nx">qb</span><span class="o">-</span><span class="nx">multi</span><span class="o">-</span><span class="nx">tax</span><span class="o">-</span><span class="nx">implementation</span><span class="p">.</span><span class="nx">sh</span><span class="w"> </span><span class="p">(</span><span class="nx">NUEVO</span><span class="p">)</span>
+<span class="w">  </span><span class="o">-</span><span class="w"> </span><span class="nx">Script</span><span class="w"> </span><span class="nx">de</span><span class="w"> </span><span class="nx">validación</span><span class="w"> </span><span class="nx">de</span><span class="w"> </span><span class="nx">implementación</span>
+</code></pre></div>
+
+<h2 id="referencias">Referencias</h2>
+<ul>
+<li>API ACI Cloud: <code>https://us-central1-zoho-books-edocs-integracion.cloudfunctions.net/aciv2</code></li>
+<li>Endpoint TaxCode: <code>/quickbooks/taxcode/{id}/details</code></li>
+<li>QuickBooks API: <code>TxnTaxDetail</code> structure documentation</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/aghabrego/docucenter" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

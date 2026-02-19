@@ -1346,10 +1346,21 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#implementacion-gpedcomgl_dnroped" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        � Implementación gPedComGl_dNroPed 🆕
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#api-consulta-de-ruc" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🔍 API Consulta de RUC 🆕
+        �🔍 API Consulta de RUC 🆕
       
     </span>
   </a>
@@ -2604,10 +2615,21 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#implementacion-gpedcomgl_dnroped" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        � Implementación gPedComGl_dNroPed 🆕
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#api-consulta-de-ruc" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🔍 API Consulta de RUC 🆕
+        �🔍 API Consulta de RUC 🆕
       
     </span>
   </a>
@@ -3441,7 +3463,29 @@
 
 <h1 id="sistema-de-testing-docucenter">🧪 Sistema de Testing DocuCenter</h1>
 <h2 id="scrip-scripts-de-prueba-reutilizables">📋 Scrip### 🧪 Scripts de Prueba Reutilizables</h2>
-<h3 id="api-consulta-de-ruc">🔍 <strong><a href="../api/check-ruc-api/">API Consulta de RUC</a></strong> 🆕</h3>
+<h3 id="implementacion-gpedcomgl_dnroped">� <strong><a href="gPedComGl-dNroPed-implementation/">Implementación gPedComGl_dNroPed</a></strong> 🆕</h3>
+<p>Implementación y testing del campo número de pedido de compra global en facturas electrónicas.</p>
+<p><strong>Scripts disponibles</strong>:
+- <code>test-real-xml.php</code> - Verificar parsing básico del XML
+- <code>test-full-import-gped.php</code> - Verificar extracción con getFirstfilterData()
+- <code>test-import-simulation.php</code> - Simular flujo completo de importación</p>
+<p><strong>Cambios incluidos</strong>:
+- ✅ Campo <code>gPedComGl_dNroPed</code> agregado a FeHeader model y base de datos
+- ✅ Extracción implementada en ImportData.php (métodos xml() y xmlGT())
+- ✅ <strong>Fix crítico del parser XML.php</strong> - Resuelve extracción de solo 2 claves
+- ✅ Documentación completa con casos de prueba</p>
+<p><strong>Uso rápido</strong>:</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Verificar extracción básica</span>
+docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>docucenter_laravel.test<span class="w"> </span>php<span class="w"> </span>/var/www/html/scripts/test-real-xml.php
+
+<span class="c1"># Prueba completa</span>
+docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>docucenter_laravel.test<span class="w"> </span>php<span class="w"> </span>/var/www/html/scripts/test-full-import-gped.php
+
+<span class="c1"># Simulación de importación</span>
+docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>docucenter_laravel.test<span class="w"> </span>php<span class="w"> </span>/var/www/html/scripts/test-import-simulation.php
+</code></pre></div>
+
+<h3 id="api-consulta-de-ruc">�🔍 <strong><a href="../api/check-ruc-api/">API Consulta de RUC</a></strong> 🆕</h3>
 <p>Testing de la nueva API para consulta de RUCs panameños usando Alanube.</p>
 <p><strong>Scripts disponibles</strong>:
 - <code>test-check-ruc.sh</code> - Script completo de testing con múltiples casos
