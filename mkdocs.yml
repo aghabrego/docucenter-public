@@ -1,68 +1,91 @@
 site_name: DocuCenter
-site_description: Documentación técnica y de usuario de DocuCenter
+site_description: Documentación técnica y de usuario de DocuCenter - Sistema de facturación electrónica
 site_author: aghabrego
-site_url: https://aghabrego.github.io/docucenter-public/
-repo_url: https://github.com/aghabrego/docucenter-public
-repo_name: aghabrego/docucenter-public
+site_url: https://aghabrego.github.io/docucenter/
+repo_url: https://github.com/aghabrego/docucenter
+repo_name: aghabrego/docucenter
 
 theme:
   name: material
   language: es
   favicon: https://home.apconpanama.me/wp-content/uploads/2024/03/logo3.png
   logo: https://home.apconpanama.me/wp-content/uploads/2024/03/logo3.png
+  palette:
+    - scheme: default
+      primary: blue
+      accent: light blue
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - search.highlight
+    - search.suggest
 
 nav:
   - Inicio: index.md
-  - API Documentation:
-    - Sage ACICloud:
-      - Índice: api/sage-acicloud/index.md
-      - Facturación - Invoices: api/sage-acicloud/invoices-api.md
-      - Clientes - Customers: api/sage-acicloud/customers-api.md
-      - Proveedores - Vendors: api/sage-acicloud/vendors-api.md
-      - Compras - Purchases: api/sage-acicloud/purchases-api.md
-      - Productos - Products: api/sage-acicloud/products-api.md
-      - Trabajos - Jobs: api/sage-acicloud/jobs-api.md
-      - Contabilidad General: api/sage-acicloud/accounting-api.md
-      - Pagos y Créditos: api/sage-acicloud/payments-api.md
-      - Inventario - Inventory: api/sage-acicloud/inventory-api.md
+  - APIs:
+    - api/index.md
     - Facturación Electrónica (FE):
-      - Índice: api/fe/index.md
-      - APIs de Facturación Electrónica: api/fe/fe-api.md
-      - Integración Meypar: api/fe/meypar-api.md
-      - Integración Shopify: api/fe/shopify-api.md
-      - Integración Kart21: api/fe/kart21-api.md
-      - Integración Lightspeed: api/fe/lightspeed-api.md
-      - Integración Maxgym: api/fe/maxgym-api.md
-      - ACICloud FE: api/fe/acicloud-fe-api.md
-      - Import XML: api/fe/import-xml-api.md
-      - Emit JSON Object: api/fe/emit-json-object-api.md
-      - Download Base64 Document: api/fe/download-base64-document-api.md
+      - api/fe/fe-api.md
+      - api/fe/acicloud-fe-api.md
+      - api/fe/document-emission-api.md
+      - api/fe/shopify-api.md
+      - api/fe/lightspeed-api.md
+      - api/fe/maxgym-api.md
+      - api/fe/meypar-api.md
+      - api/fe/kart21-api.md
+    - Sage ACICloud:
+      - api/sage-acicloud/customers-api.md
+      - api/sage-acicloud/products-api.md
+      - api/sage-acicloud/sales-orders-api.md
+      - api/sage-acicloud/purchases-api.md
+      - api/sage-acicloud/payments-api.md
+      - api/sage-acicloud/inventory-api.md
+      - api/sage-acicloud/jobs-api.md
     - Organizaciones:
-      - Índice: api/organizations/index.md
-      - Gestión de Organizaciones: api/organizations/organizations-api.md
-    - Ubicaciones Geográficas:
-      - Índice: api/locations/index.md
-      - API de Ubicaciones: api/locations/locations-api.md
-  - Sistema de Testing:
-    - Índice de Testing: testing/README.md
-    - Resumen Ejecutivo: TESTING_SYSTEM_SUMMARY.md
+      - api/organizations/organizations-api.md
+  - Optimizaciones:
+    - optimizations/README.md
+    - Performance:
+      - optimizations/customer-supplier-optimizations.md
+      - optimizations/mysql-optimization-circuit-breaker.md
   - Documentación Técnica:
-    - Soluciones: technical/README.md
-    - Auditoría Lightspeed: technical/lightspeed_audit_improvement.md
-    - Sincronización de Pagos: technical/solucion-sincronizacion-pagos.md
-    - Corrección Cálculo Pagos: technical/payment-calculation-fix.md
+    - technical/README.md
+    - Pagos y Cálculos:
+      - technical/payment-calculation-fix.md
+      - technical/solucion-sincronizacion-pagos.md
   - Validaciones:
-    - Resumen: validations/README.md
-    - Validación RUC CreateSale: validations/createSale-ruc-validation.md
-    - Validación RUC Maxgym: validations/maxgym-ruc-validation.md
-    - Validaciones MEYPAR: validations/meypar-validations.md
-    - Comparación Validaciones: validations/validation_comparison.md
+    - validations/README.md
+    - Documentos Fiscales:
+      - validations/createSale-ruc-validation.md
+      - validations/maxgym-ruc-validation.md
 
 markdown_extensions:
   - admonition
-  - codehilite
-  - toc
+  - attr_list
+  - codehilite:
+      guess_lang: false
+  - toc:
+      permalink: true
   - footnotes
+  - pymdownx.arithmatex
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.critic
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+  - pymdownx.inlinehilite
+  - pymdownx.magiclink
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.superfences
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
 
 extra:
   social:
