@@ -1,9 +1,14 @@
+#!/bin/bash
+set -e
+
+# Crear el mkdocs.yml correcto
+cat > /home/weirdolabs/code/docucenter-public/mkdocs.yml <<'EOF'
 site_name: DocuCenter
 site_description: Documentación técnica y de usuario de DocuCenter - Sistema de facturación electrónica
 site_author: aghabrego
-site_url: https://aghabrego.github.io/docucenter/
-repo_url: https://github.com/aghabrego/docucenter
-repo_name: aghabrego/docucenter
+site_url: https://aghabrego.github.io/docucenter-public/
+repo_url: https://github.com/aghabrego/docucenter-public
+repo_name: aghabrego/docucenter-public
 
 theme:
   name: material
@@ -24,7 +29,7 @@ theme:
 
 nav:
   - Inicio: index.md
-  - APIs:
+  - API Documentation:
     - api/index.md
     - Facturación Electrónica (FE):
       - api/fe/fe-api.md
@@ -51,7 +56,7 @@ nav:
       - optimizations/customer-supplier-optimizations.md
       - optimizations/mysql-optimization-circuit-breaker.md
   - Documentación Técnica:
-    - Soluciones Técnicas: technical/index.md
+    - Soluciones Técnicas: technical/README.md
     - Pagos y Cálculos:
       - technical/payment-calculation-fix.md
       - technical/solucion-sincronizacion-pagos.md
@@ -60,34 +65,24 @@ nav:
     - Documentos Fiscales:
       - validations/createSale-ruc-validation.md
       - validations/maxgym-ruc-validation.md
+  - Sistema de Testing: testing/README.md
 
 markdown_extensions:
   - admonition
-  - attr_list
-  - codehilite:
-      guess_lang: false
-  - toc:
-      permalink: true
+  - codehilite
+  - toc
   - footnotes
-  - pymdownx.arithmatex
-  - pymdownx.betterem:
-      smart_enable: all
-  - pymdownx.caret
-  - pymdownx.critic
-  - pymdownx.details
-  - pymdownx.emoji:
-      emoji_index: !!python/name:materialx.emoji.twemoji
-      emoji_generator: !!python/name:materialx.emoji.to_svg
-  - pymdownx.inlinehilite
-  - pymdownx.magiclink
-  - pymdownx.mark
-  - pymdownx.smartsymbols
-  - pymdownx.superfences
-  - pymdownx.tasklist:
-      custom_checkbox: true
-  - pymdownx.tilde
 
 extra:
   social:
     - icon: fontawesome/brands/github
-      link: https://github.com/aghabrego/docucenter
+      link: https://github.com/aghabrego/docucenter-public
+EOF
+
+# Construir inmediatamente
+cd /home/weirdolabs/code/docucenter-public
+source .venv/bin/activate
+mkdocs build
+cp -r site/* .
+
+echo "✓ Build completado con navegación corregida"
