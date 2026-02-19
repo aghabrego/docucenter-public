@@ -196,9 +196,10 @@ cd /home/weirdolabs/code/docucenter
 - [API Documentation](../api/)
 - [Database Schema](../technical/database-schema.md)
 
+
+**Autor**: Team de Docucenter  
 ---
 
-**Autor**: GitHub Copilot  
 **Fecha**: $(date)  
 **Versión**: 1.0  
 **Estado**: Implementado y Probado

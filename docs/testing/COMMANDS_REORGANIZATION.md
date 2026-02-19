@@ -111,8 +111,9 @@ chmod +x docs/testing/commands/*.sh
 3. **Docker Integration**: Sin cambios en configuración Docker
 4. **Backward Compatibility**: Considerar symlinks si necesario
 
+
+**Responsable**: Team de Docucenter  
 ---
 
 **Implementado**: Agosto 26, 2025  
-**Responsable**: GitHub Copilot  
 **Revisión**: Pendiente validación de usuario

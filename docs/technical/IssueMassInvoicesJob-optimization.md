@@ -148,5 +148,6 @@ redis-cli monitor | grep IssueMassInvoicesJob
 
 ---
 **Fecha**: Octubre 2025  
-**Autor**: GitHub Copilot  
 **Tipo**: Optimización de Performance
+**Autor**: Team de Docucenter  
+

@@ -97,8 +97,9 @@ La implementación del sistema de emisión masiva de facturas ha sido completada
 
 **Estado**: 🟢 PRODUCCIÓN READY
 
+
+**Arquitecto de Sistema**: Team de Docucenter  
 ---
 
 **Última actualización**: $(date)  
-**Arquitecto de Sistema**: GitHub Copilot  
 **Documentación**: `/docs/technical/`

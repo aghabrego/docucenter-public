@@ -201,8 +201,9 @@ Para personalizar colores o estilos, editar:
 - Tarjetas de estadísticas en la vista blade
 - Clases CSS de Bootstrap 5
 
+
+**Autor**: Team de Docucenter  
 ---
 
 **Fecha de Implementación**: 26 de Diciembre, 2025
-**Autor**: GitHub Copilot
 **Versión**: 1.0.0

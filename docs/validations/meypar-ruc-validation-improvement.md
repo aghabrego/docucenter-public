@@ -292,8 +292,9 @@ Siguiendo el patrón estándar del sistema (usado en `ImportData`, `LightspeedSe
 - ✅ Facilita reportes y análisis de ventas a consumidor final
 - ✅ Consistente con el resto del sistema DocuCenter
 
+
+**Autor**: Team de Docucenter  
 ---
 
 **Fecha de implementación**: 2026-01-27
-**Autor**: GitHub Copilot
 **Versión**: 1.0

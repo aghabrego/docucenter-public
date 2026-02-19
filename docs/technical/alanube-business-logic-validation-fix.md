@@ -136,6 +136,7 @@ $data = [
 
 ---
 **Fecha**: 2025-01-01
-**Autor**: GitHub Copilot
 **Versión**: 1.0
 **Estado**: Implementado y Funcional
+**Autor**: Team de Docucenter  
+

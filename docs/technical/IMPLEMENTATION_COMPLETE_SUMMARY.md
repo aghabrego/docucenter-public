@@ -221,8 +221,9 @@ El sistema ahora maneja dinámicamente:
 
 **🚀 El sistema está listo para testing en producción!**
 
+
+**Implementado por**: Team de Docucenter  
 ---
 
-**Implementado por**: GitHub Copilot  
 **Fecha**: 23 de septiembre de 2025  
 **Versión**: DocuCenter v2.0 - Campos Condicionales JSch09 iDoc

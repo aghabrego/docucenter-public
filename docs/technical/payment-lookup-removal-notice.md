@@ -104,10 +104,11 @@ El sistema `UpdateIntuitOrdersJob` ahora opera con el flujo tradicional bien pro
 3. **Logging mejorado** para debugging ✅
 4. **Código simplificado** y mantenible ✅
 
+
+**Autor**: Team de Docucenter  
 ---
 
 **Fecha**: 17 de Septiembre, 2025  
-**Autor**: GitHub Copilot  
 **Aprobado por**: Usuario (eliminación solicitada)  
 
 La remoción se realizó exitosamente manteniendo toda la funcionalidad core intacta mientras se simplifica significativamente el código base.

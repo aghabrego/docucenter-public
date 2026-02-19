@@ -419,8 +419,9 @@ Para problemas o preguntas:
 3. Verificar settings en BD
 4. Consultar documentación en `docs/integrations/`
 
+
+**Implementado por**: Team de Docucenter  
 ---
 
-**Implementado por:** GitHub Copilot  
 **Fecha:** 9 de noviembre de 2025  
 **Estado:** ✅ Producción Ready

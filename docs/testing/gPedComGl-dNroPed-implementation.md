@@ -259,7 +259,8 @@ El fix del método `XMLToArrayFlat()` no solo permite extraer `gPedComGl_dNroPed
  **Documentación actualizada**  
  **Lista para despliegue en producción**
 
+
+**Autor**: Team de Docucenter  
 ---
 
-**Autor:** GitHub Copilot (Claude Sonnet 4.5)  
 **Archivo de Testing:** Este documento permanece en `docs/testing/` para referencia futura

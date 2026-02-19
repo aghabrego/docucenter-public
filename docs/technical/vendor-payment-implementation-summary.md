@@ -211,8 +211,9 @@ curl -X GET "http://localhost/api/acicloud/vendor_payment_imp?VendorID=V123&limi
    - Implementar métricas de uso
    - Dashboard de pagos a proveedores
 
+
+**Desarrollador**: Team de Docucenter  
 ---
 
 **Fecha de Implementación:** 2025-11-25
-**Desarrollador:** GitHub Copilot
 **Estado:** ✅ Completado

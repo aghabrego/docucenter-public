@@ -181,9 +181,10 @@ $saleModel->save();                             // Una sola operación de BD
 - **Seguridad**: No afecta validaciones o permisos existentes
 - **Multi-tenant**: Respeta arquitectura de bases de datos por organización
 
+
+**Autor**: Team de Docucenter  
 ---
 
 **Creado**: $(date)  
-**Autor**: GitHub Copilot  
 **Organización Afectada**: 14034741628418  
 **Factura de Referencia**: ID=67  

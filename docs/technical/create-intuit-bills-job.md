@@ -249,9 +249,10 @@ php artisan tinker -c "App\Models\PurchaseHeaderImp::where('Enviado', false)->co
 tail -f storage/logs/laravel.log | grep CreateIntuitBillsJob
 ```
 
+
+**Autor**: Team de Docucenter  
 ---
 
-**Autor**: GitHub Copilot  
 **Fecha**: 2025-09-03  
 **Versión**: 1.0  
 **Estado**: Implementado

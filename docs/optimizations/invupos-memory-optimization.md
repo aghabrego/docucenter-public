@@ -218,8 +218,9 @@ Mensajes clave:
 3. **Compresión**: Comprimir datos serializados en BD si superan cierto tamaño
 4. **Lazy Properties**: Usar Livewire lazy properties para tabs no activos
 
+
+**Autor**: Team de Docucenter  
 ---
 
-**Autor**: GitHub Copilot  
 **Revisión**: Pendiente de testing en producción  
 **Estado**: ✅ Implementado y verificado con script automatizado
