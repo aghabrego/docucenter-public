@@ -1755,13 +1755,41 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#implementacion-gpedcomgl_dnroped" class="md-nav__link">
+  <a href="#campo-pedido-de-compra-global-en-facturas" class="md-nav__link">
     <span class="md-ellipsis">
       
-        � Implementación gPedComGl_dNroPed 🆕
+        📦 Campo Pedido de Compra Global en Facturas
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="📦 Campo Pedido de Compra Global en Facturas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#implementacion-original-gpedcomgl_dnroped" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implementación Original gPedComGl_dNroPed
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#renombrado-a-gpedcomlr_dnroped" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Renombrado a gPedComlr_dNroPed 🆕
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -2603,17 +2631,24 @@
 
 <h1 id="sistema-de-testing-docucenter">🧪 Sistema de Testing DocuCenter<a class="headerlink" href="#sistema-de-testing-docucenter" title="Permanent link">&para;</a></h1>
 <h2 id="scrip-scripts-de-prueba-reutilizables">📋 Scrip### 🧪 Scripts de Prueba Reutilizables<a class="headerlink" href="#scrip-scripts-de-prueba-reutilizables" title="Permanent link">&para;</a></h2>
-<h3 id="implementacion-gpedcomgl_dnroped">� <strong><a href="gPedComGl-dNroPed-implementation/">Implementación gPedComGl_dNroPed</a></strong> 🆕<a class="headerlink" href="#implementacion-gpedcomgl_dnroped" title="Permanent link">&para;</a></h3>
-<p>Implementación y testing del campo número de pedido de compra global en facturas electrónicas.</p>
+<h3 id="campo-pedido-de-compra-global-en-facturas">📦 <strong>Campo Pedido de Compra Global en Facturas</strong><a class="headerlink" href="#campo-pedido-de-compra-global-en-facturas" title="Permanent link">&para;</a></h3>
+<h4 id="implementacion-original-gpedcomgl_dnroped"><strong><a href="gPedComGl-dNroPed-implementation/">Implementación Original gPedComGl_dNroPed</a></strong><a class="headerlink" href="#implementacion-original-gpedcomgl_dnroped" title="Permanent link">&para;</a></h4>
+<p>Implementación inicial del campo número de pedido de compra global en facturas electrónicas.</p>
 <p><strong>Scripts disponibles</strong>:
 - <code>test-real-xml.php</code> - Verificar parsing básico del XML
 - <code>test-full-import-gped.php</code> - Verificar extracción con getFirstfilterData()
 - <code>test-import-simulation.php</code> - Simular flujo completo de importación</p>
 <p><strong>Cambios incluidos</strong>:
-- ✅ Campo <code>gPedComGl_dNroPed</code> agregado a FeHeader model y base de datos
 - ✅ Extracción implementada en ImportData.php (métodos xml() y xmlGT())
 - ✅ <strong>Fix crítico del parser XML.php</strong> - Resuelve extracción de solo 2 claves
 - ✅ Documentación completa con casos de prueba</p>
+<h4 id="renombrado-a-gpedcomlr_dnroped"><strong><a href="gPedComlr-dNroPed-rename/">Renombrado a gPedComlr_dNroPed</a></strong> 🆕<a class="headerlink" href="#renombrado-a-gpedcomlr_dnroped" title="Permanent link">&para;</a></h4>
+<p>Refactorización de nomenclatura del campo en modelo y base de datos.</p>
+<p><strong>Cambios incluidos</strong>:
+- ✅ Campo renombrado a <code>gPedComlr_dNroPed</code> en modelo y BD
+- ✅ Extracción del XML mantiene nombre original según DGI
+- ✅ Comando creado: <code>db:rename-column-in-organizations-table</code>
+- ✅ Script automatizado: <code>scripts/rename-gpedcomgl-to-gpedcomlr.sh</code></p>
 <p><strong>Uso rápido</strong>:
 <div class="highlight"><pre><span></span><code><span class="c1"># Verificar extracción básica</span>
 docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>docucenter_laravel.test<span class="w"> </span>php<span class="w"> </span>/var/www/html/scripts/test-real-xml.php

@@ -2,8 +2,10 @@
 
 ## 📋 Scrip### 🧪 Scripts de Prueba Reutilizables
 
-### � **[Implementación gPedComGl_dNroPed](gPedComGl-dNroPed-implementation.md)** 🆕
-Implementación y testing del campo número de pedido de compra global en facturas electrónicas.
+### 📦 **Campo Pedido de Compra Global en Facturas**
+
+#### **[Implementación Original gPedComGl_dNroPed](gPedComGl-dNroPed-implementation.md)**
+Implementación inicial del campo número de pedido de compra global en facturas electrónicas.
 
 **Scripts disponibles**:
 - `test-real-xml.php` - Verificar parsing básico del XML
@@ -11,10 +13,18 @@ Implementación y testing del campo número de pedido de compra global en factur
 - `test-import-simulation.php` - Simular flujo completo de importación
 
 **Cambios incluidos**:
-- ✅ Campo `gPedComGl_dNroPed` agregado a FeHeader model y base de datos
 - ✅ Extracción implementada en ImportData.php (métodos xml() y xmlGT())
 - ✅ **Fix crítico del parser XML.php** - Resuelve extracción de solo 2 claves
 - ✅ Documentación completa con casos de prueba
+
+#### **[Renombrado a gPedComlr_dNroPed](gPedComlr-dNroPed-rename.md)** 🆕
+Refactorización de nomenclatura del campo en modelo y base de datos.
+
+**Cambios incluidos**:
+- ✅ Campo renombrado a `gPedComlr_dNroPed` en modelo y BD
+- ✅ Extracción del XML mantiene nombre original según DGI
+- ✅ Comando creado: `db:rename-column-in-organizations-table`
+- ✅ Script automatizado: `scripts/rename-gpedcomgl-to-gpedcomlr.sh`
 
 **Uso rápido**:
 ```bash
