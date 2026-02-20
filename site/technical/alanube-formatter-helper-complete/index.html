@@ -233,7 +233,7 @@
           
   
   
-  APIs
+  API Documentation
 
         </a>
       </li>
@@ -269,7 +269,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../" class="md-tabs__link">
+        <a href="../README.md" class="md-tabs__link">
           
   
   
@@ -298,6 +298,25 @@
         </a>
       </li>
     
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../testing/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Sistema de Testing
+
+      </a>
+    </li>
   
 
       
@@ -404,7 +423,7 @@
   <span class="md-ellipsis">
     
   
-    APIs
+    API Documentation
   
 
     
@@ -420,7 +439,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    APIs
+    API Documentation
   
 
           </label>
@@ -1363,7 +1382,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
+      <a href="../README.md" class="md-nav__link">
         
   
   
@@ -1716,6 +1735,33 @@
   
 
     
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sistema de Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -2056,18 +2102,18 @@
   
 
 
-<h1 id="alanubeformatterhelper-documentacion-completa">AlanubeFormatterHelper - Documentación Completa<a class="headerlink" href="#alanubeformatterhelper-documentacion-completa" title="Permanent link">&para;</a></h1>
-<h2 id="resumen">Resumen<a class="headerlink" href="#resumen" title="Permanent link">&para;</a></h2>
+<h1 id="alanubeformatterhelper-documentacion-completa">AlanubeFormatterHelper - Documentación Completa</h1>
+<h2 id="resumen">Resumen</h2>
 <p>El <code>AlanubeFormatterHelper</code> es un helper completo que formatea datos de DocuCenter al formato requerido por Alanube para <strong>República Dominicana</strong> y <strong>Panamá</strong>. Implementa mapeos específicos basados en la documentación oficial de cada país.</p>
-<h2 id="estado-de-implementacion">Estado de Implementación<a class="headerlink" href="#estado-de-implementacion" title="Permanent link">&para;</a></h2>
+<h2 id="estado-de-implementacion">Estado de Implementación</h2>
 <p>✅ <strong>COMPLETO</strong> - Ambos países totalmente implementados según documentación oficial:</p>
 <ul>
 <li><strong>República Dominicana</strong>: Migrada toda la lógica existente del <code>FeHeader.php</code></li>
 <li><strong>Panamá</strong>: Implementado según documentación oficial DGI</li>
 </ul>
-<h2 id="caracteristicas-principales">Características Principales<a class="headerlink" href="#caracteristicas-principales" title="Permanent link">&para;</a></h2>
-<h3 id="deteccion-automatica-de-pais">🌍 <strong>Detección Automática de País</strong><a class="headerlink" href="#deteccion-automatica-de-pais" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">// Por endpoint</span>
+<h2 id="caracteristicas-principales">Características Principales</h2>
+<h3 id="deteccion-automatica-de-pais">🌍 <strong>Detección Automática de País</strong></h3>
+<div class="codehilite"><pre><span></span><code><span class="x">// Por endpoint</span>
 <span class="x">https://api-test.alanube.do/v1 → República Dominicana (DO)</span>
 <span class="x">https://api-test.alanube.pa/v1 → Panamá (PA)</span>
 
@@ -2078,9 +2124,10 @@
 <span class="x">// Fallback</span>
 <span class="x">Sin conexión → República Dominicana (DO) - compatibilidad</span>
 </code></pre></div>
-<h3 id="estructura-de-datos-completa">📋 <strong>Estructura de Datos Completa</strong><a class="headerlink" href="#estructura-de-datos-completa" title="Permanent link">&para;</a></h3>
-<p>Ambos países retornan estructura completa:
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
+
+<h3 id="estructura-de-datos-completa">📋 <strong>Estructura de Datos Completa</strong></h3>
+<p>Ambos países retornan estructura completa:</p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;information&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* Datos generales del documento */</span><span class="w"> </span><span class="p">},</span>
 <span class="w">  </span><span class="nt">&quot;receiver&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* Datos del receptor */</span><span class="w"> </span><span class="p">},</span>
 <span class="w">  </span><span class="nt">&quot;items&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="cm">/* Array de productos/servicios */</span><span class="w"> </span><span class="p">],</span>
@@ -2089,8 +2136,9 @@
 <span class="w">  </span><span class="nt">&quot;logistic&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* Información logística */</span><span class="w"> </span><span class="p">},</span>
 <span class="w">  </span><span class="nt">&quot;delivery&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* Datos de entrega */</span><span class="w"> </span><span class="p">}</span>
 <span class="p">}</span>
-</code></pre></div></p>
-<h3 id="panama-mapeo-dgi-oficial">🇵🇦 <strong>Panamá - Mapeo DGI Oficial</strong><a class="headerlink" href="#panama-mapeo-dgi-oficial" title="Permanent link">&para;</a></h3>
+</code></pre></div>
+
+<h3 id="panama-mapeo-dgi-oficial">🇵🇦 <strong>Panamá - Mapeo DGI Oficial</strong></h3>
 <ul>
 <li>Información general con tipos de documento 01-10</li>
 <li>Receptor con RUC y ubicación por provincia/distrito/corregimiento</li>
@@ -2098,7 +2146,7 @@
 <li>Totales con métodos de pago locales</li>
 <li>Validaciones según normativa DGI</li>
 </ul>
-<h3 id="republica-dominicana-migracion-completa">🇩🇴 <strong>República Dominicana - Migración Completa</strong><a class="headerlink" href="#republica-dominicana-migracion-completa" title="Permanent link">&para;</a></h3>
+<h3 id="republica-dominicana-migracion-completa">🇩🇴 <strong>República Dominicana - Migración Completa</strong></h3>
 <ul>
 <li>Toda la lógica existente del <code>FeHeader.php</code> migrada</li>
 <li>Tipos de documento 01-15 (incluye regímenes especiales)</li>
@@ -2107,9 +2155,9 @@
 <li>Formas de pago y pagos a plazos</li>
 <li>Información logística y de entrega completa</li>
 </ul>
-<h2 id="uso">Uso<a class="headerlink" href="#uso" title="Permanent link">&para;</a></h2>
-<h3 id="basico">Básico<a class="headerlink" href="#basico" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">use App\Helpers\AlanubeFormatterHelper;</span>
+<h2 id="uso">Uso</h2>
+<h3 id="basico">Básico</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">use App\Helpers\AlanubeFormatterHelper;</span>
 
 <span class="x">// Sin conexión (DO por defecto)</span>
 <span class="x">$result = AlanubeFormatterHelper::format($datos);</span>
@@ -2117,8 +2165,9 @@
 <span class="x">// Con conexión específica</span>
 <span class="x">$result = AlanubeFormatterHelper::format($datos, $connection);</span>
 </code></pre></div>
-<h3 id="en-feheaderphp">En FeHeader.php<a class="headerlink" href="#en-feheaderphp" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">public function configureFormatterAlanube(array $datos, ?Pacconnection $connection = null): array</span>
+
+<h3 id="en-feheaderphp">En FeHeader.php</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">public function configureFormatterAlanube(array $datos, ?Pacconnection $connection = null): array</span>
 <span class="x">{</span>
 <span class="x">    if ($connection !== null) {</span>
 <span class="x">        return AlanubeFormatterHelper::format($datos, $connection);</span>
@@ -2126,30 +2175,36 @@
 <span class="x">    // Lógica legacy...</span>
 <span class="x">}</span>
 </code></pre></div>
-<h3 id="en-createphp-livewire">En Create.php (Livewire)<a class="headerlink" href="#en-createphp-livewire" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">$datos = $feModel-&gt;configureFormatterAlanube($request, $connection);</span>
+
+<h3 id="en-createphp-livewire">En Create.php (Livewire)</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">$datos = $feModel-&gt;configureFormatterAlanube($request, $connection);</span>
 </code></pre></div>
-<h2 id="endpoints-de-desarrollo">Endpoints de Desarrollo<a class="headerlink" href="#endpoints-de-desarrollo" title="Permanent link">&para;</a></h2>
-<h3 id="panama">Panamá<a class="headerlink" href="#panama" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>Desarrollo: https://api-test.alanube.pa/v1
-Producción: https://api.alanube.pa/v1
+
+<h2 id="endpoints-de-desarrollo">Endpoints de Desarrollo</h2>
+<h3 id="panama">Panamá</h3>
+<div class="codehilite"><pre><span></span><code><span class="n">Desarrollo</span><span class="o">:</span><span class="w"> </span><span class="n">https</span><span class="o">://</span><span class="n">api</span><span class="o">-</span><span class="n">test</span><span class="o">.</span><span class="na">alanube</span><span class="o">.</span><span class="na">pa</span><span class="o">/</span><span class="n">v1</span>
+<span class="n">Producción</span><span class="o">:</span><span class="w"> </span><span class="n">https</span><span class="o">://</span><span class="n">api</span><span class="o">.</span><span class="na">alanube</span><span class="o">.</span><span class="na">pa</span><span class="o">/</span><span class="n">v1</span>
 </code></pre></div>
-<h3 id="republica-dominicana">República Dominicana<a class="headerlink" href="#republica-dominicana" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>Desarrollo: https://api-test.alanube.do/v1
-Producción: https://api.alanube.do/v1
+
+<h3 id="republica-dominicana">República Dominicana</h3>
+<div class="codehilite"><pre><span></span><code><span class="n">Desarrollo</span><span class="o">:</span><span class="w"> </span><span class="n">https</span><span class="o">://</span><span class="n">api</span><span class="o">-</span><span class="n">test</span><span class="o">.</span><span class="na">alanube</span><span class="o">.</span><span class="na">do</span><span class="o">/</span><span class="n">v1</span>
+<span class="n">Producción</span><span class="o">:</span><span class="w"> </span><span class="n">https</span><span class="o">://</span><span class="n">api</span><span class="o">.</span><span class="na">alanube</span><span class="o">.</span><span class="na">do</span><span class="o">/</span><span class="n">v1</span>
 </code></pre></div>
-<h2 id="validaciones">Validaciones<a class="headerlink" href="#validaciones" title="Permanent link">&para;</a></h2>
-<h3 id="panama_1">Panamá<a class="headerlink" href="#panama_1" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">$errors = AlanubeFormatterHelper::validateForPanama($data);</span>
+
+<h2 id="validaciones">Validaciones</h2>
+<h3 id="panama_1">Panamá</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">$errors = AlanubeFormatterHelper::validateForPanama($data);</span>
 <span class="x">// Valida: documento, número, receptor según DGI</span>
 </code></pre></div>
-<h3 id="republica-dominicana_1">República Dominicana<a class="headerlink" href="#republica-dominicana_1" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">$errors = AlanubeFormatterHelper::validateForDominicana($data);</span>
+
+<h3 id="republica-dominicana_1">República Dominicana</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">$errors = AlanubeFormatterHelper::validateForDominicana($data);</span>
 <span class="x">// Valida: documento, número según normativa local</span>
 </code></pre></div>
-<h2 id="constantes-de-documentos">Constantes de Documentos<a class="headerlink" href="#constantes-de-documentos" title="Permanent link">&para;</a></h2>
-<h3 id="panama-01-10">Panamá (01-10)<a class="headerlink" href="#panama-01-10" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">const DOCUMENT_TYPES_PANAMA = [</span>
+
+<h2 id="constantes-de-documentos">Constantes de Documentos</h2>
+<h3 id="panama-01-10">Panamá (01-10)</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">const DOCUMENT_TYPES_PANAMA = [</span>
 <span class="x">    &#39;01&#39; =&gt; &#39;Factura de Operación Interna&#39;,</span>
 <span class="x">    &#39;02&#39; =&gt; &#39;Factura de Importación&#39;,</span>
 <span class="x">    &#39;03&#39; =&gt; &#39;Factura de Exportación&#39;,</span>
@@ -2158,8 +2213,9 @@ Producción: https://api.alanube.do/v1
 <span class="x">    // ...hasta &#39;10&#39;</span>
 <span class="x">];</span>
 </code></pre></div>
-<h3 id="republica-dominicana-01-15">República Dominicana (01-15)<a class="headerlink" href="#republica-dominicana-01-15" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">const DOCUMENT_TYPES_DOMINICANA = [</span>
+
+<h3 id="republica-dominicana-01-15">República Dominicana (01-15)</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">const DOCUMENT_TYPES_DOMINICANA = [</span>
 <span class="x">    &#39;01&#39; =&gt; &#39;Factura de Crédito Fiscal&#39;,</span>
 <span class="x">    &#39;02&#39; =&gt; &#39;Factura de Consumo&#39;,</span>
 <span class="x">    &#39;03&#39; =&gt; &#39;Nota de Débito&#39;,</span>
@@ -2167,15 +2223,16 @@ Producción: https://api.alanube.do/v1
 <span class="x">    // ...hasta &#39;15&#39;</span>
 <span class="x">];</span>
 </code></pre></div>
-<h2 id="compatibilidad">Compatibilidad<a class="headerlink" href="#compatibilidad" title="Permanent link">&para;</a></h2>
+
+<h2 id="compatibilidad">Compatibilidad</h2>
 <ul>
 <li>✅ <strong>Sin breaking changes</strong>: Código existente sigue funcionando</li>
 <li>✅ <strong>Backward compatible</strong>: Fallback a lógica original</li>
 <li>✅ <strong>Forward compatible</strong>: Fácil agregar nuevos países</li>
 <li>✅ <strong>Progressive enhancement</strong>: Nueva funcionalidad se activa automáticamente</li>
 </ul>
-<h2 id="testing-con-docker">Testing con Docker<a class="headerlink" href="#testing-con-docker" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><span class="c1"># Levantar contenedores</span>
+<h2 id="testing-con-docker">Testing con Docker</h2>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Levantar contenedores</span>
 docker-compose<span class="w"> </span>up<span class="w"> </span>-d
 
 <span class="c1"># Probar helper</span>
@@ -2196,14 +2253,15 @@ docker-compose<span class="w"> </span><span class="nb">exec</span><span class="w
 <span class="s2">echo &#39;País: &#39; . \$country; // PA</span>
 <span class="s2">&quot;</span>
 </code></pre></div>
-<h2 id="integracion-en-produccion">Integración en Producción<a class="headerlink" href="#integracion-en-produccion" title="Permanent link">&para;</a></h2>
+
+<h2 id="integracion-en-produccion">Integración en Producción</h2>
 <ol>
 <li><strong>FeHeader.php</strong>: Ya integrado con parámetro opcional</li>
 <li><strong>Create.php</strong>: Ya actualizado para pasar conexión</li>
 <li><strong>AlanubeFormatterHelper.php</strong>: Completo y operativo</li>
 <li><strong>Autoload</strong>: Regenerado con <code>composer dump-autoload</code></li>
 </ol>
-<h2 id="proximos-pasos">Próximos Pasos<a class="headerlink" href="#proximos-pasos" title="Permanent link">&para;</a></h2>
+<h2 id="proximos-pasos">Próximos Pasos</h2>
 <ul>
 <li>✅ Implementación completa</li>
 <li>✅ Testing básico funcionando</li>
@@ -2265,7 +2323,7 @@ docker-compose<span class="w"> </span><span class="nb">exec</span><span class="w
       
       
     
-    <a href="https://github.com/aghabrego/docucenter" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+    <a href="https://github.com/aghabrego/docucenter-public" target="_blank" rel="noopener" title="github.com" class="md-social__link">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
     </a>
   

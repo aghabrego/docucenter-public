@@ -233,7 +233,7 @@
           
   
   
-  APIs
+  API Documentation
 
         </a>
       </li>
@@ -269,7 +269,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../technical/" class="md-tabs__link">
+        <a href="../../technical/README.md" class="md-tabs__link">
           
   
   
@@ -298,6 +298,25 @@
         </a>
       </li>
     
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../testing/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Sistema de Testing
+
+      </a>
+    </li>
   
 
       
@@ -404,7 +423,7 @@
   <span class="md-ellipsis">
     
   
-    APIs
+    API Documentation
   
 
     
@@ -420,7 +439,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    APIs
+    API Documentation
   
 
           </label>
@@ -1363,7 +1382,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../technical/" class="md-nav__link">
+      <a href="../../technical/README.md" class="md-nav__link">
         
   
   
@@ -1716,6 +1735,33 @@
   
 
     
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sistema de Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -1984,38 +2030,38 @@
   
 
 
-<h1 id="correcciones-criticas-error-pac-201-thefactoryhka">Correcciones Críticas Error PAC 201 - TheFactoryHKA<a class="headerlink" href="#correcciones-criticas-error-pac-201-thefactoryhka" title="Permanent link">&para;</a></h1>
-<h2 id="resumen-de-problema">📋 Resumen de Problema<a class="headerlink" href="#resumen-de-problema" title="Permanent link">&para;</a></h2>
+<h1 id="correcciones-criticas-error-pac-201-thefactoryhka">Correcciones Críticas Error PAC 201 - TheFactoryHKA</h1>
+<h2 id="resumen-de-problema">📋 Resumen de Problema</h2>
 <p><strong>Error</strong>: PAC 201 "Error al procesar solicitud" persistía después de corregir campos prohibidos para extranjeros.</p>
 <p><strong>Análisis</strong>: El problema no era solo los campos prohibidos, sino múltiples validaciones PAC que causaban rechazo.</p>
-<h2 id="problemas-identificados">🔍 Problemas Identificados<a class="headerlink" href="#problemas-identificados" title="Permanent link">&para;</a></h2>
-<h3 id="1-codigo-de-item-vacio">1. Código de Item Vacío<a class="headerlink" href="#1-codigo-de-item-vacio" title="Permanent link">&para;</a></h3>
+<h2 id="problemas-identificados">🔍 Problemas Identificados</h2>
+<h3 id="1-codigo-de-item-vacio">1. Código de Item Vacío</h3>
 <ul>
 <li><strong>Problema</strong>: Items con <code>codigo: ""</code> (cadena vacía)</li>
 <li><strong>Impacto</strong>: PAC requiere código válido para cada item</li>
 <li><strong>Solución</strong>: Asignar código por defecto <code>ITEM001</code> cuando esté vacío</li>
 </ul>
-<h3 id="2-descripcion-de-item-excesiva">2. Descripción de Item Excesiva<a class="headerlink" href="#2-descripcion-de-item-excesiva" title="Permanent link">&para;</a></h3>
+<h3 id="2-descripcion-de-item-excesiva">2. Descripción de Item Excesiva</h3>
 <ul>
 <li><strong>Problema</strong>: Descripciones &gt; 100 caracteres (ej: 109 caracteres)</li>
 <li><strong>Impacto</strong>: PAC rechaza descripciones que exceden límites</li>
 <li><strong>Solución</strong>: Truncar automáticamente a 100 caracteres</li>
 </ul>
-<h3 id="3-campos-numericos-cero-innecesarios">3. Campos Numéricos Cero Innecesarios<a class="headerlink" href="#3-campos-numericos-cero-innecesarios" title="Permanent link">&para;</a></h3>
+<h3 id="3-campos-numericos-cero-innecesarios">3. Campos Numéricos Cero Innecesarios</h3>
 <ul>
 <li><strong>Problema</strong>: Envío de campos con valores <code>0.000000</code> que deberían omitirse</li>
 <li><strong>Impacto</strong>: PAC interpreta como datos innecesarios que causan error</li>
 <li><strong>Solución</strong>: Omitir completamente campos cero excepto los esenciales</li>
 </ul>
-<h3 id="4-filtrado-incorrecto-de-campos">4. Filtrado Incorrecto de Campos<a class="headerlink" href="#4-filtrado-incorrecto-de-campos" title="Permanent link">&para;</a></h3>
+<h3 id="4-filtrado-incorrecto-de-campos">4. Filtrado Incorrecto de Campos</h3>
 <ul>
 <li><strong>Problema</strong>: <code>filterNullValues()</code> incluía todos los valores cero</li>
 <li><strong>Impacto</strong>: Estructura enviada contenía campos innecesarios</li>
 <li><strong>Solución</strong>: Filtrado inteligente con lista blanca de campos cero permitidos</li>
 </ul>
-<h2 id="correcciones-implementadas">✅ Correcciones Implementadas<a class="headerlink" href="#correcciones-implementadas" title="Permanent link">&para;</a></h2>
-<h3 id="hkaservicephp-validacion-de-items">HKAService.php - Validación de Items<a class="headerlink" href="#hkaservicephp-validacion-de-items" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">// CRÍTICO: Validar descripción del item (max 100 caracteres según PAC)</span>
+<h2 id="correcciones-implementadas">✅ Correcciones Implementadas</h2>
+<h3 id="hkaservicephp-validacion-de-items">HKAService.php - Validación de Items</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">// CRÍTICO: Validar descripción del item (max 100 caracteres según PAC)</span>
 <span class="x">$descripcionCompleta = $this-&gt;getNestedValue($detailItem, &#39;dDescProd&#39;);</span>
 <span class="x">$item-&gt;descripcion = !empty($descripcionCompleta) ? </span>
 <span class="x">    substr($descripcionCompleta, 0, 100) : &#39;PRODUCTO&#39;;</span>
@@ -2030,8 +2076,9 @@
 <span class="x">    $item-&gt;precioUnitarioDescuento = $descuento;</span>
 <span class="x">}</span>
 </code></pre></div>
-<h3 id="hkaservicephp-filtrado-inteligente">HKAService.php - Filtrado Inteligente<a class="headerlink" href="#hkaservicephp-filtrado-inteligente" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">private function filterNullValues($object)</span>
+
+<h3 id="hkaservicephp-filtrado-inteligente">HKAService.php - Filtrado Inteligente</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">private function filterNullValues($object)</span>
 <span class="x">{</span>
 <span class="x">    // CRÍTICO: Omitir campos con valores cero que pueden causar error PAC</span>
 <span class="x">    $isZeroValue = (</span>
@@ -2055,16 +2102,18 @@
 <span class="x">    }</span>
 <span class="x">}</span>
 </code></pre></div>
-<h3 id="hkaservicephp-totales-condicionales">HKAService.php - Totales Condicionales<a class="headerlink" href="#hkaservicephp-totales-condicionales" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">// CRÍTICO: Solo incluir totales si &gt; 0 para evitar campos innecesarios</span>
+
+<h3 id="hkaservicephp-totales-condicionales">HKAService.php - Totales Condicionales</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">// CRÍTICO: Solo incluir totales si &gt; 0 para evitar campos innecesarios</span>
 <span class="x">$totalITBMS = $this-&gt;normalizeNumericValueToTwoDecimals($this-&gt;getNestedValue($doc, &#39;gTot.dTotITBMS&#39;));</span>
 <span class="x">if (floatval($totalITBMS) &gt; 0) {</span>
 <span class="x">    $totales-&gt;totalITBMS = $totalITBMS;</span>
 <span class="x">}</span>
 </code></pre></div>
-<h2 id="validacion-de-correcciones">🧪 Validación de Correcciones<a class="headerlink" href="#validacion-de-correcciones" title="Permanent link">&para;</a></h2>
+
+<h2 id="validacion-de-correcciones">🧪 Validación de Correcciones</h2>
 <p>Se creó script de testing integral: <code>docs/testing/test-correcciones-pac-201.php</code></p>
-<h3 id="resultados-de-testing">Resultados de Testing:<a class="headerlink" href="#resultados-de-testing" title="Permanent link">&para;</a></h3>
+<h3 id="resultados-de-testing">Resultados de Testing:</h3>
 <ul>
 <li>✅ <strong>Campos prohibidos extranjeros</strong>: Verificados como null</li>
 <li>✅ <strong>Código item vacío</strong>: Corregido a 'ITEM001'</li>
@@ -2072,33 +2121,33 @@
 <li>✅ <strong>Campos cero items</strong>: Omitidos correctamente</li>
 <li>✅ <strong>Campos cero totales</strong>: Omitidos correctamente</li>
 </ul>
-<h2 id="archivos-modificados">📚 Archivos Modificados<a class="headerlink" href="#archivos-modificados" title="Permanent link">&para;</a></h2>
-<h3 id="principales">Principales:<a class="headerlink" href="#principales" title="Permanent link">&para;</a></h3>
+<h2 id="archivos-modificados">📚 Archivos Modificados</h2>
+<h3 id="principales">Principales:</h3>
 <ul>
 <li><code>app/Services/HKAService.php</code>: Correcciones en validación de items y filtrado</li>
 <li><code>docs/testing/test-correcciones-pac-201.php</code>: Script de validación completo</li>
 <li><code>docs/testing/debug-pac-201-estructura-exacta.php</code>: Análisis detallado del problema</li>
 </ul>
-<h3 id="testing">Testing:<a class="headerlink" href="#testing" title="Permanent link">&para;</a></h3>
+<h3 id="testing">Testing:</h3>
 <ul>
 <li>Validación de estructura antes/después de correcciones</li>
 <li>Verificación de omisión correcta de campos cero</li>
 <li>Comprobación de campos prohibidos para extranjeros</li>
 </ul>
-<h2 id="proximos-pasos">🎯 Próximos Pasos<a class="headerlink" href="#proximos-pasos" title="Permanent link">&para;</a></h2>
+<h2 id="proximos-pasos">🎯 Próximos Pasos</h2>
 <ol>
 <li><strong>Testing en Producción</strong>: Probar factura de exportación con cliente extranjero</li>
 <li><strong>Validación PAC</strong>: Confirmar que error 201 se resuelve</li>
 <li><strong>Monitoreo</strong>: Supervisar otras transacciones para efectos secundarios</li>
 </ol>
-<h2 id="referencias">📖 Referencias<a class="headerlink" href="#referencias" title="Permanent link">&para;</a></h2>
+<h2 id="referencias">📖 Referencias</h2>
 <ul>
-<li><strong>Documentación PAC</strong>: <a href="https://felwiki.thefactoryhka.com.pa/">https://felwiki.thefactoryhka.com.pa/</a></li>
+<li><strong>Documentación PAC</strong>: https://felwiki.thefactoryhka.com.pa/</li>
 <li><strong>Catálogo Errores</strong>: <code>public/catalogo_de_codigos_de_retorno_del_servicio-08-2023.pdf</code></li>
 <li><strong>Código 109</strong>: "El campo [campo] no debe ser informado"</li>
 <li><strong>Código 201</strong>: "Error al procesar solicitud"</li>
 </ul>
-<h2 id="commits-relacionados">🔗 Commits Relacionados<a class="headerlink" href="#commits-relacionados" title="Permanent link">&para;</a></h2>
+<h2 id="commits-relacionados">🔗 Commits Relacionados</h2>
 <ul>
 <li>Commit anterior: Corrección campos prohibidos extranjeros</li>
 <li>Este commit: Correcciones adicionales para error 201 completo</li>
@@ -2158,7 +2207,7 @@
       
       
     
-    <a href="https://github.com/aghabrego/docucenter" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+    <a href="https://github.com/aghabrego/docucenter-public" target="_blank" rel="noopener" title="github.com" class="md-social__link">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
     </a>
   

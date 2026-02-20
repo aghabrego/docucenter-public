@@ -233,7 +233,7 @@
           
   
   
-  APIs
+  API Documentation
 
         </a>
       </li>
@@ -269,7 +269,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../technical/" class="md-tabs__link">
+        <a href="../../technical/README.md" class="md-tabs__link">
           
   
   
@@ -298,6 +298,25 @@
         </a>
       </li>
     
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Sistema de Testing
+
+      </a>
+    </li>
   
 
       
@@ -404,7 +423,7 @@
   <span class="md-ellipsis">
     
   
-    APIs
+    API Documentation
   
 
     
@@ -420,7 +439,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    APIs
+    API Documentation
   
 
           </label>
@@ -1363,7 +1382,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../technical/" class="md-nav__link">
+      <a href="../../technical/README.md" class="md-nav__link">
         
   
   
@@ -1716,6 +1735,33 @@
   
 
     
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sistema de Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -2040,84 +2086,89 @@
   
 
 
-<h1 id="tests-digifact-enero-2025">Tests Digifact - Enero 2025<a class="headerlink" href="#tests-digifact-enero-2025" title="Permanent link">&para;</a></h1>
-<h2 id="documentacion-oficial">Documentación Oficial<a class="headerlink" href="#documentacion-oficial" title="Permanent link">&para;</a></h2>
+<h1 id="tests-digifact-enero-2025">Tests Digifact - Enero 2025</h1>
+<h2 id="documentacion-oficial">Documentación Oficial</h2>
 <ul>
 <li><strong>Versión</strong>: 2.0.4 (02/10/2025)</li>
 <li><strong>Archivo</strong>: Documentacion Tecnica API Digifact Panama V2.0.4</li>
 </ul>
-<h2 id="endpoints-correctos-segun-v204">Endpoints Correctos (Según v2.0.4)<a class="headerlink" href="#endpoints-correctos-segun-v204" title="Permanent link">&para;</a></h2>
+<h2 id="endpoints-correctos-segun-v204">Endpoints Correctos (Según v2.0.4)</h2>
 <ul>
 <li><strong>QA/Test</strong>: <code>https://testnucpa.digifact.com/api/login/get_token</code> ✅</li>
 <li><strong>Producción</strong>: <code>https://nucpa.digifact.com/api/login/get_token</code> ✅</li>
 <li><strong>Ruta</strong>: <code>/api/login/get_token</code> (NO <code>/v2</code>, NO <code>/apinuc</code>)</li>
 </ul>
-<h3 id="nota-importante">Nota Importante<a class="headerlink" href="#nota-importante" title="Permanent link">&para;</a></h3>
+<h3 id="nota-importante">Nota Importante</h3>
 <ul>
-<li>El endpoint de <strong>producción es <code>nucpa</code></strong> (NO <del>apinuc</del>)</li>
+<li>El endpoint de <strong>producción es <code>nucpa</code></strong> (NO ~~apinuc~~)</li>
 <li>Esta corrección está en la documentación v2.0.4 de octubre 2025</li>
 </ul>
-<h2 id="procedimiento-de-obtencion-de-token-v204">Procedimiento de Obtención de Token (v2.0.4)<a class="headerlink" href="#procedimiento-de-obtencion-de-token-v204" title="Permanent link">&para;</a></h2>
-<h3 id="formato-username">Formato Username<a class="headerlink" href="#formato-username" title="Permanent link">&para;</a></h3>
-<p>Concatenación separada por punto (.):
-<div class="highlight"><pre><span></span><code>PA.&lt;RUC&gt;.&lt;Nombre_usuario&gt;
-</code></pre></div></p>
+<h2 id="procedimiento-de-obtencion-de-token-v204">Procedimiento de Obtención de Token (v2.0.4)</h2>
+<h3 id="formato-username">Formato Username</h3>
+<p>Concatenación separada por punto (.):</p>
+<div class="codehilite"><pre><span></span><code>PA.&lt;RUC&gt;.&lt;Nombre_usuario&gt;
+</code></pre></div>
+
 <p><strong>Ejemplo:</strong> <code>PA.155770712-2-2025.155770712-2-2025</code></p>
-<h3 id="body-request-json">Body Request (JSON)<a class="headerlink" href="#body-request-json" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<h3 id="body-request-json">Body Request (JSON)</h3>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;Username&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;PA.155770712-2-2025.155770712-2-2025&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;Password&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Freskura123*&quot;</span>
 <span class="p">}</span>
 </code></pre></div>
-<h3 id="vigencia-del-token">Vigencia del Token<a class="headerlink" href="#vigencia-del-token" title="Permanent link">&para;</a></h3>
+
+<h3 id="vigencia-del-token">Vigencia del Token</h3>
 <ul>
 <li><strong>Validez</strong>: 30 días desde la solicitud</li>
 <li><strong>Caducado</strong>: API devuelve error 401 Unauthorized</li>
 <li><strong>Renovación</strong>: Generar nuevo token cuando expire</li>
 </ul>
-<h3 id="uso-del-token-en-solicitudes">Uso del Token en Solicitudes<a class="headerlink" href="#uso-del-token-en-solicitudes" title="Permanent link">&para;</a></h3>
-<p>El token se incluye en el header <code>Authorization</code>:
-<div class="highlight"><pre><span></span><code>Authorization: &lt;TOKEN&gt;
-</code></pre></div></p>
-<h4 id="test-digifact-qaphp">test-digifact-qa.php<a class="headerlink" href="#test-digifact-qaphp" title="Permanent link">&para;</a></h4>
-<p>Prueba de autenticación en ambiente QA.
-<div class="highlight"><pre><span></span><code>php<span class="w"> </span>docs/testing/test-digifact-qa.php
+<h3 id="uso-del-token-en-solicitudes">Uso del Token en Solicitudes</h3>
+<p>El token se incluye en el header <code>Authorization</code>:</p>
+<div class="codehilite"><pre><span></span><code>Authorization: &lt;TOKEN&gt;
 </code></pre></div>
-<strong>Resultado esperado</strong>: <code>401 Unauthorized</code> con mensaje "Credenciales incorrectas"
+
+<h4 id="test-digifact-qaphp">test-digifact-qa.php</h4>
+<p>Prueba de autenticación en ambiente QA.</p>
+<div class="codehilite"><pre><span></span><code>php<span class="w"> </span>docs/testing/test-digifact-qa.php
+</code></pre></div>
+
+<p><strong>Resultado esperado</strong>: <code>401 Unauthorized</code> con mensaje "Credenciales incorrectas"
 - Username: <code>PA.155770712-2-2025.155770712-2-2025</code> (credencial de producción)
 - Password: <code>Freskura123*</code>
 - <strong>Nota</strong>: Las credenciales de producción no funcionan en QA. Se necesitan credenciales de QA para token exitoso.</p>
-<h4 id="test-token-prodphp">test-token-prod.php<a class="headerlink" href="#test-token-prodphp" title="Permanent link">&para;</a></h4>
+<h4 id="test-token-prodphp">test-token-prod.php</h4>
 <p>Test obsoleto - Intenta conectar a <code>apinuc.digifact.com</code> (endpoint antiguo).
 <strong>Usar <code>test-token-prod-standalone.php</code> en su lugar.</strong></p>
-<h4 id="test-token-prod-standalonephp">test-token-prod-standalone.php<a class="headerlink" href="#test-token-prod-standalonephp" title="Permanent link">&para;</a></h4>
+<h4 id="test-token-prod-standalonephp">test-token-prod-standalone.php</h4>
 <p>Versión standalone sin dependencias de Laravel.
-Conecta a endpoint correcto: <code>https://nucpa.digifact.com/api/login/get_token</code>
-<div class="highlight"><pre><span></span><code>php<span class="w"> </span>docs/testing/test-token-prod-standalone.php
+Conecta a endpoint correcto: <code>https://nucpa.digifact.com/api/login/get_token</code></p>
+<div class="codehilite"><pre><span></span><code>php<span class="w"> </span>docs/testing/test-token-prod-standalone.php
 </code></pre></div>
-<strong>Resultado</strong>: Depende de acceso a red de producción desde tu máquina.</p>
-<h2 id="hallazgos-de-formato-xml">Hallazgos de Formato XML<a class="headerlink" href="#hallazgos-de-formato-xml" title="Permanent link">&para;</a></h2>
+
+<p><strong>Resultado</strong>: Depende de acceso a red de producción desde tu máquina.</p>
+<h2 id="hallazgos-de-formato-xml">Hallazgos de Formato XML</h2>
 <p>Desde las pruebas anteriores (DigifactRealCertificationTest.php en tests/):</p>
-<h3 id="campo-formatogeneracion-ai11">Campo FormatoGeneracion (AI11)<a class="headerlink" href="#campo-formatogeneracion-ai11" title="Permanent link">&para;</a></h3>
+<h3 id="campo-formatogeneracion-ai11">Campo FormatoGeneracion (AI11)</h3>
 <ul>
 <li><strong>Corrección</strong>: Cambio de <code>FormatoOperacion</code> a <code>FormatoGeneracion</code> (v2.0.2+)</li>
 <li><strong>Valores válidos</strong>: 1 (Sin CAFE), 2 (Cinta papel) </li>
 <li><strong>Nota</strong>: Valor 3 es INVÁLIDO en versiones modernas</li>
 <li><strong>Estado</strong>: Implementado en DigifactXmlBuilder.php línea 164</li>
 </ul>
-<h3 id="valores-predeterminados-cafe-commit-32db4ba8">Valores Predeterminados CAFE (Commit 32db4ba8)<a class="headerlink" href="#valores-predeterminados-cafe-commit-32db4ba8" title="Permanent link">&para;</a></h3>
+<h3 id="valores-predeterminados-cafe-commit-32db4ba8">Valores Predeterminados CAFE (Commit 32db4ba8)</h3>
 <ul>
 <li><code>FormatoGeneracion</code>: 1 (Sin CAFE)</li>
 <li><code>ManeraEntrega</code>: 1</li>
 <li><code>EnvioContenedor</code>: 1</li>
 </ul>
-<h3 id="codigos-de-ambiente">Códigos de Ambiente<a class="headerlink" href="#codigos-de-ambiente" title="Permanent link">&para;</a></h3>
+<h3 id="codigos-de-ambiente">Códigos de Ambiente</h3>
 <ul>
 <li><strong>AdditionalIssueType</strong>: Invertido para Digifact (2=Test, 1=Producción)</li>
 <li>Implementado en DigifactXmlBuilder.php líneas 131-132</li>
 </ul>
-<h2 id="proximos-pasos">Próximos Pasos<a class="headerlink" href="#proximos-pasos" title="Permanent link">&para;</a></h2>
-<h3 id="completado">✅ Completado<a class="headerlink" href="#completado" title="Permanent link">&para;</a></h3>
+<h2 id="proximos-pasos">Próximos Pasos</h2>
+<h3 id="completado">✅ Completado</h3>
 <ol>
 <li><strong>Token de Producción</strong>: Generado exitosamente</li>
 <li>Endpoint: <code>https://nucpa.digifact.com/api/login/get_token</code></li>
@@ -2133,7 +2184,7 @@ Conecta a endpoint correcto: <code>https://nucpa.digifact.com/api/login/get_toke
 <li>Parámetros: TAXID, FORMAT, USERNAME</li>
 <li>Status: OK</li>
 </ol>
-<h3 id="en-progreso">⏳ En Progreso<a class="headerlink" href="#en-progreso" title="Permanent link">&para;</a></h3>
+<h3 id="en-progreso">⏳ En Progreso</h3>
 <ol>
 <li><strong>Validación de XML NUC</strong>: Estructura correcta según Digifact v2.0.4</li>
 <li>Status: Identificar schema completo de Seller, Buyer, Items, Totals, Payments</li>
@@ -2146,19 +2197,20 @@ Conecta a endpoint correcto: <code>https://nucpa.digifact.com/api/login/get_toke
 <li>Test file: <code>test-token-certificacion-prod.php</code></li>
 <li>Status: Requiere estructura XML completa</li>
 </ol>
-<h3 id="hallazgos-importantes">🔍 Hallazgos Importantes<a class="headerlink" href="#hallazgos-importantes" title="Permanent link">&para;</a></h3>
-<h4 id="correccion-de-rutas-v204-octubre-2025">Corrección de Rutas (v2.0.4 - Octubre 2025)<a class="headerlink" href="#correccion-de-rutas-v204-octubre-2025" title="Permanent link">&para;</a></h4>
+<h3 id="hallazgos-importantes">🔍 Hallazgos Importantes</h3>
+<h4 id="correccion-de-rutas-v204-octubre-2025">Corrección de Rutas (v2.0.4 - Octubre 2025)</h4>
 <ul>
 <li><strong>ANTES (incorrecto)</strong>: <code>apinuc.digifact.com</code></li>
 <li><strong>AHORA (correcto)</strong>: <code>nucpa.digifact.com</code></li>
 <li><strong>Tipo de ruta</strong>: <code>/api/v2/transform/nuc</code> para certificación</li>
 </ul>
-<h4 id="estructura-xml-info">Estructura XML Info<a class="headerlink" href="#estructura-xml-info" title="Permanent link">&para;</a></h4>
-<p>Los elementos <code>Info</code> en <code>AdditionalIssueDocInfo</code> usan atributos, NO contenido:
-<div class="highlight"><pre><span></span><code><span class="nt">&lt;Info</span><span class="w"> </span><span class="na">Name=</span><span class="s">&quot;TipoEmision&quot;</span><span class="w"> </span><span class="na">Value=</span><span class="s">&quot;01&quot;</span><span class="nt">/&gt;</span>
+<h4 id="estructura-xml-info">Estructura XML Info</h4>
+<p>Los elementos <code>Info</code> en <code>AdditionalIssueDocInfo</code> usan atributos, NO contenido:</p>
+<div class="codehilite"><pre><span></span><code><span class="nt">&lt;Info</span><span class="w"> </span><span class="na">Name=</span><span class="s">&quot;TipoEmision&quot;</span><span class="w"> </span><span class="na">Value=</span><span class="s">&quot;01&quot;</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;Info</span><span class="w"> </span><span class="na">Name=</span><span class="s">&quot;NumeroDF&quot;</span><span class="w"> </span><span class="na">Value=</span><span class="s">&quot;0000000001&quot;</span><span class="nt">/&gt;</span>
-</code></pre></div></p>
-<h4 id="campos-obligatorios-en-additionalissuedocinfo">Campos Obligatorios en AdditionalIssueDocInfo<a class="headerlink" href="#campos-obligatorios-en-additionalissuedocinfo" title="Permanent link">&para;</a></h4>
+</code></pre></div>
+
+<h4 id="campos-obligatorios-en-additionalissuedocinfo">Campos Obligatorios en AdditionalIssueDocInfo</h4>
 <p>Mínimo requerido:
 - TipoEmision
 - NumeroDF
@@ -2225,7 +2277,7 @@ Conecta a endpoint correcto: <code>https://nucpa.digifact.com/api/login/get_toke
       
       
     
-    <a href="https://github.com/aghabrego/docucenter" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+    <a href="https://github.com/aghabrego/docucenter-public" target="_blank" rel="noopener" title="github.com" class="md-social__link">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
     </a>
   

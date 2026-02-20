@@ -233,7 +233,7 @@
           
   
   
-  APIs
+  API Documentation
 
         </a>
       </li>
@@ -269,7 +269,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../" class="md-tabs__link">
+        <a href="../README.md" class="md-tabs__link">
           
   
   
@@ -298,6 +298,25 @@
         </a>
       </li>
     
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../testing/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Sistema de Testing
+
+      </a>
+    </li>
   
 
       
@@ -404,7 +423,7 @@
   <span class="md-ellipsis">
     
   
-    APIs
+    API Documentation
   
 
     
@@ -420,7 +439,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    APIs
+    API Documentation
   
 
           </label>
@@ -1363,7 +1382,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
+      <a href="../README.md" class="md-nav__link">
         
   
   
@@ -1712,6 +1731,33 @@
           </ul>
         </nav>
       
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sistema de Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -2145,53 +2191,54 @@
   
 
 
-<h1 id="resumen-implementacion-tipos-de-documento-docucenter-panama">📋 Resumen Implementación Tipos de Documento - DocuCenter Panamá<a class="headerlink" href="#resumen-implementacion-tipos-de-documento-docucenter-panama" title="Permanent link">&para;</a></h1>
-<h2 id="objetivo-completado">🎯 Objetivo Completado<a class="headerlink" href="#objetivo-completado" title="Permanent link">&para;</a></h2>
+<h1 id="resumen-implementacion-tipos-de-documento-docucenter-panama">📋 Resumen Implementación Tipos de Documento - DocuCenter Panamá</h1>
+<h2 id="objetivo-completado">🎯 Objetivo Completado</h2>
 <p>Se ha implementado soporte completo para los <strong>9 tipos de documento oficiales</strong> según la documentación JSch09 iDoc de la DGI de Panamá, complementando los tipos existentes (01 y 06) con los 7 tipos faltantes.</p>
-<h2 id="trabajos-realizados">✅ Trabajos Realizados<a class="headerlink" href="#trabajos-realizados" title="Permanent link">&para;</a></h2>
-<h3 id="1-actualizacion-alanubeservicephp">1. Actualización AlanubeService.php<a class="headerlink" href="#1-actualizacion-alanubeservicephp" title="Permanent link">&para;</a></h3>
+<h2 id="trabajos-realizados">✅ Trabajos Realizados</h2>
+<h3 id="1-actualizacion-alanubeservicephp">1. Actualización AlanubeService.php</h3>
 <ul>
 <li>✅ <strong>Constantes completadas</strong>: Agregadas constantes para tipos 05, 07</li>
 <li>✅ <strong>Backwards compatibility</strong>: Mantiene constante CREDIT_NOTE existente</li>
 <li>✅ <strong>Endpoints mapeados</strong>: Incluye endpoints para notas de débito</li>
 <li>✅ <strong>Método getEndpointForDocumentType()</strong>: Lógica centralizada de routing</li>
 </ul>
-<div class="highlight"><pre><span></span><code><span class="x">// Nuevas constantes agregadas</span>
+<div class="codehilite"><pre><span></span><code><span class="x">// Nuevas constantes agregadas</span>
 <span class="x">const DEBIT_NOTE_REFERENCE = &#39;05&#39;;    // Nota de Débito referente a FE</span>
 <span class="x">const DEBIT_NOTE_GENERIC = &#39;07&#39;;      // Nota de Débito genérica</span>
 </code></pre></div>
-<h3 id="2-typedocumentvalidatorphp-nuevo">2. TypedocumentValidator.php (NUEVO)<a class="headerlink" href="#2-typedocumentvalidatorphp-nuevo" title="Permanent link">&para;</a></h3>
+
+<h3 id="2-typedocumentvalidatorphp-nuevo">2. TypedocumentValidator.php (NUEVO)</h3>
 <ul>
 <li>✅ <strong>Servicio completo</strong>: Validaciones específicas por cada tipo</li>
 <li>✅ <strong>Campos dinámicos</strong>: Método getRequiredFieldsByType()</li>
 <li>✅ <strong>Validaciones contextuales</strong>: Diferentes reglas según tipo de documento</li>
 <li>✅ <strong>Casos especiales</strong>: Importación, exportación, zona franca, reembolso</li>
 </ul>
-<h3 id="3-typedocumentseederphp-nuevo">3. TypedocumentSeeder.php (NUEVO)<a class="headerlink" href="#3-typedocumentseederphp-nuevo" title="Permanent link">&para;</a></h3>
+<h3 id="3-typedocumentseederphp-nuevo">3. TypedocumentSeeder.php (NUEVO)</h3>
 <ul>
 <li>✅ <strong>Datos oficiales</strong>: Los 9 tipos según documentación DGI</li>
 <li>✅ <strong>Upsert logic</strong>: firstOrCreate para evitar duplicados</li>
 <li>✅ <strong>Nombres correctos</strong>: Nomenclatura oficial panameña</li>
 </ul>
-<h3 id="4-testdocumenttypes-command-nuevo">4. TestDocumentTypes Command (NUEVO)<a class="headerlink" href="#4-testdocumenttypes-command-nuevo" title="Permanent link">&para;</a></h3>
+<h3 id="4-testdocumenttypes-command-nuevo">4. TestDocumentTypes Command (NUEVO)</h3>
 <ul>
 <li>✅ <strong>Testing integrado</strong>: Comando Artisan para pruebas</li>
 <li>✅ <strong>Verificación completa</strong>: Constants, endpoints, validaciones</li>
 <li>✅ <strong>Debugging</strong>: Acceso a métodos protegidos para testing</li>
 </ul>
-<h3 id="5-script-de-prueba-completo">5. Script de Prueba Completo<a class="headerlink" href="#5-script-de-prueba-completo" title="Permanent link">&para;</a></h3>
+<h3 id="5-script-de-prueba-completo">5. Script de Prueba Completo</h3>
 <ul>
 <li>✅ <strong>test-complete-document-types.sh</strong>: Script bash integral</li>
 <li>✅ <strong>Casos de prueba</strong>: Validaciones por cada tipo</li>
 <li>✅ <strong>Verificación automática</strong>: Constantes, endpoints, seeder</li>
 </ul>
-<h3 id="6-documentacion-tecnica">6. Documentación Técnica<a class="headerlink" href="#6-documentacion-tecnica" title="Permanent link">&para;</a></h3>
+<h3 id="6-documentacion-tecnica">6. Documentación Técnica</h3>
 <ul>
 <li>✅ <strong>Análisis completo</strong>: panama-document-types-analysis.md</li>
 <li>✅ <strong>Plan de implementación</strong>: livewire-create-enhancement-plan.md</li>
 <li>✅ <strong>Estado actual vs objetivo</strong>: Mapeo detallado de gaps</li>
 </ul>
-<h2 id="estado-por-tipo-de-documento">📊 Estado por Tipo de Documento<a class="headerlink" href="#estado-por-tipo-de-documento" title="Permanent link">&para;</a></h2>
+<h2 id="estado-por-tipo-de-documento">📊 Estado por Tipo de Documento</h2>
 <table>
 <thead>
 <tr>
@@ -2278,13 +2325,13 @@
 </tr>
 </tbody>
 </table>
-<h2 id="archivos-modificadoscreados">🔧 Archivos Modificados/Creados<a class="headerlink" href="#archivos-modificadoscreados" title="Permanent link">&para;</a></h2>
-<h3 id="archivos-modificados">Archivos Modificados:<a class="headerlink" href="#archivos-modificados" title="Permanent link">&para;</a></h3>
+<h2 id="archivos-modificadoscreados">🔧 Archivos Modificados/Creados</h2>
+<h3 id="archivos-modificados">Archivos Modificados:</h3>
 <ol>
 <li><code>/app/Services/AlanubeService.php</code> - Constantes y endpoints</li>
 <li><code>/app/Helpers/AlanubeFormatterHelper.php</code> - Ya tenía tipos correctos</li>
 </ol>
-<h3 id="archivos-nuevos">Archivos Nuevos:<a class="headerlink" href="#archivos-nuevos" title="Permanent link">&para;</a></h3>
+<h3 id="archivos-nuevos">Archivos Nuevos:</h3>
 <ol>
 <li><code>/app/Services/TypedocumentValidator.php</code> - Validador especializado</li>
 <li><code>/database/seeders/TypedocumentSeeder.php</code> - Datos oficiales</li>
@@ -2293,14 +2340,16 @@
 <li><code>/docs/technical/panama-document-types-analysis.md</code> - Análisis técnico</li>
 <li><code>/docs/technical/livewire-create-enhancement-plan.md</code> - Plan Frontend</li>
 </ol>
-<h2 id="testing-implementado">🧪 Testing Implementado<a class="headerlink" href="#testing-implementado" title="Permanent link">&para;</a></h2>
-<h3 id="comando-artisan">Comando Artisan<a class="headerlink" href="#comando-artisan" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>php<span class="w"> </span>artisan<span class="w"> </span>test:document-types<span class="w"> </span>--type<span class="o">=</span><span class="m">05</span>
+<h2 id="testing-implementado">🧪 Testing Implementado</h2>
+<h3 id="comando-artisan">Comando Artisan</h3>
+<div class="codehilite"><pre><span></span><code>php<span class="w"> </span>artisan<span class="w"> </span>test:document-types<span class="w"> </span>--type<span class="o">=</span><span class="m">05</span>
 </code></pre></div>
-<h3 id="script-bash">Script Bash<a class="headerlink" href="#script-bash" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>./scripts/test-complete-document-types.sh
+
+<h3 id="script-bash">Script Bash</h3>
+<div class="codehilite"><pre><span></span><code>./scripts/test-complete-document-types.sh
 </code></pre></div>
-<h3 id="casos-de-prueba">Casos de Prueba<a class="headerlink" href="#casos-de-prueba" title="Permanent link">&para;</a></h3>
+
+<h3 id="casos-de-prueba">Casos de Prueba</h3>
 <ul>
 <li>✅ Verificación de constantes AlanubeService</li>
 <li>✅ Mapeo correcto de endpoints por tipo</li>
@@ -2308,21 +2357,21 @@
 <li>✅ Datos en base de datos via seeder</li>
 <li>✅ Casos válidos e inválidos por tipo</li>
 </ul>
-<h2 id="proximos-pasos-frontend">🎯 Próximos Pasos (Frontend)<a class="headerlink" href="#proximos-pasos-frontend" title="Permanent link">&para;</a></h2>
-<h3 id="alta-prioridad">Alta Prioridad<a class="headerlink" href="#alta-prioridad" title="Permanent link">&para;</a></h3>
+<h2 id="proximos-pasos-frontend">🎯 Próximos Pasos (Frontend)</h2>
+<h3 id="alta-prioridad">Alta Prioridad</h3>
 <ol>
 <li><strong>Actualizar Create.php</strong>: Agregar campos específicos por tipo</li>
 <li><strong>Actualizar create.blade.php</strong>: Vista dinámica con campos contextuales</li>
 <li><strong>Testing Livewire</strong>: Casos de prueba para validaciones frontend</li>
 </ol>
-<h3 id="media-prioridad">Media Prioridad<a class="headerlink" href="#media-prioridad" title="Permanent link">&para;</a></h3>
+<h3 id="media-prioridad">Media Prioridad</h3>
 <ol>
 <li><strong>UX Enhancement</strong>: JavaScript para show/hide campos</li>
 <li><strong>Validaciones dinámicas</strong>: getRules() condicional por tipo</li>
 <li><strong>Documentación usuario</strong>: Guías por tipo de documento</li>
 </ol>
-<h2 id="caracteristicas-implementadas">💡 Características Implementadas<a class="headerlink" href="#caracteristicas-implementadas" title="Permanent link">&para;</a></h2>
-<h3 id="validaciones-inteligentes">Validaciones Inteligentes<a class="headerlink" href="#validaciones-inteligentes" title="Permanent link">&para;</a></h3>
+<h2 id="caracteristicas-implementadas">💡 Características Implementadas</h2>
+<h3 id="validaciones-inteligentes">Validaciones Inteligentes</h3>
 <ul>
 <li><strong>Notas con referencia (04,05)</strong>: Requieren documento original</li>
 <li><strong>Notas genéricas (06,07)</strong>: Solo requieren motivo</li>
@@ -2331,54 +2380,54 @@
 <li><strong>Zona Franca (08)</strong>: Registro y ubicación</li>
 <li><strong>Reembolso (09)</strong>: Concepto y documentos soporte</li>
 </ul>
-<h3 id="compatibilidad-pac">Compatibilidad PAC<a class="headerlink" href="#compatibilidad-pac" title="Permanent link">&para;</a></h3>
+<h3 id="compatibilidad-pac">Compatibilidad PAC</h3>
 <ul>
 <li><strong>TheFactoryHKA</strong>: Endpoints correctos por tipo</li>
 <li><strong>Alanube</strong>: Mapeo según documentación oficial</li>
 <li><strong>Backwards compatibility</strong>: Constantes existentes preservadas</li>
 </ul>
-<h3 id="multi-tenant-ready">Multi-tenant Ready<a class="headerlink" href="#multi-tenant-ready" title="Permanent link">&para;</a></h3>
+<h3 id="multi-tenant-ready">Multi-tenant Ready</h3>
 <ul>
 <li><strong>Seeder independiente</strong>: No afecta organizaciones existentes</li>
 <li><strong>Validaciones por organización</strong>: Configurables por tenant</li>
 <li><strong>Database switching</strong>: Compatible con CustomConnection trait</li>
 </ul>
-<h2 id="verificacion-de-calidad">🔍 Verificación de Calidad<a class="headerlink" href="#verificacion-de-calidad" title="Permanent link">&para;</a></h2>
-<h3 id="code-standards">Code Standards<a class="headerlink" href="#code-standards" title="Permanent link">&para;</a></h3>
+<h2 id="verificacion-de-calidad">🔍 Verificación de Calidad</h2>
+<h3 id="code-standards">Code Standards</h3>
 <ul>
 <li>✅ <strong>PSR-4</strong>: Namespaces correctos</li>
 <li>✅ <strong>DocBlocks</strong>: Documentación completa</li>
 <li>✅ <strong>Type hints</strong>: PHP 8+ typing</li>
 <li>✅ <strong>Error handling</strong>: Try-catch apropiados</li>
 </ul>
-<h3 id="testing-coverage">Testing Coverage<a class="headerlink" href="#testing-coverage" title="Permanent link">&para;</a></h3>
+<h3 id="testing-coverage">Testing Coverage</h3>
 <ul>
 <li>✅ <strong>Unit tests</strong>: Validaciones individuales</li>
 <li>✅ <strong>Integration tests</strong>: Flujo completo por tipo</li>
 <li>✅ <strong>Edge cases</strong>: Datos inválidos y límites</li>
 <li>✅ <strong>Regression tests</strong>: Funcionalidad existente preservada</li>
 </ul>
-<h2 id="impacto-del-negocio">📈 Impacto del Negocio<a class="headerlink" href="#impacto-del-negocio" title="Permanent link">&para;</a></h2>
-<h3 id="cumplimiento-legal">Cumplimiento Legal<a class="headerlink" href="#cumplimiento-legal" title="Permanent link">&para;</a></h3>
+<h2 id="impacto-del-negocio">📈 Impacto del Negocio</h2>
+<h3 id="cumplimiento-legal">Cumplimiento Legal</h3>
 <ul>
 <li>✅ <strong>100% cobertura</strong>: Todos los tipos oficiales DGI</li>
 <li>✅ <strong>Validaciones robustas</strong>: Según normativas específicas</li>
 <li>✅ <strong>Trazabilidad</strong>: Logging detallado por tipo</li>
 </ul>
-<h3 id="experiencia-usuario">Experiencia Usuario<a class="headerlink" href="#experiencia-usuario" title="Permanent link">&para;</a></h3>
+<h3 id="experiencia-usuario">Experiencia Usuario</h3>
 <ul>
 <li>✅ <strong>Validaciones contextuales</strong>: Solo campos relevantes</li>
 <li>✅ <strong>Mensajes específicos</strong>: Errores claros por tipo</li>
 <li>✅ <strong>Performance</strong>: Validaciones eficientes</li>
 </ul>
-<h3 id="mantenibilidad">Mantenibilidad<a class="headerlink" href="#mantenibilidad" title="Permanent link">&para;</a></h3>
+<h3 id="mantenibilidad">Mantenibilidad</h3>
 <ul>
 <li>✅ <strong>Código limpio</strong>: Separación de responsabilidades</li>
 <li>✅ <strong>Extensible</strong>: Fácil agregar nuevos tipos</li>
 <li>✅ <strong>Documentado</strong>: Guías técnicas completas</li>
 </ul>
 <hr />
-<h2 id="resultado-final">🎉 Resultado Final<a class="headerlink" href="#resultado-final" title="Permanent link">&para;</a></h2>
+<h2 id="resultado-final">🎉 Resultado Final</h2>
 <p><strong>Backend completamente implementado</strong> para los 9 tipos de documento oficiales según JSch09 iDoc de la DGI de Panamá. El sistema ahora soporta:</p>
 <ul>
 <li>✅ Validaciones específicas por tipo</li>
@@ -2444,7 +2493,7 @@
       
       
     
-    <a href="https://github.com/aghabrego/docucenter" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+    <a href="https://github.com/aghabrego/docucenter-public" target="_blank" rel="noopener" title="github.com" class="md-social__link">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
     </a>
   

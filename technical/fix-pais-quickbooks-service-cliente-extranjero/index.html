@@ -233,7 +233,7 @@
           
   
   
-  APIs
+  API Documentation
 
         </a>
       </li>
@@ -269,7 +269,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../" class="md-tabs__link">
+        <a href="../README.md" class="md-tabs__link">
           
   
   
@@ -298,6 +298,25 @@
         </a>
       </li>
     
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../testing/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Sistema de Testing
+
+      </a>
+    </li>
   
 
       
@@ -404,7 +423,7 @@
   <span class="md-ellipsis">
     
   
-    APIs
+    API Documentation
   
 
     
@@ -420,7 +439,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    APIs
+    API Documentation
   
 
           </label>
@@ -1363,7 +1382,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
+      <a href="../README.md" class="md-nav__link">
         
   
   
@@ -1716,6 +1735,33 @@
   
 
     
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sistema de Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -1934,13 +1980,14 @@
   
 
 
-<h1 id="fix-critico-pais-incorrecto-en-quickbooksonlineservice">Fix Crítico: País Incorrecto en QuickBooksOnlineService<a class="headerlink" href="#fix-critico-pais-incorrecto-en-quickbooksonlineservice" title="Permanent link">&para;</a></h1>
-<h2 id="problema-identificado">Problema Identificado<a class="headerlink" href="#problema-identificado" title="Permanent link">&para;</a></h2>
-<p>Error persistente en PAC después del fix anterior:
-<div class="highlight"><pre><span></span><code>El campo pais es inválido. El país del cliente debe ser PA si el destino de la operación es 1= Panamá.
-</code></pre></div></p>
-<p><strong>Datos del cliente desde QuickBooks</strong>:
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<h1 id="fix-critico-pais-incorrecto-en-quickbooksonlineservice">Fix Crítico: País Incorrecto en QuickBooksOnlineService</h1>
+<h2 id="problema-identificado">Problema Identificado</h2>
+<p>Error persistente en PAC después del fix anterior:</p>
+<div class="codehilite"><pre><span></span><code>El campo pais es inválido. El país del cliente debe ser PA si el destino de la operación es 1= Panamá.
+</code></pre></div>
+
+<p><strong>Datos del cliente desde QuickBooks</strong>:</p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;CustomerRef&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="nt">&quot;TIPO_RECEPTOR&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;04&quot;</span><span class="p">,</span>
 <span class="w">    </span><span class="nt">&quot;PASAPORTE&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;XYZABC123&quot;</span><span class="p">,</span><span class="w"> </span>
@@ -1948,31 +1995,33 @@
 <span class="w">    </span><span class="nt">&quot;BillAddr&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;Country&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Chile&quot;</span><span class="p">}</span>
 <span class="w">  </span><span class="p">}</span>
 <span class="p">}</span>
-</code></pre></div></p>
-<h2 id="causa-raiz-real">Causa Raíz Real<a class="headerlink" href="#causa-raiz-real" title="Permanent link">&para;</a></h2>
+</code></pre></div>
+
+<h2 id="causa-raiz-real">Causa Raíz Real</h2>
 <p><strong>El problema estaba en <code>QuickBooksOnlineService</code>, NO en <code>CreateFastJob</code></strong>:</p>
-<h3 id="logica-incorrecta-antes">Lógica Incorrecta (ANTES):<a class="headerlink" href="#logica-incorrecta-antes" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">// Para operaciones internas (documentType=01), el país debe ser PA para consistencia con destination=1</span>
+<h3 id="logica-incorrecta-antes">Lógica Incorrecta (ANTES):</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">// Para operaciones internas (documentType=01), el país debe ser PA para consistencia con destination=1</span>
 <span class="x">$originalCountry = array_get($customerRef, &#39;Country&#39;, array_get($customerRef, &#39;BillAddr.Country&#39;, &#39;PA&#39;));</span>
 <span class="x">$isInternalOperation = ($typeOfSale === 1); // ❌ INCORRECTO: typeOfSale=1 para montos positivos</span>
 <span class="x">$correctedCountry = $isInternalOperation ? &#39;PA&#39; : $originalCountry; // ❌ Forzaba PA para TODOS</span>
 </code></pre></div>
-<h3 id="problema">Problema:<a class="headerlink" href="#problema" title="Permanent link">&para;</a></h3>
+
+<h3 id="problema">Problema:</h3>
 <ol>
 <li>✅ Cliente extranjero detectado: <code>TIPO_RECEPTOR = "04"</code>, <code>Country = "Chile"</code></li>
 <li>❌ <strong>Servicio sobrescribe</strong>: <code>typeOfSale = 1</code> (monto positivo) → fuerza <code>Country = "PA"</code></li>
 <li>❌ <strong>Cliente guardado con</strong>: <code>TIPO_RECEPTOR = "04"</code> + <code>Country = "PA"</code></li>
 <li>❌ <strong>Resultado XML</strong>: <code>iTipoRec = 04</code> (extranjero) + <code>cPaisRec = PA</code> (Panamá) → <strong>CONFLICTO</strong></li>
 </ol>
-<h3 id="error-de-logica">Error de Lógica:<a class="headerlink" href="#error-de-logica" title="Permanent link">&para;</a></h3>
+<h3 id="error-de-logica">Error de Lógica:</h3>
 <ul>
 <li><strong><code>typeOfSale</code></strong> solo depende del monto (positivo=1, negativo=2)</li>
 <li><strong>NO tiene relación con si el cliente es nacional o extranjero</strong></li>
 <li><strong>Estaba forzando país = 'PA' para TODAS las facturas con montos positivos</strong></li>
 </ul>
-<h2 id="solucion-implementada">Solución Implementada<a class="headerlink" href="#solucion-implementada" title="Permanent link">&para;</a></h2>
-<h3 id="logica-corregida">Lógica Corregida:<a class="headerlink" href="#logica-corregida" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">// CORRECCIÓN CRÍTICA: Determinar país basado en TIPO_RECEPTOR, no en typeOfSale</span>
+<h2 id="solucion-implementada">Solución Implementada</h2>
+<h3 id="logica-corregida">Lógica Corregida:</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">// CORRECCIÓN CRÍTICA: Determinar país basado en TIPO_RECEPTOR, no en typeOfSale</span>
 <span class="x">$originalCountry = array_get($customerRef, &#39;Country&#39;, array_get($customerRef, &#39;BillAddr.Country&#39;, &#39;PA&#39;));</span>
 <span class="x">$tipoReceptor = array_get($customerRef, &#39;TIPO_RECEPTOR&#39;, &#39;02&#39;);</span>
 
@@ -1981,7 +2030,8 @@
 <span class="x">$isNationalClient = in_array($tipoReceptor, [&#39;01&#39;, &#39;02&#39;, &#39;03&#39;, &#39;1&#39;, &#39;2&#39;, &#39;3&#39;]);</span>
 <span class="x">$correctedCountry = $isNationalClient ? &#39;PA&#39; : $originalCountry;</span>
 </code></pre></div>
-<h3 id="matriz-de-validacion">Matriz de Validación:<a class="headerlink" href="#matriz-de-validacion" title="Permanent link">&para;</a></h3>
+
+<h3 id="matriz-de-validacion">Matriz de Validación:</h3>
 <table>
 <thead>
 <tr>
@@ -2016,12 +2066,12 @@
 </tr>
 </tbody>
 </table>
-<h2 id="archivos-modificados">Archivos Modificados<a class="headerlink" href="#archivos-modificados" title="Permanent link">&para;</a></h2>
+<h2 id="archivos-modificados">Archivos Modificados</h2>
 <ul>
 <li><code>app/Services/QuickBooksOnlineService.php</code>: Líneas 691-711 - Lógica de corrección de país basada en tipo de receptor</li>
 </ul>
-<h2 id="flujo-completo-corregido">Flujo Completo Corregido<a class="headerlink" href="#flujo-completo-corregido" title="Permanent link">&para;</a></h2>
-<h3 id="caso-cliente-extranjero-desde-quickbooks">Caso: Cliente Extranjero desde QuickBooks<a class="headerlink" href="#caso-cliente-extranjero-desde-quickbooks" title="Permanent link">&para;</a></h3>
+<h2 id="flujo-completo-corregido">Flujo Completo Corregido</h2>
+<h3 id="caso-cliente-extranjero-desde-quickbooks">Caso: Cliente Extranjero desde QuickBooks</h3>
 <ol>
 <li><strong>Request QB</strong>: <code>TIPO_RECEPTOR: "04"</code>, <code>Country: "Chile"</code></li>
 <li><strong>Servicio detecta</strong>: <code>isNationalClient = false</code> (04 no está en [01,02,03])</li>
@@ -2031,7 +2081,7 @@
 <li><strong>Destino operación</strong>: <code>destinoOperacion = 2</code> (extranjero)</li>
 <li><strong>XML generado</strong>: <code>iDest = 2</code> + <code>cPaisRec = CL</code> ✅ <strong>VÁLIDO PAC</strong></li>
 </ol>
-<h3 id="caso-cliente-nacional-desde-quickbooks">Caso: Cliente Nacional desde QuickBooks<a class="headerlink" href="#caso-cliente-nacional-desde-quickbooks" title="Permanent link">&para;</a></h3>
+<h3 id="caso-cliente-nacional-desde-quickbooks">Caso: Cliente Nacional desde QuickBooks</h3>
 <ol>
 <li><strong>Request QB</strong>: <code>TIPO_RECEPTOR: "01"</code>, <code>Country: "US"</code> (error de captura)</li>
 <li><strong>Servicio detecta</strong>: <code>isNationalClient = true</code> (01 está en [01,02,03])</li>
@@ -2041,8 +2091,8 @@
 <li><strong>Destino operación</strong>: <code>destinoOperacion = 1</code> (nacional)</li>
 <li><strong>XML generado</strong>: <code>iDest = 1</code> + <code>cPaisRec = PA</code> ✅ <strong>VÁLIDO PAC</strong></li>
 </ol>
-<h2 id="logging-mejorado">Logging Mejorado<a class="headerlink" href="#logging-mejorado" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><span class="x">Log::info(&#39;QuickBooksOnlineService: Corrigiendo país para Cliente Nacional&#39;, [</span>
+<h2 id="logging-mejorado">Logging Mejorado</h2>
+<div class="codehilite"><pre><span></span><code><span class="x">Log::info(&#39;QuickBooksOnlineService: Corrigiendo país para Cliente Nacional&#39;, [</span>
 <span class="x">    &#39;original_country&#39; =&gt; $originalCountry,</span>
 <span class="x">    &#39;corrected_country&#39; =&gt; $correctedCountry,</span>
 <span class="x">    &#39;tipo_receptor&#39; =&gt; $tipoReceptor,</span>
@@ -2050,7 +2100,8 @@
 <span class="x">    &#39;is_national_client&#39; =&gt; $isNationalClient</span>
 <span class="x">]);</span>
 </code></pre></div>
-<h2 id="estado">Estado<a class="headerlink" href="#estado" title="Permanent link">&para;</a></h2>
+
+<h2 id="estado">Estado</h2>
 <p>✅ <strong>CRÍTICO RESUELTO</strong> - Error PAC "país inválido vs destino operación" solucionado en la raíz</p>
 <p>Este fix corrige la inconsistencia en el nivel de servicio, asegurando que los datos del cliente se guarden correctamente desde el primer momento, evitando conflictos posteriores en la validación PAC.</p>
 
@@ -2105,7 +2156,7 @@
       
       
     
-    <a href="https://github.com/aghabrego/docucenter" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+    <a href="https://github.com/aghabrego/docucenter-public" target="_blank" rel="noopener" title="github.com" class="md-social__link">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
     </a>
   

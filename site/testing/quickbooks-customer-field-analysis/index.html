@@ -233,7 +233,7 @@
           
   
   
-  APIs
+  API Documentation
 
         </a>
       </li>
@@ -269,7 +269,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../technical/" class="md-tabs__link">
+        <a href="../../technical/README.md" class="md-tabs__link">
           
   
   
@@ -298,6 +298,25 @@
         </a>
       </li>
     
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Sistema de Testing
+
+      </a>
+    </li>
   
 
       
@@ -404,7 +423,7 @@
   <span class="md-ellipsis">
     
   
-    APIs
+    API Documentation
   
 
     
@@ -420,7 +439,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    APIs
+    API Documentation
   
 
           </label>
@@ -1363,7 +1382,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../technical/" class="md-nav__link">
+      <a href="../../technical/README.md" class="md-nav__link">
         
   
   
@@ -1712,6 +1731,33 @@
           </ul>
         </nav>
       
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sistema de Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -2134,12 +2180,12 @@
   
 
 
-<h1 id="analisis-de-procesamiento-custom_field3-y-custom_field4-en-quickbooks">Análisis de Procesamiento Custom_field3 y Custom_field4 en QuickBooks<a class="headerlink" href="#analisis-de-procesamiento-custom_field3-y-custom_field4-en-quickbooks" title="Permanent link">&para;</a></h1>
+<h1 id="analisis-de-procesamiento-custom_field3-y-custom_field4-en-quickbooks">Análisis de Procesamiento Custom_field3 y Custom_field4 en QuickBooks</h1>
 <p><strong>Fecha:</strong> 2026-01-26<br />
 <strong>Contexto:</strong> Análisis del procesamiento de campos personalizados para cliente extranjero</p>
 <hr />
-<h2 id="objeto-de-prueba-invoice-1930">📋 Objeto de Prueba - Invoice 1930<a class="headerlink" href="#objeto-de-prueba-invoice-1930" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<h2 id="objeto-de-prueba-invoice-1930">📋 Objeto de Prueba - Invoice 1930</h2>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;CustomerRef&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;575&quot;</span><span class="p">,</span>
 <span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;116&quot;</span><span class="p">,</span>
@@ -2155,7 +2201,8 @@
 <span class="w">  </span><span class="nt">&quot;TotalAmt&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">1632.55</span>
 <span class="p">}</span>
 </code></pre></div>
-<h3 id="caracteristicas-del-cliente">Características del Cliente:<a class="headerlink" href="#caracteristicas-del-cliente" title="Permanent link">&para;</a></h3>
+
+<h3 id="caracteristicas-del-cliente">Características del Cliente:</h3>
 <ul>
 <li>✅ <strong>PASAPORTE:</strong> CNBZT153H920</li>
 <li>✅ <strong>TIPO_RECEPTOR:</strong> "04" (Extranjero)</li>
@@ -2165,37 +2212,40 @@
 <li>❌ <strong>CompanyName:</strong> null</li>
 </ul>
 <hr />
-<h2 id="flujo-de-procesamiento-actual">🔍 Flujo de Procesamiento Actual<a class="headerlink" href="#flujo-de-procesamiento-actual" title="Permanent link">&para;</a></h2>
-<h3 id="paso-1-extraccion-de-datos-storeorder">Paso 1: Extracción de Datos (storeOrder)<a class="headerlink" href="#paso-1-extraccion-de-datos-storeorder" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">// Líneas 814-824</span>
+<h2 id="flujo-de-procesamiento-actual">🔍 Flujo de Procesamiento Actual</h2>
+<h3 id="paso-1-extraccion-de-datos-storeorder">Paso 1: Extracción de Datos (storeOrder)</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">// Líneas 814-824</span>
 <span class="x">$customerRef = $invoiceData[&#39;CustomerRef&#39;] ?? [];</span>
 <span class="x">$customerName = !empty($customerRef[&#39;CompanyName&#39;])</span>
 <span class="x">    ? $customerRef[&#39;CompanyName&#39;]</span>
 <span class="x">    : ($customerRef[&#39;name&#39;] ?? &#39;QuickBooks Customer&#39;);</span>
 </code></pre></div>
+
 <p><strong>Resultado:</strong>
 - <code>$customerName</code> = "116" (porque CompanyName es null, usa 'name')</p>
-<h3 id="paso-2-determinacion-de-tipo_receptor-storeorder">Paso 2: Determinación de TIPO_RECEPTOR (storeOrder)<a class="headerlink" href="#paso-2-determinacion-de-tipo_receptor-storeorder" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">// Líneas 826-836</span>
+<h3 id="paso-2-determinacion-de-tipo_receptor-storeorder">Paso 2: Determinación de TIPO_RECEPTOR (storeOrder)</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">// Líneas 826-836</span>
 <span class="x">$originalCountry = array_get($customerRef, &#39;Country&#39;, array_get($customerRef, &#39;BillAddr.Country&#39;, &#39;PA&#39;));</span>
 <span class="x">$tipoReceptorRaw = array_get($customerRef, &#39;TIPO_RECEPTOR&#39;, 2);</span>
 
 <span class="x">// Normalizar a ID si viene como código &#39;01&#39;,&#39;02&#39;,&#39;03&#39;,&#39;04&#39;</span>
 <span class="x">$tipoReceptor = is_string($tipoReceptorRaw) ? (int)ltrim($tipoReceptorRaw, &#39;0&#39;) : (int)$tipoReceptorRaw;</span>
 </code></pre></div>
+
 <p><strong>Resultado:</strong>
 - <code>$tipoReceptorRaw</code> = "04"
 - <code>$tipoReceptor</code> = <strong>4</strong> (Extranjero) ✅</p>
-<p><strong>Lógica de País:</strong>
-<div class="highlight"><pre><span></span><code><span class="x">// Líneas 837-839</span>
+<p><strong>Lógica de País:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="x">// Líneas 837-839</span>
 <span class="x">$isNationalClient = in_array($tipoReceptor, [1, 2, 3]);</span>
 <span class="x">$correctedCountry = $isNationalClient ? &#39;PA&#39; : $originalCountry;</span>
-</code></pre></div></p>
+</code></pre></div>
+
 <p><strong>Resultado:</strong>
 - <code>$isNationalClient</code> = false
 - <code>$correctedCountry</code> = País original (no 'PA') ✅</p>
-<h3 id="paso-3-llamada-a-createdefaultclient">Paso 3: Llamada a createDefaultClient<a class="headerlink" href="#paso-3-llamada-a-createdefaultclient" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">// Líneas 860-873</span>
+<h3 id="paso-3-llamada-a-createdefaultclient">Paso 3: Llamada a createDefaultClient</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">// Líneas 860-873</span>
 <span class="x">$customer = $this-&gt;createDefaultClient($organization, [</span>
 <span class="x">    &#39;CustomerID&#39; =&gt; $customerId,</span>
 <span class="x">    &#39;Customer_Bill_Name&#39; =&gt; $customerName,</span>
@@ -2211,8 +2261,9 @@
 <span class="x">    &#39;PASAPORTE&#39; =&gt; array_get($customerRef, &#39;PASAPORTE&#39;),</span>
 <span class="x">]);</span>
 </code></pre></div>
-<p><strong>Datos enviados:</strong>
-<div class="highlight"><pre><span></span><code><span class="x">[</span>
+
+<p><strong>Datos enviados:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="x">[</span>
 <span class="x">    &#39;Ruc&#39; =&gt; null,</span>
 <span class="x">    &#39;Dv&#39; =&gt; null,</span>
 <span class="x">    &#39;TIPO&#39; =&gt; null,</span>
@@ -2220,21 +2271,23 @@
 <span class="x">    &#39;PASAPORTE&#39; =&gt; &quot;CNBZT153H920&quot;,</span>
 <span class="x">    &#39;Country&#39; =&gt; &#39;?&#39; // Depende del BillAddr</span>
 <span class="x">]</span>
-</code></pre></div></p>
+</code></pre></div>
+
 <hr />
-<h2 id="procesamiento-en-createdefaultclient">🔧 Procesamiento en createDefaultClient<a class="headerlink" href="#procesamiento-en-createdefaultclient" title="Permanent link">&para;</a></h2>
-<h3 id="fase-1-inicializacion-de-variables">Fase 1: Inicialización de Variables<a class="headerlink" href="#fase-1-inicializacion-de-variables" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">// Líneas 480-486</span>
+<h2 id="procesamiento-en-createdefaultclient">🔧 Procesamiento en createDefaultClient</h2>
+<h3 id="fase-1-inicializacion-de-variables">Fase 1: Inicialización de Variables</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">// Líneas 480-486</span>
 <span class="x">$ruc = &#39;&#39;;</span>
 <span class="x">$dv = &#39;&#39;;</span>
 <span class="x">$tipoContribuyente = &#39;2&#39;; // ⚠️ Default: Persona Natural</span>
 <span class="x">$locationCode = null;</span>
 <span class="x">$pasaporte = null;</span>
 </code></pre></div>
+
 <p><strong>Estado Inicial:</strong>
 - <code>$tipoContribuyente</code> = <strong>'2'</strong> (Persona Natural - Default)</p>
-<h3 id="fase-2-extraccion-de-rucdv-regex">Fase 2: Extracción de RUC/DV (Regex)<a class="headerlink" href="#fase-2-extraccion-de-rucdv-regex" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">// Líneas 488-503</span>
+<h3 id="fase-2-extraccion-de-rucdv-regex">Fase 2: Extracción de RUC/DV (Regex)</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">// Líneas 488-503</span>
 <span class="x">if (preg_match(&#39;/Ruc:(\d+-\d+-\d+)|.../&#39;, $rucOriginal, $matches)) {</span>
 <span class="x">    $ruc = end($filteredMatches);</span>
 <span class="x">}</span>
@@ -2242,11 +2295,12 @@
 <span class="x">    $dv = end($filteredMatches);</span>
 <span class="x">}</span>
 </code></pre></div>
+
 <p><strong>Resultado:</strong>
 - <code>$ruc</code> = '' (vacío, porque RUC es null)
 - <code>$dv</code> = '' (vacío, porque DV es null)</p>
-<h3 id="fase-3-extraccion-tipo-desde-primarytaxidentifier">Fase 3: Extracción TIPO desde PrimaryTaxIdentifier<a class="headerlink" href="#fase-3-extraccion-tipo-desde-primarytaxidentifier" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">// Líneas 505-526</span>
+<h3 id="fase-3-extraccion-tipo-desde-primarytaxidentifier">Fase 3: Extracción TIPO desde PrimaryTaxIdentifier</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">// Líneas 505-526</span>
 <span class="x">if (is_null($tipoFromRequest)) {</span>
 <span class="x">    $primaryTaxIdentifier = array_get($request, &#39;PrimaryTaxIdentifier&#39;, &#39;&#39;);</span>
 <span class="x">    if (!empty($primaryTaxIdentifier) &amp;&amp; preg_match(&#39;/TIPO:(\d{2})/&#39;, $primaryTaxIdentifier, $matches)) {</span>
@@ -2254,10 +2308,11 @@
 <span class="x">    }</span>
 <span class="x">}</span>
 </code></pre></div>
+
 <p><strong>Resultado:</strong>
 - <code>$tipoFromRequest</code> = <strong>null</strong> (no está presente en CustomerRef)</p>
-<h3 id="fase-4-determinacion-de-tipocontribuyente">Fase 4: Determinación de tipoContribuyente<a class="headerlink" href="#fase-4-determinacion-de-tipocontribuyente" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">// Líneas 528-596</span>
+<h3 id="fase-4-determinacion-de-tipocontribuyente">Fase 4: Determinación de tipoContribuyente</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">// Líneas 528-596</span>
 <span class="x">if (!is_null($tipoFromRequest)) {</span>
 <span class="x">    // ❌ Este bloque NO se ejecuta porque $tipoFromRequest es null</span>
 <span class="x">} else {</span>
@@ -2269,10 +2324,11 @@
 <span class="x">    // ⚠️ $tipoContribuyente queda con el valor default: &#39;2&#39;</span>
 <span class="x">}</span>
 </code></pre></div>
+
 <p><strong>Resultado:</strong>
 - <code>$tipoContribuyente</code> = <strong>'2'</strong> (Persona Natural - Default) ⚠️</p>
-<h3 id="fase-5-determinacion-de-tipo_receptor">Fase 5: Determinación de TIPO_RECEPTOR<a class="headerlink" href="#fase-5-determinacion-de-tipo_receptor" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">// Líneas 598-620</span>
+<h3 id="fase-5-determinacion-de-tipo_receptor">Fase 5: Determinación de TIPO_RECEPTOR</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">// Líneas 598-620</span>
 <span class="x">$tipoReceptor = 2; // Default: Consumidor final</span>
 
 <span class="x">$tipoReceptorFromRequest = array_get($request, &#39;TIPO_RECEPTOR&#39;); // &quot;04&quot;</span>
@@ -2283,10 +2339,11 @@
 <span class="x">    }</span>
 <span class="x">}</span>
 </code></pre></div>
+
 <p><strong>Resultado:</strong>
 - <code>$tipoReceptor</code> = <strong>4</strong> (Extranjero) ✅</p>
-<h3 id="fase-6-validacion-cruzada-para-extranjeros">Fase 6: Validación Cruzada para Extranjeros<a class="headerlink" href="#fase-6-validacion-cruzada-para-extranjeros" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">// Líneas 622-635</span>
+<h3 id="fase-6-validacion-cruzada-para-extranjeros">Fase 6: Validación Cruzada para Extranjeros</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">// Líneas 622-635</span>
 <span class="x">if ($tipoReceptor === 4) {</span>
 <span class="x">    if (!empty($pasaporteFromRequest)) {</span>
 <span class="x">        $pasaporte = $pasaporteFromRequest; // &quot;CNBZT153H920&quot;</span>
@@ -2301,24 +2358,26 @@
 <span class="x">    $pasaporte = null;</span>
 <span class="x">}</span>
 </code></pre></div>
+
 <p><strong>Resultado:</strong>
 - <code>$pasaporte</code> = <strong>"CNBZT153H920"</strong> ✅
 - <code>$ruc</code> = <strong>null</strong> ✅
 - <code>$dv</code> = <strong>null</strong> ✅
 - <code>$tipoFromRequest</code> = <strong>null</strong> ✅
 - ⚠️ <strong>$tipoContribuyente permanece en '2' (NO se limpia)</strong></p>
-<h3 id="fase-7-pais-por-defecto">Fase 7: País por Defecto<a class="headerlink" href="#fase-7-pais-por-defecto" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">// Líneas 637-645</span>
+<h3 id="fase-7-pais-por-defecto">Fase 7: País por Defecto</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">// Líneas 637-645</span>
 <span class="x">$countryFromRequest = array_get($request, &#39;Country&#39;);</span>
 <span class="x">$defaultCountry = ($tipoReceptor === 4 ? &#39;US&#39; : &#39;PA&#39;);</span>
 <span class="x">$finalCountry = $countryFromRequest ?? $defaultCountry;</span>
 </code></pre></div>
+
 <p><strong>Resultado:</strong>
 - <code>$defaultCountry</code> = <strong>'US'</strong> (porque tipoReceptor === 4) ✅
 - <code>$finalCountry</code> = Depende si viene Country en request</p>
 <hr />
-<h2 id="resultado-final-en-customersimp">📊 Resultado Final en CustomersImp<a class="headerlink" href="#resultado-final-en-customersimp" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><span class="x">// Líneas 655-674</span>
+<h2 id="resultado-final-en-customersimp">📊 Resultado Final en CustomersImp</h2>
+<div class="codehilite"><pre><span></span><code><span class="x">// Líneas 655-674</span>
 <span class="x">$customer = $modelCustomer-&gt;updateOrCreate(</span>
 <span class="x">    [</span>
 <span class="x">        &#39;CustomerID&#39; =&gt; !empty($ruc) ? $ruc : (!empty($pasaporte) ? $pasaporte : ...),</span>
@@ -2339,15 +2398,16 @@
 <span class="x">    ]</span>
 <span class="x">);</span>
 </code></pre></div>
+
 <hr />
-<h2 id="problemas-identificados">🚨 PROBLEMAS IDENTIFICADOS<a class="headerlink" href="#problemas-identificados" title="Permanent link">&para;</a></h2>
-<h3 id="problema-1-custom_field4-para-extranjeros">Problema 1: Custom_field4 para Extranjeros<a class="headerlink" href="#problema-1-custom_field4-para-extranjeros" title="Permanent link">&para;</a></h3>
+<h2 id="problemas-identificados">🚨 PROBLEMAS IDENTIFICADOS</h2>
+<h3 id="problema-1-custom_field4-para-extranjeros">Problema 1: Custom_field4 para Extranjeros</h3>
 <p><strong>Estado Actual:</strong>
 - Para clientes extranjeros (TIPO_RECEPTOR = 4)
 - <code>Custom_field4</code> se asigna con valor <strong>'2'</strong> (Persona Natural)
 - Este valor proviene del default inicial del método</p>
-<p><strong>Lógica Incorrecta:</strong>
-<div class="highlight"><pre><span></span><code><span class="x">$tipoContribuyente = &#39;2&#39;; // Default al inicio del método</span>
+<p><strong>Lógica Incorrecta:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="x">$tipoContribuyente = &#39;2&#39;; // Default al inicio del método</span>
 
 <span class="x">// Más adelante, en la validación de extranjeros:</span>
 <span class="x">if ($tipoReceptor === 4) {</span>
@@ -2357,12 +2417,13 @@
 <span class="x">    $tipoFromRequest = null;</span>
 <span class="x">    // ⚠️ FALTA: $tipoContribuyente = null;</span>
 <span class="x">}</span>
-</code></pre></div></p>
+</code></pre></div>
+
 <p><strong>Problema:</strong>
 - NO se está limpiando <code>$tipoContribuyente</code> para extranjeros
 - Los extranjeros NO tienen tipo contribuyente panameño (no tienen RUC)
 - Debería ser <strong>null</strong> para extranjeros</p>
-<h3 id="problema-2-inconsistencia-semantica">Problema 2: Inconsistencia Semántica<a class="headerlink" href="#problema-2-inconsistencia-semantica" title="Permanent link">&para;</a></h3>
+<h3 id="problema-2-inconsistencia-semantica">Problema 2: Inconsistencia Semántica</h3>
 <p><strong>Custom_field4</strong> representa "Tipo de contribuyente" panameño:
 - 1 = Persona Natural (con RUC panameño)
 - 2 = Persona Jurídica (con RUC panameño)</p>
@@ -2373,9 +2434,9 @@
 <p><strong>Valor Esperado:</strong>
 - <code>Custom_field4</code> debería ser <strong>null</strong> para TIPO_RECEPTOR = 4</p>
 <hr />
-<h2 id="solucion-propuesta">✅ SOLUCIÓN PROPUESTA<a class="headerlink" href="#solucion-propuesta" title="Permanent link">&para;</a></h2>
-<h3 id="correccion-en-fase-6">Corrección en Fase 6<a class="headerlink" href="#correccion-en-fase-6" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">// Validación cruzada para extranjeros (TIPO_RECEPTOR: 4)</span>
+<h2 id="solucion-propuesta">✅ SOLUCIÓN PROPUESTA</h2>
+<h3 id="correccion-en-fase-6">Corrección en Fase 6</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">// Validación cruzada para extranjeros (TIPO_RECEPTOR: 4)</span>
 <span class="x">if ($tipoReceptor === 4) {</span>
 <span class="x">    if (!empty($pasaporteFromRequest)) {</span>
 <span class="x">        $pasaporte = $pasaporteFromRequest;</span>
@@ -2392,8 +2453,9 @@
 <span class="x">    $pasaporte = null;</span>
 <span class="x">}</span>
 </code></pre></div>
-<h3 id="resultado-esperado-despues-de-la-correccion">Resultado Esperado Después de la Corrección<a class="headerlink" href="#resultado-esperado-despues-de-la-correccion" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">[</span>
+
+<h3 id="resultado-esperado-despues-de-la-correccion">Resultado Esperado Después de la Corrección</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">[</span>
 <span class="x">    &#39;Custom_field1&#39; =&gt; &#39;CNBZT153H920&#39;, // ✅ PASAPORTE</span>
 <span class="x">    &#39;Custom_field2&#39; =&gt; null,           // ✅ null (no tiene DV)</span>
 <span class="x">    &#39;Custom_field3&#39; =&gt; 4,              // ✅ Extranjero</span>
@@ -2401,9 +2463,10 @@
 <span class="x">    &#39;Custom_field5&#39; =&gt; null,           // ✅ null (no tiene ubicación PA)</span>
 <span class="x">]</span>
 </code></pre></div>
+
 <hr />
-<h2 id="resumen-de-campos-custom">📝 Resumen de Campos Custom<a class="headerlink" href="#resumen-de-campos-custom" title="Permanent link">&para;</a></h2>
-<h3 id="estandar-global-docucenter">Estándar Global DocuCenter<a class="headerlink" href="#estandar-global-docucenter" title="Permanent link">&para;</a></h3>
+<h2 id="resumen-de-campos-custom">📝 Resumen de Campos Custom</h2>
+<h3 id="estandar-global-docucenter">Estándar Global DocuCenter</h3>
 <table>
 <thead>
 <tr>
@@ -2440,7 +2503,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="reglas-de-validacion">Reglas de Validación<a class="headerlink" href="#reglas-de-validacion" title="Permanent link">&para;</a></h3>
+<h3 id="reglas-de-validacion">Reglas de Validación</h3>
 <p><strong>Para TIPO_RECEPTOR = 4 (Extranjeros):</strong>
 - ✅ Custom_field1 = PASAPORTE (requerido)
 - ✅ Custom_field2 = null
@@ -2454,9 +2517,9 @@
 - ✅ Custom_field4 = Tipo contribuyente (1 o 2, según RUC)
 - ✅ Custom_field5 = Código ubicación (provincia-distrito-corregimiento)</p>
 <hr />
-<h2 id="caso-de-prueba">🎯 Caso de Prueba<a class="headerlink" href="#caso-de-prueba" title="Permanent link">&para;</a></h2>
-<h3 id="input-invoice-1930">Input (Invoice 1930)<a class="headerlink" href="#input-invoice-1930" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<h2 id="caso-de-prueba">🎯 Caso de Prueba</h2>
+<h3 id="input-invoice-1930">Input (Invoice 1930)</h3>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;CustomerRef&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="nt">&quot;RUC&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
 <span class="w">    </span><span class="nt">&quot;DV&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
@@ -2467,8 +2530,9 @@
 <span class="w">  </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
-<h3 id="output-actual-incorrecto">Output Actual (INCORRECTO)<a class="headerlink" href="#output-actual-incorrecto" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">CustomersImp {</span>
+
+<h3 id="output-actual-incorrecto">Output Actual (INCORRECTO)</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">CustomersImp {</span>
 <span class="x">  Custom_field1: &quot;CNBZT153H920&quot; ✅</span>
 <span class="x">  Custom_field2: null ✅</span>
 <span class="x">  Custom_field3: 4 ✅</span>
@@ -2476,8 +2540,9 @@
 <span class="x">  Custom_field5: null ✅</span>
 <span class="x">}</span>
 </code></pre></div>
-<h3 id="output-esperado-correcto">Output Esperado (CORRECTO)<a class="headerlink" href="#output-esperado-correcto" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">CustomersImp {</span>
+
+<h3 id="output-esperado-correcto">Output Esperado (CORRECTO)</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">CustomersImp {</span>
 <span class="x">  Custom_field1: &quot;CNBZT153H920&quot; ✅</span>
 <span class="x">  Custom_field2: null ✅</span>
 <span class="x">  Custom_field3: 4 ✅</span>
@@ -2485,10 +2550,11 @@
 <span class="x">  Custom_field5: null ✅</span>
 <span class="x">}</span>
 </code></pre></div>
+
 <hr />
-<h2 id="logging-para-debug">🔍 Logging para Debug<a class="headerlink" href="#logging-para-debug" title="Permanent link">&para;</a></h2>
+<h2 id="logging-para-debug">🔍 Logging para Debug</h2>
 <p>El método ya tiene logging extenso:</p>
-<div class="highlight"><pre><span></span><code><span class="x">Log::info(&#39;QuickBooksOnlineService.createDefaultClient: DEBUGGING Country Assignment&#39;, [</span>
+<div class="codehilite"><pre><span></span><code><span class="x">Log::info(&#39;QuickBooksOnlineService.createDefaultClient: DEBUGGING Country Assignment&#39;, [</span>
 <span class="x">    &#39;customer_name&#39; =&gt; array_get($request, &#39;Customer_Bill_Name&#39;, &#39;&#39;),</span>
 <span class="x">    &#39;tipo_receptor&#39; =&gt; $tipoReceptor,</span>
 <span class="x">    &#39;country_from_request&#39; =&gt; $countryFromRequest,</span>
@@ -2500,8 +2566,9 @@
 <span class="x">    &#39;dv&#39; =&gt; $dv</span>
 <span class="x">]);</span>
 </code></pre></div>
+
 <hr />
-<h2 id="accion-recomendada">🚀 Acción Recomendada<a class="headerlink" href="#accion-recomendada" title="Permanent link">&para;</a></h2>
+<h2 id="accion-recomendada">🚀 Acción Recomendada</h2>
 <ol>
 <li><strong>Modificar línea 633</strong> en <code>QuickBooksOnlineService.php</code></li>
 <li>Agregar: <code>$tipoContribuyente = null;</code> en el bloque de extranjeros</li>
@@ -2566,7 +2633,7 @@
       
       
     
-    <a href="https://github.com/aghabrego/docucenter" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+    <a href="https://github.com/aghabrego/docucenter-public" target="_blank" rel="noopener" title="github.com" class="md-social__link">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
     </a>
   

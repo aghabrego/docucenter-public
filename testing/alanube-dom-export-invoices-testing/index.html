@@ -233,7 +233,7 @@
           
   
   
-  APIs
+  API Documentation
 
         </a>
       </li>
@@ -269,7 +269,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../technical/" class="md-tabs__link">
+        <a href="../../technical/README.md" class="md-tabs__link">
           
   
   
@@ -298,6 +298,25 @@
         </a>
       </li>
     
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Sistema de Testing
+
+      </a>
+    </li>
   
 
       
@@ -404,7 +423,7 @@
   <span class="md-ellipsis">
     
   
-    APIs
+    API Documentation
   
 
     
@@ -420,7 +439,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    APIs
+    API Documentation
   
 
           </label>
@@ -1363,7 +1382,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../technical/" class="md-nav__link">
+      <a href="../../technical/README.md" class="md-nav__link">
         
   
   
@@ -1712,6 +1731,33 @@
           </ul>
         </nav>
       
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sistema de Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -2384,11 +2430,11 @@
   
 
 
-<h1 id="testing-de-facturas-de-exportacion-electronica-46-alanube-dom">Testing de Facturas de Exportación Electrónica (46) - Alanube DOM<a class="headerlink" href="#testing-de-facturas-de-exportacion-electronica-46-alanube-dom" title="Permanent link">&para;</a></h1>
-<h2 id="descripcion-general">Descripción General<a class="headerlink" href="#descripcion-general" title="Permanent link">&para;</a></h2>
+<h1 id="testing-de-facturas-de-exportacion-electronica-46-alanube-dom">Testing de Facturas de Exportación Electrónica (46) - Alanube DOM</h1>
+<h2 id="descripcion-general">Descripción General</h2>
 <p>Esta documentación describe el sistema de testing completo para las <strong>Facturas de Exportación Electrónica (46)</strong> implementadas en DocuCenter para el servicio Alanube DOM. El sistema incluye validaciones específicas, pruebas de integración y testing automatizado.</p>
-<h2 id="estructura-de-testing">Estructura de Testing<a class="headerlink" href="#estructura-de-testing" title="Permanent link">&para;</a></h2>
-<h3 id="archivos-principales">Archivos Principales<a class="headerlink" href="#archivos-principales" title="Permanent link">&para;</a></h3>
+<h2 id="estructura-de-testing">Estructura de Testing</h2>
+<h3 id="archivos-principales">Archivos Principales</h3>
 <ul>
 <li><strong>Script principal</strong>: <code>/scripts/test-export-invoices.sh</code></li>
 <li><strong>Documentación técnica</strong>: <code>/docs/technical/alanube-dom-export-invoices.md</code></li>
@@ -2397,102 +2443,116 @@
 <li><code>AlanubeDomService.php</code> (métodos de exportación)</li>
 <li><code>CreateExportInvoiceAlanubeDomJob.php</code></li>
 </ul>
-<h3 id="directorio-de-resultados">Directorio de Resultados<a class="headerlink" href="#directorio-de-resultados" title="Permanent link">&para;</a></h3>
+<h3 id="directorio-de-resultados">Directorio de Resultados</h3>
 <ul>
 <li><strong>Ubicación</strong>: <code>/scripts/results/</code></li>
 <li><strong>Logs automáticos</strong>: <code>export_test_YYYYMMDD_HHMMSS.log</code></li>
 <li><strong>Comandos ejecutados</strong>: <code>export_commands_YYYYMMDD_HHMMSS.log</code></li>
 </ul>
-<h2 id="uso-del-script-de-testing">Uso del Script de Testing<a class="headerlink" href="#uso-del-script-de-testing" title="Permanent link">&para;</a></h2>
-<h3 id="sintaxis-basica">Sintaxis Básica<a class="headerlink" href="#sintaxis-basica" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>./scripts/test-export-invoices.sh<span class="w"> </span><span class="o">[</span>OPCIÓN<span class="o">]</span><span class="w"> </span><span class="o">[</span>PARÁMETROS<span class="o">]</span>
+<h2 id="uso-del-script-de-testing">Uso del Script de Testing</h2>
+<h3 id="sintaxis-basica">Sintaxis Básica</h3>
+<div class="codehilite"><pre><span></span><code>./scripts/test-export-invoices.sh<span class="w"> </span><span class="o">[</span>OPCIÓN<span class="o">]</span><span class="w"> </span><span class="o">[</span>PARÁMETROS<span class="o">]</span>
 </code></pre></div>
-<h3 id="opciones-disponibles">Opciones Disponibles<a class="headerlink" href="#opciones-disponibles" title="Permanent link">&para;</a></h3>
-<h4 id="1-testing-de-validaciones">1. Testing de Validaciones<a class="headerlink" href="#1-testing-de-validaciones" title="Permanent link">&para;</a></h4>
-<p><div class="highlight"><pre><span></span><code>./scripts/test-export-invoices.sh<span class="w"> </span>validation
+
+<h3 id="opciones-disponibles">Opciones Disponibles</h3>
+<h4 id="1-testing-de-validaciones">1. Testing de Validaciones</h4>
+<div class="codehilite"><pre><span></span><code>./scripts/test-export-invoices.sh<span class="w"> </span>validation
 </code></pre></div>
-<strong>Incluye</strong>:
+
+<p><strong>Incluye</strong>:
 - Validación de estructura del documento
 - Verificación de límites de ítems (máximo 1,000)
 - Validación de indicadores de facturación (ITBIS 0%)
 - Validación de información específica de exportación</p>
-<h4 id="2-testing-del-enhancement">2. Testing del Enhancement<a class="headerlink" href="#2-testing-del-enhancement" title="Permanent link">&para;</a></h4>
-<p><div class="highlight"><pre><span></span><code>./scripts/test-export-invoices.sh<span class="w"> </span>enhancement
+<h4 id="2-testing-del-enhancement">2. Testing del Enhancement</h4>
+<div class="codehilite"><pre><span></span><code>./scripts/test-export-invoices.sh<span class="w"> </span>enhancement
 </code></pre></div>
-<strong>Incluye</strong>:
+
+<p><strong>Incluye</strong>:
 - Generación de datos de prueba
 - Preparación de documentos completos
 - Construcción de compradores extranjeros
 - Verificación de constantes</p>
-<h4 id="3-testing-del-servicio">3. Testing del Servicio<a class="headerlink" href="#3-testing-del-servicio" title="Permanent link">&para;</a></h4>
-<p><div class="highlight"><pre><span></span><code>./scripts/test-export-invoices.sh<span class="w"> </span>service
+<h4 id="3-testing-del-servicio">3. Testing del Servicio</h4>
+<div class="codehilite"><pre><span></span><code>./scripts/test-export-invoices.sh<span class="w"> </span>service
 </code></pre></div>
-<strong>Incluye</strong>:
+
+<p><strong>Incluye</strong>:
 - Detección inteligente de facturas de exportación
 - Determinación de tipo de documento
 - Preparación para emisión (sin envío real)</p>
-<h4 id="4-testing-del-job">4. Testing del Job<a class="headerlink" href="#4-testing-del-job" title="Permanent link">&para;</a></h4>
-<p><div class="highlight"><pre><span></span><code>./scripts/test-export-invoices.sh<span class="w"> </span>job
+<h4 id="4-testing-del-job">4. Testing del Job</h4>
+<div class="codehilite"><pre><span></span><code>./scripts/test-export-invoices.sh<span class="w"> </span>job
 </code></pre></div>
-<strong>Incluye</strong>:
+
+<p><strong>Incluye</strong>:
 - Verificación de estructura del job
 - Creación de instancias
 - Validación de métodos requeridos</p>
-<h4 id="5-testing-completo">5. Testing Completo<a class="headerlink" href="#5-testing-completo" title="Permanent link">&para;</a></h4>
-<p><div class="highlight"><pre><span></span><code>./scripts/test-export-invoices.sh<span class="w"> </span><span class="nb">complete</span>
+<h4 id="5-testing-completo">5. Testing Completo</h4>
+<div class="codehilite"><pre><span></span><code>./scripts/test-export-invoices.sh<span class="w"> </span><span class="nb">complete</span>
 </code></pre></div>
-<strong>Ejecuta</strong>: Todas las pruebas anteriores en secuencia</p>
-<h4 id="6-modo-interactivo">6. Modo Interactivo<a class="headerlink" href="#6-modo-interactivo" title="Permanent link">&para;</a></h4>
-<p><div class="highlight"><pre><span></span><code>./scripts/test-export-invoices.sh<span class="w"> </span>interactive<span class="w"> </span><span class="o">[</span>org_id<span class="o">]</span>
+
+<p><strong>Ejecuta</strong>: Todas las pruebas anteriores en secuencia</p>
+<h4 id="6-modo-interactivo">6. Modo Interactivo</h4>
+<div class="codehilite"><pre><span></span><code>./scripts/test-export-invoices.sh<span class="w"> </span>interactive<span class="w"> </span><span class="o">[</span>org_id<span class="o">]</span>
 </code></pre></div>
-<strong>Características</strong>:
+
+<p><strong>Características</strong>:
 - Menú interactivo con opciones numeradas
 - Selección de organización específica
 - Ejecución paso a paso de pruebas</p>
-<h3 id="parametros-opcionales">Parámetros Opcionales<a class="headerlink" href="#parametros-opcionales" title="Permanent link">&para;</a></h3>
-<h4 id="organizacion-especifica">Organización Específica<a class="headerlink" href="#organizacion-especifica" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code>./scripts/test-export-invoices.sh<span class="w"> </span>validation<span class="w"> </span>--org-id<span class="o">=</span><span class="m">5</span>
+<h3 id="parametros-opcionales">Parámetros Opcionales</h3>
+<h4 id="organizacion-especifica">Organización Específica</h4>
+<div class="codehilite"><pre><span></span><code>./scripts/test-export-invoices.sh<span class="w"> </span>validation<span class="w"> </span>--org-id<span class="o">=</span><span class="m">5</span>
 </code></pre></div>
-<h4 id="modo-verbose">Modo Verbose<a class="headerlink" href="#modo-verbose" title="Permanent link">&para;</a></h4>
-<p><div class="highlight"><pre><span></span><code>./scripts/test-export-invoices.sh<span class="w"> </span><span class="nb">complete</span><span class="w"> </span>--verbose
+
+<h4 id="modo-verbose">Modo Verbose</h4>
+<div class="codehilite"><pre><span></span><code>./scripts/test-export-invoices.sh<span class="w"> </span><span class="nb">complete</span><span class="w"> </span>--verbose
 </code></pre></div>
-<strong>Funcionalidad</strong>: Muestra output detallado de cada comando</p>
-<h4 id="guardar-resultados">Guardar Resultados<a class="headerlink" href="#guardar-resultados" title="Permanent link">&para;</a></h4>
-<p><div class="highlight"><pre><span></span><code>./scripts/test-export-invoices.sh<span class="w"> </span><span class="nb">complete</span><span class="w"> </span>--save-results
+
+<p><strong>Funcionalidad</strong>: Muestra output detallado de cada comando</p>
+<h4 id="guardar-resultados">Guardar Resultados</h4>
+<div class="codehilite"><pre><span></span><code>./scripts/test-export-invoices.sh<span class="w"> </span><span class="nb">complete</span><span class="w"> </span>--save-results
 </code></pre></div>
-<strong>Funcionalidad</strong>: Guarda logs detallados en archivos</p>
-<h4 id="combinacion-de-parametros">Combinación de Parámetros<a class="headerlink" href="#combinacion-de-parametros" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code>./scripts/test-export-invoices.sh<span class="w"> </span><span class="nb">complete</span><span class="w"> </span>--org-id<span class="o">=</span><span class="m">3</span><span class="w"> </span>--verbose<span class="w"> </span>--save-results
+
+<p><strong>Funcionalidad</strong>: Guarda logs detallados en archivos</p>
+<h4 id="combinacion-de-parametros">Combinación de Parámetros</h4>
+<div class="codehilite"><pre><span></span><code>./scripts/test-export-invoices.sh<span class="w"> </span><span class="nb">complete</span><span class="w"> </span>--org-id<span class="o">=</span><span class="m">3</span><span class="w"> </span>--verbose<span class="w"> </span>--save-results
 </code></pre></div>
-<h2 id="casos-de-prueba-especificos">Casos de Prueba Específicos<a class="headerlink" href="#casos-de-prueba-especificos" title="Permanent link">&para;</a></h2>
-<h3 id="1-validacion-de-estructura">1. Validación de Estructura<a class="headerlink" href="#1-validacion-de-estructura" title="Permanent link">&para;</a></h3>
+
+<h2 id="casos-de-prueba-especificos">Casos de Prueba Específicos</h2>
+<h3 id="1-validacion-de-estructura">1. Validación de Estructura</h3>
 <p><strong>Objetivo</strong>: Verificar que el documento de exportación cumple con la estructura requerida</p>
 <p><strong>Validaciones</strong>:
 - Presencia de campos obligatorios
 - Formato de información adicional
 - Estructura de ítems de exportación
 - Datos del comprador extranjero</p>
-<p><strong>Comando</strong>:
-<div class="highlight"><pre><span></span><code>./scripts/test-export-invoices.sh<span class="w"> </span>validation
-</code></pre></div></p>
-<p><strong>Resultado Esperado</strong>:
-<div class="highlight"><pre><span></span><code>[INFO] ✓ Validación de estructura del documento de exportación - EXITOSO
-[INFO] ✓ Validación de límites de ítems - EXITOSO
-[INFO] ✓ Validación de indicadores de facturación para exportación - EXITOSO
-[INFO] ✓ Validación de información específica de exportación - EXITOSO
-</code></pre></div></p>
-<h3 id="2-generacion-de-datos-de-prueba">2. Generación de Datos de Prueba<a class="headerlink" href="#2-generacion-de-datos-de-prueba" title="Permanent link">&para;</a></h3>
+<p><strong>Comando</strong>:</p>
+<div class="codehilite"><pre><span></span><code>./scripts/test-export-invoices.sh<span class="w"> </span>validation
+</code></pre></div>
+
+<p><strong>Resultado Esperado</strong>:</p>
+<div class="codehilite"><pre><span></span><code><span class="o">[</span><span class="n">INFO</span><span class="o">]</span><span class="w"> </span><span class="err">✓</span><span class="w"> </span><span class="n">Validación</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">estructura</span><span class="w"> </span><span class="n">del</span><span class="w"> </span><span class="n">documento</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">exportación</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">EXITOSO</span>
+<span class="o">[</span><span class="n">INFO</span><span class="o">]</span><span class="w"> </span><span class="err">✓</span><span class="w"> </span><span class="n">Validación</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">límites</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">ítems</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">EXITOSO</span>
+<span class="o">[</span><span class="n">INFO</span><span class="o">]</span><span class="w"> </span><span class="err">✓</span><span class="w"> </span><span class="n">Validación</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">indicadores</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">facturación</span><span class="w"> </span><span class="n">para</span><span class="w"> </span><span class="n">exportación</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">EXITOSO</span>
+<span class="o">[</span><span class="n">INFO</span><span class="o">]</span><span class="w"> </span><span class="err">✓</span><span class="w"> </span><span class="n">Validación</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">información</span><span class="w"> </span><span class="n">específica</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">exportación</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">EXITOSO</span>
+</code></pre></div>
+
+<h3 id="2-generacion-de-datos-de-prueba">2. Generación de Datos de Prueba</h3>
 <p><strong>Objetivo</strong>: Verificar que se pueden generar datos de prueba válidos</p>
 <p><strong>Características de los datos</strong>:
 - Múltiples ítems con ITBIS 0%
 - Información de transporte marítimo
 - Comprador extranjero con identificador válido
 - Moneda USD por defecto</p>
-<p><strong>Comando</strong>:
-<div class="highlight"><pre><span></span><code>./scripts/test-export-invoices.sh<span class="w"> </span>enhancement
-</code></pre></div></p>
-<p><strong>Datos Generados</strong>:
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<p><strong>Comando</strong>:</p>
+<div class="codehilite"><pre><span></span><code>./scripts/test-export-invoices.sh<span class="w"> </span>enhancement
+</code></pre></div>
+
+<p><strong>Datos Generados</strong>:</p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;additionalInformation&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="nt">&quot;shippingDocument&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;BL-001-2025&quot;</span><span class="p">,</span>
 <span class="w">    </span><span class="nt">&quot;destinationCountry&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;US&quot;</span><span class="p">,</span>
@@ -2513,19 +2573,21 @@
 <span class="w">    </span><span class="p">}</span>
 <span class="w">  </span><span class="p">]</span>
 <span class="p">}</span>
-</code></pre></div></p>
-<h3 id="3-deteccion-inteligente">3. Detección Inteligente<a class="headerlink" href="#3-deteccion-inteligente" title="Permanent link">&para;</a></h3>
+</code></pre></div>
+
+<h3 id="3-deteccion-inteligente">3. Detección Inteligente</h3>
 <p><strong>Objetivo</strong>: Verificar que el sistema detecta automáticamente facturas de exportación</p>
 <p><strong>Indicadores Analizados</strong>:
 - Presencia de <code>shippingDocument</code>
 - Datos de transporte
 - Identificadores extranjeros
 - Indicador de facturación 3</p>
-<p><strong>Comando</strong>:
-<div class="highlight"><pre><span></span><code>./scripts/test-export-invoices.sh<span class="w"> </span>service
-</code></pre></div></p>
-<p><strong>Lógica de Detección</strong>:
-<div class="highlight"><pre><span></span><code><span class="x">// Verificar información de envío</span>
+<p><strong>Comando</strong>:</p>
+<div class="codehilite"><pre><span></span><code>./scripts/test-export-invoices.sh<span class="w"> </span>service
+</code></pre></div>
+
+<p><strong>Lógica de Detección</strong>:</p>
+<div class="codehilite"><pre><span></span><code><span class="x">// Verificar información de envío</span>
 <span class="x">$hasShipping = !empty($additionalInfo[&#39;shippingDocument&#39;]) || </span>
 <span class="x">               !empty($additionalInfo[&#39;transportMean&#39;]);</span>
 
@@ -2534,8 +2596,9 @@
 
 <span class="x">// Verificar indicadores de exportación</span>
 <span class="x">$hasExportIndicators = $billingIndicator === &#39;3&#39;;</span>
-</code></pre></div></p>
-<h3 id="4-preparacion-de-documentos">4. Preparación de Documentos<a class="headerlink" href="#4-preparacion-de-documentos" title="Permanent link">&para;</a></h3>
+</code></pre></div>
+
+<h3 id="4-preparacion-de-documentos">4. Preparación de Documentos</h3>
 <p><strong>Objetivo</strong>: Verificar que los documentos se preparan correctamente para envío</p>
 <p><strong>Proceso</strong>:
 1. Validación de datos de entrada
@@ -2547,23 +2610,24 @@
 - Total de ITBIS es 0.00
 - Estructura cumple con API de Alanube
 - Información de exportación completa</p>
-<h3 id="5-validacion-de-limites">5. Validación de Límites<a class="headerlink" href="#5-validacion-de-limites" title="Permanent link">&para;</a></h3>
+<h3 id="5-validacion-de-limites">5. Validación de Límites</h3>
 <p><strong>Objetivo</strong>: Verificar que se respetan los límites específicos de exportación</p>
 <p><strong>Límites Verificados</strong>:
 - <strong>Ítems</strong>: Máximo 1,000 por factura
 - <strong>Formas de pago</strong>: Máximo 7 por factura
 - <strong>Longitud de campos</strong>: Según especificaciones
 - <strong>Formatos</strong>: Fechas, monedas, códigos de país</p>
-<p><strong>Comando de Verificación</strong>:
-<div class="highlight"><pre><span></span><code>php<span class="w"> </span>artisan<span class="w"> </span>tinker<span class="w"> </span>--execute<span class="o">=</span><span class="s2">&quot;</span>
+<p><strong>Comando de Verificación</strong>:</p>
+<div class="codehilite"><pre><span></span><code>php<span class="w"> </span>artisan<span class="w"> </span>tinker<span class="w"> </span>--execute<span class="o">=</span><span class="s2">&quot;</span>
 <span class="nv">$testData</span><span class="s2"> = \App\Services\AlanubeDomExportInvoiceEnhancement::generateTestExportInvoiceData();</span>
 <span class="s2">echo &#39;Ítems: &#39; . count(</span><span class="nv">$testData</span><span class="s2">[&#39;itemDetails&#39;]) . &#39;/&#39; . \App\Services\AlanubeDomExportInvoiceEnhancement::MAX_ITEMS;</span>
 <span class="s2">echo &#39;Formas de pago: &#39; . count(</span><span class="nv">$testData</span><span class="s2">[&#39;paymentFormsTable&#39;]) . &#39;/&#39; . \App\Services\AlanubeDomExportInvoiceEnhancement::MAX_PAYMENT_FORMS;</span>
 <span class="s2">&quot;</span>
-</code></pre></div></p>
-<h2 id="escenarios-de-testing-especificos">Escenarios de Testing Específicos<a class="headerlink" href="#escenarios-de-testing-especificos" title="Permanent link">&para;</a></h2>
-<h3 id="escenario-1-exportacion-maritima-a-estados-unidos">Escenario 1: Exportación Marítima a Estados Unidos<a class="headerlink" href="#escenario-1-exportacion-maritima-a-estados-unidos" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># Datos de prueba específicos</span>
+</code></pre></div>
+
+<h2 id="escenarios-de-testing-especificos">Escenarios de Testing Específicos</h2>
+<h3 id="escenario-1-exportacion-maritima-a-estados-unidos">Escenario 1: Exportación Marítima a Estados Unidos</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Datos de prueba específicos</span>
 <span class="nv">$exportData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>
 <span class="w">    </span><span class="s1">&#39;additionalInformation&#39;</span><span class="w"> </span><span class="o">=</span>&gt;<span class="w"> </span><span class="o">[</span>
 <span class="w">        </span><span class="s1">&#39;shippingDocument&#39;</span><span class="w"> </span><span class="o">=</span>&gt;<span class="w"> </span><span class="s1">&#39;BL-001-2025&#39;</span>,
@@ -2582,8 +2646,9 @@
 <span class="w">    </span><span class="o">]</span>
 <span class="o">]</span><span class="p">;</span>
 </code></pre></div>
-<h3 id="escenario-2-exportacion-aerea-a-canada">Escenario 2: Exportación Aérea a Canadá<a class="headerlink" href="#escenario-2-exportacion-aerea-a-canada" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># Datos de prueba específicos</span>
+
+<h3 id="escenario-2-exportacion-aerea-a-canada">Escenario 2: Exportación Aérea a Canadá</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Datos de prueba específicos</span>
 <span class="nv">$exportData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>
 <span class="w">    </span><span class="s1">&#39;additionalInformation&#39;</span><span class="w"> </span><span class="o">=</span>&gt;<span class="w"> </span><span class="o">[</span>
 <span class="w">        </span><span class="s1">&#39;shippingDocument&#39;</span><span class="w"> </span><span class="o">=</span>&gt;<span class="w"> </span><span class="s1">&#39;AWB-567-2025&#39;</span>,
@@ -2600,8 +2665,9 @@
 <span class="w">    </span><span class="o">]</span>
 <span class="o">]</span><span class="p">;</span>
 </code></pre></div>
-<h3 id="escenario-3-exportacion-terrestre-a-costa-rica">Escenario 3: Exportación Terrestre a Costa Rica<a class="headerlink" href="#escenario-3-exportacion-terrestre-a-costa-rica" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># Datos de prueba específicos</span>
+
+<h3 id="escenario-3-exportacion-terrestre-a-costa-rica">Escenario 3: Exportación Terrestre a Costa Rica</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Datos de prueba específicos</span>
 <span class="nv">$exportData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>
 <span class="w">    </span><span class="s1">&#39;additionalInformation&#39;</span><span class="w"> </span><span class="o">=</span>&gt;<span class="w"> </span><span class="o">[</span>
 <span class="w">        </span><span class="s1">&#39;shippingDocument&#39;</span><span class="w"> </span><span class="o">=</span>&gt;<span class="w"> </span><span class="s1">&#39;CRT-789-2025&#39;</span>,
@@ -2618,9 +2684,10 @@
 <span class="w">    </span><span class="o">]</span>
 <span class="o">]</span><span class="p">;</span>
 </code></pre></div>
-<h2 id="testing-de-job-asincrono">Testing de Job Asíncrono<a class="headerlink" href="#testing-de-job-asincrono" title="Permanent link">&para;</a></h2>
-<h3 id="prueba-de-estados-del-job">Prueba de Estados del Job<a class="headerlink" href="#prueba-de-estados-del-job" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># Verificar constantes de estado</span>
+
+<h2 id="testing-de-job-asincrono">Testing de Job Asíncrono</h2>
+<h3 id="prueba-de-estados-del-job">Prueba de Estados del Job</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Verificar constantes de estado</span>
 php<span class="w"> </span>artisan<span class="w"> </span>tinker<span class="w"> </span>--execute<span class="o">=</span><span class="s2">&quot;</span>
 <span class="nv">$reflection</span><span class="s2"> = new ReflectionClass(&#39;\App\Jobs\CreateExportInvoiceAlanubeDomJob&#39;);</span>
 <span class="nv">$constants</span><span class="s2"> = </span><span class="nv">$reflection</span><span class="s2">-&gt;getConstants();</span>
@@ -2631,14 +2698,15 @@ php<span class="w"> </span>artisan<span class="w"> </span>tinker<span class="w">
 <span class="s2">}</span>
 <span class="s2">&quot;</span>
 </code></pre></div>
+
 <p><strong>Estados Esperados</strong>:
 - <code>STATE_INIT: 1</code>
 - <code>STATE_VALIDATION: 2</code>
 - <code>STATE_PREPARATION: 3</code>
 - <code>STATE_EMISSION: 4</code>
 - <code>STATE_COMPLETED: 5</code></p>
-<h3 id="prueba-de-creacion-de-job">Prueba de Creación de Job<a class="headerlink" href="#prueba-de-creacion-de-job" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># Crear instancia del job</span>
+<h3 id="prueba-de-creacion-de-job">Prueba de Creación de Job</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Crear instancia del job</span>
 php<span class="w"> </span>artisan<span class="w"> </span>tinker<span class="w"> </span>--execute<span class="o">=</span><span class="s2">&quot;</span>
 <span class="nv">$testData</span><span class="s2"> = \App\Services\AlanubeDomExportInvoiceEnhancement::generateTestExportInvoiceData();</span>
 <span class="nv">$job</span><span class="s2"> = new \App\Jobs\CreateExportInvoiceAlanubeDomJob(1, </span><span class="nv">$testData</span><span class="s2">, 1);</span>
@@ -2647,41 +2715,43 @@ php<span class="w"> </span>artisan<span class="w"> </span>tinker<span class="w">
 <span class="s2">echo &#39;Cola: &#39; . </span><span class="nv">$job</span><span class="s2">-&gt;queue;</span>
 <span class="s2">&quot;</span>
 </code></pre></div>
-<h3 id="prueba-de-configuracion-del-job">Prueba de Configuración del Job<a class="headerlink" href="#prueba-de-configuracion-del-job" title="Permanent link">&para;</a></h3>
+
+<h3 id="prueba-de-configuracion-del-job">Prueba de Configuración del Job</h3>
 <p><strong>Características del Job</strong>:
 - <strong>Intentos</strong>: 3 reintentos
 - <strong>Timeout</strong>: 300 segundos (5 minutos)
 - <strong>Backoff</strong>: [30, 60, 120] segundos
 - <strong>Cola</strong>: <code>alanube_dom</code></p>
-<h2 id="interpretacion-de-resultados">Interpretación de Resultados<a class="headerlink" href="#interpretacion-de-resultados" title="Permanent link">&para;</a></h2>
-<h3 id="resultados-exitosos">Resultados Exitosos<a class="headerlink" href="#resultados-exitosos" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>[INFO] ✓ Validación de estructura del documento de exportación - EXITOSO
-[INFO] ✓ Generación de datos de prueba - EXITOSO
-[INFO] ✓ Detección inteligente de factura de exportación - EXITOSO
-[INFO] ✓ Creación de instancia del job - EXITOSO
+<h2 id="interpretacion-de-resultados">Interpretación de Resultados</h2>
+<h3 id="resultados-exitosos">Resultados Exitosos</h3>
+<div class="codehilite"><pre><span></span><code><span class="o">[</span><span class="n">INFO</span><span class="o">]</span><span class="w"> </span><span class="err">✓</span><span class="w"> </span><span class="n">Validación</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">estructura</span><span class="w"> </span><span class="n">del</span><span class="w"> </span><span class="n">documento</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">exportación</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">EXITOSO</span>
+<span class="o">[</span><span class="n">INFO</span><span class="o">]</span><span class="w"> </span><span class="err">✓</span><span class="w"> </span><span class="n">Generación</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">datos</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">prueba</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">EXITOSO</span>
+<span class="o">[</span><span class="n">INFO</span><span class="o">]</span><span class="w"> </span><span class="err">✓</span><span class="w"> </span><span class="n">Detección</span><span class="w"> </span><span class="n">inteligente</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">factura</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">exportación</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">EXITOSO</span>
+<span class="o">[</span><span class="n">INFO</span><span class="o">]</span><span class="w"> </span><span class="err">✓</span><span class="w"> </span><span class="n">Creación</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">instancia</span><span class="w"> </span><span class="n">del</span><span class="w"> </span><span class="n">job</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">EXITOSO</span>
 </code></pre></div>
-<h3 id="errores-comunes-y-soluciones">Errores Comunes y Soluciones<a class="headerlink" href="#errores-comunes-y-soluciones" title="Permanent link">&para;</a></h3>
-<h4 id="error-indicador-de-facturacion-incorrecto">Error: "Indicador de facturación incorrecto"<a class="headerlink" href="#error-indicador-de-facturacion-incorrecto" title="Permanent link">&para;</a></h4>
+
+<h3 id="errores-comunes-y-soluciones">Errores Comunes y Soluciones</h3>
+<h4 id="error-indicador-de-facturacion-incorrecto">Error: "Indicador de facturación incorrecto"</h4>
 <p><strong>Causa</strong>: Ítems con indicador diferente a 3
 <strong>Solución</strong>: Verificar que todos los ítems tengan <code>billingIndicator: "3"</code></p>
-<h4 id="error-excede-limite-de-items">Error: "Excede límite de ítems"<a class="headerlink" href="#error-excede-limite-de-items" title="Permanent link">&para;</a></h4>
+<h4 id="error-excede-limite-de-items">Error: "Excede límite de ítems"</h4>
 <p><strong>Causa</strong>: Más de 1,000 ítems en la factura
 <strong>Solución</strong>: Dividir en múltiples facturas</p>
-<h4 id="error-informacion-de-exportacion-faltante">Error: "Información de exportación faltante"<a class="headerlink" href="#error-informacion-de-exportacion-faltante" title="Permanent link">&para;</a></h4>
+<h4 id="error-informacion-de-exportacion-faltante">Error: "Información de exportación faltante"</h4>
 <p><strong>Causa</strong>: Campos obligatorios vacíos en <code>additionalInformation</code>
 <strong>Solución</strong>: Completar campos de transporte y destino</p>
-<h4 id="error-comprador-extranjero-invalido">Error: "Comprador extranjero inválido"<a class="headerlink" href="#error-comprador-extranjero-invalido" title="Permanent link">&para;</a></h4>
+<h4 id="error-comprador-extranjero-invalido">Error: "Comprador extranjero inválido"</h4>
 <p><strong>Causa</strong>: Falta RNC o identificador extranjero
 <strong>Solución</strong>: Proporcionar al menos un identificador válido</p>
-<h3 id="warnings-comunes">Warnings Comunes<a class="headerlink" href="#warnings-comunes" title="Permanent link">&para;</a></h3>
+<h3 id="warnings-comunes">Warnings Comunes</h3>
 <ul>
 <li><strong>Moneda no especificada</strong>: Usa USD por defecto</li>
 <li><strong>Puerto de descarga faltante</strong>: Para transporte marítimo</li>
 <li><strong>Información aduanera vacía</strong>: Recomendada para exportaciones</li>
 </ul>
-<h2 id="automatizacion-de-testing">Automatización de Testing<a class="headerlink" href="#automatizacion-de-testing" title="Permanent link">&para;</a></h2>
-<h3 id="ejecucion-en-cicd">Ejecución en CI/CD<a class="headerlink" href="#ejecucion-en-cicd" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># Script para integración continua</span>
+<h2 id="automatizacion-de-testing">Automatización de Testing</h2>
+<h3 id="ejecucion-en-cicd">Ejecución en CI/CD</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Script para integración continua</span>
 <span class="c1">#!/bin/bash</span>
 <span class="nb">cd</span><span class="w"> </span>/path/to/docucenter
 ./scripts/test-export-invoices.sh<span class="w"> </span><span class="nb">complete</span><span class="w"> </span>--save-results
@@ -2694,18 +2764,21 @@ php<span class="w"> </span>artisan<span class="w"> </span>tinker<span class="w">
 <span class="w">    </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
 <span class="k">fi</span>
 </code></pre></div>
-<h3 id="testing-programado">Testing Programado<a class="headerlink" href="#testing-programado" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># Crontab para testing diario</span>
+
+<h3 id="testing-programado">Testing Programado</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Crontab para testing diario</span>
 <span class="m">0</span><span class="w"> </span><span class="m">2</span><span class="w"> </span>*<span class="w"> </span>*<span class="w"> </span>*<span class="w"> </span>/path/to/docucenter/scripts/test-export-invoices.sh<span class="w"> </span><span class="nb">complete</span><span class="w"> </span>--save-results<span class="w"> </span>&gt;&gt;<span class="w"> </span>/var/log/export-test.log<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span>
 </code></pre></div>
-<h3 id="monitoring-de-resultados">Monitoring de Resultados<a class="headerlink" href="#monitoring-de-resultados" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># Verificar logs de resultados</span>
+
+<h3 id="monitoring-de-resultados">Monitoring de Resultados</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Verificar logs de resultados</span>
 tail<span class="w"> </span>-f<span class="w"> </span>/scripts/results/export_test_<span class="k">$(</span>date<span class="w"> </span>+%Y%m%d<span class="k">)</span>*.log
 </code></pre></div>
-<h2 id="integracion-con-testing-framework">Integración con Testing Framework<a class="headerlink" href="#integracion-con-testing-framework" title="Permanent link">&para;</a></h2>
-<h3 id="phpunit-tests">PHPUnit Tests<a class="headerlink" href="#phpunit-tests" title="Permanent link">&para;</a></h3>
+
+<h2 id="integracion-con-testing-framework">Integración con Testing Framework</h2>
+<h3 id="phpunit-tests">PHPUnit Tests</h3>
 <p><strong>Ubicación sugerida</strong>: <code>tests/Feature/AlanubeDom/ExportInvoiceTest.php</code></p>
-<div class="highlight"><pre><span></span><code><span class="cp">&lt;?php</span>
+<div class="codehilite"><pre><span></span><code><span class="cp">&lt;?php</span>
 
 <span class="k">namespace</span> <span class="nx">Tests\Feature\AlanubeDom</span><span class="p">;</span>
 
@@ -2749,8 +2822,9 @@ tail<span class="w"> </span>-f<span class="w"> </span>/scripts/results/export_te
     <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
-<h2 id="conclusiones">Conclusiones<a class="headerlink" href="#conclusiones" title="Permanent link">&para;</a></h2>
-<h3 id="cobertura-de-testing">Cobertura de Testing<a class="headerlink" href="#cobertura-de-testing" title="Permanent link">&para;</a></h3>
+
+<h2 id="conclusiones">Conclusiones</h2>
+<h3 id="cobertura-de-testing">Cobertura de Testing</h3>
 <ul>
 <li>✅ <strong>Validaciones</strong>: Estructura, límites, indicadores</li>
 <li>✅ <strong>Enhancement</strong>: Generación, preparación, constantes</li>
@@ -2758,14 +2832,14 @@ tail<span class="w"> </span>-f<span class="w"> </span>/scripts/results/export_te
 <li>✅ <strong>Job</strong>: Estados, configuración, métodos</li>
 <li>✅ <strong>Integración</strong>: Flujo completo end-to-end</li>
 </ul>
-<h3 id="calidad-del-testing">Calidad del Testing<a class="headerlink" href="#calidad-del-testing" title="Permanent link">&para;</a></h3>
+<h3 id="calidad-del-testing">Calidad del Testing</h3>
 <ul>
 <li><strong>Automatizado</strong>: Script ejecutable con múltiples opciones</li>
 <li><strong>Interactivo</strong>: Modo para testing manual paso a paso</li>
 <li><strong>Logging</strong>: Registro detallado de resultados</li>
 <li><strong>Escalable</strong>: Fácil agregar nuevos casos de prueba</li>
 </ul>
-<h3 id="proximos-pasos">Próximos Pasos<a class="headerlink" href="#proximos-pasos" title="Permanent link">&para;</a></h3>
+<h3 id="proximos-pasos">Próximos Pasos</h3>
 <ol>
 <li><strong>Integración CI/CD</strong>: Automatizar en pipeline</li>
 <li><strong>Testing Performance</strong>: Pruebas de carga con múltiples facturas</li>
@@ -2829,7 +2903,7 @@ tail<span class="w"> </span>-f<span class="w"> </span>/scripts/results/export_te
       
       
     
-    <a href="https://github.com/aghabrego/docucenter" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+    <a href="https://github.com/aghabrego/docucenter-public" target="_blank" rel="noopener" title="github.com" class="md-social__link">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
     </a>
   

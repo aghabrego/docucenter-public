@@ -233,7 +233,7 @@
           
   
   
-  APIs
+  API Documentation
 
         </a>
       </li>
@@ -269,7 +269,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../" class="md-tabs__link">
+        <a href="../README.md" class="md-tabs__link">
           
   
   
@@ -298,6 +298,25 @@
         </a>
       </li>
     
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../testing/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Sistema de Testing
+
+      </a>
+    </li>
   
 
       
@@ -404,7 +423,7 @@
   <span class="md-ellipsis">
     
   
-    APIs
+    API Documentation
   
 
     
@@ -420,7 +439,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    APIs
+    API Documentation
   
 
           </label>
@@ -1363,7 +1382,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
+      <a href="../README.md" class="md-nav__link">
         
   
   
@@ -1716,6 +1735,33 @@
   
 
     
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sistema de Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -2012,13 +2058,13 @@
   
 
 
-<h1 id="sincronizacion-automatica-de-companias-configuracion">Sincronización Automática de Compañías - Configuración<a class="headerlink" href="#sincronizacion-automatica-de-companias-configuracion" title="Permanent link">&para;</a></h1>
-<h2 id="resumen">Resumen<a class="headerlink" href="#resumen" title="Permanent link">&para;</a></h2>
+<h1 id="sincronizacion-automatica-de-companias-configuracion">Sincronización Automática de Compañías - Configuración</h1>
+<h2 id="resumen">Resumen</h2>
 <p>El comando <code>company:sync</code> debe ejecutarse automáticamente en la madrugada para sincronizar datos de organizaciones a bases de datos consolidadas.</p>
-<h2 id="opcion-1-laravel-scheduler-recomendado">Opción 1: Laravel Scheduler (Recomendado)<a class="headerlink" href="#opcion-1-laravel-scheduler-recomendado" title="Permanent link">&para;</a></h2>
-<h3 id="1-modificar-appconsolekernelphp">1. Modificar <code>app/Console/Kernel.php</code><a class="headerlink" href="#1-modificar-appconsolekernelphp" title="Permanent link">&para;</a></h3>
+<h2 id="opcion-1-laravel-scheduler-recomendado">Opción 1: Laravel Scheduler (Recomendado)</h2>
+<h3 id="1-modificar-appconsolekernelphp">1. Modificar <code>app/Console/Kernel.php</code></h3>
 <p>Agregar en el método <code>schedule()</code>:</p>
-<div class="highlight"><pre><span></span><code><span class="x">protected function schedule(Schedule $schedule)</span>
+<div class="codehilite"><pre><span></span><code><span class="x">protected function schedule(Schedule $schedule)</span>
 <span class="x">{</span>
 <span class="x">    // Sincronización diaria a las 2:00 AM</span>
 <span class="x">    $schedule-&gt;command(&#39;company:sync --all&#39;)</span>
@@ -2034,24 +2080,29 @@
 <span class="x">    //     -&gt;appendOutputTo(storage_path(&#39;logs/company-sync.log&#39;));</span>
 <span class="x">}</span>
 </code></pre></div>
-<h3 id="2-configurar-cron-una-sola-vez">2. Configurar Cron (una sola vez)<a class="headerlink" href="#2-configurar-cron-una-sola-vez" title="Permanent link">&para;</a></h3>
-<p>Editar crontab del servidor:
-<div class="highlight"><pre><span></span><code>crontab<span class="w"> </span>-e
-</code></pre></div></p>
-<p>Agregar esta línea:
-<div class="highlight"><pre><span></span><code>*<span class="w"> </span>*<span class="w"> </span>*<span class="w"> </span>*<span class="w"> </span>*<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>/home/weirdolabs/code/docucenter<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>docucenter_laravel.test<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>schedule:run<span class="w"> </span>&gt;&gt;<span class="w"> </span>/dev/null<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span>
-</code></pre></div></p>
-<p>Esta entrada ejecuta el scheduler de Laravel cada minuto, y Laravel se encarga de ejecutar los comandos programados.</p>
-<h2 id="opcion-2-cron-directo">Opción 2: Cron Directo<a class="headerlink" href="#opcion-2-cron-directo" title="Permanent link">&para;</a></h2>
-<p>Si prefieres no usar el Laravel Scheduler:</p>
-<div class="highlight"><pre><span></span><code>crontab<span class="w"> </span>-e
+
+<h3 id="2-configurar-cron-una-sola-vez">2. Configurar Cron (una sola vez)</h3>
+<p>Editar crontab del servidor:</p>
+<div class="codehilite"><pre><span></span><code>crontab<span class="w"> </span>-e
 </code></pre></div>
-<p>Agregar:
-<div class="highlight"><pre><span></span><code><span class="c1"># Sincronización diaria a las 2:00 AM</span>
+
+<p>Agregar esta línea:</p>
+<div class="codehilite"><pre><span></span><code>*<span class="w"> </span>*<span class="w"> </span>*<span class="w"> </span>*<span class="w"> </span>*<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>/home/weirdolabs/code/docucenter<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>docucenter_laravel.test<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>schedule:run<span class="w"> </span>&gt;&gt;<span class="w"> </span>/dev/null<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span>
+</code></pre></div>
+
+<p>Esta entrada ejecuta el scheduler de Laravel cada minuto, y Laravel se encarga de ejecutar los comandos programados.</p>
+<h2 id="opcion-2-cron-directo">Opción 2: Cron Directo</h2>
+<p>Si prefieres no usar el Laravel Scheduler:</p>
+<div class="codehilite"><pre><span></span><code>crontab<span class="w"> </span>-e
+</code></pre></div>
+
+<p>Agregar:</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Sincronización diaria a las 2:00 AM</span>
 <span class="m">0</span><span class="w"> </span><span class="m">2</span><span class="w"> </span>*<span class="w"> </span>*<span class="w"> </span>*<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>/home/weirdolabs/code/docucenter<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>docucenter_laravel.test<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>company:sync<span class="w"> </span>--all<span class="w"> </span>&gt;&gt;<span class="w"> </span>/home/weirdolabs/code/docucenter/storage/logs/cron-sync.log<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span>
-</code></pre></div></p>
-<h3 id="horarios-alternativos">Horarios Alternativos<a class="headerlink" href="#horarios-alternativos" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># A las 3:00 AM</span>
+</code></pre></div>
+
+<h3 id="horarios-alternativos">Horarios Alternativos</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># A las 3:00 AM</span>
 <span class="m">0</span><span class="w"> </span><span class="m">3</span><span class="w"> </span>*<span class="w"> </span>*<span class="w"> </span>*<span class="w"> </span>...
 
 <span class="c1"># A las 1:30 AM</span>
@@ -2063,11 +2114,12 @@
 <span class="c1"># De lunes a viernes a las 2:00 AM</span>
 <span class="m">0</span><span class="w"> </span><span class="m">2</span><span class="w"> </span>*<span class="w"> </span>*<span class="w"> </span><span class="m">1</span>-5<span class="w"> </span>...
 </code></pre></div>
-<h2 id="opcion-3-supervisord-para-jobs-en-segundo-plano">Opción 3: Supervisord para Jobs en Segundo Plano<a class="headerlink" href="#opcion-3-supervisord-para-jobs-en-segundo-plano" title="Permanent link">&para;</a></h2>
+
+<h2 id="opcion-3-supervisord-para-jobs-en-segundo-plano">Opción 3: Supervisord para Jobs en Segundo Plano</h2>
 <p>Si usas Redis Queue (recomendado para mejor control):</p>
-<h3 id="1-verificar-configuracion-en-dockersupervisordconf">1. Verificar configuración en <code>docker/supervisord.conf</code><a class="headerlink" href="#1-verificar-configuracion-en-dockersupervisordconf" title="Permanent link">&para;</a></h3>
-<p>Debe incluir:
-<div class="highlight"><pre><span></span><code><span class="k">[program:laravel-worker]</span>
+<h3 id="1-verificar-configuracion-en-dockersupervisordconf">1. Verificar configuración en <code>docker/supervisord.conf</code></h3>
+<p>Debe incluir:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">[program:laravel-worker]</span>
 <span class="na">command</span><span class="o">=</span><span class="s">php /var/www/html/artisan queue:work redis --sleep=3 --tries=3 --max-time=3600</span>
 <span class="na">autostart</span><span class="o">=</span><span class="s">true</span>
 <span class="na">autorestart</span><span class="o">=</span><span class="s">true</span>
@@ -2075,9 +2127,10 @@
 <span class="na">numprocs</span><span class="o">=</span><span class="s">2</span>
 <span class="na">redirect_stderr</span><span class="o">=</span><span class="s">true</span>
 <span class="na">stdout_logfile</span><span class="o">=</span><span class="s">/var/www/html/storage/logs/worker.log</span>
-</code></pre></div></p>
-<h3 id="2-programar-en-laravel-scheduler">2. Programar en Laravel Scheduler<a class="headerlink" href="#2-programar-en-laravel-scheduler" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">protected function schedule(Schedule $schedule)</span>
+</code></pre></div>
+
+<h3 id="2-programar-en-laravel-scheduler">2. Programar en Laravel Scheduler</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">protected function schedule(Schedule $schedule)</span>
 <span class="x">{</span>
 <span class="x">    // Despachar job a la cola a las 2:00 AM</span>
 <span class="x">    $schedule-&gt;call(function () {</span>
@@ -2100,23 +2153,26 @@
 <span class="x">      -&gt;onOneServer();</span>
 <span class="x">}</span>
 </code></pre></div>
-<h2 id="monitoreo-y-validacion">Monitoreo y Validación<a class="headerlink" href="#monitoreo-y-validacion" title="Permanent link">&para;</a></h2>
-<h3 id="1-verificar-que-cron-esta-activo">1. Verificar que cron está activo<a class="headerlink" href="#1-verificar-que-cron-esta-activo" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># Ver tareas programadas</span>
+
+<h2 id="monitoreo-y-validacion">Monitoreo y Validación</h2>
+<h3 id="1-verificar-que-cron-esta-activo">1. Verificar que cron está activo</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Ver tareas programadas</span>
 crontab<span class="w"> </span>-l
 
 <span class="c1"># Ver logs del sistema</span>
 tail<span class="w"> </span>-f<span class="w"> </span>/var/log/syslog<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>CRON
 </code></pre></div>
-<h3 id="2-verificar-ejecucion-del-scheduler">2. Verificar ejecución del scheduler<a class="headerlink" href="#2-verificar-ejecucion-del-scheduler" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># Probar manualmente</span>
+
+<h3 id="2-verificar-ejecucion-del-scheduler">2. Verificar ejecución del scheduler</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Probar manualmente</span>
 docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>docucenter_laravel.test<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>schedule:run
 
 <span class="c1"># Ver siguiente ejecución programada</span>
 docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>docucenter_laravel.test<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>schedule:list
 </code></pre></div>
-<h3 id="3-revisar-logs-de-sincronizacion">3. Revisar logs de sincronización<a class="headerlink" href="#3-revisar-logs-de-sincronizacion" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># Log del comando</span>
+
+<h3 id="3-revisar-logs-de-sincronizacion">3. Revisar logs de sincronización</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Log del comando</span>
 tail<span class="w"> </span>-f<span class="w"> </span>storage/logs/company-sync.log
 
 <span class="c1"># Log de Laravel</span>
@@ -2125,8 +2181,9 @@ tail<span class="w"> </span>-f<span class="w"> </span>storage/logs/laravel.log<s
 <span class="c1"># Log de workers (si usas queue)</span>
 tail<span class="w"> </span>-f<span class="w"> </span>storage/logs/worker.log
 </code></pre></div>
-<h3 id="4-queries-de-validacion-post-sync">4. Queries de validación post-sync<a class="headerlink" href="#4-queries-de-validacion-post-sync" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="c1">-- Conectar a base de datos consolidada</span>
+
+<h3 id="4-queries-de-validacion-post-sync">4. Queries de validación post-sync</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1">-- Conectar a base de datos consolidada</span>
 <span class="n">USE</span><span class="w"> </span><span class="n">db_weirdolabs_13</span><span class="p">;</span>
 
 <span class="c1">-- Ver última sincronización por organización</span>
@@ -2148,7 +2205,8 @@ tail<span class="w"> </span>-f<span class="w"> </span>storage/logs/worker.log
 <span class="w">    </span><span class="k">AND</span><span class="w"> </span><span class="n">h</span><span class="p">.</span><span class="n">org_source_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">d</span><span class="p">.</span><span class="n">org_source_id</span>
 <span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">h</span><span class="p">.</span><span class="n">org_source_id</span><span class="p">;</span>
 </code></pre></div>
-<h2 id="recomendaciones">Recomendaciones<a class="headerlink" href="#recomendaciones" title="Permanent link">&para;</a></h2>
+
+<h2 id="recomendaciones">Recomendaciones</h2>
 <ol>
 <li><strong>Usar Laravel Scheduler</strong> (Opción 1) para mejor control y logging</li>
 <li><strong>Configurar alertas</strong> si la sincronización falla</li>
@@ -2156,9 +2214,9 @@ tail<span class="w"> </span>-f<span class="w"> </span>storage/logs/worker.log
 <li><strong>Monitoreo</strong>: Configurar script que verifique si se ejecutó correctamente</li>
 <li><strong>Retention</strong>: Rotar logs antiguos (después de 30 días)</li>
 </ol>
-<h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2>
-<h3 id="problema-cron-no-ejecuta">Problema: Cron no ejecuta<a class="headerlink" href="#problema-cron-no-ejecuta" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># Verificar servicio cron activo</span>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<h3 id="problema-cron-no-ejecuta">Problema: Cron no ejecuta</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Verificar servicio cron activo</span>
 sudo<span class="w"> </span>systemctl<span class="w"> </span>status<span class="w"> </span>cron
 
 <span class="c1"># Reiniciar cron</span>
@@ -2167,15 +2225,17 @@ sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class=
 <span class="c1"># Ver logs de errores</span>
 grep<span class="w"> </span>CRON<span class="w"> </span>/var/log/syslog
 </code></pre></div>
-<h3 id="problema-scheduler-no-ejecuta">Problema: Scheduler no ejecuta<a class="headerlink" href="#problema-scheduler-no-ejecuta" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># Verificar que el comando funciona manualmente</span>
+
+<h3 id="problema-scheduler-no-ejecuta">Problema: Scheduler no ejecuta</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Verificar que el comando funciona manualmente</span>
 docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>docucenter_laravel.test<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>company:sync<span class="w"> </span>--all
 
 <span class="c1"># Verificar configuración de timezone en config/app.php</span>
 <span class="s1">&#39;timezone&#39;</span><span class="w"> </span><span class="o">=</span>&gt;<span class="w"> </span><span class="s1">&#39;America/Panama&#39;</span>,
 </code></pre></div>
-<h3 id="problema-jobs-no-se-procesan">Problema: Jobs no se procesan<a class="headerlink" href="#problema-jobs-no-se-procesan" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># Verificar workers activos</span>
+
+<h3 id="problema-jobs-no-se-procesan">Problema: Jobs no se procesan</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Verificar workers activos</span>
 docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>docucenter_laravel.test<span class="w"> </span>supervisorctl<span class="w"> </span>status
 
 <span class="c1"># Reiniciar workers</span>
@@ -2184,9 +2244,10 @@ docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </spa
 <span class="c1"># Ver jobs en cola</span>
 docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>docucenter_laravel.test<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>queue:listen
 </code></pre></div>
-<h2 id="script-de-monitoreo-automatico">Script de Monitoreo Automático<a class="headerlink" href="#script-de-monitoreo-automatico" title="Permanent link">&para;</a></h2>
+
+<h2 id="script-de-monitoreo-automatico">Script de Monitoreo Automático</h2>
 <p>Crear <code>/home/weirdolabs/code/docucenter/scripts/check-sync-status.sh</code>:</p>
-<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+<div class="codehilite"><pre><span></span><code><span class="ch">#!/bin/bash</span>
 <span class="nv">LOG_FILE</span><span class="o">=</span><span class="s2">&quot;/home/weirdolabs/code/docucenter/storage/logs/company-sync.log&quot;</span>
 <span class="nv">YESTERDAY</span><span class="o">=</span><span class="k">$(</span>date<span class="w"> </span>-d<span class="w"> </span><span class="s2">&quot;yesterday&quot;</span><span class="w"> </span>+%Y-%m-%d<span class="k">)</span>
 
@@ -2200,12 +2261,14 @@ docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </spa
 <span class="w">    </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
 <span class="k">fi</span>
 </code></pre></div>
-<p>Hacer ejecutable:
-<div class="highlight"><pre><span></span><code>chmod<span class="w"> </span>+x<span class="w"> </span>scripts/check-sync-status.sh
-</code></pre></div></p>
-<p>Programar verificación diaria:
-<div class="highlight"><pre><span></span><code><span class="m">0</span><span class="w"> </span><span class="m">8</span><span class="w"> </span>*<span class="w"> </span>*<span class="w"> </span>*<span class="w"> </span>/home/weirdolabs/code/docucenter/scripts/check-sync-status.sh
-</code></pre></div></p>
+
+<p>Hacer ejecutable:</p>
+<div class="codehilite"><pre><span></span><code>chmod<span class="w"> </span>+x<span class="w"> </span>scripts/check-sync-status.sh
+</code></pre></div>
+
+<p>Programar verificación diaria:</p>
+<div class="codehilite"><pre><span></span><code><span class="m">0</span><span class="w"> </span><span class="m">8</span><span class="w"> </span>*<span class="w"> </span>*<span class="w"> </span>*<span class="w"> </span>/home/weirdolabs/code/docucenter/scripts/check-sync-status.sh
+</code></pre></div>
 
 
 
@@ -2258,7 +2321,7 @@ docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </spa
       
       
     
-    <a href="https://github.com/aghabrego/docucenter" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+    <a href="https://github.com/aghabrego/docucenter-public" target="_blank" rel="noopener" title="github.com" class="md-social__link">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
     </a>
   

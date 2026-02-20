@@ -233,7 +233,7 @@
           
   
   
-  APIs
+  API Documentation
 
         </a>
       </li>
@@ -269,7 +269,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../" class="md-tabs__link">
+        <a href="../README.md" class="md-tabs__link">
           
   
   
@@ -298,6 +298,25 @@
         </a>
       </li>
     
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../testing/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Sistema de Testing
+
+      </a>
+    </li>
   
 
       
@@ -404,7 +423,7 @@
   <span class="md-ellipsis">
     
   
-    APIs
+    API Documentation
   
 
     
@@ -420,7 +439,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    APIs
+    API Documentation
   
 
           </label>
@@ -1363,7 +1382,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
+      <a href="../README.md" class="md-nav__link">
         
   
   
@@ -1716,6 +1735,33 @@
   
 
     
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sistema de Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -2034,17 +2080,18 @@
   
 
 
-<h1 id="resolucion-completa-del-error-de-customers_imp-navegacion-de-wizard">Resolución Completa del Error de Customers_Imp - Navegación de Wizard<a class="headerlink" href="#resolucion-completa-del-error-de-customers_imp-navegacion-de-wizard" title="Permanent link">&para;</a></h1>
-<h2 id="problema-identificado">Problema Identificado<a class="headerlink" href="#problema-identificado" title="Permanent link">&para;</a></h2>
-<p>Durante la navegación del wizard (botones "Siguiente" y "Anterior"), el componente <code>Create.php</code> presentaba el error:
-<div class="highlight"><pre><span></span><code>SQLSTATE[42S02]: Base table or view not found: 1146 Table &#39;docucenter.Customers_Imp&#39; doesn&#39;t exist
-select * from `Customers_Imp` where `Customers_Imp`.`ID` = 27 limit 1
-</code></pre></div></p>
-<h2 id="causa-raiz">Causa Raíz<a class="headerlink" href="#causa-raiz" title="Permanent link">&para;</a></h2>
+<h1 id="resolucion-completa-del-error-de-customers_imp-navegacion-de-wizard">Resolución Completa del Error de Customers_Imp - Navegación de Wizard</h1>
+<h2 id="problema-identificado">Problema Identificado</h2>
+<p>Durante la navegación del wizard (botones "Siguiente" y "Anterior"), el componente <code>Create.php</code> presentaba el error:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">SQLSTATE</span><span class="err">[</span><span class="n">42S02</span><span class="err">]</span><span class="o">:</span><span class="w"> </span><span class="n">Base</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="k">view</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">found</span><span class="o">:</span><span class="w"> </span><span class="mi">1146</span><span class="w"> </span><span class="k">Table</span><span class="w"> </span><span class="s1">&#39;docucenter.Customers_Imp&#39;</span><span class="w"> </span><span class="n">doesn</span><span class="s1">&#39;t exist</span>
+<span class="s1">select * from `Customers_Imp` where `Customers_Imp`.`ID` = 27 limit 1</span>
+</code></pre></div>
+
+<h2 id="causa-raiz">Causa Raíz</h2>
 <p><strong>Livewire Property Serialization Issue</strong>: El componente almacenaba directamente el modelo <code>Customer</code> como propiedad pública (<code>public $customer</code>). Durante la serialización/deserialización de Livewire entre requests de navegación, este modelo perdía su contexto de conexión de base de datos, causando que las consultas posteriores usaran la base de datos incorrecta (<code>docucenter</code> en lugar de <code>db_18257061709732_90</code>).</p>
-<h2 id="arquitectura-del-problema">Arquitectura del Problema<a class="headerlink" href="#arquitectura-del-problema" title="Permanent link">&para;</a></h2>
-<h3 id="antes-problematica">Antes (Problemática)<a class="headerlink" href="#antes-problematica" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">class Create extends Component {</span>
+<h2 id="arquitectura-del-problema">Arquitectura del Problema</h2>
+<h3 id="antes-problematica">Antes (Problemática)</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">class Create extends Component {</span>
 <span class="x">    public $customer; // Modelo serializado por Livewire</span>
 
 <span class="x">    public function mount($sale) {</span>
@@ -2053,14 +2100,15 @@ select * from `Customers_Imp` where `Customers_Imp`.`ID` = 27 limit 1
 <span class="x">    }</span>
 <span class="x">}</span>
 </code></pre></div>
+
 <p><strong>Flujo del Error:</strong>
 1. Mount: <code>$this-&gt;customer</code> obtiene modelo con conexión correcta
 2. Livewire serializa: Modelo pierde contexto de conexión
 3. Navegación (nextStep): Livewire deserializa el modelo
 4. Acceso a propiedades: Modelo usa conexión predeterminada (<code>docucenter</code>)
 5. Error: Tabla no existe en base predeterminada</p>
-<h3 id="despues-solucionado">Después (Solucionado)<a class="headerlink" href="#despues-solucionado" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">class Create extends Component {</span>
+<h3 id="despues-solucionado">Después (Solucionado)</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">class Create extends Component {</span>
 <span class="x">    public $customer_id; // Solo almacena el ID</span>
 
 <span class="x">    public function mount($sale) {</span>
@@ -2088,17 +2136,19 @@ select * from `Customers_Imp` where `Customers_Imp`.`ID` = 27 limit 1
 <span class="x">    }</span>
 <span class="x">}</span>
 </code></pre></div>
-<h2 id="implementacion-de-la-solucion">Implementación de la Solución<a class="headerlink" href="#implementacion-de-la-solucion" title="Permanent link">&para;</a></h2>
-<h3 id="1-eliminacion-de-propiedad-problematica">1. Eliminación de Propiedad Problemática<a class="headerlink" href="#1-eliminacion-de-propiedad-problematica" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">// ANTES</span>
+
+<h2 id="implementacion-de-la-solucion">Implementación de la Solución</h2>
+<h3 id="1-eliminacion-de-propiedad-problematica">1. Eliminación de Propiedad Problemática</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">// ANTES</span>
 <span class="x">public $customer; // ❌ Causa problemas de serialización</span>
 
 <span class="x">// DESPUÉS  </span>
 <span class="x">// Propiedad eliminada ✅</span>
 <span class="x">public $customer_id = null; // ✅ Solo almacena ID</span>
 </code></pre></div>
-<h3 id="2-metodo-getcustomerproperty-robusto">2. Método getCustomerProperty() Robusto<a class="headerlink" href="#2-metodo-getcustomerproperty-robusto" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">public function getCustomerProperty()</span>
+
+<h3 id="2-metodo-getcustomerproperty-robusto">2. Método getCustomerProperty() Robusto</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">public function getCustomerProperty()</span>
 <span class="x">{</span>
 <span class="x">    if (!$this-&gt;customer_id) {</span>
 <span class="x">        return null;</span>
@@ -2142,9 +2192,10 @@ select * from `Customers_Imp` where `Customers_Imp`.`ID` = 27 limit 1
 <span class="x">    return null;</span>
 <span class="x">}</span>
 </code></pre></div>
-<h3 id="3-refactoring-de-referencias-en-mount">3. Refactoring de Referencias en mount()<a class="headerlink" href="#3-refactoring-de-referencias-en-mount" title="Permanent link">&para;</a></h3>
+
+<h3 id="3-refactoring-de-referencias-en-mount">3. Refactoring de Referencias en mount()</h3>
 <p>Se actualizaron <strong>todas las referencias</strong> de <code>$this-&gt;customer</code> a <code>$customer</code> (variable local):</p>
-<div class="highlight"><pre><span></span><code><span class="x">public function mount($sale) {</span>
+<div class="codehilite"><pre><span></span><code><span class="x">public function mount($sale) {</span>
 <span class="x">    // Obtener customer y almacenar solo el ID</span>
 <span class="x">    $customer = $this-&gt;getCustomerProperty();</span>
 <span class="x">    $this-&gt;customer_id = $customer ? $customer-&gt;ID : null;</span>
@@ -2164,18 +2215,20 @@ select * from `Customers_Imp` where `Customers_Imp`.`ID` = 27 limit 1
 <span class="x">    $this-&gt;receptor_correoElectronico = $customer-&gt;Email ?? &#39;&#39;;</span>
 <span class="x">}</span>
 </code></pre></div>
-<h3 id="4-metodo-getsaleproperty-optimizado">4. Método getSaleProperty() Optimizado<a class="headerlink" href="#4-metodo-getsaleproperty-optimizado" title="Permanent link">&para;</a></h3>
+
+<h3 id="4-metodo-getsaleproperty-optimizado">4. Método getSaleProperty() Optimizado</h3>
 <p>También se optimizó para evitar eager loading problemático:</p>
-<div class="highlight"><pre><span></span><code><span class="x">public function getSaleProperty() {</span>
+<div class="codehilite"><pre><span></span><code><span class="x">public function getSaleProperty() {</span>
 <span class="x">    // Sin eager loading de relaciones</span>
 <span class="x">    $sale = SalesHeaderImp::findOrFail($this-&gt;sale_id);</span>
 <span class="x">    $sale-&gt;load([&#39;salesDetails&#39;, &#39;paymentsImp&#39;]); // Solo relaciones seguras</span>
 <span class="x">    return $sale;</span>
 <span class="x">}</span>
 </code></pre></div>
-<h2 id="validacion-de-la-solucion">Validación de la Solución<a class="headerlink" href="#validacion-de-la-solucion" title="Permanent link">&para;</a></h2>
-<h3 id="test-de-conexion-directa">✅ Test de Conexión Directa<a class="headerlink" href="#test-de-conexion-directa" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>docucenter_laravel.test<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>test:simple-customer-access
+
+<h2 id="validacion-de-la-solucion">Validación de la Solución</h2>
+<h3 id="test-de-conexion-directa">✅ Test de Conexión Directa</h3>
+<div class="codehilite"><pre><span></span><code>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>docucenter_laravel.test<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>test:simple-customer-access
 
 ✅<span class="w"> </span>Test<span class="w"> </span><span class="m">1</span>:<span class="w"> </span>Conexión<span class="w"> </span>directa<span class="w"> </span>a<span class="w"> </span>base<span class="w"> </span>de<span class="w"> </span>organización
 <span class="w">   </span>✓<span class="w"> </span>Conectado<span class="w"> </span>a:<span class="w"> </span>db_18257061709732_90
@@ -2189,51 +2242,52 @@ select * from `Customers_Imp` where `Customers_Imp`.`ID` = 27 limit 1
 ✅<span class="w"> </span>Test<span class="w"> </span><span class="m">3</span>:<span class="w"> </span>Usar<span class="w"> </span>modelo<span class="w"> </span>CustomersImp<span class="w"> </span>directamente
 <span class="w">   </span>✓<span class="w"> </span>Modelo<span class="w"> </span>CustomersImp<span class="w"> </span>funciona<span class="w"> </span>correctamente
 </code></pre></div>
-<h3 id="verificacion-de-arquitectura">✅ Verificación de Arquitectura<a class="headerlink" href="#verificacion-de-arquitectura" title="Permanent link">&para;</a></h3>
+
+<h3 id="verificacion-de-arquitectura">✅ Verificación de Arquitectura</h3>
 <ul>
 <li>❌ <strong>Antes</strong>: <code>public $customer</code> (serialización problemática)  </li>
 <li>✅ <strong>Después</strong>: <code>public $customer_id</code> (solo ID, serialización segura)</li>
 <li>✅ <strong>Método dinámico</strong>: <code>getCustomerProperty()</code> con conexión controlada</li>
 <li>✅ <strong>Eliminación completa</strong>: No quedan referencias a <code>$this-&gt;customer</code></li>
 </ul>
-<h2 id="impacto-de-la-solucion">Impacto de la Solución<a class="headerlink" href="#impacto-de-la-solucion" title="Permanent link">&para;</a></h2>
-<h3 id="navegacion-del-wizard">✅ Navegación del Wizard<a class="headerlink" href="#navegacion-del-wizard" title="Permanent link">&para;</a></h3>
+<h2 id="impacto-de-la-solucion">Impacto de la Solución</h2>
+<h3 id="navegacion-del-wizard">✅ Navegación del Wizard</h3>
 <ul>
 <li><strong>Botón "Siguiente"</strong>: Sin errores de tabla no encontrada</li>
 <li><strong>Botón "Anterior"</strong>: Navegación fluida entre pasos</li>
 <li><strong>Validaciones de paso</strong>: Acceso correcto a datos de customer</li>
 <li><strong>Persistencia de datos</strong>: Información del customer mantiene integridad</li>
 </ul>
-<h3 id="performance-y-reliability">✅ Performance y Reliability<a class="headerlink" href="#performance-y-reliability" title="Permanent link">&para;</a></h3>
+<h3 id="performance-y-reliability">✅ Performance y Reliability</h3>
 <ul>
 <li><strong>Lazy Loading</strong>: Customer se carga solo cuando se necesita</li>
 <li><strong>Conexión Controlada</strong>: Cada acceso verifica/establece conexión correcta</li>
 <li><strong>Manejo de Errores</strong>: Fallbacks entre CustomersImp y CustomersExp</li>
 <li><strong>Testing Friendly</strong>: Funciona sin dependencias de usuario autenticado</li>
 </ul>
-<h3 id="consistencia-arquitectonica">✅ Consistencia Arquitectónica<a class="headerlink" href="#consistencia-arquitectonica" title="Permanent link">&para;</a></h3>
+<h3 id="consistencia-arquitectonica">✅ Consistencia Arquitectónica</h3>
 <ul>
 <li><strong>Patrón Uniforme</strong>: Misma arquitectura que <code>getSaleProperty()</code></li>
 <li><strong>Multi-tenant Safe</strong>: Respeta base de datos de organización</li>
 <li><strong>Livewire Compatible</strong>: Sin problemas de serialización</li>
 <li><strong>Maintainable</strong>: Código claro y documentado</li>
 </ul>
-<h2 id="lecciones-tecnicas">Lecciones Técnicas<a class="headerlink" href="#lecciones-tecnicas" title="Permanent link">&para;</a></h2>
-<h3 id="livewire-serialization-best-practices">🎯 <strong>Livewire Serialization Best Practices</strong><a class="headerlink" href="#livewire-serialization-best-practices" title="Permanent link">&para;</a></h3>
+<h2 id="lecciones-tecnicas">Lecciones Técnicas</h2>
+<h3 id="livewire-serialization-best-practices">🎯 <strong>Livewire Serialization Best Practices</strong></h3>
 <ol>
 <li><strong>NO almacenar modelos Eloquent</strong> como propiedades públicas</li>
 <li><strong>Usar IDs + getters dinámicos</strong> para modelos complejos</li>
 <li><strong>Controlar conexión de BD</strong> en cada acceso a modelos</li>
 <li><strong>Manejar deserialización</strong> con contexto perdido</li>
 </ol>
-<h3 id="multi-tenant-database-management">🎯 <strong>Multi-tenant Database Management</strong><a class="headerlink" href="#multi-tenant-database-management" title="Permanent link">&para;</a></h3>
+<h3 id="multi-tenant-database-management">🎯 <strong>Multi-tenant Database Management</strong></h3>
 <ol>
 <li><strong>Conexiones explícitas</strong> antes de cada consulta</li>
 <li><strong>Fallbacks robustos</strong> cuando el contexto falla</li>
 <li><strong>Testing sin dependencias</strong> de usuario autenticado</li>
 <li><strong>Logging apropiado</strong> para debugging</li>
 </ol>
-<h2 id="archivos-modificados">Archivos Modificados<a class="headerlink" href="#archivos-modificados" title="Permanent link">&para;</a></h2>
+<h2 id="archivos-modificados">Archivos Modificados</h2>
 <ol>
 <li><strong><code>app/Http/Livewire/Admin/Einvoice/Create.php</code></strong></li>
 <li>Eliminada propiedad <code>public $customer</code></li>
@@ -2249,7 +2303,7 @@ select * from `Customers_Imp` where `Customers_Imp`.`ID` = 27 limit 1
 <li>Verificación de conexión multi-tenant</li>
 <li>Testing sin dependencias de Facade</li>
 </ol>
-<h2 id="estado-final">Estado Final<a class="headerlink" href="#estado-final" title="Permanent link">&para;</a></h2>
+<h2 id="estado-final">Estado Final</h2>
 <p><strong>✅ COMPLETAMENTE RESUELTO</strong>: El sistema de facturación electrónica permite navegación fluida en el wizard de creación de facturas sin errores de "Table not found" para <code>Customers_Imp</code>.</p>
 <p><strong>Resultado</strong>: Arquitectura robusta, estable y preparada para operación en producción con soporte completo multi-tenant.</p>
 
@@ -2304,7 +2358,7 @@ select * from `Customers_Imp` where `Customers_Imp`.`ID` = 27 limit 1
       
       
     
-    <a href="https://github.com/aghabrego/docucenter" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+    <a href="https://github.com/aghabrego/docucenter-public" target="_blank" rel="noopener" title="github.com" class="md-social__link">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
     </a>
   

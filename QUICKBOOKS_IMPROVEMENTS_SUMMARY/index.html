@@ -233,7 +233,7 @@
           
   
   
-  APIs
+  API Documentation
 
         </a>
       </li>
@@ -269,7 +269,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../technical/" class="md-tabs__link">
+        <a href="../technical/README.md" class="md-tabs__link">
           
   
   
@@ -298,6 +298,25 @@
         </a>
       </li>
     
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../testing/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Sistema de Testing
+
+      </a>
+    </li>
   
 
       
@@ -404,7 +423,7 @@
   <span class="md-ellipsis">
     
   
-    APIs
+    API Documentation
   
 
     
@@ -420,7 +439,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    APIs
+    API Documentation
   
 
           </label>
@@ -1363,7 +1382,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../technical/" class="md-nav__link">
+      <a href="../technical/README.md" class="md-nav__link">
         
   
   
@@ -1712,6 +1731,33 @@
           </ul>
         </nav>
       
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sistema de Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -2223,28 +2269,28 @@
   
 
 
-<h1 id="resumen-completo-mejoras-quickbooks-y-reorganizacion">📋 Resumen Completo - Mejoras QuickBooks y Reorganización<a class="headerlink" href="#resumen-completo-mejoras-quickbooks-y-reorganizacion" title="Permanent link">&para;</a></h1>
-<h2 id="trabajos-realizados-17-de-septiembre-2025">🎯 <strong>Trabajos Realizados - 17 de Septiembre, 2025</strong><a class="headerlink" href="#trabajos-realizados-17-de-septiembre-2025" title="Permanent link">&para;</a></h2>
-<h3 id="1-simplificacion-del-flujo-de-pagos-quickbooks">1. <strong>Simplificación del Flujo de Pagos QuickBooks</strong><a class="headerlink" href="#1-simplificacion-del-flujo-de-pagos-quickbooks" title="Permanent link">&para;</a></h3>
+<h1 id="resumen-completo-mejoras-quickbooks-y-reorganizacion">📋 Resumen Completo - Mejoras QuickBooks y Reorganización</h1>
+<h2 id="trabajos-realizados-17-de-septiembre-2025">🎯 <strong>Trabajos Realizados - 17 de Septiembre, 2025</strong></h2>
+<h3 id="1-simplificacion-del-flujo-de-pagos-quickbooks">1. <strong>Simplificación del Flujo de Pagos QuickBooks</strong></h3>
 <ul>
 <li>❌ <strong>Removido</strong>: Funcionalidad <code>getPaymentByRefNum()</code> completa</li>
 <li>✅ <strong>Simplificado</strong>: Flujo de pagos usando solo <code>getSyncTokenPaymentQB()</code></li>
 <li>✅ <strong>Mejorado</strong>: Logging detallado en <code>determinePaymentMethods()</code></li>
 <li>✅ <strong>Mantenido</strong>: Toda la funcionalidad core intacta</li>
 </ul>
-<h3 id="2-archivos-principales-modificados">2. <strong>Archivos Principales Modificados</strong><a class="headerlink" href="#2-archivos-principales-modificados" title="Permanent link">&para;</a></h3>
-<h4 id="appjobsintuitupdateintuitordersjobphp"><code>app/Jobs/Intuit/UpdateIntuitOrdersJob.php</code><a class="headerlink" href="#appjobsintuitupdateintuitordersjobphp" title="Permanent link">&para;</a></h4>
+<h3 id="2-archivos-principales-modificados">2. <strong>Archivos Principales Modificados</strong></h3>
+<h4 id="appjobsintuitupdateintuitordersjobphp"><code>app/Jobs/Intuit/UpdateIntuitOrdersJob.php</code></h4>
 <p><strong>Cambios</strong>:
 - Simplificado <code>stepRegisterPayments()</code> eliminando payment lookup
 - Flujo directo: <code>getSyncTokenPaymentQB()</code> → <code>registerPaymentsQB()</code>
 - Mantenida toda la lógica de sincronización existente
 - Código más limpio y mantenible</p>
-<h4 id="apptraitsupdateintuitorderstraitphp"><code>app/Traits/UpdateIntuitOrdersTrait.php</code><a class="headerlink" href="#apptraitsupdateintuitorderstraitphp" title="Permanent link">&para;</a></h4>
+<h4 id="apptraitsupdateintuitorderstraitphp"><code>app/Traits/UpdateIntuitOrdersTrait.php</code></h4>
 <p><strong>Cambios</strong>:
 - ❌ Eliminado método <code>getPaymentByRefNum()</code> completo (~38 líneas)
 - Mantenidos todos los otros métodos de comunicación API
 - Trait más liviano y enfocado</p>
-<h4 id="appservicesquickbooksonlineservicephp"><code>app/Services/QuickBooksOnlineService.php</code><a class="headerlink" href="#appservicesquickbooksonlineservicephp" title="Permanent link">&para;</a></h4>
+<h4 id="appservicesquickbooksonlineservicephp"><code>app/Services/QuickBooksOnlineService.php</code></h4>
 <p><strong>Cambios</strong>:
 - ✅ Mejorado <code>determinePaymentMethods()</code> con logging detallado
 - ✅ Agregado análisis de 3 escenarios de pago:
@@ -2252,36 +2298,36 @@
   2. <strong>Totalmente pagado</strong>: Balance == 0 → 1 pago "CREDIT_CARD"<br />
   3. <strong>Pago parcial</strong>: 0 &lt; Balance &lt; Total → 2 pagos combinados
 - ✅ Logging granular para debugging y análisis</p>
-<h3 id="3-documentacion-tecnica-creada">3. <strong>Documentación Técnica Creada</strong><a class="headerlink" href="#3-documentacion-tecnica-creada" title="Permanent link">&para;</a></h3>
-<h4 id="docstechnicalpayment-lookup-removal-noticemd"><code>docs/technical/payment-lookup-removal-notice.md</code><a class="headerlink" href="#docstechnicalpayment-lookup-removal-noticemd" title="Permanent link">&para;</a></h4>
+<h3 id="3-documentacion-tecnica-creada">3. <strong>Documentación Técnica Creada</strong></h3>
+<h4 id="docstechnicalpayment-lookup-removal-noticemd"><code>docs/technical/payment-lookup-removal-notice.md</code></h4>
 <ul>
 <li>Detalle completo de la funcionalidad removida</li>
 <li>Razones para la simplificación</li>
 <li>Comparación antes/después del código</li>
 <li>Beneficios obtenidos con la remoción</li>
 </ul>
-<h4 id="docstechnicalquickbooks-payment-lookup-integrationmd"><code>docs/technical/quickbooks-payment-lookup-integration.md</code><a class="headerlink" href="#docstechnicalquickbooks-payment-lookup-integrationmd" title="Permanent link">&para;</a></h4>
+<h4 id="docstechnicalquickbooks-payment-lookup-integrationmd"><code>docs/technical/quickbooks-payment-lookup-integration.md</code></h4>
 <ul>
 <li>Documentación histórica de la funcionalidad implementada</li>
 <li>⚠️ Marcada como <strong>REMOVIDA</strong> con explicaciones</li>
 <li>Casos de uso y testing originales</li>
 <li>Referencias técnicas completas</li>
 </ul>
-<h4 id="docstechnicalquickbooks-payment-methods-integrationmd"><code>docs/technical/quickbooks-payment-methods-integration.md</code><a class="headerlink" href="#docstechnicalquickbooks-payment-methods-integrationmd" title="Permanent link">&para;</a></h4>
+<h4 id="docstechnicalquickbooks-payment-methods-integrationmd"><code>docs/technical/quickbooks-payment-methods-integration.md</code></h4>
 <ul>
 <li>Documentación completa del sistema <code>determinePaymentMethods()</code></li>
 <li>Explicación de los 3 escenarios de pago</li>
 <li>Ejemplo real con factura <code>FE0000003143</code></li>
 <li>Flujo de sincronización detallado</li>
 </ul>
-<h4 id="docstechnicalindexmd"><code>docs/technical/index.md</code><a class="headerlink" href="#docstechnicalindexmd" title="Permanent link">&para;</a></h4>
+<h4 id="docstechnicalindexmd"><code>docs/technical/index.md</code></h4>
 <ul>
 <li>✅ Actualizado con referencias a nuevas documentaciones</li>
 <li>✅ Organización mejorada de integraciones QuickBooks</li>
 <li>✅ Índice completo de documentación técnica</li>
 </ul>
-<h3 id="4-scripts-de-testing-organizados">4. <strong>Scripts de Testing Organizados</strong><a class="headerlink" href="#4-scripts-de-testing-organizados" title="Permanent link">&para;</a></h3>
-<h4 id="nuevos-en-docstesting">Nuevos en <code>docs/testing/</code>:<a class="headerlink" href="#nuevos-en-docstesting" title="Permanent link">&para;</a></h4>
+<h3 id="4-scripts-de-testing-organizados">4. <strong>Scripts de Testing Organizados</strong></h3>
+<h4 id="nuevos-en-docstesting">Nuevos en <code>docs/testing/</code>:</h4>
 <ul>
 <li><code>test-get-payment-by-ref-num.php</code> - Testing del método removido</li>
 <li><code>test-synctoken-extraction.php</code> - Validación de extracción SyncToken</li>
@@ -2289,104 +2335,107 @@
 <li><code>test-real-invoice-fe3143.php</code> - Test específico factura real</li>
 <li><code>analyze-payment-methods.php</code> - Análisis completo payment methods</li>
 </ul>
-<h4 id="movidos-del-root">Movidos del root:<a class="headerlink" href="#movidos-del-root" title="Permanent link">&para;</a></h4>
+<h4 id="movidos-del-root">Movidos del root:</h4>
 <ul>
 <li><code>test-quickbooks-update.sh</code> → <code>docs/testing/</code></li>
 <li><code>test_qb_update.php</code> → <code>docs/testing/</code></li>
 <li><code>test_truncate.php</code> → <code>docs/testing/</code></li>
 </ul>
-<h4 id="scriptsvalidate-quickbooks-improvementssh"><code>scripts/validate-quickbooks-improvements.sh</code><a class="headerlink" href="#scriptsvalidate-quickbooks-improvementssh" title="Permanent link">&para;</a></h4>
+<h4 id="scriptsvalidate-quickbooks-improvementssh"><code>scripts/validate-quickbooks-improvements.sh</code></h4>
 <ul>
 <li>✅ Script completo de validación de mejoras</li>
 <li>✅ Verificación de archivos y funcionalidades</li>
 <li>✅ Testing automatizado</li>
 <li>✅ Reportes de completitud</li>
 </ul>
-<h3 id="5-reorganizacion-completa-de-archivos">5. <strong>Reorganización Completa de Archivos</strong><a class="headerlink" href="#5-reorganizacion-completa-de-archivos" title="Permanent link">&para;</a></h3>
-<h4 id="antes-desorganizado"><strong>Antes</strong> (Desorganizado):<a class="headerlink" href="#antes-desorganizado" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code>/root/
+<h3 id="5-reorganizacion-completa-de-archivos">5. <strong>Reorganización Completa de Archivos</strong></h3>
+<h4 id="antes-desorganizado"><strong>Antes</strong> (Desorganizado):</h4>
+<div class="codehilite"><pre><span></span><code>/root/
 ├── test-quickbooks-update.sh ❌
 ├── test_qb_update.php ❌
 ├── test_truncate.php ❌
 └── [otros archivos de test dispersos]
 </code></pre></div>
-<h4 id="despues-organizado"><strong>Después</strong> (Organizado):<a class="headerlink" href="#despues-organizado" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code>docs/
-├── testing/ ✅
-│   ├── test-quickbooks-update.sh
-│   ├── test_qb_update.php  
-│   ├── test_truncate.php
-│   ├── test-get-payment-by-ref-num.php
-│   └── [85+ scripts organizados]
-├── technical/ ✅
-│   ├── payment-lookup-removal-notice.md
-│   ├── quickbooks-payment-lookup-integration.md
-│   ├── quickbooks-payment-methods-integration.md
-│   └── index.md [actualizado]
-└── scripts/ ✅
-    └── validate-quickbooks-improvements.sh
+
+<h4 id="despues-organizado"><strong>Después</strong> (Organizado):</h4>
+<div class="codehilite"><pre><span></span><code><span class="n">docs</span><span class="o">/</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">testing</span><span class="o">/</span><span class="w"> </span><span class="err">✅</span>
+<span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="n">test</span><span class="o">-</span><span class="n">quickbooks</span><span class="o">-</span><span class="k">update</span><span class="p">.</span><span class="n">sh</span>
+<span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="n">test_qb_update</span><span class="p">.</span><span class="n">php</span><span class="w">  </span>
+<span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="n">test_truncate</span><span class="p">.</span><span class="n">php</span>
+<span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="n">test</span><span class="o">-</span><span class="k">get</span><span class="o">-</span><span class="n">payment</span><span class="o">-</span><span class="k">by</span><span class="o">-</span><span class="k">ref</span><span class="o">-</span><span class="n">num</span><span class="p">.</span><span class="n">php</span>
+<span class="err">│</span><span class="w">   </span><span class="err">└──</span><span class="w"> </span><span class="o">[</span><span class="n">85+ scripts organizados</span><span class="o">]</span>
+<span class="err">├──</span><span class="w"> </span><span class="n">technical</span><span class="o">/</span><span class="w"> </span><span class="err">✅</span>
+<span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="n">payment</span><span class="o">-</span><span class="n">lookup</span><span class="o">-</span><span class="n">removal</span><span class="o">-</span><span class="n">notice</span><span class="p">.</span><span class="n">md</span>
+<span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="n">quickbooks</span><span class="o">-</span><span class="n">payment</span><span class="o">-</span><span class="n">lookup</span><span class="o">-</span><span class="n">integration</span><span class="p">.</span><span class="n">md</span>
+<span class="err">│</span><span class="w">   </span><span class="err">├──</span><span class="w"> </span><span class="n">quickbooks</span><span class="o">-</span><span class="n">payment</span><span class="o">-</span><span class="n">methods</span><span class="o">-</span><span class="n">integration</span><span class="p">.</span><span class="n">md</span>
+<span class="err">│</span><span class="w">   </span><span class="err">└──</span><span class="w"> </span><span class="k">index</span><span class="p">.</span><span class="n">md</span><span class="w"> </span><span class="o">[</span><span class="n">actualizado</span><span class="o">]</span>
+<span class="err">└──</span><span class="w"> </span><span class="n">scripts</span><span class="o">/</span><span class="w"> </span><span class="err">✅</span>
+<span class="w">    </span><span class="err">└──</span><span class="w"> </span><span class="n">validate</span><span class="o">-</span><span class="n">quickbooks</span><span class="o">-</span><span class="n">improvements</span><span class="p">.</span><span class="n">sh</span>
 </code></pre></div>
-<h2 id="metricas-de-impacto">📊 <strong>Métricas de Impacto</strong><a class="headerlink" href="#metricas-de-impacto" title="Permanent link">&para;</a></h2>
-<h3 id="codigo-simplificado"><strong>Código Simplificado</strong>:<a class="headerlink" href="#codigo-simplificado" title="Permanent link">&para;</a></h3>
+
+<h2 id="metricas-de-impacto">📊 <strong>Métricas de Impacto</strong></h2>
+<h3 id="codigo-simplificado"><strong>Código Simplificado</strong>:</h3>
 <ul>
 <li>❌ <strong>~65 líneas removidas</strong> (getPaymentByRefNum + integración)</li>
 <li>✅ <strong>+45 líneas agregadas</strong> (logging mejorado en determinePaymentMethods)</li>
 <li>✅ <strong>Resultado neto</strong>: Código más limpio y funcional</li>
 </ul>
-<h3 id="documentacion-creada"><strong>Documentación Creada</strong>:<a class="headerlink" href="#documentacion-creada" title="Permanent link">&para;</a></h3>
+<h3 id="documentacion-creada"><strong>Documentación Creada</strong>:</h3>
 <ul>
 <li>✅ <strong>4 documentos técnicos</strong> nuevos/actualizados</li>
 <li>✅ <strong>5 scripts de testing</strong> nuevos</li>
 <li>✅ <strong>1 script de validación</strong> completo</li>
 <li>✅ <strong>+2000 líneas</strong> de documentación técnica</li>
 </ul>
-<h3 id="organizacion-de-archivos"><strong>Organización de Archivos</strong>:<a class="headerlink" href="#organizacion-de-archivos" title="Permanent link">&para;</a></h3>
+<h3 id="organizacion-de-archivos"><strong>Organización de Archivos</strong>:</h3>
 <ul>
 <li>✅ <strong>3 archivos</strong> movidos del root a <code>docs/testing/</code></li>
 <li>✅ <strong>85+ scripts</strong> ya organizados en <code>docs/testing/</code></li>
 <li>✅ <strong>100% compliance</strong> con convenciones del proyecto</li>
 </ul>
-<h2 id="beneficios-obtenidos">🎯 <strong>Beneficios Obtenidos</strong><a class="headerlink" href="#beneficios-obtenidos" title="Permanent link">&para;</a></h2>
-<h3 id="1-simplicidad-y-mantenibilidad"><strong>1. Simplicidad y Mantenibilidad</strong><a class="headerlink" href="#1-simplicidad-y-mantenibilidad" title="Permanent link">&para;</a></h3>
+<h2 id="beneficios-obtenidos">🎯 <strong>Beneficios Obtenidos</strong></h2>
+<h3 id="1-simplicidad-y-mantenibilidad"><strong>1. Simplicidad y Mantenibilidad</strong></h3>
 <ul>
 <li>Código más directo y fácil de entender</li>
 <li>Menos puntos de fallo potenciales</li>
 <li>Flujo de pagos más predecible y confiable</li>
 <li>Debugging más simple y directo</li>
 </ul>
-<h3 id="2-performance-mejorada"><strong>2. Performance Mejorada</strong><a class="headerlink" href="#2-performance-mejorada" title="Permanent link">&para;</a></h3>
+<h3 id="2-performance-mejorada"><strong>2. Performance Mejorada</strong></h3>
 <ul>
 <li>Menos llamadas API por factura procesada</li>
 <li>Flujo más consistente sin dependencias adicionales</li>
 <li>Reduced latency en sincronización de pagos</li>
 </ul>
-<h3 id="3-documentacion-completa"><strong>3. Documentación Completa</strong><a class="headerlink" href="#3-documentacion-completa" title="Permanent link">&para;</a></h3>
+<h3 id="3-documentacion-completa"><strong>3. Documentación Completa</strong></h3>
 <ul>
 <li>Documentación técnica detallada de todos los cambios</li>
 <li>Scripts de testing organizados y accesibles</li>
 <li>Referencias históricas de funcionalidades implementadas/removidas</li>
 <li>Guías completas para futuro mantenimiento</li>
 </ul>
-<h3 id="4-organizacion-del-proyecto"><strong>4. Organización del Proyecto</strong><a class="headerlink" href="#4-organizacion-del-proyecto" title="Permanent link">&para;</a></h3>
+<h3 id="4-organizacion-del-proyecto"><strong>4. Organización del Proyecto</strong></h3>
 <ul>
 <li>Estructura de archivos coherente y profesional</li>
 <li>Separación clara de documentación, testing y scripts</li>
 <li>Fácil localización de recursos por tipo</li>
 <li>Cumplimiento con convenciones establecidas</li>
 </ul>
-<h2 id="estado-final-del-sistema">🔄 <strong>Estado Final del Sistema</strong><a class="headerlink" href="#estado-final-del-sistema" title="Permanent link">&para;</a></h2>
-<h3 id="flujo-de-pagos-actual-simplificado"><strong>Flujo de Pagos Actual (Simplificado)</strong>:<a class="headerlink" href="#flujo-de-pagos-actual-simplificado" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>UpdateIntuitOrdersJob::stepRegisterPayments()
-    ↓
-foreach payment:
-    ↓
-getSyncTokenPaymentQB()
-    ↓  
-registerPaymentsQB()
-    ↓
-Continue normal sync flow
+<h2 id="estado-final-del-sistema">🔄 <strong>Estado Final del Sistema</strong></h2>
+<h3 id="flujo-de-pagos-actual-simplificado"><strong>Flujo de Pagos Actual (Simplificado)</strong>:</h3>
+<div class="codehilite"><pre><span></span><code><span class="n">UpdateIntuitOrdersJob</span><span class="o">::</span><span class="n">stepRegisterPayments</span><span class="p">()</span>
+<span class="w">    </span><span class="err">↓</span>
+<span class="n">foreach</span><span class="w"> </span><span class="nl">payment:</span>
+<span class="w">    </span><span class="err">↓</span>
+<span class="n">getSyncTokenPaymentQB</span><span class="p">()</span>
+<span class="w">    </span><span class="err">↓</span><span class="w">  </span>
+<span class="n">registerPaymentsQB</span><span class="p">()</span>
+<span class="w">    </span><span class="err">↓</span>
+<span class="n">Continue</span><span class="w"> </span><span class="n">normal</span><span class="w"> </span><span class="n">sync</span><span class="w"> </span><span class="n">flow</span>
 </code></pre></div>
-<h3 id="funcionalidades-activas"><strong>Funcionalidades Activas</strong>:<a class="headerlink" href="#funcionalidades-activas" title="Permanent link">&para;</a></h3>
+
+<h3 id="funcionalidades-activas"><strong>Funcionalidades Activas</strong>:</h3>
 <ul>
 <li>✅ <strong>Tax Code inteligente</strong> con <code>determineTaxCode()</code></li>
 <li>✅ <strong>Payment Methods analysis</strong> con logging detallado</li>
@@ -2394,33 +2443,33 @@ Continue normal sync flow
 <li>✅ <strong>Logging comprehensivo</strong> para debugging</li>
 <li>✅ <strong>Testing infrastructure</strong> completa</li>
 </ul>
-<h3 id="compatibilidad"><strong>Compatibilidad</strong>:<a class="headerlink" href="#compatibilidad" title="Permanent link">&para;</a></h3>
+<h3 id="compatibilidad"><strong>Compatibilidad</strong>:</h3>
 <ul>
 <li>✅ <strong>100% backward compatible</strong> con funcionalidad existente</li>
 <li>✅ <strong>No breaking changes</strong> en APIs o interfaces</li>
 <li>✅ <strong>Mantiene throughput</strong> de 400-500 jobs/hora</li>
 <li>✅ <strong>Preserva toda la lógica</strong> de sincronización QB</li>
 </ul>
-<h2 id="proximos-pasos-recomendados">📈 <strong>Próximos Pasos Recomendados</strong><a class="headerlink" href="#proximos-pasos-recomendados" title="Permanent link">&para;</a></h2>
-<h3 id="1-validacion-en-testing"><strong>1. Validación en Testing</strong><a class="headerlink" href="#1-validacion-en-testing" title="Permanent link">&para;</a></h3>
+<h2 id="proximos-pasos-recomendados">📈 <strong>Próximos Pasos Recomendados</strong></h2>
+<h3 id="1-validacion-en-testing"><strong>1. Validación en Testing</strong></h3>
 <ul>
 <li>Ejecutar <code>scripts/validate-quickbooks-improvements.sh</code></li>
 <li>Probar flujo completo en ambiente de desarrollo</li>
 <li>Validar logs mejorados en <code>determinePaymentMethods()</code></li>
 </ul>
-<h3 id="2-monitoreo-en-produccion"><strong>2. Monitoreo en Producción</strong><a class="headerlink" href="#2-monitoreo-en-produccion" title="Permanent link">&para;</a></h3>
+<h3 id="2-monitoreo-en-produccion"><strong>2. Monitoreo en Producción</strong></h3>
 <ul>
 <li>Observar performance del flujo simplificado</li>
 <li>Verificar que no hay regresiones en sincronización</li>
 <li>Analizar logs para patrones de pago</li>
 </ul>
-<h3 id="3-expansion-de-mejoras"><strong>3. Expansión de Mejoras</strong><a class="headerlink" href="#3-expansion-de-mejoras" title="Permanent link">&para;</a></h3>
+<h3 id="3-expansion-de-mejoras"><strong>3. Expansión de Mejoras</strong></h3>
 <ul>
 <li>Considerar aplicar logging similar a otros jobs</li>
 <li>Evaluar simplificaciones adicionales en otros flujos</li>
 <li>Documentar lecciones aprendidas</li>
 </ul>
-<h2 id="conclusion">🎉 <strong>Conclusión</strong><a class="headerlink" href="#conclusion" title="Permanent link">&para;</a></h2>
+<h2 id="conclusion">🎉 <strong>Conclusión</strong></h2>
 <p><strong>La sesión del 17 de Septiembre, 2025 resultó en</strong>:</p>
 <p>✅ <strong>Simplificación exitosa</strong> del flujo de pagos QuickBooks<br />
 ✅ <strong>Documentación técnica completa</strong> de todos los cambios<br />
@@ -2433,7 +2482,7 @@ Continue normal sync flow
 - Estructura de archivos organizada
 - Flujos de trabajo más confiables
 - Infrastructure de testing robusta</p>
-<h2 id="preparado-por-team-de-docucenter"><strong>Preparado por</strong>: Team de Docucenter<a class="headerlink" href="#preparado-por-team-de-docucenter" title="Permanent link">&para;</a></h2>
+<h2 id="preparado-por-team-de-docucenter"><strong>Preparado por</strong>: Team de Docucenter</h2>
 <p><strong>Fecha</strong>: 17 de Septiembre, 2025<br />
 <strong>Commits realizados</strong>: 2 commits con push exitoso<br />
 <strong>Estado</strong>: ✅ <strong>COMPLETADO EXITOSAMENTE</strong></p>
@@ -2489,7 +2538,7 @@ Continue normal sync flow
       
       
     
-    <a href="https://github.com/aghabrego/docucenter" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+    <a href="https://github.com/aghabrego/docucenter-public" target="_blank" rel="noopener" title="github.com" class="md-social__link">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
     </a>
   

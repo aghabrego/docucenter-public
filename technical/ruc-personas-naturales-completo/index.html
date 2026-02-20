@@ -233,7 +233,7 @@
           
   
   
-  APIs
+  API Documentation
 
         </a>
       </li>
@@ -269,7 +269,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../" class="md-tabs__link">
+        <a href="../README.md" class="md-tabs__link">
           
   
   
@@ -298,6 +298,25 @@
         </a>
       </li>
     
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../testing/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Sistema de Testing
+
+      </a>
+    </li>
   
 
       
@@ -404,7 +423,7 @@
   <span class="md-ellipsis">
     
   
-    APIs
+    API Documentation
   
 
     
@@ -420,7 +439,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    APIs
+    API Documentation
   
 
           </label>
@@ -1363,7 +1382,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
+      <a href="../README.md" class="md-nav__link">
         
   
   
@@ -1712,6 +1731,33 @@
           </ul>
         </nav>
       
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sistema de Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -2141,22 +2187,23 @@
   
 
 
-<h1 id="formatos-de-ruc-para-personas-naturales-en-panama-analisis-completo">Formatos de RUC para Personas Naturales en Panamá - Análisis Completo<a class="headerlink" href="#formatos-de-ruc-para-personas-naturales-en-panama-analisis-completo" title="Permanent link">&para;</a></h1>
+<h1 id="formatos-de-ruc-para-personas-naturales-en-panama-analisis-completo">Formatos de RUC para Personas Naturales en Panamá - Análisis Completo</h1>
 <p><strong>Fecha:</strong> 2026-02-19<br />
 <strong>Fuente:</strong> Especificación oficial DGI Panamá<br />
 <strong>Objetivo:</strong> Documentar todos los formatos oficiales de RUC para personas naturales y validar cobertura en el código</p>
 <hr />
-<h2 id="aclaracion-fundamental">🔑 Aclaración Fundamental<a class="headerlink" href="#aclaracion-fundamental" title="Permanent link">&para;</a></h2>
-<h3 id="solo-existen-2-tipos-de-ruc-segun-dgi-panama">Solo Existen 2 Tipos de RUC según DGI Panamá:<a class="headerlink" href="#solo-existen-2-tipos-de-ruc-segun-dgi-panama" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>dTipoRuc = &quot;1&quot; → PERSONA NATURAL / CONSUMIDOR FINAL
+<h2 id="aclaracion-fundamental">🔑 Aclaración Fundamental</h2>
+<h3 id="solo-existen-2-tipos-de-ruc-segun-dgi-panama">Solo Existen 2 Tipos de RUC según DGI Panamá:</h3>
+<div class="codehilite"><pre><span></span><code>dTipoRuc = &quot;1&quot; → PERSONA NATURAL / CONSUMIDOR FINAL
 dTipoRuc = &quot;2&quot; → PERSONA JURÍDICA / EMPRESA
 </code></pre></div>
+
 <p><strong>⚠️ IMPORTANTE:</strong>
 - <strong>NO existe tipo "gubernamental" separado</strong>
 - Los RUCs gubernamentales (NT, PA, GO, ED, SA) son <strong>tipo "1" (PERSONA NATURAL)</strong>
 - Los RUCs con formato especial (P, PI, N, R, SR, F, TPH, PC) son <strong>tipo "1" (PERSONA NATURAL)</strong></p>
 <hr />
-<h2 id="tabla-completa-de-formatos-de-personas-naturales">📋 Tabla Completa de Formatos de Personas Naturales<a class="headerlink" href="#tabla-completa-de-formatos-de-personas-naturales" title="Permanent link">&para;</a></h2>
+<h2 id="tabla-completa-de-formatos-de-personas-naturales">📋 Tabla Completa de Formatos de Personas Naturales</h2>
 <table>
 <thead>
 <tr>
@@ -2248,9 +2295,10 @@ dTipoRuc = &quot;2&quot; → PERSONA JURÍDICA / EMPRESA
 </tbody>
 </table>
 <hr />
-<h2 id="expresion-regular-unificada-dgi-oficial">🔧 Expresión Regular Unificada (DGI Oficial)<a class="headerlink" href="#expresion-regular-unificada-dgi-oficial" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code>^(?:[0-9]{1,2}-[0-9]{1,4}-[0-9]{1,6}|E-[0-9]{1,4}-[0-9]{1,6}|[0-9]{1,3}-NT-[0-9]{1,3}-[0-9]{1,10}|P[I]?-[0-9]{3,10}|N-[0-9]{1,4}-[0-9]{1,6}|R-[0-9]{1,4}-[0-9]{1,6}|SR-[0-9]{1,4}-[0-9]{1,6}|F-[0-9]{1,4}-[0-9]{1,6}|TPH-[0-9]{1,4}-[0-9]{1,6}|PC-[0-9]{1,4}-[0-9]{1,6})$
+<h2 id="expresion-regular-unificada-dgi-oficial">🔧 Expresión Regular Unificada (DGI Oficial)</h2>
+<div class="codehilite"><pre><span></span><code><span class="o">^</span><span class="p">(</span><span class="vm">?</span><span class="err">:</span><span class="o">[</span><span class="n">0-9</span><span class="o">]</span><span class="err">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="err">}</span><span class="o">-[</span><span class="n">0-9</span><span class="o">]</span><span class="err">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="err">}</span><span class="o">-[</span><span class="n">0-9</span><span class="o">]</span><span class="err">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="err">}</span><span class="o">|</span><span class="n">E</span><span class="o">-[</span><span class="n">0-9</span><span class="o">]</span><span class="err">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="err">}</span><span class="o">-[</span><span class="n">0-9</span><span class="o">]</span><span class="err">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="err">}</span><span class="o">|[</span><span class="n">0-9</span><span class="o">]</span><span class="err">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="err">}</span><span class="o">-</span><span class="n">NT</span><span class="o">-[</span><span class="n">0-9</span><span class="o">]</span><span class="err">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="err">}</span><span class="o">-[</span><span class="n">0-9</span><span class="o">]</span><span class="err">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="err">}</span><span class="o">|</span><span class="n">P</span><span class="o">[</span><span class="n">I</span><span class="o">]</span><span class="vm">?</span><span class="o">-[</span><span class="n">0-9</span><span class="o">]</span><span class="err">{</span><span class="mi">3</span><span class="p">,</span><span class="mi">10</span><span class="err">}</span><span class="o">|</span><span class="n">N</span><span class="o">-[</span><span class="n">0-9</span><span class="o">]</span><span class="err">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="err">}</span><span class="o">-[</span><span class="n">0-9</span><span class="o">]</span><span class="err">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="err">}</span><span class="o">|</span><span class="n">R</span><span class="o">-[</span><span class="n">0-9</span><span class="o">]</span><span class="err">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="err">}</span><span class="o">-[</span><span class="n">0-9</span><span class="o">]</span><span class="err">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="err">}</span><span class="o">|</span><span class="n">SR</span><span class="o">-[</span><span class="n">0-9</span><span class="o">]</span><span class="err">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="err">}</span><span class="o">-[</span><span class="n">0-9</span><span class="o">]</span><span class="err">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="err">}</span><span class="o">|</span><span class="n">F</span><span class="o">-[</span><span class="n">0-9</span><span class="o">]</span><span class="err">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="err">}</span><span class="o">-[</span><span class="n">0-9</span><span class="o">]</span><span class="err">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="err">}</span><span class="o">|</span><span class="n">TPH</span><span class="o">-[</span><span class="n">0-9</span><span class="o">]</span><span class="err">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="err">}</span><span class="o">-[</span><span class="n">0-9</span><span class="o">]</span><span class="err">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="err">}</span><span class="o">|</span><span class="n">PC</span><span class="o">-[</span><span class="n">0-9</span><span class="o">]</span><span class="err">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="err">}</span><span class="o">-[</span><span class="n">0-9</span><span class="o">]</span><span class="err">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="err">}</span><span class="p">)</span><span class="err">$</span>
 </code></pre></div>
+
 <p><strong>Desglose:</strong>
 1. <code>[0-9]{1,2}-[0-9]{1,4}-[0-9]{1,6}</code> → Cédula regular (provincias 1-13)
 2. <code>E-[0-9]{1,4}-[0-9]{1,6}</code> → Extranjero
@@ -2263,10 +2311,10 @@ dTipoRuc = &quot;2&quot; → PERSONA JURÍDICA / EMPRESA
 9. <code>TPH-[0-9]{1,4}-[0-9]{1,6}</code> → Trabajador Por Horas
 10. <code>PC-[0-9]{1,4}-[0-9]{1,6}</code> → Profesional Contratista</p>
 <hr />
-<h2 id="validacion-del-codigo-actual">✅ Validación del Código Actual<a class="headerlink" href="#validacion-del-codigo-actual" title="Permanent link">&para;</a></h2>
-<h3 id="metodo-determineructype-en-acicloudservicephp">Método <code>determineRucType()</code> en ACIcloudService.php<a class="headerlink" href="#metodo-determineructype-en-acicloudservicephp" title="Permanent link">&para;</a></h3>
+<h2 id="validacion-del-codigo-actual">✅ Validación del Código Actual</h2>
+<h3 id="metodo-determineructype-en-acicloudservicephp">Método <code>determineRucType()</code> en ACIcloudService.php</h3>
 <p><strong>Código Actual (líneas 2391-2462):</strong></p>
-<div class="highlight"><pre><span></span><code><span class="x">private function determineRucType(?string $ruc): string</span>
+<div class="codehilite"><pre><span></span><code><span class="x">private function determineRucType(?string $ruc): string</span>
 <span class="x">{</span>
 <span class="x">    // Si no hay RUC o está vacío, asumir consumidor final</span>
 <span class="x">    if (empty($ruc) || $ruc === &#39;0-0-0&#39;) {</span>
@@ -2315,9 +2363,10 @@ dTipoRuc = &quot;2&quot; → PERSONA JURÍDICA / EMPRESA
 <span class="x">    return &#39;1&#39;; // Por defecto: persona natural</span>
 <span class="x">}</span>
 </code></pre></div>
+
 <hr />
-<h2 id="analisis-de-cobertura">📊 Análisis de Cobertura<a class="headerlink" href="#analisis-de-cobertura" title="Permanent link">&para;</a></h2>
-<h3 id="formatos-cubiertos-por-el-codigo-actual">Formatos CUBIERTOS por el Código Actual<a class="headerlink" href="#formatos-cubiertos-por-el-codigo-actual" title="Permanent link">&para;</a></h3>
+<h2 id="analisis-de-cobertura">📊 Análisis de Cobertura</h2>
+<h3 id="formatos-cubiertos-por-el-codigo-actual">Formatos CUBIERTOS por el Código Actual</h3>
 <table>
 <thead>
 <tr>
@@ -2398,9 +2447,9 @@ dTipoRuc = &quot;2&quot; → PERSONA JURÍDICA / EMPRESA
 </table>
 <p><strong>Cobertura:</strong> 4 de 11 formatos = <strong>36.4%</strong></p>
 <hr />
-<h2 id="correccion-propuesta-para-determineructype">🔧 Corrección Propuesta para <code>determineRucType()</code><a class="headerlink" href="#correccion-propuesta-para-determineructype" title="Permanent link">&para;</a></h2>
-<h3 id="codigo-mejorado">Código Mejorado<a class="headerlink" href="#codigo-mejorado" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">private function determineRucType(?string $ruc): string</span>
+<h2 id="correccion-propuesta-para-determineructype">🔧 Corrección Propuesta para <code>determineRucType()</code></h2>
+<h3 id="codigo-mejorado">Código Mejorado</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">private function determineRucType(?string $ruc): string</span>
 <span class="x">{</span>
 <span class="x">    // Si no hay RUC o está vacío, asumir consumidor final</span>
 <span class="x">    if (empty($ruc) || $ruc === &#39;0-0-0&#39;) {</span>
@@ -2454,18 +2503,21 @@ dTipoRuc = &quot;2&quot; → PERSONA JURÍDICA / EMPRESA
 <span class="x">    return &#39;1&#39;;</span>
 <span class="x">}</span>
 </code></pre></div>
+
 <hr />
-<h2 id="cambios-realizados">📝 Cambios Realizados<a class="headerlink" href="#cambios-realizados" title="Permanent link">&para;</a></h2>
-<h3 id="antes-regla-1">Antes (Regla #1):<a class="headerlink" href="#antes-regla-1" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">if (preg_match(&quot;/^(PE|E|N)$/&quot;, $firstPart)) {</span>
+<h2 id="cambios-realizados">📝 Cambios Realizados</h2>
+<h3 id="antes-regla-1">Antes (Regla #1):</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">if (preg_match(&quot;/^(PE|E|N)$/&quot;, $firstPart)) {</span>
 <span class="x">    return &#39;1&#39;;</span>
 <span class="x">}</span>
 </code></pre></div>
-<h3 id="despues-regla-1-mejorada">Después (Regla #1 MEJORADA):<a class="headerlink" href="#despues-regla-1-mejorada" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">if (preg_match(&quot;/^(PE|E|N|P|PI|R|SR|F|TPH|PC)$/i&quot;, $firstPart)) {</span>
+
+<h3 id="despues-regla-1-mejorada">Después (Regla #1 MEJORADA):</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">if (preg_match(&quot;/^(PE|E|N|P|PI|R|SR|F|TPH|PC)$/i&quot;, $firstPart)) {</span>
 <span class="x">    return &#39;1&#39;;</span>
 <span class="x">}</span>
 </code></pre></div>
+
 <p><strong>Agregados:</strong>
 - ✅ <code>P</code> - Pasaporte
 - ✅ <code>PI</code> - Población Indígena (como prefijo independiente)
@@ -2475,9 +2527,9 @@ dTipoRuc = &quot;2&quot; → PERSONA JURÍDICA / EMPRESA
 - ✅ <code>TPH</code> - Trabajador Por Horas
 - ✅ <code>PC</code> - Profesional Contratista</p>
 <hr />
-<h2 id="casos-de-prueba">🧪 Casos de Prueba<a class="headerlink" href="#casos-de-prueba" title="Permanent link">&para;</a></h2>
-<h3 id="personas-naturales-debe-retornar-1">Personas Naturales (debe retornar '1')<a class="headerlink" href="#personas-naturales-debe-retornar-1" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">$personasNaturales = [</span>
+<h2 id="casos-de-prueba">🧪 Casos de Prueba</h2>
+<h3 id="personas-naturales-debe-retornar-1">Personas Naturales (debe retornar '1')</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">$personasNaturales = [</span>
 <span class="x">    // Cédulas regulares</span>
 <span class="x">    &#39;8-765-1234&#39;,         // Provincia 8</span>
 <span class="x">    &#39;1-123-456&#39;,          // Provincia 1</span>
@@ -2516,8 +2568,9 @@ dTipoRuc = &quot;2&quot; → PERSONA JURÍDICA / EMPRESA
 <span class="x">    assert($tipo === &#39;1&#39;, &quot;RUC {$ruc} debe ser tipo &#39;1&#39; (persona natural)&quot;);</span>
 <span class="x">}</span>
 </code></pre></div>
-<h3 id="empresas-juridicas-debe-retornar-2">Empresas Jurídicas (debe retornar '2')<a class="headerlink" href="#empresas-juridicas-debe-retornar-2" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">$empresas = [</span>
+
+<h3 id="empresas-juridicas-debe-retornar-2">Empresas Jurídicas (debe retornar '2')</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">$empresas = [</span>
 <span class="x">    // Empresas con diferentes longitudes</span>
 <span class="x">    &#39;155591465-2-2015&#39;,   // 9 dígitos</span>
 <span class="x">    &#39;1858809-1-715011&#39;,   // 7 dígitos</span>
@@ -2537,8 +2590,9 @@ dTipoRuc = &quot;2&quot; → PERSONA JURÍDICA / EMPRESA
 <span class="x">    assert($tipo === &#39;2&#39;, &quot;RUC {$ruc} debe ser tipo &#39;2&#39; (empresa)&quot;);</span>
 <span class="x">}</span>
 </code></pre></div>
-<h3 id="casos-especiales-para-validar">Casos Especiales para Validar<a class="headerlink" href="#casos-especiales-para-validar" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">// ⚠️ IMPORTANTE: Diferenciar entre formato similar</span>
+
+<h3 id="casos-especiales-para-validar">Casos Especiales para Validar</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">// ⚠️ IMPORTANTE: Diferenciar entre formato similar</span>
 <span class="x">&#39;1-PI-123-456&#39;    // ❓ ¿Es 1PI (provincia con PI) o 1-PI-... (4 partes)?</span>
 <span class="x">&#39;8-PI-123-456&#39;    // ❓ Similar</span>
 
@@ -2549,9 +2603,10 @@ dTipoRuc = &quot;2&quot; → PERSONA JURÍDICA / EMPRESA
 <span class="x">    // Es provincia-PI-...-... (formato especial no documentado)</span>
 <span class="x">}</span>
 </code></pre></div>
+
 <hr />
-<h2 id="tamano-maximo-de-rucs-personas-naturales">📏 Tamaño Máximo de RUCs Personas Naturales<a class="headerlink" href="#tamano-maximo-de-rucs-personas-naturales" title="Permanent link">&para;</a></h2>
-<h3 id="analisis-por-formato">Análisis por Formato<a class="headerlink" href="#analisis-por-formato" title="Permanent link">&para;</a></h3>
+<h2 id="tamano-maximo-de-rucs-personas-naturales">📏 Tamaño Máximo de RUCs Personas Naturales</h2>
+<h3 id="analisis-por-formato">Análisis por Formato</h3>
 <table>
 <thead>
 <tr>
@@ -2620,28 +2675,30 @@ dTipoRuc = &quot;2&quot; → PERSONA JURÍDICA / EMPRESA
 </table>
 <p><strong>Máximo teórico:</strong> 23 caracteres (formato NT con todos los dígitos máximos)</p>
 <hr />
-<h2 id="validacion-en-createsaleacicloudrequestphp">🎯 Validación en CreateSaleAciCloudRequest.php<a class="headerlink" href="#validacion-en-createsaleacicloudrequestphp" title="Permanent link">&para;</a></h2>
-<h3 id="estado-actual">Estado Actual<a class="headerlink" href="#estado-actual" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">&#39;dGen.gDatRec.gRucRec.dRuc&#39; =&gt; [</span>
+<h2 id="validacion-en-createsaleacicloudrequestphp">🎯 Validación en CreateSaleAciCloudRequest.php</h2>
+<h3 id="estado-actual">Estado Actual</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">&#39;dGen.gDatRec.gRucRec.dRuc&#39; =&gt; [</span>
 <span class="x">    &#39;string&#39;,</span>
 <span class="x">    &#39;max:20&#39;,  // ⚠️ Puede ser insuficiente</span>
 <span class="x">]</span>
 </code></pre></div>
-<h3 id="recomendacion">Recomendación<a class="headerlink" href="#recomendacion" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">&#39;dGen.gDatRec.gRucRec.dRuc&#39; =&gt; [</span>
+
+<h3 id="recomendacion">Recomendación</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">&#39;dGen.gDatRec.gRucRec.dRuc&#39; =&gt; [</span>
 <span class="x">    &#39;string&#39;,</span>
 <span class="x">    &#39;max:30&#39;,  // ✅ Cubre todos los formatos con margen</span>
 <span class="x">]</span>
 </code></pre></div>
+
 <p><strong>Justificación:</strong>
 - Máximo teórico personas naturales: 23 caracteres (NT)
 - Máximo encontrado empresas: 25 caracteres (del ListadoRuc.pdf)
 - Límite recomendado: 30 (margen de seguridad 20%)</p>
 <hr />
-<h2 id="actualizacion-del-metodo-panamaid-en-helperarray">📚 Actualización del Método <code>panamaID()</code> en HelperArray<a class="headerlink" href="#actualizacion-del-metodo-panamaid-en-helperarray" title="Permanent link">&para;</a></h2>
-<h3 id="propuesta-para-helper">Propuesta para Helper<a class="headerlink" href="#propuesta-para-helper" title="Permanent link">&para;</a></h3>
+<h2 id="actualizacion-del-metodo-panamaid-en-helperarray">📚 Actualización del Método <code>panamaID()</code> en HelperArray</h2>
+<h3 id="propuesta-para-helper">Propuesta para Helper</h3>
 <p>El método <code>panamaID()</code> en <code>vendor/weirdo/helper/src/Helper/Traits/HelperArray.php</code> debe actualizarse para incluir todos los formatos:</p>
-<div class="highlight"><pre><span></span><code><span class="x">/**</span>
+<div class="codehilite"><pre><span></span><code><span class="x">/**</span>
 <span class="x"> * Accepted patterns for Panama Personal IDs:</span>
 <span class="x"> * - Regular (provincia-libro-tomo). Ej: 8-765-1234</span>
 <span class="x"> * - Extranjero (E-libro-tomo). Ej: E-8-123456</span>
@@ -2678,25 +2735,28 @@ dTipoRuc = &quot;2&quot; → PERSONA JURÍDICA / EMPRESA
 <span class="x">    return $matches;</span>
 <span class="x">}</span>
 </code></pre></div>
+
 <hr />
-<h2 id="resumen-de-correcciones-necesarias">✅ Resumen de Correcciones Necesarias<a class="headerlink" href="#resumen-de-correcciones-necesarias" title="Permanent link">&para;</a></h2>
-<h3 id="1-acicloudservicephp-metodo-determineructype">1. ACIcloudService.php - Método <code>determineRucType()</code><a class="headerlink" href="#1-acicloudservicephp-metodo-determineructype" title="Permanent link">&para;</a></h3>
-<p><strong>Cambio en Regla #1:</strong>
-<div class="highlight"><pre><span></span><code><span class="x">// ANTES</span>
+<h2 id="resumen-de-correcciones-necesarias">✅ Resumen de Correcciones Necesarias</h2>
+<h3 id="1-acicloudservicephp-metodo-determineructype">1. ACIcloudService.php - Método <code>determineRucType()</code></h3>
+<p><strong>Cambio en Regla #1:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="x">// ANTES</span>
 <span class="x">if (preg_match(&quot;/^(PE|E|N)$/&quot;, $firstPart)) {</span>
 
 <span class="x">// DESPUÉS</span>
 <span class="x">if (preg_match(&quot;/^(PE|E|N|P|PI|R|SR|F|TPH|PC)$/i&quot;, $firstPart)) {</span>
-</code></pre></div></p>
-<h3 id="2-createsaleacicloudrequestphp-validacion">2. CreateSaleAciCloudRequest.php - Validación<a class="headerlink" href="#2-createsaleacicloudrequestphp-validacion" title="Permanent link">&para;</a></h3>
-<p><strong>Cambio:</strong>
-<div class="highlight"><pre><span></span><code><span class="x">// ANTES</span>
+</code></pre></div>
+
+<h3 id="2-createsaleacicloudrequestphp-validacion">2. CreateSaleAciCloudRequest.php - Validación</h3>
+<p><strong>Cambio:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="x">// ANTES</span>
 <span class="x">&#39;max:20&#39;,</span>
 
 <span class="x">// DESPUÉS</span>
 <span class="x">&#39;max:30&#39;,</span>
-</code></pre></div></p>
-<h3 id="3-helperarrayphp-metodo-panamaid">3. HelperArray.php - Método <code>panamaID()</code><a class="headerlink" href="#3-helperarrayphp-metodo-panamaid" title="Permanent link">&para;</a></h3>
+</code></pre></div>
+
+<h3 id="3-helperarrayphp-metodo-panamaid">3. HelperArray.php - Método <code>panamaID()</code></h3>
 <p><strong>Agregar patrones:</strong>
 - ✅ Pasaporte (P)
 - ✅ Población Indígena (PI) como prefijo
@@ -2706,7 +2766,7 @@ dTipoRuc = &quot;2&quot; → PERSONA JURÍDICA / EMPRESA
 - ✅ Trabajador Por Horas (TPH)
 - ✅ Profesional Contratista (PC)</p>
 <hr />
-<h2 id="cobertura-final-esperada">📊 Cobertura Final Esperada<a class="headerlink" href="#cobertura-final-esperada" title="Permanent link">&para;</a></h2>
+<h2 id="cobertura-final-esperada">📊 Cobertura Final Esperada</h2>
 <table>
 <thead>
 <tr>
@@ -2793,7 +2853,7 @@ dTipoRuc = &quot;2&quot; → PERSONA JURÍDICA / EMPRESA
       
       
     
-    <a href="https://github.com/aghabrego/docucenter" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+    <a href="https://github.com/aghabrego/docucenter-public" target="_blank" rel="noopener" title="github.com" class="md-social__link">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
     </a>
   

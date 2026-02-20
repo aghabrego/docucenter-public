@@ -233,7 +233,7 @@
           
   
   
-  APIs
+  API Documentation
 
         </a>
       </li>
@@ -269,7 +269,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../" class="md-tabs__link">
+        <a href="../README.md" class="md-tabs__link">
           
   
   
@@ -298,6 +298,25 @@
         </a>
       </li>
     
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../testing/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Sistema de Testing
+
+      </a>
+    </li>
   
 
       
@@ -404,7 +423,7 @@
   <span class="md-ellipsis">
     
   
-    APIs
+    API Documentation
   
 
     
@@ -420,7 +439,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    APIs
+    API Documentation
   
 
           </label>
@@ -1363,7 +1382,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
+      <a href="../README.md" class="md-nav__link">
         
   
   
@@ -1716,6 +1735,33 @@
   
 
     
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sistema de Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -1934,18 +1980,18 @@
   
 
 
-<h1 id="solucion-al-error-instancereceiverruc-requires-property-ruc-en-facturas-de-consumidor-final">Solución al Error "instance.receiver.ruc requires property 'ruc'" en Facturas de Consumidor Final<a class="headerlink" href="#solucion-al-error-instancereceiverruc-requires-property-ruc-en-facturas-de-consumidor-final" title="Permanent link">&para;</a></h1>
-<h2 id="resumen-del-problema">Resumen del Problema<a class="headerlink" href="#resumen-del-problema" title="Permanent link">&para;</a></h2>
+<h1 id="solucion-al-error-instancereceiverruc-requires-property-ruc-en-facturas-de-consumidor-final">Solución al Error "instance.receiver.ruc requires property 'ruc'" en Facturas de Consumidor Final</h1>
+<h2 id="resumen-del-problema">Resumen del Problema</h2>
 <p>El error <code>"instance.receiver.ruc requires property 'ruc'"</code> aparecía al intentar emitir facturas de consumidor final tanto en <strong>TheFactoryHKA</strong> como en <strong>Alanube</strong>. El problema era que el sistema trataba de incluir el campo RUC incluso cuando no debería estar presente para este tipo de documento.</p>
-<h2 id="facturas-de-consumidor-final">Facturas de Consumidor Final<a class="headerlink" href="#facturas-de-consumidor-final" title="Permanent link">&para;</a></h2>
+<h2 id="facturas-de-consumidor-final">Facturas de Consumidor Final</h2>
 <p>Las facturas de consumidor final <strong>NO requieren RUC del receptor</strong> según la normativa DGI de Panamá. Por tanto, el campo <code>gRucRec</code> no debe enviarse a los PAC cuando:
 - Tipo de documento: <code>'2'</code> (Factura de consumidor final)
 - RUC es <code>'0-0-0'</code> (valor por defecto para consumidor final)
 - No hay un RUC válido del cliente</p>
-<h2 id="correcciones-implementadas">Correcciones Implementadas<a class="headerlink" href="#correcciones-implementadas" title="Permanent link">&para;</a></h2>
-<h3 id="1-livewire-create-component-thefactoryhka">1. Livewire Create Component - TheFactoryHKA<a class="headerlink" href="#1-livewire-create-component-thefactoryhka" title="Permanent link">&para;</a></h3>
+<h2 id="correcciones-implementadas">Correcciones Implementadas</h2>
+<h3 id="1-livewire-create-component-thefactoryhka">1. Livewire Create Component - TheFactoryHKA</h3>
 <p><strong>Archivo</strong>: <code>app/Http/Livewire/Admin/Einvoice/Create.php</code></p>
-<div class="highlight"><pre><span></span><code><span class="x">case &#39;2&#39;: // Factura de consumidor final</span>
+<div class="codehilite"><pre><span></span><code><span class="x">case &#39;2&#39;: // Factura de consumidor final</span>
 <span class="x">    // Solo incluir gRucRec si hay un RUC válido y no es &#39;0-0-0&#39;</span>
 <span class="x">    if (!empty($this-&gt;ruc_receiver) &amp;&amp; $this-&gt;ruc_receiver !== &#39;0-0-0&#39;) {</span>
 <span class="x">        $data[&#39;dGen&#39;][&#39;gDatRec&#39;][&#39;gRucRec&#39;] = [</span>
@@ -1957,10 +2003,11 @@
 <span class="x">    // No incluir gRucRec para consumidor final sin RUC</span>
 <span class="x">    break;</span>
 </code></pre></div>
-<h3 id="2-alanubeformatterhelper-alanube-pac">2. AlanubeFormatterHelper - Alanube PAC<a class="headerlink" href="#2-alanubeformatterhelper-alanube-pac" title="Permanent link">&para;</a></h3>
+
+<h3 id="2-alanubeformatterhelper-alanube-pac">2. AlanubeFormatterHelper - Alanube PAC</h3>
 <p><strong>Archivo</strong>: <code>app/Helpers/AlanubeFormatterHelper.php</code></p>
-<h4 id="metodo-formatforpanama">Método formatForPanama():<a class="headerlink" href="#metodo-formatforpanama" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="x">// Verificar si existe gRucRec antes de acceder a dRuc</span>
+<h4 id="metodo-formatforpanama">Método formatForPanama():</h4>
+<div class="codehilite"><pre><span></span><code><span class="x">// Verificar si existe gRucRec antes de acceder a dRuc</span>
 <span class="x">$ruc = isset($data[&#39;dGen&#39;][&#39;gDatRec&#39;][&#39;gRucRec&#39;]) ? ($data[&#39;dGen&#39;][&#39;gDatRec&#39;][&#39;gRucRec&#39;][&#39;dRuc&#39;] ?? null) : null;</span>
 <span class="x">$ruc = $ruc === &#39;0-0-0&#39; ? null : $ruc;</span>
 
@@ -1968,18 +2015,21 @@
 <span class="x">&#39;type&#39; =&gt; (int)(isset($data[&#39;dGen&#39;][&#39;gDatRec&#39;][&#39;gRucRec&#39;]) ? ($data[&#39;dGen&#39;][&#39;gDatRec&#39;][&#39;gRucRec&#39;][&#39;dTipoRuc&#39;] ?? 1) : 1),</span>
 <span class="x">&#39;verificationDigit&#39; =&gt; isset($data[&#39;dGen&#39;][&#39;gDatRec&#39;][&#39;gRucRec&#39;]) ? ($data[&#39;dGen&#39;][&#39;gDatRec&#39;][&#39;gRucRec&#39;][&#39;dDV&#39;] ?? $data[&#39;dGen&#39;][&#39;gDatRec&#39;][&#39;gRucRec&#39;][&#39;dDVRuc&#39;] ?? null) : null,</span>
 </code></pre></div>
-<h4 id="metodo-formatfordominicana">Método formatForDominicana():<a class="headerlink" href="#metodo-formatfordominicana" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="x">// Misma lógica de verificación aplicada para República Dominicana</span>
+
+<h4 id="metodo-formatfordominicana">Método formatForDominicana():</h4>
+<div class="codehilite"><pre><span></span><code><span class="x">// Misma lógica de verificación aplicada para República Dominicana</span>
 <span class="x">$ruc = isset($data[&#39;dGen&#39;][&#39;gDatRec&#39;][&#39;gRucRec&#39;]) ? ($data[&#39;dGen&#39;][&#39;gDatRec&#39;][&#39;gRucRec&#39;][&#39;dRuc&#39;] ?? null) : null;</span>
 </code></pre></div>
-<h4 id="metodo-formatpanamadocument">Método formatPanamaDocument():<a class="headerlink" href="#metodo-formatpanamadocument" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="x">// Ya tenía la protección correcta usando ?? []</span>
+
+<h4 id="metodo-formatpanamadocument">Método formatPanamaDocument():</h4>
+<div class="codehilite"><pre><span></span><code><span class="x">// Ya tenía la protección correcta usando ?? []</span>
 <span class="x">$gRucRec = $gDatRec[&#39;gRucRec&#39;] ?? [];</span>
 <span class="x">&#39;number&#39; =&gt; $gRucRec[&#39;dRuc&#39;] ?? null,</span>
 </code></pre></div>
-<h3 id="3-multi-tenant-database-fix">3. Multi-Tenant Database Fix<a class="headerlink" href="#3-multi-tenant-database-fix" title="Permanent link">&para;</a></h3>
+
+<h3 id="3-multi-tenant-database-fix">3. Multi-Tenant Database Fix</h3>
 <p><strong>Archivo</strong>: <code>app/Http/Livewire/Admin/Einvoice/Single.php</code></p>
-<div class="highlight"><pre><span></span><code><span class="x">public function mount($invoice)</span>
+<div class="codehilite"><pre><span></span><code><span class="x">public function mount($invoice)</span>
 <span class="x">{</span>
 <span class="x">    // Establecer conexión organizacional ANTES de acceder a relaciones</span>
 <span class="x">    $this-&gt;setOrganization();</span>
@@ -1989,11 +2039,12 @@
 <span class="x">    // ... resto del código</span>
 <span class="x">}</span>
 </code></pre></div>
-<h2 id="validacion-de-campos-condicionales">Validación de Campos Condicionales<a class="headerlink" href="#validacion-de-campos-condicionales" title="Permanent link">&para;</a></h2>
-<h3 id="zona-franca-tipo-de-documento-3">Zona Franca - Tipo de Documento '3'<a class="headerlink" href="#zona-franca-tipo-de-documento-3" title="Permanent link">&para;</a></h3>
+
+<h2 id="validacion-de-campos-condicionales">Validación de Campos Condicionales</h2>
+<h3 id="zona-franca-tipo-de-documento-3">Zona Franca - Tipo de Documento '3'</h3>
 <p><strong>Archivo</strong>: <code>resources/views/livewire/admin/einvoice/create.blade.php</code></p>
-<p>Los campos condicionales para zona franca están correctamente configurados:
-<div class="highlight"><pre><span></span><code><span class="cm">&lt;!-- Campos específicos para exportación/importación/zona franca --&gt;</span>
+<p>Los campos condicionales para zona franca están correctamente configurados:</p>
+<div class="codehilite"><pre><span></span><code><span class="cm">&lt;!-- Campos específicos para exportación/importación/zona franca --&gt;</span>
 <span class="p">&lt;</span><span class="nt">div</span> <span class="na">x-show</span><span class="o">=</span><span class="s">&quot;[&#39;3&#39;, &#39;4&#39;, &#39;8&#39;].includes($wire.tipeDocument)&quot;</span><span class="p">&gt;</span>
     <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;grid grid-cols-1 md:grid-cols-2 gap-4&quot;</span><span class="p">&gt;</span>
         <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
@@ -2006,8 +2057,9 @@
         <span class="cm">&lt;!-- ... más campos --&gt;</span>
     <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
 <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-</code></pre></div></p>
-<h2 id="resultado">Resultado<a class="headerlink" href="#resultado" title="Permanent link">&para;</a></h2>
+</code></pre></div>
+
+<h2 id="resultado">Resultado</h2>
 <p>Tras estas correcciones:</p>
 <ol>
 <li>✅ <strong>TheFactoryHKA</strong>: Las facturas de consumidor final ya no envían <code>gRucRec</code> cuando no es necesario</li>
@@ -2015,9 +2067,9 @@
 <li>✅ <strong>Multi-tenant</strong>: Conexión de base de datos correcta antes de acceder a relaciones</li>
 <li>✅ <strong>Zona Franca</strong>: Campos condicionales funcionando correctamente</li>
 </ol>
-<h2 id="testing-recomendado">Testing Recomendado<a class="headerlink" href="#testing-recomendado" title="Permanent link">&para;</a></h2>
+<h2 id="testing-recomendado">Testing Recomendado</h2>
 <p>Para validar la solución:</p>
-<div class="highlight"><pre><span></span><code><span class="c1"># Crear factura de consumidor final sin RUC</span>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Crear factura de consumidor final sin RUC</span>
 -<span class="w"> </span>Tipo<span class="w"> </span>documento:<span class="w"> </span><span class="s2">&quot;2&quot;</span>
 -<span class="w"> </span>RUC<span class="w"> </span>receptor:<span class="w"> </span><span class="s2">&quot;0-0-0&quot;</span><span class="w"> </span>o<span class="w"> </span>vacío
 -<span class="w"> </span>Verificar<span class="w"> </span>que<span class="w"> </span>se<span class="w"> </span>crea<span class="w"> </span>sin<span class="w"> </span>error<span class="w"> </span>en<span class="w"> </span>ambos<span class="w"> </span>PAC
@@ -2026,7 +2078,8 @@
 -<span class="w"> </span>Tipo<span class="w"> </span>documento:<span class="w"> </span><span class="s2">&quot;3&quot;</span><span class="w"> </span>
 -<span class="w"> </span>Verificar<span class="w"> </span>campos<span class="w"> </span>condicionales<span class="w"> </span>de<span class="w"> </span>exportación
 </code></pre></div>
-<h2 id="notas-tecnicas">Notas Técnicas<a class="headerlink" href="#notas-tecnicas" title="Permanent link">&para;</a></h2>
+
+<h2 id="notas-tecnicas">Notas Técnicas</h2>
 <ul>
 <li><strong>Consumidor Final</strong>: No requiere RUC según normativa DGI Panamá</li>
 <li><strong>Multi-PAC</strong>: Ambos TheFactoryHKA y Alanube ahora manejan correctamente la ausencia de RUC</li>
@@ -2086,7 +2139,7 @@
       
       
     
-    <a href="https://github.com/aghabrego/docucenter" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+    <a href="https://github.com/aghabrego/docucenter-public" target="_blank" rel="noopener" title="github.com" class="md-social__link">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
     </a>
   

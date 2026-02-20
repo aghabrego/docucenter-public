@@ -233,7 +233,7 @@
           
   
   
-  APIs
+  API Documentation
 
         </a>
       </li>
@@ -269,7 +269,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../" class="md-tabs__link">
+        <a href="../README.md" class="md-tabs__link">
           
   
   
@@ -298,6 +298,25 @@
         </a>
       </li>
     
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../testing/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Sistema de Testing
+
+      </a>
+    </li>
   
 
       
@@ -404,7 +423,7 @@
   <span class="md-ellipsis">
     
   
-    APIs
+    API Documentation
   
 
     
@@ -420,7 +439,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    APIs
+    API Documentation
   
 
           </label>
@@ -1363,7 +1382,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
+      <a href="../README.md" class="md-nav__link">
         
   
   
@@ -1712,6 +1731,33 @@
           </ul>
         </nav>
       
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sistema de Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -2152,62 +2198,64 @@
   
 
 
-<h1 id="plan-management-system-sidebar-integration-complete">Plan Management System - Sidebar Integration Complete<a class="headerlink" href="#plan-management-system-sidebar-integration-complete" title="Permanent link">&para;</a></h1>
-<h2 id="integracion-del-sidebar-completada-exitosamente">✅ <strong>INTEGRACIÓN DEL SIDEBAR COMPLETADA EXITOSAMENTE</strong><a class="headerlink" href="#integracion-del-sidebar-completada-exitosamente" title="Permanent link">&para;</a></h2>
-<h3 id="resumen"><strong>Resumen</strong><a class="headerlink" href="#resumen" title="Permanent link">&para;</a></h3>
+<h1 id="plan-management-system-sidebar-integration-complete">Plan Management System - Sidebar Integration Complete</h1>
+<h2 id="integracion-del-sidebar-completada-exitosamente">✅ <strong>INTEGRACIÓN DEL SIDEBAR COMPLETADA EXITOSAMENTE</strong></h2>
+<h3 id="resumen"><strong>Resumen</strong></h3>
 <p>El enlace del Sistema de Gestión de Planes ha sido agregado exitosamente al sidebar de la administración de DocuCenter. Los usuarios ahora pueden acceder fácilmente a la funcionalidad de gestión de planes desde la navegación principal.</p>
 <hr />
-<h2 id="cambios-implementados">🎯 <strong>Cambios Implementados</strong><a class="headerlink" href="#cambios-implementados" title="Permanent link">&para;</a></h2>
-<h3 id="1-archivo-modificado"><strong>1. Archivo Modificado</strong><a class="headerlink" href="#1-archivo-modificado" title="Permanent link">&para;</a></h3>
+<h2 id="cambios-implementados">🎯 <strong>Cambios Implementados</strong></h2>
+<h3 id="1-archivo-modificado"><strong>1. Archivo Modificado</strong></h3>
 <ul>
 <li><strong>Archivo</strong>: <code>resources/views/vendor/admin/layouts/sidebar.blade.php</code></li>
 <li><strong>Sección</strong>: Applications menu</li>
 <li><strong>Líneas agregadas</strong>: 2 bloques de código</li>
 </ul>
-<h3 id="2-elementos-agregados"><strong>2. Elementos Agregados</strong><a class="headerlink" href="#2-elementos-agregados" title="Permanent link">&para;</a></h3>
-<h4 id="a-permiso-en-condicion-principal"><strong>A. Permiso en Condición Principal</strong><a class="headerlink" href="#a-permiso-en-condicion-principal" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code>@if (
-    hasPermission(getRouteName().&#39;.crud.lists&#39;, true) ||
-    hasPermission(getRouteName().&#39;.translation&#39;, true) ||
-    // ... otros permisos ...
-    hasPermission(getRouteName().&#39;.organization_plans&#39;, true)  // ← NUEVO
-)
+<h3 id="2-elementos-agregados"><strong>2. Elementos Agregados</strong></h3>
+<h4 id="a-permiso-en-condicion-principal"><strong>A. Permiso en Condición Principal</strong></h4>
+<div class="codehilite"><pre><span></span><code><span class="n">@if</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">hasPermission</span><span class="p">(</span><span class="n">getRouteName</span><span class="p">().</span><span class="err">&#39;</span><span class="p">.</span><span class="n">crud</span><span class="p">.</span><span class="n">lists</span><span class="err">&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">true</span><span class="p">)</span><span class="w"> </span><span class="p">||</span>
+<span class="w">    </span><span class="n">hasPermission</span><span class="p">(</span><span class="n">getRouteName</span><span class="p">().</span><span class="err">&#39;</span><span class="p">.</span><span class="n">translation</span><span class="err">&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">true</span><span class="p">)</span><span class="w"> </span><span class="p">||</span>
+<span class="w">    </span><span class="c1">// ... otros permisos ...</span>
+<span class="w">    </span><span class="n">hasPermission</span><span class="p">(</span><span class="n">getRouteName</span><span class="p">().</span><span class="err">&#39;</span><span class="p">.</span><span class="n">organization_plans</span><span class="err">&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">true</span><span class="p">)</span><span class="w">  </span><span class="c1">// ← NUEVO</span>
+<span class="p">)</span>
 </code></pre></div>
-<h4 id="b-enlace-del-menu"><strong>B. Enlace del Menu</strong><a class="headerlink" href="#b-enlace-del-menu" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code>@if(hasPermission(getRouteName().&#39;.organization_plans&#39;, true))
-&lt;li class=&quot;sidebar-item @isActive([getRouteName().&#39;.organization_plans&#39;], &#39;selected&#39;)&quot;&gt;
-    &lt;a class=&quot;sidebar-link @isActive([getRouteName().&#39;.organization_plans&#39;], &#39;active&#39;) &quot; 
-       href=&quot;@route(getRouteName().&#39;.organization_plans&#39;)&quot; aria-expanded=&quot;false&quot;&gt;
-        &lt;i data-feather=&quot;users&quot; class=&quot;feather-icon&quot;&gt;&lt;/i&gt;
-        &lt;span class=&quot;hide-menu&quot;&gt;{{ __(&#39;Plan Management&#39;) }}&lt;/span&gt;
-    &lt;/a&gt;
-&lt;/li&gt;
-@endif
+
+<h4 id="b-enlace-del-menu"><strong>B. Enlace del Menu</strong></h4>
+<div class="codehilite"><pre><span></span><code><span class="p">@</span><span class="k">if</span><span class="p">(</span><span class="n">hasPermission</span><span class="p">(</span><span class="n">getRouteName</span><span class="p">().</span><span class="err">&#39;</span><span class="p">.</span><span class="n">organization_plans</span><span class="err">&#39;</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">))</span>
+<span class="o">&lt;</span><span class="n">li</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;sidebar-item @isActive([getRouteName().&#39;.organization_plans&#39;], &#39;selected&#39;)&quot;</span><span class="o">&gt;</span>
+<span class="w">    </span><span class="o">&lt;</span><span class="n">a</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;sidebar-link @isActive([getRouteName().&#39;.organization_plans&#39;], &#39;active&#39;) &quot;</span><span class="w"> </span>
+<span class="w">       </span><span class="n">href</span><span class="o">=</span><span class="s">&quot;@route(getRouteName().&#39;.organization_plans&#39;)&quot;</span><span class="w"> </span><span class="n">aria</span><span class="o">-</span><span class="n">expanded</span><span class="o">=</span><span class="s">&quot;false&quot;</span><span class="o">&gt;</span>
+<span class="w">        </span><span class="o">&lt;</span><span class="n">i</span><span class="w"> </span><span class="n">data</span><span class="o">-</span><span class="n">feather</span><span class="o">=</span><span class="s">&quot;users&quot;</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;feather-icon&quot;</span><span class="o">&gt;&lt;/</span><span class="n">i</span><span class="o">&gt;</span>
+<span class="w">        </span><span class="o">&lt;</span><span class="n">span</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;hide-menu&quot;</span><span class="o">&gt;</span><span class="p">{{</span><span class="w"> </span><span class="n">__</span><span class="p">(</span><span class="err">&#39;</span><span class="n">Plan</span><span class="w"> </span><span class="n">Management</span><span class="err">&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">}}</span><span class="o">&lt;/</span><span class="n">span</span><span class="o">&gt;</span>
+<span class="w">    </span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="n">li</span><span class="o">&gt;</span>
+<span class="p">@</span><span class="n">endif</span>
 </code></pre></div>
+
 <hr />
-<h2 id="especificaciones-tecnicas">🔧 <strong>Especificaciones Técnicas</strong><a class="headerlink" href="#especificaciones-tecnicas" title="Permanent link">&para;</a></h2>
-<h3 id="ubicacion-en-sidebar"><strong>Ubicación en Sidebar</strong><a class="headerlink" href="#ubicacion-en-sidebar" title="Permanent link">&para;</a></h3>
+<h2 id="especificaciones-tecnicas">🔧 <strong>Especificaciones Técnicas</strong></h2>
+<h3 id="ubicacion-en-sidebar"><strong>Ubicación en Sidebar</strong></h3>
 <ul>
 <li><strong>Sección</strong>: Applications</li>
 <li><strong>Posición</strong>: Después de "Catalogos"</li>
 <li><strong>Ícono</strong>: <code>users</code> (Feather Icon)</li>
 <li><strong>Texto</strong>: "Plan Management"</li>
 </ul>
-<h3 id="control-de-acceso"><strong>Control de Acceso</strong><a class="headerlink" href="#control-de-acceso" title="Permanent link">&para;</a></h3>
+<h3 id="control-de-acceso"><strong>Control de Acceso</strong></h3>
 <ul>
 <li><strong>Función</strong>: <code>hasPermission(getRouteName().'.organization_plans', true)</code></li>
 <li><strong>Ruta</strong>: <code>admin.organization_plans</code></li>
 <li><strong>Middleware</strong>: <code>dynamicAcl</code></li>
 </ul>
-<h3 id="estados-del-enlace"><strong>Estados del Enlace</strong><a class="headerlink" href="#estados-del-enlace" title="Permanent link">&para;</a></h3>
+<h3 id="estados-del-enlace"><strong>Estados del Enlace</strong></h3>
 <ul>
 <li><strong>Normal</strong>: Enlace estándar</li>
 <li><strong>Activo</strong>: Clase <code>active</code> cuando la ruta está activa</li>
 <li><strong>Seleccionado</strong>: Clase <code>selected</code> cuando la página está siendo visitada</li>
 </ul>
 <hr />
-<h2 id="pruebas-realizadas">🧪 <strong>Pruebas Realizadas</strong><a class="headerlink" href="#pruebas-realizadas" title="Permanent link">&para;</a></h2>
-<h3 id="tests-de-integracion-55-passed"><strong>Tests de Integración (5/5 PASSED)</strong><a class="headerlink" href="#tests-de-integracion-55-passed" title="Permanent link">&para;</a></h3>
+<h2 id="pruebas-realizadas">🧪 <strong>Pruebas Realizadas</strong></h2>
+<h3 id="tests-de-integracion-55-passed"><strong>Tests de Integración (5/5 PASSED)</strong></h3>
 <table>
 <thead>
 <tr>
@@ -2244,7 +2292,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="validaciones-docker"><strong>Validaciones Docker</strong><a class="headerlink" href="#validaciones-docker" title="Permanent link">&para;</a></h3>
+<h3 id="validaciones-docker"><strong>Validaciones Docker</strong></h3>
 <ul>
 <li>✅ <strong>Ruta accesible</strong>: <code>admin/organization_plans</code></li>
 <li>✅ <strong>Componente funcional</strong>: 4 planes disponibles</li>
@@ -2252,16 +2300,16 @@
 <li>✅ <strong>Sidebar renderiza</strong>: Enlaces visibles</li>
 </ul>
 <hr />
-<h2 id="acceso-al-sistema">🚀 <strong>Acceso al Sistema</strong><a class="headerlink" href="#acceso-al-sistema" title="Permanent link">&para;</a></h2>
-<h3 id="para-usuarios-administradores"><strong>Para Usuarios Administradores</strong><a class="headerlink" href="#para-usuarios-administradores" title="Permanent link">&para;</a></h3>
+<h2 id="acceso-al-sistema">🚀 <strong>Acceso al Sistema</strong></h2>
+<h3 id="para-usuarios-administradores"><strong>Para Usuarios Administradores</strong></h3>
 <ol>
 <li><strong>Login</strong>: Ingresar al panel de administración</li>
 <li><strong>Navegación</strong>: Buscar sección "Applications" en sidebar</li>
 <li><strong>Acceso</strong>: Click en "Plan Management"</li>
 <li><strong>URL Directa</strong>: <code>/admin/organization_plans</code></li>
 </ol>
-<h3 id="ubicacion-visual"><strong>Ubicación Visual</strong><a class="headerlink" href="#ubicacion-visual" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>Sidebar → Applications (sección desplegable)
+<h3 id="ubicacion-visual"><strong>Ubicación Visual</strong></h3>
+<div class="codehilite"><pre><span></span><code>Sidebar → Applications (sección desplegable)
 ├── CRUD Manager
 ├── Translation
 ├── Roles
@@ -2276,39 +2324,40 @@
 ├── Catalogos
 └── Plan Management  ← NUEVO
 </code></pre></div>
+
 <hr />
-<h2 id="experiencia-de-usuario">📱 <strong>Experiencia de Usuario</strong><a class="headerlink" href="#experiencia-de-usuario" title="Permanent link">&para;</a></h2>
-<h3 id="comportamiento-del-enlace"><strong>Comportamiento del Enlace</strong><a class="headerlink" href="#comportamiento-del-enlace" title="Permanent link">&para;</a></h3>
+<h2 id="experiencia-de-usuario">📱 <strong>Experiencia de Usuario</strong></h2>
+<h3 id="comportamiento-del-enlace"><strong>Comportamiento del Enlace</strong></h3>
 <ul>
 <li><strong>Hover</strong>: Efecto visual de hover estándar</li>
 <li><strong>Click</strong>: Navegación directa al componente Plan Management</li>
 <li><strong>Estado Activo</strong>: Resaltado visual cuando está en esa página</li>
 <li><strong>Responsive</strong>: Funciona en móviles y tablets</li>
 </ul>
-<h3 id="integracion-con-tema"><strong>Integración con Tema</strong><a class="headerlink" href="#integracion-con-tema" title="Permanent link">&para;</a></h3>
+<h3 id="integracion-con-tema"><strong>Integración con Tema</strong></h3>
 <ul>
 <li><strong>Ícono</strong>: Consistente con otros elementos del sidebar</li>
 <li><strong>Estilos</strong>: Utiliza las clases CSS existentes del tema admin</li>
 <li><strong>Colores</strong>: Sigue la paleta de colores del panel de administración</li>
 </ul>
 <hr />
-<h2 id="seguridad-y-permisos">🔐 <strong>Seguridad y Permisos</strong><a class="headerlink" href="#seguridad-y-permisos" title="Permanent link">&para;</a></h2>
-<h3 id="control-de-acceso_1"><strong>Control de Acceso</strong><a class="headerlink" href="#control-de-acceso_1" title="Permanent link">&para;</a></h3>
+<h2 id="seguridad-y-permisos">🔐 <strong>Seguridad y Permisos</strong></h2>
+<h3 id="control-de-acceso_1"><strong>Control de Acceso</strong></h3>
 <ul>
 <li><strong>Verificación</strong>: <code>hasPermission()</code> antes de mostrar enlace</li>
 <li><strong>Middleware</strong>: <code>dynamicAcl</code> protege la ruta</li>
 <li><strong>Fallback</strong>: Si no hay permisos, el enlace no aparece</li>
 </ul>
-<h3 id="niveles-de-acceso"><strong>Niveles de Acceso</strong><a class="headerlink" href="#niveles-de-acceso" title="Permanent link">&para;</a></h3>
+<h3 id="niveles-de-acceso"><strong>Niveles de Acceso</strong></h3>
 <ul>
 <li><strong>Admin</strong>: Acceso completo al sistema de gestión de planes</li>
 <li><strong>Usuarios limitados</strong>: Controlado por sistema de permisos</li>
 <li><strong>Invitados</strong>: Sin acceso (requiere autenticación)</li>
 </ul>
 <hr />
-<h2 id="comandos-de-verificacion">📋 <strong>Comandos de Verificación</strong><a class="headerlink" href="#comandos-de-verificacion" title="Permanent link">&para;</a></h2>
-<h3 id="verificar-integracion"><strong>Verificar Integración</strong><a class="headerlink" href="#verificar-integracion" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># Test completo de sidebar</span>
+<h2 id="comandos-de-verificacion">📋 <strong>Comandos de Verificación</strong></h2>
+<h3 id="verificar-integracion"><strong>Verificar Integración</strong></h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Test completo de sidebar</span>
 ./scripts/test-sidebar-integration.sh
 
 <span class="c1"># Verificar ruta existe</span>
@@ -2320,16 +2369,18 @@ docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </spa
 <span class="s2">print_r(\$component-&gt;getAvailablePlans());</span>
 <span class="s2">&quot;</span>
 </code></pre></div>
-<h3 id="verificar-sidebar"><strong>Verificar Sidebar</strong><a class="headerlink" href="#verificar-sidebar" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># Buscar elementos agregados</span>
+
+<h3 id="verificar-sidebar"><strong>Verificar Sidebar</strong></h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Buscar elementos agregados</span>
 grep<span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;organization_plans&quot;</span><span class="w"> </span>resources/views/vendor/admin/layouts/sidebar.blade.php
 
 <span class="c1"># Verificar permisos</span>
 grep<span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;hasPermission.*organization_plans&quot;</span><span class="w"> </span>resources/views/vendor/admin/layouts/sidebar.blade.php
 </code></pre></div>
+
 <hr />
-<h2 id="estado-final">🎉 <strong>Estado Final</strong><a class="headerlink" href="#estado-final" title="Permanent link">&para;</a></h2>
-<h3 id="completado-exitosamente"><strong>✅ COMPLETADO EXITOSAMENTE</strong><a class="headerlink" href="#completado-exitosamente" title="Permanent link">&para;</a></h3>
+<h2 id="estado-final">🎉 <strong>Estado Final</strong></h2>
+<h3 id="completado-exitosamente"><strong>✅ COMPLETADO EXITOSAMENTE</strong></h3>
 <ul>
 <li>✅ <strong>Enlace agregado</strong> al sidebar en sección Applications</li>
 <li>✅ <strong>Permisos configurados</strong> correctamente</li>
@@ -2339,10 +2390,10 @@ grep<span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;has
 <li>✅ <strong>Integración visual</strong> consistente con el tema</li>
 <li>✅ <strong>Docker environment</strong> funcionando perfectamente</li>
 </ul>
-<h3 id="listo-para-uso-en-produccion"><strong>🚀 LISTO PARA USO EN PRODUCCIÓN</strong><a class="headerlink" href="#listo-para-uso-en-produccion" title="Permanent link">&para;</a></h3>
+<h3 id="listo-para-uso-en-produccion"><strong>🚀 LISTO PARA USO EN PRODUCCIÓN</strong></h3>
 <p>El Sistema de Gestión de Planes está ahora completamente integrado en el sidebar y listo para que los administradores gestionen los planes de las organizaciones desde la interfaz principal.</p>
 <hr />
-<h2 id="nota-sobre-futuras-mejoras">📝 <strong>Nota sobre Futuras Mejoras</strong><a class="headerlink" href="#nota-sobre-futuras-mejoras" title="Permanent link">&para;</a></h2>
+<h2 id="nota-sobre-futuras-mejoras">📝 <strong>Nota sobre Futuras Mejoras</strong></h2>
 <p>Como mencionaste, más adelante se pueden hacer mejoras en el layout para que no estén en el vendor, pero por el momento el sistema está completamente funcional en la ubicación actual y listo para uso inmediato.</p>
 <p><strong>Próximos pasos sugeridos:</strong>
 1. ✅ <strong>Funcionamiento básico</strong> - COMPLETADO
@@ -2400,7 +2451,7 @@ grep<span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;has
       
       
     
-    <a href="https://github.com/aghabrego/docucenter" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+    <a href="https://github.com/aghabrego/docucenter-public" target="_blank" rel="noopener" title="github.com" class="md-social__link">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
     </a>
   

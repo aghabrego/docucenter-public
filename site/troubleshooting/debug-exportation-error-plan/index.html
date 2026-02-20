@@ -233,7 +233,7 @@
           
   
   
-  APIs
+  API Documentation
 
         </a>
       </li>
@@ -269,7 +269,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../technical/" class="md-tabs__link">
+        <a href="../../technical/README.md" class="md-tabs__link">
           
   
   
@@ -298,6 +298,25 @@
         </a>
       </li>
     
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../testing/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Sistema de Testing
+
+      </a>
+    </li>
   
 
       
@@ -404,7 +423,7 @@
   <span class="md-ellipsis">
     
   
-    APIs
+    API Documentation
   
 
     
@@ -420,7 +439,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    APIs
+    API Documentation
   
 
           </label>
@@ -1363,7 +1382,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../technical/" class="md-nav__link">
+      <a href="../../technical/README.md" class="md-nav__link">
         
   
   
@@ -1716,6 +1735,33 @@
   
 
     
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sistema de Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -1917,14 +1963,15 @@
   
 
 
-<h1 id="plan-de-debug-error-instance-requires-property-exportation">Plan de Debug - Error "instance requires property exportation"<a class="headerlink" href="#plan-de-debug-error-instance-requires-property-exportation" title="Permanent link">&para;</a></h1>
-<h2 id="diagnostico-paso-a-paso">🔍 Diagnóstico Paso a Paso<a class="headerlink" href="#diagnostico-paso-a-paso" title="Permanent link">&para;</a></h2>
-<h3 id="1-verificar-los-logs-anadidos">1. Verificar los logs añadidos<a class="headerlink" href="#1-verificar-los-logs-anadidos" title="Permanent link">&para;</a></h3>
+<h1 id="plan-de-debug-error-instance-requires-property-exportation">Plan de Debug - Error "instance requires property exportation"</h1>
+<h2 id="diagnostico-paso-a-paso">🔍 Diagnóstico Paso a Paso</h2>
+<h3 id="1-verificar-los-logs-anadidos">1. Verificar los logs añadidos</h3>
 <p>Los logs de debug se han agregado al código. Para ver qué está pasando exactamente:</p>
-<div class="highlight"><pre><span></span><code><span class="c1"># Ver logs en tiempo real</span>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Ver logs en tiempo real</span>
 tail<span class="w"> </span>-f<span class="w"> </span>storage/logs/laravel.log<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;AlanubeFormatterHelper&quot;</span>
 </code></pre></div>
-<h3 id="2-informacion-que-necesitamos-confirmar">2. Información que necesitamos confirmar<a class="headerlink" href="#2-informacion-que-necesitamos-confirmar" title="Permanent link">&para;</a></h3>
+
+<h3 id="2-informacion-que-necesitamos-confirmar">2. Información que necesitamos confirmar</h3>
 <p><strong>Del formulario</strong>:
 - ¿Qué tipo de documento seleccionas? (debe ser "Factura de operación interna")
 - ¿El valor <code>tipeDocument</code> es '1'?
@@ -1932,25 +1979,29 @@ tail<span class="w"> </span>-f<span class="w"> </span>storage/logs/laravel.log<s
 <p><strong>Del PAC</strong>:
 - ¿Qué endpoint PAC estás usando?
 - ¿Es Panamá (.../pan/v1) o República Dominicana (.../dom/v1)?</p>
-<h3 id="3-posibles-causas-del-error">3. Posibles causas del error<a class="headerlink" href="#3-posibles-causas-del-error" title="Permanent link">&para;</a></h3>
-<h4 id="causa-1-deteccion-incorrecta-de-pais">Causa 1: Detección incorrecta de país<a class="headerlink" href="#causa-1-deteccion-incorrecta-de-pais" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code>SÍNTOMA: Se procesa como República Dominicana cuando debería ser Panamá
-SOLUCIÓN: Verificar configuración PAC y endpoint
+<h3 id="3-posibles-causas-del-error">3. Posibles causas del error</h3>
+<h4 id="causa-1-deteccion-incorrecta-de-pais">Causa 1: Detección incorrecta de país</h4>
+<div class="codehilite"><pre><span></span><code><span class="n">SÍNTOMA</span><span class="o">:</span><span class="w"> </span><span class="n">Se</span><span class="w"> </span><span class="n">procesa</span><span class="w"> </span><span class="n">como</span><span class="w"> </span><span class="n">República</span><span class="w"> </span><span class="n">Dominicana</span><span class="w"> </span><span class="n">cuando</span><span class="w"> </span><span class="n">debería</span><span class="w"> </span><span class="n">ser</span><span class="w"> </span><span class="n">Panamá</span>
+<span class="n">SOLUCIÓN</span><span class="o">:</span><span class="w"> </span><span class="n">Verificar</span><span class="w"> </span><span class="n">configuración</span><span class="w"> </span><span class="n">PAC</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="n">endpoint</span>
 </code></pre></div>
-<h4 id="causa-2-tipo-de-documento-incorrecto">Causa 2: Tipo de documento incorrecto<a class="headerlink" href="#causa-2-tipo-de-documento-incorrecto" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code>SÍNTOMA: Se envía como tipo 02/03 cuando debería ser 01
-SOLUCIÓN: Verificar mapeo de tipo de documento
+
+<h4 id="causa-2-tipo-de-documento-incorrecto">Causa 2: Tipo de documento incorrecto</h4>
+<div class="codehilite"><pre><span></span><code><span class="n">SÍNTOMA</span><span class="o">:</span><span class="w"> </span><span class="n">Se</span><span class="w"> </span><span class="n">envía</span><span class="w"> </span><span class="n">como</span><span class="w"> </span><span class="n">tipo</span><span class="w"> </span><span class="mi">02</span><span class="o">/</span><span class="mi">03</span><span class="w"> </span><span class="n">cuando</span><span class="w"> </span><span class="n">debería</span><span class="w"> </span><span class="n">ser</span><span class="w"> </span><span class="mi">01</span>
+<span class="n">SOLUCIÓN</span><span class="o">:</span><span class="w"> </span><span class="n">Verificar</span><span class="w"> </span><span class="n">mapeo</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">tipo</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">documento</span>
 </code></pre></div>
-<h4 id="causa-3-cache-del-pac">Causa 3: Cache del PAC<a class="headerlink" href="#causa-3-cache-del-pac" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code>SÍNTOMA: PAC tiene versión anterior cacheada
-SOLUCIÓN: Limpiar cache o esperar expiración
+
+<h4 id="causa-3-cache-del-pac">Causa 3: Cache del PAC</h4>
+<div class="codehilite"><pre><span></span><code><span class="n">SÍNTOMA</span><span class="o">:</span><span class="w"> </span><span class="n">PAC</span><span class="w"> </span><span class="n">tiene</span><span class="w"> </span><span class="n">versión</span><span class="w"> </span><span class="n">anterior</span><span class="w"> </span><span class="n">cacheada</span>
+<span class="n">SOLUCIÓN</span><span class="o">:</span><span class="w"> </span><span class="n">Limpiar</span><span class="w"> </span><span class="n">cache</span><span class="w"> </span><span class="n">o</span><span class="w"> </span><span class="n">esperar</span><span class="w"> </span><span class="n">expiración</span>
 </code></pre></div>
-<h4 id="causa-4-validacion-adicional-del-pac">Causa 4: Validación adicional del PAC<a class="headerlink" href="#causa-4-validacion-adicional-del-pac" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code>SÍNTOMA: PAC tiene validaciones no documentadas
-SOLUCIÓN: Contactar soporte Alanube o revisar documentación actualizada
+
+<h4 id="causa-4-validacion-adicional-del-pac">Causa 4: Validación adicional del PAC</h4>
+<div class="codehilite"><pre><span></span><code><span class="n">SÍNTOMA</span><span class="o">:</span><span class="w"> </span><span class="n">PAC</span><span class="w"> </span><span class="n">tiene</span><span class="w"> </span><span class="n">validaciones</span><span class="w"> </span><span class="n">no</span><span class="w"> </span><span class="n">documentadas</span>
+<span class="n">SOLUCIÓN</span><span class="o">:</span><span class="w"> </span><span class="n">Contactar</span><span class="w"> </span><span class="n">soporte</span><span class="w"> </span><span class="n">Alanube</span><span class="w"> </span><span class="n">o</span><span class="w"> </span><span class="n">revisar</span><span class="w"> </span><span class="n">documentación</span><span class="w"> </span><span class="n">actualizada</span>
 </code></pre></div>
-<h3 id="4-comandos-de-debug">4. Comandos de debug<a class="headerlink" href="#4-comandos-de-debug" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># 1. Limpiar logs para ver solo los nuevos</span>
+
+<h3 id="4-comandos-de-debug">4. Comandos de debug</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># 1. Limpiar logs para ver solo los nuevos</span>
 <span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span>&gt;<span class="w"> </span>storage/logs/laravel.log
 
 <span class="c1"># 2. Procesar la factura problemática</span>
@@ -1961,15 +2012,17 @@ grep<span class="w"> </span><span class="s2">&quot;AlanubeFormatterHelper&quot;<
 <span class="c1"># 4. Ver logs específicos de exportation</span>
 grep<span class="w"> </span><span class="s2">&quot;exportation&quot;</span><span class="w"> </span>storage/logs/laravel.log
 </code></pre></div>
-<h3 id="5-verificacion-inmediata">5. Verificación inmediata<a class="headerlink" href="#5-verificacion-inmediata" title="Permanent link">&para;</a></h3>
+
+<h3 id="5-verificacion-inmediata">5. Verificación inmediata</h3>
 <p>Ejecutar este comando para confirmar que la lógica condicional está activa:</p>
-<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>/home/weirdolabs/code/docucenter
+<div class="codehilite"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>/home/weirdolabs/code/docucenter
 grep<span class="w"> </span>-A<span class="w"> </span><span class="m">5</span><span class="w"> </span>-B<span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="s2">&quot;should_include_exportation&quot;</span><span class="w"> </span>app/Helpers/AlanubeFormatterHelper.php
 </code></pre></div>
+
 <p>Si no encuentra nada, significa que los logs de debug no están en el código actual.</p>
-<h3 id="6-testing-manual">6. Testing manual<a class="headerlink" href="#6-testing-manual" title="Permanent link">&para;</a></h3>
+<h3 id="6-testing-manual">6. Testing manual</h3>
 <p>Para probar sin procesar factura real:</p>
-<div class="highlight"><pre><span></span><code><span class="x">// En tinker o archivo de prueba</span>
+<div class="codehilite"><pre><span></span><code><span class="x">// En tinker o archivo de prueba</span>
 <span class="x">$testData = [</span>
 <span class="x">    &#39;dGen&#39; =&gt; [</span>
 <span class="x">        &#39;iDoc&#39; =&gt; &#39;01&#39;, // Operación interna</span>
@@ -1986,7 +2039,8 @@ grep<span class="w"> </span>-A<span class="w"> </span><span class="m">5</span><s
 <span class="x">// Verificar si tiene exportation</span>
 <span class="x">var_dump(isset($result[&#39;receiver&#39;][&#39;exportation&#39;]));</span>
 </code></pre></div>
-<h3 id="7-proximos-pasos-segun-resultado">7. Próximos pasos según resultado<a class="headerlink" href="#7-proximos-pasos-segun-resultado" title="Permanent link">&para;</a></h3>
+
+<h3 id="7-proximos-pasos-segun-resultado">7. Próximos pasos según resultado</h3>
 <p><strong>Si los logs muestran que SÍ se incluye exportation para tipo 01</strong>:
 - Hay bug en la lógica condicional
 - Necesita corrección adicional</p>
@@ -1997,7 +2051,7 @@ grep<span class="w"> </span>-A<span class="w"> </span><span class="m">5</span><s
 - Los cambios no están aplicados
 - Revisar deployment</p>
 <hr />
-<h2 id="accion-inmediata">🎯 Acción Inmediata<a class="headerlink" href="#accion-inmediata" title="Permanent link">&para;</a></h2>
+<h2 id="accion-inmediata">🎯 Acción Inmediata</h2>
 <ol>
 <li><strong>Procesar una factura problemática</strong></li>
 <li><strong>Revisar logs</strong>: <code>tail -f storage/logs/laravel.log | grep exportation</code></li>
@@ -2056,7 +2110,7 @@ grep<span class="w"> </span>-A<span class="w"> </span><span class="m">5</span><s
       
       
     
-    <a href="https://github.com/aghabrego/docucenter" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+    <a href="https://github.com/aghabrego/docucenter-public" target="_blank" rel="noopener" title="github.com" class="md-social__link">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
     </a>
   

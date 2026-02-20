@@ -233,7 +233,7 @@
           
   
   
-  APIs
+  API Documentation
 
         </a>
       </li>
@@ -269,7 +269,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../" class="md-tabs__link">
+        <a href="../README.md" class="md-tabs__link">
           
   
   
@@ -298,6 +298,25 @@
         </a>
       </li>
     
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../testing/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Sistema de Testing
+
+      </a>
+    </li>
   
 
       
@@ -404,7 +423,7 @@
   <span class="md-ellipsis">
     
   
-    APIs
+    API Documentation
   
 
     
@@ -420,7 +439,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    APIs
+    API Documentation
   
 
           </label>
@@ -1363,7 +1382,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
+      <a href="../README.md" class="md-nav__link">
         
   
   
@@ -1712,6 +1731,33 @@
           </ul>
         </nav>
       
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sistema de Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -2212,27 +2258,27 @@
   
 
 
-<h1 id="implementacion-de-configuracion-de-jobs-resumen">Implementación de Configuración de Jobs - Resumen<a class="headerlink" href="#implementacion-de-configuracion-de-jobs-resumen" title="Permanent link">&para;</a></h1>
+<h1 id="implementacion-de-configuracion-de-jobs-resumen">Implementación de Configuración de Jobs - Resumen</h1>
 <p><strong>Fecha</strong>: 2026-02-14<br />
 <strong>Implementado por</strong>: Automatización masiva<br />
 <strong>Total de jobs procesados</strong>: 71</p>
 <hr />
-<h2 id="resumen-ejecutivo">Resumen Ejecutivo<a class="headerlink" href="#resumen-ejecutivo" title="Permanent link">&para;</a></h2>
-<h3 id="estado-final">Estado Final<a class="headerlink" href="#estado-final" title="Permanent link">&para;</a></h3>
+<h2 id="resumen-ejecutivo">Resumen Ejecutivo</h2>
+<h3 id="estado-final">Estado Final</h3>
 <ul>
 <li><strong>71 jobs (100%)</strong> tienen configuración completa de límites</li>
 <li><strong>0 jobs</strong> sin configuración</li>
 <li><strong>0 jobs</strong> con bucles <code>while(true)</code> peligrosos</li>
 </ul>
-<h3 id="mejora-lograda">Mejora Lograda<a class="headerlink" href="#mejora-lograda" title="Permanent link">&para;</a></h3>
+<h3 id="mejora-lograda">Mejora Lograda</h3>
 <ul>
 <li><strong>Antes</strong>: 1 job configurado (1.4%)</li>
 <li><strong>Después</strong>: 71 jobs configurados (100%)</li>
 <li><strong>Incremento</strong>: +7000% de cobertura</li>
 </ul>
 <hr />
-<h2 id="proceso-de-implementacion">Proceso de Implementación<a class="headerlink" href="#proceso-de-implementacion" title="Permanent link">&para;</a></h2>
-<h3 id="fase-1-jobs-criticos-manual">Fase 1: Jobs Críticos (Manual)<a class="headerlink" href="#fase-1-jobs-criticos-manual" title="Permanent link">&para;</a></h3>
+<h2 id="proceso-de-implementacion">Proceso de Implementación</h2>
+<h3 id="fase-1-jobs-criticos-manual">Fase 1: Jobs Críticos (Manual)</h3>
 <p><strong>Commit</strong>: <code>0570b5e3</code></p>
 <ol>
 <li><strong>DownloadPacFileJob</strong> - Reparado bucle <code>while(true)</code> con paginación</li>
@@ -2256,9 +2302,9 @@
 <li>Implementado: Control de errores consecutivos</li>
 <li>Agregado: Timeouts en GuzzleHttp</li>
 </ol>
-<h3 id="fase-2-automatizacion-masiva">Fase 2: Automatización Masiva<a class="headerlink" href="#fase-2-automatizacion-masiva" title="Permanent link">&para;</a></h3>
+<h3 id="fase-2-automatizacion-masiva">Fase 2: Automatización Masiva</h3>
 <p><strong>Commit</strong>: <code>9aa26cdf</code></p>
-<h4 id="herramienta-creada">Herramienta Creada<a class="headerlink" href="#herramienta-creada" title="Permanent link">&para;</a></h4>
+<h4 id="herramienta-creada">Herramienta Creada</h4>
 <p><strong>Comando</strong>: <code>php artisan jobs:fix-config</code></p>
 <p><strong>Opciones</strong>:
 - <code>--category=&lt;nombre&gt;</code> - Procesar categoría específica
@@ -2273,9 +2319,9 @@
 - Soporte para múltiples categorías de jobs
 - Modo dry-run para verificación segura</p>
 <hr />
-<h2 id="jobs-procesados-por-categoria">Jobs Procesados por Categoría<a class="headerlink" href="#jobs-procesados-por-categoria" title="Permanent link">&para;</a></h2>
-<h3 id="facturacion-7-jobs">Facturación (7 jobs)<a class="headerlink" href="#facturacion-7-jobs" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code> CreateSaleAlanubeDomJob
+<h2 id="jobs-procesados-por-categoria">Jobs Procesados por Categoría</h2>
+<h3 id="facturacion-7-jobs">Facturación (7 jobs)</h3>
+<div class="codehilite"><pre><span></span><code> CreateSaleAlanubeDomJob
  CreateInvoiceAlanubeJob
  CreateFiscalCreditInvoiceAlanubeDomJob
  CreateGovernmentalInvoiceAlanubeDomJob
@@ -2283,111 +2329,118 @@
  IssueMassInvoicesJob
  EmitObjectJob
 </code></pre></div>
+
 <p><strong>Configuración aplicada</strong>:
 - <code>$tries = 3</code>
 - <code>$timeout = 900</code> (15 minutos)
 - <code>$maxExceptions = 3</code>
 - Método <code>failed()</code> agregado donde faltaba</p>
-<h3 id="integraciones-3-jobs">Integraciones (3 jobs)<a class="headerlink" href="#integraciones-3-jobs" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code> ExtractOrganizationConfigurationEmailsJob
+<h3 id="integraciones-3-jobs">Integraciones (3 jobs)</h3>
+<div class="codehilite"><pre><span></span><code> ExtractOrganizationConfigurationEmailsJob
  Pac/ImportXMLAccordingToCreationDateJob
  Pac/CreateAccessTokenJob
 </code></pre></div>
+
 <p><strong>Configuración aplicada</strong>:
 - <code>$tries = 3</code>
 - <code>$timeout = 900</code> (15 minutos)
 - <code>$maxExceptions = 3</code>
 - Método <code>failed()</code> agregado</p>
-<h3 id="invupos-14-jobs">Invupos (14 jobs)<a class="headerlink" href="#invupos-14-jobs" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code> PurchaseOrdersJob
- SubCategoryJob
- CustomerJob
- CategoryJob
- UploadSalesIntuitJob
- PurchaseCategoryJob
- SalesOrdersJob
- TypePaymentJob
- CreditNotesJob
- ProductJob
- ItemMenuJob
- UploadSalesGeneralDiaryIntuitJob
- CreateAccessTokenJob
- ProviderJob
+<h3 id="invupos-14-jobs">Invupos (14 jobs)</h3>
+<div class="codehilite"><pre><span></span><code><span class="w"> </span><span class="n">PurchaseOrdersJob</span>
+<span class="w"> </span><span class="n">SubCategoryJob</span>
+<span class="w"> </span><span class="n">CustomerJob</span>
+<span class="w"> </span><span class="n">CategoryJob</span>
+<span class="w"> </span><span class="n">UploadSalesIntuitJob</span>
+<span class="w"> </span><span class="n">PurchaseCategoryJob</span>
+<span class="w"> </span><span class="n">SalesOrdersJob</span>
+<span class="w"> </span><span class="n">TypePaymentJob</span>
+<span class="w"> </span><span class="n">CreditNotesJob</span>
+<span class="w"> </span><span class="n">ProductJob</span>
+<span class="w"> </span><span class="n">ItemMenuJob</span>
+<span class="w"> </span><span class="n">UploadSalesGeneralDiaryIntuitJob</span>
+<span class="w"> </span><span class="n">CreateAccessTokenJob</span>
+<span class="w"> </span><span class="n">ProviderJob</span>
 </code></pre></div>
+
 <p><strong>Configuración aplicada</strong>:
 - <code>$tries = 3</code>
 - <code>$timeout = 900</code> (15 minutos)
 - <code>$maxExceptions = 3</code>
 - Método <code>failed()</code> agregado a todos</p>
-<h3 id="sql-server-5-jobs">SQL Server (5 jobs)<a class="headerlink" href="#sql-server-5-jobs" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code> STInvoiceJob
+<h3 id="sql-server-5-jobs">SQL Server (5 jobs)</h3>
+<div class="codehilite"><pre><span></span><code> STInvoiceJob
  STCostOfGoodsOfCategoryJob
  STVendorsJob
  STCostOfGoodsJob
  STCreateSummaryJob
 </code></pre></div>
+
 <p><strong>Configuración aplicada</strong>:
 - <code>$tries = 3</code>
 - <code>$timeout = 900</code> (15 minutos)
 - <code>$maxExceptions = 3</code>
 - Método <code>failed()</code> agregado</p>
-<h3 id="booqable-4-jobs">Booqable (4 jobs)<a class="headerlink" href="#booqable-4-jobs" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code> CustomerJob (ya configurado manualmente)
+<h3 id="booqable-4-jobs">Booqable (4 jobs)</h3>
+<div class="codehilite"><pre><span></span><code> CustomerJob (ya configurado manualmente)
  SalesOrdersV4Job
  SalesOrdersJob
  ProductJob
 </code></pre></div>
+
 <p><strong>Nota</strong>: CustomerJob ya tenía configuración completa del arreglo manual anterior.</p>
-<h3 id="intuitquickbooks-4-jobs">Intuit/QuickBooks (4 jobs)<a class="headerlink" href="#intuitquickbooks-4-jobs" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code> UpdateIntuitFEJob
+<h3 id="intuitquickbooks-4-jobs">Intuit/QuickBooks (4 jobs)</h3>
+<div class="codehilite"><pre><span></span><code> UpdateIntuitFEJob
  CreateIntuitBillsJob
  UpdateQuickBooksInvoicesJob
  UpdateIntuitOrdersJob
 </code></pre></div>
+
 <p><strong>Configuración aplicada</strong>:
 - <code>$timeout = 900</code> (15 minutos)
 - <code>$maxExceptions = 3</code>
 - Método <code>failed()</code> agregado donde faltaba</p>
-<h3 id="otros-jobs-32-jobs">Otros Jobs (32 jobs)<a class="headerlink" href="#otros-jobs-32-jobs" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code> ACI/VerifyOrIssueFaithFromIssuanceJob
- Booqable/DownloadSalesOrdersV4Job
- CleanExpiredTokensJob
- CleanFailedJobsJob
- CleanOldArchivesJob
- CleanOldTransactionsJob (ya configurado)
- CorrectElectronicInvoicesWithErrorsJob
- CreateSaleAciCloudJob
- CreateSaleKart21Job
- CreateSaleLightspeedJob
- CreateSaleMaxgymJob
- CreateSaleMeyparJob
- CreateSaleQuickBooksJob
- CreateSaleShopifyJob
- Ezee/SalesJob
- GenerateDocumentAIJSONFilesJob
- ImportXmlJob
- ImportZipXmlInvoicesJob
- Invupos/CreateCreditNotesSummaryJob
- Invupos/CreateSalesOrderSummaryJob
- Lightspeed/SetSalesOrdersJob
- LightspeedSerieR/CreateAccessTokenSerieRJob
- LightspeedSerieR/SetSalesOrdersJob
- MonitorDocumentAITraining
- Others/PanamaDailyEntryJob
- Others/PanamaPaymentsMadeJob
- Others/PanamaSettlementJob
- Pac/DownloadPacFileJob (ya configurado)
- PlusMovil/ImportInvoicesJob
- ProcessZohoPurchaseOrderJob
- SendSaleToQuickBooksJob
- SyncOrganizationToCompanyJob
- TypepaymentlightspeedJob
- UpdateFiscalDocumentNumberJob
+<h3 id="otros-jobs-32-jobs">Otros Jobs (32 jobs)</h3>
+<div class="codehilite"><pre><span></span><code><span class="w"> </span><span class="n">ACI</span><span class="o">/</span><span class="n">VerifyOrIssueFaithFromIssuanceJob</span>
+<span class="w"> </span><span class="n">Booqable</span><span class="o">/</span><span class="n">DownloadSalesOrdersV4Job</span>
+<span class="w"> </span><span class="n">CleanExpiredTokensJob</span>
+<span class="w"> </span><span class="n">CleanFailedJobsJob</span>
+<span class="w"> </span><span class="n">CleanOldArchivesJob</span>
+<span class="w"> </span><span class="n">CleanOldTransactionsJob</span><span class="w"> </span><span class="p">(</span><span class="n">ya</span><span class="w"> </span><span class="n">configurado</span><span class="p">)</span>
+<span class="w"> </span><span class="n">CorrectElectronicInvoicesWithErrorsJob</span>
+<span class="w"> </span><span class="n">CreateSaleAciCloudJob</span>
+<span class="w"> </span><span class="n">CreateSaleKart21Job</span>
+<span class="w"> </span><span class="n">CreateSaleLightspeedJob</span>
+<span class="w"> </span><span class="n">CreateSaleMaxgymJob</span>
+<span class="w"> </span><span class="n">CreateSaleMeyparJob</span>
+<span class="w"> </span><span class="n">CreateSaleQuickBooksJob</span>
+<span class="w"> </span><span class="n">CreateSaleShopifyJob</span>
+<span class="w"> </span><span class="n">Ezee</span><span class="o">/</span><span class="n">SalesJob</span>
+<span class="w"> </span><span class="n">GenerateDocumentAIJSONFilesJob</span>
+<span class="w"> </span><span class="n">ImportXmlJob</span>
+<span class="w"> </span><span class="n">ImportZipXmlInvoicesJob</span>
+<span class="w"> </span><span class="n">Invupos</span><span class="o">/</span><span class="n">CreateCreditNotesSummaryJob</span>
+<span class="w"> </span><span class="n">Invupos</span><span class="o">/</span><span class="n">CreateSalesOrderSummaryJob</span>
+<span class="w"> </span><span class="n">Lightspeed</span><span class="o">/</span><span class="n">SetSalesOrdersJob</span>
+<span class="w"> </span><span class="n">LightspeedSerieR</span><span class="o">/</span><span class="n">CreateAccessTokenSerieRJob</span>
+<span class="w"> </span><span class="n">LightspeedSerieR</span><span class="o">/</span><span class="n">SetSalesOrdersJob</span>
+<span class="w"> </span><span class="n">MonitorDocumentAITraining</span>
+<span class="w"> </span><span class="n">Others</span><span class="o">/</span><span class="n">PanamaDailyEntryJob</span>
+<span class="w"> </span><span class="n">Others</span><span class="o">/</span><span class="n">PanamaPaymentsMadeJob</span>
+<span class="w"> </span><span class="n">Others</span><span class="o">/</span><span class="n">PanamaSettlementJob</span>
+<span class="w"> </span><span class="n">Pac</span><span class="o">/</span><span class="n">DownloadPacFileJob</span><span class="w"> </span><span class="p">(</span><span class="n">ya</span><span class="w"> </span><span class="n">configurado</span><span class="p">)</span>
+<span class="w"> </span><span class="n">PlusMovil</span><span class="o">/</span><span class="n">ImportInvoicesJob</span>
+<span class="w"> </span><span class="n">ProcessZohoPurchaseOrderJob</span>
+<span class="w"> </span><span class="n">SendSaleToQuickBooksJob</span>
+<span class="w"> </span><span class="n">SyncOrganizationToCompanyJob</span>
+<span class="w"> </span><span class="n">TypepaymentlightspeedJob</span>
+<span class="w"> </span><span class="n">UpdateFiscalDocumentNumberJob</span>
 </code></pre></div>
+
 <hr />
-<h2 id="configuracion-estandar-aplicada">Configuración Estándar Aplicada<a class="headerlink" href="#configuracion-estandar-aplicada" title="Permanent link">&para;</a></h2>
-<h3 id="propiedades-base">Propiedades Base<a class="headerlink" href="#propiedades-base" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">/**</span>
+<h2 id="configuracion-estandar-aplicada">Configuración Estándar Aplicada</h2>
+<h3 id="propiedades-base">Propiedades Base</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">/**</span>
 <span class="x"> * Número máximo de intentos del job</span>
 <span class="x"> */</span>
 <span class="x">public $tries = 3;</span>
@@ -2402,8 +2455,9 @@
 <span class="x"> */</span>
 <span class="x">public $maxExceptions = 3;</span>
 </code></pre></div>
-<h3 id="metodo-failed-generado">Método failed() Generado<a class="headerlink" href="#metodo-failed-generado" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">/**</span>
+
+<h3 id="metodo-failed-generado">Método failed() Generado</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">/**</span>
 <span class="x"> * Handle a job failure.</span>
 <span class="x"> *</span>
 <span class="x"> * @param  \Throwable  $exception</span>
@@ -2417,34 +2471,35 @@
 <span class="x">    ]);</span>
 <span class="x">}</span>
 </code></pre></div>
+
 <hr />
-<h2 id="beneficios-implementados">Beneficios Implementados<a class="headerlink" href="#beneficios-implementados" title="Permanent link">&para;</a></h2>
-<h3 id="1-prevencion-de-bucles-infinitos">1. Prevención de Bucles Infinitos<a class="headerlink" href="#1-prevencion-de-bucles-infinitos" title="Permanent link">&para;</a></h3>
+<h2 id="beneficios-implementados">Beneficios Implementados</h2>
+<h3 id="1-prevencion-de-bucles-infinitos">1. Prevención de Bucles Infinitos</h3>
 <ul>
 <li>Todos los <code>while(true)</code> eliminados</li>
 <li>Límites de páginas/iteraciones implementados</li>
 <li>Protección contra errores consecutivos</li>
 </ul>
-<h3 id="2-control-de-recursos">2. Control de Recursos<a class="headerlink" href="#2-control-de-recursos" title="Permanent link">&para;</a></h3>
+<h3 id="2-control-de-recursos">2. Control de Recursos</h3>
 <ul>
 <li>Timeouts de 15 minutos previenen ejecuciones eternas</li>
 <li>Límite de 3 intentos evita consumo excesivo de cola</li>
 <li>MaxExceptions previene fallos en cascada</li>
 </ul>
-<h3 id="3-observabilidad">3. Observabilidad<a class="headerlink" href="#3-observabilidad" title="Permanent link">&para;</a></h3>
+<h3 id="3-observabilidad">3. Observabilidad</h3>
 <ul>
 <li>Método <code>failed()</code> en todos los jobs</li>
 <li>Logging estructurado de errores</li>
 <li>Trazabilidad completa de fallos</li>
 </ul>
-<h3 id="4-estabilidad-del-sistema">4. Estabilidad del Sistema<a class="headerlink" href="#4-estabilidad-del-sistema" title="Permanent link">&para;</a></h3>
+<h3 id="4-estabilidad-del-sistema">4. Estabilidad del Sistema</h3>
 <ul>
 <li>Redis queue protegida de sobrecarga</li>
 <li>Workers no bloqueados indefinidamente</li>
 <li>Recuperación automática de fallos temporales</li>
 </ul>
 <hr />
-<h2 id="commits-relacionados">Commits Relacionados<a class="headerlink" href="#commits-relacionados" title="Permanent link">&para;</a></h2>
+<h2 id="commits-relacionados">Commits Relacionados</h2>
 <ol>
 <li><strong><code>7ace520d</code></strong> - Job Monitor con tab "En Ejecución"</li>
 <li>Nueva funcionalidad para monitorear jobs activos</li>
@@ -2472,25 +2527,28 @@
 <li>Herramienta de automatización creada</li>
 </ol>
 <hr />
-<h2 id="uso-del-comando-para-futuros-jobs">Uso del Comando para Futuros Jobs<a class="headerlink" href="#uso-del-comando-para-futuros-jobs" title="Permanent link">&para;</a></h2>
-<h3 id="procesar-job-individual">Procesar job individual<a class="headerlink" href="#procesar-job-individual" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>docucenter_laravel.test<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>jobs:fix-config<span class="w"> </span><span class="se">\</span>
+<h2 id="uso-del-comando-para-futuros-jobs">Uso del Comando para Futuros Jobs</h2>
+<h3 id="procesar-job-individual">Procesar job individual</h3>
+<div class="codehilite"><pre><span></span><code>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>docucenter_laravel.test<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>jobs:fix-config<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--category<span class="o">=</span>facturacion<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--dry-run
 </code></pre></div>
-<h3 id="procesar-todos-los-jobs-nuevos">Procesar todos los jobs nuevos<a class="headerlink" href="#procesar-todos-los-jobs-nuevos" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>docucenter_laravel.test<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>jobs:fix-config<span class="w"> </span>--all
+
+<h3 id="procesar-todos-los-jobs-nuevos">Procesar todos los jobs nuevos</h3>
+<div class="codehilite"><pre><span></span><code>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>docucenter_laravel.test<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>jobs:fix-config<span class="w"> </span>--all
 </code></pre></div>
-<h3 id="con-configuracion-personalizada">Con configuración personalizada<a class="headerlink" href="#con-configuracion-personalizada" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>docucenter_laravel.test<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>jobs:fix-config<span class="w"> </span><span class="se">\</span>
+
+<h3 id="con-configuracion-personalizada">Con configuración personalizada</h3>
+<div class="codehilite"><pre><span></span><code>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>docucenter_laravel.test<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>jobs:fix-config<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--category<span class="o">=</span>integraciones<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--tries<span class="o">=</span><span class="m">5</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--timeout<span class="o">=</span><span class="m">1800</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--max-exceptions<span class="o">=</span><span class="m">5</span>
 </code></pre></div>
+
 <hr />
-<h2 id="recomendaciones">Recomendaciones<a class="headerlink" href="#recomendaciones" title="Permanent link">&para;</a></h2>
-<h3 id="para-nuevos-jobs">Para Nuevos Jobs<a class="headerlink" href="#para-nuevos-jobs" title="Permanent link">&para;</a></h3>
+<h2 id="recomendaciones">Recomendaciones</h2>
+<h3 id="para-nuevos-jobs">Para Nuevos Jobs</h3>
 <ol>
 <li><strong>Siempre incluir</strong> <code>$tries</code>, <code>$timeout</code>, <code>$maxExceptions</code> desde el inicio</li>
 <li><strong>Implementar</strong> método <code>failed()</code> para tracking</li>
@@ -2498,14 +2556,14 @@
 <li><strong>Agregar</strong> contadores de iteraciones en bucles</li>
 <li><strong>Implementar</strong> timeouts en HTTP clients</li>
 </ol>
-<h3 id="para-jobs-existentes">Para Jobs Existentes<a class="headerlink" href="#para-jobs-existentes" title="Permanent link">&para;</a></h3>
+<h3 id="para-jobs-existentes">Para Jobs Existentes</h3>
 <ol>
 <li><strong>Revisar</strong> logs de jobs fallidos regularmente</li>
 <li><strong>Ajustar</strong> timeouts según duración real observada</li>
 <li><strong>Monitorear</strong> uso de memoria en jobs largos</li>
 <li><strong>Considerar</strong> chunking para procesamiento de grandes volúmenes</li>
 </ol>
-<h3 id="mantenimiento">Mantenimiento<a class="headerlink" href="#mantenimiento" title="Permanent link">&para;</a></h3>
+<h3 id="mantenimiento">Mantenimiento</h3>
 <ol>
 <li><strong>Ejecutar</strong> auditorías periódicas de configuración</li>
 <li><strong>Actualizar</strong> valores de timeout según métricas reales</li>
@@ -2513,15 +2571,15 @@
 <li><strong>Probar</strong> con <code>--dry-run</code> antes de cambios masivos</li>
 </ol>
 <hr />
-<h2 id="estado-del-sistema">Estado del Sistema<a class="headerlink" href="#estado-del-sistema" title="Permanent link">&para;</a></h2>
-<h3 id="antes-de-la-implementacion">Antes de la Implementación<a class="headerlink" href="#antes-de-la-implementacion" title="Permanent link">&para;</a></h3>
+<h2 id="estado-del-sistema">Estado del Sistema</h2>
+<h3 id="antes-de-la-implementacion">Antes de la Implementación</h3>
 <ul>
 <li>70/71 jobs sin protección de timeouts</li>
 <li>2 jobs con bucles infinitos peligrosos</li>
 <li>94% de jobs sin límite de excepciones</li>
 <li>⏱️ Riesgo alto de bloqueo de workers</li>
 </ul>
-<h3 id="despues-de-la-implementacion">Después de la Implementación<a class="headerlink" href="#despues-de-la-implementacion" title="Permanent link">&para;</a></h3>
+<h3 id="despues-de-la-implementacion">Después de la Implementación</h3>
 <ul>
 <li>71/71 jobs con configuración completa</li>
 <li>0 jobs con bucles infinitos</li>
@@ -2529,7 +2587,7 @@
 <li>Sistema de colas protegido y estable</li>
 </ul>
 <hr />
-<h2 id="conclusion">Conclusión<a class="headerlink" href="#conclusion" title="Permanent link">&para;</a></h2>
+<h2 id="conclusion">Conclusión</h2>
 <p>La implementación exitosa de configuración de límites en los 71 jobs del sistema representa una <strong>mejora crítica en la estabilidad y confiabilidad</strong> de DocuCenter. </p>
 <p><strong>Impacto cuantificable</strong>:
 - <strong>+7000%</strong> incremento en cobertura de configuración
@@ -2589,7 +2647,7 @@
       
       
     
-    <a href="https://github.com/aghabrego/docucenter" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+    <a href="https://github.com/aghabrego/docucenter-public" target="_blank" rel="noopener" title="github.com" class="md-social__link">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
     </a>
   

@@ -233,7 +233,7 @@
           
   
   
-  APIs
+  API Documentation
 
         </a>
       </li>
@@ -269,7 +269,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../technical/" class="md-tabs__link">
+        <a href="../../technical/README.md" class="md-tabs__link">
           
   
   
@@ -298,6 +298,25 @@
         </a>
       </li>
     
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../testing/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Sistema de Testing
+
+      </a>
+    </li>
   
 
       
@@ -404,7 +423,7 @@
   <span class="md-ellipsis">
     
   
-    APIs
+    API Documentation
   
 
     
@@ -420,7 +439,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    APIs
+    API Documentation
   
 
           </label>
@@ -1363,7 +1382,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../technical/" class="md-nav__link">
+      <a href="../../technical/README.md" class="md-nav__link">
         
   
   
@@ -1712,6 +1731,33 @@
           </ul>
         </nav>
       
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sistema de Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -2068,12 +2114,12 @@
   
 
 
-<h1 id="importacion-plusmovil-completada">✅ Importación PlusMóvil - Completada<a class="headerlink" href="#importacion-plusmovil-completada" title="Permanent link">&para;</a></h1>
+<h1 id="importacion-plusmovil-completada">✅ Importación PlusMóvil - Completada</h1>
 <p><strong>Fecha:</strong> 9 de noviembre de 2025<br />
 <strong>Estado:</strong> ✅ <strong>FUNCIONAL</strong> (con mejoras opcionales pendientes)</p>
 <hr />
-<h2 id="resumen-de-implementacion">🎉 Resumen de Implementación<a class="headerlink" href="#resumen-de-implementacion" title="Permanent link">&para;</a></h2>
-<h3 id="funcionalidades-implementadas">✅ Funcionalidades Implementadas<a class="headerlink" href="#funcionalidades-implementadas" title="Permanent link">&para;</a></h3>
+<h2 id="resumen-de-implementacion">🎉 Resumen de Implementación</h2>
+<h3 id="funcionalidades-implementadas">✅ Funcionalidades Implementadas</h3>
 <ol>
 <li><strong>Autenticación AWS Cognito</strong> ✅</li>
 <li>Generación de tokens</li>
@@ -2105,18 +2151,19 @@
 <li>Cálculo de ITBMS (7% estándar Panamá)</li>
 </ol>
 <hr />
-<h2 id="resultados-de-prueba">📊 Resultados de Prueba<a class="headerlink" href="#resultados-de-prueba" title="Permanent link">&para;</a></h2>
-<h3 id="importacion-exitosa">Importación Exitosa<a class="headerlink" href="#importacion-exitosa" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>docucenter_laravel.test<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>plusmovil:import-invoices<span class="w"> </span><span class="m">25</span><span class="w"> </span><span class="se">\</span>
+<h2 id="resultados-de-prueba">📊 Resultados de Prueba</h2>
+<h3 id="importacion-exitosa">Importación Exitosa</h3>
+<div class="codehilite"><pre><span></span><code>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>docucenter_laravel.test<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>plusmovil:import-invoices<span class="w"> </span><span class="m">25</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--start-date<span class="o">=</span><span class="m">2025</span>-09-01<span class="w"> </span>--end-date<span class="o">=</span><span class="m">2025</span>-09-01
 </code></pre></div>
+
 <p><strong>Resultado:</strong>
 - ✅ 35 facturas importadas
 - ✅ 58 items importados
 - ✅ 0 errores
 - ⏱️ Tiempo: ~22 segundos</p>
-<h3 id="verificacion-en-base-de-datos">Verificación en Base de Datos<a class="headerlink" href="#verificacion-en-base-de-datos" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="c1">-- Headers importados</span>
+<h3 id="verificacion-en-base-de-datos">Verificación en Base de Datos</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1">-- Headers importados</span>
 <span class="k">SELECT</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">db_18257061709732_90</span><span class="p">.</span><span class="n">Sales_Header_Imp</span><span class="w"> </span>
 <span class="k">WHERE</span><span class="w"> </span><span class="n">origin</span><span class="o">=</span><span class="s1">&#39;plusmovil&#39;</span><span class="p">;</span>
 <span class="c1">-- Resultado: 35</span>
@@ -2129,17 +2176,19 @@
 <span class="p">);</span>
 <span class="c1">-- Resultado: 58</span>
 </code></pre></div>
+
 <hr />
-<h2 id="solucion-tecnica-contexto-de-base-de-datos">🔧 Solución Técnica: Contexto de Base de Datos<a class="headerlink" href="#solucion-tecnica-contexto-de-base-de-datos" title="Permanent link">&para;</a></h2>
-<h3 id="problema-encontrado">Problema Encontrado<a class="headerlink" href="#problema-encontrado" title="Permanent link">&para;</a></h3>
+<h2 id="solucion-tecnica-contexto-de-base-de-datos">🔧 Solución Técnica: Contexto de Base de Datos</h2>
+<h3 id="problema-encontrado">Problema Encontrado</h3>
 <p>El uso de <code>DB::connection()-&gt;useDatabase()</code> <strong>no persistía</strong> el contexto en consultas subsecuentes:</p>
-<div class="highlight"><pre><span></span><code><span class="x">// ❌ NO FUNCIONA</span>
+<div class="codehilite"><pre><span></span><code><span class="x">// ❌ NO FUNCIONA</span>
 <span class="x">DB::connection()-&gt;useDatabase($organization-&gt;database);</span>
 <span class="x">DB::table(&#39;Sales_Header_Imp&#39;)-&gt;insert([...]); // Usa &#39;docucenter&#39; en vez de org DB</span>
 </code></pre></div>
-<h3 id="solucion-implementada">Solución Implementada<a class="headerlink" href="#solucion-implementada" title="Permanent link">&para;</a></h3>
+
+<h3 id="solucion-implementada">Solución Implementada</h3>
 <p>Especificar la base de datos <strong>en cada consulta</strong>:</p>
-<div class="highlight"><pre><span></span><code><span class="x">// ✅ FUNCIONA</span>
+<div class="codehilite"><pre><span></span><code><span class="x">// ✅ FUNCIONA</span>
 <span class="x">$database = $organization-&gt;database; // ej: &quot;db_18257061709732_90&quot;</span>
 
 <span class="x">DB::connection()-&gt;table(&quot;{$database}.Sales_Header_Imp&quot;)</span>
@@ -2149,10 +2198,11 @@
 <span class="x">DB::connection()-&gt;table(&quot;{$database}.Sales_Detail_Imp&quot;)</span>
 <span class="x">    -&gt;insert([...]);</span>
 </code></pre></div>
+
 <p><strong>Commit:</strong> <code>bdae78e7</code> - "fix: establecer contexto de base de datos en cada query"</p>
 <hr />
-<h2 id="mapeo-de-campos-implementado">📋 Mapeo de Campos Implementado<a class="headerlink" href="#mapeo-de-campos-implementado" title="Permanent link">&para;</a></h2>
-<h3 id="sales_header_imp-headers">Sales_Header_Imp (Headers)<a class="headerlink" href="#sales_header_imp-headers" title="Permanent link">&para;</a></h3>
+<h2 id="mapeo-de-campos-implementado">📋 Mapeo de Campos Implementado</h2>
+<h3 id="sales_header_imp-headers">Sales_Header_Imp (Headers)</h3>
 <table>
 <thead>
 <tr>
@@ -2269,7 +2319,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="sales_detail_imp-items">Sales_Detail_Imp (Items)<a class="headerlink" href="#sales_detail_imp-items" title="Permanent link">&para;</a></h3>
+<h3 id="sales_detail_imp-items">Sales_Detail_Imp (Items)</h3>
 <table>
 <thead>
 <tr>
@@ -2352,20 +2402,21 @@
 </tbody>
 </table>
 <hr />
-<h2 id="mejoras-opcionales-identificadas">⚠️ Mejoras Opcionales Identificadas<a class="headerlink" href="#mejoras-opcionales-identificadas" title="Permanent link">&para;</a></h2>
-<h3 id="1-distribucion-proporcional-de-impuestos">1. Distribución Proporcional de Impuestos<a class="headerlink" href="#1-distribucion-proporcional-de-impuestos" title="Permanent link">&para;</a></h3>
+<h2 id="mejoras-opcionales-identificadas">⚠️ Mejoras Opcionales Identificadas</h2>
+<h3 id="1-distribucion-proporcional-de-impuestos">1. Distribución Proporcional de Impuestos</h3>
 <p><strong>Problema:</strong>
 - API no envía tax por item
 - Calculamos 7% fijo por item
 - Puede generar pequeñas discrepancias con el <code>tax_amount</code> del header</p>
-<p><strong>Ejemplo:</strong>
-<div class="highlight"><pre><span></span><code>Factura PM-00000043:
-- Header tax_amount: 294.39
-- Suma de items Itbms calculado: 315.00
-- Diferencia: 20.61
-</code></pre></div></p>
-<p><strong>Solución Propuesta:</strong>
-<div class="highlight"><pre><span></span><code><span class="x">// Distribuir proporcionalmente el tax del header</span>
+<p><strong>Ejemplo:</strong></p>
+<div class="codehilite"><pre><span></span><code>Factura PM-00000043:
+<span class="k">-</span> Header tax_amount: 294.39
+<span class="k">-</span> Suma de items Itbms calculado: 315.00
+<span class="k">-</span> Diferencia: 20.61
+</code></pre></div>
+
+<p><strong>Solución Propuesta:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="x">// Distribuir proporcionalmente el tax del header</span>
 <span class="x">$totalSubtotal = array_sum(array_column($items, &#39;subtotal&#39;));</span>
 <span class="x">$headerTax = $invoice[&#39;tax_amount&#39;];</span>
 
@@ -2374,9 +2425,10 @@
 <span class="x">    $itbms = round($headerTax * $proportion, 4);</span>
 <span class="x">    // ...</span>
 <span class="x">}</span>
-</code></pre></div></p>
+</code></pre></div>
+
 <p><strong>Prioridad:</strong> 🔵 Baja (diferencias menores, cálculo actual es válido)</p>
-<h3 id="2-deteccion-de-productos-exentos">2. Detección de Productos Exentos<a class="headerlink" href="#2-deteccion-de-productos-exentos" title="Permanent link">&para;</a></h3>
+<h3 id="2-deteccion-de-productos-exentos">2. Detección de Productos Exentos</h3>
 <p><strong>Problema:</strong>
 - Asumimos todos los productos tienen ITBMS (7%)
 - Algunos productos pueden estar exentos</p>
@@ -2385,17 +2437,18 @@
 - Si es 0, marcar todos los items como <code>Taxable = 0</code>
 - Si &gt; 0, distribuir proporcionalmente</p>
 <p><strong>Prioridad:</strong> 🟡 Media (depende de la variedad de productos)</p>
-<h3 id="3-manejo-de-rangos-serializados">3. Manejo de Rangos Serializados<a class="headerlink" href="#3-manejo-de-rangos-serializados" title="Permanent link">&para;</a></h3>
+<h3 id="3-manejo-de-rangos-serializados">3. Manejo de Rangos Serializados</h3>
 <p><strong>Observación:</strong>
-La API agrupa productos en rangos (ej: tarjetas prepago):
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
+La API agrupa productos en rangos (ej: tarjetas prepago):</p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;product_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;TARJETA PREPAGO $3.00&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;range_start&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;872208162&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;range_end&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;872208186&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;quantity&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;subtotal&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;73.7500&quot;</span>
 <span class="p">}</span>
-</code></pre></div></p>
+</code></pre></div>
+
 <ul>
 <li><code>quantity</code>: Siempre 1 (es una línea agrupada)</li>
 <li>Unidades reales: <code>range_end - range_start + 1</code> = 25 unidades</li>
@@ -2410,20 +2463,20 @@ La API agrupa productos en rangos (ej: tarjetas prepago):
 - Almacenar en campo adicional para inventario</p>
 <p><strong>Prioridad:</strong> 🔵 Baja (el sistema actual es válido para facturación)</p>
 <hr />
-<h2 id="proximos-pasos-recomendados">🔄 Próximos Pasos Recomendados<a class="headerlink" href="#proximos-pasos-recomendados" title="Permanent link">&para;</a></h2>
-<h3 id="fase-5-sincronizacion-automatica-opcional">Fase 5: Sincronización Automática (Opcional)<a class="headerlink" href="#fase-5-sincronizacion-automatica-opcional" title="Permanent link">&para;</a></h3>
+<h2 id="proximos-pasos-recomendados">🔄 Próximos Pasos Recomendados</h2>
+<h3 id="fase-5-sincronizacion-automatica-opcional">Fase 5: Sincronización Automática (Opcional)</h3>
 <ol>
 <li>
 <p><strong>Scheduler Laravel</strong>
-   <div class="highlight"><pre><span></span><code><span class="x">// app/Console/Kernel.php</span>
-<span class="x">protected function schedule(Schedule $schedule)</span>
-<span class="x">{</span>
-<span class="x">    $schedule-&gt;job(new ImportInvoicesJob($connection, $startDate, $endDate))</span>
-<span class="x">        -&gt;dailyAt(&#39;02:00&#39;)</span>
-<span class="x">        -&gt;name(&#39;plusmovil-daily-import&#39;)</span>
-<span class="x">        -&gt;onOneServer();</span>
-<span class="x">}</span>
-</code></pre></div></p>
+   <code>php
+   // app/Console/Kernel.php
+   protected function schedule(Schedule $schedule)
+   {
+       $schedule-&gt;job(new ImportInvoicesJob($connection, $startDate, $endDate))
+           -&gt;dailyAt('02:00')
+           -&gt;name('plusmovil-daily-import')
+           -&gt;onOneServer();
+   }</code></p>
 </li>
 <li>
 <p><strong>Configuración por Organización</strong></p>
@@ -2444,7 +2497,7 @@ La API agrupa productos en rangos (ej: tarjetas prepago):
 <li>Si PlusMóvil implementa webhooks</li>
 <li>Importación en tiempo real</li>
 </ol>
-<h3 id="fase-6-monitoreo-y-alertas">Fase 6: Monitoreo y Alertas<a class="headerlink" href="#fase-6-monitoreo-y-alertas" title="Permanent link">&para;</a></h3>
+<h3 id="fase-6-monitoreo-y-alertas">Fase 6: Monitoreo y Alertas</h3>
 <ol>
 <li><strong>Dashboard de Importaciones</strong></li>
 <li>Total de facturas importadas</li>
@@ -2459,8 +2512,8 @@ La API agrupa productos en rangos (ej: tarjetas prepago):
 <li>Slack/Discord para reportes diarios</li>
 </ol>
 <hr />
-<h2 id="archivos-creadosmodificados">📝 Archivos Creados/Modificados<a class="headerlink" href="#archivos-creadosmodificados" title="Permanent link">&para;</a></h2>
-<h3 id="nuevos-archivos">Nuevos Archivos<a class="headerlink" href="#nuevos-archivos" title="Permanent link">&para;</a></h3>
+<h2 id="archivos-creadosmodificados">📝 Archivos Creados/Modificados</h2>
+<h3 id="nuevos-archivos">Nuevos Archivos</h3>
 <ol>
 <li><code>app/Jobs/PlusMóvil/ImportInvoicesJob.php</code></li>
 <li>Job principal de importación</li>
@@ -2475,7 +2528,7 @@ La API agrupa productos en rangos (ej: tarjetas prepago):
 <li>Validación de parámetros</li>
 <li>Soporte para ejecución en cola</li>
 </ol>
-<h3 id="archivos-modificados">Archivos Modificados<a class="headerlink" href="#archivos-modificados" title="Permanent link">&para;</a></h3>
+<h3 id="archivos-modificados">Archivos Modificados</h3>
 <ol>
 <li><code>app/Models/Connection.php</code></li>
 <li>Fix de autenticación Cognito</li>
@@ -2489,7 +2542,7 @@ La API agrupa productos en rangos (ej: tarjetas prepago):
 <li>Método <code>getProforma($id)</code> para detalle con items</li>
 </ol>
 <hr />
-<h2 id="commits-relacionados">🎯 Commits Relacionados<a class="headerlink" href="#commits-relacionados" title="Permanent link">&para;</a></h2>
+<h2 id="commits-relacionados">🎯 Commits Relacionados</h2>
 <ol>
 <li><code>aad361ab</code> - Crear Job y Command de importación</li>
 <li><code>15525f85</code> - Fix autenticación AWS Cognito</li>
@@ -2499,25 +2552,25 @@ La API agrupa productos en rangos (ej: tarjetas prepago):
 <li><code>bdae78e7</code> - ✅ <strong>Solución definitiva: contexto de BD en cada query</strong></li>
 </ol>
 <hr />
-<h2 id="checklist-de-validacion">✅ Checklist de Validación<a class="headerlink" href="#checklist-de-validacion" title="Permanent link">&para;</a></h2>
-<ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Autenticación funcional</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Importación de headers completa</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Importación de items completa</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Cálculo de impuestos</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Manejo de errores</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Logging adecuado</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Transacciones implementadas</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Comando manual funcional</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Soporte para colas</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Documentación técnica</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Distribución proporcional de impuestos (opcional)</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Detección de productos exentos (opcional)</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Scheduler automático (opcional)</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Dashboard de monitoreo (opcional)</li>
+<h2 id="checklist-de-validacion">✅ Checklist de Validación</h2>
+<ul>
+<li>[x] Autenticación funcional</li>
+<li>[x] Importación de headers completa</li>
+<li>[x] Importación de items completa</li>
+<li>[x] Cálculo de impuestos</li>
+<li>[x] Manejo de errores</li>
+<li>[x] Logging adecuado</li>
+<li>[x] Transacciones implementadas</li>
+<li>[x] Comando manual funcional</li>
+<li>[x] Soporte para colas</li>
+<li>[x] Documentación técnica</li>
+<li>[ ] Distribución proporcional de impuestos (opcional)</li>
+<li>[ ] Detección de productos exentos (opcional)</li>
+<li>[ ] Scheduler automático (opcional)</li>
+<li>[ ] Dashboard de monitoreo (opcional)</li>
 </ul>
 <hr />
-<h2 id="documentacion-relacionada">📚 Documentación Relacionada<a class="headerlink" href="#documentacion-relacionada" title="Permanent link">&para;</a></h2>
+<h2 id="documentacion-relacionada">📚 Documentación Relacionada</h2>
 <ul>
 <li><a href="../plusmovil-invoice-items-SOLVED/">plusmovil-invoice-items-SOLVED.md</a> - Estructura de API</li>
 <li><a href="../plusmovil-continuation-plan/">plusmovil-continuation-plan.md</a> - Plan inicial</li>
@@ -2578,7 +2631,7 @@ La API agrupa productos en rangos (ej: tarjetas prepago):
       
       
     
-    <a href="https://github.com/aghabrego/docucenter" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+    <a href="https://github.com/aghabrego/docucenter-public" target="_blank" rel="noopener" title="github.com" class="md-social__link">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
     </a>
   

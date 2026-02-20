@@ -233,7 +233,7 @@
           
   
   
-  APIs
+  API Documentation
 
         </a>
       </li>
@@ -269,7 +269,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../" class="md-tabs__link">
+        <a href="../README.md" class="md-tabs__link">
           
   
   
@@ -298,6 +298,25 @@
         </a>
       </li>
     
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../testing/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Sistema de Testing
+
+      </a>
+    </li>
   
 
       
@@ -404,7 +423,7 @@
   <span class="md-ellipsis">
     
   
-    APIs
+    API Documentation
   
 
     
@@ -420,7 +439,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    APIs
+    API Documentation
   
 
           </label>
@@ -1363,7 +1382,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
+      <a href="../README.md" class="md-nav__link">
         
   
   
@@ -1716,6 +1735,33 @@
   
 
     
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sistema de Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -2040,15 +2086,15 @@
   
 
 
-<h1 id="fix-cleartransactiontypesale-metodo-faltante-en-componente-livewire">Fix clearTransactionTypeSale - Método Faltante en Componente Livewire<a class="headerlink" href="#fix-cleartransactiontypesale-metodo-faltante-en-componente-livewire" title="Permanent link">&para;</a></h1>
-<h2 id="resumen-del-problema">Resumen del Problema<a class="headerlink" href="#resumen-del-problema" title="Permanent link">&para;</a></h2>
+<h1 id="fix-cleartransactiontypesale-metodo-faltante-en-componente-livewire">Fix clearTransactionTypeSale - Método Faltante en Componente Livewire</h1>
+<h2 id="resumen-del-problema">Resumen del Problema</h2>
 <p><strong>Error Detectado</strong>: <code>Unable to call component method. Public method [clearTransactionTypeSale] not found on component: [admin.einvoice.create]</code></p>
 <p><strong>Causa</strong>: El método <code>clearTransactionTypeSale</code> estaba referenciado en la vista Blade con <code>wire:change="clearTransactionTypeSale"</code> pero no estaba implementado en el componente Livewire.</p>
 <p><strong>Impacto</strong>: El dropdown <code>naturalezaOperacion</code> no funcionaba correctamente, causando errores de runtime al cambiar el valor.</p>
-<h2 id="solucion-implementada">Solución Implementada<a class="headerlink" href="#solucion-implementada" title="Permanent link">&para;</a></h2>
-<h3 id="1-metodo-cleartransactiontypesale">1. Método clearTransactionTypeSale<a class="headerlink" href="#1-metodo-cleartransactiontypesale" title="Permanent link">&para;</a></h3>
+<h2 id="solucion-implementada">Solución Implementada</h2>
+<h3 id="1-metodo-cleartransactiontypesale">1. Método clearTransactionTypeSale</h3>
 <p><strong>Ubicación</strong>: <code>app/Http/Livewire/Admin/Einvoice/Create.php</code> (línea ~970)</p>
-<div class="highlight"><pre><span></span><code><span class="x">/**</span>
+<div class="codehilite"><pre><span></span><code><span class="x">/**</span>
 <span class="x"> * Limpiar tipo transacción venta cuando cambia naturaleza operación</span>
 <span class="x"> * @return void</span>
 <span class="x"> */</span>
@@ -2061,12 +2107,13 @@
 <span class="x">    }</span>
 <span class="x">}</span>
 </code></pre></div>
+
 <p><strong>Lógica</strong>:
 - Si <code>naturalezaOperacion ≠ 1</code>: Limpiar <code>tipoTransaccionVenta</code>
 - Si <code>naturalezaOperacion = 1</code>: Establecer <code>tipoTransaccionVenta = 1</code></p>
-<h3 id="2-metodo-filtervar-dependencia">2. Método filterVar (Dependencia)<a class="headerlink" href="#2-metodo-filtervar-dependencia" title="Permanent link">&para;</a></h3>
+<h3 id="2-metodo-filtervar-dependencia">2. Método filterVar (Dependencia)</h3>
 <p><strong>Ubicación</strong>: <code>app/Http/Livewire/Admin/Einvoice/Create.php</code> (línea ~755)</p>
-<div class="highlight"><pre><span></span><code><span class="x">/**</span>
+<div class="codehilite"><pre><span></span><code><span class="x">/**</span>
 <span class="x"> * Filtrar y validar variables usando filter_var de PHP</span>
 <span class="x"> * @param mixed $value</span>
 <span class="x"> * @param int $filter</span>
@@ -2081,9 +2128,10 @@
 <span class="x">    return filter_var($value, $filter);</span>
 <span class="x">}</span>
 </code></pre></div>
+
 <p><strong>Propósito</strong>: Wrapper de la función nativa <code>filter_var</code> de PHP, usado extensivamente en el componente para validaciones.</p>
-<h2 id="casos-de-uso">Casos de Uso<a class="headerlink" href="#casos-de-uso" title="Permanent link">&para;</a></h2>
-<h3 id="comportamiento-del-metodo">Comportamiento del Método<a class="headerlink" href="#comportamiento-del-metodo" title="Permanent link">&para;</a></h3>
+<h2 id="casos-de-uso">Casos de Uso</h2>
+<h3 id="comportamiento-del-metodo">Comportamiento del Método</h3>
 <table>
 <thead>
 <tr>
@@ -2115,9 +2163,9 @@
 </tr>
 </tbody>
 </table>
-<h3 id="integracion-con-ui">Integración con UI<a class="headerlink" href="#integracion-con-ui" title="Permanent link">&para;</a></h3>
+<h3 id="integracion-con-ui">Integración con UI</h3>
 <p><strong>Vista</strong>: <code>resources/views/livewire/admin/einvoice/create.blade.php</code></p>
-<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">select</span> <span class="na">wire:model</span><span class="o">=</span><span class="s">&quot;naturalezaOperacion&quot;</span> 
+<div class="codehilite"><pre><span></span><code><span class="p">&lt;</span><span class="nt">select</span> <span class="na">wire:model</span><span class="o">=</span><span class="s">&quot;naturalezaOperacion&quot;</span> 
         <span class="na">wire:change</span><span class="o">=</span><span class="s">&quot;clearTransactionTypeSale&quot;</span> 
         <span class="na">class</span><span class="o">=</span><span class="s">&quot;form-control&quot;</span><span class="p">&gt;</span>
     <span class="p">&lt;</span><span class="nt">option</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">&gt;</span>Seleccionar...<span class="p">&lt;/</span><span class="nt">option</span><span class="p">&gt;</span>
@@ -2126,10 +2174,11 @@
     <span class="p">&lt;</span><span class="nt">option</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;3&quot;</span><span class="p">&gt;</span>Operación con no domiciliado<span class="p">&lt;/</span><span class="nt">option</span><span class="p">&gt;</span>
 <span class="p">&lt;/</span><span class="nt">select</span><span class="p">&gt;</span>
 </code></pre></div>
-<h2 id="testing-y-verificacion">Testing y Verificación<a class="headerlink" href="#testing-y-verificacion" title="Permanent link">&para;</a></h2>
-<h3 id="script-de-testing">Script de Testing<a class="headerlink" href="#script-de-testing" title="Permanent link">&para;</a></h3>
+
+<h2 id="testing-y-verificacion">Testing y Verificación</h2>
+<h3 id="script-de-testing">Script de Testing</h3>
 <p><strong>Ubicación</strong>: <code>docs/testing/test-clearTransactionTypeSale-fix.sh</code></p>
-<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+<div class="codehilite"><pre><span></span><code><span class="ch">#!/bin/bash</span>
 <span class="c1"># Verifica:</span>
 <span class="c1"># 1. Existencia del método clearTransactionTypeSale</span>
 <span class="c1"># 2. Existencia del método filterVar</span>
@@ -2137,71 +2186,76 @@
 <span class="c1"># 4. Sintaxis PHP válida</span>
 <span class="c1"># 5. Integración con vista</span>
 </code></pre></div>
-<h3 id="ejecucion-de-testing">Ejecución de Testing<a class="headerlink" href="#ejecucion-de-testing" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>/home/weirdolabs/code/docucenter
+
+<h3 id="ejecucion-de-testing">Ejecución de Testing</h3>
+<div class="codehilite"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>/home/weirdolabs/code/docucenter
 ./docs/testing/test-clearTransactionTypeSale-fix.sh
 </code></pre></div>
+
 <p><strong>Resultado Esperado</strong>:
 - ✅ Método clearTransactionTypeSale encontrado
 - ✅ Método filterVar encontrado
 - ✅ Propiedades necesarias encontradas
 - ✅ Sintaxis PHP válida
 - ✅ wire:change encontrado en la vista</p>
-<h2 id="contexto-dgi-compliance">Contexto DGI Compliance<a class="headerlink" href="#contexto-dgi-compliance" title="Permanent link">&para;</a></h2>
-<h3 id="importancia-del-fix">Importancia del Fix<a class="headerlink" href="#importancia-del-fix" title="Permanent link">&para;</a></h3>
+<h2 id="contexto-dgi-compliance">Contexto DGI Compliance</h2>
+<h3 id="importancia-del-fix">Importancia del Fix</h3>
 <p>Este fix es <strong>CRÍTICO</strong> para el funcionamiento del sistema de 98% DGI compliance porque:</p>
 <ol>
 <li><strong>Validaciones Automáticas</strong>: El método permite que las validaciones condicionales funcionen correctamente</li>
 <li><strong>Experiencia de Usuario</strong>: Evita errores de runtime en formularios críticos</li>
 <li><strong>Integridad de Datos</strong>: Asegura que <code>tipoTransaccionVenta</code> se establezca correctamente según <code>naturalezaOperacion</code></li>
 </ol>
-<h3 id="relacion-con-campos-condicionales">Relación con Campos Condicionales<a class="headerlink" href="#relacion-con-campos-condicionales" title="Permanent link">&para;</a></h3>
+<h3 id="relacion-con-campos-condicionales">Relación con Campos Condicionales</h3>
 <p>El método es parte del sistema más amplio de <strong>formularios condicionales JSch09</strong>:
 - 9 tipos de documento iDoc implementados
 - 45+ campos adicionales con lógica condicional
 - Validaciones automáticas críticas según ficha técnica DGI</p>
-<h2 id="estado-final">Estado Final<a class="headerlink" href="#estado-final" title="Permanent link">&para;</a></h2>
+<h2 id="estado-final">Estado Final</h2>
 <p><strong>Status</strong>: ✅ <strong>COMPLETADO</strong></p>
-<h3 id="lo-que-funciona-ahora">Lo que Funciona Ahora<a class="headerlink" href="#lo-que-funciona-ahora" title="Permanent link">&para;</a></h3>
+<h3 id="lo-que-funciona-ahora">Lo que Funciona Ahora</h3>
 <ol>
 <li><strong>Dropdown naturalezaOperacion</strong>: Funciona sin errores</li>
 <li><strong>Campo tipoTransaccionVenta</strong>: Se actualiza automáticamente</li>
 <li><strong>Validaciones</strong>: Se ejecutan correctamente</li>
 <li><strong>UI Reactiva</strong>: Responde a cambios de usuario</li>
 </ol>
-<h3 id="proximos-pasos">Próximos Pasos<a class="headerlink" href="#proximos-pasos" title="Permanent link">&para;</a></h3>
+<h3 id="proximos-pasos">Próximos Pasos</h3>
 <ol>
 <li><strong>Testing en Navegador</strong>: Verificar funcionamiento visual</li>
 <li><strong>Testing de Integración</strong>: Probar con datos reales</li>
 <li><strong>Certificación PAC</strong>: Proceder con proceso de sandbox</li>
 </ol>
-<h2 id="archivos-modificados">Archivos Modificados<a class="headerlink" href="#archivos-modificados" title="Permanent link">&para;</a></h2>
-<h3 id="archivos-principales">Archivos Principales<a class="headerlink" href="#archivos-principales" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>app/Http/Livewire/Admin/Einvoice/Create.php
-├── + clearTransactionTypeSale() método público (línea ~970)
-├── + filterVar() método privado (línea ~755)
-└── ✅ Sin cambios en propiedades existentes
+<h2 id="archivos-modificados">Archivos Modificados</h2>
+<h3 id="archivos-principales">Archivos Principales</h3>
+<div class="codehilite"><pre><span></span><code><span class="n">app</span><span class="o">/</span><span class="n">Http</span><span class="o">/</span><span class="n">Livewire</span><span class="o">/</span><span class="n">Admin</span><span class="o">/</span><span class="n">Einvoice</span><span class="o">/</span><span class="n">Create</span><span class="p">.</span><span class="n">php</span>
+<span class="err">├──</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">clearTransactionTypeSale</span><span class="p">()</span><span class="w"> </span><span class="n">método</span><span class="w"> </span><span class="n">público</span><span class="w"> </span><span class="p">(</span><span class="n">línea</span><span class="w"> </span><span class="o">~</span><span class="mh">970</span><span class="p">)</span>
+<span class="err">├──</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">filterVar</span><span class="p">()</span><span class="w"> </span><span class="n">método</span><span class="w"> </span><span class="n">privado</span><span class="w"> </span><span class="p">(</span><span class="n">línea</span><span class="w"> </span><span class="o">~</span><span class="mh">755</span><span class="p">)</span>
+<span class="err">└──</span><span class="w"> </span><span class="err">✅</span><span class="w"> </span><span class="n">Sin</span><span class="w"> </span><span class="n">cambios</span><span class="w"> </span><span class="n">en</span><span class="w"> </span><span class="n">propiedades</span><span class="w"> </span><span class="n">existentes</span>
 </code></pre></div>
-<h3 id="archivos-de-testing">Archivos de Testing<a class="headerlink" href="#archivos-de-testing" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>docs/testing/test-clearTransactionTypeSale-fix.sh
+
+<h3 id="archivos-de-testing">Archivos de Testing</h3>
+<div class="codehilite"><pre><span></span><code>docs/testing/test-clearTransactionTypeSale-fix.sh
 ├── ✅ Script de verificación completo
 ├── ✅ Validación de sintaxis PHP
 └── ✅ Verificación de integración con vista
 </code></pre></div>
-<h3 id="archivos-de-documentacion">Archivos de Documentación<a class="headerlink" href="#archivos-de-documentacion" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>docs/technical/dgi-cleartransactiontypesale-fix.md
-├── ✅ Documentación técnica completa
-├── ✅ Casos de uso documentados
-└── ✅ Procedimientos de testing
+
+<h3 id="archivos-de-documentacion">Archivos de Documentación</h3>
+<div class="codehilite"><pre><span></span><code><span class="nx">docs</span><span class="o">/</span><span class="nx">technical</span><span class="o">/</span><span class="nx">dgi</span><span class="o">-</span><span class="nx">cleartransactiontypesale</span><span class="o">-</span><span class="nx">fix</span><span class="p">.</span><span class="nx">md</span>
+<span class="err">├──</span><span class="w"> </span><span class="err">✅</span><span class="w"> </span><span class="nx">Documentación</span><span class="w"> </span><span class="nx">técnica</span><span class="w"> </span><span class="nx">completa</span>
+<span class="err">├──</span><span class="w"> </span><span class="err">✅</span><span class="w"> </span><span class="nx">Casos</span><span class="w"> </span><span class="nx">de</span><span class="w"> </span><span class="nx">uso</span><span class="w"> </span><span class="nx">documentados</span>
+<span class="err">└──</span><span class="w"> </span><span class="err">✅</span><span class="w"> </span><span class="nx">Procedimientos</span><span class="w"> </span><span class="nx">de</span><span class="w"> </span><span class="nx">testing</span>
 </code></pre></div>
-<h2 id="compatibilidad">Compatibilidad<a class="headerlink" href="#compatibilidad" title="Permanent link">&para;</a></h2>
+
+<h2 id="compatibilidad">Compatibilidad</h2>
 <ul>
 <li><strong>PHP</strong>: 8.1+ (usa filter_var nativo)</li>
 <li><strong>Laravel</strong>: 9+ (compatible con Livewire)</li>
 <li><strong>Livewire</strong>: 2.x (métodos públicos callable desde Blade)</li>
 <li><strong>Frontend</strong>: Alpine.js/Bootstrap compatible</li>
 </ul>
-<h2 id="conclusion">Conclusión<a class="headerlink" href="#conclusion" title="Permanent link">&para;</a></h2>
+<h2 id="conclusion">Conclusión</h2>
 <p>El fix resuelve completamente el error de método faltante, restaurando la funcionalidad completa del sistema de 98% DGI compliance. El componente ahora está listo para uso en producción y certificación PAC.</p>
 <p><strong>Implementación</strong>: ✅ COMPLETA<br />
 <strong>Testing</strong>: ✅ VERIFICADO<br />
@@ -2259,7 +2313,7 @@
       
       
     
-    <a href="https://github.com/aghabrego/docucenter" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+    <a href="https://github.com/aghabrego/docucenter-public" target="_blank" rel="noopener" title="github.com" class="md-social__link">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
     </a>
   

@@ -233,7 +233,7 @@
           
   
   
-  APIs
+  API Documentation
 
         </a>
       </li>
@@ -269,7 +269,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../" class="md-tabs__link">
+        <a href="../README.md" class="md-tabs__link">
           
   
   
@@ -298,6 +298,25 @@
         </a>
       </li>
     
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../testing/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Sistema de Testing
+
+      </a>
+    </li>
   
 
       
@@ -404,7 +423,7 @@
   <span class="md-ellipsis">
     
   
-    APIs
+    API Documentation
   
 
     
@@ -420,7 +439,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    APIs
+    API Documentation
   
 
           </label>
@@ -1363,7 +1382,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
+      <a href="../README.md" class="md-nav__link">
         
   
   
@@ -1712,6 +1731,33 @@
           </ul>
         </nav>
       
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sistema de Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -2617,13 +2663,13 @@
   
 
 
-<h1 id="guia-de-implementacion-pac-digifact-panama">Guía de Implementación PAC Digifact Panamá<a class="headerlink" href="#guia-de-implementacion-pac-digifact-panama" title="Permanent link">&para;</a></h1>
+<h1 id="guia-de-implementacion-pac-digifact-panama">Guía de Implementación PAC Digifact Panamá</h1>
 <p><strong>Versión API</strong>: 1.0.4<br />
 <strong>Fecha de Análisis</strong>: 26 de diciembre de 2025<br />
 <strong>Sistema</strong>: DocuCenter - Facturación Electrónica Panamá<br />
 <strong>Proveedor</strong>: Digifact Servicios, S.A.</p>
 <hr />
-<h2 id="indice">Índice<a class="headerlink" href="#indice" title="Permanent link">&para;</a></h2>
+<h2 id="indice">Índice</h2>
 <ol>
 <li><a href="#resumen-ejecutivo">Resumen Ejecutivo</a></li>
 <li><a href="#arquitectura-de-la-api">Arquitectura de la API</a></li>
@@ -2639,9 +2685,9 @@
 <li><a href="#consideraciones-técnicas">Consideraciones Técnicas</a></li>
 </ol>
 <hr />
-<h2 id="resumen-ejecutivo">Resumen Ejecutivo<a class="headerlink" href="#resumen-ejecutivo" title="Permanent link">&para;</a></h2>
+<h2 id="resumen-ejecutivo">Resumen Ejecutivo</h2>
 <p>Digifact es un proveedor de certificación (PAC) autorizado por la DGI de Panamá para emitir, transmitir, certificar y conservar facturas electrónicas bajo el régimen establecido por la Ley N°256 del 26 de noviembre de 2021.</p>
-<h3 id="caracteristicas-principales">Características Principales<a class="headerlink" href="#caracteristicas-principales" title="Permanent link">&para;</a></h3>
+<h3 id="caracteristicas-principales">Características Principales</h3>
 <ul>
 <li><strong>Protocolo</strong>: API REST con JSON y XML</li>
 <li><strong>Autenticación</strong>: Bearer Token (JWT) con vigencia de 30 días</li>
@@ -2650,7 +2696,7 @@
 <li><strong>Throughput</strong>: No especificado en documentación</li>
 <li><strong>Firma Electrónica</strong>: Requerida para ambiente productivo</li>
 </ul>
-<h3 id="ventajas-sobre-otros-pacs">Ventajas sobre Otros PACs<a class="headerlink" href="#ventajas-sobre-otros-pacs" title="Permanent link">&para;</a></h3>
+<h3 id="ventajas-sobre-otros-pacs">Ventajas sobre Otros PACs</h3>
 <ul>
 <li>API REST moderna y estándar</li>
 <li>Soporte para múltiples formatos de respuesta (PDF|HTML|XML)</li>
@@ -2659,32 +2705,35 @@
 <li>Validación completa según normativas DGI</li>
 </ul>
 <hr />
-<h2 id="arquitectura-de-la-api">Arquitectura de la API<a class="headerlink" href="#arquitectura-de-la-api" title="Permanent link">&para;</a></h2>
-<h3 id="urls-base">URLs Base<a class="headerlink" href="#urls-base" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>Test:       https://pactest.digifact.com.pa/pa.com.apinuc/api
-Productivo: https://apinuc.digifact.com.pa/api
+<h2 id="arquitectura-de-la-api">Arquitectura de la API</h2>
+<h3 id="urls-base">URLs Base</h3>
+<div class="codehilite"><pre><span></span><code><span class="n">Test</span><span class="o">:</span><span class="w">       </span><span class="n">https</span><span class="o">://</span><span class="n">pactest</span><span class="o">.</span><span class="na">digifact</span><span class="o">.</span><span class="na">com</span><span class="o">.</span><span class="na">pa</span><span class="sr">/pa.com.apinuc/</span><span class="n">api</span>
+<span class="n">Productivo</span><span class="o">:</span><span class="w"> </span><span class="n">https</span><span class="o">://</span><span class="n">apinuc</span><span class="o">.</span><span class="na">digifact</span><span class="o">.</span><span class="na">com</span><span class="o">.</span><span class="na">pa</span><span class="o">/</span><span class="n">api</span>
 </code></pre></div>
-<h3 id="estructura-de-endpoints">Estructura de Endpoints<a class="headerlink" href="#estructura-de-endpoints" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>/login/get_token                  → Autenticación (POST)
+
+<h3 id="estructura-de-endpoints">Estructura de Endpoints</h3>
+<div class="codehilite"><pre><span></span><code>/login/get_token                  → Autenticación (POST)
 /transform/nuc                    → Certificación de documentos (POST)
 /SHAREDINFO                       → Consultas generales (GET)
 /GetDocument                      → Obtener documento por CUFE (GET)
 </code></pre></div>
+
 <hr />
-<h2 id="configuracion-y-credenciales">Configuración y Credenciales<a class="headerlink" href="#configuracion-y-credenciales" title="Permanent link">&para;</a></h2>
-<h3 id="credenciales-de-acceso">Credenciales de Acceso<a class="headerlink" href="#credenciales-de-acceso" title="Permanent link">&para;</a></h3>
+<h2 id="configuracion-y-credenciales">Configuración y Credenciales</h2>
+<h3 id="credenciales-de-acceso">Credenciales de Acceso</h3>
 <p>Las credenciales se solicitan vía:
-- <strong>Email</strong>: <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#115;&#111;&#112;&#111;&#114;&#116;&#101;&#64;&#100;&#105;&#103;&#105;&#102;&#97;&#99;&#116;&#46;&#99;&#111;&#109;&#46;&#103;&#116;">&#115;&#111;&#112;&#111;&#114;&#116;&#101;&#64;&#100;&#105;&#103;&#105;&#102;&#97;&#99;&#116;&#46;&#99;&#111;&#109;&#46;&#103;&#116;</a> con subject "Solicitud de credenciales TEST"
+- <strong>Email</strong>: soporte@digifact.com.gt con subject "Solicitud de credenciales TEST"
 - <strong>Teléfono</strong>: 2319-1921, opción 2</p>
 <p><strong>Formato de credenciales recibidas</strong>:</p>
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;codigo_acceso&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;23824-0930-212623&quot;</span><span class="p">,</span><span class="w">  </span><span class="c1">// RUC del usuario</span>
 <span class="w">  </span><span class="nt">&quot;empresa&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;LA LECHITA, SOCIEDAD ANÓNIMA&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;usuario&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;USER_TEST&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;contrasena&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;s142$%SAF&quot;</span>
 <span class="p">}</span>
 </code></pre></div>
-<h3 id="requisitos-para-ambiente-productivo">Requisitos para Ambiente Productivo<a class="headerlink" href="#requisitos-para-ambiente-productivo" title="Permanent link">&para;</a></h3>
+
+<h3 id="requisitos-para-ambiente-productivo">Requisitos para Ambiente Productivo</h3>
 <ol>
 <li><strong>Firma electrónica</strong>: Archivo de firma digital obtenido en agencia virtual DGI</li>
 <li><strong>Contraseña de firma</strong>: Contraseña asignada a la firma electrónica</li>
@@ -2692,58 +2741,66 @@ Productivo: https://apinuc.digifact.com.pa/api
 </ol>
 <p><strong>IMPORTANTE</strong>: Los servicios productivos solo funcionan con credenciales productivas cuando el RUC está registrado en Digifact.</p>
 <hr />
-<h2 id="autenticacion">Autenticación<a class="headerlink" href="#autenticacion" title="Permanent link">&para;</a></h2>
-<h3 id="obtener-token-jwt">Obtener Token JWT<a class="headerlink" href="#obtener-token-jwt" title="Permanent link">&para;</a></h3>
-<p><strong>Endpoint</strong>:
-<div class="highlight"><pre><span></span><code>POST /login/get_token
-</code></pre></div></p>
-<p><strong>Request</strong>:
-<div class="highlight"><pre><span></span><code><span class="err">POST /login/get_token</span>
+<h2 id="autenticacion">Autenticación</h2>
+<h3 id="obtener-token-jwt">Obtener Token JWT</h3>
+<p><strong>Endpoint</strong>:</p>
+<div class="codehilite"><pre><span></span><code>POST /login/get_token
+</code></pre></div>
+
+<p><strong>Request</strong>:</p>
+<div class="codehilite"><pre><span></span><code><span class="err">POST /login/get_token</span>
 <span class="err">Content-Type: application/json</span>
 
 <span class="err">{</span>
 <span class="err">  &quot;Username&quot;: &quot;PA.155704849-2-2021.USER_TEST&quot;,</span>
 <span class="err">  &quot;Password&quot;: &quot;s142$%SAF&quot;</span>
 <span class="err">}</span>
-</code></pre></div></p>
-<p><strong>Formato de Username</strong>:
-<div class="highlight"><pre><span></span><code>PA + &quot;.&quot; + &lt;RUC_USUARIO&gt; + &quot;.&quot; + &lt;NOMBRE_USUARIO&gt;
+</code></pre></div>
+
+<p><strong>Formato de Username</strong>:</p>
+<div class="codehilite"><pre><span></span><code>PA + &quot;.&quot; + &lt;RUC_USUARIO&gt; + &quot;.&quot; + &lt;NOMBRE_USUARIO&gt;
 
 Ejemplo: PA.155704849-2-2021.USER_TEST
-</code></pre></div></p>
-<p><strong>Response</strong>:
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
+</code></pre></div>
+
+<p><strong>Response</strong>:</p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;token&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlx...&quot;</span>
 <span class="p">}</span>
-</code></pre></div></p>
-<h3 id="uso-del-token">Uso del Token<a class="headerlink" href="#uso-del-token" title="Permanent link">&para;</a></h3>
-<p>El token debe enviarse en cada request como header:</p>
-<div class="highlight"><pre><span></span><code><span class="err">Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlx...</span>
 </code></pre></div>
-<h3 id="vigencia-y-renovacion">Vigencia y Renovación<a class="headerlink" href="#vigencia-y-renovacion" title="Permanent link">&para;</a></h3>
+
+<h3 id="uso-del-token">Uso del Token</h3>
+<p>El token debe enviarse en cada request como header:</p>
+<div class="codehilite"><pre><span></span><code><span class="err">Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlx...</span>
+</code></pre></div>
+
+<h3 id="vigencia-y-renovacion">Vigencia y Renovación</h3>
 <ul>
 <li><strong>Vigencia</strong>: 30 días desde la generación</li>
 <li><strong>Expiración</strong>: Retorna código 401 (Unauthorized)</li>
 <li><strong>Renovación</strong>: Generar nuevo token con mismo procedimiento</li>
 </ul>
 <hr />
-<h2 id="endpoints-principales">Endpoints Principales<a class="headerlink" href="#endpoints-principales" title="Permanent link">&para;</a></h2>
-<h3 id="1-certificate_fe_xml_tosign-certificacion-de-documentos">1. CERTIFICATE_FE_XML_TOSIGN - Certificación de Documentos<a class="headerlink" href="#1-certificate_fe_xml_tosign-certificacion-de-documentos" title="Permanent link">&para;</a></h3>
-<p><strong>Endpoint</strong>:
-<div class="highlight"><pre><span></span><code>POST /transform/nuc
-</code></pre></div></p>
-<p><strong>Headers</strong>:
-<div class="highlight"><pre><span></span><code><span class="err">Content-Type: application/xml</span>
+<h2 id="endpoints-principales">Endpoints Principales</h2>
+<h3 id="1-certificate_fe_xml_tosign-certificacion-de-documentos">1. CERTIFICATE_FE_XML_TOSIGN - Certificación de Documentos</h3>
+<p><strong>Endpoint</strong>:</p>
+<div class="codehilite"><pre><span></span><code>POST /transform/nuc
+</code></pre></div>
+
+<p><strong>Headers</strong>:</p>
+<div class="codehilite"><pre><span></span><code><span class="err">Content-Type: application/xml</span>
 <span class="err">Authorization: Bearer {token}</span>
-</code></pre></div></p>
-<p><strong>Parámetros Query String</strong>:
-<div class="highlight"><pre><span></span><code>TAXID: 23824-0930-212623        // RUC del usuario
-FORMAT: PDF|HTML|XML            // Formatos deseados separados por pipe
-USERNAME: La_Lechita            // Usuario asignado
-</code></pre></div></p>
+</code></pre></div>
+
+<p><strong>Parámetros Query String</strong>:</p>
+<div class="codehilite"><pre><span></span><code><span class="n">TAXID</span><span class="o">:</span><span class="w"> </span><span class="mi">23824</span><span class="o">-</span><span class="mi">0930</span><span class="o">-</span><span class="mi">212623</span><span class="w">        </span><span class="c1">// RUC del usuario</span>
+<span class="n">FORMAT</span><span class="o">:</span><span class="w"> </span><span class="n">PDF</span><span class="o">|</span><span class="n">HTML</span><span class="o">|</span><span class="n">XML</span><span class="w">            </span><span class="c1">// Formatos deseados separados por pipe</span>
+<span class="n">USERNAME</span><span class="o">:</span><span class="w"> </span><span class="n">La_Lechita</span><span class="w">            </span><span class="c1">// Usuario asignado</span>
+</code></pre></div>
+
 <p><strong>Body</strong>: XML del documento según esquema DGI NUC</p>
-<p><strong>Ejemplo de Request</strong>:
-<div class="highlight"><pre><span></span><code><span class="err">POST /transform/nuc?TAXID=23824-0930-212623&amp;FORMAT=PDF|HTML|XML&amp;USERNAME=La_Lechita</span>
+<p><strong>Ejemplo de Request</strong>:</p>
+<div class="codehilite"><pre><span></span><code><span class="err">POST /transform/nuc?TAXID=23824-0930-212623&amp;FORMAT=PDF|HTML|XML&amp;USERNAME=La_Lechita</span>
 <span class="err">Content-Type: application/xml</span>
 <span class="err">Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...</span>
 
@@ -2752,9 +2809,10 @@ USERNAME: La_Lechita            // Usuario asignado
 <span class="err">     xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&gt;</span>
 <span class="err">  &lt;!-- Contenido XML según esquema DGI --&gt;</span>
 <span class="err">&lt;/rFE&gt;</span>
-</code></pre></div></p>
-<p><strong>Response Structure</strong>:
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
+</code></pre></div>
+
+<p><strong>Response Structure</strong>:</p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;codigo&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;200&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;mensaje&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Certificación exitosa&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;descripcion&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Documento certificado correctamente&quot;</span><span class="p">,</span>
@@ -2779,31 +2837,36 @@ USERNAME: La_Lechita            // Usuario asignado
 <span class="w">  </span><span class="nt">&quot;fecha_de_certificacion&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2024-12-26T10:30:15&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;backprocessor&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;DIGIFACT&quot;</span>
 <span class="p">}</span>
-</code></pre></div></p>
-<h3 id="2-shared_getdocinfo-consultar-documento">2. SHARED_GETDOCINFO - Consultar Documento<a class="headerlink" href="#2-shared_getdocinfo-consultar-documento" title="Permanent link">&para;</a></h3>
-<p><strong>Endpoint</strong>:
-<div class="highlight"><pre><span></span><code>GET /SHAREDINFO
-</code></pre></div></p>
-<p><strong>Parámetros</strong>:
-<div class="highlight"><pre><span></span><code>TRANSACTION: SHARED_INFO
-RUC: 23824-0930-212623
-DATA1: SHARED_GETDOCINFO
-DATA2: AUTHNUMBER|FE0120000155704849-2-2021320001202205018539617752001120008136739
-USERNAME: Test_User
-</code></pre></div></p>
-<p><strong>Headers</strong>:
-<div class="highlight"><pre><span></span><code><span class="err">Authorization: Bearer {token}</span>
-</code></pre></div></p>
-<p><strong>Ejemplo de URL</strong>:
-<div class="highlight"><pre><span></span><code>https://pactest.digifact.com.pa/pa.com.apinuc/api/SHAREDINFO?
+</code></pre></div>
+
+<h3 id="2-shared_getdocinfo-consultar-documento">2. SHARED_GETDOCINFO - Consultar Documento</h3>
+<p><strong>Endpoint</strong>:</p>
+<div class="codehilite"><pre><span></span><code>GET /SHAREDINFO
+</code></pre></div>
+
+<p><strong>Parámetros</strong>:</p>
+<div class="codehilite"><pre><span></span><code><span class="n">TRANSACTION</span><span class="o">:</span><span class="w"> </span><span class="n">SHARED_INFO</span>
+<span class="n">RUC</span><span class="o">:</span><span class="w"> </span><span class="mi">23824</span><span class="o">-</span><span class="mi">0930</span><span class="o">-</span><span class="mi">212623</span>
+<span class="n">DATA1</span><span class="o">:</span><span class="w"> </span><span class="n">SHARED_GETDOCINFO</span>
+<span class="n">DATA2</span><span class="o">:</span><span class="w"> </span><span class="n">AUTHNUMBER</span><span class="o">|</span><span class="n">FE0120000155704849</span><span class="o">-</span><span class="mi">2</span><span class="o">-</span><span class="mi">2021320001202205018539617752001120008136739</span>
+<span class="n">USERNAME</span><span class="o">:</span><span class="w"> </span><span class="n">Test_User</span>
+</code></pre></div>
+
+<p><strong>Headers</strong>:</p>
+<div class="codehilite"><pre><span></span><code><span class="err">Authorization: Bearer {token}</span>
+</code></pre></div>
+
+<p><strong>Ejemplo de URL</strong>:</p>
+<div class="codehilite"><pre><span></span><code>https://pactest.digifact.com.pa/pa.com.apinuc/api/SHAREDINFO?
   TRANSACTION=SHARED_INFO&amp;
   RUC=23824-0930-212623&amp;
   DATA1=SHARED_GETDOCINFO&amp;
   DATA2=AUTHNUMBER|FE0120000155704849-2-2021320001202205018539617752001120008136739&amp;
   USERNAME=Test_User
-</code></pre></div></p>
-<p><strong>Response Structure</strong>:
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
+</code></pre></div>
+
+<p><strong>Response Structure</strong>:</p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;REQUEST_DATA&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span>
 <span class="w">    </span><span class="nt">&quot;Respuesta&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;success&quot;</span><span class="p">,</span>
 <span class="w">    </span><span class="nt">&quot;Codigo&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;200&quot;</span><span class="p">,</span>
@@ -2821,35 +2884,41 @@ USERNAME: Test_User
 <span class="w">    </span><span class="nt">&quot;estado&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;CERTIFICADO&quot;</span>
 <span class="w">  </span><span class="p">}]</span>
 <span class="p">}</span>
-</code></pre></div></p>
-<h3 id="3-shared_getinfotaxcom-informacion-fiscal">3. SHARED_GETINFOTAXcom - Información Fiscal<a class="headerlink" href="#3-shared_getinfotaxcom-informacion-fiscal" title="Permanent link">&para;</a></h3>
-<p><strong>Endpoint</strong>:
-<div class="highlight"><pre><span></span><code>GET /SHAREDINFO
-</code></pre></div></p>
-<p><strong>Parámetros</strong>:
-<div class="highlight"><pre><span></span><code>TRANSACTION: SHARED_INFO
-RUC: 23824-0930-212623
-DATA1: SHARED_GETFEINFOTAXcom
-DATA2: RUC|00023824-0933-212623
-USERNAME: Test_User
-</code></pre></div></p>
+</code></pre></div>
+
+<h3 id="3-shared_getinfotaxcom-informacion-fiscal">3. SHARED_GETINFOTAXcom - Información Fiscal</h3>
+<p><strong>Endpoint</strong>:</p>
+<div class="codehilite"><pre><span></span><code>GET /SHAREDINFO
+</code></pre></div>
+
+<p><strong>Parámetros</strong>:</p>
+<div class="codehilite"><pre><span></span><code><span class="n">TRANSACTION</span><span class="o">:</span><span class="w"> </span><span class="n">SHARED_INFO</span>
+<span class="n">RUC</span><span class="o">:</span><span class="w"> </span><span class="mi">23824</span><span class="o">-</span><span class="mi">0930</span><span class="o">-</span><span class="mi">212623</span>
+<span class="n">DATA1</span><span class="o">:</span><span class="w"> </span><span class="n">SHARED_GETFEINFOTAXcom</span>
+<span class="n">DATA2</span><span class="o">:</span><span class="w"> </span><span class="n">RUC</span><span class="o">|</span><span class="mi">00023824</span><span class="o">-</span><span class="mi">0933</span><span class="o">-</span><span class="mi">212623</span>
+<span class="n">USERNAME</span><span class="o">:</span><span class="w"> </span><span class="n">Test_User</span>
+</code></pre></div>
+
 <p><strong>Nota</strong>: El RUC en DATA2 debe estar completado con ceros a la izquierda hasta 20 caracteres.</p>
-<p><strong>Ejemplo</strong>:
-<div class="highlight"><pre><span></span><code>RUC original: 23824-0930-212623 (19 caracteres)
+<p><strong>Ejemplo</strong>:</p>
+<div class="codehilite"><pre><span></span><code>RUC original: 23824-0930-212623 (19 caracteres)
 RUC formateado: 00023824-0930-212623 (20 caracteres)
-</code></pre></div></p>
-<h3 id="4-getdocument-obtener-documento-por-cufe">4. GetDocument - Obtener Documento por CUFE<a class="headerlink" href="#4-getdocument-obtener-documento-por-cufe" title="Permanent link">&para;</a></h3>
-<p><strong>Endpoint</strong>:
-<div class="highlight"><pre><span></span><code>GET /GetDocument
-</code></pre></div></p>
-<p><strong>Parámetros</strong>:
-<div class="highlight"><pre><span></span><code>CUFE: FE0120000155704849-2-2021320001202208048429617728001012000813673
-RUC: 23824-0930-212623
-FORMAT: HTML|PDF|XML
-USERNAME: TESTUSER
-</code></pre></div></p>
-<p><strong>Response Structure</strong>:
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
+</code></pre></div>
+
+<h3 id="4-getdocument-obtener-documento-por-cufe">4. GetDocument - Obtener Documento por CUFE</h3>
+<p><strong>Endpoint</strong>:</p>
+<div class="codehilite"><pre><span></span><code>GET /GetDocument
+</code></pre></div>
+
+<p><strong>Parámetros</strong>:</p>
+<div class="codehilite"><pre><span></span><code><span class="n">CUFE</span><span class="o">:</span><span class="w"> </span><span class="n">FE0120000155704849</span><span class="o">-</span><span class="mi">2</span><span class="o">-</span><span class="mi">2021320001202208048429617728001012000813673</span>
+<span class="n">RUC</span><span class="o">:</span><span class="w"> </span><span class="mi">23824</span><span class="o">-</span><span class="mi">0930</span><span class="o">-</span><span class="mi">212623</span>
+<span class="n">FORMAT</span><span class="o">:</span><span class="w"> </span><span class="n">HTML</span><span class="o">|</span><span class="n">PDF</span><span class="o">|</span><span class="n">XML</span>
+<span class="n">USERNAME</span><span class="o">:</span><span class="w"> </span><span class="n">TESTUSER</span>
+</code></pre></div>
+
+<p><strong>Response Structure</strong>:</p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;REQUEST_DATA&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span>
 <span class="w">    </span><span class="nt">&quot;Respuesta&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;success&quot;</span><span class="p">,</span>
 <span class="w">    </span><span class="nt">&quot;Codigo&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;200&quot;</span><span class="p">,</span>
@@ -2864,66 +2933,68 @@ USERNAME: TESTUSER
 <span class="w">    </span><span class="nt">&quot;ResponseData3&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;base64_pdf_content&quot;</span>
 <span class="w">  </span><span class="p">}]</span>
 <span class="p">}</span>
-</code></pre></div></p>
+</code></pre></div>
+
 <p><strong>Nota</strong>: Si un parámetro requerido no existe, RESPONSE será un arreglo vacío: <code>"RESPONSE": []</code></p>
 <hr />
-<h2 id="flujo-de-certificacion">Flujo de Certificación<a class="headerlink" href="#flujo-de-certificacion" title="Permanent link">&para;</a></h2>
-<h3 id="diagrama-de-flujo">Diagrama de Flujo<a class="headerlink" href="#diagrama-de-flujo" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>┌─────────────────────────────────────────────────────────┐
-│ 1. Solicitar Credenciales                               │
-│    → Email: soporte@digifact.com.gt                     │
-│    → Tel: 2319-1921 opción 2                            │
-└──────────────────────┬──────────────────────────────────┘
-                       ↓
-┌─────────────────────────────────────────────────────────┐
-│ 2. Recibir Credenciales                                 │
-│    → RUC (TAXID)                                        │
-│    → Usuario                                            │
-│    → Contraseña                                         │
-└──────────────────────┬──────────────────────────────────┘
-                       ↓
-┌─────────────────────────────────────────────────────────┐
-│ 3. Obtener Token JWT (Vigencia: 30 días)               │
-│    POST /login/get_token                                │
-│    Body: { Username, Password }                         │
-└──────────────────────┬──────────────────────────────────┘
-                       ↓
-┌─────────────────────────────────────────────────────────┐
-│ 4. Generar XML según Esquema DGI                        │
-│    → Validar estructura XML                             │
-│    → Incluir todos los campos requeridos                │
-└──────────────────────┬──────────────────────────────────┘
-                       ↓
-┌─────────────────────────────────────────────────────────┐
-│ 5. Enviar a Certificación                               │
-│    POST /transform/nuc                                  │
-│    Headers: Authorization, Content-Type                 │
-│    Params: TAXID, FORMAT, USERNAME                      │
-│    Body: XML del documento                              │
-└──────────────────────┬──────────────────────────────────┘
-                       ↓
-┌─────────────────────────────────────────────────────────┐
-│ 6. Recibir Respuesta de DGI                             │
-│    → Acuse de Recibo (CUFE)                             │
-│    → Documentos en formatos solicitados (base64)        │
-│    → Códigos de validación                              │
-└──────────────────────┬──────────────────────────────────┘
-                       ↓
-┌─────────────────────────────────────────────────────────┐
-│ 7. Procesar y Almacenar                                 │
-│    → Decodificar base64                                 │
-│    → Guardar archivos (XML, PDF, HTML)                  │
-│    → Registrar CUFE y acuse de recibo                   │
-└─────────────────────────────────────────────────────────┘
+<h2 id="flujo-de-certificacion">Flujo de Certificación</h2>
+<h3 id="diagrama-de-flujo">Diagrama de Flujo</h3>
+<div class="codehilite"><pre><span></span><code><span class="err">┌─────────────────────────────────────────────────────────┐</span>
+<span class="err">│</span><span class="w"> </span><span class="mf">1.</span><span class="w"> </span><span class="n">Solicitar</span><span class="w"> </span><span class="n">Credenciales</span><span class="w">                               </span><span class="err">│</span>
+<span class="err">│</span><span class="w">    </span><span class="err">→</span><span class="w"> </span><span class="nl">Email</span><span class="p">:</span><span class="w"> </span><span class="n">soporte</span><span class="nv">@digifact</span><span class="p">.</span><span class="n">com</span><span class="p">.</span><span class="n">gt</span><span class="w">                     </span><span class="err">│</span>
+<span class="err">│</span><span class="w">    </span><span class="err">→</span><span class="w"> </span><span class="nl">Tel</span><span class="p">:</span><span class="w"> </span><span class="mi">2319</span><span class="o">-</span><span class="mi">1921</span><span class="w"> </span><span class="n">opción</span><span class="w"> </span><span class="mi">2</span><span class="w">                            </span><span class="err">│</span>
+<span class="err">└──────────────────────┬──────────────────────────────────┘</span>
+<span class="w">                       </span><span class="err">↓</span>
+<span class="err">┌─────────────────────────────────────────────────────────┐</span>
+<span class="err">│</span><span class="w"> </span><span class="mf">2.</span><span class="w"> </span><span class="n">Recibir</span><span class="w"> </span><span class="n">Credenciales</span><span class="w">                                 </span><span class="err">│</span>
+<span class="err">│</span><span class="w">    </span><span class="err">→</span><span class="w"> </span><span class="n">RUC</span><span class="w"> </span><span class="p">(</span><span class="n">TAXID</span><span class="p">)</span><span class="w">                                        </span><span class="err">│</span>
+<span class="err">│</span><span class="w">    </span><span class="err">→</span><span class="w"> </span><span class="n">Usuario</span><span class="w">                                            </span><span class="err">│</span>
+<span class="err">│</span><span class="w">    </span><span class="err">→</span><span class="w"> </span><span class="n">Contraseña</span><span class="w">                                         </span><span class="err">│</span>
+<span class="err">└──────────────────────┬──────────────────────────────────┘</span>
+<span class="w">                       </span><span class="err">↓</span>
+<span class="err">┌─────────────────────────────────────────────────────────┐</span>
+<span class="err">│</span><span class="w"> </span><span class="mf">3.</span><span class="w"> </span><span class="n">Obtener</span><span class="w"> </span><span class="n">Token</span><span class="w"> </span><span class="n">JWT</span><span class="w"> </span><span class="p">(</span><span class="nl">Vigencia</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="w"> </span><span class="n">días</span><span class="p">)</span><span class="w">               </span><span class="err">│</span>
+<span class="err">│</span><span class="w">    </span><span class="n">POST</span><span class="w"> </span><span class="o">/</span><span class="n">login</span><span class="o">/</span><span class="n">get_token</span><span class="w">                                </span><span class="err">│</span>
+<span class="err">│</span><span class="w">    </span><span class="nl">Body</span><span class="p">:</span><span class="w"> </span><span class="err">{</span><span class="w"> </span><span class="n">Username</span><span class="p">,</span><span class="w"> </span><span class="n">Password</span><span class="w"> </span><span class="err">}</span><span class="w">                         </span><span class="err">│</span>
+<span class="err">└──────────────────────┬──────────────────────────────────┘</span>
+<span class="w">                       </span><span class="err">↓</span>
+<span class="err">┌─────────────────────────────────────────────────────────┐</span>
+<span class="err">│</span><span class="w"> </span><span class="mf">4.</span><span class="w"> </span><span class="n">Generar</span><span class="w"> </span><span class="nc">XML</span><span class="w"> </span><span class="n">según</span><span class="w"> </span><span class="n">Esquema</span><span class="w"> </span><span class="n">DGI</span><span class="w">                        </span><span class="err">│</span>
+<span class="err">│</span><span class="w">    </span><span class="err">→</span><span class="w"> </span><span class="n">Validar</span><span class="w"> </span><span class="n">estructura</span><span class="w"> </span><span class="nc">XML</span><span class="w">                             </span><span class="err">│</span>
+<span class="err">│</span><span class="w">    </span><span class="err">→</span><span class="w"> </span><span class="n">Incluir</span><span class="w"> </span><span class="n">todos</span><span class="w"> </span><span class="n">los</span><span class="w"> </span><span class="n">campos</span><span class="w"> </span><span class="n">requeridos</span><span class="w">                </span><span class="err">│</span>
+<span class="err">└──────────────────────┬──────────────────────────────────┘</span>
+<span class="w">                       </span><span class="err">↓</span>
+<span class="err">┌─────────────────────────────────────────────────────────┐</span>
+<span class="err">│</span><span class="w"> </span><span class="mf">5.</span><span class="w"> </span><span class="n">Enviar</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">Certificación</span><span class="w">                               </span><span class="err">│</span>
+<span class="err">│</span><span class="w">    </span><span class="n">POST</span><span class="w"> </span><span class="o">/</span><span class="n">transform</span><span class="o">/</span><span class="n">nuc</span><span class="w">                                  </span><span class="err">│</span>
+<span class="err">│</span><span class="w">    </span><span class="nl">Headers</span><span class="p">:</span><span class="w"> </span><span class="k">Authorization</span><span class="p">,</span><span class="w"> </span><span class="n">Content</span><span class="o">-</span><span class="n">Type</span><span class="w">                 </span><span class="err">│</span>
+<span class="err">│</span><span class="w">    </span><span class="nl">Params</span><span class="p">:</span><span class="w"> </span><span class="n">TAXID</span><span class="p">,</span><span class="w"> </span><span class="nf">FORMAT</span><span class="p">,</span><span class="w"> </span><span class="n">USERNAME</span><span class="w">                      </span><span class="err">│</span>
+<span class="err">│</span><span class="w">    </span><span class="nl">Body</span><span class="p">:</span><span class="w"> </span><span class="nc">XML</span><span class="w"> </span><span class="n">del</span><span class="w"> </span><span class="n">documento</span><span class="w">                              </span><span class="err">│</span>
+<span class="err">└──────────────────────┬──────────────────────────────────┘</span>
+<span class="w">                       </span><span class="err">↓</span>
+<span class="err">┌─────────────────────────────────────────────────────────┐</span>
+<span class="err">│</span><span class="w"> </span><span class="mf">6.</span><span class="w"> </span><span class="n">Recibir</span><span class="w"> </span><span class="n">Respuesta</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">DGI</span><span class="w">                             </span><span class="err">│</span>
+<span class="err">│</span><span class="w">    </span><span class="err">→</span><span class="w"> </span><span class="n">Acuse</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">Recibo</span><span class="w"> </span><span class="p">(</span><span class="n">CUFE</span><span class="p">)</span><span class="w">                             </span><span class="err">│</span>
+<span class="err">│</span><span class="w">    </span><span class="err">→</span><span class="w"> </span><span class="n">Documentos</span><span class="w"> </span><span class="n">en</span><span class="w"> </span><span class="n">formatos</span><span class="w"> </span><span class="n">solicitados</span><span class="w"> </span><span class="p">(</span><span class="n">base64</span><span class="p">)</span><span class="w">        </span><span class="err">│</span>
+<span class="err">│</span><span class="w">    </span><span class="err">→</span><span class="w"> </span><span class="n">Códigos</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">validación</span><span class="w">                              </span><span class="err">│</span>
+<span class="err">└──────────────────────┬──────────────────────────────────┘</span>
+<span class="w">                       </span><span class="err">↓</span>
+<span class="err">┌─────────────────────────────────────────────────────────┐</span>
+<span class="err">│</span><span class="w"> </span><span class="mf">7.</span><span class="w"> </span><span class="n">Procesar</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="n">Almacenar</span><span class="w">                                 </span><span class="err">│</span>
+<span class="err">│</span><span class="w">    </span><span class="err">→</span><span class="w"> </span><span class="n">Decodificar</span><span class="w"> </span><span class="n">base64</span><span class="w">                                 </span><span class="err">│</span>
+<span class="err">│</span><span class="w">    </span><span class="err">→</span><span class="w"> </span><span class="n">Guardar</span><span class="w"> </span><span class="n">archivos</span><span class="w"> </span><span class="p">(</span><span class="nc">XML</span><span class="p">,</span><span class="w"> </span><span class="n">PDF</span><span class="p">,</span><span class="w"> </span><span class="n">HTML</span><span class="p">)</span><span class="w">                  </span><span class="err">│</span>
+<span class="err">│</span><span class="w">    </span><span class="err">→</span><span class="w"> </span><span class="n">Registrar</span><span class="w"> </span><span class="n">CUFE</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="n">acuse</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">recibo</span><span class="w">                   </span><span class="err">│</span>
+<span class="err">└─────────────────────────────────────────────────────────┘</span>
 </code></pre></div>
-<h3 id="validaciones-realizadas-por-digifact">Validaciones Realizadas por Digifact<a class="headerlink" href="#validaciones-realizadas-por-digifact" title="Permanent link">&para;</a></h3>
+
+<h3 id="validaciones-realizadas-por-digifact">Validaciones Realizadas por Digifact</h3>
 <p>Digifact ejecuta todas las validaciones según:
 1. Documentación técnica DGI
 2. Régimen FE publicado en Gaceta Oficial
 3. Esquema XSD del NUC (Nuevo Formato Único de Comprobación)</p>
 <hr />
-<h2 id="operaciones-get">Operaciones GET<a class="headerlink" href="#operaciones-get" title="Permanent link">&para;</a></h2>
-<h3 id="tabla-comparativa-de-operaciones">Tabla Comparativa de Operaciones<a class="headerlink" href="#tabla-comparativa-de-operaciones" title="Permanent link">&para;</a></h3>
+<h2 id="operaciones-get">Operaciones GET</h2>
+<h3 id="tabla-comparativa-de-operaciones">Tabla Comparativa de Operaciones</h3>
 <table>
 <thead>
 <tr>
@@ -2954,8 +3025,8 @@ USERNAME: TESTUSER
 </tr>
 </tbody>
 </table>
-<h3 id="estructura-estandar-de-respuesta-get">Estructura Estándar de Respuesta GET<a class="headerlink" href="#estructura-estandar-de-respuesta-get" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<h3 id="estructura-estandar-de-respuesta-get">Estructura Estándar de Respuesta GET</h3>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;REQUEST_DATA&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <span class="w">    </span><span class="p">{</span>
 <span class="w">      </span><span class="nt">&quot;Respuesta&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;success|error&quot;</span><span class="p">,</span>
@@ -2972,9 +3043,10 @@ USERNAME: TESTUSER
 <span class="w">  </span><span class="p">]</span>
 <span class="p">}</span>
 </code></pre></div>
+
 <hr />
-<h2 id="formatos-de-respuesta">Formatos de Respuesta<a class="headerlink" href="#formatos-de-respuesta" title="Permanent link">&para;</a></h2>
-<h3 id="codigos-de-estado">Códigos de Estado<a class="headerlink" href="#codigos-de-estado" title="Permanent link">&para;</a></h3>
+<h2 id="formatos-de-respuesta">Formatos de Respuesta</h2>
+<h3 id="codigos-de-estado">Códigos de Estado</h3>
 <p>Basado en la documentación del NUC (sección 5):</p>
 <table>
 <thead>
@@ -3012,34 +3084,36 @@ USERNAME: TESTUSER
 </tr>
 </tbody>
 </table>
-<h3 id="formatos-de-documento">Formatos de Documento<a class="headerlink" href="#formatos-de-documento" title="Permanent link">&para;</a></h3>
+<h3 id="formatos-de-documento">Formatos de Documento</h3>
 <p>Los documentos se entregan en <strong>base64</strong> en los campos:</p>
 <ul>
 <li><code>responseData1</code>: XML</li>
 <li><code>responseData2</code>: HTML  </li>
 <li><code>responseData3</code>: PDF</li>
 </ul>
-<p><strong>Decodificación</strong>:
-<div class="highlight"><pre><span></span><code><span class="x">$xmlContent = base64_decode($response[&#39;responseData1&#39;]);</span>
+<p><strong>Decodificación</strong>:</p>
+<div class="codehilite"><pre><span></span><code><span class="x">$xmlContent = base64_decode($response[&#39;responseData1&#39;]);</span>
 <span class="x">$htmlContent = base64_decode($response[&#39;responseData2&#39;]);</span>
 <span class="x">$pdfContent = base64_decode($response[&#39;responseData3&#39;]);</span>
-</code></pre></div></p>
-<h3 id="cufe-codigo-unico-de-factura-electronica">CUFE (Código Único de Factura Electrónica)<a class="headerlink" href="#cufe-codigo-unico-de-factura-electronica" title="Permanent link">&para;</a></h3>
+</code></pre></div>
+
+<h3 id="cufe-codigo-unico-de-factura-electronica">CUFE (Código Único de Factura Electrónica)</h3>
 <p><strong>Formato</strong>: <code>FE + Tipo + Serie + Número + Identificadores</code></p>
-<p><strong>Ejemplo</strong>:
-<div class="highlight"><pre><span></span><code>FE0120000155704849-2-2021320001202205018539617752001120008136739
+<p><strong>Ejemplo</strong>:</p>
+<div class="codehilite"><pre><span></span><code>FE0120000155704849-2-2021320001202205018539617752001120008136739
 │ │││                                                      │
 │ │││                                                      └─ Checksum
 │ ││└─ Serie y número
 │ │└── RUC emisor
 │ └─── Tipo de documento
 └───── Prefijo FE (Factura Electrónica)
-</code></pre></div></p>
+</code></pre></div>
+
 <hr />
-<h2 id="integracion-con-docucenter">Integración con DocuCenter<a class="headerlink" href="#integracion-con-docucenter" title="Permanent link">&para;</a></h2>
-<h3 id="modelo-pacconnection">Modelo: Pacconnection<a class="headerlink" href="#modelo-pacconnection" title="Permanent link">&para;</a></h3>
+<h2 id="integracion-con-docucenter">Integración con DocuCenter</h2>
+<h3 id="modelo-pacconnection">Modelo: Pacconnection</h3>
 <p>Agregar nuevo tipo de PAC:</p>
-<div class="highlight"><pre><span></span><code><span class="x">// En migration</span>
+<div class="codehilite"><pre><span></span><code><span class="x">// En migration</span>
 <span class="x">Schema::table(&#39;pacconnections&#39;, function (Blueprint $table) {</span>
 <span class="x">    // Campos específicos para Digifact</span>
 <span class="x">    $table-&gt;string(&#39;username&#39;)-&gt;nullable()-&gt;after(&#39;token&#39;);</span>
@@ -3065,10 +3139,11 @@ USERNAME: TESTUSER
 <span class="x">    }</span>
 <span class="x">}</span>
 </code></pre></div>
-<h3 id="servicio-digifactservice">Servicio: DigifactService<a class="headerlink" href="#servicio-digifactservice" title="Permanent link">&para;</a></h3>
+
+<h3 id="servicio-digifactservice">Servicio: DigifactService</h3>
 <p><strong>Ubicación</strong>: <code>app/Services/DigifactService.php</code></p>
 <p><strong>Estructura</strong>:</p>
-<div class="highlight"><pre><span></span><code><span class="x">namespace App\Services;</span>
+<div class="codehilite"><pre><span></span><code><span class="x">namespace App\Services;</span>
 
 <span class="x">use App\Models\Pacconnection;</span>
 <span class="x">use Illuminate\Support\Facades\Http;</span>
@@ -3276,9 +3351,10 @@ USERNAME: TESTUSER
 <span class="x">    }</span>
 <span class="x">}</span>
 </code></pre></div>
-<h3 id="job-certifydigifactinvoicejob">Job: CertifyDigifactInvoiceJob<a class="headerlink" href="#job-certifydigifactinvoicejob" title="Permanent link">&para;</a></h3>
+
+<h3 id="job-certifydigifactinvoicejob">Job: CertifyDigifactInvoiceJob</h3>
 <p><strong>Ubicación</strong>: <code>app/Jobs/CertifyDigifactInvoiceJob.php</code></p>
-<div class="highlight"><pre><span></span><code><span class="x">namespace App\Jobs;</span>
+<div class="codehilite"><pre><span></span><code><span class="x">namespace App\Jobs;</span>
 
 <span class="x">use App\Models\Order;</span>
 <span class="x">use App\Models\Pacconnection;</span>
@@ -3405,20 +3481,21 @@ USERNAME: TESTUSER
 <span class="x">    }</span>
 <span class="x">}</span>
 </code></pre></div>
+
 <hr />
-<h2 id="plan-de-implementacion">Plan de Implementación<a class="headerlink" href="#plan-de-implementacion" title="Permanent link">&para;</a></h2>
-<h3 id="fase-1-configuracion-inicial-2-3-dias">Fase 1: Configuración Inicial (2-3 días)<a class="headerlink" href="#fase-1-configuracion-inicial-2-3-dias" title="Permanent link">&para;</a></h3>
+<h2 id="plan-de-implementacion">Plan de Implementación</h2>
+<h3 id="fase-1-configuracion-inicial-2-3-dias">Fase 1: Configuración Inicial (2-3 días)</h3>
 <ol>
 <li><strong>Solicitar credenciales TEST</strong></li>
-<li>Email a <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#115;&#111;&#112;&#111;&#114;&#116;&#101;&#64;&#100;&#105;&#103;&#105;&#102;&#97;&#99;&#116;&#46;&#99;&#111;&#109;&#46;&#103;&#116;">&#115;&#111;&#112;&#111;&#114;&#116;&#101;&#64;&#100;&#105;&#103;&#105;&#102;&#97;&#99;&#116;&#46;&#99;&#111;&#109;&#46;&#103;&#116;</a></li>
+<li>Email a soporte@digifact.com.gt</li>
 <li>Proporcionar información requerida</li>
 <li>
 <p>Esperar habilitación</p>
 </li>
 <li>
 <p><strong>Crear migración para Pacconnection</strong>
-   <div class="highlight"><pre><span></span><code>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>docucenter-app-1<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>make:migration<span class="w"> </span>add_digifact_fields_to_pacconnections
-</code></pre></div></p>
+   <code>bash
+   docker exec -it docucenter-app-1 php artisan make:migration add_digifact_fields_to_pacconnections</code></p>
 </li>
 <li>
 <p><strong>Actualizar modelo Pacconnection</strong></p>
@@ -3427,12 +3504,12 @@ USERNAME: TESTUSER
 <li>Agregar campos específicos</li>
 <li>Implementar método <code>isTokenExpired()</code></li>
 </ol>
-<h3 id="fase-2-desarrollo-del-servicio-3-5-dias">Fase 2: Desarrollo del Servicio (3-5 días)<a class="headerlink" href="#fase-2-desarrollo-del-servicio-3-5-dias" title="Permanent link">&para;</a></h3>
+<h3 id="fase-2-desarrollo-del-servicio-3-5-dias">Fase 2: Desarrollo del Servicio (3-5 días)</h3>
 <ol>
 <li>
 <p><strong>Crear DigifactService</strong>
-   <div class="highlight"><pre><span></span><code>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>docucenter-app-1<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>make:class<span class="w"> </span>Services/DigifactService
-</code></pre></div></p>
+   <code>bash
+   docker exec -it docucenter-app-1 php artisan make:class Services/DigifactService</code></p>
 </li>
 <li>
 <p><strong>Implementar métodos</strong>:</p>
@@ -3446,11 +3523,11 @@ USERNAME: TESTUSER
 </li>
 <li>
 <p><strong>Testing unitario</strong>
-   <div class="highlight"><pre><span></span><code>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>docucenter-app-1<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>make:test<span class="w"> </span>DigifactServiceTest
-</code></pre></div></p>
+   <code>bash
+   docker exec -it docucenter-app-1 php artisan make:test DigifactServiceTest</code></p>
 </li>
 </ol>
-<h3 id="fase-3-generacion-de-xml-dgi-5-7-dias">Fase 3: Generación de XML DGI (5-7 días)<a class="headerlink" href="#fase-3-generacion-de-xml-dgi-5-7-dias" title="Permanent link">&para;</a></h3>
+<h3 id="fase-3-generacion-de-xml-dgi-5-7-dias">Fase 3: Generación de XML DGI (5-7 días)</h3>
 <ol>
 <li><strong>Estudiar esquema DGI NUC</strong></li>
 <li>Revisar documentación técnica DGI</li>
@@ -3460,8 +3537,7 @@ USERNAME: TESTUSER
 </li>
 <li>
 <p><strong>Crear template Blade para XML</strong>
-   <div class="highlight"><pre><span></span><code>resources/views/xml/digifact/invoice.blade.php
-</code></pre></div></p>
+   <code>resources/views/xml/digifact/invoice.blade.php</code></p>
 </li>
 <li>
 <p><strong>Validaciones XML</strong></p>
@@ -3469,12 +3545,12 @@ USERNAME: TESTUSER
 <li>Crear validador contra XSD DGI</li>
 <li>Implementar reglas de negocio</li>
 </ol>
-<h3 id="fase-4-job-de-certificacion-2-3-dias">Fase 4: Job de Certificación (2-3 días)<a class="headerlink" href="#fase-4-job-de-certificacion-2-3-dias" title="Permanent link">&para;</a></h3>
+<h3 id="fase-4-job-de-certificacion-2-3-dias">Fase 4: Job de Certificación (2-3 días)</h3>
 <ol>
 <li>
 <p><strong>Crear Job</strong>
-   <div class="highlight"><pre><span></span><code>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>docucenter-app-1<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>make:job<span class="w"> </span>CertifyDigifactInvoiceJob
-</code></pre></div></p>
+   <code>bash
+   docker exec -it docucenter-app-1 php artisan make:job CertifyDigifactInvoiceJob</code></p>
 </li>
 <li>
 <p><strong>Implementar estados granulares</strong></p>
@@ -3486,16 +3562,16 @@ USERNAME: TESTUSER
 </li>
 <li>
 <p><strong>Testing del Job</strong>
-   <div class="highlight"><pre><span></span><code>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>docucenter-app-1<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>make:test<span class="w"> </span>CertifyDigifactInvoiceJobTest
-</code></pre></div></p>
+   <code>bash
+   docker exec -it docucenter-app-1 php artisan make:test CertifyDigifactInvoiceJobTest</code></p>
 </li>
 </ol>
-<h3 id="fase-5-interfaz-de-usuario-3-4-dias">Fase 5: Interfaz de Usuario (3-4 días)<a class="headerlink" href="#fase-5-interfaz-de-usuario-3-4-dias" title="Permanent link">&para;</a></h3>
+<h3 id="fase-5-interfaz-de-usuario-3-4-dias">Fase 5: Interfaz de Usuario (3-4 días)</h3>
 <ol>
 <li>
 <p><strong>Componente Livewire para configuración</strong>
-   <div class="highlight"><pre><span></span><code>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>docucenter-app-1<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>make:livewire<span class="w"> </span>DigifactConnectionForm
-</code></pre></div></p>
+   <code>bash
+   docker exec -it docucenter-app-1 php artisan make:livewire DigifactConnectionForm</code></p>
 </li>
 <li>
 <p><strong>Formulario de configuración</strong>:</p>
@@ -3515,7 +3591,7 @@ USERNAME: TESTUSER
 <li>Validación de credenciales</li>
 <li>Feedback visual</li>
 </ol>
-<h3 id="fase-6-testing-integral-3-5-dias">Fase 6: Testing Integral (3-5 días)<a class="headerlink" href="#fase-6-testing-integral-3-5-dias" title="Permanent link">&para;</a></h3>
+<h3 id="fase-6-testing-integral-3-5-dias">Fase 6: Testing Integral (3-5 días)</h3>
 <ol>
 <li><strong>Testing en ambiente TEST</strong></li>
 <li>Crear script en <code>docs/testing/digifact-test.sh</code></li>
@@ -3525,8 +3601,8 @@ USERNAME: TESTUSER
 </li>
 <li>
 <p><strong>Command de prueba</strong>
-   <div class="highlight"><pre><span></span><code>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>docucenter-app-1<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>make:command<span class="w"> </span>DigifactTestCommand
-</code></pre></div></p>
+   <code>bash
+   docker exec -it docucenter-app-1 php artisan make:command DigifactTestCommand</code></p>
 </li>
 <li>
 <p><strong>Casos de prueba</strong>:</p>
@@ -3537,7 +3613,7 @@ USERNAME: TESTUSER
 <li>Certificación exitosa</li>
 <li>Consulta de documentos</li>
 </ol>
-<h3 id="fase-7-migracion-a-productivo-2-3-dias">Fase 7: Migración a Productivo (2-3 días)<a class="headerlink" href="#fase-7-migracion-a-productivo-2-3-dias" title="Permanent link">&para;</a></h3>
+<h3 id="fase-7-migracion-a-productivo-2-3-dias">Fase 7: Migración a Productivo (2-3 días)</h3>
 <ol>
 <li><strong>Solicitar credenciales productivas</strong></li>
 <li><strong>Proporcionar firma electrónica</strong></li>
@@ -3545,7 +3621,7 @@ USERNAME: TESTUSER
 <li><strong>Pruebas con factura real</strong></li>
 <li>**Monitoreo inicial</li>
 </ol>
-<h3 id="fase-8-documentacion-2-dias">Fase 8: Documentación (2 días)<a class="headerlink" href="#fase-8-documentacion-2-dias" title="Permanent link">&para;</a></h3>
+<h3 id="fase-8-documentacion-2-dias">Fase 8: Documentación (2 días)</h3>
 <ol>
 <li><strong>Documentación técnica</strong></li>
 <li>Ubicar en <code>docs/technical/digifact/</code></li>
@@ -3561,10 +3637,10 @@ USERNAME: TESTUSER
 <li>FAQ</li>
 </ol>
 <hr />
-<h2 id="testing-y-validacion">Testing y Validación<a class="headerlink" href="#testing-y-validacion" title="Permanent link">&para;</a></h2>
-<h3 id="script-de-testing">Script de Testing<a class="headerlink" href="#script-de-testing" title="Permanent link">&para;</a></h3>
+<h2 id="testing-y-validacion">Testing y Validación</h2>
+<h3 id="script-de-testing">Script de Testing</h3>
 <p><strong>Ubicación</strong>: <code>docs/testing/digifact-test.sh</code></p>
-<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+<div class="codehilite"><pre><span></span><code><span class="ch">#!/bin/bash</span>
 
 <span class="c1"># Script de testing para Digifact PAC</span>
 <span class="c1"># Ubicación: docs/testing/digifact-test.sh</span>
@@ -3633,8 +3709,9 @@ test_complete<span class="o">()</span><span class="w"> </span><span class="o">{<
 <span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;  Testing completado&quot;</span>
 <span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;======================================&quot;</span>
 </code></pre></div>
-<h3 id="command-digifacttestcommand">Command: DigifactTestCommand<a class="headerlink" href="#command-digifacttestcommand" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">namespace App\Console\Commands;</span>
+
+<h3 id="command-digifacttestcommand">Command: DigifactTestCommand</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">namespace App\Console\Commands;</span>
 
 <span class="x">use App\Models\Organization;</span>
 <span class="x">use App\Models\Pacconnection;</span>
@@ -3766,10 +3843,11 @@ test_complete<span class="o">()</span><span class="w"> </span><span class="o">{<
 <span class="x">    }</span>
 <span class="x">}</span>
 </code></pre></div>
+
 <hr />
-<h2 id="consideraciones-tecnicas">Consideraciones Técnicas<a class="headerlink" href="#consideraciones-tecnicas" title="Permanent link">&para;</a></h2>
-<h3 id="1-multi-tenant-con-digifact">1. Multi-Tenant con Digifact<a class="headerlink" href="#1-multi-tenant-con-digifact" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">// En Job o Service</span>
+<h2 id="consideraciones-tecnicas">Consideraciones Técnicas</h2>
+<h3 id="1-multi-tenant-con-digifact">1. Multi-Tenant con Digifact</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">// En Job o Service</span>
 <span class="x">protected function setDatabaseConnection(Organization $organization)</span>
 <span class="x">{</span>
 <span class="x">    DB::connection()-&gt;useDatabase($organization-&gt;database);</span>
@@ -3785,19 +3863,21 @@ test_complete<span class="o">()</span><span class="w"> </span><span class="o">{<
 <span class="x">// ... operaciones en BD específica</span>
 <span class="x">$this-&gt;setDefaultConnection();</span>
 </code></pre></div>
-<h3 id="2-manejo-de-token">2. Manejo de Token<a class="headerlink" href="#2-manejo-de-token" title="Permanent link">&para;</a></h3>
+
+<h3 id="2-manejo-de-token">2. Manejo de Token</h3>
 <ul>
 <li><strong>Almacenar fecha de expiración</strong>: <code>token_expires_at</code></li>
 <li><strong>Verificar antes de cada request</strong>: <code>isTokenExpired()</code></li>
 <li><strong>Renovar automáticamente</strong>: En método <code>certifyDocument()</code></li>
 </ul>
-<div class="highlight"><pre><span></span><code><span class="x">if ($this-&gt;connection-&gt;isTokenExpired()) {</span>
+<div class="codehilite"><pre><span></span><code><span class="x">if ($this-&gt;connection-&gt;isTokenExpired()) {</span>
 <span class="x">    $this-&gt;authenticate();</span>
 <span class="x">}</span>
 </code></pre></div>
-<h3 id="3-formatos-de-respuesta">3. Formatos de Respuesta<a class="headerlink" href="#3-formatos-de-respuesta" title="Permanent link">&para;</a></h3>
+
+<h3 id="3-formatos-de-respuesta">3. Formatos de Respuesta</h3>
 <p>Todos los documentos vienen en <strong>base64</strong>:</p>
-<div class="highlight"><pre><span></span><code><span class="x">// Decodificar y guardar</span>
+<div class="codehilite"><pre><span></span><code><span class="x">// Decodificar y guardar</span>
 <span class="x">$pdfContent = base64_decode($result[&#39;pdf_base64&#39;]);</span>
 <span class="x">Storage::put($path, $pdfContent);</span>
 
@@ -3806,44 +3886,49 @@ test_complete<span class="o">()</span><span class="w"> </span><span class="o">{<
 <span class="x">    -&gt;header(&#39;Content-Type&#39;, &#39;application/pdf&#39;)</span>
 <span class="x">    -&gt;header(&#39;Content-Disposition&#39;, &#39;inline; filename=&quot;invoice.pdf&quot;&#39;);</span>
 </code></pre></div>
-<h3 id="4-validacion-de-ruc">4. Validación de RUC<a class="headerlink" href="#4-validacion-de-ruc" title="Permanent link">&para;</a></h3>
+
+<h3 id="4-validacion-de-ruc">4. Validación de RUC</h3>
 <p>Para <code>SHARED_GETINFOTAXcom</code>, el RUC debe tener 20 caracteres:</p>
-<div class="highlight"><pre><span></span><code><span class="x">$formattedRuc = str_pad($ruc, 20, &#39;0&#39;, STR_PAD_LEFT);</span>
+<div class="codehilite"><pre><span></span><code><span class="x">$formattedRuc = str_pad($ruc, 20, &#39;0&#39;, STR_PAD_LEFT);</span>
 <span class="x">// 23824-0930-212623 → 00023824-0930-212623</span>
 </code></pre></div>
-<h3 id="5-throughput-y-colas-redis">5. Throughput y Colas Redis<a class="headerlink" href="#5-throughput-y-colas-redis" title="Permanent link">&para;</a></h3>
+
+<h3 id="5-throughput-y-colas-redis">5. Throughput y Colas Redis</h3>
 <ul>
 <li><strong>Configurar worker dedicado</strong> para Digifact</li>
 <li><strong>Rate limiting</strong> si es necesario</li>
 <li><strong>Retry strategy</strong> para errores transitorios</li>
 </ul>
-<div class="highlight"><pre><span></span><code><span class="x">// En Job</span>
+<div class="codehilite"><pre><span></span><code><span class="x">// En Job</span>
 <span class="x">public $tries = 3;</span>
 <span class="x">public $backoff = [60, 300, 900]; // 1min, 5min, 15min</span>
 </code></pre></div>
-<h3 id="6-logging-y-debugging">6. Logging y Debugging<a class="headerlink" href="#6-logging-y-debugging" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">Log::channel(&#39;digifact&#39;)-&gt;info(&#39;Request&#39;, [</span>
+
+<h3 id="6-logging-y-debugging">6. Logging y Debugging</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">Log::channel(&#39;digifact&#39;)-&gt;info(&#39;Request&#39;, [</span>
 <span class="x">    &#39;organization_id&#39; =&gt; $this-&gt;organization-&gt;id,</span>
 <span class="x">    &#39;order_id&#39; =&gt; $this-&gt;order-&gt;id,</span>
 <span class="x">    &#39;state&#39; =&gt; $this-&gt;state,</span>
 <span class="x">    &#39;endpoint&#39; =&gt; $endpoint,</span>
 <span class="x">]);</span>
 </code></pre></div>
+
 <p>Crear canal específico en <code>config/logging.php</code>:</p>
-<div class="highlight"><pre><span></span><code><span class="x">&#39;digifact&#39; =&gt; [</span>
+<div class="codehilite"><pre><span></span><code><span class="x">&#39;digifact&#39; =&gt; [</span>
 <span class="x">    &#39;driver&#39; =&gt; &#39;daily&#39;,</span>
 <span class="x">    &#39;path&#39; =&gt; storage_path(&#39;logs/digifact.log&#39;),</span>
 <span class="x">    &#39;level&#39; =&gt; &#39;debug&#39;,</span>
 <span class="x">    &#39;days&#39; =&gt; 14,</span>
 <span class="x">],</span>
 </code></pre></div>
-<h3 id="7-firma-electronica-productivo">7. Firma Electrónica (Productivo)<a class="headerlink" href="#7-firma-electronica-productivo" title="Permanent link">&para;</a></h3>
+
+<h3 id="7-firma-electronica-productivo">7. Firma Electrónica (Productivo)</h3>
 <ul>
 <li><strong>Archivo</strong>: Formato .pfx o .p12</li>
 <li><strong>Contraseña</strong>: Requerida para usar firma</li>
 <li><strong>Almacenamiento</strong>: Cifrado en base de datos o storage seguro</li>
 </ul>
-<div class="highlight"><pre><span></span><code><span class="x">// Migration</span>
+<div class="codehilite"><pre><span></span><code><span class="x">// Migration</span>
 <span class="x">$table-&gt;binary(&#39;firma_electronica&#39;)-&gt;nullable();</span>
 <span class="x">$table-&gt;string(&#39;firma_password&#39;)-&gt;nullable();</span>
 
@@ -3853,8 +3938,9 @@ test_complete<span class="o">()</span><span class="w"> </span><span class="o">{<
 <span class="x">// Descifrar al usar</span>
 <span class="x">decrypt($this-&gt;connection-&gt;firma_password)</span>
 </code></pre></div>
-<h3 id="8-manejo-de-errores">8. Manejo de Errores<a class="headerlink" href="#8-manejo-de-errores" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">try {</span>
+
+<h3 id="8-manejo-de-errores">8. Manejo de Errores</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">try {</span>
 <span class="x">    $result = $service-&gt;certifyDocument($xml);</span>
 <span class="x">} catch (\Exception $e) {</span>
 <span class="x">    // Clasificar error</span>
@@ -3872,9 +3958,10 @@ test_complete<span class="o">()</span><span class="w"> </span><span class="o">{<
 <span class="x">    }</span>
 <span class="x">}</span>
 </code></pre></div>
+
 <hr />
-<h2 id="comparacion-con-otros-pacs">Comparación con Otros PACs<a class="headerlink" href="#comparacion-con-otros-pacs" title="Permanent link">&para;</a></h2>
-<h3 id="digifact-vs-thefactoryhka">Digifact vs TheFactoryHKA<a class="headerlink" href="#digifact-vs-thefactoryhka" title="Permanent link">&para;</a></h3>
+<h2 id="comparacion-con-otros-pacs">Comparación con Otros PACs</h2>
+<h3 id="digifact-vs-thefactoryhka">Digifact vs TheFactoryHKA</h3>
 <table>
 <thead>
 <tr>
@@ -3921,7 +4008,7 @@ test_complete<span class="o">()</span><span class="w"> </span><span class="o">{<
 </tr>
 </tbody>
 </table>
-<h3 id="digifact-vs-alanube">Digifact vs Alanube<a class="headerlink" href="#digifact-vs-alanube" title="Permanent link">&para;</a></h3>
+<h3 id="digifact-vs-alanube">Digifact vs Alanube</h3>
 <table>
 <thead>
 <tr>
@@ -3959,34 +4046,34 @@ test_complete<span class="o">()</span><span class="w"> </span><span class="o">{<
 </tbody>
 </table>
 <hr />
-<h2 id="recursos-y-soporte">Recursos y Soporte<a class="headerlink" href="#recursos-y-soporte" title="Permanent link">&para;</a></h2>
-<h3 id="contacto-digifact">Contacto Digifact<a class="headerlink" href="#contacto-digifact" title="Permanent link">&para;</a></h3>
+<h2 id="recursos-y-soporte">Recursos y Soporte</h2>
+<h3 id="contacto-digifact">Contacto Digifact</h3>
 <ul>
-<li><strong>Email</strong>: <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#115;&#111;&#112;&#111;&#114;&#116;&#101;&#64;&#100;&#105;&#103;&#105;&#102;&#97;&#99;&#116;&#46;&#99;&#111;&#109;&#46;&#103;&#116;">&#115;&#111;&#112;&#111;&#114;&#116;&#101;&#64;&#100;&#105;&#103;&#105;&#102;&#97;&#99;&#116;&#46;&#99;&#111;&#109;&#46;&#103;&#116;</a></li>
+<li><strong>Email</strong>: soporte@digifact.com.gt</li>
 <li><strong>Teléfono</strong>: 2319-1921 (Panamá)</li>
 <li>Opción 2: Soporte Técnico</li>
-<li><strong>Website</strong>: <a href="https://www.digifact.com.pa">https://www.digifact.com.pa</a></li>
+<li><strong>Website</strong>: https://www.digifact.com.pa</li>
 </ul>
-<h3 id="formato-de-consultas-por-email">Formato de Consultas por Email<a class="headerlink" href="#formato-de-consultas-por-email" title="Permanent link">&para;</a></h3>
+<h3 id="formato-de-consultas-por-email">Formato de Consultas por Email</h3>
 <p><strong>Subject</strong>: <code>[RUC] Tipo Consulta_REST</code></p>
 <p>Ejemplo: <code>[23824-0930-212623] Tipo Consulta_REST</code></p>
-<h3 id="tipos-de-consulta">Tipos de Consulta<a class="headerlink" href="#tipos-de-consulta" title="Permanent link">&para;</a></h3>
+<h3 id="tipos-de-consulta">Tipos de Consulta</h3>
 <ul>
 <li><strong>REST</strong>: Dudas sobre API REST</li>
 <li><strong>GENERAL</strong>: Consultas generales</li>
 <li><strong>VENTAS</strong>: Aspectos comerciales</li>
 <li><strong>ADMON</strong>: Aspectos contractuales</li>
 </ul>
-<h3 id="recursos-dgi">Recursos DGI<a class="headerlink" href="#recursos-dgi" title="Permanent link">&para;</a></h3>
+<h3 id="recursos-dgi">Recursos DGI</h3>
 <ul>
-<li><strong>Documentación Técnica</strong>: <a href="https://dgi.mef.gob.pa/_7FacturaElectronica/source/GacetaNo_28608b_20180910FA.pdf">https://dgi.mef.gob.pa/_7FacturaElectronica/source/GacetaNo_28608b_20180910FA.pdf</a></li>
-<li><strong>Proyecto Piloto</strong>: <a href="https://dgi.mef.gob.pa/_7FacturaElectronica/ftpiloto.php">https://dgi.mef.gob.pa/_7FacturaElectronica/ftpiloto.php</a></li>
+<li><strong>Documentación Técnica</strong>: https://dgi.mef.gob.pa/_7FacturaElectronica/source/GacetaNo_28608b_20180910FA.pdf</li>
+<li><strong>Proyecto Piloto</strong>: https://dgi.mef.gob.pa/_7FacturaElectronica/ftpiloto.php</li>
 <li><strong>Agencia Virtual</strong>: Para obtener firma electrónica</li>
 </ul>
 <hr />
-<h2 id="conclusion">Conclusión<a class="headerlink" href="#conclusion" title="Permanent link">&para;</a></h2>
+<h2 id="conclusion">Conclusión</h2>
 <p>Digifact representa una opción robusta y moderna para la certificación de facturas electrónicas en Panamá. Su API REST es estándar y bien documentada, facilitando la integración con DocuCenter.</p>
-<h3 id="ventajas-principales">Ventajas Principales<a class="headerlink" href="#ventajas-principales" title="Permanent link">&para;</a></h3>
+<h3 id="ventajas-principales">Ventajas Principales</h3>
 <ol>
 <li><strong>API REST moderna</strong>: Fácil de consumir</li>
 <li><strong>Token de larga duración</strong>: Menos overhead de autenticación</li>
@@ -3994,7 +4081,7 @@ test_complete<span class="o">()</span><span class="w"> </span><span class="o">{<
 <li><strong>Soporte bilingüe</strong>: Email y teléfono</li>
 <li><strong>Documentación clara</strong>: Ejemplos concretos</li>
 </ol>
-<h3 id="proximos-pasos">Próximos Pasos<a class="headerlink" href="#proximos-pasos" title="Permanent link">&para;</a></h3>
+<h3 id="proximos-pasos">Próximos Pasos</h3>
 <ol>
 <li>✅ Análisis de documentación completado</li>
 <li>⏳ Solicitar credenciales TEST</li>
@@ -4004,9 +4091,9 @@ test_complete<span class="o">()</span><span class="w"> </span><span class="o">{<
 <li>⏳ Migración a productivo</li>
 </ol>
 <hr />
-<h2 id="anexos">Anexos<a class="headerlink" href="#anexos" title="Permanent link">&para;</a></h2>
-<h3 id="a-estructura-xml-basica-dgi">A. Estructura XML Básica DGI<a class="headerlink" href="#a-estructura-xml-basica-dgi" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
+<h2 id="anexos">Anexos</h2>
+<h3 id="a-estructura-xml-basica-dgi">A. Estructura XML Básica DGI</h3>
+<div class="codehilite"><pre><span></span><code><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
 <span class="nt">&lt;rFE</span><span class="w"> </span><span class="na">xmlns:xsd=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema&quot;</span><span class="w"> </span>
 <span class="w">     </span><span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><span class="nt">&gt;</span>
 <span class="w">  </span><span class="nt">&lt;dFechaEmis&gt;</span>2024-12-26<span class="nt">&lt;/dFechaEmis&gt;</span>
@@ -4021,7 +4108,8 @@ test_complete<span class="o">()</span><span class="w"> </span><span class="o">{<
 <span class="w">  </span><span class="nt">&lt;/dFactura&gt;</span>
 <span class="nt">&lt;/rFE&gt;</span>
 </code></pre></div>
-<h3 id="b-codigos-de-respuesta-comunes">B. Códigos de Respuesta Comunes<a class="headerlink" href="#b-codigos-de-respuesta-comunes" title="Permanent link">&para;</a></h3>
+
+<h3 id="b-codigos-de-respuesta-comunes">B. Códigos de Respuesta Comunes</h3>
 <table>
 <thead>
 <tr>
@@ -4058,20 +4146,20 @@ test_complete<span class="o">()</span><span class="w"> </span><span class="o">{<
 </tr>
 </tbody>
 </table>
-<h3 id="c-checklist-de-implementacion">C. Checklist de Implementación<a class="headerlink" href="#c-checklist-de-implementacion" title="Permanent link">&para;</a></h3>
-<ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Solicitar credenciales TEST</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Crear migración para Pacconnection</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Implementar DigifactService</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Crear Job de certificación</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Generar XML según esquema DGI</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Implementar UI de configuración</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Testing en ambiente TEST</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Solicitar credenciales productivas</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Proporcionar firma electrónica</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Testing en ambiente productivo</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Documentación final</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Capacitación a usuarios</li>
+<h3 id="c-checklist-de-implementacion">C. Checklist de Implementación</h3>
+<ul>
+<li>[ ] Solicitar credenciales TEST</li>
+<li>[ ] Crear migración para Pacconnection</li>
+<li>[ ] Implementar DigifactService</li>
+<li>[ ] Crear Job de certificación</li>
+<li>[ ] Generar XML según esquema DGI</li>
+<li>[ ] Implementar UI de configuración</li>
+<li>[ ] Testing en ambiente TEST</li>
+<li>[ ] Solicitar credenciales productivas</li>
+<li>[ ] Proporcionar firma electrónica</li>
+<li>[ ] Testing en ambiente productivo</li>
+<li>[ ] Documentación final</li>
+<li>[ ] Capacitación a usuarios</li>
 </ul>
 <hr />
 <p><strong>Documento generado</strong>: 26 de diciembre de 2025<br />
@@ -4130,7 +4218,7 @@ test_complete<span class="o">()</span><span class="w"> </span><span class="o">{<
       
       
     
-    <a href="https://github.com/aghabrego/docucenter" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+    <a href="https://github.com/aghabrego/docucenter-public" target="_blank" rel="noopener" title="github.com" class="md-social__link">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
     </a>
   

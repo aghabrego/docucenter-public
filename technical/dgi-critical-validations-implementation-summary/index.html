@@ -233,7 +233,7 @@
           
   
   
-  APIs
+  API Documentation
 
         </a>
       </li>
@@ -269,7 +269,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../" class="md-tabs__link">
+        <a href="../README.md" class="md-tabs__link">
           
   
   
@@ -298,6 +298,25 @@
         </a>
       </li>
     
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../testing/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Sistema de Testing
+
+      </a>
+    </li>
   
 
       
@@ -404,7 +423,7 @@
   <span class="md-ellipsis">
     
   
-    APIs
+    API Documentation
   
 
     
@@ -420,7 +439,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    APIs
+    API Documentation
   
 
           </label>
@@ -1363,7 +1382,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
+      <a href="../README.md" class="md-nav__link">
         
   
   
@@ -1712,6 +1731,33 @@
           </ul>
         </nav>
       
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sistema de Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -2173,35 +2219,36 @@
   
 
 
-<h1 id="implementacion-de-validaciones-criticas-dgi-resumen-tecnico">IMPLEMENTACIÓN DE VALIDACIONES CRÍTICAS DGI - RESUMEN TÉCNICO<a class="headerlink" href="#implementacion-de-validaciones-criticas-dgi-resumen-tecnico" title="Permanent link">&para;</a></h1>
-<h2 id="objetivo-completado">🎯 OBJETIVO COMPLETADO<a class="headerlink" href="#objetivo-completado" title="Permanent link">&para;</a></h2>
+<h1 id="implementacion-de-validaciones-criticas-dgi-resumen-tecnico">IMPLEMENTACIÓN DE VALIDACIONES CRÍTICAS DGI - RESUMEN TÉCNICO</h1>
+<h2 id="objetivo-completado">🎯 OBJETIVO COMPLETADO</h2>
 <p>Se han implementado exitosamente las <strong>validaciones automáticas críticas</strong> para el cumplimiento de la especificación técnica DGI Panamá en el sistema DocuCenter.</p>
-<h2 id="mejora-en-cumplimiento">📊 MEJORA EN CUMPLIMIENTO<a class="headerlink" href="#mejora-en-cumplimiento" title="Permanent link">&para;</a></h2>
+<h2 id="mejora-en-cumplimiento">📊 MEJORA EN CUMPLIMIENTO</h2>
 <ul>
 <li><strong>Antes</strong>: ~70% completitud DGI</li>
 <li><strong>Ahora</strong>: ~90% completitud DGI</li>
 <li><strong>Incremento</strong>: +20% cumplimiento normativo</li>
 </ul>
-<h2 id="validaciones-criticas-implementadas">🔧 VALIDACIONES CRÍTICAS IMPLEMENTADAS<a class="headerlink" href="#validaciones-criticas-implementadas" title="Permanent link">&para;</a></h2>
-<h3 id="1-auto-asignacion-exportacion-tipo-03">1. AUTO-ASIGNACIÓN EXPORTACIÓN (Tipo 03)<a class="headerlink" href="#1-auto-asignacion-exportacion-tipo-03" title="Permanent link">&para;</a></h3>
+<h2 id="validaciones-criticas-implementadas">🔧 VALIDACIONES CRÍTICAS IMPLEMENTADAS</h2>
+<h3 id="1-auto-asignacion-exportacion-tipo-03">1. AUTO-ASIGNACIÓN EXPORTACIÓN (Tipo 03)</h3>
 <p><strong>Archivo</strong>: <code>app/Http/Livewire/Admin/Einvoice/Create.php</code>
 <strong>Método</strong>: <code>updatedTipeDocument()</code></p>
-<div class="highlight"><pre><span></span><code><span class="x">// VALIDACIÓN CRÍTICA 1: Auto-asignación para Exportación (Tipo 03)</span>
+<div class="codehilite"><pre><span></span><code><span class="x">// VALIDACIÓN CRÍTICA 1: Auto-asignación para Exportación (Tipo 03)</span>
 <span class="x">if ($value === &#39;3&#39;) {</span>
 <span class="x">    $this-&gt;receptor_tipo = &#39;4&#39;; // Forzar gobierno/extranjero</span>
 <span class="x">    $this-&gt;destinoOperacion = &#39;2&#39;; // Forzar exportación</span>
 <span class="x">    // ... notificación al usuario</span>
 <span class="x">}</span>
 </code></pre></div>
+
 <p><strong>Funcionalidad</strong>:
 - ✅ Auto-asigna <code>receptor_tipo = 4</code> (Gobierno/Extranjero)
 - ✅ Auto-asigna <code>destinoOperacion = 2</code> (Extranjero)
 - ✅ Campos INCOTERMS se vuelven obligatorios
 - ✅ Notificación al usuario sobre cambios automáticos</p>
-<h3 id="2-bloqueo-receptor-incompatible-tipos-0102">2. BLOQUEO RECEPTOR INCOMPATIBLE (Tipos 01/02)<a class="headerlink" href="#2-bloqueo-receptor-incompatible-tipos-0102" title="Permanent link">&para;</a></h3>
+<h3 id="2-bloqueo-receptor-incompatible-tipos-0102">2. BLOQUEO RECEPTOR INCOMPATIBLE (Tipos 01/02)</h3>
 <p><strong>Archivo</strong>: <code>app/Http/Livewire/Admin/Einvoice/Create.php</code>
 <strong>Métodos</strong>: <code>updatedTipeDocument()</code>, <code>updatedReceptorTipo()</code></p>
-<div class="highlight"><pre><span></span><code><span class="x">// VALIDACIÓN CRÍTICA 2: Bloqueo de receptor incompatible</span>
+<div class="codehilite"><pre><span></span><code><span class="x">// VALIDACIÓN CRÍTICA 2: Bloqueo de receptor incompatible</span>
 <span class="x">if (in_array($value, [&#39;1&#39;, &#39;2&#39;])) {</span>
 <span class="x">    if ($this-&gt;receptor_tipo === &#39;4&#39;) {</span>
 <span class="x">        $this-&gt;receptor_tipo = &#39;1&#39;; // Cambiar a contribuyente</span>
@@ -2210,15 +2257,16 @@
 <span class="x">    $this-&gt;destinoOperacion = &#39;1&#39;; // Forzar destino nacional</span>
 <span class="x">}</span>
 </code></pre></div>
+
 <p><strong>Funcionalidad</strong>:
 - ✅ NO permite <code>receptor_tipo = 4</code> para facturas nacionales
 - ✅ Fuerza <code>destinoOperacion = 1</code> (Nacional)
 - ✅ Auto-corrige receptor incompatible a "Contribuyente"
 - ✅ Validación bidireccional (tipo→receptor y receptor→tipo)</p>
-<h3 id="3-validacion-notas-creditodebito-tipos-0405">3. VALIDACIÓN NOTAS CRÉDITO/DÉBITO (Tipos 04/05)<a class="headerlink" href="#3-validacion-notas-creditodebito-tipos-0405" title="Permanent link">&para;</a></h3>
+<h3 id="3-validacion-notas-creditodebito-tipos-0405">3. VALIDACIÓN NOTAS CRÉDITO/DÉBITO (Tipos 04/05)</h3>
 <p><strong>Archivo</strong>: <code>app/Http/Livewire/Admin/Einvoice/Create.php</code>
 <strong>Método</strong>: <code>validateReferenceDate()</code></p>
-<div class="highlight"><pre><span></span><code><span class="x">private function validateReferenceDate()</span>
+<div class="codehilite"><pre><span></span><code><span class="x">private function validateReferenceDate()</span>
 <span class="x">{</span>
 <span class="x">    // DGI: Máximo 180 días para notas de crédito/débito</span>
 <span class="x">    if ($diasDiferencia &gt; 180) {</span>
@@ -2227,15 +2275,16 @@
 <span class="x">    }</span>
 <span class="x">}</span>
 </code></pre></div>
+
 <p><strong>Funcionalidad</strong>:
 - ✅ Validación automática de 180 días máximo
 - ✅ CUFE requerido con exactamente 96 caracteres
 - ✅ Todos los campos de referencia obligatorios
 - ✅ Validación de montos vs documento original</p>
-<h3 id="4-reseteo-condicional-inteligente">4. RESETEO CONDICIONAL INTELIGENTE<a class="headerlink" href="#4-reseteo-condicional-inteligente" title="Permanent link">&para;</a></h3>
+<h3 id="4-reseteo-condicional-inteligente">4. RESETEO CONDICIONAL INTELIGENTE</h3>
 <p><strong>Archivo</strong>: <code>app/Http/Livewire/Admin/Einvoice/Create.php</code>
 <strong>Método</strong>: <code>applyConditionalFieldReset()</code></p>
-<div class="highlight"><pre><span></span><code><span class="x">private function applyConditionalFieldReset($documentType)</span>
+<div class="codehilite"><pre><span></span><code><span class="x">private function applyConditionalFieldReset($documentType)</span>
 <span class="x">{</span>
 <span class="x">    switch ($documentType) {</span>
 <span class="x">        case &#39;1&#39;: // Factura</span>
@@ -2248,40 +2297,43 @@
 <span class="x">    }</span>
 <span class="x">}</span>
 </code></pre></div>
+
 <p><strong>Funcionalidad</strong>:
 - ✅ Limpia campos no aplicables según tipo de documento
 - ✅ Previene datos inconsistentes entre tipos
 - ✅ Reseteo inteligente sin afectar campos comunes
 - ✅ Preserva datos relevantes durante transiciones</p>
-<h2 id="campos-nuevos-agregados">📋 CAMPOS NUEVOS AGREGADOS<a class="headerlink" href="#campos-nuevos-agregados" title="Permanent link">&para;</a></h2>
-<h3 id="campo-b602-nombreemisorreferenciado">Campo B602: nombreEmisorReferenciado<a class="headerlink" href="#campo-b602-nombreemisorreferenciado" title="Permanent link">&para;</a></h3>
+<h2 id="campos-nuevos-agregados">📋 CAMPOS NUEVOS AGREGADOS</h2>
+<h3 id="campo-b602-nombreemisorreferenciado">Campo B602: nombreEmisorReferenciado</h3>
 <p><strong>Archivo</strong>: <code>resources/views/livewire/admin/einvoice/create.blade.php</code></p>
-<div class="highlight"><pre><span></span><code>&lt;div class=&#39;form-group&#39;&gt;
-    &lt;label for=&#39;nombreEmisorReferenciado&#39; class=&#39;control-label&#39;&gt;
-        Nombre del Emisor Referenciado (B602)
-    &lt;/label&gt;
-    &lt;input type=&#39;text&#39; id=&#39;nombreEmisorReferenciado&#39; 
-           wire:model.lazy=&#39;nombreEmisorReferenciado&#39; 
-           class=&quot;form-control @error(&#39;nombreEmisorReferenciado&#39;) is-invalid @enderror&quot;&gt;
-    &lt;small class=&quot;form-text text-muted&quot;&gt;Campo opcional según especificación DGI&lt;/small&gt;
-&lt;/div&gt;
+<div class="codehilite"><pre><span></span><code><span class="o">&lt;</span><span class="n">div</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="err">&#39;</span><span class="n">form</span><span class="o">-</span><span class="n">group</span><span class="err">&#39;</span><span class="o">&gt;</span>
+<span class="w">    </span><span class="o">&lt;</span><span class="n">label</span><span class="w"> </span><span class="k">for</span><span class="o">=</span><span class="err">&#39;</span><span class="n">nombreEmisorReferenciado</span><span class="err">&#39;</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="err">&#39;</span><span class="n">control</span><span class="o">-</span><span class="n">label</span><span class="err">&#39;</span><span class="o">&gt;</span>
+<span class="w">        </span><span class="n">Nombre</span><span class="w"> </span><span class="n">del</span><span class="w"> </span><span class="n">Emisor</span><span class="w"> </span><span class="n">Referenciado</span><span class="w"> </span><span class="p">(</span><span class="n">B602</span><span class="p">)</span>
+<span class="w">    </span><span class="o">&lt;/</span><span class="n">label</span><span class="o">&gt;</span>
+<span class="w">    </span><span class="o">&lt;</span><span class="n">input</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="err">&#39;</span><span class="n">text</span><span class="err">&#39;</span><span class="w"> </span><span class="kt">id</span><span class="o">=</span><span class="err">&#39;</span><span class="n">nombreEmisorReferenciado</span><span class="err">&#39;</span><span class="w"> </span>
+<span class="w">           </span><span class="nl">wire</span><span class="p">:</span><span class="n">model</span><span class="p">.</span><span class="n">lazy</span><span class="o">=</span><span class="err">&#39;</span><span class="n">nombreEmisorReferenciado</span><span class="err">&#39;</span><span class="w"> </span>
+<span class="w">           </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;form-control @error(&#39;nombreEmisorReferenciado&#39;) is-invalid @enderror&quot;</span><span class="o">&gt;</span>
+<span class="w">    </span><span class="o">&lt;</span><span class="n">small</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;form-text text-muted&quot;</span><span class="o">&gt;</span><span class="n">Campo</span><span class="w"> </span><span class="n">opcional</span><span class="w"> </span><span class="n">según</span><span class="w"> </span><span class="n">especificación</span><span class="w"> </span><span class="n">DGI</span><span class="o">&lt;/</span><span class="n">small</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
 </code></pre></div>
-<h3 id="campo-b503-descripcionmonedapersonalizada">Campo B503: descripcionMonedaPersonalizada<a class="headerlink" href="#campo-b503-descripcionmonedapersonalizada" title="Permanent link">&para;</a></h3>
+
+<h3 id="campo-b503-descripcionmonedapersonalizada">Campo B503: descripcionMonedaPersonalizada</h3>
 <p><strong>Archivo</strong>: <code>resources/views/livewire/admin/einvoice/create.blade.php</code></p>
-<div class="highlight"><pre><span></span><code>&lt;div class=&#39;form-group&#39; x-show=&quot;$wire.monedaExportacion &amp;&amp; ![&#39;USD&#39;, &#39;EUR&#39;, &#39;CAD&#39;, &#39;GBP&#39;].includes($wire.monedaExportacion)&quot;&gt;
-    &lt;label for=&#39;descripcionMonedaPersonalizada&#39; class=&#39;control-label&#39;&gt;
-        Descripción Moneda Personalizada (B503)
-    &lt;/label&gt;
-    &lt;input type=&#39;text&#39; id=&#39;descripcionMonedaPersonalizada&#39; 
-           wire:model.lazy=&#39;descripcionMonedaPersonalizada&#39; 
-           class=&quot;form-control&quot;&gt;
-    &lt;small class=&quot;form-text text-muted&quot;&gt;Solo para monedas no estándar según DGI&lt;/small&gt;
-&lt;/div&gt;
+<div class="codehilite"><pre><span></span><code><span class="nt">&lt;div</span><span class="w"> </span><span class="na">class=</span><span class="s">&#39;form-group&#39;</span><span class="w"> </span><span class="na">x-show=</span><span class="s">&quot;$wire.monedaExportacion &amp;&amp; ![&#39;USD&#39;, &#39;EUR&#39;, &#39;CAD&#39;, &#39;GBP&#39;].includes($wire.monedaExportacion)&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;label</span><span class="w"> </span><span class="na">for=</span><span class="s">&#39;descripcionMonedaPersonalizada&#39;</span><span class="w"> </span><span class="na">class=</span><span class="s">&#39;control-label&#39;</span><span class="nt">&gt;</span>
+<span class="w">        </span>Descripción<span class="w"> </span>Moneda<span class="w"> </span>Personalizada<span class="w"> </span>(B503)
+<span class="w">    </span><span class="nt">&lt;/label&gt;</span>
+<span class="w">    </span><span class="nt">&lt;input</span><span class="w"> </span><span class="na">type=</span><span class="s">&#39;text&#39;</span><span class="w"> </span><span class="na">id=</span><span class="s">&#39;descripcionMonedaPersonalizada&#39;</span><span class="w"> </span>
+<span class="w">           </span><span class="na">wire:model.lazy=</span><span class="s">&#39;descripcionMonedaPersonalizada&#39;</span><span class="w"> </span>
+<span class="w">           </span><span class="na">class=</span><span class="s">&quot;form-control&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;small</span><span class="w"> </span><span class="na">class=</span><span class="s">&quot;form-text text-muted&quot;</span><span class="nt">&gt;</span>Solo<span class="w"> </span>para<span class="w"> </span>monedas<span class="w"> </span>no<span class="w"> </span>estándar<span class="w"> </span>según<span class="w"> </span>DGI<span class="nt">&lt;/small&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
 </code></pre></div>
-<h2 id="reglas-de-validacion-expandidas">🔧 REGLAS DE VALIDACIÓN EXPANDIDAS<a class="headerlink" href="#reglas-de-validacion-expandidas" title="Permanent link">&para;</a></h2>
+
+<h2 id="reglas-de-validacion-expandidas">🔧 REGLAS DE VALIDACIÓN EXPANDIDAS</h2>
 <p><strong>Archivo</strong>: <code>app/Http/Livewire/Admin/Einvoice/Create.php</code>
 <strong>Método</strong>: <code>getConditionalRules()</code></p>
-<div class="highlight"><pre><span></span><code><span class="x">// Factura Nacional/Simplificada (B06=01,02)</span>
+<div class="codehilite"><pre><span></span><code><span class="x">// Factura Nacional/Simplificada (B06=01,02)</span>
 <span class="x">if (in_array($this-&gt;tipeDocument, [&#39;1&#39;, &#39;2&#39;])) {</span>
 <span class="x">    $rules = array_merge($rules, [</span>
 <span class="x">        &#39;receptor_tipo&#39; =&gt; &#39;required|in:1,2,3&#39;, // NO extranjero directo</span>
@@ -2312,8 +2364,9 @@
 <span class="x">    ]);</span>
 <span class="x">}</span>
 </code></pre></div>
-<h2 id="archivos-modificados">📁 ARCHIVOS MODIFICADOS<a class="headerlink" href="#archivos-modificados" title="Permanent link">&para;</a></h2>
-<h3 id="1-componente-livewire-principal">1. Componente Livewire Principal<a class="headerlink" href="#1-componente-livewire-principal" title="Permanent link">&para;</a></h3>
+
+<h2 id="archivos-modificados">📁 ARCHIVOS MODIFICADOS</h2>
+<h3 id="1-componente-livewire-principal">1. Componente Livewire Principal</h3>
 <p><strong><code>app/Http/Livewire/Admin/Einvoice/Create.php</code></strong>
 - ✅ <code>updatedTipeDocument()</code> - Validaciones automáticas críticas
 - ✅ <code>updatedReceptorTipo()</code> - Validación receptor vs tipo documento
@@ -2322,36 +2375,37 @@
 - ✅ <code>validateNoteAmount()</code> - Validación montos notas vs original
 - ✅ <code>getConditionalRules()</code> - Reglas críticas DGI expandidas
 - ✅ <code>resetReceptorFields()</code> - Limpieza específica de receptor</p>
-<h3 id="2-vista-blade-template">2. Vista Blade Template<a class="headerlink" href="#2-vista-blade-template" title="Permanent link">&para;</a></h3>
+<h3 id="2-vista-blade-template">2. Vista Blade Template</h3>
 <p><strong><code>resources/views/livewire/admin/einvoice/create.blade.php</code></strong>
 - ✅ Campo B602: <code>nombreEmisorReferenciado</code>
 - ✅ Campo B503: <code>descripcionMonedaPersonalizada</code>
 - ✅ Validaciones Alpine.js mejoradas
 - ✅ UI condicional más intuitiva</p>
-<h3 id="3-propiedades-del-componente">3. Propiedades del Componente<a class="headerlink" href="#3-propiedades-del-componente" title="Permanent link">&para;</a></h3>
-<p><strong>Nuevas propiedades agregadas</strong>:
-<div class="highlight"><pre><span></span><code><span class="x">public $descripcionMonedaPersonalizada = null; // B503</span>
+<h3 id="3-propiedades-del-componente">3. Propiedades del Componente</h3>
+<p><strong>Nuevas propiedades agregadas</strong>:</p>
+<div class="codehilite"><pre><span></span><code><span class="x">public $descripcionMonedaPersonalizada = null; // B503</span>
 <span class="x">// nombreEmisorReferenciado ya existía</span>
-</code></pre></div></p>
-<h2 id="funcionalidades-en-tiempo-real">🚀 FUNCIONALIDADES EN TIEMPO REAL<a class="headerlink" href="#funcionalidades-en-tiempo-real" title="Permanent link">&para;</a></h2>
-<h3 id="deteccion-automatica-de-tipo-de-documento">Detección Automática de Tipo de Documento<a class="headerlink" href="#deteccion-automatica-de-tipo-de-documento" title="Permanent link">&para;</a></h3>
+</code></pre></div>
+
+<h2 id="funcionalidades-en-tiempo-real">🚀 FUNCIONALIDADES EN TIEMPO REAL</h2>
+<h3 id="deteccion-automatica-de-tipo-de-documento">Detección Automática de Tipo de Documento</h3>
 <ul>
 <li><strong>Al seleccionar Tipo 03</strong>: Auto-configura exportación</li>
 <li><strong>Al seleccionar Tipos 01/02</strong>: Bloquea receptor extranjero</li>
 <li><strong>Al seleccionar Tipos 04/05</strong>: Activa validaciones de referencia</li>
 </ul>
-<h3 id="validacion-bidireccional">Validación Bidireccional<a class="headerlink" href="#validacion-bidireccional" title="Permanent link">&para;</a></h3>
+<h3 id="validacion-bidireccional">Validación Bidireccional</h3>
 <ul>
 <li><strong>Tipo → Receptor</strong>: Cambio de tipo valida receptor compatible</li>
 <li><strong>Receptor → Tipo</strong>: Cambio de receptor valida tipo compatible</li>
 </ul>
-<h3 id="notificaciones-de-usuario">Notificaciones de Usuario<a class="headerlink" href="#notificaciones-de-usuario" title="Permanent link">&para;</a></h3>
+<h3 id="notificaciones-de-usuario">Notificaciones de Usuario</h3>
 <ul>
 <li><strong>Flash Messages</strong>: Informan sobre cambios automáticos</li>
 <li><strong>Validaciones en Vivo</strong>: Previenen datos inconsistentes</li>
 <li><strong>Mensajes de Error</strong>: Guían al usuario en correcciones</li>
 </ul>
-<h2 id="cobertura-dgi-por-tipo-de-documento">📊 COBERTURA DGI POR TIPO DE DOCUMENTO<a class="headerlink" href="#cobertura-dgi-por-tipo-de-documento" title="Permanent link">&para;</a></h2>
+<h2 id="cobertura-dgi-por-tipo-de-documento">📊 COBERTURA DGI POR TIPO DE DOCUMENTO</h2>
 <table>
 <thead>
 <tr>
@@ -2407,14 +2461,14 @@
 </tr>
 </tbody>
 </table>
-<h2 id="testing-implementado">🧪 TESTING IMPLEMENTADO<a class="headerlink" href="#testing-implementado" title="Permanent link">&para;</a></h2>
-<h3 id="scripts-de-validacion">Scripts de Validación<a class="headerlink" href="#scripts-de-validacion" title="Permanent link">&para;</a></h3>
+<h2 id="testing-implementado">🧪 TESTING IMPLEMENTADO</h2>
+<h3 id="scripts-de-validacion">Scripts de Validación</h3>
 <ol>
 <li><strong><code>validate-critical-dgi-rules.sh</code></strong> - Resumen de implementación</li>
 <li><strong><code>test-critical-validations-interactive.sh</code></strong> - Testing interactivo por tipo</li>
 <li><strong><code>analyze-dgi-completeness.sh</code></strong> - Análisis de completitud</li>
 </ol>
-<h3 id="casos-de-prueba-cubiertos">Casos de Prueba Cubiertos<a class="headerlink" href="#casos-de-prueba-cubiertos" title="Permanent link">&para;</a></h3>
+<h3 id="casos-de-prueba-cubiertos">Casos de Prueba Cubiertos</h3>
 <ul>
 <li>✅ Transición entre todos los tipos (01-09)</li>
 <li>✅ Validación de compatibilidad receptor-tipo</li>
@@ -2422,8 +2476,8 @@
 <li>✅ Validaciones de fecha (180 días)</li>
 <li>✅ Validaciones de formato (CUFE 96 chars)</li>
 </ul>
-<h2 id="nivel-de-cumplimiento-alcanzado">🎯 NIVEL DE CUMPLIMIENTO ALCANZADO<a class="headerlink" href="#nivel-de-cumplimiento-alcanzado" title="Permanent link">&para;</a></h2>
-<h3 id="implementado-90">✅ IMPLEMENTADO (90%)<a class="headerlink" href="#implementado-90" title="Permanent link">&para;</a></h3>
+<h2 id="nivel-de-cumplimiento-alcanzado">🎯 NIVEL DE CUMPLIMIENTO ALCANZADO</h2>
+<h3 id="implementado-90">✅ IMPLEMENTADO (90%)</h3>
 <ul>
 <li><strong>Validaciones Automáticas Críticas</strong>: 100%</li>
 <li><strong>Campos Condicionales DGI</strong>: 100%</li>
@@ -2431,43 +2485,43 @@
 <li><strong>Validaciones en Tiempo Real</strong>: 100%</li>
 <li><strong>UI/UX Condicional</strong>: 100%</li>
 </ul>
-<h3 id="pendiente-para-100">🔲 PENDIENTE PARA 100%<a class="headerlink" href="#pendiente-para-100" title="Permanent link">&para;</a></h3>
+<h3 id="pendiente-para-100">🔲 PENDIENTE PARA 100%</h3>
 <ul>
 <li><strong>Validaciones de Negocio Avanzadas</strong>: Integración con datos reales</li>
 <li><strong>Base de Datos de Contribuyentes</strong>: Validación RUC en vivo</li>
 <li><strong>Validaciones PAC Específicas</strong>: Por proveedor (TheFactoryHKA/Alanube)</li>
 <li><strong>Testing End-to-End</strong>: Con todos los PAC providers</li>
 </ul>
-<h2 id="impacto-en-la-aplicacion">🚀 IMPACTO EN LA APLICACIÓN<a class="headerlink" href="#impacto-en-la-aplicacion" title="Permanent link">&para;</a></h2>
-<h3 id="beneficios-inmediatos">Beneficios Inmediatos<a class="headerlink" href="#beneficios-inmediatos" title="Permanent link">&para;</a></h3>
+<h2 id="impacto-en-la-aplicacion">🚀 IMPACTO EN LA APLICACIÓN</h2>
+<h3 id="beneficios-inmediatos">Beneficios Inmediatos</h3>
 <ol>
 <li><strong>Cumplimiento Normativo</strong>: 90% → 100% potencial</li>
 <li><strong>Prevención de Errores</strong>: Validaciones automáticas</li>
 <li><strong>Mejor UX</strong>: Auto-configuración inteligente</li>
 <li><strong>Consistencia de Datos</strong>: Reseteo automático</li>
 </ol>
-<h3 id="beneficios-a-largo-plazo">Beneficios a Largo Plazo<a class="headerlink" href="#beneficios-a-largo-plazo" title="Permanent link">&para;</a></h3>
+<h3 id="beneficios-a-largo-plazo">Beneficios a Largo Plazo</h3>
 <ol>
 <li><strong>Mantenibilidad</strong>: Código más robusto y documentado</li>
 <li><strong>Escalabilidad</strong>: Fácil agregar nuevos tipos de documento</li>
 <li><strong>Auditabilidad</strong>: Validaciones trazables y logs</li>
 <li><strong>Certificación</strong>: Preparado para auditorías DGI</li>
 </ol>
-<h2 id="documentacion-generada">📚 DOCUMENTACIÓN GENERADA<a class="headerlink" href="#documentacion-generada" title="Permanent link">&para;</a></h2>
-<h3 id="tecnica">Técnica<a class="headerlink" href="#tecnica" title="Permanent link">&para;</a></h3>
+<h2 id="documentacion-generada">📚 DOCUMENTACIÓN GENERADA</h2>
+<h3 id="tecnica">Técnica</h3>
 <ul>
 <li><strong><code>panama-document-conditional-fields-mapping.md</code></strong> - Especificación completa</li>
 <li><strong><code>TESTING_SYSTEM_SUMMARY.md</code></strong> - Resumen del sistema de testing</li>
 <li><strong>Scripts de validación</strong> - Testing automatizado</li>
 </ul>
-<h3 id="scripts-de-utilidad">Scripts de Utilidad<a class="headerlink" href="#scripts-de-utilidad" title="Permanent link">&para;</a></h3>
+<h3 id="scripts-de-utilidad">Scripts de Utilidad</h3>
 <ul>
 <li><strong>Testing interactivo</strong> - Para desarrolladores</li>
 <li><strong>Validación de completitud</strong> - Para QA</li>
 <li><strong>Análisis de cumplimiento</strong> - Para auditores</li>
 </ul>
 <hr />
-<h2 id="conclusion">✅ CONCLUSIÓN<a class="headerlink" href="#conclusion" title="Permanent link">&para;</a></h2>
+<h2 id="conclusion">✅ CONCLUSIÓN</h2>
 <p>Se han implementado exitosamente las <strong>validaciones automáticas críticas</strong> requeridas para el cumplimiento de la especificación técnica DGI Panamá. El sistema DocuCenter ahora:</p>
 <ol>
 <li><strong>Auto-configura</strong> campos según tipo de documento</li>
@@ -2530,7 +2584,7 @@
       
       
     
-    <a href="https://github.com/aghabrego/docucenter" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+    <a href="https://github.com/aghabrego/docucenter-public" target="_blank" rel="noopener" title="github.com" class="md-social__link">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
     </a>
   

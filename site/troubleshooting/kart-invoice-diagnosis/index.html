@@ -233,7 +233,7 @@
           
   
   
-  APIs
+  API Documentation
 
         </a>
       </li>
@@ -269,7 +269,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../technical/" class="md-tabs__link">
+        <a href="../../technical/README.md" class="md-tabs__link">
           
   
   
@@ -298,6 +298,25 @@
         </a>
       </li>
     
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../testing/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Sistema de Testing
+
+      </a>
+    </li>
   
 
       
@@ -404,7 +423,7 @@
   <span class="md-ellipsis">
     
   
-    APIs
+    API Documentation
   
 
     
@@ -420,7 +439,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    APIs
+    API Documentation
   
 
           </label>
@@ -1363,7 +1382,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../technical/" class="md-nav__link">
+      <a href="../../technical/README.md" class="md-nav__link">
         
   
   
@@ -1712,6 +1731,33 @@
           </ul>
         </nav>
       
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sistema de Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -2212,11 +2258,11 @@
   
 
 
-<h1 id="diagnostico-y-reparacion-kart-facturacion-electronica">🔍 Diagnóstico y Reparación: Kart → Facturación Electrónica<a class="headerlink" href="#diagnostico-y-reparacion-kart-facturacion-electronica" title="Permanent link">&para;</a></h1>
+<h1 id="diagnostico-y-reparacion-kart-facturacion-electronica">🔍 Diagnóstico y Reparación: Kart → Facturación Electrónica</h1>
 <p>Este sistema de diagnóstico está diseñado para identificar y resolver problemas cuando las órdenes de Kart21 no se emiten automáticamente como facturas electrónicas en DocuCenter.</p>
-<h2 id="caso-de-uso-orden-kart-12720">📋 Caso de Uso: Orden Kart #12720<a class="headerlink" href="#caso-de-uso-orden-kart-12720" title="Permanent link">&para;</a></h2>
-<h3 id="datos-de-la-orden-problematica">Datos de la Orden Problemática<a class="headerlink" href="#datos-de-la-orden-problematica" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<h2 id="caso-de-uso-orden-kart-12720">📋 Caso de Uso: Orden Kart #12720</h2>
+<h3 id="datos-de-la-orden-problematica">Datos de la Orden Problemática</h3>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">12720</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;number&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;12720&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;CLOSED&quot;</span><span class="p">,</span>
@@ -2239,10 +2285,12 @@
 <span class="w">  </span><span class="nt">&quot;total&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">20.33</span>
 <span class="p">}</span>
 </code></pre></div>
-<h2 id="herramientas-de-diagnostico">🛠️ Herramientas de Diagnóstico<a class="headerlink" href="#herramientas-de-diagnostico" title="Permanent link">&para;</a></h2>
-<h3 id="1-script-principal-de-diagnostico">1. Script Principal de Diagnóstico<a class="headerlink" href="#1-script-principal-de-diagnostico" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>./scripts/diagnose-kart-invoice.sh<span class="w"> </span>diagnose<span class="w"> </span>&lt;org_id&gt;<span class="w"> </span><span class="o">[</span>kart_order_id<span class="o">]</span>
+
+<h2 id="herramientas-de-diagnostico">🛠️ Herramientas de Diagnóstico</h2>
+<h3 id="1-script-principal-de-diagnostico">1. Script Principal de Diagnóstico</h3>
+<div class="codehilite"><pre><span></span><code>./scripts/diagnose-kart-invoice.sh<span class="w"> </span>diagnose<span class="w"> </span>&lt;org_id&gt;<span class="w"> </span><span class="o">[</span>kart_order_id<span class="o">]</span>
 </code></pre></div>
+
 <p><strong>Funcionalidades:</strong>
 - ✅ Verificación de configuración PAC
 - 📋 Búsqueda de facturas en el sistema
@@ -2250,83 +2298,89 @@
 - 🧪 Simulación de procesamiento
 - ⏳ Estado de jobs en cola
 - 💡 Recomendaciones de solución</p>
-<h3 id="2-comandos-artisan-especificos">2. Comandos Artisan Específicos<a class="headerlink" href="#2-comandos-artisan-especificos" title="Permanent link">&para;</a></h3>
-<h4 id="diagnostico-completo">Diagnóstico Completo<a class="headerlink" href="#diagnostico-completo" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code>php<span class="w"> </span>artisan<span class="w"> </span>kart:diagnose-invoice<span class="w"> </span>&lt;organization_id&gt;<span class="w"> </span><span class="o">[</span>kart_order_id<span class="o">]</span>
+<h3 id="2-comandos-artisan-especificos">2. Comandos Artisan Específicos</h3>
+<h4 id="diagnostico-completo">Diagnóstico Completo</h4>
+<div class="codehilite"><pre><span></span><code>php<span class="w"> </span>artisan<span class="w"> </span>kart:diagnose-invoice<span class="w"> </span>&lt;organization_id&gt;<span class="w"> </span><span class="o">[</span>kart_order_id<span class="o">]</span>
 </code></pre></div>
-<h4 id="forzar-emision">Forzar Emisión<a class="headerlink" href="#forzar-emision" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code>php<span class="w"> </span>artisan<span class="w"> </span>kart:force-emission<span class="w"> </span>&lt;organization_id&gt;<span class="w"> </span><span class="o">[</span>invoice_id<span class="o">]</span><span class="w"> </span><span class="o">[</span>--all<span class="o">]</span><span class="w"> </span><span class="o">[</span>--dry-run<span class="o">]</span>
+
+<h4 id="forzar-emision">Forzar Emisión</h4>
+<div class="codehilite"><pre><span></span><code>php<span class="w"> </span>artisan<span class="w"> </span>kart:force-emission<span class="w"> </span>&lt;organization_id&gt;<span class="w"> </span><span class="o">[</span>invoice_id<span class="o">]</span><span class="w"> </span><span class="o">[</span>--all<span class="o">]</span><span class="w"> </span><span class="o">[</span>--dry-run<span class="o">]</span>
 </code></pre></div>
-<h2 id="proceso-de-diagnostico">🔍 Proceso de Diagnóstico<a class="headerlink" href="#proceso-de-diagnostico" title="Permanent link">&para;</a></h2>
-<h3 id="paso-1-verificacion-de-configuracion">Paso 1: Verificación de Configuración<a class="headerlink" href="#paso-1-verificacion-de-configuracion" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>./scripts/diagnose-kart-invoice.sh<span class="w"> </span>diagnose<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">12720</span>
+
+<h2 id="proceso-de-diagnostico">🔍 Proceso de Diagnóstico</h2>
+<h3 id="paso-1-verificacion-de-configuracion">Paso 1: Verificación de Configuración</h3>
+<div class="codehilite"><pre><span></span><code>./scripts/diagnose-kart-invoice.sh<span class="w"> </span>diagnose<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">12720</span>
 </code></pre></div>
+
 <p><strong>Verifica:</strong>
 - ✅ Organización existe
 - 🔗 Configuración PAC activa
 - 🔑 Token PAC válido
 - 📊 Base de datos específica</p>
-<h3 id="paso-2-busqueda-de-factura">Paso 2: Búsqueda de Factura<a class="headerlink" href="#paso-2-busqueda-de-factura" title="Permanent link">&para;</a></h3>
+<h3 id="paso-2-busqueda-de-factura">Paso 2: Búsqueda de Factura</h3>
 <p><strong>Criterios de búsqueda:</strong>
 - InvoiceNumber contiene ID de orden
 - CustomerName contiene "Marcos" o "Bohnen"
 - Total coincide ($20.33)
 - Fecha de la transacción</p>
-<h3 id="paso-3-analisis-de-logs">Paso 3: Análisis de Logs<a class="headerlink" href="#paso-3-analisis-de-logs" title="Permanent link">&para;</a></h3>
+<h3 id="paso-3-analisis-de-logs">Paso 3: Análisis de Logs</h3>
 <p><strong>Patrones buscados:</strong>
 - <code>CreateSaleKart21Job</code>
 - <code>Kart21Service</code>
 - <code>storeOrder</code>
 - Errores relacionados</p>
-<h3 id="paso-4-verificacion-de-emision-automatica">Paso 4: Verificación de Emisión Automática<a class="headerlink" href="#paso-4-verificacion-de-emision-automatica" title="Permanent link">&para;</a></h3>
+<h3 id="paso-4-verificacion-de-emision-automatica">Paso 4: Verificación de Emisión Automática</h3>
 <p><strong>Verifica si:</strong>
 - Kart21Service tiene trait <code>CreateFastJob</code>
 - Método <code>issueInvoice</code> está disponible
 - Configuración PAC permite emisión
 - Factura ya fue emitida (<code>EzeeIssued = 1</code>)</p>
-<h2 id="soluciones-comunes">🚀 Soluciones Comunes<a class="headerlink" href="#soluciones-comunes" title="Permanent link">&para;</a></h2>
-<h3 id="problema-1-no-hay-configuracion-pac">Problema 1: No hay configuración PAC<a class="headerlink" href="#problema-1-no-hay-configuracion-pac" title="Permanent link">&para;</a></h3>
+<h2 id="soluciones-comunes">🚀 Soluciones Comunes</h2>
+<h3 id="problema-1-no-hay-configuracion-pac">Problema 1: No hay configuración PAC</h3>
 <p><strong>Síntomas:</strong>
 - ❌ Error: "No se encontró configuración PAC"
 - Facturas se crean pero no se emiten</p>
-<p><strong>Solución:</strong>
-<div class="highlight"><pre><span></span><code><span class="c1"># 1. Configurar PAC en panel de administración</span>
+<p><strong>Solución:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># 1. Configurar PAC en panel de administración</span>
 <span class="c1"># 2. Verificar endpoint y token</span>
 <span class="c1"># 3. Activar la conexión PAC</span>
-</code></pre></div></p>
-<h3 id="problema-2-kart21service-sin-emision-automatica">Problema 2: Kart21Service sin emisión automática<a class="headerlink" href="#problema-2-kart21service-sin-emision-automatica" title="Permanent link">&para;</a></h3>
+</code></pre></div>
+
+<h3 id="problema-2-kart21service-sin-emision-automatica">Problema 2: Kart21Service sin emisión automática</h3>
 <p><strong>Síntomas:</strong>
 - ✅ Factura se crea en DocuCenter
 - ❌ No se emite automáticamente
 - <code>EzeeIssued = 0</code></p>
-<p><strong>Solución:</strong>
-<div class="highlight"><pre><span></span><code><span class="x">// Agregar trait CreateFastJob a Kart21Service</span>
+<p><strong>Solución:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="x">// Agregar trait CreateFastJob a Kart21Service</span>
 <span class="x">class Kart21Service implements Kart21ServiceContract</span>
 <span class="x">{</span>
 <span class="x">    use Helper, CreateFastJob;</span>
 
 <span class="x">    // ... resto del código</span>
 <span class="x">}</span>
-</code></pre></div></p>
-<h3 id="problema-3-webhook-no-llego-correctamente">Problema 3: Webhook no llegó correctamente<a class="headerlink" href="#problema-3-webhook-no-llego-correctamente" title="Permanent link">&para;</a></h3>
+</code></pre></div>
+
+<h3 id="problema-3-webhook-no-llego-correctamente">Problema 3: Webhook no llegó correctamente</h3>
 <p><strong>Síntomas:</strong>
 - ❌ No hay factura en DocuCenter
 - No hay logs de procesamiento
 - Job no se ejecutó</p>
-<p><strong>Solución:</strong>
-<div class="highlight"><pre><span></span><code><span class="c1"># Simular procesamiento manual</span>
+<p><strong>Solución:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Simular procesamiento manual</span>
 ./scripts/diagnose-kart-invoice.sh<span class="w"> </span>simulate<span class="w"> </span><span class="m">1</span>
 
 <span class="c1"># O procesar directamente</span>
 php<span class="w"> </span>artisan<span class="w"> </span>kart:send-to-zoho<span class="w"> </span><span class="m">21</span><span class="w"> </span>--dry-run
-</code></pre></div></p>
-<h3 id="problema-4-job-fallo-en-procesamiento">Problema 4: Job falló en procesamiento<a class="headerlink" href="#problema-4-job-fallo-en-procesamiento" title="Permanent link">&para;</a></h3>
+</code></pre></div>
+
+<h3 id="problema-4-job-fallo-en-procesamiento">Problema 4: Job falló en procesamiento</h3>
 <p><strong>Síntomas:</strong>
 - ⚠️ Jobs en estado failed
 - Logs con errores de excepción
 - Factura parcialmente creada</p>
-<p><strong>Solución:</strong>
-<div class="highlight"><pre><span></span><code><span class="c1"># Ver jobs fallidos</span>
+<p><strong>Solución:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Ver jobs fallidos</span>
 php<span class="w"> </span>artisan<span class="w"> </span>queue:failed
 
 <span class="c1"># Reintentar jobs específicos</span>
@@ -2334,17 +2388,19 @@ php<span class="w"> </span>artisan<span class="w"> </span>queue:retry<span class
 
 <span class="c1"># Forzar emisión de factura existente</span>
 ./scripts/diagnose-kart-invoice.sh<span class="w"> </span>force-emit<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">123</span>
-</code></pre></div></p>
-<h2 id="ejemplos-de-uso">📊 Ejemplos de Uso<a class="headerlink" href="#ejemplos-de-uso" title="Permanent link">&para;</a></h2>
-<h3 id="diagnostico-completo_1">Diagnóstico Completo<a class="headerlink" href="#diagnostico-completo_1" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># Diagnosticar orden específica</span>
+</code></pre></div>
+
+<h2 id="ejemplos-de-uso">📊 Ejemplos de Uso</h2>
+<h3 id="diagnostico-completo_1">Diagnóstico Completo</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Diagnosticar orden específica</span>
 ./scripts/diagnose-kart-invoice.sh<span class="w"> </span>diagnose<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">12720</span>
 
 <span class="c1"># Diagnosticar configuración general</span>
 ./scripts/diagnose-kart-invoice.sh<span class="w"> </span>diagnose<span class="w"> </span><span class="m">1</span>
 </code></pre></div>
-<h3 id="forzar-emision_1">Forzar Emisión<a class="headerlink" href="#forzar-emision_1" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># Ver qué facturas se emitirían (dry-run)</span>
+
+<h3 id="forzar-emision_1">Forzar Emisión</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Ver qué facturas se emitirían (dry-run)</span>
 ./scripts/diagnose-kart-invoice.sh<span class="w"> </span>force-emit-all<span class="w"> </span><span class="m">1</span><span class="w"> </span>--dry-run
 
 <span class="c1"># Emitir factura específica</span>
@@ -2353,31 +2409,35 @@ php<span class="w"> </span>artisan<span class="w"> </span>queue:retry<span class
 <span class="c1"># Emitir todas las pendientes</span>
 ./scripts/diagnose-kart-invoice.sh<span class="w"> </span>force-emit-all<span class="w"> </span><span class="m">1</span>
 </code></pre></div>
-<h3 id="revision-de-logs">Revisión de Logs<a class="headerlink" href="#revision-de-logs" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># Logs específicos de una orden</span>
+
+<h3 id="revision-de-logs">Revisión de Logs</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Logs específicos de una orden</span>
 ./scripts/diagnose-kart-invoice.sh<span class="w"> </span>check-logs<span class="w"> </span><span class="m">12720</span>
 
 <span class="c1"># Estado de la cola</span>
 ./scripts/diagnose-kart-invoice.sh<span class="w"> </span>queue-status
 </code></pre></div>
-<h3 id="simulacion-con-datos-de-prueba">Simulación con Datos de Prueba<a class="headerlink" href="#simulacion-con-datos-de-prueba" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># Procesar orden problemática con datos reales</span>
+
+<h3 id="simulacion-con-datos-de-prueba">Simulación con Datos de Prueba</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Procesar orden problemática con datos reales</span>
 ./scripts/diagnose-kart-invoice.sh<span class="w"> </span>simulate<span class="w"> </span><span class="m">1</span>
 </code></pre></div>
-<h2 id="flujo-de-procesamiento-normal">🔄 Flujo de Procesamiento Normal<a class="headerlink" href="#flujo-de-procesamiento-normal" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code>graph TD
-    A[Webhook Kart] --&gt; B[CreateSaleKart21Job]
-    B --&gt; C[Kart21Service.storeOrder]
-    C --&gt; D{Trait CreateFastJob?}
-    D --&gt;|Sí| E[issueInvoice automático]
-    D --&gt;|No| F[Solo crear factura]
-    E --&gt; G[Emisión PAC]
-    G --&gt; H[EzeeIssued = 1]
-    F --&gt; I[EzeeIssued = 0]
+
+<h2 id="flujo-de-procesamiento-normal">🔄 Flujo de Procesamiento Normal</h2>
+<div class="codehilite"><pre><span></span><code><span class="n">graph</span><span class="w"> </span><span class="n">TD</span>
+<span class="w">    </span><span class="n">A</span><span class="p">[</span><span class="n">Webhook</span><span class="w"> </span><span class="n">Kart</span><span class="p">]</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">B</span><span class="p">[</span><span class="n">CreateSaleKart21Job</span><span class="p">]</span>
+<span class="w">    </span><span class="n">B</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">C</span><span class="p">[</span><span class="n">Kart21Service</span><span class="p">.</span><span class="n">storeOrder</span><span class="p">]</span>
+<span class="w">    </span><span class="n">C</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">D</span><span class="p">{</span><span class="n">Trait</span><span class="w"> </span><span class="n">CreateFastJob</span><span class="o">?</span><span class="p">}</span>
+<span class="w">    </span><span class="n">D</span><span class="w"> </span><span class="o">--&gt;|</span><span class="n">Sí</span><span class="o">|</span><span class="w"> </span><span class="n">E</span><span class="p">[</span><span class="n">issueInvoice</span><span class="w"> </span><span class="n">automático</span><span class="p">]</span>
+<span class="w">    </span><span class="n">D</span><span class="w"> </span><span class="o">--&gt;|</span><span class="n">No</span><span class="o">|</span><span class="w"> </span><span class="n">F</span><span class="p">[</span><span class="n">Solo</span><span class="w"> </span><span class="n">crear</span><span class="w"> </span><span class="n">factura</span><span class="p">]</span>
+<span class="w">    </span><span class="n">E</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">G</span><span class="p">[</span><span class="n">Emisión</span><span class="w"> </span><span class="n">PAC</span><span class="p">]</span>
+<span class="w">    </span><span class="n">G</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">H</span><span class="p">[</span><span class="n">EzeeIssued</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span>
+<span class="w">    </span><span class="n">F</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">I</span><span class="p">[</span><span class="n">EzeeIssued</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">]</span>
 </code></pre></div>
-<h2 id="implementacion-de-emision-automatica">⚡ Implementación de Emisión Automática<a class="headerlink" href="#implementacion-de-emision-automatica" title="Permanent link">&para;</a></h2>
+
+<h2 id="implementacion-de-emision-automatica">⚡ Implementación de Emisión Automática</h2>
 <p>Para habilitar emisión automática en Kart21Service:</p>
-<div class="highlight"><pre><span></span><code><span class="cp">&lt;?php</span>
+<div class="codehilite"><pre><span></span><code><span class="cp">&lt;?php</span>
 
 <span class="k">namespace</span> <span class="nx">App\Services</span><span class="p">;</span>
 
@@ -2401,38 +2461,40 @@ php<span class="w"> </span>artisan<span class="w"> </span>queue:retry<span class
     <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
-<h2 id="checklist-de-verificacion">📋 Checklist de Verificación<a class="headerlink" href="#checklist-de-verificacion" title="Permanent link">&para;</a></h2>
-<h3 id="pre-requisitos">✅ Pre-requisitos<a class="headerlink" href="#pre-requisitos" title="Permanent link">&para;</a></h3>
-<ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Organización configurada</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Conexión PAC activa</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Token PAC válido</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Endpoint PAC correcto</li>
+
+<h2 id="checklist-de-verificacion">📋 Checklist de Verificación</h2>
+<h3 id="pre-requisitos">✅ Pre-requisitos</h3>
+<ul>
+<li>[ ] Organización configurada</li>
+<li>[ ] Conexión PAC activa</li>
+<li>[ ] Token PAC válido</li>
+<li>[ ] Endpoint PAC correcto</li>
 </ul>
-<h3 id="procesamiento">✅ Procesamiento<a class="headerlink" href="#procesamiento" title="Permanent link">&para;</a></h3>
-<ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Webhook recibido correctamente</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Job CreateSaleKart21Job ejecutado</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Factura creada en DocuCenter</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Cliente asociado correctamente</li>
+<h3 id="procesamiento">✅ Procesamiento</h3>
+<ul>
+<li>[ ] Webhook recibido correctamente</li>
+<li>[ ] Job CreateSaleKart21Job ejecutado</li>
+<li>[ ] Factura creada en DocuCenter</li>
+<li>[ ] Cliente asociado correctamente</li>
 </ul>
-<h3 id="emision">✅ Emisión<a class="headerlink" href="#emision" title="Permanent link">&para;</a></h3>
-<ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Trait CreateFastJob implementado</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Método issueInvoice disponible</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Emisión PAC exitosa</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> EzeeIssued = 1</li>
+<h3 id="emision">✅ Emisión</h3>
+<ul>
+<li>[ ] Trait CreateFastJob implementado</li>
+<li>[ ] Método issueInvoice disponible</li>
+<li>[ ] Emisión PAC exitosa</li>
+<li>[ ] EzeeIssued = 1</li>
 </ul>
-<h2 id="soporte-y-troubleshooting">🆘 Soporte y Troubleshooting<a class="headerlink" href="#soporte-y-troubleshooting" title="Permanent link">&para;</a></h2>
-<h3 id="logs-importantes">Logs Importantes<a class="headerlink" href="#logs-importantes" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># Logs generales</span>
+<h2 id="soporte-y-troubleshooting">🆘 Soporte y Troubleshooting</h2>
+<h3 id="logs-importantes">Logs Importantes</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Logs generales</span>
 tail<span class="w"> </span>-f<span class="w"> </span>storage/logs/laravel.log<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;kart\|CreateSaleKart21Job&#39;</span>
 
 <span class="c1"># Logs de cola</span>
 tail<span class="w"> </span>-f<span class="w"> </span>storage/logs/queue.log
 </code></pre></div>
-<h3 id="comandos-de-diagnostico">Comandos de Diagnóstico<a class="headerlink" href="#comandos-de-diagnostico" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># Estado completo del sistema</span>
+
+<h3 id="comandos-de-diagnostico">Comandos de Diagnóstico</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Estado completo del sistema</span>
 ./scripts/diagnose-kart-invoice.sh<span class="w"> </span>diagnose<span class="w"> </span><span class="m">1</span>
 
 <span class="c1"># Verificar cola de jobs</span>
@@ -2442,24 +2504,28 @@ php<span class="w"> </span>artisan<span class="w"> </span>queue:failed
 <span class="c1"># Procesar cola manualmente</span>
 php<span class="w"> </span>artisan<span class="w"> </span>queue:work<span class="w"> </span>--once
 </code></pre></div>
-<h3 id="contacto-de-soporte">Contacto de Soporte<a class="headerlink" href="#contacto-de-soporte" title="Permanent link">&para;</a></h3>
+
+<h3 id="contacto-de-soporte">Contacto de Soporte</h3>
 <ul>
 <li><strong>Documentación</strong>: <code>docs/api/fe/kart21-api.md</code></li>
 <li><strong>Testing</strong>: <code>docs/testing/kart21-service-analysis.md</code></li>
 <li><strong>Código</strong>: <code>app/Services/Kart21Service.php</code></li>
 </ul>
 <hr />
-<h2 id="casos-de-uso-especificos">🎯 Casos de Uso Específicos<a class="headerlink" href="#casos-de-uso-especificos" title="Permanent link">&para;</a></h2>
-<h3 id="caso-1-orden-12720-no-se-emitio">Caso 1: Orden #12720 no se emitió<a class="headerlink" href="#caso-1-orden-12720-no-se-emitio" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>./scripts/diagnose-kart-invoice.sh<span class="w"> </span>diagnose<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">12720</span>
+<h2 id="casos-de-uso-especificos">🎯 Casos de Uso Específicos</h2>
+<h3 id="caso-1-orden-12720-no-se-emitio">Caso 1: Orden #12720 no se emitió</h3>
+<div class="codehilite"><pre><span></span><code>./scripts/diagnose-kart-invoice.sh<span class="w"> </span>diagnose<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">12720</span>
 </code></pre></div>
-<h3 id="caso-2-cliente-reporta-factura-faltante">Caso 2: Cliente reporta factura faltante<a class="headerlink" href="#caso-2-cliente-reporta-factura-faltante" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>./scripts/diagnose-kart-invoice.sh<span class="w"> </span>diagnose<span class="w"> </span><span class="m">1</span>
+
+<h3 id="caso-2-cliente-reporta-factura-faltante">Caso 2: Cliente reporta factura faltante</h3>
+<div class="codehilite"><pre><span></span><code>./scripts/diagnose-kart-invoice.sh<span class="w"> </span>diagnose<span class="w"> </span><span class="m">1</span>
 ./scripts/diagnose-kart-invoice.sh<span class="w"> </span>force-emit-all<span class="w"> </span><span class="m">1</span><span class="w"> </span>--dry-run
 </code></pre></div>
-<h3 id="caso-3-multiples-ordenes-sin-emitir">Caso 3: Múltiples órdenes sin emitir<a class="headerlink" href="#caso-3-multiples-ordenes-sin-emitir" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>./scripts/diagnose-kart-invoice.sh<span class="w"> </span>force-emit-all<span class="w"> </span><span class="m">1</span>
+
+<h3 id="caso-3-multiples-ordenes-sin-emitir">Caso 3: Múltiples órdenes sin emitir</h3>
+<div class="codehilite"><pre><span></span><code>./scripts/diagnose-kart-invoice.sh<span class="w"> </span>force-emit-all<span class="w"> </span><span class="m">1</span>
 </code></pre></div>
+
 <p>Este sistema proporciona una solución completa para diagnosticar y resolver problemas de facturación electrónica con Kart21, asegurando que todas las transacciones se procesen correctamente según las normativas fiscales panameñas.</p>
 
 
@@ -2513,7 +2579,7 @@ php<span class="w"> </span>artisan<span class="w"> </span>queue:work<span class=
       
       
     
-    <a href="https://github.com/aghabrego/docucenter" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+    <a href="https://github.com/aghabrego/docucenter-public" target="_blank" rel="noopener" title="github.com" class="md-social__link">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
     </a>
   

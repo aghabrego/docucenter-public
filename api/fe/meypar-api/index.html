@@ -239,7 +239,7 @@
           
   
   
-  APIs
+  API Documentation
 
         </a>
       </li>
@@ -275,7 +275,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../technical/" class="md-tabs__link">
+        <a href="../../../technical/README.md" class="md-tabs__link">
           
   
   
@@ -304,6 +304,25 @@
         </a>
       </li>
     
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../testing/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Sistema de Testing
+
+      </a>
+    </li>
   
 
       
@@ -413,7 +432,7 @@
   <span class="md-ellipsis">
     
   
-    APIs
+    API Documentation
   
 
     
@@ -429,7 +448,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    APIs
+    API Documentation
   
 
           </label>
@@ -1966,7 +1985,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../technical/" class="md-nav__link">
+      <a href="../../../technical/README.md" class="md-nav__link">
         
   
   
@@ -2315,6 +2334,33 @@
           </ul>
         </nav>
       
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sistema de Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -2903,17 +2949,17 @@
   
 
 
-<h1 id="api-facturacion-electronica-integracion-meypar">API Facturación Electrónica - Integración Meypar<a class="headerlink" href="#api-facturacion-electronica-integracion-meypar" title="Permanent link">&para;</a></h1>
-<h2 id="crear-venta-meypar">Crear Venta Meypar<a class="headerlink" href="#crear-venta-meypar" title="Permanent link">&para;</a></h2>
+<h1 id="api-facturacion-electronica-integracion-meypar">API Facturación Electrónica - Integración Meypar</h1>
+<h2 id="crear-venta-meypar">Crear Venta Meypar</h2>
 <p><strong>Endpoint:</strong> <code>POST /api/v1/fe/create_sale_meypar</code> 
 <strong>Controller:</strong> <code>FeController::createSaleMeypar</code> 
 <strong>Request Class:</strong> <code>CreateSaleMeyparRequest</code> 
 <strong>Autenticación:</strong> Bearer Token requerido 
 <strong>Middleware:</strong> <code>check.activate.organization</code></p>
-<h3 id="descripcion">Descripción<a class="headerlink" href="#descripcion" title="Permanent link">&para;</a></h3>
+<h3 id="descripcion">Descripción</h3>
 <p>Crea y emite una factura electrónica basada en datos provenientes del sistema Meypar (estacionamientos y servicios de parqueo).</p>
-<h3 id="estructura-del-request">Estructura del Request<a class="headerlink" href="#estructura-del-request" title="Permanent link">&para;</a></h3>
-<h4 id="campos-principales-estructura-oficial-meypar">Campos Principales (Estructura Oficial MEYPAR)<a class="headerlink" href="#campos-principales-estructura-oficial-meypar" title="Permanent link">&para;</a></h4>
+<h3 id="estructura-del-request">Estructura del Request</h3>
+<h4 id="campos-principales-estructura-oficial-meypar">Campos Principales (Estructura Oficial MEYPAR)</h4>
 <table>
 <thead>
 <tr>
@@ -2987,7 +3033,7 @@
 - <strong><code>documento</code></strong>: Es el NIT/documento del <strong>cliente</strong> (adquiriente), NO el número de factura
 - <strong><code>numero</code></strong>: Es el <strong>número de la factura</strong>, se convierte en <code>InvoiceNumber</code>
 - <strong>Consumidor Final</strong>: Usar <code>documento = "222222222222"</code> para consumidor final en Panamá</p>
-<h4 id="emisor">Emisor<a class="headerlink" href="#emisor" title="Permanent link">&para;</a></h4>
+<h4 id="emisor">Emisor</h4>
 <table>
 <thead>
 <tr>
@@ -3036,7 +3082,7 @@
 </tr>
 </tbody>
 </table>
-<h4 id="adquiriente-estructura-simplificada-opcional">Adquiriente (Estructura Simplificada - Opcional)<a class="headerlink" href="#adquiriente-estructura-simplificada-opcional" title="Permanent link">&para;</a></h4>
+<h4 id="adquiriente-estructura-simplificada-opcional">Adquiriente (Estructura Simplificada - Opcional)</h4>
 <p><strong>Nota</strong>: Esta es una estructura alternativa simplificada de DocuCenter. La estructura oficial MEYPAR usa el campo raíz <code>documento</code> para el NIT del cliente.</p>
 <table>
 <thead>
@@ -3090,7 +3136,7 @@
 - El campo <code>documento</code> (raíz) es el NIT del adquiriente según PDF técnico LogTech
 - Formato: String alfanumérico, máximo 50 caracteres
 - Consumidor Final Panamá: <code>"222222222222"</code></p>
-<h4 id="terminal">Terminal<a class="headerlink" href="#terminal" title="Permanent link">&para;</a></h4>
+<h4 id="terminal">Terminal</h4>
 <table>
 <thead>
 <tr>
@@ -3125,7 +3171,7 @@
 </tr>
 </tbody>
 </table>
-<h4 id="items-del-documento">Items del Documento<a class="headerlink" href="#items-del-documento" title="Permanent link">&para;</a></h4>
+<h4 id="items-del-documento">Items del Documento</h4>
 <table>
 <thead>
 <tr>
@@ -3181,7 +3227,7 @@
 </tr>
 </tbody>
 </table>
-<h4 id="medios-de-pago">Medios de Pago<a class="headerlink" href="#medios-de-pago" title="Permanent link">&para;</a></h4>
+<h4 id="medios-de-pago">Medios de Pago</h4>
 <table>
 <thead>
 <tr>
@@ -3209,7 +3255,7 @@
 </tr>
 </tbody>
 </table>
-<h4 id="totales">Totales<a class="headerlink" href="#totales" title="Permanent link">&para;</a></h4>
+<h4 id="totales">Totales</h4>
 <table>
 <thead>
 <tr>
@@ -3251,7 +3297,7 @@
 </tr>
 </tbody>
 </table>
-<h4 id="autorizacion-de-prefijo-opcional">Autorización de Prefijo (Opcional)<a class="headerlink" href="#autorizacion-de-prefijo-opcional" title="Permanent link">&para;</a></h4>
+<h4 id="autorizacion-de-prefijo-opcional">Autorización de Prefijo (Opcional)</h4>
 <table>
 <thead>
 <tr>
@@ -3279,8 +3325,8 @@
 </tr>
 </tbody>
 </table>
-<h3 id="ejemplo-de-request-estructura-oficial-meypar">Ejemplo de Request (Estructura Oficial MEYPAR)<a class="headerlink" href="#ejemplo-de-request-estructura-oficial-meypar" title="Permanent link">&para;</a></h3>
-<p><div class="highlight"><pre><span></span><code><span class="p">{</span>
+<h3 id="ejemplo-de-request-estructura-oficial-meypar">Ejemplo de Request (Estructura Oficial MEYPAR)</h3>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
 <span class="w"> </span><span class="nt">&quot;idFacturador&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">12345678</span><span class="p">,</span>
 <span class="w"> </span><span class="nt">&quot;ambiente&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
 <span class="w"> </span><span class="nt">&quot;documento&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;900123456-1&quot;</span><span class="p">,</span>
@@ -3323,7 +3369,8 @@
 <span class="w"> </span><span class="p">}]</span>
 <span class="p">}</span>
 </code></pre></div>
- },
+
+<p>},
  "terminal": {
  "CodigoTerminal": 7,
  "CodigoExterno": "TERM-BOG-001",
@@ -3379,8 +3426,8 @@
  "CorrelativoFinalNum": 50000
  }
  }
-}
-<div class="highlight"><pre><span></span><code>### Respuesta de Éxito (Test)
+}</p>
+<div class="codehilite"><pre><span></span><code><span class="gu">##</span># Respuesta de Éxito (Test)
 
 ```json
 {
@@ -3389,8 +3436,9 @@
  &quot;message&quot;: &quot;Factura Meypar procesada exitosamente&quot;,
  &quot;job_id&quot;: &quot;uuid-generated-job-id&quot;
 }
-</code></pre></div></p>
-<h3 id="validaciones-especificas-estructura-oficial-meypar">Validaciones Específicas (Estructura Oficial MEYPAR)<a class="headerlink" href="#validaciones-especificas-estructura-oficial-meypar" title="Permanent link">&para;</a></h3>
+</code></pre></div>
+
+<h3 id="validaciones-especificas-estructura-oficial-meypar">Validaciones Específicas (Estructura Oficial MEYPAR)</h3>
 <table>
 <thead>
 <tr>
@@ -3481,7 +3529,7 @@
 - El <code>numero</code> se convierte en <code>InvoiceNumber</code> en la base de datos
 | <code>medioPago</code> | integer | required, in:1,2,3,4 | Medio de pago principal |
 | <code>fechaFactura</code> | string | required, Y-m-d | Fecha de la factura |</p>
-<h4 id="autorizacion-de-prefijo-opcional_1">Autorización de Prefijo (Opcional)<a class="headerlink" href="#autorizacion-de-prefijo-opcional_1" title="Permanent link">&para;</a></h4>
+<h4 id="autorizacion-de-prefijo-opcional_1">Autorización de Prefijo (Opcional)</h4>
 <table>
 <thead>
 <tr>
@@ -3530,7 +3578,7 @@
 </tr>
 </tbody>
 </table>
-<h4 id="detalles-de-factura-requeridos">Detalles de Factura (Requeridos)<a class="headerlink" href="#detalles-de-factura-requeridos" title="Permanent link">&para;</a></h4>
+<h4 id="detalles-de-factura-requeridos">Detalles de Factura (Requeridos)</h4>
 <table>
 <thead>
 <tr>
@@ -3585,7 +3633,7 @@
 </tr>
 </tbody>
 </table>
-<h4 id="medios-de-pago-requeridos">Medios de Pago (Requeridos)<a class="headerlink" href="#medios-de-pago-requeridos" title="Permanent link">&para;</a></h4>
+<h4 id="medios-de-pago-requeridos">Medios de Pago (Requeridos)</h4>
 <table>
 <thead>
 <tr>
@@ -3618,7 +3666,7 @@
 - Todos los precios y cantidades usan regex específicos para validar precisión
 - Formato esperado: hasta 12 dígitos enteros con máximo 4 decimales
 - Regex: <code>/^\d{1,12}(\.\d{1,4})?$/</code></p>
-<h4 id="validaciones-de-negocio">Validaciones de Negocio<a class="headerlink" href="#validaciones-de-negocio" title="Permanent link">&para;</a></h4>
+<h4 id="validaciones-de-negocio">Validaciones de Negocio</h4>
 <ul>
 <li><strong>Items</strong>: Mínimo 1 item requerido</li>
 <li><strong>Medios de Pago</strong>: Al menos un medio de pago</li>
@@ -3627,7 +3675,7 @@
 <li><strong>Fecha</strong>: Formato YYYY-MM-DD</li>
 <li><strong>Totales</strong>: Coherencia entre totales globales e items individuales</li>
 </ul>
-<h4 id="mensajes-de-error-en-espanol">Mensajes de Error en Español<a class="headerlink" href="#mensajes-de-error-en-espanol" title="Permanent link">&para;</a></h4>
+<h4 id="mensajes-de-error-en-espanol">Mensajes de Error en Español</h4>
 <p>El sistema proporciona mensajes de error específicos y descriptivos:</p>
 <p><strong>Ejemplos de mensajes de validación:</strong>
 - <code>"El número de documento no puede exceder 20 caracteres"</code>
@@ -3635,14 +3683,14 @@
 - <code>"El precio unitario debe ser un decimal válido con máximo 4 decimales"</code>
 - <code>"La cantidad no puede exceder 999,999,999,999.9999"</code>
 - <code>"El importe del medio de pago debe ser un decimal válido con máximo 4 decimales"</code></p>
-<h3 id="casos-de-uso">Casos de Uso<a class="headerlink" href="#casos-de-uso" title="Permanent link">&para;</a></h3>
+<h3 id="casos-de-uso">Casos de Uso</h3>
 <ul>
 <li><strong>Estacionamientos</strong>: Cobro de estancia de vehículos</li>
 <li><strong>Servicios eléctricos</strong>: Recarga de vehículos eléctricos</li>
 <li><strong>Servicios adicionales</strong>: Lavado, servicios premium</li>
 <li><strong>Multi-terminal</strong>: Soporte para múltiples terminales</li>
 </ul>
-<h3 id="codigos-de-respuesta-http">Códigos de Respuesta HTTP<a class="headerlink" href="#codigos-de-respuesta-http" title="Permanent link">&para;</a></h3>
+<h3 id="codigos-de-respuesta-http">Códigos de Respuesta HTTP</h3>
 <table>
 <thead>
 <tr>
@@ -3673,7 +3721,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="notas-tecnicas">Notas Técnicas<a class="headerlink" href="#notas-tecnicas" title="Permanent link">&para;</a></h3>
+<h3 id="notas-tecnicas">Notas Técnicas</h3>
 <ul>
 <li><strong>Procesamiento</strong>: Asíncrono usando <code>CreateSaleMeyparJob</code></li>
 <li><strong>Formato de fecha</strong>: YYYY-MM-DD</li>
@@ -3681,7 +3729,7 @@
 <li><strong>Validación terminal</strong>: Código de terminal único por organización</li>
 <li><strong>Items específicos</strong>: Soporte para códigos de vehículos y observaciones detalladas</li>
 </ul>
-<h4 id="implementacion-del-servicio-meypar">Implementación del Servicio MEYPAR<a class="headerlink" href="#implementacion-del-servicio-meypar" title="Permanent link">&para;</a></h4>
+<h4 id="implementacion-del-servicio-meypar">Implementación del Servicio MEYPAR</h4>
 <p><strong>MeyparService.php</strong>
 - <strong>Validación de documentos</strong>: Automática para NITs y cédulas colombianas
 - <strong>Totales optimizados</strong>: Usa totales globales de MEYPAR directamente (no calculados)
@@ -3704,7 +3752,7 @@
 - <code>Custom_field3</code>: <code>null</code> (limpio)
 - <code>Custom_field4</code>: ReceiverType automático ('1' empresa, '2' persona/consumidor)
 - <code>Custom_field5</code>: Código de ubicación organización (solo empresas), <code>null</code> para otros</p>
-<h4 id="performance-y-optimizacion">Performance y Optimización<a class="headerlink" href="#performance-y-optimizacion" title="Permanent link">&para;</a></h4>
+<h4 id="performance-y-optimizacion">Performance y Optimización</h4>
 <p><strong>Validaciones Optimizadas</strong>
 - Validación de documentos en una sola pasada
 - Uso directo de totales globales (elimina cálculos)
@@ -3716,15 +3764,15 @@
 - Valores por defecto para campos opcionales
 - Formateo decimal con validación de límites</p>
 <hr />
-<h2 id="crear-venta-meypar-con-emision-directa">Crear Venta Meypar con Emisión Directa<a class="headerlink" href="#crear-venta-meypar-con-emision-directa" title="Permanent link">&para;</a></h2>
+<h2 id="crear-venta-meypar-con-emision-directa">Crear Venta Meypar con Emisión Directa</h2>
 <p><strong>Endpoint:</strong> <code>POST /api/v1/fe/create_sale_meypar_with_emission</code> 
 <strong>Controller:</strong> <code>FeController::createSaleMeyparWithEmission</code> 
 <strong>Request Class:</strong> <code>CreateSaleMeyparRequest</code> 
 <strong>Autenticación:</strong> Bearer Token requerido 
 <strong>Middleware:</strong> <code>check.activate.organization</code></p>
-<h3 id="descripcion_1">Descripción<a class="headerlink" href="#descripcion_1" title="Permanent link">&para;</a></h3>
+<h3 id="descripcion_1">Descripción</h3>
 <p>Crea y procesa una factura electrónica con emisión directa basada en datos del sistema Meypar. Este endpoint procesa la venta de manera síncrona incluyendo la emisión automática de la factura electrónica mediante el PAC configurado, con sistema de reintentos integrado.</p>
-<h3 id="diferencias-con-createsalemeypar">Diferencias con <code>createSaleMeypar</code><a class="headerlink" href="#diferencias-con-createsalemeypar" title="Permanent link">&para;</a></h3>
+<h3 id="diferencias-con-createsalemeypar">Diferencias con <code>createSaleMeypar</code></h3>
 <table>
 <thead>
 <tr>
@@ -3761,10 +3809,10 @@
 </tr>
 </tbody>
 </table>
-<h3 id="estructura-del-request_1">Estructura del Request<a class="headerlink" href="#estructura-del-request_1" title="Permanent link">&para;</a></h3>
+<h3 id="estructura-del-request_1">Estructura del Request</h3>
 <p>La estructura del request es <strong>idéntica</strong> a <code>createSaleMeypar</code>. Ver sección anterior para detalles completos.</p>
-<h3 id="ejemplo-de-request">Ejemplo de Request<a class="headerlink" href="#ejemplo-de-request" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<h3 id="ejemplo-de-request">Ejemplo de Request</h3>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
 <span class="w"> </span><span class="nt">&quot;documento&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w"> </span><span class="nt">&quot;tipo_documento&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1&quot;</span><span class="p">,</span>
 <span class="w"> </span><span class="nt">&quot;numero&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;MEYPAR-EMISSION-001&quot;</span><span class="p">,</span>
@@ -3819,8 +3867,9 @@
 <span class="w"> </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
-<h3 id="respuesta-de-exito">Respuesta de Éxito<a class="headerlink" href="#respuesta-de-exito" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
+
+<h3 id="respuesta-de-exito">Respuesta de Éxito</h3>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
 <span class="w"> </span><span class="nt">&quot;resCodigo&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
 <span class="w"> </span><span class="nt">&quot;resMensaje&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Exitoso&quot;</span><span class="p">,</span>
 <span class="w"> </span><span class="nt">&quot;cufe&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FE0120000155702081-2-2021-2600142026020500000000710040126897194708&quot;</span><span class="p">,</span>
@@ -3863,7 +3912,8 @@
 <span class="w"> </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
-<h4 id="campos-de-la-respuesta">Campos de la respuesta:<a class="headerlink" href="#campos-de-la-respuesta" title="Permanent link">&para;</a></h4>
+
+<h4 id="campos-de-la-respuesta">Campos de la respuesta:</h4>
 <table>
 <thead>
 <tr>
@@ -3958,44 +4008,49 @@
 </tr>
 </tbody>
 </table>
-<h3 id="respuesta-de-error">Respuesta de Error<a class="headerlink" href="#respuesta-de-error" title="Permanent link">&para;</a></h3>
-<p><strong>Error después de 3 reintentos:</strong>
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<h3 id="respuesta-de-error">Respuesta de Error</h3>
+<p><strong>Error después de 3 reintentos:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
 <span class="w"> </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
 <span class="w"> </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Falló después de 3 intentos&quot;</span><span class="p">,</span>
 <span class="w"> </span><span class="nt">&quot;error&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Error procesando venta MEYPAR con emisión&quot;</span>
 <span class="p">}</span>
-</code></pre></div></p>
-<h4 id="tipos-de-errores-especificos">Tipos de errores específicos:<a class="headerlink" href="#tipos-de-errores-especificos" title="Permanent link">&para;</a></h4>
-<p><strong>1. Error de configuración PAC:</strong>
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
+</code></pre></div>
+
+<h4 id="tipos-de-errores-especificos">Tipos de errores específicos:</h4>
+<p><strong>1. Error de configuración PAC:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
 <span class="w"> </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
 <span class="w"> </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;No se encontró configuración PAC para la organización&quot;</span><span class="p">,</span>
 <span class="w"> </span><span class="nt">&quot;error&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Error procesando venta MEYPAR con emisión&quot;</span>
 <span class="p">}</span>
-</code></pre></div></p>
-<p><strong>2. Error de validación de documentos:</strong>
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
+</code></pre></div>
+
+<p><strong>2. Error de validación de documentos:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
 <span class="w"> </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
 <span class="w"> </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;The document has already been issued.&quot;</span><span class="p">,</span>
 <span class="w"> </span><span class="nt">&quot;error&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Error procesando venta MEYPAR con emisión&quot;</span>
 <span class="p">}</span>
-</code></pre></div></p>
-<p><strong>3. Error de conexión PAC (Alanube):</strong>
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
+</code></pre></div>
+
+<p><strong>3. Error de conexión PAC (Alanube):</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
 <span class="w"> </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
 <span class="w"> </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Connection timeout&quot;</span><span class="p">,</span>
 <span class="w"> </span><span class="nt">&quot;error&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Error procesando venta MEYPAR con emisión&quot;</span>
 <span class="p">}</span>
-</code></pre></div></p>
-<p><strong>4. Error de respuesta PAC (400/401):</strong>
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
+</code></pre></div>
+
+<p><strong>4. Error de respuesta PAC (400/401):</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
 <span class="w"> </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
 <span class="w"> </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Error message from PAC response&quot;</span><span class="p">,</span>
 <span class="w"> </span><span class="nt">&quot;error&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Error procesando venta MEYPAR con emisión&quot;</span>
 <span class="p">}</span>
-</code></pre></div></p>
-<h3 id="flujo-de-procesamiento">Flujo de Procesamiento<a class="headerlink" href="#flujo-de-procesamiento" title="Permanent link">&para;</a></h3>
+</code></pre></div>
+
+<h3 id="flujo-de-procesamiento">Flujo de Procesamiento</h3>
 <ol>
 <li><strong>Validación de request</strong>: Usando <code>CreateSaleMeyparRequest</code></li>
 <li><strong>Auditoría de transacción</strong>: Almacenar datos originales para auditoría</li>
@@ -4006,27 +4061,27 @@
 <li><strong>Actualización BD</strong>: <code>EzeeIssued = 1</code> y <code>InvoiceNote</code> con respuesta PAC</li>
 <li><strong>Respuesta completa</strong>: Estructura con datos de venta y emisión</li>
 </ol>
-<h3 id="configuraciones-requeridas">Configuraciones Requeridas<a class="headerlink" href="#configuraciones-requeridas" title="Permanent link">&para;</a></h3>
-<h4 id="pac-connection">PAC Connection<a class="headerlink" href="#pac-connection" title="Permanent link">&para;</a></h4>
+<h3 id="configuraciones-requeridas">Configuraciones Requeridas</h3>
+<h4 id="pac-connection">PAC Connection</h4>
 <ul>
 <li>Configuración PAC activa en la organización</li>
 <li>Token válido y endpoint configurado</li>
 <li>Certificados digitales válidos</li>
 </ul>
-<h4 id="meyparservice">MeyparService<a class="headerlink" href="#meyparservice" title="Permanent link">&para;</a></h4>
+<h4 id="meyparservice">MeyparService</h4>
 <ul>
 <li>Servicio configurado para la organización</li>
 <li>Mapeo de productos Meypar a códigos internos</li>
 <li>Configuración de impuestos y tarifas</li>
 </ul>
-<h3 id="casos-de-uso-ideales">Casos de Uso Ideales<a class="headerlink" href="#casos-de-uso-ideales" title="Permanent link">&para;</a></h3>
+<h3 id="casos-de-uso-ideales">Casos de Uso Ideales</h3>
 <ul>
 <li><strong>Punto de venta</strong>: Emisión inmediata en terminales</li>
 <li><strong>Aplicaciones móviles</strong>: Facturación instantánea</li>
 <li><strong>Integraciones críticas</strong>: Cuando se requiere confirmación inmediata</li>
 <li><strong>Servicios premium</strong>: Para clientes que requieren factura inmediata</li>
 </ul>
-<h3 id="consideraciones-de-performance">Consideraciones de Performance<a class="headerlink" href="#consideraciones-de-performance" title="Permanent link">&para;</a></h3>
+<h3 id="consideraciones-de-performance">Consideraciones de Performance</h3>
 <table>
 <thead>
 <tr>
@@ -4063,7 +4118,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="codigos-de-respuesta-http_1">Códigos de Respuesta HTTP<a class="headerlink" href="#codigos-de-respuesta-http_1" title="Permanent link">&para;</a></h3>
+<h3 id="codigos-de-respuesta-http_1">Códigos de Respuesta HTTP</h3>
 <table>
 <thead>
 <tr>
@@ -4090,7 +4145,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="monitoreo-y-logging">Monitoreo y Logging<a class="headerlink" href="#monitoreo-y-logging" title="Permanent link">&para;</a></h3>
+<h3 id="monitoreo-y-logging">Monitoreo y Logging</h3>
 <p>El sistema registra automáticamente:</p>
 <ul>
 <li><strong>Request ID</strong>: organization_id + user_id + documento_numero</li>
@@ -4100,13 +4155,14 @@
 <li><strong>Error tracking</strong>: Mensajes de error específicos por intento</li>
 <li><strong>Audit trail</strong>: Transacciones almacenadas antes del procesamiento</li>
 </ul>
-<h4 id="logs-clave-a-monitorear">Logs clave a monitorear:<a class="headerlink" href="#logs-clave-a-monitorear" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code>CreateSaleMeyparWithEmission: Iniciando procesamiento
-MeyparService: Intento X de 3
-MeyparService: Procesamiento completado exitosamente
-Error en createSaleMeyparWithEmission: [error_message]
+<h4 id="logs-clave-a-monitorear">Logs clave a monitorear:</h4>
+<div class="codehilite"><pre><span></span><code><span class="nl">CreateSaleMeyparWithEmission</span><span class="p">:</span><span class="w"> </span><span class="n">Iniciando</span><span class="w"> </span><span class="n">procesamiento</span>
+<span class="nl">MeyparService</span><span class="p">:</span><span class="w"> </span><span class="n">Intento</span><span class="w"> </span><span class="n">X</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="mi">3</span>
+<span class="nl">MeyparService</span><span class="p">:</span><span class="w"> </span><span class="n">Procesamiento</span><span class="w"> </span><span class="n">completado</span><span class="w"> </span><span class="n">exitosamente</span>
+<span class="n">Error</span><span class="w"> </span><span class="n">en</span><span class="w"> </span><span class="nl">createSaleMeyparWithEmission</span><span class="p">:</span><span class="w"> </span><span class="o">[</span><span class="n">error_message</span><span class="o">]</span>
 </code></pre></div>
-<h3 id="mejores-practicas">Mejores Prácticas<a class="headerlink" href="#mejores-practicas" title="Permanent link">&para;</a></h3>
+
+<h3 id="mejores-practicas">Mejores Prácticas</h3>
 <ol>
 <li><strong>Timeout del cliente</strong>: Configurar timeout mínimo de 30 segundos</li>
 <li><strong>Manejo de errores</strong>: Implementar fallback a método asíncrono si falla</li>
@@ -4115,14 +4171,14 @@ Error en createSaleMeyparWithEmission: [error_message]
 <li><strong>Validación previa</strong>: Verificar configuración PAC antes del envío</li>
 <li><strong>XML firmado</strong>: Para Alanube, el XML base64 se incluye en <code>signedXml</code></li>
 </ol>
-<h3 id="caracteristicas-especiales-de-alanube">Características Especiales de Alanube<a class="headerlink" href="#caracteristicas-especiales-de-alanube" title="Permanent link">&para;</a></h3>
+<h3 id="caracteristicas-especiales-de-alanube">Características Especiales de Alanube</h3>
 <ul>
 <li><strong>XML automático</strong>: Descarga y codificación base64 automática del XML firmado</li>
 <li><strong>Almacenamiento</strong>: XML se guarda como archivo usando <code>FileUploadService</code></li>
 <li><strong>Auditoría</strong>: Registro del archivo XML en modelo <code>Archive</code></li>
 <li><strong>Campo <code>signedXml</code></strong>: Incluido en <code>pac_response</code> solo para Alanube</li>
 </ul>
-<h2 id="referencias">Referencias<a class="headerlink" href="#referencias" title="Permanent link">&para;</a></h2>
+<h2 id="referencias">Referencias</h2>
 <ul>
 <li><a href="https://api.meypar.com/docs">API MEYPAR Colombia - Documentación Oficial</a></li>
 <li><a href="/">DocuCenter - Sistema de Facturación Electrónica</a></li>
@@ -4181,7 +4237,7 @@ Error en createSaleMeyparWithEmission: [error_message]
       
       
     
-    <a href="https://github.com/aghabrego/docucenter" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+    <a href="https://github.com/aghabrego/docucenter-public" target="_blank" rel="noopener" title="github.com" class="md-social__link">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
     </a>
   

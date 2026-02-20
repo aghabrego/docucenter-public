@@ -233,7 +233,7 @@
           
   
   
-  APIs
+  API Documentation
 
         </a>
       </li>
@@ -269,7 +269,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../technical/" class="md-tabs__link">
+        <a href="../../technical/README.md" class="md-tabs__link">
           
   
   
@@ -298,6 +298,25 @@
         </a>
       </li>
     
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../testing/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Sistema de Testing
+
+      </a>
+    </li>
   
 
       
@@ -404,7 +423,7 @@
   <span class="md-ellipsis">
     
   
-    APIs
+    API Documentation
   
 
     
@@ -420,7 +439,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    APIs
+    API Documentation
   
 
           </label>
@@ -1363,7 +1382,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../technical/" class="md-nav__link">
+      <a href="../../technical/README.md" class="md-nav__link">
         
   
   
@@ -1716,6 +1735,33 @@
   
 
     
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sistema de Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -1889,28 +1935,29 @@
   
 
 
-<h1 id="correccion-pac-error-el-campo-codigo-es-invalido">Corrección PAC: Error "El campo codigo es inválido"<a class="headerlink" href="#correccion-pac-error-el-campo-codigo-es-invalido" title="Permanent link">&para;</a></h1>
-<h2 id="problema-identificado">Problema Identificado<a class="headerlink" href="#problema-identificado" title="Permanent link">&para;</a></h2>
+<h1 id="correccion-pac-error-el-campo-codigo-es-invalido">Corrección PAC: Error "El campo codigo es inválido"</h1>
+<h2 id="problema-identificado">Problema Identificado</h2>
 <p>En producción se generó el siguiente error de validación del PAC TheFactoryHKA:</p>
-<div class="highlight"><pre><span></span><code>En la ocurrencia [1] de Item, El campo codigo es inválido.
+<div class="codehilite"><pre><span></span><code>En la ocurrencia [1] de Item, El campo codigo es inválido.
 </code></pre></div>
+
 <p><strong>Caso específico</strong>: Código de producto <code>"ResMed:37221"</code> con caracteres especiales fue rechazado por el PAC.</p>
-<h2 id="analisis-de-documentacion-oficial">Análisis de Documentación Oficial<a class="headerlink" href="#analisis-de-documentacion-oficial" title="Permanent link">&para;</a></h2>
+<h2 id="analisis-de-documentacion-oficial">Análisis de Documentación Oficial</h2>
 <p>Según la documentación oficial de TheFactoryHKA PAC:</p>
 <ol>
 <li>
 <p><strong>Campo puede estar vacío</strong>: En el ejemplo de factura de exportación se muestra:
-   <div class="highlight"><pre><span></span><code><span class="nt">&lt;ser:codigo&gt;&lt;/ser:codigo&gt;</span>
-</code></pre></div></p>
+   <code>xml
+   &lt;ser:codigo&gt;&lt;/ser:codigo&gt;</code></p>
 </li>
 <li>
 <p><strong>Caracteres especiales problemáticos</strong>: El PAC rechaza ciertos caracteres especiales en códigos de producto, incluyendo <code>:</code> que aparecía en el código problemático.</p>
 </li>
 </ol>
-<h2 id="solucion-implementada">Solución Implementada<a class="headerlink" href="#solucion-implementada" title="Permanent link">&para;</a></h2>
-<h3 id="1-nuevo-metodo-de-sanitizacion">1. Nuevo Método de Sanitización<a class="headerlink" href="#1-nuevo-metodo-de-sanitizacion" title="Permanent link">&para;</a></h3>
+<h2 id="solucion-implementada">Solución Implementada</h2>
+<h3 id="1-nuevo-metodo-de-sanitizacion">1. Nuevo Método de Sanitización</h3>
 <p>Se agregó el método <code>sanitizeProductCodeForPAC()</code> en <code>HKAService.php</code>:</p>
-<div class="highlight"><pre><span></span><code><span class="x">private function sanitizeProductCodeForPAC($code)</span>
+<div class="codehilite"><pre><span></span><code><span class="x">private function sanitizeProductCodeForPAC($code)</span>
 <span class="x">{</span>
 <span class="x">    // Según documentación oficial PAC, el campo codigo puede estar vacío</span>
 <span class="x">    if (empty($code)) {</span>
@@ -1938,13 +1985,15 @@
 <span class="x">    return substr($sanitized, 0, 50);</span>
 <span class="x">}</span>
 </code></pre></div>
-<h3 id="2-integracion-en-procesamiento-de-items">2. Integración en Procesamiento de Items<a class="headerlink" href="#2-integracion-en-procesamiento-de-items" title="Permanent link">&para;</a></h3>
+
+<h3 id="2-integracion-en-procesamiento-de-items">2. Integración en Procesamiento de Items</h3>
 <p>El método se integró en el procesamiento de items del <code>createFeXML()</code>:</p>
-<div class="highlight"><pre><span></span><code><span class="x">// CRÍTICO: Código del item puede estar vacío según documentación oficial PAC</span>
+<div class="codehilite"><pre><span></span><code><span class="x">// CRÍTICO: Código del item puede estar vacío según documentación oficial PAC</span>
 <span class="x">$codigoItem = $this-&gt;getNestedValue($detailItem, &#39;dCodProd&#39;);</span>
 <span class="x">$item-&gt;codigo = $this-&gt;sanitizeProductCodeForPAC($codigoItem);</span>
 </code></pre></div>
-<h2 id="casos-de-prueba-validados">Casos de Prueba Validados<a class="headerlink" href="#casos-de-prueba-validados" title="Permanent link">&para;</a></h2>
+
+<h2 id="casos-de-prueba-validados">Casos de Prueba Validados</h2>
 <table>
 <thead>
 <tr>
@@ -1991,7 +2040,7 @@
 </tr>
 </tbody>
 </table>
-<h2 id="caracteres-eliminados">Caracteres Eliminados<a class="headerlink" href="#caracteres-eliminados" title="Permanent link">&para;</a></h2>
+<h2 id="caracteres-eliminados">Caracteres Eliminados</h2>
 <p>Los siguientes caracteres son eliminados por ser problemáticos para el PAC:</p>
 <ul>
 <li><code>:</code> (dos puntos)</li>
@@ -2017,22 +2066,23 @@
 <li><code>[</code> <code>]</code> (corchetes)</li>
 <li><code>{</code> <code>}</code> (llaves)</li>
 </ul>
-<h2 id="caracteres-permitidos">Caracteres Permitidos<a class="headerlink" href="#caracteres-permitidos" title="Permanent link">&para;</a></h2>
+<h2 id="caracteres-permitidos">Caracteres Permitidos</h2>
 <ul>
 <li><strong>Letras y números</strong>: A-Z, a-z, 0-9</li>
 <li><strong>Guiones</strong>: <code>-</code> (convertidos automáticamente desde espacios)</li>
 <li><strong>Puntos</strong>: <code>.</code> (mantenidos por ser comunes en códigos)</li>
 <li><strong>Guiones bajos</strong>: <code>_</code> (mantenidos por ser comunes en códigos)</li>
 </ul>
-<h2 id="logging">Logging<a class="headerlink" href="#logging" title="Permanent link">&para;</a></h2>
+<h2 id="logging">Logging</h2>
 <p>El sistema incluye logging detallado para rastrear las sanitizaciones:</p>
-<div class="highlight"><pre><span></span><code><span class="x">Log::info(&#39;HKAService - Código producto sanitizado para PAC&#39;, [</span>
+<div class="codehilite"><pre><span></span><code><span class="x">Log::info(&#39;HKAService - Código producto sanitizado para PAC&#39;, [</span>
 <span class="x">    &#39;codigo_original&#39; =&gt; $code,</span>
 <span class="x">    &#39;codigo_sanitizado&#39; =&gt; $sanitized,</span>
 <span class="x">    &#39;razon&#39; =&gt; &#39;Cumplimiento TheFactoryHKA PAC&#39;</span>
 <span class="x">]);</span>
 </code></pre></div>
-<h2 id="impacto">Impacto<a class="headerlink" href="#impacto" title="Permanent link">&para;</a></h2>
+
+<h2 id="impacto">Impacto</h2>
 <p>Esta corrección resolverá el error PAC "El campo codigo es inválido" que se presentaba con códigos de producto que contenían caracteres especiales, específicamente:</p>
 <ol>
 <li><strong>Caso de producción</strong>: <code>ResMed:37221</code> → <code>ResMed37221</code></li>
@@ -2040,7 +2090,7 @@
 <li><strong>Flexibilidad</strong>: Códigos vacíos son permitidos según documentación oficial</li>
 <li><strong>Robustez</strong>: Manejo automático de cualquier carácter especial problemático</li>
 </ol>
-<h2 id="testing">Testing<a class="headerlink" href="#testing" title="Permanent link">&para;</a></h2>
+<h2 id="testing">Testing</h2>
 <p>Se creó un test completo en <code>docs/testing/test-sanitizacion-codigo-producto-pac.php</code> que valida:</p>
 <ul>
 <li>✅ Sanitización del caso específico de producción</li>
@@ -2102,7 +2152,7 @@
       
       
     
-    <a href="https://github.com/aghabrego/docucenter" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+    <a href="https://github.com/aghabrego/docucenter-public" target="_blank" rel="noopener" title="github.com" class="md-social__link">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
     </a>
   

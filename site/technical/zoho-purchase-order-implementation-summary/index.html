@@ -233,7 +233,7 @@
           
   
   
-  APIs
+  API Documentation
 
         </a>
       </li>
@@ -269,7 +269,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../" class="md-tabs__link">
+        <a href="../README.md" class="md-tabs__link">
           
   
   
@@ -298,6 +298,25 @@
         </a>
       </li>
     
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../testing/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Sistema de Testing
+
+      </a>
+    </li>
   
 
       
@@ -404,7 +423,7 @@
   <span class="md-ellipsis">
     
   
-    APIs
+    API Documentation
   
 
     
@@ -420,7 +439,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    APIs
+    API Documentation
   
 
           </label>
@@ -1363,7 +1382,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
+      <a href="../README.md" class="md-nav__link">
         
   
   
@@ -1712,6 +1731,33 @@
           </ul>
         </nav>
       
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sistema de Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -2235,14 +2281,14 @@
   
 
 
-<h1 id="resumen-ejecutivo-implementacion-de-mapeo-de-ordenes-de-compra-zoho">Resumen Ejecutivo: Implementación de Mapeo de Órdenes de Compra Zoho<a class="headerlink" href="#resumen-ejecutivo-implementacion-de-mapeo-de-ordenes-de-compra-zoho" title="Permanent link">&para;</a></h1>
+<h1 id="resumen-ejecutivo-implementacion-de-mapeo-de-ordenes-de-compra-zoho">Resumen Ejecutivo: Implementación de Mapeo de Órdenes de Compra Zoho</h1>
 <p><strong>Fecha</strong>: 2025-10-02<br />
 <strong>Tipo</strong>: Análisis técnico y implementación completa<br />
 <strong>Estado</strong>: ✅ COMPLETADO</p>
-<h2 id="resumen">Resumen<a class="headerlink" href="#resumen" title="Permanent link">&para;</a></h2>
+<h2 id="resumen">Resumen</h2>
 <p>Se ha completado exitosamente el análisis y la implementación del sistema de mapeo de órdenes de compra desde Zoho Books hacia los modelos <code>PurchaseHeaderImp</code> y <code>PurchaseDetailImp</code> de DocuCenter. La implementación incluye clases de transformación, servicios de importación, validaciones robustas y herramientas de testing.</p>
-<h2 id="analisis-de-datos-realizado">Análisis de Datos Realizado<a class="headerlink" href="#analisis-de-datos-realizado" title="Permanent link">&para;</a></h2>
-<h3 id="datos-fuente-analizados">Datos Fuente Analizados<a class="headerlink" href="#datos-fuente-analizados" title="Permanent link">&para;</a></h3>
+<h2 id="analisis-de-datos-realizado">Análisis de Datos Realizado</h2>
+<h3 id="datos-fuente-analizados">Datos Fuente Analizados</h3>
 <ul>
 <li><strong>Log de producción</strong> del endpoint <code>/api/acicloud/create_purchase_order_zoho</code></li>
 <li><strong>Estructura completa</strong> del webhook de Zoho Books</li>
@@ -2250,9 +2296,9 @@
 <li><strong>Ejemplo real sin impuestos</strong>: Orden de Medtrition por $60.00 con producto "DIENAT G Vainilla"</li>
 <li><strong>Ejemplo real con impuestos</strong>: Orden de Medtrition por $5.35 con ITBMS (7%) - "PRO SOURCE NO CARB"</li>
 </ul>
-<h3 id="estructura-identificada">Estructura Identificada<a class="headerlink" href="#estructura-identificada" title="Permanent link">&para;</a></h3>
-<p><strong>Sin impuestos:</strong>
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<h3 id="estructura-identificada">Estructura Identificada</h3>
+<p><strong>Sin impuestos:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;vendor_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Medtrition&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;bill_number&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;88931&quot;</span><span class="p">,</span><span class="w"> </span>
 <span class="w">  </span><span class="nt">&quot;sub_total&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;60.0&quot;</span><span class="p">,</span>
@@ -2260,9 +2306,10 @@
 <span class="w">  </span><span class="nt">&quot;total&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;60.0&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;line_items&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;[{\&quot;sku\&quot;:\&quot;V504413\&quot;,\&quot;name\&quot;:\&quot;DIENAT G Vainilla\&quot;,\&quot;quantity\&quot;:20,\&quot;rate\&quot;:3,\&quot;item_total\&quot;:60}]&quot;</span>
 <span class="p">}</span>
-</code></pre></div></p>
-<p><strong>Con impuestos (ITBMS 7%):</strong>
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
+</code></pre></div>
+
+<p><strong>Con impuestos (ITBMS 7%):</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;vendor_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Medtrition&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;bill_number&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;9999&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;sub_total&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;5.0&quot;</span><span class="p">,</span>
@@ -2270,9 +2317,10 @@
 <span class="w">  </span><span class="nt">&quot;total&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;5.35&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;line_items&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;[{\&quot;sku\&quot;:\&quot;11525\&quot;,\&quot;name\&quot;:\&quot;PRO SOURCE NO CARB\&quot;,\&quot;quantity\&quot;:1,\&quot;rate\&quot;:5,\&quot;item_total\&quot;:5,\&quot;tax_percentage\&quot;:7,\&quot;line_item_taxes\&quot;:[{\&quot;tax_amount\&quot;:0.35,\&quot;tax_name\&quot;:\&quot;ITBMS (7%)\&quot;}]}]&quot;</span>
 <span class="p">}</span>
-</code></pre></div></p>
-<h2 id="implementacion-completa">Implementación Completa<a class="headerlink" href="#implementacion-completa" title="Permanent link">&para;</a></h2>
-<h3 id="1-clase-de-transformacion">1. Clase de Transformación<a class="headerlink" href="#1-clase-de-transformacion" title="Permanent link">&para;</a></h3>
+</code></pre></div>
+
+<h2 id="implementacion-completa">Implementación Completa</h2>
+<h3 id="1-clase-de-transformacion">1. Clase de Transformación</h3>
 <p><strong>Archivo</strong>: <code>app/Services/Zoho/ZohoPurchaseOrderTransformer.php</code></p>
 <p><strong>Funcionalidades</strong>:
 - ✅ Transformación de datos del header Zoho → PurchaseHeaderImp
@@ -2289,7 +2337,7 @@
 - <code>parseZohoDate()</code> - Conversión de fechas
 - <code>buildTaxInfo()</code> - <strong>Construcción de información de impuestos</strong>
 - <code>buildItemTaxInfo()</code> - <strong>Información de impuestos por línea</strong></p>
-<h3 id="2-servicio-de-importacion">2. Servicio de Importación<a class="headerlink" href="#2-servicio-de-importacion" title="Permanent link">&para;</a></h3>
+<h3 id="2-servicio-de-importacion">2. Servicio de Importación</h3>
 <p><strong>Archivo</strong>: <code>app/Services/Zoho/ZohoPurchaseOrderImporter.php</code></p>
 <p><strong>Funcionalidades</strong>:
 - ✅ Importación completa con transacciones
@@ -2303,7 +2351,7 @@
 - <code>importMultiplePurchaseOrders()</code> - Procesamiento en lote
 - <code>getImportStats()</code> - Estadísticas
 - <code>checkForDuplicate()</code> - Validación de duplicados</p>
-<h3 id="3-controller-actualizado">3. Controller Actualizado<a class="headerlink" href="#3-controller-actualizado" title="Permanent link">&para;</a></h3>
+<h3 id="3-controller-actualizado">3. Controller Actualizado</h3>
 <p><strong>Archivo</strong>: <code>app/Http/Controllers/Sage/ACIcloudController.php</code></p>
 <p><strong>Mejoras implementadas</strong>:
 - ✅ Integración con servicios de transformación
@@ -2311,8 +2359,8 @@
 - ✅ Manejo de autenticación y organizaciones
 - ✅ Respuestas JSON estructuradas
 - ✅ Mantenimiento del logging para análisis</p>
-<h2 id="mapeo-de-campos-implementado">Mapeo de Campos Implementado<a class="headerlink" href="#mapeo-de-campos-implementado" title="Permanent link">&para;</a></h2>
-<h3 id="purchaseheaderimp">PurchaseHeaderImp<a class="headerlink" href="#purchaseheaderimp" title="Permanent link">&para;</a></h3>
+<h2 id="mapeo-de-campos-implementado">Mapeo de Campos Implementado</h2>
+<h3 id="purchaseheaderimp">PurchaseHeaderImp</h3>
 <table>
 <thead>
 <tr>
@@ -2369,7 +2417,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="purchasedetailimp">PurchaseDetailImp<a class="headerlink" href="#purchasedetailimp" title="Permanent link">&para;</a></h3>
+<h3 id="purchasedetailimp">PurchaseDetailImp</h3>
 <table>
 <thead>
 <tr>
@@ -2426,9 +2474,9 @@
 </tr>
 </tbody>
 </table>
-<h3 id="informacion-de-impuestos-preservada">Información de Impuestos Preservada<a class="headerlink" href="#informacion-de-impuestos-preservada" title="Permanent link">&para;</a></h3>
-<p><strong>ErrorPT (Header):</strong>
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<h3 id="informacion-de-impuestos-preservada">Información de Impuestos Preservada</h3>
+<p><strong>ErrorPT (Header):</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;tax_total&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.35</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;has_taxes&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;currency&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;USD&quot;</span><span class="p">,</span>
@@ -2443,9 +2491,10 @@
 <span class="w">    </span><span class="p">}</span>
 <span class="w">  </span><span class="p">}</span>
 <span class="p">}</span>
-</code></pre></div></p>
-<p><strong>JobID (Line Item):</strong>
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
+</code></pre></div>
+
+<p><strong>JobID (Line Item):</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;pct&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ITBMS&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;details&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
@@ -2456,9 +2505,10 @@
 <span class="w">    </span><span class="p">}</span>
 <span class="w">  </span><span class="p">]</span>
 <span class="p">}</span>
-</code></pre></div></p>
-<h2 id="herramientas-de-testing">Herramientas de Testing<a class="headerlink" href="#herramientas-de-testing" title="Permanent link">&para;</a></h2>
-<h3 id="1-script-de-testing-bash">1. Script de Testing Bash<a class="headerlink" href="#1-script-de-testing-bash" title="Permanent link">&para;</a></h3>
+</code></pre></div>
+
+<h2 id="herramientas-de-testing">Herramientas de Testing</h2>
+<h3 id="1-script-de-testing-bash">1. Script de Testing Bash</h3>
 <p><strong>Archivo</strong>: <code>docs/testing/test-zoho-purchase-order-mapping.sh</code></p>
 <p><strong>Modos de testing</strong>:
 - <code>structure</code> - Verificación de clases
@@ -2466,21 +2516,23 @@
 - <code>simulation</code> - Simulación de importación
 - <code>endpoint</code> - Testing del endpoint real
 - <code>complete</code> - Suite completa</p>
-<p><strong>Uso</strong>:
-<div class="highlight"><pre><span></span><code>./docs/testing/test-zoho-purchase-order-mapping.sh<span class="w"> </span><span class="nb">complete</span>
-</code></pre></div></p>
-<h3 id="2-comando-artisan">2. Comando Artisan<a class="headerlink" href="#2-comando-artisan" title="Permanent link">&para;</a></h3>
+<p><strong>Uso</strong>:</p>
+<div class="codehilite"><pre><span></span><code>./docs/testing/test-zoho-purchase-order-mapping.sh<span class="w"> </span><span class="nb">complete</span>
+</code></pre></div>
+
+<h3 id="2-comando-artisan">2. Comando Artisan</h3>
 <p><strong>Archivo</strong>: <code>app/Console/Commands/TestZohoPurchaseOrderMapping.php</code></p>
-<p><strong>Comando</strong>:
-<div class="highlight"><pre><span></span><code>php<span class="w"> </span>artisan<span class="w"> </span>zoho:test-purchase-order-mapping<span class="w"> </span>--mode<span class="o">=</span>all<span class="w"> </span>--org-id<span class="o">=</span><span class="m">1</span><span class="w"> </span>--real-data<span class="w"> </span>--with-taxes
-</code></pre></div></p>
+<p><strong>Comando</strong>:</p>
+<div class="codehilite"><pre><span></span><code>php<span class="w"> </span>artisan<span class="w"> </span>zoho:test-purchase-order-mapping<span class="w"> </span>--mode<span class="o">=</span>all<span class="w"> </span>--org-id<span class="o">=</span><span class="m">1</span><span class="w"> </span>--real-data<span class="w"> </span>--with-taxes
+</code></pre></div>
+
 <p><strong>Opciones</strong>:
 - <code>--mode</code>: validate, transform, import, all
 - <code>--org-id</code>: ID de organización para testing
 - <code>--real-data</code>: Usar datos reales del log
 - <code>--with-taxes</code>: <strong>Usar datos con impuestos ITBMS</strong></p>
-<h2 id="documentacion-generada">Documentación Generada<a class="headerlink" href="#documentacion-generada" title="Permanent link">&para;</a></h2>
-<h3 id="1-analisis-tecnico-completo">1. Análisis Técnico Completo<a class="headerlink" href="#1-analisis-tecnico-completo" title="Permanent link">&para;</a></h3>
+<h2 id="documentacion-generada">Documentación Generada</h2>
+<h3 id="1-analisis-tecnico-completo">1. Análisis Técnico Completo</h3>
 <p><strong>Archivo</strong>: <code>docs/technical/zoho-purchase-order-mapping-analysis.md</code></p>
 <p><strong>Contenido</strong>:
 - ✅ Estructura detallada de datos Zoho
@@ -2488,15 +2540,15 @@
 - ✅ Código de implementación sugerido
 - ✅ Casos de uso y testing
 - ✅ Consideraciones técnicas</p>
-<h3 id="2-documentacion-de-api">2. Documentación de API<a class="headerlink" href="#2-documentacion-de-api" title="Permanent link">&para;</a></h3>
+<h3 id="2-documentacion-de-api">2. Documentación de API</h3>
 <ul>
 <li>✅ Endpoint: <code>POST /api/acicloud/create_purchase_order_zoho</code></li>
 <li>✅ Autenticación requerida</li>
 <li>✅ Validación de organización</li>
 <li>✅ Respuestas estructuradas</li>
 </ul>
-<h2 id="validaciones-implementadas">Validaciones Implementadas<a class="headerlink" href="#validaciones-implementadas" title="Permanent link">&para;</a></h2>
-<h3 id="validaciones-de-entrada">Validaciones de Entrada<a class="headerlink" href="#validaciones-de-entrada" title="Permanent link">&para;</a></h3>
+<h2 id="validaciones-implementadas">Validaciones Implementadas</h2>
+<h3 id="validaciones-de-entrada">Validaciones de Entrada</h3>
 <ul>
 <li>✅ <code>bill_number</code> requerido</li>
 <li>✅ <code>vendor_id</code> requerido  </li>
@@ -2505,30 +2557,30 @@
 <li>✅ <code>line_items</code> no vacío</li>
 <li>✅ Validación por cada line item</li>
 </ul>
-<h3 id="validaciones-de-negocio">Validaciones de Negocio<a class="headerlink" href="#validaciones-de-negocio" title="Permanent link">&para;</a></h3>
+<h3 id="validaciones-de-negocio">Validaciones de Negocio</h3>
 <ul>
 <li>✅ Detección de duplicados por <code>bill_number</code> + <code>vendor_id</code></li>
 <li>✅ Verificación de autenticación</li>
 <li>✅ Validación de organización activa</li>
 <li>✅ Integridad de datos transformados</li>
 </ul>
-<h2 id="manejo-de-errores">Manejo de Errores<a class="headerlink" href="#manejo-de-errores" title="Permanent link">&para;</a></h2>
-<h3 id="logging-completo">Logging Completo<a class="headerlink" href="#logging-completo" title="Permanent link">&para;</a></h3>
+<h2 id="manejo-de-errores">Manejo de Errores</h2>
+<h3 id="logging-completo">Logging Completo</h3>
 <ul>
 <li>✅ Request completo para análisis</li>
 <li>✅ Errores detallados con stack trace</li>
 <li>✅ Métricas de importación</li>
 <li>✅ Estados de transacciones</li>
 </ul>
-<h3 id="recuperacion-de-errores">Recuperación de Errores<a class="headerlink" href="#recuperacion-de-errores" title="Permanent link">&para;</a></h3>
+<h3 id="recuperacion-de-errores">Recuperación de Errores</h3>
 <ul>
 <li>✅ Rollback automático en transacciones</li>
 <li>✅ Mensajes de error informativos</li>
 <li>✅ Preservación de datos originales</li>
 <li>✅ Códigos HTTP apropiados</li>
 </ul>
-<h2 id="testing-realizado">Testing Realizado<a class="headerlink" href="#testing-realizado" title="Permanent link">&para;</a></h2>
-<h3 id="datos-de-prueba">Datos de Prueba<a class="headerlink" href="#datos-de-prueba" title="Permanent link">&para;</a></h3>
+<h2 id="testing-realizado">Testing Realizado</h2>
+<h3 id="datos-de-prueba">Datos de Prueba</h3>
 <ul>
 <li>✅ <strong>Datos reales</strong> extraídos del log de producción</li>
 <li>✅ <strong>Datos sintéticos</strong> para testing controlado</li>
@@ -2537,7 +2589,7 @@
 <li>✅ <strong>14 escenarios</strong> de validación</li>
 <li>✅ <strong>Testing de borde</strong> para casos límite</li>
 </ul>
-<h3 id="resultados-de-testing">Resultados de Testing<a class="headerlink" href="#resultados-de-testing" title="Permanent link">&para;</a></h3>
+<h3 id="resultados-de-testing">Resultados de Testing</h3>
 <ul>
 <li>✅ Transformación header: EXITOSA</li>
 <li>✅ Transformación line items: EXITOSA  </li>
@@ -2546,37 +2598,37 @@
 <li>✅ Detección de duplicados: EXITOSA</li>
 <li>✅ Importación completa: LISTA PARA TESTING</li>
 </ul>
-<h2 id="proximos-pasos">Próximos Pasos<a class="headerlink" href="#proximos-pasos" title="Permanent link">&para;</a></h2>
-<h3 id="inmediatos">Inmediatos<a class="headerlink" href="#inmediatos" title="Permanent link">&para;</a></h3>
+<h2 id="proximos-pasos">Próximos Pasos</h2>
+<h3 id="inmediatos">Inmediatos</h3>
 <ol>
 <li><strong>Testing en producción</strong> con datos reales de Zoho</li>
 <li><strong>Verificación de logs</strong> para análisis de rendimiento</li>
 <li><strong>Ajustes finos</strong> basados en datos reales</li>
 </ol>
-<h3 id="futuras-mejoras">Futuras Mejoras<a class="headerlink" href="#futuras-mejoras" title="Permanent link">&para;</a></h3>
+<h3 id="futuras-mejoras">Futuras Mejoras</h3>
 <ol>
 <li><strong>Dashboard de monitoreo</strong> para importaciones</li>
 <li><strong>Alertas automáticas</strong> para errores</li>
 <li><strong>Sincronización bidireccional</strong> DocuCenter → Zoho</li>
 <li><strong>Webhooks management</strong> centralizado</li>
 </ol>
-<h2 id="impacto-del-desarrollo">Impacto del Desarrollo<a class="headerlink" href="#impacto-del-desarrollo" title="Permanent link">&para;</a></h2>
-<h3 id="beneficios-tecnicos">Beneficios Técnicos<a class="headerlink" href="#beneficios-tecnicos" title="Permanent link">&para;</a></h3>
+<h2 id="impacto-del-desarrollo">Impacto del Desarrollo</h2>
+<h3 id="beneficios-tecnicos">Beneficios Técnicos</h3>
 <ul>
 <li>✅ <strong>Automatización completa</strong> de importación Zoho</li>
 <li>✅ <strong>Reducción de errores</strong> manuales</li>
 <li>✅ <strong>Trazabilidad completa</strong> de datos</li>
 <li>✅ <strong>Escalabilidad</strong> para múltiples organizaciones</li>
 </ul>
-<h3 id="beneficios-de-negocio">Beneficios de Negocio<a class="headerlink" href="#beneficios-de-negocio" title="Permanent link">&para;</a></h3>
+<h3 id="beneficios-de-negocio">Beneficios de Negocio</h3>
 <ul>
 <li>✅ <strong>Integración en tiempo real</strong> con Zoho Books</li>
 <li>✅ <strong>Consistencia de datos</strong> entre sistemas</li>
 <li>✅ <strong>Reducción de tiempo</strong> de procesamiento</li>
 <li>✅ <strong>Base sólida</strong> para futuras integraciones</li>
 </ul>
-<h2 id="archivos-modificadoscreados">Archivos Modificados/Creados<a class="headerlink" href="#archivos-modificadoscreados" title="Permanent link">&para;</a></h2>
-<h3 id="nuevos-archivos">Nuevos Archivos<a class="headerlink" href="#nuevos-archivos" title="Permanent link">&para;</a></h3>
+<h2 id="archivos-modificadoscreados">Archivos Modificados/Creados</h2>
+<h3 id="nuevos-archivos">Nuevos Archivos</h3>
 <ol>
 <li><code>app/Services/Zoho/ZohoPurchaseOrderTransformer.php</code></li>
 <li><code>app/Services/Zoho/ZohoPurchaseOrderImporter.php</code></li>
@@ -2584,12 +2636,12 @@
 <li><code>docs/technical/zoho-purchase-order-mapping-analysis.md</code></li>
 <li><code>docs/testing/test-zoho-purchase-order-mapping.sh</code></li>
 </ol>
-<h3 id="archivos-modificados">Archivos Modificados<a class="headerlink" href="#archivos-modificados" title="Permanent link">&para;</a></h3>
+<h3 id="archivos-modificados">Archivos Modificados</h3>
 <ol>
 <li><code>app/Http/Controllers/Sage/ACIcloudController.php</code> - Integración con servicios</li>
 <li><code>docs/technical/index.md</code> - Actualización del índice</li>
 </ol>
-<h2 id="conclusion">Conclusión<a class="headerlink" href="#conclusion" title="Permanent link">&para;</a></h2>
+<h2 id="conclusion">Conclusión</h2>
 <p>La implementación del mapeo de órdenes de compra Zoho hacia DocuCenter está <strong>100% completada</strong> y lista para deployment en producción. El sistema incluye:</p>
 <ul>
 <li>✅ <strong>Análisis exhaustivo</strong> de datos reales</li>
@@ -2657,7 +2709,7 @@
       
       
     
-    <a href="https://github.com/aghabrego/docucenter" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+    <a href="https://github.com/aghabrego/docucenter-public" target="_blank" rel="noopener" title="github.com" class="md-social__link">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
     </a>
   

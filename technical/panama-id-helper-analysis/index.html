@@ -233,7 +233,7 @@
           
   
   
-  APIs
+  API Documentation
 
         </a>
       </li>
@@ -269,7 +269,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../" class="md-tabs__link">
+        <a href="../README.md" class="md-tabs__link">
           
   
   
@@ -298,6 +298,25 @@
         </a>
       </li>
     
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../testing/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Sistema de Testing
+
+      </a>
+    </li>
   
 
       
@@ -404,7 +423,7 @@
   <span class="md-ellipsis">
     
   
-    APIs
+    API Documentation
   
 
     
@@ -420,7 +439,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    APIs
+    API Documentation
   
 
           </label>
@@ -1363,7 +1382,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
+      <a href="../README.md" class="md-nav__link">
         
   
   
@@ -1712,6 +1731,33 @@
           </ul>
         </nav>
       
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sistema de Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -2190,15 +2236,15 @@
   
 
 
-<h1 id="analisis-del-metodo-panamaid-soporte-para-rucs-gubernamentales">Análisis del Método panamaID - Soporte para RUCs Gubernamentales<a class="headerlink" href="#analisis-del-metodo-panamaid-soporte-para-rucs-gubernamentales" title="Permanent link">&para;</a></h1>
+<h1 id="analisis-del-metodo-panamaid-soporte-para-rucs-gubernamentales">Análisis del Método panamaID - Soporte para RUCs Gubernamentales</h1>
 <p><strong>Fecha:</strong> 2026-02-19<br />
 <strong>Archivo:</strong> <code>vendor/weirdo/helper/src/Helper/Traits/HelperArray.php</code><br />
 <strong>Método:</strong> <code>panamaID()</code><br />
 <strong>Objetivo:</strong> Agregar soporte para RUCs gubernamentales de 4 partes (ej: <code>4-NT-1-8346</code>)</p>
 <hr />
-<h2 id="estado-actual">📋 Estado Actual<a class="headerlink" href="#estado-actual" title="Permanent link">&para;</a></h2>
-<h3 id="metodo-existente-lineas-798-822">Método Existente (líneas 798-822)<a class="headerlink" href="#metodo-existente-lineas-798-822" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">/**</span>
+<h2 id="estado-actual">📋 Estado Actual</h2>
+<h3 id="metodo-existente-lineas-798-822">Método Existente (líneas 798-822)</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">/**</span>
 <span class="x"> * Accepted patterns:</span>
 <span class="x"> * - Regular (provincia-libro-tomo). Ej: 1-1234-12345</span>
 <span class="x"> * - Panameño nacido en el extranjero (PE-libro-tomo). Ej: PE-1234-12345</span>
@@ -2224,28 +2270,32 @@
 <span class="x">    return $matches;</span>
 <span class="x">}</span>
 </code></pre></div>
+
 <hr />
-<h2 id="problemas-detectados">❌ Problemas Detectados<a class="headerlink" href="#problemas-detectados" title="Permanent link">&para;</a></h2>
-<h3 id="1-expresion-onlyfirst-inconsistencia">1. Expresión <code>$onlyFirst</code> - Inconsistencia<a class="headerlink" href="#1-expresion-onlyfirst-inconsistencia" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">// Línea 815 - Tiene DOS patrones diferentes repetidos:</span>
+<h2 id="problemas-detectados">❌ Problemas Detectados</h2>
+<h3 id="1-expresion-onlyfirst-inconsistencia">1. Expresión <code>$onlyFirst</code> - Inconsistencia</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">// Línea 815 - Tiene DOS patrones diferentes repetidos:</span>
 <span class="x">&quot;^(?:PE|E|N|[23456789]|[23456789](?:A|P)?|...&quot;  // ❌ Patrón 1: (?:A|P)? incompleto</span>
 <span class="x">&quot;|^(?:PE|E|N|[23456789]|[23456789](?:AV|PI)?|...&quot; // ✅ Patrón 2: (?:AV|PI)? correcto</span>
 </code></pre></div>
+
 <p><strong>Problema:</strong> Duplicación innecesaria y patrón incorrecto <code>(?:A|P)?</code> que debería ser <code>(?:AV|PI)?</code></p>
-<h3 id="2-no-soporta-rucs-gubernamentales-4-partes">2. NO soporta RUCs Gubernamentales (4 partes)<a class="headerlink" href="#2-no-soporta-rucs-gubernamentales-4-partes" title="Permanent link">&para;</a></h3>
-<p><strong>Formato actual soportado (3 partes):</strong>
-<div class="highlight"><pre><span></span><code>provincia-libro-tomo
+<h3 id="2-no-soporta-rucs-gubernamentales-4-partes">2. NO soporta RUCs Gubernamentales (4 partes)</h3>
+<p><strong>Formato actual soportado (3 partes):</strong></p>
+<div class="codehilite"><pre><span></span><code>provincia-libro-tomo
 8-123-456 ✅
 PE-123-456 ✅
 8AV-123-456 ✅
-</code></pre></div></p>
-<p><strong>Formato gubernamental NO soportado (4 partes):</strong>
-<div class="highlight"><pre><span></span><code>provincia-TIPO-componente-secuencia
-4-NT-1-8346 ❌
-8-PA-2-1234 ❌
-1-GO-3-5678 ❌
-</code></pre></div></p>
-<h3 id="3-sufijos-gubernamentales-faltantes">3. Sufijos Gubernamentales Faltantes<a class="headerlink" href="#3-sufijos-gubernamentales-faltantes" title="Permanent link">&para;</a></h3>
+</code></pre></div>
+
+<p><strong>Formato gubernamental NO soportado (4 partes):</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="n">provincia</span><span class="o">-</span><span class="n">TIPO</span><span class="o">-</span><span class="n">componente</span><span class="o">-</span><span class="n">secuencia</span>
+<span class="mi">4</span><span class="o">-</span><span class="n">NT</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="mi">8346</span><span class="w"> </span><span class="err">❌</span>
+<span class="mi">8</span><span class="o">-</span><span class="n">PA</span><span class="o">-</span><span class="mi">2</span><span class="o">-</span><span class="mi">1234</span><span class="w"> </span><span class="err">❌</span>
+<span class="mi">1</span><span class="o">-</span><span class="k">GO</span><span class="o">-</span><span class="mi">3</span><span class="o">-</span><span class="mi">5678</span><span class="w"> </span><span class="err">❌</span>
+</code></pre></div>
+
+<h3 id="3-sufijos-gubernamentales-faltantes">3. Sufijos Gubernamentales Faltantes</h3>
 <p><strong>Actualmente soportados:</strong>
 - ✅ <code>AV</code> (Antes de la Vigencia)
 - ✅ <code>PI</code> (Población Indígena)</p>
@@ -2256,78 +2306,89 @@ PE-123-456 ✅
 - ❌ <code>ED</code> (Educación)
 - ❌ <code>SA</code> (Salud)</p>
 <hr />
-<h2 id="analisis-de-expresiones-regulares">📊 Análisis de Expresiones Regulares<a class="headerlink" href="#analisis-de-expresiones-regulares" title="Permanent link">&para;</a></h2>
-<h3 id="expresion-correcta-para-provincias-1-13">Expresión Correcta para Provincias 1-13<a class="headerlink" href="#expresion-correcta-para-provincias-1-13" title="Permanent link">&para;</a></h3>
-<p><strong>Patrón actual (problemático):</strong>
-<div class="highlight"><pre><span></span><code>[23456789]|1[0123]?
-</code></pre></div></p>
+<h2 id="analisis-de-expresiones-regulares">📊 Análisis de Expresiones Regulares</h2>
+<h3 id="expresion-correcta-para-provincias-1-13">Expresión Correcta para Provincias 1-13</h3>
+<p><strong>Patrón actual (problemático):</strong></p>
+<div class="codehilite"><pre><span></span><code>[23456789]|1[0123]?
+</code></pre></div>
+
 <p><strong>Problemas:</strong>
 - No es consistente con el usado en <code>ACIcloudService::determineRucType()</code>
 - Puede generar confusión</p>
-<p><strong>Patrón correcto (usado en ACIcloudService):</strong>
-<div class="highlight"><pre><span></span><code>1[0123]?|[23456789]
-</code></pre></div></p>
+<p><strong>Patrón correcto (usado en ACIcloudService):</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="mf">1</span><span class="err">[</span><span class="mf">0123</span><span class="err">]?|[</span><span class="mf">23456789</span><span class="err">]</span>
+</code></pre></div>
+
 <p><strong>Explicación:</strong>
 - <code>1[0123]?</code> → Captura: 1, 10, 11, 12, 13
 - <code>[23456789]</code> → Captura: 2, 3, 4, 5, 6, 7, 8, 9</p>
 <hr />
-<h2 id="propuesta-de-mejora">🎯 Propuesta de Mejora<a class="headerlink" href="#propuesta-de-mejora" title="Permanent link">&para;</a></h2>
-<h3 id="nuevos-patrones-a-agregar">Nuevos Patrones a Agregar<a class="headerlink" href="#nuevos-patrones-a-agregar" title="Permanent link">&para;</a></h3>
-<h4 id="1-patron-para-ruc-gubernamental-4-partes">1. Patrón para RUC Gubernamental (4 partes)<a class="headerlink" href="#1-patron-para-ruc-gubernamental-4-partes" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="x">// Formato: provincia-TIPO-componente-secuencia</span>
+<h2 id="propuesta-de-mejora">🎯 Propuesta de Mejora</h2>
+<h3 id="nuevos-patrones-a-agregar">Nuevos Patrones a Agregar</h3>
+<h4 id="1-patron-para-ruc-gubernamental-4-partes">1. Patrón para RUC Gubernamental (4 partes)</h4>
+<div class="codehilite"><pre><span></span><code><span class="x">// Formato: provincia-TIPO-componente-secuencia</span>
 <span class="x">// Ejemplo: 4-NT-1-8346</span>
 <span class="x">$governmentalId = &quot;^(1[0123]?|[23456789])$delimiter(NT|PA|GO|ED|SA)$delimiter(\d{1,$tomo})$delimiter(\d{1,$folio})&quot;;</span>
 </code></pre></div>
+
 <p><strong>Captura:</strong>
 - <code>$matches[1]</code> → Provincia (1-13)
 - <code>$matches[2]</code> → Tipo gubernamental (NT, PA, GO, ED, SA)
 - <code>$matches[3]</code> → Componente (hasta 4 dígitos por defecto)
 - <code>$matches[4]</code> → Secuencia (hasta 6 dígitos por defecto)</p>
-<h4 id="2-patron-para-solo-provincia-tipo-gubernamental">2. Patrón para Solo Provincia + Tipo Gubernamental<a class="headerlink" href="#2-patron-para-solo-provincia-tipo-gubernamental" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="x">// Validación parcial: provincia-TIPO</span>
+<h4 id="2-patron-para-solo-provincia-tipo-gubernamental">2. Patrón para Solo Provincia + Tipo Gubernamental</h4>
+<div class="codehilite"><pre><span></span><code><span class="x">// Validación parcial: provincia-TIPO</span>
 <span class="x">// Ejemplo: 4-NT</span>
 <span class="x">$governmentalPrefix = &quot;^(1[0123]?|[23456789])$delimiter(NT|PA|GO|ED|SA)$delimiter?$&quot;;</span>
 </code></pre></div>
-<h4 id="3-patron-para-provincia-tipo-componente">3. Patrón para Provincia + Tipo + Componente<a class="headerlink" href="#3-patron-para-provincia-tipo-componente" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="x">// Validación parcial: provincia-TIPO-componente</span>
+
+<h4 id="3-patron-para-provincia-tipo-componente">3. Patrón para Provincia + Tipo + Componente</h4>
+<div class="codehilite"><pre><span></span><code><span class="x">// Validación parcial: provincia-TIPO-componente</span>
 <span class="x">// Ejemplo: 4-NT-1</span>
 <span class="x">$governmentalPartial = &quot;^(1[0123]?|[23456789])$delimiter(NT|PA|GO|ED|SA)$delimiter(\d{1,$tomo})$delimiter?$&quot;;</span>
 </code></pre></div>
+
 <hr />
-<h2 id="expresiones-mejoradas">🔧 Expresiones Mejoradas<a class="headerlink" href="#expresiones-mejoradas" title="Permanent link">&para;</a></h2>
-<h3 id="expresion-onlyfirst-corregida">Expresión <code>$onlyFirst</code> - CORREGIDA<a class="headerlink" href="#expresion-onlyfirst-corregida" title="Permanent link">&para;</a></h3>
-<p><strong>Antes:</strong>
-<div class="highlight"><pre><span></span><code><span class="x">$onlyFirst = &quot;^(?:PE|E|N|[23456789]|[23456789](?:A|P)?|1[0123]?|1[0123]?(?:A|P)?)$|^(?:PE|E|N|[23456789]|[23456789](?:AV|PI)?|1[0123]?|1[0123]?(?:AV|PI)?)$delimiter?$&quot;;</span>
-</code></pre></div></p>
-<p><strong>Después (simplificada y corregida):</strong>
-<div class="highlight"><pre><span></span><code><span class="x">$onlyFirst = &quot;^(?:PE|E|N|1[0123]?(?:AV|PI)?|[23456789](?:AV|PI)?)$delimiter?$&quot;;</span>
-</code></pre></div></p>
+<h2 id="expresiones-mejoradas">🔧 Expresiones Mejoradas</h2>
+<h3 id="expresion-onlyfirst-corregida">Expresión <code>$onlyFirst</code> - CORREGIDA</h3>
+<p><strong>Antes:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="x">$onlyFirst = &quot;^(?:PE|E|N|[23456789]|[23456789](?:A|P)?|1[0123]?|1[0123]?(?:A|P)?)$|^(?:PE|E|N|[23456789]|[23456789](?:AV|PI)?|1[0123]?|1[0123]?(?:AV|PI)?)$delimiter?$&quot;;</span>
+</code></pre></div>
+
+<p><strong>Después (simplificada y corregida):</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="x">$onlyFirst = &quot;^(?:PE|E|N|1[0123]?(?:AV|PI)?|[23456789](?:AV|PI)?)$delimiter?$&quot;;</span>
+</code></pre></div>
+
 <p><strong>Cambios:</strong>
 - ✅ Eliminada duplicación innecesaria
 - ✅ Corregido patrón <code>(?:A|P)?</code> a <code>(?:AV|PI)?</code>
 - ✅ Reordenado para consistencia (provincias 1-13 primero)</p>
-<h3 id="expresion-bookandtome-mejorada">Expresión <code>$bookAndTome</code> - MEJORADA<a class="headerlink" href="#expresion-bookandtome-mejorada" title="Permanent link">&para;</a></h3>
-<p><strong>Antes:</strong>
-<div class="highlight"><pre><span></span><code><span class="x">$bookAndTome = &quot;^(?:PE|E|N|[23456789](?:AV|PI)?|1[0123]?(?:AV|PI)?)$delimiter(?:\d{1,$tomo})$delimiter?$&quot;;</span>
-</code></pre></div></p>
-<p><strong>Después (mismo orden que onlyFirst):</strong>
-<div class="highlight"><pre><span></span><code><span class="x">$bookAndTome = &quot;^(?:PE|E|N|1[0123]?(?:AV|PI)?|[23456789](?:AV|PI)?)$delimiter(\d{1,$tomo})$delimiter?$&quot;;</span>
-</code></pre></div></p>
+<h3 id="expresion-bookandtome-mejorada">Expresión <code>$bookAndTome</code> - MEJORADA</h3>
+<p><strong>Antes:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="x">$bookAndTome = &quot;^(?:PE|E|N|[23456789](?:AV|PI)?|1[0123]?(?:AV|PI)?)$delimiter(?:\d{1,$tomo})$delimiter?$&quot;;</span>
+</code></pre></div>
+
+<p><strong>Después (mismo orden que onlyFirst):</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="x">$bookAndTome = &quot;^(?:PE|E|N|1[0123]?(?:AV|PI)?|[23456789](?:AV|PI)?)$delimiter(\d{1,$tomo})$delimiter?$&quot;;</span>
+</code></pre></div>
+
 <p><strong>Cambios:</strong>
 - ✅ Reordenado para consistencia
 - ✅ Cambiado a grupo de captura <code>(\d{1,$tomo})</code> en vez de no captura <code>(?:\d{1,$tomo})</code></p>
-<h3 id="expresion-fullid-mejorada">Expresión <code>$fullId</code> - MEJORADA<a class="headerlink" href="#expresion-fullid-mejorada" title="Permanent link">&para;</a></h3>
-<p><strong>Antes:</strong>
-<div class="highlight"><pre><span></span><code><span class="x">$fullId = &quot;^(PE|E|N|[23456789](?:AV|PI)?|1[0123]?(?:AV|PI)?)$delimiter(\d{1,$tomo})$delimiter(\d{1,$folio})&quot;;</span>
-</code></pre></div></p>
-<p><strong>Después:</strong>
-<div class="highlight"><pre><span></span><code><span class="x">$fullId = &quot;^(PE|E|N|1[0123]?(?:AV|PI)?|[23456789](?:AV|PI)?)$delimiter(\d{1,$tomo})$delimiter(\d{1,$folio})&quot;;</span>
-</code></pre></div></p>
+<h3 id="expresion-fullid-mejorada">Expresión <code>$fullId</code> - MEJORADA</h3>
+<p><strong>Antes:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="x">$fullId = &quot;^(PE|E|N|[23456789](?:AV|PI)?|1[0123]?(?:AV|PI)?)$delimiter(\d{1,$tomo})$delimiter(\d{1,$folio})&quot;;</span>
+</code></pre></div>
+
+<p><strong>Después:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="x">$fullId = &quot;^(PE|E|N|1[0123]?(?:AV|PI)?|[23456789](?:AV|PI)?)$delimiter(\d{1,$tomo})$delimiter(\d{1,$folio})&quot;;</span>
+</code></pre></div>
+
 <p><strong>Cambios:</strong>
 - ✅ Reordenado para consistencia</p>
 <hr />
-<h2 id="metodo-completo-propuesto">📝 Método Completo Propuesto<a class="headerlink" href="#metodo-completo-propuesto" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><span class="x">/**</span>
+<h2 id="metodo-completo-propuesto">📝 Método Completo Propuesto</h2>
+<div class="codehilite"><pre><span></span><code><span class="x">/**</span>
 <span class="x"> * Accepted patterns:</span>
 <span class="x"> * - Regular (provincia-libro-tomo). Ej: 1-1234-12345</span>
 <span class="x"> * - Panameño nacido en el extranjero (PE-libro-tomo). Ej: PE-1234-12345</span>
@@ -2372,10 +2433,11 @@ PE-123-456 ✅
 <span class="x">    return $matches;</span>
 <span class="x">}</span>
 </code></pre></div>
+
 <hr />
-<h2 id="casos-de-prueba">🧪 Casos de Prueba<a class="headerlink" href="#casos-de-prueba" title="Permanent link">&para;</a></h2>
-<h3 id="cedulas-estandar-3-partes-deben-seguir-funcionando">Cédulas Estándar (3 partes) - Deben seguir funcionando<a class="headerlink" href="#cedulas-estandar-3-partes-deben-seguir-funcionando" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">$helper-&gt;panamaID(&#39;8-123-456&#39;, 4, 6, &#39;-&#39;);</span>
+<h2 id="casos-de-prueba">🧪 Casos de Prueba</h2>
+<h3 id="cedulas-estandar-3-partes-deben-seguir-funcionando">Cédulas Estándar (3 partes) - Deben seguir funcionando</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">$helper-&gt;panamaID(&#39;8-123-456&#39;, 4, 6, &#39;-&#39;);</span>
 <span class="x">// ✅ Debe capturar: [&#39;8-123-456&#39;, &#39;8&#39;, &#39;123&#39;, &#39;456&#39;]</span>
 
 <span class="x">$helper-&gt;panamaID(&#39;PE-123-456&#39;, 4, 6, &#39;-&#39;);</span>
@@ -2387,8 +2449,9 @@ PE-123-456 ✅
 <span class="x">$helper-&gt;panamaID(&#39;1PI-123-456&#39;, 4, 6, &#39;-&#39;);</span>
 <span class="x">// ✅ Debe capturar: [&#39;1PI-123-456&#39;, &#39;1PI&#39;, &#39;123&#39;, &#39;456&#39;]</span>
 </code></pre></div>
-<h3 id="rucs-gubernamentales-4-partes-nuevo-soporte">RUCs Gubernamentales (4 partes) - NUEVO SOPORTE<a class="headerlink" href="#rucs-gubernamentales-4-partes-nuevo-soporte" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">$helper-&gt;panamaID(&#39;4-NT-1-8346&#39;, 4, 6, &#39;-&#39;);</span>
+
+<h3 id="rucs-gubernamentales-4-partes-nuevo-soporte">RUCs Gubernamentales (4 partes) - NUEVO SOPORTE</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">$helper-&gt;panamaID(&#39;4-NT-1-8346&#39;, 4, 6, &#39;-&#39;);</span>
 <span class="x">// ✅ Debe capturar: [&#39;4-NT-1-8346&#39;, &#39;4&#39;, &#39;NT&#39;, &#39;1&#39;, &#39;8346&#39;]</span>
 
 <span class="x">$helper-&gt;panamaID(&#39;8-PA-2-1234&#39;, 4, 6, &#39;-&#39;);</span>
@@ -2400,8 +2463,9 @@ PE-123-456 ✅
 <span class="x">$helper-&gt;panamaID(&#39;13-ED-1-9999&#39;, 4, 6, &#39;-&#39;);</span>
 <span class="x">// ✅ Debe capturar: [&#39;13-ED-1-9999&#39;, &#39;13&#39;, &#39;ED&#39;, &#39;1&#39;, &#39;9999&#39;]</span>
 </code></pre></div>
-<h3 id="validaciones-parciales">Validaciones Parciales<a class="headerlink" href="#validaciones-parciales" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">// Solo provincia</span>
+
+<h3 id="validaciones-parciales">Validaciones Parciales</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">// Solo provincia</span>
 <span class="x">$helper-&gt;panamaID(&#39;8&#39;, 4, 6, &#39;-&#39;);</span>
 <span class="x">// ✅ Debe capturar: [&#39;8&#39;]</span>
 
@@ -2413,8 +2477,9 @@ PE-123-456 ✅
 <span class="x">$helper-&gt;panamaID(&#39;4-NT-1&#39;, 4, 6, &#39;-&#39;);</span>
 <span class="x">// ✅ Debe capturar: [&#39;4-NT-1&#39;, &#39;4&#39;, &#39;NT&#39;, &#39;1&#39;]</span>
 </code></pre></div>
-<h3 id="casos-invalidos">Casos Inválidos<a class="headerlink" href="#casos-invalidos" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">$helper-&gt;panamaID(&#39;14-123-456&#39;, 4, 6, &#39;-&#39;);</span>
+
+<h3 id="casos-invalidos">Casos Inválidos</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">$helper-&gt;panamaID(&#39;14-123-456&#39;, 4, 6, &#39;-&#39;);</span>
 <span class="x">// ❌ Debe retornar: [] (provincia 14 no existe)</span>
 
 <span class="x">$helper-&gt;panamaID(&#39;8-XX-123-456&#39;, 4, 6, &#39;-&#39;);</span>
@@ -2423,8 +2488,9 @@ PE-123-456 ✅
 <span class="x">$helper-&gt;panamaID(&#39;ABC-123-456&#39;, 4, 6, &#39;-&#39;);</span>
 <span class="x">// ❌ Debe retornar: [] (ABC no es un prefijo válido)</span>
 </code></pre></div>
+
 <hr />
-<h2 id="matriz-de-compatibilidad">📊 Matriz de Compatibilidad<a class="headerlink" href="#matriz-de-compatibilidad" title="Permanent link">&para;</a></h2>
+<h2 id="matriz-de-compatibilidad">📊 Matriz de Compatibilidad</h2>
 <table>
 <thead>
 <tr>
@@ -2472,33 +2538,34 @@ PE-123-456 ✅
 </tbody>
 </table>
 <hr />
-<h2 id="consideraciones">⚠️ Consideraciones<a class="headerlink" href="#consideraciones" title="Permanent link">&para;</a></h2>
-<h3 id="1-orden-de-validacion-en-regex">1. Orden de Validación en Regex<a class="headerlink" href="#1-orden-de-validacion-en-regex" title="Permanent link">&para;</a></h3>
-<p>El orden es importante en la alternancia <code>|</code>:
-<div class="highlight"><pre><span></span><code><span class="x">// ✅ CORRECTO: De más específico a menos específico</span>
+<h2 id="consideraciones">⚠️ Consideraciones</h2>
+<h3 id="1-orden-de-validacion-en-regex">1. Orden de Validación en Regex</h3>
+<p>El orden es importante en la alternancia <code>|</code>:</p>
+<div class="codehilite"><pre><span></span><code><span class="x">// ✅ CORRECTO: De más específico a menos específico</span>
 <span class="x">$governmentalId      // 4 partes completas</span>
 <span class="x">$governmentalPartial // 3 partes</span>
 <span class="x">$governmentalPrefix  // 2 partes</span>
 <span class="x">$fullId              // 3 partes completas (cédula)</span>
 <span class="x">$bookAndTome         // 2 partes</span>
 <span class="x">$onlyFirst           // 1 parte</span>
-</code></pre></div></p>
-<h3 id="2-grupos-de-captura">2. Grupos de Captura<a class="headerlink" href="#2-grupos-de-captura" title="Permanent link">&para;</a></h3>
+</code></pre></div>
+
+<h3 id="2-grupos-de-captura">2. Grupos de Captura</h3>
 <p>Los grupos de captura <code>()</code> permiten extraer las partes individuales:
 - Cédula: <code>['8-123-456', '8', '123', '456']</code> → [match completo, provincia, libro, tomo]
 - Gubernamental: <code>['4-NT-1-8346', '4', 'NT', '1', '8346']</code> → [match completo, provincia, tipo, componente, secuencia]</p>
-<h3 id="3-case-insensitive">3. Case-Insensitive<a class="headerlink" href="#3-case-insensitive" title="Permanent link">&para;</a></h3>
+<h3 id="3-case-insensitive">3. Case-Insensitive</h3>
 <p>La bandera <code>/i</code> al final hace que sea case-insensitive:
 - <code>4-nt-1-8346</code> ✅
 - <code>4-NT-1-8346</code> ✅
 - <code>4-Nt-1-8346</code> ✅</p>
-<h3 id="4-delimitador-personalizable">4. Delimitador Personalizable<a class="headerlink" href="#4-delimitador-personalizable" title="Permanent link">&para;</a></h3>
+<h3 id="4-delimitador-personalizable">4. Delimitador Personalizable</h3>
 <p>El parámetro <code>$delimiter</code> permite usar diferentes separadores:
 - Con <code>-</code>: <code>4-NT-1-8346</code>
 - Con <code>_</code>: <code>4_NT_1_8346</code>
 - Sin delimitador: <code>4NT18346</code> (menos común)</p>
 <hr />
-<h2 id="proximos-pasos">🎯 Próximos Pasos<a class="headerlink" href="#proximos-pasos" title="Permanent link">&para;</a></h2>
+<h2 id="proximos-pasos">🎯 Próximos Pasos</h2>
 <ol>
 <li>✅ <strong>Revisión de documentación</strong> - Este documento</li>
 <li>⏳ <strong>Implementar cambios</strong> en <code>HelperArray.php</code></li>
@@ -2507,24 +2574,25 @@ PE-123-456 ✅
 <li>⏳ <strong>Probar integración</strong> con sistemas existentes</li>
 </ol>
 <hr />
-<h2 id="referencias">📚 Referencias<a class="headerlink" href="#referencias" title="Permanent link">&para;</a></h2>
-<h3 id="documentos-relacionados">Documentos Relacionados<a class="headerlink" href="#documentos-relacionados" title="Permanent link">&para;</a></h3>
+<h2 id="referencias">📚 Referencias</h2>
+<h3 id="documentos-relacionados">Documentos Relacionados</h3>
 <ul>
 <li><a href="../../validations/acicloud-ruc-gubernamental-support/">ACIcloudService RUC Gubernamental Support</a></li>
 <li><a href="../../validations/acicloud-ruc-gubernamental-support/#corrección-crítica-implementada">Corrección Crítica dTipoRuc</a></li>
 </ul>
-<h3 id="codigo-relacionado">Código Relacionado<a class="headerlink" href="#codigo-relacionado" title="Permanent link">&para;</a></h3>
+<h3 id="codigo-relacionado">Código Relacionado</h3>
 <ul>
 <li><code>vendor/weirdo/helper/src/Helper/Traits/HelperArray.php</code> → Método <code>panamaID()</code></li>
 <li><code>app/Services/ACIcloudService.php</code> → Método <code>determineRucType()</code></li>
 <li><code>app/Helpers/PanamaRucHelper.php</code> → Validación de RUCs</li>
 </ul>
-<h3 id="patrones-de-provincia-consistentes">Patrones de Provincia Consistentes<a class="headerlink" href="#patrones-de-provincia-consistentes" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>// Patrón usado en ACIcloudService::determineRucType()
-1[0123]?|[23456789]  // Provincias 1-13
+<h3 id="patrones-de-provincia-consistentes">Patrones de Provincia Consistentes</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1">// Patrón usado en ACIcloudService::determineRucType()</span>
+<span class="mi">1</span><span class="p">[</span><span class="mi">0123</span><span class="p">]</span>?<span class="o">|</span><span class="p">[</span><span class="mi">23456789</span><span class="p">]</span><span class="w">  </span><span class="c1">// Provincias 1-13</span>
 
-// Este mismo patrón se debe usar en panamaID() para consistencia
+<span class="c1">// Este mismo patrón se debe usar en panamaID() para consistencia</span>
 </code></pre></div>
+
 <hr />
 <p><strong>Fecha de Análisis:</strong> 2026-02-19<br />
 <strong>Analizado por:</strong> Team de Docucenter<br />
@@ -2581,7 +2649,7 @@ PE-123-456 ✅
       
       
     
-    <a href="https://github.com/aghabrego/docucenter" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+    <a href="https://github.com/aghabrego/docucenter-public" target="_blank" rel="noopener" title="github.com" class="md-social__link">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
     </a>
   

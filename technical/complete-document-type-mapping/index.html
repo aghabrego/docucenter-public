@@ -233,7 +233,7 @@
           
   
   
-  APIs
+  API Documentation
 
         </a>
       </li>
@@ -269,7 +269,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../" class="md-tabs__link">
+        <a href="../README.md" class="md-tabs__link">
           
   
   
@@ -298,6 +298,25 @@
         </a>
       </li>
     
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../testing/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Sistema de Testing
+
+      </a>
+    </li>
   
 
       
@@ -404,7 +423,7 @@
   <span class="md-ellipsis">
     
   
-    APIs
+    API Documentation
   
 
     
@@ -420,7 +439,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    APIs
+    API Documentation
   
 
           </label>
@@ -1363,7 +1382,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
+      <a href="../README.md" class="md-nav__link">
         
   
   
@@ -1716,6 +1735,33 @@
   
 
     
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sistema de Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -2001,15 +2047,15 @@
   
 
 
-<h1 id="mapeo-completo-de-estructuras-por-tipo-de-documento-createphp">Mapeo Completo de Estructuras por Tipo de Documento - Create.php<a class="headerlink" href="#mapeo-completo-de-estructuras-por-tipo-de-documento-createphp" title="Permanent link">&para;</a></h1>
-<h2 id="analisis-completo-de-implementacion">Análisis Completo de Implementación<a class="headerlink" href="#analisis-completo-de-implementacion" title="Permanent link">&para;</a></h2>
+<h1 id="mapeo-completo-de-estructuras-por-tipo-de-documento-createphp">Mapeo Completo de Estructuras por Tipo de Documento - Create.php</h1>
+<h2 id="analisis-completo-de-implementacion">Análisis Completo de Implementación</h2>
 <p>Se ha completado la implementación de <strong>todas las estructuras específicas</strong> requeridas por cada tipo de documento según normativas DGI de Panamá en el componente <code>app/Http/Livewire/Admin/Einvoice/Create.php</code>.</p>
-<h2 id="estructuras-implementadas">Estructuras Implementadas<a class="headerlink" href="#estructuras-implementadas" title="Permanent link">&para;</a></h2>
-<h3 id="ubicacion-en-el-codigo">🔧 <strong>Ubicación en el Código</strong><a class="headerlink" href="#ubicacion-en-el-codigo" title="Permanent link">&para;</a></h3>
+<h2 id="estructuras-implementadas">Estructuras Implementadas</h2>
+<h3 id="ubicacion-en-el-codigo">🔧 <strong>Ubicación en el Código</strong></h3>
 <p><strong>Archivo</strong>: <code>app/Http/Livewire/Admin/Einvoice/Create.php</code>
 <strong>Método</strong>: <code>issueDocument()</code>
 <strong>Líneas</strong>: ~1695-1735 (después de <code>$request['dGen'] = $dGen;</code>)</p>
-<h3 id="mapeo-por-tipo-de-documento">📋 <strong>Mapeo por Tipo de Documento</strong><a class="headerlink" href="#mapeo-por-tipo-de-documento" title="Permanent link">&para;</a></h3>
+<h3 id="mapeo-por-tipo-de-documento">📋 <strong>Mapeo por Tipo de Documento</strong></h3>
 <table>
 <thead>
 <tr>
@@ -2079,9 +2125,9 @@
 </tr>
 </tbody>
 </table>
-<h2 id="detalles-de-implementacion">Detalles de Implementación<a class="headerlink" href="#detalles-de-implementacion" title="Permanent link">&para;</a></h2>
-<h3 id="1-gfexp-factura-de-exportacion-tipo-03">1. <strong>gFExp - Factura de Exportación (Tipo 03)</strong><a class="headerlink" href="#1-gfexp-factura-de-exportacion-tipo-03" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">if ($this-&gt;tipeDocument === &#39;3&#39;) {</span>
+<h2 id="detalles-de-implementacion">Detalles de Implementación</h2>
+<h3 id="1-gfexp-factura-de-exportacion-tipo-03">1. <strong>gFExp - Factura de Exportación (Tipo 03)</strong></h3>
+<div class="codehilite"><pre><span></span><code><span class="x">if ($this-&gt;tipeDocument === &#39;3&#39;) {</span>
 <span class="x">    $request[&#39;gFExp&#39;] = $this-&gt;validArray([</span>
 <span class="x">        &#39;cCondEntr&#39; =&gt; $this-&gt;condicionesEntrega, // INCOTERM</span>
 <span class="x">        &#39;cMoneda&#39; =&gt; $this-&gt;monedaExportacion ?: &#39;USD&#39;, // Código de moneda</span>
@@ -2091,14 +2137,15 @@
 <span class="x">    ]);</span>
 <span class="x">}</span>
 </code></pre></div>
+
 <p><strong>Campos Mapeados:</strong>
 - <code>condicionesEntrega</code> → <code>cCondEntr</code> (INCOTERM: FOB, CIF, etc.)
 - <code>monedaExportacion</code> → <code>cMoneda</code> (Código ISO: USD, EUR, etc.)
 - <code>tipoCambio</code> → <code>dCambio</code> (Decimal 6 decimales)
 - <code>montoMonedaExtranjera</code> → <code>dVTotEst</code> (Decimal 2 decimales)
 - <code>puertoEmbarque</code> → <code>dPuertoEmbarq</code> (Texto libre)</p>
-<h3 id="2-gdocref-notas-de-creditodebito-tipos-04-05">2. <strong>gDocRef - Notas de Crédito/Débito (Tipos 04, 05)</strong><a class="headerlink" href="#2-gdocref-notas-de-creditodebito-tipos-04-05" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">if (in_array($this-&gt;tipeDocument, [&#39;4&#39;, &#39;5&#39;])) {</span>
+<h3 id="2-gdocref-notas-de-creditodebito-tipos-04-05">2. <strong>gDocRef - Notas de Crédito/Débito (Tipos 04, 05)</strong></h3>
+<div class="codehilite"><pre><span></span><code><span class="x">if (in_array($this-&gt;tipeDocument, [&#39;4&#39;, &#39;5&#39;])) {</span>
 <span class="x">    $request[&#39;gDocRef&#39;] = $this-&gt;validArray([</span>
 <span class="x">        &#39;dNroDF&#39; =&gt; $this-&gt;numeroDocumentoReferenciado, // Número documento referenciado</span>
 <span class="x">        &#39;dCufeRef&#39; =&gt; $this-&gt;cufeReferenciado, // CUFE del documento referenciado</span>
@@ -2108,25 +2155,27 @@
 <span class="x">    ]);</span>
 <span class="x">}</span>
 </code></pre></div>
+
 <p><strong>Campos Mapeados:</strong>
 - <code>numeroDocumentoReferenciado</code> → <code>dNroDF</code> (Número del documento original)
 - <code>cufeReferenciado</code> → <code>dCufeRef</code> (CUFE de 96 caracteres)
 - <code>fechaDocumentoReferenciado</code> → <code>dFechaRef</code> (Fecha formato Y-m-d)
 - <code>nombreEmisorReferenciado</code> → <code>dNombEmiRef</code> (Nombre del emisor original)
 - <code>rucEmisorReferenciado</code> → <code>dRucEmiRef</code> (RUC del emisor original)</p>
-<h3 id="3-gnotagen-notas-genericas-tipos-06-07">3. <strong>gNotaGen - Notas Genéricas (Tipos 06, 07)</strong><a class="headerlink" href="#3-gnotagen-notas-genericas-tipos-06-07" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">if (in_array($this-&gt;tipeDocument, [&#39;6&#39;, &#39;7&#39;])) {</span>
+<h3 id="3-gnotagen-notas-genericas-tipos-06-07">3. <strong>gNotaGen - Notas Genéricas (Tipos 06, 07)</strong></h3>
+<div class="codehilite"><pre><span></span><code><span class="x">if (in_array($this-&gt;tipeDocument, [&#39;6&#39;, &#39;7&#39;])) {</span>
 <span class="x">    $request[&#39;gNotaGen&#39;] = $this-&gt;validArray([</span>
 <span class="x">        &#39;dConcNota&#39; =&gt; $this-&gt;conceptoNota, // Concepto de la nota</span>
 <span class="x">        &#39;dPeriodoNota&#39; =&gt; $this-&gt;periodoNota, // Período de la nota</span>
 <span class="x">    ]);</span>
 <span class="x">}</span>
 </code></pre></div>
+
 <p><strong>Campos Mapeados:</strong>
 - <code>conceptoNota</code> → <code>dConcNota</code> (Descripción del concepto)
 - <code>periodoNota</code> → <code>dPeriodoNota</code> (Período aplicable)</p>
-<h3 id="4-gcompori-reembolso-tipo-09">4. <strong>gCompOri - Reembolso (Tipo 09)</strong><a class="headerlink" href="#4-gcompori-reembolso-tipo-09" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">if ($this-&gt;tipeDocument === &#39;9&#39;) {</span>
+<h3 id="4-gcompori-reembolso-tipo-09">4. <strong>gCompOri - Reembolso (Tipo 09)</strong></h3>
+<div class="codehilite"><pre><span></span><code><span class="x">if ($this-&gt;tipeDocument === &#39;9&#39;) {</span>
 <span class="x">    $request[&#39;gCompOri&#39;] = $this-&gt;validArray([</span>
 <span class="x">        &#39;dNumCompOri&#39; =&gt; $this-&gt;numeroComprobanteOriginal, // Número comprobante original</span>
 <span class="x">        &#39;dFechaCompOri&#39; =&gt; $this-&gt;fechaComprobanteOriginal ? docucenter_date_format($this-&gt;fechaComprobanteOriginal, &#39;Y-m-d&#39;, get_user_timezone()) : null, // Fecha comprobante original</span>
@@ -2134,12 +2183,13 @@
 <span class="x">    ]);</span>
 <span class="x">}</span>
 </code></pre></div>
+
 <p><strong>Campos Mapeados:</strong>
 - <code>numeroComprobanteOriginal</code> → <code>dNumCompOri</code> (Número del comprobante original)
 - <code>fechaComprobanteOriginal</code> → <code>dFechaCompOri</code> (Fecha formato Y-m-d)
 - <code>razonReembolso</code> → <code>dRazonReemb</code> (Justificación del reembolso)</p>
-<h2 id="flujo-completo-de-construccion">Flujo Completo de Construcción<a class="headerlink" href="#flujo-completo-de-construccion" title="Permanent link">&para;</a></h2>
-<h3 id="orden-de-construccion-en-issuedocument">Orden de Construcción en <code>issueDocument()</code><a class="headerlink" href="#orden-de-construccion-en-issuedocument" title="Permanent link">&para;</a></h3>
+<h2 id="flujo-completo-de-construccion">Flujo Completo de Construcción</h2>
+<h3 id="orden-de-construccion-en-issuedocument">Orden de Construcción en <code>issueDocument()</code></h3>
 <ol>
 <li><strong>dGen</strong> - Datos generales (siempre presente)</li>
 <li><strong>Estructuras específicas por tipo</strong>:</li>
@@ -2151,9 +2201,9 @@
 <li><strong>gTot</strong> - Totales (con gRetenc y gPagPlazo si aplica)</li>
 <li><strong>gPedComGl</strong> - Pedido comercial global</li>
 </ol>
-<h3 id="array-final-esperado">Array Final Esperado<a class="headerlink" href="#array-final-esperado" title="Permanent link">&para;</a></h3>
-<p><strong>Para Exportación (Tipo 03):</strong>
-<div class="highlight"><pre><span></span><code><span class="x">array:6 [</span>
+<h3 id="array-final-esperado">Array Final Esperado</h3>
+<p><strong>Para Exportación (Tipo 03):</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="x">array:6 [</span>
 <span class="x">  &quot;key&quot; =&gt; null</span>
 <span class="x">  &quot;dGen&quot; =&gt; [...] // Datos generales</span>
 <span class="x">  &quot;gFExp&quot; =&gt; [...] // ✅ DATOS DE EXPORTACIÓN</span>
@@ -2161,9 +2211,10 @@
 <span class="x">  &quot;gTot&quot; =&gt; [...] // Totales</span>
 <span class="x">  &quot;gPedComGl&quot; =&gt; [...] // Pedido comercial</span>
 <span class="x">]</span>
-</code></pre></div></p>
-<p><strong>Para Nota de Crédito (Tipo 04):</strong>
-<div class="highlight"><pre><span></span><code><span class="x">array:6 [</span>
+</code></pre></div>
+
+<p><strong>Para Nota de Crédito (Tipo 04):</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="x">array:6 [</span>
 <span class="x">  &quot;key&quot; =&gt; null</span>
 <span class="x">  &quot;dGen&quot; =&gt; [...] // Datos generales</span>
 <span class="x">  &quot;gDocRef&quot; =&gt; [...] // ✅ REFERENCIA DOCUMENTO ORIGINAL</span>
@@ -2171,30 +2222,31 @@
 <span class="x">  &quot;gTot&quot; =&gt; [...] // Totales</span>
 <span class="x">  &quot;gPedComGl&quot; =&gt; [...] // Pedido comercial</span>
 <span class="x">]</span>
-</code></pre></div></p>
-<h2 id="validaciones-dgi-incluidas">Validaciones DGI Incluidas<a class="headerlink" href="#validaciones-dgi-incluidas" title="Permanent link">&para;</a></h2>
-<h3 id="campos-obligatorios-por-tipo">Campos Obligatorios por Tipo<a class="headerlink" href="#campos-obligatorios-por-tipo" title="Permanent link">&para;</a></h3>
+</code></pre></div>
+
+<h2 id="validaciones-dgi-incluidas">Validaciones DGI Incluidas</h2>
+<h3 id="campos-obligatorios-por-tipo">Campos Obligatorios por Tipo</h3>
 <ul>
 <li><strong>Tipo 03</strong>: <code>condicionesEntrega</code> (INCOTERM obligatorio)</li>
 <li><strong>Tipos 04,05</strong>: <code>cufeReferenciado</code>, <code>rucEmisorReferenciado</code>, <code>fechaDocumentoReferenciado</code>, <code>numeroDocumentoReferenciado</code></li>
 <li><strong>Tipos 06,07</strong>: <code>conceptoNota</code> (opcional), <code>periodoNota</code> (opcional)</li>
 <li><strong>Tipo 09</strong>: <code>numeroComprobanteOriginal</code>, <code>fechaComprobanteOriginal</code>, <code>razonReembolso</code></li>
 </ul>
-<h3 id="reglas-de-negocio">Reglas de Negocio<a class="headerlink" href="#reglas-de-negocio" title="Permanent link">&para;</a></h3>
+<h3 id="reglas-de-negocio">Reglas de Negocio</h3>
 <ul>
 <li><strong>Exportación</strong>: Solo destino extranjero (<code>destinoOperacion = 2</code>)</li>
 <li><strong>Notas</strong>: Fecha máximo 180 días atrás</li>
 <li><strong>Reembolso</strong>: Fecha máximo 1 año atrás</li>
 <li><strong>CUFE</strong>: Exactamente 96 caracteres</li>
 </ul>
-<h2 id="compatibilidad-pac">Compatibilidad PAC<a class="headerlink" href="#compatibilidad-pac" title="Permanent link">&para;</a></h2>
-<h3 id="verificacion-por-proveedor">Verificación por Proveedor<a class="headerlink" href="#verificacion-por-proveedor" title="Permanent link">&para;</a></h3>
+<h2 id="compatibilidad-pac">Compatibilidad PAC</h2>
+<h3 id="verificacion-por-proveedor">Verificación por Proveedor</h3>
 <ul>
 <li>✅ <strong>TheFactoryHKA</strong>: Acepta todas las estructuras</li>
 <li>✅ <strong>Alanube</strong>: <code>AlanubeFormatterHelper</code> mapea correctamente</li>
 <li>✅ <strong>PACs Genéricos</strong>: Estructuras estándar DGI</li>
 </ul>
-<h2 id="estado-final">Estado Final<a class="headerlink" href="#estado-final" title="Permanent link">&para;</a></h2>
+<h2 id="estado-final">Estado Final</h2>
 <table>
 <thead>
 <tr>
@@ -2231,7 +2283,7 @@
 </tr>
 </tbody>
 </table>
-<h2 id="conclusion">Conclusión<a class="headerlink" href="#conclusion" title="Permanent link">&para;</a></h2>
+<h2 id="conclusion">Conclusión</h2>
 <p><strong>PROBLEMA RESUELTO COMPLETAMENTE</strong>: Ahora <strong>todos los tipos de documento</strong> mapean correctamente sus datos específicos al array principal para la emisión:</p>
 <ol>
 <li>✅ <strong>Facturas base (01,02)</strong>: Solo estructura base</li>
@@ -2293,7 +2345,7 @@
       
       
     
-    <a href="https://github.com/aghabrego/docucenter" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+    <a href="https://github.com/aghabrego/docucenter-public" target="_blank" rel="noopener" title="github.com" class="md-social__link">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
     </a>
   

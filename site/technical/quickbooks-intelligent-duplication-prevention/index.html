@@ -233,7 +233,7 @@
           
   
   
-  APIs
+  API Documentation
 
         </a>
       </li>
@@ -269,7 +269,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../" class="md-tabs__link">
+        <a href="../README.md" class="md-tabs__link">
           
   
   
@@ -298,6 +298,25 @@
         </a>
       </li>
     
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../testing/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Sistema de Testing
+
+      </a>
+    </li>
   
 
       
@@ -404,7 +423,7 @@
   <span class="md-ellipsis">
     
   
-    APIs
+    API Documentation
   
 
     
@@ -420,7 +439,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    APIs
+    API Documentation
   
 
           </label>
@@ -1363,7 +1382,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
+      <a href="../README.md" class="md-nav__link">
         
   
   
@@ -1712,6 +1731,33 @@
           </ul>
         </nav>
       
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sistema de Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -2095,10 +2141,10 @@
   
 
 
-<h1 id="sistema-inteligente-de-prevencion-de-duplicacion-quickbooks">Sistema Inteligente de Prevención de Duplicación QuickBooks<a class="headerlink" href="#sistema-inteligente-de-prevencion-de-duplicacion-quickbooks" title="Permanent link">&para;</a></h1>
-<h2 id="resumen">📋 Resumen<a class="headerlink" href="#resumen" title="Permanent link">&para;</a></h2>
+<h1 id="sistema-inteligente-de-prevencion-de-duplicacion-quickbooks">Sistema Inteligente de Prevención de Duplicación QuickBooks</h1>
+<h2 id="resumen">📋 Resumen</h2>
 <p>Se implementó un <strong>sistema inteligente de validación</strong> en <code>FeController::validateQuickBooksInvoiceDuplication()</code> que utiliza <strong>detección de similitud de nombres</strong> y <strong>queries LIKE</strong> para prevenir duplicación de facturas entre el API <code>createSaleQuickbooks</code> y procesos webhook de QuickBooks.</p>
-<h2 id="problema-resuelto">🎯 Problema Resuelto<a class="headerlink" href="#problema-resuelto" title="Permanent link">&para;</a></h2>
+<h2 id="problema-resuelto">🎯 Problema Resuelto</h2>
 <p><strong>Escenario Real Documentado:</strong>
 - <strong>Factura Original:</strong> 3733 - "ORIANA FERNANDEZ" - $69.55
 - <strong>Factura Duplicada:</strong> 3817 - "Oriana Fernandez" - $65.00
@@ -2108,32 +2154,34 @@
 - ❌ Filtros por <code>origin</code> y <code>created_at</code> podían pasar duplicados legítimos
 - ❌ Validación exacta de nombres no detectaba variaciones de case
 - ❌ No consideraba diferencias de monto por impuestos</p>
-<h2 id="solucion-implementada">✅ Solución Implementada<a class="headerlink" href="#solucion-implementada" title="Permanent link">&para;</a></h2>
-<h3 id="1-sistema-de-deteccion-inteligente"><strong>1. Sistema de Detección Inteligente</strong> 🧠<a class="headerlink" href="#1-sistema-de-deteccion-inteligente" title="Permanent link">&para;</a></h3>
-<h4 id="a-normalizacion-de-nombres">A. <strong>Normalización de Nombres</strong><a class="headerlink" href="#a-normalizacion-de-nombres" title="Permanent link">&para;</a></h4>
-<p><div class="highlight"><pre><span></span><code><span class="x">protected function normalizeCustomerName($name)</span>
+<h2 id="solucion-implementada">✅ Solución Implementada</h2>
+<h3 id="1-sistema-de-deteccion-inteligente"><strong>1. Sistema de Detección Inteligente</strong> 🧠</h3>
+<h4 id="a-normalizacion-de-nombres">A. <strong>Normalización de Nombres</strong></h4>
+<div class="codehilite"><pre><span></span><code><span class="x">protected function normalizeCustomerName($name)</span>
 <span class="x">{</span>
 <span class="x">    return strtoupper(str_replace(&#39; &#39;, &#39;&#39;, trim($name)));</span>
 <span class="x">}</span>
 </code></pre></div>
-<strong>Funcionalidad:</strong>
+
+<p><strong>Funcionalidad:</strong>
 - Convierte a mayúsculas
 - Elimina espacios
 - Trim de espacios iniciales/finales</p>
-<h4 id="b-busqueda-like-inteligente">B. <strong>Búsqueda LIKE Inteligente</strong><a class="headerlink" href="#b-busqueda-like-inteligente" title="Permanent link">&para;</a></h4>
-<p><div class="highlight"><pre><span></span><code><span class="x">$normalizedCustomer = $this-&gt;normalizeCustomerName($customerName);</span>
+<h4 id="b-busqueda-like-inteligente">B. <strong>Búsqueda LIKE Inteligente</strong></h4>
+<div class="codehilite"><pre><span></span><code><span class="x">$normalizedCustomer = $this-&gt;normalizeCustomerName($customerName);</span>
 <span class="x">$existingSales = SalesHeaderImp::whereRaw(</span>
 <span class="x">    &quot;UPPER(REPLACE(CustomerName, &#39; &#39;, &#39;&#39;)) LIKE ?&quot;, </span>
 <span class="x">    [&quot;%{$normalizedCustomer}%&quot;]</span>
 <span class="x">)-&gt;get();</span>
 </code></pre></div>
-<strong>Ventajas:</strong>
+
+<p><strong>Ventajas:</strong>
 - ✅ <strong>Sin filtros por origin</strong> - Más seguro
 - ✅ <strong>Sin filtros por created_at</strong> - No depende de timing
 - ✅ <strong>Case-insensitive</strong> - Detecta variaciones de mayúsculas
 - ✅ <strong>Space-insensitive</strong> - Ignora espacios extra</p>
-<h4 id="c-calculo-de-similitud-con-levenshtein">C. <strong>Cálculo de Similitud con Levenshtein</strong><a class="headerlink" href="#c-calculo-de-similitud-con-levenshtein" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="x">protected function calculateCustomerNameSimilarity($name1, $name2)</span>
+<h4 id="c-calculo-de-similitud-con-levenshtein">C. <strong>Cálculo de Similitud con Levenshtein</strong></h4>
+<div class="codehilite"><pre><span></span><code><span class="x">protected function calculateCustomerNameSimilarity($name1, $name2)</span>
 <span class="x">{</span>
 <span class="x">    $norm1 = $this-&gt;normalizeCustomerName($name1);</span>
 <span class="x">    $norm2 = $this-&gt;normalizeCustomerName($name2);</span>
@@ -2155,9 +2203,10 @@
 <span class="x">    return min($similarity, 100);</span>
 <span class="x">}</span>
 </code></pre></div>
-<h3 id="2-validacion-multi-capa"><strong>2. Validación Multi-Capa</strong> 📊<a class="headerlink" href="#2-validacion-multi-capa" title="Permanent link">&para;</a></h3>
-<h4 id="capa-1-validacion-exacta-case-insensitive-con-collate"><strong>Capa 1: Validación Exacta Case-Insensitive con COLLATE</strong><a class="headerlink" href="#capa-1-validacion-exacta-case-insensitive-con-collate" title="Permanent link">&para;</a></h4>
-<p><div class="highlight"><pre><span></span><code><span class="x">// Cliente case-insensitive + Documento LIKE para máxima flexibilidad</span>
+
+<h3 id="2-validacion-multi-capa"><strong>2. Validación Multi-Capa</strong> 📊</h3>
+<h4 id="capa-1-validacion-exacta-case-insensitive-con-collate"><strong>Capa 1: Validación Exacta Case-Insensitive con COLLATE</strong></h4>
+<div class="codehilite"><pre><span></span><code><span class="x">// Cliente case-insensitive + Documento LIKE para máxima flexibilidad</span>
 <span class="x">$existingSale = SalesHeaderImp::whereRaw(&#39;CustomerName COLLATE utf8mb4_general_ci = ?&#39;, [$customerName])</span>
 <span class="x">    -&gt;where(function($query) use ($docNumber) {</span>
 <span class="x">        $query-&gt;where(&#39;InvoiceNumber&#39;, &#39;LIKE&#39;, &quot;%{$docNumber}%&quot;)</span>
@@ -2165,16 +2214,18 @@
 <span class="x">    })</span>
 <span class="x">    -&gt;first();</span>
 </code></pre></div>
-<strong>Ventajas del COLLATE utf8mb4_general_ci:</strong>
+
+<p><strong>Ventajas del COLLATE utf8mb4_general_ci:</strong>
 - ✅ Case-insensitive nativo de MySQL (más eficiente que UPPER)
 - ✅ Maneja caracteres especiales y acentos correctamente
 - ✅ Una sola sentencia SQL sin conversiones
 - ✅ Detecta: "ORIANA FERNANDEZ" = "oriana fernandez" = "Oriana Fernandez"</p>
-<h4 id="capa-2-validacion-por-quickbooks-id"><strong>Capa 2: Validación por QuickBooks ID</strong><a class="headerlink" href="#capa-2-validacion-por-quickbooks-id" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="x">$existingByQbId = SalesHeaderImp::where(&#39;intuit_invoice_id&#39;, $qbInvoiceId)-&gt;first();</span>
+<h4 id="capa-2-validacion-por-quickbooks-id"><strong>Capa 2: Validación por QuickBooks ID</strong></h4>
+<div class="codehilite"><pre><span></span><code><span class="x">$existingByQbId = SalesHeaderImp::where(&#39;intuit_invoice_id&#39;, $qbInvoiceId)-&gt;first();</span>
 </code></pre></div>
-<h4 id="capa-3-deteccion-inteligente-de-similitud"><strong>Capa 3: Detección Inteligente de Similitud</strong><a class="headerlink" href="#capa-3-deteccion-inteligente-de-similitud" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="x">foreach ($existingSales as $existingSale) {</span>
+
+<h4 id="capa-3-deteccion-inteligente-de-similitud"><strong>Capa 3: Detección Inteligente de Similitud</strong></h4>
+<div class="codehilite"><pre><span></span><code><span class="x">foreach ($existingSales as $existingSale) {</span>
 <span class="x">    $similarity = $this-&gt;calculateCustomerNameSimilarity($customerName, $existingSale-&gt;CustomerName);</span>
 
 <span class="x">    if ($similarity &gt;= 80) { // 80% de similitud mínima</span>
@@ -2193,7 +2244,8 @@
 <span class="x">    }</span>
 <span class="x">}</span>
 </code></pre></div>
-<h3 id="3-configuracion-de-umbrales"><strong>3. Configuración de Umbrales</strong> ⚙️<a class="headerlink" href="#3-configuracion-de-umbrales" title="Permanent link">&para;</a></h3>
+
+<h3 id="3-configuracion-de-umbrales"><strong>3. Configuración de Umbrales</strong> ⚙️</h3>
 <table>
 <thead>
 <tr>
@@ -2220,47 +2272,47 @@
 </tr>
 </tbody>
 </table>
-<h3 id="4-casos-de-prueba-validados"><strong>4. Casos de Prueba Validados</strong> ✅<a class="headerlink" href="#4-casos-de-prueba-validados" title="Permanent link">&para;</a></h3>
-<h4 id="escenario-1-coincidencia-exacta"><strong>Escenario 1: Coincidencia Exacta</strong><a class="headerlink" href="#escenario-1-coincidencia-exacta" title="Permanent link">&para;</a></h4>
+<h3 id="4-casos-de-prueba-validados"><strong>4. Casos de Prueba Validados</strong> ✅</h3>
+<h4 id="escenario-1-coincidencia-exacta"><strong>Escenario 1: Coincidencia Exacta</strong></h4>
 <ul>
 <li><strong>Input:</strong> "ORIANA FERNANDEZ" - $69.55</li>
 <li><strong>Existente:</strong> "ORIANA FERNANDEZ" - $69.55</li>
 <li><strong>Resultado:</strong> ✅ <strong>BLOQUEADO</strong> (100% similitud, 0% diferencia)</li>
 </ul>
-<h4 id="escenario-2-variacion-de-case"><strong>Escenario 2: Variación de Case</strong><a class="headerlink" href="#escenario-2-variacion-de-case" title="Permanent link">&para;</a></h4>
+<h4 id="escenario-2-variacion-de-case"><strong>Escenario 2: Variación de Case</strong></h4>
 <ul>
 <li><strong>Input:</strong> "Oriana Fernandez" - $65.00</li>
 <li><strong>Existente:</strong> "ORIANA FERNANDEZ" - $69.55</li>
 <li><strong>Resultado:</strong> ✅ <strong>BLOQUEADO</strong> (100% similitud, 6.5% diferencia)</li>
 </ul>
-<h4 id="escenario-3-nombres-diferentes"><strong>Escenario 3: Nombres Diferentes</strong><a class="headerlink" href="#escenario-3-nombres-diferentes" title="Permanent link">&para;</a></h4>
+<h4 id="escenario-3-nombres-diferentes"><strong>Escenario 3: Nombres Diferentes</strong></h4>
 <ul>
 <li><strong>Input:</strong> "Juan Perez" - $69.55</li>
 <li><strong>Existente:</strong> "ORIANA FERNANDEZ" - $69.55</li>
 <li><strong>Resultado:</strong> ✅ <strong>PERMITIDO</strong> (0% similitud)</li>
 </ul>
-<h4 id="escenario-4-cliente-diferente-monto-similar"><strong>Escenario 4: Cliente Diferente, Monto Similar</strong><a class="headerlink" href="#escenario-4-cliente-diferente-monto-similar" title="Permanent link">&para;</a></h4>
+<h4 id="escenario-4-cliente-diferente-monto-similar"><strong>Escenario 4: Cliente Diferente, Monto Similar</strong></h4>
 <ul>
 <li><strong>Input:</strong> "Maria Lopez" - $70.00</li>
 <li><strong>Existente:</strong> "ORIANA FERNANDEZ" - $69.55</li>
 <li><strong>Resultado:</strong> ✅ <strong>PERMITIDO</strong> (0% similitud)</li>
 </ul>
-<h4 id="escenario-5-deteccion-inteligente-real"><strong>Escenario 5: Detección Inteligente Real</strong><a class="headerlink" href="#escenario-5-deteccion-inteligente-real" title="Permanent link">&para;</a></h4>
+<h4 id="escenario-5-deteccion-inteligente-real"><strong>Escenario 5: Detección Inteligente Real</strong></h4>
 <ul>
 <li><strong>Input:</strong> "ORIANA FERNANDEZ" - $69.55</li>
 <li><strong>Existente:</strong> "Oriana Fernandez" - $65.00</li>
 <li><strong>Resultado:</strong> ✅ <strong>BLOQUEADO</strong> (100% similitud, 6.5% diferencia)</li>
 <li><strong>Log:</strong> "Cliente similar detectado y bloqueado correctamente"</li>
 </ul>
-<h4 id="escenario-6-deteccion-like-de-numeros"><strong>Escenario 6: Detección LIKE de Números</strong><a class="headerlink" href="#escenario-6-deteccion-like-de-numeros" title="Permanent link">&para;</a></h4>
+<h4 id="escenario-6-deteccion-like-de-numeros"><strong>Escenario 6: Detección LIKE de Números</strong></h4>
 <ul>
 <li><strong>Input:</strong> "001" (número parcial)</li>
 <li><strong>Existente:</strong> "FISCAL-001" (número completo)</li>
 <li><strong>Resultado:</strong> ✅ <strong>BLOQUEADO</strong> (LIKE detecta coincidencia parcial)</li>
 </ul>
-<h2 id="implementacion-tecnica">🔧 Implementación Técnica<a class="headerlink" href="#implementacion-tecnica" title="Permanent link">&para;</a></h2>
-<h3 id="metodo-principal-actualizado"><strong>Método Principal Actualizado</strong><a class="headerlink" href="#metodo-principal-actualizado" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">protected function validateQuickBooksInvoiceDuplication($customerName, $requestAmount, $docNumber = null, $qbInvoiceId = null)</span>
+<h2 id="implementacion-tecnica">🔧 Implementación Técnica</h2>
+<h3 id="metodo-principal-actualizado"><strong>Método Principal Actualizado</strong></h3>
+<div class="codehilite"><pre><span></span><code><span class="x">protected function validateQuickBooksInvoiceDuplication($customerName, $requestAmount, $docNumber = null, $qbInvoiceId = null)</span>
 <span class="x">{</span>
 <span class="x">    // 1. Validación exacta por cliente + documento</span>
 <span class="x">    if ($docNumber) {</span>
@@ -2319,43 +2371,45 @@
 <span class="x">    return [&#39;is_duplicate&#39; =&gt; false];</span>
 <span class="x">}</span>
 </code></pre></div>
-<h2 id="beneficios-del-sistema-inteligente">📈 Beneficios del Sistema Inteligente<a class="headerlink" href="#beneficios-del-sistema-inteligente" title="Permanent link">&para;</a></h2>
-<h3 id="seguridad-mejorada"><strong>Seguridad Mejorada</strong><a class="headerlink" href="#seguridad-mejorada" title="Permanent link">&para;</a></h3>
+
+<h2 id="beneficios-del-sistema-inteligente">📈 Beneficios del Sistema Inteligente</h2>
+<h3 id="seguridad-mejorada"><strong>Seguridad Mejorada</strong></h3>
 <ul>
 <li>✅ <strong>Elimina dependencia de filtros origin/timing</strong> que pueden fallar</li>
 <li>✅ <strong>Detección robusta</strong> de variaciones de nombres comunes</li>
 <li>✅ <strong>Tolerancia inteligente</strong> a diferencias de ITBMS</li>
 </ul>
-<h3 id="precision-aumentada"><strong>Precisión Aumentada</strong><a class="headerlink" href="#precision-aumentada" title="Permanent link">&para;</a></h3>
+<h3 id="precision-aumentada"><strong>Precisión Aumentada</strong></h3>
 <ul>
 <li>✅ <strong>80% de similitud</strong> previene falsos positivos</li>
 <li>✅ <strong>15% tolerancia de monto</strong> permite variaciones fiscales</li>
 <li>✅ <strong>Normalización consistente</strong> elimina variaciones de formato</li>
 </ul>
-<h3 id="flexibilidad"><strong>Flexibilidad</strong><a class="headerlink" href="#flexibilidad" title="Permanent link">&para;</a></h3>
+<h3 id="flexibilidad"><strong>Flexibilidad</strong></h3>
 <ul>
 <li>✅ <strong>Configurable</strong> mediante constantes</li>
 <li>✅ <strong>Extensible</strong> para nuevos tipos de similitud</li>
 <li>✅ <strong>Logging detallado</strong> para monitoreo</li>
 </ul>
-<h2 id="proximos-pasos">🚀 Próximos Pasos<a class="headerlink" href="#proximos-pasos" title="Permanent link">&para;</a></h2>
+<h2 id="proximos-pasos">🚀 Próximos Pasos</h2>
 <ol>
 <li><strong>Monitoreo en Producción:</strong> Validar efectividad con casos reales</li>
 <li><strong>Configuración Dinámica:</strong> Mover umbrales a configuración de base de datos</li>
 <li><strong>Algoritmos Adicionales:</strong> Considerar Soundex o Metaphone para similitud fonética</li>
 <li><strong>Dashboard de Monitoreo:</strong> Panel para revisar intentos de duplicación bloqueados</li>
 </ol>
-<h2 id="testing">📋 Testing<a class="headerlink" href="#testing" title="Permanent link">&para;</a></h2>
+<h2 id="testing">📋 Testing</h2>
 <p><strong>Script de Pruebas:</strong> <code>docs/testing/test-quickbooks-duplication-prevention.php</code>
 - ✅ 6 escenarios de prueba implementados
 - ✅ Validación de detección inteligente
 - ✅ Validación LIKE para números de documento
 - ✅ Casos edge cubiertos</p>
-<p><strong>Comando de Ejecución:</strong>
-<div class="highlight"><pre><span></span><code>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>docucenter_laravel.test<span class="w"> </span>php<span class="w"> </span>docs/testing/test-quickbooks-duplication-prevention.php
-</code></pre></div></p>
-<p><strong>Resultado Esperado:</strong>
-<div class="highlight"><pre><span></span><code>🧪 === PRUEBA DE SISTEMA DE DUPLICACIÓN QUICKBOOKS ===
+<p><strong>Comando de Ejecución:</strong></p>
+<div class="codehilite"><pre><span></span><code>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>docucenter_laravel.test<span class="w"> </span>php<span class="w"> </span>docs/testing/test-quickbooks-duplication-prevention.php
+</code></pre></div>
+
+<p><strong>Resultado Esperado:</strong></p>
+<div class="codehilite"><pre><span></span><code>🧪 === PRUEBA DE SISTEMA DE DUPLICACIÓN QUICKBOOKS ===
 
 ✅ Escenario 1: Cliente exacto duplicado BLOQUEADO correctamente
 ✅ Escenario 2: Cliente diferente PERMITIDO correctamente  
@@ -2365,7 +2419,7 @@
 ✅ Escenario 6: Número de documento similar detectado correctamente por LIKE
 
 🎉 Todas las pruebas completadas exitosamente!
-</code></pre></div></p>
+</code></pre></div>
 
 
 
@@ -2418,7 +2472,7 @@
       
       
     
-    <a href="https://github.com/aghabrego/docucenter" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+    <a href="https://github.com/aghabrego/docucenter-public" target="_blank" rel="noopener" title="github.com" class="md-social__link">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
     </a>
   

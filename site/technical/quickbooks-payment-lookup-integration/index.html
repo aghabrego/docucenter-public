@@ -233,7 +233,7 @@
           
   
   
-  APIs
+  API Documentation
 
         </a>
       </li>
@@ -269,7 +269,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../" class="md-tabs__link">
+        <a href="../README.md" class="md-tabs__link">
           
   
   
@@ -298,6 +298,25 @@
         </a>
       </li>
     
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../testing/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Sistema de Testing
+
+      </a>
+    </li>
   
 
       
@@ -404,7 +423,7 @@
   <span class="md-ellipsis">
     
   
-    APIs
+    API Documentation
   
 
     
@@ -420,7 +439,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    APIs
+    API Documentation
   
 
           </label>
@@ -1363,7 +1382,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
+      <a href="../README.md" class="md-nav__link">
         
   
   
@@ -1716,6 +1735,33 @@
   
 
     
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sistema de Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -1780,7 +1826,7 @@
   <a href="#1-metodo-getpaymentbyrefnum-eliminado" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Método getPaymentByRefNum() eliminado
+        1. ~~Método getPaymentByRefNum() eliminado~~
       
     </span>
   </a>
@@ -2107,17 +2153,17 @@
   
 
 
-<h1 id="payment-lookup-integration-quickbooks">Payment Lookup Integration - QuickBooks<a class="headerlink" href="#payment-lookup-integration-quickbooks" title="Permanent link">&para;</a></h1>
-<h2 id="descripcion-general">Descripción General<a class="headerlink" href="#descripcion-general" title="Permanent link">&para;</a></h2>
+<h1 id="payment-lookup-integration-quickbooks">Payment Lookup Integration - QuickBooks</h1>
+<h2 id="descripcion-general">Descripción General</h2>
 <p>Se implementó funcionalidad de búsqueda de pagos existentes en QuickBooks para prevenir duplicaciones durante el proceso de sincronización en <code>UpdateIntuitOrdersJob</code>.</p>
-<h2 id="funcionalidad-removida">⚠️ <strong>FUNCIONALIDAD REMOVIDA</strong><a class="headerlink" href="#funcionalidad-removida" title="Permanent link">&para;</a></h2>
+<h2 id="funcionalidad-removida">⚠️ <strong>FUNCIONALIDAD REMOVIDA</strong></h2>
 <p>Esta funcionalidad de payment lookup ha sido <strong>removida del sistema</strong> para simplificar el flujo de sincronización. </p>
-<h3 id="cambios-realizados">Cambios Realizados:<a class="headerlink" href="#cambios-realizados" title="Permanent link">&para;</a></h3>
-<h3 id="1-metodo-getpaymentbyrefnum-eliminado">1. <del>Método getPaymentByRefNum() eliminado</del><a class="headerlink" href="#1-metodo-getpaymentbyrefnum-eliminado" title="Permanent link">&para;</a></h3>
+<h3 id="cambios-realizados">Cambios Realizados:</h3>
+<h3 id="1-metodo-getpaymentbyrefnum-eliminado">1. ~~Método getPaymentByRefNum() eliminado~~</h3>
 <p><strong>Estado</strong>: ❌ <strong>REMOVIDO</strong> de <code>app/Traits/UpdateIntuitOrdersTrait.php</code></p>
-<h3 id="2-integracion-simplificada-en-stepregisterpayments">2. Integración simplificada en stepRegisterPayments()<a class="headerlink" href="#2-integracion-simplificada-en-stepregisterpayments" title="Permanent link">&para;</a></h3>
+<h3 id="2-integracion-simplificada-en-stepregisterpayments">2. Integración simplificada en stepRegisterPayments()</h3>
 <p><strong>Ubicación</strong>: <code>app/Jobs/Intuit/UpdateIntuitOrdersJob.php</code></p>
-<div class="highlight"><pre><span></span><code><span class="x">// Flujo simplificado - Solo getSyncTokenPaymentQB</span>
+<div class="codehilite"><pre><span></span><code><span class="x">// Flujo simplificado - Solo getSyncTokenPaymentQB</span>
 <span class="x">foreach ($payments as $payment) {</span>
 <span class="x">    $syncTokenPayment = $this-&gt;getSyncTokenPaymentQB($email, $password, [</span>
 <span class="x">        &#39;payment_id&#39; =&gt; $payment-&gt;UniqueReceiptID,</span>
@@ -2131,20 +2177,21 @@
 <span class="x">    // Continuar con registerPaymentsQB...</span>
 <span class="x">}</span>
 </code></pre></div>
+
 <p><strong>Flujo de Trabajo Simplificado</strong>:
 1. Procesar pagos directamente sin consulta previa
 2. Obtener SyncToken usando getSyncTokenPaymentQB() tradicional
 3. Continuar con el flujo normal de sincronización</p>
-<h2 id="parametros-api">Parámetros API<a class="headerlink" href="#parametros-api" title="Permanent link">&para;</a></h2>
-<h3 id="endpoint-aciv2get_payment_by_ref_num">Endpoint: <code>/aciv2/get_payment_by_ref_num</code><a class="headerlink" href="#endpoint-aciv2get_payment_by_ref_num" title="Permanent link">&para;</a></h3>
+<h2 id="parametros-api">Parámetros API</h2>
+<h3 id="endpoint-aciv2get_payment_by_ref_num">Endpoint: <code>/aciv2/get_payment_by_ref_num</code></h3>
 <p><strong>Parámetros Requeridos</strong>:
 - <code>connection_id</code>: ID de la conexión QuickBooks
 - <code>payment_ref_num</code>: Número de referencia del pago (invoice_number)</p>
 <p><strong>Respuesta</strong>:
 - <code>array</code>: Datos de pagos encontrados con estructura completa
 - <code>false</code>: No se encontraron pagos o error</p>
-<p><strong>Estructura de Respuesta Exitosa</strong>:
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<p><strong>Estructura de Respuesta Exitosa</strong>:</p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
 <span class="w">    </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
 <span class="w">    </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Pago encontrado exitosamente&quot;</span><span class="p">,</span>
 <span class="w">    </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
@@ -2167,32 +2214,34 @@
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
-</code></pre></div></p>
-<h2 id="testing">Testing<a class="headerlink" href="#testing" title="Permanent link">&para;</a></h2>
-<h3 id="scripts-de-prueba">Scripts de Prueba<a class="headerlink" href="#scripts-de-prueba" title="Permanent link">&para;</a></h3>
-<h4 id="1-test-principal-docstestingtest-get-payment-by-ref-numphp">1. Test Principal: <code>docs/testing/test-get-payment-by-ref-num.php</code><a class="headerlink" href="#1-test-principal-docstestingtest-get-payment-by-ref-numphp" title="Permanent link">&para;</a></h4>
+</code></pre></div>
+
+<h2 id="testing">Testing</h2>
+<h3 id="scripts-de-prueba">Scripts de Prueba</h3>
+<h4 id="1-test-principal-docstestingtest-get-payment-by-ref-numphp">1. Test Principal: <code>docs/testing/test-get-payment-by-ref-num.php</code></h4>
 <p><strong>Funcionalidades</strong>:
 - ✅ Validación de conexión QuickBooks
 - ✅ Verificación de credenciales ACI
 - ✅ Simulación para desarrollo sin credenciales
 - ✅ Pruebas reales con facturas de ejemplo
 - ✅ Validación de estructura de respuesta</p>
-<h4 id="2-test-synctoken-docstestingtest-synctoken-extractionphp">2. Test SyncToken: <code>docs/testing/test-synctoken-extraction.php</code><a class="headerlink" href="#2-test-synctoken-docstestingtest-synctoken-extractionphp" title="Permanent link">&para;</a></h4>
+<h4 id="2-test-synctoken-docstestingtest-synctoken-extractionphp">2. Test SyncToken: <code>docs/testing/test-synctoken-extraction.php</code></h4>
 <p><strong>Funcionalidades</strong>:
 - ✅ Validación de extracción de SyncToken
 - ✅ Casos de prueba para diferentes estructuras de respuesta
 - ✅ Simulación de respuestas reales del API
 - ✅ Validación de lógica de fallback</p>
-<p><strong>Ejecución</strong>:
-<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>/home/weirdolabs/code/docucenter
+<p><strong>Ejecución</strong>:</p>
+<div class="codehilite"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>/home/weirdolabs/code/docucenter
 
 <span class="c1"># Test principal de payment lookup</span>
 php<span class="w"> </span>docs/testing/test-get-payment-by-ref-num.php
 
 <span class="c1"># Test específico de extracción SyncToken</span>
 php<span class="w"> </span>docs/testing/test-synctoken-extraction.php
-</code></pre></div></p>
-<h3 id="casos-de-prueba">Casos de Prueba<a class="headerlink" href="#casos-de-prueba" title="Permanent link">&para;</a></h3>
+</code></pre></div>
+
+<h3 id="casos-de-prueba">Casos de Prueba</h3>
 <ol>
 <li><strong>Factura con Pagos Existentes</strong></li>
 <li>Número: FE0000003143</li>
@@ -2205,70 +2254,71 @@ php<span class="w"> </span>docs/testing/test-synctoken-extraction.php
 <li>Número: FE0000999999</li>
 <li>Resultado Esperado: false</li>
 </ol>
-<h2 id="logging-y-debugging">Logging y Debugging<a class="headerlink" href="#logging-y-debugging" title="Permanent link">&para;</a></h2>
-<h3 id="logs-generados">Logs Generados<a class="headerlink" href="#logs-generados" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>[INFO] Consultando pago existente: {&quot;connection_id&quot;:&quot;123&quot;,&quot;payment_ref_num&quot;:&quot;FE0000003143&quot;}
-[INFO] Pagos encontrados para ref_num: FE0000003143: {&quot;payment_count&quot;:2}
+<h2 id="logging-y-debugging">Logging y Debugging</h2>
+<h3 id="logs-generados">Logs Generados</h3>
+<div class="codehilite"><pre><span></span><code><span class="o">[</span><span class="n">INFO</span><span class="o">]</span><span class="w"> </span><span class="n">Consultando</span><span class="w"> </span><span class="n">pago</span><span class="w"> </span><span class="nl">existente</span><span class="p">:</span><span class="w"> </span><span class="err">{</span><span class="ss">&quot;connection_id&quot;</span><span class="err">:</span><span class="ss">&quot;123&quot;</span><span class="p">,</span><span class="ss">&quot;payment_ref_num&quot;</span><span class="err">:</span><span class="ss">&quot;FE0000003143&quot;</span><span class="err">}</span>
+<span class="o">[</span><span class="n">INFO</span><span class="o">]</span><span class="w"> </span><span class="n">Pagos</span><span class="w"> </span><span class="n">encontrados</span><span class="w"> </span><span class="n">para</span><span class="w"> </span><span class="nl">ref_num</span><span class="p">:</span><span class="w"> </span><span class="nl">FE0000003143</span><span class="p">:</span><span class="w"> </span><span class="err">{</span><span class="ss">&quot;payment_count&quot;</span><span class="err">:</span><span class="mi">2</span><span class="err">}</span>
 </code></pre></div>
-<h3 id="identificacion-de-problemas">Identificación de Problemas<a class="headerlink" href="#identificacion-de-problemas" title="Permanent link">&para;</a></h3>
+
+<h3 id="identificacion-de-problemas">Identificación de Problemas</h3>
 <ul>
 <li><strong>Parámetros faltantes</strong>: Log nivel WARNING</li>
 <li><strong>No pagos encontrados</strong>: Log nivel INFO</li>
 <li><strong>Pagos encontrados</strong>: Log nivel INFO con conteo</li>
 </ul>
-<h2 id="razones-para-la-remocion">Razones para la Remoción<a class="headerlink" href="#razones-para-la-remocion" title="Permanent link">&para;</a></h2>
-<h3 id="1-simplificacion-del-flujo">1. Simplificación del Flujo<a class="headerlink" href="#1-simplificacion-del-flujo" title="Permanent link">&para;</a></h3>
+<h2 id="razones-para-la-remocion">Razones para la Remoción</h2>
+<h3 id="1-simplificacion-del-flujo">1. Simplificación del Flujo</h3>
 <ul>
 <li>Elimina complejidad innecesaria en el proceso de sincronización</li>
 <li>Reduce puntos de fallo potenciales</li>
 <li>Mantiene el flujo tradicional bien probado</li>
 </ul>
-<h3 id="2-performance-consistente">2. Performance Consistente<a class="headerlink" href="#2-performance-consistente" title="Permanent link">&para;</a></h3>
+<h3 id="2-performance-consistente">2. Performance Consistente</h3>
 <ul>
 <li>Evita llamadas API adicionales que pueden fallar</li>
 <li>Flujo más predecible y confiable</li>
 <li>Menos dependencias externas</li>
 </ul>
-<h3 id="3-mantenimiento-simplificado">3. Mantenimiento Simplificado<a class="headerlink" href="#3-mantenimiento-simplificado" title="Permanent link">&para;</a></h3>
+<h3 id="3-mantenimiento-simplificado">3. Mantenimiento Simplificado</h3>
 <ul>
 <li>Menos código para mantener y debuggear</li>
 <li>Flujo más directo y fácil de entender</li>
 <li>Reduce superficie de ataque para errores</li>
 </ul>
-<h2 id="consideraciones-de-produccion">Consideraciones de Producción<a class="headerlink" href="#consideraciones-de-produccion" title="Permanent link">&para;</a></h2>
-<h3 id="performance">Performance<a class="headerlink" href="#performance" title="Permanent link">&para;</a></h3>
+<h2 id="consideraciones-de-produccion">Consideraciones de Producción</h2>
+<h3 id="performance">Performance</h3>
 <ul>
 <li>Llamada API adicional por factura procesada</li>
 <li>Impacto mínimo dado el throughput actual (400-500 jobs/hora)</li>
 <li>Logging configurable para reducir overhead</li>
 </ul>
-<h3 id="monitoreo">Monitoreo<a class="headerlink" href="#monitoreo" title="Permanent link">&para;</a></h3>
+<h3 id="monitoreo">Monitoreo</h3>
 <ul>
 <li>Revisar logs para patrones de pagos duplicados</li>
 <li>Análizar efectividad de prevención</li>
 <li>Monitorear tiempo de respuesta API</li>
 </ul>
-<h3 id="mantenimiento">Mantenimiento<a class="headerlink" href="#mantenimiento" title="Permanent link">&para;</a></h3>
+<h3 id="mantenimiento">Mantenimiento</h3>
 <ul>
 <li>Sincronizado con updates del trait principal</li>
 <li>Compatible con estructura ACI Cloud existente</li>
 <li>No requiere cambios en base de datos</li>
 </ul>
-<h2 id="estado-del-sistema">Estado del Sistema<a class="headerlink" href="#estado-del-sistema" title="Permanent link">&para;</a></h2>
-<h3 id="flujo-actual-simplificado">✅ Flujo Actual (Simplificado)<a class="headerlink" href="#flujo-actual-simplificado" title="Permanent link">&para;</a></h3>
+<h2 id="estado-del-sistema">Estado del Sistema</h2>
+<h3 id="flujo-actual-simplificado">✅ Flujo Actual (Simplificado)</h3>
 <ol>
 <li><strong>stepRegisterPayments()</strong> procesa pagos directamente</li>
 <li><strong>getSyncTokenPaymentQB()</strong> obtiene SyncToken usando método tradicional</li>
 <li><strong>registerPaymentsQB()</strong> registra el pago en QuickBooks</li>
 <li>Flujo continúa normalmente</li>
 </ol>
-<h3 id="impacto-de-la-remocion">📊 Impacto de la Remoción<a class="headerlink" href="#impacto-de-la-remocion" title="Permanent link">&para;</a></h3>
+<h3 id="impacto-de-la-remocion">📊 Impacto de la Remoción</h3>
 <ul>
 <li><strong>Menos complejidad</strong>: Código más simple y directo</li>
 <li><strong>Mayor confiabilidad</strong>: Menos puntos de fallo</li>
 <li><strong>Mantenimiento reducido</strong>: Menos código para debuggear</li>
 </ul>
-<h2 id="referencias">Referencias<a class="headerlink" href="#referencias" title="Permanent link">&para;</a></h2>
+<h2 id="referencias">Referencias</h2>
 <ul>
 <li><strong>UpdateIntuitOrdersJob</strong>: Job principal de sincronización QB</li>
 <li><strong>UpdateIntuitOrdersTrait</strong>: Trait con métodos de comunicación API</li>
@@ -2327,7 +2377,7 @@ php<span class="w"> </span>docs/testing/test-synctoken-extraction.php
       
       
     
-    <a href="https://github.com/aghabrego/docucenter" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+    <a href="https://github.com/aghabrego/docucenter-public" target="_blank" rel="noopener" title="github.com" class="md-social__link">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
     </a>
   

@@ -233,7 +233,7 @@
           
   
   
-  APIs
+  API Documentation
 
         </a>
       </li>
@@ -269,7 +269,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../" class="md-tabs__link">
+        <a href="../README.md" class="md-tabs__link">
           
   
   
@@ -298,6 +298,25 @@
         </a>
       </li>
     
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../testing/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Sistema de Testing
+
+      </a>
+    </li>
   
 
       
@@ -404,7 +423,7 @@
   <span class="md-ellipsis">
     
   
-    APIs
+    API Documentation
   
 
     
@@ -420,7 +439,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    APIs
+    API Documentation
   
 
           </label>
@@ -1363,7 +1382,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
+      <a href="../README.md" class="md-nav__link">
         
   
   
@@ -1716,6 +1735,33 @@
   
 
     
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sistema de Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -1990,24 +2036,25 @@
   
 
 
-<h1 id="correccion-error-pac-2152-monto-del-itbms-del-item-invalido">Corrección Error PAC 2152 - "Monto del ITBMS del ítem inválido"<a class="headerlink" href="#correccion-error-pac-2152-monto-del-itbms-del-item-invalido" title="Permanent link">&para;</a></h1>
-<h2 id="estado-en-proceso">Estado: 🔧 EN PROCESO<a class="headerlink" href="#estado-en-proceso" title="Permanent link">&para;</a></h2>
+<h1 id="correccion-error-pac-2152-monto-del-itbms-del-item-invalido">Corrección Error PAC 2152 - "Monto del ITBMS del ítem inválido"</h1>
+<h2 id="estado-en-proceso">Estado: 🔧 EN PROCESO</h2>
 <p><strong>Fecha</strong>: 2024-12-19<br />
 <strong>Error</strong>: <code>2152-Item 1: Monto del ITBMS del ítem inválido</code><br />
 <strong>Organización</strong>: 155757563-2-2024<br />
 <strong>PAC</strong>: TheFactoryHKA (ID: 8)  </p>
-<h2 id="analisis-del-problema">Análisis del Problema<a class="headerlink" href="#analisis-del-problema" title="Permanent link">&para;</a></h2>
-<h3 id="causa-raiz-identificada">Causa Raíz Identificada<a class="headerlink" href="#causa-raiz-identificada" title="Permanent link">&para;</a></h3>
+<h2 id="analisis-del-problema">Análisis del Problema</h2>
+<h3 id="causa-raiz-identificada">Causa Raíz Identificada</h3>
 <p>El error no estaba en el cálculo del ITBMS del ítem individual, sino en inconsistencias en los campos totales enviados al PAC:</p>
-<div class="highlight"><pre><span></span><code><span class="cm">&lt;!-- XML PROBLEMÁTICO --&gt;</span>
+<div class="codehilite"><pre><span></span><code><span class="cm">&lt;!-- XML PROBLEMÁTICO --&gt;</span>
 <span class="nt">&lt;dValTotItem&gt;</span>5.990000<span class="nt">&lt;/dValTotItem&gt;</span><span class="w">  </span><span class="cm">&lt;!-- ✓ Correcto --&gt;</span>
 <span class="nt">&lt;dValITBMS&gt;</span>0.390000<span class="nt">&lt;/dValITBMS&gt;</span><span class="w">      </span><span class="cm">&lt;!-- ✓ Correcto --&gt;</span>
 <span class="nt">&lt;dTotRec&gt;</span>5.60<span class="nt">&lt;/dTotRec&gt;</span><span class="w">              </span><span class="cm">&lt;!-- ❌ INCORRECTO --&gt;</span>
 <span class="nt">&lt;iPzPag&gt;</span>5.60<span class="nt">&lt;/iPzPag&gt;</span><span class="w">                </span><span class="cm">&lt;!-- ❌ INCORRECTO --&gt;</span>
 <span class="nt">&lt;dVTotItems&gt;</span>5.60<span class="nt">&lt;/dVTotItems&gt;</span><span class="w">        </span><span class="cm">&lt;!-- ❌ INCORRECTO --&gt;</span>
 </code></pre></div>
-<h3 id="log-de-diagnostico">Log de Diagnóstico<a class="headerlink" href="#log-de-diagnostico" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
+
+<h3 id="log-de-diagnostico">Log de Diagnóstico</h3>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;base_price_dPrItem&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">5.6</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;original_itbms_from_db&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.39</span><span class="p">,</span><span class="w"> </span>
 <span class="w">  </span><span class="nt">&quot;calculated_itbms&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.39</span><span class="p">,</span>
@@ -2016,22 +2063,24 @@
 <span class="w">  </span><span class="nt">&quot;coherence_check&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
 <span class="p">}</span>
 </code></pre></div>
+
 <p>Los cálculos individuales eran correctos, pero los totales enviados al PAC estaban inconsistentes.</p>
-<h2 id="correcciones-implementadas">Correcciones Implementadas<a class="headerlink" href="#correcciones-implementadas" title="Permanent link">&para;</a></h2>
-<h3 id="1-campo-dvtotitems-linea-2456">1. Campo <code>dVTotItems</code> (Línea 2456)<a class="headerlink" href="#1-campo-dvtotitems-linea-2456" title="Permanent link">&para;</a></h3>
+<h2 id="correcciones-implementadas">Correcciones Implementadas</h2>
+<h3 id="1-campo-dvtotitems-linea-2456">1. Campo <code>dVTotItems</code> (Línea 2456)</h3>
 <p><strong>Problema</strong>: Se asignaba <code>$dVTot</code> (total general) en lugar de <code>$dVTotItems</code> (suma de ítems).</p>
-<div class="highlight"><pre><span></span><code><span class="x">// ANTES (INCORRECTO)</span>
+<div class="codehilite"><pre><span></span><code><span class="x">// ANTES (INCORRECTO)</span>
 <span class="x">&#39;dVTotItems&#39; =&gt; $this-&gt;numberFormat($dVTot),</span>
 
 <span class="x">// DESPUÉS (CORREGIDO)</span>
 <span class="x">&#39;dVTotItems&#39; =&gt; $this-&gt;numberFormat($dVTotItems),</span>
 </code></pre></div>
-<h3 id="2-calculo-itbms-con-precision-dgi">2. Cálculo ITBMS con Precisión DGI<a class="headerlink" href="#2-calculo-itbms-con-precision-dgi" title="Permanent link">&para;</a></h3>
+
+<h3 id="2-calculo-itbms-con-precision-dgi">2. Cálculo ITBMS con Precisión DGI</h3>
 <p><strong>Métodos añadidos</strong>:
 - <code>calculateCorrectITBMS()</code>: Recalculo preciso usando tasas estándar (7%, 10%, 15%)
 - <code>validateITBMSCoherence()</code>: Validación matemática pre-envío</p>
-<p><strong>Integración en <code>issueDocument()</code></strong> (líneas 2235-2275):
-<div class="highlight"><pre><span></span><code><span class="x">// Recalcular ITBMS con precisión DGI</span>
+<p><strong>Integración en <code>issueDocument()</code></strong> (líneas 2235-2275):</p>
+<div class="codehilite"><pre><span></span><code><span class="x">// Recalcular ITBMS con precisión DGI</span>
 <span class="x">if ($taxable &amp;&amp; $dPrItem &gt; 0) {</span>
 <span class="x">    $originalITBMS = $this-&gt;filterVar(array_get($item, &#39;Itbms&#39;, 0), FILTER_VALIDATE_FLOAT);</span>
 <span class="x">    $valITBMS = $this-&gt;calculateCorrectITBMS($dPrItem, $item);</span>
@@ -2045,25 +2094,27 @@
 <span class="x">        &#39;tax_rate_calculated&#39; =&gt; round(($valITBMS / $dPrItem) * 100, 2),</span>
 <span class="x">    ]);</span>
 <span class="x">}</span>
-</code></pre></div></p>
-<h3 id="3-logging-mejorado">3. Logging Mejorado<a class="headerlink" href="#3-logging-mejorado" title="Permanent link">&para;</a></h3>
+</code></pre></div>
+
+<h3 id="3-logging-mejorado">3. Logging Mejorado</h3>
 <p><strong>Nuevos logs para diagnosticar</strong>:
 - Debug detallado por ítem individual
 - Logging de totales finales antes del envío PAC
 - Validación de coherencia matemática</p>
-<h2 id="estado-de-testing">Estado de Testing<a class="headerlink" href="#estado-de-testing" title="Permanent link">&para;</a></h2>
-<h3 id="comando-de-prueba-creado">Comando de Prueba Creado<a class="headerlink" href="#comando-de-prueba-creado" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>docucenter_laravel.test<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>test:itbms-calculation<span class="w"> </span><span class="m">155757563</span>-2-2024
+<h2 id="estado-de-testing">Estado de Testing</h2>
+<h3 id="comando-de-prueba-creado">Comando de Prueba Creado</h3>
+<div class="codehilite"><pre><span></span><code>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>docucenter_laravel.test<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>test:itbms-calculation<span class="w"> </span><span class="m">155757563</span>-2-2024
 </code></pre></div>
+
 <p><strong>Resultado</strong>: ✅ Cálculos matemáticos correctos confirmados</p>
-<h3 id="proximas-validaciones-requeridas">Próximas Validaciones Requeridas<a class="headerlink" href="#proximas-validaciones-requeridas" title="Permanent link">&para;</a></h3>
+<h3 id="proximas-validaciones-requeridas">Próximas Validaciones Requeridas</h3>
 <ol>
 <li><strong>Validar corrección <code>dVTotItems</code></strong>: Verificar que ahora envía 5.60 en lugar de 5.99</li>
 <li><strong>Testing con PAC real</strong>: Probar con organización 155757563-2-2024 </li>
 <li><strong>Verificar otros campos totales</strong>: Confirmar coherencia de <code>dTotRec</code> e <code>iPzPag</code></li>
 </ol>
-<h2 id="archivos-modificados">Archivos Modificados<a class="headerlink" href="#archivos-modificados" title="Permanent link">&para;</a></h2>
-<h3 id="apphttplivewireadmineinvoicecreatephp"><code>app/Http/Livewire/Admin/Einvoice/Create.php</code><a class="headerlink" href="#apphttplivewireadmineinvoicecreatephp" title="Permanent link">&para;</a></h3>
+<h2 id="archivos-modificados">Archivos Modificados</h2>
+<h3 id="apphttplivewireadmineinvoicecreatephp"><code>app/Http/Livewire/Admin/Einvoice/Create.php</code></h3>
 <ul>
 <li>✅ Línea 2456: Corrección <code>dVTotItems</code></li>
 <li>✅ Líneas 1865-1895: Método <code>calculateCorrectITBMS()</code></li>
@@ -2071,26 +2122,26 @@
 <li>✅ Líneas 2235-2275: Integración en <code>issueDocument()</code></li>
 <li>✅ Logging mejorado para debugging</li>
 </ul>
-<h3 id="appconsolecommandstestitbmscalculationphp"><code>app/Console/Commands/TestITBMSCalculation.php</code><a class="headerlink" href="#appconsolecommandstestitbmscalculationphp" title="Permanent link">&para;</a></h3>
+<h3 id="appconsolecommandstestitbmscalculationphp"><code>app/Console/Commands/TestITBMSCalculation.php</code></h3>
 <ul>
 <li>✅ Comando de testing independiente para validación</li>
 </ul>
-<h2 id="validaciones-pendientes">Validaciones Pendientes<a class="headerlink" href="#validaciones-pendientes" title="Permanent link">&para;</a></h2>
-<h3 id="campos-que-requieren-verificacion">Campos que Requieren Verificación<a class="headerlink" href="#campos-que-requieren-verificacion" title="Permanent link">&para;</a></h3>
+<h2 id="validaciones-pendientes">Validaciones Pendientes</h2>
+<h3 id="campos-que-requieren-verificacion">Campos que Requieren Verificación</h3>
 <p>En el XML problemático detectamos inconsistencias en:</p>
 <ol>
 <li><strong><code>dTotRec</code></strong>: Debe ser 5.99, pero aparece como 5.60</li>
 <li><strong><code>iPzPag</code></strong>: Debe ser el código de tiempo de pago (1), pero aparece como 5.60</li>
 <li><strong><code>dVTotItems</code></strong>: Debe ser 5.60 (suma sin impuestos), ahora corregido</li>
 </ol>
-<h3 id="plan-de-testing">Plan de Testing<a class="headerlink" href="#plan-de-testing" title="Permanent link">&para;</a></h3>
+<h3 id="plan-de-testing">Plan de Testing</h3>
 <ol>
 <li><strong>Ejecutar nueva factura</strong>: Con los cambios implementados</li>
 <li><strong>Revisar logs nuevos</strong>: Verificar valores finales en gTotData</li>
 <li><strong>Comparar XML generado</strong>: Confirmar campos corregidos</li>
 <li><strong>Validación PAC</strong>: Probar envío real a TheFactoryHKA</li>
 </ol>
-<h2 id="proximos-pasos">Próximos Pasos<a class="headerlink" href="#proximos-pasos" title="Permanent link">&para;</a></h2>
+<h2 id="proximos-pasos">Próximos Pasos</h2>
 <ol>
 <li>✅ <strong>Logging mejorado</strong>: Implementado para capturar valores exactos</li>
 <li>🔧 <strong>Testing con datos reales</strong>: Pendiente validación con organización específica</li>
@@ -2151,7 +2202,7 @@
       
       
     
-    <a href="https://github.com/aghabrego/docucenter" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+    <a href="https://github.com/aghabrego/docucenter-public" target="_blank" rel="noopener" title="github.com" class="md-social__link">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
     </a>
   

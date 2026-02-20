@@ -233,7 +233,7 @@
           
   
   
-  APIs
+  API Documentation
 
         </a>
       </li>
@@ -269,7 +269,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../technical/" class="md-tabs__link">
+        <a href="../../technical/README.md" class="md-tabs__link">
           
   
   
@@ -298,6 +298,25 @@
         </a>
       </li>
     
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../testing/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Sistema de Testing
+
+      </a>
+    </li>
   
 
       
@@ -404,7 +423,7 @@
   <span class="md-ellipsis">
     
   
-    APIs
+    API Documentation
   
 
     
@@ -420,7 +439,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    APIs
+    API Documentation
   
 
           </label>
@@ -1363,7 +1382,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../technical/" class="md-nav__link">
+      <a href="../../technical/README.md" class="md-nav__link">
         
   
   
@@ -1716,6 +1735,33 @@
   
 
     
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sistema de Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -2056,16 +2102,16 @@
   
 
 
-<h1 id="resultados-de-pruebas-plusmovil-api">Resultados de Pruebas: PlusMovil API<a class="headerlink" href="#resultados-de-pruebas-plusmovil-api" title="Permanent link">&para;</a></h1>
+<h1 id="resultados-de-pruebas-plusmovil-api">Resultados de Pruebas: PlusMovil API</h1>
 <p><strong>Fecha:</strong> 31 de octubre de 2025<br />
 <strong>Ambiente:</strong> QA<br />
 <strong>Estado:</strong> ✅ Autenticación funcionando, algunos endpoints con errores del servidor</p>
 <hr />
-<h2 id="resumen-ejecutivo">Resumen Ejecutivo<a class="headerlink" href="#resumen-ejecutivo" title="Permanent link">&para;</a></h2>
+<h2 id="resumen-ejecutivo">Resumen Ejecutivo</h2>
 <p>Se completó con éxito la integración de autenticación con AWS Cognito para la API de PlusMovil. El token de acceso se obtiene correctamente y es aceptado por el API Gateway. Sin embargo, se identificaron problemas de configuración en el servidor que impiden el uso de ciertos endpoints.</p>
 <hr />
-<h2 id="configuracion-confirmada">Configuración Confirmada<a class="headerlink" href="#configuracion-confirmada" title="Permanent link">&para;</a></h2>
-<h3 id="endpoints-por-ambiente">Endpoints por Ambiente<a class="headerlink" href="#endpoints-por-ambiente" title="Permanent link">&para;</a></h3>
+<h2 id="configuracion-confirmada">Configuración Confirmada</h2>
+<h3 id="endpoints-por-ambiente">Endpoints por Ambiente</h3>
 <table>
 <thead>
 <tr>
@@ -2087,26 +2133,27 @@
 </tr>
 </tbody>
 </table>
-<h3 id="autenticacion">Autenticación<a class="headerlink" href="#autenticacion" title="Permanent link">&para;</a></h3>
+<h3 id="autenticacion">Autenticación</h3>
 <p><strong>Método:</strong> AWS Cognito con User Pool<br />
 <strong>Región:</strong> us-east-1<br />
 <strong>Flow:</strong> USER_PASSWORD_AUTH<br />
 <strong>Header:</strong> <code>Authorization: Bearer {ACCESS_TOKEN}</code><br />
 <strong>Expiración:</strong> 60 minutos (3600 segundos)</p>
 <hr />
-<h2 id="resultados-de-pruebas">Resultados de Pruebas<a class="headerlink" href="#resultados-de-pruebas" title="Permanent link">&para;</a></h2>
-<h3 id="autenticacion-cognito">✅ Autenticación Cognito<a class="headerlink" href="#autenticacion-cognito" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>aws<span class="w"> </span>cognito-idp<span class="w"> </span>initiate-auth<span class="w"> </span><span class="se">\</span>
+<h2 id="resultados-de-pruebas">Resultados de Pruebas</h2>
+<h3 id="autenticacion-cognito">✅ Autenticación Cognito</h3>
+<div class="codehilite"><pre><span></span><code>aws<span class="w"> </span>cognito-idp<span class="w"> </span>initiate-auth<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>--region<span class="w"> </span>us-east-1<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>--auth-flow<span class="w"> </span>USER_PASSWORD_AUTH<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>--client-id<span class="w"> </span>7t3s7lb4tfg6ssal586l929ovl<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>--auth-parameters<span class="w"> </span><span class="nv">USERNAME</span><span class="o">=</span>xxx,PASSWORD<span class="o">=</span>xxx
 </code></pre></div>
+
 <p><strong>Estado:</strong> ✅ <strong>EXITOSO</strong><br />
 <strong>Respuesta:</strong> Token de acceso obtenido correctamente<br />
 <strong>Duración:</strong> ~2 segundos</p>
 <hr />
-<h3 id="endpoint-sys-logs">⚠️ Endpoint: <code>/sys-logs</code><a class="headerlink" href="#endpoint-sys-logs" title="Permanent link">&para;</a></h3>
+<h3 id="endpoint-sys-logs">⚠️ Endpoint: <code>/sys-logs</code></h3>
 <p><strong>URL:</strong> <code>https://xka96gucj8.execute-api.us-east-1.amazonaws.com/qa/sys-logs</code><br />
 <strong>Método:</strong> GET<br />
 <strong>Autenticación:</strong> ✅ Token aceptado  </p>
@@ -2118,15 +2165,16 @@
 - <code>id_gte</code>, <code>id_lte</code> - Rangos numéricos
 - <code>created_at_between</code> - Rangos de fecha
 - <code>order_by</code>, <code>order_dir</code> - Ordenamiento</p>
-<p><strong>Resultado:</strong>
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<p><strong>Resultado:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;module&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SysLogController&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Error al obtener los Logs&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;error&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Association with alias \&quot;created_user\&quot; does not exist on sys_log&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span>
 <span class="p">}</span>
-</code></pre></div></p>
+</code></pre></div>
+
 <p><strong>HTTP Status:</strong> 500 Internal Server Error</p>
 <p><strong>Análisis:</strong>
 - ✅ El token es <strong>válido y aceptado</strong>
@@ -2134,15 +2182,16 @@
 - ❌ Falta definir la relación <code>created_user</code> en el modelo Eloquent/Sequelize
 - 🔧 <strong>Acción requerida:</strong> Equipo de PlusMovil debe corregir la configuración del modelo</p>
 <hr />
-<h3 id="endpoint-invoices">❌ Endpoint: <code>/invoices</code><a class="headerlink" href="#endpoint-invoices" title="Permanent link">&para;</a></h3>
+<h3 id="endpoint-invoices">❌ Endpoint: <code>/invoices</code></h3>
 <p><strong>URL:</strong> <code>https://xka96gucj8.execute-api.us-east-1.amazonaws.com/qa/invoices</code><br />
 <strong>Método:</strong> GET<br />
 <strong>Autenticación:</strong> ❌ Token rechazado  </p>
-<p><strong>Resultado:</strong>
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<p><strong>Resultado:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Invalid key=value pair (missing equal-sign) in Authorization header (hashed with SHA-256 and encoded with Base64): &#39;VA7TJRPbAsXU3QrW46d3h8l61BHLHjXf7IqJX4it2CE=&#39;.&quot;</span>
 <span class="p">}</span>
-</code></pre></div></p>
+</code></pre></div>
+
 <p><strong>HTTP Status:</strong> 403 Forbidden</p>
 <p><strong>Análisis:</strong>
 - ❌ El endpoint rechaza el Bearer token de Cognito
@@ -2150,7 +2199,7 @@
 - 🤔 Posible configuración mixta: algunos endpoints con Cognito, otros con AWS IAM
 - 🔧 <strong>Acción requerida:</strong> Confirmar con equipo de PlusMovil el método de autenticación para este endpoint</p>
 <hr />
-<h3 id="endpoint-inv-products">✅ Endpoint: <code>/inv-products</code><a class="headerlink" href="#endpoint-inv-products" title="Permanent link">&para;</a></h3>
+<h3 id="endpoint-inv-products">✅ Endpoint: <code>/inv-products</code></h3>
 <p><strong>URL:</strong> <code>https://xka96gucj8.execute-api.us-east-1.amazonaws.com/qa/inv-products</code><br />
 <strong>Método:</strong> GET<br />
 <strong>Autenticación:</strong> ✅ Token aceptado  </p>
@@ -2164,8 +2213,8 @@
 - <code>field_between</code> - Rangos entre dos valores
 - <code>order_by</code> - Campos para ordenar (separados por coma)
 - <code>order_dir</code> - Dirección de orden (asc/desc por campo)</p>
-<p><strong>Ejemplo de Resultado Exitoso:</strong>
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<p><strong>Ejemplo de Resultado Exitoso:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Productos en Inventario obtenidos correctamente&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;error&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
@@ -2202,7 +2251,8 @@
 <span class="w">    </span><span class="p">}</span>
 <span class="w">  </span><span class="p">]</span>
 <span class="p">}</span>
-</code></pre></div></p>
+</code></pre></div>
+
 <p><strong>HTTP Status:</strong> 200 OK</p>
 <p><strong>Análisis:</strong>
 - ✅ Token de Cognito <strong>aceptado y funcionando</strong>
@@ -2227,8 +2277,8 @@
 - <code>created_at</code> - Fecha de creación
 - <code>updated_user_id</code> - Usuario que actualizó
 - <code>updated_at</code> - Fecha de actualización</p>
-<p><strong>Relaciones Incluidas:</strong>
-<div class="highlight"><pre><span></span><code><span class="nt">&quot;cat_product&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<p><strong>Relaciones Incluidas:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="nt">&quot;cat_product&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="err">i</span><span class="kc">nte</span><span class="err">ger</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="err">s</span><span class="kc">tr</span><span class="err">i</span><span class="kc">n</span><span class="err">g</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="err">s</span><span class="kc">tr</span><span class="err">i</span><span class="kc">n</span><span class="err">g</span><span class="p">,</span>
@@ -2242,9 +2292,10 @@
 <span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="err">i</span><span class="kc">nte</span><span class="err">ger</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="err">s</span><span class="kc">tr</span><span class="err">i</span><span class="kc">n</span><span class="err">g</span>
 <span class="p">}</span>
-</code></pre></div></p>
-<p><strong>Ejemplos de Uso:</strong>
-<div class="highlight"><pre><span></span><code><span class="c1"># Obtener últimos 10 productos</span>
+</code></pre></div>
+
+<p><strong>Ejemplos de Uso:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Obtener últimos 10 productos</span>
 GET<span class="w"> </span>/inv-products?limit<span class="o">=</span><span class="m">10</span><span class="p">&amp;</span><span class="nv">order_by</span><span class="o">=</span>id<span class="p">&amp;</span><span class="nv">order_dir</span><span class="o">=</span>desc
 
 <span class="c1"># Buscar por código</span>
@@ -2264,14 +2315,15 @@ GET<span class="w"> </span>/inv-products?order_by<span class="o">=</span>status,
 
 <span class="c1"># Consulta compleja</span>
 GET<span class="w"> </span>/inv-products?status<span class="o">=</span><span class="m">5</span><span class="p">&amp;</span><span class="nv">inv_warehouse_id</span><span class="o">=</span><span class="m">7756</span><span class="p">&amp;</span><span class="nv">code_like</span><span class="o">=</span><span class="m">878</span><span class="p">&amp;</span><span class="nv">order_by</span><span class="o">=</span>created_at<span class="p">&amp;</span><span class="nv">order_dir</span><span class="o">=</span>desc<span class="p">&amp;</span><span class="nv">limit</span><span class="o">=</span><span class="m">15</span>
-</code></pre></div></p>
+</code></pre></div>
+
 <p><strong>Notas Importantes:</strong>
 - ⚠️ <strong>SIEMPRE usar <code>limit</code></strong> para evitar timeouts (502)
 - ✅ Respuestas bien estructuradas con metadata (<code>code</code>, <code>message</code>, <code>error</code>, <code>data</code>)
 - ✅ Incluye relaciones automáticamente (no requiere <code>include</code> param)
 - 📊 Ideal para sincronización de inventario con DocuCenter</p>
 <hr />
-<h3 id="endpoint-com-invoices">✅ Endpoint: <code>/com-invoices</code><a class="headerlink" href="#endpoint-com-invoices" title="Permanent link">&para;</a></h3>
+<h3 id="endpoint-com-invoices">✅ Endpoint: <code>/com-invoices</code></h3>
 <p><strong>URL:</strong> <code>https://xka96gucj8.execute-api.us-east-1.amazonaws.com/qa/com-invoices</code><br />
 <strong>Método:</strong> GET<br />
 <strong>Autenticación:</strong> ✅ Token aceptado  </p>
@@ -2285,8 +2337,8 @@ GET<span class="w"> </span>/inv-products?status<span class="o">=</span><span cla
 - <code>field_between</code> - Rangos (ej: <code>invoice_date_between=2025-01-01,2025-12-31</code>)
 - <code>order_by</code> - Campos para ordenar
 - <code>order_dir</code> - Dirección de orden (asc/desc)</p>
-<p><strong>Ejemplo de Resultado Exitoso:</strong>
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<p><strong>Ejemplo de Resultado Exitoso:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Facturas obtenidos correctamente&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;error&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
@@ -2365,7 +2417,8 @@ GET<span class="w"> </span>/inv-products?status<span class="o">=</span><span cla
 <span class="w">    </span><span class="p">}</span>
 <span class="w">  </span><span class="p">]</span>
 <span class="p">}</span>
-</code></pre></div></p>
+</code></pre></div>
+
 <p><strong>HTTP Status:</strong> 200 OK</p>
 <p><strong>Análisis:</strong>
 - ✅ Token de Cognito <strong>aceptado y funcionando</strong>
@@ -2391,8 +2444,8 @@ GET<span class="w"> </span>/inv-products?status<span class="o">=</span><span cla
 - <code>balance</code> - Saldo pendiente
 - <code>status</code> - Estado (0=pendiente?, 1=activa?, 2=pagada?, 3=anulada?)
 - <code>comments</code> - Comentarios</p>
-<p><strong>Relaciones Incluidas:</strong>
-<div class="highlight"><pre><span></span><code><span class="nt">&quot;com_distributor&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<p><strong>Relaciones Incluidas:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="nt">&quot;com_distributor&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="err">i</span><span class="kc">nte</span><span class="err">ger</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="err">s</span><span class="kc">tr</span><span class="err">i</span><span class="kc">n</span><span class="err">g</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="err">s</span><span class="kc">tr</span><span class="err">i</span><span class="kc">n</span><span class="err">g</span><span class="p">,</span>
@@ -2430,9 +2483,10 @@ GET<span class="w"> </span>/inv-products?status<span class="o">=</span><span cla
 <span class="w">  </span><span class="nt">&quot;photo&quot;</span><span class="p">:</span><span class="w"> </span><span class="err">s</span><span class="kc">tr</span><span class="err">i</span><span class="kc">n</span><span class="err">g</span>
 <span class="p">},</span>
 <span class="nt">&quot;com_invoice_payment_summary&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span>
-</code></pre></div></p>
-<p><strong>Ejemplos de Uso para DocuCenter:</strong>
-<div class="highlight"><pre><span></span><code><span class="c1"># Sincronización incremental (últimas facturas)</span>
+</code></pre></div>
+
+<p><strong>Ejemplos de Uso para DocuCenter:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Sincronización incremental (últimas facturas)</span>
 GET<span class="w"> </span>/com-invoices?invoice_date_gte<span class="o">=</span><span class="m">2025</span>-10-01<span class="p">&amp;</span><span class="nv">limit</span><span class="o">=</span><span class="m">100</span><span class="p">&amp;</span><span class="nv">order_by</span><span class="o">=</span>invoice_date<span class="p">&amp;</span><span class="nv">order_dir</span><span class="o">=</span>asc
 
 <span class="c1"># Facturas pendientes de pago</span>
@@ -2452,7 +2506,8 @@ GET<span class="w"> </span>/com-invoices?customer_name_like<span class="o">=</sp
 
 <span class="c1"># Facturas por vendedor</span>
 GET<span class="w"> </span>/com-invoices?com_seller_id<span class="o">=</span><span class="m">86</span><span class="p">&amp;</span><span class="nv">limit</span><span class="o">=</span><span class="m">30</span>
-</code></pre></div></p>
+</code></pre></div>
+
 <p><strong>Observaciones Importantes:</strong>
 - ⚠️ Muchas facturas tienen <code>invoice_number: "0"</code> - posiblemente se genera después
 - ⚠️ Campo <code>customer_vat_number</code> puede tener valor "PENDIENTE"
@@ -2553,25 +2608,27 @@ GET<span class="w"> </span>/com-invoices?com_seller_id<span class="o">=</span><s
 - ✅ Soporte para productos serializados con rangos
 - 📋 Ver solución completa en: <code>docs/integrations/plusmovil-invoice-items-SOLVED.md</code></p>
 <hr />
-<h2 id="configuracion-de-errores-identificados">Configuración de Errores Identificados<a class="headerlink" href="#configuracion-de-errores-identificados" title="Permanent link">&para;</a></h2>
-<h3 id="1-error-de-relacion-created_user-en-sys-logs">1. Error de Relación <code>created_user</code> en <code>/sys-logs</code><a class="headerlink" href="#1-error-de-relacion-created_user-en-sys-logs" title="Permanent link">&para;</a></h3>
+<h2 id="configuracion-de-errores-identificados">Configuración de Errores Identificados</h2>
+<h3 id="1-error-de-relacion-created_user-en-sys-logs">1. Error de Relación <code>created_user</code> en <code>/sys-logs</code></h3>
 <p><strong>Ubicación en servidor:</strong> Modelo <code>sys_log</code></p>
-<p><strong>Causa probable:</strong>
-<div class="highlight"><pre><span></span><code><span class="x">// En el controlador o servicio se está haciendo:</span>
+<p><strong>Causa probable:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="x">// En el controlador o servicio se está haciendo:</span>
 <span class="x">$logs = SysLog::with(&#39;created_user&#39;)-&gt;get();</span>
 
 <span class="x">// Pero en el modelo SysLog falta:</span>
 <span class="x">public function createdUser() {</span>
 <span class="x">    return $this-&gt;belongsTo(User::class, &#39;created_by&#39;);</span>
 <span class="x">}</span>
-</code></pre></div></p>
-<p><strong>Solución sugerida para PlusMovil:</strong>
-<div class="highlight"><pre><span></span><code><span class="x">// En app/Models/SysLog.php o equivalente</span>
+</code></pre></div>
+
+<p><strong>Solución sugerida para PlusMovil:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="x">// En app/Models/SysLog.php o equivalente</span>
 <span class="x">public function createdUser() {</span>
 <span class="x">    return $this-&gt;belongsTo(User::class, &#39;created_by&#39;, &#39;id&#39;);</span>
 <span class="x">}</span>
-</code></pre></div></p>
-<h3 id="2-autenticacion-mixta-en-api-gateway">2. Autenticación Mixta en API Gateway<a class="headerlink" href="#2-autenticacion-mixta-en-api-gateway" title="Permanent link">&para;</a></h3>
+</code></pre></div>
+
+<h3 id="2-autenticacion-mixta-en-api-gateway">2. Autenticación Mixta en API Gateway</h3>
 <p><strong>Problema:</strong> Algunos endpoints aceptan Cognito Bearer token, otros requieren AWS Signature</p>
 <p><strong>Endpoints con Cognito:</strong>
 - ✅ <code>/sys-logs</code> (con error del servidor, pero acepta token)
@@ -2586,13 +2643,14 @@ GET<span class="w"> </span>/com-invoices?com_seller_id<span class="o">=</span><s
 2. <strong>Opción B:</strong> Documentar claramente qué endpoints usan qué método
 3. <strong>Opción C:</strong> Implementar ambos métodos en DocuCenter según necesidad</p>
 <hr />
-<h2 id="scripts-creados">Scripts Creados<a class="headerlink" href="#scripts-creados" title="Permanent link">&para;</a></h2>
-<h3 id="1-get-plusmovil-tokensh">1. <code>get-plusmovil-token.sh</code><a class="headerlink" href="#1-get-plusmovil-tokensh" title="Permanent link">&para;</a></h3>
+<h2 id="scripts-creados">Scripts Creados</h2>
+<h3 id="1-get-plusmovil-tokensh">1. <code>get-plusmovil-token.sh</code></h3>
 <p><strong>Ubicación:</strong> <code>docs/testing/get-plusmovil-token.sh</code><br />
 <strong>Propósito:</strong> Obtener token de AWS Cognito interactivamente<br />
-<strong>Uso:</strong>
-<div class="highlight"><pre><span></span><code>./docs/testing/get-plusmovil-token.sh
-</code></pre></div></p>
+<strong>Uso:</strong></p>
+<div class="codehilite"><pre><span></span><code>./docs/testing/get-plusmovil-token.sh
+</code></pre></div>
+
 <p><strong>Características:</strong>
 - ✅ Selección de ambiente (QA/Prod)
 - ✅ Ingreso seguro de credenciales
@@ -2600,28 +2658,31 @@ GET<span class="w"> </span>/com-invoices?com_seller_id<span class="o">=</span><s
 - ✅ Guardado automático en archivo <code>.plusmovil-token-{ENV}.txt</code>
 - ✅ Agregado automático a <code>.gitignore</code>
 - ✅ Prueba opcional del token con endpoint</p>
-<h3 id="2-test-plusmovil-apish">2. <code>test-plusmovil-api.sh</code><a class="headerlink" href="#2-test-plusmovil-apish" title="Permanent link">&para;</a></h3>
+<h3 id="2-test-plusmovil-apish">2. <code>test-plusmovil-api.sh</code></h3>
 <p><strong>Ubicación:</strong> <code>docs/testing/test-plusmovil-api.sh</code><br />
 <strong>Propósito:</strong> Probar endpoints de PlusMovil con diferentes filtros<br />
-<strong>Uso:</strong>
-<div class="highlight"><pre><span></span><code>./docs/testing/test-plusmovil-api.sh
-</code></pre></div></p>
+<strong>Uso:</strong></p>
+<div class="codehilite"><pre><span></span><code>./docs/testing/test-plusmovil-api.sh
+</code></pre></div>
+
 <p><strong>Características:</strong>
 - ✅ Pruebas de endpoints con y sin filtros
 - ✅ Ejemplos de todos los tipos de filtros soportados
 - ✅ Documentación interactiva de parámetros</p>
-<h3 id="3-test-invoices-endpointsh">3. <code>test-invoices-endpoint.sh</code><a class="headerlink" href="#3-test-invoices-endpointsh" title="Permanent link">&para;</a></h3>
+<h3 id="3-test-invoices-endpointsh">3. <code>test-invoices-endpoint.sh</code></h3>
 <p><strong>Ubicación:</strong> <code>docs/testing/test-invoices-endpoint.sh</code><br />
 <strong>Propósito:</strong> Pruebas específicas de endpoints de invoices<br />
-<strong>Uso:</strong>
-<div class="highlight"><pre><span></span><code>./docs/testing/test-invoices-endpoint.sh
-</code></pre></div></p>
-<h3 id="4-test-inv-products-endpointsh">4. <code>test-inv-products-endpoint.sh</code><a class="headerlink" href="#4-test-inv-products-endpointsh" title="Permanent link">&para;</a></h3>
+<strong>Uso:</strong></p>
+<div class="codehilite"><pre><span></span><code>./docs/testing/test-invoices-endpoint.sh
+</code></pre></div>
+
+<h3 id="4-test-inv-products-endpointsh">4. <code>test-inv-products-endpoint.sh</code></h3>
 <p><strong>Ubicación:</strong> <code>docs/testing/test-inv-products-endpoint.sh</code><br />
 <strong>Propósito:</strong> Pruebas completas del endpoint /inv-products con filtros dinámicos<br />
-<strong>Uso:</strong>
-<div class="highlight"><pre><span></span><code>./docs/testing/test-inv-products-endpoint.sh
-</code></pre></div></p>
+<strong>Uso:</strong></p>
+<div class="codehilite"><pre><span></span><code>./docs/testing/test-inv-products-endpoint.sh
+</code></pre></div>
+
 <p><strong>Características:</strong>
 - ✅ Pruebas de paginación (limit, offset)
 - ✅ Búsquedas parciales (code_like, barcode_like)
@@ -2631,8 +2692,8 @@ GET<span class="w"> </span>/com-invoices?com_seller_id<span class="o">=</span><s
 - ✅ Consultas complejas personalizadas
 - ✅ Modo interactivo con ejemplos</p>
 <hr />
-<h2 id="proximos-pasos">Próximos Pasos<a class="headerlink" href="#proximos-pasos" title="Permanent link">&para;</a></h2>
-<h3 id="acciones-inmediatas">Acciones Inmediatas<a class="headerlink" href="#acciones-inmediatas" title="Permanent link">&para;</a></h3>
+<h2 id="proximos-pasos">Próximos Pasos</h2>
+<h3 id="acciones-inmediatas">Acciones Inmediatas</h3>
 <ol>
 <li><strong>Reportar a PlusMovil:</strong></li>
 <li>❌ Error de relación <code>created_user</code> en endpoint <code>/sys-logs</code></li>
@@ -2649,11 +2710,11 @@ GET<span class="w"> </span>/com-invoices?com_seller_id<span class="o">=</span><s
 <li>⏳ Pendiente: Implementar servicio PHP para <code>/inv-products</code></li>
 <li>⏳ Pendiente: Implementar sincronización de inventario</li>
 </ol>
-<h3 id="acciones-pendientes-cuando-plusmovil-corrija">Acciones Pendientes (cuando PlusMovil corrija)<a class="headerlink" href="#acciones-pendientes-cuando-plusmovil-corrija" title="Permanent link">&para;</a></h3>
+<h3 id="acciones-pendientes-cuando-plusmovil-corrija">Acciones Pendientes (cuando PlusMovil corrija)</h3>
 <ol>
-<li>
-<p><strong>Crear Service en Laravel:</strong>
-<div class="highlight"><pre><span></span><code><span class="x">// app/Services/PlusMovilService.php</span>
+<li><strong>Crear Service en Laravel:</strong></li>
+</ol>
+<div class="codehilite"><pre><span></span><code><span class="x">// app/Services/PlusMovilService.php</span>
 <span class="x">class PlusMovilService {</span>
 <span class="x">    public function authenticate() {</span>
 <span class="x">        // Usar AWS Cognito SDK</span>
@@ -2672,26 +2733,26 @@ GET<span class="w"> </span>/com-invoices?com_seller_id<span class="o">=</span><s
 <span class="x">        // Llamar endpoint /invoices (cuando funcione)</span>
 <span class="x">    }</span>
 <span class="x">}</span>
-</code></pre></div></p>
-</li>
-<li>
-<p><strong>Configurar en <code>.env</code>:</strong>
-<div class="highlight"><pre><span></span><code>PLUSMOVIL_ENVIRONMENT=qa
+</code></pre></div>
+
+<ol>
+<li><strong>Configurar en <code>.env</code>:</strong></li>
+</ol>
+<div class="codehilite"><pre><span></span><code>PLUSMOVIL_ENVIRONMENT=qa
 PLUSMOVIL_CLIENT_ID=7t3s7lb4tfg6ssal586l929ovl
 PLUSMOVIL_USERNAME=xxx
 PLUSMOVIL_PASSWORD=xxx
 PLUSMOVIL_BASE_URL=https://xka96gucj8.execute-api.us-east-1.amazonaws.com/qa
-</code></pre></div></p>
-</li>
-<li>
-<p><strong>Testing automatizado:</strong></p>
-</li>
+</code></pre></div>
+
+<ol>
+<li><strong>Testing automatizado:</strong></li>
 <li>Crear Feature Tests en Laravel</li>
 <li>Mockear respuestas de Cognito</li>
 <li>Probar manejo de errores</li>
 </ol>
 <hr />
-<h2 id="contacto-con-plusmovil">Contacto con PlusMovil<a class="headerlink" href="#contacto-con-plusmovil" title="Permanent link">&para;</a></h2>
+<h2 id="contacto-con-plusmovil">Contacto con PlusMovil</h2>
 <p><strong>Puntos a aclarar en próxima comunicación:</strong></p>
 <ol>
 <li>¿Cuándo estará corregido el error de <code>created_user</code> en <code>/sys-logs</code>?</li>
@@ -2702,15 +2763,15 @@ PLUSMOVIL_BASE_URL=https://xka96gucj8.execute-api.us-east-1.amazonaws.com/qa
 <li>¿Existe endpoint de health check para monitoreo?</li>
 </ol>
 <hr />
-<h2 id="referencias">Referencias<a class="headerlink" href="#referencias" title="Permanent link">&para;</a></h2>
+<h2 id="referencias">Referencias</h2>
 <ul>
-<li><strong>AWS Cognito Documentation:</strong> <a href="https://docs.aws.amazon.com/cognito/">https://docs.aws.amazon.com/cognito/</a></li>
-<li><strong>AWS CLI Installation:</strong> <a href="https://aws.amazon.com/cli/">https://aws.amazon.com/cli/</a></li>
-<li><strong>API Gateway Authorization:</strong> <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-control-access-to-api.html">https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-control-access-to-api.html</a></li>
+<li><strong>AWS Cognito Documentation:</strong> https://docs.aws.amazon.com/cognito/</li>
+<li><strong>AWS CLI Installation:</strong> https://aws.amazon.com/cli/</li>
+<li><strong>API Gateway Authorization:</strong> https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-control-access-to-api.html</li>
 <li><strong>Scripts de Prueba:</strong> <code>docs/testing/</code></li>
 </ul>
 <hr />
-<h2 id="changelog">Changelog<a class="headerlink" href="#changelog" title="Permanent link">&para;</a></h2>
+<h2 id="changelog">Changelog</h2>
 <table>
 <thead>
 <tr>
@@ -2785,7 +2846,7 @@ PLUSMOVIL_BASE_URL=https://xka96gucj8.execute-api.us-east-1.amazonaws.com/qa
       
       
     
-    <a href="https://github.com/aghabrego/docucenter" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+    <a href="https://github.com/aghabrego/docucenter-public" target="_blank" rel="noopener" title="github.com" class="md-social__link">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
     </a>
   

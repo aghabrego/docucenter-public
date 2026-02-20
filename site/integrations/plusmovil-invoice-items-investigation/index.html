@@ -233,7 +233,7 @@
           
   
   
-  APIs
+  API Documentation
 
         </a>
       </li>
@@ -269,7 +269,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../technical/" class="md-tabs__link">
+        <a href="../../technical/README.md" class="md-tabs__link">
           
   
   
@@ -298,6 +298,25 @@
         </a>
       </li>
     
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../testing/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Sistema de Testing
+
+      </a>
+    </li>
   
 
       
@@ -404,7 +423,7 @@
   <span class="md-ellipsis">
     
   
-    APIs
+    API Documentation
   
 
     
@@ -420,7 +439,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    APIs
+    API Documentation
   
 
           </label>
@@ -1363,7 +1382,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../technical/" class="md-nav__link">
+      <a href="../../technical/README.md" class="md-nav__link">
         
   
   
@@ -1716,6 +1735,33 @@
   
 
     
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sistema de Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -2040,16 +2086,16 @@
   
 
 
-<h1 id="investigacion-itemsdetalles-de-facturas-en-plusmovil-api">Investigación: Items/Detalles de Facturas en PlusMovil API<a class="headerlink" href="#investigacion-itemsdetalles-de-facturas-en-plusmovil-api" title="Permanent link">&para;</a></h1>
+<h1 id="investigacion-itemsdetalles-de-facturas-en-plusmovil-api">Investigación: Items/Detalles de Facturas en PlusMovil API</h1>
 <p><strong>Fecha:</strong> 4 de noviembre de 2025<br />
 <strong>Endpoint Principal:</strong> <code>/com-invoices</code><br />
 <strong>Pregunta:</strong> ¿Las facturas incluyen los items/líneas de detalle?</p>
 <hr />
-<h2 id="hallazgos">Hallazgos<a class="headerlink" href="#hallazgos" title="Permanent link">&para;</a></h2>
-<h3 id="no-incluidos-en-com-invoices">❌ NO Incluidos en <code>/com-invoices</code><a class="headerlink" href="#no-incluidos-en-com-invoices" title="Permanent link">&para;</a></h3>
+<h2 id="hallazgos">Hallazgos</h2>
+<h3 id="no-incluidos-en-com-invoices">❌ NO Incluidos en <code>/com-invoices</code></h3>
 <p>El endpoint <code>/com-invoices</code> <strong>NO incluye</strong> los items/detalles de las facturas en la respuesta.</p>
-<p><strong>Campos disponibles en factura:</strong>
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<p><strong>Campos disponibles en factura:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">303</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;invoice_number&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;total&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;4.9200&quot;</span><span class="p">,</span>
@@ -2060,31 +2106,34 @@
 <span class="w">  </span><span class="nt">&quot;com_order_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;com_order&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span>
 <span class="p">}</span>
-</code></pre></div></p>
+</code></pre></div>
+
 <p><strong>Observaciones:</strong>
 - ✅ Tiene <code>total_quantity</code> pero generalmente es <code>null</code>
 - ✅ Tiene referencia <code>com_order_id</code> pero el objeto <code>com_order</code> no incluye items
 - ❌ No tiene campo <code>com_invoice_items</code>, <code>items</code>, <code>details</code>, etc.</p>
 <hr />
-<h2 id="endpoints-probados">Endpoints Probados<a class="headerlink" href="#endpoints-probados" title="Permanent link">&para;</a></h2>
-<h3 id="1-com-invoice-details">1. <code>/com-invoice-details</code><a class="headerlink" href="#1-com-invoice-details" title="Permanent link">&para;</a></h3>
+<h2 id="endpoints-probados">Endpoints Probados</h2>
+<h3 id="1-com-invoice-details">1. <code>/com-invoice-details</code></h3>
 <p><strong>URL:</strong> <code>/com-invoice-details?com_invoice_id=303</code><br />
 <strong>Resultado:</strong> ❌ <strong>Error 403</strong> - Requiere AWS Signature (no Cognito Bearer token)</p>
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Invalid key=value pair (missing equal-sign) in Authorization header&quot;</span>
 <span class="p">}</span>
 </code></pre></div>
-<h3 id="2-com-invoice-items">2. <code>/com-invoice-items</code><a class="headerlink" href="#2-com-invoice-items" title="Permanent link">&para;</a></h3>
+
+<h3 id="2-com-invoice-items">2. <code>/com-invoice-items</code></h3>
 <p><strong>URL:</strong> <code>/com-invoice-items?com_invoice_id=303</code><br />
 <strong>Resultado:</strong> ❌ <strong>Error 403</strong> - Requiere AWS Signature (no Cognito Bearer token)</p>
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Invalid key=value pair (missing equal-sign) in Authorization header&quot;</span>
 <span class="p">}</span>
 </code></pre></div>
-<h3 id="3-com-orders">3. <code>/com-orders</code><a class="headerlink" href="#3-com-orders" title="Permanent link">&para;</a></h3>
+
+<h3 id="3-com-orders">3. <code>/com-orders</code></h3>
 <p><strong>URL:</strong> <code>/com-orders?id=30</code><br />
 <strong>Resultado:</strong> ✅ Funciona con Cognito, pero <strong>NO incluye items</strong></p>
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;order_date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2025-07-25T00:54:14.000Z&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;total&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;110.2500&quot;</span><span class="p">,</span>
@@ -2093,9 +2142,10 @@
 <span class="w">  </span><span class="c1">// ... otros campos pero NO items</span>
 <span class="p">}</span>
 </code></pre></div>
+
 <hr />
-<h2 id="conclusiones">Conclusiones<a class="headerlink" href="#conclusiones" title="Permanent link">&para;</a></h2>
-<h3 id="situacion-actual">🔍 Situación Actual<a class="headerlink" href="#situacion-actual" title="Permanent link">&para;</a></h3>
+<h2 id="conclusiones">Conclusiones</h2>
+<h3 id="situacion-actual">🔍 Situación Actual</h3>
 <ol>
 <li><strong>Endpoint de facturas (<code>/com-invoices</code>):</strong></li>
 <li>✅ Funciona con Cognito Bearer token</li>
@@ -2117,8 +2167,8 @@
 <li>Otros endpoints usan <strong>AWS Signature V4</strong> (IAM authentication)</li>
 </ol>
 <hr />
-<h2 id="recomendaciones">Recomendaciones<a class="headerlink" href="#recomendaciones" title="Permanent link">&para;</a></h2>
-<h3 id="opcion-1-solicitar-a-plusmovil">📋 Opción 1: Solicitar a PlusMovil<a class="headerlink" href="#opcion-1-solicitar-a-plusmovil" title="Permanent link">&para;</a></h3>
+<h2 id="recomendaciones">Recomendaciones</h2>
+<h3 id="opcion-1-solicitar-a-plusmovil">📋 Opción 1: Solicitar a PlusMovil</h3>
 <p><strong>Contactar al equipo de PlusMovil para:</strong></p>
 <ol>
 <li>✅ Confirmar el endpoint correcto para obtener items de factura</li>
@@ -2126,8 +2176,8 @@
 <li>✅ Verificar si pueden habilitar autenticación Cognito para <code>/com-invoice-items</code></li>
 <li>✅ Obtener Swagger completo con todos los endpoints disponibles</li>
 </ol>
-<p><strong>Preguntas específicas:</strong>
-<div class="highlight"><pre><span></span><code>Hola,
+<p><strong>Preguntas específicas:</strong></p>
+<div class="codehilite"><pre><span></span><code>Hola,
 
 Estamos integrando la API de PlusMovil y necesitamos obtener los items/detalles 
 de las facturas del endpoint /com-invoices.
@@ -2141,16 +2191,17 @@ Actualmente obtenemos error 403 en estos endpoints con nuestro token de Cognito.
 ¿Requieren autenticación diferente o permisos adicionales?
 
 Gracias.
-</code></pre></div></p>
-<h3 id="opcion-2-verificar-documentacion-swagger">📋 Opción 2: Verificar Documentación Swagger<a class="headerlink" href="#opcion-2-verificar-documentacion-swagger" title="Permanent link">&para;</a></h3>
+</code></pre></div>
+
+<h3 id="opcion-2-verificar-documentacion-swagger">📋 Opción 2: Verificar Documentación Swagger</h3>
 <p><strong>Acciones:</strong>
 1. Acceder a la aplicación web de PlusMovil
 2. Buscar documentación Swagger interna
 3. Identificar endpoint de items/detalles
 4. Verificar método de autenticación requerido</p>
-<h3 id="opcion-3-endpoint-alternativo-si-existe">📋 Opción 3: Endpoint Alternativo (si existe)<a class="headerlink" href="#opcion-3-endpoint-alternativo-si-existe" title="Permanent link">&para;</a></h3>
+<h3 id="opcion-3-endpoint-alternativo-si-existe">📋 Opción 3: Endpoint Alternativo (si existe)</h3>
 <p><strong>Posibles alternativas a probar cuando PlusMovil responda:</strong></p>
-<div class="highlight"><pre><span></span><code><span class="c1"># Opción A: Items como recurso independiente</span>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Opción A: Items como recurso independiente</span>
 GET<span class="w"> </span>/com-invoice-items?com_invoice_id<span class="o">=</span><span class="m">303</span><span class="p">&amp;</span><span class="nv">limit</span><span class="o">=</span><span class="m">50</span>
 
 <span class="c1"># Opción B: Detalles como subrecurso</span>
@@ -2165,9 +2216,10 @@ GET<span class="w"> </span>/com-invoices?id<span class="o">=</span><span class="
 <span class="c1"># Opción E: Expand parameter</span>
 GET<span class="w"> </span>/com-invoices?id<span class="o">=</span><span class="m">303</span><span class="p">&amp;</span><span class="nv">expand</span><span class="o">=</span>items
 </code></pre></div>
+
 <hr />
-<h2 id="impacto-en-integracion-docucenter">Impacto en Integración DocuCenter<a class="headerlink" href="#impacto-en-integracion-docucenter" title="Permanent link">&para;</a></h2>
-<h3 id="funcionalidad-limitada-actual">⚠️ Funcionalidad Limitada Actual<a class="headerlink" href="#funcionalidad-limitada-actual" title="Permanent link">&para;</a></h3>
+<h2 id="impacto-en-integracion-docucenter">Impacto en Integración DocuCenter</h2>
+<h3 id="funcionalidad-limitada-actual">⚠️ Funcionalidad Limitada Actual</h3>
 <p><strong>Sin acceso a items de factura:</strong>
 - ❌ No podemos sincronizar líneas de detalle (<code>Sales_Detail_Imp</code>)
 - ❌ No podemos validar totales por item
@@ -2175,26 +2227,28 @@ GET<span class="w"> </span>/com-invoices?id<span class="o">=</span><span class="
 - ❌ No podemos generar reportes de productos más vendidos
 - ✅ SÍ podemos sincronizar headers de factura (<code>Sales_Header_Imp</code>)
 - ✅ SÍ podemos sincronizar totales generales</p>
-<h3 id="implementacion-sugerida-dos-fases">🔧 Implementación Sugerida (dos fases)<a class="headerlink" href="#implementacion-sugerida-dos-fases" title="Permanent link">&para;</a></h3>
-<p><strong>Fase 1: Sin items (implementar ahora)</strong>
-<div class="highlight"><pre><span></span><code><span class="x">// app/Services/PlusMovilInvoiceService.php</span>
+<h3 id="implementacion-sugerida-dos-fases">🔧 Implementación Sugerida (dos fases)</h3>
+<p><strong>Fase 1: Sin items (implementar ahora)</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="x">// app/Services/PlusMovilInvoiceService.php</span>
 <span class="x">public function syncInvoiceHeaders($fromDate) {</span>
 <span class="x">    // Sincronizar solo headers de facturas</span>
 <span class="x">    // Guardar en Sales_Header_Imp</span>
 <span class="x">    // Marcar como &quot;sin_detalles&quot; temporalmente</span>
 <span class="x">}</span>
-</code></pre></div></p>
-<p><strong>Fase 2: Con items (cuando se resuelva acceso)</strong>
-<div class="highlight"><pre><span></span><code><span class="x">public function syncInvoiceDetails($invoiceId) {</span>
+</code></pre></div>
+
+<p><strong>Fase 2: Con items (cuando se resuelva acceso)</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="x">public function syncInvoiceDetails($invoiceId) {</span>
 <span class="x">    // Obtener items del endpoint correcto</span>
 <span class="x">    // Guardar en Sales_Detail_Imp</span>
 <span class="x">    // Actualizar flag &quot;sin_detalles&quot; = false</span>
 <span class="x">}</span>
-</code></pre></div></p>
+</code></pre></div>
+
 <hr />
-<h2 id="estructura-esperada-de-items">Estructura Esperada de Items<a class="headerlink" href="#estructura-esperada-de-items" title="Permanent link">&para;</a></h2>
+<h2 id="estructura-esperada-de-items">Estructura Esperada de Items</h2>
 <p><strong>Basado en patrones comunes de APIs similares:</strong></p>
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Items obtenidos correctamente&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
@@ -2217,21 +2271,22 @@ GET<span class="w"> </span>/com-invoices?id<span class="o">=</span><span class="
 <span class="w">  </span><span class="p">]</span>
 <span class="p">}</span>
 </code></pre></div>
+
 <hr />
-<h2 id="proximos-pasos">Próximos Pasos<a class="headerlink" href="#proximos-pasos" title="Permanent link">&para;</a></h2>
-<h3 id="inmediatos">Inmediatos:<a class="headerlink" href="#inmediatos" title="Permanent link">&para;</a></h3>
+<h2 id="proximos-pasos">Próximos Pasos</h2>
+<h3 id="inmediatos">Inmediatos:</h3>
 <ol>
 <li>✅ <strong>Contactar a PlusMovil</strong> para confirmar endpoint de items</li>
 <li>✅ <strong>Solicitar acceso</strong> si requiere permisos adicionales</li>
 <li>✅ <strong>Documentar respuesta</strong> cuando obtengamos acceso</li>
 </ol>
-<h3 id="mientras-tanto">Mientras tanto:<a class="headerlink" href="#mientras-tanto" title="Permanent link">&para;</a></h3>
+<h3 id="mientras-tanto">Mientras tanto:</h3>
 <ol>
 <li>✅ Implementar sincronización de <strong>headers</strong> de facturas</li>
 <li>✅ Guardar referencia <code>external_invoice_id</code> para asociar items después</li>
 <li>✅ Implementar flag <code>has_details</code> en Sales_Header_Imp</li>
 </ol>
-<h3 id="cuando-se-resuelva">Cuando se resuelva:<a class="headerlink" href="#cuando-se-resuelva" title="Permanent link">&para;</a></h3>
+<h3 id="cuando-se-resuelva">Cuando se resuelva:</h3>
 <ol>
 <li>⏳ Crear script de prueba para endpoint de items</li>
 <li>⏳ Documentar estructura completa</li>
@@ -2239,9 +2294,9 @@ GET<span class="w"> </span>/com-invoices?id<span class="o">=</span><span class="
 <li>⏳ Actualizar facturas existentes con items</li>
 </ol>
 <hr />
-<h2 id="scripts-de-prueba-para-cuando-tengamos-acceso">Scripts de Prueba (para cuando tengamos acceso)<a class="headerlink" href="#scripts-de-prueba-para-cuando-tengamos-acceso" title="Permanent link">&para;</a></h2>
-<p>Crear <code>test-com-invoice-items-endpoint.sh</code>:
-<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+<h2 id="scripts-de-prueba-para-cuando-tengamos-acceso">Scripts de Prueba (para cuando tengamos acceso)</h2>
+<p>Crear <code>test-com-invoice-items-endpoint.sh</code>:</p>
+<div class="codehilite"><pre><span></span><code><span class="ch">#!/bin/bash</span>
 <span class="c1"># Probar endpoint de items cuando tengamos acceso</span>
 
 <span class="nv">TOKEN</span><span class="o">=</span><span class="k">$(</span>cat<span class="w"> </span>docs/testing/.plusmovil-token-QA.txt<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>ACCESS_TOKEN<span class="w"> </span><span class="p">|</span><span class="w"> </span>cut<span class="w"> </span>-d<span class="s1">&#39;=&#39;</span><span class="w"> </span>-f2-<span class="w"> </span><span class="p">|</span><span class="w"> </span>tr<span class="w"> </span>-d<span class="w"> </span><span class="s1">&#39; \n\r\t&#39;</span><span class="k">)</span>
@@ -2252,9 +2307,10 @@ curl<span class="w"> </span>-s<span class="w"> </span><span class="s2">&quot;htt
 
 curl<span class="w"> </span>-s<span class="w"> </span><span class="s2">&quot;https://xka96gucj8.execute-api.us-east-1.amazonaws.com/qa/com-invoices/303/items&quot;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Authorization: Bearer </span><span class="si">${</span><span class="nv">TOKEN</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;.&#39;</span>
-</code></pre></div></p>
+</code></pre></div>
+
 <hr />
-<h2 id="resumen">Resumen<a class="headerlink" href="#resumen" title="Permanent link">&para;</a></h2>
+<h2 id="resumen">Resumen</h2>
 <table>
 <thead>
 <tr>
@@ -2339,7 +2395,7 @@ curl<span class="w"> </span>-s<span class="w"> </span><span class="s2">&quot;htt
       
       
     
-    <a href="https://github.com/aghabrego/docucenter" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+    <a href="https://github.com/aghabrego/docucenter-public" target="_blank" rel="noopener" title="github.com" class="md-social__link">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
     </a>
   

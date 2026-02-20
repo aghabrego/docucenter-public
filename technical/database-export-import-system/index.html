@@ -233,7 +233,7 @@
           
   
   
-  APIs
+  API Documentation
 
         </a>
       </li>
@@ -269,7 +269,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../" class="md-tabs__link">
+        <a href="../README.md" class="md-tabs__link">
           
   
   
@@ -298,6 +298,25 @@
         </a>
       </li>
     
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../testing/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Sistema de Testing
+
+      </a>
+    </li>
   
 
       
@@ -404,7 +423,7 @@
   <span class="md-ellipsis">
     
   
-    APIs
+    API Documentation
   
 
     
@@ -420,7 +439,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    APIs
+    API Documentation
   
 
           </label>
@@ -1363,7 +1382,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
+      <a href="../README.md" class="md-nav__link">
         
   
   
@@ -1712,6 +1731,33 @@
           </ul>
         </nav>
       
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sistema de Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -2272,11 +2318,11 @@
   
 
 
-<h1 id="sistema-de-exportacionimportacion-con-links-temporales">Sistema de Exportación/Importación con Links Temporales<a class="headerlink" href="#sistema-de-exportacionimportacion-con-links-temporales" title="Permanent link">&para;</a></h1>
-<h2 id="descripcion">Descripción<a class="headerlink" href="#descripcion" title="Permanent link">&para;</a></h2>
+<h1 id="sistema-de-exportacionimportacion-con-links-temporales">Sistema de Exportación/Importación con Links Temporales</h1>
+<h2 id="descripcion">Descripción</h2>
 <p>Sistema mejorado de exportación e importación de base de datos con generación de links de descarga temporales firmados que expiran automáticamente.</p>
-<h2 id="comando-wordexport-data">Comando: word:export-data<a class="headerlink" href="#comando-wordexport-data" title="Permanent link">&para;</a></h2>
-<h3 id="caracteristicas">Características<a class="headerlink" href="#caracteristicas" title="Permanent link">&para;</a></h3>
+<h2 id="comando-wordexport-data">Comando: word:export-data</h2>
+<h3 id="caracteristicas">Características</h3>
 <ul>
 <li>Genera exportación SQL completa de la base de datos</li>
 <li>Crea URL firmada con expiración configurable (default: 60 minutos)</li>
@@ -2284,8 +2330,8 @@
 <li>Almacenamiento seguro en <code>storage/app/exports/</code></li>
 <li>Modo legacy compatible con sistema anterior</li>
 </ul>
-<h3 id="uso-basico">Uso Básico<a class="headerlink" href="#uso-basico" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># Exportación con link temporal (60 minutos) - BD principal</span>
+<h3 id="uso-basico">Uso Básico</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Exportación con link temporal (60 minutos) - BD principal</span>
 php<span class="w"> </span>artisan<span class="w"> </span>word:export-data
 
 <span class="c1"># Exportación con expiración personalizada (120 minutos)</span>
@@ -2300,9 +2346,10 @@ php<span class="w"> </span>artisan<span class="w"> </span>word:export-data<span 
 <span class="c1"># Exportar BD de organización específica con 2 horas de expiración</span>
 php<span class="w"> </span>artisan<span class="w"> </span>word:export-data<span class="w"> </span>--database<span class="o">=</span>db_18257061709732_90<span class="w"> </span>--expiration<span class="o">=</span><span class="m">120</span>
 </code></pre></div>
-<h3 id="exportacion-multi-tenant">Exportación Multi-Tenant<a class="headerlink" href="#exportacion-multi-tenant" title="Permanent link">&para;</a></h3>
+
+<h3 id="exportacion-multi-tenant">Exportación Multi-Tenant</h3>
 <p>Para sistemas multi-tenant como DocuCenter, puedes exportar bases de datos específicas de organizaciones:</p>
-<div class="highlight"><pre><span></span><code><span class="c1"># Exportar BD consolidada</span>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Exportar BD consolidada</span>
 php<span class="w"> </span>artisan<span class="w"> </span>word:export-data<span class="w"> </span>--database<span class="o">=</span>db_weirdolabs_14
 
 <span class="c1"># Exportar BD de organización específica</span>
@@ -2313,35 +2360,37 @@ php<span class="w"> </span>artisan<span class="w"> </span>word:export-data<span 
 <span class="w">    </span>php<span class="w"> </span>artisan<span class="w"> </span>word:export-data<span class="w"> </span>--database<span class="o">=</span><span class="nv">$db</span><span class="w"> </span>--expiration<span class="o">=</span><span class="m">240</span>
 <span class="k">done</span>
 </code></pre></div>
-<h3 id="salida-ejemplo">Salida Ejemplo<a class="headerlink" href="#salida-ejemplo" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>Iniciando exportación de base de datos...
-Generando exportación...
-Ejecutando: mysqldump...
-Exportación generada exitosamente (145.23 MB)
 
-═══════════════════════════════════════════════════════
-        EXPORTACIÓN COMPLETADA
-═══════════════════════════════════════════════════════
-Archivo: docucenter_2026_02_11_14_30_45.sql
-Tamaño: 145.23 MB
-Expira en: 60 minutos (2026-02-11 15:30:45)
+<h3 id="salida-ejemplo">Salida Ejemplo</h3>
+<div class="codehilite"><pre><span></span><code><span class="n">Iniciando</span><span class="w"> </span><span class="n">exportación</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">base</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">datos</span><span class="o">...</span>
+<span class="n">Generando</span><span class="w"> </span><span class="n">exportación</span><span class="o">...</span>
+<span class="n">Ejecutando</span><span class="p">:</span><span class="w"> </span><span class="n">mysqldump</span><span class="o">...</span>
+<span class="n">Exportación</span><span class="w"> </span><span class="n">generada</span><span class="w"> </span><span class="n">exitosamente</span><span class="w"> </span><span class="p">(</span><span class="mf">145.23</span><span class="w"> </span><span class="n">MB</span><span class="p">)</span>
 
-Link de descarga temporal:
-https://docucenter.com/database/export/download/docucenter_2026_02_11_14_30_45.sql?expires=1707666645&amp;signature=abc123...
+<span class="err">═══════════════════════════════════════════════════════</span>
+<span class="w">        </span><span class="n">EXPORTACIÓN</span><span class="w"> </span><span class="n">COMPLETADA</span>
+<span class="err">═══════════════════════════════════════════════════════</span>
+<span class="n">Archivo</span><span class="p">:</span><span class="w"> </span><span class="n">docucenter_2026_02_11_14_30_45</span><span class="o">.</span><span class="n">sql</span>
+<span class="n">Tamaño</span><span class="p">:</span><span class="w"> </span><span class="mf">145.23</span><span class="w"> </span><span class="n">MB</span>
+<span class="n">Expira</span><span class="w"> </span><span class="n">en</span><span class="p">:</span><span class="w"> </span><span class="mi">60</span><span class="w"> </span><span class="n">minutos</span><span class="w"> </span><span class="p">(</span><span class="mi">2026</span><span class="o">-</span><span class="mi">02</span><span class="o">-</span><span class="mi">11</span><span class="w"> </span><span class="mi">15</span><span class="p">:</span><span class="mi">30</span><span class="p">:</span><span class="mi">45</span><span class="p">)</span>
 
-IMPORTANTE: Este link expirará en 60 minutos
-═══════════════════════════════════════════════════════
+<span class="n">Link</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">descarga</span><span class="w"> </span><span class="n">temporal</span><span class="p">:</span>
+<span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">docucenter</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">database</span><span class="o">/</span><span class="k">export</span><span class="o">/</span><span class="n">download</span><span class="o">/</span><span class="n">docucenter_2026_02_11_14_30_45</span><span class="o">.</span><span class="n">sql</span><span class="err">?</span><span class="n">expires</span><span class="o">=</span><span class="mi">1707666645</span><span class="o">&amp;</span><span class="n">signature</span><span class="o">=</span><span class="n">abc123</span><span class="o">...</span>
+
+<span class="n">IMPORTANTE</span><span class="p">:</span><span class="w"> </span><span class="n">Este</span><span class="w"> </span><span class="n">link</span><span class="w"> </span><span class="n">expirará</span><span class="w"> </span><span class="n">en</span><span class="w"> </span><span class="mi">60</span><span class="w"> </span><span class="n">minutos</span>
+<span class="err">═══════════════════════════════════════════════════════</span>
 </code></pre></div>
-<h2 id="comando-wordimport-data">Comando: word:import-data<a class="headerlink" href="#comando-wordimport-data" title="Permanent link">&para;</a></h2>
-<h3 id="caracteristicas_1">Características<a class="headerlink" href="#caracteristicas_1" title="Permanent link">&para;</a></h3>
+
+<h2 id="comando-wordimport-data">Comando: word:import-data</h2>
+<h3 id="caracteristicas_1">Características</h3>
 <ul>
 <li>Importación desde múltiples fuentes</li>
 <li>Confirmación interactiva antes de importar</li>
 <li>Detección automática del archivo más reciente</li>
 <li>Soporte para rutas personalizadas</li>
 </ul>
-<h3 id="uso-basico_1">Uso Básico<a class="headerlink" href="#uso-basico_1" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># Importar archivo específico - BD principal</span>
+<h3 id="uso-basico_1">Uso Básico</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Importar archivo específico - BD principal</span>
 php<span class="w"> </span>artisan<span class="w"> </span>word:import-data<span class="w"> </span>/ruta/al/archivo.sql
 
 <span class="c1"># Importar exportación más reciente de exports/</span>
@@ -2359,9 +2408,10 @@ php<span class="w"> </span>artisan<span class="w"> </span>word:import-data<span 
 <span class="c1"># Importar archivo específico a BD de organización</span>
 php<span class="w"> </span>artisan<span class="w"> </span>word:import-data<span class="w"> </span>/path/to/backup.sql<span class="w"> </span>--database<span class="o">=</span>db_18257061709732_90
 </code></pre></div>
-<h3 id="importacion-multi-tenant">Importación Multi-Tenant<a class="headerlink" href="#importacion-multi-tenant" title="Permanent link">&para;</a></h3>
+
+<h3 id="importacion-multi-tenant">Importación Multi-Tenant</h3>
 <p>Para restaurar bases de datos específicas de organizaciones:</p>
-<div class="highlight"><pre><span></span><code><span class="c1"># Restaurar BD consolidada desde archivo específico</span>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Restaurar BD consolidada desde archivo específico</span>
 php<span class="w"> </span>artisan<span class="w"> </span>word:import-data<span class="w"> </span>/backups/db_weirdolabs_14_2026_02_11.sql<span class="w"> </span>--database<span class="o">=</span>db_weirdolabs_14
 
 <span class="c1"># Restaurar organización desde exportación más reciente</span>
@@ -2370,91 +2420,98 @@ php<span class="w"> </span>artisan<span class="w"> </span>word:import-data<span 
 <span class="c1"># Restaurar BD completa de una organización</span>
 php<span class="w"> </span>artisan<span class="w"> </span>word:import-data<span class="w"> </span>/backups/org_backup.sql<span class="w"> </span>--database<span class="o">=</span>db_18257061709732_91
 </code></pre></div>
-<h3 id="confirmacion-interactiva">Confirmación Interactiva<a class="headerlink" href="#confirmacion-interactiva" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>ADVERTENCIA: Esta operación sobrescribirá la base de datos actual
-Archivo: docucenter_2026_02_11_14_30_45.sql
-Tamaño: 145.23 MB
 
-¿Deseas continuar con la importación? (yes/no) [no]:
+<h3 id="confirmacion-interactiva">Confirmación Interactiva</h3>
+<div class="codehilite"><pre><span></span><code><span class="nl">ADVERTENCIA</span><span class="p">:</span><span class="w"> </span><span class="n">Esta</span><span class="w"> </span><span class="n">operación</span><span class="w"> </span><span class="n">sobrescribirá</span><span class="w"> </span><span class="n">la</span><span class="w"> </span><span class="n">base</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">datos</span><span class="w"> </span><span class="n">actual</span>
+<span class="nl">Archivo</span><span class="p">:</span><span class="w"> </span><span class="n">docucenter_2026_02_11_14_30_45</span><span class="p">.</span><span class="k">sql</span>
+<span class="nl">Tamaño</span><span class="p">:</span><span class="w"> </span><span class="mf">145.23</span><span class="w"> </span><span class="n">MB</span>
+
+<span class="err">¿</span><span class="n">Deseas</span><span class="w"> </span><span class="n">continuar</span><span class="w"> </span><span class="n">con</span><span class="w"> </span><span class="n">la</span><span class="w"> </span><span class="n">importación</span><span class="vm">?</span><span class="w"> </span><span class="p">(</span><span class="n">yes</span><span class="o">/</span><span class="k">no</span><span class="p">)</span><span class="w"> </span><span class="o">[</span><span class="n">no</span><span class="o">]</span><span class="err">:</span>
 </code></pre></div>
-<h2 id="seguridad">Seguridad<a class="headerlink" href="#seguridad" title="Permanent link">&para;</a></h2>
-<h3 id="urls-firmadas">URLs Firmadas<a class="headerlink" href="#urls-firmadas" title="Permanent link">&para;</a></h3>
+
+<h2 id="seguridad">Seguridad</h2>
+<h3 id="urls-firmadas">URLs Firmadas</h3>
 <ul>
 <li>Las URLs generadas utilizan firma criptográfica de Laravel</li>
 <li>No se puede modificar la URL sin invalidar la firma</li>
 <li>Expiración automática después del tiempo configurado</li>
 <li>Validación en cada descarga mediante middleware <code>signed</code></li>
 </ul>
-<h3 id="ruta-de-descarga">Ruta de Descarga<a class="headerlink" href="#ruta-de-descarga" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">Route::get(&#39;/database/export/download/{filename}&#39;, [DatabaseExportController::class, &#39;download&#39;])</span>
+<h3 id="ruta-de-descarga">Ruta de Descarga</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">Route::get(&#39;/database/export/download/{filename}&#39;, [DatabaseExportController::class, &#39;download&#39;])</span>
 <span class="x">    -&gt;middleware(&#39;signed&#39;)</span>
 <span class="x">    -&gt;name(&#39;database.export.download&#39;);</span>
 </code></pre></div>
-<h3 id="validacion">Validación<a class="headerlink" href="#validacion" title="Permanent link">&para;</a></h3>
+
+<h3 id="validacion">Validación</h3>
 <p>El controlador valida:
 1. Firma de URL válida
 2. URL no expirada
 3. Archivo existe en storage
 4. Solo permite descargar archivos de <code>exports/</code></p>
-<h2 id="limpieza-automatica">Limpieza Automática<a class="headerlink" href="#limpieza-automatica" title="Permanent link">&para;</a></h2>
-<h3 id="task-programada">Task Programada<a class="headerlink" href="#task-programada" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">// En app/Console/Kernel.php</span>
+<h2 id="limpieza-automatica">Limpieza Automática</h2>
+<h3 id="task-programada">Task Programada</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">// En app/Console/Kernel.php</span>
 <span class="x">$schedule-&gt;call(function () {</span>
 <span class="x">    $controller = new \App\Http\Controllers\DatabaseExportController();</span>
 <span class="x">    $controller-&gt;cleanup();</span>
 <span class="x">})-&gt;hourly();</span>
 </code></pre></div>
-<h3 id="reglas-de-limpieza">Reglas de Limpieza<a class="headerlink" href="#reglas-de-limpieza" title="Permanent link">&para;</a></h3>
+
+<h3 id="reglas-de-limpieza">Reglas de Limpieza</h3>
 <ul>
 <li>Se ejecuta cada hora automáticamente</li>
 <li>Elimina archivos mayores a 2 horas</li>
 <li>Previene acumulación de exportaciones antiguas</li>
 <li>Libera espacio en disco automáticamente</li>
 </ul>
-<h2 id="estructura-de-almacenamiento">Estructura de Almacenamiento<a class="headerlink" href="#estructura-de-almacenamiento" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code>storage/
-└── app/
-    └── exports/                          # Exportaciones temporales
-        ├── docucenter_2026_02_11_14_30_45.sql
-        ├── docucenter_2026_02_11_13_15_22.sql
-        └── ...
+<h2 id="estructura-de-almacenamiento">Estructura de Almacenamiento</h2>
+<div class="codehilite"><pre><span></span><code><span class="n">storage</span><span class="o">/</span>
+<span class="err">└──</span><span class="w"> </span><span class="n">app</span><span class="o">/</span>
+<span class="w">    </span><span class="err">└──</span><span class="w"> </span><span class="n">exports</span><span class="o">/</span><span class="w">                          </span><span class="c1"># Exportaciones temporales</span>
+<span class="w">        </span><span class="err">├──</span><span class="w"> </span><span class="n">docucenter_2026_02_11_14_30_45</span><span class="o">.</span><span class="n">sql</span>
+<span class="w">        </span><span class="err">├──</span><span class="w"> </span><span class="n">docucenter_2026_02_11_13_15_22</span><span class="o">.</span><span class="n">sql</span>
+<span class="w">        </span><span class="err">└──</span><span class="w"> </span><span class="o">...</span>
 
-database/
-└── dumps/                                # Modo legacy (opcional)
-    └── docucenter_2026_02_10_10_00_00.sql
+<span class="n">database</span><span class="o">/</span>
+<span class="err">└──</span><span class="w"> </span><span class="n">dumps</span><span class="o">/</span><span class="w">                                </span><span class="c1"># Modo legacy (opcional)</span>
+<span class="w">    </span><span class="err">└──</span><span class="w"> </span><span class="n">docucenter_2026_02_10_10_00_00</span><span class="o">.</span><span class="n">sql</span>
 </code></pre></div>
-<h2 id="flujo-de-trabajo-recomendado">Flujo de Trabajo Recomendado<a class="headerlink" href="#flujo-de-trabajo-recomendado" title="Permanent link">&para;</a></h2>
-<h3 id="1-exportacion">1. Exportación<a class="headerlink" href="#1-exportacion" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># Generar exportación con link de 2 horas</span>
+
+<h2 id="flujo-de-trabajo-recomendado">Flujo de Trabajo Recomendado</h2>
+<h3 id="1-exportacion">1. Exportación</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Generar exportación con link de 2 horas</span>
 docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>docucenter_laravel.test<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>word:export-data<span class="w"> </span>--expiration<span class="o">=</span><span class="m">120</span>
 </code></pre></div>
-<h3 id="2-compartir-link">2. Compartir Link<a class="headerlink" href="#2-compartir-link" title="Permanent link">&para;</a></h3>
+
+<h3 id="2-compartir-link">2. Compartir Link</h3>
 <ul>
 <li>Copiar la URL generada</li>
 <li>Enviar al destinatario</li>
 <li>El link expirará automáticamente</li>
 </ul>
-<h3 id="3-descarga">3. Descarga<a class="headerlink" href="#3-descarga" title="Permanent link">&para;</a></h3>
+<h3 id="3-descarga">3. Descarga</h3>
 <ul>
 <li>Abrir URL en navegador</li>
 <li>Descarga automática del archivo</li>
 <li>Si la URL expiró: Error 401 "URL expirada"</li>
 </ul>
-<h3 id="4-importacion">4. Importación<a class="headerlink" href="#4-importacion" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># Importar la exportación más reciente</span>
+<h3 id="4-importacion">4. Importación</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Importar la exportación más reciente</span>
 docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>docucenter_laravel.test<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>word:import-data<span class="w"> </span>--latest
 
 <span class="c1"># O importar archivo específico</span>
 docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>docucenter_laravel.test<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>word:import-data<span class="w"> </span>/path/to/file.sql
 </code></pre></div>
-<h2 id="panel-de-administracion">Panel de Administración<a class="headerlink" href="#panel-de-administracion" title="Permanent link">&para;</a></h2>
+
+<h2 id="panel-de-administracion">Panel de Administración</h2>
 <p>Los comandos están disponibles en el panel web:
 - <strong>Admin &gt; Process Management &gt; Respaldo y Migración</strong>
 - Exportar Base de Datos (genera link temporal)
 - Importar Base de Datos (con opciones de fuente)</p>
-<h2 id="casos-de-uso-docucenter-multi-tenant">Casos de Uso DocuCenter Multi-Tenant<a class="headerlink" href="#casos-de-uso-docucenter-multi-tenant" title="Permanent link">&para;</a></h2>
-<h3 id="1-backup-de-base-de-datos-consolidada">1. Backup de Base de Datos Consolidada<a class="headerlink" href="#1-backup-de-base-de-datos-consolidada" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># Exportar BD consolidada con link de 4 horas</span>
+<h2 id="casos-de-uso-docucenter-multi-tenant">Casos de Uso DocuCenter Multi-Tenant</h2>
+<h3 id="1-backup-de-base-de-datos-consolidada">1. Backup de Base de Datos Consolidada</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Exportar BD consolidada con link de 4 horas</span>
 docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>docucenter_laravel.test<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>word:export-data<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>--database<span class="o">=</span>db_weirdolabs_14<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>--expiration<span class="o">=</span><span class="m">240</span>
@@ -2464,8 +2521,9 @@ docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </spa
 <span class="w">    </span>/backups/db_weirdolabs_14_2026_02_11.sql<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>--database<span class="o">=</span>db_weirdolabs_14
 </code></pre></div>
-<h3 id="2-migracion-de-organizacion-individual">2. Migración de Organización Individual<a class="headerlink" href="#2-migracion-de-organizacion-individual" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># Exportar organización específica</span>
+
+<h3 id="2-migracion-de-organizacion-individual">2. Migración de Organización Individual</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Exportar organización específica</span>
 docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>docucenter_laravel.test<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>word:export-data<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>--database<span class="o">=</span>db_18257061709732_90<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>--expiration<span class="o">=</span><span class="m">120</span>
@@ -2475,8 +2533,9 @@ docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </spa
 <span class="w">    </span>/backups/org_90.sql<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>--database<span class="o">=</span>db_18257061709732_95
 </code></pre></div>
-<h3 id="3-backup-completo-de-todas-las-organizaciones">3. Backup Completo de Todas las Organizaciones<a class="headerlink" href="#3-backup-completo-de-todas-las-organizaciones" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+
+<h3 id="3-backup-completo-de-todas-las-organizaciones">3. Backup Completo de Todas las Organizaciones</h3>
+<div class="codehilite"><pre><span></span><code><span class="ch">#!/bin/bash</span>
 <span class="c1"># Script para backup de todas las organizaciones</span>
 
 <span class="c1"># Exportar BD principal</span>
@@ -2497,8 +2556,9 @@ docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </spa
 <span class="w">        </span>--expiration<span class="o">=</span><span class="m">360</span>
 <span class="k">done</span>
 </code></pre></div>
-<h3 id="4-restauracion-de-emergencia">4. Restauración de Emergencia<a class="headerlink" href="#4-restauracion-de-emergencia" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># Restaurar BD principal desde backup</span>
+
+<h3 id="4-restauracion-de-emergencia">4. Restauración de Emergencia</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Restaurar BD principal desde backup</span>
 docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>docucenter_laravel.test<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>word:import-data<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>/emergency-backups/docucenter_main.sql<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>--database<span class="o">=</span>docucenter
@@ -2508,8 +2568,9 @@ docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </spa
 <span class="w">    </span>--latest<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>--database<span class="o">=</span>db_18257061709732_90
 </code></pre></div>
-<h3 id="5-clone-de-organizacion-testingdesarrollo">5. Clone de Organización (Testing/Desarrollo)<a class="headerlink" href="#5-clone-de-organizacion-testingdesarrollo" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># Exportar organización de producción</span>
+
+<h3 id="5-clone-de-organizacion-testingdesarrollo">5. Clone de Organización (Testing/Desarrollo)</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Exportar organización de producción</span>
 docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>docucenter_laravel.test<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>word:export-data<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>--database<span class="o">=</span>db_18257061709732_90<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>--legacy
@@ -2519,8 +2580,9 @@ docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </spa
 <span class="w">    </span>/storage/app/exports/db_18257061709732_90.sql<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>--database<span class="o">=</span>db_testing_org
 </code></pre></div>
-<h3 id="6-consolidar-multiples-organizaciones">6. Consolidar Múltiples Organizaciones<a class="headerlink" href="#6-consolidar-multiples-organizaciones" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># Exportar organizaciones individuales</span>
+
+<h3 id="6-consolidar-multiples-organizaciones">6. Consolidar Múltiples Organizaciones</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Exportar organizaciones individuales</span>
 docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>docucenter_laravel.test<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>word:export-data<span class="w"> </span>--database<span class="o">=</span>db_org_1
 docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>docucenter_laravel.test<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>word:export-data<span class="w"> </span>--database<span class="o">=</span>db_org_2
 docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>docucenter_laravel.test<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>word:export-data<span class="w"> </span>--database<span class="o">=</span>db_org_3
@@ -2528,9 +2590,10 @@ docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </spa
 <span class="c1"># Luego usar company:sync para consolidar</span>
 docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>docucenter_laravel.test<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>company:sync<span class="w"> </span>--all
 </code></pre></div>
-<h2 id="opciones-avanzadas">Opciones Avanzadas<a class="headerlink" href="#opciones-avanzadas" title="Permanent link">&para;</a></h2>
-<h3 id="especificar-base-de-datos">Especificar Base de Datos<a class="headerlink" href="#especificar-base-de-datos" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># Exportar BD específica</span>
+
+<h2 id="opciones-avanzadas">Opciones Avanzadas</h2>
+<h3 id="especificar-base-de-datos">Especificar Base de Datos</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Exportar BD específica</span>
 php<span class="w"> </span>artisan<span class="w"> </span>word:export-data<span class="w"> </span>--database<span class="o">=</span>db_nombre_especifica
 
 <span class="c1"># Importar a BD específica</span>
@@ -2539,8 +2602,9 @@ php<span class="w"> </span>artisan<span class="w"> </span>word:import-data<span 
 <span class="c1"># Listar bases de datos disponibles</span>
 docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>docucenter-mariadb-1<span class="w"> </span>mysql<span class="w"> </span>-u<span class="w"> </span>sail<span class="w"> </span>-psecret<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;SHOW DATABASES;&quot;</span>
 </code></pre></div>
-<h3 id="personalizar-tiempo-de-expiracion">Personalizar Tiempo de Expiración<a class="headerlink" href="#personalizar-tiempo-de-expiracion" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># 30 minutos</span>
+
+<h3 id="personalizar-tiempo-de-expiracion">Personalizar Tiempo de Expiración</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># 30 minutos</span>
 php<span class="w"> </span>artisan<span class="w"> </span>word:export-data<span class="w"> </span>--expiration<span class="o">=</span><span class="m">30</span>
 
 <span class="c1"># 4 horas</span>
@@ -2549,29 +2613,31 @@ php<span class="w"> </span>artisan<span class="w"> </span>word:export-data<span 
 <span class="c1"># 24 horas (máximo recomendado)</span>
 php<span class="w"> </span>artisan<span class="w"> </span>word:export-data<span class="w"> </span>--expiration<span class="o">=</span><span class="m">1440</span>
 </code></pre></div>
-<h3 id="modo-legacy-sin-link-temporal">Modo Legacy (Sin Link Temporal)<a class="headerlink" href="#modo-legacy-sin-link-temporal" title="Permanent link">&para;</a></h3>
-<p>Si prefieres el comportamiento anterior sin links temporales:
-<div class="highlight"><pre><span></span><code>php<span class="w"> </span>artisan<span class="w"> </span>word:export-data<span class="w"> </span>--legacy
+
+<h3 id="modo-legacy-sin-link-temporal">Modo Legacy (Sin Link Temporal)</h3>
+<p>Si prefieres el comportamiento anterior sin links temporales:</p>
+<div class="codehilite"><pre><span></span><code>php<span class="w"> </span>artisan<span class="w"> </span>word:export-data<span class="w"> </span>--legacy
 <span class="c1"># Guarda en: database/dumps/docucenter_YYYY_MM_DD_HH_MM_SS.sql</span>
-</code></pre></div></p>
-<h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2>
-<h3 id="error-url-expirada">Error: "URL expirada"<a class="headerlink" href="#error-url-expirada" title="Permanent link">&para;</a></h3>
+</code></pre></div>
+
+<h2 id="troubleshooting">Troubleshooting</h2>
+<h3 id="error-url-expirada">Error: "URL expirada"</h3>
 <ul>
 <li>La URL ha superado el tiempo de expiración</li>
 <li>Generar nueva exportación con <code>word:export-data</code></li>
 </ul>
-<h3 id="error-archivo-no-encontrado">Error: "Archivo no encontrado"<a class="headerlink" href="#error-archivo-no-encontrado" title="Permanent link">&para;</a></h3>
+<h3 id="error-archivo-no-encontrado">Error: "Archivo no encontrado"</h3>
 <ul>
 <li>El archivo fue eliminado por limpieza automática (&gt; 2 horas)</li>
 <li>Generar nueva exportación</li>
 </ul>
-<h3 id="error-firma-invalida">Error: "Firma inválida"<a class="headerlink" href="#error-firma-invalida" title="Permanent link">&para;</a></h3>
+<h3 id="error-firma-invalida">Error: "Firma inválida"</h3>
 <ul>
 <li>La URL fue modificada manualmente</li>
 <li>No modificar ningún parámetro de la URL</li>
 <li>Generar nueva exportación si es necesario</li>
 </ul>
-<h2 id="ventajas-del-sistema-mejorado">Ventajas del Sistema Mejorado<a class="headerlink" href="#ventajas-del-sistema-mejorado" title="Permanent link">&para;</a></h2>
+<h2 id="ventajas-del-sistema-mejorado">Ventajas del Sistema Mejorado</h2>
 <p><strong>Seguridad</strong>: URLs firmadas criptográficamente
  <strong>Expiración</strong>: Links temporales previenen accesos indefinidos
  <strong>Automático</strong>: Limpieza automática de archivos antiguos
@@ -2581,7 +2647,7 @@ php<span class="w"> </span>artisan<span class="w"> </span>word:export-data<span 
  <strong>Informativo</strong>: Detalles completos de archivo y expiración
  <strong>Interactivo</strong>: Confirmación antes de sobrescribir datos
  <strong>Personalizable</strong>: Nombres de archivo basados en BD específica</p>
-<h2 id="notas-tecnicas">Notas Técnicas<a class="headerlink" href="#notas-tecnicas" title="Permanent link">&para;</a></h2>
+<h2 id="notas-tecnicas">Notas Técnicas</h2>
 <ul>
 <li>Los archivos se almacenan en <code>storage/app/exports/</code></li>
 <li>La limpieza automática se ejecuta cada hora via cron scheduler</li>
@@ -2644,7 +2710,7 @@ php<span class="w"> </span>artisan<span class="w"> </span>word:export-data<span 
       
       
     
-    <a href="https://github.com/aghabrego/docucenter" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+    <a href="https://github.com/aghabrego/docucenter-public" target="_blank" rel="noopener" title="github.com" class="md-social__link">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
     </a>
   

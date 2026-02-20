@@ -233,7 +233,7 @@
           
   
   
-  APIs
+  API Documentation
 
         </a>
       </li>
@@ -269,7 +269,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../" class="md-tabs__link">
+        <a href="../README.md" class="md-tabs__link">
           
   
   
@@ -298,6 +298,25 @@
         </a>
       </li>
     
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../testing/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Sistema de Testing
+
+      </a>
+    </li>
   
 
       
@@ -404,7 +423,7 @@
   <span class="md-ellipsis">
     
   
-    APIs
+    API Documentation
   
 
     
@@ -420,7 +439,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    APIs
+    API Documentation
   
 
           </label>
@@ -1363,7 +1382,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
+      <a href="../README.md" class="md-nav__link">
         
   
   
@@ -1716,6 +1735,33 @@
   
 
     
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sistema de Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -2001,24 +2047,25 @@
   
 
 
-<h1 id="implementacion-de-item_code-para-quickbooks-resumen-tecnico">Implementación de Item_Code para QuickBooks - Resumen Técnico<a class="headerlink" href="#implementacion-de-item_code-para-quickbooks-resumen-tecnico" title="Permanent link">&para;</a></h1>
-<h2 id="objetivo-implementado">Objetivo Implementado<a class="headerlink" href="#objetivo-implementado" title="Permanent link">&para;</a></h2>
+<h1 id="implementacion-de-item_code-para-quickbooks-resumen-tecnico">Implementación de Item_Code para QuickBooks - Resumen Técnico</h1>
+<h2 id="objetivo-implementado">Objetivo Implementado</h2>
 <p>Extraer y almacenar códigos de productos de QuickBooks desde el campo <code>SalesItemLineDetail.ItemRef.name</code> en la columna <code>Item_Code</code> de la tabla <code>Sales_Detail_Imp</code>.</p>
-<h2 id="implementacion-realizada">Implementación Realizada<a class="headerlink" href="#implementacion-realizada" title="Permanent link">&para;</a></h2>
-<h3 id="1-columna-de-base-de-datos-agregada">1. ✅ Columna de Base de Datos Agregada<a class="headerlink" href="#1-columna-de-base-de-datos-agregada" title="Permanent link">&para;</a></h3>
-<p><strong>Comando ejecutado</strong>:
-<div class="highlight"><pre><span></span><code>php<span class="w"> </span>artisan<span class="w"> </span>db:add-column-to-organizations-table<span class="w"> </span>Sales_Detail_Imp<span class="w"> </span>Item_Code<span class="w"> </span>string<span class="w"> </span>--length<span class="o">=</span><span class="m">50</span><span class="w"> </span>--nullable<span class="o">=</span><span class="m">1</span>
-</code></pre></div></p>
+<h2 id="implementacion-realizada">Implementación Realizada</h2>
+<h3 id="1-columna-de-base-de-datos-agregada">1. ✅ Columna de Base de Datos Agregada</h3>
+<p><strong>Comando ejecutado</strong>:</p>
+<div class="codehilite"><pre><span></span><code>php<span class="w"> </span>artisan<span class="w"> </span>db:add-column-to-organizations-table<span class="w"> </span>Sales_Detail_Imp<span class="w"> </span>Item_Code<span class="w"> </span>string<span class="w"> </span>--length<span class="o">=</span><span class="m">50</span><span class="w"> </span>--nullable<span class="o">=</span><span class="m">1</span>
+</code></pre></div>
+
 <p><strong>Resultado</strong>: Columna <code>Item_Code varchar(50) NULL</code> agregada a todas las organizaciones.</p>
-<h3 id="2-modelo-salesdetailimp-actualizado">2. ✅ Modelo SalesDetailImp Actualizado<a class="headerlink" href="#2-modelo-salesdetailimp-actualizado" title="Permanent link">&para;</a></h3>
+<h3 id="2-modelo-salesdetailimp-actualizado">2. ✅ Modelo SalesDetailImp Actualizado</h3>
 <p><strong>Archivo</strong>: <code>app/Models/SalesDetailImp.php</code></p>
 <p><strong>Cambios realizados</strong>:
 - Agregado <code>Item_Code</code> al array <code>$fillable</code>
 - Agregado <code>@property string $Item_Code</code> a la documentación PHPDoc</p>
-<h3 id="3-servicio-quickbooksonlineservice-modificado">3. ✅ Servicio QuickBooksOnlineService Modificado<a class="headerlink" href="#3-servicio-quickbooksonlineservice-modificado" title="Permanent link">&para;</a></h3>
+<h3 id="3-servicio-quickbooksonlineservice-modificado">3. ✅ Servicio QuickBooksOnlineService Modificado</h3>
 <p><strong>Archivo</strong>: <code>app/Services/QuickBooksOnlineService.php</code></p>
-<h4 id="nuevo-metodo-agregado">Nuevo Método Agregado:<a class="headerlink" href="#nuevo-metodo-agregado" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="x">/**</span>
+<h4 id="nuevo-metodo-agregado">Nuevo Método Agregado:</h4>
+<div class="codehilite"><pre><span></span><code><span class="x">/**</span>
 <span class="x"> * Extrae el código del producto del nombre del ItemRef de QuickBooks</span>
 <span class="x"> * </span>
 <span class="x"> * @param string $itemRefName Nombre completo del item (ej: &quot;ResMed:37221 AirSense 10 AutoSet&quot;)</span>
@@ -2038,8 +2085,9 @@
 <span class="x">    return !empty($itemCode) ? $itemCode : null;</span>
 <span class="x">}</span>
 </code></pre></div>
-<h4 id="logica-de-procesamiento-modificada">Lógica de Procesamiento Modificada:<a class="headerlink" href="#logica-de-procesamiento-modificada" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="x">if (($line[&#39;DetailType&#39;] ?? &#39;&#39;) === &#39;SalesItemLineDetail&#39;) {</span>
+
+<h4 id="logica-de-procesamiento-modificada">Lógica de Procesamiento Modificada:</h4>
+<div class="codehilite"><pre><span></span><code><span class="x">if (($line[&#39;DetailType&#39;] ?? &#39;&#39;) === &#39;SalesItemLineDetail&#39;) {</span>
 <span class="x">    $salesItemDetail = $line[&#39;SalesItemLineDetail&#39;] ?? [];</span>
 <span class="x">    $description = $line[&#39;Description&#39;] ?? &#39;QuickBooks Item&#39;;</span>
 <span class="x">    $itemCode = null; // Inicializar Item_Code</span>
@@ -2068,10 +2116,11 @@
 <span class="x">    ];</span>
 <span class="x">}</span>
 </code></pre></div>
-<h2 id="funcionalidad-implementada">Funcionalidad Implementada<a class="headerlink" href="#funcionalidad-implementada" title="Permanent link">&para;</a></h2>
-<h3 id="extraccion-de-codigo">Extracción de Código<a class="headerlink" href="#extraccion-de-codigo" title="Permanent link">&para;</a></h3>
-<p><strong>Input QuickBooks</strong>:
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
+
+<h2 id="funcionalidad-implementada">Funcionalidad Implementada</h2>
+<h3 id="extraccion-de-codigo">Extracción de Código</h3>
+<p><strong>Input QuickBooks</strong>:</p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
 <span class="w">    </span><span class="nt">&quot;SalesItemLineDetail&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="nt">&quot;ItemRef&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;4&quot;</span><span class="p">,</span>
@@ -2079,13 +2128,14 @@
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
-</code></pre></div></p>
+</code></pre></div>
+
 <p><strong>Extracción</strong>:
 - Campo fuente: <code>SalesItemLineDetail.ItemRef.name</code>
 - Valor completo: <code>"ResMed:37221 AirSense 10 AutoSet"</code>
 - Código extraído: <code>"ResMed:37221"</code> (todo antes del primer espacio)
 - Campo destino: <code>Sales_Detail_Imp.Item_Code</code></p>
-<h3 id="casos-de-prueba-validados">Casos de Prueba Validados<a class="headerlink" href="#casos-de-prueba-validados" title="Permanent link">&para;</a></h3>
+<h3 id="casos-de-prueba-validados">Casos de Prueba Validados</h3>
 <table>
 <thead>
 <tr>
@@ -2122,8 +2172,8 @@
 </tr>
 </tbody>
 </table>
-<h2 id="testing-implementado">Testing Implementado<a class="headerlink" href="#testing-implementado" title="Permanent link">&para;</a></h2>
-<h3 id="scripts-de-testing-creados">Scripts de Testing Creados<a class="headerlink" href="#scripts-de-testing-creados" title="Permanent link">&para;</a></h3>
+<h2 id="testing-implementado">Testing Implementado</h2>
+<h3 id="scripts-de-testing-creados">Scripts de Testing Creados</h3>
 <ol>
 <li><strong><code>docs/testing/test-quickbooks-item-code-extraction.sh</code></strong></li>
 <li>Verificación completa de la columna</li>
@@ -2137,29 +2187,30 @@
 <li>Test rápido de la función de extracción</li>
 <li>Casos de prueba múltiples</li>
 </ol>
-<h3 id="ejecucion-de-tests">Ejecución de Tests<a class="headerlink" href="#ejecucion-de-tests" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># Test completo</span>
+<h3 id="ejecucion-de-tests">Ejecución de Tests</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Test completo</span>
 ./docs/testing/test-quickbooks-item-code-extraction.sh
 
 <span class="c1"># Test rápido</span>
 ./docs/testing/quick-test-item-code.sh
 </code></pre></div>
-<h2 id="resultados-de-validacion">Resultados de Validación<a class="headerlink" href="#resultados-de-validacion" title="Permanent link">&para;</a></h2>
-<h3 id="verificaciones-exitosas">✅ Verificaciones Exitosas<a class="headerlink" href="#verificaciones-exitosas" title="Permanent link">&para;</a></h3>
+
+<h2 id="resultados-de-validacion">Resultados de Validación</h2>
+<h3 id="verificaciones-exitosas">✅ Verificaciones Exitosas</h3>
 <ol>
 <li><strong>Columna creada</strong>: <code>Item_Code varchar(50) NULL</code> en todas las organizaciones</li>
 <li><strong>Modelo actualizado</strong>: Campo incluido en <code>$fillable</code> de <code>SalesDetailImp</code></li>
 <li><strong>Función implementada</strong>: <code>extractItemCode()</code> funciona correctamente</li>
 <li><strong>Integración completa</strong>: Código se extrae y almacena en el flujo de QuickBooks</li>
 </ol>
-<h3 id="consideraciones">⚠️ Consideraciones<a class="headerlink" href="#consideraciones" title="Permanent link">&para;</a></h3>
+<h3 id="consideraciones">⚠️ Consideraciones</h3>
 <ul>
 <li><strong>Espacios al inicio</strong>: El método maneja correctamente la mayoría de casos, pero podría mejorarse para espacios al inicio</li>
 <li><strong>Casos edge</strong>: Implementación robusta para casos vacíos o nulos</li>
 <li><strong>Longitud</strong>: Campo limitado a 50 caracteres (ajustable si es necesario)</li>
 </ul>
-<h2 id="flujo-de-procesamiento">Flujo de Procesamiento<a class="headerlink" href="#flujo-de-procesamiento" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code>QuickBooks Invoice
+<h2 id="flujo-de-procesamiento">Flujo de Procesamiento</h2>
+<div class="codehilite"><pre><span></span><code>QuickBooks Invoice
       ↓
 SalesItemLineDetail.ItemRef.name: &quot;ResMed:37221 AirSense 10 AutoSet&quot;
       ↓
@@ -2171,7 +2222,8 @@ trim(parts[0]) → &quot;ResMed:37221&quot;
       ↓
 Sales_Detail_Imp.Item_Code = &quot;ResMed:37221&quot;
 </code></pre></div>
-<h2 id="proximos-pasos-recomendados">Próximos Pasos Recomendados<a class="headerlink" href="#proximos-pasos-recomendados" title="Permanent link">&para;</a></h2>
+
+<h2 id="proximos-pasos-recomendados">Próximos Pasos Recomendados</h2>
 <ol>
 <li><strong>Testing en Producción</strong>: Probar con facturas reales de QuickBooks</li>
 <li><strong>Monitoreo</strong>: Observar que los códigos se extraigan correctamente</li>
@@ -2180,7 +2232,7 @@ Sales_Detail_Imp.Item_Code = &quot;ResMed:37221&quot;
 <li>Validación de formato de códigos</li>
 <li>Logging de códigos extraídos para auditoría</li>
 </ol>
-<h2 id="archivos-modificados">Archivos Modificados<a class="headerlink" href="#archivos-modificados" title="Permanent link">&para;</a></h2>
+<h2 id="archivos-modificados">Archivos Modificados</h2>
 <ul>
 <li><code>app/Models/SalesDetailImp.php</code> - Agregado campo al fillable</li>
 <li><code>app/Services/QuickBooksOnlineService.php</code> - Implementado extracción y almacenamiento</li>
@@ -2244,7 +2296,7 @@ Sales_Detail_Imp.Item_Code = &quot;ResMed:37221&quot;
       
       
     
-    <a href="https://github.com/aghabrego/docucenter" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+    <a href="https://github.com/aghabrego/docucenter-public" target="_blank" rel="noopener" title="github.com" class="md-social__link">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
     </a>
   

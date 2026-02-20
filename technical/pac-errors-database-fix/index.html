@@ -233,7 +233,7 @@
           
   
   
-  APIs
+  API Documentation
 
         </a>
       </li>
@@ -269,7 +269,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../" class="md-tabs__link">
+        <a href="../README.md" class="md-tabs__link">
           
   
   
@@ -298,6 +298,25 @@
         </a>
       </li>
     
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../testing/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Sistema de Testing
+
+      </a>
+    </li>
   
 
       
@@ -404,7 +423,7 @@
   <span class="md-ellipsis">
     
   
-    APIs
+    API Documentation
   
 
     
@@ -420,7 +439,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    APIs
+    API Documentation
   
 
           </label>
@@ -1363,7 +1382,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
+      <a href="../README.md" class="md-nav__link">
         
   
   
@@ -1716,6 +1735,33 @@
   
 
     
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sistema de Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -1934,13 +1980,13 @@
   
 
 
-<h1 id="correccion-pac_emission_errors-en-base-de-datos-principal">Corrección: pac_emission_errors en Base de Datos Principal<a class="headerlink" href="#correccion-pac_emission_errors-en-base-de-datos-principal" title="Permanent link">&para;</a></h1>
-<h2 id="problema-detectado">Problema Detectado<a class="headerlink" href="#problema-detectado" title="Permanent link">&para;</a></h2>
+<h1 id="correccion-pac_emission_errors-en-base-de-datos-principal">Corrección: pac_emission_errors en Base de Datos Principal</h1>
+<h2 id="problema-detectado">Problema Detectado</h2>
 <p>La tabla <code>pac_emission_errors</code> se estaba intentando crear/consultar en la base de datos de cada organización, pero debe estar en la <strong>base de datos principal</strong>.</p>
-<h2 id="cambios-realizados">Cambios Realizados<a class="headerlink" href="#cambios-realizados" title="Permanent link">&para;</a></h2>
-<h3 id="1-modelo-pacemissionerror">1. Modelo PacEmissionError<a class="headerlink" href="#1-modelo-pacemissionerror" title="Permanent link">&para;</a></h3>
+<h2 id="cambios-realizados">Cambios Realizados</h2>
+<h3 id="1-modelo-pacemissionerror">1. Modelo PacEmissionError</h3>
 <p><strong>Archivo</strong>: <code>app/Models/PacEmissionError.php</code></p>
-<div class="highlight"><pre><span></span><code><span class="x">class PacEmissionError extends Model</span>
+<div class="codehilite"><pre><span></span><code><span class="x">class PacEmissionError extends Model</span>
 <span class="x">{</span>
 <span class="x">    use HasFactory;</span>
 
@@ -1954,10 +2000,11 @@
 <span class="x">    // ... resto del modelo</span>
 <span class="x">}</span>
 </code></pre></div>
+
 <p><strong>Efecto</strong>: El modelo SIEMPRE usará la conexión <code>mysql</code> (base de datos principal), sin importar qué base de datos de organización esté activa.</p>
-<h3 id="2-migracion">2. Migración<a class="headerlink" href="#2-migracion" title="Permanent link">&para;</a></h3>
+<h3 id="2-migracion">2. Migración</h3>
 <p><strong>Archivo</strong>: <code>database/migrations/2025_12_17_000001_create_pac_emission_errors_table.php</code></p>
-<div class="highlight"><pre><span></span><code><span class="x">public function up()</span>
+<div class="codehilite"><pre><span></span><code><span class="x">public function up()</span>
 <span class="x">{</span>
 <span class="x">    // IMPORTANTE: Esta tabla va en la base de datos PRINCIPAL (mysql)</span>
 <span class="x">    Schema::connection(&#39;mysql&#39;)-&gt;create(&#39;pac_emission_errors&#39;, function (Blueprint $table) {</span>
@@ -1970,14 +2017,15 @@
 <span class="x">    Schema::connection(&#39;mysql&#39;)-&gt;dropIfExists(&#39;pac_emission_errors&#39;);</span>
 <span class="x">}</span>
 </code></pre></div>
+
 <p><strong>Efecto</strong>: La migración creará la tabla en la base de datos principal, no en las BD de organizaciones.</p>
-<h3 id="3-dashboard-pacerrorsdashboard">3. Dashboard PacErrorsDashboard<a class="headerlink" href="#3-dashboard-pacerrorsdashboard" title="Permanent link">&para;</a></h3>
+<h3 id="3-dashboard-pacerrorsdashboard">3. Dashboard PacErrorsDashboard</h3>
 <p><strong>Archivo</strong>: <code>app/Http/Livewire/Admin/Reports/PacErrorsDashboard.php</code></p>
 <p><strong>Cambios</strong>:
 - ❌ Eliminado: <code>$this-&gt;setDatabaseConnection($this-&gt;organization)</code>
 - ❌ Eliminados: métodos <code>setDatabaseConnection()</code> y <code>setDefaultConnection()</code>
 - ✅ Agregado: Comentario explicativo</p>
-<div class="highlight"><pre><span></span><code><span class="x">public function mount()</span>
+<div class="codehilite"><pre><span></span><code><span class="x">public function mount()</span>
 <span class="x">{</span>
 <span class="x">    $this-&gt;organization = auth()-&gt;user()-&gt;organization;</span>
 <span class="x">    $this-&gt;organization_id = $this-&gt;organization-&gt;id;</span>
@@ -1986,9 +2034,10 @@
 <span class="x">    // ... resto del código</span>
 <span class="x">}</span>
 </code></pre></div>
+
 <p><strong>Efecto</strong>: El componente ya NO cambia la conexión de base de datos, porque el modelo maneja eso automáticamente.</p>
-<h2 id="por-que-esta-solucion">Por Qué Esta Solución<a class="headerlink" href="#por-que-esta-solucion" title="Permanent link">&para;</a></h2>
-<h3 id="tabla-en-bd-principal">Tabla en BD Principal<a class="headerlink" href="#tabla-en-bd-principal" title="Permanent link">&para;</a></h3>
+<h2 id="por-que-esta-solucion">Por Qué Esta Solución</h2>
+<h3 id="tabla-en-bd-principal">Tabla en BD Principal</h3>
 <p>La tabla <code>pac_emission_errors</code> debe estar en la base de datos principal porque:</p>
 <ol>
 <li><strong>Centralización</strong>: Permite consultar errores de TODAS las organizaciones desde un solo lugar</li>
@@ -1996,26 +2045,28 @@
 <li><strong>Simplicidad</strong>: No requiere sincronización entre múltiples bases de datos</li>
 <li><strong>Escalabilidad</strong>: Una sola tabla es más fácil de mantener y optimizar</li>
 </ol>
-<h3 id="filtrado-por-organizacion">Filtrado por Organización<a class="headerlink" href="#filtrado-por-organizacion" title="Permanent link">&para;</a></h3>
+<h3 id="filtrado-por-organizacion">Filtrado por Organización</h3>
 <p>Aunque la tabla está centralizada, cada organización solo ve sus propios errores gracias a:</p>
-<div class="highlight"><pre><span></span><code><span class="x">$query = PacEmissionError::query()</span>
+<div class="codehilite"><pre><span></span><code><span class="x">$query = PacEmissionError::query()</span>
 <span class="x">    -&gt;forOrganization($this-&gt;organization_id)  // Filtro automático</span>
 <span class="x">    -&gt;with([&#39;organization&#39;, &#39;invoice&#39;])</span>
 <span class="x">    -&gt;orderBy(&#39;occurred_at&#39;, &#39;desc&#39;);</span>
 </code></pre></div>
+
 <p>El scope <code>forOrganization()</code> asegura que solo se consulten errores de la organización actual.</p>
-<h2 id="como-ejecutar-la-migracion">Cómo Ejecutar la Migración<a class="headerlink" href="#como-ejecutar-la-migracion" title="Permanent link">&para;</a></h2>
-<h3 id="opcion-1-script-automatico-recomendado">Opción 1: Script Automático (Recomendado)<a class="headerlink" href="#opcion-1-script-automatico-recomendado" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>/home/weirdolabs/code/docucenter
+<h2 id="como-ejecutar-la-migracion">Cómo Ejecutar la Migración</h2>
+<h3 id="opcion-1-script-automatico-recomendado">Opción 1: Script Automático (Recomendado)</h3>
+<div class="codehilite"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>/home/weirdolabs/code/docucenter
 ./scripts/migrate-pac-errors.sh
 </code></pre></div>
+
 <p>Este script:
 - Verifica que Docker esté corriendo
 - Detecta automáticamente el contenedor
 - Ejecuta la migración en la BD principal
 - Verifica que la tabla se creó correctamente</p>
-<h3 id="opcion-2-manual">Opción 2: Manual<a class="headerlink" href="#opcion-2-manual" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># Iniciar Docker si no está corriendo</span>
+<h3 id="opcion-2-manual">Opción 2: Manual</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Iniciar Docker si no está corriendo</span>
 docker-compose<span class="w"> </span>up<span class="w"> </span>-d
 
 <span class="c1"># Ejecutar migración</span>
@@ -2026,15 +2077,18 @@ docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </spa
 docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>&lt;nombre_contenedor&gt;<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>route:clear
 docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>&lt;nombre_contenedor&gt;<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>view:clear
 </code></pre></div>
-<h2 id="verificacion">Verificación<a class="headerlink" href="#verificacion" title="Permanent link">&para;</a></h2>
+
+<h2 id="verificacion">Verificación</h2>
 <p>Después de ejecutar la migración, verifica que funciona:</p>
 <ol>
 <li>
 <p><strong>Acceder al dashboard</strong>: <code>http://localhost/admin/reports/pac_errors</code></p>
 </li>
 <li>
-<p><strong>Crear error de prueba</strong> (en tinker):
-<div class="highlight"><pre><span></span><code><span class="x">docker exec -it &lt;contenedor&gt; php artisan tinker</span>
+<p><strong>Crear error de prueba</strong> (en tinker):</p>
+</li>
+</ol>
+<div class="codehilite"><pre><span></span><code><span class="x">docker exec -it &lt;contenedor&gt; php artisan tinker</span>
 
 <span class="x">&gt;&gt;&gt; \App\Services\PacErrorCaptureService::captureError([</span>
 <span class="x">    &#39;organization_id&#39; =&gt; 2,</span>
@@ -2045,26 +2099,28 @@ docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </spa
 <span class="x">    &#39;error_message&#39; =&gt; &#39;Error de prueba&#39;,</span>
 <span class="x">    &#39;attempt_number&#39; =&gt; 1</span>
 <span class="x">]);</span>
-</code></pre></div></p>
-</li>
+</code></pre></div>
+
+<ol>
 <li>
 <p><strong>Verificar en dashboard</strong>: El error debe aparecer en la tabla</p>
 </li>
 <li>
-<p><strong>Verificar base de datos correcta</strong>:
-<div class="highlight"><pre><span></span><code><span class="x">&gt;&gt;&gt; \App\Models\PacEmissionError::query()-&gt;getConnection()-&gt;getDatabaseName();</span>
-<span class="x">// Debe retornar el nombre de la BD principal, NO la BD de organización</span>
-</code></pre></div></p>
+<p><strong>Verificar base de datos correcta</strong>:</p>
 </li>
 </ol>
-<h2 id="archivos-modificados">Archivos Modificados<a class="headerlink" href="#archivos-modificados" title="Permanent link">&para;</a></h2>
+<div class="codehilite"><pre><span></span><code><span class="x">&gt;&gt;&gt; \App\Models\PacEmissionError::query()-&gt;getConnection()-&gt;getDatabaseName();</span>
+<span class="x">// Debe retornar el nombre de la BD principal, NO la BD de organización</span>
+</code></pre></div>
+
+<h2 id="archivos-modificados">Archivos Modificados</h2>
 <ul>
 <li>✅ <code>app/Models/PacEmissionError.php</code> - Agregado <code>$connection = 'mysql'</code></li>
 <li>✅ <code>database/migrations/2025_12_17_000001_create_pac_emission_errors_table.php</code> - Usa <code>Schema::connection('mysql')</code></li>
 <li>✅ <code>app/Http/Livewire/Admin/Reports/PacErrorsDashboard.php</code> - Eliminado cambio de conexión</li>
 <li>✅ <code>scripts/migrate-pac-errors.sh</code> - Script de migración creado</li>
 </ul>
-<h2 id="notas-importantes">Notas Importantes<a class="headerlink" href="#notas-importantes" title="Permanent link">&para;</a></h2>
+<h2 id="notas-importantes">Notas Importantes</h2>
 <ol>
 <li>
 <p><strong>Relaciones con otras tablas</strong>: La relación con <code>SalesHeaderImp</code> (invoices) funciona porque Laravel maneja automáticamente las diferentes conexiones en las relaciones.</p>
@@ -2131,7 +2187,7 @@ docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </spa
       
       
     
-    <a href="https://github.com/aghabrego/docucenter" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+    <a href="https://github.com/aghabrego/docucenter-public" target="_blank" rel="noopener" title="github.com" class="md-social__link">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
     </a>
   

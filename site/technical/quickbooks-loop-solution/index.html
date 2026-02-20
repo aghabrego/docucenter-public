@@ -233,7 +233,7 @@
           
   
   
-  APIs
+  API Documentation
 
         </a>
       </li>
@@ -269,7 +269,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../" class="md-tabs__link">
+        <a href="../README.md" class="md-tabs__link">
           
   
   
@@ -298,6 +298,25 @@
         </a>
       </li>
     
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../testing/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Sistema de Testing
+
+      </a>
+    </li>
   
 
       
@@ -404,7 +423,7 @@
   <span class="md-ellipsis">
     
   
-    APIs
+    API Documentation
   
 
     
@@ -420,7 +439,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    APIs
+    API Documentation
   
 
           </label>
@@ -1363,7 +1382,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
+      <a href="../README.md" class="md-nav__link">
         
   
   
@@ -1712,6 +1731,33 @@
           </ul>
         </nav>
       
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sistema de Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -2068,36 +2114,38 @@
   
 
 
-<h1 id="solucion-loop-quickbooks-facturas-bidireccionales">Solución Loop QuickBooks - Facturas Bidireccionales<a class="headerlink" href="#solucion-loop-quickbooks-facturas-bidireccionales" title="Permanent link">&para;</a></h1>
-<h2 id="problema-identificado">Problema Identificado<a class="headerlink" href="#problema-identificado" title="Permanent link">&para;</a></h2>
+<h1 id="solucion-loop-quickbooks-facturas-bidireccionales">Solución Loop QuickBooks - Facturas Bidireccionales</h1>
+<h2 id="problema-identificado">Problema Identificado</h2>
 <p><strong>Loop infinito</strong> entre el comando <code>word:update-intuit-orders</code> y la API <code>create_sale_quickbooks</code>:</p>
 <ol>
 <li><strong>API <code>create_sale_quickbooks</code></strong>: Recibe factura de QB → Emite FE → Envía de vuelta a QB</li>
 <li><strong>Comando <code>update-intuit-orders</code></strong>: Encuentra la misma factura → La procesa nuevamente</li>
 <li><strong>Resultado</strong>: Loop infinito y facturas duplicadas</li>
 </ol>
-<h2 id="solucion-implementada">Solución Implementada<a class="headerlink" href="#solucion-implementada" title="Permanent link">&para;</a></h2>
-<h3 id="campo-origin-en-salesheaderimp">🔹 <strong>Campo <code>origin</code> en SalesHeaderImp</strong><a class="headerlink" href="#campo-origin-en-salesheaderimp" title="Permanent link">&para;</a></h3>
+<h2 id="solucion-implementada">Solución Implementada</h2>
+<h3 id="campo-origin-en-salesheaderimp">🔹 <strong>Campo <code>origin</code> en SalesHeaderImp</strong></h3>
 <p><strong>Propósito</strong>: Identificar el origen de cada factura para aplicar lógica diferencial.</p>
-<div class="highlight"><pre><span></span><code><span class="c1">-- Agregado al stub Sales_Header_Imp.sql.stub</span>
+<div class="codehilite"><pre><span></span><code><span class="c1">-- Agregado al stub Sales_Header_Imp.sql.stub</span>
 <span class="o">`</span><span class="n">origin</span><span class="o">`</span><span class="w"> </span><span class="nb">varchar</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="s1">&#39;docucenter&#39;</span><span class="p">,</span>
 <span class="k">KEY</span><span class="w"> </span><span class="o">`</span><span class="n">sales_header_imp_origin_index</span><span class="o">`</span><span class="w"> </span><span class="p">(</span><span class="o">`</span><span class="n">origin</span><span class="o">`</span><span class="p">)</span>
 </code></pre></div>
+
 <p><strong>Valores posibles</strong>:
 - <code>'docucenter'</code>: Factura creada en DocuCenter (default)
 - <code>'quickbooks'</code>: Factura recibida desde QuickBooks
 - <code>'shopify'</code>: Factura recibida desde Shopify
 - <code>'lightspeed'</code>: Factura recibida desde Lightspeed
 - etc.</p>
-<h3 id="modificacion-createsalequickbooksjob">🔹 <strong>Modificación CreateSaleQuickBooksJob</strong><a class="headerlink" href="#modificacion-createsalequickbooksjob" title="Permanent link">&para;</a></h3>
-<p><strong>Antes</strong>:
-<div class="highlight"><pre><span></span><code><span class="x">// Después de emitir FE, enviaba de vuelta a QB</span>
+<h3 id="modificacion-createsalequickbooksjob">🔹 <strong>Modificación CreateSaleQuickBooksJob</strong></h3>
+<p><strong>Antes</strong>:</p>
+<div class="codehilite"><pre><span></span><code><span class="x">// Después de emitir FE, enviaba de vuelta a QB</span>
 <span class="x">if ($this-&gt;hasActiveQuickBooksConnection()) {</span>
 <span class="x">    SendSaleToQuickBooksJob::dispatch($sale-&gt;getKey(), $this-&gt;organization-&gt;id);</span>
 <span class="x">}</span>
-</code></pre></div></p>
-<p><strong>Después</strong>:
-<div class="highlight"><pre><span></span><code><span class="x">// Marcar como originada en QB y completamente sincronizada</span>
+</code></pre></div>
+
+<p><strong>Después</strong>:</p>
+<div class="codehilite"><pre><span></span><code><span class="x">// Marcar como originada en QB y completamente sincronizada</span>
 <span class="x">$sale-&gt;update([</span>
 <span class="x">    &#39;origin&#39; =&gt; &#39;quickbooks&#39;,</span>
 <span class="x">    &#39;intuit_sync_status&#39; =&gt; &#39;completed&#39;,</span>
@@ -2107,93 +2155,102 @@
 <span class="x">]);</span>
 
 <span class="x">// NO enviar de vuelta a QuickBooks (evita loop)</span>
-</code></pre></div></p>
-<h3 id="modificacion-updateintuitordersjob">🔹 <strong>Modificación UpdateIntuitOrdersJob</strong><a class="headerlink" href="#modificacion-updateintuitordersjob" title="Permanent link">&para;</a></h3>
-<p><strong>Filtro agregado</strong>:
-<div class="highlight"><pre><span></span><code><span class="x">// Solo procesar facturas originadas en DocuCenter</span>
+</code></pre></div>
+
+<h3 id="modificacion-updateintuitordersjob">🔹 <strong>Modificación UpdateIntuitOrdersJob</strong></h3>
+<p><strong>Filtro agregado</strong>:</p>
+<div class="codehilite"><pre><span></span><code><span class="x">// Solo procesar facturas originadas en DocuCenter</span>
 <span class="x">$query-&gt;where(function ($subQuery) {</span>
 <span class="x">    $subQuery-&gt;where(&#39;origin&#39;, &#39;docucenter&#39;)</span>
 <span class="x">            -&gt;orWhereNull(&#39;origin&#39;); // Compatibilidad con facturas existentes</span>
 <span class="x">});</span>
-</code></pre></div></p>
-<p><strong>Logging mejorado</strong>:
-<div class="highlight"><pre><span></span><code><span class="x">Log::info(&quot;UpdateIntuitOrdersJob: Iniciando procesamiento de facturas DocuCenter&quot;, [</span>
+</code></pre></div>
+
+<p><strong>Logging mejorado</strong>:</p>
+<div class="codehilite"><pre><span></span><code><span class="x">Log::info(&quot;UpdateIntuitOrdersJob: Iniciando procesamiento de facturas DocuCenter&quot;, [</span>
 <span class="x">    &#39;organization_id&#39; =&gt; $organization-&gt;id,</span>
 <span class="x">    &#39;total_facturas&#39; =&gt; $query-&gt;count(),</span>
 <span class="x">    &#39;filtros&#39; =&gt; [</span>
 <span class="x">        &#39;origin&#39; =&gt; &#39;docucenter o null&#39;</span>
 <span class="x">    ]</span>
 <span class="x">]);</span>
-</code></pre></div></p>
-<h2 id="flujo-corregido">Flujo Corregido<a class="headerlink" href="#flujo-corregido" title="Permanent link">&para;</a></h2>
-<h3 id="docucenter-quickbooks-comando">📤 <strong>DocuCenter → QuickBooks</strong> (Comando)<a class="headerlink" href="#docucenter-quickbooks-comando" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>graph TD
-    A[Factura creada en DocuCenter] --&gt; B[origin = &#39;docucenter&#39;]
-    B --&gt; C[Comando update-intuit-orders]
-    C --&gt; D[UpdateIntuitOrdersJob procesa]
-    D --&gt; E[Envía a QuickBooks]
-    E --&gt; F[Marca como exportada]
 </code></pre></div>
-<h3 id="quickbooks-docucenter-api">📥 <strong>QuickBooks → DocuCenter</strong> (API)<a class="headerlink" href="#quickbooks-docucenter-api" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>graph TD
-    A[Factura creada en QB] --&gt; B[API create_sale_quickbooks]
-    B --&gt; C[CreateSaleQuickBooksJob emite FE]
-    C --&gt; D[origin = &#39;quickbooks&#39;]
-    D --&gt; E[intuit_sync_status = &#39;completed&#39;]
-    E --&gt; F[NO envía de vuelta a QB]
+
+<h2 id="flujo-corregido">Flujo Corregido</h2>
+<h3 id="docucenter-quickbooks-comando">📤 <strong>DocuCenter → QuickBooks</strong> (Comando)</h3>
+<div class="codehilite"><pre><span></span><code><span class="n">graph</span><span class="w"> </span><span class="n">TD</span>
+<span class="w">    </span><span class="n">A</span><span class="p">[</span><span class="n">Factura</span><span class="w"> </span><span class="n">creada</span><span class="w"> </span><span class="n">en</span><span class="w"> </span><span class="n">DocuCenter</span><span class="p">]</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">B</span><span class="p">[</span><span class="n">origin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">&#39;</span><span class="n">docucenter</span><span class="err">&#39;</span><span class="p">]</span>
+<span class="w">    </span><span class="n">B</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">C</span><span class="p">[</span><span class="n">Comando</span><span class="w"> </span><span class="n">update</span><span class="o">-</span><span class="n">intuit</span><span class="o">-</span><span class="n">orders</span><span class="p">]</span>
+<span class="w">    </span><span class="n">C</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">D</span><span class="p">[</span><span class="n">UpdateIntuitOrdersJob</span><span class="w"> </span><span class="n">procesa</span><span class="p">]</span>
+<span class="w">    </span><span class="n">D</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">E</span><span class="p">[</span><span class="n">Envía</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">QuickBooks</span><span class="p">]</span>
+<span class="w">    </span><span class="n">E</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">F</span><span class="p">[</span><span class="n">Marca</span><span class="w"> </span><span class="n">como</span><span class="w"> </span><span class="n">exportada</span><span class="p">]</span>
 </code></pre></div>
-<h2 id="compatibilidad-retroactiva">Compatibilidad Retroactiva<a class="headerlink" href="#compatibilidad-retroactiva" title="Permanent link">&para;</a></h2>
-<h3 id="facturas-existentes-sin-origin"><strong>Facturas Existentes sin <code>origin</code></strong><a class="headerlink" href="#facturas-existentes-sin-origin" title="Permanent link">&para;</a></h3>
+
+<h3 id="quickbooks-docucenter-api">📥 <strong>QuickBooks → DocuCenter</strong> (API)</h3>
+<div class="codehilite"><pre><span></span><code><span class="n">graph</span><span class="w"> </span><span class="n">TD</span>
+<span class="w">    </span><span class="n">A</span><span class="p">[</span><span class="n">Factura</span><span class="w"> </span><span class="n">creada</span><span class="w"> </span><span class="n">en</span><span class="w"> </span><span class="n">QB</span><span class="p">]</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">B</span><span class="p">[</span><span class="n">API</span><span class="w"> </span><span class="n">create_sale_quickbooks</span><span class="p">]</span>
+<span class="w">    </span><span class="n">B</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">C</span><span class="p">[</span><span class="n">CreateSaleQuickBooksJob</span><span class="w"> </span><span class="n">emite</span><span class="w"> </span><span class="n">FE</span><span class="p">]</span>
+<span class="w">    </span><span class="n">C</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">D</span><span class="p">[</span><span class="n">origin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">&#39;</span><span class="n">quickbooks</span><span class="err">&#39;</span><span class="p">]</span>
+<span class="w">    </span><span class="n">D</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">E</span><span class="p">[</span><span class="n">intuit_sync_status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">&#39;</span><span class="n">completed</span><span class="err">&#39;</span><span class="p">]</span>
+<span class="w">    </span><span class="n">E</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">F</span><span class="p">[</span><span class="nb">NO</span><span class="w"> </span><span class="n">envía</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">vuelta</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">QB</span><span class="p">]</span>
+</code></pre></div>
+
+<h2 id="compatibilidad-retroactiva">Compatibilidad Retroactiva</h2>
+<h3 id="facturas-existentes-sin-origin"><strong>Facturas Existentes sin <code>origin</code></strong></h3>
 <ul>
 <li><strong>Comportamiento</strong>: Se tratan como <code>origin = 'docucenter'</code> (null = DocuCenter)</li>
 <li><strong>UpdateIntuitOrdersJob</strong>: Procesa facturas con <code>origin IS NULL</code></li>
 <li><strong>Sin breaking changes</strong> en facturas existentes</li>
 </ul>
-<h3 id="migracion-gradual"><strong>Migración Gradual</strong><a class="headerlink" href="#migracion-gradual" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="c1">-- Si se requiere actualizar facturas existentes:</span>
+<h3 id="migracion-gradual"><strong>Migración Gradual</strong></h3>
+<div class="codehilite"><pre><span></span><code><span class="c1">-- Si se requiere actualizar facturas existentes:</span>
 <span class="k">UPDATE</span><span class="w"> </span><span class="n">Sales_Header_Imp</span><span class="w"> </span>
 <span class="k">SET</span><span class="w"> </span><span class="n">origin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;docucenter&#39;</span><span class="w"> </span>
 <span class="k">WHERE</span><span class="w"> </span><span class="n">origin</span><span class="w"> </span><span class="k">IS</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span>
 <span class="w">  </span><span class="k">AND</span><span class="w"> </span><span class="n">EzeeImport</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="c1">-- Facturas creadas localmente</span>
 </code></pre></div>
-<h2 id="testing">Testing<a class="headerlink" href="#testing" title="Permanent link">&para;</a></h2>
-<h3 id="casos-de-prueba"><strong>Casos de Prueba</strong><a class="headerlink" href="#casos-de-prueba" title="Permanent link">&para;</a></h3>
-<h4 id="caso-1-factura-docucenter-qb">✅ <strong>Caso 1: Factura DocuCenter → QB</strong><a class="headerlink" href="#caso-1-factura-docucenter-qb" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="c1"># 1. Crear factura en DocuCenter</span>
+
+<h2 id="testing">Testing</h2>
+<h3 id="casos-de-prueba"><strong>Casos de Prueba</strong></h3>
+<h4 id="caso-1-factura-docucenter-qb">✅ <strong>Caso 1: Factura DocuCenter → QB</strong></h4>
+<div class="codehilite"><pre><span></span><code><span class="c1"># 1. Crear factura en DocuCenter</span>
 <span class="c1"># 2. Ejecutar comando: php artisan word:update-intuit-orders</span>
 <span class="c1"># 3. Verificar: Factura aparece en QuickBooks</span>
 <span class="c1"># 4. Verificar: origin = &#39;docucenter&#39;, EzeeExport = true</span>
 </code></pre></div>
-<h4 id="caso-2-factura-qb-docucenter">✅ <strong>Caso 2: Factura QB → DocuCenter</strong><a class="headerlink" href="#caso-2-factura-qb-docucenter" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="c1"># 1. Crear factura en QuickBooks</span>
+
+<h4 id="caso-2-factura-qb-docucenter">✅ <strong>Caso 2: Factura QB → DocuCenter</strong></h4>
+<div class="codehilite"><pre><span></span><code><span class="c1"># 1. Crear factura en QuickBooks</span>
 <span class="c1"># 2. Llamar API: POST /api/v1/fe/create_sale_quickbooks</span>
 <span class="c1"># 3. Verificar: Factura emitida con FE</span>
 <span class="c1"># 4. Verificar: origin = &#39;quickbooks&#39;, intuit_sync_status = &#39;completed&#39;</span>
 <span class="c1"># 5. Verificar: NO aparece duplicada en QB</span>
 </code></pre></div>
-<h4 id="caso-3-loop-evitado">✅ <strong>Caso 3: Loop Evitado</strong><a class="headerlink" href="#caso-3-loop-evitado" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="c1"># 1. Factura QB → DocuCenter (API)</span>
+
+<h4 id="caso-3-loop-evitado">✅ <strong>Caso 3: Loop Evitado</strong></h4>
+<div class="codehilite"><pre><span></span><code><span class="c1"># 1. Factura QB → DocuCenter (API)</span>
 <span class="c1"># 2. Ejecutar comando: php artisan word:update-intuit-orders</span>
 <span class="c1"># 3. Verificar: Factura QB NO es reprocesada</span>
 <span class="c1"># 4. Log debe mostrar: &quot;origin = quickbooks, skipped&quot;</span>
 </code></pre></div>
-<h2 id="archivos-modificados">Archivos Modificados<a class="headerlink" href="#archivos-modificados" title="Permanent link">&para;</a></h2>
-<h3 id="estructura-de-datos"><strong>Estructura de Datos</strong><a class="headerlink" href="#estructura-de-datos" title="Permanent link">&para;</a></h3>
+
+<h2 id="archivos-modificados">Archivos Modificados</h2>
+<h3 id="estructura-de-datos"><strong>Estructura de Datos</strong></h3>
 <ul>
 <li><code>app/Models/stubs/Sales_Header_Imp.sql.stub</code> - Campo <code>origin</code> agregado</li>
 <li><code>app/Models/SalesHeaderImp.php</code> - Campo agregado a fillable</li>
 </ul>
-<h3 id="logica-de-negocio"><strong>Lógica de Negocio</strong><a class="headerlink" href="#logica-de-negocio" title="Permanent link">&para;</a></h3>
+<h3 id="logica-de-negocio"><strong>Lógica de Negocio</strong></h3>
 <ul>
 <li><code>app/Jobs/CreateSaleQuickBooksJob.php</code> - No envía de vuelta a QB</li>
 <li><code>app/Jobs/Intuit/UpdateIntuitOrdersJob.php</code> - Filtro por origin</li>
 </ul>
-<h3 id="logging-y-monitoring"><strong>Logging y Monitoring</strong><a class="headerlink" href="#logging-y-monitoring" title="Permanent link">&para;</a></h3>
+<h3 id="logging-y-monitoring"><strong>Logging y Monitoring</strong></h3>
 <ul>
 <li>Logs detallados para tracking de origen</li>
 <li>Contadores de facturas procesadas por origen</li>
 </ul>
-<h2 id="beneficios">Beneficios<a class="headerlink" href="#beneficios" title="Permanent link">&para;</a></h2>
+<h2 id="beneficios">Beneficios</h2>
 <ol>
 <li><strong>🔄 Elimina loop infinito</strong> entre comando y API</li>
 <li><strong>📊 Visibilidad total</strong> del origen de cada factura</li>
@@ -2201,9 +2258,9 @@
 <li><strong>🔒 Compatibilidad</strong> con facturas existentes</li>
 <li><strong>🧩 Escalable</strong> para futuras integraciones (Shopify, etc.)</li>
 </ol>
-<h2 id="monitoreo">Monitoreo<a class="headerlink" href="#monitoreo" title="Permanent link">&para;</a></h2>
-<h3 id="queries-utiles"><strong>Queries Útiles</strong><a class="headerlink" href="#queries-utiles" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="c1">-- Ver distribución por origen</span>
+<h2 id="monitoreo">Monitoreo</h2>
+<h3 id="queries-utiles"><strong>Queries Útiles</strong></h3>
+<div class="codehilite"><pre><span></span><code><span class="c1">-- Ver distribución por origen</span>
 <span class="k">SELECT</span><span class="w"> </span><span class="n">origin</span><span class="p">,</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">total</span><span class="w"> </span>
 <span class="k">FROM</span><span class="w"> </span><span class="n">Sales_Header_Imp</span><span class="w"> </span>
 <span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">origin</span><span class="p">;</span>
@@ -2221,7 +2278,8 @@
 <span class="w">  </span><span class="k">AND</span><span class="w"> </span><span class="n">EzeeExport</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">false</span><span class="w"> </span>
 <span class="w">  </span><span class="k">AND</span><span class="w"> </span><span class="n">EzeeIssued</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">true</span><span class="p">;</span>
 </code></pre></div>
-<h3 id="logs-a-monitorear"><strong>Logs a Monitorear</strong><a class="headerlink" href="#logs-a-monitorear" title="Permanent link">&para;</a></h3>
+
+<h3 id="logs-a-monitorear"><strong>Logs a Monitorear</strong></h3>
 <ul>
 <li><code>"UpdateIntuitOrdersJob: Iniciando procesamiento de facturas DocuCenter"</code></li>
 <li><code>"CreateSaleQuickBooks: Venta marcada como originada en QuickBooks - NO se enviará de vuelta"</code></li>
@@ -2280,7 +2338,7 @@
       
       
     
-    <a href="https://github.com/aghabrego/docucenter" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+    <a href="https://github.com/aghabrego/docucenter-public" target="_blank" rel="noopener" title="github.com" class="md-social__link">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
     </a>
   

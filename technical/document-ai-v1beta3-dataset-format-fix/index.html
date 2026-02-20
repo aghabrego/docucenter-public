@@ -233,7 +233,7 @@
           
   
   
-  APIs
+  API Documentation
 
         </a>
       </li>
@@ -269,7 +269,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../" class="md-tabs__link">
+        <a href="../README.md" class="md-tabs__link">
           
   
   
@@ -298,6 +298,25 @@
         </a>
       </li>
     
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../testing/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Sistema de Testing
+
+      </a>
+    </li>
   
 
       
@@ -404,7 +423,7 @@
   <span class="md-ellipsis">
     
   
-    APIs
+    API Documentation
   
 
     
@@ -420,7 +439,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    APIs
+    API Documentation
   
 
           </label>
@@ -1363,7 +1382,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
+      <a href="../README.md" class="md-nav__link">
         
   
   
@@ -1716,6 +1735,33 @@
   
 
     
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sistema de Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -2045,18 +2091,19 @@
   
 
 
-<h1 id="document-ai-v1beta3-dataset-format-correccion-completa">Document AI v1beta3 Dataset Format - Corrección Completa<a class="headerlink" href="#document-ai-v1beta3-dataset-format-correccion-completa" title="Permanent link">&para;</a></h1>
-<h2 id="fecha">Fecha<a class="headerlink" href="#fecha" title="Permanent link">&para;</a></h2>
+<h1 id="document-ai-v1beta3-dataset-format-correccion-completa">Document AI v1beta3 Dataset Format - Corrección Completa</h1>
+<h2 id="fecha">Fecha</h2>
 <p>24 de noviembre de 2025</p>
-<h2 id="problema-original">Problema Original<a class="headerlink" href="#problema-original" title="Permanent link">&para;</a></h2>
-<p>El entrenamiento del Custom Processor fallaba con el error:
-<div class="highlight"><pre><span></span><code>Tu conjunto de datos no cumple con los criterios mínimos de entrenamiento
+<h2 id="problema-original">Problema Original</h2>
+<p>El entrenamiento del Custom Processor fallaba con el error:</p>
+<div class="codehilite"><pre><span></span><code>Tu conjunto de datos no cumple con los criterios mínimos de entrenamiento
 - Todas las 14 etiquetas mostraban: 0 documentos de entrenamiento, 0 documentos de prueba
-</code></pre></div></p>
-<h3 id="causa-raiz">Causa Raíz<a class="headerlink" href="#causa-raiz" title="Permanent link">&para;</a></h3>
+</code></pre></div>
+
+<h3 id="causa-raiz">Causa Raíz</h3>
 <p>El formato JSONL generado no cumplía con las especificaciones de Document AI v1beta3:</p>
-<p><strong>Formato Incorrecto (anterior)</strong>:
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<p><strong>Formato Incorrecto (anterior)</strong>:</p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;document&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="nt">&quot;mimeType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;application/pdf&quot;</span><span class="p">,</span>
 <span class="w">    </span><span class="nt">&quot;content&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;base64_encoded_pdf_content...&quot;</span>
@@ -2064,9 +2111,10 @@
 <span class="w">  </span><span class="nt">&quot;annotations&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">},</span>
 <span class="w">  </span><span class="nt">&quot;entities&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="err">...</span><span class="p">]</span>
 <span class="p">}</span>
-</code></pre></div></p>
-<p><strong>Formato Correcto (v1beta3)</strong>:
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
+</code></pre></div>
+
+<p><strong>Formato Correcto (v1beta3)</strong>:</p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;document&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="nt">&quot;uri&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;gs://bucket/training-pdfs/20251124215223/document-123.pdf&quot;</span><span class="p">,</span>
 <span class="w">    </span><span class="nt">&quot;mimeType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;application/pdf&quot;</span>
@@ -2082,31 +2130,33 @@
 <span class="w">    </span><span class="p">}</span>
 <span class="w">  </span><span class="p">]</span>
 <span class="p">}</span>
-</code></pre></div></p>
-<h2 id="solucion-implementada">Solución Implementada<a class="headerlink" href="#solucion-implementada" title="Permanent link">&para;</a></h2>
-<h3 id="1-nuevo-metodo-uploadpdfstogcs">1. Nuevo Método: <code>uploadPDFsToGCS()</code><a class="headerlink" href="#1-nuevo-metodo-uploadpdfstogcs" title="Permanent link">&para;</a></h3>
+</code></pre></div>
+
+<h2 id="solucion-implementada">Solución Implementada</h2>
+<h3 id="1-nuevo-metodo-uploadpdfstogcs">1. Nuevo Método: <code>uploadPDFsToGCS()</code></h3>
 <p><strong>Ubicación</strong>: <code>app/Services/DocumentAIService.php</code></p>
 <p><strong>Funcionalidad</strong>:
 - Sube cada PDF individualmente a Google Cloud Storage
 - Genera URIs únicos con timestamp: <code>gs://bucket/training-pdfs/{timestamp}/document-{id}.pdf</code>
 - Retorna mapeo de <code>document_id =&gt; gcs_uri</code></p>
-<p><strong>Ejemplo de uso</strong>:
-<div class="highlight"><pre><span></span><code><span class="x">$docsForUpload = [</span>
+<p><strong>Ejemplo de uso</strong>:</p>
+<div class="codehilite"><pre><span></span><code><span class="x">$docsForUpload = [</span>
 <span class="x">    [&#39;id&#39; =&gt; 1, &#39;file_path&#39; =&gt; &#39;invoices/invoice1.pdf&#39;],</span>
 <span class="x">    [&#39;id&#39; =&gt; 2, &#39;file_path&#39; =&gt; &#39;invoices/invoice2.pdf&#39;]</span>
 <span class="x">];</span>
 
 <span class="x">$pdfUris = $service-&gt;uploadPDFsToGCS($docsForUpload);</span>
 <span class="x">// Retorna: [1 =&gt; &#39;gs://bucket/...&#39;, 2 =&gt; &#39;gs://bucket/...&#39;]</span>
-</code></pre></div></p>
-<h3 id="2-nuevo-metodo-extracttextsegments">2. Nuevo Método: <code>extractTextSegments()</code><a class="headerlink" href="#2-nuevo-metodo-extracttextsegments" title="Permanent link">&para;</a></h3>
+</code></pre></div>
+
+<h3 id="2-nuevo-metodo-extracttextsegments">2. Nuevo Método: <code>extractTextSegments()</code></h3>
 <p><strong>Ubicación</strong>: <code>app/Services/DocumentAIService.php</code></p>
 <p><strong>Funcionalidad</strong>:
 - Convierte anotaciones simples (key-value) a formato Document AI
 - Genera <code>textSegment</code> con <code>startIndex</code> y <code>endIndex</code>
 - Por ahora usa posiciones simuladas (mejora futura: OCR real)</p>
-<p><strong>Transformación</strong>:
-<div class="highlight"><pre><span></span><code><span class="x">// Input</span>
+<p><strong>Transformación</strong>:</p>
+<div class="codehilite"><pre><span></span><code><span class="x">// Input</span>
 <span class="x">$annotations = [</span>
 <span class="x">    &#39;invoice_number&#39; =&gt; &#39;INV-001&#39;,</span>
 <span class="x">    &#39;total_amount&#39; =&gt; &#39;100.00&#39;</span>
@@ -2131,8 +2181,9 @@
 <span class="x">        ]</span>
 <span class="x">    ]</span>
 <span class="x">]</span>
-</code></pre></div></p>
-<h3 id="3-metodo-reescrito-uploadtrainingdataset">3. Método Reescrito: <code>uploadTrainingDataset()</code><a class="headerlink" href="#3-metodo-reescrito-uploadtrainingdataset" title="Permanent link">&para;</a></h3>
+</code></pre></div>
+
+<h3 id="3-metodo-reescrito-uploadtrainingdataset">3. Método Reescrito: <code>uploadTrainingDataset()</code></h3>
 <p><strong>Ubicación</strong>: <code>app/Services/DocumentAIService.php</code></p>
 <p><strong>Cambios principales</strong>:
 - <strong>Nueva firma</strong>: <code>uploadTrainingDataset(array $trainingData, array $pdfUris): array</code>
@@ -2145,14 +2196,14 @@
 3. Extrae textSegments de las anotaciones
 4. Genera línea JSONL con formato correcto
 5. Sube cada dataset como archivo JSONL separado</p>
-<h3 id="4-metodo-actualizado-starttraining">4. Método Actualizado: <code>startTraining()</code><a class="headerlink" href="#4-metodo-actualizado-starttraining" title="Permanent link">&para;</a></h3>
+<h3 id="4-metodo-actualizado-starttraining">4. Método Actualizado: <code>startTraining()</code></h3>
 <p><strong>Ubicación</strong>: <code>app/Services/DocumentAIService.php</code></p>
 <p><strong>Cambios</strong>:
 - <strong>Nueva firma</strong>: <code>startTraining(string $trainingGcsUri, ?string $testGcsUri = null): array</code>
 - <strong>Payload actualizado</strong>: Usa <code>gcsDocuments.documents</code> en lugar de <code>gcsPrefix</code>
 - <strong>Test dataset</strong>: Ahora acepta URI separado para dataset de prueba</p>
-<p><strong>Estructura del payload</strong>:
-<div class="highlight"><pre><span></span><code><span class="x">[</span>
+<p><strong>Estructura del payload</strong>:</p>
+<div class="codehilite"><pre><span></span><code><span class="x">[</span>
 <span class="x">    &#39;inputData&#39; =&gt; [</span>
 <span class="x">        &#39;trainingDocuments&#39; =&gt; [</span>
 <span class="x">            &#39;gcsDocuments&#39; =&gt; [</span>
@@ -2176,8 +2227,9 @@
 <span class="x">        ]</span>
 <span class="x">    ]</span>
 <span class="x">]</span>
-</code></pre></div></p>
-<h3 id="5-componente-actualizado-trainingmanager">5. Componente Actualizado: TrainingManager<a class="headerlink" href="#5-componente-actualizado-trainingmanager" title="Permanent link">&para;</a></h3>
+</code></pre></div>
+
+<h3 id="5-componente-actualizado-trainingmanager">5. Componente Actualizado: TrainingManager</h3>
 <p><strong>Ubicación</strong>: <code>app/Http/Livewire/Admin/DocumentAI/TrainingManager.php</code></p>
 <p><strong>Método modificado</strong>: <code>startGoogleTraining()</code></p>
 <p><strong>Nuevo flujo</strong>:
@@ -2187,8 +2239,8 @@
 4. <strong>Subir PDFs</strong>: Llamar <code>uploadPDFsToGCS()</code> para todos los documentos
 5. <strong>Generar datasets</strong>: Llamar <code>uploadTrainingDataset()</code> con split
 6. <strong>Iniciar entrenamiento</strong>: Llamar <code>startTraining()</code> con URIs separados</p>
-<p><strong>Código clave</strong>:
-<div class="highlight"><pre><span></span><code><span class="x">// Split 80/20</span>
+<p><strong>Código clave</strong>:</p>
+<div class="codehilite"><pre><span></span><code><span class="x">// Split 80/20</span>
 <span class="x">$allDocs = $annotatedDocs-&gt;toArray();</span>
 <span class="x">$totalDocs = count($allDocs);</span>
 <span class="x">$trainCount = (int) floor($totalDocs * 0.8);</span>
@@ -2207,10 +2259,11 @@
 <span class="x">    $datasetUris[&#39;training_uri&#39;],</span>
 <span class="x">    $datasetUris[&#39;test_uri&#39;] ?? null</span>
 <span class="x">);</span>
-</code></pre></div></p>
-<h2 id="estructura-de-archivos-en-gcs">Estructura de Archivos en GCS<a class="headerlink" href="#estructura-de-archivos-en-gcs" title="Permanent link">&para;</a></h2>
+</code></pre></div>
+
+<h2 id="estructura-de-archivos-en-gcs">Estructura de Archivos en GCS</h2>
 <p>Después de ejecutar el entrenamiento:</p>
-<div class="highlight"><pre><span></span><code>gs://bucket-name/
+<div class="codehilite"><pre><span></span><code>gs://bucket-name/
 ├── training-pdfs/
 │   └── 20251124215223/          # Timestamp del entrenamiento
 │       ├── document-1.pdf
@@ -2220,14 +2273,15 @@
     ├── training-dataset-20251124215223.jsonl
     └── test-dataset-20251124215223.jsonl
 </code></pre></div>
-<h2 id="requisitos-de-document-ai-v1beta3">Requisitos de Document AI v1beta3<a class="headerlink" href="#requisitos-de-document-ai-v1beta3" title="Permanent link">&para;</a></h2>
-<h3 id="minimos-para-entrenamiento">Mínimos para Entrenamiento<a class="headerlink" href="#minimos-para-entrenamiento" title="Permanent link">&para;</a></h3>
+
+<h2 id="requisitos-de-document-ai-v1beta3">Requisitos de Document AI v1beta3</h2>
+<h3 id="minimos-para-entrenamiento">Mínimos para Entrenamiento</h3>
 <ul>
 <li><strong>Training dataset</strong>: Mínimo 10 documentos por etiqueta</li>
 <li><strong>Test dataset</strong>: Mínimo 10 documentos por etiqueta</li>
 <li><strong>Total recomendado</strong>: 50+ documentos</li>
 </ul>
-<h3 id="formato-jsonl-requerido">Formato JSONL Requerido<a class="headerlink" href="#formato-jsonl-requerido" title="Permanent link">&para;</a></h3>
+<h3 id="formato-jsonl-requerido">Formato JSONL Requerido</h3>
 <p>✅ <strong>Correcto</strong>:
 - <code>document.uri</code>: GCS URI del PDF
 - <code>annotations[].type</code>: Nombre del campo
@@ -2237,11 +2291,11 @@
 - <code>document.content</code>: Base64 embebido
 - Anotaciones sin <code>textSegment</code>
 - GCS prefix en lugar de URIs específicos</p>
-<h2 id="testing">Testing<a class="headerlink" href="#testing" title="Permanent link">&para;</a></h2>
-<h3 id="script-de-prueba">Script de Prueba<a class="headerlink" href="#script-de-prueba" title="Permanent link">&para;</a></h3>
+<h2 id="testing">Testing</h2>
+<h3 id="script-de-prueba">Script de Prueba</h3>
 <p><strong>Ubicación</strong>: <code>scripts/test-training-v2.sh</code></p>
-<p><strong>Operaciones disponibles</strong>:
-<div class="highlight"><pre><span></span><code><span class="c1"># Probar subida de PDFs</span>
+<p><strong>Operaciones disponibles</strong>:</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Probar subida de PDFs</span>
 ./scripts/test-training-v2.sh<span class="w"> </span>test-upload
 
 <span class="c1"># Probar generación de datasets</span>
@@ -2249,9 +2303,10 @@
 
 <span class="c1"># Probar flujo completo (inicia entrenamiento real)</span>
 ./scripts/test-training-v2.sh<span class="w"> </span>test-full
-</code></pre></div></p>
-<h3 id="prueba-manual-con-tinker">Prueba Manual con Tinker<a class="headerlink" href="#prueba-manual-con-tinker" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>docucenter_laravel.test<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>tinker
+</code></pre></div>
+
+<h3 id="prueba-manual-con-tinker">Prueba Manual con Tinker</h3>
+<div class="codehilite"><pre><span></span><code>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>docucenter_laravel.test<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>tinker
 
 use<span class="w"> </span>App<span class="se">\S</span>ervices<span class="se">\D</span>ocumentAIService<span class="p">;</span>
 use<span class="w"> </span>App<span class="se">\M</span>odels<span class="se">\D</span>ocumentAITrainingDocument<span class="p">;</span>
@@ -2266,15 +2321,16 @@ use<span class="w"> </span>App<span class="se">\M</span>odels<span class="se">\D
 //<span class="w"> </span>Ver<span class="w"> </span>URIs<span class="w"> </span>generados
 print_r<span class="o">(</span><span class="nv">$uris</span><span class="o">)</span><span class="p">;</span>
 </code></pre></div>
-<h2 id="mejoras-futuras">Mejoras Futuras<a class="headerlink" href="#mejoras-futuras" title="Permanent link">&para;</a></h2>
-<h3 id="1-extraccion-real-de-posiciones-de-texto">1. Extracción Real de Posiciones de Texto<a class="headerlink" href="#1-extraccion-real-de-posiciones-de-texto" title="Permanent link">&para;</a></h3>
+
+<h2 id="mejoras-futuras">Mejoras Futuras</h2>
+<h3 id="1-extraccion-real-de-posiciones-de-texto">1. Extracción Real de Posiciones de Texto</h3>
 <p><strong>Estado actual</strong>: Usa posiciones simuladas
 <strong>Mejora</strong>: Implementar extracción real con:
 - PDF text extraction (pdftotext, PyPDF2)
 - Document AI OCR para obtener coordenadas exactas
 - Búsqueda de texto en documento parseado</p>
-<p><strong>Implementación sugerida</strong>:
-<div class="highlight"><pre><span></span><code><span class="x">protected function extractTextSegments(string $pdfPath, array $annotations): array</span>
+<p><strong>Implementación sugerida</strong>:</p>
+<div class="codehilite"><pre><span></span><code><span class="x">protected function extractTextSegments(string $pdfPath, array $annotations): array</span>
 <span class="x">{</span>
 <span class="x">    // Extraer texto completo del PDF</span>
 <span class="x">    $fullText = $this-&gt;extractPDFText($pdfPath);</span>
@@ -2299,10 +2355,11 @@ print_r<span class="o">(</span><span class="nv">$uris</span><span class="o">)</s
 
 <span class="x">    return $annotationsWithSegments;</span>
 <span class="x">}</span>
-</code></pre></div></p>
-<h3 id="2-validacion-de-requisitos-minimos">2. Validación de Requisitos Mínimos<a class="headerlink" href="#2-validacion-de-requisitos-minimos" title="Permanent link">&para;</a></h3>
-<p>Agregar validación antes de subir:
-<div class="highlight"><pre><span></span><code><span class="x">protected function validateDatasetRequirements(array $trainingDocs, array $testDocs): bool</span>
+</code></pre></div>
+
+<h3 id="2-validacion-de-requisitos-minimos">2. Validación de Requisitos Mínimos</h3>
+<p>Agregar validación antes de subir:</p>
+<div class="codehilite"><pre><span></span><code><span class="x">protected function validateDatasetRequirements(array $trainingDocs, array $testDocs): bool</span>
 <span class="x">{</span>
 <span class="x">    $minPerSet = 10;</span>
 
@@ -2332,10 +2389,11 @@ print_r<span class="o">(</span><span class="nv">$uris</span><span class="o">)</s
 
 <span class="x">    return true;</span>
 <span class="x">}</span>
-</code></pre></div></p>
-<h3 id="3-limpieza-de-archivos-gcs">3. Limpieza de Archivos GCS<a class="headerlink" href="#3-limpieza-de-archivos-gcs" title="Permanent link">&para;</a></h3>
-<p>Agregar método para limpiar entrenamientos fallidos:
-<div class="highlight"><pre><span></span><code><span class="x">public function cleanupFailedTraining(string $timestamp): void</span>
+</code></pre></div>
+
+<h3 id="3-limpieza-de-archivos-gcs">3. Limpieza de Archivos GCS</h3>
+<p>Agregar método para limpiar entrenamientos fallidos:</p>
+<div class="codehilite"><pre><span></span><code><span class="x">public function cleanupFailedTraining(string $timestamp): void</span>
 <span class="x">{</span>
 <span class="x">    $bucket = $this-&gt;storage-&gt;bucket($this-&gt;bucketName);</span>
 
@@ -2351,27 +2409,29 @@ print_r<span class="o">(</span><span class="nv">$uris</span><span class="o">)</s
 <span class="x">        }</span>
 <span class="x">    }</span>
 <span class="x">}</span>
-</code></pre></div></p>
-<h2 id="commit">Commit<a class="headerlink" href="#commit" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code>refactor: implementar formato correcto de dataset Document AI v1beta3
-
-- Agregar uploadPDFsToGCS para subir PDFs individuales a GCS
-- Agregar extractTextSegments para generar anotaciones con posiciones
-- Reescribir uploadTrainingDataset con formato correcto (GCS URIs + textSegment)
-- Implementar split automático 80/20 entre training y test datasets
-- Actualizar startTraining para aceptar URIs separados de training y test
-- Modificar TrainingManager para usar nuevo flujo completo
-
-Corrige error de formato JSONL que causaba 0 documentos reconocidos
-Ahora usa estructura: document.uri + annotations con startIndex/endIndex
 </code></pre></div>
-<h2 id="referencias">Referencias<a class="headerlink" href="#referencias" title="Permanent link">&para;</a></h2>
+
+<h2 id="commit">Commit</h2>
+<div class="codehilite"><pre><span></span><code><span class="n">refactor</span><span class="p">:</span><span class="w"> </span><span class="n">implementar</span><span class="w"> </span><span class="n">formato</span><span class="w"> </span><span class="n">correcto</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">dataset</span><span class="w"> </span><span class="n">Document</span><span class="w"> </span><span class="n">AI</span><span class="w"> </span><span class="n">v1beta3</span>
+
+<span class="o">-</span><span class="w"> </span><span class="n">Agregar</span><span class="w"> </span><span class="n">uploadPDFsToGCS</span><span class="w"> </span><span class="n">para</span><span class="w"> </span><span class="n">subir</span><span class="w"> </span><span class="n">PDFs</span><span class="w"> </span><span class="n">individuales</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">GCS</span>
+<span class="o">-</span><span class="w"> </span><span class="n">Agregar</span><span class="w"> </span><span class="n">extractTextSegments</span><span class="w"> </span><span class="n">para</span><span class="w"> </span><span class="n">generar</span><span class="w"> </span><span class="n">anotaciones</span><span class="w"> </span><span class="n">con</span><span class="w"> </span><span class="n">posiciones</span>
+<span class="o">-</span><span class="w"> </span><span class="n">Reescribir</span><span class="w"> </span><span class="n">uploadTrainingDataset</span><span class="w"> </span><span class="n">con</span><span class="w"> </span><span class="n">formato</span><span class="w"> </span><span class="n">correcto</span><span class="w"> </span><span class="p">(</span><span class="n">GCS</span><span class="w"> </span><span class="n">URIs</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">textSegment</span><span class="p">)</span>
+<span class="o">-</span><span class="w"> </span><span class="n">Implementar</span><span class="w"> </span><span class="n">split</span><span class="w"> </span><span class="n">automático</span><span class="w"> </span><span class="mi">80</span><span class="o">/</span><span class="mi">20</span><span class="w"> </span><span class="n">entre</span><span class="w"> </span><span class="n">training</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="n">test</span><span class="w"> </span><span class="n">datasets</span>
+<span class="o">-</span><span class="w"> </span><span class="n">Actualizar</span><span class="w"> </span><span class="n">startTraining</span><span class="w"> </span><span class="n">para</span><span class="w"> </span><span class="n">aceptar</span><span class="w"> </span><span class="n">URIs</span><span class="w"> </span><span class="n">separados</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">training</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="n">test</span>
+<span class="o">-</span><span class="w"> </span><span class="n">Modificar</span><span class="w"> </span><span class="n">TrainingManager</span><span class="w"> </span><span class="n">para</span><span class="w"> </span><span class="n">usar</span><span class="w"> </span><span class="n">nuevo</span><span class="w"> </span><span class="n">flujo</span><span class="w"> </span><span class="n">completo</span>
+
+<span class="n">Corrige</span><span class="w"> </span><span class="n">error</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">formato</span><span class="w"> </span><span class="n">JSONL</span><span class="w"> </span><span class="n">que</span><span class="w"> </span><span class="n">causaba</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="n">documentos</span><span class="w"> </span><span class="n">reconocidos</span>
+<span class="n">Ahora</span><span class="w"> </span><span class="n">usa</span><span class="w"> </span><span class="n">estructura</span><span class="p">:</span><span class="w"> </span><span class="n">document</span><span class="o">.</span><span class="n">uri</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">annotations</span><span class="w"> </span><span class="n">con</span><span class="w"> </span><span class="n">startIndex</span><span class="o">/</span><span class="n">endIndex</span>
+</code></pre></div>
+
+<h2 id="referencias">Referencias</h2>
 <ul>
 <li><a href="https://cloud.google.com/document-ai/docs/reference/rest/v1beta3">Document AI v1beta3 API Reference</a></li>
 <li><a href="https://cloud.google.com/document-ai/docs/workbench/build-custom-processor">Custom Extractor Training</a></li>
 <li><a href="https://cloud.google.com/document-ai/docs/workbench/import-documents">Dataset Format Specification</a></li>
 </ul>
-<h2 id="proximos-pasos">Próximos Pasos<a class="headerlink" href="#proximos-pasos" title="Permanent link">&para;</a></h2>
+<h2 id="proximos-pasos">Próximos Pasos</h2>
 <ol>
 <li>✅ Implementar formato correcto de dataset</li>
 <li>✅ Agregar split train/test</li>
@@ -2433,7 +2493,7 @@ Ahora usa estructura: document.uri + annotations con startIndex/endIndex
       
       
     
-    <a href="https://github.com/aghabrego/docucenter" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+    <a href="https://github.com/aghabrego/docucenter-public" target="_blank" rel="noopener" title="github.com" class="md-social__link">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
     </a>
   

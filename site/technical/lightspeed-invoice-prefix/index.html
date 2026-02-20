@@ -233,7 +233,7 @@
           
   
   
-  APIs
+  API Documentation
 
         </a>
       </li>
@@ -269,7 +269,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../" class="md-tabs__link">
+        <a href="../README.md" class="md-tabs__link">
           
   
   
@@ -298,6 +298,25 @@
         </a>
       </li>
     
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../testing/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Sistema de Testing
+
+      </a>
+    </li>
   
 
       
@@ -404,7 +423,7 @@
   <span class="md-ellipsis">
     
   
-    APIs
+    API Documentation
   
 
     
@@ -420,7 +439,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    APIs
+    API Documentation
   
 
           </label>
@@ -1363,7 +1382,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
+      <a href="../README.md" class="md-nav__link">
         
   
   
@@ -1712,6 +1731,33 @@
           </ul>
         </nav>
       
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sistema de Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -2128,10 +2174,10 @@
   
 
 
-<h1 id="prefijos-de-factura-por-tienda-lightspeed-x-series">Prefijos de Factura por Tienda - Lightspeed X-Series<a class="headerlink" href="#prefijos-de-factura-por-tienda-lightspeed-x-series" title="Permanent link">&para;</a></h1>
-<h2 id="resumen">📋 Resumen<a class="headerlink" href="#resumen" title="Permanent link">&para;</a></h2>
+<h1 id="prefijos-de-factura-por-tienda-lightspeed-x-series">Prefijos de Factura por Tienda - Lightspeed X-Series</h1>
+<h2 id="resumen">📋 Resumen</h2>
 <p>Sistema de prefijos configurables por tienda (outlet) en Lightspeed X-Series para evitar colisiones de números de factura entre múltiples tiendas de una misma organización.</p>
-<h2 id="problema-resuelto">🎯 Problema Resuelto<a class="headerlink" href="#problema-resuelto" title="Permanent link">&para;</a></h2>
+<h2 id="problema-resuelto">🎯 Problema Resuelto</h2>
 <p>Cuando una organización tiene múltiples tiendas en Lightspeed X-Series, pueden existir números de factura idénticos entre diferentes tiendas, lo que causa colisiones en el sistema de facturación electrónica de DocuCenter.</p>
 <p><strong>Ejemplo del problema:</strong>
 - Tienda A genera factura #1001
@@ -2141,10 +2187,10 @@
 - Tienda A (prefijo: "T1-") → Factura "T1-1001"
 - Tienda B (prefijo: "T2-") → Factura "T2-1001"
 - Sin colisión, facturas únicas en el sistema</p>
-<h2 id="implementacion">🔧 Implementación<a class="headerlink" href="#implementacion" title="Permanent link">&para;</a></h2>
-<h3 id="1-cambios-en-la-base-de-datos">1. Cambios en la Base de Datos<a class="headerlink" href="#1-cambios-en-la-base-de-datos" title="Permanent link">&para;</a></h3>
+<h2 id="implementacion">🔧 Implementación</h2>
+<h3 id="1-cambios-en-la-base-de-datos">1. Cambios en la Base de Datos</h3>
 <p>La configuración de prefijos se almacena en la tabla <code>lightspeed_configurations</code> dentro del campo <code>configurations</code> (JSON):</p>
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;outlets&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <span class="w">    </span><span class="p">{</span>
 <span class="w">      </span><span class="nt">&quot;id_outlet&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;12345&quot;</span><span class="p">,</span>
@@ -2159,7 +2205,8 @@
 <span class="w">  </span><span class="p">]</span>
 <span class="p">}</span>
 </code></pre></div>
-<h3 id="2-interfaz-de-usuario">2. Interfaz de Usuario<a class="headerlink" href="#2-interfaz-de-usuario" title="Permanent link">&para;</a></h3>
+
+<h3 id="2-interfaz-de-usuario">2. Interfaz de Usuario</h3>
 <p><strong>Ubicación:</strong> <code>admin/e_invoice/configuration/lightspeed_settings</code></p>
 <p><strong>Archivo:</strong> <code>resources/views/livewire/admin/einvoice/lightspeed_setting.blade.php</code></p>
 <p>La tabla de configuración ahora incluye:
@@ -2170,31 +2217,33 @@
 - Campo de texto con máximo 10 caracteres
 - Placeholder sugerido: "Ej: T1-"
 - Texto de ayuda explicativo</p>
-<h3 id="3-componente-livewire">3. Componente Livewire<a class="headerlink" href="#3-componente-livewire" title="Permanent link">&para;</a></h3>
+<h3 id="3-componente-livewire">3. Componente Livewire</h3>
 <p><strong>Archivo:</strong> <code>app/Http/Livewire/Admin/Einvoice/AssignBranch.php</code></p>
-<p><strong>Reglas de validación actualizadas:</strong>
-<div class="highlight"><pre><span></span><code><span class="x">protected $rules = [</span>
+<p><strong>Reglas de validación actualizadas:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="x">protected $rules = [</span>
 <span class="x">    &#39;organization_id&#39; =&gt; &#39;required&#39;,</span>
 <span class="x">    &#39;configurations.outlets.*.id_outlet&#39; =&gt; &#39;nullable&#39;,</span>
 <span class="x">    &#39;configurations.outlets.*.codigo_secursal&#39; =&gt; &#39;nullable&#39;,</span>
 <span class="x">    &#39;configurations.outlets.*.invoice_prefix&#39; =&gt; &#39;nullable|string|max:10&#39;,</span>
 <span class="x">    &#39;configurations.ignore_products&#39; =&gt; &#39;nullable&#39;,</span>
 <span class="x">];</span>
-</code></pre></div></p>
-<p><strong>Método loadOutlets actualizado:</strong>
-<div class="highlight"><pre><span></span><code><span class="x">foreach ($outlets as $key =&gt; $outlet) {</span>
+</code></pre></div>
+
+<p><strong>Método loadOutlets actualizado:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="x">foreach ($outlets as $key =&gt; $outlet) {</span>
 <span class="x">    $this-&gt;configurations[&#39;outlets&#39;][$key] = [</span>
 <span class="x">        &#39;id_outlet&#39; =&gt; $outlet[&#39;id&#39;] ?? $outlet[&#39;id_outlet&#39;],</span>
 <span class="x">        &#39;codigo_secursal&#39; =&gt; $outlet[&#39;codigo_secursal&#39;] ?? &#39;&#39;,</span>
 <span class="x">        &#39;invoice_prefix&#39; =&gt; $outlet[&#39;invoice_prefix&#39;] ?? &#39;&#39;,</span>
 <span class="x">    ];</span>
 <span class="x">}</span>
-</code></pre></div></p>
-<h3 id="4-servicio-lightspeed">4. Servicio Lightspeed<a class="headerlink" href="#4-servicio-lightspeed" title="Permanent link">&para;</a></h3>
+</code></pre></div>
+
+<h3 id="4-servicio-lightspeed">4. Servicio Lightspeed</h3>
 <p><strong>Archivo:</strong> <code>app/Services/LightspeedService.php</code></p>
-<h4 id="metodo-principal-storeorder">Método Principal: <code>storeOrder()</code><a class="headerlink" href="#metodo-principal-storeorder" title="Permanent link">&para;</a></h4>
-<p><strong>Aplicación del prefijo:</strong>
-<div class="highlight"><pre><span></span><code><span class="x">// Obtener prefijo de tienda desde la configuración de Lightspeed</span>
+<h4 id="metodo-principal-storeorder">Método Principal: <code>storeOrder()</code></h4>
+<p><strong>Aplicación del prefijo:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="x">// Obtener prefijo de tienda desde la configuración de Lightspeed</span>
 <span class="x">$outletId = array_get($request, &#39;outlet_id&#39;, null);</span>
 <span class="x">$invoicePrefix = $this-&gt;getInvoicePrefixForOutlet($organization, $outletId);</span>
 
@@ -2202,13 +2251,14 @@
 <span class="x">if (!empty($invoicePrefix) &amp;&amp; strpos($number, $invoicePrefix) !== 0) {</span>
 <span class="x">    $number = $invoicePrefix . $number;</span>
 <span class="x">}</span>
-</code></pre></div></p>
+</code></pre></div>
+
 <p><strong>Características:</strong>
 - Solo aplica el prefijo si está configurado
 - Evita duplicar el prefijo si ya existe
 - Se ejecuta antes de la validación de CUFE</p>
-<h4 id="metodo-helper-getinvoiceprefixforoutlet">Método Helper: <code>getInvoicePrefixForOutlet()</code><a class="headerlink" href="#metodo-helper-getinvoiceprefixforoutlet" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="x">protected function getInvoicePrefixForOutlet(Organization $organization, $outletId): string</span>
+<h4 id="metodo-helper-getinvoiceprefixforoutlet">Método Helper: <code>getInvoicePrefixForOutlet()</code></h4>
+<div class="codehilite"><pre><span></span><code><span class="x">protected function getInvoicePrefixForOutlet(Organization $organization, $outletId): string</span>
 <span class="x">{</span>
 <span class="x">    if (empty($outletId)) {</span>
 <span class="x">        return &#39;&#39;;</span>
@@ -2243,28 +2293,30 @@
 <span class="x">    return &#39;&#39;;</span>
 <span class="x">}</span>
 </code></pre></div>
+
 <p><strong>Características:</strong>
 - Manejo seguro de errores
 - Logging para debugging
 - Retorna string vacío si no encuentra configuración
 - Busca por ID de outlet</p>
-<h2 id="flujo-de-procesamiento">🔄 Flujo de Procesamiento<a class="headerlink" href="#flujo-de-procesamiento" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code>graph TD
-    A[API recibe venta de Lightspeed] --&gt; B[Extraer invoice_number y outlet_id]
-    B --&gt; C{Existe configuración&lt;br/&gt;para outlet?}
-    C --&gt;|No| D[Usar número original]
-    C --&gt;|Sí| E[Obtener prefijo configurado]
-    E --&gt; F{Prefijo ya existe&lt;br/&gt;en número?}
-    F --&gt;|Sí| D
-    F --&gt;|No| G[Agregar prefijo al número]
-    G --&gt; H[Continuar procesamiento]
-    D --&gt; H
-    H --&gt; I[Validar CUFE]
-    I --&gt; J[Crear/Actualizar factura]
+<h2 id="flujo-de-procesamiento">🔄 Flujo de Procesamiento</h2>
+<div class="codehilite"><pre><span></span><code><span class="n">graph</span><span class="w"> </span><span class="n">TD</span>
+<span class="w">    </span><span class="n">A</span><span class="p">[</span><span class="n">API</span><span class="w"> </span><span class="n">recibe</span><span class="w"> </span><span class="n">venta</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">Lightspeed</span><span class="p">]</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">B</span><span class="p">[</span><span class="n">Extraer</span><span class="w"> </span><span class="n">invoice_number</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="n">outlet_id</span><span class="p">]</span>
+<span class="w">    </span><span class="n">B</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">C</span><span class="p">{</span><span class="n">Existe</span><span class="w"> </span><span class="n">configuración</span><span class="o">&lt;</span><span class="n">br</span><span class="o">/&gt;</span><span class="n">para</span><span class="w"> </span><span class="n">outlet</span><span class="o">?</span><span class="p">}</span>
+<span class="w">    </span><span class="n">C</span><span class="w"> </span><span class="o">--&gt;|</span><span class="n">No</span><span class="o">|</span><span class="w"> </span><span class="n">D</span><span class="p">[</span><span class="n">Usar</span><span class="w"> </span><span class="n">número</span><span class="w"> </span><span class="n">original</span><span class="p">]</span>
+<span class="w">    </span><span class="n">C</span><span class="w"> </span><span class="o">--&gt;|</span><span class="n">Sí</span><span class="o">|</span><span class="w"> </span><span class="n">E</span><span class="p">[</span><span class="n">Obtener</span><span class="w"> </span><span class="n">prefijo</span><span class="w"> </span><span class="n">configurado</span><span class="p">]</span>
+<span class="w">    </span><span class="n">E</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">F</span><span class="p">{</span><span class="n">Prefijo</span><span class="w"> </span><span class="n">ya</span><span class="w"> </span><span class="n">existe</span><span class="o">&lt;</span><span class="n">br</span><span class="o">/&gt;</span><span class="n">en</span><span class="w"> </span><span class="n">número</span><span class="o">?</span><span class="p">}</span>
+<span class="w">    </span><span class="n">F</span><span class="w"> </span><span class="o">--&gt;|</span><span class="n">Sí</span><span class="o">|</span><span class="w"> </span><span class="n">D</span>
+<span class="w">    </span><span class="n">F</span><span class="w"> </span><span class="o">--&gt;|</span><span class="n">No</span><span class="o">|</span><span class="w"> </span><span class="n">G</span><span class="p">[</span><span class="n">Agregar</span><span class="w"> </span><span class="n">prefijo</span><span class="w"> </span><span class="n">al</span><span class="w"> </span><span class="n">número</span><span class="p">]</span>
+<span class="w">    </span><span class="n">G</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">H</span><span class="p">[</span><span class="n">Continuar</span><span class="w"> </span><span class="n">procesamiento</span><span class="p">]</span>
+<span class="w">    </span><span class="n">D</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">H</span>
+<span class="w">    </span><span class="n">H</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">I</span><span class="p">[</span><span class="n">Validar</span><span class="w"> </span><span class="n">CUFE</span><span class="p">]</span>
+<span class="w">    </span><span class="n">I</span><span class="w"> </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">J</span><span class="p">[</span><span class="n">Crear</span><span class="o">/</span><span class="n">Actualizar</span><span class="w"> </span><span class="n">factura</span><span class="p">]</span>
 </code></pre></div>
-<h2 id="ejemplos-de-uso">📝 Ejemplos de Uso<a class="headerlink" href="#ejemplos-de-uso" title="Permanent link">&para;</a></h2>
-<h3 id="caso-1-sin-prefijo-configurado">Caso 1: Sin Prefijo Configurado<a class="headerlink" href="#caso-1-sin-prefijo-configurado" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">// Request</span>
+
+<h2 id="ejemplos-de-uso">📝 Ejemplos de Uso</h2>
+<h3 id="caso-1-sin-prefijo-configurado">Caso 1: Sin Prefijo Configurado</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">// Request</span>
 <span class="x">$request = [</span>
 <span class="x">    &#39;invoice_number&#39; =&gt; &#39;1001&#39;,</span>
 <span class="x">    &#39;outlet_id&#39; =&gt; &#39;12345&#39;</span>
@@ -2272,8 +2324,9 @@
 
 <span class="x">// Resultado: &#39;1001&#39; (sin cambios)</span>
 </code></pre></div>
-<h3 id="caso-2-con-prefijo-configurado">Caso 2: Con Prefijo Configurado<a class="headerlink" href="#caso-2-con-prefijo-configurado" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">// Configuración</span>
+
+<h3 id="caso-2-con-prefijo-configurado">Caso 2: Con Prefijo Configurado</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">// Configuración</span>
 <span class="x">[</span>
 <span class="x">    &#39;id_outlet&#39; =&gt; &#39;12345&#39;,</span>
 <span class="x">    &#39;invoice_prefix&#39; =&gt; &#39;T1-&#39;</span>
@@ -2287,8 +2340,9 @@
 
 <span class="x">// Resultado: &#39;T1-1001&#39;</span>
 </code></pre></div>
-<h3 id="caso-3-prefijo-ya-existe">Caso 3: Prefijo Ya Existe<a class="headerlink" href="#caso-3-prefijo-ya-existe" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">// Configuración</span>
+
+<h3 id="caso-3-prefijo-ya-existe">Caso 3: Prefijo Ya Existe</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">// Configuración</span>
 <span class="x">[</span>
 <span class="x">    &#39;id_outlet&#39; =&gt; &#39;12345&#39;,</span>
 <span class="x">    &#39;invoice_prefix&#39; =&gt; &#39;T1-&#39;</span>
@@ -2302,23 +2356,26 @@
 
 <span class="x">// Resultado: &#39;T1-1001&#39; (sin duplicar)</span>
 </code></pre></div>
-<h2 id="cambios-en-menu">🎨 Cambios en Menú<a class="headerlink" href="#cambios-en-menu" title="Permanent link">&para;</a></h2>
+
+<h2 id="cambios-en-menu">🎨 Cambios en Menú</h2>
 <p><strong>Archivo:</strong> <code>resources/views/partials/menu/facturacion.blade.php</code></p>
 <p>El nombre del menú fue actualizado de "Lightspeed" a "Lightspeed X-Series" para mayor claridad:</p>
-<div class="highlight"><pre><span></span><code>&lt;span class=&quot;hide-menu&quot;&gt;{{ __(&#39;Lightspeed X-Series&#39;) }}&lt;/span&gt;
+<div class="codehilite"><pre><span></span><code><span class="nt">&lt;span</span><span class="w"> </span><span class="na">class=</span><span class="s">&quot;hide-menu&quot;</span><span class="nt">&gt;</span><span class="cp">{{</span> <span class="nv">__</span><span class="o">(</span><span class="s1">&#39;Lightspeed X-Series&#39;</span><span class="o">)</span> <span class="cp">}}</span><span class="nt">&lt;/span&gt;</span>
 </code></pre></div>
-<h2 id="traducciones">🌐 Traducciones<a class="headerlink" href="#traducciones" title="Permanent link">&para;</a></h2>
+
+<h2 id="traducciones">🌐 Traducciones</h2>
 <p><strong>Archivos:</strong>
 - <code>lang/es_panel.json</code>
 - <code>lang/en_panel.json</code></p>
-<p><strong>Nuevas claves agregadas:</strong>
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<p><strong>Nuevas claves agregadas:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
 <span class="w">    </span><span class="nt">&quot;Invoice Prefix&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Prefijo de Factura&quot;</span><span class="p">,</span>
 <span class="w">    </span><span class="nt">&quot;Prefix to avoid duplicate invoice numbers&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Prefijo para evitar números de factura duplicados&quot;</span>
 <span class="p">}</span>
-</code></pre></div></p>
-<h2 id="mejores-practicas">✅ Mejores Prácticas<a class="headerlink" href="#mejores-practicas" title="Permanent link">&para;</a></h2>
-<h3 id="definicion-de-prefijos">Definición de Prefijos<a class="headerlink" href="#definicion-de-prefijos" title="Permanent link">&para;</a></h3>
+</code></pre></div>
+
+<h2 id="mejores-practicas">✅ Mejores Prácticas</h2>
+<h3 id="definicion-de-prefijos">Definición de Prefijos</h3>
 <ol>
 <li><strong>Usar identificadores cortos y descriptivos:</strong></li>
 <li>✅ Bueno: "T1-", "T2-", "SUC1-"</li>
@@ -2339,7 +2396,7 @@
 <li>Recomendado: 2-5 caracteres</li>
 <li>Incluir separador (guión) para legibilidad</li>
 </ol>
-<h3 id="configuracion-inicial">Configuración Inicial<a class="headerlink" href="#configuracion-inicial" title="Permanent link">&para;</a></h3>
+<h3 id="configuracion-inicial">Configuración Inicial</h3>
 <ol>
 <li>Acceder a <code>admin/e_invoice/configuration/lightspeed_settings</code></li>
 <li>Seleccionar la organización</li>
@@ -2348,55 +2405,59 @@
 <li>Definir prefijo único</li>
 <li>Guardar configuración</li>
 </ol>
-<h3 id="migracion-de-datos-existentes">Migración de Datos Existentes<a class="headerlink" href="#migracion-de-datos-existentes" title="Permanent link">&para;</a></h3>
+<h3 id="migracion-de-datos-existentes">Migración de Datos Existentes</h3>
 <p>Si ya existen facturas sin prefijos:
 1. Identificar facturas duplicadas
 2. Aplicar prefijos manualmente a través de SQL
 3. Configurar prefijos para nuevas facturas</p>
-<div class="highlight"><pre><span></span><code><span class="c1">-- Ejemplo de actualización manual</span>
+<div class="codehilite"><pre><span></span><code><span class="c1">-- Ejemplo de actualización manual</span>
 <span class="k">UPDATE</span><span class="w"> </span><span class="n">sales_header_imp</span><span class="w"> </span>
 <span class="k">SET</span><span class="w"> </span><span class="n">InvoiceNumber</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CONCAT</span><span class="p">(</span><span class="s1">&#39;T1-&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">InvoiceNumber</span><span class="p">)</span>
 <span class="k">WHERE</span><span class="w"> </span><span class="n">IdStore</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;12345&#39;</span><span class="w"> </span>
 <span class="k">AND</span><span class="w"> </span><span class="n">InvoiceNumber</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;T1-%&#39;</span><span class="p">;</span>
 </code></pre></div>
-<h2 id="troubleshooting">🐛 Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2>
-<h3 id="problema-facturas-aun-se-duplican">Problema: Facturas aún se duplican<a class="headerlink" href="#problema-facturas-aun-se-duplican" title="Permanent link">&para;</a></h3>
+
+<h2 id="troubleshooting">🐛 Troubleshooting</h2>
+<h3 id="problema-facturas-aun-se-duplican">Problema: Facturas aún se duplican</h3>
 <p><strong>Posibles causas:</strong>
 1. Prefijo no configurado para outlet
 2. Configuración no guardada correctamente
 3. Cache no actualizado</p>
-<p><strong>Solución:</strong>
-<div class="highlight"><pre><span></span><code><span class="c1"># Verificar configuración en BD</span>
+<p><strong>Solución:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Verificar configuración en BD</span>
 docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>docucenter-app-1<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>tinker
 &gt;&gt;&gt;<span class="w"> </span><span class="nv">$config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>App<span class="se">\M</span>odels<span class="se">\L</span>ightspeedconfiguration::where<span class="o">(</span><span class="s1">&#39;organization_id&#39;</span>,<span class="w"> </span><span class="m">1</span><span class="o">)</span>-&gt;first<span class="o">()</span><span class="p">;</span>
 &gt;&gt;&gt;<span class="w"> </span><span class="nv">$config</span>-&gt;getConfigurationsAttribute<span class="o">()</span><span class="p">;</span>
 
 <span class="c1"># Limpiar cache si es necesario</span>
 docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>docucenter-app-1<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>cache:clear
-</code></pre></div></p>
-<h3 id="problema-prefijo-se-duplica">Problema: Prefijo se duplica<a class="headerlink" href="#problema-prefijo-se-duplica" title="Permanent link">&para;</a></h3>
+</code></pre></div>
+
+<h3 id="problema-prefijo-se-duplica">Problema: Prefijo se duplica</h3>
 <p><strong>Causa:</strong> El número ya incluye el prefijo</p>
-<p><strong>Solución:</strong> El código ya maneja este caso con:
-<div class="highlight"><pre><span></span><code><span class="x">if (!empty($invoicePrefix) &amp;&amp; strpos($number, $invoicePrefix) !== 0) {</span>
+<p><strong>Solución:</strong> El código ya maneja este caso con:</p>
+<div class="codehilite"><pre><span></span><code><span class="x">if (!empty($invoicePrefix) &amp;&amp; strpos($number, $invoicePrefix) !== 0) {</span>
 <span class="x">    $number = $invoicePrefix . $number;</span>
 <span class="x">}</span>
-</code></pre></div></p>
-<h3 id="logging">Logging<a class="headerlink" href="#logging" title="Permanent link">&para;</a></h3>
-<p>Para debugging, revisar logs:
-<div class="highlight"><pre><span></span><code>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>docucenter-app-1<span class="w"> </span>tail<span class="w"> </span>-f<span class="w"> </span>storage/logs/laravel.log<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;prefijo&quot;</span>
-</code></pre></div></p>
+</code></pre></div>
+
+<h3 id="logging">Logging</h3>
+<p>Para debugging, revisar logs:</p>
+<div class="codehilite"><pre><span></span><code>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>docucenter-app-1<span class="w"> </span>tail<span class="w"> </span>-f<span class="w"> </span>storage/logs/laravel.log<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;prefijo&quot;</span>
+</code></pre></div>
+
 <p>El sistema registra:
 - Errores al obtener prefijo
 - Organization ID y Outlet ID involucrados
 - Mensajes de error específicos</p>
-<h2 id="casos-de-uso-reales">📊 Casos de Uso Reales<a class="headerlink" href="#casos-de-uso-reales" title="Permanent link">&para;</a></h2>
-<h3 id="organizacion-multi-tienda">Organización Multi-Tienda<a class="headerlink" href="#organizacion-multi-tienda" title="Permanent link">&para;</a></h3>
+<h2 id="casos-de-uso-reales">📊 Casos de Uso Reales</h2>
+<h3 id="organizacion-multi-tienda">Organización Multi-Tienda</h3>
 <p><strong>Escenario:</strong>
 - Organización: "Retail SA"
 - 3 tiendas: Principal, Norte, Sur
 - Cada tienda genera ~100 facturas/día</p>
-<p><strong>Configuración:</strong>
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<p><strong>Configuración:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;outlets&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <span class="w">    </span><span class="p">{</span>
 <span class="w">      </span><span class="nt">&quot;id_outlet&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;001&quot;</span><span class="p">,</span>
@@ -2415,34 +2476,35 @@ docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </spa
 <span class="w">    </span><span class="p">}</span>
 <span class="w">  </span><span class="p">]</span>
 <span class="p">}</span>
-</code></pre></div></p>
+</code></pre></div>
+
 <p><strong>Resultado:</strong>
 - Principal: PRI-0001, PRI-0002, ...
 - Norte: NOR-0001, NOR-0002, ...
 - Sur: SUR-0001, SUR-0002, ...</p>
 <p>Sin colisiones entre tiendas.</p>
-<h2 id="seguridad">🔐 Seguridad<a class="headerlink" href="#seguridad" title="Permanent link">&para;</a></h2>
+<h2 id="seguridad">🔐 Seguridad</h2>
 <ul>
 <li>Validación de longitud máxima (10 caracteres)</li>
 <li>Sanitización de entrada</li>
 <li>Manejo seguro de excepciones</li>
 <li>Logging de errores sin exponer datos sensibles</li>
 </ul>
-<h2 id="metricas-de-exito">📈 Métricas de Éxito<a class="headerlink" href="#metricas-de-exito" title="Permanent link">&para;</a></h2>
+<h2 id="metricas-de-exito">📈 Métricas de Éxito</h2>
 <ul>
 <li>✅ Cero colisiones de números de factura</li>
 <li>✅ Identificación clara de origen de factura</li>
 <li>✅ Configuración flexible por tienda</li>
 <li>✅ Compatibilidad con facturas existentes</li>
 </ul>
-<h2 id="actualizaciones-futuras">🔄 Actualizaciones Futuras<a class="headerlink" href="#actualizaciones-futuras" title="Permanent link">&para;</a></h2>
+<h2 id="actualizaciones-futuras">🔄 Actualizaciones Futuras</h2>
 <p>Posibles mejoras:
 1. Validación de unicidad de prefijos en UI
 2. Sugerencias automáticas de prefijos
 3. Reportes por tienda usando prefijos
 4. Bulk update de prefijos
 5. Validación de formato de prefijo</p>
-<h2 id="referencias">📚 Referencias<a class="headerlink" href="#referencias" title="Permanent link">&para;</a></h2>
+<h2 id="referencias">📚 Referencias</h2>
 <ul>
 <li><a href="../../api/fe/lightspeed-api/">Documentación Lightspeed X-Series API</a></li>
 <li><a href="../../app/Models/Lightspeedconfiguration.php">Modelo Lightspeedconfiguration</a></li>
@@ -2505,7 +2567,7 @@ docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </spa
       
       
     
-    <a href="https://github.com/aghabrego/docucenter" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+    <a href="https://github.com/aghabrego/docucenter-public" target="_blank" rel="noopener" title="github.com" class="md-social__link">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
     </a>
   

@@ -233,7 +233,7 @@
           
   
   
-  APIs
+  API Documentation
 
         </a>
       </li>
@@ -269,7 +269,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../technical/" class="md-tabs__link">
+        <a href="../../technical/README.md" class="md-tabs__link">
           
   
   
@@ -298,6 +298,25 @@
         </a>
       </li>
     
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Sistema de Testing
+
+      </a>
+    </li>
   
 
       
@@ -404,7 +423,7 @@
   <span class="md-ellipsis">
     
   
-    APIs
+    API Documentation
   
 
     
@@ -420,7 +439,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    APIs
+    API Documentation
   
 
           </label>
@@ -1363,7 +1382,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../technical/" class="md-nav__link">
+      <a href="../../technical/README.md" class="md-nav__link">
         
   
   
@@ -1716,6 +1735,33 @@
   
 
     
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sistema de Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -1967,20 +2013,23 @@
   
 
 
-<h1 id="script-de-test-extraccion-de-cufe-desde-log-real">Script de Test: Extracción de CUFE desde Log Real<a class="headerlink" href="#script-de-test-extraccion-de-cufe-desde-log-real" title="Permanent link">&para;</a></h1>
-<h2 id="descripcion">Descripción<a class="headerlink" href="#descripcion" title="Permanent link">&para;</a></h2>
+<h1 id="script-de-test-extraccion-de-cufe-desde-log-real">Script de Test: Extracción de CUFE desde Log Real</h1>
+<h2 id="descripcion">Descripción</h2>
 <p>Script PHP que extrae automáticamente los valores <code>responseData1</code> del log de producción y decodifica los CUFEs de Digifact sin necesidad de hardcodear valores.</p>
-<h2 id="ubicacion">Ubicación<a class="headerlink" href="#ubicacion" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code>docs/testing/test-cufe-from-log.php
+<h2 id="ubicacion">Ubicación</h2>
+<div class="codehilite"><pre><span></span><code>docs/testing/test-cufe-from-log.php
 </code></pre></div>
-<h2 id="uso">Uso<a class="headerlink" href="#uso" title="Permanent link">&para;</a></h2>
-<h3 id="opcion-1-log-por-defecto-laravellog">Opción 1: Log por defecto (laravel.log)<a class="headerlink" href="#opcion-1-log-por-defecto-laravellog" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>php<span class="w"> </span>docs/testing/test-cufe-from-log.php
+
+<h2 id="uso">Uso</h2>
+<h3 id="opcion-1-log-por-defecto-laravellog">Opción 1: Log por defecto (laravel.log)</h3>
+<div class="codehilite"><pre><span></span><code>php<span class="w"> </span>docs/testing/test-cufe-from-log.php
 </code></pre></div>
-<h3 id="opcion-2-log-especifico">Opción 2: Log específico<a class="headerlink" href="#opcion-2-log-especifico" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>php<span class="w"> </span>docs/testing/test-cufe-from-log.php<span class="w"> </span>storage/logs/laravel-2026-02-04.log
+
+<h3 id="opcion-2-log-especifico">Opción 2: Log específico</h3>
+<div class="codehilite"><pre><span></span><code>php<span class="w"> </span>docs/testing/test-cufe-from-log.php<span class="w"> </span>storage/logs/laravel-2026-02-04.log
 </code></pre></div>
-<h2 id="que-hace-el-script">Qué hace el script<a class="headerlink" href="#que-hace-el-script" title="Permanent link">&para;</a></h2>
+
+<h2 id="que-hace-el-script">Qué hace el script</h2>
 <ol>
 <li><strong>Lee el archivo de log</strong> especificado</li>
 <li><strong>Busca todos los campos <code>responseData1</code></strong> usando regex</li>
@@ -1988,8 +2037,8 @@
 <li><strong>Extrae los CUFEs</strong> del elemento <code>&lt;dId&gt;</code> con regex</li>
 <li><strong>Reporta estadísticas</strong> y lista de CUFEs válidos</li>
 </ol>
-<h2 id="ejemplo-de-salida">Ejemplo de Salida<a class="headerlink" href="#ejemplo-de-salida" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code>=== EXTRACCIÓN DE CUFE DESDE LOG REAL ===
+<h2 id="ejemplo-de-salida">Ejemplo de Salida</h2>
+<div class="codehilite"><pre><span></span><code>=== EXTRACCIÓN DE CUFE DESDE LOG REAL ===
 
 📄 Log utilizado: storage/logs/laravel.log
 📦 Tamaño del log: 1,243,259 bytes
@@ -2027,21 +2076,25 @@ Total de CUFEs extraídos: 3
    2. FE0120000155770712-2-2025-3600002026020300000000110020113194207472
    3. FE0120000155770712-2-2025-3600002026020300000000110020113194207472
 </code></pre></div>
-<h2 id="como-funciona-la-extraccion">Cómo funciona la extracción<a class="headerlink" href="#como-funciona-la-extraccion" title="Permanent link">&para;</a></h2>
-<h3 id="paso-1-buscar-responsedata1-en-el-log">Paso 1: Buscar responseData1 en el log<a class="headerlink" href="#paso-1-buscar-responsedata1-en-el-log" title="Permanent link">&para;</a></h3>
-<p><div class="highlight"><pre><span></span><code>/&quot;responseData1&quot;:&quot;([^&quot;]{100,})&quot;/
+
+<h2 id="como-funciona-la-extraccion">Cómo funciona la extracción</h2>
+<h3 id="paso-1-buscar-responsedata1-en-el-log">Paso 1: Buscar responseData1 en el log</h3>
+<div class="codehilite"><pre><span></span><code>/&quot;responseData1&quot;:&quot;([^&quot;]{100,})&quot;/
 </code></pre></div>
-Busca el campo <code>responseData1</code> con más de 100 caracteres (para evitar valores vacíos).</p>
-<h3 id="paso-2-decodificar-base64">Paso 2: Decodificar base64<a class="headerlink" href="#paso-2-decodificar-base64" title="Permanent link">&para;</a></h3>
-<p><div class="highlight"><pre><span></span><code><span class="x">$xmlDecoded = base64_decode($base64Data);</span>
+
+<p>Busca el campo <code>responseData1</code> con más de 100 caracteres (para evitar valores vacíos).</p>
+<h3 id="paso-2-decodificar-base64">Paso 2: Decodificar base64</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">$xmlDecoded = base64_decode($base64Data);</span>
 </code></pre></div>
-Convierte el base64 a XML UTF-8.</p>
-<h3 id="paso-3-extraer-cufe-con-regex">Paso 3: Extraer CUFE con regex<a class="headerlink" href="#paso-3-extraer-cufe-con-regex" title="Permanent link">&para;</a></h3>
-<p><div class="highlight"><pre><span></span><code>/&lt;dId&gt;([^&lt;]+)&lt;\/dId&gt;/
+
+<p>Convierte el base64 a XML UTF-8.</p>
+<h3 id="paso-3-extraer-cufe-con-regex">Paso 3: Extraer CUFE con regex</h3>
+<div class="codehilite"><pre><span></span><code>/&lt;dId&gt;([^&lt;]+)&lt;\/dId&gt;/
 </code></pre></div>
-Busca el elemento <code>dId</code> que contiene el CUFE del documento.</p>
-<h2 id="estructura-del-cufe-de-digifact">Estructura del CUFE de Digifact<a class="headerlink" href="#estructura-del-cufe-de-digifact" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code>FE0120000155770712-2-2025-3600002026020300000000110020113194207472
+
+<p>Busca el elemento <code>dId</code> que contiene el CUFE del documento.</p>
+<h2 id="estructura-del-cufe-de-digifact">Estructura del CUFE de Digifact</h2>
+<div class="codehilite"><pre><span></span><code>FE0120000155770712-2-2025-3600002026020300000000110020113194207472
 ^^                 ^^^^^^  ^^^^
 ├─ FE: Factura Electrónica
 └─ 01: Tipo de documento
@@ -2049,20 +2102,21 @@ Busca el elemento <code>dId</code> que contiene el CUFE del documento.</p>
       └─ 01557707122-2-2025: RUC del emisor
          └─ 36000020260203...: Datos de la emisión
 </code></pre></div>
-<h2 id="validaciones">Validaciones<a class="headerlink" href="#validaciones" title="Permanent link">&para;</a></h2>
+
+<h2 id="validaciones">Validaciones</h2>
 <p>El script valida:
 - ✅ Que el archivo de log existe
 - ✅ Que contiene datos de <code>responseData1</code>
 - ✅ Que el base64 decodifica correctamente
 - ✅ Que se encuentra el elemento <code>&lt;dId&gt;</code> en el XML</p>
-<h2 id="errores-comunes">Errores comunes<a class="headerlink" href="#errores-comunes" title="Permanent link">&para;</a></h2>
-<h3 id="no-se-encontro-responsedata1-en-el-log">"No se encontró responseData1 en el log"<a class="headerlink" href="#no-se-encontro-responsedata1-en-el-log" title="Permanent link">&para;</a></h3>
+<h2 id="errores-comunes">Errores comunes</h2>
+<h3 id="no-se-encontro-responsedata1-en-el-log">"No se encontró responseData1 en el log"</h3>
 <p><strong>Solución</strong>: El log no contiene respuestas de Digifact. Asegúrate de:
 1. Haber emitido documentos con Digifact
 2. Usar el log correcto (fecha actual)</p>
-<h3 id="error-al-decodificar-el-base64">"Error al decodificar el base64"<a class="headerlink" href="#error-al-decodificar-el-base64" title="Permanent link">&para;</a></h3>
+<h3 id="error-al-decodificar-el-base64">"Error al decodificar el base64"</h3>
 <p><strong>Solución</strong>: El base64 está corrupto. Esto puede indicar problemas en la respuesta de Digifact.</p>
-<h2 id="ver-tambien">Ver también<a class="headerlink" href="#ver-tambien" title="Permanent link">&para;</a></h2>
+<h2 id="ver-tambien">Ver también</h2>
 <ul>
 <li><a href="../test-cufe-extraction.php">test-cufe-extraction.php</a> - Test con base64 hardcodeado</li>
 <li><a href="../../app/Services/DigifactService.php#L779">DigifactService.php</a> - Extracción de CUFE en el código real</li>
@@ -2119,7 +2173,7 @@ Busca el elemento <code>dId</code> que contiene el CUFE del documento.</p>
       
       
     
-    <a href="https://github.com/aghabrego/docucenter" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+    <a href="https://github.com/aghabrego/docucenter-public" target="_blank" rel="noopener" title="github.com" class="md-social__link">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
     </a>
   

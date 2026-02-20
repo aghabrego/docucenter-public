@@ -233,7 +233,7 @@
           
   
   
-  APIs
+  API Documentation
 
         </a>
       </li>
@@ -269,7 +269,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../" class="md-tabs__link">
+        <a href="../README.md" class="md-tabs__link">
           
   
   
@@ -298,6 +298,25 @@
         </a>
       </li>
     
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../testing/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Sistema de Testing
+
+      </a>
+    </li>
   
 
       
@@ -404,7 +423,7 @@
   <span class="md-ellipsis">
     
   
-    APIs
+    API Documentation
   
 
     
@@ -420,7 +439,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    APIs
+    API Documentation
   
 
           </label>
@@ -1363,7 +1382,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
+      <a href="../README.md" class="md-nav__link">
         
   
   
@@ -1712,6 +1731,33 @@
           </ul>
         </nav>
       
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sistema de Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -2207,23 +2253,23 @@
   
 
 
-<h1 id="implementacion-de-columnas-source-para-consolidacion">Implementación de Columnas Source para Consolidación<a class="headerlink" href="#implementacion-de-columnas-source-para-consolidacion" title="Permanent link">&para;</a></h1>
+<h1 id="implementacion-de-columnas-source-para-consolidacion">Implementación de Columnas Source para Consolidación</h1>
 <p><strong>Fecha:</strong> 9 de febrero, 2026 
 <strong>Estado:</strong> Implementado y listo para despliegue 
 <strong>Prioridad:</strong> CRÍTICO</p>
 <hr />
-<h2 id="resumen">Resumen<a class="headerlink" href="#resumen" title="Permanent link">&para;</a></h2>
+<h2 id="resumen">Resumen</h2>
 <p>Se implementó la solución completa para el problema de colisión de Primary Keys en el sistema de consolidación multi-organización. La solución incluye:</p>
 <ol>
-<li><strong>14 columnas source_*</strong> para preservar PKs originales (6 headers + 8 details)</li>
+<li><strong>14 columnas source_</strong>* para preservar PKs originales (6 headers + 8 details)</li>
 <li><strong>UNIQUE constraints</strong> en (source_*, org_source_id) para prevenir duplicados</li>
 <li><strong>Sincronización en 2 fases</strong> para mantener integridad referencial Header-Detail</li>
 <li><strong>Scripts automatizados</strong> para despliegue en producción</li>
 </ol>
 <hr />
-<h2 id="problema-resuelto">Problema Resuelto<a class="headerlink" href="#problema-resuelto" title="Permanent link">&para;</a></h2>
-<h3 id="antes-sistema-vulnerable">Antes (Sistema Vulnerable)<a class="headerlink" href="#antes-sistema-vulnerable" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="c1">-- Org1: GJE_Header_Imp tiene TransactionID=100</span>
+<h2 id="problema-resuelto">Problema Resuelto</h2>
+<h3 id="antes-sistema-vulnerable">Antes (Sistema Vulnerable)</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1">-- Org1: GJE_Header_Imp tiene TransactionID=100</span>
 <span class="c1">-- Org2: GJE_Header_Imp tiene TransactionID=100</span>
 <span class="c1">-- Consolidación: ERROR - Duplicate PK &#39;100&#39;</span>
 
@@ -2234,8 +2280,9 @@
 <span class="c1">-- - FK apunta a header inexistente (100 cambió a 500)</span>
 <span class="c1">-- - Integridad referencial ROTA</span>
 </code></pre></div>
-<h3 id="despues-sistema-protegido">Después (Sistema Protegido)<a class="headerlink" href="#despues-sistema-protegido" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="c1">-- FASE 1: Headers</span>
+
+<h3 id="despues-sistema-protegido">Después (Sistema Protegido)</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1">-- FASE 1: Headers</span>
 <span class="c1">-- Org1 → source_transaction_id=100, TransactionID=500 (nuevo)</span>
 <span class="c1">-- Org2 → source_transaction_id=100, TransactionID=501 (nuevo)</span>
 <span class="c1">-- Mapeo: {100_org1 =&gt; 500, 100_org2 =&gt; 501}</span>
@@ -2245,23 +2292,26 @@
 <span class="c1">-- Org2 Detail → source_detail_id=1, DetailID=1001 (nuevo), FK=501 </span>
 <span class="c1">-- Integridad referencial PRESERVADA</span>
 </code></pre></div>
+
 <hr />
-<h2 id="componentes-implementados">Componentes Implementados<a class="headerlink" href="#componentes-implementados" title="Permanent link">&para;</a></h2>
-<h3 id="1-comandos-artisan">1. Comandos Artisan<a class="headerlink" href="#1-comandos-artisan" title="Permanent link">&para;</a></h3>
-<h4 id="dbupdate-stub-source-column"><code>db:update-stub-source-column</code><a class="headerlink" href="#dbupdate-stub-source-column" title="Permanent link">&para;</a></h4>
+<h2 id="componentes-implementados">Componentes Implementados</h2>
+<h3 id="1-comandos-artisan">1. Comandos Artisan</h3>
+<h4 id="dbupdate-stub-source-column"><code>db:update-stub-source-column</code></h4>
 <p><strong>Ubicación:</strong> <code>app/Console/Commands/Configuration/UpdateStubSourceColumnCommand.php</code></p>
 <p><strong>Propósito:</strong> Actualizar stubs SQL para incluir columnas source_* y UNIQUE constraints</p>
-<p><strong>Uso:</strong>
-<div class="highlight"><pre><span></span><code>php<span class="w"> </span>artisan<span class="w"> </span>db:update-stub-source-column<span class="w"> </span><span class="o">{</span>table<span class="o">}</span><span class="w"> </span><span class="o">{</span>column<span class="o">}</span><span class="w"> </span><span class="o">[</span>--after<span class="o">=</span>org_source_id<span class="o">]</span>
-</code></pre></div></p>
-<p><strong>Ejemplo:</strong>
-<div class="highlight"><pre><span></span><code>php<span class="w"> </span>artisan<span class="w"> </span>db:update-stub-source-column<span class="w"> </span>Sales_Header_Imp<span class="w"> </span>source_id
-</code></pre></div></p>
-<h4 id="dbadd-column-to-organizations-table-actualizado"><code>db:add-column-to-organizations-table</code> (Actualizado)<a class="headerlink" href="#dbadd-column-to-organizations-table-actualizado" title="Permanent link">&para;</a></h4>
+<p><strong>Uso:</strong></p>
+<div class="codehilite"><pre><span></span><code>php<span class="w"> </span>artisan<span class="w"> </span>db:update-stub-source-column<span class="w"> </span><span class="o">{</span>table<span class="o">}</span><span class="w"> </span><span class="o">{</span>column<span class="o">}</span><span class="w"> </span><span class="o">[</span>--after<span class="o">=</span>org_source_id<span class="o">]</span>
+</code></pre></div>
+
+<p><strong>Ejemplo:</strong></p>
+<div class="codehilite"><pre><span></span><code>php<span class="w"> </span>artisan<span class="w"> </span>db:update-stub-source-column<span class="w"> </span>Sales_Header_Imp<span class="w"> </span>source_id
+</code></pre></div>
+
+<h4 id="dbadd-column-to-organizations-table-actualizado"><code>db:add-column-to-organizations-table</code> (Actualizado)</h4>
 <p><strong>Ubicación:</strong> <code>app/Console/Commands/Configuration/AddColumnToOrganizationsTableCommand.php</code></p>
 <p><strong>Mejora:</strong> Ahora detecta automáticamente columnas <code>source_*</code> y actualiza el stub antes de agregar a BDs organizacionales</p>
-<h3 id="2-job-de-sincronizacion">2. Job de Sincronización<a class="headerlink" href="#2-job-de-sincronizacion" title="Permanent link">&para;</a></h3>
-<h4 id="syncorganizationtocompanyjob-actualizado"><code>SyncOrganizationToCompanyJob</code> (Actualizado)<a class="headerlink" href="#syncorganizationtocompanyjob-actualizado" title="Permanent link">&para;</a></h4>
+<h3 id="2-job-de-sincronizacion">2. Job de Sincronización</h3>
+<h4 id="syncorganizationtocompanyjob-actualizado"><code>SyncOrganizationToCompanyJob</code> (Actualizado)</h4>
 <p><strong>Ubicación:</strong> <code>app/Jobs/SyncOrganizationToCompanyJob.php</code></p>
 <p><strong>Mejoras:</strong>
 - Nuevo método <code>syncTableWithHeaderDetailRelation()</code>: Sincronización en 2 fases
@@ -2271,61 +2321,68 @@
 <p><strong>Flujo de Sincronización:</strong>
 1. <strong>FASE 1:</strong> Sincronizar Headers → Crear mapa de IDs (oldId =&gt; newId)
 2. <strong>FASE 2:</strong> Sincronizar Details → Actualizar FKs usando mapa + Preservar PK original</p>
-<h3 id="3-scripts-de-despliegue">3. Scripts de Despliegue<a class="headerlink" href="#3-scripts-de-despliegue" title="Permanent link">&para;</a></h3>
-<h4 id="add-source-columns-consolidationsh"><code>add-source-columns-consolidation.sh</code><a class="headerlink" href="#add-source-columns-consolidationsh" title="Permanent link">&para;</a></h4>
+<h3 id="3-scripts-de-despliegue">3. Scripts de Despliegue</h3>
+<h4 id="add-source-columns-consolidationsh"><code>add-source-columns-consolidation.sh</code></h4>
 <p><strong>Ubicación:</strong> <code>scripts/add-source-columns-consolidation.sh</code></p>
 <p><strong>Propósito:</strong> Agregar 14 columnas source_* a TODAS las BDs organizacionales existentes</p>
-<p><strong>Ejecución:</strong>
-<div class="highlight"><pre><span></span><code>./scripts/add-source-columns-consolidation.sh
-</code></pre></div></p>
+<p><strong>Ejecución:</strong></p>
+<div class="codehilite"><pre><span></span><code>./scripts/add-source-columns-consolidation.sh
+</code></pre></div>
+
 <p><strong>Duración estimada:</strong> 30-60 minutos (depende del número de organizaciones)</p>
 <p><strong>Qué hace:</strong>
 1. Actualiza stub SQL automáticamente (comando lo hace)
 2. Agrega columna a cada BD organizacional
 3. Reporta progreso en tiempo real</p>
-<h4 id="add-unique-constraints-source-columnssh"><code>add-unique-constraints-source-columns.sh</code><a class="headerlink" href="#add-unique-constraints-source-columnssh" title="Permanent link">&para;</a></h4>
+<h4 id="add-unique-constraints-source-columnssh"><code>add-unique-constraints-source-columns.sh</code></h4>
 <p><strong>Ubicación:</strong> <code>scripts/add-unique-constraints-source-columns.sh</code></p>
 <p><strong>Propósito:</strong> Agregar UNIQUE constraints a BDs de consolidación existentes</p>
-<p><strong>Ejecución:</strong>
-<div class="highlight"><pre><span></span><code>./scripts/add-unique-constraints-source-columns.sh
-</code></pre></div></p>
+<p><strong>Ejecución:</strong></p>
+<div class="codehilite"><pre><span></span><code>./scripts/add-unique-constraints-source-columns.sh
+</code></pre></div>
+
 <p><strong>Duración estimada:</strong> 5-10 minutos</p>
 <p><strong>Qué hace:</strong>
 1. Obtiene compañías con <code>enable_consolidation=true</code>
 2. Aplica ALTER TABLE ADD UNIQUE KEY en cada BD consolidada
 3. Ignora errores si constraint ya existe</p>
 <hr />
-<h2 id="guia-de-despliegue">Guía de Despliegue<a class="headerlink" href="#guia-de-despliegue" title="Permanent link">&para;</a></h2>
-<h3 id="paso-1-backup-obligatorio">Paso 1: Backup (OBLIGATORIO)<a class="headerlink" href="#paso-1-backup-obligatorio" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># Backup de BDs organizacionales</span>
+<h2 id="guia-de-despliegue">Guía de Despliegue</h2>
+<h3 id="paso-1-backup-obligatorio">Paso 1: Backup (OBLIGATORIO)</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Backup de BDs organizacionales</span>
 docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>docucenter-app-1<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>backup:database:all
 
 <span class="c1"># Backup de BDs de consolidación</span>
 docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>docucenter-app-1<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>backup:database:consolidation
 </code></pre></div>
-<h3 id="paso-2-agregar-columnas-source-en-bds-organizacionales">Paso 2: Agregar Columnas Source en BDs Organizacionales<a class="headerlink" href="#paso-2-agregar-columnas-source-en-bds-organizacionales" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>./scripts/add-source-columns-consolidation.sh
+
+<h3 id="paso-2-agregar-columnas-source-en-bds-organizacionales">Paso 2: Agregar Columnas Source en BDs Organizacionales</h3>
+<div class="codehilite"><pre><span></span><code>./scripts/add-source-columns-consolidation.sh
 </code></pre></div>
+
 <p><strong>⏱ Tiempo:</strong> ~30-60 minutos 
-<strong>Output esperado:</strong>
-<div class="highlight"><pre><span></span><code>Completado: Sales_Header_Imp.source_id
-Completado: GJE_Detail_Imp.source_detail_id
-...
-PARTE 2 COMPLETADA: 8 columnas source en Details
-Total: 14 columnas agregadas
-</code></pre></div></p>
-<h3 id="paso-3-agregar-unique-constraints-en-bds-de-consolidacion">Paso 3: Agregar UNIQUE Constraints en BDs de Consolidación<a class="headerlink" href="#paso-3-agregar-unique-constraints-en-bds-de-consolidacion" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>./scripts/add-unique-constraints-source-columns.sh
+<strong>Output esperado:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="n">Completado</span><span class="o">:</span><span class="w"> </span><span class="n">Sales_Header_Imp</span><span class="o">.</span><span class="na">source_id</span>
+<span class="n">Completado</span><span class="o">:</span><span class="w"> </span><span class="n">GJE_Detail_Imp</span><span class="o">.</span><span class="na">source_detail_id</span>
+<span class="o">...</span>
+<span class="n">PARTE</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="n">COMPLETADA</span><span class="o">:</span><span class="w"> </span><span class="mi">8</span><span class="w"> </span><span class="n">columnas</span><span class="w"> </span><span class="n">source</span><span class="w"> </span><span class="n">en</span><span class="w"> </span><span class="n">Details</span>
+<span class="n">Total</span><span class="o">:</span><span class="w"> </span><span class="mi">14</span><span class="w"> </span><span class="n">columnas</span><span class="w"> </span><span class="n">agregadas</span>
 </code></pre></div>
+
+<h3 id="paso-3-agregar-unique-constraints-en-bds-de-consolidacion">Paso 3: Agregar UNIQUE Constraints en BDs de Consolidación</h3>
+<div class="codehilite"><pre><span></span><code>./scripts/add-unique-constraints-source-columns.sh
+</code></pre></div>
+
 <p><strong>⏱ Tiempo:</strong> ~5-10 minutos 
-<strong>Output esperado:</strong>
-<div class="highlight"><pre><span></span><code>Constraints agregados en: company_100_consolidation
-Constraints agregados en: company_101_consolidation
-...
-UNIQUE constraints agregados en todas las BDs de consolidación
-</code></pre></div></p>
-<h3 id="paso-4-verificar-implementacion">Paso 4: Verificar Implementación<a class="headerlink" href="#paso-4-verificar-implementacion" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># Verificar columna en BD organizacional</span>
+<strong>Output esperado:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="n">Constraints</span><span class="w"> </span><span class="n">agregados</span><span class="w"> </span><span class="n">en</span><span class="p">:</span><span class="w"> </span><span class="n">company_100_consolidation</span>
+<span class="n">Constraints</span><span class="w"> </span><span class="n">agregados</span><span class="w"> </span><span class="n">en</span><span class="p">:</span><span class="w"> </span><span class="n">company_101_consolidation</span>
+<span class="o">...</span>
+<span class="n">UNIQUE</span><span class="w"> </span><span class="n">constraints</span><span class="w"> </span><span class="n">agregados</span><span class="w"> </span><span class="n">en</span><span class="w"> </span><span class="n">todas</span><span class="w"> </span><span class="n">las</span><span class="w"> </span><span class="n">BDs</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">consolidación</span>
+</code></pre></div>
+
+<h3 id="paso-4-verificar-implementacion">Paso 4: Verificar Implementación</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Verificar columna en BD organizacional</span>
 docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>docucenter-app-1<span class="w"> </span>mysql<span class="w"> </span>-u<span class="w"> </span>root<span class="w"> </span>-p<span class="si">${</span><span class="nv">MYSQL_ROOT_PASSWORD</span><span class="si">}</span><span class="w"> </span>9_734_1672_56<span class="w"> </span><span class="se">\</span>
 <span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;DESCRIBE Sales_Header_Imp&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>source_id
 
@@ -2333,30 +2390,35 @@ docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </spa
 docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>docucenter-app-1<span class="w"> </span>mysql<span class="w"> </span>-u<span class="w"> </span>root<span class="w"> </span>-p<span class="si">${</span><span class="nv">MYSQL_ROOT_PASSWORD</span><span class="si">}</span><span class="w"> </span>company_100<span class="w"> </span><span class="se">\</span>
 <span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;SHOW INDEX FROM Sales_Header_Imp WHERE Key_name LIKE &#39;uk_source%&#39;&quot;</span>
 </code></pre></div>
-<p><strong>Output esperado:</strong>
-<div class="highlight"><pre><span></span><code>source_id | bigint | YES | | NULL |
+
+<p><strong>Output esperado:</strong></p>
+<div class="codehilite"><pre><span></span><code>source_id | bigint | YES | | NULL |
 uk_source_id_org_source_id | 1 | source_id | A | ...
-</code></pre></div></p>
-<h3 id="paso-5-probar-sincronizacion">Paso 5: Probar Sincronización<a class="headerlink" href="#paso-5-probar-sincronizacion" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># Disparar Job de sincronización manualmente</span>
+</code></pre></div>
+
+<h3 id="paso-5-probar-sincronizacion">Paso 5: Probar Sincronización</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Disparar Job de sincronización manualmente</span>
 docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>docucenter-app-1<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>tinker
 &gt;&gt;&gt;<span class="w"> </span>App<span class="se">\J</span>obs<span class="se">\S</span>yncOrganizationToCompanyJob::dispatch<span class="o">(</span><span class="m">1</span>,<span class="w"> </span><span class="m">100</span><span class="o">)</span><span class="p">;</span>
 &gt;&gt;&gt;<span class="w"> </span><span class="nb">exit</span>
 </code></pre></div>
-<p><strong>Verificar logs:</strong>
-<div class="highlight"><pre><span></span><code>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>docucenter-app-1<span class="w"> </span>tail<span class="w"> </span>-f<span class="w"> </span>storage/logs/laravel.log<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;FASE&quot;</span>
-</code></pre></div></p>
-<p><strong>Output esperado:</strong>
-<div class="highlight"><pre><span></span><code>[INFO] FASE 1: Syncing header table Sales_Header_Imp...
-[INFO] FASE 1 completada: Sales_Header_Imp con 150 registros mapeados
-[INFO] FASE 2: Syncing detail table Sales_Detail_Imp...
-[INFO] FASE 2 completada: Sales_Detail_Imp
-[INFO] - Details sincronizados: 450
-[INFO] Completed Header-Detail pair: Sales_Header_Imp + Sales_Detail_Imp = 600 records
-</code></pre></div></p>
+
+<p><strong>Verificar logs:</strong></p>
+<div class="codehilite"><pre><span></span><code>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>docucenter-app-1<span class="w"> </span>tail<span class="w"> </span>-f<span class="w"> </span>storage/logs/laravel.log<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;FASE&quot;</span>
+</code></pre></div>
+
+<p><strong>Output esperado:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="o">[</span><span class="n">INFO</span><span class="o">]</span><span class="w"> </span><span class="n">FASE</span><span class="w"> </span><span class="mi">1</span><span class="err">:</span><span class="w"> </span><span class="n">Syncing</span><span class="w"> </span><span class="n">header</span><span class="w"> </span><span class="nc">table</span><span class="w"> </span><span class="n">Sales_Header_Imp</span><span class="p">...</span>
+<span class="o">[</span><span class="n">INFO</span><span class="o">]</span><span class="w"> </span><span class="n">FASE</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="nl">completada</span><span class="p">:</span><span class="w"> </span><span class="n">Sales_Header_Imp</span><span class="w"> </span><span class="n">con</span><span class="w"> </span><span class="mi">150</span><span class="w"> </span><span class="n">registros</span><span class="w"> </span><span class="n">mapeados</span>
+<span class="o">[</span><span class="n">INFO</span><span class="o">]</span><span class="w"> </span><span class="n">FASE</span><span class="w"> </span><span class="mi">2</span><span class="err">:</span><span class="w"> </span><span class="n">Syncing</span><span class="w"> </span><span class="n">detail</span><span class="w"> </span><span class="nc">table</span><span class="w"> </span><span class="n">Sales_Detail_Imp</span><span class="p">...</span>
+<span class="o">[</span><span class="n">INFO</span><span class="o">]</span><span class="w"> </span><span class="n">FASE</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="nl">completada</span><span class="p">:</span><span class="w"> </span><span class="n">Sales_Detail_Imp</span>
+<span class="o">[</span><span class="n">INFO</span><span class="o">]</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">Details</span><span class="w"> </span><span class="nl">sincronizados</span><span class="p">:</span><span class="w"> </span><span class="mi">450</span>
+<span class="o">[</span><span class="n">INFO</span><span class="o">]</span><span class="w"> </span><span class="n">Completed</span><span class="w"> </span><span class="n">Header</span><span class="o">-</span><span class="n">Detail</span><span class="w"> </span><span class="nl">pair</span><span class="p">:</span><span class="w"> </span><span class="n">Sales_Header_Imp</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Sales_Detail_Imp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">600</span><span class="w"> </span><span class="n">records</span>
+</code></pre></div>
+
 <hr />
-<h2 id="estadisticas">Estadísticas<a class="headerlink" href="#estadisticas" title="Permanent link">&para;</a></h2>
-<h3 id="columnas-agregadas">Columnas Agregadas<a class="headerlink" href="#columnas-agregadas" title="Permanent link">&para;</a></h3>
+<h2 id="estadisticas">Estadísticas</h2>
+<h3 id="columnas-agregadas">Columnas Agregadas</h3>
 <table>
 <thead>
 <tr>
@@ -2484,7 +2546,7 @@ docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </spa
 </tbody>
 </table>
 <p><strong>Total:</strong> 14 columnas</p>
-<h3 id="pares-header-detail-sincronizados">Pares Header-Detail Sincronizados<a class="headerlink" href="#pares-header-detail-sincronizados" title="Permanent link">&para;</a></h3>
+<h3 id="pares-header-detail-sincronizados">Pares Header-Detail Sincronizados</h3>
 <table>
 <thead>
 <tr>
@@ -2565,9 +2627,9 @@ docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </spa
 </table>
 <p><strong>Total:</strong> 8 pares (16 tablas con sincronización especial)</p>
 <hr />
-<h2 id="validaciones-post-despliegue">Validaciones Post-Despliegue<a class="headerlink" href="#validaciones-post-despliegue" title="Permanent link">&para;</a></h2>
-<h3 id="1-verificar-columnas-en-organizaciones">1. Verificar Columnas en Organizaciones<a class="headerlink" href="#1-verificar-columnas-en-organizaciones" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="c1">-- Ejecutar en cada BD organizacional</span>
+<h2 id="validaciones-post-despliegue">Validaciones Post-Despliegue</h2>
+<h3 id="1-verificar-columnas-en-organizaciones">1. Verificar Columnas en Organizaciones</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1">-- Ejecutar en cada BD organizacional</span>
 <span class="k">SELECT</span><span class="w"> </span>
 <span class="w"> </span><span class="k">TABLE_NAME</span><span class="p">,</span><span class="w"> </span>
 <span class="w"> </span><span class="k">COLUMN_NAME</span><span class="p">,</span>
@@ -2578,9 +2640,10 @@ docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </spa
 <span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="k">COLUMN_NAME</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;source_%&#39;</span>
 <span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="k">TABLE_NAME</span><span class="p">,</span><span class="w"> </span><span class="k">COLUMN_NAME</span><span class="p">;</span>
 </code></pre></div>
+
 <p><strong>Esperado:</strong> 14+ filas (puede haber más si hay source_transaction_id ya existente)</p>
-<h3 id="2-verificar-unique-constraints-en-consolidacion">2. Verificar UNIQUE Constraints en Consolidación<a class="headerlink" href="#2-verificar-unique-constraints-en-consolidacion" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="c1">-- Ejecutar en cada BD consolidada</span>
+<h3 id="2-verificar-unique-constraints-en-consolidacion">2. Verificar UNIQUE Constraints en Consolidación</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1">-- Ejecutar en cada BD consolidada</span>
 <span class="k">SELECT</span><span class="w"> </span>
 <span class="w"> </span><span class="k">TABLE_NAME</span><span class="p">,</span>
 <span class="w"> </span><span class="k">CONSTRAINT_NAME</span><span class="p">,</span>
@@ -2591,9 +2654,10 @@ docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </spa
 <span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="k">TABLE_NAME</span><span class="p">,</span><span class="w"> </span><span class="k">CONSTRAINT_NAME</span>
 <span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="k">TABLE_NAME</span><span class="p">;</span>
 </code></pre></div>
+
 <p><strong>Esperado:</strong> 14 constraints (1 por tabla)</p>
-<h3 id="3-verificar-integridad-referencial">3. Verificar Integridad Referencial<a class="headerlink" href="#3-verificar-integridad-referencial" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="c1">-- Verificar que Details tienen FKs válidas (NO huérfanos)</span>
+<h3 id="3-verificar-integridad-referencial">3. Verificar Integridad Referencial</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1">-- Verificar que Details tienen FKs válidas (NO huérfanos)</span>
 <span class="k">SELECT</span><span class="w"> </span>
 <span class="w"> </span><span class="n">h</span><span class="p">.</span><span class="n">TransactionID</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">header_new_id</span><span class="p">,</span>
 <span class="w"> </span><span class="n">h</span><span class="p">.</span><span class="n">source_transaction_id</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">header_original_id</span><span class="p">,</span>
@@ -2605,9 +2669,10 @@ docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </spa
 <span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">h</span><span class="p">.</span><span class="n">TransactionID</span><span class="p">,</span><span class="w"> </span><span class="n">h</span><span class="p">.</span><span class="n">source_transaction_id</span><span class="p">,</span><span class="w"> </span><span class="n">h</span><span class="p">.</span><span class="n">org_source_id</span>
 <span class="k">HAVING</span><span class="w"> </span><span class="n">details_count</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 </code></pre></div>
+
 <p><strong>Esperado:</strong> Todas las relaciones FK válidas, sin NULL</p>
-<h3 id="4-verificar-sincronizacion-funcionando">4. Verificar Sincronización Funcionando<a class="headerlink" href="#4-verificar-sincronizacion-funcionando" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># Revisar últimos logs de sincronización</span>
+<h3 id="4-verificar-sincronizacion-funcionando">4. Verificar Sincronización Funcionando</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Revisar últimos logs de sincronización</span>
 docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>docucenter-app-1<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>tinker<span class="w"> </span>--execute<span class="o">=</span><span class="s2">&quot;</span>
 <span class="s2">\$jobs = \App\Models\Job::where(&#39;queue&#39;, &#39;consolidation&#39;)</span>
 <span class="s2"> -&gt;orderBy(&#39;id&#39;, &#39;desc&#39;)</span>
@@ -2619,23 +2684,27 @@ docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </spa
 <span class="s2">});</span>
 <span class="s2">&quot;</span>
 </code></pre></div>
+
 <hr />
-<h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2>
-<h3 id="problema-1-column-already-exists">Problema 1: "Column already exists"<a class="headerlink" href="#problema-1-column-already-exists" title="Permanent link">&para;</a></h3>
-<p><strong>Síntoma:</strong>
-<div class="highlight"><pre><span></span><code>Error: Column &#39;source_id&#39; already exists in table &#39;Sales_Header_Imp&#39;
-</code></pre></div></p>
-<p><strong>Solución:</strong>
-<div class="highlight"><pre><span></span><code><span class="c1"># Continuar script - el comando detecta columnas existentes automáticamente</span>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<h3 id="problema-1-column-already-exists">Problema 1: "Column already exists"</h3>
+<p><strong>Síntoma:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="n">Error</span><span class="o">:</span><span class="w"> </span><span class="n">Column</span><span class="w"> </span><span class="s1">&#39;source_id&#39;</span><span class="w"> </span><span class="n">already</span><span class="w"> </span><span class="n">exists</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">table</span><span class="w"> </span><span class="s1">&#39;Sales_Header_Imp&#39;</span>
+</code></pre></div>
+
+<p><strong>Solución:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Continuar script - el comando detecta columnas existentes automáticamente</span>
 <span class="c1"># El script mostrará &quot;✓ La columna &#39;source_id&#39; ya existe&quot; en lugar de error fatal</span>
-</code></pre></div></p>
-<h3 id="problema-2-orphan-details">Problema 2: "Orphan details"<a class="headerlink" href="#problema-2-orphan-details" title="Permanent link">&para;</a></h3>
-<p><strong>Síntoma:</strong>
-<div class="highlight"><pre><span></span><code>[WARNING] Orphan detail: GJE_Detail_Imp FK TransactionID=100 not found in map
-</code></pre></div></p>
+</code></pre></div>
+
+<h3 id="problema-2-orphan-details">Problema 2: "Orphan details"</h3>
+<p><strong>Síntoma:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="o">[</span><span class="n">WARNING</span><span class="o">]</span><span class="w"> </span><span class="n">Orphan</span><span class="w"> </span><span class="nl">detail</span><span class="p">:</span><span class="w"> </span><span class="n">GJE_Detail_Imp</span><span class="w"> </span><span class="n">FK</span><span class="w"> </span><span class="n">TransactionID</span><span class="o">=</span><span class="mi">100</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="k">found</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="k">map</span>
+</code></pre></div>
+
 <p><strong>Causa:</strong> Details tienen FK a headers que no existen en la organización origen</p>
-<p><strong>Solución:</strong>
-<div class="highlight"><pre><span></span><code><span class="c1">-- Identificar details huérfanos en BD origen</span>
+<p><strong>Solución:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="c1">-- Identificar details huérfanos en BD origen</span>
 <span class="k">SELECT</span><span class="w"> </span><span class="n">d</span><span class="p">.</span><span class="o">*</span><span class="w"> </span>
 <span class="k">FROM</span><span class="w"> </span><span class="n">GJE_Detail_Imp</span><span class="w"> </span><span class="n">d</span>
 <span class="k">LEFT</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">GJE_Header_Imp</span><span class="w"> </span><span class="n">h</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">h</span><span class="p">.</span><span class="n">TransactionID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">d</span><span class="p">.</span><span class="n">TransactionID</span>
@@ -2643,19 +2712,21 @@ docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </spa
 
 <span class="c1">-- Eliminar o corregir en BD origen ANTES de consolidar</span>
 <span class="k">DELETE</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">GJE_Detail_Imp</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">DetailID</span><span class="w"> </span><span class="k">IN</span><span class="w"> </span><span class="p">(...);</span>
-</code></pre></div></p>
-<h3 id="problema-3-sincronizacion-lenta">Problema 3: Sincronización lenta<a class="headerlink" href="#problema-3-sincronizacion-lenta" title="Permanent link">&para;</a></h3>
+</code></pre></div>
+
+<h3 id="problema-3-sincronizacion-lenta">Problema 3: Sincronización lenta</h3>
 <p><strong>Síntoma:</strong> Job tarda más de 5 minutos</p>
-<p><strong>Diagnóstico:</strong>
-<div class="highlight"><pre><span></span><code><span class="c1"># Ver progreso en tiempo real</span>
+<p><strong>Diagnóstico:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Ver progreso en tiempo real</span>
 docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>docucenter-app-1<span class="w"> </span>tail<span class="w"> </span>-f<span class="w"> </span>storage/logs/laravel.log<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;chunk\|FASE&quot;</span>
-</code></pre></div></p>
+</code></pre></div>
+
 <p><strong>Optimización:</strong>
 - Reducir chunk size para tablas con XML/JSON pesados
 - Aumentar timeout del Job si es necesario
 - Verificar índices en tablas origen</p>
 <hr />
-<h2 id="documentacion-relacionada">Documentación Relacionada<a class="headerlink" href="#documentacion-relacionada" title="Permanent link">&para;</a></h2>
+<h2 id="documentacion-relacionada">Documentación Relacionada</h2>
 <ul>
 <li><a href="../consolidation-detail-tables-analysis/">consolidation-detail-tables-analysis.md</a> - Análisis completo del problema</li>
 <li><a href="../consolidation-pk-collision-analysis/">consolidation-pk-collision-analysis.md</a> - Análisis de colisión PKs Headers</li>
@@ -2663,18 +2734,19 @@ docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </spa
 <li><a href="../database-replication-analysis/">database-replication-analysis.md</a> - Arquitectura general</li>
 </ul>
 <hr />
-<h2 id="proximos-pasos-opcional">Próximos Pasos (Opcional)<a class="headerlink" href="#proximos-pasos-opcional" title="Permanent link">&para;</a></h2>
-<h3 id="mejoras-futuras">Mejoras Futuras<a class="headerlink" href="#mejoras-futuras" title="Permanent link">&para;</a></h3>
+<h2 id="proximos-pasos-opcional">Próximos Pasos (Opcional)</h2>
+<h3 id="mejoras-futuras">Mejoras Futuras</h3>
 <ol>
 <li>Agregar columnas source_* a tablas Export (PurOrdr, SalesInvoice, SalesOrder)</li>
 <li>Implementar sincronización incremental (solo registros nuevos/modificados)</li>
 <li>Agregar métricas de performance en Dashboard</li>
 <li>Implementar rollback automático si falla sincronización</li>
 </ol>
-<h3 id="monitoreo-recomendado">Monitoreo Recomendado<a class="headerlink" href="#monitoreo-recomendado" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># Crear alerta si aparecen orphaned details</span>
+<h3 id="monitoreo-recomendado">Monitoreo Recomendado</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Crear alerta si aparecen orphaned details</span>
 docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>docucenter-app-1<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>schedule:run<span class="w"> </span>consolidation:check-orphans
 </code></pre></div>
+
 <hr />
 <p><strong>Implementado por:</strong> Sistema AI 
 <strong>Revisado por:</strong> [Pendiente] 
@@ -2732,7 +2804,7 @@ docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </spa
       
       
     
-    <a href="https://github.com/aghabrego/docucenter" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+    <a href="https://github.com/aghabrego/docucenter-public" target="_blank" rel="noopener" title="github.com" class="md-social__link">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
     </a>
   

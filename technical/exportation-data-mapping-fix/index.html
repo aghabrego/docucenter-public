@@ -233,7 +233,7 @@
           
   
   
-  APIs
+  API Documentation
 
         </a>
       </li>
@@ -269,7 +269,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../" class="md-tabs__link">
+        <a href="../README.md" class="md-tabs__link">
           
   
   
@@ -298,6 +298,25 @@
         </a>
       </li>
     
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../testing/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Sistema de Testing
+
+      </a>
+    </li>
   
 
       
@@ -404,7 +423,7 @@
   <span class="md-ellipsis">
     
   
-    APIs
+    API Documentation
   
 
     
@@ -420,7 +439,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    APIs
+    API Documentation
   
 
           </label>
@@ -1363,7 +1382,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
+      <a href="../README.md" class="md-nav__link">
         
   
   
@@ -1716,6 +1735,33 @@
   
 
     
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sistema de Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -2006,40 +2052,41 @@
   
 
 
-<h1 id="correccion-condicional-de-estructura-de-exportacion-en-alanubeformatterhelper">Corrección Condicional de Estructura de Exportación en AlanubeFormatterHelper<a class="headerlink" href="#correccion-condicional-de-estructura-de-exportacion-en-alanubeformatterhelper" title="Permanent link">&para;</a></h1>
-<h2 id="problema-identificado">Problema Identificado<a class="headerlink" href="#problema-identificado" title="Permanent link">&para;</a></h2>
-<p>El PAC Alanube reportaba el error de validación:
-<div class="highlight"><pre><span></span><code>&quot;instance requires property exportation&quot;
-</code></pre></div></p>
+<h1 id="correccion-condicional-de-estructura-de-exportacion-en-alanubeformatterhelper">Corrección Condicional de Estructura de Exportación en AlanubeFormatterHelper</h1>
+<h2 id="problema-identificado">Problema Identificado</h2>
+<p>El PAC Alanube reportaba el error de validación:</p>
+<div class="codehilite"><pre><span></span><code><span class="s2">&quot;instance requires property exportation&quot;</span>
+</code></pre></div>
+
 <p><strong>Problema Principal</strong>: La estructura <code>exportation</code> se incluía <strong>siempre</strong> para todos los tipos de documento, pero según las normativas DGI, solo debe incluirse para tipos específicos.</p>
-<h2 id="analisis-del-error">Análisis del Error<a class="headerlink" href="#analisis-del-error" title="Permanent link">&para;</a></h2>
-<h3 id="error-original-resuelto">Error Original (Resuelto)<a class="headerlink" href="#error-original-resuelto" title="Permanent link">&para;</a></h3>
+<h2 id="analisis-del-error">Análisis del Error</h2>
+<h3 id="error-original-resuelto">Error Original (Resuelto)</h3>
 <p>El error se originaba porque la estructura de datos de exportación estaba siendo mapeada desde la ruta incorrecta:
 - <strong>Ruta incorrecta</strong>: <code>$data['dGen']['gFExp']</code>
 - <strong>Ruta correcta</strong>: <code>$data['gFExp']</code></p>
-<h3 id="problema-actual-resuelto">Problema Actual (Resuelto)<a class="headerlink" href="#problema-actual-resuelto" title="Permanent link">&para;</a></h3>
+<h3 id="problema-actual-resuelto">Problema Actual (Resuelto)</h3>
 <p><strong>Inclusión Incorrecta</strong>: La estructura <code>exportation</code> se incluía para <strong>todos</strong> los documentos
 <strong>Solución</strong>: Incluir <code>exportation</code> solo para tipos de documento que la requieren según DGI</p>
-<h2 id="reglas-dgi-para-estructura-gfexp-exportation">Reglas DGI para Estructura gFExp (exportation)<a class="headerlink" href="#reglas-dgi-para-estructura-gfexp-exportation" title="Permanent link">&para;</a></h2>
-<h3 id="tipos-que-requieren-exportation">✅ Tipos que REQUIEREN exportation:<a class="headerlink" href="#tipos-que-requieren-exportation" title="Permanent link">&para;</a></h3>
+<h2 id="reglas-dgi-para-estructura-gfexp-exportation">Reglas DGI para Estructura gFExp (exportation)</h2>
+<h3 id="tipos-que-requieren-exportation">✅ Tipos que REQUIEREN exportation:</h3>
 <ul>
 <li><strong>Tipo 02</strong>: Factura de importación</li>
 <li><strong>Tipo 03</strong>: Factura de exportación</li>
 </ul>
-<h3 id="tipos-que-no-deben-incluir-exportation">❌ Tipos que NO DEBEN incluir exportation:<a class="headerlink" href="#tipos-que-no-deben-incluir-exportation" title="Permanent link">&para;</a></h3>
+<h3 id="tipos-que-no-deben-incluir-exportation">❌ Tipos que NO DEBEN incluir exportation:</h3>
 <ul>
 <li><strong>Tipo 01</strong>: Factura de operación interna (incluso con receptor extranjero)</li>
 <li><strong>Tipo 04-09</strong>: Notas de crédito, débito, zona franca, reembolso</li>
 </ul>
-<h2 id="archivos-modificados">Archivos Modificados<a class="headerlink" href="#archivos-modificados" title="Permanent link">&para;</a></h2>
+<h2 id="archivos-modificados">Archivos Modificados</h2>
 <ul>
 <li><code>app/Helpers/AlanubeFormatterHelper.php</code></li>
 <li>Método <code>formatForPanama()</code> (línea ~165)</li>
 <li>Método <code>formatForDominicana()</code> (línea ~554)</li>
 </ul>
-<h2 id="cambios-realizados">Cambios Realizados<a class="headerlink" href="#cambios-realizados" title="Permanent link">&para;</a></h2>
-<h3 id="antes-problematico">Antes (Problemático):<a class="headerlink" href="#antes-problematico" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">// Siempre se incluía exportation para todos los tipos</span>
+<h2 id="cambios-realizados">Cambios Realizados</h2>
+<h3 id="antes-problematico">Antes (Problemático):</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">// Siempre se incluía exportation para todos los tipos</span>
 <span class="x">$gDatRec = self::removeNullValues([</span>
 <span class="x">    // ... otros campos</span>
 <span class="x">    &#39;exportation&#39; =&gt; self::removeNullValues([</span>
@@ -2048,8 +2095,9 @@
 <span class="x">    ]),</span>
 <span class="x">]);</span>
 </code></pre></div>
-<h3 id="despues-condicional">Después (Condicional):<a class="headerlink" href="#despues-condicional" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">// Estructura base sin exportation</span>
+
+<h3 id="despues-condicional">Después (Condicional):</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">// Estructura base sin exportation</span>
 <span class="x">$gDatRec = self::removeNullValues([</span>
 <span class="x">    // ... otros campos sin exportation</span>
 <span class="x">]);</span>
@@ -2069,7 +2117,8 @@
 <span class="x">    ]);</span>
 <span class="x">}</span>
 </code></pre></div>
-<h2 id="impacto">Impacto<a class="headerlink" href="#impacto" title="Permanent link">&para;</a></h2>
+
+<h2 id="impacto">Impacto</h2>
 <ul>
 <li>✅ <strong>CRÍTICO</strong>: Resuelve error PAC para facturas internas con receptores extranjeros</li>
 <li>✅ Permite procesar facturas tipo 01 con clientes extranjeros sin error</li>
@@ -2077,8 +2126,8 @@
 <li>✅ Cumple estrictamente con normativas DGI sobre cuándo incluir gFExp</li>
 <li>✅ Compatibilidad para Panamá y República Dominicana</li>
 </ul>
-<h2 id="casos-de-uso-especificos">Casos de Uso Específicos<a class="headerlink" href="#casos-de-uso-especificos" title="Permanent link">&para;</a></h2>
-<h3 id="panama">🇵🇦 Panamá<a class="headerlink" href="#panama" title="Permanent link">&para;</a></h3>
+<h2 id="casos-de-uso-especificos">Casos de Uso Específicos</h2>
+<h3 id="panama">🇵🇦 Panamá</h3>
 <table>
 <thead>
 <tr>
@@ -2109,7 +2158,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="republica-dominicana">🇩🇴 República Dominicana<a class="headerlink" href="#republica-dominicana" title="Permanent link">&para;</a></h3>
+<h3 id="republica-dominicana">🇩🇴 República Dominicana</h3>
 <table>
 <thead>
 <tr>
@@ -2156,14 +2205,14 @@
 </tr>
 </tbody>
 </table>
-<h2 id="impacto_1">Impacto<a class="headerlink" href="#impacto_1" title="Permanent link">&para;</a></h2>
+<h2 id="impacto_1">Impacto</h2>
 <ul>
 <li>✅ Resuelve error de validación PAC para documentos de exportación (tipo 03)</li>
 <li>✅ Permite procesar correctamente facturas de exportación </li>
 <li>✅ Mapeo correcto de datos gFExp según estructura DGI Panamá</li>
 <li>✅ Compatibilidad con ambos países (Panamá y República Dominicana)</li>
 </ul>
-<h2 id="campos-de-exportacion-afectados">Campos de Exportación Afectados<a class="headerlink" href="#campos-de-exportacion-afectados" title="Permanent link">&para;</a></h2>
+<h2 id="campos-de-exportacion-afectados">Campos de Exportación Afectados</h2>
 <ul>
 <li><code>cCondEntr</code> (Incoterm)</li>
 <li><code>cMoneda</code> (Código de moneda)</li>
@@ -2172,15 +2221,15 @@
 <li><code>dVTotEst</code> (Total en moneda extranjera)</li>
 <li><code>dPuertoEmbarq</code> (Puerto de embarque)</li>
 </ul>
-<h2 id="testing">Testing<a class="headerlink" href="#testing" title="Permanent link">&para;</a></h2>
+<h2 id="testing">Testing</h2>
 <p>Para probar la corrección:
 1. Crear factura de exportación (documento tipo 03)
 2. Completar campos de información de exportación en el paso 3
 3. Verificar que la factura se procese correctamente sin errores PAC
 4. Confirmar que los datos de exportación aparezcan correctamente en el XML enviado</p>
-<h2 id="fecha-de-correccion">Fecha de Corrección<a class="headerlink" href="#fecha-de-correccion" title="Permanent link">&para;</a></h2>
+<h2 id="fecha-de-correccion">Fecha de Corrección</h2>
 <p>2024-12-19</p>
-<h2 id="estado">Estado<a class="headerlink" href="#estado" title="Permanent link">&para;</a></h2>
+<h2 id="estado">Estado</h2>
 <p>✅ COMPLETADO - Errores de validación PAC resueltos para documentos de exportación</p>
 
 
@@ -2234,7 +2283,7 @@
       
       
     
-    <a href="https://github.com/aghabrego/docucenter" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+    <a href="https://github.com/aghabrego/docucenter-public" target="_blank" rel="noopener" title="github.com" class="md-social__link">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
     </a>
   

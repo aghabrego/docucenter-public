@@ -233,7 +233,7 @@
           
   
   
-  APIs
+  API Documentation
 
         </a>
       </li>
@@ -269,7 +269,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../" class="md-tabs__link">
+        <a href="../README.md" class="md-tabs__link">
           
   
   
@@ -298,6 +298,25 @@
         </a>
       </li>
     
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../testing/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Sistema de Testing
+
+      </a>
+    </li>
   
 
       
@@ -404,7 +423,7 @@
   <span class="md-ellipsis">
     
   
-    APIs
+    API Documentation
   
 
     
@@ -420,7 +439,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    APIs
+    API Documentation
   
 
           </label>
@@ -1363,7 +1382,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
+      <a href="../README.md" class="md-nav__link">
         
   
   
@@ -1716,6 +1735,33 @@
   
 
     
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sistema de Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -1979,12 +2025,12 @@
   
 
 
-<h1 id="analisis-del-sistema-multi-sucursal-con-id_compania">Análisis del Sistema Multi-Sucursal con ID_compania<a class="headerlink" href="#analisis-del-sistema-multi-sucursal-con-id_compania" title="Permanent link">&para;</a></h1>
+<h1 id="analisis-del-sistema-multi-sucursal-con-id_compania">Análisis del Sistema Multi-Sucursal con ID_compania</h1>
 <p><strong>Fecha:</strong> 3 de diciembre de 2025<br />
 <strong>Versión:</strong> 1.0<br />
 <strong>Estado:</strong> Análisis para Implementación</p>
 <hr />
-<h2 id="indice">📋 Índice<a class="headerlink" href="#indice" title="Permanent link">&para;</a></h2>
+<h2 id="indice">📋 Índice</h2>
 <ol>
 <li><a href="#contexto-general">Contexto General</a></li>
 <li><a href="#arquitectura-actual">Arquitectura Actual</a></li>
@@ -1995,7 +2041,7 @@
 <li><a href="#plan-de-implementación">Plan de Implementación</a></li>
 </ol>
 <hr />
-<h2 id="contexto-general">Contexto General<a class="headerlink" href="#contexto-general" title="Permanent link">&para;</a></h2>
+<h2 id="contexto-general">Contexto General</h2>
 <p>DocuCenter maneja un sistema multi-tenant donde:
 - Una <strong>Empresa/Matriz</strong> (CompanySession) puede tener múltiples <strong>Organizaciones</strong>
 - Cada <strong>Organización</strong> tiene su propia base de datos
@@ -2012,9 +2058,9 @@
   - Organización 3: "RXY Regional Sur" (BD: rest_sur)
     - Sucursal 5: Local Sur (ID_compania: 5)</p>
 <hr />
-<h2 id="arquitectura-actual">Arquitectura Actual<a class="headerlink" href="#arquitectura-actual" title="Permanent link">&para;</a></h2>
-<h3 id="estructura-de-base-de-datos">Estructura de Base de Datos<a class="headerlink" href="#estructura-de-base-de-datos" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>┌─────────────────────────────────────────┐
+<h2 id="arquitectura-actual">Arquitectura Actual</h2>
+<h3 id="estructura-de-base-de-datos">Estructura de Base de Datos</h3>
+<div class="codehilite"><pre><span></span><code>┌─────────────────────────────────────────┐
 │  Base de Datos Principal (mysql)       │
 ├─────────────────────────────────────────┤
 │  - organizations                        │
@@ -2039,6 +2085,7 @@
 │  - ... (43+ tablas más)                 │
 └─────────────────────────────────────────┘
 </code></pre></div>
+
 <p><strong>⚠️ IMPORTANTE - Dualidad de CompanySession:</strong></p>
 <p>La tabla <code>CompanySession</code> existe en DOS ubicaciones:</p>
 <ol>
@@ -2057,7 +2104,7 @@
 <li><strong>NO es consultada por el modelo Eloquent</strong></li>
 <li>Posiblemente para importación/exportación de datos</li>
 </ol>
-<div class="highlight"><pre><span></span><code><span class="x">// app/Models/Companysession.php</span>
+<div class="codehilite"><pre><span></span><code><span class="x">// app/Models/Companysession.php</span>
 <span class="x">public function __construct(array $attributes = [])</span>
 <span class="x">{</span>
 <span class="x">    parent::__construct($attributes);</span>
@@ -2066,8 +2113,9 @@
 <span class="x">    $this-&gt;setDefaultConnection();</span>
 <span class="x">}</span>
 </code></pre></div>
-<h3 id="flujo-de-conexion-correcto-propuesto">Flujo de Conexión Correcto (Propuesto)<a class="headerlink" href="#flujo-de-conexion-correcto-propuesto" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">// 1. Usuario se autentica</span>
+
+<h3 id="flujo-de-conexion-correcto-propuesto">Flujo de Conexión Correcto (Propuesto)</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">// 1. Usuario se autentica</span>
 <span class="x">User::find(1)</span>
 
 <span class="x">// 2. Obtiene la organización actual</span>
@@ -2085,46 +2133,48 @@
 <span class="x">// 5. PROBLEMA ACTUAL: Usuario ve TODOS los datos mezclados</span>
 <span class="x">// 6. SOLUCIÓN: Filtrar por las sucursales asignadas al usuario</span>
 </code></pre></div>
+
 <hr />
-<h2 id="relaciones-clave">Relaciones Clave<a class="headerlink" href="#relaciones-clave" title="Permanent link">&para;</a></h2>
-<h3 id="relacion-correcta-flujo-propuesto">✅ Relación CORRECTA (Flujo Propuesto)<a class="headerlink" href="#relacion-correcta-flujo-propuesto" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>CompanySession (BD Principal)
-    ├─&gt; ID_compania: 100 (Empresa/Matriz &quot;Restaurantes XYZ S.A.&quot;)
-    ├─&gt; CompanyNameSage50: &quot;Restaurantes XYZ S.A.&quot;
-    └─&gt; organizations() → hasMany (UNA EMPRESA = MUCHAS ORGANIZACIONES)
-          ├─&gt; Organization 1: &quot;RXY Regional Centro&quot; (BD: rest_centro)
-          ├─&gt; Organization 2: &quot;RXY Regional Norte&quot; (BD: rest_norte)
-          └─&gt; Organization 3: &quot;RXY Regional Sur&quot; (BD: rest_sur)
+<h2 id="relaciones-clave">Relaciones Clave</h2>
+<h3 id="relacion-correcta-flujo-propuesto">✅ Relación CORRECTA (Flujo Propuesto)</h3>
+<div class="codehilite"><pre><span></span><code><span class="n">CompanySession</span><span class="w"> </span><span class="p">(</span><span class="n">BD</span><span class="w"> </span><span class="n">Principal</span><span class="p">)</span>
+<span class="w">    </span><span class="err">├─</span><span class="o">&gt;</span><span class="w"> </span><span class="nl">ID_compania:</span><span class="w"> </span><span class="mh">100</span><span class="w"> </span><span class="p">(</span><span class="n">Empresa</span><span class="o">/</span><span class="n">Matriz</span><span class="w"> </span><span class="s">&quot;Restaurantes XYZ S.A.&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="err">├─</span><span class="o">&gt;</span><span class="w"> </span><span class="nl">CompanyNameSage50:</span><span class="w"> </span><span class="s">&quot;Restaurantes XYZ S.A.&quot;</span>
+<span class="w">    </span><span class="err">└─</span><span class="o">&gt;</span><span class="w"> </span><span class="n">organizations</span><span class="p">()</span><span class="w"> </span><span class="err">→</span><span class="w"> </span><span class="n">hasMany</span><span class="w"> </span><span class="p">(</span><span class="n">UNA</span><span class="w"> </span><span class="n">EMPRESA</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MUCHAS</span><span class="w"> </span><span class="n">ORGANIZACIONES</span><span class="p">)</span>
+<span class="w">          </span><span class="err">├─</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Organization</span><span class="w"> </span><span class="mh">1</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;RXY Regional Centro&quot;</span><span class="w"> </span><span class="p">(</span><span class="nl">BD:</span><span class="w"> </span><span class="n">rest_centro</span><span class="p">)</span>
+<span class="w">          </span><span class="err">├─</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Organization</span><span class="w"> </span><span class="mh">2</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;RXY Regional Norte&quot;</span><span class="w"> </span><span class="p">(</span><span class="nl">BD:</span><span class="w"> </span><span class="n">rest_norte</span><span class="p">)</span>
+<span class="w">          </span><span class="err">└─</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Organization</span><span class="w"> </span><span class="mh">3</span><span class="o">:</span><span class="w"> </span><span class="s">&quot;RXY Regional Sur&quot;</span><span class="w"> </span><span class="p">(</span><span class="nl">BD:</span><span class="w"> </span><span class="n">rest_sur</span><span class="p">)</span>
 
-Organization (BD Principal)
-    ├─&gt; id: 25
-    ├─&gt; nombre: &quot;RXY Regional Centro&quot;
-    ├─&gt; database: &quot;9_734_1672_56&quot;
-    ├─&gt; id_empresa: 100 (FK a CompanySession - Empresa Matriz)
-    └─&gt; belongsTo(Companysession) → Empresa Matriz
+<span class="n">Organization</span><span class="w"> </span><span class="p">(</span><span class="n">BD</span><span class="w"> </span><span class="n">Principal</span><span class="p">)</span>
+<span class="w">    </span><span class="err">├─</span><span class="o">&gt;</span><span class="w"> </span><span class="nl">id:</span><span class="w"> </span><span class="mh">25</span>
+<span class="w">    </span><span class="err">├─</span><span class="o">&gt;</span><span class="w"> </span><span class="nl">nombre:</span><span class="w"> </span><span class="s">&quot;RXY Regional Centro&quot;</span>
+<span class="w">    </span><span class="err">├─</span><span class="o">&gt;</span><span class="w"> </span><span class="nl">database:</span><span class="w"> </span><span class="s">&quot;9_734_1672_56&quot;</span>
+<span class="w">    </span><span class="err">├─</span><span class="o">&gt;</span><span class="w"> </span><span class="nl">id_empresa:</span><span class="w"> </span><span class="mh">100</span><span class="w"> </span><span class="p">(</span><span class="n">FK</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">CompanySession</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">Empresa</span><span class="w"> </span><span class="n">Matriz</span><span class="p">)</span>
+<span class="w">    </span><span class="err">└─</span><span class="o">&gt;</span><span class="w"> </span><span class="n">belongsTo</span><span class="p">(</span><span class="n">Companysession</span><span class="p">)</span><span class="w"> </span><span class="err">→</span><span class="w"> </span><span class="n">Empresa</span><span class="w"> </span><span class="n">Matriz</span>
 
-Dentro de BD Organización (9_734_1672_56):
-    ├─&gt; CompanySession (UN SOLO ID_compania por organización)
-    │     └─&gt; ID_compania: 100 (la organización pertenece a esta compañía)
-    ├─&gt; CompanySession (múltiples registros)
-    │     ├─&gt; ID_compania: 1 (Sucursal Centro)
-    │     ├─&gt; ID_compania: 2 (Sucursal Plaza)
-    │     └─&gt; ID_compania: 3 (Sucursal Mall)
-    │
-    ├─&gt; Customers_Imp
-    │     ├─&gt; Record 1: ID_compania = 1 (clientes de Sucursal Centro)
-    │     ├─&gt; Record 2: ID_compania = 2 (clientes de Sucursal Plaza)
-    │     └─&gt; Record 3: ID_compania = 3 (clientes de Sucursal Mall)
-    │
-    └─&gt; Sales_Header_Imp (ventas mezcladas de todas las sucursales)
+<span class="n">Dentro</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">BD</span><span class="w"> </span><span class="n">Organización</span><span class="w"> </span><span class="p">(</span><span class="mh">9</span><span class="n">_734_1672_56</span><span class="p">)</span><span class="o">:</span>
+<span class="w">    </span><span class="err">├─</span><span class="o">&gt;</span><span class="w"> </span><span class="n">CompanySession</span><span class="w"> </span><span class="p">(</span><span class="n">UN</span><span class="w"> </span><span class="n">SOLO</span><span class="w"> </span><span class="n">ID_compania</span><span class="w"> </span><span class="n">por</span><span class="w"> </span><span class="n">organización</span><span class="p">)</span>
+<span class="w">    </span><span class="err">│</span><span class="w">     </span><span class="err">└─</span><span class="o">&gt;</span><span class="w"> </span><span class="nl">ID_compania:</span><span class="w"> </span><span class="mh">100</span><span class="w"> </span><span class="p">(</span><span class="n">la</span><span class="w"> </span><span class="n">organización</span><span class="w"> </span><span class="n">pertenece</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">esta</span><span class="w"> </span><span class="n">compañía</span><span class="p">)</span>
+<span class="w">    </span><span class="err">├─</span><span class="o">&gt;</span><span class="w"> </span><span class="n">CompanySession</span><span class="w"> </span><span class="p">(</span><span class="n">múltiples</span><span class="w"> </span><span class="n">registros</span><span class="p">)</span>
+<span class="w">    </span><span class="err">│</span><span class="w">     </span><span class="err">├─</span><span class="o">&gt;</span><span class="w"> </span><span class="nl">ID_compania:</span><span class="w"> </span><span class="mh">1</span><span class="w"> </span><span class="p">(</span><span class="n">Sucursal</span><span class="w"> </span><span class="n">Centro</span><span class="p">)</span>
+<span class="w">    </span><span class="err">│</span><span class="w">     </span><span class="err">├─</span><span class="o">&gt;</span><span class="w"> </span><span class="nl">ID_compania:</span><span class="w"> </span><span class="mh">2</span><span class="w"> </span><span class="p">(</span><span class="n">Sucursal</span><span class="w"> </span><span class="n">Plaza</span><span class="p">)</span>
+<span class="w">    </span><span class="err">│</span><span class="w">     </span><span class="err">└─</span><span class="o">&gt;</span><span class="w"> </span><span class="nl">ID_compania:</span><span class="w"> </span><span class="mh">3</span><span class="w"> </span><span class="p">(</span><span class="n">Sucursal</span><span class="w"> </span><span class="n">Mall</span><span class="p">)</span>
+<span class="w">    </span><span class="err">│</span>
+<span class="w">    </span><span class="err">├─</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Customers_Imp</span>
+<span class="w">    </span><span class="err">│</span><span class="w">     </span><span class="err">├─</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Record</span><span class="w"> </span><span class="mh">1</span><span class="o">:</span><span class="w"> </span><span class="n">ID_compania</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">1</span><span class="w"> </span><span class="p">(</span><span class="n">clientes</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">Sucursal</span><span class="w"> </span><span class="n">Centro</span><span class="p">)</span>
+<span class="w">    </span><span class="err">│</span><span class="w">     </span><span class="err">├─</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Record</span><span class="w"> </span><span class="mh">2</span><span class="o">:</span><span class="w"> </span><span class="n">ID_compania</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">2</span><span class="w"> </span><span class="p">(</span><span class="n">clientes</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">Sucursal</span><span class="w"> </span><span class="n">Plaza</span><span class="p">)</span>
+<span class="w">    </span><span class="err">│</span><span class="w">     </span><span class="err">└─</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Record</span><span class="w"> </span><span class="mh">3</span><span class="o">:</span><span class="w"> </span><span class="n">ID_compania</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">3</span><span class="w"> </span><span class="p">(</span><span class="n">clientes</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">Sucursal</span><span class="w"> </span><span class="n">Mall</span><span class="p">)</span>
+<span class="w">    </span><span class="err">│</span>
+<span class="w">    </span><span class="err">└─</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Sales_Header_Imp</span><span class="w"> </span><span class="p">(</span><span class="n">ventas</span><span class="w"> </span><span class="n">mezcladas</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">todas</span><span class="w"> </span><span class="n">las</span><span class="w"> </span><span class="n">sucursales</span><span class="p">)</span>
 
-**IMPORTANTE:** 
-- UNA EMPRESA (CompanySession en BD principal) = MUCHAS ORGANIZACIONES
-- UNA ORGANIZACIÓN (con su BD) = MUCHAS SUCURSALES (ID_compania en su BD)
-- Usuario debe ver solo las sucursales que le fueron asignadas
+<span class="o">**</span><span class="nl">IMPORTANTE:</span><span class="o">**</span><span class="w"> </span>
+<span class="o">-</span><span class="w"> </span><span class="n">UNA</span><span class="w"> </span><span class="n">EMPRESA</span><span class="w"> </span><span class="p">(</span><span class="n">CompanySession</span><span class="w"> </span><span class="n">en</span><span class="w"> </span><span class="n">BD</span><span class="w"> </span><span class="n">principal</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MUCHAS</span><span class="w"> </span><span class="n">ORGANIZACIONES</span>
+<span class="o">-</span><span class="w"> </span><span class="n">UNA</span><span class="w"> </span><span class="n">ORGANIZACIÓN</span><span class="w"> </span><span class="p">(</span><span class="n">con</span><span class="w"> </span><span class="n">su</span><span class="w"> </span><span class="n">BD</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MUCHAS</span><span class="w"> </span><span class="n">SUCURSALES</span><span class="w"> </span><span class="p">(</span><span class="n">ID_compania</span><span class="w"> </span><span class="n">en</span><span class="w"> </span><span class="n">su</span><span class="w"> </span><span class="n">BD</span><span class="p">)</span>
+<span class="o">-</span><span class="w"> </span><span class="n">Usuario</span><span class="w"> </span><span class="n">debe</span><span class="w"> </span><span class="n">ver</span><span class="w"> </span><span class="n">solo</span><span class="w"> </span><span class="n">las</span><span class="w"> </span><span class="n">sucursales</span><span class="w"> </span><span class="n">que</span><span class="w"> </span><span class="n">le</span><span class="w"> </span><span class="n">fueron</span><span class="w"> </span><span class="n">asignadas</span>
 </code></pre></div>
-<h3 id="modelo-de-datos-actualizado-flujo-correcto">📊 Modelo de Datos Actualizado (Flujo Correcto)<a class="headerlink" href="#modelo-de-datos-actualizado-flujo-correcto" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>CompanySession (BD Principal) - Empresas Matriz
+
+<h3 id="modelo-de-datos-actualizado-flujo-correcto">📊 Modelo de Datos Actualizado (Flujo Correcto)</h3>
+<div class="codehilite"><pre><span></span><code>CompanySession (BD Principal) - Empresas Matriz
   └─&gt; ID_compania: 100 (&quot;Restaurantes XYZ S.A.&quot;)
         └─&gt; hasMany Organizations
               ├─&gt; Organization 1 (id_empresa: 100, BD: rest_centro)
@@ -2157,12 +2207,13 @@ User (BD Principal)
 
 **NUEVO REQUERIMIENTO:**
 User debe tener asignación de sucursales específicas:
-  - Juan puede ver: Org 1 (sucursales 1,2) + Org 2 (sucursal 4)
-  - María puede ver: Org 1 (sucursal 3) + Org 3 (sucursales 6,7)
+  <span class="k">-</span> Juan puede ver: Org 1 (sucursales 1,2) + Org 2 (sucursal 4)
+  <span class="k">-</span> María puede ver: Org 1 (sucursal 3) + Org 3 (sucursales 6,7)
 </code></pre></div>
-<h3 id="relacion-organizacion-sucursal">🔑 Relación Organización → Sucursal<a class="headerlink" href="#relacion-organizacion-sucursal" title="Permanent link">&para;</a></h3>
-<p><strong>En BD Principal (<code>organizations</code>):</strong>
-<div class="highlight"><pre><span></span><code><span class="x">class Organization extends Model</span>
+
+<h3 id="relacion-organizacion-sucursal">🔑 Relación Organización → Sucursal</h3>
+<p><strong>En BD Principal (<code>organizations</code>):</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="x">class Organization extends Model</span>
 <span class="x">{</span>
 <span class="x">    protected $fillable = [</span>
 <span class="x">        &#39;id&#39;,           // 25</span>
@@ -2177,9 +2228,10 @@ User debe tener asignación de sucursales específicas:
 <span class="x">        return $this-&gt;belongsTo(Companysession::class, &#39;id_empresa&#39;, &#39;ID_compania&#39;);</span>
 <span class="x">    }</span>
 <span class="x">}</span>
-</code></pre></div></p>
-<p><strong>En BD Principal (<code>CompanySession</code>):</strong>
-<div class="highlight"><pre><span></span><code><span class="x">class Companysession extends Model</span>
+</code></pre></div>
+
+<p><strong>En BD Principal (<code>CompanySession</code>):</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="x">class Companysession extends Model</span>
 <span class="x">{</span>
 <span class="x">    protected $table = &#39;CompanySession&#39;;</span>
 
@@ -2205,7 +2257,8 @@ User debe tener asignación de sucursales específicas:
 <span class="x">        return $this-&gt;hasMany(Organization::class, &#39;id_empresa&#39;, &#39;ID_compania&#39;);</span>
 <span class="x">    }</span>
 <span class="x">}</span>
-</code></pre></div></p>
+</code></pre></div>
+
 <p><strong>⚠️ ACLARACIONES IMPORTANTES:</strong></p>
 <ol>
 <li><strong>Modelo de Relaciones Correcto:</strong></li>
@@ -2247,9 +2300,9 @@ User debe tener asignación de sucursales específicas:
 <li>Mantener flexibilidad para reportes consolidados</li>
 </ol>
 <hr />
-<h2 id="modelos-con-id_compania">Modelos con ID_compania<a class="headerlink" href="#modelos-con-id_compania" title="Permanent link">&para;</a></h2>
-<h3 id="inventario-de-tablas-43-tablas-en-total">📊 Inventario de Tablas (43 tablas en total)<a class="headerlink" href="#inventario-de-tablas-43-tablas-en-total" title="Permanent link">&para;</a></h3>
-<h4 id="con-filtrado-implementado-7-modelos">✅ Con Filtrado Implementado (7 modelos)<a class="headerlink" href="#con-filtrado-implementado-7-modelos" title="Permanent link">&para;</a></h4>
+<h2 id="modelos-con-id_compania">Modelos con ID_compania</h2>
+<h3 id="inventario-de-tablas-43-tablas-en-total">📊 Inventario de Tablas (43 tablas en total)</h3>
+<h4 id="con-filtrado-implementado-7-modelos">✅ Con Filtrado Implementado (7 modelos)</h4>
 <table>
 <thead>
 <tr>
@@ -2296,15 +2349,16 @@ User debe tener asignación de sucursales específicas:
 </tr>
 </tbody>
 </table>
-<p><strong>Ejemplo de implementación:</strong>
-<div class="highlight"><pre><span></span><code><span class="x">public function scopeAddLocalFilterItems(Builder $query, Request $request)</span>
+<p><strong>Ejemplo de implementación:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="x">public function scopeAddLocalFilterItems(Builder $query, Request $request)</span>
 <span class="x">{</span>
 <span class="x">    $companiesIds = OrganizationFacade::getCompanyIds();</span>
 <span class="x">    $query-&gt;whereIn(&#39;ID_compania&#39;, $companiesIds);</span>
 <span class="x">    return $query;</span>
 <span class="x">}</span>
-</code></pre></div></p>
-<h4 id="sin-filtrado-36-modelos-pendientes">❌ Sin Filtrado (36+ modelos pendientes)<a class="headerlink" href="#sin-filtrado-36-modelos-pendientes" title="Permanent link">&para;</a></h4>
+</code></pre></div>
+
+<h4 id="sin-filtrado-36-modelos-pendientes">❌ Sin Filtrado (36+ modelos pendientes)</h4>
 <p><strong>Ventas:</strong>
 - <code>SalesHeaderImp</code>
 - <code>SalesDetailImp</code>
@@ -2346,83 +2400,91 @@ User debe tener asignación de sucursales específicas:
 - <code>GJEDetailImp</code>
 - <code>SageConnectTransferSummary</code></p>
 <hr />
-<h2 id="problema-identificado-actualizado">Problema Identificado - ACTUALIZADO<a class="headerlink" href="#problema-identificado-actualizado" title="Permanent link">&para;</a></h2>
-<h3 id="aclaracion-importante">⚠️ ACLARACIÓN IMPORTANTE<a class="headerlink" href="#aclaracion-importante" title="Permanent link">&para;</a></h3>
+<h2 id="problema-identificado-actualizado">Problema Identificado - ACTUALIZADO</h2>
+<h3 id="aclaracion-importante">⚠️ ACLARACIÓN IMPORTANTE</h3>
 <p><strong>ARQUITECTURA REAL (Confirmada):</strong></p>
 <p>Cada organización tiene <strong>UN SOLO ID_compania</strong> en su base de datos, NO múltiples:</p>
-<div class="highlight"><pre><span></span><code>BD Organización (9_734_1672_56):
+<div class="codehilite"><pre><span></span><code>BD Organización (9_734_1672_56):
   └─&gt; CompanySession (ID_compania: 100)  ← UN SOLO VALOR
   └─&gt; Customers_Imp (todos con ID_compania: 100)
   └─&gt; Sales_Header_Imp (todos con ID_compania: 100)
 </code></pre></div>
-<p><strong>NO es como se documentó inicialmente:</strong>
-<div class="highlight"><pre><span></span><code>❌ INCORRECTO:
-BD Organización (9_734_1672_56):
-  └─&gt; CompanySession (ID_compania: 1, 2, 3)  ← Múltiples valores
-  └─&gt; Datos mezclados de varias sucursales
-</code></pre></div></p>
-<h3 id="problema-real-consolidacion-para-sage-connector">🎯 Problema Real: Consolidación para Sage Connector<a class="headerlink" href="#problema-real-consolidacion-para-sage-connector" title="Permanent link">&para;</a></h3>
+
+<p><strong>NO es como se documentó inicialmente:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="err">❌</span><span class="w"> </span><span class="n">INCORRECTO</span><span class="p">:</span>
+<span class="n">BD</span><span class="w"> </span><span class="n">Organización</span><span class="w"> </span><span class="p">(</span><span class="mi">9</span><span class="n">_734_1672_56</span><span class="p">):</span>
+<span class="w">  </span><span class="err">└─</span><span class="o">&gt;</span><span class="w"> </span><span class="n">CompanySession</span><span class="w"> </span><span class="p">(</span><span class="n">ID_compania</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="w">  </span><span class="err">←</span><span class="w"> </span><span class="n">Múltiples</span><span class="w"> </span><span class="n">valores</span>
+<span class="w">  </span><span class="err">└─</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Datos</span><span class="w"> </span><span class="n">mezclados</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">varias</span><span class="w"> </span><span class="n">sucursales</span>
+</code></pre></div>
+
+<h3 id="problema-real-consolidacion-para-sage-connector">🎯 Problema Real: Consolidación para Sage Connector</h3>
 <p><strong>Limitación de Sage:</strong>
 - Sage Connector solo puede conectarse a <strong>UNA base de datos</strong>
 - Solo puede trabajar con <strong>UN solo ID_compania</strong></p>
-<p><strong>Problema Actual:</strong>
-<div class="highlight"><pre><span></span><code>Compañía 100 tiene 3 organizaciones:
-  - Org 1: BD rest_centro (ID_compania: 100)
-  - Org 2: BD rest_norte (ID_compania: 100)
-  - Org 3: BD rest_sur (ID_compania: 100)
+<p><strong>Problema Actual:</strong></p>
+<div class="codehilite"><pre><span></span><code>Compañía 100 tiene 3 organizaciones:
+  <span class="k">-</span> Org 1: BD rest_centro (ID_compania: 100)
+  <span class="k">-</span> Org 2: BD rest_norte (ID_compania: 100)
+  <span class="k">-</span> Org 3: BD rest_sur (ID_compania: 100)
 
 ❌ Sage NO puede acceder a las 3 BDs simultáneamente
 ❌ Necesita UNA BD consolidada con TODOS los datos
-</code></pre></div></p>
-<p><strong>Solución Propuesta:</strong>
-<div class="highlight"><pre><span></span><code>BD Company_100 (nueva - consolidada)
-  ├─&gt; Customers_Imp (de Org 1 + Org 2 + Org 3)
-  ├─&gt; Sales_Header_Imp (de Org 1 + Org 2 + Org 3)
-  └─&gt; org_source_id (identifica de qué org vino cada registro)
+</code></pre></div>
 
-✅ Sage se conecta AQUÍ y ve TODO consolidado
-</code></pre></div></p>
+<p><strong>Solución Propuesta:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="n">BD</span><span class="w"> </span><span class="n">Company_100</span><span class="w"> </span><span class="p">(</span><span class="n">nueva</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">consolidada</span><span class="p">)</span>
+<span class="w">  </span><span class="err">├─</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Customers_Imp</span><span class="w"> </span><span class="p">(</span><span class="n">de</span><span class="w"> </span><span class="n">Org</span><span class="w"> </span><span class="mh">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Org</span><span class="w"> </span><span class="mh">2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Org</span><span class="w"> </span><span class="mh">3</span><span class="p">)</span>
+<span class="w">  </span><span class="err">├─</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Sales_Header_Imp</span><span class="w"> </span><span class="p">(</span><span class="n">de</span><span class="w"> </span><span class="n">Org</span><span class="w"> </span><span class="mh">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Org</span><span class="w"> </span><span class="mh">2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Org</span><span class="w"> </span><span class="mh">3</span><span class="p">)</span>
+<span class="w">  </span><span class="err">└─</span><span class="o">&gt;</span><span class="w"> </span><span class="n">org_source_id</span><span class="w"> </span><span class="p">(</span><span class="n">identifica</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">qué</span><span class="w"> </span><span class="n">org</span><span class="w"> </span><span class="n">vino</span><span class="w"> </span><span class="n">cada</span><span class="w"> </span><span class="n">registro</span><span class="p">)</span>
+
+<span class="err">✅</span><span class="w"> </span><span class="n">Sage</span><span class="w"> </span><span class="n">se</span><span class="w"> </span><span class="n">conecta</span><span class="w"> </span><span class="n">AQUÍ</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="n">ve</span><span class="w"> </span><span class="n">TODO</span><span class="w"> </span><span class="n">consolidado</span>
+</code></pre></div>
+
 <p>Ver análisis completo en: <a href="../database-replication-analysis/">database-replication-analysis.md</a></p>
-<h3 id="escenario-problematico-anterior-descartado">🚨 Escenario Problemático ANTERIOR (Descartado)<a class="headerlink" href="#escenario-problematico-anterior-descartado" title="Permanent link">&para;</a></h3>
+<h3 id="escenario-problematico-anterior-descartado">🚨 Escenario Problemático ANTERIOR (Descartado)</h3>
 <p><strong>NOTA:</strong> Esta sección ya NO aplica porque cada org tiene UN solo ID_compania</p>
 <details>
 <summary>Ver escenario anterior (solo referencia histórica)</summary>
 
 **Situación Anterior (incorrecta):**
-<div class="highlight"><pre><span></span><code>Usuario: Juan
-Organizaciones asignadas:
-  - Org 1: &quot;RXY Regional Centro&quot;  → BD: rest_centro
-    * Contiene sucursales: 1, 2, 3 (ID_compania)
-  - Org 2: &quot;RXY Regional Norte&quot;   → BD: rest_norte
-    * Contiene sucursales: 4, 5 (ID_compania)
 
-Problema asumido (NO real):
-  Juan selecciona Org 1 en el header
-  Sistema cambia a BD rest_centro
-  Al consultar Sales_Header_Imp ve TODAS las ventas:
-    - Ventas de sucursal 1 ✅
-    - Ventas de sucursal 2 ✅
-    - Ventas de sucursal 3 ✅
+<div class="codehilite"><pre><span></span><code><span class="n">Usuario</span><span class="o">:</span><span class="w"> </span><span class="n">Juan</span>
+<span class="n">Organizaciones</span><span class="w"> </span><span class="n">asignadas</span><span class="o">:</span>
+<span class="w">  </span><span class="o">-</span><span class="w"> </span><span class="n">Org</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;RXY Regional Centro&quot;</span><span class="w">  </span><span class="err">→</span><span class="w"> </span><span class="n">BD</span><span class="o">:</span><span class="w"> </span><span class="n">rest_centro</span>
+<span class="w">    </span><span class="o">*</span><span class="w"> </span><span class="n">Contiene</span><span class="w"> </span><span class="n">sucursales</span><span class="o">:</span><span class="w"> </span><span class="mi">1</span><span class="o">,</span><span class="w"> </span><span class="mi">2</span><span class="o">,</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="o">(</span><span class="n">ID_compania</span><span class="o">)</span>
+<span class="w">  </span><span class="o">-</span><span class="w"> </span><span class="n">Org</span><span class="w"> </span><span class="mi">2</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;RXY Regional Norte&quot;</span><span class="w">   </span><span class="err">→</span><span class="w"> </span><span class="n">BD</span><span class="o">:</span><span class="w"> </span><span class="n">rest_norte</span>
+<span class="w">    </span><span class="o">*</span><span class="w"> </span><span class="n">Contiene</span><span class="w"> </span><span class="n">sucursales</span><span class="o">:</span><span class="w"> </span><span class="mi">4</span><span class="o">,</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="o">(</span><span class="n">ID_compania</span><span class="o">)</span>
 
-  Pero Juan solo debería ver:
-    - Ventas de sucursal 1 (asignada)
-    - Ventas de sucursal 2 (asignada)
-    NO la sucursal 3 (no asignada)
+<span class="n">Problema</span><span class="w"> </span><span class="n">asumido</span><span class="w"> </span><span class="o">(</span><span class="n">NO</span><span class="w"> </span><span class="n">real</span><span class="o">):</span>
+<span class="w">  </span><span class="n">Juan</span><span class="w"> </span><span class="n">selecciona</span><span class="w"> </span><span class="n">Org</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="n">en</span><span class="w"> </span><span class="n">el</span><span class="w"> </span><span class="n">header</span>
+<span class="w">  </span><span class="n">Sistema</span><span class="w"> </span><span class="n">cambia</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">BD</span><span class="w"> </span><span class="n">rest_centro</span>
+<span class="w">  </span><span class="n">Al</span><span class="w"> </span><span class="n">consultar</span><span class="w"> </span><span class="n">Sales_Header_Imp</span><span class="w"> </span><span class="n">ve</span><span class="w"> </span><span class="n">TODAS</span><span class="w"> </span><span class="n">las</span><span class="w"> </span><span class="n">ventas</span><span class="o">:</span>
+<span class="w">    </span><span class="o">-</span><span class="w"> </span><span class="n">Ventas</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">sucursal</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="err">✅</span>
+<span class="w">    </span><span class="o">-</span><span class="w"> </span><span class="n">Ventas</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">sucursal</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="err">✅</span>
+<span class="w">    </span><span class="o">-</span><span class="w"> </span><span class="n">Ventas</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">sucursal</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="err">✅</span>
 
-Escenario Deseado:
-  Juan tiene asignadas específicamente:
-    - Org 1: sucursales 1, 2 (NO la 3)
-    - Org 2: sucursal 4 (NO la 5)
+<span class="w">  </span><span class="n">Pero</span><span class="w"> </span><span class="n">Juan</span><span class="w"> </span><span class="n">solo</span><span class="w"> </span><span class="n">debería</span><span class="w"> </span><span class="n">ver</span><span class="o">:</span>
+<span class="w">    </span><span class="o">-</span><span class="w"> </span><span class="n">Ventas</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">sucursal</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">(</span><span class="n">asignada</span><span class="o">)</span>
+<span class="w">    </span><span class="o">-</span><span class="w"> </span><span class="n">Ventas</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">sucursal</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">(</span><span class="n">asignada</span><span class="o">)</span>
+<span class="w">    </span><span class="n">NO</span><span class="w"> </span><span class="n">la</span><span class="w"> </span><span class="n">sucursal</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="o">(</span><span class="n">no</span><span class="w"> </span><span class="n">asignada</span><span class="o">)</span>
 
-  Filtrado automático:
-    WHERE ID_compania IN (1, 2) cuando usa Org 1
-    WHERE ID_compania IN (4) cuando usa Org 2
+<span class="n">Escenario</span><span class="w"> </span><span class="n">Deseado</span><span class="o">:</span>
+<span class="w">  </span><span class="n">Juan</span><span class="w"> </span><span class="n">tiene</span><span class="w"> </span><span class="n">asignadas</span><span class="w"> </span><span class="n">específicamente</span><span class="o">:</span>
+<span class="w">    </span><span class="o">-</span><span class="w"> </span><span class="n">Org</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="w"> </span><span class="n">sucursales</span><span class="w"> </span><span class="mi">1</span><span class="o">,</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">(</span><span class="n">NO</span><span class="w"> </span><span class="n">la</span><span class="w"> </span><span class="mi">3</span><span class="o">)</span>
+<span class="w">    </span><span class="o">-</span><span class="w"> </span><span class="n">Org</span><span class="w"> </span><span class="mi">2</span><span class="o">:</span><span class="w"> </span><span class="n">sucursal</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="o">(</span><span class="n">NO</span><span class="w"> </span><span class="n">la</span><span class="w"> </span><span class="mi">5</span><span class="o">)</span>
+
+<span class="w">  </span><span class="n">Filtrado</span><span class="w"> </span><span class="n">automático</span><span class="o">:</span>
+<span class="w">    </span><span class="n">WHERE</span><span class="w"> </span><span class="n">ID_compania</span><span class="w"> </span><span class="n">IN</span><span class="w"> </span><span class="o">(</span><span class="mi">1</span><span class="o">,</span><span class="w"> </span><span class="mi">2</span><span class="o">)</span><span class="w"> </span><span class="n">cuando</span><span class="w"> </span><span class="n">usa</span><span class="w"> </span><span class="n">Org</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">    </span><span class="n">WHERE</span><span class="w"> </span><span class="n">ID_compania</span><span class="w"> </span><span class="n">IN</span><span class="w"> </span><span class="o">(</span><span class="mi">4</span><span class="o">)</span><span class="w"> </span><span class="n">cuando</span><span class="w"> </span><span class="n">usa</span><span class="w"> </span><span class="n">Org</span><span class="w"> </span><span class="mi">2</span>
 </code></pre></div>
+
+
 
 ### Código Actual vs Deseado
 
 **❌ Código Actual:**
-<div class="highlight"><pre><span></span><code><span class="x">// En SalesHeaderImp (sin filtrado)</span>
+
+<div class="codehilite"><pre><span></span><code><span class="x">// En SalesHeaderImp (sin filtrado)</span>
 <span class="x">SalesHeaderImp::all();</span>
 <span class="x">// Retorna: TODAS las ventas de TODAS las sucursales en la BD</span>
 <span class="x">// Problema: Usuario ve sucursales no asignadas</span>
@@ -2432,8 +2494,11 @@ Escenario Deseado:
 <span class="x">// Pero ve también las ventas de sucursal 3 ❌</span>
 </code></pre></div>
 
+
+
 **✅ Código Deseado:**
-<div class="highlight"><pre><span></span><code><span class="x">// Con filtrado automático</span>
+
+<div class="codehilite"><pre><span></span><code><span class="x">// Con filtrado automático</span>
 <span class="x">SalesHeaderImp::all();</span>
 <span class="x">// Retorna: Solo ventas de sucursales asignadas al usuario</span>
 
@@ -2443,47 +2508,55 @@ Escenario Deseado:
 <span class="x">// Solo ve ventas de sucursales 1 y 2 ✅</span>
 </code></pre></div>
 
+
+
 ### Flujo Incorrecto Actual
 
-<div class="highlight"><pre><span></span><code>1. Usuario Juan tiene 2 organizaciones
-   └─&gt; Org 1: rest_centro (sucursales 1,2,3)
-   └─&gt; Org 2: rest_norte (sucursales 4,5)
 
-2. Juan selecciona Org 1 en el header
-   └─&gt; Sistema: DB::useDatabase(&#39;rest_centro&#39;)
+<div class="codehilite"><pre><span></span><code><span class="mf">1.</span><span class="w"> </span><span class="n">Usuario</span><span class="w"> </span><span class="n">Juan</span><span class="w"> </span><span class="n">tiene</span><span class="w"> </span><span class="mf">2</span><span class="w"> </span><span class="ow">or</span><span class="n">ganizaciones</span>
+<span class="w">   </span><span class="err">└─</span><span class="o">&gt;</span><span class="w"> </span><span class="ow">Or</span><span class="n">g</span><span class="w"> </span><span class="mf">1</span><span class="p">:</span><span class="w"> </span><span class="n">rest_centro</span><span class="w"> </span><span class="p">(</span><span class="n">sucursales</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span><span class="mf">2</span><span class="p">,</span><span class="mf">3</span><span class="p">)</span>
+<span class="w">   </span><span class="err">└─</span><span class="o">&gt;</span><span class="w"> </span><span class="ow">Or</span><span class="n">g</span><span class="w"> </span><span class="mf">2</span><span class="p">:</span><span class="w"> </span><span class="n">rest_norte</span><span class="w"> </span><span class="p">(</span><span class="n">sucursales</span><span class="w"> </span><span class="mf">4</span><span class="p">,</span><span class="mf">5</span><span class="p">)</span>
 
-3. Query sin filtrado:
-   └─&gt; SalesHeaderImp::all()
-   └─&gt; ❌ PROBLEMA: Retorna TODAS las ventas (ID_compania 1,2,3)
-   └─&gt; Juan no debería ver sucursal 3
+<span class="mf">2.</span><span class="w"> </span><span class="n">Juan</span><span class="w"> </span><span class="n">selecciona</span><span class="w"> </span><span class="ow">Or</span><span class="n">g</span><span class="w"> </span><span class="mf">1</span><span class="w"> </span><span class="n">en</span><span class="w"> </span><span class="n">el</span><span class="w"> </span><span class="n">header</span>
+<span class="w">   </span><span class="err">└─</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Sistema</span><span class="p">:</span><span class="w"> </span><span class="n">DB</span><span class="p">::</span><span class="n">useDatabase</span><span class="p">(</span><span class="err">&#39;</span><span class="n">rest_centro</span><span class="err">&#39;</span><span class="p">)</span>
 
-4. Método actual getCompanyIds() no ayuda:
-   └─&gt; Retorna [100] (ID empresa matriz de BD principal)
-   └─&gt; No distingue entre sucursales de la BD organizacional
+<span class="mf">3.</span><span class="w"> </span><span class="n">Query</span><span class="w"> </span><span class="nb">sin</span><span class="w"> </span><span class="n">filtrado</span><span class="p">:</span>
+<span class="w">   </span><span class="err">└─</span><span class="o">&gt;</span><span class="w"> </span><span class="n">SalesHeaderImp</span><span class="p">::</span><span class="n">all</span><span class="p">()</span>
+<span class="w">   </span><span class="err">└─</span><span class="o">&gt;</span><span class="w"> </span><span class="err">❌</span><span class="w"> </span><span class="n">PROBLEMA</span><span class="p">:</span><span class="w"> </span><span class="n">Retorna</span><span class="w"> </span><span class="kr">TO</span><span class="n">DAS</span><span class="w"> </span><span class="n">las</span><span class="w"> </span><span class="n">ventas</span><span class="w"> </span><span class="p">(</span><span class="n">ID_compania</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span><span class="mf">2</span><span class="p">,</span><span class="mf">3</span><span class="p">)</span>
+<span class="w">   </span><span class="err">└─</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Juan</span><span class="w"> </span><span class="n">no</span><span class="w"> </span><span class="n">debería</span><span class="w"> </span><span class="n">ver</span><span class="w"> </span><span class="n">sucursal</span><span class="w"> </span><span class="mf">3</span>
+
+<span class="mf">4.</span><span class="w"> </span><span class="n">Método</span><span class="w"> </span><span class="n">actual</span><span class="w"> </span><span class="kr">get</span><span class="n">CompanyIds</span><span class="p">()</span><span class="w"> </span><span class="n">no</span><span class="w"> </span><span class="n">ayuda</span><span class="p">:</span>
+<span class="w">   </span><span class="err">└─</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Retorna</span><span class="w"> </span><span class="err">[</span><span class="mf">100</span><span class="err">]</span><span class="w"> </span><span class="p">(</span><span class="n">ID</span><span class="w"> </span><span class="n">empresa</span><span class="w"> </span><span class="n">matriz</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">BD</span><span class="w"> </span><span class="n">principal</span><span class="p">)</span>
+<span class="w">   </span><span class="err">└─</span><span class="o">&gt;</span><span class="w"> </span><span class="n">No</span><span class="w"> </span><span class="n">distingue</span><span class="w"> </span><span class="n">entre</span><span class="w"> </span><span class="n">sucursales</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">la</span><span class="w"> </span><span class="n">BD</span><span class="w"> </span><span class="ow">or</span><span class="n">ganizacional</span>
 </code></pre></div>
+
+
 
 ### Flujo Correcto Propuesto
 
-<div class="highlight"><pre><span></span><code>1. Usuario Juan tiene 2 organizaciones CON sucursales asignadas
-   └─&gt; Org 1: rest_centro
-        └─&gt; Sucursales asignadas: [1, 2] (NO la 3)
-   └─&gt; Org 2: rest_norte
-        └─&gt; Sucursales asignadas: [4] (NO la 5)
 
-2. Juan selecciona Org 1 en el header
-   └─&gt; Sistema: DB::useDatabase(&#39;rest_centro&#39;)
-   └─&gt; Carga: assigned_branches = [1, 2]
+<div class="codehilite"><pre><span></span><code><span class="mf">1.</span><span class="w"> </span><span class="n">Usuario</span><span class="w"> </span><span class="n">Juan</span><span class="w"> </span><span class="n">tiene</span><span class="w"> </span><span class="mf">2</span><span class="w"> </span><span class="ow">or</span><span class="n">ganizaciones</span><span class="w"> </span><span class="n">CON</span><span class="w"> </span><span class="n">sucursales</span><span class="w"> </span><span class="n">asignadas</span>
+<span class="w">   </span><span class="err">└─</span><span class="o">&gt;</span><span class="w"> </span><span class="ow">Or</span><span class="n">g</span><span class="w"> </span><span class="mf">1</span><span class="p">:</span><span class="w"> </span><span class="n">rest_centro</span>
+<span class="w">        </span><span class="err">└─</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Sucursales</span><span class="w"> </span><span class="n">asignadas</span><span class="p">:</span><span class="w"> </span><span class="err">[</span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="mf">2</span><span class="err">]</span><span class="w"> </span><span class="p">(</span><span class="n">NO</span><span class="w"> </span><span class="n">la</span><span class="w"> </span><span class="mf">3</span><span class="p">)</span>
+<span class="w">   </span><span class="err">└─</span><span class="o">&gt;</span><span class="w"> </span><span class="ow">Or</span><span class="n">g</span><span class="w"> </span><span class="mf">2</span><span class="p">:</span><span class="w"> </span><span class="n">rest_norte</span>
+<span class="w">        </span><span class="err">└─</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Sucursales</span><span class="w"> </span><span class="n">asignadas</span><span class="p">:</span><span class="w"> </span><span class="err">[</span><span class="mf">4</span><span class="err">]</span><span class="w"> </span><span class="p">(</span><span class="n">NO</span><span class="w"> </span><span class="n">la</span><span class="w"> </span><span class="mf">5</span><span class="p">)</span>
 
-3. Query con filtrado automático:
-   └─&gt; SalesHeaderImp::all()
-   └─&gt; CompanyIdFilterScope aplica:
-        WHERE ID_compania IN (1, 2)
-   └─&gt; ✅ CORRECTO: Solo ventas de sucursales 1 y 2
+<span class="mf">2.</span><span class="w"> </span><span class="n">Juan</span><span class="w"> </span><span class="n">selecciona</span><span class="w"> </span><span class="ow">Or</span><span class="n">g</span><span class="w"> </span><span class="mf">1</span><span class="w"> </span><span class="n">en</span><span class="w"> </span><span class="n">el</span><span class="w"> </span><span class="n">header</span>
+<span class="w">   </span><span class="err">└─</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Sistema</span><span class="p">:</span><span class="w"> </span><span class="n">DB</span><span class="p">::</span><span class="n">useDatabase</span><span class="p">(</span><span class="err">&#39;</span><span class="n">rest_centro</span><span class="err">&#39;</span><span class="p">)</span>
+<span class="w">   </span><span class="err">└─</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Carga</span><span class="p">:</span><span class="w"> </span><span class="n">assigned_branches</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">[</span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="mf">2</span><span class="err">]</span>
 
-4. Método mejorado getBranchIds():
-   └─&gt; Retorna [1, 2] (sucursales asignadas en org actual)
-   └─&gt; Filtrado granular por sucursal
+<span class="mf">3.</span><span class="w"> </span><span class="n">Query</span><span class="w"> </span><span class="n">con</span><span class="w"> </span><span class="n">filtrado</span><span class="w"> </span><span class="n">automático</span><span class="p">:</span>
+<span class="w">   </span><span class="err">└─</span><span class="o">&gt;</span><span class="w"> </span><span class="n">SalesHeaderImp</span><span class="p">::</span><span class="n">all</span><span class="p">()</span>
+<span class="w">   </span><span class="err">└─</span><span class="o">&gt;</span><span class="w"> </span><span class="n">CompanyIdFilterScope</span><span class="w"> </span><span class="n">aplica</span><span class="p">:</span>
+<span class="w">        </span><span class="n">WHERE</span><span class="w"> </span><span class="n">ID_compania</span><span class="w"> </span><span class="n">IN</span><span class="w"> </span><span class="p">(</span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="mf">2</span><span class="p">)</span>
+<span class="w">   </span><span class="err">└─</span><span class="o">&gt;</span><span class="w"> </span><span class="err">✅</span><span class="w"> </span><span class="n">CORRECTO</span><span class="p">:</span><span class="w"> </span><span class="n">Solo</span><span class="w"> </span><span class="n">ventas</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">sucursales</span><span class="w"> </span><span class="mf">1</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="mf">2</span>
+
+<span class="mf">4.</span><span class="w"> </span><span class="n">Método</span><span class="w"> </span><span class="n">mejorado</span><span class="w"> </span><span class="kr">get</span><span class="n">BranchIds</span><span class="p">():</span>
+<span class="w">   </span><span class="err">└─</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Retorna</span><span class="w"> </span><span class="err">[</span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="mf">2</span><span class="err">]</span><span class="w"> </span><span class="p">(</span><span class="n">sucursales</span><span class="w"> </span><span class="n">asignadas</span><span class="w"> </span><span class="n">en</span><span class="w"> </span><span class="ow">or</span><span class="n">g</span><span class="w"> </span><span class="n">actual</span><span class="p">)</span>
+<span class="w">   </span><span class="err">└─</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Filtrado</span><span class="w"> </span><span class="n">granular</span><span class="w"> </span><span class="n">por</span><span class="w"> </span><span class="n">sucursal</span>
 </code></pre></div>
+
+
 
 ---
 
@@ -2500,7 +2573,8 @@ Escenario Deseado:
 **Opciones de Implementación:**
 
 #### Opción A: Tabla Intermedia Dedicada (Recomendada)
-<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">user_organization_branches</span><span class="w"> </span><span class="p">(</span>
+
+<div class="codehilite"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">user_organization_branches</span><span class="w"> </span><span class="p">(</span>
 <span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">BIGINT</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="n">AUTO_INCREMENT</span><span class="p">,</span>
 <span class="w">    </span><span class="n">user_id</span><span class="w"> </span><span class="nb">BIGINT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
 <span class="w">    </span><span class="n">organization_id</span><span class="w"> </span><span class="nb">BIGINT</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
@@ -2513,18 +2587,24 @@ Escenario Deseado:
 <span class="p">);</span>
 </code></pre></div>
 
+
+
 #### Opción B: Columna JSON en organizations_user
-<div class="highlight"><pre><span></span><code><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">organizations_user</span><span class="w"> </span>
+
+<div class="codehilite"><pre><span></span><code><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">organizations_user</span><span class="w"> </span>
 <span class="k">ADD</span><span class="w"> </span><span class="k">COLUMN</span><span class="w"> </span><span class="n">assigned_branches</span><span class="w"> </span><span class="n">JSON</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="k">NULL</span><span class="p">;</span>
 
 <span class="c1">-- Ejemplo de datos:</span>
 <span class="c1">-- assigned_branches: [1, 2, 5] -- IDs de sucursales permitidas</span>
 </code></pre></div>
 
+
+
 ### 1️⃣ Crear Tabla/Columna para Asignación de Sucursales
 
 **Opción A - Tabla Dedicada:**
-<div class="highlight"><pre><span></span><code><span class="x">// database/migrations/2025_12_03_create_user_organization_branches_table.php</span>
+
+<div class="codehilite"><pre><span></span><code><span class="x">// database/migrations/2025_12_03_create_user_organization_branches_table.php</span>
 <span class="x">Schema::create(&#39;user_organization_branches&#39;, function (Blueprint $table) {</span>
 <span class="x">    $table-&gt;id();</span>
 <span class="x">    $table-&gt;foreignId(&#39;user_id&#39;)-&gt;constrained()-&gt;onDelete(&#39;cascade&#39;);</span>
@@ -2536,16 +2616,22 @@ Escenario Deseado:
 <span class="x">});</span>
 </code></pre></div>
 
+
+
 **Opción B - Columna JSON:**
-<div class="highlight"><pre><span></span><code><span class="x">// database/migrations/2025_12_03_add_assigned_branches_to_organizations_user.php</span>
+
+<div class="codehilite"><pre><span></span><code><span class="x">// database/migrations/2025_12_03_add_assigned_branches_to_organizations_user.php</span>
 <span class="x">Schema::table(&#39;organizations_user&#39;, function (Blueprint $table) {</span>
 <span class="x">    $table-&gt;json(&#39;assigned_branches&#39;)-&gt;nullable()-&gt;after(&#39;organization_id&#39;);</span>
 <span class="x">});</span>
 </code></pre></div>
 
+
+
 ### 2️⃣ Modificar OrganizationService
 
-<div class="highlight"><pre><span></span><code><span class="x">// app/Services/OrganizationService.php</span>
+
+<div class="codehilite"><pre><span></span><code><span class="x">// app/Services/OrganizationService.php</span>
 
 <span class="x">/**</span>
 <span class="x"> * Obtiene los ID_compania (sucursales) asignadas al usuario</span>
@@ -2624,9 +2710,12 @@ Escenario Deseado:
 <span class="x">}</span>
 </code></pre></div>
 
+
+
 ### 2️⃣ Crear Global Scope Reutilizable
 
-<div class="highlight"><pre><span></span><code><span class="x">// app/Models/Scopes/CompanyIdFilterScope.php</span>
+
+<div class="codehilite"><pre><span></span><code><span class="x">// app/Models/Scopes/CompanyIdFilterScope.php</span>
 
 <span class="x">namespace App\Models\Scopes;</span>
 
@@ -2661,11 +2750,14 @@ Escenario Deseado:
 <span class="x">}</span>
 </code></pre></div>
 
+
+
 ### 3️⃣ Aplicar Scope a Todos los Modelos
 
 **Ejemplo de implementación:**
 
-<div class="highlight"><pre><span></span><code><span class="x">// app/Models/SalesHeaderImp.php</span>
+
+<div class="codehilite"><pre><span></span><code><span class="x">// app/Models/SalesHeaderImp.php</span>
 
 <span class="x">namespace App\Models;</span>
 
@@ -2694,10 +2786,13 @@ Escenario Deseado:
 <span class="x">}</span>
 </code></pre></div>
 
+
+
 ### 4️⃣ Modelos que Deben Implementar el Scope
 
 **Prioridad ALTA (Transacciones):**
-<div class="highlight"><pre><span></span><code><span class="x">// Ventas</span>
+
+<div class="codehilite"><pre><span></span><code><span class="x">// Ventas</span>
 <span class="x">SalesHeaderImp::class</span>
 <span class="x">SalesDetailImp::class</span>
 <span class="x">SalesOrderHeaderImp::class</span>
@@ -2717,8 +2812,11 @@ Escenario Deseado:
 <span class="x">FePayment::class</span>
 </code></pre></div>
 
+
+
 **Prioridad MEDIA (Catálogos):**
-<div class="highlight"><pre><span></span><code><span class="x">// Ya implementados, pero cambiar de whereIn a where</span>
+
+<div class="codehilite"><pre><span></span><code><span class="x">// Ya implementados, pero cambiar de whereIn a where</span>
 <span class="x">CustomersImp::class</span>
 <span class="x">VendorsImp::class</span>
 <span class="x">ProductsImp::class</span>
@@ -2729,19 +2827,25 @@ Escenario Deseado:
 <span class="x">ProductsExp::class</span>
 </code></pre></div>
 
+
+
 **Prioridad BAJA (Configuración):**
-<div class="highlight"><pre><span></span><code><span class="x">JobPhasesExp::class</span>
+
+<div class="codehilite"><pre><span></span><code><span class="x">JobPhasesExp::class</span>
 <span class="x">JobCostCodesExp::class</span>
 <span class="x">SalesRepresentativeExp::class</span>
 <span class="x">ChartExp::class</span>
 </code></pre></div>
+
+
 
 ### 5️⃣ Casos Especiales: Reportes Consolidados
 
 **Problema:** Algunos reportes necesitan ver TODAS las sucursales
 
 **Solución:**
-<div class="highlight"><pre><span></span><code><span class="x">// En controllers o servicios de reportes</span>
+
+<div class="codehilite"><pre><span></span><code><span class="x">// En controllers o servicios de reportes</span>
 <span class="x">use Illuminate\Database\Eloquent\Builder;</span>
 
 <span class="x">// Desactivar scope globalmente</span>
@@ -2762,12 +2866,15 @@ Escenario Deseado:
 <span class="x">SalesHeaderImp::allBranches()-&gt;get();</span>
 </code></pre></div>
 
+
+
 ### 6️⃣ Jobs Asíncronos
 
 **Problema:** Jobs no tienen `auth()->user()`
 
 **Solución:**
-<div class="highlight"><pre><span></span><code><span class="x">// En Jobs, deshabilitar scope y filtrar manualmente</span>
+
+<div class="codehilite"><pre><span></span><code><span class="x">// En Jobs, deshabilitar scope y filtrar manualmente</span>
 <span class="x">class ProcessSalesJob implements ShouldQueue</span>
 <span class="x">{</span>
 <span class="x">    protected $organizationId;</span>
@@ -2790,6 +2897,8 @@ Escenario Deseado:
 <span class="x">}</span>
 </code></pre></div>
 
+
+
 ---
 
 ## Plan de Implementación
@@ -2802,14 +2911,20 @@ Escenario Deseado:
 - **Recomendación:** Opción A para mejor performance y queries
 
 **1.2 Crear Migration**
-<div class="highlight"><pre><span></span><code>php<span class="w"> </span>artisan<span class="w"> </span>make:migration<span class="w"> </span>create_user_organization_branches_table
+
+<div class="codehilite"><pre><span></span><code>php<span class="w"> </span>artisan<span class="w"> </span>make:migration<span class="w"> </span>create_user_organization_branches_table
 <span class="c1"># O</span>
 php<span class="w"> </span>artisan<span class="w"> </span>make:migration<span class="w"> </span>add_assigned_branches_to_organizations_user_table
 </code></pre></div>
 
+
+
 **1.3 Crear Scope Base**
-<div class="highlight"><pre><span></span><code>php<span class="w"> </span>artisan<span class="w"> </span>make:scope<span class="w"> </span>CompanyIdFilterScope
+
+<div class="codehilite"><pre><span></span><code>php<span class="w"> </span>artisan<span class="w"> </span>make:scope<span class="w"> </span>CompanyIdFilterScope
 </code></pre></div>
+
+
 
 **1.4 Modificar OrganizationService**
 - Agregar `getAssignedBranchIds()`
@@ -2817,7 +2932,8 @@ php<span class="w"> </span>artisan<span class="w"> </span>make:migration<span cl
 - Decidir comportamiento por defecto (ver todas vs ninguna)
 
 **1.5 Testing de Scope**
-<div class="highlight"><pre><span></span><code><span class="x">// tests/Unit/CompanyIdFilterScopeTest.php</span>
+
+<div class="codehilite"><pre><span></span><code><span class="x">// tests/Unit/CompanyIdFilterScopeTest.php</span>
 <span class="x">test(&#39;filters by assigned branches in current organization&#39;, function () {</span>
 <span class="x">    $user = User::factory()-&gt;create();</span>
 <span class="x">    $org = Organization::factory()-&gt;create([&#39;database&#39; =&gt; &#39;test_db&#39;]);</span>
@@ -2840,6 +2956,8 @@ php<span class="w"> </span>artisan<span class="w"> </span>make:migration<span cl
 <span class="x">    expect($sales-&gt;pluck(&#39;ID_compania&#39;)-&gt;toArray())-&gt;toBe([1, 2]);</span>
 <span class="x">});</span>
 </code></pre></div>
+
+
 
 ### Fase 2: Implementación Progresiva (4-6 días)
 
@@ -2868,7 +2986,8 @@ php<span class="w"> </span>artisan<span class="w"> </span>make:migration<span cl
 ### Fase 3: Migración y Despliegue (3-4 días)
 
 **3.1 Migración de Datos Existentes**
-<div class="highlight"><pre><span></span><code><span class="x">// Seeder para asignar todas las sucursales a usuarios existentes</span>
+
+<div class="codehilite"><pre><span></span><code><span class="x">// Seeder para asignar todas las sucursales a usuarios existentes</span>
 <span class="x">// Mantener comportamiento actual (ver todas)</span>
 <span class="x">foreach (User::all() as $user) {</span>
 <span class="x">    foreach ($user-&gt;organizations as $org) {</span>
@@ -2888,6 +3007,8 @@ php<span class="w"> </span>artisan<span class="w"> </span>make:migration<span cl
 <span class="x">}</span>
 </code></pre></div>
 
+
+
 **3.2 Verificación de Jobs**
 - Identificar jobs que usan modelos con scope
 - Agregar `withoutGlobalScope()` donde sea necesario
@@ -2899,7 +3020,8 @@ php<span class="w"> </span>artisan<span class="w"> </span>make:migration<span cl
 - Manejar cross-organization reports
 
 **3.4 Deploy Gradual**
-<div class="highlight"><pre><span></span><code><span class="c1"># 1. Deploy migration en staging</span>
+
+<div class="codehilite"><pre><span></span><code><span class="c1"># 1. Deploy migration en staging</span>
 php<span class="w"> </span>artisan<span class="w"> </span>migrate
 
 <span class="c1"># 2. Seed de asignaciones por defecto</span>
@@ -2910,10 +3032,13 @@ php<span class="w"> </span>artisan<span class="w"> </span>db:seed<span class="w"
 <span class="c1"># 5. Monitoreo de logs y queries</span>
 </code></pre></div>
 
+
+
 ### Fase 4: Documentación (1 día)
 
 **4.1 Actualizar Copilot Instructions**
-<div class="highlight"><pre><span></span><code><span class="gu">## Filtrado por Sucursal (ID_compania) - ACTUALIZADO</span>
+
+<div class="codehilite"><pre><span></span><code><span class="gu">## Filtrado por Sucursal (ID_compania) - ACTUALIZADO</span>
 
 <span class="gu">### Arquitectura Multi-Sucursal</span>
 <span class="k">-</span><span class="w"> </span>1 Empresa Matriz → N Organizaciones (cada una con BD propia)
@@ -2942,71 +3067,80 @@ protected static function booted()
 }
 </code></pre></div>
 
+
+
 ### Para Jobs
-<div class="highlight"><pre><span></span><code><span class="x">// Deshabilitar scope y filtrar manualmente</span>
+
+<div class="codehilite"><pre><span></span><code><span class="x">// Deshabilitar scope y filtrar manualmente</span>
 <span class="x">$sales = SalesHeaderImp::withoutGlobalScopes()</span>
 <span class="x">    -&gt;whereIn(&#39;ID_compania&#39;, $assignedBranches)</span>
 <span class="x">    -&gt;get();</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>**4.2 Crear Migration Guide**
-- Para desarrolladores que agreguen nuevos modelos
-- Checklist de validación
 
----
 
-## Ventajas de Esta Solución
 
-### ✅ Simplicidad
-- No requiere tabla intermedia
-- Usa relaciones existentes (Organization → Companysession)
-- Mínimo impacto en código existente
+<div class="codehilite"><pre><span></span><code><span class="o">**</span><span class="m m-Double">4.2</span><span class="w"> </span><span class="nx">Crear</span><span class="w"> </span><span class="nx">Migration</span><span class="w"> </span><span class="nx">Guide</span><span class="o">**</span>
+<span class="o">-</span><span class="w"> </span><span class="nx">Para</span><span class="w"> </span><span class="nx">desarrolladores</span><span class="w"> </span><span class="nx">que</span><span class="w"> </span><span class="nx">agreguen</span><span class="w"> </span><span class="nx">nuevos</span><span class="w"> </span><span class="nx">modelos</span>
+<span class="o">-</span><span class="w"> </span><span class="nx">Checklist</span><span class="w"> </span><span class="nx">de</span><span class="w"> </span><span class="nx">validación</span>
 
-### ✅ Seguridad
-- Filtrado automático a nivel de modelo
-- Imposible olvidar filtrar en queries
-- Protección contra acceso a datos de otras sucursales
+<span class="o">---</span>
 
-### ✅ Performance
-- Un solo filtro: `WHERE ID_compania = 100`
-- Índices ya existen en todas las tablas
-- Queries más rápidos (menos filas)
+<span class="err">##</span><span class="w"> </span><span class="nx">Ventajas</span><span class="w"> </span><span class="nx">de</span><span class="w"> </span><span class="nx">Esta</span><span class="w"> </span><span class="nx">Solución</span>
 
-### ✅ Mantenibilidad
-- Comportamiento consistente en todos los modelos
-- Scope reutilizable
-- Fácil de testear
+<span class="err">###</span><span class="w"> </span><span class="err">✅</span><span class="w"> </span><span class="nx">Simplicidad</span>
+<span class="o">-</span><span class="w"> </span><span class="nx">No</span><span class="w"> </span><span class="nx">requiere</span><span class="w"> </span><span class="nx">tabla</span><span class="w"> </span><span class="nx">intermedia</span>
+<span class="o">-</span><span class="w"> </span><span class="nx">Usa</span><span class="w"> </span><span class="nx">relaciones</span><span class="w"> </span><span class="nx">existentes</span><span class="w"> </span><span class="p">(</span><span class="nx">Organization</span><span class="w"> </span><span class="err">→</span><span class="w"> </span><span class="nx">Companysession</span><span class="p">)</span>
+<span class="o">-</span><span class="w"> </span><span class="nx">Mínimo</span><span class="w"> </span><span class="nx">impacto</span><span class="w"> </span><span class="nx">en</span><span class="w"> </span><span class="nx">código</span><span class="w"> </span><span class="nx">existente</span>
 
-### ✅ Flexibilidad
-- Reportes consolidados: `withoutGlobalScope()`
-- Jobs: filtrado manual explícito
-- Compatible con arquitectura actual
+<span class="err">###</span><span class="w"> </span><span class="err">✅</span><span class="w"> </span><span class="nx">Seguridad</span>
+<span class="o">-</span><span class="w"> </span><span class="nx">Filtrado</span><span class="w"> </span><span class="nx">automático</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">nivel</span><span class="w"> </span><span class="nx">de</span><span class="w"> </span><span class="nx">modelo</span>
+<span class="o">-</span><span class="w"> </span><span class="nx">Imposible</span><span class="w"> </span><span class="nx">olvidar</span><span class="w"> </span><span class="nx">filtrar</span><span class="w"> </span><span class="nx">en</span><span class="w"> </span><span class="nx">queries</span>
+<span class="o">-</span><span class="w"> </span><span class="nx">Protección</span><span class="w"> </span><span class="nx">contra</span><span class="w"> </span><span class="nx">acceso</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">datos</span><span class="w"> </span><span class="nx">de</span><span class="w"> </span><span class="nx">otras</span><span class="w"> </span><span class="nx">sucursales</span>
 
----
+<span class="err">###</span><span class="w"> </span><span class="err">✅</span><span class="w"> </span><span class="nx">Performance</span>
+<span class="o">-</span><span class="w"> </span><span class="nx">Un</span><span class="w"> </span><span class="nx">solo</span><span class="w"> </span><span class="nx">filtro</span><span class="p">:</span><span class="w"> </span><span class="err">`</span><span class="nx">WHERE</span><span class="w"> </span><span class="nx">ID_compania</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">100</span><span class="err">`</span>
+<span class="o">-</span><span class="w"> </span><span class="nx">Índices</span><span class="w"> </span><span class="nx">ya</span><span class="w"> </span><span class="nx">existen</span><span class="w"> </span><span class="nx">en</span><span class="w"> </span><span class="nx">todas</span><span class="w"> </span><span class="nx">las</span><span class="w"> </span><span class="nx">tablas</span>
+<span class="o">-</span><span class="w"> </span><span class="nx">Queries</span><span class="w"> </span><span class="nx">más</span><span class="w"> </span><span class="nx">rápidos</span><span class="w"> </span><span class="p">(</span><span class="nx">menos</span><span class="w"> </span><span class="nx">filas</span><span class="p">)</span>
 
-## Casos de Uso Específicos
+<span class="err">###</span><span class="w"> </span><span class="err">✅</span><span class="w"> </span><span class="nx">Mantenibilidad</span>
+<span class="o">-</span><span class="w"> </span><span class="nx">Comportamiento</span><span class="w"> </span><span class="nx">consistente</span><span class="w"> </span><span class="nx">en</span><span class="w"> </span><span class="nx">todos</span><span class="w"> </span><span class="nx">los</span><span class="w"> </span><span class="nx">modelos</span>
+<span class="o">-</span><span class="w"> </span><span class="nx">Scope</span><span class="w"> </span><span class="nx">reutilizable</span>
+<span class="o">-</span><span class="w"> </span><span class="nx">Fácil</span><span class="w"> </span><span class="nx">de</span><span class="w"> </span><span class="nx">testear</span>
 
-### Caso 1: Usuario con 1 Organización, Múltiples Sucursales
+<span class="err">###</span><span class="w"> </span><span class="err">✅</span><span class="w"> </span><span class="nx">Flexibilidad</span>
+<span class="o">-</span><span class="w"> </span><span class="nx">Reportes</span><span class="w"> </span><span class="nx">consolidados</span><span class="p">:</span><span class="w"> </span><span class="err">`</span><span class="nx">withoutGlobalScope</span><span class="p">()</span><span class="err">`</span>
+<span class="o">-</span><span class="w"> </span><span class="nx">Jobs</span><span class="p">:</span><span class="w"> </span><span class="nx">filtrado</span><span class="w"> </span><span class="nx">manual</span><span class="w"> </span><span class="nx">explícito</span>
+<span class="o">-</span><span class="w"> </span><span class="nx">Compatible</span><span class="w"> </span><span class="nx">con</span><span class="w"> </span><span class="nx">arquitectura</span><span class="w"> </span><span class="nx">actual</span>
 
-```php
-User: María
-Organizaciones: 1
-  └─&gt; Org: &quot;RXY Regional Centro&quot; (BD: rest_centro)
-      ├─&gt; Sucursal 1: Local Centro (ID_compania: 1)
-      ├─&gt; Sucursal 2: Local Plaza (ID_compania: 2)
-      └─&gt; Sucursal 3: Local Mall (ID_compania: 3)
+<span class="o">---</span>
 
-María tiene asignadas: sucursales 1 y 2 (NO la 3)
+<span class="err">##</span><span class="w"> </span><span class="nx">Casos</span><span class="w"> </span><span class="nx">de</span><span class="w"> </span><span class="nx">Uso</span><span class="w"> </span><span class="nx">Específicos</span>
 
-// Todas las queries automáticamente filtran por sucursales asignadas
-SalesHeaderImp::all(); // WHERE ID_compania IN (1, 2)
-CustomersImp::all();   // WHERE ID_compania IN (1, 2)
+<span class="err">###</span><span class="w"> </span><span class="nx">Caso</span><span class="w"> </span><span class="mi">1</span><span class="p">:</span><span class="w"> </span><span class="nx">Usuario</span><span class="w"> </span><span class="nx">con</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="nx">Organización</span><span class="p">,</span><span class="w"> </span><span class="nx">Múltiples</span><span class="w"> </span><span class="nx">Sucursales</span>
 
-// María NO ve datos de sucursal 3
+<span class="err">```</span><span class="nx">php</span>
+<span class="nx">User</span><span class="p">:</span><span class="w"> </span><span class="nx">María</span>
+<span class="nx">Organizaciones</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">  </span><span class="err">└─</span><span class="p">&gt;</span><span class="w"> </span><span class="nx">Org</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;RXY Regional Centro&quot;</span><span class="w"> </span><span class="p">(</span><span class="nx">BD</span><span class="p">:</span><span class="w"> </span><span class="nx">rest_centro</span><span class="p">)</span>
+<span class="w">      </span><span class="err">├─</span><span class="p">&gt;</span><span class="w"> </span><span class="nx">Sucursal</span><span class="w"> </span><span class="mi">1</span><span class="p">:</span><span class="w"> </span><span class="nx">Local</span><span class="w"> </span><span class="nx">Centro</span><span class="w"> </span><span class="p">(</span><span class="nx">ID_compania</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+<span class="w">      </span><span class="err">├─</span><span class="p">&gt;</span><span class="w"> </span><span class="nx">Sucursal</span><span class="w"> </span><span class="mi">2</span><span class="p">:</span><span class="w"> </span><span class="nx">Local</span><span class="w"> </span><span class="nx">Plaza</span><span class="w"> </span><span class="p">(</span><span class="nx">ID_compania</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
+<span class="w">      </span><span class="err">└─</span><span class="p">&gt;</span><span class="w"> </span><span class="nx">Sucursal</span><span class="w"> </span><span class="mi">3</span><span class="p">:</span><span class="w"> </span><span class="nx">Local</span><span class="w"> </span><span class="nx">Mall</span><span class="w"> </span><span class="p">(</span><span class="nx">ID_compania</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span>
+
+<span class="nx">María</span><span class="w"> </span><span class="nx">tiene</span><span class="w"> </span><span class="nx">asignadas</span><span class="p">:</span><span class="w"> </span><span class="nx">sucursales</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="nx">y</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="p">(</span><span class="nx">NO</span><span class="w"> </span><span class="nx">la</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span>
+
+<span class="c1">// Todas las queries automáticamente filtran por sucursales asignadas</span>
+<span class="nx">SalesHeaderImp</span><span class="o">::</span><span class="nx">all</span><span class="p">();</span><span class="w"> </span><span class="c1">// WHERE ID_compania IN (1, 2)</span>
+<span class="nx">CustomersImp</span><span class="o">::</span><span class="nx">all</span><span class="p">();</span><span class="w">   </span><span class="c1">// WHERE ID_compania IN (1, 2)</span>
+
+<span class="c1">// María NO ve datos de sucursal 3</span>
 </code></pre></div>
+
+
 
 ### Caso 2: Usuario con Múltiples Organizaciones y Sucursales Selectivas
 
-<div class="highlight"><pre><span></span><code><span class="x">User: Juan</span>
+
+<div class="codehilite"><pre><span></span><code><span class="x">User: Juan</span>
 <span class="x">Organizaciones: 2</span>
 <span class="x">  ├─&gt; Org 1: &quot;RXY Regional Centro&quot; (BD: rest_centro)</span>
 <span class="x">  │     ├─&gt; Sucursales disponibles: 1, 2, 3</span>
@@ -3035,9 +3169,12 @@ CustomersImp::all();   // WHERE ID_compania IN (1, 2)
 <span class="x">// Solo ve ventas de sucursal 4, NO 5 ni 6</span>
 </code></pre></div>
 
+
+
 ### Caso 3: Reporte Consolidado Multi-Organización
 
-<div class="highlight"><pre><span></span><code><span class="x">// Supervisor necesita ver consolidado de múltiples organizaciones</span>
+
+<div class="codehilite"><pre><span></span><code><span class="x">// Supervisor necesita ver consolidado de múltiples organizaciones</span>
 <span class="x">// Cada organización tiene múltiples sucursales</span>
 
 <span class="x">$totalSales = 0;</span>
@@ -3082,6 +3219,8 @@ CustomersImp::all();   // WHERE ID_compania IN (1, 2)
 <span class="x">//   ]</span>
 <span class="x">// ]</span>
 </code></pre></div>
+
+
 
 ---
 
@@ -3194,7 +3333,7 @@ El sistema actual necesita mejoras para manejar el escenario real:
       
       
     
-    <a href="https://github.com/aghabrego/docucenter" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+    <a href="https://github.com/aghabrego/docucenter-public" target="_blank" rel="noopener" title="github.com" class="md-social__link">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
     </a>
   

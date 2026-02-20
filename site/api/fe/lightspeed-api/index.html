@@ -239,7 +239,7 @@
           
   
   
-  APIs
+  API Documentation
 
         </a>
       </li>
@@ -275,7 +275,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../technical/" class="md-tabs__link">
+        <a href="../../../technical/README.md" class="md-tabs__link">
           
   
   
@@ -304,6 +304,25 @@
         </a>
       </li>
     
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../testing/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Sistema de Testing
+
+      </a>
+    </li>
   
 
       
@@ -413,7 +432,7 @@
   <span class="md-ellipsis">
     
   
-    APIs
+    API Documentation
   
 
     
@@ -429,7 +448,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    APIs
+    API Documentation
   
 
           </label>
@@ -1644,7 +1663,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../technical/" class="md-nav__link">
+      <a href="../../../technical/README.md" class="md-nav__link">
         
   
   
@@ -1997,6 +2016,33 @@
   
 
     
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sistema de Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -2259,24 +2305,24 @@
   
 
 
-<h1 id="api-facturacion-electronica-integracion-lightspeed">API Facturación Electrónica - Integración Lightspeed<a class="headerlink" href="#api-facturacion-electronica-integracion-lightspeed" title="Permanent link">&para;</a></h1>
-<h2 id="crear-venta-lightspeed">Crear Venta Lightspeed<a class="headerlink" href="#crear-venta-lightspeed" title="Permanent link">&para;</a></h2>
+<h1 id="api-facturacion-electronica-integracion-lightspeed">API Facturación Electrónica - Integración Lightspeed</h1>
+<h2 id="crear-venta-lightspeed">Crear Venta Lightspeed</h2>
 <p><strong>Endpoint:</strong> <code>POST /api/v1/fe/create_sale_lightspeed</code><br />
 <strong>Controller:</strong> <code>FeController::createSaleLightspeed</code><br />
 <strong>Request Class:</strong> <code>CreateSaleLightspeedRequest</code><br />
 <strong>Autenticación:</strong> Bearer Token requerido<br />
 <strong>Middleware:</strong> <code>check.activate.organization</code></p>
-<h3 id="descripcion">Descripción<a class="headerlink" href="#descripcion" title="Permanent link">&para;</a></h3>
+<h3 id="descripcion">Descripción</h3>
 <p>Crea y emite una factura electrónica basada en datos provenientes de Lightspeed Retail (sistema POS y manejo de inventario).</p>
-<h3 id="configuracion-previa">Configuración Previa<a class="headerlink" href="#configuracion-previa" title="Permanent link">&para;</a></h3>
+<h3 id="configuracion-previa">Configuración Previa</h3>
 <p>Antes de usar esta API, debe configurar:</p>
 <ol>
 <li><strong>Lightspeed Configuration</strong>: Configuración de conexión a Lightspeed</li>
 <li><strong>Webhook Setup</strong>: Configuración de webhook en Lightspeed</li>
 <li><strong>Token Authorization</strong>: Token de acceso válido</li>
 </ol>
-<h3 id="estructura-del-request">Estructura del Request<a class="headerlink" href="#estructura-del-request" title="Permanent link">&para;</a></h3>
-<h4 id="configuracion-webhook">Configuración Webhook<a class="headerlink" href="#configuracion-webhook" title="Permanent link">&para;</a></h4>
+<h3 id="estructura-del-request">Estructura del Request</h3>
+<h4 id="configuracion-webhook">Configuración Webhook</h4>
 <p>La API está diseñada para recibir webhooks de Lightspeed con el siguiente formato:</p>
 <table>
 <thead>
@@ -2314,7 +2360,7 @@
 </tr>
 </tbody>
 </table>
-<h4 id="datos-de-la-venta">Datos de la Venta<a class="headerlink" href="#datos-de-la-venta" title="Permanent link">&para;</a></h4>
+<h4 id="datos-de-la-venta">Datos de la Venta</h4>
 <table>
 <thead>
 <tr>
@@ -2381,7 +2427,7 @@
 </tr>
 </tbody>
 </table>
-<h4 id="items-de-la-venta">Items de la Venta<a class="headerlink" href="#items-de-la-venta" title="Permanent link">&para;</a></h4>
+<h4 id="items-de-la-venta">Items de la Venta</h4>
 <table>
 <thead>
 <tr>
@@ -2424,8 +2470,8 @@
 </tr>
 </tbody>
 </table>
-<h3 id="ejemplo-de-request-basado-en-webhook-lightspeed">Ejemplo de Request (Basado en Webhook Lightspeed)<a class="headerlink" href="#ejemplo-de-request-basado-en-webhook-lightspeed" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<h3 id="ejemplo-de-request-basado-en-webhook-lightspeed">Ejemplo de Request (Basado en Webhook Lightspeed)</h3>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;event_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;sale.update&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;retailer_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">12345</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
@@ -2483,8 +2529,9 @@
 <span class="w">  </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
-<h3 id="respuesta-de-exito">Respuesta de Éxito<a class="headerlink" href="#respuesta-de-exito" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
+
+<h3 id="respuesta-de-exito">Respuesta de Éxito</h3>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Venta Lightspeed procesada exitosamente&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;job_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;uuid-generated-job-id&quot;</span><span class="p">,</span>
@@ -2495,9 +2542,10 @@
 <span class="w">  </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
-<h3 id="configuracion-de-webhook-en-lightspeed">Configuración de Webhook en Lightspeed<a class="headerlink" href="#configuracion-de-webhook-en-lightspeed" title="Permanent link">&para;</a></h3>
+
+<h3 id="configuracion-de-webhook-en-lightspeed">Configuración de Webhook en Lightspeed</h3>
 <p>Para configurar el webhook en Lightspeed, use la siguiente configuración:</p>
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;token&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Bearer YOUR_LIGHTSPEED_TOKEN&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;domain&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;your-domain.retail&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;active&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
@@ -2505,7 +2553,8 @@
 <span class="w">  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;sale.update&quot;</span>
 <span class="p">}</span>
 </code></pre></div>
-<h3 id="validaciones-especificas">Validaciones Específicas<a class="headerlink" href="#validaciones-especificas" title="Permanent link">&para;</a></h3>
+
+<h3 id="validaciones-especificas">Validaciones Específicas</h3>
 <ul>
 <li><strong>Sale ID</strong>: Debe ser único</li>
 <li><strong>Items</strong>: Mínimo 1 item requerido</li>
@@ -2513,14 +2562,14 @@
 <li><strong>Shop</strong>: Tienda debe estar activa</li>
 <li><strong>Total</strong>: Coherencia entre subtotal + impuestos = total</li>
 </ul>
-<h3 id="casos-de-uso">Casos de Uso<a class="headerlink" href="#casos-de-uso" title="Permanent link">&para;</a></h3>
+<h3 id="casos-de-uso">Casos de Uso</h3>
 <ul>
 <li><strong>Retail</strong>: Ventas de tiendas físicas</li>
 <li><strong>Multi-tienda</strong>: Soporte para múltiples ubicaciones</li>
 <li><strong>Inventory</strong>: Integración con manejo de inventario</li>
 <li><strong>Customer Management</strong>: Gestión de clientes integrada</li>
 </ul>
-<h3 id="codigos-de-respuesta-http">Códigos de Respuesta HTTP<a class="headerlink" href="#codigos-de-respuesta-http" title="Permanent link">&para;</a></h3>
+<h3 id="codigos-de-respuesta-http">Códigos de Respuesta HTTP</h3>
 <table>
 <thead>
 <tr>
@@ -2551,16 +2600,17 @@
 </tr>
 </tbody>
 </table>
-<h3 id="configuracion-requerida">Configuración Requerida<a class="headerlink" href="#configuracion-requerida" title="Permanent link">&para;</a></h3>
-<h4 id="lightspeed-configuration">Lightspeed Configuration<a class="headerlink" href="#lightspeed-configuration" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="x">// Modelo: Lightspeedconfiguration</span>
+<h3 id="configuracion-requerida">Configuración Requerida</h3>
+<h4 id="lightspeed-configuration">Lightspeed Configuration</h4>
+<div class="codehilite"><pre><span></span><code><span class="x">// Modelo: Lightspeedconfiguration</span>
 <span class="x">&#39;organization_id&#39; =&gt; &#39;ID de la organización&#39;,</span>
 <span class="x">&#39;token&#39; =&gt; &#39;Token de acceso Lightspeed&#39;,</span>
 <span class="x">&#39;domain&#39; =&gt; &#39;Dominio del retailer (ej: detailspanama.retail)&#39;,</span>
 <span class="x">&#39;webhook_url&#39; =&gt; &#39;URL del webhook configurado&#39;,</span>
 <span class="x">&#39;active&#39; =&gt; true</span>
 </code></pre></div>
-<h3 id="notas-tecnicas">Notas Técnicas<a class="headerlink" href="#notas-tecnicas" title="Permanent link">&para;</a></h3>
+
+<h3 id="notas-tecnicas">Notas Técnicas</h3>
 <ul>
 <li><strong>Procesamiento</strong>: Asíncrono usando <code>CreateSaleLightspeedJob</code></li>
 <li><strong>Webhook</strong>: Recibe webhooks tipo "sale.update"</li>
@@ -2569,12 +2619,12 @@
 <li><strong>Multi-tienda</strong>: Soporte para múltiples shops por organización</li>
 <li><strong>Sincronización</strong>: Sincronización bidireccional con inventario Lightspeed</li>
 </ul>
-<h3 id="testing">Testing<a class="headerlink" href="#testing" title="Permanent link">&para;</a></h3>
+<h3 id="testing">Testing</h3>
 <p>La API incluye métodos de testing para:
 - <strong>getWebhook()</strong>: Verificar webhooks existentes
 - <strong>createWebhook()</strong>: Crear nuevos webhooks
 - <strong>Validación de tokens</strong>: Verificar tokens de acceso</p>
-<h3 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h3>
+<h3 id="troubleshooting">Troubleshooting</h3>
 <ul>
 <li><strong>Token inválido</strong>: Verificar Bearer token y permisos</li>
 <li><strong>Webhook no recibido</strong>: Validar URL y configuración en Lightspeed</li>
@@ -2633,7 +2683,7 @@
       
       
     
-    <a href="https://github.com/aghabrego/docucenter" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+    <a href="https://github.com/aghabrego/docucenter-public" target="_blank" rel="noopener" title="github.com" class="md-social__link">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
     </a>
   

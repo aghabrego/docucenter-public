@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://aghabrego.github.io/docucenter-public/technical/payment-calculation-fix/">
       
       
-        <link rel="prev" href="../">
+        <link rel="prev" href="../../optimizations/mysql-optimization-circuit-breaker/">
       
       
         <link rel="next" href="../solucion-sincronizacion-pagos/">
@@ -237,7 +237,7 @@
           
   
   
-  APIs
+  API Documentation
 
         </a>
       </li>
@@ -275,7 +275,7 @@
     
     
       <li class="md-tabs__item md-tabs__item--active">
-        <a href="../" class="md-tabs__link">
+        <a href="../README.md" class="md-tabs__link">
           
   
   
@@ -304,6 +304,25 @@
         </a>
       </li>
     
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../testing/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Sistema de Testing
+
+      </a>
+    </li>
   
 
       
@@ -410,7 +429,7 @@
   <span class="md-ellipsis">
     
   
-    APIs
+    API Documentation
   
 
     
@@ -426,7 +445,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    APIs
+    API Documentation
   
 
           </label>
@@ -1372,7 +1391,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
+      <a href="../README.md" class="md-nav__link">
         
   
   
@@ -1958,6 +1977,33 @@
   
 
     
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sistema de Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -2187,38 +2233,48 @@
   
 
 
-<h1 id="analisis-de-discrepancias-en-calculo-de-pagos-facturacion-electronica">Análisis de Discrepancias en Cálculo de Pagos - Facturación Electrónica<a class="headerlink" href="#analisis-de-discrepancias-en-calculo-de-pagos-facturacion-electronica" title="Permanent link">&para;</a></h1>
-<h2 id="problema-identificado">Problema Identificado<a class="headerlink" href="#problema-identificado" title="Permanent link">&para;</a></h2>
+<h1 id="analisis-de-discrepancias-en-calculo-de-pagos-facturacion-electronica">Análisis de Discrepancias en Cálculo de Pagos - Facturación Electrónica</h1>
+<h2 id="problema-identificado">Problema Identificado</h2>
 <p>En el sistema de facturación electrónica, se presentaba una discrepancia de 1 centavo en el cálculo del vuelto debido a diferencias entre el total esperado (<code>dVTot</code>) y el total recibido (<code>dTotRec</code>).</p>
-<h3 id="ejemplo-del-problema">Ejemplo del Problema:<a class="headerlink" href="#ejemplo-del-problema" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">// Datos originales del usuario:</span>
+<h3 id="ejemplo-del-problema">Ejemplo del Problema:</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">// Datos originales del usuario:</span>
 <span class="x">$gTot = [</span>
 <span class="x">    &#39;dVTot&#39; =&gt; 20.33,     // Total esperado</span>
 <span class="x">    &#39;dTotRec&#39; =&gt; 20.32,   // Total recibido</span>
 <span class="x">    &#39;dVuelto&#39; =&gt; 0.01     // Vuelto no deseado</span>
 <span class="x">];</span>
 </code></pre></div>
-<h2 id="analisis-de-las-fuentes-de-discrepancia">Análisis de las Fuentes de Discrepancia<a class="headerlink" href="#analisis-de-las-fuentes-de-discrepancia" title="Permanent link">&para;</a></h2>
-<h3 id="1-calculo-de-dvtot-total-esperado">1. <strong>Cálculo de <code>$dVTot</code> (Total Esperado)</strong><a class="headerlink" href="#1-calculo-de-dvtot-total-esperado" title="Permanent link">&para;</a></h3>
-<p><div class="highlight"><pre><span></span><code><span class="x">$dVTot = $this-&gt;filterVar($this-&gt;numberFormat(($dVTotItems + $dTotAcar + $dTotSeg)), FILTER_VALIDATE_FLOAT);</span>
+
+<h2 id="analisis-de-las-fuentes-de-discrepancia">Análisis de las Fuentes de Discrepancia</h2>
+<h3 id="1-calculo-de-dvtot-total-esperado">1. <strong>Cálculo de <code>$dVTot</code> (Total Esperado)</strong></h3>
+<div class="codehilite"><pre><span></span><code><span class="x">$dVTot = $this-&gt;filterVar($this-&gt;numberFormat(($dVTotItems + $dTotAcar + $dTotSeg)), FILTER_VALIDATE_FLOAT);</span>
 </code></pre></div>
-- Se calcula basado en la suma de items, acarreos y seguros
-- Puede tener precisión diferente debido a redondeos acumulativos</p>
-<h3 id="2-calculo-de-dtotrec-total-recibido-inicial">2. <strong>Cálculo de <code>$dTotRec</code> (Total Recibido Inicial)</strong><a class="headerlink" href="#2-calculo-de-dtotrec-total-recibido-inicial" title="Permanent link">&para;</a></h3>
-<p><div class="highlight"><pre><span></span><code><span class="x">$dTotRec = array_sum(array_column($payments, &#39;dVlrCuota&#39;));</span>
+
+<ul>
+<li>Se calcula basado en la suma de items, acarreos y seguros</li>
+<li>Puede tener precisión diferente debido a redondeos acumulativos</li>
+</ul>
+<h3 id="2-calculo-de-dtotrec-total-recibido-inicial">2. <strong>Cálculo de <code>$dTotRec</code> (Total Recibido Inicial)</strong></h3>
+<div class="codehilite"><pre><span></span><code><span class="x">$dTotRec = array_sum(array_column($payments, &#39;dVlrCuota&#39;));</span>
 </code></pre></div>
-- Se calcula sumando los valores de todos los pagos
-- Puede diferir de <code>$dVTot</code> por errores de redondeo</p>
-<h3 id="3-determinacion-de-maxtotal">3. <strong>Determinación de <code>$maxTotal</code></strong><a class="headerlink" href="#3-determinacion-de-maxtotal" title="Permanent link">&para;</a></h3>
-<p><div class="highlight"><pre><span></span><code><span class="x">$maxTotal = $this-&gt;numberFormat(max([$dTotRec, $dVTot]), 2);</span>
+
+<ul>
+<li>Se calcula sumando los valores de todos los pagos</li>
+<li>Puede diferir de <code>$dVTot</code> por errores de redondeo</li>
+</ul>
+<h3 id="3-determinacion-de-maxtotal">3. <strong>Determinación de <code>$maxTotal</code></strong></h3>
+<div class="codehilite"><pre><span></span><code><span class="x">$maxTotal = $this-&gt;numberFormat(max([$dTotRec, $dVTot]), 2);</span>
 </code></pre></div>
-- Se toma el mayor valor entre <code>$dTotRec</code> y <code>$dVTot</code>
-- Este se convierte en el valor de referencia para el ajuste</p>
-<h2 id="solucion-implementada">Solución Implementada<a class="headerlink" href="#solucion-implementada" title="Permanent link">&para;</a></h2>
-<h3 id="problema-principal">Problema Principal<a class="headerlink" href="#problema-principal" title="Permanent link">&para;</a></h3>
+
+<ul>
+<li>Se toma el mayor valor entre <code>$dTotRec</code> y <code>$dVTot</code></li>
+<li>Este se convierte en el valor de referencia para el ajuste</li>
+</ul>
+<h2 id="solucion-implementada">Solución Implementada</h2>
+<h3 id="problema-principal">Problema Principal</h3>
 <p>El <code>PaymentCalculationHelper</code> ajustaba correctamente los pagos para sumar exactamente <code>$maxTotal</code>, pero <code>$dVTot</code> no se sincronizaba con este valor ajustado.</p>
-<h3 id="solucion-sincronizacion-de-dvtot">Solución: Sincronización de <code>$dVTot</code><a class="headerlink" href="#solucion-sincronizacion-de-dvtot" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">// Procesar pagos con suma exacta garantizada al $maxTotal</span>
+<h3 id="solucion-sincronizacion-de-dvtot">Solución: Sincronización de <code>$dVTot</code></h3>
+<div class="codehilite"><pre><span></span><code><span class="x">// Procesar pagos con suma exacta garantizada al $maxTotal</span>
 <span class="x">$payments = PaymentCalculationHelper::processPaymentsWithExactTotal($payments, $maxTotal, 2);</span>
 
 <span class="x">// Aplicar formateo de decimales consistente</span>
@@ -2232,43 +2288,45 @@
 
 <span class="x">$dVuelto = $this-&gt;numberFormat(abs($dTotRec - $dVTot), 2);</span>
 </code></pre></div>
-<h2 id="archivos-modificados">Archivos Modificados<a class="headerlink" href="#archivos-modificados" title="Permanent link">&para;</a></h2>
+
+<h2 id="archivos-modificados">Archivos Modificados</h2>
 <ol>
 <li><strong><code>app/Http/Livewire/Admin/Einvoice/Create.php</code></strong> - Línea ~1238</li>
 <li><strong><code>app/Http/Livewire/Admin/Einvoice/CreateFast.php</code></strong> - Línea ~1042</li>
 <li><strong><code>app/Http/Livewire/Admin/Einvoice/CreateFastJob.php</code></strong> - Línea ~1302</li>
 </ol>
-<h2 id="resultado-esperado">Resultado Esperado<a class="headerlink" href="#resultado-esperado" title="Permanent link">&para;</a></h2>
-<p>Después de la corrección:
-<div class="highlight"><pre><span></span><code><span class="x">// Datos después del ajuste:</span>
+<h2 id="resultado-esperado">Resultado Esperado</h2>
+<p>Después de la corrección:</p>
+<div class="codehilite"><pre><span></span><code><span class="x">// Datos después del ajuste:</span>
 <span class="x">$gTot = [</span>
 <span class="x">    &#39;dVTot&#39; =&gt; 20.33,     // Sincronizado con maxTotal</span>
 <span class="x">    &#39;dTotRec&#39; =&gt; 20.33,   // Ajustado por PaymentCalculationHelper</span>
 <span class="x">    &#39;dVuelto&#39; =&gt; 0.00     // Sin vuelto no deseado</span>
 <span class="x">];</span>
-</code></pre></div></p>
-<h2 id="casos-de-uso-cubiertos">Casos de Uso Cubiertos<a class="headerlink" href="#casos-de-uso-cubiertos" title="Permanent link">&para;</a></h2>
+</code></pre></div>
+
+<h2 id="casos-de-uso-cubiertos">Casos de Uso Cubiertos</h2>
 <ol>
 <li><strong>Discrepancia Menor (≤0.2%)</strong>: PaymentCalculationHelper ajusta proporcionalmente</li>
 <li><strong>Discrepancia Mayor (&gt;0.2%)</strong>: Se toma el valor mayor como referencia</li>
 <li><strong>Descuentos Adicionales</strong>: Los pagos por descuentos se incluyen en el cálculo</li>
 <li><strong>Múltiples Formas de Pago</strong>: Todos los tipos de pago se normalizan consistentemente</li>
 </ol>
-<h2 id="beneficios-de-la-solucion">Beneficios de la Solución<a class="headerlink" href="#beneficios-de-la-solucion" title="Permanent link">&para;</a></h2>
+<h2 id="beneficios-de-la-solucion">Beneficios de la Solución</h2>
 <ul>
 <li><strong>Eliminación de vueltos no deseados</strong>: No más centavos de diferencia</li>
 <li><strong>Consistencia en facturación</strong>: Mismo comportamiento en todos los módulos</li>
 <li><strong>Compatibilidad con PAC</strong>: Los totales coinciden exactamente</li>
 <li><strong>Mantenimiento de precisión</strong>: Se respeta la tolerancia del 0.2%</li>
 </ul>
-<h2 id="consideraciones-tecnicas">Consideraciones Técnicas<a class="headerlink" href="#consideraciones-tecnicas" title="Permanent link">&para;</a></h2>
+<h2 id="consideraciones-tecnicas">Consideraciones Técnicas</h2>
 <ul>
 <li>La sincronización de <code>$dVTot = $maxTotal</code> ocurre DESPUÉS del procesamiento del PaymentCalculationHelper</li>
 <li>Se mantiene la lógica existente de determinación del valor de referencia (<code>max([$dTotRec, $dVTot])</code>)</li>
 <li>La precisión se mantiene en 2 decimales para cumplir con estándares fiscales</li>
 <li>El formateo consistente evita problemas de presentación de decimales</li>
 </ul>
-<h2 id="testing-recomendado">Testing Recomendado<a class="headerlink" href="#testing-recomendado" title="Permanent link">&para;</a></h2>
+<h2 id="testing-recomendado">Testing Recomendado</h2>
 <ol>
 <li>Verificar facturación con descuentos múltiples</li>
 <li>Probar con diferentes formas de pago combinadas</li>
@@ -2327,7 +2385,7 @@
       
       
     
-    <a href="https://github.com/aghabrego/docucenter" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+    <a href="https://github.com/aghabrego/docucenter-public" target="_blank" rel="noopener" title="github.com" class="md-social__link">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
     </a>
   

@@ -233,7 +233,7 @@
           
   
   
-  APIs
+  API Documentation
 
         </a>
       </li>
@@ -269,7 +269,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../technical/" class="md-tabs__link">
+        <a href="../../technical/README.md" class="md-tabs__link">
           
   
   
@@ -298,6 +298,25 @@
         </a>
       </li>
     
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Sistema de Testing
+
+      </a>
+    </li>
   
 
       
@@ -404,7 +423,7 @@
   <span class="md-ellipsis">
     
   
-    APIs
+    API Documentation
   
 
     
@@ -420,7 +439,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    APIs
+    API Documentation
   
 
           </label>
@@ -1363,7 +1382,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../technical/" class="md-nav__link">
+      <a href="../../technical/README.md" class="md-nav__link">
         
   
   
@@ -1716,6 +1735,33 @@
   
 
     
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sistema de Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -1929,10 +1975,10 @@
   
 
 
-<h1 id="scripts-de-testing-para-zoho-self-client">📋 Scripts de Testing para Zoho Self Client<a class="headerlink" href="#scripts-de-testing-para-zoho-self-client" title="Permanent link">&para;</a></h1>
-<h2 id="script-de-testing-completo">🚀 Script de Testing Completo<a class="headerlink" href="#script-de-testing-completo" title="Permanent link">&para;</a></h2>
-<h3 id="script-principal-test-zoho-self-clientsh">Script Principal: <code>test-zoho-self-client.sh</code><a class="headerlink" href="#script-principal-test-zoho-self-clientsh" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+<h1 id="scripts-de-testing-para-zoho-self-client">📋 Scripts de Testing para Zoho Self Client</h1>
+<h2 id="script-de-testing-completo">🚀 Script de Testing Completo</h2>
+<h3 id="script-principal-test-zoho-self-clientsh">Script Principal: <code>test-zoho-self-client.sh</code></h3>
+<div class="codehilite"><pre><span></span><code><span class="ch">#!/bin/bash</span>
 
 <span class="c1"># Configuración</span>
 <span class="nv">APP_URL</span><span class="o">=</span><span class="s2">&quot;http://localhost&quot;</span>
@@ -2207,8 +2253,9 @@ main<span class="o">()</span><span class="w"> </span><span class="o">{</span>
 <span class="c1"># Ejecutar función principal</span>
 main<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$@</span><span class="s2">&quot;</span>
 </code></pre></div>
-<h3 id="script-de-documentacion-generate-zoho-docssh">📝 Script de Documentación: <code>generate-zoho-docs.sh</code><a class="headerlink" href="#script-de-documentacion-generate-zoho-docssh" title="Permanent link">&para;</a></h3>
-<p><div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+
+<h3 id="script-de-documentacion-generate-zoho-docssh">📝 Script de Documentación: <code>generate-zoho-docs.sh</code></h3>
+<div class="codehilite"><pre><span></span><code><span class="ch">#!/bin/bash</span>
 
 <span class="c1"># Script para generar documentación de Zoho Self Client</span>
 
@@ -2248,45 +2295,55 @@ cat<span class="w"> </span>&gt;<span class="w"> </span>docs/testing/zoho-self-cl
 
 <span class="c1">#### **Caso 1: Crear Nueva Conexión**</span>
 </code></pre></div>
-1. Ir a /admin/connections/create
-2. Seleccionar tipo "Zoho Self Client"
-3. Completar datos básicos:
-   - Client ID: 1000.XXXXXXXXX
-   - Client Secret: xxxxxxxxx
-   - Zoho Environment: com
-4. Generar código en Zoho Console
-5. Pegar código en campo "Código Directo"
-6. Clic en "Autorizar con Código Directo"</p>
-<p>✅ Resultado esperado: Conexión creada con tokens válidos
-<div class="highlight"><pre><span></span><code>#### **Caso 2: Re-autorizar Conexión Existente**
-</code></pre></div>
-1. Ir a /admin/connections
-2. Editar conexión Zoho existente
-3. Generar nuevo código en Zoho Console
-4. Pegar en campo de re-autorización
-5. Clic en "Re-autorizar con Código Directo"</p>
-<p>✅ Resultado esperado: Tokens renovados, configuración preservada
-<div class="highlight"><pre><span></span><code>#### **Caso 3: OAuth Tradicional (Fallback)**
-</code></pre></div>
-1. Configurar Redirect URI en Zoho Console
-2. Completar configuración OAuth completa
-3. Usar flujo tradicional con popup</p>
-<p>✅ Resultado esperado: Ambos métodos funcionan
-<div class="highlight"><pre><span></span><code>### 🔍 Testing Técnico
 
-#### **Verificación de Archivos**
+<ol>
+<li>Ir a /admin/connections/create</li>
+<li>Seleccionar tipo "Zoho Self Client"</li>
+<li>Completar datos básicos:</li>
+<li>Client ID: 1000.XXXXXXXXX</li>
+<li>Client Secret: xxxxxxxxx</li>
+<li>Zoho Environment: com</li>
+<li>Generar código en Zoho Console</li>
+<li>Pegar código en campo "Código Directo"</li>
+<li>Clic en "Autorizar con Código Directo"</li>
+</ol>
+<p>✅ Resultado esperado: Conexión creada con tokens válidos</p>
+<div class="codehilite"><pre><span></span><code><span class="gu">##</span>## **Caso 2: Re-autorizar Conexión Existente**
+</code></pre></div>
+
+<ol>
+<li>Ir a /admin/connections</li>
+<li>Editar conexión Zoho existente</li>
+<li>Generar nuevo código en Zoho Console</li>
+<li>Pegar en campo de re-autorización</li>
+<li>Clic en "Re-autorizar con Código Directo"</li>
+</ol>
+<p>✅ Resultado esperado: Tokens renovados, configuración preservada</p>
+<div class="codehilite"><pre><span></span><code><span class="gu">##</span>## **Caso 3: OAuth Tradicional (Fallback)**
+</code></pre></div>
+
+<ol>
+<li>Configurar Redirect URI en Zoho Console</li>
+<li>Completar configuración OAuth completa</li>
+<li>Usar flujo tradicional con popup</li>
+</ol>
+<p>✅ Resultado esperado: Ambos métodos funcionan</p>
+<div class="codehilite"><pre><span></span><code><span class="gu">##</span># 🔍 Testing Técnico
+
+<span class="gu">##</span>## **Verificación de Archivos**
 ```bash
-# Ejecutar script de testing
+<span class="gh">#</span> Ejecutar script de testing
 ./scripts/test-zoho-self-client.sh all
 
-# Testing interactivo
+<span class="gh">#</span> Testing interactivo
 ./scripts/test-zoho-self-client.sh interactive
 
-# Testing específico
+<span class="gh">#</span> Testing específico
 ./scripts/test-zoho-self-client.sh connection
-</code></pre></div></p>
-<h4 id="validacion-de-codigo"><strong>Validación de Código</strong><a class="headerlink" href="#validacion-de-codigo" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="c1"># Verificar sintaxis</span>
+</code></pre></div>
+
+<h4 id="validacion-de-codigo"><strong>Validación de Código</strong></h4>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Verificar sintaxis</span>
 docker-compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>laravel.test<span class="w"> </span>php<span class="w"> </span>-l<span class="w"> </span>app/Http/Livewire/Admin/Connection/Create.php
 docker-compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>laravel.test<span class="w"> </span>php<span class="w"> </span>-l<span class="w"> </span>app/Http/Livewire/Admin/Connection/Update.php
 
@@ -2294,39 +2351,43 @@ docker-compose<span class="w"> </span><span class="nb">exec</span><span class="w
 grep<span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;authorizeWithDirectCode&quot;</span><span class="w"> </span>app/Http/Livewire/Admin/Connection/Create.php
 grep<span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;reauthorizeWithDirectCode&quot;</span><span class="w"> </span>app/Http/Livewire/Admin/Connection/Update.php
 </code></pre></div>
-<h3 id="casos-de-error">📊 Casos de Error<a class="headerlink" href="#casos-de-error" title="Permanent link">&para;</a></h3>
-<h4 id="error-1-codigo-expirado"><strong>Error 1: Código Expirado</strong><a class="headerlink" href="#error-1-codigo-expirado" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code>Síntoma: Error 400 &quot;invalid_grant&quot;
-Solución: Generar nuevo código (3 min validez)
+
+<h3 id="casos-de-error">📊 Casos de Error</h3>
+<h4 id="error-1-codigo-expirado"><strong>Error 1: Código Expirado</strong></h4>
+<div class="codehilite"><pre><span></span><code><span class="n">Síntoma</span><span class="o">:</span><span class="w"> </span><span class="n">Error</span><span class="w"> </span><span class="mi">400</span><span class="w"> </span><span class="s2">&quot;invalid_grant&quot;</span>
+<span class="n">Solución</span><span class="o">:</span><span class="w"> </span><span class="n">Generar</span><span class="w"> </span><span class="n">nuevo</span><span class="w"> </span><span class="n">código</span><span class="w"> </span><span class="o">(</span><span class="mi">3</span><span class="w"> </span><span class="n">min</span><span class="w"> </span><span class="n">validez</span><span class="o">)</span>
 </code></pre></div>
-<h4 id="error-2-credenciales-incorrectas"><strong>Error 2: Credenciales Incorrectas</strong><a class="headerlink" href="#error-2-credenciales-incorrectas" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code>Síntoma: Error 401 &quot;invalid_client&quot;
-Solución: Verificar Client ID y Secret
+
+<h4 id="error-2-credenciales-incorrectas"><strong>Error 2: Credenciales Incorrectas</strong></h4>
+<div class="codehilite"><pre><span></span><code><span class="n">Síntoma</span><span class="o">:</span><span class="w"> </span><span class="n">Error</span><span class="w"> </span><span class="mi">401</span><span class="w"> </span><span class="s2">&quot;invalid_client&quot;</span>
+<span class="n">Solución</span><span class="o">:</span><span class="w"> </span><span class="n">Verificar</span><span class="w"> </span><span class="n">Client</span><span class="w"> </span><span class="n">ID</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="n">Secret</span>
 </code></pre></div>
-<h4 id="error-3-scope-incorrecto"><strong>Error 3: Scope Incorrecto</strong><a class="headerlink" href="#error-3-scope-incorrecto" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code>Síntoma: Error 403 &quot;access_denied&quot;
-Solución: Usar scope &quot;ZohoBooks.fullaccess.all&quot;
+
+<h4 id="error-3-scope-incorrecto"><strong>Error 3: Scope Incorrecto</strong></h4>
+<div class="codehilite"><pre><span></span><code><span class="n">Síntoma</span><span class="o">:</span><span class="w"> </span><span class="n">Error</span><span class="w"> </span><span class="mi">403</span><span class="w"> </span><span class="s2">&quot;access_denied&quot;</span>
+<span class="n">Solución</span><span class="o">:</span><span class="w"> </span><span class="n">Usar</span><span class="w"> </span><span class="n">scope</span><span class="w"> </span><span class="s2">&quot;ZohoBooks.fullaccess.all&quot;</span>
 </code></pre></div>
-<h3 id="metricas-de-exito">🎯 Métricas de Éxito<a class="headerlink" href="#metricas-de-exito" title="Permanent link">&para;</a></h3>
-<h4 id="performance"><strong>Performance</strong><a class="headerlink" href="#performance" title="Permanent link">&para;</a></h4>
+
+<h3 id="metricas-de-exito">🎯 Métricas de Éxito</h3>
+<h4 id="performance"><strong>Performance</strong></h4>
 <ul>
 <li>⏱️ Autorización directa: &lt; 5 segundos</li>
 <li>⏱️ Re-autorización: &lt; 3 segundos</li>
 <li>📦 Tamaño de respuesta: &lt; 2KB</li>
 </ul>
-<h4 id="usabilidad"><strong>Usabilidad</strong><a class="headerlink" href="#usabilidad" title="Permanent link">&para;</a></h4>
+<h4 id="usabilidad"><strong>Usabilidad</strong></h4>
 <ul>
 <li>👆 Clicks para autorizar: 1</li>
 <li>📝 Campos requeridos: 4 (ID, Secret, Env, Code)</li>
 <li>🔄 Tiempo de configuración: &lt; 2 minutos</li>
 </ul>
-<h4 id="confiabilidad"><strong>Confiabilidad</strong><a class="headerlink" href="#confiabilidad" title="Permanent link">&para;</a></h4>
+<h4 id="confiabilidad"><strong>Confiabilidad</strong></h4>
 <ul>
 <li>✅ Tasa de éxito: &gt; 95%</li>
 <li>🔁 Reintentos automáticos: 3</li>
 <li>📝 Logging completo: Sí</li>
 </ul>
-<h3 id="proximos-pasos">🚀 Próximos Pasos<a class="headerlink" href="#proximos-pasos" title="Permanent link">&para;</a></h3>
+<h3 id="proximos-pasos">🚀 Próximos Pasos</h3>
 <ol>
 <li><strong>Testing Automatizado</strong></li>
 <li>Crear tests unitarios para métodos</li>
@@ -2351,44 +2412,49 @@ Solución: Usar scope &quot;ZohoBooks.fullaccess.all&quot;
 </ol>
 <p>EOF</p>
 <p>echo "✅ Documentación generada en docs/testing/zoho-self-client-testing.md"</p>
-<h1 id="generar-script-de-uso-rapido">Generar script de uso rápido<a class="headerlink" href="#generar-script-de-uso-rapido" title="Permanent link">&para;</a></h1>
+<h1 id="generar-script-de-uso-rapido">Generar script de uso rápido</h1>
 <p>cat &gt; docs/testing/quick-start.md &lt;&lt; 'EOF'</p>
-<h1 id="quick-start-zoho-self-client">⚡ Quick Start: Zoho Self Client<a class="headerlink" href="#quick-start-zoho-self-client" title="Permanent link">&para;</a></h1>
-<h2 id="configuracion-en-2-minutos">🚀 Configuración en 2 Minutos<a class="headerlink" href="#configuracion-en-2-minutos" title="Permanent link">&para;</a></h2>
-<h3 id="1-obtener-credenciales">1. Obtener Credenciales<a class="headerlink" href="#1-obtener-credenciales" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>1. Ve a: https://api-console.zoho.com/
-2. Crear aplicación &quot;Self Client&quot;
-3. Anotar Client ID y Client Secret
+<h1 id="quick-start-zoho-self-client">⚡ Quick Start: Zoho Self Client</h1>
+<h2 id="configuracion-en-2-minutos">🚀 Configuración en 2 Minutos</h2>
+<h3 id="1-obtener-credenciales">1. Obtener Credenciales</h3>
+<div class="codehilite"><pre><span></span><code><span class="mf">1.</span><span class="w"> </span><span class="n">Ve</span><span class="w"> </span><span class="n">a</span><span class="p">:</span><span class="w"> </span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">api</span><span class="o">-</span><span class="n">console</span><span class="mf">.</span><span class="n">zoho</span><span class="mf">.</span><span class="n">com</span><span class="o">/</span>
+<span class="mf">2.</span><span class="w"> </span><span class="n">Crear</span><span class="w"> </span><span class="n">aplicación</span><span class="w"> </span><span class="s">&quot;Self Client&quot;</span>
+<span class="mf">3.</span><span class="w"> </span><span class="n">Anotar</span><span class="w"> </span><span class="n">Client</span><span class="w"> </span><span class="n">ID</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="n">Client</span><span class="w"> </span><span class="n">Secret</span>
 </code></pre></div>
-<h3 id="2-autorizacion-rapida">2. Autorización Rápida<a class="headerlink" href="#2-autorizacion-rapida" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>1. Ir a: /admin/connections/create
-2. Tipo: &quot;Zoho Self Client&quot;
-3. Completar: Client ID, Secret, Environment
-4. Generar código en Zoho Console
-5. Autorizar con código directo
+
+<h3 id="2-autorizacion-rapida">2. Autorización Rápida</h3>
+<div class="codehilite"><pre><span></span><code><span class="mf">1.</span><span class="w"> </span><span class="n">Ir</span><span class="w"> </span><span class="n">a</span><span class="p">:</span><span class="w"> </span><span class="o">/</span><span class="n">admin</span><span class="o">/</span><span class="n">connections</span><span class="o">/</span><span class="n">create</span>
+<span class="mf">2.</span><span class="w"> </span><span class="n">Tipo</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Zoho Self Client&quot;</span>
+<span class="mf">3.</span><span class="w"> </span><span class="n">Completar</span><span class="p">:</span><span class="w"> </span><span class="n">Client</span><span class="w"> </span><span class="n">ID</span><span class="p">,</span><span class="w"> </span><span class="n">Secret</span><span class="p">,</span><span class="w"> </span><span class="n">Environment</span>
+<span class="mf">4.</span><span class="w"> </span><span class="n">Generar</span><span class="w"> </span><span class="n">código</span><span class="w"> </span><span class="n">en</span><span class="w"> </span><span class="n">Zoho</span><span class="w"> </span><span class="n">Console</span>
+<span class="mf">5.</span><span class="w"> </span><span class="n">Autorizar</span><span class="w"> </span><span class="n">con</span><span class="w"> </span><span class="n">código</span><span class="w"> </span><span class="n">directo</span>
 </code></pre></div>
-<h3 id="3-verificacion">3. Verificación<a class="headerlink" href="#3-verificacion" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>1. Ir a: /admin/connections
-2. Verificar estado: &quot;Conectado&quot;
-3. Test API: Sincronizar datos
+
+<h3 id="3-verificacion">3. Verificación</h3>
+<div class="codehilite"><pre><span></span><code><span class="mf">1.</span><span class="w"> </span><span class="n">Ir</span><span class="w"> </span><span class="n">a</span><span class="p">:</span><span class="w"> </span><span class="o">/</span><span class="n">admin</span><span class="o">/</span><span class="n">connections</span>
+<span class="mf">2.</span><span class="w"> </span><span class="n">Verificar</span><span class="w"> </span><span class="n">estado</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Conectado&quot;</span>
+<span class="mf">3.</span><span class="w"> </span><span class="n">Test</span><span class="w"> </span><span class="n">API</span><span class="p">:</span><span class="w"> </span><span class="nb">Sin</span><span class="n">cronizar</span><span class="w"> </span><span class="n">datos</span>
 </code></pre></div>
-<h2 id="casos-de-uso-rapidos">🎯 Casos de Uso Rápidos<a class="headerlink" href="#casos-de-uso-rapidos" title="Permanent link">&para;</a></h2>
-<h3 id="desarrollo-local">Desarrollo Local<a class="headerlink" href="#desarrollo-local" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># Testing completo</span>
+
+<h2 id="casos-de-uso-rapidos">🎯 Casos de Uso Rápidos</h2>
+<h3 id="desarrollo-local">Desarrollo Local</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Testing completo</span>
 ./scripts/test-zoho-self-client.sh<span class="w"> </span>all
 
 <span class="c1"># Testing interactivo</span>
 ./scripts/test-zoho-self-client.sh<span class="w"> </span>interactive
 </code></pre></div>
-<h3 id="produccion">Producción<a class="headerlink" href="#produccion" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>1. Usar código directo para setup inicial
-2. Configurar OAuth como respaldo
-3. Monitorear tokens y renovar
+
+<h3 id="produccion">Producción</h3>
+<div class="codehilite"><pre><span></span><code><span class="mf">1.</span><span class="w"> </span><span class="n">Usar</span><span class="w"> </span><span class="n">código</span><span class="w"> </span><span class="n">directo</span><span class="w"> </span><span class="n">para</span><span class="w"> </span><span class="n">setup</span><span class="w"> </span><span class="n">inicial</span>
+<span class="mf">2.</span><span class="w"> </span><span class="n">Configurar</span><span class="w"> </span><span class="n">OAuth</span><span class="w"> </span><span class="n">como</span><span class="w"> </span><span class="n">respaldo</span>
+<span class="mf">3.</span><span class="w"> </span><span class="n">Monitorear</span><span class="w"> </span><span class="kr">to</span><span class="n">kens</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="n">renovar</span>
 </code></pre></div>
+
 <p>EOF</p>
 <p>echo "✅ Quick start generado en docs/testing/quick-start.md"
-echo "📋 Scripts listos para usar!"
-<div class="highlight"><pre><span></span><code>### 🎮 Comandos de Testing
+echo "📋 Scripts listos para usar!"</p>
+<div class="codehilite"><pre><span></span><code>### 🎮 Comandos de Testing
 
 ```bash
 # Hacer ejecutable
@@ -2405,21 +2471,23 @@ chmod +x scripts/test-zoho-self-client.sh
 ./scripts/test-zoho-self-client.sh update
 ./scripts/test-zoho-self-client.sh views
 ./scripts/test-zoho-self-client.sh services
-</code></pre></div></p>
-<h3 id="ejemplo-de-output">📊 Ejemplo de Output<a class="headerlink" href="#ejemplo-de-output" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>[INFO] === Running All Zoho Self Client Tests ===
-[SUCCESS] Create.php exists
-[SUCCESS] Create.php syntax OK
-[SUCCESS] authorizeWithDirectCode method found
-[SUCCESS] Update.php exists
-[SUCCESS] Update.php syntax OK
-[SUCCESS] reauthorizeWithDirectCode method found
-[SUCCESS] create.blade.php exists
-[SUCCESS] Direct code field found in create view
-[SUCCESS] update.blade.php exists
-[SUCCESS] Re-authorization method found in update view
-[SUCCESS] All tests completed!
 </code></pre></div>
+
+<h3 id="ejemplo-de-output">📊 Ejemplo de Output</h3>
+<div class="codehilite"><pre><span></span><code><span class="o">[</span><span class="n">INFO</span><span class="o">]</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="n">Running</span><span class="w"> </span><span class="ow">All</span><span class="w"> </span><span class="n">Zoho</span><span class="w"> </span><span class="n">Self</span><span class="w"> </span><span class="n">Client</span><span class="w"> </span><span class="n">Tests</span><span class="w"> </span><span class="o">===</span>
+<span class="o">[</span><span class="n">SUCCESS</span><span class="o">]</span><span class="w"> </span><span class="k">Create</span><span class="p">.</span><span class="n">php</span><span class="w"> </span><span class="ow">exists</span>
+<span class="o">[</span><span class="n">SUCCESS</span><span class="o">]</span><span class="w"> </span><span class="k">Create</span><span class="p">.</span><span class="n">php</span><span class="w"> </span><span class="n">syntax</span><span class="w"> </span><span class="n">OK</span>
+<span class="o">[</span><span class="n">SUCCESS</span><span class="o">]</span><span class="w"> </span><span class="n">authorizeWithDirectCode</span><span class="w"> </span><span class="k">method</span><span class="w"> </span><span class="k">found</span>
+<span class="o">[</span><span class="n">SUCCESS</span><span class="o">]</span><span class="w"> </span><span class="k">Update</span><span class="p">.</span><span class="n">php</span><span class="w"> </span><span class="ow">exists</span>
+<span class="o">[</span><span class="n">SUCCESS</span><span class="o">]</span><span class="w"> </span><span class="k">Update</span><span class="p">.</span><span class="n">php</span><span class="w"> </span><span class="n">syntax</span><span class="w"> </span><span class="n">OK</span>
+<span class="o">[</span><span class="n">SUCCESS</span><span class="o">]</span><span class="w"> </span><span class="n">reauthorizeWithDirectCode</span><span class="w"> </span><span class="k">method</span><span class="w"> </span><span class="k">found</span>
+<span class="o">[</span><span class="n">SUCCESS</span><span class="o">]</span><span class="w"> </span><span class="k">create</span><span class="p">.</span><span class="n">blade</span><span class="p">.</span><span class="n">php</span><span class="w"> </span><span class="ow">exists</span>
+<span class="o">[</span><span class="n">SUCCESS</span><span class="o">]</span><span class="w"> </span><span class="n">Direct</span><span class="w"> </span><span class="n">code</span><span class="w"> </span><span class="n">field</span><span class="w"> </span><span class="k">found</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="k">create</span><span class="w"> </span><span class="k">view</span>
+<span class="o">[</span><span class="n">SUCCESS</span><span class="o">]</span><span class="w"> </span><span class="k">update</span><span class="p">.</span><span class="n">blade</span><span class="p">.</span><span class="n">php</span><span class="w"> </span><span class="ow">exists</span>
+<span class="o">[</span><span class="n">SUCCESS</span><span class="o">]</span><span class="w"> </span><span class="n">Re</span><span class="o">-</span><span class="k">authorization</span><span class="w"> </span><span class="k">method</span><span class="w"> </span><span class="k">found</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="k">update</span><span class="w"> </span><span class="k">view</span>
+<span class="o">[</span><span class="n">SUCCESS</span><span class="o">]</span><span class="w"> </span><span class="ow">All</span><span class="w"> </span><span class="n">tests</span><span class="w"> </span><span class="n">completed</span><span class="err">!</span>
+</code></pre></div>
+
 <p>¡Scripts completos para testing y documentación! 🎉</p>
 
 
@@ -2473,7 +2541,7 @@ chmod +x scripts/test-zoho-self-client.sh
       
       
     
-    <a href="https://github.com/aghabrego/docucenter" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+    <a href="https://github.com/aghabrego/docucenter-public" target="_blank" rel="noopener" title="github.com" class="md-social__link">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
     </a>
   

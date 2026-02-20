@@ -233,7 +233,7 @@
           
   
   
-  APIs
+  API Documentation
 
         </a>
       </li>
@@ -269,7 +269,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../" class="md-tabs__link">
+        <a href="../README.md" class="md-tabs__link">
           
   
   
@@ -298,6 +298,25 @@
         </a>
       </li>
     
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../testing/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Sistema de Testing
+
+      </a>
+    </li>
   
 
       
@@ -404,7 +423,7 @@
   <span class="md-ellipsis">
     
   
-    APIs
+    API Documentation
   
 
     
@@ -420,7 +439,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    APIs
+    API Documentation
   
 
           </label>
@@ -1363,7 +1382,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
+      <a href="../README.md" class="md-nav__link">
         
   
   
@@ -1712,6 +1731,33 @@
           </ul>
         </nav>
       
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sistema de Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -2245,11 +2291,11 @@
   
 
 
-<h1 id="mejora-de-supervisor-para-queue-workers-resumen-de-implementacion">Mejora de Supervisor para Queue Workers - Resumen de Implementación<a class="headerlink" href="#mejora-de-supervisor-para-queue-workers-resumen-de-implementacion" title="Permanent link">&para;</a></h1>
-<h2 id="cambios-realizados">Cambios Realizados<a class="headerlink" href="#cambios-realizados" title="Permanent link">&para;</a></h2>
-<h3 id="1-separacion-de-workers-por-prioridad">1. Separación de Workers por Prioridad<a class="headerlink" href="#1-separacion-de-workers-por-prioridad" title="Permanent link">&para;</a></h3>
+<h1 id="mejora-de-supervisor-para-queue-workers-resumen-de-implementacion">Mejora de Supervisor para Queue Workers - Resumen de Implementación</h1>
+<h2 id="cambios-realizados">Cambios Realizados</h2>
+<h3 id="1-separacion-de-workers-por-prioridad">1. Separación de Workers por Prioridad</h3>
 <p>Se reemplazó la configuración monolítica de 4 workers por un sistema optimizado de <strong>3 grupos</strong>:</p>
-<h4 id="high-priority-workers-2-procesos"><strong>High Priority Workers</strong> (2 procesos)<a class="headerlink" href="#high-priority-workers-2-procesos" title="Permanent link">&para;</a></h4>
+<h4 id="high-priority-workers-2-procesos"><strong>High Priority Workers</strong> (2 procesos)</h4>
 <ul>
 <li><strong>Colas</strong>: <code>high</code></li>
 <li><strong>Memoria</strong>: 512MB por worker</li>
@@ -2258,7 +2304,7 @@
 <li><strong>Max Jobs</strong>: 50 jobs por worker antes de reiniciar</li>
 <li><strong>Uso</strong>: Operaciones críticas que requieren atención inmediata</li>
 </ul>
-<h4 id="default-workers-3-procesos"><strong>Default Workers</strong> (3 procesos)<a class="headerlink" href="#default-workers-3-procesos" title="Permanent link">&para;</a></h4>
+<h4 id="default-workers-3-procesos"><strong>Default Workers</strong> (3 procesos)</h4>
 <ul>
 <li><strong>Colas</strong>: <code>default</code>, <code>sales</code>, <code>create_sale_maxgym</code>, <code>create_sale_kart</code></li>
 <li><strong>Memoria</strong>: 512MB por worker</li>
@@ -2267,7 +2313,7 @@
 <li><strong>Max Jobs</strong>: 50 jobs por worker antes de reiniciar</li>
 <li><strong>Uso</strong>: Operaciones normales de ventas y procesamiento</li>
 </ul>
-<h4 id="batch-workers-2-procesos"><strong>Batch Workers</strong> (2 procesos)<a class="headerlink" href="#batch-workers-2-procesos" title="Permanent link">&para;</a></h4>
+<h4 id="batch-workers-2-procesos"><strong>Batch Workers</strong> (2 procesos)</h4>
 <ul>
 <li><strong>Colas</strong>: <code>issue_mass_invoices</code>, <code>maintenance</code></li>
 <li><strong>Memoria</strong>: 1024MB por worker</li>
@@ -2277,39 +2323,39 @@
 <li><strong>Uso</strong>: Emisión masiva de facturas y tareas de mantenimiento pesadas</li>
 </ul>
 <p><strong>Total</strong>: 7 workers (~4.6GB RAM estimado)</p>
-<h3 id="2-configuracion-opcional-ligera">2. Configuración Opcional Ligera<a class="headerlink" href="#2-configuracion-opcional-ligera" title="Permanent link">&para;</a></h3>
+<h3 id="2-configuracion-opcional-ligera">2. Configuración Opcional Ligera</h3>
 <p>Para servidores con <strong>2GB RAM</strong>, se incluye configuración alternativa:
 - 1 High Priority worker (256MB)
 - 2 Default workers (256MB c/u)
 - 1 Batch worker (512MB)
 - <strong>Total</strong>: 4 workers (~1.3GB RAM)</p>
-<h3 id="3-mejoras-en-gestion-de-logs">3. Mejoras en Gestión de Logs<a class="headerlink" href="#3-mejoras-en-gestion-de-logs" title="Permanent link">&para;</a></h3>
+<h3 id="3-mejoras-en-gestion-de-logs">3. Mejoras en Gestión de Logs</h3>
 <ul>
 <li><strong>Rotación automática</strong>: Límite de 50MB por archivo (100MB para batch)</li>
 <li><strong>Backups</strong>: 5 versiones antiguas (10 para batch)</li>
 <li><strong>Logs separados</strong>: Por grupo de workers para troubleshooting fácil</li>
 <li><strong>Errores independientes</strong>: stdout y stderr separados</li>
 </ul>
-<h3 id="4-configuraciones-avanzadas">4. Configuraciones Avanzadas<a class="headerlink" href="#4-configuraciones-avanzadas" title="Permanent link">&para;</a></h3>
-<h4 id="backoff-exponencial">Backoff Exponencial<a class="headerlink" href="#backoff-exponencial" title="Permanent link">&para;</a></h4>
+<h3 id="4-configuraciones-avanzadas">4. Configuraciones Avanzadas</h3>
+<h4 id="backoff-exponencial">Backoff Exponencial</h4>
 <ul>
 <li><strong>High</strong>: 30s, 60s, 180s entre reintentos</li>
 <li><strong>Default</strong>: 60s, 180s, 300s</li>
 <li><strong>Batch</strong>: 300s, 600s</li>
 </ul>
-<h4 id="graceful-shutdown">Graceful Shutdown<a class="headerlink" href="#graceful-shutdown" title="Permanent link">&para;</a></h4>
+<h4 id="graceful-shutdown">Graceful Shutdown</h4>
 <ul>
 <li><strong>High/Default</strong>: 60 segundos de espera</li>
 <li><strong>Batch</strong>: 120 segundos (jobs más largos)</li>
 </ul>
-<h4 id="prioridades-de-inicio">Prioridades de Inicio<a class="headerlink" href="#prioridades-de-inicio" title="Permanent link">&para;</a></h4>
+<h4 id="prioridades-de-inicio">Prioridades de Inicio</h4>
 <ul>
 <li><strong>High</strong>: Prioridad 100 (inicia primero)</li>
 <li><strong>Default</strong>: Prioridad 200</li>
 <li><strong>Batch</strong>: Prioridad 300 (inicia último)</li>
 </ul>
-<h3 id="5-herramientas-de-gestion">5. Herramientas de Gestión<a class="headerlink" href="#5-herramientas-de-gestion" title="Permanent link">&para;</a></h3>
-<h4 id="script-de-monitoreo-monitor-workerssh">Script de Monitoreo (<code>monitor-workers.sh</code>)<a class="headerlink" href="#script-de-monitoreo-monitor-workerssh" title="Permanent link">&para;</a></h4>
+<h3 id="5-herramientas-de-gestion">5. Herramientas de Gestión</h3>
+<h4 id="script-de-monitoreo-monitor-workerssh">Script de Monitoreo (<code>monitor-workers.sh</code>)</h4>
 <ul>
 <li>Estado de todos los workers con emojis visuales</li>
 <li>Uso de memoria y CPU en tiempo real</li>
@@ -2318,7 +2364,7 @@
 <li>Últimos errores de cada grupo</li>
 <li><strong>Uso</strong>: <code>./scripts/monitor-workers.sh</code></li>
 </ul>
-<h4 id="script-de-instalacion-install-supervisor-configsh">Script de Instalación (<code>install-supervisor-config.sh</code>)<a class="headerlink" href="#script-de-instalacion-install-supervisor-configsh" title="Permanent link">&para;</a></h4>
+<h4 id="script-de-instalacion-install-supervisor-configsh">Script de Instalación (<code>install-supervisor-config.sh</code>)</h4>
 <ul>
 <li>Instalación automatizada con backup de configuración anterior</li>
 <li>Modo <code>full</code> (7 workers) o <code>light</code> (4 workers)</li>
@@ -2326,8 +2372,8 @@
 <li>Verificación de estado post-instalación</li>
 <li><strong>Uso</strong>: <code>sudo ./scripts/install-supervisor-config.sh [light|full]</code></li>
 </ul>
-<h2 id="archivos-creados">Archivos Creados<a class="headerlink" href="#archivos-creados" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code>config/supervisor/
+<h2 id="archivos-creados">Archivos Creados</h2>
+<div class="codehilite"><pre><span></span><code>config/supervisor/
 ├── laravel-worker-high.conf      # Workers alta prioridad
 ├── laravel-worker-default.conf   # Workers estándar
 ├── laravel-worker-batch.conf     # Workers batch/mantenimiento
@@ -2340,17 +2386,19 @@ scripts/
 docs/technical/
 └── supervisor-queue-workers.md   # Documentación completa (390+ líneas)
 </code></pre></div>
-<h2 id="instalacion-rapida">Instalación Rápida<a class="headerlink" href="#instalacion-rapida" title="Permanent link">&para;</a></h2>
-<h3 id="opcion-1-instalacion-automatica-recomendado">Opción 1: Instalación Automática (Recomendado)<a class="headerlink" href="#opcion-1-instalacion-automatica-recomendado" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># Configuración completa (7 workers, 4GB+ RAM)</span>
+
+<h2 id="instalacion-rapida">Instalación Rápida</h2>
+<h3 id="opcion-1-instalacion-automatica-recomendado">Opción 1: Instalación Automática (Recomendado)</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Configuración completa (7 workers, 4GB+ RAM)</span>
 <span class="nb">cd</span><span class="w"> </span>/home/desarrollo/code/docucenter
 sudo<span class="w"> </span>./scripts/install-supervisor-config.sh<span class="w"> </span>full
 
 <span class="c1"># Configuración ligera (4 workers, 2GB RAM)</span>
 sudo<span class="w"> </span>./scripts/install-supervisor-config.sh<span class="w"> </span>light
 </code></pre></div>
-<h3 id="opcion-2-instalacion-manual">Opción 2: Instalación Manual<a class="headerlink" href="#opcion-2-instalacion-manual" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># 1. Backup de configuración actual</span>
+
+<h3 id="opcion-2-instalacion-manual">Opción 2: Instalación Manual</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># 1. Backup de configuración actual</span>
 sudo<span class="w"> </span>cp<span class="w"> </span>/etc/supervisor/conf.d/laravel-worker.conf<span class="w"> </span>/etc/supervisor/conf.d/laravel-worker.conf.backup
 
 <span class="c1"># 2. Remover configuración antigua</span>
@@ -2378,9 +2426,10 @@ sudo<span class="w"> </span>supervisorctl<span class="w"> </span>start<span clas
 <span class="c1"># 6. Verificar</span>
 sudo<span class="w"> </span>supervisorctl<span class="w"> </span>status
 </code></pre></div>
-<h2 id="comandos-utiles">Comandos Útiles<a class="headerlink" href="#comandos-utiles" title="Permanent link">&para;</a></h2>
-<h3 id="gestion-de-workers">Gestión de Workers<a class="headerlink" href="#gestion-de-workers" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># Ver estado de todos los workers</span>
+
+<h2 id="comandos-utiles">Comandos Útiles</h2>
+<h3 id="gestion-de-workers">Gestión de Workers</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Ver estado de todos los workers</span>
 sudo<span class="w"> </span>supervisorctl<span class="w"> </span>status
 
 <span class="c1"># Reiniciar todos</span>
@@ -2398,8 +2447,9 @@ sudo<span class="w"> </span>supervisorctl<span class="w"> </span>stop<span class
 sudo<span class="w"> </span>supervisorctl<span class="w"> </span>tail<span class="w"> </span>-f<span class="w"> </span>laravel-worker-high
 tail<span class="w"> </span>-f<span class="w"> </span>storage/logs/worker-high.log
 </code></pre></div>
-<h3 id="monitoreo">Monitoreo<a class="headerlink" href="#monitoreo" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># Script de monitoreo completo</span>
+
+<h3 id="monitoreo">Monitoreo</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Script de monitoreo completo</span>
 ./scripts/monitor-workers.sh
 
 <span class="c1"># Ver uso de memoria</span>
@@ -2415,46 +2465,48 @@ php<span class="w"> </span>artisan<span class="w"> </span>queue:failed
 <span class="c1"># Reintentar jobs fallidos</span>
 php<span class="w"> </span>artisan<span class="w"> </span>queue:retry<span class="w"> </span>all
 </code></pre></div>
-<h2 id="configuracion-por-cron-opcional">Configuración por Cron (Opcional)<a class="headerlink" href="#configuracion-por-cron-opcional" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><span class="c1"># Agregar a crontab para monitoreo automático</span>
+
+<h2 id="configuracion-por-cron-opcional">Configuración por Cron (Opcional)</h2>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Agregar a crontab para monitoreo automático</span>
 crontab<span class="w"> </span>-e
 
 <span class="c1"># Verificar cada 5 minutos y guardar log</span>
 */5<span class="w"> </span>*<span class="w"> </span>*<span class="w"> </span>*<span class="w"> </span>*<span class="w"> </span>/home/desarrollo/code/docucenter/scripts/monitor-workers.sh<span class="w"> </span>&gt;&gt;<span class="w"> </span>/home/desarrollo/logs/worker-monitor.log<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span>
 </code></pre></div>
-<h2 id="ventajas-de-la-nueva-configuracion">Ventajas de la Nueva Configuración<a class="headerlink" href="#ventajas-de-la-nueva-configuracion" title="Permanent link">&para;</a></h2>
-<h3 id="optimizacion-de-recursos">Optimización de Recursos<a class="headerlink" href="#optimizacion-de-recursos" title="Permanent link">&para;</a></h3>
+
+<h2 id="ventajas-de-la-nueva-configuracion">Ventajas de la Nueva Configuración</h2>
+<h3 id="optimizacion-de-recursos">Optimización de Recursos</h3>
 <ul>
 <li><strong>Separación por prioridad</strong>: Jobs críticos procesados primero</li>
 <li><strong>Memoria diferenciada</strong>: Batch tiene más memoria (1GB vs 512MB)</li>
 <li><strong>Timeouts ajustados</strong>: Batch permite hasta 2 horas</li>
 <li><strong>Max-jobs limit</strong>: Workers se reinician después de 50 jobs (30 para batch) previniendo memory leaks</li>
 </ul>
-<h3 id="mejor-manejo-de-colas">Mejor Manejo de Colas<a class="headerlink" href="#mejor-manejo-de-colas" title="Permanent link">&para;</a></h3>
+<h3 id="mejor-manejo-de-colas">Mejor Manejo de Colas</h3>
 <ul>
 <li><strong>Sleep optimizado</strong>: 1s para high, 3s para default, 5s para batch</li>
 <li><strong>Backoff exponencial</strong>: Reintentos más inteligentes</li>
 <li><strong>Prioridades</strong>: High inicia primero, batch último</li>
 </ul>
-<h3 id="gestion-de-logs-mejorada">Gestión de Logs Mejorada<a class="headerlink" href="#gestion-de-logs-mejorada" title="Permanent link">&para;</a></h3>
+<h3 id="gestion-de-logs-mejorada">Gestión de Logs Mejorada</h3>
 <ul>
 <li><strong>Rotación automática</strong>: No se llenan los discos</li>
 <li><strong>Logs separados</strong>: Troubleshooting más fácil</li>
 <li><strong>Errores independientes</strong>: stdout/stderr separados</li>
 </ul>
-<h3 id="escalabilidad">Escalabilidad<a class="headerlink" href="#escalabilidad" title="Permanent link">&para;</a></h3>
+<h3 id="escalabilidad">Escalabilidad</h3>
 <ul>
 <li><strong>Fácil ajuste</strong>: Cambiar <code>numprocs</code> en archivos <code>.conf</code></li>
 <li><strong>Dos modos</strong>: Full (7 workers) o Light (4 workers)</li>
 <li><strong>Por grupo</strong>: Escalar solo lo necesario</li>
 </ul>
-<h3 id="herramientas-de-gestion">Herramientas de Gestión<a class="headerlink" href="#herramientas-de-gestion" title="Permanent link">&para;</a></h3>
+<h3 id="herramientas-de-gestion">Herramientas de Gestión</h3>
 <ul>
 <li><strong>Monitoreo visual</strong>: Script con emojis y colores</li>
 <li><strong>Instalación automática</strong>: Con backup y verificación</li>
 <li><strong>Documentación completa</strong>: 390+ líneas</li>
 </ul>
-<h2 id="comparacion-antes-vs-despues">Comparación Antes vs Después<a class="headerlink" href="#comparacion-antes-vs-despues" title="Permanent link">&para;</a></h2>
+<h2 id="comparacion-antes-vs-despues">Comparación Antes vs Después</h2>
 <table>
 <thead>
 <tr>
@@ -2527,20 +2579,20 @@ crontab<span class="w"> </span>-e
 </tr>
 </tbody>
 </table>
-<h2 id="recomendaciones">Recomendaciones<a class="headerlink" href="#recomendaciones" title="Permanent link">&para;</a></h2>
-<h3 id="para-servidor-de-2gb-ram">Para Servidor de 2GB RAM<a class="headerlink" href="#para-servidor-de-2gb-ram" title="Permanent link">&para;</a></h3>
+<h2 id="recomendaciones">Recomendaciones</h2>
+<h3 id="para-servidor-de-2gb-ram">Para Servidor de 2GB RAM</h3>
 <ul>
 <li>Usar configuración <strong>light</strong> (4 workers)</li>
 <li>Monitorear memoria con <code>free -h</code></li>
 <li>Considerar reducir más si hay problemas</li>
 </ul>
-<h3 id="para-servidor-de-4gb-ram">Para Servidor de 4GB+ RAM<a class="headerlink" href="#para-servidor-de-4gb-ram" title="Permanent link">&para;</a></h3>
+<h3 id="para-servidor-de-4gb-ram">Para Servidor de 4GB+ RAM</h3>
 <ul>
 <li>Usar configuración <strong>full</strong> (7 workers)</li>
 <li>Monitorear rendimiento regularmente</li>
 <li>Ajustar <code>numprocs</code> según carga real</li>
 </ul>
-<h3 id="en-general">En General<a class="headerlink" href="#en-general" title="Permanent link">&para;</a></h3>
+<h3 id="en-general">En General</h3>
 <ul>
 <li>Monitorear uso de memoria semanalmente</li>
 <li>Revisar jobs fallidos diariamente</li>
@@ -2549,17 +2601,18 @@ crontab<span class="w"> </span>-e
 <li>No exceder capacidad RAM del servidor</li>
 <li>No ignorar logs de error</li>
 </ul>
-<h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2>
-<h3 id="workers-no-inician">Workers no inician<a class="headerlink" href="#workers-no-inician" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># Ver logs de supervisor</span>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<h3 id="workers-no-inician">Workers no inician</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Ver logs de supervisor</span>
 sudo<span class="w"> </span>tail<span class="w"> </span>-100<span class="w"> </span>/var/log/supervisor/supervisord.log
 
 <span class="c1"># Verificar permisos</span>
 ls<span class="w"> </span>-la<span class="w"> </span>artisan
 sudo<span class="w"> </span>chown<span class="w"> </span>-R<span class="w"> </span>desarrollo:desarrollo<span class="w"> </span>/home/desarrollo/code/docucenter
 </code></pre></div>
-<h3 id="alto-uso-de-memoria">Alto uso de memoria<a class="headerlink" href="#alto-uso-de-memoria" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># Reducir numprocs en archivos .conf</span>
+
+<h3 id="alto-uso-de-memoria">Alto uso de memoria</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Reducir numprocs en archivos .conf</span>
 sudo<span class="w"> </span>nano<span class="w"> </span>/etc/supervisor/conf.d/laravel-worker-default.conf
 <span class="c1"># Cambiar numprocs=3 a numprocs=2</span>
 
@@ -2567,8 +2620,9 @@ sudo<span class="w"> </span>nano<span class="w"> </span>/etc/supervisor/conf.d/l
 sudo<span class="w"> </span>supervisorctl<span class="w"> </span>reread
 sudo<span class="w"> </span>supervisorctl<span class="w"> </span>update
 </code></pre></div>
-<h3 id="jobs-se-acumulan">Jobs se acumulan<a class="headerlink" href="#jobs-se-acumulan" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># Verificar workers corriendo</span>
+
+<h3 id="jobs-se-acumulan">Jobs se acumulan</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Verificar workers corriendo</span>
 sudo<span class="w"> </span>supervisorctl<span class="w"> </span>status
 
 <span class="c1"># Aumentar workers temporalmente</span>
@@ -2577,14 +2631,15 @@ sudo<span class="w"> </span>supervisorctl<span class="w"> </span>start<span clas
 <span class="c1"># O procesar manual</span>
 php<span class="w"> </span>artisan<span class="w"> </span>queue:work<span class="w"> </span>redis<span class="w"> </span>--queue<span class="o">=</span>default<span class="w"> </span>--once
 </code></pre></div>
-<h2 id="documentacion-adicional">Documentación Adicional<a class="headerlink" href="#documentacion-adicional" title="Permanent link">&para;</a></h2>
+
+<h2 id="documentacion-adicional">Documentación Adicional</h2>
 <p>Ver <a href="docs/technical/supervisor-queue-workers.md">docs/technical/supervisor-queue-workers.md</a> para:
 - Configuración detallada de cada parámetro
 - Ejemplos de uso avanzado
 - Mejores prácticas de Redis
 - Performance tuning
 - Monitoring avanzado con cron</p>
-<h2 id="proximos-pasos">Próximos Pasos<a class="headerlink" href="#proximos-pasos" title="Permanent link">&para;</a></h2>
+<h2 id="proximos-pasos">Próximos Pasos</h2>
 <ol>
 <li>Instalar configuración (light o full según servidor)</li>
 <li>Monitorear durante 24-48 horas</li>
@@ -2644,7 +2699,7 @@ php<span class="w"> </span>artisan<span class="w"> </span>queue:work<span class=
       
       
     
-    <a href="https://github.com/aghabrego/docucenter" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+    <a href="https://github.com/aghabrego/docucenter-public" target="_blank" rel="noopener" title="github.com" class="md-social__link">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
     </a>
   

@@ -233,7 +233,7 @@
           
   
   
-  APIs
+  API Documentation
 
         </a>
       </li>
@@ -269,7 +269,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../technical/" class="md-tabs__link">
+        <a href="../../technical/README.md" class="md-tabs__link">
           
   
   
@@ -298,6 +298,25 @@
         </a>
       </li>
     
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../testing/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Sistema de Testing
+
+      </a>
+    </li>
   
 
       
@@ -404,7 +423,7 @@
   <span class="md-ellipsis">
     
   
-    APIs
+    API Documentation
   
 
     
@@ -420,7 +439,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    APIs
+    API Documentation
   
 
           </label>
@@ -1363,7 +1382,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../technical/" class="md-nav__link">
+      <a href="../../technical/README.md" class="md-nav__link">
         
   
   
@@ -1712,6 +1731,33 @@
           </ul>
         </nav>
       
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sistema de Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -2179,18 +2225,18 @@
   
 
 
-<h1 id="optimizacion-y-mejoras-creacion-de-ordenes-de-venta-sage50">Optimización y Mejoras: Creación de Órdenes de Venta Sage50<a class="headerlink" href="#optimizacion-y-mejoras-creacion-de-ordenes-de-venta-sage50" title="Permanent link">&para;</a></h1>
+<h1 id="optimizacion-y-mejoras-creacion-de-ordenes-de-venta-sage50">Optimización y Mejoras: Creación de Órdenes de Venta Sage50</h1>
 <p><strong>Fecha</strong>: 10 de diciembre de 2025<br />
 <strong>Módulo</strong>: <code>admin/sage50/create_sales_order</code><br />
 <strong>Componente</strong>: <code>App\Http\Livewire\Admin\Sage50\CreateSaleOrder</code></p>
-<h2 id="problemas-identificados">Problemas Identificados<a class="headerlink" href="#problemas-identificados" title="Permanent link">&para;</a></h2>
-<h3 id="1-rendimiento-lento-con-ordenes-de-50-items">1. Rendimiento Lento con Órdenes de 50+ Items<a class="headerlink" href="#1-rendimiento-lento-con-ordenes-de-50-items" title="Permanent link">&para;</a></h3>
-<h4 id="sintoma">Síntoma<a class="headerlink" href="#sintoma" title="Permanent link">&para;</a></h4>
+<h2 id="problemas-identificados">Problemas Identificados</h2>
+<h3 id="1-rendimiento-lento-con-ordenes-de-50-items">1. Rendimiento Lento con Órdenes de 50+ Items</h3>
+<h4 id="sintoma">Síntoma</h4>
 <p>El sistema se vuelve extremadamente lento al agregar productos cuando la orden tiene más de 50 items.</p>
-<h4 id="causa-raiz">Causa Raíz<a class="headerlink" href="#causa-raiz" title="Permanent link">&para;</a></h4>
+<h4 id="causa-raiz">Causa Raíz</h4>
 <p><strong>Archivo</strong>: <code>app/Http/Livewire/Admin/Sage50/CreateSaleOrder.php</code></p>
-<p><strong>Método <code>addProduct()</code> (línea 600)</strong>:
-<div class="highlight"><pre><span></span><code><span class="x">public function addProduct(array $detail)</span>
+<p><strong>Método <code>addProduct()</code> (línea 600)</strong>:</p>
+<div class="codehilite"><pre><span></span><code><span class="x">public function addProduct(array $detail)</span>
 <span class="x">{</span>
 <span class="x">    // ... lógica de agregar item ...</span>
 
@@ -2205,9 +2251,10 @@
 
 <span class="x">    $this-&gt;dispatchBrowserEvent(&#39;close-modal-add-product&#39;);</span>
 <span class="x">}</span>
-</code></pre></div></p>
-<p><strong>Método <code>calcularTotales()</code> (línea 679)</strong>:
-<div class="highlight"><pre><span></span><code><span class="x">public function calcularTotales()</span>
+</code></pre></div>
+
+<p><strong>Método <code>calcularTotales()</code> (línea 679)</strong>:</p>
+<div class="codehilite"><pre><span></span><code><span class="x">public function calcularTotales()</span>
 <span class="x">{</span>
 <span class="x">    // Reiniciar los totales</span>
 <span class="x">    $this-&gt;totalSubtotal = 0;</span>
@@ -2227,34 +2274,36 @@
 <span class="x">    }</span>
 <span class="x">    $this-&gt;otroPrecioFinal = $this-&gt;totalPrecioFinal;</span>
 <span class="x">}</span>
-</code></pre></div></p>
-<h4 id="analisis-de-complejidad">Análisis de Complejidad<a class="headerlink" href="#analisis-de-complejidad" title="Permanent link">&para;</a></h4>
+</code></pre></div>
+
+<h4 id="analisis-de-complejidad">Análisis de Complejidad</h4>
 <ul>
 <li><strong>Por cada item agregado</strong>: O(n) donde n = cantidad de items</li>
 <li><strong>50 items</strong>: 1 + 2 + 3 + ... + 50 = <strong>1,275 iteraciones totales</strong></li>
 <li><strong>100 items</strong>: 1 + 2 + 3 + ... + 100 = <strong>5,050 iteraciones totales</strong></li>
 <li><strong>Complejidad total</strong>: O(n²) - Cuadrática</li>
 </ul>
-<h4 id="comportamiento-del-usuario">Comportamiento del Usuario<a class="headerlink" href="#comportamiento-del-usuario" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code>Usuario agrega Item 1 → Calcula 1 item
-Usuario agrega Item 2 → Calcula 2 items (recalcula Item 1 nuevamente)
-Usuario agrega Item 3 → Calcula 3 items (recalcula Items 1 y 2 nuevamente)
-...
-Usuario agrega Item 50 → Calcula 50 items (recalcula Items 1-49 OTRA VEZ)
+<h4 id="comportamiento-del-usuario">Comportamiento del Usuario</h4>
+<div class="codehilite"><pre><span></span><code><span class="n">Usuario</span><span class="w"> </span><span class="n">agrega</span><span class="w"> </span><span class="n">Item</span><span class="w"> </span><span class="mh">1</span><span class="w"> </span><span class="err">→</span><span class="w"> </span><span class="n">Calcula</span><span class="w"> </span><span class="mh">1</span><span class="w"> </span><span class="n">item</span>
+<span class="n">Usuario</span><span class="w"> </span><span class="n">agrega</span><span class="w"> </span><span class="n">Item</span><span class="w"> </span><span class="mh">2</span><span class="w"> </span><span class="err">→</span><span class="w"> </span><span class="n">Calcula</span><span class="w"> </span><span class="mh">2</span><span class="w"> </span><span class="n">items</span><span class="w"> </span><span class="p">(</span><span class="n">recalcula</span><span class="w"> </span><span class="n">Item</span><span class="w"> </span><span class="mh">1</span><span class="w"> </span><span class="n">nuevamente</span><span class="p">)</span>
+<span class="n">Usuario</span><span class="w"> </span><span class="n">agrega</span><span class="w"> </span><span class="n">Item</span><span class="w"> </span><span class="mh">3</span><span class="w"> </span><span class="err">→</span><span class="w"> </span><span class="n">Calcula</span><span class="w"> </span><span class="mh">3</span><span class="w"> </span><span class="n">items</span><span class="w"> </span><span class="p">(</span><span class="n">recalcula</span><span class="w"> </span><span class="n">Items</span><span class="w"> </span><span class="mh">1</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="mh">2</span><span class="w"> </span><span class="n">nuevamente</span><span class="p">)</span>
+<span class="p">...</span>
+<span class="n">Usuario</span><span class="w"> </span><span class="n">agrega</span><span class="w"> </span><span class="n">Item</span><span class="w"> </span><span class="mh">50</span><span class="w"> </span><span class="err">→</span><span class="w"> </span><span class="n">Calcula</span><span class="w"> </span><span class="mh">50</span><span class="w"> </span><span class="n">items</span><span class="w"> </span><span class="p">(</span><span class="n">recalcula</span><span class="w"> </span><span class="n">Items</span><span class="w"> </span><span class="mh">1</span><span class="o">-</span><span class="mh">49</span><span class="w"> </span><span class="n">OTRA</span><span class="w"> </span><span class="n">VEZ</span><span class="p">)</span>
 </code></pre></div>
-<h4 id="llamadas-adicionales-en-livewire">Llamadas Adicionales en Livewire<a class="headerlink" href="#llamadas-adicionales-en-livewire" title="Permanent link">&para;</a></h4>
+
+<h4 id="llamadas-adicionales-en-livewire">Llamadas Adicionales en Livewire</h4>
 <ul>
 <li>Cada <code>addProduct()</code> dispara re-renderizado completo del componente</li>
 <li>El método <code>getProductsExp()</code> ejecuta query con paginación en cada actualización</li>
 <li>La vista re-renderiza la tabla de items (líneas 148-226 de <code>create_sale_order.blade.php</code>)</li>
 </ul>
 <hr />
-<h3 id="2-sistema-de-borradores-ausente">2. Sistema de Borradores Ausente<a class="headerlink" href="#2-sistema-de-borradores-ausente" title="Permanent link">&para;</a></h3>
-<h4 id="problema">Problema<a class="headerlink" href="#problema" title="Permanent link">&para;</a></h4>
+<h3 id="2-sistema-de-borradores-ausente">2. Sistema de Borradores Ausente</h3>
+<h4 id="problema">Problema</h4>
 <p>No existe forma de guardar órdenes como "borradores" para continuar trabajando después.</p>
-<h4 id="estado-actual">Estado Actual<a class="headerlink" href="#estado-actual" title="Permanent link">&para;</a></h4>
-<p><strong>Método <code>createOrder()</code> (línea 891)</strong>:
-<div class="highlight"><pre><span></span><code><span class="x">$header = SalesOrderHeaderImp::query()-&gt;create([</span>
+<h4 id="estado-actual">Estado Actual</h4>
+<p><strong>Método <code>createOrder()</code> (línea 891)</strong>:</p>
+<div class="codehilite"><pre><span></span><code><span class="x">$header = SalesOrderHeaderImp::query()-&gt;create([</span>
 <span class="x">    &#39;ID_compania&#39; =&gt; $company-&gt;ID_compania ?? null,</span>
 <span class="x">    &#39;SalesOrderNumber&#39; =&gt; $this-&gt;strPad($this-&gt;sales_order_number, 10),</span>
 <span class="x">    &#39;CustomerID&#39; =&gt; $this-&gt;customer_id,</span>
@@ -2262,26 +2311,28 @@ Usuario agrega Item 50 → Calcula 50 items (recalcula Items 1-49 OTRA VEZ)
 <span class="x">    &#39;Enviado&#39; =&gt; 0,  // ⚠️ Siempre 0 al crear</span>
 <span class="x">    &#39;Error&#39; =&gt; 0,    // ⚠️ Siempre 0 al crear</span>
 <span class="x">]);</span>
-</code></pre></div></p>
-<h4 id="campos-disponibles-en-bd">Campos Disponibles en BD<a class="headerlink" href="#campos-disponibles-en-bd" title="Permanent link">&para;</a></h4>
-<p><strong>Archivo</strong>: <code>app/Models/stubs/SalesOrder_Header_Imp.sql.stub</code>
-<div class="highlight"><pre><span></span><code><span class="o">`</span><span class="n">Enviado</span><span class="o">`</span><span class="w"> </span><span class="n">tinyint</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+</code></pre></div>
+
+<h4 id="campos-disponibles-en-bd">Campos Disponibles en BD</h4>
+<p><strong>Archivo</strong>: <code>app/Models/stubs/SalesOrder_Header_Imp.sql.stub</code></p>
+<div class="codehilite"><pre><span></span><code><span class="o">`</span><span class="n">Enviado</span><span class="o">`</span><span class="w"> </span><span class="n">tinyint</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
 <span class="o">`</span><span class="n">Error</span><span class="o">`</span><span class="w"> </span><span class="n">tinyint</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
 <span class="o">`</span><span class="n">ErrorPT</span><span class="o">`</span><span class="w"> </span><span class="nb">varchar</span><span class="p">(</span><span class="mi">1024</span><span class="p">)</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
-</code></pre></div></p>
-<h4 id="comportamiento-esperado">Comportamiento Esperado<a class="headerlink" href="#comportamiento-esperado" title="Permanent link">&para;</a></h4>
+</code></pre></div>
+
+<h4 id="comportamiento-esperado">Comportamiento Esperado</h4>
 <p>Los usuarios necesitan:
 1. Guardar orden parcialmente completa
 2. Cerrar sesión
 3. Volver después y continuar editando
 4. Solo cuando esté 100% completa → marcar como "lista para envío a Sage50"</p>
 <hr />
-<h2 id="soluciones-propuestas">Soluciones Propuestas<a class="headerlink" href="#soluciones-propuestas" title="Permanent link">&para;</a></h2>
-<h3 id="solucion-1-optimizacion-de-rendimiento">Solución 1: Optimización de Rendimiento<a class="headerlink" href="#solucion-1-optimizacion-de-rendimiento" title="Permanent link">&para;</a></h3>
-<h4 id="opcion-1a-calculo-incremental-recomendado">Opción 1A: Cálculo Incremental (Recomendado)<a class="headerlink" href="#opcion-1a-calculo-incremental-recomendado" title="Permanent link">&para;</a></h4>
+<h2 id="soluciones-propuestas">Soluciones Propuestas</h2>
+<h3 id="solucion-1-optimizacion-de-rendimiento">Solución 1: Optimización de Rendimiento</h3>
+<h4 id="opcion-1a-calculo-incremental-recomendado">Opción 1A: Cálculo Incremental (Recomendado)</h4>
 <p><strong>Ventaja</strong>: Mejor rendimiento sin cambiar UX<br />
 <strong>Complejidad</strong>: O(1) por item agregado</p>
-<div class="highlight"><pre><span></span><code><span class="x">// En CreateSaleOrder.php</span>
+<div class="codehilite"><pre><span></span><code><span class="x">// En CreateSaleOrder.php</span>
 
 <span class="x">public function addProduct(array $detail)</span>
 <span class="x">{</span>
@@ -2371,13 +2422,14 @@ Usuario agrega Item 50 → Calcula 50 items (recalcula Items 1-49 OTRA VEZ)
 <span class="x">    }</span>
 <span class="x">}</span>
 </code></pre></div>
+
 <p><strong>Impacto de Performance</strong>:
 - 50 items: <strong>1,275 iteraciones</strong> → <strong>50 iteraciones</strong> (96% mejora)
 - 100 items: <strong>5,050 iteraciones</strong> → <strong>100 iteraciones</strong> (98% mejora)</p>
-<h4 id="opcion-1b-calculo-diferido-con-toggle">Opción 1B: Cálculo Diferido con Toggle<a class="headerlink" href="#opcion-1b-calculo-diferido-con-toggle" title="Permanent link">&para;</a></h4>
+<h4 id="opcion-1b-calculo-diferido-con-toggle">Opción 1B: Cálculo Diferido con Toggle</h4>
 <p><strong>Ventaja</strong>: Usuario controla cuándo recalcular<br />
 <strong>Uso</strong>: Para órdenes muy grandes (100+ items)</p>
-<div class="highlight"><pre><span></span><code><span class="x">// Agregar propiedad en CreateSaleOrder.php</span>
+<div class="codehilite"><pre><span></span><code><span class="x">// Agregar propiedad en CreateSaleOrder.php</span>
 <span class="x">public $autoCalculate = true;</span>
 
 <span class="x">public function addProduct(array $detail)</span>
@@ -2413,35 +2465,37 @@ Usuario agrega Item 50 → Calcula 50 items (recalcula Items 1-49 OTRA VEZ)
 <span class="x">    ]);</span>
 <span class="x">}</span>
 </code></pre></div>
-<p><strong>Blade</strong> (<code>create_sale_order.blade.php</code>):
-<div class="highlight"><pre><span></span><code>&lt;div class=&quot;form-check mb-3&quot;&gt;
-    &lt;input type=&quot;checkbox&quot; class=&quot;form-check-input&quot; id=&quot;autoCalc&quot; 
-           wire:model=&quot;autoCalculate&quot; wire:change=&quot;toggleAutoCalculate&quot;&gt;
-    &lt;label class=&quot;form-check-label&quot; for=&quot;autoCalc&quot;&gt;
-        {{ __(&#39;Auto-calcular totales (desactivar para órdenes grandes)&#39;) }}
-    &lt;/label&gt;
-&lt;/div&gt;
 
-@if (!$autoCalculate)
-    &lt;button type=&quot;button&quot; wire:click=&quot;recalcularManual&quot; class=&quot;btn btn-sm btn-info&quot;&gt;
-        &lt;i class=&quot;fa fa-calculator&quot;&gt;&lt;/i&gt; {{ __(&#39;Recalcular Totales&#39;) }}
-    &lt;/button&gt;
-@endif
-</code></pre></div></p>
-<h4 id="opcion-1c-virtualizacion-de-lista-avanzado">Opción 1C: Virtualización de Lista (Avanzado)<a class="headerlink" href="#opcion-1c-virtualizacion-de-lista-avanzado" title="Permanent link">&para;</a></h4>
+<p><strong>Blade</strong> (<code>create_sale_order.blade.php</code>):</p>
+<div class="codehilite"><pre><span></span><code><span class="o">&lt;</span><span class="n">div</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;form-check mb-3&quot;</span><span class="o">&gt;</span>
+<span class="w">    </span><span class="o">&lt;</span><span class="n">input</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="s">&quot;checkbox&quot;</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;form-check-input&quot;</span><span class="w"> </span><span class="kt">id</span><span class="o">=</span><span class="s">&quot;autoCalc&quot;</span><span class="w"> </span>
+<span class="w">           </span><span class="nl">wire</span><span class="p">:</span><span class="n">model</span><span class="o">=</span><span class="s">&quot;autoCalculate&quot;</span><span class="w"> </span><span class="n">wire</span><span class="o">:</span><span class="n">change</span><span class="o">=</span><span class="s">&quot;toggleAutoCalculate&quot;</span><span class="o">&gt;</span>
+<span class="w">    </span><span class="o">&lt;</span><span class="n">label</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;form-check-label&quot;</span><span class="w"> </span><span class="k">for</span><span class="o">=</span><span class="s">&quot;autoCalc&quot;</span><span class="o">&gt;</span>
+<span class="w">        </span><span class="p">{{</span><span class="w"> </span><span class="n">__</span><span class="p">(</span><span class="err">&#39;</span><span class="n">Auto</span><span class="o">-</span><span class="n">calcular</span><span class="w"> </span><span class="n">totales</span><span class="w"> </span><span class="p">(</span><span class="n">desactivar</span><span class="w"> </span><span class="n">para</span><span class="w"> </span><span class="n">órdenes</span><span class="w"> </span><span class="n">grandes</span><span class="p">)</span><span class="err">&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">}}</span>
+<span class="w">    </span><span class="o">&lt;/</span><span class="n">label</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+
+<span class="p">@</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">$autoCalculate</span><span class="p">)</span>
+<span class="w">    </span><span class="o">&lt;</span><span class="n">button</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="s">&quot;button&quot;</span><span class="w"> </span><span class="n">wire</span><span class="o">:</span><span class="n">click</span><span class="o">=</span><span class="s">&quot;recalcularManual&quot;</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;btn btn-sm btn-info&quot;</span><span class="o">&gt;</span>
+<span class="w">        </span><span class="o">&lt;</span><span class="n">i</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;fa fa-calculator&quot;</span><span class="o">&gt;&lt;/</span><span class="n">i</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{{</span><span class="w"> </span><span class="n">__</span><span class="p">(</span><span class="err">&#39;</span><span class="n">Recalcular</span><span class="w"> </span><span class="n">Totales</span><span class="err">&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">}}</span>
+<span class="w">    </span><span class="o">&lt;/</span><span class="n">button</span><span class="o">&gt;</span>
+<span class="p">@</span><span class="n">endif</span>
+</code></pre></div>
+
+<h4 id="opcion-1c-virtualizacion-de-lista-avanzado">Opción 1C: Virtualización de Lista (Avanzado)</h4>
 <p>Para órdenes extremadamente grandes (200+ items), considerar:
 - Usar <code>wire:ignore</code> en tabla de items
 - Implementar scroll virtual con Alpine.js
 - Renderizar solo items visibles</p>
 <hr />
-<h3 id="solucion-2-sistema-de-borradores">Solución 2: Sistema de Borradores<a class="headerlink" href="#solucion-2-sistema-de-borradores" title="Permanent link">&para;</a></h3>
-<h4 id="opcion-2a-extender-campo-enviado-recomendado">Opción 2A: Extender Campo <code>Enviado</code> (Recomendado)<a class="headerlink" href="#opcion-2a-extender-campo-enviado-recomendado" title="Permanent link">&para;</a></h4>
+<h3 id="solucion-2-sistema-de-borradores">Solución 2: Sistema de Borradores</h3>
+<h4 id="opcion-2a-extender-campo-enviado-recomendado">Opción 2A: Extender Campo <code>Enviado</code> (Recomendado)</h4>
 <p><strong>Ventajas</strong>:
 - No requiere ALTER TABLE
 - Compatible con sistema actual
 - Fácil de implementar</p>
-<p><strong>Estados Propuestos</strong>:
-<div class="highlight"><pre><span></span><code><span class="x">// Agregar constantes en SalesOrderHeaderImp.php</span>
+<p><strong>Estados Propuestos</strong>:</p>
+<div class="codehilite"><pre><span></span><code><span class="x">// Agregar constantes en SalesOrderHeaderImp.php</span>
 <span class="x">const ESTADO_BORRADOR = 0;      // Orden incompleta, se puede editar</span>
 <span class="x">const ESTADO_COMPLETADO = 1;    // Orden completa, lista para Sage50</span>
 <span class="x">const ESTADO_ENVIADO = 2;       // Enviado exitosamente a Sage50</span>
@@ -2467,9 +2521,10 @@ Usuario agrega Item 50 → Calcula 50 items (recalcula Items 1-49 OTRA VEZ)
 <span class="x">{</span>
 <span class="x">    return in_array($this-&gt;Enviado, [self::ESTADO_BORRADOR, self::ESTADO_COMPLETADO]);</span>
 <span class="x">}</span>
-</code></pre></div></p>
-<p><strong>Implementación en CreateSaleOrder.php</strong>:
-<div class="highlight"><pre><span></span><code><span class="x">// Agregar propiedad</span>
+</code></pre></div>
+
+<p><strong>Implementación en CreateSaleOrder.php</strong>:</p>
+<div class="codehilite"><pre><span></span><code><span class="x">// Agregar propiedad</span>
 <span class="x">public $guardarComoBorrador = false;</span>
 
 <span class="x">/**</span>
@@ -2592,42 +2647,44 @@ Usuario agrega Item 50 → Calcula 50 items (recalcula Items 1-49 OTRA VEZ)
 <span class="x">        ]);</span>
 <span class="x">    }</span>
 <span class="x">}</span>
-</code></pre></div></p>
-<p><strong>Actualización del Blade</strong>:
-<div class="highlight"><pre><span></span><code>&lt;!-- En step 3, agregar botones --&gt;
-&lt;div class=&quot;step-tree&quot; x-show=&quot;currentStep == 3&quot;&gt;
-    &lt;!-- ... campos existentes ... --&gt;
+</code></pre></div>
 
-    &lt;div class=&quot;d-flex gap-2 mt-3&quot;&gt;
-        &lt;!-- Guardar como borrador --&gt;
-        &lt;button wire:click=&quot;guardarBorrador&quot; 
-                class=&quot;btn btn-secondary&quot; 
-                wire:loading.attr=&quot;disabled&quot;&gt;
-            &lt;span wire:loading.remove wire:target=&quot;guardarBorrador&quot;&gt;
-                &lt;i class=&quot;fa fa-save&quot;&gt;&lt;/i&gt; {{ __(&#39;Guardar Borrador&#39;) }}
-            &lt;/span&gt;
-            &lt;span wire:loading wire:target=&quot;guardarBorrador&quot;&gt;
-                &lt;i class=&quot;fas fa-spinner fa-spin&quot;&gt;&lt;/i&gt; {{ __(&#39;Guardando...&#39;) }}
-            &lt;/span&gt;
-        &lt;/button&gt;
+<p><strong>Actualización del Blade</strong>:</p>
+<div class="codehilite"><pre><span></span><code><span class="cm">&lt;!-- En step 3, agregar botones --&gt;</span>
+<span class="nt">&lt;div</span><span class="w"> </span><span class="na">class=</span><span class="s">&quot;step-tree&quot;</span><span class="w"> </span><span class="na">x-show=</span><span class="s">&quot;currentStep == 3&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="cm">&lt;!-- ... campos existentes ... --&gt;</span>
 
-        &lt;!-- Crear orden completa --&gt;
-        &lt;button wire:click=&quot;createOrder&quot; 
-                class=&quot;btn btn-primary&quot; 
-                wire:loading.attr=&quot;disabled&quot;&gt;
-            &lt;span wire:loading.remove wire:target=&quot;createOrder&quot;&gt;
-                {{ __(&#39;Create sales order&#39;) }}
-            &lt;/span&gt;
-            &lt;span wire:loading wire:target=&quot;createOrder&quot;&gt;
-                &lt;i class=&quot;fas fa-spinner fa-spin&quot;&gt;&lt;/i&gt; {{ __(&#39;Creando...&#39;) }}
-            &lt;/span&gt;
-        &lt;/button&gt;
-    &lt;/div&gt;
-&lt;/div&gt;
-</code></pre></div></p>
-<h4 id="vista-de-borradores">Vista de Borradores<a class="headerlink" href="#vista-de-borradores" title="Permanent link">&para;</a></h4>
-<p><strong>Componente Livewire</strong>: <code>App\Http\Livewire\Admin\Sage50\DraftSalesOrders</code>
-<div class="highlight"><pre><span></span><code><span class="cp">&lt;?php</span>
+<span class="w">    </span><span class="nt">&lt;div</span><span class="w"> </span><span class="na">class=</span><span class="s">&quot;d-flex gap-2 mt-3&quot;</span><span class="nt">&gt;</span>
+<span class="w">        </span><span class="cm">&lt;!-- Guardar como borrador --&gt;</span>
+<span class="w">        </span><span class="nt">&lt;button</span><span class="w"> </span><span class="na">wire:click=</span><span class="s">&quot;guardarBorrador&quot;</span><span class="w"> </span>
+<span class="w">                </span><span class="na">class=</span><span class="s">&quot;btn btn-secondary&quot;</span><span class="w"> </span>
+<span class="w">                </span><span class="na">wire:loading.attr=</span><span class="s">&quot;disabled&quot;</span><span class="nt">&gt;</span>
+<span class="w">            </span><span class="nt">&lt;span</span><span class="w"> </span><span class="err">wire:loading.remove</span><span class="w"> </span><span class="na">wire:target=</span><span class="s">&quot;guardarBorrador&quot;</span><span class="nt">&gt;</span>
+<span class="w">                </span><span class="nt">&lt;i</span><span class="w"> </span><span class="na">class=</span><span class="s">&quot;fa fa-save&quot;</span><span class="nt">&gt;&lt;/i&gt;</span><span class="w"> </span><span class="cp">{{</span> <span class="nv">__</span><span class="o">(</span><span class="s1">&#39;Guardar Borrador&#39;</span><span class="o">)</span> <span class="cp">}}</span>
+<span class="w">            </span><span class="nt">&lt;/span&gt;</span>
+<span class="w">            </span><span class="nt">&lt;span</span><span class="w"> </span><span class="err">wire:loading</span><span class="w"> </span><span class="na">wire:target=</span><span class="s">&quot;guardarBorrador&quot;</span><span class="nt">&gt;</span>
+<span class="w">                </span><span class="nt">&lt;i</span><span class="w"> </span><span class="na">class=</span><span class="s">&quot;fas fa-spinner fa-spin&quot;</span><span class="nt">&gt;&lt;/i&gt;</span><span class="w"> </span><span class="cp">{{</span> <span class="nv">__</span><span class="o">(</span><span class="s1">&#39;Guardando...&#39;</span><span class="o">)</span> <span class="cp">}}</span>
+<span class="w">            </span><span class="nt">&lt;/span&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/button&gt;</span>
+
+<span class="w">        </span><span class="cm">&lt;!-- Crear orden completa --&gt;</span>
+<span class="w">        </span><span class="nt">&lt;button</span><span class="w"> </span><span class="na">wire:click=</span><span class="s">&quot;createOrder&quot;</span><span class="w"> </span>
+<span class="w">                </span><span class="na">class=</span><span class="s">&quot;btn btn-primary&quot;</span><span class="w"> </span>
+<span class="w">                </span><span class="na">wire:loading.attr=</span><span class="s">&quot;disabled&quot;</span><span class="nt">&gt;</span>
+<span class="w">            </span><span class="nt">&lt;span</span><span class="w"> </span><span class="err">wire:loading.remove</span><span class="w"> </span><span class="na">wire:target=</span><span class="s">&quot;createOrder&quot;</span><span class="nt">&gt;</span>
+<span class="w">                </span><span class="cp">{{</span> <span class="nv">__</span><span class="o">(</span><span class="s1">&#39;Create sales order&#39;</span><span class="o">)</span> <span class="cp">}}</span>
+<span class="w">            </span><span class="nt">&lt;/span&gt;</span>
+<span class="w">            </span><span class="nt">&lt;span</span><span class="w"> </span><span class="err">wire:loading</span><span class="w"> </span><span class="na">wire:target=</span><span class="s">&quot;createOrder&quot;</span><span class="nt">&gt;</span>
+<span class="w">                </span><span class="nt">&lt;i</span><span class="w"> </span><span class="na">class=</span><span class="s">&quot;fas fa-spinner fa-spin&quot;</span><span class="nt">&gt;&lt;/i&gt;</span><span class="w"> </span><span class="cp">{{</span> <span class="nv">__</span><span class="o">(</span><span class="s1">&#39;Creando...&#39;</span><span class="o">)</span> <span class="cp">}}</span>
+<span class="w">            </span><span class="nt">&lt;/span&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/button&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</code></pre></div>
+
+<h4 id="vista-de-borradores">Vista de Borradores</h4>
+<p><strong>Componente Livewire</strong>: <code>App\Http\Livewire\Admin\Sage50\DraftSalesOrders</code></p>
+<div class="codehilite"><pre><span></span><code><span class="cp">&lt;?php</span>
 
 <span class="k">namespace</span> <span class="nx">App\Http\Livewire\Admin\Sage50</span><span class="p">;</span>
 
@@ -2666,10 +2723,11 @@ Usuario agrega Item 50 → Calcula 50 items (recalcula Items 1-49 OTRA VEZ)
         <span class="p">}</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</code></pre></div></p>
-<h4 id="opcion-2b-agregar-columna-estado-mas-robusto">Opción 2B: Agregar Columna <code>estado</code> (Más Robusto)<a class="headerlink" href="#opcion-2b-agregar-columna-estado-mas-robusto" title="Permanent link">&para;</a></h4>
+</code></pre></div>
+
+<h4 id="opcion-2b-agregar-columna-estado-mas-robusto">Opción 2B: Agregar Columna <code>estado</code> (Más Robusto)</h4>
 <p>Si se prefiere mayor claridad semántica:</p>
-<div class="highlight"><pre><span></span><code><span class="c1"># Migration</span>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Migration</span>
 php<span class="w"> </span>artisan<span class="w"> </span>db:add-column-to-organizations-table<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>SalesOrder_Header_Imp<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>estado<span class="w"> </span><span class="se">\</span>
@@ -2677,12 +2735,14 @@ php<span class="w"> </span>artisan<span class="w"> </span>db:add-column-to-organ
 <span class="w">    </span>--default<span class="o">=</span>borrador<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>--index<span class="o">=</span><span class="m">1</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code><span class="x">// Model</span>
+
+<div class="codehilite"><pre><span></span><code><span class="x">// Model</span>
 <span class="x">const ESTADO_BORRADOR = &#39;borrador&#39;;</span>
 <span class="x">const ESTADO_COMPLETADO = &#39;completado&#39;;</span>
 <span class="x">const ESTADO_ENVIADO = &#39;enviado&#39;;</span>
 <span class="x">const ESTADO_ERROR = &#39;error&#39;;</span>
 </code></pre></div>
+
 <p><strong>Ventajas</strong>:
 - Más legible
 - Extensible a futuro
@@ -2691,8 +2751,8 @@ php<span class="w"> </span>artisan<span class="w"> </span>db:add-column-to-organ
 - Requiere migración en producción
 - Cambios en stubs</p>
 <hr />
-<h2 id="recomendaciones-finales">Recomendaciones Finales<a class="headerlink" href="#recomendaciones-finales" title="Permanent link">&para;</a></h2>
-<h3 id="para-implementar-inmediatamente">Para Implementar Inmediatamente<a class="headerlink" href="#para-implementar-inmediatamente" title="Permanent link">&para;</a></h3>
+<h2 id="recomendaciones-finales">Recomendaciones Finales</h2>
+<h3 id="para-implementar-inmediatamente">Para Implementar Inmediatamente</h3>
 <ol>
 <li><strong>Rendimiento</strong>: Opción 1A (Cálculo Incremental)</li>
 <li>Mejora crítica para UX</li>
@@ -2707,7 +2767,7 @@ php<span class="w"> </span>artisan<span class="w"> </span>db:add-column-to-organ
 <li>Funcionalidad completa</li>
 <li>Implementación rápida</li>
 </ol>
-<h3 id="para-futuro-opcional">Para Futuro (Opcional)<a class="headerlink" href="#para-futuro-opcional" title="Permanent link">&para;</a></h3>
+<h3 id="para-futuro-opcional">Para Futuro (Opcional)</h3>
 <ol>
 <li><strong>Rendimiento</strong>: Opción 1B (Toggle Auto-Calcular)</li>
 <li>Para usuarios con órdenes 100+ items</li>
@@ -2720,8 +2780,8 @@ php<span class="w"> </span>artisan<span class="w"> </span>db:add-column-to-organ
 <li>Si se planean más estados</li>
 <li>Migración coordinada</li>
 </ol>
-<h3 id="validacion-post-implementacion">Validación Post-Implementación<a class="headerlink" href="#validacion-post-implementacion" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">// Test de rendimiento</span>
+<h3 id="validacion-post-implementacion">Validación Post-Implementación</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">// Test de rendimiento</span>
 <span class="x">// Agregar 100 items y medir tiempo</span>
 <span class="x">$start = microtime(true);</span>
 <span class="x">for ($i = 0; $i &lt; 100; $i++) {</span>
@@ -2731,39 +2791,41 @@ php<span class="w"> </span>artisan<span class="w"> </span>db:add-column-to-organ
 <span class="x">// Antes: ~5-10 segundos</span>
 <span class="x">// Después: ~0.5-1 segundo</span>
 </code></pre></div>
-<h3 id="jobs-de-exportacion-a-sage50">Jobs de Exportación a Sage50<a class="headerlink" href="#jobs-de-exportacion-a-sage50" title="Permanent link">&para;</a></h3>
+
+<h3 id="jobs-de-exportacion-a-sage50">Jobs de Exportación a Sage50</h3>
 <p><strong>Importante</strong>: Actualizar jobs que exportan a Sage50 para:
 1. Ignorar órdenes con <code>Enviado = 0</code> (borradores)
 2. Solo procesar órdenes con <code>Enviado = 1</code> (completadas)
 3. Marcar como <code>Enviado = 2</code> al enviar exitosamente</p>
-<div class="highlight"><pre><span></span><code><span class="x">// En el Job de exportación</span>
+<div class="codehilite"><pre><span></span><code><span class="x">// En el Job de exportación</span>
 <span class="x">$ordenes = SalesOrderHeaderImp::query()</span>
 <span class="x">    -&gt;where(&#39;Enviado&#39;, SalesOrderHeaderImp::ESTADO_COMPLETADO)</span>
 <span class="x">    -&gt;where(&#39;Error&#39;, 0)</span>
 <span class="x">    -&gt;get();</span>
 </code></pre></div>
+
 <hr />
-<h2 id="archivos-afectados">Archivos Afectados<a class="headerlink" href="#archivos-afectados" title="Permanent link">&para;</a></h2>
-<h3 id="modificaciones-requeridas">Modificaciones Requeridas<a class="headerlink" href="#modificaciones-requeridas" title="Permanent link">&para;</a></h3>
+<h2 id="archivos-afectados">Archivos Afectados</h2>
+<h3 id="modificaciones-requeridas">Modificaciones Requeridas</h3>
 <ol>
 <li><code>app/Http/Livewire/Admin/Sage50/CreateSaleOrder.php</code></li>
 <li><code>app/Models/SalesOrderHeaderImp.php</code></li>
 <li><code>resources/views/livewire/admin/sage50/create_sale_order.blade.php</code></li>
 </ol>
-<h3 id="archivos-nuevos">Archivos Nuevos<a class="headerlink" href="#archivos-nuevos" title="Permanent link">&para;</a></h3>
+<h3 id="archivos-nuevos">Archivos Nuevos</h3>
 <ol>
 <li><code>app/Http/Livewire/Admin/Sage50/DraftSalesOrders.php</code></li>
 <li><code>resources/views/livewire/admin/sage50/draft-sales-orders.blade.php</code></li>
 </ol>
-<h3 id="posibles-conflictos">Posibles Conflictos<a class="headerlink" href="#posibles-conflictos" title="Permanent link">&para;</a></h3>
+<h3 id="posibles-conflictos">Posibles Conflictos</h3>
 <ul>
 <li>Jobs de exportación a Sage50 que usan campo <code>Enviado</code></li>
 <li>Reportes que filtran por estado de órdenes</li>
 <li>Vistas que muestran listas de órdenes</li>
 </ul>
 <hr />
-<h2 id="testing">Testing<a class="headerlink" href="#testing" title="Permanent link">&para;</a></h2>
-<h3 id="casos-de-prueba">Casos de Prueba<a class="headerlink" href="#casos-de-prueba" title="Permanent link">&para;</a></h3>
+<h2 id="testing">Testing</h2>
+<h3 id="casos-de-prueba">Casos de Prueba</h3>
 <ol>
 <li><strong>Rendimiento</strong>:</li>
 <li>Crear orden con 10 items (baseline)</li>
@@ -2791,7 +2853,7 @@ php<span class="w"> </span>artisan<span class="w"> </span>db:add-column-to-organ
 <li>Órdenes antiguas → deben seguir siendo compatibles</li>
 </ol>
 <hr />
-<h2 id="proximos-pasos">Próximos Pasos<a class="headerlink" href="#proximos-pasos" title="Permanent link">&para;</a></h2>
+<h2 id="proximos-pasos">Próximos Pasos</h2>
 <ol>
 <li>✅ Revisar y aprobar propuestas</li>
 <li>⏳ Implementar Opción 1A (Rendimiento)</li>
@@ -2852,7 +2914,7 @@ php<span class="w"> </span>artisan<span class="w"> </span>db:add-column-to-organ
       
       
     
-    <a href="https://github.com/aghabrego/docucenter" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+    <a href="https://github.com/aghabrego/docucenter-public" target="_blank" rel="noopener" title="github.com" class="md-social__link">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
     </a>
   

@@ -233,7 +233,7 @@
           
   
   
-  APIs
+  API Documentation
 
         </a>
       </li>
@@ -269,7 +269,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../technical/" class="md-tabs__link">
+        <a href="../../technical/README.md" class="md-tabs__link">
           
   
   
@@ -298,6 +298,25 @@
         </a>
       </li>
     
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../testing/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Sistema de Testing
+
+      </a>
+    </li>
   
 
       
@@ -404,7 +423,7 @@
   <span class="md-ellipsis">
     
   
-    APIs
+    API Documentation
   
 
     
@@ -420,7 +439,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    APIs
+    API Documentation
   
 
           </label>
@@ -1363,7 +1382,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../technical/" class="md-nav__link">
+      <a href="../../technical/README.md" class="md-nav__link">
         
   
   
@@ -1716,6 +1735,33 @@
   
 
     
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sistema de Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -1922,16 +1968,17 @@
   
 
 
-<h1 id="simplexml-addchild-escaping-guia-critica">SimpleXML addChild() Escaping - Guía Crítica<a class="headerlink" href="#simplexml-addchild-escaping-guia-critica" title="Permanent link">&para;</a></h1>
-<h2 id="problema-unterminated-entity-reference">Problema: "unterminated entity reference"<a class="headerlink" href="#problema-unterminated-entity-reference" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code>SimpleXMLElement::addChild(): unterminated entity reference  Arts Tower, Av. Vasco Núñez de Balboa
+<h1 id="simplexml-addchild-escaping-guia-critica">SimpleXML addChild() Escaping - Guía Crítica</h1>
+<h2 id="problema-unterminated-entity-reference">Problema: "unterminated entity reference"</h2>
+<div class="codehilite"><pre><span></span><code><span class="nx">SimpleXMLElement</span><span class="o">::</span><span class="nx">addChild</span><span class="p">():</span><span class="w"> </span><span class="nx">unterminated</span><span class="w"> </span><span class="nx">entity</span><span class="w"> </span><span class="nx">reference</span><span class="w">  </span><span class="nx">Arts</span><span class="w"> </span><span class="nx">Tower</span><span class="p">,</span><span class="w"> </span><span class="nx">Av</span><span class="p">.</span><span class="w"> </span><span class="nx">Vasco</span><span class="w"> </span><span class="nx">Núñez</span><span class="w"> </span><span class="nx">de</span><span class="w"> </span><span class="nx">Balboa</span>
 </code></pre></div>
-<h2 id="causa-raiz">Causa Raíz<a class="headerlink" href="#causa-raiz" title="Permanent link">&para;</a></h2>
+
+<h2 id="causa-raiz">Causa Raíz</h2>
 <p><strong>SimpleXML NO escapa automáticamente valores en <code>addChild()</code></strong>. </p>
 <p>Cuando pasas un valor a <code>addChild()</code> que contiene caracteres especiales XML (<code>&amp;</code>, <code>&lt;</code>, <code>&gt;</code>, <code>"</code>, <code>'</code>), SimpleXML intenta interpretarlos como XML válido. Si el valor contiene estos caracteres sin escapar, genera el error "unterminated entity reference".</p>
-<h2 id="solucion-correcta">Solución Correcta<a class="headerlink" href="#solucion-correcta" title="Permanent link">&para;</a></h2>
+<h2 id="solucion-correcta">Solución Correcta</h2>
 <p><strong>SIEMPRE usar <code>htmlspecialchars()</code> CON opciones XML ANTES de pasar a <code>addChild()</code>:</strong></p>
-<div class="highlight"><pre><span></span><code><span class="x">private function safeXmlValue(?string $value): string</span>
+<div class="codehilite"><pre><span></span><code><span class="x">private function safeXmlValue(?string $value): string</span>
 <span class="x">{</span>
 <span class="x">    // Paso 1: Sanitizar caracteres de control (invalidos en XML)</span>
 <span class="x">    $sanitized = $this-&gt;sanitizeForXml($value);</span>
@@ -1945,7 +1992,8 @@
 <span class="x">// Uso:</span>
 <span class="x">$addressInfo-&gt;addChild(&#39;Address&#39;, $this-&gt;safeXmlValue($gDatRec[&#39;dDirecRec&#39;]));</span>
 </code></pre></div>
-<h2 id="que-hace-htmlspecialchars">Qué Hace htmlspecialchars()<a class="headerlink" href="#que-hace-htmlspecialchars" title="Permanent link">&para;</a></h2>
+
+<h2 id="que-hace-htmlspecialchars">Qué Hace htmlspecialchars()</h2>
 <table>
 <thead>
 <tr>
@@ -1982,30 +2030,32 @@
 </tr>
 </tbody>
 </table>
-<h2 id="opciones-importantes">Opciones Importantes<a class="headerlink" href="#opciones-importantes" title="Permanent link">&para;</a></h2>
+<h2 id="opciones-importantes">Opciones Importantes</h2>
 <ul>
 <li><code>ENT_QUOTES</code>: Escapa AMBOS tipos de comillas (doble y simple)</li>
 <li><code>ENT_XML1</code>: Usa definición de caracteres especiales de XML 1.0</li>
 <li><code>'UTF-8'</code>: Codificación (debe coincidir con archivo XML)</li>
 </ul>
-<h2 id="diferencia-entre">Diferencia Entre<a class="headerlink" href="#diferencia-entre" title="Permanent link">&para;</a></h2>
-<h3 id="incorrecto-sin-escapado">❌ INCORRECTO - Sin escapado<a class="headerlink" href="#incorrecto-sin-escapado" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">$addressInfo-&gt;addChild(&#39;Address&#39;, $value);  // &quot;Arts Tower, Av. Vasco Núñez de Balboa&quot;</span>
+<h2 id="diferencia-entre">Diferencia Entre</h2>
+<h3 id="incorrecto-sin-escapado">❌ INCORRECTO - Sin escapado</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">$addressInfo-&gt;addChild(&#39;Address&#39;, $value);  // &quot;Arts Tower, Av. Vasco Núñez de Balboa&quot;</span>
 <span class="x">// Error: unterminated entity reference</span>
 </code></pre></div>
-<h3 id="correcto-con-escapado">✅ CORRECTO - Con escapado<a class="headerlink" href="#correcto-con-escapado" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">$addressInfo-&gt;addChild(&#39;Address&#39;, </span>
+
+<h3 id="correcto-con-escapado">✅ CORRECTO - Con escapado</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">$addressInfo-&gt;addChild(&#39;Address&#39;, </span>
 <span class="x">    htmlspecialchars($value, ENT_QUOTES | ENT_XML1, &#39;UTF-8&#39;)</span>
 <span class="x">);</span>
 <span class="x">// Resultado: &quot;Arts Tower, Av. Vasco Núñez de Balboa&quot;</span>
 </code></pre></div>
-<h2 id="proceso-en-digifactxmlbuilder">Proceso en DigifactXmlBuilder<a class="headerlink" href="#proceso-en-digifactxmlbuilder" title="Permanent link">&para;</a></h2>
+
+<h2 id="proceso-en-digifactxmlbuilder">Proceso en DigifactXmlBuilder</h2>
 <ol>
 <li><strong>sanitizeForXml()</strong>: Remueve caracteres de control (0x00-0x08, etc.)</li>
 <li><strong>safeXmlValue()</strong>: Aplica htmlspecialchars() para escapar caracteres XML</li>
 <li><strong>addChild()</strong>: Recibe valor correctamente escapado, sin errores</li>
 </ol>
-<h2 id="caracteres-que-causan-problemas">Caracteres que Causan Problemas<a class="headerlink" href="#caracteres-que-causan-problemas" title="Permanent link">&para;</a></h2>
+<h2 id="caracteres-que-causan-problemas">Caracteres que Causan Problemas</h2>
 <ul>
 <li><code>&amp;</code> en "M&amp;M" → Necesita ser <code>&amp;amp;</code></li>
 <li><code>&lt;</code> en valores numéricos → Necesita ser <code>&amp;lt;</code></li>
@@ -2013,23 +2063,25 @@
 <li><code>'</code> en nombres → Necesita ser <code>&amp;#039;</code></li>
 <li>Acentos como <code>ñ</code>, <code>á</code>, <code>é</code> → Válidos en UTF-8, NO necesitan escaparse</li>
 </ul>
-<h2 id="implementacion-en-digifact-v207">Implementación en Digifact v2.0.7<a class="headerlink" href="#implementacion-en-digifact-v207" title="Permanent link">&para;</a></h2>
+<h2 id="implementacion-en-digifact-v207">Implementación en Digifact v2.0.7</h2>
 <p><strong>Archivo</strong>: <code>app/Services/DigifactXmlBuilder.php</code></p>
-<p><strong>Función safeXmlValue()</strong> (línea ~820-835):
-<div class="highlight"><pre><span></span><code><span class="x">private function safeXmlValue(?string $value): string</span>
+<p><strong>Función safeXmlValue()</strong> (línea ~820-835):</p>
+<div class="codehilite"><pre><span></span><code><span class="x">private function safeXmlValue(?string $value): string</span>
 <span class="x">{</span>
 <span class="x">    $sanitized = $this-&gt;sanitizeForXml($value);</span>
 <span class="x">    return htmlspecialchars($sanitized, ENT_QUOTES | ENT_XML1, &#39;UTF-8&#39;);</span>
 <span class="x">}</span>
-</code></pre></div></p>
-<p><strong>Uso en buildBuyerAddressInfo()</strong> (línea ~399):
-<div class="highlight"><pre><span></span><code><span class="x">if (!empty($gDatRec[&#39;dDirecRec&#39;])) {</span>
+</code></pre></div>
+
+<p><strong>Uso en buildBuyerAddressInfo()</strong> (línea ~399):</p>
+<div class="codehilite"><pre><span></span><code><span class="x">if (!empty($gDatRec[&#39;dDirecRec&#39;])) {</span>
 <span class="x">    $addressInfo-&gt;addChild(&#39;Address&#39;, $this-&gt;safeXmlValue($gDatRec[&#39;dDirecRec&#39;]));</span>
 <span class="x">}</span>
-</code></pre></div></p>
-<h2 id="testing">Testing<a class="headerlink" href="#testing" title="Permanent link">&para;</a></h2>
+</code></pre></div>
+
+<h2 id="testing">Testing</h2>
 <p>Para verificar que el escaping funciona correctamente:</p>
-<div class="highlight"><pre><span></span><code><span class="c1"># Crear factura con dirección que contenga caracteres especiales</span>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Crear factura con dirección que contenga caracteres especiales</span>
 <span class="c1"># Ejemplo: &quot;Arts Tower, Av. Vasco Núñez de Balboa&quot;</span>
 
 <span class="c1"># Si ve error &quot;unterminated entity reference&quot;, significa que </span>
@@ -2037,13 +2089,14 @@
 
 <span class="c1"># Si funciona sin errores, significa que el escaping es correcto</span>
 </code></pre></div>
-<h2 id="referencias">Referencias<a class="headerlink" href="#referencias" title="Permanent link">&para;</a></h2>
+
+<h2 id="referencias">Referencias</h2>
 <ul>
 <li><a href="https://www.php.net/manual/en/function.htmlspecialchars.php">PHP htmlspecialchars()</a></li>
 <li><a href="https://www.php.net/manual/en/simplexmlelement.addchild.php">SimpleXML addChild()</a></li>
 <li><a href="https://www.w3.org/TR/xml/#syntax">XML Special Characters</a></li>
 </ul>
-<h2 id="changelog">Changelog<a class="headerlink" href="#changelog" title="Permanent link">&para;</a></h2>
+<h2 id="changelog">Changelog</h2>
 <table>
 <thead>
 <tr>
@@ -2117,7 +2170,7 @@
       
       
     
-    <a href="https://github.com/aghabrego/docucenter" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+    <a href="https://github.com/aghabrego/docucenter-public" target="_blank" rel="noopener" title="github.com" class="md-social__link">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
     </a>
   

@@ -233,7 +233,7 @@
           
   
   
-  APIs
+  API Documentation
 
         </a>
       </li>
@@ -269,7 +269,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../technical/" class="md-tabs__link">
+        <a href="../../technical/README.md" class="md-tabs__link">
           
   
   
@@ -298,6 +298,25 @@
         </a>
       </li>
     
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../testing/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Sistema de Testing
+
+      </a>
+    </li>
   
 
       
@@ -404,7 +423,7 @@
   <span class="md-ellipsis">
     
   
-    APIs
+    API Documentation
   
 
     
@@ -420,7 +439,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    APIs
+    API Documentation
   
 
           </label>
@@ -1363,7 +1382,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../technical/" class="md-nav__link">
+      <a href="../../technical/README.md" class="md-nav__link">
         
   
   
@@ -1716,6 +1735,33 @@
   
 
     
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sistema de Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -2035,13 +2081,13 @@
   
 
 
-<h1 id="resumen-final-correcciones-criticas-pac-thefactoryhka">Resumen Final: Correcciones Críticas PAC TheFactoryHKA<a class="headerlink" href="#resumen-final-correcciones-criticas-pac-thefactoryhka" title="Permanent link">&para;</a></h1>
-<h2 id="problemas-identificados-y-resueltos">Problemas Identificados y Resueltos<a class="headerlink" href="#problemas-identificados-y-resueltos" title="Permanent link">&para;</a></h2>
-<h3 id="1-error-pac-201-el-campo-tipodecambio-no-debe-ser-informado">1. ❌ Error PAC 201: "El campo [tipoDeCambio] no debe ser informado"<a class="headerlink" href="#1-error-pac-201-el-campo-tipodecambio-no-debe-ser-informado" title="Permanent link">&para;</a></h3>
+<h1 id="resumen-final-correcciones-criticas-pac-thefactoryhka">Resumen Final: Correcciones Críticas PAC TheFactoryHKA</h1>
+<h2 id="problemas-identificados-y-resueltos">Problemas Identificados y Resueltos</h2>
+<h3 id="1-error-pac-201-el-campo-tipodecambio-no-debe-ser-informado">1. ❌ Error PAC 201: "El campo [tipoDeCambio] no debe ser informado"</h3>
 <p><strong>Causa</strong>: Envío de campos prohibidos en <code>datosFacturaExportacion</code>
 <strong>Solución</strong>: Solo enviar 3 campos según ejemplo oficial TheFactoryHKA</p>
-<h4 id="correccion-aplicada">Corrección Aplicada:<a class="headerlink" href="#correccion-aplicada" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="x">// ANTES (INCORRECTO)</span>
+<h4 id="correccion-aplicada">Corrección Aplicada:</h4>
+<div class="codehilite"><pre><span></span><code><span class="x">// ANTES (INCORRECTO)</span>
 <span class="x">$datos-&gt;datosFacturaExportacion = (object) [</span>
 <span class="x">    &#39;condicionesEntrega&#39; =&gt; &#39;CFR&#39;,</span>
 <span class="x">    &#39;monedaOperExportacion&#39; =&gt; &#39;USD&#39;,</span>
@@ -2057,17 +2103,18 @@
 <span class="x">    &#39;puertoEmbarque&#39; =&gt; &#39;PANAMA&#39;,       // ✅ VÁLIDO</span>
 <span class="x">];</span>
 </code></pre></div>
-<h3 id="2-error-pac-el-campo-unidadmedida-es-invalido">2. ❌ Error PAC: "El campo unidadMedida es inválido"<a class="headerlink" href="#2-error-pac-el-campo-unidadmedida-es-invalido" title="Permanent link">&para;</a></h3>
+
+<h3 id="2-error-pac-el-campo-unidadmedida-es-invalido">2. ❌ Error PAC: "El campo unidadMedida es inválido"</h3>
 <p><strong>Causa</strong>: Uso de "UND" que NO aparece en Tabla 29 oficial DGI
 <strong>Solución</strong>: Usar únicamente unidades válidas según documentación oficial</p>
-<h4 id="analisis-documentacion-dgi">Análisis Documentación DGI:<a class="headerlink" href="#analisis-documentacion-dgi" title="Permanent link">&para;</a></h4>
+<h4 id="analisis-documentacion-dgi">Análisis Documentación DGI:</h4>
 <ul>
 <li><strong>Archivo</strong>: <code>4-Anexo-3-Ficha-Técnica-Factura-Electrónica-Proveedores-Autorización-Calificados-V1.0.pdf</code></li>
 <li><strong>Sección</strong>: 10.3.2. Catálogo de Unidades de Medida (Tabla 29)</li>
 <li><strong>Campo C11</strong>: Uso opcional, pero debe ser de lista oficial</li>
 </ul>
-<h4 id="correccion-aplicada_1">Corrección Aplicada:<a class="headerlink" href="#correccion-aplicada_1" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="x">// ANTES (INCORRECTO)</span>
+<h4 id="correccion-aplicada_1">Corrección Aplicada:</h4>
+<div class="codehilite"><pre><span></span><code><span class="x">// ANTES (INCORRECTO)</span>
 <span class="x">$item-&gt;unidadMedida = &quot;UND&quot;;     // ❌ NO aparece en Tabla 29 DGI</span>
 <span class="x">$item-&gt;unidadMedidaCPBS = &quot;UND&quot;; // ❌ NO aparece en Tabla 29 DGI</span>
 
@@ -2075,23 +2122,24 @@
 <span class="x">$item-&gt;unidadMedida = &quot;um&quot;;      // ✅ Micrómetro (Tabla 29 DGI)</span>
 <span class="x">$item-&gt;unidadMedidaCPBS = &quot;cm&quot;;  // ✅ Centímetro (Tabla 29 DGI)</span>
 </code></pre></div>
-<h2 id="documentacion-oficial-consultada">Documentación Oficial Consultada<a class="headerlink" href="#documentacion-oficial-consultada" title="Permanent link">&para;</a></h2>
-<h3 id="thefactoryhka-pac">TheFactoryHKA (PAC)<a class="headerlink" href="#thefactoryhka-pac" title="Permanent link">&para;</a></h3>
+
+<h2 id="documentacion-oficial-consultada">Documentación Oficial Consultada</h2>
+<h3 id="thefactoryhka-pac">TheFactoryHKA (PAC)</h3>
 <ul>
-<li><strong>URL</strong>: <a href="https://felwiki.thefactoryhka.com.pa/factura_de_exportacion">https://felwiki.thefactoryhka.com.pa/factura_de_exportacion</a></li>
+<li><strong>URL</strong>: https://felwiki.thefactoryhka.com.pa/factura_de_exportacion</li>
 <li><strong>Ejemplo oficial</strong>: Solo 3 campos en <code>datosFacturaExportacion</code></li>
 <li><strong>Unidades</strong>: <code>unidadMedida="um"</code>, <code>unidadMedidaCPBS="cm"</code></li>
 </ul>
-<h3 id="dgi-panama-autoridad">DGI Panamá (Autoridad)<a class="headerlink" href="#dgi-panama-autoridad" title="Permanent link">&para;</a></h3>
+<h3 id="dgi-panama-autoridad">DGI Panamá (Autoridad)</h3>
 <ul>
 <li><strong>Archivo</strong>: Ficha Técnica oficial DGI (232 páginas)</li>
 <li><strong>Tabla 29</strong>: Catálogo oficial de unidades de medida</li>
 <li><strong>Unidades válidas</strong>: um, mm, cm, dm, m, dam, hm, km, mi, nmi, in, ft, yd, etc.</li>
 <li><strong>NO incluye</strong>: "UND" (no aparece en documentación oficial)</li>
 </ul>
-<h2 id="implementacion-final">Implementación Final<a class="headerlink" href="#implementacion-final" title="Permanent link">&para;</a></h2>
-<h3 id="estructura-de-exportacion-corregida">Estructura de Exportación Corregida<a class="headerlink" href="#estructura-de-exportacion-corregida" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">// Solo 3 campos permitidos según TheFactoryHKA</span>
+<h2 id="implementacion-final">Implementación Final</h2>
+<h3 id="estructura-de-exportacion-corregida">Estructura de Exportación Corregida</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">// Solo 3 campos permitidos según TheFactoryHKA</span>
 <span class="x">if ($datos-&gt;tipoDocumento === &#39;03&#39;) {</span>
 <span class="x">    $datos-&gt;datosFacturaExportacion = (object) [</span>
 <span class="x">        &#39;condicionesEntrega&#39; =&gt; &#39;EXW&#39;,</span>
@@ -2100,8 +2148,9 @@
 <span class="x">    ];</span>
 <span class="x">}</span>
 </code></pre></div>
-<h3 id="unidades-de-medida-validadas">Unidades de Medida Validadas<a class="headerlink" href="#unidades-de-medida-validadas" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">// Método de validación según Tabla 29 DGI</span>
+
+<h3 id="unidades-de-medida-validadas">Unidades de Medida Validadas</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">// Método de validación según Tabla 29 DGI</span>
 <span class="x">private function isValidDGIUnit($unit) {</span>
 <span class="x">    $validUnits = [&#39;um&#39;, &#39;mm&#39;, &#39;cm&#39;, &#39;m&#39;, &#39;km&#39;, ...]; // Tabla 29 completa</span>
 <span class="x">    return in_array($unit, $validUnits, true);</span>
@@ -2111,45 +2160,47 @@
 <span class="x">$item-&gt;unidadMedida = &#39;um&#39;;  // Conforme a DGI y TheFactoryHKA</span>
 <span class="x">$item-&gt;unidadMedidaCPBS = &#39;cm&#39;; // Conforme a DGI y TheFactoryHKA</span>
 </code></pre></div>
-<h3 id="validacion-preventiva">Validación Preventiva<a class="headerlink" href="#validacion-preventiva" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">// validateAndFixDocument corrige automáticamente</span>
+
+<h3 id="validacion-preventiva">Validación Preventiva</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">// validateAndFixDocument corrige automáticamente</span>
 <span class="x">if (!$this-&gt;isValidDGIUnit($item-&gt;unidadMedida)) {</span>
 <span class="x">    $item-&gt;unidadMedida = &#39;um&#39;; // Unidad DGI válida</span>
 <span class="x">}</span>
 </code></pre></div>
-<h2 id="scripts-de-validacion-creados">Scripts de Validación Creados<a class="headerlink" href="#scripts-de-validacion-creados" title="Permanent link">&para;</a></h2>
-<h3 id="testing-framework">Testing Framework<a class="headerlink" href="#testing-framework" title="Permanent link">&para;</a></h3>
+
+<h2 id="scripts-de-validacion-creados">Scripts de Validación Creados</h2>
+<h3 id="testing-framework">Testing Framework</h3>
 <ol>
 <li><strong><code>test-campos-exactos-exportacion.php</code></strong>: Validación estructura exportación</li>
 <li><strong><code>test-unidades-dgi-oficiales.php</code></strong>: Validación conformidad Tabla 29 DGI</li>
 <li><strong><code>test-unidades-medida-exportacion.php</code></strong>: Testing específico exportación</li>
 <li><strong><code>verificar-correccion-exportacion.php</code></strong>: Verificación código corregido</li>
 </ol>
-<h3 id="documentacion-tecnica">Documentación Técnica<a class="headerlink" href="#documentacion-tecnica" title="Permanent link">&para;</a></h3>
+<h3 id="documentacion-tecnica">Documentación Técnica</h3>
 <ol>
 <li><strong><code>analisis-unidades-medida-dgi.md</code></strong>: Análisis completo documentación DGI</li>
 <li><strong><code>correccion-campos-exportacion-prohibidos.md</code></strong>: Documentación correcciones PAC</li>
 <li><strong><code>correcciones-criticas-pac-201.md</code></strong>: Historia completa de correcciones</li>
 </ol>
-<h2 id="resultado-final">Resultado Final<a class="headerlink" href="#resultado-final" title="Permanent link">&para;</a></h2>
-<h3 id="cumplimiento-normativo">✅ Cumplimiento Normativo<a class="headerlink" href="#cumplimiento-normativo" title="Permanent link">&para;</a></h3>
+<h2 id="resultado-final">Resultado Final</h2>
+<h3 id="cumplimiento-normativo">✅ Cumplimiento Normativo</h3>
 <ul>
 <li><strong>TheFactoryHKA</strong>: 100% conforme a ejemplo oficial</li>
 <li><strong>DGI Panamá</strong>: 100% conforme a Tabla 29 oficial</li>
 <li><strong>Eliminados</strong>: Todos los campos y valores prohibidos</li>
 </ul>
-<h3 id="errores-pac-resueltos">✅ Errores PAC Resueltos<a class="headerlink" href="#errores-pac-resueltos" title="Permanent link">&para;</a></h3>
+<h3 id="errores-pac-resueltos">✅ Errores PAC Resueltos</h3>
 <ul>
 <li>❌ "El campo [tipoDeCambio] no debe ser informado" → ✅ Campo removido</li>
 <li>❌ "El campo unidadMedida es inválido" → ✅ Solo unidades DGI válidas</li>
 </ul>
-<h3 id="sistema-robusto">✅ Sistema Robusto<a class="headerlink" href="#sistema-robusto" title="Permanent link">&para;</a></h3>
+<h3 id="sistema-robusto">✅ Sistema Robusto</h3>
 <ul>
 <li><strong>Validación automática</strong>: Corrige unidades inválidas automáticamente</li>
 <li><strong>Logging detallado</strong>: Registra todas las correcciones aplicadas</li>
 <li><strong>Testing completo</strong>: Cobertura total de casos de uso</li>
 </ul>
-<h2 id="proximos-pasos">Próximos Pasos<a class="headerlink" href="#proximos-pasos" title="Permanent link">&para;</a></h2>
+<h2 id="proximos-pasos">Próximos Pasos</h2>
 <ol>
 <li><strong>Probar en producción</strong> con factura de exportación real</li>
 <li><strong>Monitorear logs</strong> para verificar correcciones automáticas</li>
@@ -2210,7 +2261,7 @@
       
       
     
-    <a href="https://github.com/aghabrego/docucenter" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+    <a href="https://github.com/aghabrego/docucenter-public" target="_blank" rel="noopener" title="github.com" class="md-social__link">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
     </a>
   

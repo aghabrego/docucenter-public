@@ -233,7 +233,7 @@
           
   
   
-  APIs
+  API Documentation
 
         </a>
       </li>
@@ -269,7 +269,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../technical/" class="md-tabs__link">
+        <a href="../../technical/README.md" class="md-tabs__link">
           
   
   
@@ -298,6 +298,25 @@
         </a>
       </li>
     
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Sistema de Testing
+
+      </a>
+    </li>
   
 
       
@@ -404,7 +423,7 @@
   <span class="md-ellipsis">
     
   
-    APIs
+    API Documentation
   
 
     
@@ -420,7 +439,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    APIs
+    API Documentation
   
 
           </label>
@@ -1363,7 +1382,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../technical/" class="md-nav__link">
+      <a href="../../technical/README.md" class="md-nav__link">
         
   
   
@@ -1712,6 +1731,33 @@
           </ul>
         </nav>
       
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sistema de Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -2167,48 +2213,53 @@
   
 
 
-<h1 id="implementacion-de-campo-gpedcomgl_dnroped-en-feheader">Implementación de campo gPedComGl_dNroPed en FeHeader<a class="headerlink" href="#implementacion-de-campo-gpedcomgl_dnroped-en-feheader" title="Permanent link">&para;</a></h1>
+<h1 id="implementacion-de-campo-gpedcomgl_dnroped-en-feheader">Implementación de campo gPedComGl_dNroPed en FeHeader</h1>
 <p><strong>Fecha:</strong> 19 de febrero de 2026<br />
 <strong>Estado:</strong>  Completado y Verificado</p>
-<h2 id="resumen">Resumen<a class="headerlink" href="#resumen" title="Permanent link">&para;</a></h2>
+<h2 id="resumen">Resumen</h2>
 <p>Implementación del campo <code>gPedComGl_dNroPed</code> (varchar 12) para almacenar el número de pedido de compra global desde facturas electrónicas de Panamá según especificación DGI.</p>
-<h2 id="cambios-realizados">Cambios Realizados<a class="headerlink" href="#cambios-realizados" title="Permanent link">&para;</a></h2>
-<h3 id="1-base-de-datos-schema">1. Base de Datos (Schema)<a class="headerlink" href="#1-base-de-datos-schema" title="Permanent link">&para;</a></h3>
+<h2 id="cambios-realizados">Cambios Realizados</h2>
+<h3 id="1-base-de-datos-schema">1. Base de Datos (Schema)</h3>
 <p><strong>Archivo:</strong> <code>app/Models/stubs/fe_header.sql.stub</code>
 - Agregada columna: <code>gPedComGl_dNroPed varchar(12) DEFAULT NULL</code>
 - Ubicación: Antes de la declaración PRIMARY KEY</p>
-<h3 id="2-modelo-eloquent">2. Modelo Eloquent<a class="headerlink" href="#2-modelo-eloquent" title="Permanent link">&para;</a></h3>
+<h3 id="2-modelo-eloquent">2. Modelo Eloquent</h3>
 <p><strong>Archivo:</strong> <code>app/Models/FeHeader.php</code>
 - Agregada propiedad en PHPDoc: <code>@property string $gPedComGl_dNroPed</code>
 - Agregada al array <code>$fillable</code> para asignación masiva</p>
-<h3 id="3-logica-de-importacion">3. Lógica de Importación<a class="headerlink" href="#3-logica-de-importacion" title="Permanent link">&para;</a></h3>
+<h3 id="3-logica-de-importacion">3. Lógica de Importación</h3>
 <p><strong>Archivo:</strong> <code>app/Utils/ImportData.php</code></p>
-<h4 id="metodo-xml-linea-291">Método xml() - Línea ~291<a class="headerlink" href="#metodo-xml-linea-291" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="x">$gPedComGlDNroPed = $this-&gt;getFirstfilterData($data, &#39;/gPedComGl1_dNroPed1/i&#39;);</span>
+<h4 id="metodo-xml-linea-291">Método xml() - Línea ~291</h4>
+<div class="codehilite"><pre><span></span><code><span class="x">$gPedComGlDNroPed = $this-&gt;getFirstfilterData($data, &#39;/gPedComGl1_dNroPed1/i&#39;);</span>
 </code></pre></div>
-<h4 id="metodo-xml-linea-327-request-array">Método xml() - Línea ~327 (request array)<a class="headerlink" href="#metodo-xml-linea-327-request-array" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="x">&#39;gPedComGl_dNroPed&#39; =&gt; $gPedComGlDNroPed,</span>
+
+<h4 id="metodo-xml-linea-327-request-array">Método xml() - Línea ~327 (request array)</h4>
+<div class="codehilite"><pre><span></span><code><span class="x">&#39;gPedComGl_dNroPed&#39; =&gt; $gPedComGlDNroPed,</span>
 </code></pre></div>
-<h4 id="metodo-xmlgt-linea-777-guatemala-format">Método xmlGT() - Línea ~777 (Guatemala format)<a class="headerlink" href="#metodo-xmlgt-linea-777-guatemala-format" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="x">&#39;gPedComGl_dNroPed&#39; =&gt; array_get($data, &#39;gPedComGl_dNroPed&#39;),</span>
+
+<h4 id="metodo-xmlgt-linea-777-guatemala-format">Método xmlGT() - Línea ~777 (Guatemala format)</h4>
+<div class="codehilite"><pre><span></span><code><span class="x">&#39;gPedComGl_dNroPed&#39; =&gt; array_get($data, &#39;gPedComGl_dNroPed&#39;),</span>
 </code></pre></div>
-<h4 id="metodo-getdataxml-linea-1842">Método getDataXML() - Línea ~1842<a class="headerlink" href="#metodo-getdataxml-linea-1842" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="x">// Extracción del campo</span>
+
+<h4 id="metodo-getdataxml-linea-1842">Método getDataXML() - Línea ~1842</h4>
+<div class="codehilite"><pre><span></span><code><span class="x">// Extracción del campo</span>
 <span class="x">$gPedComGlDNroPed = $this-&gt;getFirstfilterData($data, &#39;/gPedComGl1_dNroPed1/i&#39;);</span>
 
 <span class="x">// En el array de retorno</span>
 <span class="x">&#39;gPedComGl_dNroPed&#39; =&gt; $gPedComGlDNroPed,</span>
 </code></pre></div>
-<h4 id="metodo-setdatafile-linea-2031">Método setDataFile() - Línea ~2031<a class="headerlink" href="#metodo-setdatafile-linea-2031" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="x">// En el array $request</span>
+
+<h4 id="metodo-setdatafile-linea-2031">Método setDataFile() - Línea ~2031</h4>
+<div class="codehilite"><pre><span></span><code><span class="x">// En el array $request</span>
 <span class="x">&#39;gPedComGl_dNroPed&#39; =&gt; array_get($data, &#39;gPedComGl_dNroPed&#39;),</span>
 </code></pre></div>
-<h3 id="4-fix-critico-del-parser-xml">4. Fix Crítico del Parser XML<a class="headerlink" href="#4-fix-critico-del-parser-xml" title="Permanent link">&para;</a></h3>
+
+<h3 id="4-fix-critico-del-parser-xml">4. Fix Crítico del Parser XML</h3>
 <p><strong>Archivo:</strong> <code>app/Utils/XML.php</code> - Método <code>XMLToArrayFlat()</code></p>
 <p><strong>Problema:</strong> El parser solo extraía 2 claves del XML en lugar de toda la estructura (~92 claves).</p>
 <p><strong>Causa Raíz:</strong> Cuando el xpath <code>//dgi:feDatosMsg</code> fallaba, asignaba <code>null</code> a <code>$children</code> y el método retornaba inmediatamente sin procesar el resto del documento XML.</p>
-<p><strong>Solución Implementada:</strong>
-<div class="highlight"><pre><span></span><code><span class="x">// ANTES (línea 80):</span>
+<p><strong>Solución Implementada:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="x">// ANTES (línea 80):</span>
 <span class="x">$data = $xml-&gt;xpath($xpath);</span>
 <span class="x">$children = array_first($data);  // Si falla xpath, $children = null</span>
 
@@ -2221,11 +2272,12 @@
 <span class="x">    }</span>
 <span class="x">}</span>
 <span class="x">// Mantiene el valor original de $children si xpath falla</span>
-</code></pre></div></p>
+</code></pre></div>
+
 <p><strong>Impacto:</strong> Este fix resuelve un problema crítico que afectaba el parsing de TODOS los archivos XML que no contienen el nodo <code>feDatosMsg</code>, mejorando la extracción de 2 claves a 92+ claves.</p>
-<h2 id="estructura-xml-esperada">Estructura XML Esperada<a class="headerlink" href="#estructura-xml-esperada" title="Permanent link">&para;</a></h2>
+<h2 id="estructura-xml-esperada">Estructura XML Esperada</h2>
 <p>El campo se extrae de la siguiente estructura en el XML de factura electrónica:</p>
-<div class="highlight"><pre><span></span><code><span class="nt">&lt;rFE</span><span class="w"> </span><span class="na">xmlns=</span><span class="s">&quot;http://dgi-fep.mef.gob.pa&quot;</span><span class="nt">&gt;</span>
+<div class="codehilite"><pre><span></span><code><span class="nt">&lt;rFE</span><span class="w"> </span><span class="na">xmlns=</span><span class="s">&quot;http://dgi-fep.mef.gob.pa&quot;</span><span class="nt">&gt;</span>
 <span class="w">    </span><span class="nt">&lt;dVerForm&gt;</span>1.00<span class="nt">&lt;/dVerForm&gt;</span>
 <span class="w">    </span><span class="nt">&lt;dId&gt;</span>FE012000...<span class="nt">&lt;/dId&gt;</span>
 <span class="w">    </span><span class="nt">&lt;gDGen&gt;</span>...<span class="nt">&lt;/gDGen&gt;</span>
@@ -2237,17 +2289,18 @@
 <span class="w">    </span>...
 <span class="nt">&lt;/rFE&gt;</span>
 </code></pre></div>
+
 <p><strong>Patrón de búsqueda:</strong> <code>/gPedComGl1_dNroPed1/i</code> (case-insensitive)<br />
 <strong>Ruta en array plano:</strong> <code>xFe1_rFE1_gPedComGl1_dNroPed1</code></p>
-<h2 id="verificacion-y-testing">Verificación y Testing<a class="headerlink" href="#verificacion-y-testing" title="Permanent link">&para;</a></h2>
-<h3 id="scripts-de-prueba-creados">Scripts de Prueba Creados<a class="headerlink" href="#scripts-de-prueba-creados" title="Permanent link">&para;</a></h3>
+<h2 id="verificacion-y-testing">Verificación y Testing</h2>
+<h3 id="scripts-de-prueba-creados">Scripts de Prueba Creados</h3>
 <p>Todos los scripts están ubicados en <code>/scripts/</code> para facilitar el acceso:</p>
-<h4 id="1-test-real-xmlphp">1. <code>test-real-xml.php</code><a class="headerlink" href="#1-test-real-xmlphp" title="Permanent link">&para;</a></h4>
+<h4 id="1-test-real-xmlphp">1. <code>test-real-xml.php</code></h4>
 <ul>
 <li><strong>Propósito:</strong> Verificar parsing básico del XML real</li>
 <li><strong>Resultado:</strong>  92 claves parseadas, campo encontrado con valor "1234"</li>
 </ul>
-<h4 id="2-test-full-import-gpedphp">2. <code>test-full-import-gped.php</code><a class="headerlink" href="#2-test-full-import-gpedphp" title="Permanent link">&para;</a></h4>
+<h4 id="2-test-full-import-gpedphp">2. <code>test-full-import-gped.php</code></h4>
 <ul>
 <li><strong>Propósito:</strong> Verificar extracción usando <code>getFirstfilterData()</code></li>
 <li><strong>Pruebas:</strong> </li>
@@ -2256,13 +2309,13 @@
 <li>Campos comunes (CUFE, número factura, total)</li>
 <li><strong>Resultado:</strong>  Todas las pruebas pasaron</li>
 </ul>
-<h4 id="3-test-import-simulationphp">3. <code>test-import-simulation.php</code><a class="headerlink" href="#3-test-import-simulationphp" title="Permanent link">&para;</a></h4>
+<h4 id="3-test-import-simulationphp">3. <code>test-import-simulation.php</code></h4>
 <ul>
 <li><strong>Propósito:</strong> Simular flujo completo de importación</li>
 <li><strong>Verifica:</strong> Array completo que se enviaría a <code>FeHeader::create()</code></li>
 <li><strong>Resultado:</strong>  Implementación lista para producción</li>
 </ul>
-<h4 id="4-test-complete-flow-gpedphp">4. <code>test-complete-flow-gped.php</code> 🆕<a class="headerlink" href="#4-test-complete-flow-gpedphp" title="Permanent link">&para;</a></h4>
+<h4 id="4-test-complete-flow-gpedphp">4. <code>test-complete-flow-gped.php</code> 🆕</h4>
 <ul>
 <li><strong>Propósito:</strong> Verificar implementación en todos los métodos de ImportData.php</li>
 <li><strong>Verifica:</strong></li>
@@ -2274,14 +2327,14 @@
 <li>Schema stub SQL - Columna agregada</li>
 <li><strong>Resultado:</strong>  Implementación completa verificada</li>
 </ul>
-<h3 id="archivo-xml-de-prueba">Archivo XML de Prueba<a class="headerlink" href="#archivo-xml-de-prueba" title="Permanent link">&para;</a></h3>
+<h3 id="archivo-xml-de-prueba">Archivo XML de Prueba</h3>
 <p><strong>Ubicación:</strong> <code>tests/Feature/Resources/01_01_0000015680_001_0000.xml</code>
 - CUFE: FE0120000155651535-2-2017-2500002026021000000156800010118734105753
 - Emisor: PRAYA LOGISTICS S.A.
 - Receptor: CONTADO
 - Número de Pedido: <strong>1234</strong></p>
-<h3 id="resultados-de-pruebas">Resultados de Pruebas<a class="headerlink" href="#resultados-de-pruebas" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># Test 1: Parser básico</span>
+<h3 id="resultados-de-pruebas">Resultados de Pruebas</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Test 1: Parser básico</span>
 $<span class="w"> </span>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>docucenter_laravel.test<span class="w"> </span>php<span class="w"> </span>/var/www/html/scripts/test-real-xml.php
 <span class="w"> </span>SUCCESS:<span class="w"> </span>Campo<span class="w"> </span>extraído<span class="w"> </span>correctamente:<span class="w"> </span><span class="m">1234</span>
 
@@ -2304,13 +2357,15 @@ $<span class="w"> </span>docker<span class="w"> </span><span class="nb">exec</sp
 <span class="w">    </span>Modelo<span class="w"> </span>FeHeader<span class="w"> </span>-<span class="w"> </span>PHPDoc<span class="w"> </span>y<span class="w"> </span><span class="nv">$fillable</span><span class="w"> </span>actualizados
 <span class="w">    </span>Schema<span class="w"> </span>fe_header.sql.stub<span class="w"> </span>-<span class="w"> </span>Columna<span class="w"> </span>agregada
 </code></pre></div>
-<h2 id="notas-tecnicas">Notas Técnicas<a class="headerlink" href="#notas-tecnicas" title="Permanent link">&para;</a></h2>
-<h3 id="warning-del-namespace">Warning del Namespace<a class="headerlink" href="#warning-del-namespace" title="Permanent link">&para;</a></h3>
-<p>Durante el parsing aparece el siguiente warning (no afecta funcionalidad):
-<div class="highlight"><pre><span></span><code>PHP Warning: SimpleXMLElement::xpath(): Undefined namespace prefix in /var/www/html/app/Utils/XML.php on line 80
-</code></pre></div></p>
+
+<h2 id="notas-tecnicas">Notas Técnicas</h2>
+<h3 id="warning-del-namespace">Warning del Namespace</h3>
+<p>Durante el parsing aparece el siguiente warning (no afecta funcionalidad):</p>
+<div class="codehilite"><pre><span></span><code><span class="n">PHP</span><span class="w"> </span><span class="n">Warning</span><span class="p">:</span><span class="w"> </span><span class="n">SimpleXMLElement</span><span class="p">::</span><span class="n">xpath</span><span class="p">():</span><span class="w"> </span><span class="n">Undefined</span><span class="w"> </span><span class="n">namespace</span><span class="w"> </span><span class="n">prefix</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="o">/</span><span class="k">var</span><span class="o">/</span><span class="n">www</span><span class="o">/</span><span class="n">html</span><span class="o">/</span><span class="n">app</span><span class="o">/</span><span class="n">Utils</span><span class="o">/</span><span class="n">XML</span><span class="o">.</span><span class="n">php</span><span class="w"> </span><span class="n">on</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="mi">80</span>
+</code></pre></div>
+
 <p>Este warning es normal y ocurre cuando los archivos XML no contienen el namespace <code>dgi:feDatosMsg</code>. El parser ahora maneja correctamente este caso y continúa con el procesamiento normal del documento.</p>
-<h3 id="compatibilidad">Compatibilidad<a class="headerlink" href="#compatibilidad" title="Permanent link">&para;</a></h3>
+<h3 id="compatibilidad">Compatibilidad</h3>
 <ul>
 <li>Compatible con facturas electrónicas de Panamá (DGI)</li>
 <li>Compatible con formato Guatemala (xmlGT)</li>
@@ -2320,9 +2375,9 @@ $<span class="w"> </span>docker<span class="w"> </span><span class="nb">exec</sp
 <li>No afecta importaciones existentes</li>
 <li>Campo opcional (nullable)</li>
 </ul>
-<h2 id="flujo-de-procesamiento">Flujo de Procesamiento<a class="headerlink" href="#flujo-de-procesamiento" title="Permanent link">&para;</a></h2>
-<h3 id="flujo-1-importacion-desde-livewire-component">Flujo 1: Importación desde Livewire Component<a class="headerlink" href="#flujo-1-importacion-desde-livewire-component" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>Usuario sube XML → getDataXML() → setDataFile() → FeHeader::create()
+<h2 id="flujo-de-procesamiento">Flujo de Procesamiento</h2>
+<h3 id="flujo-1-importacion-desde-livewire-component">Flujo 1: Importación desde Livewire Component</h3>
+<div class="codehilite"><pre><span></span><code>Usuario sube XML → getDataXML() → setDataFile() → FeHeader::create()
                     ↓
                     Extrae gPedComGl_dNroPed
                     ↓
@@ -2330,8 +2385,9 @@ $<span class="w"> </span>docker<span class="w"> </span><span class="nb">exec</sp
                                                     ↓
                                                     Campo guardado en BD
 </code></pre></div>
-<h3 id="flujo-2-importacion-desde-jobcomando">Flujo 2: Importación desde Job/Comando<a class="headerlink" href="#flujo-2-importacion-desde-jobcomando" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>XML File → xml() → FeHeader::create()
+
+<h3 id="flujo-2-importacion-desde-jobcomando">Flujo 2: Importación desde Job/Comando</h3>
+<div class="codehilite"><pre><span></span><code>XML File → xml() → FeHeader::create()
            ↓
            Extrae gPedComGl_dNroPed
            ↓
@@ -2339,8 +2395,9 @@ $<span class="w"> </span>docker<span class="w"> </span><span class="nb">exec</sp
                                      ↓
                                      Campo guardado en BD
 </code></pre></div>
-<h3 id="flujo-3-formato-guatemala">Flujo 3: Formato Guatemala<a class="headerlink" href="#flujo-3-formato-guatemala" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>XML GT → xmlGT() → FeHeader::create()
+
+<h3 id="flujo-3-formato-guatemala">Flujo 3: Formato Guatemala</h3>
+<div class="codehilite"><pre><span></span><code>XML GT → xmlGT() → FeHeader::create()
          ↓
          Extrae gPedComGl_dNroPed
          ↓
@@ -2348,13 +2405,14 @@ $<span class="w"> </span>docker<span class="w"> </span><span class="nb">exec</sp
                                    ↓
                                    Campo guardado en BD
 </code></pre></div>
-<h2 id="migracion-a-produccion">Migración a Producción<a class="headerlink" href="#migracion-a-produccion" title="Permanent link">&para;</a></h2>
-<h3 id="pasos-requeridos">Pasos Requeridos<a class="headerlink" href="#pasos-requeridos" title="Permanent link">&para;</a></h3>
+
+<h2 id="migracion-a-produccion">Migración a Producción</h2>
+<h3 id="pasos-requeridos">Pasos Requeridos</h3>
 <ol>
 <li>
 <p><strong>Ejecutar migración de base de datos</strong> en todas las organizaciones:
-   <div class="highlight"><pre><span></span><code><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">fe_header</span><span class="w"> </span><span class="k">ADD</span><span class="w"> </span><span class="k">COLUMN</span><span class="w"> </span><span class="n">gPedComGl_dNroPed</span><span class="w"> </span><span class="nb">varchar</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="k">NULL</span><span class="p">;</span>
-</code></pre></div></p>
+   <code>sql
+   ALTER TABLE fe_header ADD COLUMN gPedComGl_dNroPed varchar(12) DEFAULT NULL;</code></p>
 </li>
 <li>
 <p><strong>Desplegar código actualizado:</strong></p>
@@ -2367,25 +2425,25 @@ $<span class="w"> </span>docker<span class="w"> </span><span class="nb">exec</sp
 </li>
 <li>
 <p><strong>Verificar en ambiente de producción:</strong>
-   <div class="highlight"><pre><span></span><code>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>docucenter-app-1<span class="w"> </span>php<span class="w"> </span>/var/www/html/scripts/test-real-xml.php
-</code></pre></div></p>
+   <code>bash
+   docker exec docucenter-app-1 php /var/www/html/scripts/test-real-xml.php</code></p>
 </li>
 </ol>
-<h3 id="beneficios-del-fix-del-parser">Beneficios del Fix del Parser<a class="headerlink" href="#beneficios-del-fix-del-parser" title="Permanent link">&para;</a></h3>
+<h3 id="beneficios-del-fix-del-parser">Beneficios del Fix del Parser</h3>
 <p>El fix del método <code>XMLToArrayFlat()</code> no solo permite extraer <code>gPedComGl_dNroPed</code>, sino que mejora significativamente el parsing de TODOS los archivos XML que no contienen el nodo <code>feDatosMsg</code>. Esto puede resolver potenciales problemas de extracción en otras importaciones.</p>
-<h2 id="referencias">Referencias<a class="headerlink" href="#referencias" title="Permanent link">&para;</a></h2>
+<h2 id="referencias">Referencias</h2>
 <ul>
 <li><strong>Especificación DGI Panamá:</strong> Campo <code>gPedComGl &gt; dNroPed</code></li>
 <li><strong>Tipo de dato:</strong> varchar(12) según normativa</li>
 <li><strong>Uso:</strong> Número del pedido de compra en transacciones B2B</li>
 </ul>
-<h2 id="conclusion">Conclusión<a class="headerlink" href="#conclusion" title="Permanent link">&para;</a></h2>
+<h2 id="conclusion">Conclusión</h2>
 <p><strong>Implementación completa y verificada</strong><br />
 <strong>Fix crítico del parser XML aplicado</strong><br />
 <strong>Scripts de prueba disponibles para validación continua</strong><br />
 <strong>Documentación actualizada</strong><br />
 <strong>Lista para despliegue en producción</strong></p>
-<h2 id="autor-team-de-docucenter"><strong>Autor</strong>: Team de Docucenter<a class="headerlink" href="#autor-team-de-docucenter" title="Permanent link">&para;</a></h2>
+<h2 id="autor-team-de-docucenter"><strong>Autor</strong>: Team de Docucenter</h2>
 <p><strong>Archivo de Testing:</strong> Este documento permanece en <code>docs/testing/</code> para referencia futura</p>
 
 
@@ -2439,7 +2497,7 @@ $<span class="w"> </span>docker<span class="w"> </span><span class="nb">exec</sp
       
       
     
-    <a href="https://github.com/aghabrego/docucenter" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+    <a href="https://github.com/aghabrego/docucenter-public" target="_blank" rel="noopener" title="github.com" class="md-social__link">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
     </a>
   

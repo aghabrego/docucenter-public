@@ -233,7 +233,7 @@
           
   
   
-  APIs
+  API Documentation
 
         </a>
       </li>
@@ -269,7 +269,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../" class="md-tabs__link">
+        <a href="../README.md" class="md-tabs__link">
           
   
   
@@ -298,6 +298,25 @@
         </a>
       </li>
     
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../testing/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Sistema de Testing
+
+      </a>
+    </li>
   
 
       
@@ -404,7 +423,7 @@
   <span class="md-ellipsis">
     
   
-    APIs
+    API Documentation
   
 
     
@@ -420,7 +439,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    APIs
+    API Documentation
   
 
           </label>
@@ -1363,7 +1382,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
+      <a href="../README.md" class="md-nav__link">
         
   
   
@@ -1716,6 +1735,33 @@
   
 
     
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sistema de Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -2018,21 +2064,22 @@
   
 
 
-<h1 id="resolucion-error-attempt-to-assign-property-cufe-on-array">Resolución: Error "Attempt to assign property cufe on array"<a class="headerlink" href="#resolucion-error-attempt-to-assign-property-cufe-on-array" title="Permanent link">&para;</a></h1>
-<h2 id="problema-identificado">Problema Identificado<a class="headerlink" href="#problema-identificado" title="Permanent link">&para;</a></h2>
-<h3 id="error-original">Error Original<a class="headerlink" href="#error-original" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>Attempt to assign property &quot;cufe&quot; on array
+<h1 id="resolucion-error-attempt-to-assign-property-cufe-on-array">Resolución: Error "Attempt to assign property cufe on array"</h1>
+<h2 id="problema-identificado">Problema Identificado</h2>
+<h3 id="error-original">Error Original</h3>
+<div class="codehilite"><pre><span></span><code><span class="n">Attempt</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="k">assign</span><span class="w"> </span><span class="n">property</span><span class="w"> </span><span class="s">&quot;cufe&quot;</span><span class="w"> </span><span class="n">on</span><span class="w"> </span><span class="n">array</span>
 </code></pre></div>
-<h3 id="contexto-del-error">Contexto del Error<a class="headerlink" href="#contexto-del-error" title="Permanent link">&para;</a></h3>
+
+<h3 id="contexto-del-error">Contexto del Error</h3>
 <ul>
 <li><strong>Ubicación</strong>: <code>HKAService::writeXMLLog()</code> línea 327</li>
 <li><strong>Origen</strong>: Llamada desde <code>Create.php::saveFileAndLog()</code> línea 1874</li>
 <li><strong>Causa</strong>: Conversión incompleta de array a objeto usando <code>(object)$request</code></li>
 </ul>
-<h3 id="analisis-tecnico">Análisis Técnico<a class="headerlink" href="#analisis-tecnico" title="Permanent link">&para;</a></h3>
-<h4 id="objeto-enviado-al-pac">Objeto Enviado al PAC<a class="headerlink" href="#objeto-enviado-al-pac" title="Permanent link">&para;</a></h4>
-<p>El objeto que se envía al PAC tiene la siguiente estructura:
-<div class="highlight"><pre><span></span><code><span class="x">array:5 [</span>
+<h3 id="analisis-tecnico">Análisis Técnico</h3>
+<h4 id="objeto-enviado-al-pac">Objeto Enviado al PAC</h4>
+<p>El objeto que se envía al PAC tiene la siguiente estructura:</p>
+<div class="codehilite"><pre><span></span><code><span class="x">array:5 [</span>
 <span class="x">  &quot;key&quot; =&gt; null</span>
 <span class="x">  &quot;dGen&quot; =&gt; array:11 [</span>
 <span class="x">    &quot;iDoc&quot; =&gt; &quot;01&quot;</span>
@@ -2043,19 +2090,21 @@
 <span class="x">  &quot;gTot&quot; =&gt; array:14 [ /* totales */ ]</span>
 <span class="x">  &quot;gPedComGl&quot; =&gt; array:3 [ /* pedido comercial */ ]</span>
 <span class="x">]</span>
-</code></pre></div></p>
-<h4 id="problema-de-conversion">Problema de Conversión<a class="headerlink" href="#problema-de-conversion" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="x">// En Create.php línea 1874 (problemático)</span>
+</code></pre></div>
+
+<h4 id="problema-de-conversion">Problema de Conversión</h4>
+<div class="codehilite"><pre><span></span><code><span class="x">// En Create.php línea 1874 (problemático)</span>
 <span class="x">$fileXml = $HKAService-&gt;writeXMLLog((object)$request, $issuet);</span>
 </code></pre></div>
+
 <p>La conversión <code>(object)$request</code> solo convierte el nivel superior del array a objeto, pero los arrays anidados como <code>$request['dGen']</code> permanecen como arrays. Por lo tanto:</p>
 <ul>
 <li><code>$doc-&gt;dGen</code> es un <strong>array</strong>, no un objeto</li>
 <li>Intentar <code>$doc-&gt;dGen-&gt;cufe = ...</code> falla porque no se puede asignar propiedades a un array</li>
 </ul>
-<h2 id="solucion-implementada">Solución Implementada<a class="headerlink" href="#solucion-implementada" title="Permanent link">&para;</a></h2>
-<h3 id="1-conversion-recursiva-en-hkaservice">1. Conversión Recursiva en HKAService<a class="headerlink" href="#1-conversion-recursiva-en-hkaservice" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">public function writeXMLLog($doc, array $issuet)</span>
+<h2 id="solucion-implementada">Solución Implementada</h2>
+<h3 id="1-conversion-recursiva-en-hkaservice">1. Conversión Recursiva en HKAService</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">public function writeXMLLog($doc, array $issuet)</span>
 <span class="x">{</span>
 <span class="x">    // Asegurar que $doc sea un objeto completo (conversión recursiva)</span>
 <span class="x">    if (is_array($doc)) {</span>
@@ -2068,42 +2117,45 @@
 <span class="x">    // ... resto del método</span>
 <span class="x">}</span>
 </code></pre></div>
-<h3 id="2-simplificacion-en-createphp">2. Simplificación en Create.php<a class="headerlink" href="#2-simplificacion-en-createphp" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">// Antes (problemático)</span>
+
+<h3 id="2-simplificacion-en-createphp">2. Simplificación en Create.php</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">// Antes (problemático)</span>
 <span class="x">$fileXml = $HKAService-&gt;writeXMLLog((object)$request, $issuet);</span>
 
 <span class="x">// Después (corregido)</span>
 <span class="x">$fileXml = $HKAService-&gt;writeXMLLog($request, $issuet);</span>
 </code></pre></div>
-<h3 id="3-actualizacion-de-documentacion">3. Actualización de Documentación<a class="headerlink" href="#3-actualizacion-de-documentacion" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">/**</span>
+
+<h3 id="3-actualizacion-de-documentacion">3. Actualización de Documentación</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">/**</span>
 <span class="x"> * @param object|array $doc  // Actualizado para aceptar ambos tipos</span>
 <span class="x"> * @param array $issuet</span>
 <span class="x"> * @return array</span>
 <span class="x"> */</span>
 </code></pre></div>
-<h2 id="beneficios-de-la-solucion">Beneficios de la Solución<a class="headerlink" href="#beneficios-de-la-solucion" title="Permanent link">&para;</a></h2>
-<h3 id="conversion-robusta">Conversión Robusta<a class="headerlink" href="#conversion-robusta" title="Permanent link">&para;</a></h3>
+
+<h2 id="beneficios-de-la-solucion">Beneficios de la Solución</h2>
+<h3 id="conversion-robusta">Conversión Robusta</h3>
 <ul>
 <li><strong>json_decode(json_encode())</strong>: Convierte recursivamente todos los arrays anidados a objetos</li>
 <li><strong>Compatibilidad</strong>: Acepta tanto arrays como objetos como entrada</li>
 <li><strong>Consistencia</strong>: Garantiza que <code>$doc-&gt;dGen</code> sea siempre un objeto</li>
 </ul>
-<h3 id="manejo-de-casos-edge">Manejo de Casos Edge<a class="headerlink" href="#manejo-de-casos-edge" title="Permanent link">&para;</a></h3>
+<h3 id="manejo-de-casos-edge">Manejo de Casos Edge</h3>
 <ul>
 <li>Si <code>$doc</code> ya es un objeto, no se reconvierte</li>
 <li>Si <code>$doc</code> es un array, se convierte completamente a objeto</li>
 <li>Preserva la estructura y tipos de datos internos</li>
 </ul>
-<h3 id="mejora-del-error-handling">Mejora del Error Handling<a class="headerlink" href="#mejora-del-error-handling" title="Permanent link">&para;</a></h3>
+<h3 id="mejora-del-error-handling">Mejora del Error Handling</h3>
 <ul>
 <li>Elimina el error "Attempt to assign property cufe on array"</li>
 <li>Mantiene la funcionalidad existente</li>
 <li>No afecta otras partes del sistema</li>
 </ul>
-<h2 id="resultado-del-pac">Resultado del PAC<a class="headerlink" href="#resultado-del-pac" title="Permanent link">&para;</a></h2>
-<h3 id="respuesta-del-pac">Respuesta del PAC<a class="headerlink" href="#respuesta-del-pac" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<h2 id="resultado-del-pac">Resultado del PAC</h2>
+<h3 id="respuesta-del-pac">Respuesta del PAC</h3>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;EnviarResult&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="nt">&quot;codigo&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;203&quot;</span><span class="p">,</span>
 <span class="w">    </span><span class="nt">&quot;resultado&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;error&quot;</span><span class="p">,</span>
@@ -2116,23 +2168,24 @@
 <span class="w">  </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
+
 <p><strong>Nota</strong>: El error del PAC ("Monto del ITBMS del ítem inválido") es un error de validación de negocio del PAC, no un error técnico. Esto indica que la transmisión funcionó correctamente pero hay un problema con el cálculo del ITBMS.</p>
-<h2 id="validacion">Validación<a class="headerlink" href="#validacion" title="Permanent link">&para;</a></h2>
-<h3 id="testing-realizado">Testing Realizado<a class="headerlink" href="#testing-realizado" title="Permanent link">&para;</a></h3>
+<h2 id="validacion">Validación</h2>
+<h3 id="testing-realizado">Testing Realizado</h3>
 <ul>
 <li>✅ <strong>Sintaxis</strong>: <code>php artisan route:list</code> ejecuta sin errores</li>
 <li>✅ <strong>Cache</strong>: Vista y configuración limpiadas exitosamente</li>
 <li>✅ <strong>Conversión</strong>: Arrays se convierten correctamente a objetos</li>
 <li>✅ <strong>Asignación</strong>: <code>$doc-&gt;dGen-&gt;cufe</code> funciona sin errores</li>
 </ul>
-<h3 id="casos-de-prueba">Casos de Prueba<a class="headerlink" href="#casos-de-prueba" title="Permanent link">&para;</a></h3>
+<h3 id="casos-de-prueba">Casos de Prueba</h3>
 <ol>
 <li><strong>Array Input</strong>: Funciona correctamente con conversión automática</li>
 <li><strong>Object Input</strong>: Funciona sin reconversión innecesaria</li>
 <li><strong>Nested Arrays</strong>: Todos los niveles se convierten a objetos</li>
 <li><strong>Property Assignment</strong>: <code>cufe</code> se asigna exitosamente</li>
 </ol>
-<h2 id="conclusion">Conclusión<a class="headerlink" href="#conclusion" title="Permanent link">&para;</a></h2>
+<h2 id="conclusion">Conclusión</h2>
 <p>El error "Attempt to assign property cufe on array" ha sido resuelto completamente mediante:</p>
 <ol>
 <li><strong>Conversión recursiva</strong> de arrays a objetos en <code>HKAService::writeXMLLog()</code></li>
@@ -2198,7 +2251,7 @@
       
       
     
-    <a href="https://github.com/aghabrego/docucenter" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+    <a href="https://github.com/aghabrego/docucenter-public" target="_blank" rel="noopener" title="github.com" class="md-social__link">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
     </a>
   

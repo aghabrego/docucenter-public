@@ -233,7 +233,7 @@
           
   
   
-  APIs
+  API Documentation
 
         </a>
       </li>
@@ -269,7 +269,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../" class="md-tabs__link">
+        <a href="../README.md" class="md-tabs__link">
           
   
   
@@ -298,6 +298,25 @@
         </a>
       </li>
     
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../testing/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Sistema de Testing
+
+      </a>
+    </li>
   
 
       
@@ -404,7 +423,7 @@
   <span class="md-ellipsis">
     
   
-    APIs
+    API Documentation
   
 
     
@@ -420,7 +439,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    APIs
+    API Documentation
   
 
           </label>
@@ -1363,7 +1382,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
+      <a href="../README.md" class="md-nav__link">
         
   
   
@@ -1716,6 +1735,33 @@
   
 
     
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sistema de Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -1990,9 +2036,9 @@
   
 
 
-<h1 id="plan-de-implementacion-de-campos-condicionales-en-createbladephp">Plan de Implementación de Campos Condicionales en Create.blade.php<a class="headerlink" href="#plan-de-implementacion-de-campos-condicionales-en-createbladephp" title="Permanent link">&para;</a></h1>
-<h2 id="analisis-del-formulario-actual">Análisis del Formulario Actual<a class="headerlink" href="#analisis-del-formulario-actual" title="Permanent link">&para;</a></h2>
-<h3 id="estructura-actual-por-pasos">Estructura Actual por Pasos<a class="headerlink" href="#estructura-actual-por-pasos" title="Permanent link">&para;</a></h3>
+<h1 id="plan-de-implementacion-de-campos-condicionales-en-createbladephp">Plan de Implementación de Campos Condicionales en Create.blade.php</h1>
+<h2 id="analisis-del-formulario-actual">Análisis del Formulario Actual</h2>
+<h3 id="estructura-actual-por-pasos">Estructura Actual por Pasos</h3>
 <ol>
 <li><strong>Paso 1</strong>: Tipo de documento (tipeDocument) - ✅ Ya existe</li>
 <li><strong>Paso 2</strong>: Operación (naturalezaOperacion, tipoTransaccionVenta, tipoOperacion, destinoOperacion)</li>
@@ -2001,153 +2047,156 @@
 <li><strong>Paso 6</strong>: Otros valores (retenciones, pagos)</li>
 <li><strong>Paso 7</strong>: Resumen</li>
 </ol>
-<h3 id="campos-condicionales-necesarios">Campos Condicionales Necesarios<a class="headerlink" href="#campos-condicionales-necesarios" title="Permanent link">&para;</a></h3>
-<h4 id="1-campos-de-exportacion-solo-tipo-03">1. Campos de Exportación (Solo tipo 03)<a class="headerlink" href="#1-campos-de-exportacion-solo-tipo-03" title="Permanent link">&para;</a></h4>
+<h3 id="campos-condicionales-necesarios">Campos Condicionales Necesarios</h3>
+<h4 id="1-campos-de-exportacion-solo-tipo-03">1. Campos de Exportación (Solo tipo 03)</h4>
 <p><strong>Ubicación sugerida</strong>: Nuevo paso 3 o dentro del paso 2</p>
-<div class="highlight"><pre><span></span><code>&lt;!-- Campos exportación - Solo si tipeDocument = &#39;3&#39; --&gt;
-&lt;div x-show=&quot;$wire.tipeDocument === &#39;3&#39;&quot; class=&quot;export-fields&quot;&gt;
-    &lt;div class=&quot;row&quot;&gt;
-        &lt;div class=&quot;col-md-6&quot;&gt;
-            &lt;div class=&quot;form-group&quot;&gt;
-                &lt;label for=&quot;input-condicionesEntrega&quot; class=&quot;control-label&quot;&gt;{{ __(&#39;Delivery Conditions (INCOTERMS)&#39;) }}&lt;/label&gt;
-                &lt;select id=&quot;input-condicionesEntrega&quot; wire:model.lazy=&quot;condicionesEntrega&quot; class=&quot;form-control @error(&#39;condicionesEntrega&#39;) is-invalid @enderror&quot;&gt;
-                    @foreach (\App\Utils\DataProvider::incoterms() ?? [] as $key =&gt; $option)
-                        &lt;option value=&quot;{{ $key }}&quot;&gt;{{ $option }}&lt;/option&gt;
-                    @endforeach
-                &lt;/select&gt;
-                @error(&#39;condicionesEntrega&#39;) &lt;div class=&quot;invalid-feedback&quot;&gt;{{ $message }}&lt;/div&gt; @enderror
-            &lt;/div&gt;
-        &lt;/div&gt;
+<div class="codehilite"><pre><span></span><code><span class="o">&lt;!--</span><span class="w"> </span><span class="n">Campos</span><span class="w"> </span><span class="n">exportación</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">Solo</span><span class="w"> </span><span class="n">si</span><span class="w"> </span><span class="n">tipeDocument</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sc">&#39;3&#39;</span><span class="w"> </span><span class="o">--&gt;</span>
+<span class="o">&lt;</span><span class="n">div</span><span class="w"> </span><span class="n">x</span><span class="o">-</span><span class="n">show</span><span class="o">=</span><span class="s">&quot;$wire.tipeDocument === &#39;3&#39;&quot;</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;export-fields&quot;</span><span class="o">&gt;</span>
+<span class="w">    </span><span class="o">&lt;</span><span class="n">div</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;row&quot;</span><span class="o">&gt;</span>
+<span class="w">        </span><span class="o">&lt;</span><span class="n">div</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;col-md-6&quot;</span><span class="o">&gt;</span>
+<span class="w">            </span><span class="o">&lt;</span><span class="n">div</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;form-group&quot;</span><span class="o">&gt;</span>
+<span class="w">                </span><span class="o">&lt;</span><span class="n">label</span><span class="w"> </span><span class="k">for</span><span class="o">=</span><span class="s">&quot;input-condicionesEntrega&quot;</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;control-label&quot;</span><span class="o">&gt;</span><span class="p">{{</span><span class="w"> </span><span class="n">__</span><span class="p">(</span><span class="err">&#39;</span><span class="n">Delivery</span><span class="w"> </span><span class="n">Conditions</span><span class="w"> </span><span class="p">(</span><span class="n">INCOTERMS</span><span class="p">)</span><span class="err">&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">}}</span><span class="o">&lt;/</span><span class="n">label</span><span class="o">&gt;</span>
+<span class="w">                </span><span class="o">&lt;</span><span class="n">select</span><span class="w"> </span><span class="kt">id</span><span class="o">=</span><span class="s">&quot;input-condicionesEntrega&quot;</span><span class="w"> </span><span class="n">wire</span><span class="o">:</span><span class="n">model</span><span class="p">.</span><span class="n">lazy</span><span class="o">=</span><span class="s">&quot;condicionesEntrega&quot;</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;form-control @error(&#39;condicionesEntrega&#39;) is-invalid @enderror&quot;</span><span class="o">&gt;</span>
+<span class="w">                    </span><span class="p">@</span><span class="n">foreach</span><span class="w"> </span><span class="p">(</span><span class="err">\</span><span class="n">App</span><span class="err">\</span><span class="n">Utils</span><span class="err">\</span><span class="n">DataProvider</span><span class="o">::</span><span class="n">incoterms</span><span class="p">()</span><span class="w"> </span><span class="o">??</span><span class="w"> </span><span class="p">[]</span><span class="w"> </span><span class="n">as</span><span class="w"> </span><span class="n">$key</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">$option</span><span class="p">)</span>
+<span class="w">                        </span><span class="o">&lt;</span><span class="n">option</span><span class="w"> </span><span class="n">value</span><span class="o">=</span><span class="s">&quot;{{ $key }}&quot;</span><span class="o">&gt;</span><span class="p">{{</span><span class="w"> </span><span class="n">$option</span><span class="w"> </span><span class="p">}}</span><span class="o">&lt;/</span><span class="n">option</span><span class="o">&gt;</span>
+<span class="w">                    </span><span class="p">@</span><span class="n">endforeach</span>
+<span class="w">                </span><span class="o">&lt;/</span><span class="n">select</span><span class="o">&gt;</span>
+<span class="w">                </span><span class="p">@</span><span class="n">error</span><span class="p">(</span><span class="err">&#39;</span><span class="n">condicionesEntrega</span><span class="err">&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="n">div</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;invalid-feedback&quot;</span><span class="o">&gt;</span><span class="p">{{</span><span class="w"> </span><span class="n">$message</span><span class="w"> </span><span class="p">}}</span><span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span><span class="w"> </span><span class="p">@</span><span class="n">enderror</span>
+<span class="w">            </span><span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+<span class="w">        </span><span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
 
-        &lt;div class=&quot;col-md-6&quot;&gt;
-            &lt;div class=&quot;form-group&quot;&gt;
-                &lt;label for=&quot;input-monedaExportacion&quot; class=&quot;control-label&quot;&gt;{{ __(&#39;Export Currency&#39;) }}&lt;/label&gt;
-                &lt;select id=&quot;input-monedaExportacion&quot; wire:model.lazy=&quot;monedaExportacion&quot; class=&quot;form-control @error(&#39;monedaExportacion&#39;) is-invalid @enderror&quot;&gt;
-                    @foreach (\App\Utils\DataProvider::exportCurrencies() ?? [] as $key =&gt; $option)
-                        &lt;option value=&quot;{{ $key }}&quot;&gt;{{ $option }}&lt;/option&gt;
-                    @endforeach
-                &lt;/select&gt;
-                @error(&#39;monedaExportacion&#39;) &lt;div class=&quot;invalid-feedback&quot;&gt;{{ $message }}&lt;/div&gt; @enderror
-            &lt;/div&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
+<span class="w">        </span><span class="o">&lt;</span><span class="n">div</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;col-md-6&quot;</span><span class="o">&gt;</span>
+<span class="w">            </span><span class="o">&lt;</span><span class="n">div</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;form-group&quot;</span><span class="o">&gt;</span>
+<span class="w">                </span><span class="o">&lt;</span><span class="n">label</span><span class="w"> </span><span class="k">for</span><span class="o">=</span><span class="s">&quot;input-monedaExportacion&quot;</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;control-label&quot;</span><span class="o">&gt;</span><span class="p">{{</span><span class="w"> </span><span class="n">__</span><span class="p">(</span><span class="err">&#39;</span><span class="n">Export</span><span class="w"> </span><span class="n">Currency</span><span class="err">&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">}}</span><span class="o">&lt;/</span><span class="n">label</span><span class="o">&gt;</span>
+<span class="w">                </span><span class="o">&lt;</span><span class="n">select</span><span class="w"> </span><span class="kt">id</span><span class="o">=</span><span class="s">&quot;input-monedaExportacion&quot;</span><span class="w"> </span><span class="n">wire</span><span class="o">:</span><span class="n">model</span><span class="p">.</span><span class="n">lazy</span><span class="o">=</span><span class="s">&quot;monedaExportacion&quot;</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;form-control @error(&#39;monedaExportacion&#39;) is-invalid @enderror&quot;</span><span class="o">&gt;</span>
+<span class="w">                    </span><span class="p">@</span><span class="n">foreach</span><span class="w"> </span><span class="p">(</span><span class="err">\</span><span class="n">App</span><span class="err">\</span><span class="n">Utils</span><span class="err">\</span><span class="n">DataProvider</span><span class="o">::</span><span class="n">exportCurrencies</span><span class="p">()</span><span class="w"> </span><span class="o">??</span><span class="w"> </span><span class="p">[]</span><span class="w"> </span><span class="n">as</span><span class="w"> </span><span class="n">$key</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">$option</span><span class="p">)</span>
+<span class="w">                        </span><span class="o">&lt;</span><span class="n">option</span><span class="w"> </span><span class="n">value</span><span class="o">=</span><span class="s">&quot;{{ $key }}&quot;</span><span class="o">&gt;</span><span class="p">{{</span><span class="w"> </span><span class="n">$option</span><span class="w"> </span><span class="p">}}</span><span class="o">&lt;/</span><span class="n">option</span><span class="o">&gt;</span>
+<span class="w">                    </span><span class="p">@</span><span class="n">endforeach</span>
+<span class="w">                </span><span class="o">&lt;/</span><span class="n">select</span><span class="o">&gt;</span>
+<span class="w">                </span><span class="p">@</span><span class="n">error</span><span class="p">(</span><span class="err">&#39;</span><span class="n">monedaExportacion</span><span class="err">&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="n">div</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;invalid-feedback&quot;</span><span class="o">&gt;</span><span class="p">{{</span><span class="w"> </span><span class="n">$message</span><span class="w"> </span><span class="p">}}</span><span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span><span class="w"> </span><span class="p">@</span><span class="n">enderror</span>
+<span class="w">            </span><span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+<span class="w">        </span><span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+<span class="w">    </span><span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
 
-    &lt;div class=&quot;row&quot; x-show=&quot;$wire.monedaExportacion &amp;&amp; $wire.monedaExportacion !== &#39;USD&#39;&quot;&gt;
-        &lt;div class=&quot;col-md-6&quot;&gt;
-            &lt;div class=&quot;form-group&quot;&gt;
-                &lt;label for=&quot;input-tipoCambio&quot; class=&quot;control-label&quot;&gt;{{ __(&#39;Exchange Rate&#39;) }}&lt;/label&gt;
-                &lt;input type=&quot;number&quot; step=&quot;0.0001&quot; id=&quot;input-tipoCambio&quot; wire:model.lazy=&quot;tipoCambio&quot; class=&quot;form-control @error(&#39;tipoCambio&#39;) is-invalid @enderror&quot;&gt;
-                @error(&#39;tipoCambio&#39;) &lt;div class=&quot;invalid-feedback&quot;&gt;{{ $message }}&lt;/div&gt; @enderror
-            &lt;/div&gt;
-        &lt;/div&gt;
+<span class="w">    </span><span class="o">&lt;</span><span class="n">div</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;row&quot;</span><span class="w"> </span><span class="n">x</span><span class="o">-</span><span class="n">show</span><span class="o">=</span><span class="s">&quot;$wire.monedaExportacion &amp;&amp; $wire.monedaExportacion !== &#39;USD&#39;&quot;</span><span class="o">&gt;</span>
+<span class="w">        </span><span class="o">&lt;</span><span class="n">div</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;col-md-6&quot;</span><span class="o">&gt;</span>
+<span class="w">            </span><span class="o">&lt;</span><span class="n">div</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;form-group&quot;</span><span class="o">&gt;</span>
+<span class="w">                </span><span class="o">&lt;</span><span class="n">label</span><span class="w"> </span><span class="k">for</span><span class="o">=</span><span class="s">&quot;input-tipoCambio&quot;</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;control-label&quot;</span><span class="o">&gt;</span><span class="p">{{</span><span class="w"> </span><span class="n">__</span><span class="p">(</span><span class="err">&#39;</span><span class="n">Exchange</span><span class="w"> </span><span class="n">Rate</span><span class="err">&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">}}</span><span class="o">&lt;/</span><span class="n">label</span><span class="o">&gt;</span>
+<span class="w">                </span><span class="o">&lt;</span><span class="n">input</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="s">&quot;number&quot;</span><span class="w"> </span><span class="n">step</span><span class="o">=</span><span class="s">&quot;0.0001&quot;</span><span class="w"> </span><span class="kt">id</span><span class="o">=</span><span class="s">&quot;input-tipoCambio&quot;</span><span class="w"> </span><span class="n">wire</span><span class="o">:</span><span class="n">model</span><span class="p">.</span><span class="n">lazy</span><span class="o">=</span><span class="s">&quot;tipoCambio&quot;</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;form-control @error(&#39;tipoCambio&#39;) is-invalid @enderror&quot;</span><span class="o">&gt;</span>
+<span class="w">                </span><span class="p">@</span><span class="n">error</span><span class="p">(</span><span class="err">&#39;</span><span class="n">tipoCambio</span><span class="err">&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="n">div</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;invalid-feedback&quot;</span><span class="o">&gt;</span><span class="p">{{</span><span class="w"> </span><span class="n">$message</span><span class="w"> </span><span class="p">}}</span><span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span><span class="w"> </span><span class="p">@</span><span class="n">enderror</span>
+<span class="w">            </span><span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+<span class="w">        </span><span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
 
-        &lt;div class=&quot;col-md-6&quot;&gt;
-            &lt;div class=&quot;form-group&quot;&gt;
-                &lt;label for=&quot;input-montoMonedaExtranjera&quot; class=&quot;control-label&quot;&gt;{{ __(&#39;Amount in Foreign Currency&#39;) }}&lt;/label&gt;
-                &lt;input type=&quot;number&quot; step=&quot;0.01&quot; id=&quot;input-montoMonedaExtranjera&quot; wire:model.lazy=&quot;montoMonedaExtranjera&quot; class=&quot;form-control @error(&#39;montoMonedaExtranjera&#39;) is-invalid @enderror&quot;&gt;
-                @error(&#39;montoMonedaExtranjera&#39;) &lt;div class=&quot;invalid-feedback&quot;&gt;{{ $message }}&lt;/div&gt; @enderror
-            &lt;/div&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
+<span class="w">        </span><span class="o">&lt;</span><span class="n">div</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;col-md-6&quot;</span><span class="o">&gt;</span>
+<span class="w">            </span><span class="o">&lt;</span><span class="n">div</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;form-group&quot;</span><span class="o">&gt;</span>
+<span class="w">                </span><span class="o">&lt;</span><span class="n">label</span><span class="w"> </span><span class="k">for</span><span class="o">=</span><span class="s">&quot;input-montoMonedaExtranjera&quot;</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;control-label&quot;</span><span class="o">&gt;</span><span class="p">{{</span><span class="w"> </span><span class="n">__</span><span class="p">(</span><span class="err">&#39;</span><span class="n">Amount</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">Foreign</span><span class="w"> </span><span class="n">Currency</span><span class="err">&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">}}</span><span class="o">&lt;/</span><span class="n">label</span><span class="o">&gt;</span>
+<span class="w">                </span><span class="o">&lt;</span><span class="n">input</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="s">&quot;number&quot;</span><span class="w"> </span><span class="n">step</span><span class="o">=</span><span class="s">&quot;0.01&quot;</span><span class="w"> </span><span class="kt">id</span><span class="o">=</span><span class="s">&quot;input-montoMonedaExtranjera&quot;</span><span class="w"> </span><span class="n">wire</span><span class="o">:</span><span class="n">model</span><span class="p">.</span><span class="n">lazy</span><span class="o">=</span><span class="s">&quot;montoMonedaExtranjera&quot;</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;form-control @error(&#39;montoMonedaExtranjera&#39;) is-invalid @enderror&quot;</span><span class="o">&gt;</span>
+<span class="w">                </span><span class="p">@</span><span class="n">error</span><span class="p">(</span><span class="err">&#39;</span><span class="n">montoMonedaExtranjera</span><span class="err">&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="n">div</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;invalid-feedback&quot;</span><span class="o">&gt;</span><span class="p">{{</span><span class="w"> </span><span class="n">$message</span><span class="w"> </span><span class="p">}}</span><span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span><span class="w"> </span><span class="p">@</span><span class="n">enderror</span>
+<span class="w">            </span><span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+<span class="w">        </span><span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+<span class="w">    </span><span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
 
-    &lt;div class=&quot;row&quot;&gt;
-        &lt;div class=&quot;col-md-12&quot;&gt;
-            &lt;div class=&quot;form-group&quot;&gt;
-                &lt;label for=&quot;input-puertoEmbarque&quot; class=&quot;control-label&quot;&gt;{{ __(&#39;Port of Shipment&#39;) }}&lt;/label&gt;
-                &lt;input type=&quot;text&quot; id=&quot;input-puertoEmbarque&quot; wire:model.lazy=&quot;puertoEmbarque&quot; class=&quot;form-control @error(&#39;puertoEmbarque&#39;) is-invalid @enderror&quot;&gt;
-                @error(&#39;puertoEmbarque&#39;) &lt;div class=&quot;invalid-feedback&quot;&gt;{{ $message }}&lt;/div&gt; @enderror
-            &lt;/div&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-&lt;/div&gt;
+<span class="w">    </span><span class="o">&lt;</span><span class="n">div</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;row&quot;</span><span class="o">&gt;</span>
+<span class="w">        </span><span class="o">&lt;</span><span class="n">div</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;col-md-12&quot;</span><span class="o">&gt;</span>
+<span class="w">            </span><span class="o">&lt;</span><span class="n">div</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;form-group&quot;</span><span class="o">&gt;</span>
+<span class="w">                </span><span class="o">&lt;</span><span class="n">label</span><span class="w"> </span><span class="k">for</span><span class="o">=</span><span class="s">&quot;input-puertoEmbarque&quot;</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;control-label&quot;</span><span class="o">&gt;</span><span class="p">{{</span><span class="w"> </span><span class="n">__</span><span class="p">(</span><span class="err">&#39;</span><span class="n">Port</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">Shipment</span><span class="err">&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">}}</span><span class="o">&lt;/</span><span class="n">label</span><span class="o">&gt;</span>
+<span class="w">                </span><span class="o">&lt;</span><span class="n">input</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="s">&quot;text&quot;</span><span class="w"> </span><span class="kt">id</span><span class="o">=</span><span class="s">&quot;input-puertoEmbarque&quot;</span><span class="w"> </span><span class="n">wire</span><span class="o">:</span><span class="n">model</span><span class="p">.</span><span class="n">lazy</span><span class="o">=</span><span class="s">&quot;puertoEmbarque&quot;</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;form-control @error(&#39;puertoEmbarque&#39;) is-invalid @enderror&quot;</span><span class="o">&gt;</span>
+<span class="w">                </span><span class="p">@</span><span class="n">error</span><span class="p">(</span><span class="err">&#39;</span><span class="n">puertoEmbarque</span><span class="err">&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="n">div</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;invalid-feedback&quot;</span><span class="o">&gt;</span><span class="p">{{</span><span class="w"> </span><span class="n">$message</span><span class="w"> </span><span class="p">}}</span><span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span><span class="w"> </span><span class="p">@</span><span class="n">enderror</span>
+<span class="w">            </span><span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+<span class="w">        </span><span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+<span class="w">    </span><span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
 </code></pre></div>
-<h4 id="2-campos-de-referencia-solo-tipos-04-y-05">2. Campos de Referencia (Solo tipos 04 y 05)<a class="headerlink" href="#2-campos-de-referencia-solo-tipos-04-y-05" title="Permanent link">&para;</a></h4>
+
+<h4 id="2-campos-de-referencia-solo-tipos-04-y-05">2. Campos de Referencia (Solo tipos 04 y 05)</h4>
 <p><strong>Ubicación sugerida</strong>: Nuevo paso 3 o dentro del paso 2</p>
-<div class="highlight"><pre><span></span><code>&lt;!-- Campos referencia - Solo si tipeDocument = &#39;4&#39; o &#39;5&#39; --&gt;
-&lt;div x-show=&quot;[&#39;4&#39;,&#39;5&#39;].includes($wire.tipeDocument)&quot; class=&quot;reference-fields&quot;&gt;
-    &lt;div class=&quot;row&quot;&gt;
-        &lt;div class=&quot;col-md-12&quot;&gt;
-            &lt;div class=&quot;form-group&quot;&gt;
-                &lt;label for=&quot;input-cufeReferenciado&quot; class=&quot;control-label&quot;&gt;{{ __(&#39;Referenced CUFE&#39;) }}&lt;/label&gt;
-                &lt;input type=&quot;text&quot; id=&quot;input-cufeReferenciado&quot; wire:model.lazy=&quot;cufeReferenciado&quot; class=&quot;form-control @error(&#39;cufeReferenciado&#39;) is-invalid @enderror&quot; maxlength=&quot;100&quot;&gt;
-                @error(&#39;cufeReferenciado&#39;) &lt;div class=&quot;invalid-feedback&quot;&gt;{{ $message }}&lt;/div&gt; @enderror
-            &lt;/div&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
+<div class="codehilite"><pre><span></span><code><span class="o">&lt;!--</span><span class="w"> </span><span class="n">Campos</span><span class="w"> </span><span class="n">referencia</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">Solo</span><span class="w"> </span><span class="n">si</span><span class="w"> </span><span class="n">tipeDocument</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sc">&#39;4&#39;</span><span class="w"> </span><span class="n">o</span><span class="w"> </span><span class="sc">&#39;5&#39;</span><span class="w"> </span><span class="o">--&gt;</span>
+<span class="o">&lt;</span><span class="n">div</span><span class="w"> </span><span class="n">x</span><span class="o">-</span><span class="n">show</span><span class="o">=</span><span class="s">&quot;[&#39;4&#39;,&#39;5&#39;].includes($wire.tipeDocument)&quot;</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;reference-fields&quot;</span><span class="o">&gt;</span>
+<span class="w">    </span><span class="o">&lt;</span><span class="n">div</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;row&quot;</span><span class="o">&gt;</span>
+<span class="w">        </span><span class="o">&lt;</span><span class="n">div</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;col-md-12&quot;</span><span class="o">&gt;</span>
+<span class="w">            </span><span class="o">&lt;</span><span class="n">div</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;form-group&quot;</span><span class="o">&gt;</span>
+<span class="w">                </span><span class="o">&lt;</span><span class="n">label</span><span class="w"> </span><span class="k">for</span><span class="o">=</span><span class="s">&quot;input-cufeReferenciado&quot;</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;control-label&quot;</span><span class="o">&gt;</span><span class="p">{{</span><span class="w"> </span><span class="n">__</span><span class="p">(</span><span class="err">&#39;</span><span class="n">Referenced</span><span class="w"> </span><span class="n">CUFE</span><span class="err">&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">}}</span><span class="o">&lt;/</span><span class="n">label</span><span class="o">&gt;</span>
+<span class="w">                </span><span class="o">&lt;</span><span class="n">input</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="s">&quot;text&quot;</span><span class="w"> </span><span class="kt">id</span><span class="o">=</span><span class="s">&quot;input-cufeReferenciado&quot;</span><span class="w"> </span><span class="n">wire</span><span class="o">:</span><span class="n">model</span><span class="p">.</span><span class="n">lazy</span><span class="o">=</span><span class="s">&quot;cufeReferenciado&quot;</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;form-control @error(&#39;cufeReferenciado&#39;) is-invalid @enderror&quot;</span><span class="w"> </span><span class="n">maxlength</span><span class="o">=</span><span class="s">&quot;100&quot;</span><span class="o">&gt;</span>
+<span class="w">                </span><span class="p">@</span><span class="n">error</span><span class="p">(</span><span class="err">&#39;</span><span class="n">cufeReferenciado</span><span class="err">&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="n">div</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;invalid-feedback&quot;</span><span class="o">&gt;</span><span class="p">{{</span><span class="w"> </span><span class="n">$message</span><span class="w"> </span><span class="p">}}</span><span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span><span class="w"> </span><span class="p">@</span><span class="n">enderror</span>
+<span class="w">            </span><span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+<span class="w">        </span><span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+<span class="w">    </span><span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
 
-    &lt;div class=&quot;row&quot;&gt;
-        &lt;div class=&quot;col-md-6&quot;&gt;
-            &lt;div class=&quot;form-group&quot;&gt;
-                &lt;label for=&quot;input-rucEmisorReferenciado&quot; class=&quot;control-label&quot;&gt;{{ __(&#39;Referenced Issuer RUC&#39;) }}&lt;/label&gt;
-                &lt;input type=&quot;text&quot; id=&quot;input-rucEmisorReferenciado&quot; wire:model.lazy=&quot;rucEmisorReferenciado&quot; class=&quot;form-control @error(&#39;rucEmisorReferenciado&#39;) is-invalid @enderror&quot;&gt;
-                @error(&#39;rucEmisorReferenciado&#39;) &lt;div class=&quot;invalid-feedback&quot;&gt;{{ $message }}&lt;/div&gt; @enderror
-            &lt;/div&gt;
-        &lt;/div&gt;
+<span class="w">    </span><span class="o">&lt;</span><span class="n">div</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;row&quot;</span><span class="o">&gt;</span>
+<span class="w">        </span><span class="o">&lt;</span><span class="n">div</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;col-md-6&quot;</span><span class="o">&gt;</span>
+<span class="w">            </span><span class="o">&lt;</span><span class="n">div</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;form-group&quot;</span><span class="o">&gt;</span>
+<span class="w">                </span><span class="o">&lt;</span><span class="n">label</span><span class="w"> </span><span class="k">for</span><span class="o">=</span><span class="s">&quot;input-rucEmisorReferenciado&quot;</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;control-label&quot;</span><span class="o">&gt;</span><span class="p">{{</span><span class="w"> </span><span class="n">__</span><span class="p">(</span><span class="err">&#39;</span><span class="n">Referenced</span><span class="w"> </span><span class="n">Issuer</span><span class="w"> </span><span class="n">RUC</span><span class="err">&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">}}</span><span class="o">&lt;/</span><span class="n">label</span><span class="o">&gt;</span>
+<span class="w">                </span><span class="o">&lt;</span><span class="n">input</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="s">&quot;text&quot;</span><span class="w"> </span><span class="kt">id</span><span class="o">=</span><span class="s">&quot;input-rucEmisorReferenciado&quot;</span><span class="w"> </span><span class="n">wire</span><span class="o">:</span><span class="n">model</span><span class="p">.</span><span class="n">lazy</span><span class="o">=</span><span class="s">&quot;rucEmisorReferenciado&quot;</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;form-control @error(&#39;rucEmisorReferenciado&#39;) is-invalid @enderror&quot;</span><span class="o">&gt;</span>
+<span class="w">                </span><span class="p">@</span><span class="n">error</span><span class="p">(</span><span class="err">&#39;</span><span class="n">rucEmisorReferenciado</span><span class="err">&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="n">div</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;invalid-feedback&quot;</span><span class="o">&gt;</span><span class="p">{{</span><span class="w"> </span><span class="n">$message</span><span class="w"> </span><span class="p">}}</span><span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span><span class="w"> </span><span class="p">@</span><span class="n">enderror</span>
+<span class="w">            </span><span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+<span class="w">        </span><span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
 
-        &lt;div class=&quot;col-md-6&quot;&gt;
-            &lt;div class=&quot;form-group&quot;&gt;
-                &lt;label for=&quot;input-nombreEmisorReferenciado&quot; class=&quot;control-label&quot;&gt;{{ __(&#39;Referenced Issuer Name&#39;) }}&lt;/label&gt;
-                &lt;input type=&quot;text&quot; id=&quot;input-nombreEmisorReferenciado&quot; wire:model.lazy=&quot;nombreEmisorReferenciado&quot; class=&quot;form-control @error(&#39;nombreEmisorReferenciado&#39;) is-invalid @enderror&quot;&gt;
-                @error(&#39;nombreEmisorReferenciado&#39;) &lt;div class=&quot;invalid-feedback&quot;&gt;{{ $message }}&lt;/div&gt; @enderror
-            &lt;/div&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
+<span class="w">        </span><span class="o">&lt;</span><span class="n">div</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;col-md-6&quot;</span><span class="o">&gt;</span>
+<span class="w">            </span><span class="o">&lt;</span><span class="n">div</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;form-group&quot;</span><span class="o">&gt;</span>
+<span class="w">                </span><span class="o">&lt;</span><span class="n">label</span><span class="w"> </span><span class="k">for</span><span class="o">=</span><span class="s">&quot;input-nombreEmisorReferenciado&quot;</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;control-label&quot;</span><span class="o">&gt;</span><span class="p">{{</span><span class="w"> </span><span class="n">__</span><span class="p">(</span><span class="err">&#39;</span><span class="n">Referenced</span><span class="w"> </span><span class="n">Issuer</span><span class="w"> </span><span class="n">Name</span><span class="err">&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">}}</span><span class="o">&lt;/</span><span class="n">label</span><span class="o">&gt;</span>
+<span class="w">                </span><span class="o">&lt;</span><span class="n">input</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="s">&quot;text&quot;</span><span class="w"> </span><span class="kt">id</span><span class="o">=</span><span class="s">&quot;input-nombreEmisorReferenciado&quot;</span><span class="w"> </span><span class="n">wire</span><span class="o">:</span><span class="n">model</span><span class="p">.</span><span class="n">lazy</span><span class="o">=</span><span class="s">&quot;nombreEmisorReferenciado&quot;</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;form-control @error(&#39;nombreEmisorReferenciado&#39;) is-invalid @enderror&quot;</span><span class="o">&gt;</span>
+<span class="w">                </span><span class="p">@</span><span class="n">error</span><span class="p">(</span><span class="err">&#39;</span><span class="n">nombreEmisorReferenciado</span><span class="err">&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="n">div</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;invalid-feedback&quot;</span><span class="o">&gt;</span><span class="p">{{</span><span class="w"> </span><span class="n">$message</span><span class="w"> </span><span class="p">}}</span><span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span><span class="w"> </span><span class="p">@</span><span class="n">enderror</span>
+<span class="w">            </span><span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+<span class="w">        </span><span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+<span class="w">    </span><span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
 
-    &lt;div class=&quot;row&quot;&gt;
-        &lt;div class=&quot;col-md-6&quot;&gt;
-            &lt;div class=&quot;form-group&quot;&gt;
-                &lt;label for=&quot;input-fechaDocumentoReferenciado&quot; class=&quot;control-label&quot;&gt;{{ __(&#39;Referenced Document Date&#39;) }}&lt;/label&gt;
-                &lt;input type=&quot;date&quot; id=&quot;input-fechaDocumentoReferenciado&quot; wire:model.lazy=&quot;fechaDocumentoReferenciado&quot; class=&quot;form-control @error(&#39;fechaDocumentoReferenciado&#39;) is-invalid @enderror&quot;&gt;
-                @error(&#39;fechaDocumentoReferenciado&#39;) &lt;div class=&quot;invalid-feedback&quot;&gt;{{ $message }}&lt;/div&gt; @enderror
-            &lt;/div&gt;
-        &lt;/div&gt;
+<span class="w">    </span><span class="o">&lt;</span><span class="n">div</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;row&quot;</span><span class="o">&gt;</span>
+<span class="w">        </span><span class="o">&lt;</span><span class="n">div</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;col-md-6&quot;</span><span class="o">&gt;</span>
+<span class="w">            </span><span class="o">&lt;</span><span class="n">div</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;form-group&quot;</span><span class="o">&gt;</span>
+<span class="w">                </span><span class="o">&lt;</span><span class="n">label</span><span class="w"> </span><span class="k">for</span><span class="o">=</span><span class="s">&quot;input-fechaDocumentoReferenciado&quot;</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;control-label&quot;</span><span class="o">&gt;</span><span class="p">{{</span><span class="w"> </span><span class="n">__</span><span class="p">(</span><span class="err">&#39;</span><span class="n">Referenced</span><span class="w"> </span><span class="n">Document</span><span class="w"> </span><span class="n">Date</span><span class="err">&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">}}</span><span class="o">&lt;/</span><span class="n">label</span><span class="o">&gt;</span>
+<span class="w">                </span><span class="o">&lt;</span><span class="n">input</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="s">&quot;date&quot;</span><span class="w"> </span><span class="kt">id</span><span class="o">=</span><span class="s">&quot;input-fechaDocumentoReferenciado&quot;</span><span class="w"> </span><span class="n">wire</span><span class="o">:</span><span class="n">model</span><span class="p">.</span><span class="n">lazy</span><span class="o">=</span><span class="s">&quot;fechaDocumentoReferenciado&quot;</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;form-control @error(&#39;fechaDocumentoReferenciado&#39;) is-invalid @enderror&quot;</span><span class="o">&gt;</span>
+<span class="w">                </span><span class="p">@</span><span class="n">error</span><span class="p">(</span><span class="err">&#39;</span><span class="n">fechaDocumentoReferenciado</span><span class="err">&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="n">div</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;invalid-feedback&quot;</span><span class="o">&gt;</span><span class="p">{{</span><span class="w"> </span><span class="n">$message</span><span class="w"> </span><span class="p">}}</span><span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span><span class="w"> </span><span class="p">@</span><span class="n">enderror</span>
+<span class="w">            </span><span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+<span class="w">        </span><span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
 
-        &lt;div class=&quot;col-md-6&quot;&gt;
-            &lt;div class=&quot;form-group&quot;&gt;
-                &lt;label for=&quot;input-numeroDocumentoReferenciado&quot; class=&quot;control-label&quot;&gt;{{ __(&#39;Referenced Document Number&#39;) }}&lt;/label&gt;
-                &lt;input type=&quot;text&quot; id=&quot;input-numeroDocumentoReferenciado&quot; wire:model.lazy=&quot;numeroDocumentoReferenciado&quot; class=&quot;form-control @error(&#39;numeroDocumentoReferenciado&#39;) is-invalid @enderror&quot;&gt;
-                @error(&#39;numeroDocumentoReferenciado&#39;) &lt;div class=&quot;invalid-feedback&quot;&gt;{{ $message }}&lt;/div&gt; @enderror
-            &lt;/div&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-&lt;/div&gt;
+<span class="w">        </span><span class="o">&lt;</span><span class="n">div</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;col-md-6&quot;</span><span class="o">&gt;</span>
+<span class="w">            </span><span class="o">&lt;</span><span class="n">div</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;form-group&quot;</span><span class="o">&gt;</span>
+<span class="w">                </span><span class="o">&lt;</span><span class="n">label</span><span class="w"> </span><span class="k">for</span><span class="o">=</span><span class="s">&quot;input-numeroDocumentoReferenciado&quot;</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;control-label&quot;</span><span class="o">&gt;</span><span class="p">{{</span><span class="w"> </span><span class="n">__</span><span class="p">(</span><span class="err">&#39;</span><span class="n">Referenced</span><span class="w"> </span><span class="n">Document</span><span class="w"> </span><span class="n">Number</span><span class="err">&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">}}</span><span class="o">&lt;/</span><span class="n">label</span><span class="o">&gt;</span>
+<span class="w">                </span><span class="o">&lt;</span><span class="n">input</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="s">&quot;text&quot;</span><span class="w"> </span><span class="kt">id</span><span class="o">=</span><span class="s">&quot;input-numeroDocumentoReferenciado&quot;</span><span class="w"> </span><span class="n">wire</span><span class="o">:</span><span class="n">model</span><span class="p">.</span><span class="n">lazy</span><span class="o">=</span><span class="s">&quot;numeroDocumentoReferenciado&quot;</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;form-control @error(&#39;numeroDocumentoReferenciado&#39;) is-invalid @enderror&quot;</span><span class="o">&gt;</span>
+<span class="w">                </span><span class="p">@</span><span class="n">error</span><span class="p">(</span><span class="err">&#39;</span><span class="n">numeroDocumentoReferenciado</span><span class="err">&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="n">div</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;invalid-feedback&quot;</span><span class="o">&gt;</span><span class="p">{{</span><span class="w"> </span><span class="n">$message</span><span class="w"> </span><span class="p">}}</span><span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span><span class="w"> </span><span class="p">@</span><span class="n">enderror</span>
+<span class="w">            </span><span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+<span class="w">        </span><span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+<span class="w">    </span><span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
 </code></pre></div>
-<h4 id="3-campos-de-receptor-extranjero-mejorar-existente">3. Campos de Receptor Extranjero (Mejorar existente)<a class="headerlink" href="#3-campos-de-receptor-extranjero-mejorar-existente" title="Permanent link">&para;</a></h4>
+
+<h4 id="3-campos-de-receptor-extranjero-mejorar-existente">3. Campos de Receptor Extranjero (Mejorar existente)</h4>
 <p><strong>Ubicación</strong>: Modificar paso 4 existente</p>
-<div class="highlight"><pre><span></span><code>&lt;!-- Extranjero Form - Mejorar existente --&gt;
-&lt;div x-show=&quot;receptor_tipo === &#39;4&#39; || $wire.tipeDocument === &#39;3&#39;&quot; @change=&quot;isFormComplete = checkFormCompletion()&quot;&gt;
-    &lt;div class=&quot;form-group&quot;&gt;
-        &lt;label for=&quot;input-tipoIdentificacionExtranjero&quot; class=&quot;control-label&quot;&gt;{{ __(&#39;Foreign ID Type&#39;) }}&lt;/label&gt;
-        &lt;select id=&quot;input-tipoIdentificacionExtranjero&quot; wire:model.lazy=&quot;tipoIdentificacionExtranjero&quot; class=&quot;form-control @error(&#39;tipoIdentificacionExtranjero&#39;) is-invalid @enderror&quot;&gt;
-            &lt;option value=&quot;1&quot;&gt;{{ __(&#39;Passport&#39;) }}&lt;/option&gt;
-            &lt;option value=&quot;2&quot;&gt;{{ __(&#39;Foreign Tax ID&#39;) }}&lt;/option&gt;
-            &lt;option value=&quot;3&quot;&gt;{{ __(&#39;Other ID&#39;) }}&lt;/option&gt;
-        &lt;/select&gt;
-        @error(&#39;tipoIdentificacionExtranjero&#39;) &lt;div class=&quot;invalid-feedback&quot;&gt;{{ $message }}&lt;/div&gt; @enderror
-    &lt;/div&gt;
+<div class="codehilite"><pre><span></span><code><span class="o">&lt;!--</span><span class="w"> </span><span class="n">Extranjero</span><span class="w"> </span><span class="n">Form</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">Mejorar</span><span class="w"> </span><span class="n">existente</span><span class="w"> </span><span class="o">--&gt;</span>
+<span class="o">&lt;</span><span class="n">div</span><span class="w"> </span><span class="n">x</span><span class="o">-</span><span class="n">show</span><span class="o">=</span><span class="s">&quot;receptor_tipo === &#39;4&#39; || $wire.tipeDocument === &#39;3&#39;&quot;</span><span class="w"> </span><span class="p">@</span><span class="n">change</span><span class="o">=</span><span class="s">&quot;isFormComplete = checkFormCompletion()&quot;</span><span class="o">&gt;</span>
+<span class="w">    </span><span class="o">&lt;</span><span class="n">div</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;form-group&quot;</span><span class="o">&gt;</span>
+<span class="w">        </span><span class="o">&lt;</span><span class="n">label</span><span class="w"> </span><span class="k">for</span><span class="o">=</span><span class="s">&quot;input-tipoIdentificacionExtranjero&quot;</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;control-label&quot;</span><span class="o">&gt;</span><span class="p">{{</span><span class="w"> </span><span class="n">__</span><span class="p">(</span><span class="err">&#39;</span><span class="n">Foreign</span><span class="w"> </span><span class="n">ID</span><span class="w"> </span><span class="n">Type</span><span class="err">&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">}}</span><span class="o">&lt;/</span><span class="n">label</span><span class="o">&gt;</span>
+<span class="w">        </span><span class="o">&lt;</span><span class="n">select</span><span class="w"> </span><span class="kt">id</span><span class="o">=</span><span class="s">&quot;input-tipoIdentificacionExtranjero&quot;</span><span class="w"> </span><span class="n">wire</span><span class="o">:</span><span class="n">model</span><span class="p">.</span><span class="n">lazy</span><span class="o">=</span><span class="s">&quot;tipoIdentificacionExtranjero&quot;</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;form-control @error(&#39;tipoIdentificacionExtranjero&#39;) is-invalid @enderror&quot;</span><span class="o">&gt;</span>
+<span class="w">            </span><span class="o">&lt;</span><span class="n">option</span><span class="w"> </span><span class="n">value</span><span class="o">=</span><span class="s">&quot;1&quot;</span><span class="o">&gt;</span><span class="p">{{</span><span class="w"> </span><span class="n">__</span><span class="p">(</span><span class="err">&#39;</span><span class="n">Passport</span><span class="err">&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">}}</span><span class="o">&lt;/</span><span class="n">option</span><span class="o">&gt;</span>
+<span class="w">            </span><span class="o">&lt;</span><span class="n">option</span><span class="w"> </span><span class="n">value</span><span class="o">=</span><span class="s">&quot;2&quot;</span><span class="o">&gt;</span><span class="p">{{</span><span class="w"> </span><span class="n">__</span><span class="p">(</span><span class="err">&#39;</span><span class="n">Foreign</span><span class="w"> </span><span class="n">Tax</span><span class="w"> </span><span class="n">ID</span><span class="err">&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">}}</span><span class="o">&lt;/</span><span class="n">option</span><span class="o">&gt;</span>
+<span class="w">            </span><span class="o">&lt;</span><span class="n">option</span><span class="w"> </span><span class="n">value</span><span class="o">=</span><span class="s">&quot;3&quot;</span><span class="o">&gt;</span><span class="p">{{</span><span class="w"> </span><span class="n">__</span><span class="p">(</span><span class="err">&#39;</span><span class="n">Other</span><span class="w"> </span><span class="n">ID</span><span class="err">&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">}}</span><span class="o">&lt;/</span><span class="n">option</span><span class="o">&gt;</span>
+<span class="w">        </span><span class="o">&lt;/</span><span class="n">select</span><span class="o">&gt;</span>
+<span class="w">        </span><span class="p">@</span><span class="n">error</span><span class="p">(</span><span class="err">&#39;</span><span class="n">tipoIdentificacionExtranjero</span><span class="err">&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="n">div</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;invalid-feedback&quot;</span><span class="o">&gt;</span><span class="p">{{</span><span class="w"> </span><span class="n">$message</span><span class="w"> </span><span class="p">}}</span><span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span><span class="w"> </span><span class="p">@</span><span class="n">enderror</span>
+<span class="w">    </span><span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
 
-    &lt;div class=&quot;form-group&quot;&gt;
-        &lt;label for=&quot;input-numeroIdentificacionExtranjero&quot; class=&quot;control-label&quot;&gt;{{ __(&#39;Foreign ID Number&#39;) }}&lt;/label&gt;
-        &lt;input type=&quot;text&quot; id=&quot;input-numeroIdentificacionExtranjero&quot; wire:model.lazy=&quot;numeroIdentificacionExtranjero&quot; class=&quot;form-control @error(&#39;numeroIdentificacionExtranjero&#39;) is-invalid @enderror&quot;&gt;
-        @error(&#39;numeroIdentificacionExtranjero&#39;) &lt;div class=&quot;invalid-feedback&quot;&gt;{{ $message }}&lt;/div&gt; @enderror
-    &lt;/div&gt;
+<span class="w">    </span><span class="o">&lt;</span><span class="n">div</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;form-group&quot;</span><span class="o">&gt;</span>
+<span class="w">        </span><span class="o">&lt;</span><span class="n">label</span><span class="w"> </span><span class="k">for</span><span class="o">=</span><span class="s">&quot;input-numeroIdentificacionExtranjero&quot;</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;control-label&quot;</span><span class="o">&gt;</span><span class="p">{{</span><span class="w"> </span><span class="n">__</span><span class="p">(</span><span class="err">&#39;</span><span class="n">Foreign</span><span class="w"> </span><span class="n">ID</span><span class="w"> </span><span class="n">Number</span><span class="err">&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">}}</span><span class="o">&lt;/</span><span class="n">label</span><span class="o">&gt;</span>
+<span class="w">        </span><span class="o">&lt;</span><span class="n">input</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="s">&quot;text&quot;</span><span class="w"> </span><span class="kt">id</span><span class="o">=</span><span class="s">&quot;input-numeroIdentificacionExtranjero&quot;</span><span class="w"> </span><span class="n">wire</span><span class="o">:</span><span class="n">model</span><span class="p">.</span><span class="n">lazy</span><span class="o">=</span><span class="s">&quot;numeroIdentificacionExtranjero&quot;</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;form-control @error(&#39;numeroIdentificacionExtranjero&#39;) is-invalid @enderror&quot;</span><span class="o">&gt;</span>
+<span class="w">        </span><span class="p">@</span><span class="n">error</span><span class="p">(</span><span class="err">&#39;</span><span class="n">numeroIdentificacionExtranjero</span><span class="err">&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="n">div</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;invalid-feedback&quot;</span><span class="o">&gt;</span><span class="p">{{</span><span class="w"> </span><span class="n">$message</span><span class="w"> </span><span class="p">}}</span><span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span><span class="w"> </span><span class="p">@</span><span class="n">enderror</span>
+<span class="w">    </span><span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
 
-    &lt;div class=&quot;form-group&quot;&gt;
-        &lt;label for=&quot;input-paisExtranjero&quot; class=&quot;control-label&quot;&gt;{{ __(&#39;Foreign Country&#39;) }}&lt;/label&gt;
-        &lt;select id=&quot;input-paisExtranjero&quot; wire:model.lazy=&quot;paisExtranjero&quot; class=&quot;form-control @error(&#39;paisExtranjero&#39;) is-invalid @enderror&quot;&gt;
-            @foreach (\App\Utils\DataProvider::foreignCountries() ?? [] as $key =&gt; $option)
-                &lt;option value=&quot;{{ $key }}&quot;&gt;{{ $option }}&lt;/option&gt;
-            @endforeach
-        &lt;/select&gt;
-        @error(&#39;paisExtranjero&#39;) &lt;div class=&quot;invalid-feedback&quot;&gt;{{ $message }}&lt;/div&gt; @enderror
-    &lt;/div&gt;
+<span class="w">    </span><span class="o">&lt;</span><span class="n">div</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;form-group&quot;</span><span class="o">&gt;</span>
+<span class="w">        </span><span class="o">&lt;</span><span class="n">label</span><span class="w"> </span><span class="k">for</span><span class="o">=</span><span class="s">&quot;input-paisExtranjero&quot;</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;control-label&quot;</span><span class="o">&gt;</span><span class="p">{{</span><span class="w"> </span><span class="n">__</span><span class="p">(</span><span class="err">&#39;</span><span class="n">Foreign</span><span class="w"> </span><span class="n">Country</span><span class="err">&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">}}</span><span class="o">&lt;/</span><span class="n">label</span><span class="o">&gt;</span>
+<span class="w">        </span><span class="o">&lt;</span><span class="n">select</span><span class="w"> </span><span class="kt">id</span><span class="o">=</span><span class="s">&quot;input-paisExtranjero&quot;</span><span class="w"> </span><span class="n">wire</span><span class="o">:</span><span class="n">model</span><span class="p">.</span><span class="n">lazy</span><span class="o">=</span><span class="s">&quot;paisExtranjero&quot;</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;form-control @error(&#39;paisExtranjero&#39;) is-invalid @enderror&quot;</span><span class="o">&gt;</span>
+<span class="w">            </span><span class="p">@</span><span class="n">foreach</span><span class="w"> </span><span class="p">(</span><span class="err">\</span><span class="n">App</span><span class="err">\</span><span class="n">Utils</span><span class="err">\</span><span class="n">DataProvider</span><span class="o">::</span><span class="n">foreignCountries</span><span class="p">()</span><span class="w"> </span><span class="o">??</span><span class="w"> </span><span class="p">[]</span><span class="w"> </span><span class="n">as</span><span class="w"> </span><span class="n">$key</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">$option</span><span class="p">)</span>
+<span class="w">                </span><span class="o">&lt;</span><span class="n">option</span><span class="w"> </span><span class="n">value</span><span class="o">=</span><span class="s">&quot;{{ $key }}&quot;</span><span class="o">&gt;</span><span class="p">{{</span><span class="w"> </span><span class="n">$option</span><span class="w"> </span><span class="p">}}</span><span class="o">&lt;/</span><span class="n">option</span><span class="o">&gt;</span>
+<span class="w">            </span><span class="p">@</span><span class="n">endforeach</span>
+<span class="w">        </span><span class="o">&lt;/</span><span class="n">select</span><span class="o">&gt;</span>
+<span class="w">        </span><span class="p">@</span><span class="n">error</span><span class="p">(</span><span class="err">&#39;</span><span class="n">paisExtranjero</span><span class="err">&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="n">div</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;invalid-feedback&quot;</span><span class="o">&gt;</span><span class="p">{{</span><span class="w"> </span><span class="n">$message</span><span class="w"> </span><span class="p">}}</span><span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span><span class="w"> </span><span class="p">@</span><span class="n">enderror</span>
+<span class="w">    </span><span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
 
-    &lt;!-- Resto de campos existentes --&gt;
-&lt;/div&gt;
+<span class="w">    </span><span class="o">&lt;!--</span><span class="w"> </span><span class="n">Resto</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">campos</span><span class="w"> </span><span class="n">existentes</span><span class="w"> </span><span class="o">--&gt;</span>
+<span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
 </code></pre></div>
-<h3 id="modificaciones-en-dataprovider-necesarias">Modificaciones en DataProvider Necesarias<a class="headerlink" href="#modificaciones-en-dataprovider-necesarias" title="Permanent link">&para;</a></h3>
-<h4 id="1-nuevos-metodos-requeridos">1. Nuevos métodos requeridos:<a class="headerlink" href="#1-nuevos-metodos-requeridos" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="x">// En App\Utils\DataProvider</span>
+
+<h3 id="modificaciones-en-dataprovider-necesarias">Modificaciones en DataProvider Necesarias</h3>
+<h4 id="1-nuevos-metodos-requeridos">1. Nuevos métodos requeridos:</h4>
+<div class="codehilite"><pre><span></span><code><span class="x">// En App\Utils\DataProvider</span>
 <span class="x">public static function incoterms($component = null) {</span>
 <span class="x">    // Tabla 32 de la ficha técnica</span>
 <span class="x">    return [</span>
@@ -2185,9 +2234,10 @@
 <span class="x">    return $allCountries;</span>
 <span class="x">}</span>
 </code></pre></div>
-<h3 id="validaciones-en-el-componente-livewire">Validaciones en el Componente Livewire<a class="headerlink" href="#validaciones-en-el-componente-livewire" title="Permanent link">&para;</a></h3>
-<h4 id="propiedades-adicionales">Propiedades adicionales:<a class="headerlink" href="#propiedades-adicionales" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="x">// Campos exportación</span>
+
+<h3 id="validaciones-en-el-componente-livewire">Validaciones en el Componente Livewire</h3>
+<h4 id="propiedades-adicionales">Propiedades adicionales:</h4>
+<div class="codehilite"><pre><span></span><code><span class="x">// Campos exportación</span>
 <span class="x">public $condicionesEntrega;</span>
 <span class="x">public $monedaExportacion = &#39;USD&#39;;</span>
 <span class="x">public $tipoCambio;</span>
@@ -2206,8 +2256,9 @@
 <span class="x">public $numeroIdentificacionExtranjero;</span>
 <span class="x">public $paisExtranjero;</span>
 </code></pre></div>
-<h4 id="reglas-de-validacion-condicionales">Reglas de validación condicionales:<a class="headerlink" href="#reglas-de-validacion-condicionales" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="x">protected function getRules()</span>
+
+<h4 id="reglas-de-validacion-condicionales">Reglas de validación condicionales:</h4>
+<div class="codehilite"><pre><span></span><code><span class="x">protected function getRules()</span>
 <span class="x">{</span>
 <span class="x">    $rules = [</span>
 <span class="x">        // Reglas base...</span>
@@ -2242,8 +2293,9 @@
 <span class="x">    return $rules;</span>
 <span class="x">}</span>
 </code></pre></div>
-<h3 id="watchers-y-logica-reactiva">Watchers y Lógica Reactiva<a class="headerlink" href="#watchers-y-logica-reactiva" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">public function updatedTipeDocument($value)</span>
+
+<h3 id="watchers-y-logica-reactiva">Watchers y Lógica Reactiva</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">public function updatedTipeDocument($value)</span>
 <span class="x">{</span>
 <span class="x">    // Limpiar campos condicionales al cambiar tipo</span>
 <span class="x">    if ($value !== &#39;3&#39;) {</span>
@@ -2279,35 +2331,36 @@
 <span class="x">    $this-&gt;numeroDocumentoReferenciado = null;</span>
 <span class="x">}</span>
 </code></pre></div>
-<h2 id="plan-de-implementacion">Plan de Implementación<a class="headerlink" href="#plan-de-implementacion" title="Permanent link">&para;</a></h2>
-<h3 id="fase-1-preparacion">Fase 1: Preparación<a class="headerlink" href="#fase-1-preparacion" title="Permanent link">&para;</a></h3>
+
+<h2 id="plan-de-implementacion">Plan de Implementación</h2>
+<h3 id="fase-1-preparacion">Fase 1: Preparación</h3>
 <ol>
 <li>✅ Análisis de ficha técnica completado</li>
 <li>✅ Mapeo de campos condicionales identificado</li>
 <li>🔄 Crear métodos DataProvider adicionales</li>
 </ol>
-<h3 id="fase-2-backend">Fase 2: Backend<a class="headerlink" href="#fase-2-backend" title="Permanent link">&para;</a></h3>
+<h3 id="fase-2-backend">Fase 2: Backend</h3>
 <ol>
 <li>Agregar propiedades al componente Livewire</li>
 <li>Implementar validaciones condicionales</li>
 <li>Agregar watchers para lógica reactiva</li>
 <li>Testing de validaciones</li>
 </ol>
-<h3 id="fase-3-frontend">Fase 3: Frontend<a class="headerlink" href="#fase-3-frontend" title="Permanent link">&para;</a></h3>
+<h3 id="fase-3-frontend">Fase 3: Frontend</h3>
 <ol>
 <li>Modificar plantilla Blade con campos condicionales</li>
 <li>Implementar lógica Alpine.js para visibilidad</li>
 <li>Ajustar pasos del wizard si es necesario</li>
 <li>Testing de UX</li>
 </ol>
-<h3 id="fase-4-integracion">Fase 4: Integración<a class="headerlink" href="#fase-4-integracion" title="Permanent link">&para;</a></h3>
+<h3 id="fase-4-integracion">Fase 4: Integración</h3>
 <ol>
 <li>Actualizar generación XML con nuevos campos</li>
 <li>Testing con PACs (Alanube y TheFactoryHKA)</li>
 <li>Validación con ficha técnica</li>
 <li>Documentación de cambios</li>
 </ol>
-<h2 id="archivos-a-modificar">Archivos a Modificar<a class="headerlink" href="#archivos-a-modificar" title="Permanent link">&para;</a></h2>
+<h2 id="archivos-a-modificar">Archivos a Modificar</h2>
 <ol>
 <li><strong>Componente Livewire</strong>: <code>/app/Http/Livewire/Admin/Einvoice/Create.php</code></li>
 <li><strong>Plantilla Blade</strong>: <code>/resources/views/livewire/admin/einvoice/create.blade.php</code></li>
@@ -2368,7 +2421,7 @@
       
       
     
-    <a href="https://github.com/aghabrego/docucenter" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+    <a href="https://github.com/aghabrego/docucenter-public" target="_blank" rel="noopener" title="github.com" class="md-social__link">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
     </a>
   

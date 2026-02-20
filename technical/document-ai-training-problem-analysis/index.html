@@ -233,7 +233,7 @@
           
   
   
-  APIs
+  API Documentation
 
         </a>
       </li>
@@ -269,7 +269,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../" class="md-tabs__link">
+        <a href="../README.md" class="md-tabs__link">
           
   
   
@@ -298,6 +298,25 @@
         </a>
       </li>
     
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../testing/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Sistema de Testing
+
+      </a>
+    </li>
   
 
       
@@ -404,7 +423,7 @@
   <span class="md-ellipsis">
     
   
-    APIs
+    API Documentation
   
 
     
@@ -420,7 +439,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    APIs
+    API Documentation
   
 
           </label>
@@ -1363,7 +1382,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
+      <a href="../README.md" class="md-nav__link">
         
   
   
@@ -1716,6 +1735,33 @@
   
 
     
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sistema de Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -2022,64 +2068,65 @@
   
 
 
-<h1 id="problema-google-document-ai-training-jsonl-error-persistente">Problema: Google Document AI Training JSONL - Error Persistente<a class="headerlink" href="#problema-google-document-ai-training-jsonl-error-persistente" title="Permanent link">&para;</a></h1>
-<h2 id="resumen-del-problema">Resumen del Problema<a class="headerlink" href="#resumen-del-problema" title="Permanent link">&para;</a></h2>
+<h1 id="problema-google-document-ai-training-jsonl-error-persistente">Problema: Google Document AI Training JSONL - Error Persistente</h1>
+<h2 id="resumen-del-problema">Resumen del Problema</h2>
 <p>Después de múltiples iteraciones, Google Document AI sigue rechazando nuestros archivos JSONL con el error:
 - <code>"deserialization_error":"extraneous characters after end of JSON object"</code>
 - <code>"entities_count":"0"</code>
 - <code>"constraint":"text_anchor"</code></p>
-<h2 id="intentos-realizados">Intentos Realizados<a class="headerlink" href="#intentos-realizados" title="Permanent link">&para;</a></h2>
-<h3 id="1-con-textanchor-y-text-indices-sinteticos">1. Con textAnchor y text (índices sintéticos)<a class="headerlink" href="#1-con-textanchor-y-text-indices-sinteticos" title="Permanent link">&para;</a></h3>
+<h2 id="intentos-realizados">Intentos Realizados</h2>
+<h3 id="1-con-textanchor-y-text-indices-sinteticos">1. Con textAnchor y text (índices sintéticos)</h3>
 <ul>
 <li><strong>Formato</strong>: URI + mimeType + text + entities[type, mentionText, textAnchor]</li>
 <li><strong>Resultado</strong>: FAILED - "extraneous characters"</li>
 <li><strong>Problema</strong>: Índices no corresponden al PDF real</li>
 </ul>
-<h3 id="2-cambiando-startindexendindex-de-string-a-integer">2. Cambiando startIndex/endIndex de string a integer<a class="headerlink" href="#2-cambiando-startindexendindex-de-string-a-integer" title="Permanent link">&para;</a></h3>
+<h3 id="2-cambiando-startindexendindex-de-string-a-integer">2. Cambiando startIndex/endIndex de string a integer</h3>
 <ul>
 <li><strong>Cambio</strong>: <code>"startIndex":"0"</code> → <code>"startIndex":0</code></li>
 <li><strong>Resultado</strong>: FAILED - mismo error</li>
 </ul>
-<h3 id="3-corrigiendo-newlines-en-jsonl">3. Corrigiendo newlines en JSONL<a class="headerlink" href="#3-corrigiendo-newlines-en-jsonl" title="Permanent link">&para;</a></h3>
+<h3 id="3-corrigiendo-newlines-en-jsonl">3. Corrigiendo newlines en JSONL</h3>
 <ul>
 <li><strong>Cambio</strong>: Agregando newlines solo entre líneas, no al final</li>
 <li><strong>Resultado</strong>: FAILED - mismo error</li>
 </ul>
-<h3 id="4-sin-campo-text-ni-textanchor">4. Sin campo text ni textAnchor<a class="headerlink" href="#4-sin-campo-text-ni-textanchor" title="Permanent link">&para;</a></h3>
+<h3 id="4-sin-campo-text-ni-textanchor">4. Sin campo text ni textAnchor</h3>
 <ul>
 <li><strong>Formato</strong>: URI + mimeType + entities[type, mentionText]</li>
 <li><strong>Resultado</strong>: FAILED - "constraint: text_anchor" (Google lo requiere)</li>
 </ul>
-<h3 id="5-limpiando-caracteres-de-control-en-mentiontext">5. Limpiando caracteres de control en mentionText<a class="headerlink" href="#5-limpiando-caracteres-de-control-en-mentiontext" title="Permanent link">&para;</a></h3>
+<h3 id="5-limpiando-caracteres-de-control-en-mentiontext">5. Limpiando caracteres de control en mentionText</h3>
 <ul>
 <li><strong>Cambio</strong>: Eliminar <code>\n</code>, <code>\r</code> y otros caracteres de control</li>
 <li><strong>Resultado</strong>: FAILED - mismo error (aunque los newlines se limpiaron correctamente)</li>
 </ul>
-<h2 id="analisis-del-archivo-actual">Análisis del Archivo Actual<a class="headerlink" href="#analisis-del-archivo-actual" title="Permanent link">&para;</a></h2>
+<h2 id="analisis-del-archivo-actual">Análisis del Archivo Actual</h2>
 <p><strong>Archivo</strong>: <code>20251126005114.jsonl</code>
 - ✅ JSON válido en todas las líneas
 - ✅ No termina con newline
 - ✅ No hay newlines en mentionText
 - ✅ ContentType correcto (text/plain)
 - ⚠️  Contiene caracteres no-ASCII (°, º, á)</p>
-<p><strong>Formato actual</strong>:
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<p><strong>Formato actual</strong>:</p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;uri&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;gs://...&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;mimeType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;application/pdf&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;entities&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <span class="w">    </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;invoice_number&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;mentionText&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;12345&quot;</span><span class="p">}</span>
 <span class="w">  </span><span class="p">]</span>
 <span class="p">}</span>
-</code></pre></div></p>
-<h2 id="diagnostico">Diagnóstico<a class="headerlink" href="#diagnostico" title="Permanent link">&para;</a></h2>
+</code></pre></div>
+
+<h2 id="diagnostico">Diagnóstico</h2>
 <p>Google Document AI está rechazando el formato porque:</p>
 <ol>
 <li><strong>Requiere textAnchor</strong>: El error "constraint: text_anchor" indica que textAnchor es obligatorio</li>
 <li><strong>No puede inferir posiciones</strong>: Sin textAnchor, Google no puede ubicar el texto en el PDF</li>
 <li><strong>Formato API incompatible</strong>: El formato programático no es compatible con lo que Google espera</li>
 </ol>
-<h2 id="solucion-recomendada">Solución Recomendada<a class="headerlink" href="#solucion-recomendada" title="Permanent link">&para;</a></h2>
-<h3 id="tipos-de-procesadores-en-document-ai-workbench">Tipos de Procesadores en Document AI Workbench<a class="headerlink" href="#tipos-de-procesadores-en-document-ai-workbench" title="Permanent link">&para;</a></h3>
+<h2 id="solucion-recomendada">Solución Recomendada</h2>
+<h3 id="tipos-de-procesadores-en-document-ai-workbench">Tipos de Procesadores en Document AI Workbench</h3>
 <p>Google Document AI ofrece varios tipos de procesadores con IA generativa:</p>
 <ol>
 <li><strong>🎯 Custom Extractor</strong> (LO QUE NECESITAS)</li>
@@ -2112,7 +2159,7 @@
 <li>Ideal para: contratos largos, reportes</li>
 <li>No extrae campos estructurados</li>
 </ol>
-<h3 id="pasos-para-crear-custom-extractor">Pasos para Crear Custom Extractor<a class="headerlink" href="#pasos-para-crear-custom-extractor" title="Permanent link">&para;</a></h3>
+<h3 id="pasos-para-crear-custom-extractor">Pasos para Crear Custom Extractor</h3>
 <p><strong>✅ YA TIENES UN CUSTOM EXTRACTOR CREADO</strong></p>
 <p>Información del processor existente:
 - <strong>Nombre</strong>: docucenter-custom-extractor
@@ -2150,17 +2197,17 @@
 <p><strong>⚠️ Campos Faltantes que Usas en el Código:</strong>
 - ❌ <code>net_amount</code> - (usas en código como "subtotal sin impuestos")
 - ❌ <code>payment_method</code> - (usas en algunos documentos: "CONTADO", "CREDITO")</p>
-<h2 id="solucion-programatica-entrenar-desde-docucenter-con-ocr">✅ SOLUCIÓN PROGRAMÁTICA: Entrenar desde DocuCenter con OCR<a class="headerlink" href="#solucion-programatica-entrenar-desde-docucenter-con-ocr" title="Permanent link">&para;</a></h2>
+<h2 id="solucion-programatica-entrenar-desde-docucenter-con-ocr">✅ SOLUCIÓN PROGRAMÁTICA: Entrenar desde DocuCenter con OCR</h2>
 <p><strong>SÍ PUEDES ENTRENAR DESDE CÓDIGO</strong>, pero necesitas hacer OCR primero para obtener las coordenadas textAnchor reales.</p>
-<h3 id="como-funciona">Cómo Funciona<a class="headerlink" href="#como-funciona" title="Permanent link">&para;</a></h3>
+<h3 id="como-funciona">Cómo Funciona</h3>
 <ol>
 <li><strong>Hacer OCR de cada PDF</strong> usando el OCR Processor de Google</li>
 <li><strong>Extraer coordenadas textAnchor</strong> del resultado del OCR</li>
 <li><strong>Generar JSONL correcto</strong> con uri + text + entities (con textAnchor real)</li>
 <li><strong>Subir a GCS</strong> y entrenar normalmente</li>
 </ol>
-<h3 id="comando-artisan-creado">Comando Artisan Creado<a class="headerlink" href="#comando-artisan-creado" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># Generar training data con OCR</span>
+<h3 id="comando-artisan-creado">Comando Artisan Creado</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Generar training data con OCR</span>
 php<span class="w"> </span>artisan<span class="w"> </span>documentai:generate-training-with-ocr<span class="w"> </span>--timestamp<span class="o">=</span><span class="m">20251126005110</span><span class="w"> </span>--limit<span class="o">=</span><span class="m">20</span>
 
 <span class="c1"># Esto hace:</span>
@@ -2171,7 +2218,8 @@ php<span class="w"> </span>artisan<span class="w"> </span>documentai:generate-tr
 <span class="c1"># 5. Sube a gs://bucket/datasets/training/{timestamp}/ y .../test/{timestamp}/</span>
 <span class="c1"># 6. Listo para entrenar con: php artisan documentai:train --timestamp={nuevo_timestamp}</span>
 </code></pre></div>
-<h3 id="prerequisitos">Prerequisitos<a class="headerlink" href="#prerequisitos" title="Permanent link">&para;</a></h3>
+
+<h3 id="prerequisitos">Prerequisitos</h3>
 <ol>
 <li><strong>Annotations</strong>: Necesitas tener las annotations de cada PDF guardadas en algún lugar</li>
 <li>Puede ser en base de datos (tabla <code>invoice_annotations</code>)</li>
@@ -2180,7 +2228,7 @@ php<span class="w"> </span>artisan<span class="w"> </span>documentai:generate-tr
 </ol>
 <p><strong>Ejemplo: Crear archivo de annotations manualmente</strong></p>
 <p>Crea un archivo JSON por cada PDF con sus valores:</p>
-<div class="highlight"><pre><span></span><code><span class="c1"># /tmp/training-annotations/document-1.json</span>
+<div class="codehilite"><pre><span></span><code><span class="c1"># /tmp/training-annotations/document-1.json</span>
 <span class="o">{</span>
 <span class="w">  </span><span class="s2">&quot;invoice_number&quot;</span>:<span class="w"> </span><span class="s2">&quot;001-001-12345&quot;</span>,
 <span class="w">  </span><span class="s2">&quot;invoice_date&quot;</span>:<span class="w"> </span><span class="s2">&quot;2025-11-25&quot;</span>,
@@ -2199,8 +2247,9 @@ php<span class="w"> </span>artisan<span class="w"> </span>documentai:generate-tr
 <span class="w">  </span><span class="o">]</span>
 <span class="o">}</span>
 </code></pre></div>
+
 <p>Luego modificar <code>getAnnotationsForDocument()</code> en el comando para leer estos archivos:</p>
-<div class="highlight"><pre><span></span><code><span class="x">protected function getAnnotationsForDocument(string $fileName): array</span>
+<div class="codehilite"><pre><span></span><code><span class="x">protected function getAnnotationsForDocument(string $fileName): array</span>
 <span class="x">{</span>
 <span class="x">    $annotationsFile = &quot;/tmp/training-annotations/{$fileName}.json&quot;;</span>
 
@@ -2219,14 +2268,15 @@ php<span class="w"> </span>artisan<span class="w"> </span>documentai:generate-tr
 <span class="x">    return $annotations;</span>
 <span class="x">}</span>
 </code></pre></div>
+
 <ol>
 <li><strong>OCR Processor</strong>: Google proporciona un OCR processor general (ID: 'ocr')</li>
 <li>No requiere configuración adicional</li>
 <li>Disponible en todos los proyectos</li>
 <li>Extrae texto + coordenadas automáticamente</li>
 </ol>
-<h3 id="metodos-agregados-en-documentaiservice">Métodos Agregados en DocumentAIService<a class="headerlink" href="#metodos-agregados-en-documentaiservice" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">// Generar entities CON textAnchor real usando OCR</span>
+<h3 id="metodos-agregados-en-documentaiservice">Métodos Agregados en DocumentAIService</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">// Generar entities CON textAnchor real usando OCR</span>
 <span class="x">public function formatEntitiesWithOCR(string $pdfContent, array $annotations): array</span>
 <span class="x">{</span>
 <span class="x">    // 1. Hacer OCR del PDF</span>
@@ -2251,18 +2301,19 @@ php<span class="w"> </span>artisan<span class="w"> </span>documentai:generate-tr
 <span class="x">    return [&#39;textSegments&#39; =&gt; [[&#39;startIndex&#39; =&gt; &#39;0&#39;, &#39;endIndex&#39; =&gt; &#39;5&#39;]]];</span>
 <span class="x">}</span>
 </code></pre></div>
-<h3 id="ventajas-de-este-enfoque">Ventajas de este Enfoque<a class="headerlink" href="#ventajas-de-este-enfoque" title="Permanent link">&para;</a></h3>
+
+<h3 id="ventajas-de-este-enfoque">Ventajas de este Enfoque</h3>
 <p>✅ <strong>Totalmente programático</strong>: No necesitas UI de Workbench
 ✅ <strong>Automatizable</strong>: Puedes procesar cientos de documentos en batch
 ✅ <strong>textAnchor real</strong>: Usa las coordenadas exactas del OCR de Google
 ✅ <strong>Formato correcto</strong>: Google acepta este JSONL sin errores
 ✅ <strong>Integrado en DocuCenter</strong>: Todo en tu flujo de trabajo actual</p>
-<h3 id="desventajas">Desventajas<a class="headerlink" href="#desventajas" title="Permanent link">&para;</a></h3>
+<h3 id="desventajas">Desventajas</h3>
 <p>❌ <strong>Requiere annotations previas</strong>: Necesitas tener las annotations de cada PDF
 ❌ <strong>Más lento</strong>: OCR de 20 PDFs puede tomar varios minutos
 ❌ <strong>API calls</strong>: Cada PDF requiere una llamada al OCR Processor
 ❌ <strong>Matching imperfecto</strong>: Si el valor no aparece exactamente en el PDF, no se encontrará textAnchor</p>
-<h2 id="alternativa-document-ai-workbench-ui">🖥️ ALTERNATIVA: Document AI Workbench UI<a class="headerlink" href="#alternativa-document-ai-workbench-ui" title="Permanent link">&para;</a></h2>
+<h2 id="alternativa-document-ai-workbench-ui">🖥️ ALTERNATIVA: Document AI Workbench UI</h2>
 <p>Si no tienes annotations previas o quieres usar auto-labeling, usa Workbench UI:</p>
 <p><strong>Nota sobre "Opcional" vs "Obligatoria":</strong>
 - Los campos de line_items están como "Obligatoria varias veces" ✅ Correcto
@@ -2318,7 +2369,7 @@ php<span class="w"> </span>artisan<span class="w"> </span>documentai:generate-tr
 - Ya soporta muchos campos comunes
 - Sin necesidad de training
 - Puede no detectar campos específicos de Panamá</p>
-<h2 id="archivos-de-utilidad-creados">Archivos de Utilidad Creados<a class="headerlink" href="#archivos-de-utilidad-creados" title="Permanent link">&para;</a></h2>
+<h2 id="archivos-de-utilidad-creados">Archivos de Utilidad Creados</h2>
 <ul>
 <li><code>scripts/test-jsonl-format.php</code> - Análisis completo de JSONL</li>
 <li><code>scripts/test-google-jsonl-parser.php</code> - Simula parser de Google</li>
@@ -2328,7 +2379,7 @@ php<span class="w"> </span>artisan<span class="w"> </span>documentai:generate-tr
 <li><code>scripts/analyze-mention-text.php</code> - Encuentra caracteres problemáticos</li>
 <li><code>scripts/generate-minimal-jsonl.php</code> - Genera JSONL de prueba</li>
 </ul>
-<h2 id="conclusion">Conclusión<a class="headerlink" href="#conclusion" title="Permanent link">&para;</a></h2>
+<h2 id="conclusion">Conclusión</h2>
 <p>El problema NO es el formato JSONL en sí (que es válido), sino que <strong>la API de Document AI Training requiere un formato específico de textAnchor que no podemos generar sin OCR real del PDF</strong>.</p>
 <p>La solución práctica es usar <strong>Document AI Workbench UI</strong> que maneja esto automáticamente.</p>
 
@@ -2383,7 +2434,7 @@ php<span class="w"> </span>artisan<span class="w"> </span>documentai:generate-tr
       
       
     
-    <a href="https://github.com/aghabrego/docucenter" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+    <a href="https://github.com/aghabrego/docucenter-public" target="_blank" rel="noopener" title="github.com" class="md-social__link">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
     </a>
   

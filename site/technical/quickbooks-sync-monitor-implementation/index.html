@@ -233,7 +233,7 @@
           
   
   
-  APIs
+  API Documentation
 
         </a>
       </li>
@@ -269,7 +269,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../" class="md-tabs__link">
+        <a href="../README.md" class="md-tabs__link">
           
   
   
@@ -298,6 +298,25 @@
         </a>
       </li>
     
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../testing/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Sistema de Testing
+
+      </a>
+    </li>
   
 
       
@@ -404,7 +423,7 @@
   <span class="md-ellipsis">
     
   
-    APIs
+    API Documentation
   
 
     
@@ -420,7 +439,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    APIs
+    API Documentation
   
 
           </label>
@@ -1363,7 +1382,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
+      <a href="../README.md" class="md-nav__link">
         
   
   
@@ -1712,6 +1731,33 @@
           </ul>
         </nav>
       
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sistema de Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -2155,11 +2201,11 @@
   
 
 
-<h1 id="quickbooks-sync-monitor-implementacion">QuickBooks Sync Monitor - Implementación<a class="headerlink" href="#quickbooks-sync-monitor-implementacion" title="Permanent link">&para;</a></h1>
-<h2 id="descripcion">📋 Descripción<a class="headerlink" href="#descripcion" title="Permanent link">&para;</a></h2>
+<h1 id="quickbooks-sync-monitor-implementacion">QuickBooks Sync Monitor - Implementación</h1>
+<h2 id="descripcion">📋 Descripción</h2>
 <p>Panel de monitoreo para clientes que permite visualizar y gestionar el estado de sincronización de facturas con QuickBooks Online.</p>
-<h2 id="archivos-creados">📁 Archivos Creados<a class="headerlink" href="#archivos-creados" title="Permanent link">&para;</a></h2>
-<h3 id="1-componente-livewire">1. Componente Livewire<a class="headerlink" href="#1-componente-livewire" title="Permanent link">&para;</a></h3>
+<h2 id="archivos-creados">📁 Archivos Creados</h2>
+<h3 id="1-componente-livewire">1. Componente Livewire</h3>
 <p><strong>Ubicación</strong>: <code>app/Http/Livewire/Admin/Reports/QuickBooksSyncMonitor.php</code></p>
 <p><strong>Características</strong>:
 - Estadísticas en tiempo real de sincronización
@@ -2168,7 +2214,7 @@
 - Reintento individual y masivo de facturas fallidas
 - Paginación de resultados
 - Multi-tenant (organización activa)</p>
-<h3 id="2-vista-blade">2. Vista Blade<a class="headerlink" href="#2-vista-blade" title="Permanent link">&para;</a></h3>
+<h3 id="2-vista-blade">2. Vista Blade</h3>
 <p><strong>Ubicación</strong>: <code>resources/views/livewire/admin/reports/quickbooks-sync-monitor.blade.php</code></p>
 <p><strong>Elementos</strong>:
 - 6 tarjetas de estadísticas (Total, Completadas, Fallidas, En proceso, Pendientes, % Éxito)
@@ -2177,13 +2223,14 @@
 - Modales para ver detalles de errores
 - Selección masiva para reintentos
 - Mensajes flash de confirmación</p>
-<h3 id="3-ruta">3. Ruta<a class="headerlink" href="#3-ruta" title="Permanent link">&para;</a></h3>
-<p><strong>Ubicación</strong>: <code>routes/web.php</code>
-<div class="highlight"><pre><span></span><code><span class="x">Route::get(&#39;/admin/reports/quickbooks_sync&#39;, QuickBooksSyncMonitor::class)</span>
+<h3 id="3-ruta">3. Ruta</h3>
+<p><strong>Ubicación</strong>: <code>routes/web.php</code></p>
+<div class="codehilite"><pre><span></span><code><span class="x">Route::get(&#39;/admin/reports/quickbooks_sync&#39;, QuickBooksSyncMonitor::class)</span>
 <span class="x">    -&gt;name(&#39;admin.reports.quickbooks_sync&#39;);</span>
-</code></pre></div></p>
-<h2 id="funcionalidades">🎯 Funcionalidades<a class="headerlink" href="#funcionalidades" title="Permanent link">&para;</a></h2>
-<h3 id="visualizacion">Visualización<a class="headerlink" href="#visualizacion" title="Permanent link">&para;</a></h3>
+</code></pre></div>
+
+<h2 id="funcionalidades">🎯 Funcionalidades</h2>
+<h3 id="visualizacion">Visualización</h3>
 <ul>
 <li><strong>Estadísticas Generales</strong>:</li>
 <li>Total de facturas</li>
@@ -2206,21 +2253,21 @@
 <li>Número de intentos</li>
 <li>Fecha del último intento</li>
 </ul>
-<h3 id="filtros">Filtros<a class="headerlink" href="#filtros" title="Permanent link">&para;</a></h3>
+<h3 id="filtros">Filtros</h3>
 <ul>
 <li>Rango de fechas (desde/hasta)</li>
 <li>Estado de sincronización</li>
 <li>Paso donde se encuentra</li>
 <li>Búsqueda por número de factura</li>
 </ul>
-<h3 id="acciones">Acciones<a class="headerlink" href="#acciones" title="Permanent link">&para;</a></h3>
+<h3 id="acciones">Acciones</h3>
 <ol>
 <li><strong>Reintentar Individual</strong>: Botón por factura fallida</li>
 <li><strong>Reintentar Seleccionadas</strong>: Checkbox para selección múltiple</li>
 <li><strong>Reintentar Todas las Fallidas</strong>: Botón masivo con confirmación</li>
 <li><strong>Ver Error Detallado</strong>: Modal con información completa del error</li>
 </ol>
-<h2 id="pasos-de-sincronizacion">🔄 Pasos de Sincronización<a class="headerlink" href="#pasos-de-sincronizacion" title="Permanent link">&para;</a></h2>
+<h2 id="pasos-de-sincronizacion">🔄 Pasos de Sincronización</h2>
 <table>
 <thead>
 <tr>
@@ -2267,7 +2314,7 @@
 </tr>
 </tbody>
 </table>
-<h2 id="estados-de-sincronizacion">📊 Estados de Sincronización<a class="headerlink" href="#estados-de-sincronizacion" title="Permanent link">&para;</a></h2>
+<h2 id="estados-de-sincronizacion">📊 Estados de Sincronización</h2>
 <table>
 <thead>
 <tr>
@@ -2299,31 +2346,31 @@
 </tr>
 </tbody>
 </table>
-<h2 id="seguridad-y-permisos">🔐 Seguridad y Permisos<a class="headerlink" href="#seguridad-y-permisos" title="Permanent link">&para;</a></h2>
+<h2 id="seguridad-y-permisos">🔐 Seguridad y Permisos</h2>
 <ul>
 <li><strong>Middleware</strong>: <code>dynamicAcl</code>, <code>check.active.organization</code></li>
 <li><strong>Alcance</strong>: Solo facturas de la organización activa</li>
 <li><strong>Usuarios</strong>: Clientes con acceso a reportes</li>
 <li><strong>Base de Datos</strong>: Usa la BD específica de la organización</li>
 </ul>
-<h2 id="metodos-principales">🛠️ Métodos Principales<a class="headerlink" href="#metodos-principales" title="Permanent link">&para;</a></h2>
-<h3 id="loadstatistics"><code>loadStatistics()</code><a class="headerlink" href="#loadstatistics" title="Permanent link">&para;</a></h3>
+<h2 id="metodos-principales">🛠️ Métodos Principales</h2>
+<h3 id="loadstatistics"><code>loadStatistics()</code></h3>
 <p>Carga estadísticas agregadas de sincronización.</p>
-<h3 id="retryinvoiceinvoiceid"><code>retryInvoice($invoiceId)</code><a class="headerlink" href="#retryinvoiceinvoiceid" title="Permanent link">&para;</a></h3>
+<h3 id="retryinvoiceinvoiceid"><code>retryInvoice($invoiceId)</code></h3>
 <p>Reintenta una factura individual que falló.
 - Verifica que esté en estado <code>failed</code>
 - Reset de estado y contadores
 - Dispatch de <code>SendSaleToQuickBooksJob</code></p>
-<h3 id="retryselected"><code>retrySelected()</code><a class="headerlink" href="#retryselected" title="Permanent link">&para;</a></h3>
+<h3 id="retryselected"><code>retrySelected()</code></h3>
 <p>Reintenta facturas seleccionadas mediante checkboxes.</p>
-<h3 id="retryallfailed"><code>retryAllFailed()</code><a class="headerlink" href="#retryallfailed" title="Permanent link">&para;</a></h3>
+<h3 id="retryallfailed"><code>retryAllFailed()</code></h3>
 <p>Reintenta todas las facturas con estado <code>failed</code>.</p>
-<h3 id="getstepnamestep"><code>getStepName($step)</code><a class="headerlink" href="#getstepnamestep" title="Permanent link">&para;</a></h3>
+<h3 id="getstepnamestep"><code>getStepName($step)</code></h3>
 <p>Retorna nombre descriptivo del paso de sincronización.</p>
-<h3 id="getstatusbadgeclassstatus"><code>getStatusBadgeClass($status)</code><a class="headerlink" href="#getstatusbadgeclassstatus" title="Permanent link">&para;</a></h3>
+<h3 id="getstatusbadgeclassstatus"><code>getStatusBadgeClass($status)</code></h3>
 <p>Retorna clase CSS Bootstrap para el badge de estado.</p>
-<h2 id="columnas-requeridas-en-sales_header_imp">📝 Columnas Requeridas en <code>Sales_Header_Imp</code><a class="headerlink" href="#columnas-requeridas-en-sales_header_imp" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><span class="n">intuit_sync_status</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span><span class="w"> </span><span class="k">NULL</span><span class="w">     </span><span class="c1">-- completed|failed|processing</span>
+<h2 id="columnas-requeridas-en-sales_header_imp">📝 Columnas Requeridas en <code>Sales_Header_Imp</code></h2>
+<div class="codehilite"><pre><span></span><code><span class="n">intuit_sync_status</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span><span class="w"> </span><span class="k">NULL</span><span class="w">     </span><span class="c1">-- completed|failed|processing</span>
 <span class="n">intuit_sync_step</span><span class="w"> </span><span class="nb">INT</span><span class="w"> </span><span class="k">NULL</span><span class="w">                </span><span class="c1">-- 0-6</span>
 <span class="n">intuit_sync_errors</span><span class="w"> </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">NULL</span><span class="w">             </span><span class="c1">-- Mensaje de error</span>
 <span class="n">intuit_sync_attempts</span><span class="w"> </span><span class="nb">INT</span><span class="w"> </span><span class="k">NULL</span><span class="w">            </span><span class="c1">-- Número de intentos</span>
@@ -2331,23 +2378,25 @@
 <span class="n">intuit_invoice_id</span><span class="w"> </span><span class="nb">BIGINT</span><span class="w"> </span><span class="k">NULL</span><span class="w">            </span><span class="c1">-- ID en QuickBooks</span>
 <span class="n">intuit_extracted_cufe</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span><span class="w"> </span><span class="k">NULL</span><span class="w">  </span><span class="c1">-- CUFE usado</span>
 </code></pre></div>
-<h2 id="uso">🚀 Uso<a class="headerlink" href="#uso" title="Permanent link">&para;</a></h2>
-<h3 id="acceso">Acceso<a class="headerlink" href="#acceso" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>/admin/reports/quickbooks_sync
+
+<h2 id="uso">🚀 Uso</h2>
+<h3 id="acceso">Acceso</h3>
+<div class="codehilite"><pre><span></span><code>/admin/reports/quickbooks_sync
 </code></pre></div>
-<h3 id="filtrar-fallidas">Filtrar Fallidas<a class="headerlink" href="#filtrar-fallidas" title="Permanent link">&para;</a></h3>
+
+<h3 id="filtrar-fallidas">Filtrar Fallidas</h3>
 <ol>
 <li>Seleccionar "Failed" en filtro de estado</li>
 <li>Ver detalles del error en cada fila</li>
 <li>Click en botón "Retry" para reintentar</li>
 </ol>
-<h3 id="reintento-masivo">Reintento Masivo<a class="headerlink" href="#reintento-masivo" title="Permanent link">&para;</a></h3>
+<h3 id="reintento-masivo">Reintento Masivo</h3>
 <ol>
 <li>Marcar checkboxes de facturas deseadas</li>
 <li>Click en "Retry Selected"</li>
 <li>O usar "Retry All Failed" para todas</li>
 </ol>
-<h2 id="consideraciones">⚠️ Consideraciones<a class="headerlink" href="#consideraciones" title="Permanent link">&para;</a></h2>
+<h2 id="consideraciones">⚠️ Consideraciones</h2>
 <ol>
 <li>
 <p><strong>Columnas Faltantes</strong>: Las columnas de tracking deben existir en la BD de la organización. Si no existen, ejecutar stub/migración correspondiente.</p>
@@ -2365,33 +2414,33 @@
 <p><strong>Logging</strong>: Todos los eventos se registran en <code>storage/logs/laravel.log</code> con contexto completo.</p>
 </li>
 </ol>
-<h2 id="troubleshooting">🔍 Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2>
-<h3 id="no-se-muestran-facturas">No se muestran facturas<a class="headerlink" href="#no-se-muestran-facturas" title="Permanent link">&para;</a></h3>
+<h2 id="troubleshooting">🔍 Troubleshooting</h2>
+<h3 id="no-se-muestran-facturas">No se muestran facturas</h3>
 <ul>
 <li>Verificar que existan columnas <code>intuit_sync_*</code> en la tabla</li>
 <li>Verificar que haya facturas con <code>intuit_sync_status NOT NULL</code></li>
 <li>Revisar filtros de fecha</li>
 </ul>
-<h3 id="error-al-reintentar">Error al reintentar<a class="headerlink" href="#error-al-reintentar" title="Permanent link">&para;</a></h3>
+<h3 id="error-al-reintentar">Error al reintentar</h3>
 <ul>
 <li>Verificar que el Job <code>SendSaleToQuickBooksJob</code> exista</li>
 <li>Verificar que la cola <code>sales</code> esté activa</li>
 <li>Revisar logs en <code>storage/logs/laravel.log</code></li>
 </ul>
-<h3 id="estadisticas-en-0">Estadísticas en 0<a class="headerlink" href="#estadisticas-en-0" title="Permanent link">&para;</a></h3>
+<h3 id="estadisticas-en-0">Estadísticas en 0</h3>
 <ul>
 <li>Verificar conexión a BD de la organización</li>
 <li>Verificar que existan datos en <code>Sales_Header_Imp</code></li>
 <li>Revisar logs del componente</li>
 </ul>
-<h2 id="referencias">📚 Referencias<a class="headerlink" href="#referencias" title="Permanent link">&para;</a></h2>
+<h2 id="referencias">📚 Referencias</h2>
 <ul>
 <li>Job Principal: <code>app/Jobs/SendSaleToQuickBooksJob.php</code></li>
 <li>Trait: <code>app/Traits/UpdateIntuitOrdersTrait.php</code></li>
 <li>Modelo: <code>app/Models/SalesHeaderImp.php</code></li>
 <li>Documentación QB: <code>docs/technical/quickbooks-*</code></li>
 </ul>
-<h2 id="testing">✅ Testing<a class="headerlink" href="#testing" title="Permanent link">&para;</a></h2>
+<h2 id="testing">✅ Testing</h2>
 <p>Para probar el panel:</p>
 <ol>
 <li>Asegurarse que la organización tenga conexión QB activa</li>
@@ -2400,12 +2449,12 @@
 <li>Acceder a <code>/admin/reports/quickbooks_sync</code></li>
 <li>Probar filtros y reintentos</li>
 </ol>
-<h2 id="personalizacion">🎨 Personalización<a class="headerlink" href="#personalizacion" title="Permanent link">&para;</a></h2>
+<h2 id="personalizacion">🎨 Personalización</h2>
 <p>Para personalizar colores o estilos, editar:
 - Badges de estado en <code>getStatusBadgeClass()</code>
 - Tarjetas de estadísticas en la vista blade
 - Clases CSS de Bootstrap 5</p>
-<h2 id="autor-team-de-docucenter"><strong>Autor</strong>: Team de Docucenter<a class="headerlink" href="#autor-team-de-docucenter" title="Permanent link">&para;</a></h2>
+<h2 id="autor-team-de-docucenter"><strong>Autor</strong>: Team de Docucenter</h2>
 <p><strong>Fecha de Implementación</strong>: 26 de Diciembre, 2025
 <strong>Versión</strong>: 1.0.0</p>
 
@@ -2460,7 +2509,7 @@
       
       
     
-    <a href="https://github.com/aghabrego/docucenter" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+    <a href="https://github.com/aghabrego/docucenter-public" target="_blank" rel="noopener" title="github.com" class="md-social__link">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
     </a>
   

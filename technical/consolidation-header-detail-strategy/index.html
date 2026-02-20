@@ -233,7 +233,7 @@
           
   
   
-  APIs
+  API Documentation
 
         </a>
       </li>
@@ -269,7 +269,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../" class="md-tabs__link">
+        <a href="../README.md" class="md-tabs__link">
           
   
   
@@ -298,6 +298,25 @@
         </a>
       </li>
     
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../testing/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Sistema de Testing
+
+      </a>
+    </li>
   
 
       
@@ -404,7 +423,7 @@
   <span class="md-ellipsis">
     
   
-    APIs
+    API Documentation
   
 
     
@@ -420,7 +439,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    APIs
+    API Documentation
   
 
           </label>
@@ -1363,7 +1382,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
+      <a href="../README.md" class="md-nav__link">
         
   
   
@@ -1712,6 +1731,33 @@
           </ul>
         </nav>
       
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sistema de Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -2480,13 +2526,13 @@
   
 
 
-<h1 id="estrategia-de-consolidacion-tablas-header-detail-con-auto-increment">Estrategia de Consolidación: Tablas Header-Detail con Auto-Increment<a class="headerlink" href="#estrategia-de-consolidacion-tablas-header-detail-con-auto-increment" title="Permanent link">&para;</a></h1>
+<h1 id="estrategia-de-consolidacion-tablas-header-detail-con-auto-increment">Estrategia de Consolidación: Tablas Header-Detail con Auto-Increment</h1>
 <p><strong>Documento de Análisis y Planificación</strong> 
 <strong>Fecha:</strong> 18 de diciembre, 2025 
 <strong>Estado:</strong> En Planificación 
 <strong>Ubicación:</strong> <code>docs/technical/consolidation-header-detail-strategy.md</code></p>
 <hr />
-<h2 id="indice">Índice<a class="headerlink" href="#indice" title="Permanent link">&para;</a></h2>
+<h2 id="indice">Índice</h2>
 <ol>
 <li><a href="#problema-identificado">Problema Identificado</a></li>
 <li><a href="#tablas-afectadas">Tablas Afectadas</a></li>
@@ -2500,17 +2546,17 @@
 <li><a href="#riesgos-y-mitigaciones">Riesgos y Mitigaciones</a></li>
 </ol>
 <hr />
-<h2 id="problema-identificado">Problema Identificado<a class="headerlink" href="#problema-identificado" title="Permanent link">&para;</a></h2>
+<h2 id="problema-identificado">Problema Identificado</h2>
 <p>Cuando se consolidan datos de múltiples organizaciones en una sola compañía (company), las tablas con relaciones <strong>Header → Detail</strong> tienen IDs auto-incrementales que <strong>COLISIONARÁN</strong> entre organizaciones diferentes.</p>
-<h3 id="contexto">Contexto<a class="headerlink" href="#contexto" title="Permanent link">&para;</a></h3>
+<h3 id="contexto">Contexto</h3>
 <ul>
 <li><strong>Job Actual:</strong> <code>app/Jobs/SyncOrganizationToCompanyJob.php</code></li>
 <li><strong>Operación:</strong> Mover datos de BD de organización → BD de compañía consolidada</li>
 <li><strong>Problema:</strong> Los <code>TransactionID</code>, <code>UniqueReceiptID</code>, etc., se repiten entre organizaciones</li>
 </ul>
 <hr />
-<h2 id="tablas-afectadas">Tablas Afectadas<a class="headerlink" href="#tablas-afectadas" title="Permanent link">&para;</a></h2>
-<h3 id="pares-header-detail-identificados-9-pares">Pares Header-Detail Identificados (9 pares)<a class="headerlink" href="#pares-header-detail-identificados-9-pares" title="Permanent link">&para;</a></h3>
+<h2 id="tablas-afectadas">Tablas Afectadas</h2>
+<h3 id="pares-header-detail-identificados-9-pares">Pares Header-Detail Identificados (9 pares)</h3>
 <table>
 <thead>
 <tr>
@@ -2597,8 +2643,8 @@
 </tr>
 </tbody>
 </table>
-<h3 id="primary-keys-por-modelo">Primary Keys por Modelo<a class="headerlink" href="#primary-keys-por-modelo" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">// Verificado en app/Models/</span>
+<h3 id="primary-keys-por-modelo">Primary Keys por Modelo</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">// Verificado en app/Models/</span>
 <span class="x">CustomerCreditMemoHeaderImp::$primaryKey = &#39;TransactionID&#39;; // auto_increment = true</span>
 <span class="x">GJEHeaderImp::$primaryKey = &#39;TransactionID&#39;; // auto_increment = true YA IMPLEMENTADO</span>
 <span class="x">PurchaseHeaderImp::$primaryKey = &#39;TransactionID&#39;; // auto_increment = true</span>
@@ -2609,21 +2655,23 @@
 <span class="x">SalesInvoiceHeaderExp::$primaryKey = &#39;id&#39;; // verificar</span>
 <span class="x">SalesOrderHeaderExp::$primaryKey = &#39;ID&#39;; // verificar</span>
 </code></pre></div>
+
 <hr />
-<h2 id="analisis-del-codigo-actual">Análisis del Código Actual<a class="headerlink" href="#analisis-del-codigo-actual" title="Permanent link">&para;</a></h2>
-<h3 id="implementacion-parcial-existente">Implementación Parcial Existente<a class="headerlink" href="#implementacion-parcial-existente" title="Permanent link">&para;</a></h3>
+<h2 id="analisis-del-codigo-actual">Análisis del Código Actual</h2>
+<h3 id="implementacion-parcial-existente">Implementación Parcial Existente</h3>
 <p><strong>Ubicación:</strong> <code>app/Jobs/SyncOrganizationToCompanyJob.php</code> (Líneas 144-166)</p>
-<div class="highlight"><pre><span></span><code><span class="x">// Para GJE_Header_Imp: mapear TransactionID origen a source_transaction_id</span>
+<div class="codehilite"><pre><span></span><code><span class="x">// Para GJE_Header_Imp: mapear TransactionID origen a source_transaction_id</span>
 <span class="x">if ($table === &#39;GJE_Header_Imp&#39; &amp;&amp; isset($recordArray[&#39;TransactionID&#39;])) {</span>
 <span class="x"> $filteredRecord[&#39;source_transaction_id&#39;] = $recordArray[&#39;TransactionID&#39;];</span>
 <span class="x"> // No enviar TransactionID para que sea AUTO_INCREMENT en consolidación</span>
 <span class="x"> unset($filteredRecord[&#39;TransactionID&#39;]);</span>
 <span class="x">}</span>
 </code></pre></div>
+
 <p><strong>ESTA ES LA ESTRATEGIA CORRECTA</strong></p>
 <p><strong>PROBLEMA:</strong> Solo está aplicada a <code>GJE_Header_Imp</code>, faltan 5 tablas más (o 8 si incluimos las Export).</p>
-<h3 id="comportamiento-actual-del-chunk-processing">Comportamiento Actual del Chunk Processing<a class="headerlink" href="#comportamiento-actual-del-chunk-processing" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">DB::table($table)-&gt;orderBy($orderByColumn)-&gt;chunk($chunkSize, function ($records) use (...) {</span>
+<h3 id="comportamiento-actual-del-chunk-processing">Comportamiento Actual del Chunk Processing</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">DB::table($table)-&gt;orderBy($orderByColumn)-&gt;chunk($chunkSize, function ($records) use (...) {</span>
 <span class="x"> DB::connection()-&gt;useDatabase($company-&gt;database);</span>
 <span class="x"> $batchData = [];</span>
 
@@ -2642,12 +2690,13 @@
 <span class="x"> }</span>
 <span class="x">});</span>
 </code></pre></div>
+
 <p><strong>Problema:</strong> <code>insertBatch()</code> usa <code>INSERT ... ON DUPLICATE KEY UPDATE</code> pero no retorna los IDs generados.</p>
 <hr />
-<h2 id="escenario-de-colision">Escenario de Colisión<a class="headerlink" href="#escenario-de-colision" title="Permanent link">&para;</a></h2>
-<h3 id="ejemplo-practico-customer_credit_memo">Ejemplo Práctico: Customer_Credit_Memo<a class="headerlink" href="#ejemplo-practico-customer_credit_memo" title="Permanent link">&para;</a></h3>
-<h4 id="organizacion-a-bd-9_734_1672_56-org_id-100">Organización A (BD: <code>9_734_1672_56</code>, org_id: 100)<a class="headerlink" href="#organizacion-a-bd-9_734_1672_56-org_id-100" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="c1">-- Customer_Credit_Memo_Header_Imp</span>
+<h2 id="escenario-de-colision">Escenario de Colisión</h2>
+<h3 id="ejemplo-practico-customer_credit_memo">Ejemplo Práctico: Customer_Credit_Memo</h3>
+<h4 id="organizacion-a-bd-9_734_1672_56-org_id-100">Organización A (BD: <code>9_734_1672_56</code>, org_id: 100)</h4>
+<div class="codehilite"><pre><span></span><code><span class="c1">-- Customer_Credit_Memo_Header_Imp</span>
 <span class="n">TransactionID</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">ID_compania</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">CreditNumber</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">CustomerID</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">org_source_id</span>
 <span class="mi">1</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">50</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">CM001</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">CUST001</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">NULL</span>
 <span class="mi">2</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">50</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">CM002</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">CUST002</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">NULL</span>
@@ -2658,8 +2707,9 @@
 <span class="mi">2</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">PROD002</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Product</span><span class="w"> </span><span class="n">B</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">NULL</span>
 <span class="mi">3</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">PROD003</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Product</span><span class="w"> </span><span class="k">C</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">NULL</span>
 </code></pre></div>
-<h4 id="organizacion-b-bd-9_734_1672_57-org_id-101">Organización B (BD: <code>9_734_1672_57</code>, org_id: 101)<a class="headerlink" href="#organizacion-b-bd-9_734_1672_57-org_id-101" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="c1">-- Customer_Credit_Memo_Header_Imp</span>
+
+<h4 id="organizacion-b-bd-9_734_1672_57-org_id-101">Organización B (BD: <code>9_734_1672_57</code>, org_id: 101)</h4>
+<div class="codehilite"><pre><span></span><code><span class="c1">-- Customer_Credit_Memo_Header_Imp</span>
 <span class="n">TransactionID</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">ID_compania</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">CreditNumber</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">CustomerID</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">org_source_id</span>
 <span class="mi">1</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">51</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">CM100</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">CUST100</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">NULL</span>
 <span class="mi">2</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">51</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">CM101</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">CUST101</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">NULL</span>
@@ -2670,8 +2720,9 @@
 <span class="mi">2</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">SERV002</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Service</span><span class="w"> </span><span class="n">Y</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">NULL</span>
 <span class="mi">3</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">SERV003</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Service</span><span class="w"> </span><span class="n">Z</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">NULL</span>
 </code></pre></div>
-<h4 id="resultado-sin-estrategia-colision">Resultado Sin Estrategia (Colisión)<a class="headerlink" href="#resultado-sin-estrategia-colision" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="c1">-- Company BD Consolidada</span>
+
+<h4 id="resultado-sin-estrategia-colision">Resultado Sin Estrategia (Colisión)</h4>
+<div class="codehilite"><pre><span></span><code><span class="c1">-- Company BD Consolidada</span>
 <span class="c1">-- Customer_Credit_Memo_Header_Imp</span>
 <span class="n">TransactionID</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">ID_compania</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">CreditNumber</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">org_source_id</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">source_transaction_id</span>
 <span class="mi">1</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">50</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">CM001</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">100</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">NULL</span>
@@ -2683,8 +2734,9 @@
 <span class="mi">2</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">PROD002</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">100</span>
 <span class="n">Detail</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">Org</span><span class="w"> </span><span class="n">B</span><span class="w"> </span><span class="k">no</span><span class="w"> </span><span class="n">se</span><span class="w"> </span><span class="n">puede</span><span class="w"> </span><span class="n">insertar</span><span class="w"> </span><span class="n">porque</span><span class="w"> </span><span class="n">header</span><span class="w"> </span><span class="n">falló</span>
 </code></pre></div>
-<h4 id="resultado-con-estrategia-correcto">Resultado Con Estrategia (Correcto)<a class="headerlink" href="#resultado-con-estrategia-correcto" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="c1">-- Company BD Consolidada</span>
+
+<h4 id="resultado-con-estrategia-correcto">Resultado Con Estrategia (Correcto)</h4>
+<div class="codehilite"><pre><span></span><code><span class="c1">-- Company BD Consolidada</span>
 <span class="c1">-- Customer_Credit_Memo_Header_Imp</span>
 <span class="n">TransactionID</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">ID_compania</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">CreditNumber</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">org_source_id</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">source_transaction_id</span>
 <span class="mi">1</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">50</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">CM001</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">100</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="c1">-- Original de Org A</span>
@@ -2701,41 +2753,43 @@
 <span class="mi">5</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">SERV002</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">101</span><span class="w"> </span><span class="c1">-- Usa NUEVO TransactionID (3)</span>
 <span class="mi">6</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">SERV003</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">101</span><span class="w"> </span><span class="c1">-- Usa NUEVO TransactionID (4)</span>
 </code></pre></div>
+
 <hr />
-<h2 id="solucion-propuesta">Solución Propuesta<a class="headerlink" href="#solucion-propuesta" title="Permanent link">&para;</a></h2>
-<h3 id="estrategia-generar-nuevos-ids-columna-source-tracking">Estrategia: Generar Nuevos IDs + Columna Source Tracking<a class="headerlink" href="#estrategia-generar-nuevos-ids-columna-source-tracking" title="Permanent link">&para;</a></h3>
-<h4 id="para-header-tables">Para HEADER Tables:<a class="headerlink" href="#para-header-tables" title="Permanent link">&para;</a></h4>
+<h2 id="solucion-propuesta">Solución Propuesta</h2>
+<h3 id="estrategia-generar-nuevos-ids-columna-source-tracking">Estrategia: Generar Nuevos IDs + Columna Source Tracking</h3>
+<h4 id="para-header-tables">Para HEADER Tables:</h4>
 <ol>
 <li><strong>Agregar columna</strong> <code>source_*</code> para guardar ID original</li>
 <li><strong>NO enviar</strong> el PK al insertar (dejar auto-increment generar nuevo ID)</li>
 <li><strong>Capturar</strong> el nuevo ID generado</li>
 <li><strong>Mapear</strong> <code>ID_nuevo → ID_original</code> en memoria</li>
 </ol>
-<h4 id="para-detail-tables">Para DETAIL Tables:<a class="headerlink" href="#para-detail-tables" title="Permanent link">&para;</a></h4>
+<h4 id="para-detail-tables">Para DETAIL Tables:</h4>
 <ol>
 <li><strong>Esperar</strong> a que headers se inserten primero</li>
 <li><strong>Usar mapeo</strong> para actualizar FK con nuevo ID</li>
 <li><strong>Insertar</strong> details con nuevo ID de header</li>
 </ol>
-<h3 id="flujo-de-sincronizacion">Flujo de Sincronización<a class="headerlink" href="#flujo-de-sincronizacion" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>1. Detectar si tabla es Header con auto-increment
- ↓
-2. Procesar Headers:
- - Guardar TransactionID original en source_transaction_id
- - Omitir TransactionID (auto-increment generará nuevo)
- - Capturar nuevo ID: DB::getPdo()-&gt;lastInsertId()
- - Guardar mapeo: [ID_original] =&gt; ID_nuevo
- ↓
-3. Procesar Details relacionados:
- - Buscar details con FK = ID_original
- - Actualizar FK con ID_nuevo del mapeo
- - Insertar en BD consolidada
+<h3 id="flujo-de-sincronizacion">Flujo de Sincronización</h3>
+<div class="codehilite"><pre><span></span><code><span class="mf">1.</span><span class="w"> </span><span class="n">Detectar</span><span class="w"> </span><span class="n">si</span><span class="w"> </span><span class="n">tabla</span><span class="w"> </span><span class="n">es</span><span class="w"> </span><span class="n">Header</span><span class="w"> </span><span class="n">con</span><span class="w"> </span><span class="n">auto</span><span class="o">-</span><span class="n">increment</span>
+<span class="w"> </span><span class="err">↓</span>
+<span class="mf">2.</span><span class="w"> </span><span class="n">Procesar</span><span class="w"> </span><span class="nl">Headers</span><span class="p">:</span>
+<span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">Guardar</span><span class="w"> </span><span class="n">TransactionID</span><span class="w"> </span><span class="n">original</span><span class="w"> </span><span class="n">en</span><span class="w"> </span><span class="n">source_transaction_id</span>
+<span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">Omitir</span><span class="w"> </span><span class="n">TransactionID</span><span class="w"> </span><span class="p">(</span><span class="n">auto</span><span class="o">-</span><span class="n">increment</span><span class="w"> </span><span class="n">generará</span><span class="w"> </span><span class="n">nuevo</span><span class="p">)</span>
+<span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">Capturar</span><span class="w"> </span><span class="n">nuevo</span><span class="w"> </span><span class="nl">ID</span><span class="p">:</span><span class="w"> </span><span class="nl">DB</span><span class="p">:</span><span class="err">:</span><span class="n">getPdo</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">lastInsertId</span><span class="p">()</span>
+<span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">Guardar</span><span class="w"> </span><span class="nl">mapeo</span><span class="p">:</span><span class="w"> </span><span class="o">[</span><span class="n">ID_original</span><span class="o">]</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">ID_nuevo</span>
+<span class="w"> </span><span class="err">↓</span>
+<span class="mf">3.</span><span class="w"> </span><span class="n">Procesar</span><span class="w"> </span><span class="n">Details</span><span class="w"> </span><span class="nl">relacionados</span><span class="p">:</span>
+<span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">Buscar</span><span class="w"> </span><span class="n">details</span><span class="w"> </span><span class="n">con</span><span class="w"> </span><span class="n">FK</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ID_original</span>
+<span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">Actualizar</span><span class="w"> </span><span class="n">FK</span><span class="w"> </span><span class="n">con</span><span class="w"> </span><span class="n">ID_nuevo</span><span class="w"> </span><span class="n">del</span><span class="w"> </span><span class="n">mapeo</span>
+<span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">Insertar</span><span class="w"> </span><span class="n">en</span><span class="w"> </span><span class="n">BD</span><span class="w"> </span><span class="n">consolidada</span>
 </code></pre></div>
+
 <hr />
-<h2 id="implementacion-necesaria">Implementación Necesaria<a class="headerlink" href="#implementacion-necesaria" title="Permanent link">&para;</a></h2>
-<h3 id="fase-1-migraciones-de-base-de-datos">Fase 1: Migraciones de Base de Datos<a class="headerlink" href="#fase-1-migraciones-de-base-de-datos" title="Permanent link">&para;</a></h3>
-<h4 id="script-sql-para-columnas-source">Script SQL para Columnas Source<a class="headerlink" href="#script-sql-para-columnas-source" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="c1">-- 1. Customer_Credit_Memo_Header_Imp</span>
+<h2 id="implementacion-necesaria">Implementación Necesaria</h2>
+<h3 id="fase-1-migraciones-de-base-de-datos">Fase 1: Migraciones de Base de Datos</h3>
+<h4 id="script-sql-para-columnas-source">Script SQL para Columnas Source</h4>
+<div class="codehilite"><pre><span></span><code><span class="c1">-- 1. Customer_Credit_Memo_Header_Imp</span>
 <span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">Customer_Credit_Memo_Header_Imp</span><span class="w"> </span>
 <span class="k">ADD</span><span class="w"> </span><span class="k">COLUMN</span><span class="w"> </span><span class="n">source_transaction_id</span><span class="w"> </span><span class="nb">BIGINT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span>
 <span class="k">COMMENT</span><span class="w"> </span><span class="s1">&#39;TransactionID original del sistema fuente&#39;</span>
@@ -2782,12 +2836,14 @@
 
 <span class="c1">-- Nota: GJE_Header_Imp YA TIENE source_transaction_id</span>
 </code></pre></div>
-<h4 id="comando-artisan-para-ejecutar">Comando Artisan para Ejecutar<a class="headerlink" href="#comando-artisan-para-ejecutar" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>docucenter-app-1<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>make:command<span class="w"> </span>Database:AddSourceColumnsToConsolidation
+
+<h4 id="comando-artisan-para-ejecutar">Comando Artisan para Ejecutar</h4>
+<div class="codehilite"><pre><span></span><code>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>docucenter-app-1<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>make:command<span class="w"> </span>Database:AddSourceColumnsToConsolidation
 </code></pre></div>
-<h3 id="fase-2-actualizar-modelos">Fase 2: Actualizar Modelos<a class="headerlink" href="#fase-2-actualizar-modelos" title="Permanent link">&para;</a></h3>
-<h4 id="agregar-a-fillable-en-cada-modelo">Agregar a $fillable en cada modelo<a class="headerlink" href="#agregar-a-fillable-en-cada-modelo" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="x">// app/Models/CustomerCreditMemoHeaderImp.php</span>
+
+<h3 id="fase-2-actualizar-modelos">Fase 2: Actualizar Modelos</h3>
+<h4 id="agregar-a-fillable-en-cada-modelo">Agregar a $fillable en cada modelo</h4>
+<div class="codehilite"><pre><span></span><code><span class="x">// app/Models/CustomerCreditMemoHeaderImp.php</span>
 <span class="x">protected $fillable = [</span>
 <span class="x"> &#39;ID_compania&#39;,</span>
 <span class="x"> &#39;org_source_id&#39;,</span>
@@ -2832,9 +2888,10 @@
 <span class="x"> // ... resto de campos</span>
 <span class="x">];</span>
 </code></pre></div>
-<h3 id="fase-3-modificar-syncorganizationtocompanyjob">Fase 3: Modificar SyncOrganizationToCompanyJob<a class="headerlink" href="#fase-3-modificar-syncorganizationtocompanyjob" title="Permanent link">&para;</a></h3>
-<h4 id="a-agregar-metodo-de-configuracion">A. Agregar Método de Configuración<a class="headerlink" href="#a-agregar-metodo-de-configuracion" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="x">/**</span>
+
+<h3 id="fase-3-modificar-syncorganizationtocompanyjob">Fase 3: Modificar SyncOrganizationToCompanyJob</h3>
+<h4 id="a-agregar-metodo-de-configuracion">A. Agregar Método de Configuración</h4>
+<div class="codehilite"><pre><span></span><code><span class="x">/**</span>
 <span class="x"> * Configuración de tablas Header con auto-increment</span>
 <span class="x"> * </span>
 <span class="x"> * @param string $table</span>
@@ -2890,8 +2947,9 @@
 <span class="x"> return $configs[$table] ?? [];</span>
 <span class="x">}</span>
 </code></pre></div>
-<h4 id="b-metodo-para-insertar-header-y-capturar-id">B. Método para Insertar Header y Capturar ID<a class="headerlink" href="#b-metodo-para-insertar-header-y-capturar-id" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="x">/**</span>
+
+<h4 id="b-metodo-para-insertar-header-y-capturar-id">B. Método para Insertar Header y Capturar ID</h4>
+<div class="codehilite"><pre><span></span><code><span class="x">/**</span>
 <span class="x"> * Insertar header individual y obtener nuevo ID generado</span>
 <span class="x"> * </span>
 <span class="x"> * @param string $table</span>
@@ -2921,8 +2979,9 @@
 <span class="x"> }</span>
 <span class="x">}</span>
 </code></pre></div>
-<h4 id="c-metodo-para-sincronizar-details">C. Método para Sincronizar Details<a class="headerlink" href="#c-metodo-para-sincronizar-details" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="x">/**</span>
+
+<h4 id="c-metodo-para-sincronizar-details">C. Método para Sincronizar Details</h4>
+<div class="codehilite"><pre><span></span><code><span class="x">/**</span>
 <span class="x"> * Sincronizar tablas detail con nuevos IDs de header</span>
 <span class="x"> * </span>
 <span class="x"> * @param Organization $organization</span>
@@ -3052,8 +3111,9 @@
 <span class="x"> return $totalSynced;</span>
 <span class="x">}</span>
 </code></pre></div>
-<h4 id="d-modificar-metodo-synctable">D. Modificar Método syncTable()<a class="headerlink" href="#d-modificar-metodo-synctable" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="x">protected function syncTable(Organization $organization, Companysession $company, string $table): int</span>
+
+<h4 id="d-modificar-metodo-synctable">D. Modificar Método syncTable()</h4>
+<div class="codehilite"><pre><span></span><code><span class="x">protected function syncTable(Organization $organization, Companysession $company, string $table): int</span>
 <span class="x">{</span>
 <span class="x"> try {</span>
 <span class="x"> // Cambiar a BD de organización</span>
@@ -3183,13 +3243,15 @@
 <span class="x"> }</span>
 <span class="x">}</span>
 </code></pre></div>
+
 <hr />
-<h2 id="consideraciones-adicionales">Consideraciones Adicionales<a class="headerlink" href="#consideraciones-adicionales" title="Permanent link">&para;</a></h2>
-<h3 id="1-tablas-export-purordr-salesinvoice-salesorder">1. Tablas Export (PurOrdr, SalesInvoice, SalesOrder)<a class="headerlink" href="#1-tablas-export-purordr-salesinvoice-salesorder" title="Permanent link">&para;</a></h3>
+<h2 id="consideraciones-adicionales">Consideraciones Adicionales</h2>
+<h3 id="1-tablas-export-purordr-salesinvoice-salesorder">1. Tablas Export (PurOrdr, SalesInvoice, SalesOrder)</h3>
 <p><strong>ACCIÓN REQUERIDA:</strong> Verificar en stubs SQL si tienen <code>AUTO_INCREMENT</code>:</p>
-<div class="highlight"><pre><span></span><code><span class="c1"># Buscar en stubs</span>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Buscar en stubs</span>
 grep<span class="w"> </span>-r<span class="w"> </span><span class="s2">&quot;AUTO_INCREMENT&quot;</span><span class="w"> </span>app/Models/stubs/*.sql.stub<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s2">&quot;(PurOrdr|SalesInvoice|SalesOrder)&quot;</span>
 </code></pre></div>
+
 <p><strong>Si NO tienen auto-increment:</strong>
 - No necesitan este tratamiento
 - Los TransactionID son asignados manualmente por Sage50
@@ -3197,15 +3259,15 @@ grep<span class="w"> </span>-r<span class="w"> </span><span class="s2">&quot;AUT
 <p><strong>Si SÍ tienen auto-increment:</strong>
 - Agregar a la configuración <code>getHeaderConfig()</code>
 - Seguir mismo proceso que Import tables</p>
-<h3 id="2-tabla-fe_header-especial">2. Tabla fe_header Especial<a class="headerlink" href="#2-tabla-fe_header-especial" title="Permanent link">&para;</a></h3>
+<h3 id="2-tabla-fe_header-especial">2. Tabla fe_header Especial</h3>
 <p><strong>Particularidades:</strong>
 - Tiene <strong>2 tablas detail</strong>: <code>fe_detail</code> y <code>fe_payment</code>
 - Ambas usan <code>feHeaderId</code> como FK
 - Ya está considerado en <code>getHeaderConfig()</code> con <code>detail_tables</code> (array)</p>
-<h3 id="3-indices-unicos-en-companysession">3. Índices Únicos en Companysession<a class="headerlink" href="#3-indices-unicos-en-companysession" title="Permanent link">&para;</a></h3>
+<h3 id="3-indices-unicos-en-companysession">3. Índices Únicos en Companysession</h3>
 <p><strong>Ubicación:</strong> <code>app/Models/Companysession.php</code> método <code>getUniqueIndexConfig()</code></p>
 <p><strong>Actualizar para incluir columnas source_*:</strong></p>
-<div class="highlight"><pre><span></span><code><span class="x">// Import tables - Headers</span>
+<div class="codehilite"><pre><span></span><code><span class="x">// Import tables - Headers</span>
 <span class="x">&#39;Customer_Credit_Memo_Header_Imp&#39; =&gt; [&#39;source_transaction_id&#39;, &#39;org_source_id&#39;],</span>
 <span class="x">&#39;GJE_Header_Imp&#39; =&gt; [&#39;source_transaction_id&#39;, &#39;org_source_id&#39;],</span>
 <span class="x">&#39;Purchase_Header_Imp&#39; =&gt; [&#39;source_transaction_id&#39;, &#39;org_source_id&#39;],</span>
@@ -3213,7 +3275,8 @@ grep<span class="w"> </span>-r<span class="w"> </span><span class="s2">&quot;AUT
 <span class="x">&#39;vendor_payment_header_imp&#39; =&gt; [&#39;source_payment_id&#39;, &#39;org_source_id&#39;],</span>
 <span class="x">&#39;fe_header&#39; =&gt; [&#39;source_fe_id&#39;, &#39;org_source_id&#39;],</span>
 </code></pre></div>
-<h3 id="4-performance-y-memoria">4. Performance y Memoria<a class="headerlink" href="#4-performance-y-memoria" title="Permanent link">&para;</a></h3>
+
+<h3 id="4-performance-y-memoria">4. Performance y Memoria</h3>
 <p><strong>Preocupación:</strong> El array <code>$idMapping</code> puede crecer mucho con muchos registros.</p>
 <p><strong>Solución:</strong>
 1. Procesar headers en chunks pequeños (ya implementado: 10-500)
@@ -3223,79 +3286,79 @@ grep<span class="w"> </span>-r<span class="w"> </span><span class="s2">&quot;AUT
 - Guardar mapeos temporalmente en Redis o tabla temporal
 - Clave: <code>sync:{org_id}:{table}:{old_id} =&gt; {new_id}</code></p>
 <hr />
-<h2 id="plan-de-accion">Plan de Acción<a class="headerlink" href="#plan-de-accion" title="Permanent link">&para;</a></h2>
-<h3 id="sprint-1-preparacion-y-testing-estimado-3-4-horas">Sprint 1: Preparación y Testing (Estimado: 3-4 horas)<a class="headerlink" href="#sprint-1-preparacion-y-testing-estimado-3-4-horas" title="Permanent link">&para;</a></h3>
-<ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <strong>Tarea 1.1:</strong> Verificar auto-increment en tablas Export</li>
+<h2 id="plan-de-accion">Plan de Acción</h2>
+<h3 id="sprint-1-preparacion-y-testing-estimado-3-4-horas">Sprint 1: Preparación y Testing (Estimado: 3-4 horas)</h3>
+<ul>
+<li>[ ] <strong>Tarea 1.1:</strong> Verificar auto-increment en tablas Export</li>
 <li>Revisar stubs SQL</li>
 <li>Documentar hallazgos</li>
 <li>
 <p>Actualizar lista de tablas afectadas</p>
 </li>
-<li class="task-list-item">
-<p><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <strong>Tarea 1.2:</strong> Crear script de migración para columnas source_*</p>
+<li>
+<p>[ ] <strong>Tarea 1.2:</strong> Crear script de migración para columnas source_*</p>
 </li>
 <li>Crear comando Artisan</li>
 <li>Generar SQL para cada tabla</li>
 <li>
 <p>Testing en BD de desarrollo</p>
 </li>
-<li class="task-list-item">
-<p><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <strong>Tarea 1.3:</strong> Actualizar modelos con nuevos campos fillable</p>
+<li>
+<p>[ ] <strong>Tarea 1.3:</strong> Actualizar modelos con nuevos campos fillable</p>
 </li>
 <li>5 modelos Header</li>
 <li>Verificar casting si es necesario</li>
 <li>Commit: "feat: agregar columnas source para consolidación"</li>
 </ul>
-<h3 id="sprint-2-implementacion-core-estimado-4-5-horas">Sprint 2: Implementación Core (Estimado: 4-5 horas)<a class="headerlink" href="#sprint-2-implementacion-core-estimado-4-5-horas" title="Permanent link">&para;</a></h3>
-<ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <strong>Tarea 2.1:</strong> Implementar <code>getHeaderConfig()</code></li>
+<h3 id="sprint-2-implementacion-core-estimado-4-5-horas">Sprint 2: Implementación Core (Estimado: 4-5 horas)</h3>
+<ul>
+<li>[ ] <strong>Tarea 2.1:</strong> Implementar <code>getHeaderConfig()</code></li>
 <li>Agregar al job</li>
 <li>Configurar 6 tablas confirmadas</li>
 <li>
 <p>Testing unitario de configuración</p>
 </li>
-<li class="task-list-item">
-<p><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <strong>Tarea 2.2:</strong> Implementar <code>insertHeaderAndGetId()</code></p>
+<li>
+<p>[ ] <strong>Tarea 2.2:</strong> Implementar <code>insertHeaderAndGetId()</code></p>
 </li>
 <li>Manejo de errores</li>
 <li>Logging detallado</li>
 <li>
 <p>Testing con transacciones</p>
 </li>
-<li class="task-list-item">
-<p><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <strong>Tarea 2.3:</strong> Implementar <code>syncDetails()</code></p>
+<li>
+<p>[ ] <strong>Tarea 2.3:</strong> Implementar <code>syncDetails()</code></p>
 </li>
 <li>Soporte para múltiples detail tables (fe_header)</li>
 <li>Chunk processing</li>
 <li>
 <p>Validación de FK</p>
 </li>
-<li class="task-list-item">
-<p><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <strong>Tarea 2.4:</strong> Modificar <code>syncTable()</code></p>
+<li>
+<p>[ ] <strong>Tarea 2.4:</strong> Modificar <code>syncTable()</code></p>
 </li>
 <li>Integrar nueva lógica</li>
 <li>Mantener backward compatibility</li>
 <li>Testing con datos reales</li>
 </ul>
-<h3 id="sprint-3-testing-y-validacion-estimado-3-4-horas">Sprint 3: Testing y Validación (Estimado: 3-4 horas)<a class="headerlink" href="#sprint-3-testing-y-validacion-estimado-3-4-horas" title="Permanent link">&para;</a></h3>
-<ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <strong>Tarea 3.1:</strong> Testing con datos de prueba</li>
+<h3 id="sprint-3-testing-y-validacion-estimado-3-4-horas">Sprint 3: Testing y Validación (Estimado: 3-4 horas)</h3>
+<ul>
+<li>[ ] <strong>Tarea 3.1:</strong> Testing con datos de prueba</li>
 <li>Crear 2 organizaciones con IDs duplicados</li>
 <li>Ejecutar consolidación</li>
 <li>
 <p>Verificar mapeos correctos</p>
 </li>
-<li class="task-list-item">
-<p><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <strong>Tarea 3.2:</strong> Verificar integridad de datos</p>
+<li>
+<p>[ ] <strong>Tarea 3.2:</strong> Verificar integridad de datos</p>
 </li>
 <li>Contar registros origen vs destino</li>
 <li>Validar relaciones Header-Detail</li>
 <li>
 <p>Verificar org_source_id en todos los registros</p>
 </li>
-<li class="task-list-item">
-<p><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <strong>Tarea 3.3:</strong> Testing de edge cases</p>
+<li>
+<p>[ ] <strong>Tarea 3.3:</strong> Testing de edge cases</p>
 </li>
 <li>Headers sin details</li>
 <li>Details huérfanos</li>
@@ -3303,54 +3366,56 @@ grep<span class="w"> </span>-r<span class="w"> </span><span class="s2">&quot;AUT
 <li>
 <p>Registros muy grandes</p>
 </li>
-<li class="task-list-item">
-<p><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <strong>Tarea 3.4:</strong> Performance testing</p>
+<li>
+<p>[ ] <strong>Tarea 3.4:</strong> Performance testing</p>
 </li>
 <li>Medir tiempo con 1000+ headers</li>
 <li>Monitorear uso de memoria</li>
 <li>Optimizar si es necesario</li>
 </ul>
-<h3 id="sprint-4-documentacion-y-deploy-estimado-2-3-horas">Sprint 4: Documentación y Deploy (Estimado: 2-3 horas)<a class="headerlink" href="#sprint-4-documentacion-y-deploy-estimado-2-3-horas" title="Permanent link">&para;</a></h3>
-<ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <strong>Tarea 4.1:</strong> Documentar cambios</li>
+<h3 id="sprint-4-documentacion-y-deploy-estimado-2-3-horas">Sprint 4: Documentación y Deploy (Estimado: 2-3 horas)</h3>
+<ul>
+<li>[ ] <strong>Tarea 4.1:</strong> Documentar cambios</li>
 <li>Actualizar este documento con resultados</li>
 <li>Crear guía de troubleshooting</li>
 <li>
 <p>Documentar en docs/technical/</p>
 </li>
-<li class="task-list-item">
-<p><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <strong>Tarea 4.2:</strong> Code review</p>
+<li>
+<p>[ ] <strong>Tarea 4.2:</strong> Code review</p>
 </li>
 <li>Revisión de lógica</li>
 <li>Verificar convenciones</li>
 <li>
 <p>Testing de rollback</p>
 </li>
-<li class="task-list-item">
-<p><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <strong>Tarea 4.3:</strong> Deploy a producción</p>
+<li>
+<p>[ ] <strong>Tarea 4.3:</strong> Deploy a producción</p>
 </li>
 <li>Backup de BD</li>
 <li>Ejecutar migraciones</li>
 <li>Monitoring post-deploy</li>
 </ul>
 <hr />
-<h2 id="testing">Testing<a class="headerlink" href="#testing" title="Permanent link">&para;</a></h2>
-<h3 id="test-case-1-headers-con-ids-duplicados">Test Case 1: Headers con IDs Duplicados<a class="headerlink" href="#test-case-1-headers-con-ids-duplicados" title="Permanent link">&para;</a></h3>
-<p><strong>Setup:</strong>
-<div class="highlight"><pre><span></span><code><span class="c1">-- Org A (ID: 100)</span>
+<h2 id="testing">Testing</h2>
+<h3 id="test-case-1-headers-con-ids-duplicados">Test Case 1: Headers con IDs Duplicados</h3>
+<p><strong>Setup:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="c1">-- Org A (ID: 100)</span>
 <span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">Customer_Credit_Memo_Header_Imp</span><span class="w"> </span><span class="p">(</span><span class="n">TransactionID</span><span class="p">,</span><span class="w"> </span><span class="n">CreditNumber</span><span class="p">,</span><span class="w"> </span><span class="n">org_source_id</span><span class="p">)</span>
 <span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;CM001&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">NULL</span><span class="p">);</span>
 
 <span class="c1">-- Org B (ID: 101) </span>
 <span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">Customer_Credit_Memo_Header_Imp</span><span class="w"> </span><span class="p">(</span><span class="n">TransactionID</span><span class="p">,</span><span class="w"> </span><span class="n">CreditNumber</span><span class="p">,</span><span class="w"> </span><span class="n">org_source_id</span><span class="p">)</span>
 <span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;CM100&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">NULL</span><span class="p">);</span>
-</code></pre></div></p>
-<p><strong>Ejecución:</strong>
-<div class="highlight"><pre><span></span><code>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>docucenter-app-1<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>sync:organization-to-company<span class="w"> </span><span class="m">100</span><span class="w"> </span><span class="m">5</span>
+</code></pre></div>
+
+<p><strong>Ejecución:</strong></p>
+<div class="codehilite"><pre><span></span><code>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>docucenter-app-1<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>sync:organization-to-company<span class="w"> </span><span class="m">100</span><span class="w"> </span><span class="m">5</span>
 docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>docucenter-app-1<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>sync:organization-to-company<span class="w"> </span><span class="m">101</span><span class="w"> </span><span class="m">5</span>
-</code></pre></div></p>
-<p><strong>Verificación:</strong>
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">TransactionID</span><span class="p">,</span><span class="w"> </span><span class="n">CreditNumber</span><span class="p">,</span><span class="w"> </span><span class="n">org_source_id</span><span class="p">,</span><span class="w"> </span><span class="n">source_transaction_id</span><span class="w"> </span>
+</code></pre></div>
+
+<p><strong>Verificación:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">TransactionID</span><span class="p">,</span><span class="w"> </span><span class="n">CreditNumber</span><span class="p">,</span><span class="w"> </span><span class="n">org_source_id</span><span class="p">,</span><span class="w"> </span><span class="n">source_transaction_id</span><span class="w"> </span>
 <span class="k">FROM</span><span class="w"> </span><span class="n">Customer_Credit_Memo_Header_Imp</span><span class="w"> </span>
 <span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">TransactionID</span><span class="p">;</span>
 
@@ -3358,18 +3423,20 @@ docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </spa
 <span class="c1">-- TransactionID | CreditNumber | org_source_id | source_transaction_id</span>
 <span class="c1">-- 1 | CM001 | 100 | 1</span>
 <span class="c1">-- 2 | CM100 | 101 | 1 ← Nuevo ID, source preservado</span>
-</code></pre></div></p>
-<h3 id="test-case-2-relaciones-header-detail">Test Case 2: Relaciones Header-Detail<a class="headerlink" href="#test-case-2-relaciones-header-detail" title="Permanent link">&para;</a></h3>
-<p><strong>Setup:</strong>
-<div class="highlight"><pre><span></span><code><span class="c1">-- Org A</span>
+</code></pre></div>
+
+<h3 id="test-case-2-relaciones-header-detail">Test Case 2: Relaciones Header-Detail</h3>
+<p><strong>Setup:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="c1">-- Org A</span>
 <span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">Customer_Credit_Memo_Header_Imp</span><span class="w"> </span><span class="p">(</span><span class="n">TransactionID</span><span class="p">,</span><span class="w"> </span><span class="n">CreditNumber</span><span class="p">)</span>
 <span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;CM005&#39;</span><span class="p">);</span>
 
 <span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">Customer_Credit_Memo_Detail_Imp</span><span class="w"> </span><span class="p">(</span><span class="n">DetailID</span><span class="p">,</span><span class="w"> </span><span class="n">TransactionID</span><span class="p">,</span><span class="w"> </span><span class="n">Item_id</span><span class="p">)</span>
 <span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;ITEM001&#39;</span><span class="p">),</span><span class="w"> </span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;ITEM002&#39;</span><span class="p">);</span>
-</code></pre></div></p>
-<p><strong>Verificación:</strong>
-<div class="highlight"><pre><span></span><code><span class="c1">-- Verificar que details usen el NUEVO TransactionID</span>
+</code></pre></div>
+
+<p><strong>Verificación:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="c1">-- Verificar que details usen el NUEVO TransactionID</span>
 <span class="k">SELECT</span><span class="w"> </span><span class="n">h</span><span class="p">.</span><span class="n">TransactionID</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">new_id</span><span class="p">,</span><span class="w"> </span><span class="n">h</span><span class="p">.</span><span class="n">source_transaction_id</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">old_id</span><span class="p">,</span><span class="w"> </span>
 <span class="w"> </span><span class="n">d</span><span class="p">.</span><span class="n">DetailID</span><span class="p">,</span><span class="w"> </span><span class="n">d</span><span class="p">.</span><span class="n">TransactionID</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">detail_fk</span><span class="p">,</span><span class="w"> </span><span class="n">d</span><span class="p">.</span><span class="n">Item_id</span>
 <span class="k">FROM</span><span class="w"> </span><span class="n">Customer_Credit_Memo_Header_Imp</span><span class="w"> </span><span class="n">h</span>
@@ -3377,18 +3444,20 @@ docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </spa
 <span class="k">WHERE</span><span class="w"> </span><span class="n">h</span><span class="p">.</span><span class="n">org_source_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span><span class="p">;</span>
 
 <span class="c1">-- Esperado: detail_fk == new_id (no old_id)</span>
-</code></pre></div></p>
-<h3 id="test-case-3-fe_header-con-multiples-details">Test Case 3: fe_header con Múltiples Details<a class="headerlink" href="#test-case-3-fe_header-con-multiples-details" title="Permanent link">&para;</a></h3>
-<p><strong>Setup:</strong>
-<div class="highlight"><pre><span></span><code><span class="c1">-- fe_header con id=10</span>
+</code></pre></div>
+
+<h3 id="test-case-3-fe_header-con-multiples-details">Test Case 3: fe_header con Múltiples Details</h3>
+<p><strong>Setup:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="c1">-- fe_header con id=10</span>
 <span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">fe_header</span><span class="w"> </span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">cufe</span><span class="p">,</span><span class="w"> </span><span class="n">org_source_id</span><span class="p">)</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;CUFE123&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">NULL</span><span class="p">);</span>
 
 <span class="c1">-- 2 tablas detail</span>
 <span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">fe_detail</span><span class="w"> </span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">feHeaderId</span><span class="p">,</span><span class="w"> </span><span class="n">dCodProd</span><span class="p">)</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;PROD1&#39;</span><span class="p">);</span>
 <span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">fe_payment</span><span class="w"> </span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">feHeaderId</span><span class="p">,</span><span class="w"> </span><span class="n">iFormaPago</span><span class="p">)</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
-</code></pre></div></p>
-<p><strong>Verificación:</strong>
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span>
+</code></pre></div>
+
+<p><strong>Verificación:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span>
 <span class="w"> </span><span class="n">h</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">new_header_id</span><span class="p">,</span><span class="w"> </span>
 <span class="w"> </span><span class="n">h</span><span class="p">.</span><span class="n">source_fe_id</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">old_header_id</span><span class="p">,</span>
 <span class="w"> </span><span class="n">d</span><span class="p">.</span><span class="n">feHeaderId</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">detail_fk</span><span class="p">,</span>
@@ -3399,10 +3468,11 @@ docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </spa
 <span class="k">WHERE</span><span class="w"> </span><span class="n">h</span><span class="p">.</span><span class="n">org_source_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span><span class="p">;</span>
 
 <span class="c1">-- Verificar que ambos details usen nuevo ID</span>
-</code></pre></div></p>
-<h3 id="test-case-4-performance-con-volumen">Test Case 4: Performance con Volumen<a class="headerlink" href="#test-case-4-performance-con-volumen" title="Permanent link">&para;</a></h3>
-<p><strong>Setup:</strong>
-<div class="highlight"><pre><span></span><code><span class="x">// Crear 1000 headers con 5 details cada uno</span>
+</code></pre></div>
+
+<h3 id="test-case-4-performance-con-volumen">Test Case 4: Performance con Volumen</h3>
+<p><strong>Setup:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="x">// Crear 1000 headers con 5 details cada uno</span>
 <span class="x">for ($i = 1; $i &lt;= 1000; $i++) {</span>
 <span class="x"> DB::table(&#39;Customer_Credit_Memo_Header_Imp&#39;)-&gt;insert([</span>
 <span class="x"> &#39;TransactionID&#39; =&gt; $i,</span>
@@ -3417,7 +3487,8 @@ docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </spa
 <span class="x"> ]);</span>
 <span class="x"> }</span>
 <span class="x">}</span>
-</code></pre></div></p>
+</code></pre></div>
+
 <p><strong>Métricas a medir:</strong>
 - Tiempo de ejecución
 - Uso de memoria (pico)
@@ -3428,7 +3499,7 @@ docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </spa
 - Memoria: &lt; 512MB
 - Éxito: 100% de registros sincronizados</p>
 <hr />
-<h2 id="riesgos-y-mitigaciones">Riesgos y Mitigaciones<a class="headerlink" href="#riesgos-y-mitigaciones" title="Permanent link">&para;</a></h2>
+<h2 id="riesgos-y-mitigaciones">Riesgos y Mitigaciones</h2>
 <table>
 <thead>
 <tr>
@@ -3498,19 +3569,19 @@ docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </spa
 </tr>
 </tbody>
 </table>
-<h3 id="plan-de-rollback">Plan de Rollback<a class="headerlink" href="#plan-de-rollback" title="Permanent link">&para;</a></h3>
+<h3 id="plan-de-rollback">Plan de Rollback</h3>
 <p>Si algo falla durante implementación:</p>
 <ol>
 <li><strong>Backup completo</strong> de BD de company antes de sincronizar</li>
 <li><strong>Logging detallado</strong> de cada operación para debugging</li>
 <li><strong>Comando de rollback</strong>:
- <div class="highlight"><pre><span></span><code>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>docucenter-app-1<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>sync:rollback-company<span class="w"> </span><span class="m">5</span>
-</code></pre></div></li>
+ <code>bash
+ docker exec -it docucenter-app-1 php artisan sync:rollback-company 5</code></li>
 <li><strong>Restaurar desde backup</strong> si es necesario</li>
 </ol>
 <hr />
-<h2 id="metricas-de-exito">Métricas de Éxito<a class="headerlink" href="#metricas-de-exito" title="Permanent link">&para;</a></h2>
-<h3 id="criterios-de-aceptacion">Criterios de Aceptación<a class="headerlink" href="#criterios-de-aceptacion" title="Permanent link">&para;</a></h3>
+<h2 id="metricas-de-exito">Métricas de Éxito</h2>
+<h3 id="criterios-de-aceptacion">Criterios de Aceptación</h3>
 <ul>
 <li>Todos los headers se sincronizan sin colisiones de PK</li>
 <li>Todos los details mantienen relación correcta con nuevos headers</li>
@@ -3521,7 +3592,7 @@ docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </spa
 <li>Logging completo para troubleshooting</li>
 <li>Tests pasan al 100%</li>
 </ul>
-<h3 id="kpis-post-implementacion">KPIs Post-Implementación<a class="headerlink" href="#kpis-post-implementacion" title="Permanent link">&para;</a></h3>
+<h3 id="kpis-post-implementacion">KPIs Post-Implementación</h3>
 <table>
 <thead>
 <tr>
@@ -3559,22 +3630,22 @@ docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </spa
 </tbody>
 </table>
 <hr />
-<h2 id="referencias">Referencias<a class="headerlink" href="#referencias" title="Permanent link">&para;</a></h2>
-<h3 id="codigo-relacionado">Código Relacionado<a class="headerlink" href="#codigo-relacionado" title="Permanent link">&para;</a></h3>
+<h2 id="referencias">Referencias</h2>
+<h3 id="codigo-relacionado">Código Relacionado</h3>
 <ul>
 <li><code>app/Jobs/SyncOrganizationToCompanyJob.php</code> - Job principal de consolidación</li>
 <li><code>app/Models/Companysession.php</code> - Configuración de índices únicos</li>
 <li><code>app/Models/*HeaderImp.php</code> - Modelos de tablas header</li>
 <li><code>app/Models/*DetailImp.php</code> - Modelos de tablas detail</li>
 </ul>
-<h3 id="documentacion-relacionada">Documentación Relacionada<a class="headerlink" href="#documentacion-relacionada" title="Permanent link">&para;</a></h3>
+<h3 id="documentacion-relacionada">Documentación Relacionada</h3>
 <ul>
 <li><a href="./consolidation-system.md">Consolidation System</a> - Sistema completo de consolidación</li>
 <li><a href="./multi-tenant-architecture.md">Multi-Tenant Architecture</a> - Arquitectura multi-tenant</li>
 <li><a href="./database-switching.md">Database Switching Pattern</a> - Patrón de cambio de BD</li>
 </ul>
 <hr />
-<h2 id="historial-de-cambios">Historial de Cambios<a class="headerlink" href="#historial-de-cambios" title="Permanent link">&para;</a></h2>
+<h2 id="historial-de-cambios">Historial de Cambios</h2>
 <table>
 <thead>
 <tr>
@@ -3594,7 +3665,7 @@ docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </spa
 </tbody>
 </table>
 <hr />
-<h2 id="proximos-pasos">Próximos Pasos<a class="headerlink" href="#proximos-pasos" title="Permanent link">&para;</a></h2>
+<h2 id="proximos-pasos">Próximos Pasos</h2>
 <ol>
 <li><strong>Validar tablas Export</strong> - Verificar auto-increment en stubs SQL</li>
 <li><strong>Crear migraciones</strong> - Script para agregar columnas source_*</li>
@@ -3659,7 +3730,7 @@ docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </spa
       
       
     
-    <a href="https://github.com/aghabrego/docucenter" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+    <a href="https://github.com/aghabrego/docucenter-public" target="_blank" rel="noopener" title="github.com" class="md-social__link">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
     </a>
   

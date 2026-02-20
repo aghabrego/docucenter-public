@@ -233,7 +233,7 @@
           
   
   
-  APIs
+  API Documentation
 
         </a>
       </li>
@@ -269,7 +269,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../" class="md-tabs__link">
+        <a href="../README.md" class="md-tabs__link">
           
   
   
@@ -298,6 +298,25 @@
         </a>
       </li>
     
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../testing/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Sistema de Testing
+
+      </a>
+    </li>
   
 
       
@@ -404,7 +423,7 @@
   <span class="md-ellipsis">
     
   
-    APIs
+    API Documentation
   
 
     
@@ -420,7 +439,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    APIs
+    API Documentation
   
 
           </label>
@@ -1363,7 +1382,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
+      <a href="../README.md" class="md-nav__link">
         
   
   
@@ -1712,6 +1731,33 @@
           </ul>
         </nav>
       
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sistema de Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -2322,13 +2368,13 @@
   
 
 
-<h1 id="mejora-api-meypar-autenticacion-flexible-con-parkingid-alfanumerico">Mejora API Meypar - Autenticación Flexible con parkingID Alfanumérico<a class="headerlink" href="#mejora-api-meypar-autenticacion-flexible-con-parkingid-alfanumerico" title="Permanent link">&para;</a></h1>
+<h1 id="mejora-api-meypar-autenticacion-flexible-con-parkingid-alfanumerico">Mejora API Meypar - Autenticación Flexible con parkingID Alfanumérico</h1>
 <p><strong>Fecha:</strong> 4 de diciembre de 2025<br />
 <strong>Versión:</strong> 1.0<br />
 <strong>Estado:</strong> Análisis y Propuesta de Implementación<br />
 <strong>Módulo:</strong> API Meypar Authentication</p>
 <hr />
-<h2 id="indice">📋 Índice<a class="headerlink" href="#indice" title="Permanent link">&para;</a></h2>
+<h2 id="indice">📋 Índice</h2>
 <ol>
 <li><a href="#contexto-del-requerimiento">Contexto del Requerimiento</a></li>
 <li><a href="#análisis-de-la-situación-actual">Análisis de la Situación Actual</a></li>
@@ -2339,19 +2385,20 @@
 <li><a href="#consideraciones-de-seguridad">Consideraciones de Seguridad</a></li>
 </ol>
 <hr />
-<h2 id="contexto-del-requerimiento">Contexto del Requerimiento<a class="headerlink" href="#contexto-del-requerimiento" title="Permanent link">&para;</a></h2>
-<h3 id="solicitud-del-cliente">Solicitud del Cliente<a class="headerlink" href="#solicitud-del-cliente" title="Permanent link">&para;</a></h3>
+<h2 id="contexto-del-requerimiento">Contexto del Requerimiento</h2>
+<h3 id="solicitud-del-cliente">Solicitud del Cliente</h3>
 <p>El cliente Meypar requiere autenticación flexible usando dos tipos de identificadores:</p>
-<p><strong>Parámetros API Meypar → DocuCenter:</strong>
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<p><strong>Parámetros API Meypar → DocuCenter:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;userName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;greysa@ffproperties.net&quot;</span><span class="p">,</span><span class="w">    </span><span class="c1">// → email</span>
 <span class="w">  </span><span class="nt">&quot;userPW&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Admin.123$&quot;</span><span class="p">,</span><span class="w">                   </span><span class="c1">// → password</span>
 <span class="w">  </span><span class="nt">&quot;parkingId&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ADCOL04880&quot;</span><span class="w"> </span><span class="err">o</span><span class="w"> </span><span class="mi">101</span><span class="p">,</span><span class="w">          </span><span class="c1">// → organization_id O código alfanumérico</span>
 <span class="w">  </span><span class="nt">&quot;ambiente&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">                            </span><span class="c1">// → point_sale</span>
 <span class="w">  </span><span class="nt">&quot;idFacturador&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;110&quot;</span><span class="w">                     </span><span class="c1">// → token_name</span>
 <span class="p">}</span>
-</code></pre></div></p>
-<h3 id="casos-de-uso">Casos de Uso<a class="headerlink" href="#casos-de-uso" title="Permanent link">&para;</a></h3>
+</code></pre></div>
+
+<h3 id="casos-de-uso">Casos de Uso</h3>
 <ol>
 <li><strong>Caso Numérico (Actual):</strong></li>
 <li><code>parkingId: 101</code> → Busca directamente por <code>organizations.id = 101</code></li>
@@ -2365,7 +2412,7 @@
 <li>Permite identificadores más descriptivos y memorizables</li>
 <li>Facilita integración con sistemas externos</li>
 </ol>
-<h3 id="beneficios">Beneficios<a class="headerlink" href="#beneficios" title="Permanent link">&para;</a></h3>
+<h3 id="beneficios">Beneficios</h3>
 <ul>
 <li>✅ Mayor flexibilidad en identificación de organizaciones</li>
 <li>✅ Códigos memorizables para clientes (ej: <code>ADCOL04880</code> vs <code>101</code>)</li>
@@ -2373,14 +2420,14 @@
 <li>✅ Mantiene retrocompatibilidad con IDs numéricos existentes</li>
 </ul>
 <hr />
-<h2 id="analisis-de-la-situacion-actual">Análisis de la Situación Actual<a class="headerlink" href="#analisis-de-la-situacion-actual" title="Permanent link">&para;</a></h2>
-<h3 id="endpoint-actual">Endpoint Actual<a class="headerlink" href="#endpoint-actual" title="Permanent link">&para;</a></h3>
+<h2 id="analisis-de-la-situacion-actual">Análisis de la Situación Actual</h2>
+<h3 id="endpoint-actual">Endpoint Actual</h3>
 <p><strong>Ruta:</strong> <code>POST /api/v1/meypar-login</code><br />
 <strong>Ubicación:</strong> <code>routes/api.php</code> línea 137<br />
 <strong>Controller:</strong> <code>App\Http\Controllers\V1\AuthController::meyparLogin()</code></p>
-<h3 id="request-actual">Request Actual<a class="headerlink" href="#request-actual" title="Permanent link">&para;</a></h3>
+<h3 id="request-actual">Request Actual</h3>
 <p><strong>Archivo:</strong> <code>app/Http/Requests/Auth/MeyparLoginRequest.php</code></p>
-<div class="highlight"><pre><span></span><code><span class="x">public function rules()</span>
+<div class="codehilite"><pre><span></span><code><span class="x">public function rules()</span>
 <span class="x">{</span>
 <span class="x">    return [</span>
 <span class="x">        &#39;userName&#39; =&gt; &#39;required|email|max:255&#39;,</span>
@@ -2391,9 +2438,10 @@
 <span class="x">    ];</span>
 <span class="x">}</span>
 </code></pre></div>
+
 <p><strong>Problema:</strong> La regla <code>'parkingId' =&gt; 'required|integer|exists:organizations,id'</code> rechaza valores alfanuméricos.</p>
-<h3 id="flujo-de-autenticacion-actual">Flujo de Autenticación Actual<a class="headerlink" href="#flujo-de-autenticacion-actual" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">// app/Http/Controllers/V1/AuthController.php - meyparLogin()</span>
+<h3 id="flujo-de-autenticacion-actual">Flujo de Autenticación Actual</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">// app/Http/Controllers/V1/AuthController.php - meyparLogin()</span>
 
 <span class="x">// 1. Validación (solo integer)</span>
 <span class="x">$credentials = $request-&gt;getMappedCredentials();</span>
@@ -2409,27 +2457,29 @@
 <span class="x">// 4. Obtención de organización</span>
 <span class="x">$organization = Organization::findOrFail($credentials[&#39;organization_id&#39;]);</span>
 </code></pre></div>
+
 <hr />
-<h2 id="propuesta-de-solucion">Propuesta de Solución<a class="headerlink" href="#propuesta-de-solucion" title="Permanent link">&para;</a></h2>
-<h3 id="1-nueva-columna-en-tabla-organizations">1️⃣ Nueva Columna en Tabla <code>organizations</code><a class="headerlink" href="#1-nueva-columna-en-tabla-organizations" title="Permanent link">&para;</a></h3>
+<h2 id="propuesta-de-solucion">Propuesta de Solución</h2>
+<h3 id="1-nueva-columna-en-tabla-organizations">1️⃣ Nueva Columna en Tabla <code>organizations</code></h3>
 <p><strong>Campo:</strong> <code>codigo_sistema</code> (Código Sistema / Parking Code)</p>
 <p><strong>Características:</strong>
 - <strong>Tipo:</strong> <code>VARCHAR(50)</code>
 - <strong>Nullable:</strong> <code>YES</code> (opcional para compatibilidad)
 - <strong>Único:</strong> <code>YES</code> (índice unique para búsquedas rápidas)
 - <strong>Uso:</strong> Identificador alfanumérico alternativo para APIs externas</p>
-<div class="highlight"><pre><span></span><code><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">organizations</span><span class="w"> </span>
+<div class="codehilite"><pre><span></span><code><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">organizations</span><span class="w"> </span>
 <span class="k">ADD</span><span class="w"> </span><span class="k">COLUMN</span><span class="w"> </span><span class="n">codigo_sistema</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">UNIQUE</span><span class="w"> </span><span class="k">AFTER</span><span class="w"> </span><span class="n">id_empresa</span><span class="p">,</span>
 <span class="k">ADD</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">idx_codigo_sistema</span><span class="w"> </span><span class="p">(</span><span class="n">codigo_sistema</span><span class="p">);</span>
 </code></pre></div>
+
 <p><strong>Ejemplos de valores:</strong>
 - <code>ADCOL04880</code> (Parqueo Colombia 04880)
 - <code>PNPTY001</code> (Parqueo Panamá PTY 001)
 - <code>RESTO123</code> (Restaurante 123)
 - <code>NULL</code> (organizaciones sin código asignado)</p>
-<h3 id="2-logica-de-deteccion-automatica">2️⃣ Lógica de Detección Automática<a class="headerlink" href="#2-logica-de-deteccion-automatica" title="Permanent link">&para;</a></h3>
+<h3 id="2-logica-de-deteccion-automatica">2️⃣ Lógica de Detección Automática</h3>
 <p><strong>Estrategia:</strong> Detectar automáticamente si <code>parkingId</code> es numérico o alfanumérico</p>
-<div class="highlight"><pre><span></span><code><span class="x">// Pseudocódigo de detección</span>
+<div class="codehilite"><pre><span></span><code><span class="x">// Pseudocódigo de detección</span>
 <span class="x">if (is_numeric($parkingId) &amp;&amp; ctype_digit((string)$parkingId)) {</span>
 <span class="x">    // Es numérico → Buscar por organizations.id</span>
 <span class="x">    $organization = Organization::find($parkingId);</span>
@@ -2438,7 +2488,8 @@
 <span class="x">    $organization = Organization::where(&#39;codigo_sistema&#39;, $parkingId)-&gt;first();</span>
 <span class="x">}</span>
 </code></pre></div>
-<h3 id="3-ventajas-de-esta-solucion">3️⃣ Ventajas de esta Solución<a class="headerlink" href="#3-ventajas-de-esta-solucion" title="Permanent link">&para;</a></h3>
+
+<h3 id="3-ventajas-de-esta-solucion">3️⃣ Ventajas de esta Solución</h3>
 <p><strong>✅ Retrocompatibilidad:</strong>
 - Organizaciones sin <code>codigo_sistema</code> (NULL) siguen funcionando con ID numérico
 - No rompe integraciones existentes</p>
@@ -2454,10 +2505,10 @@
 - Facilita debugging en logs
 - Mejor documentación de APIs</p>
 <hr />
-<h2 id="cambios-necesarios">Cambios Necesarios<a class="headerlink" href="#cambios-necesarios" title="Permanent link">&para;</a></h2>
-<h3 id="1-migration">1. Migration<a class="headerlink" href="#1-migration" title="Permanent link">&para;</a></h3>
+<h2 id="cambios-necesarios">Cambios Necesarios</h2>
+<h3 id="1-migration">1. Migration</h3>
 <p><strong>Archivo:</strong> <code>database/migrations/2025_12_04_create_codigo_sistema_column.php</code></p>
-<div class="highlight"><pre><span></span><code><span class="cp">&lt;?php</span>
+<div class="codehilite"><pre><span></span><code><span class="cp">&lt;?php</span>
 
 <span class="k">use</span> <span class="nx">Illuminate\Database\Migrations\Migration</span><span class="p">;</span>
 <span class="k">use</span> <span class="nx">Illuminate\Database\Schema\Blueprint</span><span class="p">;</span>
@@ -2488,9 +2539,10 @@
     <span class="p">}</span>
 <span class="p">};</span>
 </code></pre></div>
-<h3 id="2-modelo-organization">2. Modelo Organization<a class="headerlink" href="#2-modelo-organization" title="Permanent link">&para;</a></h3>
+
+<h3 id="2-modelo-organization">2. Modelo Organization</h3>
 <p><strong>Archivo:</strong> <code>app/Models/Organization.php</code></p>
-<div class="highlight"><pre><span></span><code><span class="x">protected $fillable = [</span>
+<div class="codehilite"><pre><span></span><code><span class="x">protected $fillable = [</span>
 <span class="x">    // ... campos existentes ...</span>
 <span class="x">    &#39;id_empresa&#39;,</span>
 <span class="x">    &#39;codigo_sistema&#39;,  // ✅ AGREGAR</span>
@@ -2526,9 +2578,10 @@
 <span class="x">    return $this-&gt;codigo_sistema ?? $this-&gt;id;</span>
 <span class="x">}</span>
 </code></pre></div>
-<h3 id="3-meyparloginrequest">3. MeyparLoginRequest<a class="headerlink" href="#3-meyparloginrequest" title="Permanent link">&para;</a></h3>
+
+<h3 id="3-meyparloginrequest">3. MeyparLoginRequest</h3>
 <p><strong>Archivo:</strong> <code>app/Http/Requests/Auth/MeyparLoginRequest.php</code></p>
-<div class="highlight"><pre><span></span><code><span class="x">public function rules()</span>
+<div class="codehilite"><pre><span></span><code><span class="x">public function rules()</span>
 <span class="x">{</span>
 <span class="x">    return [</span>
 <span class="x">        &#39;userName&#39; =&gt; &#39;required|email|max:255&#39;,</span>
@@ -2580,9 +2633,10 @@
 <span class="x">    ];</span>
 <span class="x">}</span>
 </code></pre></div>
-<h3 id="4-componente-livewire-create">4. Componente Livewire Create<a class="headerlink" href="#4-componente-livewire-create" title="Permanent link">&para;</a></h3>
+
+<h3 id="4-componente-livewire-create">4. Componente Livewire Create</h3>
 <p><strong>Archivo:</strong> <code>app/Http/Livewire/Admin/Organization/Create.php</code></p>
-<div class="highlight"><pre><span></span><code><span class="x">class Create extends Component</span>
+<div class="codehilite"><pre><span></span><code><span class="x">class Create extends Component</span>
 <span class="x">{</span>
 <span class="x">    // ... propiedades existentes ...</span>
 <span class="x">    public $codigo_sistema;  // ✅ AGREGAR</span>
@@ -2611,9 +2665,10 @@
 <span class="x">    }</span>
 <span class="x">}</span>
 </code></pre></div>
-<h3 id="5-componente-livewire-update">5. Componente Livewire Update<a class="headerlink" href="#5-componente-livewire-update" title="Permanent link">&para;</a></h3>
+
+<h3 id="5-componente-livewire-update">5. Componente Livewire Update</h3>
 <p><strong>Archivo:</strong> <code>app/Http/Livewire/Admin/Organization/Update.php</code></p>
-<div class="highlight"><pre><span></span><code><span class="x">class Update extends Component</span>
+<div class="codehilite"><pre><span></span><code><span class="x">class Update extends Component</span>
 <span class="x">{</span>
 <span class="x">    // ... propiedades existentes ...</span>
 <span class="x">    public $codigo_sistema;  // ✅ AGREGAR</span>
@@ -2646,63 +2701,67 @@
 <span class="x">    }</span>
 <span class="x">}</span>
 </code></pre></div>
-<h3 id="6-vista-blade-create">6. Vista Blade Create<a class="headerlink" href="#6-vista-blade-create" title="Permanent link">&para;</a></h3>
+
+<h3 id="6-vista-blade-create">6. Vista Blade Create</h3>
 <p><strong>Archivo:</strong> <code>resources/views/livewire/admin/organization/create.blade.php</code></p>
 <p><strong>Insertar después del campo "Compañías" (línea ~130):</strong></p>
-<div class="highlight"><pre><span></span><code>&lt;!-- Código Sistema Input --&gt;
-&lt;div class=&#39;form-group&#39;&gt;
-    &lt;label for=&#39;input-codigo_sistema&#39; class=&#39;col-sm-2 control-label&#39;&gt; 
-        {{ __(&#39;System Code&#39;) }} 
-        &lt;small class=&quot;text-muted&quot;&gt;(Parking ID API)&lt;/small&gt;
-    &lt;/label&gt;
-    &lt;input 
-        type=&#39;text&#39; 
-        id=&#39;input-codigo_sistema&#39; 
-        wire:model.lazy=&#39;codigo_sistema&#39; 
-        class=&quot;form-control @error(&#39;codigo_sistema&#39;) is-invalid @enderror&quot; 
-        placeholder=&#39;Ej: ADCOL04880, PNPTY001&#39; 
-        autocomplete=&#39;off&#39;
-        maxlength=&quot;50&quot;&gt;
-    &lt;small class=&quot;form-text text-muted&quot;&gt;
-        Código alfanumérico opcional para identificación en APIs externas (Meypar, etc.)
-    &lt;/small&gt;
-    @error(&#39;codigo_sistema&#39;) &lt;div class=&#39;invalid-feedback&#39;&gt;{{ $message ?? &#39;&#39; }}&lt;/div&gt; @enderror
-&lt;/div&gt;
+<div class="codehilite"><pre><span></span><code><span class="o">&lt;!--</span><span class="w"> </span><span class="n">Código</span><span class="w"> </span><span class="n">Sistema</span><span class="w"> </span><span class="n">Input</span><span class="w"> </span><span class="o">--&gt;</span>
+<span class="o">&lt;</span><span class="n">div</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="err">&#39;</span><span class="n">form</span><span class="o">-</span><span class="n">group</span><span class="err">&#39;</span><span class="o">&gt;</span>
+<span class="w">    </span><span class="o">&lt;</span><span class="n">label</span><span class="w"> </span><span class="k">for</span><span class="o">=</span><span class="err">&#39;</span><span class="n">input</span><span class="o">-</span><span class="n">codigo_sistema</span><span class="err">&#39;</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="err">&#39;</span><span class="n">col</span><span class="o">-</span><span class="n">sm</span><span class="mi">-2</span><span class="w"> </span><span class="n">control</span><span class="o">-</span><span class="n">label</span><span class="err">&#39;</span><span class="o">&gt;</span><span class="w"> </span>
+<span class="w">        </span><span class="p">{{</span><span class="w"> </span><span class="n">__</span><span class="p">(</span><span class="err">&#39;</span><span class="n">System</span><span class="w"> </span><span class="n">Code</span><span class="err">&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">}}</span><span class="w"> </span>
+<span class="w">        </span><span class="o">&lt;</span><span class="n">small</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;text-muted&quot;</span><span class="o">&gt;</span><span class="p">(</span><span class="n">Parking</span><span class="w"> </span><span class="n">ID</span><span class="w"> </span><span class="n">API</span><span class="p">)</span><span class="o">&lt;/</span><span class="n">small</span><span class="o">&gt;</span>
+<span class="w">    </span><span class="o">&lt;/</span><span class="n">label</span><span class="o">&gt;</span>
+<span class="w">    </span><span class="o">&lt;</span><span class="n">input</span><span class="w"> </span>
+<span class="w">        </span><span class="n">type</span><span class="o">=</span><span class="err">&#39;</span><span class="n">text</span><span class="err">&#39;</span><span class="w"> </span>
+<span class="w">        </span><span class="kt">id</span><span class="o">=</span><span class="err">&#39;</span><span class="n">input</span><span class="o">-</span><span class="n">codigo_sistema</span><span class="err">&#39;</span><span class="w"> </span>
+<span class="w">        </span><span class="nl">wire</span><span class="p">:</span><span class="n">model</span><span class="p">.</span><span class="n">lazy</span><span class="o">=</span><span class="err">&#39;</span><span class="n">codigo_sistema</span><span class="err">&#39;</span><span class="w"> </span>
+<span class="w">        </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;form-control @error(&#39;codigo_sistema&#39;) is-invalid @enderror&quot;</span><span class="w"> </span>
+<span class="w">        </span><span class="n">placeholder</span><span class="o">=</span><span class="err">&#39;</span><span class="n">Ej</span><span class="o">:</span><span class="w"> </span><span class="n">ADCOL04880</span><span class="p">,</span><span class="w"> </span><span class="n">PNPTY001</span><span class="err">&#39;</span><span class="w"> </span>
+<span class="w">        </span><span class="n">autocomplete</span><span class="o">=</span><span class="err">&#39;</span><span class="n">off</span><span class="err">&#39;</span>
+<span class="w">        </span><span class="n">maxlength</span><span class="o">=</span><span class="s">&quot;50&quot;</span><span class="o">&gt;</span>
+<span class="w">    </span><span class="o">&lt;</span><span class="n">small</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;form-text text-muted&quot;</span><span class="o">&gt;</span>
+<span class="w">        </span><span class="n">Código</span><span class="w"> </span><span class="n">alfanumérico</span><span class="w"> </span><span class="n">opcional</span><span class="w"> </span><span class="n">para</span><span class="w"> </span><span class="n">identificación</span><span class="w"> </span><span class="n">en</span><span class="w"> </span><span class="n">APIs</span><span class="w"> </span><span class="n">externas</span><span class="w"> </span><span class="p">(</span><span class="n">Meypar</span><span class="p">,</span><span class="w"> </span><span class="n">etc</span><span class="p">.)</span>
+<span class="w">    </span><span class="o">&lt;/</span><span class="n">small</span><span class="o">&gt;</span>
+<span class="w">    </span><span class="p">@</span><span class="n">error</span><span class="p">(</span><span class="err">&#39;</span><span class="n">codigo_sistema</span><span class="err">&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="n">div</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="err">&#39;</span><span class="n">invalid</span><span class="o">-</span><span class="n">feedback</span><span class="err">&#39;</span><span class="o">&gt;</span><span class="p">{{</span><span class="w"> </span><span class="n">$message</span><span class="w"> </span><span class="o">??</span><span class="w"> </span><span class="err">&#39;&#39;</span><span class="w"> </span><span class="p">}}</span><span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span><span class="w"> </span><span class="p">@</span><span class="n">enderror</span>
+<span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
 </code></pre></div>
-<h3 id="7-vista-blade-update">7. Vista Blade Update<a class="headerlink" href="#7-vista-blade-update" title="Permanent link">&para;</a></h3>
+
+<h3 id="7-vista-blade-update">7. Vista Blade Update</h3>
 <p><strong>Archivo:</strong> <code>resources/views/livewire/admin/organization/update.blade.php</code></p>
 <p><strong>Insertar en el mismo lugar (después del campo "Compañías"):</strong></p>
-<div class="highlight"><pre><span></span><code>&lt;!-- Código Sistema Input --&gt;
-&lt;div class=&#39;form-group&#39;&gt;
-    &lt;label for=&#39;input-codigo_sistema&#39; class=&#39;col-sm-2 control-label&#39;&gt; 
-        {{ __(&#39;System Code&#39;) }} 
-        &lt;small class=&quot;text-muted&quot;&gt;(Parking ID API)&lt;/small&gt;
-    &lt;/label&gt;
-    &lt;input 
-        type=&#39;text&#39; 
-        id=&#39;input-codigo_sistema&#39; 
-        wire:model.lazy=&#39;codigo_sistema&#39; 
-        class=&quot;form-control @error(&#39;codigo_sistema&#39;) is-invalid @enderror&quot; 
-        placeholder=&#39;Ej: ADCOL04880, PNPTY001&#39; 
-        autocomplete=&#39;off&#39;
-        maxlength=&quot;50&quot;&gt;
-    &lt;small class=&quot;form-text text-muted&quot;&gt;
-        Código alfanumérico opcional para identificación en APIs externas (Meypar, etc.)
-    &lt;/small&gt;
-    @error(&#39;codigo_sistema&#39;) &lt;div class=&#39;invalid-feedback&#39;&gt;{{ $message ?? &#39;&#39; }}&lt;/div&gt; @enderror
-&lt;/div&gt;
+<div class="codehilite"><pre><span></span><code><span class="o">&lt;!--</span><span class="w"> </span><span class="n">Código</span><span class="w"> </span><span class="n">Sistema</span><span class="w"> </span><span class="n">Input</span><span class="w"> </span><span class="o">--&gt;</span>
+<span class="o">&lt;</span><span class="n">div</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="err">&#39;</span><span class="n">form</span><span class="o">-</span><span class="n">group</span><span class="err">&#39;</span><span class="o">&gt;</span>
+<span class="w">    </span><span class="o">&lt;</span><span class="n">label</span><span class="w"> </span><span class="k">for</span><span class="o">=</span><span class="err">&#39;</span><span class="n">input</span><span class="o">-</span><span class="n">codigo_sistema</span><span class="err">&#39;</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="err">&#39;</span><span class="n">col</span><span class="o">-</span><span class="n">sm</span><span class="mi">-2</span><span class="w"> </span><span class="n">control</span><span class="o">-</span><span class="n">label</span><span class="err">&#39;</span><span class="o">&gt;</span><span class="w"> </span>
+<span class="w">        </span><span class="p">{{</span><span class="w"> </span><span class="n">__</span><span class="p">(</span><span class="err">&#39;</span><span class="n">System</span><span class="w"> </span><span class="n">Code</span><span class="err">&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">}}</span><span class="w"> </span>
+<span class="w">        </span><span class="o">&lt;</span><span class="n">small</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;text-muted&quot;</span><span class="o">&gt;</span><span class="p">(</span><span class="n">Parking</span><span class="w"> </span><span class="n">ID</span><span class="w"> </span><span class="n">API</span><span class="p">)</span><span class="o">&lt;/</span><span class="n">small</span><span class="o">&gt;</span>
+<span class="w">    </span><span class="o">&lt;/</span><span class="n">label</span><span class="o">&gt;</span>
+<span class="w">    </span><span class="o">&lt;</span><span class="n">input</span><span class="w"> </span>
+<span class="w">        </span><span class="n">type</span><span class="o">=</span><span class="err">&#39;</span><span class="n">text</span><span class="err">&#39;</span><span class="w"> </span>
+<span class="w">        </span><span class="kt">id</span><span class="o">=</span><span class="err">&#39;</span><span class="n">input</span><span class="o">-</span><span class="n">codigo_sistema</span><span class="err">&#39;</span><span class="w"> </span>
+<span class="w">        </span><span class="nl">wire</span><span class="p">:</span><span class="n">model</span><span class="p">.</span><span class="n">lazy</span><span class="o">=</span><span class="err">&#39;</span><span class="n">codigo_sistema</span><span class="err">&#39;</span><span class="w"> </span>
+<span class="w">        </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;form-control @error(&#39;codigo_sistema&#39;) is-invalid @enderror&quot;</span><span class="w"> </span>
+<span class="w">        </span><span class="n">placeholder</span><span class="o">=</span><span class="err">&#39;</span><span class="n">Ej</span><span class="o">:</span><span class="w"> </span><span class="n">ADCOL04880</span><span class="p">,</span><span class="w"> </span><span class="n">PNPTY001</span><span class="err">&#39;</span><span class="w"> </span>
+<span class="w">        </span><span class="n">autocomplete</span><span class="o">=</span><span class="err">&#39;</span><span class="n">off</span><span class="err">&#39;</span>
+<span class="w">        </span><span class="n">maxlength</span><span class="o">=</span><span class="s">&quot;50&quot;</span><span class="o">&gt;</span>
+<span class="w">    </span><span class="o">&lt;</span><span class="n">small</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;form-text text-muted&quot;</span><span class="o">&gt;</span>
+<span class="w">        </span><span class="n">Código</span><span class="w"> </span><span class="n">alfanumérico</span><span class="w"> </span><span class="n">opcional</span><span class="w"> </span><span class="n">para</span><span class="w"> </span><span class="n">identificación</span><span class="w"> </span><span class="n">en</span><span class="w"> </span><span class="n">APIs</span><span class="w"> </span><span class="n">externas</span><span class="w"> </span><span class="p">(</span><span class="n">Meypar</span><span class="p">,</span><span class="w"> </span><span class="n">etc</span><span class="p">.)</span>
+<span class="w">    </span><span class="o">&lt;/</span><span class="n">small</span><span class="o">&gt;</span>
+<span class="w">    </span><span class="p">@</span><span class="n">error</span><span class="p">(</span><span class="err">&#39;</span><span class="n">codigo_sistema</span><span class="err">&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="n">div</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="err">&#39;</span><span class="n">invalid</span><span class="o">-</span><span class="n">feedback</span><span class="err">&#39;</span><span class="o">&gt;</span><span class="p">{{</span><span class="w"> </span><span class="n">$message</span><span class="w"> </span><span class="o">??</span><span class="w"> </span><span class="err">&#39;&#39;</span><span class="w"> </span><span class="p">}}</span><span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span><span class="w"> </span><span class="p">@</span><span class="n">enderror</span>
+<span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
 </code></pre></div>
-<h3 id="8-archivo-de-traducciones">8. Archivo de Traducciones<a class="headerlink" href="#8-archivo-de-traducciones" title="Permanent link">&para;</a></h3>
+
+<h3 id="8-archivo-de-traducciones">8. Archivo de Traducciones</h3>
 <p><strong>Archivo:</strong> <code>lang/es_panel.json</code> (o <code>lang/es/panel.php</code>)</p>
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
 <span class="w">    </span><span class="nt">&quot;System Code&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Código Sistema&quot;</span><span class="p">,</span>
 <span class="w">    </span><span class="nt">&quot;Parking ID API&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ID Parking API&quot;</span>
 <span class="p">}</span>
 </code></pre></div>
+
 <hr />
-<h2 id="plan-de-implementacion">Plan de Implementación<a class="headerlink" href="#plan-de-implementacion" title="Permanent link">&para;</a></h2>
-<h3 id="fase-1-base-de-datos-30-min">Fase 1: Base de Datos (30 min)<a class="headerlink" href="#fase-1-base-de-datos-30-min" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># 1. Crear migration</span>
+<h2 id="plan-de-implementacion">Plan de Implementación</h2>
+<h3 id="fase-1-base-de-datos-30-min">Fase 1: Base de Datos (30 min)</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># 1. Crear migration</span>
 php<span class="w"> </span>artisan<span class="w"> </span>make:migration<span class="w"> </span>add_codigo_sistema_to_organizations_table
 
 <span class="c1"># 2. Ejecutar migration</span>
@@ -2712,7 +2771,8 @@ php<span class="w"> </span>artisan<span class="w"> </span>migrate
 docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>docucenter_laravel.test<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>tinker
 &gt;&gt;&gt;<span class="w"> </span>DB::select<span class="o">(</span><span class="s2">&quot;SHOW COLUMNS FROM organizations LIKE &#39;codigo_sistema&#39;&quot;</span><span class="o">)</span><span class="p">;</span>
 </code></pre></div>
-<h3 id="fase-2-modelo-y-logica-45-min">Fase 2: Modelo y Lógica (45 min)<a class="headerlink" href="#fase-2-modelo-y-logica-45-min" title="Permanent link">&para;</a></h3>
+
+<h3 id="fase-2-modelo-y-logica-45-min">Fase 2: Modelo y Lógica (45 min)</h3>
 <ol>
 <li>✅ Agregar <code>codigo_sistema</code> a <code>$fillable</code> en Organization</li>
 <li>✅ Crear método <code>findByParkingId()</code> estático</li>
@@ -2720,20 +2780,20 @@ docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </spa
 <li>✅ Modificar <code>MeyparLoginRequest::rules()</code></li>
 <li>✅ Modificar <code>MeyparLoginRequest::getMappedCredentials()</code></li>
 </ol>
-<h3 id="fase-3-componentes-livewire-30-min">Fase 3: Componentes Livewire (30 min)<a class="headerlink" href="#fase-3-componentes-livewire-30-min" title="Permanent link">&para;</a></h3>
+<h3 id="fase-3-componentes-livewire-30-min">Fase 3: Componentes Livewire (30 min)</h3>
 <ol>
 <li>✅ Agregar propiedad <code>$codigo_sistema</code> en Create/Update</li>
 <li>✅ Agregar regla de validación</li>
 <li>✅ Agregar asignación en <code>mount()</code> (Update)</li>
 <li>✅ Agregar campo en <code>create()</code> y <code>update()</code></li>
 </ol>
-<h3 id="fase-4-vistas-blade-20-min">Fase 4: Vistas Blade (20 min)<a class="headerlink" href="#fase-4-vistas-blade-20-min" title="Permanent link">&para;</a></h3>
+<h3 id="fase-4-vistas-blade-20-min">Fase 4: Vistas Blade (20 min)</h3>
 <ol>
 <li>✅ Agregar campo input en <code>create.blade.php</code></li>
 <li>✅ Agregar campo input en <code>update.blade.php</code></li>
 <li>✅ Agregar traducciones</li>
 </ol>
-<h3 id="fase-5-testing-1-hora">Fase 5: Testing (1 hora)<a class="headerlink" href="#fase-5-testing-1-hora" title="Permanent link">&para;</a></h3>
+<h3 id="fase-5-testing-1-hora">Fase 5: Testing (1 hora)</h3>
 <ol>
 <li>✅ Test unitario: <code>Organization::findByParkingId()</code></li>
 <li>✅ Test feature: Login con ID numérico</li>
@@ -2741,8 +2801,8 @@ docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </spa
 <li>✅ Test validación: código duplicado</li>
 <li>✅ Test UI: crear/editar organización</li>
 </ol>
-<h3 id="fase-6-migracion-de-datos-si-necesario">Fase 6: Migración de Datos (si necesario)<a class="headerlink" href="#fase-6-migracion-de-datos-si-necesario" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">// Script para asignar códigos a organizaciones existentes</span>
+<h3 id="fase-6-migracion-de-datos-si-necesario">Fase 6: Migración de Datos (si necesario)</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">// Script para asignar códigos a organizaciones existentes</span>
 <span class="x">foreach (Organization::all() as $org) {</span>
 <span class="x">    if (!$org-&gt;codigo_sistema) {</span>
 <span class="x">        $org-&gt;codigo_sistema = &#39;ORG&#39; . str_pad($org-&gt;id, 6, &#39;0&#39;, STR_PAD_LEFT);</span>
@@ -2752,10 +2812,11 @@ docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </spa
 
 <span class="x">// Resultado: ORG000001, ORG000002, etc.</span>
 </code></pre></div>
+
 <hr />
-<h2 id="testing">Testing<a class="headerlink" href="#testing" title="Permanent link">&para;</a></h2>
-<h3 id="test-1-metodo-findbyparkingid">Test 1: Método findByParkingId()<a class="headerlink" href="#test-1-metodo-findbyparkingid" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">// tests/Unit/OrganizationTest.php</span>
+<h2 id="testing">Testing</h2>
+<h3 id="test-1-metodo-findbyparkingid">Test 1: Método findByParkingId()</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">// tests/Unit/OrganizationTest.php</span>
 
 <span class="x">test(&#39;encuentra organizacion por ID numerico&#39;, function () {</span>
 <span class="x">    $org = Organization::factory()-&gt;create([&#39;id&#39; =&gt; 123]);</span>
@@ -2783,8 +2844,9 @@ docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </spa
 <span class="x">    expect($found)-&gt;toBeNull();</span>
 <span class="x">});</span>
 </code></pre></div>
-<h3 id="test-2-login-meypar-con-codigo-alfanumerico">Test 2: Login Meypar con Código Alfanumérico<a class="headerlink" href="#test-2-login-meypar-con-codigo-alfanumerico" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">// tests/Feature/MeyparApiTest.php</span>
+
+<h3 id="test-2-login-meypar-con-codigo-alfanumerico">Test 2: Login Meypar con Código Alfanumérico</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">// tests/Feature/MeyparApiTest.php</span>
 
 <span class="x">test(&#39;login exitoso con parkingId alfanumerico&#39;, function () {</span>
 <span class="x">    $user = User::factory()-&gt;create([</span>
@@ -2844,8 +2906,9 @@ docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </spa
 <span class="x">        -&gt;assertJsonValidationErrors([&#39;parkingId&#39;]);</span>
 <span class="x">});</span>
 </code></pre></div>
-<h3 id="test-3-validacion-de-unicidad">Test 3: Validación de Unicidad<a class="headerlink" href="#test-3-validacion-de-unicidad" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">test(&#39;no permite codigo_sistema duplicado&#39;, function () {</span>
+
+<h3 id="test-3-validacion-de-unicidad">Test 3: Validación de Unicidad</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">test(&#39;no permite codigo_sistema duplicado&#39;, function () {</span>
 <span class="x">    Organization::factory()-&gt;create([&#39;codigo_sistema&#39; =&gt; &#39;TEST001&#39;]);</span>
 
 <span class="x">    $this-&gt;expectException(ValidationException::class);</span>
@@ -2857,17 +2920,18 @@ docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </spa
 <span class="x">    ]);</span>
 <span class="x">});</span>
 </code></pre></div>
+
 <hr />
-<h2 id="consideraciones-de-seguridad">Consideraciones de Seguridad<a class="headerlink" href="#consideraciones-de-seguridad" title="Permanent link">&para;</a></h2>
-<h3 id="validaciones-implementadas">✅ Validaciones Implementadas<a class="headerlink" href="#validaciones-implementadas" title="Permanent link">&para;</a></h3>
+<h2 id="consideraciones-de-seguridad">Consideraciones de Seguridad</h2>
+<h3 id="validaciones-implementadas">✅ Validaciones Implementadas</h3>
 <ol>
 <li><strong>Unicidad:</strong> Índice <code>UNIQUE</code> en BD + validación Laravel</li>
 <li><strong>Longitud:</strong> Máximo 50 caracteres</li>
 <li><strong>Existencia:</strong> Validación custom en <code>MeyparLoginRequest</code></li>
 <li><strong>Tipo:</strong> Acepta alfanumérico (letras, números, guiones)</li>
 </ol>
-<h3 id="recomendaciones-adicionales">⚠️ Recomendaciones Adicionales<a class="headerlink" href="#recomendaciones-adicionales" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">// Agregar validación de formato en el modelo</span>
+<h3 id="recomendaciones-adicionales">⚠️ Recomendaciones Adicionales</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">// Agregar validación de formato en el modelo</span>
 <span class="x">public function setCodigoSistemaAttribute($value)</span>
 <span class="x">{</span>
 <span class="x">    // Limpiar y normalizar</span>
@@ -2879,36 +2943,38 @@ docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </spa
 <span class="x">// Validar formato alfanumérico (opcional)</span>
 <span class="x">&#39;codigo_sistema&#39; =&gt; &#39;nullable|string|max:50|unique:organizations,codigo_sistema|regex:/^[A-Z0-9\-_]+$/&#39;,</span>
 </code></pre></div>
-<h3 id="rate-limiting">🔒 Rate Limiting<a class="headerlink" href="#rate-limiting" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">// routes/api.php</span>
+
+<h3 id="rate-limiting">🔒 Rate Limiting</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">// routes/api.php</span>
 <span class="x">Route::middleware([&#39;throttle:10,1&#39;])-&gt;group(function () {</span>
 <span class="x">    Route::post(&#39;/meypar-login&#39;, [AuthController::class, &#39;meyparLogin&#39;]);</span>
 <span class="x">});</span>
 </code></pre></div>
+
 <hr />
-<h2 id="ventajas-del-approach-propuesto">Ventajas del Approach Propuesto<a class="headerlink" href="#ventajas-del-approach-propuesto" title="Permanent link">&para;</a></h2>
-<h3 id="tecnicas">✅ Técnicas<a class="headerlink" href="#tecnicas" title="Permanent link">&para;</a></h3>
+<h2 id="ventajas-del-approach-propuesto">Ventajas del Approach Propuesto</h2>
+<h3 id="tecnicas">✅ Técnicas</h3>
 <ul>
 <li><strong>Retrocompatibilidad Total:</strong> IDs numéricos siguen funcionando</li>
 <li><strong>Performance:</strong> Índice en <code>codigo_sistema</code> para búsquedas rápidas</li>
 <li><strong>Flexibilidad:</strong> Detección automática sin cambios en cliente</li>
 <li><strong>Mantenibilidad:</strong> Lógica centralizada en <code>findByParkingId()</code></li>
 </ul>
-<h3 id="negocio">✅ Negocio<a class="headerlink" href="#negocio" title="Permanent link">&para;</a></h3>
+<h3 id="negocio">✅ Negocio</h3>
 <ul>
 <li><strong>UX Mejorado:</strong> Códigos memorizables (<code>ADCOL04880</code> vs <code>101</code>)</li>
 <li><strong>Integración Simplificada:</strong> Clientes externos usan sus códigos</li>
 <li><strong>Escalabilidad:</strong> Soporta múltiples sistemas con diferentes esquemas</li>
 <li><strong>Documentación:</strong> Códigos autodescriptivos</li>
 </ul>
-<h3 id="operacionales">✅ Operacionales<a class="headerlink" href="#operacionales" title="Permanent link">&para;</a></h3>
+<h3 id="operacionales">✅ Operacionales</h3>
 <ul>
 <li><strong>Deployment Seguro:</strong> Migration nullable, sin downtime</li>
 <li><strong>Testing Completo:</strong> Cobertura de casos numéricos y alfanuméricos</li>
 <li><strong>Logs Mejorados:</strong> Identificación clara en logs (<code>ADCOL04880</code> vs <code>101</code>)</li>
 </ul>
 <hr />
-<h2 id="resumen-de-archivos-modificados">Resumen de Archivos Modificados<a class="headerlink" href="#resumen-de-archivos-modificados" title="Permanent link">&para;</a></h2>
+<h2 id="resumen-de-archivos-modificados">Resumen de Archivos Modificados</h2>
 <table>
 <thead>
 <tr>
@@ -2972,9 +3038,9 @@ docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </spa
 </table>
 <p><strong>Total:</strong> ~210 líneas de código nuevo</p>
 <hr />
-<h2 id="ejemplo-de-uso-en-postman">Ejemplo de Uso en Postman<a class="headerlink" href="#ejemplo-de-uso-en-postman" title="Permanent link">&para;</a></h2>
-<h3 id="request-con-id-numerico-actual">Request con ID Numérico (Actual)<a class="headerlink" href="#request-con-id-numerico-actual" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="err">POST</span><span class="w"> </span><span class="err">/api/v</span><span class="mi">1</span><span class="err">/meypar</span><span class="mi">-</span><span class="err">logi</span><span class="kc">n</span>
+<h2 id="ejemplo-de-uso-en-postman">Ejemplo de Uso en Postman</h2>
+<h3 id="request-con-id-numerico-actual">Request con ID Numérico (Actual)</h3>
+<div class="codehilite"><pre><span></span><code><span class="err">POST</span><span class="w"> </span><span class="err">/api/v</span><span class="mi">1</span><span class="err">/meypar</span><span class="mi">-</span><span class="err">logi</span><span class="kc">n</span>
 <span class="err">Co</span><span class="kc">ntent</span><span class="mi">-</span><span class="err">Type</span><span class="p">:</span><span class="w"> </span><span class="err">applica</span><span class="kc">t</span><span class="err">io</span><span class="kc">n</span><span class="err">/jso</span><span class="kc">n</span>
 
 <span class="p">{</span>
@@ -2985,8 +3051,9 @@ docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </spa
 <span class="w">  </span><span class="nt">&quot;idFacturador&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;110&quot;</span>
 <span class="p">}</span>
 </code></pre></div>
-<h3 id="request-con-codigo-alfanumerico-nuevo">Request con Código Alfanumérico (Nuevo)<a class="headerlink" href="#request-con-codigo-alfanumerico-nuevo" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="err">POST</span><span class="w"> </span><span class="err">/api/v</span><span class="mi">1</span><span class="err">/meypar</span><span class="mi">-</span><span class="err">logi</span><span class="kc">n</span>
+
+<h3 id="request-con-codigo-alfanumerico-nuevo">Request con Código Alfanumérico (Nuevo)</h3>
+<div class="codehilite"><pre><span></span><code><span class="err">POST</span><span class="w"> </span><span class="err">/api/v</span><span class="mi">1</span><span class="err">/meypar</span><span class="mi">-</span><span class="err">logi</span><span class="kc">n</span>
 <span class="err">Co</span><span class="kc">ntent</span><span class="mi">-</span><span class="err">Type</span><span class="p">:</span><span class="w"> </span><span class="err">applica</span><span class="kc">t</span><span class="err">io</span><span class="kc">n</span><span class="err">/jso</span><span class="kc">n</span>
 
 <span class="p">{</span>
@@ -2997,9 +3064,10 @@ docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </spa
 <span class="w">  </span><span class="nt">&quot;idFacturador&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;110&quot;</span>
 <span class="p">}</span>
 </code></pre></div>
+
 <p><strong>Ambos funcionan sin cambios en la URL o headers</strong> ✅</p>
 <hr />
-<h2 id="conclusion">Conclusión<a class="headerlink" href="#conclusion" title="Permanent link">&para;</a></h2>
+<h2 id="conclusion">Conclusión</h2>
 <p>La solución propuesta:</p>
 <ol>
 <li>✅ <strong>Resuelve el requerimiento:</strong> Soporta <code>parkingId</code> alfanumérico</li>
@@ -3066,7 +3134,7 @@ docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </spa
       
       
     
-    <a href="https://github.com/aghabrego/docucenter" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+    <a href="https://github.com/aghabrego/docucenter-public" target="_blank" rel="noopener" title="github.com" class="md-social__link">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
     </a>
   

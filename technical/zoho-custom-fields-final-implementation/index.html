@@ -233,7 +233,7 @@
           
   
   
-  APIs
+  API Documentation
 
         </a>
       </li>
@@ -269,7 +269,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../" class="md-tabs__link">
+        <a href="../README.md" class="md-tabs__link">
           
   
   
@@ -298,6 +298,25 @@
         </a>
       </li>
     
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../testing/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Sistema de Testing
+
+      </a>
+    </li>
   
 
       
@@ -404,7 +423,7 @@
   <span class="md-ellipsis">
     
   
-    APIs
+    API Documentation
   
 
     
@@ -420,7 +439,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    APIs
+    API Documentation
   
 
           </label>
@@ -1363,7 +1382,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
+      <a href="../README.md" class="md-nav__link">
         
   
   
@@ -1712,6 +1731,33 @@
           </ul>
         </nav>
       
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sistema de Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -2112,11 +2158,11 @@
   
 
 
-<h1 id="zoho-custom-fields-implementacion-completa">Zoho Custom Fields - Implementación Completa<a class="headerlink" href="#zoho-custom-fields-implementacion-completa" title="Permanent link">&para;</a></h1>
-<h2 id="resumen-de-implementacion">Resumen de Implementación<a class="headerlink" href="#resumen-de-implementacion" title="Permanent link">&para;</a></h2>
+<h1 id="zoho-custom-fields-implementacion-completa">Zoho Custom Fields - Implementación Completa</h1>
+<h2 id="resumen-de-implementacion">Resumen de Implementación</h2>
 <p>Se ha completado la implementación de un sistema robusto para manejar campos personalizados (custom fields) en la integración con Zoho Books API, basándose estrictamente en la documentación oficial de Zoho.</p>
-<h2 id="archivos-modificados">Archivos Modificados<a class="headerlink" href="#archivos-modificados" title="Permanent link">&para;</a></h2>
-<h3 id="1-appserviceszohozohocustomfieldshelperphp">1. <code>/app/Services/Zoho/ZohoCustomFieldsHelper.php</code><a class="headerlink" href="#1-appserviceszohozohocustomfieldshelperphp" title="Permanent link">&para;</a></h3>
+<h2 id="archivos-modificados">Archivos Modificados</h2>
+<h3 id="1-appserviceszohozohocustomfieldshelperphp">1. <code>/app/Services/Zoho/ZohoCustomFieldsHelper.php</code></h3>
 <p><strong>Mejoras implementadas:</strong>
 - ✅ Corrección de estructura de custom fields según documentación oficial
 - ✅ Búsqueda por <code>label</code> en lugar de <code>customfield_id</code> inexistente<br />
@@ -2131,14 +2177,14 @@
 - <code>ensureCustomerExists()</code> - Verificación/creación de customers locales
 - <code>findOrCreateVendorBySageId()</code> - Búsqueda inteligente por SageVendorID
 - <code>findOrCreateCustomerBySageId()</code> - Búsqueda inteligente por SageCustomerID</p>
-<h3 id="2-appserviceszohoselfclientservicephp">2. <code>/app/Services/ZohoSelfClientService.php</code><a class="headerlink" href="#2-appserviceszohoselfclientservicephp" title="Permanent link">&para;</a></h3>
+<h3 id="2-appserviceszohoselfclientservicephp">2. <code>/app/Services/ZohoSelfClientService.php</code></h3>
 <p><strong>Mejoras implementadas:</strong>
 - ✅ Método <code>createCustomer()</code> mejorado con contact_type y logging
 - ✅ Método <code>createVendor()</code> ya existía pero verificado
 - ✅ Métodos de búsqueda <code>searchVendorByName()</code> y <code>searchCustomerByName()</code></p>
-<h2 id="estructura-oficial-de-custom-fields">Estructura Oficial de Custom Fields<a class="headerlink" href="#estructura-oficial-de-custom-fields" title="Permanent link">&para;</a></h2>
+<h2 id="estructura-oficial-de-custom-fields">Estructura Oficial de Custom Fields</h2>
 <p>Según la documentación oficial de Zoho Books API:</p>
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;custom_fields&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <span class="w">    </span><span class="p">{</span>
 <span class="w">      </span><span class="nt">&quot;index&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
@@ -2148,38 +2194,41 @@
 <span class="w">  </span><span class="p">]</span>
 <span class="p">}</span>
 </code></pre></div>
+
 <p><strong>Cambios clave implementados:</strong>
 - ❌ Antes: Buscaba <code>customfield_id</code> (NO existe en la API)
 - ✅ Ahora: Busca por <code>label</code> y <code>index</code> (estructura oficial)
 - ✅ Mapeo flexible por múltiples labels posibles
 - ✅ Validación de <code>contact_type</code> (vendor/customer)</p>
-<h2 id="flujo-de-procesamiento">Flujo de Procesamiento<a class="headerlink" href="#flujo-de-procesamiento" title="Permanent link">&para;</a></h2>
-<h3 id="1-extraccion-de-custom-fields">1. Extracción de Custom Fields<a class="headerlink" href="#1-extraccion-de-custom-fields" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>Webhook Data → custom_field_hash → API Consultation → Local Creation
+<h2 id="flujo-de-procesamiento">Flujo de Procesamiento</h2>
+<h3 id="1-extraccion-de-custom-fields">1. Extracción de Custom Fields</h3>
+<div class="codehilite"><pre><span></span><code>Webhook Data → custom_field_hash → API Consultation → Local Creation
 </code></pre></div>
+
 <ol>
 <li><strong>Primera verificación</strong>: <code>custom_field_hash</code> del webhook</li>
 <li><strong>Segunda verificación</strong>: Consulta API de Zoho si no está en hash</li>
 <li><strong>Creación local</strong>: Si no existe, crea en BD local con datos completos</li>
 </ol>
-<h3 id="2-verificacioncreacion-de-contacts">2. Verificación/Creación de Contacts<a class="headerlink" href="#2-verificacioncreacion-de-contacts" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>Search Local → Search Zoho → Create Zoho → Create Local
+<h3 id="2-verificacioncreacion-de-contacts">2. Verificación/Creación de Contacts</h3>
+<div class="codehilite"><pre><span></span><code>Search Local → Search Zoho → Create Zoho → Create Local
 </code></pre></div>
+
 <ol>
 <li><strong>Búsqueda local</strong>: Por Custom_field1 (SageVendorID/SageCustomerID)</li>
 <li><strong>Búsqueda Zoho</strong>: Por nombre si no existe localmente</li>
 <li><strong>Creación Zoho</strong>: Con custom fields si no existe en ningún lado</li>
 <li><strong>Creación local</strong>: Con todos los datos disponibles</li>
 </ol>
-<h2 id="archivos-de-documentacion-y-testing">Archivos de Documentación y Testing<a class="headerlink" href="#archivos-de-documentacion-y-testing" title="Permanent link">&para;</a></h2>
-<h3 id="3-docstestingzoho-custom-fields-verificationmd">3. <code>/docs/testing/zoho-custom-fields-verification.md</code><a class="headerlink" href="#3-docstestingzoho-custom-fields-verificationmd" title="Permanent link">&para;</a></h3>
+<h2 id="archivos-de-documentacion-y-testing">Archivos de Documentación y Testing</h2>
+<h3 id="3-docstestingzoho-custom-fields-verificationmd">3. <code>/docs/testing/zoho-custom-fields-verification.md</code></h3>
 <p><strong>Contenido:</strong>
 - ✅ Guía completa de verificación
 - ✅ Scripts de prueba en Tinker
 - ✅ Casos de prueba específicos
 - ✅ Monitoreo y debugging
 - ✅ Validación de resultados</p>
-<h3 id="4-scriptstest-zoho-custom-fieldssh">4. <code>/scripts/test-zoho-custom-fields.sh</code><a class="headerlink" href="#4-scriptstest-zoho-custom-fieldssh" title="Permanent link">&para;</a></h3>
+<h3 id="4-scriptstest-zoho-custom-fieldssh">4. <code>/scripts/test-zoho-custom-fields.sh</code></h3>
 <p><strong>Funcionalidades:</strong>
 - ✅ Script interactivo para pruebas
 - ✅ Verificación de conexiones Zoho
@@ -2187,9 +2236,9 @@
 - ✅ Creación de vendors/customers de prueba
 - ✅ Verificación de base de datos
 - ✅ Monitoreo de logs en tiempo real</p>
-<h2 id="casos-de-uso-soportados">Casos de Uso Soportados<a class="headerlink" href="#casos-de-uso-soportados" title="Permanent link">&para;</a></h2>
-<h3 id="caso-1-webhook-con-custom-field-hash">✅ Caso 1: Webhook con Custom Field Hash<a class="headerlink" href="#caso-1-webhook-con-custom-field-hash" title="Permanent link">&para;</a></h3>
-<p><div class="highlight"><pre><span></span><code><span class="p">{</span>
+<h2 id="casos-de-uso-soportados">Casos de Uso Soportados</h2>
+<h3 id="caso-1-webhook-con-custom-field-hash">✅ Caso 1: Webhook con Custom Field Hash</h3>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;vendor_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;123456789&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;vendor_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Test Vendor&quot;</span><span class="p">,</span><span class="w"> </span>
 <span class="w">  </span><span class="nt">&quot;custom_field_hash&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
@@ -2197,32 +2246,35 @@
 <span class="w">  </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
-<strong>Resultado</strong>: SageVendorID extraído directamente de custom_field_hash</p>
-<h3 id="caso-2-webhook-sin-custom-field-hash">✅ Caso 2: Webhook sin Custom Field Hash<a class="headerlink" href="#caso-2-webhook-sin-custom-field-hash" title="Permanent link">&para;</a></h3>
-<p><div class="highlight"><pre><span></span><code><span class="p">{</span>
+
+<p><strong>Resultado</strong>: SageVendorID extraído directamente de custom_field_hash</p>
+<h3 id="caso-2-webhook-sin-custom-field-hash">✅ Caso 2: Webhook sin Custom Field Hash</h3>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;vendor_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;123456789&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;vendor_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Test Vendor&quot;</span>
 <span class="p">}</span>
 </code></pre></div>
-<strong>Resultado</strong>: Consulta API de Zoho para obtener custom fields del contacto</p>
-<h3 id="caso-3-vendorcustomer-no-existe">✅ Caso 3: Vendor/Customer no existe<a class="headerlink" href="#caso-3-vendorcustomer-no-existe" title="Permanent link">&para;</a></h3>
-<p><div class="highlight"><pre><span></span><code><span class="x">$helper-&gt;findOrCreateVendorBySageId(</span>
+
+<p><strong>Resultado</strong>: Consulta API de Zoho para obtener custom fields del contacto</p>
+<h3 id="caso-3-vendorcustomer-no-existe">✅ Caso 3: Vendor/Customer no existe</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">$helper-&gt;findOrCreateVendorBySageId(</span>
 <span class="x">    &#39;SAGE_VENDOR_NEW&#39;,</span>
 <span class="x">    [&#39;name&#39; =&gt; &#39;New Vendor&#39;, &#39;email&#39; =&gt; &#39;new@vendor.com&#39;],</span>
 <span class="x">    $organizationId</span>
 <span class="x">);</span>
 </code></pre></div>
-<strong>Resultado</strong>: Creación completa en Zoho y base de datos local</p>
-<h2 id="validacion-y-monitoreo">Validación y Monitoreo<a class="headerlink" href="#validacion-y-monitoreo" title="Permanent link">&para;</a></h2>
-<h3 id="logs-importantes">Logs importantes:<a class="headerlink" href="#logs-importantes" title="Permanent link">&para;</a></h3>
+
+<p><strong>Resultado</strong>: Creación completa en Zoho y base de datos local</p>
+<h2 id="validacion-y-monitoreo">Validación y Monitoreo</h2>
+<h3 id="logs-importantes">Logs importantes:</h3>
 <ul>
 <li><code>ZohoCustomFieldsHelper inicializado</code></li>
 <li><code>cf_sagevendorid encontrado en custom_field_hash</code></li>
 <li><code>Custom field encontrado en vendor Zoho</code></li>
 <li><code>Vendor creado exitosamente en base de datos local</code></li>
 </ul>
-<h3 id="verificacion-de-datos">Verificación de datos:<a class="headerlink" href="#verificacion-de-datos" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="c1">-- Vendors con custom fields</span>
+<h3 id="verificacion-de-datos">Verificación de datos:</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1">-- Vendors con custom fields</span>
 <span class="k">SELECT</span><span class="w"> </span><span class="n">ID</span><span class="p">,</span><span class="w"> </span><span class="n">VendorID</span><span class="p">,</span><span class="w"> </span><span class="n">VendrName</span><span class="p">,</span><span class="w"> </span><span class="n">Custom_field1</span><span class="w"> </span>
 <span class="k">FROM</span><span class="w"> </span><span class="n">Vendors_Imp</span><span class="w"> </span>
 <span class="k">WHERE</span><span class="w"> </span><span class="n">Custom_field1</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="w"> </span>
@@ -2234,14 +2286,17 @@
 <span class="k">WHERE</span><span class="w"> </span><span class="n">Custom_field1</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="s1">&#39;&#39;</span>
 <span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">ID</span><span class="w"> </span><span class="k">DESC</span><span class="p">;</span>
 </code></pre></div>
-<h2 id="comandos-de-prueba-rapida">Comandos de Prueba Rápida<a class="headerlink" href="#comandos-de-prueba-rapida" title="Permanent link">&para;</a></h2>
-<h3 id="ejecutar-script-de-pruebas">Ejecutar script de pruebas:<a class="headerlink" href="#ejecutar-script-de-pruebas" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>./scripts/test-zoho-custom-fields.sh
+
+<h2 id="comandos-de-prueba-rapida">Comandos de Prueba Rápida</h2>
+<h3 id="ejecutar-script-de-pruebas">Ejecutar script de pruebas:</h3>
+<div class="codehilite"><pre><span></span><code>./scripts/test-zoho-custom-fields.sh
 </code></pre></div>
-<h3 id="verificar-implementacion-en-tinker">Verificar implementación en Tinker:<a class="headerlink" href="#verificar-implementacion-en-tinker" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>docucenter-app-1<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>tinker
+
+<h3 id="verificar-implementacion-en-tinker">Verificar implementación en Tinker:</h3>
+<div class="codehilite"><pre><span></span><code>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>docucenter-app-1<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>tinker
 </code></pre></div>
-<div class="highlight"><pre><span></span><code><span class="x">use App\Services\Zoho\ZohoCustomFieldsHelper;</span>
+
+<div class="codehilite"><pre><span></span><code><span class="x">use App\Services\Zoho\ZohoCustomFieldsHelper;</span>
 <span class="x">use App\Services\ZohoSelfClientService;</span>
 <span class="x">use App\Models\Connection;</span>
 
@@ -2253,36 +2308,38 @@
 <span class="x">$sageVendorId = $helper-&gt;getSageVendorId($testData);</span>
 <span class="x">echo &quot;SageVendorID: $sageVendorId\n&quot;;</span>
 </code></pre></div>
-<h3 id="monitorear-logs">Monitorear logs:<a class="headerlink" href="#monitorear-logs" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>docucenter-app-1<span class="w"> </span>tail<span class="w"> </span>-f<span class="w"> </span>storage/logs/laravel.log<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s2">&quot;(custom_field|SageVendorID|ZohoCustomFieldsHelper)&quot;</span>
+
+<h3 id="monitorear-logs">Monitorear logs:</h3>
+<div class="codehilite"><pre><span></span><code>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>docucenter-app-1<span class="w"> </span>tail<span class="w"> </span>-f<span class="w"> </span>storage/logs/laravel.log<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s2">&quot;(custom_field|SageVendorID|ZohoCustomFieldsHelper)&quot;</span>
 </code></pre></div>
-<h2 id="compatibilidad-con-sistema-existente">Compatibilidad con Sistema Existente<a class="headerlink" href="#compatibilidad-con-sistema-existente" title="Permanent link">&para;</a></h2>
-<h3 id="retrocompatibilidad-mantenida">✅ Retrocompatibilidad mantenida:<a class="headerlink" href="#retrocompatibilidad-mantenida" title="Permanent link">&para;</a></h3>
+
+<h2 id="compatibilidad-con-sistema-existente">Compatibilidad con Sistema Existente</h2>
+<h3 id="retrocompatibilidad-mantenida">✅ Retrocompatibilidad mantenida:</h3>
 <ul>
 <li>Los métodos existentes siguen funcionando</li>
 <li>Se agregaron mejoras sin romper funcionalidad actual</li>
 <li>Compatible con procesamiento de purchase orders existente</li>
 </ul>
-<h3 id="integracion-con-organization-model">✅ Integración con Organization model:<a class="headerlink" href="#integracion-con-organization-model" title="Permanent link">&para;</a></h3>
+<h3 id="integracion-con-organization-model">✅ Integración con Organization model:</h3>
 <ul>
 <li>Usa <code>Organization::find($organizationId)</code> para obtener <code>id_empresa</code></li>
 <li>Mantiene relación correcta con <code>Companysession</code></li>
 <li>Sin filtros por ID_compania según requerimientos del usuario</li>
 </ul>
-<h3 id="base-de-datos-multi-tenant">✅ Base de datos multi-tenant:<a class="headerlink" href="#base-de-datos-multi-tenant" title="Permanent link">&para;</a></h3>
+<h3 id="base-de-datos-multi-tenant">✅ Base de datos multi-tenant:</h3>
 <ul>
 <li>Funciona correctamente con cambios de contexto de BD</li>
 <li>Maneja conexiones entre BD principal (connections) y BD de organización</li>
 <li>Token refresh funciona en el contexto correcto</li>
 </ul>
-<h2 id="proximos-pasos">Próximos Pasos<a class="headerlink" href="#proximos-pasos" title="Permanent link">&para;</a></h2>
+<h2 id="proximos-pasos">Próximos Pasos</h2>
 <ol>
 <li><strong>Integración con Purchase Orders</strong>: Utilizar el sistema mejorado en el procesamiento de webhooks de purchase orders</li>
 <li><strong>Monitoreo en producción</strong>: Verificar que los custom fields se extraen correctamente</li>
 <li><strong>Optimizaciones</strong>: Considerar cacheo de custom fields si el volumen es alto</li>
 <li><strong>Extensión</strong>: Agregar más campos personalizados según necesidades</li>
 </ol>
-<h2 id="estado-completo">Estado: ✅ COMPLETO<a class="headerlink" href="#estado-completo" title="Permanent link">&para;</a></h2>
+<h2 id="estado-completo">Estado: ✅ COMPLETO</h2>
 <p>La implementación está lista para producción y cumple con:
 - ✅ Documentación oficial de Zoho Books API
 - ✅ Mejores prácticas de Laravel
@@ -2343,7 +2400,7 @@
       
       
     
-    <a href="https://github.com/aghabrego/docucenter" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+    <a href="https://github.com/aghabrego/docucenter-public" target="_blank" rel="noopener" title="github.com" class="md-social__link">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
     </a>
   

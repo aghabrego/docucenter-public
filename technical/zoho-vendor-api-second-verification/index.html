@@ -233,7 +233,7 @@
           
   
   
-  APIs
+  API Documentation
 
         </a>
       </li>
@@ -269,7 +269,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../" class="md-tabs__link">
+        <a href="../README.md" class="md-tabs__link">
           
   
   
@@ -298,6 +298,25 @@
         </a>
       </li>
     
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../testing/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Sistema de Testing
+
+      </a>
+    </li>
   
 
       
@@ -404,7 +423,7 @@
   <span class="md-ellipsis">
     
   
-    APIs
+    API Documentation
   
 
     
@@ -420,7 +439,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    APIs
+    API Documentation
   
 
           </label>
@@ -1363,7 +1382,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
+      <a href="../README.md" class="md-nav__link">
         
   
   
@@ -1712,6 +1731,33 @@
           </ul>
         </nav>
       
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sistema de Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -2240,39 +2286,43 @@
   
 
 
-<h1 id="segunda-verificacion-custom-fields-de-zoho-desde-api">Segunda Verificación Custom Fields de Zoho desde API<a class="headerlink" href="#segunda-verificacion-custom-fields-de-zoho-desde-api" title="Permanent link">&para;</a></h1>
-<h2 id="resumen">Resumen<a class="headerlink" href="#resumen" title="Permanent link">&para;</a></h2>
+<h1 id="segunda-verificacion-custom-fields-de-zoho-desde-api">Segunda Verificación Custom Fields de Zoho desde API</h1>
+<h2 id="resumen">Resumen</h2>
 <p>Se implementó una segunda verificación para obtener campos personalizados de Zoho (<code>cf_sagevendorid</code> y <code>cf_sagecustomerid</code>) consultando directamente la API de Zoho Books cuando estos campos no están presentes en el <code>custom_field_hash</code> de los webhooks.</p>
-<h2 id="problema-identificado">Problema Identificado<a class="headerlink" href="#problema-identificado" title="Permanent link">&para;</a></h2>
+<h2 id="problema-identificado">Problema Identificado</h2>
 <p>En algunos casos, los webhooks de Zoho (Purchase Orders y Sales Orders) no incluyen los campos personalizados <code>cf_sagevendorid</code> o <code>cf_sagecustomerid</code> en el <code>custom_field_hash</code>, pero estos campos sí están configurados en los vendors/customers correspondientes. Esto causaba que el sistema usara los IDs de Zoho como fallback en lugar de los IDs correctos de Sage.</p>
-<h2 id="solucion-implementada">Solución Implementada<a class="headerlink" href="#solucion-implementada" title="Permanent link">&para;</a></h2>
-<h3 id="1-flujo-de-verificacion">1. Flujo de Verificación<a class="headerlink" href="#1-flujo-de-verificacion" title="Permanent link">&para;</a></h3>
-<h4 id="para-purchase-orders-vendors">Para Purchase Orders (Vendors)<a class="headerlink" href="#para-purchase-orders-vendors" title="Permanent link">&para;</a></h4>
-<p><strong>Primera Verificación</strong>: Buscar <code>cf_sagevendorid</code> en <code>custom_field_hash</code> del webhook
-<div class="highlight"><pre><span></span><code><span class="x">$customFieldHash = $zohoData[&#39;custom_field_hash&#39;] ?? [];</span>
+<h2 id="solucion-implementada">Solución Implementada</h2>
+<h3 id="1-flujo-de-verificacion">1. Flujo de Verificación</h3>
+<h4 id="para-purchase-orders-vendors">Para Purchase Orders (Vendors)</h4>
+<p><strong>Primera Verificación</strong>: Buscar <code>cf_sagevendorid</code> en <code>custom_field_hash</code> del webhook</p>
+<div class="codehilite"><pre><span></span><code><span class="x">$customFieldHash = $zohoData[&#39;custom_field_hash&#39;] ?? [];</span>
 <span class="x">$sageVendorId = $customFieldHash[&#39;cf_sagevendorid&#39;] ?? null;</span>
-</code></pre></div></p>
-<p><strong>Segunda Verificación</strong>: Si no se encuentra, consultar vendor desde API de Zoho
-<div class="highlight"><pre><span></span><code><span class="x">if (empty($sageVendorId) &amp;&amp; !empty($zohoData[&#39;vendor_id&#39;])) {</span>
+</code></pre></div>
+
+<p><strong>Segunda Verificación</strong>: Si no se encuentra, consultar vendor desde API de Zoho</p>
+<div class="codehilite"><pre><span></span><code><span class="x">if (empty($sageVendorId) &amp;&amp; !empty($zohoData[&#39;vendor_id&#39;])) {</span>
 <span class="x">    $sageVendorId = $this-&gt;customFieldsHelper-&gt;getSageVendorId($zohoData, $contextInfo);</span>
 <span class="x">}</span>
-</code></pre></div></p>
-<h4 id="para-sales-orders-customers">Para Sales Orders (Customers)<a class="headerlink" href="#para-sales-orders-customers" title="Permanent link">&para;</a></h4>
-<p><strong>Primera Verificación</strong>: Buscar <code>cf_sagecustomerid</code> en <code>custom_field_hash</code> del webhook
-<div class="highlight"><pre><span></span><code><span class="x">$customFieldHash = $zohoData[&#39;custom_field_hash&#39;] ?? [];</span>
+</code></pre></div>
+
+<h4 id="para-sales-orders-customers">Para Sales Orders (Customers)</h4>
+<p><strong>Primera Verificación</strong>: Buscar <code>cf_sagecustomerid</code> en <code>custom_field_hash</code> del webhook</p>
+<div class="codehilite"><pre><span></span><code><span class="x">$customFieldHash = $zohoData[&#39;custom_field_hash&#39;] ?? [];</span>
 <span class="x">$sageCustomerId = $customFieldHash[&#39;cf_sagecustomerid&#39;] ?? null;</span>
-</code></pre></div></p>
-<p><strong>Segunda Verificación</strong>: Si no se encuentra, consultar customer desde API de Zoho
-<div class="highlight"><pre><span></span><code><span class="x">if (empty($sageCustomerId) &amp;&amp; !empty($zohoData[&#39;customer_id&#39;])) {</span>
+</code></pre></div>
+
+<p><strong>Segunda Verificación</strong>: Si no se encuentra, consultar customer desde API de Zoho</p>
+<div class="codehilite"><pre><span></span><code><span class="x">if (empty($sageCustomerId) &amp;&amp; !empty($zohoData[&#39;customer_id&#39;])) {</span>
 <span class="x">    $sageCustomerId = $this-&gt;customFieldsHelper-&gt;getSageCustomerId($zohoData, $contextInfo);</span>
 <span class="x">}</span>
-</code></pre></div></p>
+</code></pre></div>
+
 <p><strong>Fallback</strong>: Si ninguna verificación funciona, usar <code>vendor_id</code> o <code>customer_id</code> original</p>
-<h3 id="2-archivos-modificados">2. Archivos Modificados<a class="headerlink" href="#2-archivos-modificados" title="Permanent link">&para;</a></h3>
-<h4 id="zohoselfclientservicephp">ZohoSelfClientService.php<a class="headerlink" href="#zohoselfclientservicephp" title="Permanent link">&para;</a></h4>
+<h3 id="2-archivos-modificados">2. Archivos Modificados</h3>
+<h4 id="zohoselfclientservicephp">ZohoSelfClientService.php</h4>
 <p><strong>Ubicación</strong>: <code>app/Services/ZohoSelfClientService.php</code></p>
-<p><strong>Métodos Agregados</strong>:
-<div class="highlight"><pre><span></span><code><span class="x">// Para vendors</span>
+<p><strong>Métodos Agregados</strong>:</p>
+<div class="codehilite"><pre><span></span><code><span class="x">// Para vendors</span>
 <span class="x">public function getVendorDetails($vendorId)</span>
 <span class="x">{</span>
 <span class="x">    $settings = $this-&gt;connection-&gt;settings;</span>
@@ -2307,11 +2357,12 @@
 
 <span class="x">    return null;</span>
 <span class="x">}</span>
-</code></pre></div></p>
-<h4 id="zohocustomfieldshelperphp-nuevo">ZohoCustomFieldsHelper.php (NUEVO)<a class="headerlink" href="#zohocustomfieldshelperphp-nuevo" title="Permanent link">&para;</a></h4>
+</code></pre></div>
+
+<h4 id="zohocustomfieldshelperphp-nuevo">ZohoCustomFieldsHelper.php (NUEVO)</h4>
 <p><strong>Ubicación</strong>: <code>app/Services/Zoho/ZohoCustomFieldsHelper.php</code></p>
 <p><strong>Clase Helper centralizada</strong> para manejar ambos tipos de campos personalizados:</p>
-<div class="highlight"><pre><span></span><code><span class="x">class ZohoCustomFieldsHelper</span>
+<div class="codehilite"><pre><span></span><code><span class="x">class ZohoCustomFieldsHelper</span>
 <span class="x">{</span>
 <span class="x">    protected $zohoService;</span>
 
@@ -2359,17 +2410,19 @@
 <span class="x">    }</span>
 <span class="x">}</span>
 </code></pre></div>
-<h4 id="zohopurchaseordertransformerphp">ZohoPurchaseOrderTransformer.php<a class="headerlink" href="#zohopurchaseordertransformerphp" title="Permanent link">&para;</a></h4>
+
+<h4 id="zohopurchaseordertransformerphp">ZohoPurchaseOrderTransformer.php</h4>
 <p><strong>Ubicación</strong>: <code>app/Services/Zoho/ZohoPurchaseOrderTransformer.php</code></p>
-<p><strong>Constructor Actualizado</strong>:
-<div class="highlight"><pre><span></span><code><span class="x">public function __construct(ZohoSelfClientService $zohoService = null)</span>
+<p><strong>Constructor Actualizado</strong>:</p>
+<div class="codehilite"><pre><span></span><code><span class="x">public function __construct(ZohoSelfClientService $zohoService = null)</span>
 <span class="x">{</span>
 <span class="x">    $this-&gt;zohoService = $zohoService;</span>
 <span class="x">    $this-&gt;customFieldsHelper = new ZohoCustomFieldsHelper($zohoService);</span>
 <span class="x">}</span>
-</code></pre></div></p>
-<p><strong>Método transformHeader Simplificado</strong>:
-<div class="highlight"><pre><span></span><code><span class="x">public function transformHeader(array $zohoData): array</span>
+</code></pre></div>
+
+<p><strong>Método transformHeader Simplificado</strong>:</p>
+<div class="codehilite"><pre><span></span><code><span class="x">public function transformHeader(array $zohoData): array</span>
 <span class="x">{</span>
 <span class="x">    // Usar helper para obtener cf_sagevendorid con doble verificación</span>
 <span class="x">    $sageVendorId = $this-&gt;customFieldsHelper-&gt;getSageVendorId($zohoData, $zohoData[&#39;bill_number&#39;] ?? &#39;N/A&#39;);</span>
@@ -2379,11 +2432,12 @@
 <span class="x">        // ... resto de campos</span>
 <span class="x">    ];</span>
 <span class="x">}</span>
-</code></pre></div></p>
-<h4 id="acicloudservicephp">ACIcloudService.php<a class="headerlink" href="#acicloudservicephp" title="Permanent link">&para;</a></h4>
+</code></pre></div>
+
+<h4 id="acicloudservicephp">ACIcloudService.php</h4>
 <p><strong>Ubicación</strong>: <code>app/Services/ACIcloudService.php</code></p>
-<p><strong>Método createSaleOrderZoho Actualizado</strong>:
-<div class="highlight"><pre><span></span><code><span class="x">public function createSaleOrderZoho(CreateSaleOrderZohoRequest $request)</span>
+<p><strong>Método createSaleOrderZoho Actualizado</strong>:</p>
+<div class="codehilite"><pre><span></span><code><span class="x">public function createSaleOrderZoho(CreateSaleOrderZohoRequest $request)</span>
 <span class="x">{</span>
 <span class="x">    // Obtener conexión de Zoho para consultas adicionales</span>
 <span class="x">    $zohoConnection = Connection::where(&#39;application&#39;, &#39;zoho-self-client&#39;)</span>
@@ -2411,11 +2465,12 @@
 <span class="x">        // ... resto de campos</span>
 <span class="x">    ];</span>
 <span class="x">}</span>
-</code></pre></div></p>
-<h4 id="acicloudcontrollerphp">ACIcloudController.php<a class="headerlink" href="#acicloudcontrollerphp" title="Permanent link">&para;</a></h4>
+</code></pre></div>
+
+<h4 id="acicloudcontrollerphp">ACIcloudController.php</h4>
 <p><strong>Ubicación</strong>: <code>app/Http/Controllers/Sage/ACIcloudController.php</code></p>
-<p><strong>Inyección de Servicio</strong>:
-<div class="highlight"><pre><span></span><code><span class="x">// Obtener conexión de Zoho para la organización</span>
+<p><strong>Inyección de Servicio</strong>:</p>
+<div class="codehilite"><pre><span></span><code><span class="x">// Obtener conexión de Zoho para la organización</span>
 <span class="x">$zohoConnection = \App\Models\Connection::where(&#39;application&#39;, &#39;zoho-self-client&#39;)</span>
 <span class="x">    -&gt;where(&#39;organization_id&#39;, $organizationId)</span>
 <span class="x">    -&gt;where(&#39;active&#39;, true)</span>
@@ -2430,44 +2485,47 @@
 <span class="x">$importer = new ZohoPurchaseOrderImporter(</span>
 <span class="x">    new ZohoPurchaseOrderTransformer($zohoService)</span>
 <span class="x">);</span>
-</code></pre></div></p>
-<h4 id="processzohopurchaseorderjobphp">ProcessZohoPurchaseOrderJob.php<a class="headerlink" href="#processzohopurchaseorderjobphp" title="Permanent link">&para;</a></h4>
+</code></pre></div>
+
+<h4 id="processzohopurchaseorderjobphp">ProcessZohoPurchaseOrderJob.php</h4>
 <p><strong>Ubicación</strong>: <code>app/Jobs/ProcessZohoPurchaseOrderJob.php</code></p>
 <p><strong>Mismo patrón de inyección que el controlador</strong></p>
-<h3 id="3-logging-detallado">3. Logging Detallado<a class="headerlink" href="#3-logging-detallado" title="Permanent link">&para;</a></h3>
+<h3 id="3-logging-detallado">3. Logging Detallado</h3>
 <p>El sistema ahora registra detalladamente el proceso de verificación para ambos tipos:</p>
-<h4 id="para-vendors">Para Vendors:<a class="headerlink" href="#para-vendors" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="x">Log::info(&#39;cf_sagevendorid obtenido exitosamente&#39;, [</span>
+<h4 id="para-vendors">Para Vendors:</h4>
+<div class="codehilite"><pre><span></span><code><span class="x">Log::info(&#39;cf_sagevendorid obtenido exitosamente&#39;, [</span>
 <span class="x">    &#39;cf_sagevendorid&#39; =&gt; $sageVendorId,</span>
 <span class="x">    &#39;vendor_id&#39; =&gt; $zohoData[&#39;vendor_id&#39;],</span>
 <span class="x">    &#39;bill_number&#39; =&gt; $zohoData[&#39;bill_number&#39;],</span>
 <span class="x">    &#39;source&#39; =&gt; &#39;custom_field_hash&#39; // o &#39;vendor_api&#39;</span>
 <span class="x">]);</span>
 </code></pre></div>
-<h4 id="para-customers">Para Customers:<a class="headerlink" href="#para-customers" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><span class="x">Log::info(&#39;cf_sagecustomerid obtenido exitosamente&#39;, [</span>
+
+<h4 id="para-customers">Para Customers:</h4>
+<div class="codehilite"><pre><span></span><code><span class="x">Log::info(&#39;cf_sagecustomerid obtenido exitosamente&#39;, [</span>
 <span class="x">    &#39;cf_sagecustomerid&#39; =&gt; $sageCustomerId,</span>
 <span class="x">    &#39;customer_id&#39; =&gt; $zohoData[&#39;customer_id&#39;],</span>
 <span class="x">    &#39;salesorder_number&#39; =&gt; $zohoData[&#39;salesorder_number&#39;],</span>
 <span class="x">    &#39;source&#39; =&gt; &#39;custom_field_hash&#39; // o &#39;customer_api&#39;</span>
 <span class="x">]);</span>
 </code></pre></div>
-<h2 id="compatibilidad">Compatibilidad<a class="headerlink" href="#compatibilidad" title="Permanent link">&para;</a></h2>
-<h3 id="backward-compatibility">Backward Compatibility<a class="headerlink" href="#backward-compatibility" title="Permanent link">&para;</a></h3>
+
+<h2 id="compatibilidad">Compatibilidad</h2>
+<h3 id="backward-compatibility">Backward Compatibility</h3>
 <ul>
 <li>El transformer sigue funcionando sin <code>ZohoSelfClientService</code> (fallback)</li>
 <li>Si no hay conexión Zoho configurada, usa el comportamiento anterior</li>
 <li>Los métodos existentes no cambiaron su signature</li>
 </ul>
-<h3 id="casos-de-uso">Casos de Uso<a class="headerlink" href="#casos-de-uso" title="Permanent link">&para;</a></h3>
+<h3 id="casos-de-uso">Casos de Uso</h3>
 <ol>
 <li><strong>Purchase Orders con Conexión Zoho</strong>: Consulta vendor API como segunda verificación para cf_sagevendorid</li>
 <li><strong>Sales Orders con Conexión Zoho</strong>: Consulta customer API como segunda verificación para cf_sagecustomerid</li>
 <li><strong>Sin Conexión Zoho</strong>: Usa solo custom_field_hash + fallback a vendor_id/customer_id</li>
 <li><strong>Error en API</strong>: Logs del error y continúa con fallback</li>
 </ol>
-<h3 id="testing">Testing<a class="headerlink" href="#testing" title="Permanent link">&para;</a></h3>
-<h3 id="scripts-de-prueba">Scripts de Prueba<a class="headerlink" href="#scripts-de-prueba" title="Permanent link">&para;</a></h3>
+<h3 id="testing">Testing</h3>
+<h3 id="scripts-de-prueba">Scripts de Prueba</h3>
 <ul>
 <li><strong>Vendors</strong>: <code>docs/testing/test-zoho-vendor-api-cf-sagevendorid.sh</code></li>
 <li><strong>Customers</strong>: <code>docs/testing/test-zoho-customer-api-cf-sagecustomerid.sh</code></li>
@@ -2477,8 +2535,8 @@
 - Consulta a vendor/customer API
 - Fallback cuando no hay conexión
 - Logging de debugging</p>
-<h3 id="casos-de-prueba">Casos de Prueba<a class="headerlink" href="#casos-de-prueba" title="Permanent link">&para;</a></h3>
-<h4 id="para-purchase-orders">Para Purchase Orders:<a class="headerlink" href="#para-purchase-orders" title="Permanent link">&para;</a></h4>
+<h3 id="casos-de-prueba">Casos de Prueba</h3>
+<h4 id="para-purchase-orders">Para Purchase Orders:</h4>
 <ol>
 <li><strong>Webhook con cf_sagevendorid en custom_field_hash</strong>: Usa valor directo</li>
 <li><strong>Webhook sin cf_sagevendorid</strong>: Consulta vendor API</li>
@@ -2486,7 +2544,7 @@
 <li><strong>Vendor sin cf_sagevendorid</strong>: Usa vendor_id como fallback</li>
 <li><strong>Error en API</strong>: Maneja excepción y continúa con fallback</li>
 </ol>
-<h4 id="para-sales-orders">Para Sales Orders:<a class="headerlink" href="#para-sales-orders" title="Permanent link">&para;</a></h4>
+<h4 id="para-sales-orders">Para Sales Orders:</h4>
 <ol>
 <li><strong>Webhook con cf_sagecustomerid en custom_field_hash</strong>: Usa valor directo</li>
 <li><strong>Webhook sin cf_sagecustomerid</strong>: Consulta customer API</li>
@@ -2494,29 +2552,29 @@
 <li><strong>Customer sin cf_sagecustomerid</strong>: Usa customer_id como fallback</li>
 <li><strong>Error en API</strong>: Maneja excepción y continúa con fallback</li>
 </ol>
-<h2 id="beneficios">Beneficios<a class="headerlink" href="#beneficios" title="Permanent link">&para;</a></h2>
-<h3 id="1-precision-de-datos">1. Precisión de Datos<a class="headerlink" href="#1-precision-de-datos" title="Permanent link">&para;</a></h3>
+<h2 id="beneficios">Beneficios</h2>
+<h3 id="1-precision-de-datos">1. Precisión de Datos</h3>
 <ul>
 <li>Obtiene el ID correcto de Sage incluso cuando el webhook no lo incluye</li>
 <li>Reduce errores de mapeo entre sistemas</li>
 </ul>
-<h3 id="2-robustez">2. Robustez<a class="headerlink" href="#2-robustez" title="Permanent link">&para;</a></h3>
+<h3 id="2-robustez">2. Robustez</h3>
 <ul>
 <li>Múltiples verificaciones garantizan que se obtenga el mejor dato disponible</li>
 <li>Manejo de errores gracioso con fallbacks</li>
 </ul>
-<h3 id="3-debugging">3. Debugging<a class="headerlink" href="#3-debugging" title="Permanent link">&para;</a></h3>
+<h3 id="3-debugging">3. Debugging</h3>
 <ul>
 <li>Logging detallado para troubleshooting</li>
 <li>Rastreo de fuente de datos (webhook vs API)</li>
 </ul>
-<h3 id="4-flexibilidad">4. Flexibilidad<a class="headerlink" href="#4-flexibilidad" title="Permanent link">&para;</a></h3>
+<h3 id="4-flexibilidad">4. Flexibilidad</h3>
 <ul>
 <li>Funciona con o sin conexión Zoho configurada</li>
 <li>Compatible con implementaciones existentes</li>
 </ul>
-<h2 id="configuracion-requerida">Configuración Requerida<a class="headerlink" href="#configuracion-requerida" title="Permanent link">&para;</a></h2>
-<h3 id="conexion-zoho-books">Conexión Zoho Books<a class="headerlink" href="#conexion-zoho-books" title="Permanent link">&para;</a></h3>
+<h2 id="configuracion-requerida">Configuración Requerida</h2>
+<h3 id="conexion-zoho-books">Conexión Zoho Books</h3>
 <p>Para que la segunda verificación funcione, la organización debe tener:</p>
 <ol>
 <li><strong>Conexión configurada</strong>: <code>application = 'zoho-self-client'</code></li>
@@ -2524,14 +2582,14 @@
 <li><strong>Permisos API</strong>: Lectura de contacts/vendors</li>
 <li><strong>Estado activo</strong>: <code>active = true</code></li>
 </ol>
-<h3 id="campos-personalizados-en-zoho">Campos Personalizados en Zoho<a class="headerlink" href="#campos-personalizados-en-zoho" title="Permanent link">&para;</a></h3>
+<h3 id="campos-personalizados-en-zoho">Campos Personalizados en Zoho</h3>
 <p>Los vendors y customers en Zoho Books deben tener:
 - <strong>Para vendors</strong>: Campo personalizado con <code>customfield_id = 'cf_sagevendorid'</code>
 - <strong>Para customers</strong>: Campo personalizado con <code>customfield_id = 'cf_sagecustomerid'</code>
 - Valores configurados con los IDs correspondientes de Sage</p>
-<h2 id="monitoreo">Monitoreo<a class="headerlink" href="#monitoreo" title="Permanent link">&para;</a></h2>
-<h3 id="logs-a-revisar">Logs a Revisar<a class="headerlink" href="#logs-a-revisar" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># Verificaciones exitosas de vendors</span>
+<h2 id="monitoreo">Monitoreo</h2>
+<h3 id="logs-a-revisar">Logs a Revisar</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Verificaciones exitosas de vendors</span>
 grep<span class="w"> </span><span class="s2">&quot;cf_sagevendorid obtenido exitosamente&quot;</span><span class="w"> </span>storage/logs/laravel.log
 
 <span class="c1"># Verificaciones exitosas de customers</span>
@@ -2546,14 +2604,15 @@ grep<span class="w"> </span><span class="s2">&quot;Consultando customer details 
 <span class="c1"># Fallbacks</span>
 grep<span class="w"> </span><span class="s2">&quot;no encontrado en ninguna fuente&quot;</span><span class="w"> </span>storage/logs/laravel.log
 </code></pre></div>
-<h3 id="metricas-recomendadas">Métricas Recomendadas<a class="headerlink" href="#metricas-recomendadas" title="Permanent link">&para;</a></h3>
+
+<h3 id="metricas-recomendadas">Métricas Recomendadas</h3>
 <ul>
 <li>Porcentaje de éxito en primera vs segunda verificación</li>
 <li>Tiempo de respuesta de consultas a vendor API</li>
 <li>Frecuencia de fallbacks a vendor_id</li>
 </ul>
-<h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2>
-<h3 id="problemas-comunes">Problemas Comunes<a class="headerlink" href="#problemas-comunes" title="Permanent link">&para;</a></h3>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<h3 id="problemas-comunes">Problemas Comunes</h3>
 <ol>
 <li><strong>"ZohoSelfClientService no disponible"</strong></li>
 <li>Verificar conexión Zoho configurada y activa</li>
@@ -2574,7 +2633,7 @@ grep<span class="w"> </span><span class="s2">&quot;no encontrado en ninguna fuen
 <li>Verificar que vendor_id existe en Zoho</li>
 <li>Revisar logs detallados de excepción</li>
 </ol>
-<h2 id="conclusion">Conclusión<a class="headerlink" href="#conclusion" title="Permanent link">&para;</a></h2>
+<h2 id="conclusion">Conclusión</h2>
 <p>Esta implementación mejora significativamente la precisión del mapeo de vendors y customers entre Zoho Books y Sage, proporcionando una segunda oportunidad para obtener los IDs correctos cuando los webhooks iniciales no incluyen toda la información necesaria.</p>
 <p><strong>Características principales</strong>:
 - ✅ <strong>Soporte dual</strong>: cf_sagevendorid (purchase orders) y cf_sagecustomerid (sales orders)
@@ -2636,7 +2695,7 @@ grep<span class="w"> </span><span class="s2">&quot;no encontrado en ninguna fuen
       
       
     
-    <a href="https://github.com/aghabrego/docucenter" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+    <a href="https://github.com/aghabrego/docucenter-public" target="_blank" rel="noopener" title="github.com" class="md-social__link">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
     </a>
   

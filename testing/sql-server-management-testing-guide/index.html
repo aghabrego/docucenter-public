@@ -233,7 +233,7 @@
           
   
   
-  APIs
+  API Documentation
 
         </a>
       </li>
@@ -269,7 +269,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../technical/" class="md-tabs__link">
+        <a href="../../technical/README.md" class="md-tabs__link">
           
   
   
@@ -298,6 +298,25 @@
         </a>
       </li>
     
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Sistema de Testing
+
+      </a>
+    </li>
   
 
       
@@ -404,7 +423,7 @@
   <span class="md-ellipsis">
     
   
-    APIs
+    API Documentation
   
 
     
@@ -420,7 +439,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    APIs
+    API Documentation
   
 
           </label>
@@ -1363,7 +1382,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../technical/" class="md-nav__link">
+      <a href="../../technical/README.md" class="md-nav__link">
         
   
   
@@ -1712,6 +1731,33 @@
           </ul>
         </nav>
       
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sistema de Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -2234,56 +2280,60 @@
   
 
 
-<h1 id="guia-de-testing-gestion-sql-server">Guía de Testing - Gestión SQL Server<a class="headerlink" href="#guia-de-testing-gestion-sql-server" title="Permanent link">&para;</a></h1>
-<h2 id="comandos-de-prueba">Comandos de Prueba<a class="headerlink" href="#comandos-de-prueba" title="Permanent link">&para;</a></h2>
-<h3 id="1-testing-interactivo-completo">1. Testing Interactivo Completo<a class="headerlink" href="#1-testing-interactivo-completo" title="Permanent link">&para;</a></h3>
-<p><div class="highlight"><pre><span></span><code>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>docucenter_laravel.test<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>test:sql-server-management
+<h1 id="guia-de-testing-gestion-sql-server">Guía de Testing - Gestión SQL Server</h1>
+<h2 id="comandos-de-prueba">Comandos de Prueba</h2>
+<h3 id="1-testing-interactivo-completo">1. Testing Interactivo Completo</h3>
+<div class="codehilite"><pre><span></span><code>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>docucenter_laravel.test<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>test:sql-server-management
 </code></pre></div>
-Este comando abre un menú interactivo con todas las opciones disponibles.</p>
-<h3 id="2-listar-organizaciones-y-configuraciones">2. Listar Organizaciones y Configuraciones<a class="headerlink" href="#2-listar-organizaciones-y-configuraciones" title="Permanent link">&para;</a></h3>
-<p><div class="highlight"><pre><span></span><code>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>docucenter_laravel.test<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>test:sql-server-management<span class="w"> </span>list
+
+<p>Este comando abre un menú interactivo con todas las opciones disponibles.</p>
+<h3 id="2-listar-organizaciones-y-configuraciones">2. Listar Organizaciones y Configuraciones</h3>
+<div class="codehilite"><pre><span></span><code>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>docucenter_laravel.test<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>test:sql-server-management<span class="w"> </span>list
 </code></pre></div>
-Muestra todas las organizaciones y sus configuraciones SQL Server asociadas.</p>
-<h3 id="3-crear-configuracion-de-prueba">3. Crear Configuración de Prueba<a class="headerlink" href="#3-crear-configuracion-de-prueba" title="Permanent link">&para;</a></h3>
-<p><div class="highlight"><pre><span></span><code><span class="c1"># Requiere especificar ID de organización</span>
+
+<p>Muestra todas las organizaciones y sus configuraciones SQL Server asociadas.</p>
+<h3 id="3-crear-configuracion-de-prueba">3. Crear Configuración de Prueba</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Requiere especificar ID de organización</span>
 docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>docucenter_laravel.test<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>test:sql-server-management<span class="w"> </span>create<span class="w"> </span>--org-id<span class="o">=</span><span class="m">1</span>
 </code></pre></div>
-Crea una configuración de prueba con datos predefinidos.</p>
-<h3 id="4-eliminar-configuracion">4. Eliminar Configuración<a class="headerlink" href="#4-eliminar-configuracion" title="Permanent link">&para;</a></h3>
-<p><div class="highlight"><pre><span></span><code><span class="c1"># Requiere especificar ID de configuración</span>
+
+<p>Crea una configuración de prueba con datos predefinidos.</p>
+<h3 id="4-eliminar-configuracion">4. Eliminar Configuración</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Requiere especificar ID de configuración</span>
 docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>docucenter_laravel.test<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>test:sql-server-management<span class="w"> </span>delete<span class="w"> </span>--config-id<span class="o">=</span><span class="m">1</span>
 </code></pre></div>
-Elimina una configuración específica con confirmación.</p>
-<h2 id="escenarios-de-prueba">Escenarios de Prueba<a class="headerlink" href="#escenarios-de-prueba" title="Permanent link">&para;</a></h2>
-<h3 id="escenario-1-flujo-completo-basico">Escenario 1: Flujo Completo Básico<a class="headerlink" href="#escenario-1-flujo-completo-basico" title="Permanent link">&para;</a></h3>
+
+<p>Elimina una configuración específica con confirmación.</p>
+<h2 id="escenarios-de-prueba">Escenarios de Prueba</h2>
+<h3 id="escenario-1-flujo-completo-basico">Escenario 1: Flujo Completo Básico</h3>
 <ol>
 <li>
 <p><strong>Listar organizaciones</strong>:
-   <div class="highlight"><pre><span></span><code>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>docucenter_laravel.test<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>test:sql-server-management<span class="w"> </span>list
-</code></pre></div></p>
+   <code>bash
+   docker exec -it docucenter_laravel.test php artisan test:sql-server-management list</code></p>
 </li>
 <li>
 <p><strong>Crear configuración de prueba</strong>:
-   <div class="highlight"><pre><span></span><code>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>docucenter_laravel.test<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>test:sql-server-management<span class="w"> </span>create<span class="w"> </span>--org-id<span class="o">=</span><span class="m">1</span>
-</code></pre></div></p>
+   <code>bash
+   docker exec -it docucenter_laravel.test php artisan test:sql-server-management create --org-id=1</code></p>
 </li>
 <li>
 <p><strong>Verificar creación</strong>:
-   <div class="highlight"><pre><span></span><code>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>docucenter_laravel.test<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>test:sql-server-management<span class="w"> </span>list
-</code></pre></div></p>
+   <code>bash
+   docker exec -it docucenter_laravel.test php artisan test:sql-server-management list</code></p>
 </li>
 <li>
 <p><strong>Eliminar configuración</strong>:
-   <div class="highlight"><pre><span></span><code>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>docucenter_laravel.test<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>test:sql-server-management<span class="w"> </span>delete<span class="w"> </span>--config-id<span class="o">=[</span>ID_OBTENIDO<span class="o">]</span>
-</code></pre></div></p>
+   <code>bash
+   docker exec -it docucenter_laravel.test php artisan test:sql-server-management delete --config-id=[ID_OBTENIDO]</code></p>
 </li>
 </ol>
-<h3 id="escenario-2-testing-interactivo-avanzado">Escenario 2: Testing Interactivo Avanzado<a class="headerlink" href="#escenario-2-testing-interactivo-avanzado" title="Permanent link">&para;</a></h3>
+<h3 id="escenario-2-testing-interactivo-avanzado">Escenario 2: Testing Interactivo Avanzado</h3>
 <ol>
 <li>
 <p><strong>Iniciar modo interactivo</strong>:
-   <div class="highlight"><pre><span></span><code>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>docucenter_laravel.test<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>test:sql-server-management
-</code></pre></div></p>
+   <code>bash
+   docker exec -it docucenter_laravel.test php artisan test:sql-server-management</code></p>
 </li>
 <li>
 <p><strong>Seguir secuencia</strong>:</p>
@@ -2297,36 +2347,36 @@ Elimina una configuración específica con confirmación.</p>
 <li>Seleccionar "delete" para limpiar</li>
 <li>Seleccionar "exit" para salir</li>
 </ol>
-<h3 id="escenario-3-validacion-de-errores">Escenario 3: Validación de Errores<a class="headerlink" href="#escenario-3-validacion-de-errores" title="Permanent link">&para;</a></h3>
+<h3 id="escenario-3-validacion-de-errores">Escenario 3: Validación de Errores</h3>
 <ol>
 <li>
 <p><strong>Organización inexistente</strong>:
-   <div class="highlight"><pre><span></span><code>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>docucenter_laravel.test<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>test:sql-server-management<span class="w"> </span>create<span class="w"> </span>--org-id<span class="o">=</span><span class="m">99999</span>
-</code></pre></div>
+   <code>bash
+   docker exec -it docucenter_laravel.test php artisan test:sql-server-management create --org-id=99999</code>
    Debe mostrar error de organización no encontrada.</p>
 </li>
 <li>
 <p><strong>Configuración inexistente</strong>:
-   <div class="highlight"><pre><span></span><code>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>docucenter_laravel.test<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>test:sql-server-management<span class="w"> </span>delete<span class="w"> </span>--config-id<span class="o">=</span><span class="m">99999</span>
-</code></pre></div>
+   <code>bash
+   docker exec -it docucenter_laravel.test php artisan test:sql-server-management delete --config-id=99999</code>
    Debe mostrar error de configuración no encontrada.</p>
 </li>
 </ol>
-<h2 id="testing-de-la-interfaz-web">Testing de la Interfaz Web<a class="headerlink" href="#testing-de-la-interfaz-web" title="Permanent link">&para;</a></h2>
-<h3 id="1-acceso-a-la-interfaz">1. Acceso a la Interfaz<a class="headerlink" href="#1-acceso-a-la-interfaz" title="Permanent link">&para;</a></h3>
+<h2 id="testing-de-la-interfaz-web">Testing de la Interfaz Web</h2>
+<h3 id="1-acceso-a-la-interfaz">1. Acceso a la Interfaz</h3>
 <ol>
 <li>Abrir navegador en <code>http://localhost/admin/sql_server_management</code></li>
 <li>Verificar que se carga la página sin errores</li>
 <li>Confirmar que aparece el título "Gestión de Configuraciones SQL Server"</li>
 </ol>
-<h3 id="2-seleccion-de-organizacion">2. Selección de Organización<a class="headerlink" href="#2-seleccion-de-organizacion" title="Permanent link">&para;</a></h3>
+<h3 id="2-seleccion-de-organizacion">2. Selección de Organización</h3>
 <ol>
 <li>Verificar que el dropdown muestra organizaciones disponibles</li>
 <li>Seleccionar una organización</li>
 <li>Confirmar que se cargan las configuraciones existentes (si las hay)</li>
 <li>Verificar que aparece el botón "Nueva Configuración"</li>
 </ol>
-<h3 id="3-crear-nueva-configuracion">3. Crear Nueva Configuración<a class="headerlink" href="#3-crear-nueva-configuracion" title="Permanent link">&para;</a></h3>
+<h3 id="3-crear-nueva-configuracion">3. Crear Nueva Configuración</h3>
 <ol>
 <li>Click en "Nueva Configuración"</li>
 <li>Verificar que se abre el formulario</li>
@@ -2341,14 +2391,14 @@ Elimina una configuración específica con confirmación.</p>
 <li>Verificar mensaje de éxito</li>
 <li>Confirmar que aparece en la tabla</li>
 </ol>
-<h3 id="4-validaciones-del-formulario">4. Validaciones del Formulario<a class="headerlink" href="#4-validaciones-del-formulario" title="Permanent link">&para;</a></h3>
+<h3 id="4-validaciones-del-formulario">4. Validaciones del Formulario</h3>
 <ol>
 <li>Intentar guardar con campos vacíos</li>
 <li>Verificar que aparecen mensajes de error</li>
 <li>Verificar que se marcan los campos con error</li>
 <li>Llenar campos gradualmente y verificar validación en tiempo real</li>
 </ol>
-<h3 id="5-editar-configuracion">5. Editar Configuración<a class="headerlink" href="#5-editar-configuracion" title="Permanent link">&para;</a></h3>
+<h3 id="5-editar-configuracion">5. Editar Configuración</h3>
 <ol>
 <li>Click en el botón de editar (icono de lápiz)</li>
 <li>Verificar que se cargan los datos existentes</li>
@@ -2356,13 +2406,13 @@ Elimina una configuración específica con confirmación.</p>
 <li>Guardar y verificar actualización</li>
 <li>Confirmar cambios en la tabla</li>
 </ol>
-<h3 id="6-prueba-de-conexion">6. Prueba de Conexión<a class="headerlink" href="#6-prueba-de-conexion" title="Permanent link">&para;</a></h3>
+<h3 id="6-prueba-de-conexion">6. Prueba de Conexión</h3>
 <ol>
 <li>Click en el botón de prueba (icono de enchufe)</li>
 <li>Verificar mensaje de simulación exitosa</li>
 <li>Confirmar que no hay errores en consola</li>
 </ol>
-<h3 id="7-eliminar-configuracion">7. Eliminar Configuración<a class="headerlink" href="#7-eliminar-configuracion" title="Permanent link">&para;</a></h3>
+<h3 id="7-eliminar-configuracion">7. Eliminar Configuración</h3>
 <ol>
 <li>Click en el botón de eliminar (icono de basura)</li>
 <li>Verificar que aparece confirmación JavaScript</li>
@@ -2370,54 +2420,58 @@ Elimina una configuración específica con confirmación.</p>
 <li>Verificar mensaje de éxito</li>
 <li>Confirmar que desaparece de la tabla</li>
 </ol>
-<h2 id="verificaciones-de-base-de-datos">Verificaciones de Base de Datos<a class="headerlink" href="#verificaciones-de-base-de-datos" title="Permanent link">&para;</a></h2>
-<h3 id="1-verificar-migracion">1. Verificar Migración<a class="headerlink" href="#1-verificar-migracion" title="Permanent link">&para;</a></h3>
-<p><div class="highlight"><pre><span></span><code><span class="k">DESCRIBE</span><span class="w"> </span><span class="n">configuration_sql_server_organizations</span><span class="p">;</span>
+<h2 id="verificaciones-de-base-de-datos">Verificaciones de Base de Datos</h2>
+<h3 id="1-verificar-migracion">1. Verificar Migración</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">DESCRIBE</span><span class="w"> </span><span class="n">configuration_sql_server_organizations</span><span class="p">;</span>
 </code></pre></div>
-Debe mostrar el campo <code>store_id</code> como nullable varchar(255).</p>
-<h3 id="2-verificar-datos-creados">2. Verificar Datos Creados<a class="headerlink" href="#2-verificar-datos-creados" title="Permanent link">&para;</a></h3>
-<p><div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">configuration_sql_server_organizations</span><span class="p">;</span>
+
+<p>Debe mostrar el campo <code>store_id</code> como nullable varchar(255).</p>
+<h3 id="2-verificar-datos-creados">2. Verificar Datos Creados</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">configuration_sql_server_organizations</span><span class="p">;</span>
 </code></pre></div>
-Debe mostrar las configuraciones creadas durante las pruebas.</p>
-<h3 id="3-verificar-relaciones">3. Verificar Relaciones<a class="headerlink" href="#3-verificar-relaciones" title="Permanent link">&para;</a></h3>
-<p><div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">o</span><span class="p">.</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="k">host</span><span class="p">,</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">port</span><span class="p">,</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="k">database</span><span class="p">,</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">store_id</span><span class="w"> </span>
+
+<p>Debe mostrar las configuraciones creadas durante las pruebas.</p>
+<h3 id="3-verificar-relaciones">3. Verificar Relaciones</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">o</span><span class="p">.</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="k">host</span><span class="p">,</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">port</span><span class="p">,</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="k">database</span><span class="p">,</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">store_id</span><span class="w"> </span>
 <span class="k">FROM</span><span class="w"> </span><span class="n">organizations</span><span class="w"> </span><span class="n">o</span><span class="w"> </span>
 <span class="k">LEFT</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">configuration_sql_server_organizations</span><span class="w"> </span><span class="k">c</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">o</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">c</span><span class="p">.</span><span class="n">organization_id</span><span class="p">;</span>
 </code></pre></div>
-Debe mostrar organizaciones con sus configuraciones asociadas.</p>
-<h2 id="testing-de-permisos">Testing de Permisos<a class="headerlink" href="#testing-de-permisos" title="Permanent link">&para;</a></h2>
-<h3 id="1-usuario-sin-permisos">1. Usuario Sin Permisos<a class="headerlink" href="#1-usuario-sin-permisos" title="Permanent link">&para;</a></h3>
+
+<p>Debe mostrar organizaciones con sus configuraciones asociadas.</p>
+<h2 id="testing-de-permisos">Testing de Permisos</h2>
+<h3 id="1-usuario-sin-permisos">1. Usuario Sin Permisos</h3>
 <ol>
 <li>Crear/usar usuario sin permisos <code>sql_server_management</code></li>
 <li>Verificar que no aparece en el menú lateral</li>
 <li>Intentar acceso directo a la URL</li>
 <li>Confirmar redirección o error 403</li>
 </ol>
-<h3 id="2-usuario-con-permisos">2. Usuario Con Permisos<a class="headerlink" href="#2-usuario-con-permisos" title="Permanent link">&para;</a></h3>
+<h3 id="2-usuario-con-permisos">2. Usuario Con Permisos</h3>
 <ol>
 <li>Usar usuario con permisos administrativos</li>
 <li>Verificar acceso completo a todas las funcionalidades</li>
 <li>Confirmar operaciones CRUD funcionan correctamente</li>
 </ol>
-<h2 id="debugging-y-logs">Debugging y Logs<a class="headerlink" href="#debugging-y-logs" title="Permanent link">&para;</a></h2>
-<h3 id="1-verificar-logs-de-aplicacion">1. Verificar Logs de Aplicación<a class="headerlink" href="#1-verificar-logs-de-aplicacion" title="Permanent link">&para;</a></h3>
-<p><div class="highlight"><pre><span></span><code>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>docucenter_laravel.test<span class="w"> </span>tail<span class="w"> </span>-f<span class="w"> </span>storage/logs/laravel.log
+<h2 id="debugging-y-logs">Debugging y Logs</h2>
+<h3 id="1-verificar-logs-de-aplicacion">1. Verificar Logs de Aplicación</h3>
+<div class="codehilite"><pre><span></span><code>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>docucenter_laravel.test<span class="w"> </span>tail<span class="w"> </span>-f<span class="w"> </span>storage/logs/laravel.log
 </code></pre></div>
-Observar logs mientras se ejecutan las pruebas.</p>
-<h3 id="2-logs-especificos-del-comando">2. Logs Específicos del Comando<a class="headerlink" href="#2-logs-especificos-del-comando" title="Permanent link">&para;</a></h3>
+
+<p>Observar logs mientras se ejecutan las pruebas.</p>
+<h3 id="2-logs-especificos-del-comando">2. Logs Específicos del Comando</h3>
 <p>Durante la ejecución del comando de testing, verificar:
 - Mensajes de éxito/error claros
 - Formateo correcto de salida
 - Manejo apropiado de excepciones</p>
-<h3 id="3-debugging-de-la-interfaz">3. Debugging de la Interfaz<a class="headerlink" href="#3-debugging-de-la-interfaz" title="Permanent link">&para;</a></h3>
+<h3 id="3-debugging-de-la-interfaz">3. Debugging de la Interfaz</h3>
 <ol>
 <li>Abrir herramientas de desarrollador</li>
 <li>Verificar que no hay errores JavaScript</li>
 <li>Confirmar requests AJAX exitosos</li>
 <li>Verificar respuestas del servidor</li>
 </ol>
-<h2 id="casos-de-prueba-especificos">Casos de Prueba Específicos<a class="headerlink" href="#casos-de-prueba-especificos" title="Permanent link">&para;</a></h2>
-<h3 id="store-id-opcional">Store ID Opcional<a class="headerlink" href="#store-id-opcional" title="Permanent link">&para;</a></h3>
+<h2 id="casos-de-prueba-especificos">Casos de Prueba Específicos</h2>
+<h3 id="store-id-opcional">Store ID Opcional</h3>
 <ol>
 <li><strong>Con Store ID</strong>:</li>
 <li>Crear configuración con Store ID</li>
@@ -2432,7 +2486,7 @@ Observar logs mientras se ejecutan las pruebas.</p>
 <li>Verificar que se guarda como NULL</li>
 <li>Confirmar que se muestra "No asignado" en la tabla</li>
 </ol>
-<h3 id="validaciones-de-campos">Validaciones de Campos<a class="headerlink" href="#validaciones-de-campos" title="Permanent link">&para;</a></h3>
+<h3 id="validaciones-de-campos">Validaciones de Campos</h3>
 <ol>
 <li><strong>Host</strong>: Probar con IPs válidas e inválidas</li>
 <li><strong>Puerto</strong>: Probar con números válidos e inválidos</li>
@@ -2440,8 +2494,8 @@ Observar logs mientras se ejecutan las pruebas.</p>
 <li><strong>Usuario</strong>: Probar con diferentes formatos</li>
 <li><strong>Store ID</strong>: Probar con diferentes formatos y longitudes</li>
 </ol>
-<h2 id="resultados-esperados">Resultados Esperados<a class="headerlink" href="#resultados-esperados" title="Permanent link">&para;</a></h2>
-<h3 id="pruebas-exitosas">✅ Pruebas Exitosas<a class="headerlink" href="#pruebas-exitosas" title="Permanent link">&para;</a></h3>
+<h2 id="resultados-esperados">Resultados Esperados</h2>
+<h3 id="pruebas-exitosas">✅ Pruebas Exitosas</h3>
 <ul>
 <li>Todas las operaciones CRUD funcionan correctamente</li>
 <li>Validaciones funcionan como se espera</li>
@@ -2449,7 +2503,7 @@ Observar logs mientras se ejecutan las pruebas.</p>
 <li>No hay errores en logs</li>
 <li>Base de datos se actualiza correctamente</li>
 </ul>
-<h3 id="problemas-comunes">❌ Problemas Comunes<a class="headerlink" href="#problemas-comunes" title="Permanent link">&para;</a></h3>
+<h3 id="problemas-comunes">❌ Problemas Comunes</h3>
 <ul>
 <li><strong>Error 500</strong>: Verificar logs de aplicación</li>
 <li><strong>Campos no validados</strong>: Revisar reglas de validación</li>
@@ -2457,15 +2511,17 @@ Observar logs mientras se ejecutan las pruebas.</p>
 <li><strong>Permisos</strong>: Confirmar configuración ACL</li>
 <li><strong>Base de datos</strong>: Verificar migración ejecutada</li>
 </ul>
-<h2 id="limpieza-post-testing">Limpieza Post-Testing<a class="headerlink" href="#limpieza-post-testing" title="Permanent link">&para;</a></h2>
-<h3 id="1-limpiar-datos-de-prueba">1. Limpiar Datos de Prueba<a class="headerlink" href="#1-limpiar-datos-de-prueba" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="k">DELETE</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">configuration_sql_server_organizations</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="k">host</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;192.168.1.100&#39;</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="k">database</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;TestDatabase&#39;</span><span class="p">;</span>
+<h2 id="limpieza-post-testing">Limpieza Post-Testing</h2>
+<h3 id="1-limpiar-datos-de-prueba">1. Limpiar Datos de Prueba</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">DELETE</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">configuration_sql_server_organizations</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="k">host</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;192.168.1.100&#39;</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="k">database</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;TestDatabase&#39;</span><span class="p">;</span>
 </code></pre></div>
-<h3 id="2-verificar-estado-limpio">2. Verificar Estado Limpio<a class="headerlink" href="#2-verificar-estado-limpio" title="Permanent link">&para;</a></h3>
-<p><div class="highlight"><pre><span></span><code>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>docucenter_laravel.test<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>test:sql-server-management<span class="w"> </span>list
+
+<h3 id="2-verificar-estado-limpio">2. Verificar Estado Limpio</h3>
+<div class="codehilite"><pre><span></span><code>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>docucenter_laravel.test<span class="w"> </span>php<span class="w"> </span>artisan<span class="w"> </span>test:sql-server-management<span class="w"> </span>list
 </code></pre></div>
-Confirmar que no quedan datos de prueba.</p>
-<h2 id="notas-importantes">Notas Importantes<a class="headerlink" href="#notas-importantes" title="Permanent link">&para;</a></h2>
+
+<p>Confirmar que no quedan datos de prueba.</p>
+<h2 id="notas-importantes">Notas Importantes</h2>
 <ol>
 <li><strong>Multi-tenant</strong>: Las pruebas respetan la arquitectura multi-tenant</li>
 <li><strong>Conexiones</strong>: Usar el trait <code>CustomConnection</code> apropiadamente</li>
@@ -2524,7 +2580,7 @@ Confirmar que no quedan datos de prueba.</p>
       
       
     
-    <a href="https://github.com/aghabrego/docucenter" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+    <a href="https://github.com/aghabrego/docucenter-public" target="_blank" rel="noopener" title="github.com" class="md-social__link">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
     </a>
   

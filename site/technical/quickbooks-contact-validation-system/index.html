@@ -233,7 +233,7 @@
           
   
   
-  APIs
+  API Documentation
 
         </a>
       </li>
@@ -269,7 +269,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../" class="md-tabs__link">
+        <a href="../README.md" class="md-tabs__link">
           
   
   
@@ -298,6 +298,25 @@
         </a>
       </li>
     
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../testing/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Sistema de Testing
+
+      </a>
+    </li>
   
 
       
@@ -404,7 +423,7 @@
   <span class="md-ellipsis">
     
   
-    APIs
+    API Documentation
   
 
     
@@ -420,7 +439,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    APIs
+    API Documentation
   
 
           </label>
@@ -1363,7 +1382,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
+      <a href="../README.md" class="md-nav__link">
         
   
   
@@ -1712,6 +1731,33 @@
           </ul>
         </nav>
       
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sistema de Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -2357,47 +2403,50 @@
   
 
 
-<h1 id="sistema-de-validacion-de-contactos-quickbooks">Sistema de Validación de Contactos QuickBooks<a class="headerlink" href="#sistema-de-validacion-de-contactos-quickbooks" title="Permanent link">&para;</a></h1>
-<h2 id="descripcion">Descripción<a class="headerlink" href="#descripcion" title="Permanent link">&para;</a></h2>
+<h1 id="sistema-de-validacion-de-contactos-quickbooks">Sistema de Validación de Contactos QuickBooks</h1>
+<h2 id="descripcion">Descripción</h2>
 <p>Sistema completo para validar objetos de contacto de QuickBooks Online antes del procesamiento de facturación electrónica. Incluye validaciones específicas para el cumplimiento de normativas fiscales panameñas y requisitos DGI.</p>
-<h2 id="arquitectura">Arquitectura<a class="headerlink" href="#arquitectura" title="Permanent link">&para;</a></h2>
-<h3 id="componentes-principales">Componentes Principales<a class="headerlink" href="#componentes-principales" title="Permanent link">&para;</a></h3>
+<h2 id="arquitectura">Arquitectura</h2>
+<h3 id="componentes-principales">Componentes Principales</h3>
 <ol>
 <li><strong><code>QuickBooksContactValidator</code></strong> - Servicio principal de validación</li>
 <li><strong>Validación automática en <code>create_sale_quickbooks</code></strong> - Integración transparente  </li>
 <li><strong>Endpoint API independiente</strong> - Para validaciones manuales</li>
 <li><strong>Comando Artisan</strong> - Para testing y debugging</li>
 </ol>
-<h2 id="quickbookscontactvalidator">QuickBooksContactValidator<a class="headerlink" href="#quickbookscontactvalidator" title="Permanent link">&para;</a></h2>
-<h3 id="ubicacion">Ubicación<a class="headerlink" href="#ubicacion" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>app/Services/QuickBooks/QuickBooksContactValidator.php
+<h2 id="quickbookscontactvalidator">QuickBooksContactValidator</h2>
+<h3 id="ubicacion">Ubicación</h3>
+<div class="codehilite"><pre><span></span><code>app/Services/QuickBooks/QuickBooksContactValidator.php
 </code></pre></div>
-<h3 id="metodos-principales">Métodos Principales<a class="headerlink" href="#metodos-principales" title="Permanent link">&para;</a></h3>
-<h4 id="validatecontactarray-contact-array"><code>validateContact(array $contact): array</code><a class="headerlink" href="#validatecontactarray-contact-array" title="Permanent link">&para;</a></h4>
+
+<h3 id="metodos-principales">Métodos Principales</h3>
+<h4 id="validatecontactarray-contact-array"><code>validateContact(array $contact): array</code></h4>
 <p>Validación completa del contacto con análisis detallado.</p>
-<p><strong>Retorna:</strong>
-<div class="highlight"><pre><span></span><code><span class="x">[</span>
+<p><strong>Retorna:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="x">[</span>
 <span class="x">    &#39;is_valid&#39; =&gt; bool,           // Estado general de validación</span>
 <span class="x">    &#39;errors&#39; =&gt; [],               // Errores críticos</span>
 <span class="x">    &#39;warnings&#39; =&gt; [],             // Advertencias no críticas</span>
 <span class="x">    &#39;contact_summary&#39; =&gt; [],      // Resumen estructurado del contacto</span>
 <span class="x">    &#39;fiscal_validation&#39; =&gt; []     // Análisis fiscal específico</span>
 <span class="x">]</span>
-</code></pre></div></p>
-<h4 id="validateforelectronicinvoicingarray-contact-array"><code>validateForElectronicInvoicing(array $contact): array</code><a class="headerlink" href="#validateforelectronicinvoicingarray-contact-array" title="Permanent link">&para;</a></h4>
+</code></pre></div>
+
+<h4 id="validateforelectronicinvoicingarray-contact-array"><code>validateForElectronicInvoicing(array $contact): array</code></h4>
 <p>Validación específica para facturación electrónica con requisitos DGI Panamá.</p>
-<p><strong>Retorna:</strong> Resultado base + campos FE:
-<div class="highlight"><pre><span></span><code><span class="x">[</span>
+<p><strong>Retorna:</strong> Resultado base + campos FE:</p>
+<div class="codehilite"><pre><span></span><code><span class="x">[</span>
 <span class="x">    // ... campos base de validateContact()</span>
 <span class="x">    &#39;fe_ready&#39; =&gt; bool,           // Listo para FE</span>
 <span class="x">    &#39;fe_warnings&#39; =&gt; [],          // Advertencias específicas FE  </span>
 <span class="x">    &#39;fe_errors&#39; =&gt; []            // Errores que bloquean FE</span>
 <span class="x">]</span>
-</code></pre></div></p>
-<h4 id="logcontactdetailsarray-contact-string-context-void"><code>logContactDetails(array $contact, string $context): void</code><a class="headerlink" href="#logcontactdetailsarray-contact-string-context-void" title="Permanent link">&para;</a></h4>
+</code></pre></div>
+
+<h4 id="logcontactdetailsarray-contact-string-context-void"><code>logContactDetails(array $contact, string $context): void</code></h4>
 <p>Genera logging detallado para debugging y auditoría.</p>
-<h3 id="validaciones-implementadas">Validaciones Implementadas<a class="headerlink" href="#validaciones-implementadas" title="Permanent link">&para;</a></h3>
-<h4 id="1-estructura-basica">1. <strong>Estructura Básica</strong><a class="headerlink" href="#1-estructura-basica" title="Permanent link">&para;</a></h4>
+<h3 id="validaciones-implementadas">Validaciones Implementadas</h3>
+<h4 id="1-estructura-basica">1. <strong>Estructura Básica</strong></h4>
 <ul>
 <li>✅ ID del contacto presente</li>
 <li>✅ Nombre (DisplayName o FullyQualifiedName) requerido</li>
@@ -2405,20 +2454,20 @@
 <li>✅ SyncToken presente (advertencia si falta)</li>
 <li>✅ MetaData con fechas de creación/actualización</li>
 </ul>
-<h4 id="2-identificacion-fiscal">2. <strong>Identificación Fiscal</strong><a class="headerlink" href="#2-identificacion-fiscal" title="Permanent link">&para;</a></h4>
+<h4 id="2-identificacion-fiscal">2. <strong>Identificación Fiscal</strong></h4>
 <ul>
 <li>✅ Detección automática de persona natural vs jurídica</li>
 <li>✅ Validación de nombres empresariales vs personales</li>
 <li>✅ Análisis de balance financiero</li>
 <li>✅ Verificación de configuración de impuestos (<code>Taxable</code>)</li>
 </ul>
-<h4 id="3-direcciones">3. <strong>Direcciones</strong><a class="headerlink" href="#3-direcciones" title="Permanent link">&para;</a></h4>
+<h4 id="3-direcciones">3. <strong>Direcciones</strong></h4>
 <ul>
 <li>✅ Validación de IDs de direcciones de facturación (<code>BillAddr</code>)</li>
 <li>✅ Validación de IDs de direcciones de envío (<code>ShipAddr</code>)</li>
 <li>✅ Detección de direcciones idénticas para facturación/envío</li>
 </ul>
-<h4 id="4-cumplimiento-panama">4. <strong>Cumplimiento Panamá</strong><a class="headerlink" href="#4-cumplimiento-panama" title="Permanent link">&para;</a></h4>
+<h4 id="4-cumplimiento-panama">4. <strong>Cumplimiento Panamá</strong></h4>
 <ul>
 <li>✅ <strong>CRÍTICO</strong>: Moneda debe ser PAB (Balboa de Panamá)</li>
 <li>✅ Método de entrega preferido configurado</li>
@@ -2426,42 +2475,45 @@
 <li>✅ Verificación de facturación con entidad padre (<code>BillWithParent</code>)</li>
 <li>✅ Identificación de trabajos/proyectos (<code>Job</code>)</li>
 </ul>
-<h4 id="5-facturacion-electronica">5. <strong>Facturación Electrónica</strong><a class="headerlink" href="#5-facturacion-electronica" title="Permanent link">&para;</a></h4>
+<h4 id="5-facturacion-electronica">5. <strong>Facturación Electrónica</strong></h4>
 <ul>
 <li>✅ Datos mínimos para DGI presentes</li>
 <li>✅ Moneda PAB obligatoria</li>
 <li>✅ Validaciones de proyectos/trabajos para FE</li>
 </ul>
-<h2 id="integracion-automatica">Integración Automática<a class="headerlink" href="#integracion-automatica" title="Permanent link">&para;</a></h2>
-<h3 id="en-create_sale_quickbooks">En <code>create_sale_quickbooks</code><a class="headerlink" href="#en-create_sale_quickbooks" title="Permanent link">&para;</a></h3>
+<h2 id="integracion-automatica">Integración Automática</h2>
+<h3 id="en-create_sale_quickbooks">En <code>create_sale_quickbooks</code></h3>
 <p>La validación se ejecuta automáticamente antes del procesamiento:</p>
-<div class="highlight"><pre><span></span><code><span class="x">// En FeController::createSaleQuickbooks()</span>
+<div class="codehilite"><pre><span></span><code><span class="x">// En FeController::createSaleQuickbooks()</span>
 <span class="x">$this-&gt;validateQuickBooksContactForInvoice($arrRequest);</span>
 </code></pre></div>
-<h4 id="comportamiento">Comportamiento:<a class="headerlink" href="#comportamiento" title="Permanent link">&para;</a></h4>
+
+<h4 id="comportamiento">Comportamiento:</h4>
 <ul>
 <li>✅ <strong>Éxito</strong>: Procesamiento continúa normalmente</li>
 <li>❌ <strong>Error crítico</strong>: Lanza excepción, retorna HTTP 500</li>
 <li>⚠️ <strong>Advertencias</strong>: Se registran en logs, procesamiento continúa</li>
 </ul>
-<h4 id="ubicacion-de-contacto">Ubicación de Contacto<a class="headerlink" href="#ubicacion-de-contacto" title="Permanent link">&para;</a></h4>
+<h4 id="ubicacion-de-contacto">Ubicación de Contacto</h4>
 <p>El sistema busca datos del contacto en múltiples ubicaciones:
 - <code>Customer</code> - Datos directos
 - <code>Invoice.Customer</code> - Contacto anidado en factura<br />
 - <code>CustomerRef</code> - Referencia del contacto
 - <code>Invoice.CustomerRef</code> - Referencia en factura</p>
-<h2 id="endpoint-api-independiente">Endpoint API Independiente<a class="headerlink" href="#endpoint-api-independiente" title="Permanent link">&para;</a></h2>
-<h3 id="ruta">Ruta<a class="headerlink" href="#ruta" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>POST /api/v1/fe/validate_quickbooks_contact
+<h2 id="endpoint-api-independiente">Endpoint API Independiente</h2>
+<h3 id="ruta">Ruta</h3>
+<div class="codehilite"><pre><span></span><code>POST /api/v1/fe/validate_quickbooks_contact
 </code></pre></div>
-<h3 id="uso">Uso<a class="headerlink" href="#uso" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="se">\</span>
+
+<h3 id="uso">Uso</h3>
+<div class="codehilite"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Content-Type: application/json&quot;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>-d<span class="w"> </span><span class="s1">&#39;{&quot;Id&quot;:&quot;1634&quot;,&quot;DisplayName&quot;:&quot;LUIS INFANTE&quot;,&quot;CurrencyRef&quot;:{&quot;value&quot;:&quot;PAB&quot;}}&#39;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>http://localhost/api/v1/fe/validate_quickbooks_contact
 </code></pre></div>
-<h3 id="respuesta-exitosa-http-200">Respuesta Exitosa (HTTP 200)<a class="headerlink" href="#respuesta-exitosa-http-200" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
+
+<h3 id="respuesta-exitosa-http-200">Respuesta Exitosa (HTTP 200)</h3>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
 <span class="w">    </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
 <span class="w">    </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Validación de contacto completada&quot;</span><span class="p">,</span>
 <span class="w">    </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
@@ -2486,49 +2538,53 @@
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
-<h3 id="respuesta-de-error-http-400500">Respuesta de Error (HTTP 400/500)<a class="headerlink" href="#respuesta-de-error-http-400500" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
+
+<h3 id="respuesta-de-error-http-400500">Respuesta de Error (HTTP 400/500)</h3>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
 <span class="w">    </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
 <span class="w">    </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Error durante la validación del contacto&quot;</span><span class="p">,</span>
 <span class="w">    </span><span class="nt">&quot;error&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Descripción del error&quot;</span>
 <span class="p">}</span>
 </code></pre></div>
-<h2 id="comando-artisan">Comando Artisan<a class="headerlink" href="#comando-artisan" title="Permanent link">&para;</a></h2>
-<h3 id="uso-basico">Uso Básico<a class="headerlink" href="#uso-basico" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># Con datos de muestra</span>
+
+<h2 id="comando-artisan">Comando Artisan</h2>
+<h3 id="uso-basico">Uso Básico</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Con datos de muestra</span>
 php<span class="w"> </span>artisan<span class="w"> </span>quickbooks:validate-contact<span class="w"> </span>--sample
 
 <span class="c1"># Con JSON personalizado</span>
 php<span class="w"> </span>artisan<span class="w"> </span>quickbooks:validate-contact<span class="w"> </span>--json<span class="o">=</span><span class="s1">&#39;{&quot;Id&quot;:&quot;1634&quot;,&quot;DisplayName&quot;:&quot;LUIS INFANTE&quot;}&#39;</span>
 </code></pre></div>
-<h3 id="salida-del-comando">Salida del Comando<a class="headerlink" href="#salida-del-comando" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>=== Validación de Contacto QuickBooks ===
 
-✅ VALIDACIÓN GENERAL: PASÓ
+<h3 id="salida-del-comando">Salida del Comando</h3>
+<div class="codehilite"><pre><span></span><code><span class="c">=== Validación de Contacto QuickBooks ===</span>
 
-📋 RESUMEN DEL CONTACTO:
-+----------------------+-------------------+
-| Campo                | Valor             |
-+----------------------+-------------------+
-| ID                   | 1634              |
-| Nombre               | LUIS INFANTE      |
-| Activo               | Sí                |
-| Moneda               | PAB (Balboa de P) |
-+----------------------+-------------------+
+<span class="c">✅ VALIDACIÓN GENERAL: PASÓ</span>
 
-🏛️ ANÁLISIS FISCAL:
-+-----------------------------------+--------+
-| Aspecto                           | Valor  |
-+-----------------------------------+--------+
-| Tipo de persona                   | natural|
-| Moneda válida                     | Sí     |
-+-----------------------------------+--------+
+<span class="c">📋 RESUMEN DEL CONTACTO:</span>
+<span class="nb">+----------------------+-------------------+</span>
+<span class="c">| Campo                | Valor             |</span>
+<span class="nb">+----------------------+-------------------+</span>
+<span class="c">| ID                   | 1634              |</span>
+<span class="c">| Nombre               | LUIS INFANTE      |</span>
+<span class="c">| Activo               | Sí                |</span>
+<span class="c">| Moneda               | PAB (Balboa de P) |</span>
+<span class="nb">+----------------------+-------------------+</span>
 
-✅ FACTURACIÓN ELECTRÓNICA: LISTO
+<span class="c">🏛️ ANÁLISIS FISCAL:</span>
+<span class="nb">+-----------------------------------+--------+</span>
+<span class="c">| Aspecto                           | Valor  |</span>
+<span class="nb">+-----------------------------------+--------+</span>
+<span class="c">| Tipo de persona                   | natural|</span>
+<span class="c">| Moneda válida                     | Sí     |</span>
+<span class="nb">+-----------------------------------+--------+</span>
+
+<span class="c">✅ FACTURACIÓN ELECTRÓNICA: LISTO</span>
 </code></pre></div>
-<h2 id="objeto-de-contacto-de-ejemplo">Objeto de Contacto de Ejemplo<a class="headerlink" href="#objeto-de-contacto-de-ejemplo" title="Permanent link">&para;</a></h2>
+
+<h2 id="objeto-de-contacto-de-ejemplo">Objeto de Contacto de Ejemplo</h2>
 <p>Basado en el objeto proporcionado (ID: 1634 - LUIS INFANTE):</p>
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
 <span class="w">    </span><span class="nt">&quot;Taxable&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
 <span class="w">    </span><span class="nt">&quot;BillAddr&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;Id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;5231&quot;</span><span class="p">},</span>
 <span class="w">    </span><span class="nt">&quot;ShipAddr&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;Id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;5231&quot;</span><span class="p">},</span><span class="w"> </span>
@@ -2558,8 +2614,9 @@ php<span class="w"> </span>artisan<span class="w"> </span>quickbooks:validate-co
 <span class="w">    </span><span class="nt">&quot;V4IDPseudonym&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;002083308a2db067f14a9fa540ccb096d880c7&quot;</span>
 <span class="p">}</span>
 </code></pre></div>
-<h2 id="validaciones-especificas-del-ejemplo">Validaciones Específicas del Ejemplo<a class="headerlink" href="#validaciones-especificas-del-ejemplo" title="Permanent link">&para;</a></h2>
-<h3 id="validaciones-exitosas">✅ Validaciones Exitosas<a class="headerlink" href="#validaciones-exitosas" title="Permanent link">&para;</a></h3>
+
+<h2 id="validaciones-especificas-del-ejemplo">Validaciones Específicas del Ejemplo</h2>
+<h3 id="validaciones-exitosas">✅ Validaciones Exitosas</h3>
 <ul>
 <li><strong>ID presente</strong>: "1634"</li>
 <li><strong>Nombre válido</strong>: "LUIS INFANTE" </li>
@@ -2568,39 +2625,41 @@ php<span class="w"> </span>artisan<span class="w"> </span>quickbooks:validate-co
 <li><strong>Contacto activo</strong>: <code>Active: true</code></li>
 <li><strong>Direcciones válidas</strong>: BillAddr y ShipAddr con ID "5231"</li>
 </ul>
-<h3 id="advertencias-detectadas">⚠️ Advertencias Detectadas<a class="headerlink" href="#advertencias-detectadas" title="Permanent link">&para;</a></h3>
+<h3 id="advertencias-detectadas">⚠️ Advertencias Detectadas</h3>
 <ul>
 <li><strong>No gravado con impuestos</strong>: <code>Taxable: false</code></li>
 <li><strong>SyncToken básico</strong>: "0" (podría indicar problemas de sincronización)</li>
 <li><strong>Método de entrega no configurado</strong>: "None"</li>
 </ul>
-<h3 id="resultado-final">🎯 Resultado Final<a class="headerlink" href="#resultado-final" title="Permanent link">&para;</a></h3>
+<h3 id="resultado-final">🎯 Resultado Final</h3>
 <ul>
 <li>✅ <strong>Validación general</strong>: PASA</li>
 <li>✅ <strong>Listo para FE</strong>: SÍ</li>
 <li>✅ <strong>Cumple DGI Panamá</strong>: SÍ</li>
 </ul>
-<h2 id="scripts-de-prueba">Scripts de Prueba<a class="headerlink" href="#scripts-de-prueba" title="Permanent link">&para;</a></h2>
-<h3 id="script-api">Script API<a class="headerlink" href="#script-api" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>./scripts/test-quickbooks-contact-api.sh
+<h2 id="scripts-de-prueba">Scripts de Prueba</h2>
+<h3 id="script-api">Script API</h3>
+<div class="codehilite"><pre><span></span><code>./scripts/test-quickbooks-contact-api.sh
 </code></pre></div>
+
 <p>Ejecuta múltiples casos de prueba:
 1. ✅ Contacto válido (LUIS INFANTE)
 2. ⚠️ Datos incompletos
 3. ❌ Moneda incorrecta (USD)
 4. ❌ Petición vacía</p>
-<h2 id="logging-y-debugging">Logging y Debugging<a class="headerlink" href="#logging-y-debugging" title="Permanent link">&para;</a></h2>
-<h3 id="ubicacion-de-logs">Ubicación de Logs<a class="headerlink" href="#ubicacion-de-logs" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>storage/logs/laravel.log
+<h2 id="logging-y-debugging">Logging y Debugging</h2>
+<h3 id="ubicacion-de-logs">Ubicación de Logs</h3>
+<div class="codehilite"><pre><span></span><code>storage/logs/laravel.log
 </code></pre></div>
-<h3 id="contextos-de-log">Contextos de Log<a class="headerlink" href="#contextos-de-log" title="Permanent link">&para;</a></h3>
+
+<h3 id="contextos-de-log">Contextos de Log</h3>
 <ul>
 <li><code>QuickBooks Contact Validation</code> - Validación automática en API</li>
 <li><code>API QuickBooks Contact Validation</code> - Endpoint independiente  </li>
 <li><code>Comando Validación Manual</code> - Desde comando Artisan</li>
 </ul>
-<h3 id="ejemplo-de-log">Ejemplo de Log<a class="headerlink" href="#ejemplo-de-log" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>[2025-10-16 20:00:00] local.INFO: QuickBooks Contact Validation {
+<h3 id="ejemplo-de-log">Ejemplo de Log</h3>
+<div class="codehilite"><pre><span></span><code>[2025-10-16 20:00:00] local.INFO: QuickBooks Contact Validation {
     &quot;customer_id&quot;: &quot;1634&quot;,
     &quot;customer_name&quot;: &quot;LUIS INFANTE&quot;, 
     &quot;validation_results&quot;: {
@@ -2611,18 +2670,19 @@ php<span class="w"> </span>artisan<span class="w"> </span>quickbooks:validate-co
     }
 }
 </code></pre></div>
-<h2 id="casos-de-uso">Casos de Uso<a class="headerlink" href="#casos-de-uso" title="Permanent link">&para;</a></h2>
-<h3 id="1-validacion-preventiva">1. <strong>Validación Preventiva</strong><a class="headerlink" href="#1-validacion-preventiva" title="Permanent link">&para;</a></h3>
+
+<h2 id="casos-de-uso">Casos de Uso</h2>
+<h3 id="1-validacion-preventiva">1. <strong>Validación Preventiva</strong></h3>
 <p>Antes de procesar facturas, verificar que el contacto cumple requisitos DGI.</p>
-<h3 id="2-debugging-de-integraciones">2. <strong>Debugging de Integraciones</strong><a class="headerlink" href="#2-debugging-de-integraciones" title="Permanent link">&para;</a></h3>
+<h3 id="2-debugging-de-integraciones">2. <strong>Debugging de Integraciones</strong></h3>
 <p>Identificar por qué ciertas facturas fallan en el procesamiento.</p>
-<h3 id="3-auditoria-de-calidad">3. <strong>Auditoría de Calidad</strong><a class="headerlink" href="#3-auditoria-de-calidad" title="Permanent link">&para;</a></h3>
+<h3 id="3-auditoria-de-calidad">3. <strong>Auditoría de Calidad</strong></h3>
 <p>Revisar la calidad de datos de contactos en QuickBooks.</p>
-<h3 id="4-migracion-de-datos">4. <strong>Migración de Datos</strong><a class="headerlink" href="#4-migracion-de-datos" title="Permanent link">&para;</a></h3>
+<h3 id="4-migracion-de-datos">4. <strong>Migración de Datos</strong></h3>
 <p>Validar contactos antes de migraciones o sincronizaciones masivas.</p>
-<h2 id="extensibilidad">Extensibilidad<a class="headerlink" href="#extensibilidad" title="Permanent link">&para;</a></h2>
-<h3 id="agregar-nuevas-validaciones">Agregar Nuevas Validaciones<a class="headerlink" href="#agregar-nuevas-validaciones" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">// En QuickBooksContactValidator</span>
+<h2 id="extensibilidad">Extensibilidad</h2>
+<h3 id="agregar-nuevas-validaciones">Agregar Nuevas Validaciones</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">// En QuickBooksContactValidator</span>
 <span class="x">private function validateCustomRule(array $contact, array &amp;$results): void</span>
 <span class="x">{</span>
 <span class="x">    // Lógica de validación personalizada</span>
@@ -2632,8 +2692,9 @@ php<span class="w"> </span>artisan<span class="w"> </span>quickbooks:validate-co
 <span class="x">    }</span>
 <span class="x">}</span>
 </code></pre></div>
-<h3 id="personalizar-validaciones-por-organizacion">Personalizar Validaciones por Organización<a class="headerlink" href="#personalizar-validaciones-por-organizacion" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">// Extender para validaciones específicas por organización</span>
+
+<h3 id="personalizar-validaciones-por-organizacion">Personalizar Validaciones por Organización</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">// Extender para validaciones específicas por organización</span>
 <span class="x">public function validateContactForOrganization(array $contact, Organization $org): array</span>
 <span class="x">{</span>
 <span class="x">    $baseValidation = $this-&gt;validateContact($contact);</span>
@@ -2644,7 +2705,8 @@ php<span class="w"> </span>artisan<span class="w"> </span>quickbooks:validate-co
 <span class="x">    return $baseValidation;</span>
 <span class="x">}</span>
 </code></pre></div>
-<h2 id="conclusion">Conclusión<a class="headerlink" href="#conclusion" title="Permanent link">&para;</a></h2>
+
+<h2 id="conclusion">Conclusión</h2>
 <p>Este sistema proporciona validación robusta y comprehensiva de contactos QuickBooks, asegurando que cumplan con todos los requisitos para facturación electrónica en Panamá antes del procesamiento, reduciendo errores y mejorando la calidad de los datos fiscales.</p>
 
 
@@ -2698,7 +2760,7 @@ php<span class="w"> </span>artisan<span class="w"> </span>quickbooks:validate-co
       
       
     
-    <a href="https://github.com/aghabrego/docucenter" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+    <a href="https://github.com/aghabrego/docucenter-public" target="_blank" rel="noopener" title="github.com" class="md-social__link">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
     </a>
   

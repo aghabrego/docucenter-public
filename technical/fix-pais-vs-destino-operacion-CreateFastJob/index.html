@@ -233,7 +233,7 @@
           
   
   
-  APIs
+  API Documentation
 
         </a>
       </li>
@@ -269,7 +269,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../" class="md-tabs__link">
+        <a href="../README.md" class="md-tabs__link">
           
   
   
@@ -298,6 +298,25 @@
         </a>
       </li>
     
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../testing/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Sistema de Testing
+
+      </a>
+    </li>
   
 
       
@@ -404,7 +423,7 @@
   <span class="md-ellipsis">
     
   
-    APIs
+    API Documentation
   
 
     
@@ -420,7 +439,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    APIs
+    API Documentation
   
 
           </label>
@@ -1363,7 +1382,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
+      <a href="../README.md" class="md-nav__link">
         
   
   
@@ -1716,6 +1735,33 @@
   
 
     
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sistema de Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -1945,20 +1991,21 @@
   
 
 
-<h1 id="fix-critico-validacion-pais-vs-destino-operacion-en-createfastjob">Fix Crítico: Validación País vs Destino Operación en CreateFastJob<a class="headerlink" href="#fix-critico-validacion-pais-vs-destino-operacion-en-createfastjob" title="Permanent link">&para;</a></h1>
-<h2 id="problema-identificado">Problema Identificado<a class="headerlink" href="#problema-identificado" title="Permanent link">&para;</a></h2>
-<p>Error en producción PAC:
-<div class="highlight"><pre><span></span><code>El campo país es inválido. El país del cliente debe ser PA si el destino de la operación es 1= Panamá.
-</code></pre></div></p>
-<h2 id="causa-raiz">Causa Raíz<a class="headerlink" href="#causa-raiz" title="Permanent link">&para;</a></h2>
+<h1 id="fix-critico-validacion-pais-vs-destino-operacion-en-createfastjob">Fix Crítico: Validación País vs Destino Operación en CreateFastJob</h1>
+<h2 id="problema-identificado">Problema Identificado</h2>
+<p>Error en producción PAC:</p>
+<div class="codehilite"><pre><span></span><code>El campo país es inválido. El país del cliente debe ser PA si el destino de la operación es 1= Panamá.
+</code></pre></div>
+
+<h2 id="causa-raiz">Causa Raíz</h2>
 <p><strong>Conflicto entre destino operación y país del cliente</strong>:</p>
 <ol>
 <li>✅ <strong>Detección inicial correcta</strong>: Cliente extranjero → <code>destinoOperacion = 2</code>, <code>paisDestinoOperacion = país_extranjero</code></li>
 <li>❌ <strong>Sobrescritura incorrecta</strong>: Código en líneas 362-370 forzaba Panamá como default <strong>para TODOS los casos</strong></li>
 <li>❌ <strong>Resultado inconsistente</strong>: <code>iDest = 2</code> (extranjero) + <code>cPaisRec = PA</code> (Panamá)</li>
 </ol>
-<h3 id="codigo-problematico-antes">Código Problemático (ANTES):<a class="headerlink" href="#codigo-problematico-antes" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">// Step 4 - Solo configurar default si no se configuró automáticamente</span>
+<h3 id="codigo-problematico-antes">Código Problemático (ANTES):</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">// Step 4 - Solo configurar default si no se configuró automáticamente</span>
 <span class="x">if (empty($this-&gt;receptor_paisDestinoOperacion)) {</span>
 <span class="x">    // Buscar Panamá dinámicamente como país default</span>
 <span class="x">    $panama = \App\Models\Destinationcountryoperation::query()</span>
@@ -1970,14 +2017,15 @@
 <span class="x">    $this-&gt;receptor_paisDestinoOperacion = $panama?-&gt;id ?: 1; // ❌ SIEMPRE Panamá</span>
 <span class="x">}</span>
 </code></pre></div>
-<h3 id="validacion-pac-que-falla">Validación PAC que Falla:<a class="headerlink" href="#validacion-pac-que-falla" title="Permanent link">&para;</a></h3>
+
+<h3 id="validacion-pac-que-falla">Validación PAC que Falla:</h3>
 <ul>
 <li><strong>Si <code>iDest = 1</code></strong> (Nacional) → <strong>Requiere <code>cPaisRec = PA</code></strong> ✅</li>
 <li><strong>Si <code>iDest = 2</code></strong> (Extranjero) → <strong>Requiere <code>cPaisRec ≠ PA</code></strong> ❌ (estaba forzando PA)</li>
 </ul>
-<h2 id="solucion-implementada">Solución Implementada<a class="headerlink" href="#solucion-implementada" title="Permanent link">&para;</a></h2>
+<h2 id="solucion-implementada">Solución Implementada</h2>
 <p><strong>Código corregido para respetar tipo de cliente</strong>:</p>
-<div class="highlight"><pre><span></span><code><span class="x">// Step 4 - Solo configurar default si no se configuró automáticamente</span>
+<div class="codehilite"><pre><span></span><code><span class="x">// Step 4 - Solo configurar default si no se configuró automáticamente</span>
 <span class="x">if (empty($this-&gt;receptor_paisDestinoOperacion)) {</span>
 <span class="x">    // IMPORTANTE: Solo asignar Panamá si es cliente nacional (destinoOperacion = 1)</span>
 <span class="x">    if ($this-&gt;destinoOperacion == 1) {</span>
@@ -1993,44 +2041,45 @@
 <span class="x">    // Para extranjeros (destinoOperacion = 2), NO forzar país - debe mantenerse null o ya asignado</span>
 <span class="x">}</span>
 </code></pre></div>
-<h2 id="logica-de-validacion-correcta">Lógica de Validación Correcta<a class="headerlink" href="#logica-de-validacion-correcta" title="Permanent link">&para;</a></h2>
-<h3 id="clientes-nacionales-tipos-1-2">Clientes Nacionales (Tipos 1, 2):<a class="headerlink" href="#clientes-nacionales-tipos-1-2" title="Permanent link">&para;</a></h3>
+
+<h2 id="logica-de-validacion-correcta">Lógica de Validación Correcta</h2>
+<h3 id="clientes-nacionales-tipos-1-2">Clientes Nacionales (Tipos 1, 2):</h3>
 <ul>
 <li><code>destinoOperacion = 1</code> (Nacional)</li>
 <li><code>receptor_paisDestinoOperacion = PA</code> (Panamá)</li>
 <li><strong>Resultado XML</strong>: <code>iDest = 1</code> + <code>cPaisRec = PA</code> ✅ <strong>VÁLIDO</strong></li>
 </ul>
-<h3 id="clientes-extranjeros-tipos-3-4">Clientes Extranjeros (Tipos 3, 4):<a class="headerlink" href="#clientes-extranjeros-tipos-3-4" title="Permanent link">&para;</a></h3>
+<h3 id="clientes-extranjeros-tipos-3-4">Clientes Extranjeros (Tipos 3, 4):</h3>
 <ul>
 <li><code>destinoOperacion = 2</code> (Extranjero) </li>
 <li><code>receptor_paisDestinoOperacion = país_real_cliente</code> (CL, US, etc.)</li>
 <li><strong>Resultado XML</strong>: <code>iDest = 2</code> + <code>cPaisRec ≠ PA</code> ✅ <strong>VÁLIDO</strong></li>
 </ul>
-<h2 id="archivos-modificados">Archivos Modificados<a class="headerlink" href="#archivos-modificados" title="Permanent link">&para;</a></h2>
+<h2 id="archivos-modificados">Archivos Modificados</h2>
 <ul>
 <li><code>app/Http/Livewire/Admin/Einvoice/CreateFastJob.php</code>: Líneas 362-375 - Condicional para país default</li>
 </ul>
-<h2 id="casos-de-prueba-validados">Casos de Prueba Validados<a class="headerlink" href="#casos-de-prueba-validados" title="Permanent link">&para;</a></h2>
-<h3 id="cliente-nacional">✅ Cliente Nacional:<a class="headerlink" href="#cliente-nacional" title="Permanent link">&para;</a></h3>
+<h2 id="casos-de-prueba-validados">Casos de Prueba Validados</h2>
+<h3 id="cliente-nacional">✅ Cliente Nacional:</h3>
 <ul>
 <li>Tipo: 1 o 2 → <code>destinoOperacion = 1</code> + <code>cPaisRec = PA</code></li>
 </ul>
-<h3 id="cliente-extranjero-con-pais-detectado">✅ Cliente Extranjero con País Detectado:<a class="headerlink" href="#cliente-extranjero-con-pais-detectado" title="Permanent link">&para;</a></h3>
+<h3 id="cliente-extranjero-con-pais-detectado">✅ Cliente Extranjero con País Detectado:</h3>
 <ul>
 <li>Tipo: 3 o 4 + Country: CL → <code>destinoOperacion = 2</code> + <code>cPaisRec = CL</code></li>
 </ul>
-<h3 id="cliente-extranjero-sin-pais-edge-case">✅ Cliente Extranjero sin País (Edge Case):<a class="headerlink" href="#cliente-extranjero-sin-pais-edge-case" title="Permanent link">&para;</a></h3>
+<h3 id="cliente-extranjero-sin-pais-edge-case">✅ Cliente Extranjero sin País (Edge Case):</h3>
 <ul>
 <li>Tipo: 3 o 4 + Country: vacío → <code>destinoOperacion = 2</code> + <code>cPaisRec = null</code> (fallback PAC)</li>
 </ul>
-<h2 id="impacto-de-la-solucion">Impacto de la Solución<a class="headerlink" href="#impacto-de-la-solucion" title="Permanent link">&para;</a></h2>
+<h2 id="impacto-de-la-solucion">Impacto de la Solución</h2>
 <ul>
 <li>✅ <strong>Clientes nacionales</strong>: Funcionarán igual (sin cambios)</li>
 <li>✅ <strong>Clientes extranjeros</strong>: Ahora validarán correctamente en PAC</li>
 <li>✅ <strong>Compatibilidad</strong>: Mantiene lógica existente para casos nacionales</li>
 <li>✅ <strong>Robustez</strong>: Respeta detección automática de tipo de cliente</li>
 </ul>
-<h2 id="estado">Estado<a class="headerlink" href="#estado" title="Permanent link">&para;</a></h2>
+<h2 id="estado">Estado</h2>
 <p>✅ <strong>CRÍTICO RESUELTO</strong> - Error PAC "país inválido vs destino operación" solucionado</p>
 <p>Este fix asegura consistencia entre el destino de operación y el país del cliente según las reglas del PAC panameño.</p>
 
@@ -2085,7 +2134,7 @@
       
       
     
-    <a href="https://github.com/aghabrego/docucenter" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+    <a href="https://github.com/aghabrego/docucenter-public" target="_blank" rel="noopener" title="github.com" class="md-social__link">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
     </a>
   

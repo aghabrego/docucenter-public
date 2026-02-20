@@ -233,7 +233,7 @@
           
   
   
-  APIs
+  API Documentation
 
         </a>
       </li>
@@ -269,7 +269,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../" class="md-tabs__link">
+        <a href="../README.md" class="md-tabs__link">
           
   
   
@@ -298,6 +298,25 @@
         </a>
       </li>
     
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../testing/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Sistema de Testing
+
+      </a>
+    </li>
   
 
       
@@ -404,7 +423,7 @@
   <span class="md-ellipsis">
     
   
-    APIs
+    API Documentation
   
 
     
@@ -420,7 +439,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    APIs
+    API Documentation
   
 
           </label>
@@ -1363,7 +1382,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
+      <a href="../README.md" class="md-nav__link">
         
   
   
@@ -1716,6 +1735,33 @@
   
 
     
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sistema de Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -2007,24 +2053,24 @@
   
 
 
-<h1 id="correccion-de-sincronizacion-de-pagos-en-componentes-de-facturacion">Corrección de Sincronización de Pagos en Componentes de Facturación<a class="headerlink" href="#correccion-de-sincronizacion-de-pagos-en-componentes-de-facturacion" title="Permanent link">&para;</a></h1>
-<h2 id="problema-identificado">Problema Identificado<a class="headerlink" href="#problema-identificado" title="Permanent link">&para;</a></h2>
+<h1 id="correccion-de-sincronizacion-de-pagos-en-componentes-de-facturacion">Corrección de Sincronización de Pagos en Componentes de Facturación</h1>
+<h2 id="problema-identificado">Problema Identificado</h2>
 <p>El sistema de facturación electrónica presentaba el error PAC "El campo vuelto es inválido" debido a desincronización entre los totales de pagos y el total de la factura.</p>
-<h3 id="causa-raiz">Causa Raíz<a class="headerlink" href="#causa-raiz" title="Permanent link">&para;</a></h3>
+<h3 id="causa-raiz">Causa Raíz</h3>
 <ul>
 <li><code>PaymentCalculationHelper::adjustPaymentDistribution()</code> tenía un threshold del 0.2% que impedía ajustes necesarios</li>
 <li>Para discrepancias pequeñas (&lt; 0.2%), no se realizaba ningún ajuste</li>
 <li>Esto causaba que <code>dTotRec</code> (total recibido) no coincidiera exactamente con <code>dVTot</code> (total de la factura)</li>
 </ul>
-<h2 id="solucion-implementada">Solución Implementada<a class="headerlink" href="#solucion-implementada" title="Permanent link">&para;</a></h2>
-<h3 id="estrategia-corregida">Estrategia Corregida<a class="headerlink" href="#estrategia-corregida" title="Permanent link">&para;</a></h3>
+<h2 id="solucion-implementada">Solución Implementada</h2>
+<h3 id="estrategia-corregida">Estrategia Corregida</h3>
 <ol>
 <li><strong>Método de Ajuste</strong>: Reemplazado <code>adjustPaymentDistribution()</code> por <code>processPaymentsWithExactTotal()</code></li>
 <li><strong>Garantía de Exactitud</strong>: Sin thresholds, fuerza suma exacta entre pagos y total</li>
 <li><strong>Lógica de Vuelto</strong>: Implementada condición <code>shouldIncludeVuelto</code> para evitar vueltos de menos de 1 centavo</li>
 </ol>
-<h3 id="codigo-implementado">Código Implementado<a class="headerlink" href="#codigo-implementado" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">// Usar dVTot como referencia (suma de items + impuestos)</span>
+<h3 id="codigo-implementado">Código Implementado</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">// Usar dVTot como referencia (suma de items + impuestos)</span>
 <span class="x">$targetTotal = $dVTot;</span>
 
 <span class="x">// Forzar suma exacta sin threshold</span>
@@ -2040,8 +2086,9 @@
 <span class="x">// Solo incluir vuelto si es &gt;= 1 centavo</span>
 <span class="x">$shouldIncludeVuelto = $dVuelto &gt;= 0.01;</span>
 </code></pre></div>
-<h2 id="componentes-actualizados">Componentes Actualizados<a class="headerlink" href="#componentes-actualizados" title="Permanent link">&para;</a></h2>
-<h3 id="1-createfastjobphp">1. CreateFastJob.php<a class="headerlink" href="#1-createfastjobphp" title="Permanent link">&para;</a></h3>
+
+<h2 id="componentes-actualizados">Componentes Actualizados</h2>
+<h3 id="1-createfastjobphp">1. CreateFastJob.php</h3>
 <ul>
 <li><strong>Líneas</strong>: 1533-1589 (originalmente)</li>
 <li><strong>Estado</strong>: ✅ Corregido y limpiado</li>
@@ -2050,7 +2097,7 @@
 <li>Removidos logs de debugging</li>
 <li>Código compacto y funcional</li>
 </ul>
-<h3 id="2-createfastphp">2. CreateFast.php<a class="headerlink" href="#2-createfastphp" title="Permanent link">&para;</a></h3>
+<h3 id="2-createfastphp">2. CreateFast.php</h3>
 <ul>
 <li><strong>Líneas</strong>: Alrededor de 1037</li>
 <li><strong>Estado</strong>: ✅ Corregido</li>
@@ -2059,7 +2106,7 @@
 <li>Corregido import duplicado de PaymentCalculationHelper</li>
 <li>Lógica <code>shouldIncludeVuelto</code> implementada</li>
 </ul>
-<h3 id="3-createphp">3. Create.php<a class="headerlink" href="#3-createphp" title="Permanent link">&para;</a></h3>
+<h3 id="3-createphp">3. Create.php</h3>
 <ul>
 <li><strong>Líneas</strong>: 1220-1270</li>
 <li><strong>Estado</strong>: ✅ Corregido</li>
@@ -2068,46 +2115,46 @@
 <li>Import de PaymentCalculationHelper ya existía</li>
 <li>Consistencia con otros componentes</li>
 </ul>
-<h2 id="resultado-de-la-correccion">Resultado de la Corrección<a class="headerlink" href="#resultado-de-la-correccion" title="Permanent link">&para;</a></h2>
-<h3 id="antes">Antes<a class="headerlink" href="#antes" title="Permanent link">&para;</a></h3>
+<h2 id="resultado-de-la-correccion">Resultado de la Corrección</h2>
+<h3 id="antes">Antes</h3>
 <ul>
 <li>Error PAC: "El campo vuelto es inválido"</li>
 <li>Desincronización entre <code>dTotRec</code> y <code>dVTot</code></li>
 <li>Ajustes de pagos con threshold del 0.2%</li>
 </ul>
-<h3 id="despues">Después<a class="headerlink" href="#despues" title="Permanent link">&para;</a></h3>
+<h3 id="despues">Después</h3>
 <ul>
 <li>Error PAC: "El documento está duplicado" (confirma que la estructura de pagos es válida)</li>
 <li>Sincronización exacta: <code>dTotRec</code> == <code>dVTot</code></li>
 <li>Ajustes forzados sin thresholds</li>
 </ul>
-<h2 id="validacion">Validación<a class="headerlink" href="#validacion" title="Permanent link">&para;</a></h2>
-<h3 id="pac-response">PAC Response<a class="headerlink" href="#pac-response" title="Permanent link">&para;</a></h3>
+<h2 id="validacion">Validación</h2>
+<h3 id="pac-response">PAC Response</h3>
 <p>La transición del error de "El campo vuelto es inválido" a "El documento está duplicado" confirma que:
 1. La estructura de pagos ahora es válida
 2. Los cálculos de vuelto son correctos
 3. La sincronización total es exacta</p>
-<h3 id="consistencia-de-implementacion">Consistencia de Implementación<a class="headerlink" href="#consistencia-de-implementacion" title="Permanent link">&para;</a></h3>
+<h3 id="consistencia-de-implementacion">Consistencia de Implementación</h3>
 <ul>
 <li>✅ Todos los componentes usan <code>processPaymentsWithExactTotal()</code></li>
 <li>✅ Todos implementan <code>shouldIncludeVuelto</code></li>
 <li>✅ No quedan referencias a <code>adjustPaymentDistribution()</code></li>
 </ul>
-<h2 id="mantenimiento">Mantenimiento<a class="headerlink" href="#mantenimiento" title="Permanent link">&para;</a></h2>
-<h3 id="para-futuros-desarrollos">Para Futuros Desarrollos<a class="headerlink" href="#para-futuros-desarrollos" title="Permanent link">&para;</a></h3>
+<h2 id="mantenimiento">Mantenimiento</h2>
+<h3 id="para-futuros-desarrollos">Para Futuros Desarrollos</h3>
 <ol>
 <li><strong>Siempre usar</strong> <code>processPaymentsWithExactTotal()</code> para ajustes de pagos</li>
 <li><strong>Evitar thresholds</strong> en cálculos de facturación electrónica</li>
 <li><strong>Implementar</strong> lógica <code>shouldIncludeVuelto</code> para vueltos &lt; 1 centavo</li>
 <li><strong>Mantener sincronización</strong> exacta entre <code>dTotRec</code> y <code>dVTot</code></li>
 </ol>
-<h3 id="dependencias">Dependencias<a class="headerlink" href="#dependencias" title="Permanent link">&para;</a></h3>
+<h3 id="dependencias">Dependencias</h3>
 <ul>
 <li><code>App\Helpers\PaymentCalculationHelper</code></li>
 <li>Método <code>processPaymentsWithExactTotal()</code></li>
 <li>Método <code>calculateNormalizedTotal()</code></li>
 </ul>
-<h2 id="fecha-de-implementacion">Fecha de Implementación<a class="headerlink" href="#fecha-de-implementacion" title="Permanent link">&para;</a></h2>
+<h2 id="fecha-de-implementacion">Fecha de Implementación</h2>
 <p>Diciembre 2024 - Corrección completa aplicada a todos los componentes de facturación.</p>
 
 
@@ -2161,7 +2208,7 @@
       
       
     
-    <a href="https://github.com/aghabrego/docucenter" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+    <a href="https://github.com/aghabrego/docucenter-public" target="_blank" rel="noopener" title="github.com" class="md-social__link">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
     </a>
   

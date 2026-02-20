@@ -233,7 +233,7 @@
           
   
   
-  APIs
+  API Documentation
 
         </a>
       </li>
@@ -269,7 +269,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../technical/" class="md-tabs__link">
+        <a href="../../technical/README.md" class="md-tabs__link">
           
   
   
@@ -298,6 +298,25 @@
         </a>
       </li>
     
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../testing/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Sistema de Testing
+
+      </a>
+    </li>
   
 
       
@@ -404,7 +423,7 @@
   <span class="md-ellipsis">
     
   
-    APIs
+    API Documentation
   
 
     
@@ -420,7 +439,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    APIs
+    API Documentation
   
 
           </label>
@@ -1363,7 +1382,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../technical/" class="md-nav__link">
+      <a href="../../technical/README.md" class="md-nav__link">
         
   
   
@@ -1716,6 +1735,33 @@
   
 
     
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sistema de Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -1922,13 +1968,14 @@
   
 
 
-<h1 id="error-3010-denvfe-enumeration-analisis-final">Error 3010 (dEnvFE Enumeration) - Análisis Final<a class="headerlink" href="#error-3010-denvfe-enumeration-analisis-final" title="Permanent link">&para;</a></h1>
-<h2 id="problema-identificado">Problema Identificado<a class="headerlink" href="#problema-identificado" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code>The &#39;http://dgi-fep.mef.gob.pa:dEnvFE&#39; element is invalid - 
-The value &#39;3&#39; is invalid according to its datatype &#39;Integer&#39; - 
-The Enumeration constraint failed.
+<h1 id="error-3010-denvfe-enumeration-analisis-final">Error 3010 (dEnvFE Enumeration) - Análisis Final</h1>
+<h2 id="problema-identificado">Problema Identificado</h2>
+<div class="codehilite"><pre><span></span><code><span class="nx">The</span><span class="w"> </span><span class="err">&#39;</span><span class="nx">http</span><span class="p">:</span><span class="c1">//dgi-fep.mef.gob.pa:dEnvFE&#39; element is invalid - </span>
+<span class="nx">The</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="sc">&#39;3&#39;</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="nx">invalid</span><span class="w"> </span><span class="nx">according</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">its</span><span class="w"> </span><span class="nx">datatype</span><span class="w"> </span><span class="err">&#39;</span><span class="nx">Integer</span><span class="err">&#39;</span><span class="w"> </span><span class="o">-</span><span class="w"> </span>
+<span class="nx">The</span><span class="w"> </span><span class="nx">Enumeration</span><span class="w"> </span><span class="kd">constraint</span><span class="w"> </span><span class="nx">failed</span><span class="p">.</span>
 </code></pre></div>
-<h2 id="causa-raiz-conversion-interna-en-digifact">Causa Raíz - Conversión Interna en Digifact<a class="headerlink" href="#causa-raiz-conversion-interna-en-digifact" title="Permanent link">&para;</a></h2>
+
+<h2 id="causa-raiz-conversion-interna-en-digifact">Causa Raíz - Conversión Interna en Digifact</h2>
 <p>Digifact v2.0.7 <strong>convierte internamente</strong> el XML NUC que recibe a su propia representación DGI para validación:</p>
 <ol>
 <li><strong>Enviamos</strong>: XML NUC con <code>&lt;Info Name="EnvioContenedor" Value="3"/&gt;</code></li>
@@ -1936,7 +1983,7 @@ The Enumeration constraint failed.
 <li><strong>Digifact valida</strong> contra esquema XSD: <code>dEnvFE</code> solo acepta valores <strong>1 o 2</strong></li>
 <li><strong>Resultado</strong>: Error 3010 porque dEnvFE=3 no es válido</li>
 </ol>
-<h2 id="comparacion-de-formatos">Comparación de Formatos<a class="headerlink" href="#comparacion-de-formatos" title="Permanent link">&para;</a></h2>
+<h2 id="comparacion-de-formatos">Comparación de Formatos</h2>
 <table>
 <thead>
 <tr>
@@ -1973,18 +2020,20 @@ The Enumeration constraint failed.
 </tr>
 </tbody>
 </table>
-<h2 id="la-solucion-iprogen2">La Solución: iProGen=2<a class="headerlink" href="#la-solucion-iprogen2" title="Permanent link">&para;</a></h2>
-<p><strong>ANTES</strong> (Incorrecto):
-<div class="highlight"><pre><span></span><code><span class="x">$dGen[&#39;iProGen&#39;] = 3;  // Sistema electrónico</span>
+<h2 id="la-solucion-iprogen2">La Solución: iProGen=2</h2>
+<p><strong>ANTES</strong> (Incorrecto):</p>
+<div class="codehilite"><pre><span></span><code><span class="x">$dGen[&#39;iProGen&#39;] = 3;  // Sistema electrónico</span>
 <span class="x">// XML NUC: EnvioContenedor=3</span>
 <span class="x">// Digifact convierte: dEnvFE=3 ❌ INVALID (schema solo acepta 1,2)</span>
-</code></pre></div></p>
-<p><strong>AHORA</strong> (Correcto):
-<div class="highlight"><pre><span></span><code><span class="x">$dGen[&#39;iProGen&#39;] = 2;  // Sistema con factura manual</span>
+</code></pre></div>
+
+<p><strong>AHORA</strong> (Correcto):</p>
+<div class="codehilite"><pre><span></span><code><span class="x">$dGen[&#39;iProGen&#39;] = 2;  // Sistema con factura manual</span>
 <span class="x">// XML NUC: EnvioContenedor=2</span>
 <span class="x">// Digifact convierte: dEnvFE=2 ✅ VALID (dentro de rango 1,2)</span>
-</code></pre></div></p>
-<h2 id="por-que-iprogen-2">Por Qué <code>iProGen</code> = 2<a class="headerlink" href="#por-que-iprogen-2" title="Permanent link">&para;</a></h2>
+</code></pre></div>
+
+<h2 id="por-que-iprogen-2">Por Qué <code>iProGen</code> = 2</h2>
 <p>En el contexto de Digifact Panama:</p>
 <ul>
 <li><strong>iProGen = 1</strong>: Sin proceso de generación</li>
@@ -1992,7 +2041,7 @@ The Enumeration constraint failed.
 <li><strong>iProGen = 3</strong>: Sistema electrónico autogenerado</li>
 </ul>
 <p>DocuCenter genera facturas <strong>manualmente</strong> (los usuarios ingresan los datos), no <strong>automáticamente</strong>. Por lo tanto, <code>iProGen=2</code> es el valor correcto.</p>
-<h2 id="archivos-actualizados-commit-43ac00a2">Archivos Actualizados (Commit 43ac00a2)<a class="headerlink" href="#archivos-actualizados-commit-43ac00a2" title="Permanent link">&para;</a></h2>
+<h2 id="archivos-actualizados-commit-43ac00a2">Archivos Actualizados (Commit 43ac00a2)</h2>
 <table>
 <thead>
 <tr>
@@ -2023,23 +2072,24 @@ The Enumeration constraint failed.
 </tr>
 </tbody>
 </table>
-<h2 id="validacion-en-digifact">Validación en Digifact<a class="headerlink" href="#validacion-en-digifact" title="Permanent link">&para;</a></h2>
-<h3 id="valores-iprogen-aceptados">Valores iProGen Aceptados:<a class="headerlink" href="#valores-iprogen-aceptados" title="Permanent link">&para;</a></h3>
+<h2 id="validacion-en-digifact">Validación en Digifact</h2>
+<h3 id="valores-iprogen-aceptados">Valores iProGen Aceptados:</h3>
 <ul>
 <li><strong>1</strong>: Sin proceso (no usado en DocuCenter)</li>
 <li><strong>2</strong>: Sistema con factura manual ✅ CORRECTO</li>
 <li><strong>3</strong>: Sistema electrónico (rechazado por Digifact porque convierte a dEnvFE=3)</li>
 </ul>
-<h3 id="xml-nuc-resultante">XML NUC Resultante:<a class="headerlink" href="#xml-nuc-resultante" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="nt">&lt;AdditionalIssueDocInfo&gt;</span>
+<h3 id="xml-nuc-resultante">XML NUC Resultante:</h3>
+<div class="codehilite"><pre><span></span><code><span class="nt">&lt;AdditionalIssueDocInfo&gt;</span>
 <span class="w">    </span><span class="nt">&lt;Info</span><span class="w"> </span><span class="na">Name=</span><span class="s">&quot;EnvioContenedor&quot;</span><span class="w"> </span><span class="na">Value=</span><span class="s">&quot;2&quot;</span><span class="nt">/&gt;</span>
 <span class="w">    </span><span class="nt">&lt;Info</span><span class="w"> </span><span class="na">Name=</span><span class="s">&quot;ProcesoGeneracion&quot;</span><span class="w"> </span><span class="na">Value=</span><span class="s">&quot;2&quot;</span><span class="nt">/&gt;</span>
 <span class="w">    </span><span class="nt">&lt;Info</span><span class="w"> </span><span class="na">Name=</span><span class="s">&quot;TipoEmision&quot;</span><span class="w"> </span><span class="na">Value=</span><span class="s">&quot;01&quot;</span><span class="nt">/&gt;</span>
 <span class="w">    </span>...
 <span class="nt">&lt;/AdditionalIssueDocInfo&gt;</span>
 </code></pre></div>
-<h2 id="proceso-de-conversion-en-digifact">Proceso de Conversión en Digifact<a class="headerlink" href="#proceso-de-conversion-en-digifact" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code>┌─────────────────────────┐
+
+<h2 id="proceso-de-conversion-en-digifact">Proceso de Conversión en Digifact</h2>
+<div class="codehilite"><pre><span></span><code>┌─────────────────────────┐
 │  DocuCenter            │
 │  iProGen = 2          │
 └────────────┬───────────┘
@@ -2062,9 +2112,10 @@ The Enumeration constraint failed.
     │ Schema Valid        │
     └─────────────────────┘
 </code></pre></div>
-<h2 id="testing">Testing<a class="headerlink" href="#testing" title="Permanent link">&para;</a></h2>
+
+<h2 id="testing">Testing</h2>
 <p>Para verificar que la solución funciona:</p>
-<div class="highlight"><pre><span></span><code><span class="c1"># 1. Hacer pull de los cambios</span>
+<div class="codehilite"><pre><span></span><code><span class="c1"># 1. Hacer pull de los cambios</span>
 git<span class="w"> </span>pull<span class="w"> </span>origin<span class="w"> </span>master
 
 <span class="c1"># 2. Limpiar cachés en producción</span>
@@ -2078,14 +2129,15 @@ php<span class="w"> </span>artisan<span class="w"> </span>cache:clear
 tail<span class="w"> </span>-f<span class="w"> </span>storage/logs/production.log
 <span class="c1"># Buscar: &quot;Digifact - Respuesta HTTP recibida&quot;</span>
 </code></pre></div>
-<h2 id="referencia">Referencia<a class="headerlink" href="#referencia" title="Permanent link">&para;</a></h2>
+
+<h2 id="referencia">Referencia</h2>
 <ul>
 <li><strong>Commit</strong>: 43ac00a2</li>
 <li><strong>Fecha</strong>: 2026-02-02</li>
 <li><strong>Issue</strong>: Error 3010 - dEnvFE schema validation</li>
 <li><strong>Status</strong>: ✅ RESUELTO</li>
 </ul>
-<h2 id="changelog">Changelog<a class="headerlink" href="#changelog" title="Permanent link">&para;</a></h2>
+<h2 id="changelog">Changelog</h2>
 <table>
 <thead>
 <tr>
@@ -2117,7 +2169,7 @@ tail<span class="w"> </span>-f<span class="w"> </span>storage/logs/production.lo
 </tr>
 </tbody>
 </table>
-<h2 id="notas-criticas">Notas Críticas<a class="headerlink" href="#notas-criticas" title="Permanent link">&para;</a></h2>
+<h2 id="notas-criticas">Notas Críticas</h2>
 <ol>
 <li><strong>iProGen y dEnvFE NO son independientes</strong>: Digifact usa iProGen para generar internamente dEnvFE</li>
 <li><strong>Límite de Digifact</strong>: Aunque NUC format permite 1,2,3 para EnvioContenedor, Digifact XSD solo valida 1,2</li>
@@ -2176,7 +2228,7 @@ tail<span class="w"> </span>-f<span class="w"> </span>storage/logs/production.lo
       
       
     
-    <a href="https://github.com/aghabrego/docucenter" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+    <a href="https://github.com/aghabrego/docucenter-public" target="_blank" rel="noopener" title="github.com" class="md-social__link">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
     </a>
   

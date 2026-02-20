@@ -233,7 +233,7 @@
           
   
   
-  APIs
+  API Documentation
 
         </a>
       </li>
@@ -269,7 +269,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../" class="md-tabs__link">
+        <a href="../README.md" class="md-tabs__link">
           
   
   
@@ -298,6 +298,25 @@
         </a>
       </li>
     
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../testing/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Sistema de Testing
+
+      </a>
+    </li>
   
 
       
@@ -404,7 +423,7 @@
   <span class="md-ellipsis">
     
   
-    APIs
+    API Documentation
   
 
     
@@ -420,7 +439,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    APIs
+    API Documentation
   
 
           </label>
@@ -1363,7 +1382,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
+      <a href="../README.md" class="md-nav__link">
         
   
   
@@ -1712,6 +1731,33 @@
           </ul>
         </nav>
       
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sistema de Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -2162,14 +2208,14 @@
   
 
 
-<h1 id="correccion-de-calculo-de-montos-en-maxgym-api">Corrección de Cálculo de Montos en MaxGym API<a class="headerlink" href="#correccion-de-calculo-de-montos-en-maxgym-api" title="Permanent link">&para;</a></h1>
-<h2 id="resumen">📋 Resumen<a class="headerlink" href="#resumen" title="Permanent link">&para;</a></h2>
+<h1 id="correccion-de-calculo-de-montos-en-maxgym-api">Corrección de Cálculo de Montos en MaxGym API</h1>
+<h2 id="resumen">📋 Resumen</h2>
 <p>Se identificó y corrigió un <strong>problema crítico</strong> en el procesamiento de montos del webhook de MaxGym causado por <strong>inconsistencias en la estructura de datos de la API</strong>. La API envía webhooks con dos estructuras diferentes donde <code>lines[].price</code> representa valores distintos.</p>
-<h2 id="problema-identificado">🐛 Problema Identificado<a class="headerlink" href="#problema-identificado" title="Permanent link">&para;</a></h2>
-<h3 id="inconsistencia-en-la-api-de-maxgym">Inconsistencia en la API de MaxGym<a class="headerlink" href="#inconsistencia-en-la-api-de-maxgym" title="Permanent link">&para;</a></h3>
+<h2 id="problema-identificado">🐛 Problema Identificado</h2>
+<h3 id="inconsistencia-en-la-api-de-maxgym">Inconsistencia en la API de MaxGym</h3>
 <p>La API de MaxGym envía webhooks con <strong>dos estructuras inconsistentes</strong>:</p>
-<h4 id="webhook-tipo-1-linesprice-base-sin-impuestos">Webhook Tipo 1: lines[].price = BASE (sin impuestos)<a class="headerlink" href="#webhook-tipo-1-linesprice-base-sin-impuestos" title="Permanent link">&para;</a></h4>
-<p><div class="highlight"><pre><span></span><code><span class="p">{</span>
+<h4 id="webhook-tipo-1-linesprice-base-sin-impuestos">Webhook Tipo 1: lines[].price = BASE (sin impuestos)</h4>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
 <span class="w">    </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="nt">&quot;lines&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span>
 <span class="w">            </span><span class="nt">&quot;price&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;425.00&quot;</span><span class="w">  </span><span class="c1">// ← BASE sin impuestos</span>
@@ -2179,9 +2225,10 @@
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
-<strong>Cálculo</strong>: $425 (base) + $29.75 (tax 7%) = $454.75 ✓</p>
-<h4 id="webhook-tipo-2-linesprice-total-con-impuestos">Webhook Tipo 2: lines[].price = TOTAL (con impuestos)<a class="headerlink" href="#webhook-tipo-2-linesprice-total-con-impuestos" title="Permanent link">&para;</a></h4>
-<p><div class="highlight"><pre><span></span><code><span class="p">{</span>
+
+<p><strong>Cálculo</strong>: $425 (base) + $29.75 (tax 7%) = $454.75 ✓</p>
+<h4 id="webhook-tipo-2-linesprice-total-con-impuestos">Webhook Tipo 2: lines[].price = TOTAL (con impuestos)</h4>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
 <span class="w">    </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="nt">&quot;lines&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span>
 <span class="w">            </span><span class="nt">&quot;price&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;58.85&quot;</span><span class="w">  </span><span class="c1">// ← TOTAL con impuestos</span>
@@ -2191,19 +2238,21 @@
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
-<strong>Cálculo</strong>: $55 (base) + $3.85 (tax 7%) = $58.85 ✓</p>
-<h3 id="codigo-original-incorrecto">Código Original (Incorrecto)<a class="headerlink" href="#codigo-original-incorrecto" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">// Asumía que lines[].price SIEMPRE era el base</span>
+
+<p><strong>Cálculo</strong>: $55 (base) + $3.85 (tax 7%) = $58.85 ✓</p>
+<h3 id="codigo-original-incorrecto">Código Original (Incorrecto)</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">// Asumía que lines[].price SIEMPRE era el base</span>
 <span class="x">$baseAmount = $linePrice; // ✓ Funciona para Tipo 1, ✗ Falla para Tipo 2</span>
 <span class="x">$totalLinePrice = $linePrice + $finalTaxAmount;</span>
 </code></pre></div>
+
 <p><strong>Resultado</strong>: 
 - Tipo 1 (Personal Trainer): ✅ Procesaba correctamente
 - Tipo 2 (PYMES): ❌ Fallaba con "Subtotal mismatch"</p>
-<h2 id="solucion-implementada">✅ Solución Implementada<a class="headerlink" href="#solucion-implementada" title="Permanent link">&para;</a></h2>
-<h3 id="deteccion-automatica-del-tipo-de-precio">Detección Automática del Tipo de Precio<a class="headerlink" href="#deteccion-automatica-del-tipo-de-precio" title="Permanent link">&para;</a></h3>
+<h2 id="solucion-implementada">✅ Solución Implementada</h2>
+<h3 id="deteccion-automatica-del-tipo-de-precio">Detección Automática del Tipo de Precio</h3>
 <p><strong>Clave</strong>: Los campos <code>data.basePrice</code> y <code>data.price</code> <strong>SÍ son consistentes</strong> entre ambos tipos de webhook.</p>
-<div class="highlight"><pre><span></span><code><span class="x">// Comparar lines[].price con los campos confiables del header</span>
+<div class="codehilite"><pre><span></span><code><span class="x">// Comparar lines[].price con los campos confiables del header</span>
 <span class="x">$finalReceivedBasePrice = $receivedExactBasePrice &gt; 0 ? $receivedExactBasePrice : $receivedBasePrice;</span>
 <span class="x">$tolerance = 0.01;</span>
 
@@ -2222,7 +2271,8 @@
 <span class="x">    throw new \Exception(&quot;Cannot determine line price structure&quot;);</span>
 <span class="x">}</span>
 </code></pre></div>
-<h3 id="como-distinguir-entre-los-dos-casos">¿Cómo Distinguir Entre Los Dos Casos?<a class="headerlink" href="#como-distinguir-entre-los-dos-casos" title="Permanent link">&para;</a></h3>
+
+<h3 id="como-distinguir-entre-los-dos-casos">¿Cómo Distinguir Entre Los Dos Casos?</h3>
 <p><strong>Algoritmo de Detección</strong>:</p>
 <ol>
 <li><strong>Comparar <code>lines[].price</code> con <code>data.basePrice</code></strong></li>
@@ -2242,13 +2292,13 @@
 </li>
 <li>Lanzar excepción con estructura desconocida</li>
 </ol>
-<h3 id="ventajas-del-enfoque">Ventajas del Enfoque<a class="headerlink" href="#ventajas-del-enfoque" title="Permanent link">&para;</a></h3>
+<h3 id="ventajas-del-enfoque">Ventajas del Enfoque</h3>
 <p>✅ <strong>Robusto</strong>: Maneja ambos tipos automáticamente<br />
 ✅ <strong>Confiable</strong>: Usa campos consistentes como referencia<br />
 ✅ <strong>Explícito</strong>: Falla claramente con estructuras nuevas<br />
 ✅ <strong>Sin configuración</strong>: Detección automática<br />
 ✅ <strong>Logs detallados</strong>: Para debugging y monitoreo</p>
-<h2 id="comparacion-de-webhooks">📊 Comparación de Webhooks<a class="headerlink" href="#comparacion-de-webhooks" title="Permanent link">&para;</a></h2>
+<h2 id="comparacion-de-webhooks">📊 Comparación de Webhooks</h2>
 <table>
 <thead>
 <tr>
@@ -2285,26 +2335,28 @@
 </tr>
 </tbody>
 </table>
-<h2 id="testing">🧪 Testing<a class="headerlink" href="#testing" title="Permanent link">&para;</a></h2>
-<h3 id="tests-implementados">Tests Implementados<a class="headerlink" href="#tests-implementados" title="Permanent link">&para;</a></h3>
-<p><strong>1. MaxgymAmountDetectionTest.php</strong> - Lógica de detección
-<div class="highlight"><pre><span></span><code>✓<span class="w"> </span>Logica<span class="w"> </span>deteccion<span class="w"> </span>automatica
+<h2 id="testing">🧪 Testing</h2>
+<h3 id="tests-implementados">Tests Implementados</h3>
+<p><strong>1. MaxgymAmountDetectionTest.php</strong> - Lógica de detección</p>
+<div class="codehilite"><pre><span></span><code>✓<span class="w"> </span>Logica<span class="w"> </span>deteccion<span class="w"> </span>automatica
 ✓<span class="w"> </span>Implementacion<span class="w"> </span>completa<span class="w">  </span>
 ✓<span class="w"> </span>Codigo<span class="w"> </span>propuesto<span class="w"> </span>maxgym<span class="w"> </span>service
 ✓<span class="w"> </span>Ventajas<span class="w"> </span>enfoque
 
 OK<span class="w"> </span><span class="o">(</span><span class="m">4</span><span class="w"> </span>tests,<span class="w"> </span><span class="m">10</span><span class="w"> </span>assertions<span class="o">)</span>
-</code></pre></div></p>
-<p><strong>2. MaxgymBothWebhooksTest.php</strong> - Validación de ambos webhooks
-<div class="highlight"><pre><span></span><code>✓<span class="w"> </span>Ambos<span class="w"> </span>webhooks<span class="w"> </span>funcionan
+</code></pre></div>
+
+<p><strong>2. MaxgymBothWebhooksTest.php</strong> - Validación de ambos webhooks</p>
+<div class="codehilite"><pre><span></span><code>✓<span class="w"> </span>Ambos<span class="w"> </span>webhooks<span class="w"> </span>funcionan
 ✓<span class="w"> </span>Resumen<span class="w"> </span>solucion
 
 OK<span class="w"> </span><span class="o">(</span><span class="m">2</span><span class="w"> </span>tests,<span class="w"> </span><span class="m">9</span><span class="w"> </span>assertions<span class="o">)</span>
-</code></pre></div></p>
+</code></pre></div>
+
 <p><strong>3. MaxgymAmountCalculationTest.php</strong> - Análisis matemático original</p>
 <p><strong>4. MaxgymAmountCalculationTest2.php</strong> - Análisis del segundo webhook</p>
-<h3 id="ejecucion-de-tests">Ejecución de Tests<a class="headerlink" href="#ejecucion-de-tests" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># Test individual</span>
+<h3 id="ejecucion-de-tests">Ejecución de Tests</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Test individual</span>
 docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>docucenter_laravel.test<span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span><span class="s2">&quot;vendor/bin/phpunit tests/Unit/Services/MaxgymBothWebhooksTest.php --testdox&quot;</span>
 
@@ -2312,12 +2364,13 @@ docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </spa
 docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>docucenter_laravel.test<span class="w"> </span>bash<span class="w"> </span>-c<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span><span class="s2">&quot;vendor/bin/phpunit tests/Unit/Services/Maxgym* --testdox&quot;</span>
 </code></pre></div>
-<h2 id="implementacion-en-maxgymservicephp">📝 Implementación en MaxgymService.php<a class="headerlink" href="#implementacion-en-maxgymservicephp" title="Permanent link">&para;</a></h2>
-<h3 id="ubicacion">Ubicación<a class="headerlink" href="#ubicacion" title="Permanent link">&para;</a></h3>
+
+<h2 id="implementacion-en-maxgymservicephp">📝 Implementación en MaxgymService.php</h2>
+<h3 id="ubicacion">Ubicación</h3>
 <p><strong>Archivo</strong>: <code>app/Services/MaxgymService.php</code><br />
 <strong>Líneas</strong>: ~532-560 (detección automática)</p>
-<h3 id="codigo-implementado">Código Implementado<a class="headerlink" href="#codigo-implementado" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">foreach ($lines as $index =&gt; $line) {</span>
+<h3 id="codigo-implementado">Código Implementado</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">foreach ($lines as $index =&gt; $line) {</span>
 <span class="x">    $linePrice = $this-&gt;filterVar(array_get($line, &#39;price&#39;, 0), FILTER_VALIDATE_FLOAT);</span>
 <span class="x">    // ... obtener tax data ...</span>
 
@@ -2351,9 +2404,10 @@ docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </spa
 <span class="x">    // ... validaciones ...</span>
 <span class="x">}</span>
 </code></pre></div>
-<h3 id="logs-de-debugging">Logs de Debugging<a class="headerlink" href="#logs-de-debugging" title="Permanent link">&para;</a></h3>
+
+<h3 id="logs-de-debugging">Logs de Debugging</h3>
 <p>El sistema genera logs automáticos para cada transacción:</p>
-<div class="highlight"><pre><span></span><code><span class="x">// Para Webhook Tipo 1</span>
+<div class="codehilite"><pre><span></span><code><span class="x">// Para Webhook Tipo 1</span>
 <span class="x">Log::debug(&#39;MaxGym: linePrice detectado como BASE&#39;, [</span>
 <span class="x">    &#39;line&#39; =&gt; 0,</span>
 <span class="x">    &#39;linePrice&#39; =&gt; 425.00,</span>
@@ -2371,36 +2425,39 @@ docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </spa
 <span class="x">    &#39;baseCalculated&#39; =&gt; 55.00</span>
 <span class="x">]);</span>
 </code></pre></div>
-<h2 id="casos-de-uso">🎯 Casos de Uso<a class="headerlink" href="#casos-de-uso" title="Permanent link">&para;</a></h2>
-<h3 id="ejemplo-1-personal-trainer-425-7-itbms">Ejemplo 1: Personal Trainer ($425 + 7% ITBMS)<a class="headerlink" href="#ejemplo-1-personal-trainer-425-7-itbms" title="Permanent link">&para;</a></h3>
-<p><strong>Input</strong>:
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
+
+<h2 id="casos-de-uso">🎯 Casos de Uso</h2>
+<h3 id="ejemplo-1-personal-trainer-425-7-itbms">Ejemplo 1: Personal Trainer ($425 + 7% ITBMS)</h3>
+<p><strong>Input</strong>:</p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
 <span class="w">    </span><span class="nt">&quot;lines&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="nt">&quot;price&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;425.00&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;tax&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;amountTax&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;29.75&quot;</span><span class="p">}}],</span>
 <span class="w">    </span><span class="nt">&quot;basePrice&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;425.00&quot;</span><span class="p">,</span>
 <span class="w">    </span><span class="nt">&quot;price&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;454.75&quot;</span>
 <span class="p">}</span>
-</code></pre></div></p>
+</code></pre></div>
+
 <p><strong>Procesamiento</strong>:
 1. Comparar: <code>425.00 ≈ 425.00</code> (basePrice) ✓
 2. Detectar: Tipo BASE
 3. Calcular: base=425.00, total=425.00+29.75=454.75
 4. Validar: ✓ Todos los montos coinciden</p>
-<h3 id="ejemplo-2-pymes-55-7-itbms">Ejemplo 2: PYMES ($55 + 7% ITBMS)<a class="headerlink" href="#ejemplo-2-pymes-55-7-itbms" title="Permanent link">&para;</a></h3>
-<p><strong>Input</strong>:
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<h3 id="ejemplo-2-pymes-55-7-itbms">Ejemplo 2: PYMES ($55 + 7% ITBMS)</h3>
+<p><strong>Input</strong>:</p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
 <span class="w">    </span><span class="nt">&quot;lines&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="nt">&quot;price&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;58.85&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;tax&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;amountTax&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;3.85&quot;</span><span class="p">}}],</span>
 <span class="w">    </span><span class="nt">&quot;basePrice&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;55.00&quot;</span><span class="p">,</span>
 <span class="w">    </span><span class="nt">&quot;price&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;58.85&quot;</span>
 <span class="p">}</span>
-</code></pre></div></p>
+</code></pre></div>
+
 <p><strong>Procesamiento</strong>:
 1. Comparar: <code>58.85 ≉ 55.00</code> (basePrice) ✗
 2. Comparar: <code>58.85 ≈ 58.85</code> (price) ✓
 3. Detectar: Tipo TOTAL
 4. Calcular: base=58.85-3.85=55.00, total=58.85
 5. Validar: ✓ Todos los montos coinciden</p>
-<h2 id="estructura-de-datos-maxgym">🔍 Estructura de Datos MaxGym<a class="headerlink" href="#estructura-de-datos-maxgym" title="Permanent link">&para;</a></h2>
-<h3 id="campos-clave">Campos Clave<a class="headerlink" href="#campos-clave" title="Permanent link">&para;</a></h3>
+<h2 id="estructura-de-datos-maxgym">🔍 Estructura de Datos MaxGym</h2>
+<h3 id="campos-clave">Campos Clave</h3>
 <table>
 <thead>
 <tr>
@@ -2437,7 +2494,7 @@ docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </spa
 </tr>
 </tbody>
 </table>
-<h3 id="recomendaciones">Recomendaciones<a class="headerlink" href="#recomendaciones" title="Permanent link">&para;</a></h3>
+<h3 id="recomendaciones">Recomendaciones</h3>
 <ol>
 <li><strong>Siempre usar</strong> <code>data.basePrice</code> y <code>data.price</code> como fuente de verdad</li>
 <li><strong>No asumir</strong> que <code>lines[].price</code> tiene significado fijo</li>
@@ -2445,26 +2502,27 @@ docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </spa
 <li><strong>Validar matemáticamente</strong> que los cálculos sean correctos</li>
 <li><strong>Logear el tipo detectado</strong> para auditoría y debugging</li>
 </ol>
-<h2 id="commit">📝 Commit<a class="headerlink" href="#commit" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code>fix: implementar deteccion automatica de tipo de precio en webhook MaxGym
+<h2 id="commit">📝 Commit</h2>
+<div class="codehilite"><pre><span></span><code><span class="n">fix</span><span class="o">:</span><span class="w"> </span><span class="n">implementar</span><span class="w"> </span><span class="n">deteccion</span><span class="w"> </span><span class="n">automatica</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">tipo</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">precio</span><span class="w"> </span><span class="n">en</span><span class="w"> </span><span class="n">webhook</span><span class="w"> </span><span class="n">MaxGym</span>
 
-La API de MaxGym envia webhooks con dos estructuras inconsistentes:
-- Tipo 1: lines[].price representa el base sin impuestos
-- Tipo 2: lines[].price representa el total con impuestos
+<span class="n">La</span><span class="w"> </span><span class="n">API</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">MaxGym</span><span class="w"> </span><span class="n">envia</span><span class="w"> </span><span class="n">webhooks</span><span class="w"> </span><span class="n">con</span><span class="w"> </span><span class="n">dos</span><span class="w"> </span><span class="n">estructuras</span><span class="w"> </span><span class="n">inconsistentes</span><span class="o">:</span>
+<span class="o">-</span><span class="w"> </span><span class="n">Tipo</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="w"> </span><span class="n">lines</span><span class="o">[].</span><span class="n">price</span><span class="w"> </span><span class="n">representa</span><span class="w"> </span><span class="n">el</span><span class="w"> </span><span class="n">base</span><span class="w"> </span><span class="n">sin</span><span class="w"> </span><span class="n">impuestos</span>
+<span class="o">-</span><span class="w"> </span><span class="n">Tipo</span><span class="w"> </span><span class="mi">2</span><span class="o">:</span><span class="w"> </span><span class="n">lines</span><span class="o">[].</span><span class="n">price</span><span class="w"> </span><span class="n">representa</span><span class="w"> </span><span class="n">el</span><span class="w"> </span><span class="n">total</span><span class="w"> </span><span class="n">con</span><span class="w"> </span><span class="n">impuestos</span>
 
-Solucion:
-- Detectar automaticamente comparando con data.basePrice y data.price
-- Estos campos SI son consistentes entre ambos tipos
-- Logs detallados para debugging
-- Falla explicitamente con estructuras desconocidas
+<span class="n">Solucion</span><span class="o">:</span>
+<span class="o">-</span><span class="w"> </span><span class="n">Detectar</span><span class="w"> </span><span class="n">automaticamente</span><span class="w"> </span><span class="n">comparando</span><span class="w"> </span><span class="n">con</span><span class="w"> </span><span class="n">data</span><span class="o">.</span><span class="na">basePrice</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="n">data</span><span class="o">.</span><span class="na">price</span>
+<span class="o">-</span><span class="w"> </span><span class="n">Estos</span><span class="w"> </span><span class="n">campos</span><span class="w"> </span><span class="n">SI</span><span class="w"> </span><span class="n">son</span><span class="w"> </span><span class="n">consistentes</span><span class="w"> </span><span class="n">entre</span><span class="w"> </span><span class="n">ambos</span><span class="w"> </span><span class="n">tipos</span>
+<span class="o">-</span><span class="w"> </span><span class="n">Logs</span><span class="w"> </span><span class="n">detallados</span><span class="w"> </span><span class="n">para</span><span class="w"> </span><span class="n">debugging</span>
+<span class="o">-</span><span class="w"> </span><span class="n">Falla</span><span class="w"> </span><span class="n">explicitamente</span><span class="w"> </span><span class="n">con</span><span class="w"> </span><span class="n">estructuras</span><span class="w"> </span><span class="n">desconocidas</span>
 
-Tests:
-- MaxgymAmountDetectionTest: logica de deteccion
-- MaxgymBothWebhooksTest: validacion de ambos webhooks
+<span class="n">Tests</span><span class="o">:</span>
+<span class="o">-</span><span class="w"> </span><span class="n">MaxgymAmountDetectionTest</span><span class="o">:</span><span class="w"> </span><span class="n">logica</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">deteccion</span>
+<span class="o">-</span><span class="w"> </span><span class="n">MaxgymBothWebhooksTest</span><span class="o">:</span><span class="w"> </span><span class="n">validacion</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">ambos</span><span class="w"> </span><span class="n">webhooks</span>
 
-Verificado con webhooks reales de Personal Trainer y PYMES.
+<span class="n">Verificado</span><span class="w"> </span><span class="n">con</span><span class="w"> </span><span class="n">webhooks</span><span class="w"> </span><span class="n">reales</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">Personal</span><span class="w"> </span><span class="n">Trainer</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="n">PYMES</span><span class="o">.</span>
 </code></pre></div>
-<h2 id="estado">🎯 Estado<a class="headerlink" href="#estado" title="Permanent link">&para;</a></h2>
+
+<h2 id="estado">🎯 Estado</h2>
 <ul>
 <li>✅ <strong>Código implementado</strong> en MaxgymService.php</li>
 <li>✅ <strong>Tests unitarios creados</strong> y pasando</li>
@@ -2475,7 +2533,7 @@ Verificado con webhooks reales de Personal Trainer y PYMES.
 <li>⏳ <strong>Pendiente</strong>: Monitorear logs en producción</li>
 <li>⏳ <strong>Pendiente</strong>: Desplegar a producción</li>
 </ul>
-<h2 id="referencias">📚 Referencias<a class="headerlink" href="#referencias" title="Permanent link">&para;</a></h2>
+<h2 id="referencias">📚 Referencias</h2>
 <ul>
 <li><strong>Servicio</strong>: <code>app/Services/MaxgymService.php</code> (líneas 532-560)</li>
 <li><strong>Job</strong>: <code>app/Jobs/CreateSaleMaxgymJob.php</code></li>
@@ -2492,7 +2550,7 @@ Verificado con webhooks reales de Personal Trainer y PYMES.
 <p><strong>Fecha</strong>: 2026-02-06/07<br />
 <strong>Issue</strong>: Inconsistencia en estructura de webhooks MaxGym<br />
 <strong>Status</strong>: ✅ Resuelto con detección automática</p>
-<h3 id="campos-clave_1">Campos Clave<a class="headerlink" href="#campos-clave_1" title="Permanent link">&para;</a></h3>
+<h3 id="campos-clave_1">Campos Clave</h3>
 <table>
 <thead>
 <tr>
@@ -2544,30 +2602,32 @@ Verificado con webhooks reales de Personal Trainer y PYMES.
 </tr>
 </tbody>
 </table>
-<h3 id="logica-correcta">Lógica Correcta<a class="headerlink" href="#logica-correcta" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>1. linePrice = precio base sin impuestos
-2. taxAmount = impuesto calculado  
-3. totalLine = linePrice + taxAmount
-4. basePrice = suma de todos los linePrice
-5. totalPrice = suma de todos los totalLine
+<h3 id="logica-correcta">Lógica Correcta</h3>
+<div class="codehilite"><pre><span></span><code><span class="mf">1.</span><span class="w"> </span><span class="n">linePrice</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">precio</span><span class="w"> </span><span class="n">base</span><span class="w"> </span><span class="nb">sin</span><span class="w"> </span><span class="n">impuestos</span>
+<span class="mf">2.</span><span class="w"> </span><span class="n">taxAmount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">impuesto</span><span class="w"> </span><span class="n">calculado</span><span class="w">  </span>
+<span class="mf">3.</span><span class="w"> </span><span class="kr">to</span><span class="n">talLine</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">linePrice</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">taxAmount</span>
+<span class="mf">4.</span><span class="w"> </span><span class="n">basePrice</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">suma</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="kr">to</span><span class="n">dos</span><span class="w"> </span><span class="n">los</span><span class="w"> </span><span class="n">linePrice</span>
+<span class="mf">5.</span><span class="w"> </span><span class="kr">to</span><span class="n">talPrice</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">suma</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="kr">to</span><span class="n">dos</span><span class="w"> </span><span class="n">los</span><span class="w"> </span><span class="kr">to</span><span class="n">talLine</span>
 </code></pre></div>
-<h2 id="commit_1">📝 Commit<a class="headerlink" href="#commit_1" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code>fix: corregir calculo de montos en webhook MaxGym
 
-El codigo asumia incorrectamente que lines[].price incluia impuestos,
-cuando en realidad representa el precio base sin impuestos.
+<h2 id="commit_1">📝 Commit</h2>
+<div class="codehilite"><pre><span></span><code><span class="n">fix</span><span class="o">:</span><span class="w"> </span><span class="n">corregir</span><span class="w"> </span><span class="n">calculo</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">montos</span><span class="w"> </span><span class="n">en</span><span class="w"> </span><span class="n">webhook</span><span class="w"> </span><span class="n">MaxGym</span>
 
-Cambios:
-- Eliminar resta de impuesto del precio de linea
-- Calcular total de linea sumando base mas impuesto
-- Actualizar suma de totales para usar total de linea calculado
+<span class="n">El</span><span class="w"> </span><span class="n">codigo</span><span class="w"> </span><span class="n">asumia</span><span class="w"> </span><span class="n">incorrectamente</span><span class="w"> </span><span class="n">que</span><span class="w"> </span><span class="n">lines</span><span class="o">[].</span><span class="n">price</span><span class="w"> </span><span class="n">incluia</span><span class="w"> </span><span class="n">impuestos</span><span class="o">,</span>
+<span class="n">cuando</span><span class="w"> </span><span class="n">en</span><span class="w"> </span><span class="n">realidad</span><span class="w"> </span><span class="n">representa</span><span class="w"> </span><span class="n">el</span><span class="w"> </span><span class="n">precio</span><span class="w"> </span><span class="n">base</span><span class="w"> </span><span class="n">sin</span><span class="w"> </span><span class="n">impuestos</span><span class="o">.</span>
 
-Esto corrige el error &quot;Subtotal mismatch&quot; que causaba que todas las
-transacciones de MaxGym fallaran.
+<span class="n">Cambios</span><span class="o">:</span>
+<span class="o">-</span><span class="w"> </span><span class="n">Eliminar</span><span class="w"> </span><span class="n">resta</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">impuesto</span><span class="w"> </span><span class="n">del</span><span class="w"> </span><span class="n">precio</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">linea</span>
+<span class="o">-</span><span class="w"> </span><span class="n">Calcular</span><span class="w"> </span><span class="n">total</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">linea</span><span class="w"> </span><span class="n">sumando</span><span class="w"> </span><span class="n">base</span><span class="w"> </span><span class="n">mas</span><span class="w"> </span><span class="n">impuesto</span>
+<span class="o">-</span><span class="w"> </span><span class="n">Actualizar</span><span class="w"> </span><span class="n">suma</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">totales</span><span class="w"> </span><span class="n">para</span><span class="w"> </span><span class="n">usar</span><span class="w"> </span><span class="n">total</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">linea</span><span class="w"> </span><span class="n">calculado</span>
 
-Verificado con webhook real y tests unitarios.
+<span class="n">Esto</span><span class="w"> </span><span class="n">corrige</span><span class="w"> </span><span class="n">el</span><span class="w"> </span><span class="n">error</span><span class="w"> </span><span class="s2">&quot;Subtotal mismatch&quot;</span><span class="w"> </span><span class="n">que</span><span class="w"> </span><span class="n">causaba</span><span class="w"> </span><span class="n">que</span><span class="w"> </span><span class="n">todas</span><span class="w"> </span><span class="n">las</span>
+<span class="n">transacciones</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">MaxGym</span><span class="w"> </span><span class="n">fallaran</span><span class="o">.</span>
+
+<span class="n">Verificado</span><span class="w"> </span><span class="n">con</span><span class="w"> </span><span class="n">webhook</span><span class="w"> </span><span class="n">real</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="n">tests</span><span class="w"> </span><span class="n">unitarios</span><span class="o">.</span>
 </code></pre></div>
-<h2 id="proximos-pasos">🎯 Próximos Pasos<a class="headerlink" href="#proximos-pasos" title="Permanent link">&para;</a></h2>
+
+<h2 id="proximos-pasos">🎯 Próximos Pasos</h2>
 <ol>
 <li>✅ <strong>Corrección aplicada</strong> en <code>MaxgymService.php</code></li>
 <li>✅ <strong>Tests unitarios creados</strong> para validar el cálculo</li>
@@ -2575,7 +2635,7 @@ Verificado con webhook real y tests unitarios.
 <li>⏳ <strong>Pendiente</strong>: Verificar en staging con webhooks reales de MaxGym</li>
 <li>⏳ <strong>Pendiente</strong>: Desplegar a producción</li>
 </ol>
-<h2 id="referencias_1">📚 Referencias<a class="headerlink" href="#referencias_1" title="Permanent link">&para;</a></h2>
+<h2 id="referencias_1">📚 Referencias</h2>
 <ul>
 <li><strong>Servicio</strong>: <code>app/Services/MaxgymService.php</code></li>
 <li><strong>Job</strong>: <code>app/Jobs/CreateSaleMaxgymJob.php</code></li>
@@ -2640,7 +2700,7 @@ Verificado con webhook real y tests unitarios.
       
       
     
-    <a href="https://github.com/aghabrego/docucenter" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+    <a href="https://github.com/aghabrego/docucenter-public" target="_blank" rel="noopener" title="github.com" class="md-social__link">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
     </a>
   

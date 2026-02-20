@@ -233,7 +233,7 @@
           
   
   
-  APIs
+  API Documentation
 
         </a>
       </li>
@@ -269,7 +269,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../" class="md-tabs__link">
+        <a href="../README.md" class="md-tabs__link">
           
   
   
@@ -298,6 +298,25 @@
         </a>
       </li>
     
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../testing/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Sistema de Testing
+
+      </a>
+    </li>
   
 
       
@@ -404,7 +423,7 @@
   <span class="md-ellipsis">
     
   
-    APIs
+    API Documentation
   
 
     
@@ -420,7 +439,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    APIs
+    API Documentation
   
 
           </label>
@@ -1363,7 +1382,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
+      <a href="../README.md" class="md-nav__link">
         
   
   
@@ -1712,6 +1731,33 @@
           </ul>
         </nav>
       
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sistema de Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -2090,65 +2136,67 @@
   
 
 
-<h1 id="analisis-completo-implementacion-zoho-self-client-en-docucenter">📊 <strong>ANÁLISIS COMPLETO: Implementación Zoho Self Client en DocuCenter</strong><a class="headerlink" href="#analisis-completo-implementacion-zoho-self-client-en-docucenter" title="Permanent link">&para;</a></h1>
-<h2 id="resumen-ejecutivo"><strong>🎯 Resumen Ejecutivo</strong><a class="headerlink" href="#resumen-ejecutivo" title="Permanent link">&para;</a></h2>
+<h1 id="analisis-completo-implementacion-zoho-self-client-en-docucenter">📊 <strong>ANÁLISIS COMPLETO: Implementación Zoho Self Client en DocuCenter</strong></h1>
+<h2 id="resumen-ejecutivo"><strong>🎯 Resumen Ejecutivo</strong></h2>
 <p><strong>Objetivo</strong>: Implementar integración completa con Zoho Books usando patrón Self Client OAuth 2.0, aprovechando la arquitectura de conexiones existente en DocuCenter.</p>
 <p><strong>Estado Actual</strong>: DocuCenter ya tiene una API funcional para Zoho (<code>/api/acicloud/create_sale_order_zoho</code>) pero <strong>sin autenticación Self Client</strong>. La implementación propuesta agrega capacidades OAuth completas.</p>
 <hr />
-<h2 id="arquitectura-actual-vs-propuesta"><strong>🏗️ Arquitectura Actual vs Propuesta</strong><a class="headerlink" href="#arquitectura-actual-vs-propuesta" title="Permanent link">&para;</a></h2>
-<h3 id="existente-funcional"><strong>✅ EXISTENTE (Funcional)</strong><a class="headerlink" href="#existente-funcional" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>📍 Endpoint: POST /api/acicloud/create_sale_order_zoho
+<h2 id="arquitectura-actual-vs-propuesta"><strong>🏗️ Arquitectura Actual vs Propuesta</strong></h2>
+<h3 id="existente-funcional"><strong>✅ EXISTENTE (Funcional)</strong></h3>
+<div class="codehilite"><pre><span></span><code>📍 Endpoint: POST /api/acicloud/create_sale_order_zoho
 📁 Request: app/Http/Requests/CreateSaleOrderZohoRequest.php
 ⚙️ Service: app/Services/ACIcloudService.php::createSaleOrderZoho()
 🗄️ Modelos: SalesOrderHeaderImp, SalesOrderDetailImp
 </code></pre></div>
-<h3 id="propuesta-self-client"><strong>🆕 PROPUESTA (Self Client)</strong><a class="headerlink" href="#propuesta-self-client" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>📁 Servicio: app/Services/ZohoSelfClientService.php
-🔐 Auth: app/Http/Controllers/ZohoAuthController.php
-⚙️ Config: config/zoho.php
-🎨 UI: Extensión de Connection/Create.php
-🔗 Rutas: /zoho/auth, /zoho/callback, /zoho/test
+
+<h3 id="propuesta-self-client"><strong>🆕 PROPUESTA (Self Client)</strong></h3>
+<div class="codehilite"><pre><span></span><code><span class="err">📁</span><span class="w"> </span><span class="nx">Servicio</span><span class="p">:</span><span class="w"> </span><span class="nx">app</span><span class="o">/</span><span class="nx">Services</span><span class="o">/</span><span class="nx">ZohoSelfClientService</span><span class="p">.</span><span class="nx">php</span>
+<span class="err">🔐</span><span class="w"> </span><span class="nx">Auth</span><span class="p">:</span><span class="w"> </span><span class="nx">app</span><span class="o">/</span><span class="nx">Http</span><span class="o">/</span><span class="nx">Controllers</span><span class="o">/</span><span class="nx">ZohoAuthController</span><span class="p">.</span><span class="nx">php</span>
+<span class="err">⚙️</span><span class="w"> </span><span class="nx">Config</span><span class="p">:</span><span class="w"> </span><span class="nx">config</span><span class="o">/</span><span class="nx">zoho</span><span class="p">.</span><span class="nx">php</span>
+<span class="err">🎨</span><span class="w"> </span><span class="nx">UI</span><span class="p">:</span><span class="w"> </span><span class="nx">Extensión</span><span class="w"> </span><span class="nx">de</span><span class="w"> </span><span class="nx">Connection</span><span class="o">/</span><span class="nx">Create</span><span class="p">.</span><span class="nx">php</span>
+<span class="err">🔗</span><span class="w"> </span><span class="nx">Rutas</span><span class="p">:</span><span class="w"> </span><span class="o">/</span><span class="nx">zoho</span><span class="o">/</span><span class="nx">auth</span><span class="p">,</span><span class="w"> </span><span class="o">/</span><span class="nx">zoho</span><span class="o">/</span><span class="nx">callback</span><span class="p">,</span><span class="w"> </span><span class="o">/</span><span class="nx">zoho</span><span class="o">/</span><span class="nx">test</span>
 </code></pre></div>
+
 <hr />
-<h2 id="plan-de-implementacion-detallado"><strong>📋 Plan de Implementación Detallado</strong><a class="headerlink" href="#plan-de-implementacion-detallado" title="Permanent link">&para;</a></h2>
-<h3 id="fase-1-configuracion-base-2-3-horas"><strong>Fase 1: Configuración Base (2-3 horas)</strong><a class="headerlink" href="#fase-1-configuracion-base-2-3-horas" title="Permanent link">&para;</a></h3>
+<h2 id="plan-de-implementacion-detallado"><strong>📋 Plan de Implementación Detallado</strong></h2>
+<h3 id="fase-1-configuracion-base-2-3-horas"><strong>Fase 1: Configuración Base (2-3 horas)</strong></h3>
 <ol>
 <li>
 <p><strong>Crear configuración Zoho</strong>
-   <div class="highlight"><pre><span></span><code><span class="c1"># Crear archivo</span>
-cp<span class="w"> </span>docs/testing/zoho-config-example.php<span class="w"> </span>config/zoho.php
-</code></pre></div></p>
+   <code>bash
+   # Crear archivo
+   cp docs/testing/zoho-config-example.php config/zoho.php</code></p>
 </li>
 <li>
 <p><strong>Extender sistema de conexiones</strong>
-   <div class="highlight"><pre><span></span><code><span class="x">// En app/Http/Livewire/Admin/Connection/Create.php</span>
-<span class="x">&#39;application&#39; =&gt; &#39;...zoho-self-client&#39;,</span>
-<span class="x">&#39;settings.client_id&#39; =&gt; &#39;required_if:application,zoho-self-client&#39;,</span>
-<span class="x">&#39;settings.client_secret&#39; =&gt; &#39;required_if:application,zoho-self-client&#39;,</span>
-<span class="x">// ... más validaciones</span>
-</code></pre></div></p>
+   <code>php
+   // En app/Http/Livewire/Admin/Connection/Create.php
+   'application' =&gt; '...zoho-self-client',
+   'settings.client_id' =&gt; 'required_if:application,zoho-self-client',
+   'settings.client_secret' =&gt; 'required_if:application,zoho-self-client',
+   // ... más validaciones</code></p>
 </li>
 <li>
 <p><strong>Variables de entorno</strong>
-   <div class="highlight"><pre><span></span><code># Opcional - se puede configurar por conexión
-ZOHO_CLIENT_ID=tu_client_id
-ZOHO_CLIENT_SECRET=tu_client_secret
-ZOHO_REDIRECT_URI=${APP_URL}/zoho/callback
-</code></pre></div></p>
+   <code>env
+   # Opcional - se puede configurar por conexión
+   ZOHO_CLIENT_ID=tu_client_id
+   ZOHO_CLIENT_SECRET=tu_client_secret
+   ZOHO_REDIRECT_URI=${APP_URL}/zoho/callback</code></p>
 </li>
 </ol>
-<h3 id="fase-2-servicio-principal-4-5-horas"><strong>Fase 2: Servicio Principal (4-5 horas)</strong><a class="headerlink" href="#fase-2-servicio-principal-4-5-horas" title="Permanent link">&para;</a></h3>
+<h3 id="fase-2-servicio-principal-4-5-horas"><strong>Fase 2: Servicio Principal (4-5 horas)</strong></h3>
 <ol>
 <li>
 <p><strong>Crear ZohoSelfClientService</strong>
-   <div class="highlight"><pre><span></span><code>cp<span class="w"> </span>docs/testing/ZohoSelfClientService-example.php<span class="w"> </span>app/Services/ZohoSelfClientService.php
-</code></pre></div></p>
+   <code>bash
+   cp docs/testing/ZohoSelfClientService-example.php app/Services/ZohoSelfClientService.php</code></p>
 </li>
 <li>
 <p><strong>Registrar en ServiceProvider</strong>
-   <div class="highlight"><pre><span></span><code><span class="x">// En app/Providers/AppServiceProvider.php</span>
-<span class="x">$this-&gt;app-&gt;singleton(ZohoSelfClientService::class);</span>
-</code></pre></div></p>
+   <code>php
+   // En app/Providers/AppServiceProvider.php
+   $this-&gt;app-&gt;singleton(ZohoSelfClientService::class);</code></p>
 </li>
 <li>
 <p><strong>Funcionalidades incluidas</strong>:</p>
@@ -2159,13 +2207,13 @@ ZOHO_REDIRECT_URI=${APP_URL}/zoho/callback
 <li>✅ Llamadas API autenticadas</li>
 <li>✅ Soporte multi-región (com, eu, in, au, jp)</li>
 </ol>
-<h3 id="fase-3-controlador-oauth-3-4-horas"><strong>Fase 3: Controlador OAuth (3-4 horas)</strong><a class="headerlink" href="#fase-3-controlador-oauth-3-4-horas" title="Permanent link">&para;</a></h3>
+<h3 id="fase-3-controlador-oauth-3-4-horas"><strong>Fase 3: Controlador OAuth (3-4 horas)</strong></h3>
 <ol>
 <li>
 <p><strong>Crear ZohoAuthController</strong>
-   <div class="highlight"><pre><span></span><code>cp<span class="w"> </span>docs/testing/ZohoAuthController-example.php<span class="w"> </span>app/Http/Controllers/ZohoAuthController.php
-<span class="c1"># Nota: Renombrar método authorize() para evitar conflicto</span>
-</code></pre></div></p>
+   <code>bash
+   cp docs/testing/ZohoAuthController-example.php app/Http/Controllers/ZohoAuthController.php
+   # Nota: Renombrar método authorize() para evitar conflicto</code></p>
 </li>
 <li>
 <p><strong>Endpoints incluidos</strong>:</p>
@@ -2179,45 +2227,45 @@ ZOHO_REDIRECT_URI=${APP_URL}/zoho/callback
 </li>
 <li>
 <p><strong>Agregar rutas</strong>
-   <div class="highlight"><pre><span></span><code><span class="x">// En routes/web.php</span>
-<span class="x">Route::prefix(&#39;zoho&#39;)-&gt;middleware([&#39;auth&#39;])-&gt;group(function () {</span>
-<span class="x">    Route::get(&#39;/auth/{connection}&#39;, [ZohoAuthController::class, &#39;startAuth&#39;]);</span>
-<span class="x">    Route::get(&#39;/callback&#39;, [ZohoAuthController::class, &#39;callback&#39;]);</span>
-<span class="x">    Route::post(&#39;/revoke/{connection}&#39;, [ZohoAuthController::class, &#39;revoke&#39;]);</span>
-<span class="x">    Route::get(&#39;/test/{connection}&#39;, [ZohoAuthController::class, &#39;test&#39;]);</span>
-<span class="x">    Route::get(&#39;/info/{connection}&#39;, [ZohoAuthController::class, &#39;info&#39;]);</span>
-<span class="x">});</span>
-</code></pre></div></p>
+   <code>php
+   // En routes/web.php
+   Route::prefix('zoho')-&gt;middleware(['auth'])-&gt;group(function () {
+       Route::get('/auth/{connection}', [ZohoAuthController::class, 'startAuth']);
+       Route::get('/callback', [ZohoAuthController::class, 'callback']);
+       Route::post('/revoke/{connection}', [ZohoAuthController::class, 'revoke']);
+       Route::get('/test/{connection}', [ZohoAuthController::class, 'test']);
+       Route::get('/info/{connection}', [ZohoAuthController::class, 'info']);
+   });</code></p>
 </li>
 </ol>
-<h3 id="fase-4-ui-y-ux-2-3-horas"><strong>Fase 4: UI y UX (2-3 horas)</strong><a class="headerlink" href="#fase-4-ui-y-ux-2-3-horas" title="Permanent link">&para;</a></h3>
+<h3 id="fase-4-ui-y-ux-2-3-horas"><strong>Fase 4: UI y UX (2-3 horas)</strong></h3>
 <ol>
 <li>
 <p><strong>Extender formulario de conexiones</strong>
-   <div class="highlight"><pre><span></span><code>{<del class="critic"> En resources/views/livewire/admin/connection/create.blade.php </del>}
-@if($application === &#39;zoho-self-client&#39;)
-    {<del class="critic"> Campos específicos para Zoho Self Client </del>}
-    &lt;div class=&quot;zoho-fields&quot;&gt;
-        &lt;!-- Client ID, Client Secret, Domain, etc. --&gt;
-    &lt;/div&gt;
-@endif
-</code></pre></div></p>
+   <code>blade
+   {{-- En resources/views/livewire/admin/connection/create.blade.php --}}
+   @if($application === 'zoho-self-client')
+       {{-- Campos específicos para Zoho Self Client --}}
+       &lt;div class="zoho-fields"&gt;
+           &lt;!-- Client ID, Client Secret, Domain, etc. --&gt;
+       &lt;/div&gt;
+   @endif</code></p>
 </li>
 <li>
 <p><strong>Agregar botones de OAuth</strong>
-   <div class="highlight"><pre><span></span><code>{<del class="critic"> En vista de conexión </del>}
-&lt;a href=&quot;/zoho/auth/{{ $connection-&gt;id }}&quot; class=&quot;btn btn-primary&quot;&gt;
-    🔐 Autorizar Zoho
-&lt;/a&gt;
-</code></pre></div></p>
+   <code>blade
+   {{-- En vista de conexión --}}
+   &lt;a href="/zoho/auth/{{ $connection-&gt;id }}" class="btn btn-primary"&gt;
+       🔐 Autorizar Zoho
+   &lt;/a&gt;</code></p>
 </li>
 </ol>
-<h3 id="fase-5-testing-y-validacion-2-3-horas"><strong>Fase 5: Testing y Validación (2-3 horas)</strong><a class="headerlink" href="#fase-5-testing-y-validacion-2-3-horas" title="Permanent link">&para;</a></h3>
+<h3 id="fase-5-testing-y-validacion-2-3-horas"><strong>Fase 5: Testing y Validación (2-3 horas)</strong></h3>
 <ol>
 <li>
 <p><strong>Ejecutar script de testing</strong>
-   <div class="highlight"><pre><span></span><code>./docs/testing/test-zoho-self-client.sh
-</code></pre></div></p>
+   <code>bash
+   ./docs/testing/test-zoho-self-client.sh</code></p>
 </li>
 <li>
 <p><strong>Testing manual</strong>:</p>
@@ -2229,10 +2277,10 @@ ZOHO_REDIRECT_URI=${APP_URL}/zoho/callback
 <li>✅ Verificar auto-refresh de tokens</li>
 </ol>
 <hr />
-<h2 id="configuracion-en-zoho-developer-console"><strong>🔐 Configuración en Zoho Developer Console</strong><a class="headerlink" href="#configuracion-en-zoho-developer-console" title="Permanent link">&para;</a></h2>
-<h3 id="pasos-requeridos"><strong>Pasos Requeridos</strong>:<a class="headerlink" href="#pasos-requeridos" title="Permanent link">&para;</a></h3>
+<h2 id="configuracion-en-zoho-developer-console"><strong>🔐 Configuración en Zoho Developer Console</strong></h2>
+<h3 id="pasos-requeridos"><strong>Pasos Requeridos</strong>:</h3>
 <ol>
-<li><strong>Ir a</strong>: <a href="https://api-console.zoho.com/">https://api-console.zoho.com/</a></li>
+<li><strong>Ir a</strong>: https://api-console.zoho.com/</li>
 <li><strong>Crear Self Client</strong>:</li>
 <li>Application Type: <code>Self Client</code></li>
 <li>Client Domain: tu dominio</li>
@@ -2242,9 +2290,9 @@ ZOHO_REDIRECT_URI=${APP_URL}/zoho/callback
 <li><strong>Obtener</strong>: Client ID y Client Secret</li>
 </ol>
 <hr />
-<h2 id="estructura-de-datos"><strong>💾 Estructura de Datos</strong><a class="headerlink" href="#estructura-de-datos" title="Permanent link">&para;</a></h2>
-<h3 id="tabla-connections-settings-field"><strong>Tabla <code>connections</code> (settings field)</strong>:<a class="headerlink" href="#tabla-connections-settings-field" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<h2 id="estructura-de-datos"><strong>💾 Estructura de Datos</strong></h2>
+<h3 id="tabla-connections-settings-field"><strong>Tabla <code>connections</code> (settings field)</strong>:</h3>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;client_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1000.XXXXXXXXX&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;client_secret&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;xxxxxxxxxxxxx&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;redirect_uri&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://app.com/zoho/callback&quot;</span><span class="p">,</span>
@@ -2257,10 +2305,11 @@ ZOHO_REDIRECT_URI=${APP_URL}/zoho/callback
 <span class="w">  </span><span class="nt">&quot;organization_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Mi Empresa&quot;</span>
 <span class="p">}</span>
 </code></pre></div>
+
 <hr />
-<h2 id="apis-zoho-disponibles"><strong>🚀 APIs Zoho Disponibles</strong><a class="headerlink" href="#apis-zoho-disponibles" title="Permanent link">&para;</a></h2>
-<h3 id="endpoints-principales"><strong>Endpoints Principales</strong>:<a class="headerlink" href="#endpoints-principales" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">// Organizaciones</span>
+<h2 id="apis-zoho-disponibles"><strong>🚀 APIs Zoho Disponibles</strong></h2>
+<h3 id="endpoints-principales"><strong>Endpoints Principales</strong>:</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">// Organizaciones</span>
 <span class="x">GET /organizations</span>
 
 <span class="x">// Sales Orders  </span>
@@ -2280,43 +2329,45 @@ ZOHO_REDIRECT_URI=${APP_URL}/zoho/callback
 <span class="x">GET /invoices</span>
 <span class="x">POST /invoices</span>
 </code></pre></div>
-<h3 id="mapeo-con-docucenter"><strong>Mapeo con DocuCenter</strong>:<a class="headerlink" href="#mapeo-con-docucenter" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>Zoho Sales Order → SalesOrderHeaderImp
+
+<h3 id="mapeo-con-docucenter"><strong>Mapeo con DocuCenter</strong>:</h3>
+<div class="codehilite"><pre><span></span><code>Zoho Sales Order → SalesOrderHeaderImp
 Zoho Line Items → SalesOrderDetailImp  
 Zoho Contacts → CustomersImp/CustomersExp
 Zoho Items → InventoryMasterListImp
 </code></pre></div>
+
 <hr />
-<h2 id="consideraciones-importantes"><strong>⚠️ Consideraciones Importantes</strong><a class="headerlink" href="#consideraciones-importantes" title="Permanent link">&para;</a></h2>
-<h3 id="seguridad"><strong>Seguridad</strong>:<a class="headerlink" href="#seguridad" title="Permanent link">&para;</a></h3>
+<h2 id="consideraciones-importantes"><strong>⚠️ Consideraciones Importantes</strong></h2>
+<h3 id="seguridad"><strong>Seguridad</strong>:</h3>
 <ul>
 <li>✅ Client Secret encriptado en DB</li>
 <li>✅ State parameter para CSRF protection</li>
 <li>✅ Tokens con expiración automática</li>
 <li>✅ Validación de redirect_uri</li>
 </ul>
-<h3 id="performance"><strong>Performance</strong>:<a class="headerlink" href="#performance" title="Permanent link">&para;</a></h3>
+<h3 id="performance"><strong>Performance</strong>:</h3>
 <ul>
 <li>✅ Rate limiting (100 req/min, 2500 req/day)</li>
 <li>✅ Auto-refresh de tokens (5 min buffer)</li>
 <li>✅ Caching de respuestas</li>
 <li>✅ Timeout configurables</li>
 </ul>
-<h3 id="multi-tenancy"><strong>Multi-tenancy</strong>:<a class="headerlink" href="#multi-tenancy" title="Permanent link">&para;</a></h3>
+<h3 id="multi-tenancy"><strong>Multi-tenancy</strong>:</h3>
 <ul>
 <li>✅ Compatible con sistema multi-tenant de DocuCenter</li>
 <li>✅ Conexiones por organización</li>
 <li>✅ Soporte múltiples organizaciones Zoho</li>
 </ul>
 <hr />
-<h2 id="beneficios-vs-api-actual"><strong>📈 Beneficios vs API Actual</strong><a class="headerlink" href="#beneficios-vs-api-actual" title="Permanent link">&para;</a></h2>
-<h3 id="api-actual-acicloud"><strong>API Actual (ACIcloud)</strong>:<a class="headerlink" href="#api-actual-acicloud" title="Permanent link">&para;</a></h3>
+<h2 id="beneficios-vs-api-actual"><strong>📈 Beneficios vs API Actual</strong></h2>
+<h3 id="api-actual-acicloud"><strong>API Actual (ACIcloud)</strong>:</h3>
 <ul>
 <li>❌ Solo recibe datos, no autentica</li>
 <li>❌ No puede consultar datos de Zoho</li>
 <li>❌ Dependiente de servicios externos</li>
 </ul>
-<h3 id="self-client-propuesto"><strong>Self Client Propuesto</strong>:<a class="headerlink" href="#self-client-propuesto" title="Permanent link">&para;</a></h3>
+<h3 id="self-client-propuesto"><strong>Self Client Propuesto</strong>:</h3>
 <ul>
 <li>✅ Autenticación OAuth nativa</li>
 <li>✅ Acceso completo a API Zoho</li>
@@ -2325,7 +2376,7 @@ Zoho Items → InventoryMasterListImp
 <li>✅ Sin dependencias externas</li>
 </ul>
 <hr />
-<h2 id="cronograma-de-implementacion"><strong>⏱️ Cronograma de Implementación</strong><a class="headerlink" href="#cronograma-de-implementacion" title="Permanent link">&para;</a></h2>
+<h2 id="cronograma-de-implementacion"><strong>⏱️ Cronograma de Implementación</strong></h2>
 <table>
 <thead>
 <tr>
@@ -2375,7 +2426,7 @@ Zoho Items → InventoryMasterListImp
 </tbody>
 </table>
 <hr />
-<h2 id="proximos-pasos-recomendados"><strong>🎯 Próximos Pasos Recomendados</strong><a class="headerlink" href="#proximos-pasos-recomendados" title="Permanent link">&para;</a></h2>
+<h2 id="proximos-pasos-recomendados"><strong>🎯 Próximos Pasos Recomendados</strong></h2>
 <ol>
 <li><strong>Crear Self Client en Zoho</strong> (30 min)</li>
 <li><strong>Implementar Fase 1</strong> - Configuración base (2-3h)</li>
@@ -2437,7 +2488,7 @@ Zoho Items → InventoryMasterListImp
       
       
     
-    <a href="https://github.com/aghabrego/docucenter" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+    <a href="https://github.com/aghabrego/docucenter-public" target="_blank" rel="noopener" title="github.com" class="md-social__link">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
     </a>
   

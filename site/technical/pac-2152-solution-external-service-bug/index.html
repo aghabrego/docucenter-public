@@ -233,7 +233,7 @@
           
   
   
-  APIs
+  API Documentation
 
         </a>
       </li>
@@ -269,7 +269,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../" class="md-tabs__link">
+        <a href="../README.md" class="md-tabs__link">
           
   
   
@@ -298,6 +298,25 @@
         </a>
       </li>
     
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../testing/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Sistema de Testing
+
+      </a>
+    </li>
   
 
       
@@ -404,7 +423,7 @@
   <span class="md-ellipsis">
     
   
-    APIs
+    API Documentation
   
 
     
@@ -420,7 +439,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    APIs
+    API Documentation
   
 
           </label>
@@ -1363,7 +1382,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
+      <a href="../README.md" class="md-nav__link">
         
   
   
@@ -1716,6 +1735,33 @@
   
 
     
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sistema de Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -1923,124 +1969,129 @@
   
 
 
-<h1 id="solucion-pac-error-2152-problema-confirmado-en-servicio-externo">Solución PAC Error 2152 - Problema Confirmado en Servicio Externo<a class="headerlink" href="#solucion-pac-error-2152-problema-confirmado-en-servicio-externo" title="Permanent link">&para;</a></h1>
-<h2 id="estado-problema-identificado-estrategia-actualizada">Estado: ✅ PROBLEMA IDENTIFICADO - � ESTRATEGIA ACTUALIZADA<a class="headerlink" href="#estado-problema-identificado-estrategia-actualizada" title="Permanent link">&para;</a></h2>
+<h1 id="solucion-pac-error-2152-problema-confirmado-en-servicio-externo">Solución PAC Error 2152 - Problema Confirmado en Servicio Externo</h1>
+<h2 id="estado-problema-identificado-estrategia-actualizada">Estado: ✅ PROBLEMA IDENTIFICADO - � ESTRATEGIA ACTUALIZADA</h2>
 <p><strong>Fecha</strong>: 2024-12-19<br />
 <strong>Error</strong>: <code>2152-Item 1: Monto del ITBMS del ítem inválido</code><br />
 <strong>PAC</strong>: TheFactoryHKA<br />
 <strong>Estrategia</strong>: Hack de <code>totalPrecioNeto</code> para romper mapeo cruzado</p>
-<h2 id="analisis-final-y-estrategia-actualizada">🎯 <strong>ANÁLISIS FINAL Y ESTRATEGIA ACTUALIZADA</strong><a class="headerlink" href="#analisis-final-y-estrategia-actualizada" title="Permanent link">&para;</a></h2>
-<h3 id="problema-confirmado-mapeo-cruzado-en-thefactoryhka"><strong>Problema Confirmado: Mapeo Cruzado en TheFactoryHKA</strong><a class="headerlink" href="#problema-confirmado-mapeo-cruzado-en-thefactoryhka" title="Permanent link">&para;</a></h3>
+<h2 id="analisis-final-y-estrategia-actualizada">🎯 <strong>ANÁLISIS FINAL Y ESTRATEGIA ACTUALIZADA</strong></h2>
+<h3 id="problema-confirmado-mapeo-cruzado-en-thefactoryhka"><strong>Problema Confirmado: Mapeo Cruzado en TheFactoryHKA</strong></h3>
 <p>El PAC TheFactoryHKA tiene un bug interno donde el valor de <code>totalPrecioNeto</code> se mapea incorrectamente a múltiples campos XML:</p>
 <ul>
 <li><code>totalPrecioNeto</code> (5.60) → <code>&lt;dTotRec&gt;</code> (debería recibir totalValorRecibido = 5.99)</li>
 <li><code>totalPrecioNeto</code> (5.60) → <code>&lt;iPzPag&gt;</code> (debería recibir tiempoPago = 1)  </li>
 <li><code>totalPrecioNeto</code> (5.60) → <code>&lt;dVTotItems&gt;</code> (debería recibir totalTodosItems = 5.99)</li>
 </ul>
-<h3 id="estrategia-de-solucion-actualizada"><strong>Estrategia de Solución Actualizada</strong><a class="headerlink" href="#estrategia-de-solucion-actualizada" title="Permanent link">&para;</a></h3>
+<h3 id="estrategia-de-solucion-actualizada"><strong>Estrategia de Solución Actualizada</strong></h3>
 <p><strong>HACK CRÍTICO</strong>: Ajustar <code>totalPrecioNeto</code> para que contenga el valor que queremos que aparezca en los campos mapeados incorrectamente.</p>
-<p><div class="highlight"><pre><span></span><code><span class="x">// Si PAC mapea totalPrecioNeto a múltiples campos, </span>
+<div class="codehilite"><pre><span></span><code><span class="x">// Si PAC mapea totalPrecioNeto a múltiples campos, </span>
 <span class="x">// entonces totalPrecioNeto debe contener el valor correcto</span>
 <span class="x">$totales-&gt;totalPrecioNeto = $totales-&gt;totalFactura; // 5.99 en lugar de 5.60</span>
 </code></pre></div>
-    // Ajustar mapeo específico para corregir el bug del PAC
-    $totales-&gt;totalValorRecibido = $totales-&gt;totalFactura; // Forzar coherencia
-    $totales-&gt;totalTodosItems = $totales-&gt;totalFactura;   // Forzar coherencia<br />
-    // tiempoPago mantener como está ya que es correcto
-}
-<div class="highlight"><pre><span></span><code>### **Opción 2: Contactar TheFactoryHKA**
+
+<div class="codehilite"><pre><span></span><code><span class="c1">// Ajustar mapeo específico para corregir el bug del PAC</span>
+<span class="no">$</span><span class="n">totales</span><span class="o">-&gt;</span><span class="n">totalValorRecibido</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="no">$</span><span class="n">totales</span><span class="o">-&gt;</span><span class="n">totalFactura</span><span class="p">;</span><span class="w"> </span><span class="c1">// Forzar coherencia</span>
+<span class="no">$</span><span class="n">totales</span><span class="o">-&gt;</span><span class="n">totalTodosItems</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="no">$</span><span class="n">totales</span><span class="o">-&gt;</span><span class="n">totalFactura</span><span class="p">;</span><span class="w">   </span><span class="c1">// Forzar coherencia  </span>
+<span class="c1">// tiempoPago mantener como está ya que es correcto</span>
+</code></pre></div>
+
+<p>}</p>
+<div class="codehilite"><pre><span></span><code><span class="gu">##</span># **Opción 2: Contactar TheFactoryHKA**
 Reportar el bug al soporte técnico con evidencia completa del mapeo incorrecto.
 
-### **Opción 3: Investigar Versión de Servicio**
+<span class="gu">##</span># **Opción 3: Investigar Versión de Servicio**
 Verificar si hay una versión diferente del WSDL o endpoint que resuelva el problema.
 
-## 📋 **Información para Reporte a TheFactoryHKA**
+<span class="gu">##</span> 📋 **Información para Reporte a TheFactoryHKA**
 
-### **URL del Servicio**
+<span class="gu">##</span># **URL del Servicio**
 </code></pre></div>
-<a href="https://demoemision.thefactoryhka.com.pa/ws/obj/v1.0/Service.svc?singleWsdl">https://demoemision.thefactoryhka.com.pa/ws/obj/v1.0/Service.svc?singleWsdl</a>
-<div class="highlight"><pre><span></span><code>### **Descripción del Bug**
-El servicio está retornando valores incorrectos en el XML final:
-- Múltiples campos reciben el valor de `totalPrecioNeto` (5.60) 
-- Esto causa error 2152 porque `iPzPag` debería ser &quot;1&quot; no &quot;5.60&quot;
 
-### **Evidencia Técnica**
-- **Enviamos**: `totalValorRecibido: &quot;5.99&quot;` → **Recibimos**: `&lt;dTotRec&gt;5.60&lt;/dTotRec&gt;`
-- **Enviamos**: `tiempoPago: &quot;1&quot;` → **Recibimos**: `&lt;iPzPag&gt;5.60&lt;/iPzPag&gt;`
-- **Enviamos**: `totalTodosItems: &quot;5.99&quot;` → **Recibimos**: `&lt;dVTotItems&gt;5.60&lt;/dVTotItems&gt;`
+<p>https://demoemision.thefactoryhka.com.pa/ws/obj/v1.0/Service.svc?singleWsdl</p>
+<div class="codehilite"><pre><span></span><code><span class="c1">### **Descripción del Bug**</span>
+<span class="n">El</span><span class="w"> </span><span class="n">servicio</span><span class="w"> </span><span class="n">está</span><span class="w"> </span><span class="n">retornando</span><span class="w"> </span><span class="n">valores</span><span class="w"> </span><span class="n">incorrectos</span><span class="w"> </span><span class="n">en</span><span class="w"> </span><span class="n">el</span><span class="w"> </span><span class="k">XML</span><span class="w"> </span><span class="n">final</span><span class="o">:</span>
+<span class="o">-</span><span class="w"> </span><span class="n">Múltiples</span><span class="w"> </span><span class="n">campos</span><span class="w"> </span><span class="n">reciben</span><span class="w"> </span><span class="n">el</span><span class="w"> </span><span class="n">valor</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n n-Quoted">`totalPrecioNeto`</span><span class="w"> </span><span class="p">(</span><span class="mf">5.60</span><span class="p">)</span><span class="w"> </span>
+<span class="o">-</span><span class="w"> </span><span class="n">Esto</span><span class="w"> </span><span class="n">causa</span><span class="w"> </span><span class="k">error</span><span class="w"> </span><span class="mi">2152</span><span class="w"> </span><span class="n">porque</span><span class="w"> </span><span class="n n-Quoted">`iPzPag`</span><span class="w"> </span><span class="n">debería</span><span class="w"> </span><span class="n">ser</span><span class="w"> </span><span class="s2">&quot;1&quot;</span><span class="w"> </span><span class="k">no</span><span class="w"> </span><span class="s2">&quot;5.60&quot;</span>
 
-## 🚀 **Implementación Inmediata: Workaround**
+<span class="c1">### **Evidencia Técnica**</span>
+<span class="o">-</span><span class="w"> </span><span class="o">**</span><span class="n">Enviamos</span><span class="o">**:</span><span class="w"> </span><span class="n n-Quoted">`totalValorRecibido: &quot;5.99&quot;`</span><span class="w"> </span><span class="n">→</span><span class="w"> </span><span class="o">**</span><span class="n">Recibimos</span><span class="o">**:</span><span class="w"> </span><span class="n n-Quoted">`&lt;dTotRec&gt;5.60&lt;/dTotRec&gt;`</span>
+<span class="o">-</span><span class="w"> </span><span class="o">**</span><span class="n">Enviamos</span><span class="o">**:</span><span class="w"> </span><span class="n n-Quoted">`tiempoPago: &quot;1&quot;`</span><span class="w"> </span><span class="n">→</span><span class="w"> </span><span class="o">**</span><span class="n">Recibimos</span><span class="o">**:</span><span class="w"> </span><span class="n n-Quoted">`&lt;iPzPag&gt;5.60&lt;/iPzPag&gt;`</span>
+<span class="o">-</span><span class="w"> </span><span class="o">**</span><span class="n">Enviamos</span><span class="o">**:</span><span class="w"> </span><span class="n n-Quoted">`totalTodosItems: &quot;5.99&quot;`</span><span class="w"> </span><span class="n">→</span><span class="w"> </span><span class="o">**</span><span class="n">Recibimos</span><span class="o">**:</span><span class="w"> </span><span class="n n-Quoted">`&lt;dVTotItems&gt;5.60&lt;/dVTotItems&gt;`</span>
 
-### ✅ **Workaround Implementado**
-**Ubicación**: `app/Services/HKAService.php` líneas 276-295
+<span class="c1">## 🚀 **Implementación Inmediata: Workaround**</span>
 
-```php
-// WORKAROUND CRÍTICO: Bug en TheFactoryHKA - mapeo incorrecto de campos
-// El PAC mapea múltiples campos al valor de totalPrecioNeto causando error 2152
-if ($pacconnection-&gt;name === &#39;TheFactoryHKA&#39;) {
-    $totales = $documentoElectronico-&gt;totalesSubTotales;
-    $original_totalValorRecibido = $totales-&gt;totalValorRecibido;
-    $original_totalTodosItems = $totales-&gt;totalTodosItems;
+<span class="c1">### ✅ **Workaround Implementado**</span>
+<span class="o">**</span><span class="n">Ubicación</span><span class="o">**:</span><span class="w"> </span><span class="n n-Quoted">`app/Services/HKAService.php`</span><span class="w"> </span><span class="n">líneas</span><span class="w"> </span><span class="mi">276</span><span class="o">-</span><span class="mi">295</span>
 
-    // Forzar coherencia: usar totalFactura para campos problemáticos
-    $totales-&gt;totalValorRecibido = $totales-&gt;totalFactura;
-    $totales-&gt;totalTodosItems = $totales-&gt;totalFactura;
+<span class="n n-Quoted">`</span><span class="n n-Quoted n-Quoted-Escape">``</span><span class="n n-Quoted">php</span>
+<span class="n n-Quoted">// WORKAROUND CRÍTICO: Bug en TheFactoryHKA - mapeo incorrecto de campos</span>
+<span class="n n-Quoted">// El PAC mapea múltiples campos al valor de totalPrecioNeto causando error 2152</span>
+<span class="n n-Quoted">if ($pacconnection-&gt;name === &#39;TheFactoryHKA&#39;) {</span>
+<span class="n n-Quoted">    $totales = $documentoElectronico-&gt;totalesSubTotales;</span>
+<span class="n n-Quoted">    $original_totalValorRecibido = $totales-&gt;totalValorRecibido;</span>
+<span class="n n-Quoted">    $original_totalTodosItems = $totales-&gt;totalTodosItems;</span>
 
-    // tiempoPago mantener como está (correcto)
+<span class="n n-Quoted">    // Forzar coherencia: usar totalFactura para campos problemáticos</span>
+<span class="n n-Quoted">    $totales-&gt;totalValorRecibido = $totales-&gt;totalFactura;</span>
+<span class="n n-Quoted">    $totales-&gt;totalTodosItems = $totales-&gt;totalFactura;</span>
 
-    Log::info(&#39;TheFactoryHKA Workaround aplicado - Corrección bug PAC&#39;, [
-        &#39;organization_id&#39; =&gt; $organization-&gt;id ?? &#39;N/A&#39;,
-        &#39;original_totalValorRecibido&#39; =&gt; $original_totalValorRecibido,
-        &#39;corrected_totalValorRecibido&#39; =&gt; $totales-&gt;totalValorRecibido,
-        &#39;original_totalTodosItems&#39; =&gt; $original_totalTodosItems,
-        &#39;corrected_totalTodosItems&#39; =&gt; $totales-&gt;totalTodosItems,
-        &#39;tiempoPago_unchanged&#39; =&gt; $totales-&gt;tiempoPago,
-    ]);
+<span class="n n-Quoted">    // tiempoPago mantener como está (correcto)</span>
 
-    $documentoElectronico-&gt;totalesSubTotales = $totales;
-}
-</code></pre></div></p>
-<h3 id="logica-del-workaround">🎯 <strong>Lógica del Workaround</strong><a class="headerlink" href="#logica-del-workaround" title="Permanent link">&para;</a></h3>
+<span class="n n-Quoted">    Log::info(&#39;TheFactoryHKA Workaround aplicado - Corrección bug PAC&#39;, [</span>
+<span class="n n-Quoted">        &#39;organization_id&#39; =&gt; $organization-&gt;id ?? &#39;N/A&#39;,</span>
+<span class="n n-Quoted">        &#39;original_totalValorRecibido&#39; =&gt; $original_totalValorRecibido,</span>
+<span class="n n-Quoted">        &#39;corrected_totalValorRecibido&#39; =&gt; $totales-&gt;totalValorRecibido,</span>
+<span class="n n-Quoted">        &#39;original_totalTodosItems&#39; =&gt; $original_totalTodosItems,</span>
+<span class="n n-Quoted">        &#39;corrected_totalTodosItems&#39; =&gt; $totales-&gt;totalTodosItems,</span>
+<span class="n n-Quoted">        &#39;tiempoPago_unchanged&#39; =&gt; $totales-&gt;tiempoPago,</span>
+<span class="n n-Quoted">    ]);</span>
+
+<span class="n n-Quoted">    $documentoElectronico-&gt;totalesSubTotales = $totales;</span>
+<span class="n n-Quoted">}</span>
+</code></pre></div>
+
+<h3 id="logica-del-workaround">🎯 <strong>Lógica del Workaround</strong></h3>
 <ol>
 <li><strong>Detecta</strong> si el PAC es TheFactoryHKA</li>
 <li><strong>Corrige</strong> <code>totalValorRecibido</code> y <code>totalTodosItems</code> usando <code>totalFactura</code></li>
 <li><strong>Mantiene</strong> <code>tiempoPago</code> sin cambios (ya está correcto)</li>
 <li><strong>Logea</strong> los cambios aplicados para auditoría</li>
 </ol>
-<h3 id="resultado-esperado">📊 <strong>Resultado Esperado</strong><a class="headerlink" href="#resultado-esperado" title="Permanent link">&para;</a></h3>
+<h3 id="resultado-esperado">📊 <strong>Resultado Esperado</strong></h3>
 <ul>
 <li><code>totalValorRecibido: 5.99</code> → Ahora usa <code>totalFactura: 5.99</code> ✅</li>
 <li><code>totalTodosItems: 5.99</code> → Ahora usa <code>totalFactura: 5.99</code> ✅  </li>
 <li><code>tiempoPago: "1"</code> → Sin cambios ✅</li>
 </ul>
-<h2 id="estado-del-sistema">📊 <strong>Estado del Sistema</strong><a class="headerlink" href="#estado-del-sistema" title="Permanent link">&para;</a></h2>
-<h3 id="funcionalidad-verificada">✅ <strong>Funcionalidad Verificada</strong><a class="headerlink" href="#funcionalidad-verificada" title="Permanent link">&para;</a></h3>
+<h2 id="estado-del-sistema">📊 <strong>Estado del Sistema</strong></h2>
+<h3 id="funcionalidad-verificada">✅ <strong>Funcionalidad Verificada</strong></h3>
 <ul>
 <li>Cálculos ITBMS: ✅ Precisos  </li>
 <li>Totales PHP: ✅ Correctos</li>
 <li>Envío SOAP: ✅ Valores correctos</li>
 <li>Logging: ✅ Completo y detallado</li>
 </ul>
-<h3 id="problema-externo-confirmado">❌ <strong>Problema Externo Confirmado</strong><a class="headerlink" href="#problema-externo-confirmado" title="Permanent link">&para;</a></h3>
+<h3 id="problema-externo-confirmado">❌ <strong>Problema Externo Confirmado</strong></h3>
 <ul>
 <li>Servicio TheFactoryHKA: ❌ Bug en mapeo de campos</li>
 <li>XML retornado: ❌ Valores incorrectos</li>
 <li>Error PAC 2152: ❌ Causado por mapeo incorrecto</li>
 </ul>
-<h2 id="proximos-pasos">📋 <strong>Próximos Pasos</strong><a class="headerlink" href="#proximos-pasos" title="Permanent link">&para;</a></h2>
-<h3 id="inmediato-hoy"><strong>Inmediato (Hoy)</strong><a class="headerlink" href="#inmediato-hoy" title="Permanent link">&para;</a></h3>
+<h2 id="proximos-pasos">📋 <strong>Próximos Pasos</strong></h2>
+<h3 id="inmediato-hoy"><strong>Inmediato (Hoy)</strong></h3>
 <ol>
 <li>✅ Implementar workaround en HKAService</li>
 <li>✅ Probar factura con workaround  </li>
 <li>✅ Confirmar eliminación de error 2152</li>
 </ol>
-<h3 id="seguimiento-esta-semana"><strong>Seguimiento (Esta Semana)</strong><a class="headerlink" href="#seguimiento-esta-semana" title="Permanent link">&para;</a></h3>
+<h3 id="seguimiento-esta-semana"><strong>Seguimiento (Esta Semana)</strong></h3>
 <ol>
 <li>📧 Reportar bug a TheFactoryHKA con evidencia técnica</li>
 <li>📋 Documentar workaround como solución temporal</li>
 <li>🔍 Monitorear si el problema afecta otros campos</li>
 </ol>
-<h3 id="largo-plazo"><strong>Largo Plazo</strong><a class="headerlink" href="#largo-plazo" title="Permanent link">&para;</a></h3>
+<h3 id="largo-plazo"><strong>Largo Plazo</strong></h3>
 <ol>
 <li>🔄 Verificar si TheFactoryHKA corrige el bug</li>
 <li>🧹 Remover workaround cuando se resuelva</li>
@@ -2100,7 +2151,7 @@ if ($pacconnection-&gt;name === &#39;TheFactoryHKA&#39;) {
       
       
     
-    <a href="https://github.com/aghabrego/docucenter" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+    <a href="https://github.com/aghabrego/docucenter-public" target="_blank" rel="noopener" title="github.com" class="md-social__link">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
     </a>
   

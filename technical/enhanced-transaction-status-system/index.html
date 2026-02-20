@@ -233,7 +233,7 @@
           
   
   
-  APIs
+  API Documentation
 
         </a>
       </li>
@@ -269,7 +269,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../" class="md-tabs__link">
+        <a href="../README.md" class="md-tabs__link">
           
   
   
@@ -298,6 +298,25 @@
         </a>
       </li>
     
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../testing/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Sistema de Testing
+
+      </a>
+    </li>
   
 
       
@@ -404,7 +423,7 @@
   <span class="md-ellipsis">
     
   
-    APIs
+    API Documentation
   
 
     
@@ -420,7 +439,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    APIs
+    API Documentation
   
 
           </label>
@@ -1363,7 +1382,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
+      <a href="../README.md" class="md-nav__link">
         
   
   
@@ -1712,6 +1731,33 @@
           </ul>
         </nav>
       
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sistema de Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -2156,13 +2202,13 @@
   
 
 
-<h1 id="sistema-de-estado-mejorado-para-transacciones-fe">Sistema de Estado Mejorado para Transacciones FE<a class="headerlink" href="#sistema-de-estado-mejorado-para-transacciones-fe" title="Permanent link">&para;</a></h1>
-<h2 id="resumen-ejecutivo">Resumen Ejecutivo<a class="headerlink" href="#resumen-ejecutivo" title="Permanent link">&para;</a></h2>
+<h1 id="sistema-de-estado-mejorado-para-transacciones-fe">Sistema de Estado Mejorado para Transacciones FE</h1>
+<h2 id="resumen-ejecutivo">Resumen Ejecutivo</h2>
 <p>Se ha implementado un sistema de estado mejorado para el seguimiento completo del ciclo de vida de las transacciones en las APIs de Facturación Electrónica (FE). Este sistema proporciona visibilidad granular del estado de procesamiento, mensajes de éxito detallados y timestamps de finalización para todas las transacciones.</p>
-<h2 id="arquitectura-del-sistema">Arquitectura del Sistema<a class="headerlink" href="#arquitectura-del-sistema" title="Permanent link">&para;</a></h2>
-<h3 id="nuevas-columnas-en-la-tabla-transactions">Nuevas Columnas en la Tabla <code>transactions</code><a class="headerlink" href="#nuevas-columnas-en-la-tabla-transactions" title="Permanent link">&para;</a></h3>
+<h2 id="arquitectura-del-sistema">Arquitectura del Sistema</h2>
+<h3 id="nuevas-columnas-en-la-tabla-transactions">Nuevas Columnas en la Tabla <code>transactions</code></h3>
 <p>Se agregaron dos nuevas columnas para mejorar el seguimiento de estado:</p>
-<div class="highlight"><pre><span></span><code><span class="c1">-- Columna para mensajes de éxito detallados</span>
+<div class="codehilite"><pre><span></span><code><span class="c1">-- Columna para mensajes de éxito detallados</span>
 <span class="n">success_message</span><span class="w"> </span><span class="nb">TEXT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">AFTER</span><span class="w"> </span><span class="n">error_message</span>
 
 <span class="c1">-- Timestamp de finalización (éxito o fallo)</span>
@@ -2172,7 +2218,8 @@
 <span class="k">INDEX</span><span class="w"> </span><span class="n">transactions_status_org_idx</span><span class="w"> </span><span class="p">(</span><span class="n">status</span><span class="p">,</span><span class="w"> </span><span class="n">organization_id</span><span class="p">)</span>
 <span class="k">INDEX</span><span class="w"> </span><span class="n">transactions_completed_at_idx</span><span class="w"> </span><span class="p">(</span><span class="n">completed_at</span><span class="p">)</span>
 </code></pre></div>
-<h3 id="estados-de-transaccion">Estados de Transacción<a class="headerlink" href="#estados-de-transaccion" title="Permanent link">&para;</a></h3>
+
+<h3 id="estados-de-transaccion">Estados de Transacción</h3>
 <p>El sistema mantiene los estados existentes con funcionalidad mejorada:</p>
 <ul>
 <li><strong><code>pending</code></strong>: Estado inicial al crear la transacción</li>
@@ -2181,10 +2228,10 @@
 <li><strong><code>failed</code></strong>: Transacción falló con error</li>
 <li><strong><code>retrying</code></strong>: Transacción en reintento automático</li>
 </ul>
-<h2 id="metodos-del-organizationservice-mejorados">Métodos del OrganizationService Mejorados<a class="headerlink" href="#metodos-del-organizationservice-mejorados" title="Permanent link">&para;</a></h2>
-<h3 id="marktransactionasprocessingorganizationid-reference"><code>markTransactionAsProcessing($organizationId, $reference)</code><a class="headerlink" href="#marktransactionasprocessingorganizationid-reference" title="Permanent link">&para;</a></h3>
+<h2 id="metodos-del-organizationservice-mejorados">Métodos del OrganizationService Mejorados</h2>
+<h3 id="marktransactionasprocessingorganizationid-reference"><code>markTransactionAsProcessing($organizationId, $reference)</code></h3>
 <p>Nuevo método para marcar una transacción como en procesamiento activo:</p>
-<div class="highlight"><pre><span></span><code><span class="x">public function markTransactionAsProcessing(int $organizationId, string $reference): bool</span>
+<div class="codehilite"><pre><span></span><code><span class="x">public function markTransactionAsProcessing(int $organizationId, string $reference): bool</span>
 <span class="x">{</span>
 <span class="x">    return Transaction::where(&#39;organization_id&#39;, $organizationId)</span>
 <span class="x">        -&gt;where(&#39;reference&#39;, $reference)</span>
@@ -2194,9 +2241,10 @@
 <span class="x">        ]) &gt; 0;</span>
 <span class="x">}</span>
 </code></pre></div>
-<h3 id="marktransactionassuccessfulorganizationid-reference-successmessage-null"><code>markTransactionAsSuccessful($organizationId, $reference, $successMessage = null)</code><a class="headerlink" href="#marktransactionassuccessfulorganizationid-reference-successmessage-null" title="Permanent link">&para;</a></h3>
+
+<h3 id="marktransactionassuccessfulorganizationid-reference-successmessage-null"><code>markTransactionAsSuccessful($organizationId, $reference, $successMessage = null)</code></h3>
 <p>Método mejorado con soporte para mensajes de éxito:</p>
-<div class="highlight"><pre><span></span><code><span class="x">public function markTransactionAsSuccessful(int $organizationId, string $reference, string $successMessage = null): bool</span>
+<div class="codehilite"><pre><span></span><code><span class="x">public function markTransactionAsSuccessful(int $organizationId, string $reference, string $successMessage = null): bool</span>
 <span class="x">{</span>
 <span class="x">    $updateData = [</span>
 <span class="x">        &#39;status&#39; =&gt; &#39;success&#39;,</span>
@@ -2213,9 +2261,10 @@
 <span class="x">        -&gt;update($updateData) &gt; 0;</span>
 <span class="x">}</span>
 </code></pre></div>
-<h3 id="marktransactionasfailedorganizationid-reference-errormessage"><code>markTransactionAsFailed($organizationId, $reference, $errorMessage)</code><a class="headerlink" href="#marktransactionasfailedorganizationid-reference-errormessage" title="Permanent link">&para;</a></h3>
+
+<h3 id="marktransactionasfailedorganizationid-reference-errormessage"><code>markTransactionAsFailed($organizationId, $reference, $errorMessage)</code></h3>
 <p>Método mejorado con timestamp de finalización:</p>
-<div class="highlight"><pre><span></span><code><span class="x">public function markTransactionAsFailed(int $organizationId, string $reference, string $errorMessage): bool</span>
+<div class="codehilite"><pre><span></span><code><span class="x">public function markTransactionAsFailed(int $organizationId, string $reference, string $errorMessage): bool</span>
 <span class="x">{</span>
 <span class="x">    return Transaction::where(&#39;organization_id&#39;, $organizationId)</span>
 <span class="x">        -&gt;where(&#39;reference&#39;, $reference)</span>
@@ -2227,29 +2276,32 @@
 <span class="x">        ]) &gt; 0;</span>
 <span class="x">}</span>
 </code></pre></div>
-<h2 id="modelo-transaction-actualizado">Modelo Transaction Actualizado<a class="headerlink" href="#modelo-transaction-actualizado" title="Permanent link">&para;</a></h2>
-<h3 id="nuevos-campos-fillable">Nuevos Campos Fillable<a class="headerlink" href="#nuevos-campos-fillable" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">protected $fillable = [</span>
+
+<h2 id="modelo-transaction-actualizado">Modelo Transaction Actualizado</h2>
+<h3 id="nuevos-campos-fillable">Nuevos Campos Fillable</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">protected $fillable = [</span>
 <span class="x">    // ... campos existentes</span>
 <span class="x">    &#39;success_message&#39;,</span>
 <span class="x">    &#39;completed_at&#39;</span>
 <span class="x">];</span>
 </code></pre></div>
-<h3 id="casts-mejorados">Casts Mejorados<a class="headerlink" href="#casts-mejorados" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">protected $casts = [</span>
+
+<h3 id="casts-mejorados">Casts Mejorados</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">protected $casts = [</span>
 <span class="x">    // ... casts existentes</span>
 <span class="x">    &#39;completed_at&#39; =&gt; &#39;datetime&#39;</span>
 <span class="x">];</span>
 </code></pre></div>
-<h2 id="jobs-fe-implementados">Jobs FE Implementados<a class="headerlink" href="#jobs-fe-implementados" title="Permanent link">&para;</a></h2>
+
+<h2 id="jobs-fe-implementados">Jobs FE Implementados</h2>
 <p>Se aplicó el patrón de estado mejorado a todos los Jobs de FE:</p>
-<h3 id="1-createsaleacicloudjob">1. CreateSaleAciCloudJob<a class="headerlink" href="#1-createsaleacicloudjob" title="Permanent link">&para;</a></h3>
+<h3 id="1-createsaleacicloudjob">1. CreateSaleAciCloudJob</h3>
 <p><strong>Características especiales:</strong>
 - Soporte para emisión condicional (<code>shouldIssue</code>)
 - Manejo de contadores de intentos
 - Mensajes de éxito diferenciados</p>
-<p><strong>Patrón implementado:</strong>
-<div class="highlight"><pre><span></span><code><span class="x">// Al inicio del procesamiento</span>
+<p><strong>Patrón implementado:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="x">// Al inicio del procesamiento</span>
 <span class="x">$organizationService-&gt;markTransactionAsProcessing($organizationId, $number);</span>
 
 <span class="x">// En caso de éxito</span>
@@ -2261,46 +2313,48 @@
 
 <span class="x">// En caso de error</span>
 <span class="x">$organizationService-&gt;markTransactionAsFailed($organizationId, $number, $e-&gt;getMessage());</span>
-</code></pre></div></p>
-<h3 id="2-createsaleshopifyjob">2. CreateSaleShopifyJob<a class="headerlink" href="#2-createsaleshopifyjob" title="Permanent link">&para;</a></h3>
+</code></pre></div>
+
+<h3 id="2-createsaleshopifyjob">2. CreateSaleShopifyJob</h3>
 <p><strong>Características especiales:</strong>
 - Procesamiento de órdenes de Shopify
 - Manejo simplificado sin emisión</p>
 <p><strong>Mensajes de éxito:</strong>
 - <code>"Orden de Shopify creada exitosamente"</code></p>
-<h3 id="3-createsalekart21job">3. CreateSaleKart21Job<a class="headerlink" href="#3-createsalekart21job" title="Permanent link">&para;</a></h3>
+<h3 id="3-createsalekart21job">3. CreateSaleKart21Job</h3>
 <p><strong>Características especiales:</strong>
 - Manejo de excepción <code>CufeAlreadyExistsException</code>
 - Procesamiento omitido para CUFEs duplicados</p>
-<p><strong>Casos especiales:</strong>
-<div class="highlight"><pre><span></span><code><span class="x">// Para CUFE existente</span>
+<p><strong>Casos especiales:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="x">// Para CUFE existente</span>
 <span class="x">$organizationService-&gt;markTransactionAsSuccessful(</span>
 <span class="x">    $organizationId, </span>
 <span class="x">    $number, </span>
 <span class="x">    &#39;CUFE ya existe - procesamiento omitido&#39;</span>
 <span class="x">);</span>
-</code></pre></div></p>
-<h3 id="4-createsalemaxgymjob">4. CreateSaleMaxgymJob<a class="headerlink" href="#4-createsalemaxgymjob" title="Permanent link">&para;</a></h3>
+</code></pre></div>
+
+<h3 id="4-createsalemaxgymjob">4. CreateSaleMaxgymJob</h3>
 <p><strong>Características especiales:</strong>
 - Procesamiento de datos con validaciones complejas
 - Uso de reflection para limpieza de datos
 - Contadores de intentos</p>
 <p><strong>Mensajes de éxito:</strong>
 - <code>"Factura de Maxgym emitida exitosamente"</code></p>
-<h3 id="5-createsalemeyparjob">5. CreateSaleMeyparJob<a class="headerlink" href="#5-createsalemeyparjob" title="Permanent link">&para;</a></h3>
+<h3 id="5-createsalemeyparjob">5. CreateSaleMeyparJob</h3>
 <p><strong>Características especiales:</strong>
 - Manejo de transacciones de base de datos
 - Procesamiento en método privado
 - Memoria optimizada</p>
 <p><strong>Mensajes de éxito:</strong>
 - <code>"Documento de MEYPAR Colombia procesado exitosamente"</code></p>
-<h3 id="6-createsalelightspeedjob">6. CreateSaleLightspeedJob<a class="headerlink" href="#6-createsalelightspeedjob" title="Permanent link">&para;</a></h3>
+<h3 id="6-createsalelightspeedjob">6. CreateSaleLightspeedJob</h3>
 <p><strong>Características especiales:</strong>
 - Validación de status específicos
 - Productos ignorados configurables
 - Múltiples puntos de salida temprana</p>
-<p><strong>Casos especiales:</strong>
-<div class="highlight"><pre><span></span><code><span class="x">// Status no válido</span>
+<p><strong>Casos especiales:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="x">// Status no válido</span>
 <span class="x">$organizationService-&gt;markTransactionAsSuccessful(</span>
 <span class="x">    $organizationId, </span>
 <span class="x">    $invoiceNumber, </span>
@@ -2313,14 +2367,15 @@
 <span class="x">    $invoiceNumber, </span>
 <span class="x">    &#39;Productos ignorados encontrados - procesamiento omitido&#39;</span>
 <span class="x">);</span>
-</code></pre></div></p>
-<h3 id="7-createsalequickbooksjob-ya-implementado">7. CreateSaleQuickBooksJob (Ya implementado)<a class="headerlink" href="#7-createsalequickbooksjob-ya-implementado" title="Permanent link">&para;</a></h3>
+</code></pre></div>
+
+<h3 id="7-createsalequickbooksjob-ya-implementado">7. CreateSaleQuickBooksJob (Ya implementado)</h3>
 <p><strong>Características especiales:</strong>
 - Configuración local mejorada
 - Optimización de consultas de base de datos</p>
-<h2 id="patron-de-implementacion-estandar">Patrón de Implementación Estándar<a class="headerlink" href="#patron-de-implementacion-estandar" title="Permanent link">&para;</a></h2>
-<h3 id="estructura-comun-en-todos-los-jobs">Estructura Común en Todos los Jobs<a class="headerlink" href="#estructura-comun-en-todos-los-jobs" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">public function handle()</span>
+<h2 id="patron-de-implementacion-estandar">Patrón de Implementación Estándar</h2>
+<h3 id="estructura-comun-en-todos-los-jobs">Estructura Común en Todos los Jobs</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">public function handle()</span>
 <span class="x">{</span>
 <span class="x">    /** @var string $number */</span>
 <span class="x">    $number = // extraer número de referencia</span>
@@ -2367,40 +2422,42 @@
 <span class="x">    }</span>
 <span class="x">}</span>
 </code></pre></div>
-<h2 id="beneficios-del-sistema">Beneficios del Sistema<a class="headerlink" href="#beneficios-del-sistema" title="Permanent link">&para;</a></h2>
-<h3 id="1-visibilidad-completa">1. Visibilidad Completa<a class="headerlink" href="#1-visibilidad-completa" title="Permanent link">&para;</a></h3>
+
+<h2 id="beneficios-del-sistema">Beneficios del Sistema</h2>
+<h3 id="1-visibilidad-completa">1. Visibilidad Completa</h3>
 <ul>
 <li>Estado granular de cada transacción</li>
 <li>Mensajes de éxito específicos por contexto</li>
 <li>Timestamps de finalización precisos</li>
 </ul>
-<h3 id="2-debugging-mejorado">2. Debugging Mejorado<a class="headerlink" href="#2-debugging-mejorado" title="Permanent link">&para;</a></h3>
+<h3 id="2-debugging-mejorado">2. Debugging Mejorado</h3>
 <ul>
 <li>Identificación rápida de transacciones en procesamiento</li>
 <li>Mensajes de error y éxito detallados</li>
 <li>Historial completo de estado</li>
 </ul>
-<h3 id="3-monitoreo-y-alertas">3. Monitoreo y Alertas<a class="headerlink" href="#3-monitoreo-y-alertas" title="Permanent link">&para;</a></h3>
+<h3 id="3-monitoreo-y-alertas">3. Monitoreo y Alertas</h3>
 <ul>
 <li>Posibilidad de crear alertas basadas en estados</li>
 <li>Métricas de tiempo de procesamiento</li>
 <li>Identificación de cuellos de botella</li>
 </ul>
-<h3 id="4-auditoria-completa">4. Auditoría Completa<a class="headerlink" href="#4-auditoria-completa" title="Permanent link">&para;</a></h3>
+<h3 id="4-auditoria-completa">4. Auditoría Completa</h3>
 <ul>
 <li>Rastro completo del ciclo de vida</li>
 <li>Diferenciación entre fallas y omisiones</li>
 <li>Datos para análisis de rendimiento</li>
 </ul>
-<h2 id="consultas-de-ejemplo">Consultas de Ejemplo<a class="headerlink" href="#consultas-de-ejemplo" title="Permanent link">&para;</a></h2>
-<h3 id="transacciones-en-procesamiento-por-organizacion">Transacciones en Procesamiento por Organización<a class="headerlink" href="#transacciones-en-procesamiento-por-organizacion" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">transactions</span><span class="w"> </span>
+<h2 id="consultas-de-ejemplo">Consultas de Ejemplo</h2>
+<h3 id="transacciones-en-procesamiento-por-organizacion">Transacciones en Procesamiento por Organización</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">transactions</span><span class="w"> </span>
 <span class="k">WHERE</span><span class="w"> </span><span class="n">organization_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">?</span><span class="w"> </span>
 <span class="w">  </span><span class="k">AND</span><span class="w"> </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;processing&#39;</span>
 <span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">updated_at</span><span class="w"> </span><span class="k">DESC</span><span class="p">;</span>
 </code></pre></div>
-<h3 id="transacciones-completadas-con-tiempo-de-procesamiento">Transacciones Completadas con Tiempo de Procesamiento<a class="headerlink" href="#transacciones-completadas-con-tiempo-de-procesamiento" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span>
+
+<h3 id="transacciones-completadas-con-tiempo-de-procesamiento">Transacciones Completadas con Tiempo de Procesamiento</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span>
 <span class="w">    </span><span class="n">reference</span><span class="p">,</span>
 <span class="w">    </span><span class="n">module_type</span><span class="p">,</span>
 <span class="w">    </span><span class="n">status</span><span class="p">,</span>
@@ -2411,8 +2468,9 @@
 <span class="w">  </span><span class="k">AND</span><span class="w"> </span><span class="n">completed_at</span><span class="w"> </span><span class="k">IS</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span>
 <span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">completed_at</span><span class="w"> </span><span class="k">DESC</span><span class="p">;</span>
 </code></pre></div>
-<h3 id="estadisticas-de-exito-por-modulo">Estadísticas de Éxito por Módulo<a class="headerlink" href="#estadisticas-de-exito-por-modulo" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span>
+
+<h3 id="estadisticas-de-exito-por-modulo">Estadísticas de Éxito por Módulo</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span>
 <span class="w">    </span><span class="n">module_type</span><span class="p">,</span>
 <span class="w">    </span><span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">total</span><span class="p">,</span>
 <span class="w">    </span><span class="k">SUM</span><span class="p">(</span><span class="k">CASE</span><span class="w"> </span><span class="k">WHEN</span><span class="w"> </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;success&#39;</span><span class="w"> </span><span class="k">THEN</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">ELSE</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="k">END</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">successful</span><span class="p">,</span>
@@ -2421,7 +2479,8 @@
 <span class="k">WHERE</span><span class="w"> </span><span class="n">organization_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">?</span>
 <span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">module_type</span><span class="p">;</span>
 </code></pre></div>
-<h2 id="migracion-implementada">Migración Implementada<a class="headerlink" href="#migracion-implementada" title="Permanent link">&para;</a></h2>
+
+<h2 id="migracion-implementada">Migración Implementada</h2>
 <p><strong>Archivo:</strong> <code>2025_09_13_013942_add_enhanced_status_columns_to_transactions_table.php</code></p>
 <p><strong>Ejecutada:</strong> ✅ Completada exitosamente</p>
 <p><strong>Columnas agregadas:</strong>
@@ -2430,7 +2489,7 @@
 <p><strong>Índices creados:</strong>
 - <code>transactions_status_org_idx</code> (status, organization_id)
 - <code>transactions_completed_at_idx</code> (completed_at)</p>
-<h2 id="conclusion">Conclusión<a class="headerlink" href="#conclusion" title="Permanent link">&para;</a></h2>
+<h2 id="conclusion">Conclusión</h2>
 <p>El sistema de estado mejorado proporciona una base sólida para el monitoreo, debugging y auditoría de todas las transacciones de FE en DocuCenter. La implementación consistente en todos los Jobs garantiza un comportamiento predecible y una experiencia de desarrollo mejorada.</p>
 <hr />
 <p><strong>Fecha de implementación:</strong> Septiembre 2025<br />
@@ -2488,7 +2547,7 @@
       
       
     
-    <a href="https://github.com/aghabrego/docucenter" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+    <a href="https://github.com/aghabrego/docucenter-public" target="_blank" rel="noopener" title="github.com" class="md-social__link">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
     </a>
   

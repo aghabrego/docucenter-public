@@ -233,7 +233,7 @@
           
   
   
-  APIs
+  API Documentation
 
         </a>
       </li>
@@ -269,7 +269,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../technical/" class="md-tabs__link">
+        <a href="../../technical/README.md" class="md-tabs__link">
           
   
   
@@ -298,6 +298,25 @@
         </a>
       </li>
     
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../testing/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Sistema de Testing
+
+      </a>
+    </li>
   
 
       
@@ -404,7 +423,7 @@
   <span class="md-ellipsis">
     
   
-    APIs
+    API Documentation
   
 
     
@@ -420,7 +439,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    APIs
+    API Documentation
   
 
           </label>
@@ -1363,7 +1382,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../technical/" class="md-nav__link">
+      <a href="../../technical/README.md" class="md-nav__link">
         
   
   
@@ -1712,6 +1731,33 @@
           </ul>
         </nav>
       
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sistema de Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -2127,19 +2173,20 @@
   
 
 
-<h1 id="api-consulta-de-ruc-docucenter">API Consulta de RUC - DocuCenter<a class="headerlink" href="#api-consulta-de-ruc-docucenter" title="Permanent link">&para;</a></h1>
-<h2 id="descripcion">Descripción<a class="headerlink" href="#descripcion" title="Permanent link">&para;</a></h2>
+<h1 id="api-consulta-de-ruc-docucenter">API Consulta de RUC - DocuCenter</h1>
+<h2 id="descripcion">Descripción</h2>
 <p>API para consultar el dígito verificador de RUC utilizando el PAC Alanube configurado en la organización. Esta funcionalidad permite validar y obtener información de RUCs panameños mediante el servicio oficial de Alanube.</p>
-<h2 id="endpoint">Endpoint<a class="headerlink" href="#endpoint" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code>GET /api/v1/fe/check_ruc/{ruc}
+<h2 id="endpoint">Endpoint</h2>
+<div class="codehilite"><pre><span></span><code>GET /api/v1/fe/check_ruc/{ruc}
 </code></pre></div>
-<h2 id="autenticacion">Autenticación<a class="headerlink" href="#autenticacion" title="Permanent link">&para;</a></h2>
+
+<h2 id="autenticacion">Autenticación</h2>
 <ul>
 <li><strong>Requerida</strong>: Sí (Bearer Token)</li>
 <li><strong>Middleware</strong>: <code>auth:sanctum</code>, <code>check.activate.organization</code></li>
 </ul>
-<h2 id="parametros">Parámetros<a class="headerlink" href="#parametros" title="Permanent link">&para;</a></h2>
-<h3 id="parametro-de-ruta">Parámetro de Ruta<a class="headerlink" href="#parametro-de-ruta" title="Permanent link">&para;</a></h3>
+<h2 id="parametros">Parámetros</h2>
+<h3 id="parametro-de-ruta">Parámetro de Ruta</h3>
 <table>
 <thead>
 <tr>
@@ -2158,7 +2205,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="validaciones-de-ruc">Validaciones de RUC<a class="headerlink" href="#validaciones-de-ruc" title="Permanent link">&para;</a></h3>
+<h3 id="validaciones-de-ruc">Validaciones de RUC</h3>
 <ul>
 <li><strong>Mínimo</strong>: 3 caracteres</li>
 <li><strong>Máximo</strong>: 50 caracteres  </li>
@@ -2169,26 +2216,27 @@
 <li><strong>Persona Extranjera</strong>: <code>PE-8-123456</code></li>
 <li><strong>Empresa</strong>: <code>155750453-2-2024</code> (RUC empresarial con año)</li>
 </ul>
-<h2 id="configuracion-requerida">Configuración Requerida<a class="headerlink" href="#configuracion-requerida" title="Permanent link">&para;</a></h2>
-<h3 id="organizacion">Organización<a class="headerlink" href="#organizacion" title="Permanent link">&para;</a></h3>
+<h2 id="configuracion-requerida">Configuración Requerida</h2>
+<h3 id="organizacion">Organización</h3>
 <ul>
 <li>Debe tener una organización activa configurada</li>
 <li>La organización debe tener conexión PAC configurada</li>
 </ul>
-<h3 id="pac-connection">PAC Connection<a class="headerlink" href="#pac-connection" title="Permanent link">&para;</a></h3>
+<h3 id="pac-connection">PAC Connection</h3>
 <ul>
 <li><strong>Tipo</strong>: Debe ser de Alanube (<code>alanube_panama</code> o variantes de <code>alanube</code>)</li>
 <li><strong>País</strong>: Solo disponible para Panamá (PA)</li>
 <li><strong>Token</strong>: Debe estar configurado y válido</li>
 <li><strong>Endpoint</strong>: Debe apuntar a servicios de Alanube Panamá</li>
 </ul>
-<h3 id="ejemplos-de-endpoints-validos">Ejemplos de Endpoints Válidos<a class="headerlink" href="#ejemplos-de-endpoints-validos" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>Testing:    https://sandbox-api.alanube.co/pan/v1
-Production: https://api.alanube.co/pan/v1
+<h3 id="ejemplos-de-endpoints-validos">Ejemplos de Endpoints Válidos</h3>
+<div class="codehilite"><pre><span></span><code><span class="n">Testing</span><span class="o">:</span><span class="w">    </span><span class="n">https</span><span class="o">://</span><span class="n">sandbox</span><span class="o">-</span><span class="n">api</span><span class="o">.</span><span class="na">alanube</span><span class="o">.</span><span class="na">co</span><span class="sr">/pan/</span><span class="n">v1</span>
+<span class="n">Production</span><span class="o">:</span><span class="w"> </span><span class="n">https</span><span class="o">://</span><span class="n">api</span><span class="o">.</span><span class="na">alanube</span><span class="o">.</span><span class="na">co</span><span class="sr">/pan/</span><span class="n">v1</span>
 </code></pre></div>
-<h2 id="respuestas">Respuestas<a class="headerlink" href="#respuestas" title="Permanent link">&para;</a></h2>
-<h3 id="respuesta-exitosa-200">Respuesta Exitosa (200)<a class="headerlink" href="#respuesta-exitosa-200" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
+
+<h2 id="respuestas">Respuestas</h2>
+<h3 id="respuesta-exitosa-200">Respuesta Exitosa (200)</h3>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Consulta de RUC exitosa&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
@@ -2203,38 +2251,43 @@ Production: https://api.alanube.co/pan/v1
 <span class="w">  </span><span class="nt">&quot;pac_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;alanube_panama&quot;</span>
 <span class="p">}</span>
 </code></pre></div>
-<h3 id="error-organizacion-no-encontrada-400">Error - Organización no encontrada (400)<a class="headerlink" href="#error-organizacion-no-encontrada-400" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
+
+<h3 id="error-organizacion-no-encontrada-400">Error - Organización no encontrada (400)</h3>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;No hay organización activa configurada&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;error&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ORGANIZATION_NOT_FOUND&quot;</span>
 <span class="p">}</span>
 </code></pre></div>
-<h3 id="error-pac-no-configurado-400">Error - PAC no configurado (400)<a class="headerlink" href="#error-pac-no-configurado-400" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
+
+<h3 id="error-pac-no-configurado-400">Error - PAC no configurado (400)</h3>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;No hay configuración PAC disponible para la organización&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;error&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;PAC_NOT_CONFIGURED&quot;</span>
 <span class="p">}</span>
 </code></pre></div>
-<h3 id="error-pac-no-soportado-400">Error - PAC no soportado (400)<a class="headerlink" href="#error-pac-no-soportado-400" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
+
+<h3 id="error-pac-no-soportado-400">Error - PAC no soportado (400)</h3>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;La consulta de RUC solo está disponible para conexiones PAC de Alanube&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;error&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;PAC_NOT_SUPPORTED&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;pac_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;thefactoryhka&quot;</span>
 <span class="p">}</span>
 </code></pre></div>
-<h3 id="error-pais-no-soportado-400">Error - País no soportado (400)<a class="headerlink" href="#error-pais-no-soportado-400" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
+
+<h3 id="error-pais-no-soportado-400">Error - País no soportado (400)</h3>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;La consulta de dígito verificador solo está disponible para Panamá&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;error&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;COUNTRY_NOT_SUPPORTED&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;country&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;DO&quot;</span>
 <span class="p">}</span>
 </code></pre></div>
-<h3 id="error-api-pac-4xx5xx">Error - API PAC (4xx/5xx)<a class="headerlink" href="#error-api-pac-4xx5xx" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
+
+<h3 id="error-api-pac-4xx5xx">Error - API PAC (4xx/5xx)</h3>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Error en la consulta de RUC con el PAC&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;error&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;PAC_API_ERROR&quot;</span><span class="p">,</span>
@@ -2246,8 +2299,9 @@ Production: https://api.alanube.co/pan/v1
 <span class="w">  </span><span class="nt">&quot;ruc_consulted&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;8-123-456&quot;</span>
 <span class="p">}</span>
 </code></pre></div>
-<h3 id="error-validacion-422">Error - Validación (422)<a class="headerlink" href="#error-validacion-422" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
+
+<h3 id="error-validacion-422">Error - Validación (422)</h3>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;The given data was invalid.&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;errors&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="nt">&quot;ruc&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
@@ -2256,32 +2310,37 @@ Production: https://api.alanube.co/pan/v1
 <span class="w">  </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
-<h3 id="error-interno-500">Error - Interno (500)<a class="headerlink" href="#error-interno-500" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
+
+<h3 id="error-interno-500">Error - Interno (500)</h3>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
 <span class="w">  </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Error interno al consultar RUC&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;error&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;INTERNAL_ERROR&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;details&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Detalles específicos del error&quot;</span>
 <span class="p">}</span>
 </code></pre></div>
-<h2 id="ejemplos-de-uso">Ejemplos de Uso<a class="headerlink" href="#ejemplos-de-uso" title="Permanent link">&para;</a></h2>
-<h3 id="curl-ruc-valido">cURL - RUC Válido<a class="headerlink" href="#curl-ruc-valido" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span><span class="s2">&quot;https://tu-dominio.com/api/v1/fe/check_ruc/8-123-456&quot;</span><span class="w"> </span><span class="se">\</span>
+
+<h2 id="ejemplos-de-uso">Ejemplos de Uso</h2>
+<h3 id="curl-ruc-valido">cURL - RUC Válido</h3>
+<div class="codehilite"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span><span class="s2">&quot;https://tu-dominio.com/api/v1/fe/check_ruc/8-123-456&quot;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Authorization: Bearer tu-token-aqui&quot;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Accept: application/json&quot;</span>
 </code></pre></div>
-<h3 id="curl-ruc-con-formato-pe">cURL - RUC con Formato PE<a class="headerlink" href="#curl-ruc-con-formato-pe" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span><span class="s2">&quot;https://tu-dominio.com/api/v1/fe/check_ruc/PE-8-123456&quot;</span><span class="w"> </span><span class="se">\</span>
+
+<h3 id="curl-ruc-con-formato-pe">cURL - RUC con Formato PE</h3>
+<div class="codehilite"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span><span class="s2">&quot;https://tu-dominio.com/api/v1/fe/check_ruc/PE-8-123456&quot;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Authorization: Bearer tu-token-aqui&quot;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Accept: application/json&quot;</span>
 </code></pre></div>
-<h3 id="curl-ruc-empresarial-con-ano">cURL - RUC Empresarial con Año<a class="headerlink" href="#curl-ruc-empresarial-con-ano" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span><span class="s2">&quot;https://tu-dominio.com/api/v1/fe/check_ruc/155750453-2-2024&quot;</span><span class="w"> </span><span class="se">\</span>
+
+<h3 id="curl-ruc-empresarial-con-ano">cURL - RUC Empresarial con Año</h3>
+<div class="codehilite"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span><span class="s2">&quot;https://tu-dominio.com/api/v1/fe/check_ruc/155750453-2-2024&quot;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Authorization: Bearer tu-token-aqui&quot;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Accept: application/json&quot;</span>
 </code></pre></div>
-<h3 id="javascriptfetch">JavaScript/Fetch<a class="headerlink" href="#javascriptfetch" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">fetch</span><span class="p">(</span><span class="s1">&#39;/api/v1/fe/check_ruc/8-123-456&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+
+<h3 id="javascriptfetch">JavaScript/Fetch</h3>
+<div class="codehilite"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">fetch</span><span class="p">(</span><span class="s1">&#39;/api/v1/fe/check_ruc/8-123-456&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="nx">method</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;GET&#39;</span><span class="p">,</span>
 <span class="w">  </span><span class="nx">headers</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="s1">&#39;Authorization&#39;</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Bearer &#39;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">token</span><span class="p">,</span>
@@ -2292,15 +2351,17 @@ Production: https://api.alanube.co/pan/v1
 <span class="kd">const</span><span class="w"> </span><span class="nx">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
 </code></pre></div>
-<h3 id="phplaravel-http-client">PHP/Laravel HTTP Client<a class="headerlink" href="#phplaravel-http-client" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="x">use Illuminate\Support\Facades\Http;</span>
+
+<h3 id="phplaravel-http-client">PHP/Laravel HTTP Client</h3>
+<div class="codehilite"><pre><span></span><code><span class="x">use Illuminate\Support\Facades\Http;</span>
 
 <span class="x">$response = Http::withToken($token)</span>
 <span class="x">    -&gt;get(&#39;/api/v1/fe/check_ruc/8-123-456&#39;);</span>
 
 <span class="x">$result = $response-&gt;json();</span>
 </code></pre></div>
-<h2 id="codigos-de-error">Códigos de Error<a class="headerlink" href="#codigos-de-error" title="Permanent link">&para;</a></h2>
+
+<h2 id="codigos-de-error">Códigos de Error</h2>
 <table>
 <thead>
 <tr>
@@ -2347,13 +2408,13 @@ Production: https://api.alanube.co/pan/v1
 </tr>
 </tbody>
 </table>
-<h2 id="logging">Logging<a class="headerlink" href="#logging" title="Permanent link">&para;</a></h2>
+<h2 id="logging">Logging</h2>
 <p>El sistema registra automáticamente:
 - Consultas exitosas con detalles de RUC y respuesta
 - Errores de PAC con códigos de estado
 - Excepciones internas con stack trace
 - Información de debugging para troubleshooting</p>
-<h2 id="casos-de-uso">Casos de Uso<a class="headerlink" href="#casos-de-uso" title="Permanent link">&para;</a></h2>
+<h2 id="casos-de-uso">Casos de Uso</h2>
 <ol>
 <li><strong>Validación de Clientes</strong>: Verificar RUCs de clientes antes de crear facturas</li>
 <li><strong>Autocompletado</strong>: Obtener datos de empresa desde RUC</li>
@@ -2361,7 +2422,7 @@ Production: https://api.alanube.co/pan/v1
 <li><strong>Auditoría</strong>: Verificar existencia de RUCs para reportes</li>
 <li><strong>Compliance</strong>: Validar contribuyentes según DGI Panamá</li>
 </ol>
-<h2 id="consideraciones-tecnicas">Consideraciones Técnicas<a class="headerlink" href="#consideraciones-tecnicas" title="Permanent link">&para;</a></h2>
+<h2 id="consideraciones-tecnicas">Consideraciones Técnicas</h2>
 <ul>
 <li><strong>Timeout</strong>: 30 segundos para consultas PAC</li>
 <li><strong>Rate Limiting</strong>: Sujeto a límites de la API de Alanube</li>
@@ -2369,7 +2430,7 @@ Production: https://api.alanube.co/pan/v1
 <li><strong>Concurrent</strong>: Soporte para múltiples consultas simultáneas</li>
 <li><strong>Retry</strong>: No implementado - fallas se reportan inmediatamente</li>
 </ul>
-<h2 id="dependencias">Dependencias<a class="headerlink" href="#dependencias" title="Permanent link">&para;</a></h2>
+<h2 id="dependencias">Dependencias</h2>
 <ul>
 <li><code>App\Services\AlanubeService</code>: Servicio principal</li>
 <li><code>App\Http\Requests\CheckRucRequest</code>: Validación de entrada</li>
@@ -2377,7 +2438,7 @@ Production: https://api.alanube.co/pan/v1
 <li>Configuración PAC válida en base de datos</li>
 <li>Token de autenticación Alanube válido</li>
 </ul>
-<h2 id="notas-de-implementacion">Notas de Implementación<a class="headerlink" href="#notas-de-implementacion" title="Permanent link">&para;</a></h2>
+<h2 id="notas-de-implementacion">Notas de Implementación</h2>
 <ul>
 <li>Solo funciona con conexiones PAC de Alanube Panamá</li>
 <li>Requiere token válido configurado en <code>pacconnection.token</code></li>
@@ -2437,7 +2498,7 @@ Production: https://api.alanube.co/pan/v1
       
       
     
-    <a href="https://github.com/aghabrego/docucenter" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+    <a href="https://github.com/aghabrego/docucenter-public" target="_blank" rel="noopener" title="github.com" class="md-social__link">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
     </a>
   

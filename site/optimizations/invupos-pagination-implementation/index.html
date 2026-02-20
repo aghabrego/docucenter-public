@@ -233,7 +233,7 @@
           
   
   
-  APIs
+  API Documentation
 
         </a>
       </li>
@@ -269,7 +269,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../technical/" class="md-tabs__link">
+        <a href="../../technical/README.md" class="md-tabs__link">
           
   
   
@@ -298,6 +298,25 @@
         </a>
       </li>
     
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../testing/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Sistema de Testing
+
+      </a>
+    </li>
   
 
       
@@ -404,7 +423,7 @@
   <span class="md-ellipsis">
     
   
-    APIs
+    API Documentation
   
 
     
@@ -420,7 +439,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    APIs
+    API Documentation
   
 
           </label>
@@ -1363,7 +1382,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../technical/" class="md-nav__link">
+      <a href="../../technical/README.md" class="md-nav__link">
         
   
   
@@ -1716,6 +1735,33 @@
   
 
     
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sistema de Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -1979,207 +2025,217 @@
   
 
 
-<h1 id="implementacion-de-paginacion-en-importinvupos">Implementación de Paginación en ImportInvupos<a class="headerlink" href="#implementacion-de-paginacion-en-importinvupos" title="Permanent link">&para;</a></h1>
-<h2 id="optimizaciones-implementadas-en-el-backend">Optimizaciones Implementadas en el Backend<a class="headerlink" href="#optimizaciones-implementadas-en-el-backend" title="Permanent link">&para;</a></h2>
-<h3 id="1-cache-de-queries-ya-implementado">✅ 1. Cache de Queries (YA IMPLEMENTADO)<a class="headerlink" href="#1-cache-de-queries-ya-implementado" title="Permanent link">&para;</a></h3>
+<h1 id="implementacion-de-paginacion-en-importinvupos">Implementación de Paginación en ImportInvupos</h1>
+<h2 id="optimizaciones-implementadas-en-el-backend">Optimizaciones Implementadas en el Backend</h2>
+<h3 id="1-cache-de-queries-ya-implementado">✅ 1. Cache de Queries (YA IMPLEMENTADO)</h3>
 <ul>
 <li><code>$cachedPaymentTypes</code>, <code>$cachedCategories</code>, etc.</li>
 <li>Evita queries repetidas a DataProvider en cada render</li>
 <li><strong>Impacto</strong>: Reducción de ~80% en queries a BD</li>
 </ul>
-<h3 id="2-paginacion-en-backend-ya-implementado">✅ 2. Paginación en Backend (YA IMPLEMENTADO)<a class="headerlink" href="#2-paginacion-en-backend-ya-implementado" title="Permanent link">&para;</a></h3>
+<h3 id="2-paginacion-en-backend-ya-implementado">✅ 2. Paginación en Backend (YA IMPLEMENTADO)</h3>
 <ul>
 <li>Propiedades: <code>$currentPage</code> y <code>$perPage</code> (20 items por defecto)</li>
 <li>Computed properties: <code>$this-&gt;paginatedItems</code> y <code>$this-&gt;totalPages</code></li>
 <li>Métodos: <code>previousPage()</code>, <code>nextPage()</code>, <code>goToPage($page)</code></li>
 <li><strong>Impacto</strong>: Renderiza solo 20 items en lugar de 265</li>
 </ul>
-<h2 id="implementacion-en-vista-blade-pendiente">Implementación en Vista Blade (PENDIENTE)<a class="headerlink" href="#implementacion-en-vista-blade-pendiente" title="Permanent link">&para;</a></h2>
-<h3 id="en-el-archivo-resourcesviewslivewiresettingimport_invuposbladephp">En el archivo: <code>resources/views/livewire/setting/import_invupos.blade.php</code><a class="headerlink" href="#en-el-archivo-resourcesviewslivewiresettingimport_invuposbladephp" title="Permanent link">&para;</a></h3>
-<h4 id="cambio-1-usar-this-paginateditems-en-lugar-de-this-accounts">Cambio 1: Usar <code>$this-&gt;paginatedItems</code> en lugar de <code>$this-&gt;accounts[...]</code><a class="headerlink" href="#cambio-1-usar-this-paginateditems-en-lugar-de-this-accounts" title="Permanent link">&para;</a></h4>
-<p><strong>ANTES (ejemplo de categories):</strong>
-<div class="highlight"><pre><span></span><code>@foreach($accounts[&#39;categories&#39;] ?? [] as $index =&gt; $item)
-    &lt;div class=&quot;row&quot; wire:key=&quot;category-{{ $item[&#39;itemId&#39;] ?? &#39;new&#39; }}-{{ $index }}&quot;&gt;
-        {<del class="critic"> contenido </del>}
-    &lt;/div&gt;
-@endforeach
-</code></pre></div></p>
-<p><strong>DESPUÉS:</strong>
-<div class="highlight"><pre><span></span><code>{<del class="critic"> Mostrar solo items paginados </del>}
-@foreach($this-&gt;paginatedItems as $globalIndex =&gt; $item)
-    &lt;div class=&quot;row&quot; wire:key=&quot;category-{{ $item[&#39;itemId&#39;] ?? &#39;new&#39; }}-{{ $globalIndex }}&quot;&gt;
-        {<del class="critic"> contenido </del>}
-    &lt;/div&gt;
-@endforeach
+<h2 id="implementacion-en-vista-blade-pendiente">Implementación en Vista Blade (PENDIENTE)</h2>
+<h3 id="en-el-archivo-resourcesviewslivewiresettingimport_invuposbladephp">En el archivo: <code>resources/views/livewire/setting/import_invupos.blade.php</code></h3>
+<h4 id="cambio-1-usar-this-paginateditems-en-lugar-de-this-accounts">Cambio 1: Usar <code>$this-&gt;paginatedItems</code> en lugar de <code>$this-&gt;accounts[...]</code></h4>
+<p><strong>ANTES (ejemplo de categories):</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="p">@</span><span class="n">foreach</span><span class="p">(</span><span class="n">$accounts</span><span class="p">[</span><span class="err">&#39;</span><span class="n">categories</span><span class="err">&#39;</span><span class="p">]</span><span class="w"> </span><span class="o">??</span><span class="w"> </span><span class="p">[]</span><span class="w"> </span><span class="n">as</span><span class="w"> </span><span class="n">$index</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">$item</span><span class="p">)</span>
+<span class="w">    </span><span class="o">&lt;</span><span class="n">div</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;row&quot;</span><span class="w"> </span><span class="n">wire</span><span class="o">:</span><span class="n">key</span><span class="o">=</span><span class="s">&quot;category-{{ $item[&#39;itemId&#39;] ?? &#39;new&#39; }}-{{ $index }}&quot;</span><span class="o">&gt;</span>
+<span class="w">        </span><span class="p">{{</span><span class="o">--</span><span class="w"> </span><span class="n">contenido</span><span class="w"> </span><span class="o">--</span><span class="p">}}</span>
+<span class="w">    </span><span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+<span class="p">@</span><span class="n">endforeach</span>
+</code></pre></div>
 
-{<del class="critic"> Controles de paginación </del>}
-@if($this-&gt;totalPages &gt; 1)
-    &lt;div class=&quot;row mt-3&quot;&gt;
-        &lt;div class=&quot;col-12&quot;&gt;
-            &lt;div class=&quot;d-flex justify-content-between align-items-center&quot;&gt;
-                &lt;div&gt;
-                    &lt;button 
-                        wire:click=&quot;previousPage&quot; 
-                        @if($currentPage &lt;= 1) disabled @endif
-                        class=&quot;btn btn-sm btn-outline-primary&quot;&gt;
-                        &lt;i class=&quot;fas fa-chevron-left&quot;&gt;&lt;/i&gt; Anterior
-                    &lt;/button&gt;
-                &lt;/div&gt;
+<p><strong>DESPUÉS:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="p">{{</span><span class="o">--</span><span class="w"> </span><span class="n">Mostrar</span><span class="w"> </span><span class="n">solo</span><span class="w"> </span><span class="n">items</span><span class="w"> </span><span class="n">paginados</span><span class="w"> </span><span class="o">--</span><span class="p">}}</span>
+<span class="p">@</span><span class="n">foreach</span><span class="p">(</span><span class="n">$this</span><span class="o">-&gt;</span><span class="n">paginatedItems</span><span class="w"> </span><span class="n">as</span><span class="w"> </span><span class="n">$globalIndex</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">$item</span><span class="p">)</span>
+<span class="w">    </span><span class="o">&lt;</span><span class="n">div</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;row&quot;</span><span class="w"> </span><span class="n">wire</span><span class="o">:</span><span class="n">key</span><span class="o">=</span><span class="s">&quot;category-{{ $item[&#39;itemId&#39;] ?? &#39;new&#39; }}-{{ $globalIndex }}&quot;</span><span class="o">&gt;</span>
+<span class="w">        </span><span class="p">{{</span><span class="o">--</span><span class="w"> </span><span class="n">contenido</span><span class="w"> </span><span class="o">--</span><span class="p">}}</span>
+<span class="w">    </span><span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+<span class="p">@</span><span class="n">endforeach</span>
 
-                &lt;div class=&quot;text-muted&quot;&gt;
-                    Página {{ $currentPage }} de {{ $this-&gt;totalPages }}
-                    &lt;span class=&quot;ms-2&quot;&gt;({{ count($accounts[$configuration_type === &#39;payment&#39; ? &#39;details&#39; : 
-                        ($configuration_type === &#39;category&#39; ? &#39;categories&#39; : 
-                        ($configuration_type === &#39;subcategory&#39; ? &#39;subcategories&#39; : 
-                        ($configuration_type === &#39;categorypurchase&#39; ? &#39;purchasecategories&#39; : &#39;discounts&#39;)))] ?? []) }} items total)&lt;/span&gt;
-                &lt;/div&gt;
+<span class="p">{{</span><span class="o">--</span><span class="w"> </span><span class="n">Controles</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">paginación</span><span class="w"> </span><span class="o">--</span><span class="p">}}</span>
+<span class="p">@</span><span class="k">if</span><span class="p">(</span><span class="n">$this</span><span class="o">-&gt;</span><span class="n">totalPages</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+<span class="w">    </span><span class="o">&lt;</span><span class="n">div</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;row mt-3&quot;</span><span class="o">&gt;</span>
+<span class="w">        </span><span class="o">&lt;</span><span class="n">div</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;col-12&quot;</span><span class="o">&gt;</span>
+<span class="w">            </span><span class="o">&lt;</span><span class="n">div</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;d-flex justify-content-between align-items-center&quot;</span><span class="o">&gt;</span>
+<span class="w">                </span><span class="o">&lt;</span><span class="n">div</span><span class="o">&gt;</span>
+<span class="w">                    </span><span class="o">&lt;</span><span class="n">button</span><span class="w"> </span>
+<span class="w">                        </span><span class="nl">wire</span><span class="p">:</span><span class="n">click</span><span class="o">=</span><span class="s">&quot;previousPage&quot;</span><span class="w"> </span>
+<span class="w">                        </span><span class="p">@</span><span class="k">if</span><span class="p">(</span><span class="n">$currentPage</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="n">disabled</span><span class="w"> </span><span class="p">@</span><span class="n">endif</span>
+<span class="w">                        </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;btn btn-sm btn-outline-primary&quot;</span><span class="o">&gt;</span>
+<span class="w">                        </span><span class="o">&lt;</span><span class="n">i</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;fas fa-chevron-left&quot;</span><span class="o">&gt;&lt;/</span><span class="n">i</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Anterior</span>
+<span class="w">                    </span><span class="o">&lt;/</span><span class="n">button</span><span class="o">&gt;</span>
+<span class="w">                </span><span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
 
-                &lt;div&gt;
-                    &lt;button 
-                        wire:click=&quot;nextPage&quot; 
-                        @if($currentPage &gt;= $this-&gt;totalPages) disabled @endif
-                        class=&quot;btn btn-sm btn-outline-primary&quot;&gt;
-                        Siguiente &lt;i class=&quot;fas fa-chevron-right&quot;&gt;&lt;/i&gt;
-                    &lt;/button&gt;
-                &lt;/div&gt;
-            &lt;/div&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-@endif
-</code></pre></div></p>
-<h4 id="cambio-2-ajustar-indices-para-operaciones-delete-etc">Cambio 2: Ajustar índices para operaciones (delete, etc.)<a class="headerlink" href="#cambio-2-ajustar-indices-para-operaciones-delete-etc" title="Permanent link">&para;</a></h4>
+<span class="w">                </span><span class="o">&lt;</span><span class="n">div</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;text-muted&quot;</span><span class="o">&gt;</span>
+<span class="w">                    </span><span class="n">Página</span><span class="w"> </span><span class="p">{{</span><span class="w"> </span><span class="n">$currentPage</span><span class="w"> </span><span class="p">}}</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="p">{{</span><span class="w"> </span><span class="n">$this</span><span class="o">-&gt;</span><span class="n">totalPages</span><span class="w"> </span><span class="p">}}</span>
+<span class="w">                    </span><span class="o">&lt;</span><span class="n">span</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;ms-2&quot;</span><span class="o">&gt;</span><span class="p">({{</span><span class="w"> </span><span class="n">count</span><span class="p">(</span><span class="n">$accounts</span><span class="p">[</span><span class="n">$configuration_type</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="err">&#39;</span><span class="n">payment</span><span class="err">&#39;</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="err">&#39;</span><span class="n">details</span><span class="err">&#39;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span>
+<span class="w">                        </span><span class="p">(</span><span class="n">$configuration_type</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="err">&#39;</span><span class="n">category</span><span class="err">&#39;</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="err">&#39;</span><span class="n">categories</span><span class="err">&#39;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span>
+<span class="w">                        </span><span class="p">(</span><span class="n">$configuration_type</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="err">&#39;</span><span class="n">subcategory</span><span class="err">&#39;</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="err">&#39;</span><span class="n">subcategories</span><span class="err">&#39;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span>
+<span class="w">                        </span><span class="p">(</span><span class="n">$configuration_type</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="err">&#39;</span><span class="n">categorypurchase</span><span class="err">&#39;</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="err">&#39;</span><span class="n">purchasecategories</span><span class="err">&#39;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="err">&#39;</span><span class="n">discounts</span><span class="err">&#39;</span><span class="p">)))]</span><span class="w"> </span><span class="o">??</span><span class="w"> </span><span class="p">[])</span><span class="w"> </span><span class="p">}}</span><span class="w"> </span><span class="n">items</span><span class="w"> </span><span class="n">total</span><span class="p">)</span><span class="o">&lt;/</span><span class="n">span</span><span class="o">&gt;</span>
+<span class="w">                </span><span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+
+<span class="w">                </span><span class="o">&lt;</span><span class="n">div</span><span class="o">&gt;</span>
+<span class="w">                    </span><span class="o">&lt;</span><span class="n">button</span><span class="w"> </span>
+<span class="w">                        </span><span class="nl">wire</span><span class="p">:</span><span class="n">click</span><span class="o">=</span><span class="s">&quot;nextPage&quot;</span><span class="w"> </span>
+<span class="w">                        </span><span class="p">@</span><span class="k">if</span><span class="p">(</span><span class="n">$currentPage</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">$this</span><span class="o">-&gt;</span><span class="n">totalPages</span><span class="p">)</span><span class="w"> </span><span class="n">disabled</span><span class="w"> </span><span class="p">@</span><span class="n">endif</span>
+<span class="w">                        </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;btn btn-sm btn-outline-primary&quot;</span><span class="o">&gt;</span>
+<span class="w">                        </span><span class="n">Siguiente</span><span class="w"> </span><span class="o">&lt;</span><span class="n">i</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;fas fa-chevron-right&quot;</span><span class="o">&gt;&lt;/</span><span class="n">i</span><span class="o">&gt;</span>
+<span class="w">                    </span><span class="o">&lt;/</span><span class="n">button</span><span class="o">&gt;</span>
+<span class="w">                </span><span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+<span class="w">            </span><span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+<span class="w">        </span><span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+<span class="w">    </span><span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+<span class="p">@</span><span class="n">endif</span>
+</code></pre></div>
+
+<h4 id="cambio-2-ajustar-indices-para-operaciones-delete-etc">Cambio 2: Ajustar índices para operaciones (delete, etc.)</h4>
 <p><strong>IMPORTANTE</strong>: Los índices en <code>$this-&gt;paginatedItems</code> son GLOBALES (del array original), no relativos a la página.</p>
-<div class="highlight"><pre><span></span><code>{<del class="critic"> NO cambiar esto, el índice ya es global </del>}
-&lt;button wire:click=&quot;deleteCategories Account({{ $globalIndex }})&quot;&gt;
-    &lt;i class=&quot;fas fa-trash&quot;&gt;&lt;/i&gt;
-&lt;/button&gt;
+<div class="codehilite"><pre><span></span><code><span class="cp">{{</span><span class="o">--</span> <span class="nv">NO</span> <span class="nv">cambiar</span> <span class="nv">esto</span><span class="o">,</span> <span class="nv">el</span> <span class="err">í</span><span class="nv">ndice</span> <span class="nv">ya</span> <span class="nv">es</span> <span class="nv">global</span> <span class="o">-</span>-<span class="cp">}}</span>
+<span class="nt">&lt;button</span><span class="w"> </span><span class="na">wire:click=</span><span class="s">&quot;deleteCategories Account(</span><span class="cp">{{</span> <span class="err">$</span><span class="nv">globalIndex</span> <span class="cp">}}</span><span class="s">)&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;i</span><span class="w"> </span><span class="na">class=</span><span class="s">&quot;fas fa-trash&quot;</span><span class="nt">&gt;&lt;/i&gt;</span>
+<span class="nt">&lt;/button&gt;</span>
 </code></pre></div>
-<h4 id="cambio-3-opcional-paginacion-con-numeros-de-pagina">Cambio 3: Opcional - Paginación con números de página<a class="headerlink" href="#cambio-3-opcional-paginacion-con-numeros-de-pagina" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code>@if($this-&gt;totalPages &gt; 1)
-    &lt;div class=&quot;row mt-3&quot;&gt;
-        &lt;div class=&quot;col-12&quot;&gt;
-            &lt;nav&gt;
-                &lt;ul class=&quot;pagination justify-content-center mb-0&quot;&gt;
-                    {<del class="critic"> Anterior </del>}
-                    &lt;li class=&quot;page-item @if($currentPage &lt;= 1) disabled @endif&quot;&gt;
-                        &lt;button class=&quot;page-link&quot; wire:click=&quot;previousPage&quot;&gt;
-                            &lt;i class=&quot;fas fa-chevron-left&quot;&gt;&lt;/i&gt;
-                        &lt;/button&gt;
-                    &lt;/li&gt;
 
-                    {<del class="critic"> Números de página (mostrar max 5) </del>}
-                    @php
-                        $start = max(1, $currentPage - 2);
-                        $end = min($this-&gt;totalPages, $currentPage + 2);
-                    @endphp
+<h4 id="cambio-3-opcional-paginacion-con-numeros-de-pagina">Cambio 3: Opcional - Paginación con números de página</h4>
+<div class="codehilite"><pre><span></span><code><span class="p">@</span><span class="k">if</span><span class="p">(</span><span class="n">$this</span><span class="o">-&gt;</span><span class="n">totalPages</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+<span class="w">    </span><span class="o">&lt;</span><span class="n">div</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;row mt-3&quot;</span><span class="o">&gt;</span>
+<span class="w">        </span><span class="o">&lt;</span><span class="n">div</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;col-12&quot;</span><span class="o">&gt;</span>
+<span class="w">            </span><span class="o">&lt;</span><span class="n">nav</span><span class="o">&gt;</span>
+<span class="w">                </span><span class="o">&lt;</span><span class="n">ul</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;pagination justify-content-center mb-0&quot;</span><span class="o">&gt;</span>
+<span class="w">                    </span><span class="p">{{</span><span class="o">--</span><span class="w"> </span><span class="n">Anterior</span><span class="w"> </span><span class="o">--</span><span class="p">}}</span>
+<span class="w">                    </span><span class="o">&lt;</span><span class="n">li</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;page-item @if($currentPage &lt;= 1) disabled @endif&quot;</span><span class="o">&gt;</span>
+<span class="w">                        </span><span class="o">&lt;</span><span class="n">button</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;page-link&quot;</span><span class="w"> </span><span class="n">wire</span><span class="o">:</span><span class="n">click</span><span class="o">=</span><span class="s">&quot;previousPage&quot;</span><span class="o">&gt;</span>
+<span class="w">                            </span><span class="o">&lt;</span><span class="n">i</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;fas fa-chevron-left&quot;</span><span class="o">&gt;&lt;/</span><span class="n">i</span><span class="o">&gt;</span>
+<span class="w">                        </span><span class="o">&lt;/</span><span class="n">button</span><span class="o">&gt;</span>
+<span class="w">                    </span><span class="o">&lt;/</span><span class="n">li</span><span class="o">&gt;</span>
 
-                    @if($start &gt; 1)
-                        &lt;li class=&quot;page-item&quot;&gt;
-                            &lt;button class=&quot;page-link&quot; wire:click=&quot;goToPage(1)&quot;&gt;1&lt;/button&gt;
-                        &lt;/li&gt;
-                        @if($start &gt; 2)
-                            &lt;li class=&quot;page-item disabled&quot;&gt;&lt;span class=&quot;page-link&quot;&gt;...&lt;/span&gt;&lt;/li&gt;
-                        @endif
-                    @endif
+<span class="w">                    </span><span class="p">{{</span><span class="o">--</span><span class="w"> </span><span class="n">Números</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">página</span><span class="w"> </span><span class="p">(</span><span class="n">mostrar</span><span class="w"> </span><span class="n">max</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span><span class="w"> </span><span class="o">--</span><span class="p">}}</span>
+<span class="w">                    </span><span class="p">@</span><span class="n">php</span>
+<span class="w">                        </span><span class="n">$start</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">max</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">$currentPage</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span>
+<span class="w">                        </span><span class="n">$end</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">min</span><span class="p">(</span><span class="n">$this</span><span class="o">-&gt;</span><span class="n">totalPages</span><span class="p">,</span><span class="w"> </span><span class="n">$currentPage</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">2</span><span class="p">);</span>
+<span class="w">                    </span><span class="p">@</span><span class="n">endphp</span>
 
-                    @for($i = $start; $i &lt;= $end; $i++)
-                        &lt;li class=&quot;page-item @if($i == $currentPage) active @endif&quot;&gt;
-                            &lt;button class=&quot;page-link&quot; wire:click=&quot;goToPage({{ $i }})&quot;&gt;{{ $i }}&lt;/button&gt;
-                        &lt;/li&gt;
-                    @endfor
+<span class="w">                    </span><span class="p">@</span><span class="k">if</span><span class="p">(</span><span class="n">$start</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+<span class="w">                        </span><span class="o">&lt;</span><span class="n">li</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;page-item&quot;</span><span class="o">&gt;</span>
+<span class="w">                            </span><span class="o">&lt;</span><span class="n">button</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;page-link&quot;</span><span class="w"> </span><span class="n">wire</span><span class="o">:</span><span class="n">click</span><span class="o">=</span><span class="s">&quot;goToPage(1)&quot;</span><span class="o">&gt;</span><span class="mi">1</span><span class="o">&lt;/</span><span class="n">button</span><span class="o">&gt;</span>
+<span class="w">                        </span><span class="o">&lt;/</span><span class="n">li</span><span class="o">&gt;</span>
+<span class="w">                        </span><span class="p">@</span><span class="k">if</span><span class="p">(</span><span class="n">$start</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
+<span class="w">                            </span><span class="o">&lt;</span><span class="n">li</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;page-item disabled&quot;</span><span class="o">&gt;&lt;</span><span class="n">span</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;page-link&quot;</span><span class="o">&gt;</span><span class="p">...</span><span class="o">&lt;/</span><span class="n">span</span><span class="o">&gt;&lt;/</span><span class="n">li</span><span class="o">&gt;</span>
+<span class="w">                        </span><span class="p">@</span><span class="n">endif</span>
+<span class="w">                    </span><span class="p">@</span><span class="n">endif</span>
 
-                    @if($end &lt; $this-&gt;totalPages)
-                        @if($end &lt; $this-&gt;totalPages - 1)
-                            &lt;li class=&quot;page-item disabled&quot;&gt;&lt;span class=&quot;page-link&quot;&gt;...&lt;/span&gt;&lt;/li&gt;
-                        @endif
-                        &lt;li class=&quot;page-item&quot;&gt;
-                            &lt;button class=&quot;page-link&quot; wire:click=&quot;goToPage({{ $this-&gt;totalPages }})&quot;&gt;{{ $this-&gt;totalPages }}&lt;/button&gt;
-                        &lt;/li&gt;
-                    @endif
+<span class="w">                    </span><span class="p">@</span><span class="k">for</span><span class="p">(</span><span class="n">$i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">$start</span><span class="p">;</span><span class="w"> </span><span class="n">$i</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">$end</span><span class="p">;</span><span class="w"> </span><span class="n">$i</span><span class="o">++</span><span class="p">)</span>
+<span class="w">                        </span><span class="o">&lt;</span><span class="n">li</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;page-item @if($i == $currentPage) active @endif&quot;</span><span class="o">&gt;</span>
+<span class="w">                            </span><span class="o">&lt;</span><span class="n">button</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;page-link&quot;</span><span class="w"> </span><span class="n">wire</span><span class="o">:</span><span class="n">click</span><span class="o">=</span><span class="s">&quot;goToPage({{ $i }})&quot;</span><span class="o">&gt;</span><span class="p">{{</span><span class="w"> </span><span class="n">$i</span><span class="w"> </span><span class="p">}}</span><span class="o">&lt;/</span><span class="n">button</span><span class="o">&gt;</span>
+<span class="w">                        </span><span class="o">&lt;/</span><span class="n">li</span><span class="o">&gt;</span>
+<span class="w">                    </span><span class="p">@</span><span class="n">endfor</span>
 
-                    {<del class="critic"> Siguiente </del>}
-                    &lt;li class=&quot;page-item @if($currentPage &gt;= $this-&gt;totalPages) disabled @endif&quot;&gt;
-                        &lt;button class=&quot;page-link&quot; wire:click=&quot;nextPage&quot;&gt;
-                            &lt;i class=&quot;fas fa-chevron-right&quot;&gt;&lt;/i&gt;
-                        &lt;/button&gt;
-                    &lt;/li&gt;
-                &lt;/ul&gt;
-            &lt;/nav&gt;
+<span class="w">                    </span><span class="p">@</span><span class="k">if</span><span class="p">(</span><span class="n">$end</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">$this</span><span class="o">-&gt;</span><span class="n">totalPages</span><span class="p">)</span>
+<span class="w">                        </span><span class="p">@</span><span class="k">if</span><span class="p">(</span><span class="n">$end</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">$this</span><span class="o">-&gt;</span><span class="n">totalPages</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+<span class="w">                            </span><span class="o">&lt;</span><span class="n">li</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;page-item disabled&quot;</span><span class="o">&gt;&lt;</span><span class="n">span</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;page-link&quot;</span><span class="o">&gt;</span><span class="p">...</span><span class="o">&lt;/</span><span class="n">span</span><span class="o">&gt;&lt;/</span><span class="n">li</span><span class="o">&gt;</span>
+<span class="w">                        </span><span class="p">@</span><span class="n">endif</span>
+<span class="w">                        </span><span class="o">&lt;</span><span class="n">li</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;page-item&quot;</span><span class="o">&gt;</span>
+<span class="w">                            </span><span class="o">&lt;</span><span class="n">button</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;page-link&quot;</span><span class="w"> </span><span class="n">wire</span><span class="o">:</span><span class="n">click</span><span class="o">=</span><span class="s">&quot;goToPage({{ $this-&gt;totalPages }})&quot;</span><span class="o">&gt;</span><span class="p">{{</span><span class="w"> </span><span class="n">$this</span><span class="o">-&gt;</span><span class="n">totalPages</span><span class="w"> </span><span class="p">}}</span><span class="o">&lt;/</span><span class="n">button</span><span class="o">&gt;</span>
+<span class="w">                        </span><span class="o">&lt;/</span><span class="n">li</span><span class="o">&gt;</span>
+<span class="w">                    </span><span class="p">@</span><span class="n">endif</span>
 
-            &lt;div class=&quot;text-center text-muted mt-2 small&quot;&gt;
-                Mostrando {{ ($currentPage - 1) * $perPage + 1 }} - 
-                {{ min($currentPage * $perPage, count($accounts[$configuration_type === &#39;payment&#39; ? &#39;details&#39; : 
-                    ($configuration_type === &#39;category&#39; ? &#39;categories&#39; : 
-                    ($configuration_type === &#39;subcategory&#39; ? &#39;subcategories&#39; : 
-                    ($configuration_type === &#39;categorypurchase&#39; ? &#39;purchasecategories&#39; : &#39;discounts&#39;)))] ?? [])) }} 
-                de {{ count($accounts[$configuration_type === &#39;payment&#39; ? &#39;details&#39; : 
-                    ($configuration_type === &#39;category&#39; ? &#39;categories&#39; : 
-                    ($configuration_type === &#39;subcategory&#39; ? &#39;subcategories&#39; : 
-                    ($configuration_type === &#39;categorypurchase&#39; ? &#39;purchasecategories&#39; : &#39;discounts&#39;)))] ?? []) }} items
-            &lt;/div&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-@endif
+<span class="w">                    </span><span class="p">{{</span><span class="o">--</span><span class="w"> </span><span class="n">Siguiente</span><span class="w"> </span><span class="o">--</span><span class="p">}}</span>
+<span class="w">                    </span><span class="o">&lt;</span><span class="n">li</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;page-item @if($currentPage &gt;= $this-&gt;totalPages) disabled @endif&quot;</span><span class="o">&gt;</span>
+<span class="w">                        </span><span class="o">&lt;</span><span class="n">button</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;page-link&quot;</span><span class="w"> </span><span class="n">wire</span><span class="o">:</span><span class="n">click</span><span class="o">=</span><span class="s">&quot;nextPage&quot;</span><span class="o">&gt;</span>
+<span class="w">                            </span><span class="o">&lt;</span><span class="n">i</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;fas fa-chevron-right&quot;</span><span class="o">&gt;&lt;/</span><span class="n">i</span><span class="o">&gt;</span>
+<span class="w">                        </span><span class="o">&lt;/</span><span class="n">button</span><span class="o">&gt;</span>
+<span class="w">                    </span><span class="o">&lt;/</span><span class="n">li</span><span class="o">&gt;</span>
+<span class="w">                </span><span class="o">&lt;/</span><span class="n">ul</span><span class="o">&gt;</span>
+<span class="w">            </span><span class="o">&lt;/</span><span class="n">nav</span><span class="o">&gt;</span>
+
+<span class="w">            </span><span class="o">&lt;</span><span class="n">div</span><span class="w"> </span><span class="k">class</span><span class="o">=</span><span class="s">&quot;text-center text-muted mt-2 small&quot;</span><span class="o">&gt;</span>
+<span class="w">                </span><span class="n">Mostrando</span><span class="w"> </span><span class="p">{{</span><span class="w"> </span><span class="p">(</span><span class="n">$currentPage</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">$perPage</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">}}</span><span class="w"> </span><span class="o">-</span><span class="w"> </span>
+<span class="w">                </span><span class="p">{{</span><span class="w"> </span><span class="n">min</span><span class="p">(</span><span class="n">$currentPage</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">$perPage</span><span class="p">,</span><span class="w"> </span><span class="n">count</span><span class="p">(</span><span class="n">$accounts</span><span class="p">[</span><span class="n">$configuration_type</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="err">&#39;</span><span class="n">payment</span><span class="err">&#39;</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="err">&#39;</span><span class="n">details</span><span class="err">&#39;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span>
+<span class="w">                    </span><span class="p">(</span><span class="n">$configuration_type</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="err">&#39;</span><span class="n">category</span><span class="err">&#39;</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="err">&#39;</span><span class="n">categories</span><span class="err">&#39;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span>
+<span class="w">                    </span><span class="p">(</span><span class="n">$configuration_type</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="err">&#39;</span><span class="n">subcategory</span><span class="err">&#39;</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="err">&#39;</span><span class="n">subcategories</span><span class="err">&#39;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span>
+<span class="w">                    </span><span class="p">(</span><span class="n">$configuration_type</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="err">&#39;</span><span class="n">categorypurchase</span><span class="err">&#39;</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="err">&#39;</span><span class="n">purchasecategories</span><span class="err">&#39;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="err">&#39;</span><span class="n">discounts</span><span class="err">&#39;</span><span class="p">)))]</span><span class="w"> </span><span class="o">??</span><span class="w"> </span><span class="p">[]))</span><span class="w"> </span><span class="p">}}</span><span class="w"> </span>
+<span class="w">                </span><span class="n">de</span><span class="w"> </span><span class="p">{{</span><span class="w"> </span><span class="n">count</span><span class="p">(</span><span class="n">$accounts</span><span class="p">[</span><span class="n">$configuration_type</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="err">&#39;</span><span class="n">payment</span><span class="err">&#39;</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="err">&#39;</span><span class="n">details</span><span class="err">&#39;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span>
+<span class="w">                    </span><span class="p">(</span><span class="n">$configuration_type</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="err">&#39;</span><span class="n">category</span><span class="err">&#39;</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="err">&#39;</span><span class="n">categories</span><span class="err">&#39;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span>
+<span class="w">                    </span><span class="p">(</span><span class="n">$configuration_type</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="err">&#39;</span><span class="n">subcategory</span><span class="err">&#39;</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="err">&#39;</span><span class="n">subcategories</span><span class="err">&#39;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span>
+<span class="w">                    </span><span class="p">(</span><span class="n">$configuration_type</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="err">&#39;</span><span class="n">categorypurchase</span><span class="err">&#39;</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="err">&#39;</span><span class="n">purchasecategories</span><span class="err">&#39;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="err">&#39;</span><span class="n">discounts</span><span class="err">&#39;</span><span class="p">)))]</span><span class="w"> </span><span class="o">??</span><span class="w"> </span><span class="p">[])</span><span class="w"> </span><span class="p">}}</span><span class="w"> </span><span class="n">items</span>
+<span class="w">            </span><span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+<span class="w">        </span><span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+<span class="w">    </span><span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+<span class="p">@</span><span class="n">endif</span>
 </code></pre></div>
-<h2 id="otras-optimizaciones-adicionales">Otras Optimizaciones Adicionales<a class="headerlink" href="#otras-optimizaciones-adicionales" title="Permanent link">&para;</a></h2>
-<h3 id="3-wiremodellazy-aplicar-en-blade">3. wire:model.lazy (Aplicar en Blade)<a class="headerlink" href="#3-wiremodellazy-aplicar-en-blade" title="Permanent link">&para;</a></h3>
+
+<h2 id="otras-optimizaciones-adicionales">Otras Optimizaciones Adicionales</h2>
+<h3 id="3-wiremodellazy-aplicar-en-blade">3. wire:model.lazy (Aplicar en Blade)</h3>
 <p>Cambiar todos los <code>wire:model</code> a <code>wire:model.lazy</code> o <code>wire:model.defer</code>:</p>
-<p><strong>ANTES:</strong>
-<div class="highlight"><pre><span></span><code>&lt;select wire:model=&quot;accounts.categories.{{ $index }}.itemId&quot;&gt;
-</code></pre></div></p>
-<p><strong>DESPUÉS:</strong>
-<div class="highlight"><pre><span></span><code>&lt;select wire:model.lazy=&quot;accounts.categories.{{ $index }}.itemId&quot;&gt;
-{<del class="critic"> o mejor aún </del>}
-&lt;select wire:model.defer=&quot;accounts.categories.{{ $index }}.itemId&quot;&gt;
-</code></pre></div></p>
+<p><strong>ANTES:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="x">&lt;select wire:model=&quot;accounts.categories.</span><span class="cp">{{</span> <span class="err">$</span><span class="nv">index</span> <span class="cp">}}</span><span class="x">.itemId&quot;&gt;</span>
+</code></pre></div>
+
+<p><strong>DESPUÉS:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="x">&lt;select wire:model.lazy=&quot;accounts.categories.</span><span class="cp">{{</span> <span class="err">$</span><span class="nv">index</span> <span class="cp">}}</span><span class="x">.itemId&quot;&gt;</span>
+<span class="cp">{{</span><span class="o">--</span> <span class="nv">o</span> <span class="nv">mejor</span> <span class="nv">aún</span> <span class="o">-</span>-<span class="cp">}}</span>
+<span class="x">&lt;select wire:model.defer=&quot;accounts.categories.</span><span class="cp">{{</span> <span class="err">$</span><span class="nv">index</span> <span class="cp">}}</span><span class="x">.itemId&quot;&gt;</span>
+</code></pre></div>
+
 <p><strong>Diferencia</strong>:
 - <code>wire:model</code>: Actualiza en cada tecla/cambio (muchos requests)
 - <code>wire:model.lazy</code>: Actualiza al perder focus (menos requests)
 - <code>wire:model.defer</code>: Solo actualiza al hacer submit/acción (mínimos requests)</p>
-<h3 id="4-debouncing-en-busquedas-si-aplica">4. Debouncing en Búsquedas (Si aplica)<a class="headerlink" href="#4-debouncing-en-busquedas-si-aplica" title="Permanent link">&para;</a></h3>
-<p>Si hay campos de búsqueda:
-<div class="highlight"><pre><span></span><code>&lt;input 
-    type=&quot;text&quot; 
-    wire:model.debounce.500ms=&quot;search&quot;
-    placeholder=&quot;Buscar...&quot;&gt;
-</code></pre></div></p>
-<h2 id="resultados-esperados">Resultados Esperados<a class="headerlink" href="#resultados-esperados" title="Permanent link">&para;</a></h2>
-<h3 id="sin-optimizaciones">Sin Optimizaciones:<a class="headerlink" href="#sin-optimizaciones" title="Permanent link">&para;</a></h3>
+<h3 id="4-debouncing-en-busquedas-si-aplica">4. Debouncing en Búsquedas (Si aplica)</h3>
+<p>Si hay campos de búsqueda:</p>
+<div class="codehilite"><pre><span></span><code><span class="p">&lt;</span><span class="nx">input</span><span class="w"> </span>
+<span class="w">    </span><span class="k">type</span><span class="p">=</span><span class="s">&quot;text&quot;</span><span class="w"> </span>
+<span class="w">    </span><span class="nx">wire</span><span class="p">:</span><span class="nx">model</span><span class="p">.</span><span class="nx">debounce</span><span class="m m-Double">.500</span><span class="nx">ms</span><span class="p">=</span><span class="s">&quot;search&quot;</span>
+<span class="w">    </span><span class="nx">placeholder</span><span class="p">=</span><span class="s">&quot;Buscar...&quot;</span><span class="p">&gt;</span>
+</code></pre></div>
+
+<h2 id="resultados-esperados">Resultados Esperados</h2>
+<h3 id="sin-optimizaciones">Sin Optimizaciones:</h3>
 <ul>
 <li><strong>265 items</strong> renderizados simultáneamente</li>
 <li><strong>~265 selects</strong> con options cargados</li>
 <li><strong>Queries repetidas</strong> en cada render</li>
 <li><strong>Tiempo de carga</strong>: ~3-5 segundos</li>
 </ul>
-<h3 id="con-optimizaciones">Con Optimizaciones:<a class="headerlink" href="#con-optimizaciones" title="Permanent link">&para;</a></h3>
+<h3 id="con-optimizaciones">Con Optimizaciones:</h3>
 <ul>
 <li><strong>20 items</strong> renderizados por página (88% menos)</li>
 <li><strong>~20 selects</strong> con options cargados</li>
 <li><strong>Queries cacheadas</strong> (sin repetición)</li>
 <li><strong>Tiempo de carga</strong>: ~0.5-1 segundo ⚡</li>
 </ul>
-<h2 id="ajuste-de-perpage">Ajuste de <code>$perPage</code><a class="headerlink" href="#ajuste-de-perpage" title="Permanent link">&para;</a></h2>
+<h2 id="ajuste-de-perpage">Ajuste de <code>$perPage</code></h2>
 <p>Si 20 items sigue siendo lento, puedes reducir en el componente:</p>
-<div class="highlight"><pre><span></span><code><span class="x">// En ImportInvupos.php</span>
+<div class="codehilite"><pre><span></span><code><span class="x">// En ImportInvupos.php</span>
 <span class="x">public $perPage = 10;  // Reducir a 10 items por página</span>
 </code></pre></div>
-<p>O hacerlo configurable:
-<div class="highlight"><pre><span></span><code><span class="x">public $perPage = 20;</span>
+
+<p>O hacerlo configurable:</p>
+<div class="codehilite"><pre><span></span><code><span class="x">public $perPage = 20;</span>
 
 <span class="x">public function changePerPage($value)</span>
 <span class="x">{</span>
 <span class="x">    $this-&gt;perPage = $value;</span>
 <span class="x">    $this-&gt;currentPage = 1;</span>
 <span class="x">}</span>
-</code></pre></div></p>
-<div class="highlight"><pre><span></span><code>&lt;select wire:change=&quot;changePerPage($event.target.value)&quot;&gt;
-    &lt;option value=&quot;10&quot;&gt;10 por página&lt;/option&gt;
-    &lt;option value=&quot;20&quot; selected&gt;20 por página&lt;/option&gt;
-    &lt;option value=&quot;50&quot;&gt;50 por página&lt;/option&gt;
-    &lt;option value=&quot;100&quot;&gt;Ver todos&lt;/option&gt;
-&lt;/select&gt;
 </code></pre></div>
-<h2 id="testing">Testing<a class="headerlink" href="#testing" title="Permanent link">&para;</a></h2>
+
+<div class="codehilite"><pre><span></span><code><span class="nt">&lt;select</span><span class="w"> </span><span class="na">wire:change=</span><span class="s">&quot;changePerPage($event.target.value)&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;option</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;10&quot;</span><span class="nt">&gt;</span>10<span class="w"> </span>por<span class="w"> </span>página<span class="nt">&lt;/option&gt;</span>
+<span class="w">    </span><span class="nt">&lt;option</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;20&quot;</span><span class="w"> </span><span class="err">selected</span><span class="nt">&gt;</span>20<span class="w"> </span>por<span class="w"> </span>página<span class="nt">&lt;/option&gt;</span>
+<span class="w">    </span><span class="nt">&lt;option</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;50&quot;</span><span class="nt">&gt;</span>50<span class="w"> </span>por<span class="w"> </span>página<span class="nt">&lt;/option&gt;</span>
+<span class="w">    </span><span class="nt">&lt;option</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;100&quot;</span><span class="nt">&gt;</span>Ver<span class="w"> </span>todos<span class="nt">&lt;/option&gt;</span>
+<span class="nt">&lt;/select&gt;</span>
+</code></pre></div>
+
+<h2 id="testing">Testing</h2>
 <ol>
 <li><strong>Cargar página con 265 items</strong></li>
 <li><strong>Verificar que solo se muestran 20</strong></li>
@@ -2187,7 +2243,7 @@
 <li><strong>Agregar item en página 2 → Verificar que se guarda correctamente</strong></li>
 <li><strong>Eliminar item → Verificar que paginación se ajusta</strong></li>
 </ol>
-<h2 id="notas-importantes">Notas Importantes<a class="headerlink" href="#notas-importantes" title="Permanent link">&para;</a></h2>
+<h2 id="notas-importantes">Notas Importantes</h2>
 <ul>
 <li>✅ Los índices son GLOBALES, no hay que ajustar delete/add</li>
 <li>✅ Al agregar item nuevo, aparecerá en la última página</li>
@@ -2246,7 +2302,7 @@
       
       
     
-    <a href="https://github.com/aghabrego/docucenter" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+    <a href="https://github.com/aghabrego/docucenter-public" target="_blank" rel="noopener" title="github.com" class="md-social__link">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
     </a>
   
