@@ -55,8 +55,16 @@ nav:
     - Performance:
       - optimizations/customer-supplier-optimizations.md
       - optimizations/mysql-optimization-circuit-breaker.md
+  - Integraciones:
+    - integrations/README.md
+    - Google Drive:
+      - integrations/google-drive-setup-summary.md
+      - integrations/google-drive-configuration-guide.md
+      - integrations/google-drive-email-backup-scheduler.md
+      - integrations/google-drive-backup-implementation.md
+      - integrations/google-cloud-console-links.md
   - Documentación Técnica:
-    - Soluciones Técnicas: technical/README.md
+    - Soluciones Técnicas: technical/index.md
     - Pagos y Cálculos:
       - technical/payment-calculation-fix.md
       - technical/solucion-sincronizacion-pagos.md
