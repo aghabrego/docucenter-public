@@ -1,0 +1,3128 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentación técnica y de usuario de DocuCenter - Sistema de facturación electrónica">
+      
+      
+        <meta name="author" content="aghabrego">
+      
+      
+        <link rel="canonical" href="https://aghabrego.github.io/docucenter-public/technical/analisis-migracion-otros-pagos-customer-receipt/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="https://home.apconpanama.me/wp-content/uploads/2024/03/logo3.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Analisis: Migracion de Tenders a customer_receipt_* - DocuCenter</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="light-blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#analisis-migracion-de-tenders-a-customer_receipt_" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="DocuCenter" class="md-header__button md-logo" aria-label="DocuCenter" data-md-component="logo">
+      
+  <img src="https://home.apconpanama.me/wp-content/uploads/2024/03/logo3.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            DocuCenter
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Analisis: Migracion de Tenders a customer_receipt_*
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="light-blue"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/aghabrego/docucenter-public" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    aghabrego/docucenter-public
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Pestañas" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Inicio
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../api/" class="md-tabs__link">
+          
+  
+  
+  APIs
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../optimizations/" class="md-tabs__link">
+          
+  
+  
+  Optimizaciones
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+  Documentación Técnica
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../validations/" class="md-tabs__link">
+          
+  
+  
+  Validaciones
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="DocuCenter" class="md-nav__button md-logo" aria-label="DocuCenter" data-md-component="logo">
+      
+  <img src="https://home.apconpanama.me/wp-content/uploads/2024/03/logo3.png" alt="logo">
+
+    </a>
+    DocuCenter
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/aghabrego/docucenter-public" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    aghabrego/docucenter-public
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    APIs
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    APIs
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    APIs de DocuCenter
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Facturación Electrónica (FE)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Facturación Electrónica (FE)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/fe-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Facturación Electrónica (FE) - DocuCenter
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/acicloud-fe-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Facturación Electrónica - Integración ACICloud FE
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/document-emission-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Facturación Electrónica - Emisión de Documentos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/shopify-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Facturación Electrónica - Integración Shopify
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/lightspeed-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Facturación Electrónica - Integración Lightspeed
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/maxgym-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Facturación Electrónica - Integración Maxgym
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/meypar-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Facturación Electrónica - Integración Meypar
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/fe/kart21-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Facturación Electrónica - Integración Kart21
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sage ACICloud
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Sage ACICloud
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/customers-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Sage ACICloud - Módulo Clientes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/products-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Productos - Sage ACICloud
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/sales-orders-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Sage ACICloud - Módulo Órdenes de Venta
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/purchases-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Compras - Sage ACICloud
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/payments-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Pagos y Créditos - Sage ACICloud
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/inventory-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Inventario - Sage ACICloud
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/sage-acicloud/jobs-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Trabajos/Jobs - Sage ACICloud
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Organizaciones
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Organizaciones
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/organizations/organizations-api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API de Organizaciones
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Optimizaciones
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Optimizaciones
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optimizations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Optimizaciones - DocuCenter
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Performance
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Performance
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optimizations/customer-supplier-optimizations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Optimizaciones para el manejo de muchos clientes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optimizations/mysql-optimization-circuit-breaker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Optimización MySQL 8.0 y Circuit Breaker para DocuCenter
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Documentación Técnica
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Documentación Técnica
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Soluciones Técnicas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pagos y Cálculos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Pagos y Cálculos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../payment-calculation-fix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Análisis de Discrepancias en Cálculo de Pagos - Facturación Electrónica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../solucion-sincronizacion-pagos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Solución Final: Sincronización Completa de Pagos en Facturación Electrónica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validaciones
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Validaciones
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../validations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validaciones - DocuCenter
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Documentos Fiscales
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Documentos Fiscales
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../validations/createSale-ruc-validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validación de RUC en CreateSaleMaxgymRequest
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../validations/maxgym-ruc-validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validación de RUC en MaxgymService
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-contexto-actual" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Contexto actual
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-propuesta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Propuesta
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Propuesta">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-que-cambia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Que cambia
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-que-no-cambia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Que NO cambia
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-diseno-del-recibo-de-tender" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Diseno del recibo de tender
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Diseno del recibo de tender">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-patron-una-factura-varios-recibos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Patron: una factura, varios recibos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-cabecera-customer_receipt_header_imp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Cabecera: customer_receipt_header_imp
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-detalle-customer_receipt_detail_imp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 Detalle: customer_receipt_detail_imp
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-factura-del-turno-limpia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4 Factura del turno limpia
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-cambios-de-esquema-requeridos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Cambios de esquema requeridos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Cambios de esquema requeridos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-no-se-requieren-columnas-nuevas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 No se requieren columnas nuevas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-comando-a-ejecutar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Comando a ejecutar
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-cambios-en-codigo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Cambios en codigo
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Cambios en codigo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-apphttplivewireadminsage50createfuelsalephp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 app/Http/Livewire/Admin/Sage50/CreateFuelSale.php
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.1 app/Http/Livewire/Admin/Sage50/CreateFuelSale.php">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#511-cambiar-net_due-a-0-en-la-factura-del-turno" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1.1 Cambiar Net_due a 0 en la factura del turno
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#512-reemplazar-el-bloque-de-tenders-de-sales_detail_imp-a-customer_receipt_" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1.2 Reemplazar el bloque de tenders: de Sales_Detail_Imp a customer_receipt_*
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#513-el-bloque-de-otros-pagos-credito-no-se-modifica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1.3 El bloque de "otros pagos" (credito) NO se modifica
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#514-agregar-imports" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1.4 Agregar imports
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#515-validarjornadaduplicada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1.5 validarJornadaDuplicada()
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-appservicesdailyreportservicephp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 app/Services/DailyReportService.php
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.2 app/Services/DailyReportService.php">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#521-getpaymentmethods-para-gasolineras" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2.1 getPaymentMethods() para gasolineras
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#522-getordersdetail" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2.2 getOrdersDetail()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#523-getcreditsalessummary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2.3 getCreditSalesSummary()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#524-getsalesbyemployee" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2.4 getSalesByEmployee()
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-datos-historicos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Datos historicos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Datos historicos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-credito-no-se-migra" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 Credito: NO se migra
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-tenders-comando-de-migracion-historica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 Tenders: comando de migracion historica
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6.2 Tenders: comando de migracion historica">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#621-firma-del-comando" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2.1 Firma del comando
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#622-logica-del-comando-resumen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2.2 Logica del comando (resumen)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#623-salida-esperada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2.3 Salida esperada
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#624-consideraciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2.4 Consideraciones
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#625-comandos-relacionados-referencia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2.5 Comandos relacionados (referencia)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#626-script-de-prueba-antes-de-ejecutar-en-produccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2.6 Script de prueba antes de ejecutar en produccion
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-verificaciones-posteriores-al-cambio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Verificaciones posteriores al cambio
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-riesgos-identificados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Riesgos identificados
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-archivos-a-modificar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Archivos a modificar
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-archivos-no-modificados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Archivos NO modificados
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-orden-de-implementacion-sugerido" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Orden de implementacion sugerido
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-validaciones-pendientes-antes-de-implementar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Validaciones pendientes antes de implementar
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="analisis-migracion-de-tenders-a-customer_receipt_">Analisis: Migracion de Tenders a customer_receipt_*<a class="headerlink" href="#analisis-migracion-de-tenders-a-customer_receipt_" title="Permanent link">&para;</a></h1>
+<p><strong>Fecha:</strong> 2026-07-05
+<strong>Estado:</strong> Documento informativo / propuesta
+<strong>Modulo afectado:</strong> <code>CreateFuelSale</code> (turnos de gasolinera) y <code>DailyReportService</code> (reporte diario)</p>
+<hr />
+<h2 id="1-contexto-actual">1. Contexto actual<a class="headerlink" href="#1-contexto-actual" title="Permanent link">&para;</a></h2>
+<p>En <code>app/Http/Livewire/Admin/Sage50/CreateFuelSale.php</code>, al guardar un turno de gasolinera la factura del turno (<code>M-{id}</code>, <code>T-{id}</code>, <code>N-{id}</code>) mezcla <strong>ventas y pagos</strong> en <code>Sales_Header_Imp</code> / <code>Sales_Detail_Imp</code>. Esto ocurre en dos bloques:</p>
+<ol>
+<li><strong>Tenders fijos</strong> (<code>$this-&gt;pagos</code>): efectivo, tarjetas, Yappy, etc. Cada uno genera una linea negativa en <code>Sales_Detail_Imp</code> con <code>Category_ID = 'TENDER'</code> y resta del balance del turno.</li>
+<li><strong>Otros pagos</strong> (<code>$this-&gt;otrosPagos</code>): ventas a credito a clientes. Generan una linea negativa con <code>Item_Code = 'CREDIT_PAYMENT'</code> y ademas crean una <strong>factura aparte</strong> <code>MC-{id}</code> en <code>Sales_Header_Imp</code>.</li>
+</ol>
+<p>Este analisis cubre <strong>solo el primer caso</strong> (tenders). El credito a clientes NO se migra: se mantiene tal como esta hoy (factura <code>MC-*</code> + linea <code>CREDIT_PAYMENT</code> en el turno padre).</p>
+<p>El problema con los tenders es que estan almacenados como lineas negativas en la misma tabla donde estan las ventas. Eso obliga al reporte diario a hacer JOIN con <code>Sales_Detail_Imp</code> y filtrar por <code>Category_ID = 'TENDER'</code> para extraer el desglose por forma de pago. El sistema canonico para registrar pagos es <code>customer_receipt_header_imp</code> / <code>customer_receipt_detail_imp</code> (es la misma tabla que ya usan los clientes no-gasolineros).</p>
+<hr />
+<h2 id="2-propuesta">2. Propuesta<a class="headerlink" href="#2-propuesta" title="Permanent link">&para;</a></h2>
+<p>Migrar los <strong>tenders fijos</strong> (BRINKS, VISA, MASTERCARD, etc.) desde <code>Sales_Detail_Imp.Category_ID='TENDER'</code> hacia <code>customer_receipt_*</code>. El credito a clientes <strong>no se toca</strong>.</p>
+<h3 id="21-que-cambia">2.1 Que cambia<a class="headerlink" href="#21-que-cambia" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Pieza</th>
+<th>Antes</th>
+<th>Despues</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Lineas de tenders en <code>Sales_Detail_Imp</code> del turno</td>
+<td>Filas con <code>Category_ID='TENDER'</code>, monto negativo</td>
+<td><strong>Se eliminan</strong></td>
+</tr>
+<tr>
+<td>Recibo por cada tender</td>
+<td>(no existe)</td>
+<td><code>customer_receipt_header_imp</code> con <code>Method_of_payment = BRINKS/VISA/MASTERCARD/...</code> + un detalle</td>
+</tr>
+<tr>
+<td>Factura del turno (<code>M-{id}</code>)</td>
+<td>Ventas + tenders mezclados</td>
+<td><strong>Solo ventas</strong> (combustible + mercancia)</td>
+</tr>
+<tr>
+<td>Factura de credito <code>MC-*</code></td>
+<td>Existe, se crea al guardar el turno</td>
+<td><strong>Sin cambios</strong></td>
+</tr>
+<tr>
+<td>Linea <code>CREDIT_PAYMENT</code> en turno padre</td>
+<td>Existe</td>
+<td><strong>Sin cambios</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="22-que-no-cambia">2.2 Que NO cambia<a class="headerlink" href="#22-que-no-cambia" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Estructura de la factura del turno</strong>: sigue siendo <code>Sales_Header_Imp</code> con <code>InvoiceNumber = {turnoCode}-{id}</code>.</li>
+<li><strong>Facturas <code>MC-*</code> de credito</strong>: se siguen creando igual que hoy.</li>
+<li><strong>Lineas <code>CREDIT_PAYMENT</code> en el turno padre</strong>: se siguen creando igual que hoy.</li>
+<li><strong><code>AR_Account</code></strong>: se sigue leyendo de <code>ImportConfigurationMagaya</code> y se sigue guardando en la factura <code>MC-*</code>.</li>
+<li><strong>QuickBooks</strong>, <strong>Sage 50</strong>, <strong>FE/PAC</strong>, <strong>GJE</strong>: no se tocan.</li>
+<li><strong>Top empleados, proyecciones, monthly totals</strong>: siguen leyendo <code>Sales_Header_Imp</code> con <code>origin = 'fuel-station'</code>.</li>
+</ul>
+<hr />
+<h2 id="3-diseno-del-recibo-de-tender">3. Diseno del recibo de tender<a class="headerlink" href="#3-diseno-del-recibo-de-tender" title="Permanent link">&para;</a></h2>
+<h3 id="31-patron-una-factura-varios-recibos">3.1 Patron: una factura, varios recibos<a class="headerlink" href="#31-patron-una-factura-varios-recibos" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>M-123 (factura, solo ventas)
+  ├── linea 1: DIESEL  $X   (Item_id=DIESEL, Category=FUEL)
+  ├── linea 2: 91      $Y   (Item_id=91,    Category=FUEL)
+  ├── linea 3: Prod 5  $Z   (Item_id=PROD5, Category=MERCHANDISE)
+  ├── linea 4: CREDIT  $20  (Item_Code=CREDIT_PAYMENT, Category=TENDER)   &lt;- se mantiene
+  │
+  ├── customer_receipt 1: BRINKS  $50  (CheckNumber=M-123, Method_of_payment=BRINKS)
+  ├── customer_receipt 2: VISA    $80  (CheckNumber=M-123, Method_of_payment=VISA)
+  └── customer_receipt 3: YAPPY   $10  (CheckNumber=M-123, Method_of_payment=YAPPY)
+</code></pre></div>
+<p>Los recibos de tenders comparten la misma <code>CheckNumber = M-{id}</code> que la factura del turno. El campo <code>CheckNumber</code> ya existe en <code>customer_receipt_header_imp</code> y <code>SalesHeaderImp</code> ya tiene la relacion inversa <code>receipts()</code>.</p>
+<h3 id="32-cabecera-customer_receipt_header_imp">3.2 Cabecera: <code>customer_receipt_header_imp</code><a class="headerlink" href="#32-cabecera-customer_receipt_header_imp" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Valor</th>
+<th>Origen</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>UniqueReceiptID</code></td>
+<td>(autoincrement)</td>
+<td>BD</td>
+</tr>
+<tr>
+<td><code>ID_compania</code></td>
+<td><code>$company-&gt;ID_compania</code></td>
+<td>organizacion</td>
+</tr>
+<tr>
+<td><code>org_source_id</code></td>
+<td><code>$this-&gt;organization-&gt;id</code></td>
+<td>organizacion</td>
+</tr>
+<tr>
+<td><code>ID_companiaOrigen</code></td>
+<td><code>$company-&gt;ID_compania</code></td>
+<td>organizacion</td>
+</tr>
+<tr>
+<td><code>Reference</code></td>
+<td><code>''</code> (vacio, no aplica a tenders)</td>
+<td>constante</td>
+</tr>
+<tr>
+<td><code>CheckNumber</code></td>
+<td><code>$invoiceNumber</code> (ej: <code>M-123</code>)</td>
+<td>turno padre</td>
+</tr>
+<tr>
+<td><code>ReceiptNumber</code></td>
+<td><code>$invoiceNumber</code></td>
+<td>turno padre</td>
+</tr>
+<tr>
+<td><code>ParentTransactionId</code></td>
+<td><code>$header-&gt;getKey()</code></td>
+<td>turno padre</td>
+</tr>
+<tr>
+<td><code>CustomerID</code></td>
+<td><code>''</code> (vacio, no hay cliente en tender)</td>
+<td>constante</td>
+</tr>
+<tr>
+<td><code>CustomerName</code></td>
+<td><code>''</code></td>
+<td>constante</td>
+</tr>
+<tr>
+<td><code>Total</code></td>
+<td><code>$monto</code> (positivo)</td>
+<td>UI</td>
+</tr>
+<tr>
+<td><code>Rurned</code></td>
+<td><code>0.0</code></td>
+<td>constante</td>
+</tr>
+<tr>
+<td><code>Tips</code></td>
+<td><code>0.0</code></td>
+<td>constante</td>
+</tr>
+<tr>
+<td><code>Method_of_payment</code></td>
+<td><code>'BRINKS'</code>, <code>'VISA'</code>, <code>'CREDIT'</code>, etc.</td>
+<td>UI</td>
+</tr>
+<tr>
+<td><code>TaxID</code></td>
+<td><code>null</code></td>
+<td>default</td>
+</tr>
+<tr>
+<td><code>SalesRepID</code></td>
+<td><code>$this-&gt;vendedor</code></td>
+<td>sesion</td>
+</tr>
+<tr>
+<td><code>Date</code></td>
+<td><code>$fecha</code></td>
+<td>UI</td>
+</tr>
+<tr>
+<td><code>CashAccountID</code></td>
+<td><code>''</code></td>
+<td>constante</td>
+</tr>
+<tr>
+<td><code>Prepayment</code></td>
+<td><code>0</code></td>
+<td>constante</td>
+</tr>
+<tr>
+<td><code>Created</code></td>
+<td><code>now()</code></td>
+<td>timestamp</td>
+</tr>
+<tr>
+<td><code>LAST_CHANGE</code></td>
+<td><code>now()</code></td>
+<td>timestamp</td>
+</tr>
+<tr>
+<td><code>Enviado</code></td>
+<td><code>0</code></td>
+<td>flag</td>
+</tr>
+<tr>
+<td><code>Error</code></td>
+<td><code>0</code></td>
+<td>flag</td>
+</tr>
+<tr>
+<td><code>user</code></td>
+<td><code>auth()-&gt;id()</code></td>
+<td>sesion</td>
+</tr>
+<tr>
+<td><code>user_id</code></td>
+<td><code>auth()-&gt;id()</code></td>
+<td>sesion</td>
+</tr>
+<tr>
+<td><code>PaymentTypeID</code></td>
+<td><code>'FUEL'</code></td>
+<td>discriminador</td>
+</tr>
+<tr>
+<td><code>Exported</code></td>
+<td><code>0</code></td>
+<td>flag</td>
+</tr>
+<tr>
+<td><code>EzeeReservationNo</code></td>
+<td><code>null</code></td>
+<td>default</td>
+</tr>
+<tr>
+<td><code>DepositTicketID</code></td>
+<td><code>null</code></td>
+<td>default</td>
+</tr>
+</tbody>
+</table>
+<h3 id="33-detalle-customer_receipt_detail_imp">3.3 Detalle: <code>customer_receipt_detail_imp</code><a class="headerlink" href="#33-detalle-customer_receipt_detail_imp" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Valor</th>
+<th>Origen</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ID</code></td>
+<td>(autoincrement)</td>
+<td>BD</td>
+</tr>
+<tr>
+<td><code>ID_compania</code></td>
+<td><code>$company-&gt;ID_compania</code></td>
+<td>organizacion</td>
+</tr>
+<tr>
+<td><code>org_source_id</code></td>
+<td><code>$this-&gt;organization-&gt;id</code></td>
+<td>organizacion</td>
+</tr>
+<tr>
+<td><code>UniqueReceiptID</code></td>
+<td><code>$receipt-&gt;UniqueReceiptID</code></td>
+<td>FK al recibo</td>
+</tr>
+<tr>
+<td><code>InvoiceNumber</code></td>
+<td><code>$invoiceNumber</code> (ej: <code>M-123</code>)</td>
+<td>turno padre</td>
+</tr>
+<tr>
+<td><code>ApplyTo</code></td>
+<td><code>0</code></td>
+<td>constante</td>
+</tr>
+<tr>
+<td><code>Description</code></td>
+<td>label del tender (ej: <code>'Visa'</code>, <code>'Brinks'</code>)</td>
+<td>derivado</td>
+</tr>
+<tr>
+<td><code>Quantity</code></td>
+<td><code>1</code></td>
+<td>constante</td>
+</tr>
+<tr>
+<td><code>Item_id</code></td>
+<td><code>strtoupper($tipo)</code> (ej: <code>BRINKS</code>)</td>
+<td>derivado</td>
+</tr>
+<tr>
+<td><code>Unit_Price</code></td>
+<td><code>$monto</code> (positivo)</td>
+<td>UI</td>
+</tr>
+<tr>
+<td><code>Net_line</code></td>
+<td><code>$monto</code> (positivo)</td>
+<td>UI</td>
+</tr>
+<tr>
+<td><code>Taxable</code></td>
+<td><code>0</code></td>
+<td>constante</td>
+</tr>
+<tr>
+<td><code>user_id</code></td>
+<td><code>auth()-&gt;id()</code></td>
+<td>sesion</td>
+</tr>
+</tbody>
+</table>
+<h3 id="34-factura-del-turno-limpia">3.4 Factura del turno limpia<a class="headerlink" href="#34-factura-del-turno-limpia" title="Permanent link">&para;</a></h3>
+<p><code>Sales_Header_Imp</code> con:</p>
+<ul>
+<li><code>InvoiceNumber = M-{id}</code> (maestra)</li>
+<li><code>Subtotal = suma de Net_line de las lineas de venta</code></li>
+<li><code>Net_due = 0</code> (porque la factura ya no incluye tenders; estos se registran aparte en <code>customer_receipt_*</code>)</li>
+<li><code>AR_Account</code> se mantiene (sigue usandose para las facturas <code>MC-*</code> de credito que se siguen creando)</li>
+<li><code>origin = 'fuel-station'</code></li>
+</ul>
+<p><code>Sales_Detail_Imp</code> con:</p>
+<ul>
+<li>Solo lineas de venta (combustible + mercancia) con <code>Item_id</code> poblado.</li>
+<li>Lineas <code>CREDIT_PAYMENT</code> para cada "otro pago" (sin cambios).</li>
+<li><strong>Ninguna</strong> linea con <code>Category_ID = 'TENDER'</code> (estas se eliminan, ahora son recibos).</li>
+</ul>
+<blockquote>
+<p>Nota: al poner <code>Net_due = 0</code>, las queries del reporte diario que filtran <code>Net_due &gt; 0</code> dejaran de contar las facturas de gasolinera. Hay que ajustar el discriminador (ver seccion 5).</p>
+</blockquote>
+<hr />
+<h2 id="4-cambios-de-esquema-requeridos">4. Cambios de esquema requeridos<a class="headerlink" href="#4-cambios-de-esquema-requeridos" title="Permanent link">&para;</a></h2>
+<h3 id="41-no-se-requieren-columnas-nuevas">4.1 No se requieren columnas nuevas<a class="headerlink" href="#41-no-se-requieren-columnas-nuevas" title="Permanent link">&para;</a></h3>
+<p><code>customer_receipt_header_imp</code> ya tiene <code>CheckNumber</code>, <code>ParentTransactionId</code>, <code>Method_of_payment</code> y todos los indices necesarios en el stub <code>app/Models/stubs/customer_receipt_header_imp.sql.stub</code>.</p>
+<p><code>customer_receipt_detail_imp</code> ya tiene <code>UniqueReceiptID</code>, <code>InvoiceNumber</code> y <code>Item_id</code>.</p>
+<p><strong>Conclusion:</strong> no hay que agregar columnas. La estructura ya soporta el patron factura + N recibos.</p>
+<h3 id="42-comando-a-ejecutar">4.2 Comando a ejecutar<a class="headerlink" href="#42-comando-a-ejecutar" title="Permanent link">&para;</a></h3>
+<p>Ninguno. Solo despliegue del codigo nuevo.</p>
+<hr />
+<h2 id="5-cambios-en-codigo">5. Cambios en codigo<a class="headerlink" href="#5-cambios-en-codigo" title="Permanent link">&para;</a></h2>
+<h3 id="51-apphttplivewireadminsage50createfuelsalephp">5.1 <code>app/Http/Livewire/Admin/Sage50/CreateFuelSale.php</code><a class="headerlink" href="#51-apphttplivewireadminsage50createfuelsalephp" title="Permanent link">&para;</a></h3>
+<h4 id="511-cambiar-net_due-a-0-en-la-factura-del-turno">5.1.1 Cambiar <code>Net_due</code> a 0 en la factura del turno<a class="headerlink" href="#511-cambiar-net_due-a-0-en-la-factura-del-turno" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="x">$header = SalesHeaderImp::query()-&gt;create([</span>
+<span class="x">    &#39;ID_compania&#39;   =&gt; $company-&gt;ID_compania ?? null,</span>
+<span class="x">    &#39;InvoiceNumber&#39; =&gt; &#39;TMP&#39;,</span>
+<span class="x">    &#39;CustomerID&#39;    =&gt; $this-&gt;customer_id,</span>
+<span class="x">    &#39;CustomerName&#39;  =&gt; $this-&gt;customer_name,</span>
+<span class="x">    &#39;CustomerPO&#39;    =&gt; null,</span>
+<span class="x">    &#39;SalesRepID&#39;    =&gt; $this-&gt;vendedor,</span>
+<span class="x">    &#39;IdStore&#39;       =&gt; $this-&gt;estacion,</span>
+<span class="x">    &#39;DeviceId&#39;      =&gt; $deviceId,</span>
+<span class="x">    &#39;AR_Account&#39;    =&gt; $arAccount ?: null,</span>
+<span class="x">    &#39;Date&#39;          =&gt; $fecha,</span>
+<span class="x">    &#39;DueDate&#39;       =&gt; $fecha,</span>
+<span class="x">    &#39;Subtotal&#39;      =&gt; $totalVentas,</span>
+<span class="x">    &#39;Net_due&#39;       =&gt; 0.00,  // &lt;- los tenders ya no estan aqui</span>
+<span class="x">    &#39;Enviado&#39;       =&gt; 0,</span>
+<span class="x">    &#39;Error&#39;         =&gt; 0,</span>
+<span class="x">    &#39;origin&#39;        =&gt; &#39;fuel-station&#39;,</span>
+<span class="x">]);</span>
+</code></pre></div>
+<h4 id="512-reemplazar-el-bloque-de-tenders-de-sales_detail_imp-a-customer_receipt_">5.1.2 Reemplazar el bloque de tenders: de <code>Sales_Detail_Imp</code> a <code>customer_receipt_*</code><a class="headerlink" href="#512-reemplazar-el-bloque-de-tenders-de-sales_detail_imp-a-customer_receipt_" title="Permanent link">&para;</a></h4>
+<p><strong>Codigo actual a eliminar</strong> (en el <code>foreach ($this-&gt;pagos as $tipo =&gt; $monto)</code>):</p>
+<div class="highlight"><pre><span></span><code><span class="x">foreach ($this-&gt;pagos as $tipo =&gt; $monto) {</span>
+<span class="x">    $monto = (float) ($monto ?? 0);</span>
+
+<span class="x">    if ($monto &lt;= 0) {</span>
+<span class="x">        continue;</span>
+<span class="x">    }</span>
+
+<span class="x">    $label = self::TENDER_LABELS[$tipo] ?? $tipo;</span>
+
+<span class="x">    SalesDetailImp::query()-&gt;create([</span>
+<span class="x">        &#39;ID&#39;           =&gt; $header-&gt;getKey(),</span>
+<span class="x">        &#39;ID_compania&#39;  =&gt; $header-&gt;ID_compania,</span>
+<span class="x">        &#39;InvoiceNumber&#39; =&gt; $invoiceNumber,</span>
+<span class="x">        &#39;Item_Code&#39;    =&gt; $tipo,</span>
+<span class="x">        &#39;Sequential&#39;   =&gt; (string) $sequential,</span>
+<span class="x">        &#39;Description&#39;  =&gt; $label,</span>
+<span class="x">        &#39;JobID&#39;        =&gt; null,</span>
+<span class="x">        &#39;JobPhaseID&#39;   =&gt; null,</span>
+<span class="x">        &#39;Quantity&#39;     =&gt; 1,</span>
+<span class="x">        &#39;Unit_Price&#39;   =&gt; -$monto,</span>
+<span class="x">        &#39;Sub_Total&#39;    =&gt; -$monto,</span>
+<span class="x">        &#39;Net_line&#39;     =&gt; -$monto,</span>
+<span class="x">        &#39;Itbms&#39;        =&gt; 0,</span>
+<span class="x">        &#39;Taxable&#39;      =&gt; 0,</span>
+<span class="x">        &#39;Category_ID&#39;  =&gt; &#39;TENDER&#39;,</span>
+<span class="x">    ]);</span>
+
+<span class="x">    $sequential++;</span>
+<span class="x">}</span>
+</code></pre></div>
+<p><strong>Codigo nuevo:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="x">foreach ($this-&gt;pagos as $tipo =&gt; $monto) {</span>
+<span class="x">    $montoT = (float) ($monto ?? 0);</span>
+
+<span class="x">    if ($montoT &lt;= 0) {</span>
+<span class="x">        continue;</span>
+<span class="x">    }</span>
+
+<span class="x">    $label = self::TENDER_LABELS[$tipo] ?? $tipo;</span>
+
+<span class="x">    $receipt = CustomerReceiptHeaderImp::query()-&gt;create([</span>
+<span class="x">        &#39;ID_compania&#39;         =&gt; $company-&gt;ID_compania ?? null,</span>
+<span class="x">        &#39;org_source_id&#39;       =&gt; $this-&gt;organization-&gt;id,</span>
+<span class="x">        &#39;ID_companiaOrigen&#39;   =&gt; $company-&gt;ID_compania ?? null,</span>
+<span class="x">        &#39;Reference&#39;           =&gt; &#39;&#39;,</span>
+<span class="x">        &#39;CheckNumber&#39;         =&gt; $invoiceNumber,</span>
+<span class="x">        &#39;ReceiptNumber&#39;       =&gt; $invoiceNumber,</span>
+<span class="x">        &#39;ParentTransactionId&#39; =&gt; $header-&gt;getKey(),</span>
+<span class="x">        &#39;CustomerID&#39;          =&gt; &#39;&#39;,</span>
+<span class="x">        &#39;CustomerName&#39;        =&gt; &#39;&#39;,</span>
+<span class="x">        &#39;Total&#39;               =&gt; $montoT,</span>
+<span class="x">        &#39;Rurned&#39;              =&gt; 0.0,</span>
+<span class="x">        &#39;Tips&#39;                =&gt; 0.0,</span>
+<span class="x">        &#39;Method_of_payment&#39;   =&gt; strtoupper($tipo),</span>
+<span class="x">        &#39;TaxID&#39;               =&gt; null,</span>
+<span class="x">        &#39;SalesRepID&#39;          =&gt; $this-&gt;vendedor,</span>
+<span class="x">        &#39;Date&#39;                =&gt; $fecha,</span>
+<span class="x">        &#39;CashAccountID&#39;       =&gt; &#39;&#39;,</span>
+<span class="x">        &#39;Prepayment&#39;          =&gt; 0,</span>
+<span class="x">        &#39;Created&#39;             =&gt; now(),</span>
+<span class="x">        &#39;LAST_CHANGE&#39;         =&gt; now(),</span>
+<span class="x">        &#39;Enviado&#39;             =&gt; 0,</span>
+<span class="x">        &#39;Error&#39;               =&gt; 0,</span>
+<span class="x">        &#39;user&#39;                =&gt; auth()-&gt;id(),</span>
+<span class="x">        &#39;user_id&#39;             =&gt; auth()-&gt;id(),</span>
+<span class="x">        &#39;PaymentTypeID&#39;       =&gt; &#39;FUEL&#39;,</span>
+<span class="x">        &#39;Exported&#39;            =&gt; 0,</span>
+<span class="x">        &#39;EzeeReservationNo&#39;   =&gt; null,</span>
+<span class="x">        &#39;DepositTicketID&#39;     =&gt; null,</span>
+<span class="x">    ]);</span>
+
+<span class="x">    CustomerReceiptDetailImp::query()-&gt;create([</span>
+<span class="x">        &#39;ID_compania&#39;     =&gt; $company-&gt;ID_compania ?? null,</span>
+<span class="x">        &#39;org_source_id&#39;   =&gt; $this-&gt;organization-&gt;id,</span>
+<span class="x">        &#39;UniqueReceiptID&#39; =&gt; $receipt-&gt;UniqueReceiptID,</span>
+<span class="x">        &#39;InvoiceNumber&#39;   =&gt; $invoiceNumber,</span>
+<span class="x">        &#39;ApplyTo&#39;         =&gt; 0,</span>
+<span class="x">        &#39;Description&#39;     =&gt; $label,</span>
+<span class="x">        &#39;Net_line&#39;        =&gt; $montoT,</span>
+<span class="x">        &#39;Quantity&#39;        =&gt; 1,</span>
+<span class="x">        &#39;Item_id&#39;         =&gt; strtoupper($tipo),</span>
+<span class="x">        &#39;Unit_Price&#39;      =&gt; $montoT,</span>
+<span class="x">        &#39;Taxable&#39;         =&gt; 0,</span>
+<span class="x">        &#39;user_id&#39;         =&gt; auth()-&gt;id(),</span>
+<span class="x">    ]);</span>
+<span class="x">}</span>
+</code></pre></div>
+<h4 id="513-el-bloque-de-otros-pagos-credito-no-se-modifica">5.1.3 El bloque de "otros pagos" (credito) NO se modifica<a class="headerlink" href="#513-el-bloque-de-otros-pagos-credito-no-se-modifica" title="Permanent link">&para;</a></h4>
+<p>El <code>foreach ($this-&gt;otrosPagos as $otroPago)</code> se mantiene exactamente como esta hoy: crea la linea <code>CREDIT_PAYMENT</code> en el turno padre y la factura <code>MC-*</code> aparte.</p>
+<h4 id="514-agregar-imports">5.1.4 Agregar imports<a class="headerlink" href="#514-agregar-imports" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code><span class="x">use App\Models\CustomerReceiptHeaderImp;</span>
+<span class="x">use App\Models\CustomerReceiptDetailImp;</span>
+</code></pre></div>
+<p><code>ImportConfigurationMagaya</code> se mantiene (sigue usandose para <code>AR_Account</code> de la factura <code>MC-*</code>).</p>
+<h4 id="515-validarjornadaduplicada">5.1.5 <code>validarJornadaDuplicada()</code><a class="headerlink" href="#515-validarjornadaduplicada" title="Permanent link">&para;</a></h4>
+<p><strong>No requiere cambios.</strong> La validacion cuenta facturas por <code>LEFT(InvoiceNumber,1) = {turnoCode}</code>, lo cual sigue funcionando porque la factura del turno mantiene su <code>InvoiceNumber = M-{id}</code>.</p>
+<h3 id="52-appservicesdailyreportservicephp">5.2 <code>app/Services/DailyReportService.php</code><a class="headerlink" href="#52-appservicesdailyreportservicephp" title="Permanent link">&para;</a></h3>
+<h4 id="521-getpaymentmethods-para-gasolineras">5.2.1 <code>getPaymentMethods()</code> para gasolineras<a class="headerlink" href="#521-getpaymentmethods-para-gasolineras" title="Permanent link">&para;</a></h4>
+<p>Reemplazar la lectura desde <code>Sales_Detail_Imp</code> por la lectura desde <code>customer_receipt_header_imp</code> (tenders), y mantener la lectura de <code>Sales_Detail_Imp</code> solo para <code>Item_Code='CREDIT_PAYMENT'</code> (credito, que no se migra).</p>
+<p><strong>Codigo actual:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="x">if ($this-&gt;isFuelStation()) {</span>
+<span class="x">    if (! $this-&gt;tableExists(&#39;Sales_Detail_Imp&#39;) || ! $this-&gt;tableExists(&#39;Sales_Header_Imp&#39;)) {</span>
+<span class="x">        return [];</span>
+<span class="x">    }</span>
+
+<span class="x">    $rows = DB::table(&#39;Sales_Detail_Imp as d&#39;)</span>
+<span class="x">        -&gt;join(&#39;Sales_Header_Imp as h&#39;, &#39;h.InvoiceNumber&#39;, &#39;=&#39;, &#39;d.InvoiceNumber&#39;)</span>
+<span class="x">        -&gt;whereDate(&#39;h.Date&#39;, $date-&gt;toDateString())</span>
+<span class="x">        -&gt;whereIn(&#39;d.Category_ID&#39;, [&#39;TENDER&#39;, &#39;CREDIT_PAYMENT&#39;])</span>
+<span class="x">        -&gt;selectRaw(&#39;d.Item_Code as payment_method, COUNT(*) as count, SUM(ABS(d.Net_line)) as total&#39;)</span>
+<span class="x">        -&gt;groupBy(&#39;d.Item_Code&#39;)</span>
+<span class="x">        -&gt;orderByDesc(&#39;total&#39;)</span>
+<span class="x">        -&gt;get();</span>
+
+<span class="x">    return $rows-&gt;map(fn($r) =&gt; [...])-&gt;toArray();</span>
+<span class="x">}</span>
+</code></pre></div>
+<p><strong>Codigo nuevo:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="x">if ($this-&gt;isFuelStation()) {</span>
+<span class="x">    if (! $this-&gt;tableExists(&#39;customer_receipt_header_imp&#39;)) {</span>
+<span class="x">        return [];</span>
+<span class="x">    }</span>
+
+<span class="x">    // Tenders: leer desde customer_receipt_header_imp</span>
+<span class="x">    $tenders = DB::table(&#39;customer_receipt_header_imp&#39;)</span>
+<span class="x">        -&gt;whereDate(&#39;Date&#39;, $date-&gt;toDateString())</span>
+<span class="x">        -&gt;where(function ($q) {</span>
+<span class="x">            $q-&gt;where(&#39;CheckNumber&#39;, &#39;LIKE&#39;, &#39;M-%&#39;)</span>
+<span class="x">              -&gt;orWhere(&#39;CheckNumber&#39;, &#39;LIKE&#39;, &#39;T-%&#39;)</span>
+<span class="x">              -&gt;orWhere(&#39;CheckNumber&#39;, &#39;LIKE&#39;, &#39;N-%&#39;);</span>
+<span class="x">        })</span>
+<span class="x">        -&gt;selectRaw(&#39;Method_of_payment as payment_method, COUNT(*) as count, COALESCE(SUM(Total), 0) as total&#39;)</span>
+<span class="x">        -&gt;groupBy(&#39;Method_of_payment&#39;);</span>
+
+<span class="x">    // Credito: leer desde Sales_Detail_Imp (no se migra a recibos)</span>
+<span class="x">    $credit = collect();</span>
+<span class="x">    if ($this-&gt;tableExists(&#39;Sales_Detail_Imp&#39;) &amp;&amp; $this-&gt;tableExists(&#39;Sales_Header_Imp&#39;)) {</span>
+<span class="x">        $credit = DB::table(&#39;Sales_Detail_Imp as d&#39;)</span>
+<span class="x">            -&gt;join(&#39;Sales_Header_Imp as h&#39;, &#39;h.InvoiceNumber&#39;, &#39;=&#39;, &#39;d.InvoiceNumber&#39;)</span>
+<span class="x">            -&gt;whereDate(&#39;h.Date&#39;, $date-&gt;toDateString())</span>
+<span class="x">            -&gt;where(&#39;d.Item_Code&#39;, &#39;CREDIT_PAYMENT&#39;)</span>
+<span class="x">            -&gt;selectRaw(&quot;&#39;CREDIT&#39; as payment_method, COUNT(*) as count, SUM(ABS(d.Net_line)) as total&quot;)</span>
+<span class="x">            -&gt;groupBy(&#39;payment_method&#39;);</span>
+<span class="x">    }</span>
+
+<span class="x">    $rows = $tenders-&gt;get()-&gt;concat($credit)-&gt;sortByDesc(&#39;total&#39;)-&gt;values();</span>
+
+<span class="x">    return $rows-&gt;map(fn($r) =&gt; [</span>
+<span class="x">        &#39;payment_method&#39; =&gt; $r-&gt;payment_method,</span>
+<span class="x">        &#39;count&#39;          =&gt; (int)   $r-&gt;count,</span>
+<span class="x">        &#39;total&#39;          =&gt; (float) $r-&gt;total,</span>
+<span class="x">    ])-&gt;toArray();</span>
+<span class="x">}</span>
+</code></pre></div>
+<blockquote>
+<p>Esto mantiene el desglose completo: tenders desde <code>customer_receipt_*</code> + credito desde <code>Sales_Detail_Imp.Item_Code='CREDIT_PAYMENT'</code>.</p>
+</blockquote>
+<h4 id="522-getordersdetail">5.2.2 <code>getOrdersDetail()</code><a class="headerlink" href="#522-getordersdetail" title="Permanent link">&para;</a></h4>
+<p>La factura del turno pasa a <code>Net_due = 0</code>, asi que el filtro <code>Net_due &gt; 0</code> dejaria de contarla. Hay que reemplazarlo por <code>whereExists</code>:</p>
+<p><strong>Codigo actual:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="x">if ($this-&gt;isFuelStation()) {</span>
+<span class="x">    $query-&gt;where(&#39;Net_due&#39;, &#39;&gt;&#39;, 0);</span>
+<span class="x">}</span>
+</code></pre></div>
+<p><strong>Codigo nuevo:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="x">if ($this-&gt;isFuelStation()) {</span>
+<span class="x">    $query-&gt;where(&#39;origin&#39;, &#39;fuel-station&#39;)</span>
+<span class="x">        -&gt;whereExists(function ($q) {</span>
+<span class="x">            $q-&gt;select(DB::raw(1))</span>
+<span class="x">              -&gt;from(&#39;Sales_Detail_Imp as d&#39;)</span>
+<span class="x">              -&gt;whereColumn(&#39;d.InvoiceNumber&#39;, &#39;Sales_Header_Imp.InvoiceNumber&#39;)</span>
+<span class="x">              -&gt;whereIn(&#39;d.Category_ID&#39;, [&#39;FUEL&#39;, &#39;MERCHANDISE&#39;]);</span>
+<span class="x">        });</span>
+<span class="x">}</span>
+</code></pre></div>
+<p>El resto de <code>getOrdersDetail()</code> (incluyendo el calculo de <code>net_total_cash</code> vs <code>net_total_credit</code> con filtro <code>MC-/TC-/NC-</code>) <strong>no cambia</strong>.</p>
+<h4 id="523-getcreditsalessummary">5.2.3 <code>getCreditSalesSummary()</code><a class="headerlink" href="#523-getcreditsalessummary" title="Permanent link">&para;</a></h4>
+<p><strong>Sin cambios.</strong> Sigue leyendo desde <code>Sales_Header_Imp</code> con filtro por prefijo <code>MC-/TC-/NC-</code>.</p>
+<h4 id="524-getsalesbyemployee">5.2.4 <code>getSalesByEmployee()</code><a class="headerlink" href="#524-getsalesbyemployee" title="Permanent link">&para;</a></h4>
+<p>Mismo ajuste que en <code>getOrdersDetail()</code>: reemplazar <code>Net_due &gt; 0</code> por <code>whereExists</code>:</p>
+<p><strong>Codigo nuevo:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="x">if ($this-&gt;isFuelStation()) {</span>
+<span class="x">    $query-&gt;where(&#39;origin&#39;, &#39;fuel-station&#39;)</span>
+<span class="x">        -&gt;whereExists(function ($q) {</span>
+<span class="x">            $q-&gt;select(DB::raw(1))</span>
+<span class="x">              -&gt;from(&#39;Sales_Detail_Imp as d&#39;)</span>
+<span class="x">              -&gt;whereColumn(&#39;d.InvoiceNumber&#39;, &#39;Sales_Header_Imp.InvoiceNumber&#39;)</span>
+<span class="x">              -&gt;whereIn(&#39;d.Category_ID&#39;, [&#39;FUEL&#39;, &#39;MERCHANDISE&#39;]);</span>
+<span class="x">        });</span>
+<span class="x">}</span>
+</code></pre></div>
+<hr />
+<h2 id="6-datos-historicos">6. Datos historicos<a class="headerlink" href="#6-datos-historicos" title="Permanent link">&para;</a></h2>
+<h3 id="61-credito-no-se-migra">6.1 Credito: NO se migra<a class="headerlink" href="#61-credito-no-se-migra" title="Permanent link">&para;</a></h3>
+<p>Las 9+38 facturas <code>MC-*</code> existentes en BD <strong>no se migran</strong>. Siguen siendo validas y el reporte diario las sigue leyendo con el filtro por prefijo.</p>
+<h3 id="62-tenders-comando-de-migracion-historica">6.2 Tenders: comando de migracion historica<a class="headerlink" href="#62-tenders-comando-de-migracion-historica" title="Permanent link">&para;</a></h3>
+<p>Para los tenders historicos (lineas <code>Category_ID = 'TENDER'</code> en <code>Sales_Detail_Imp</code> con monto negativo) se propone un <strong>comando artisan</strong> que mueva esas lineas a <code>customer_receipt_*</code> sin intervencion manual.</p>
+<h4 id="621-firma-del-comando">6.2.1 Firma del comando<a class="headerlink" href="#621-firma-del-comando" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code>php artisan fuel-station:migrate-tenders-to-receipts {--dry-run} {--organization=ID} {--from=YYYY-MM-DD} {--to=YYYY-MM-DD}
+</code></pre></div>
+<p>Opciones:</p>
+<table>
+<thead>
+<tr>
+<th>Opcion</th>
+<th>Descripcion</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--dry-run</code></td>
+<td>Recorre todas las lineas TENDER y muestra un resumen sin escribir nada. Util para estimar volumen antes de ejecutar.</td>
+</tr>
+<tr>
+<td><code>--organization=ID</code></td>
+<td>Procesa solo una organizacion especifica. Si se omite, itera todas.</td>
+</tr>
+<tr>
+<td><code>--from=YYYY-MM-DD</code></td>
+<td>(Opcional) Procesa solo lineas con <code>Date &gt;= DATE</code> (sobre el <code>Date</code> del header).</td>
+</tr>
+<tr>
+<td><code>--to=YYYY-MM-DD</code></td>
+<td>(Opcional) Procesa solo lineas con <code>Date &lt;= DATE</code> (sobre el <code>Date</code> del header).</td>
+</tr>
+</tbody>
+</table>
+<p>Namespace: <code>App\Console\Commands\Sage50\MigrateTendersToReceiptsCommand</code></p>
+<p>Archivo: <code>app/Console/Commands/Sage50/MigrateTendersToReceiptsCommand.php</code></p>
+<p>Convencion: sigue el patron de <code>app/Console/Commands/Configuration/AddColumnToOrganizationsTableCommand.php</code> (usa <code>Organization::query()-&gt;cursor()</code> y <code>DB::connection()-&gt;useDatabase($organization-&gt;database)</code> para iterar).</p>
+<h4 id="622-logica-del-comando-resumen">6.2.2 Logica del comando (resumen)<a class="headerlink" href="#622-logica-del-comando-resumen" title="Permanent link">&para;</a></h4>
+<p>Por cada organizacion:</p>
+<ol>
+<li>Conectar a la BD de la organizacion con <code>setCustomConnectionWithoutUser($organization-&gt;database)</code>.</li>
+<li>Verificar que existan las tablas <code>Sales_Detail_Imp</code>, <code>Sales_Header_Imp</code>, <code>customer_receipt_header_imp</code>, <code>customer_receipt_detail_imp</code>. Si falta alguna, abortar para esa organizacion con mensaje claro.</li>
+<li>Para cada linea en <code>Sales_Detail_Imp</code> donde:</li>
+<li><code>Category_ID = 'TENDER'</code></li>
+<li><code>Net_line &lt; 0</code> (es un pago, no un ajuste)</li>
+<li>el <code>InvoiceNumber</code> asociado en <code>Sales_Header_Imp</code> empieza con <code>M-</code>, <code>T-</code> o <code>N-</code> (turno de gasolinera) y <code>origin = 'fuel-station'</code></li>
+</ol>
+<p>ejecutar:</p>
+<p>a. <strong>Crear <code>customer_receipt_header_imp</code></strong> con los mismos campos que <code>CreateFuelSale</code> usaria (seccion 3.2). <code>Method_of_payment = Item_Code</code> de la linea original. <code>Total = ABS(Net_line)</code>. <code>CheckNumber = InvoiceNumber</code>. <code>ParentTransactionId = ID</code> del header. <code>Date = Date</code> del header.</p>
+<p>b. <strong>Crear <code>customer_receipt_detail_imp</code></strong> vinculado al recibo anterior con <code>Item_id = Item_Code</code>, <code>Description = Description</code>, <code>Net_line = ABS(Net_line)</code>, <code>InvoiceNumber = InvoiceNumber</code>.</p>
+<p>c. <strong>Eliminar la linea original</strong> de <code>Sales_Detail_Imp</code>.
+4. <strong>NO tocar</strong> las lineas con <code>Category_ID = 'CREDIT_PAYMENT'</code> (es el credito a clientes, se mantiene como esta).
+5. <strong>NO tocar</strong> lineas TENDER de facturas que NO sean de gasolinera (otros origenes).
+6. <strong>NO tocar</strong> lineas TENDER con <code>Net_line &gt;= 0</code> (por seguridad, no deberia haber ninguna pero por si acaso).</p>
+<p>Todo dentro de una transaccion por organizacion. Si falla una organizacion, se hace rollback solo a esa y se continua con las siguientes.</p>
+<h4 id="623-salida-esperada">6.2.3 Salida esperada<a class="headerlink" href="#623-salida-esperada" title="Permanent link">&para;</a></h4>
+<p>El comando imprime en consola:</p>
+<div class="highlight"><pre><span></span><code>Migrando tenders historicos a customer_receipt_*
+[DRY-RUN] Modo lectura, no se escribiran cambios.
+
+Organizacion: 9_734_1672_56
+  - Lineas TENDER encontradas: 1234
+  - Receipts a crear: 1234
+  - Lineas a eliminar: 1234
+  - Procesando... OK
+    - Receipts creados: 1234
+    - Detalles creados: 1234
+    - Lineas eliminadas: 1234
+
+Organizacion: 8_555_1234_78
+  - Tabla customer_receipt_header_imp no existe. Saltando.
+
+...
+
+Resumen final:
+  - Organizaciones procesadas: 14
+  - Organizaciones saltadas (sin tablas): 3
+  - Receipts creados: 8543
+  - Detalles creados: 8543
+  - Lineas eliminadas: 8543
+</code></pre></div>
+<h4 id="624-consideraciones">6.2.4 Consideraciones<a class="headerlink" href="#624-consideraciones" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Tema</th>
+<th>Detalle</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Idempotencia</td>
+<td>El comando es idempotente: si una linea TENDER ya fue migrada (porque <code>customer_receipt_detail_imp</code> ya tiene <code>InvoiceNumber + Item_Code</code> igual), se debe saltar y NO eliminar la linea. Esto permite re-ejecuciones seguras.</td>
+</tr>
+<tr>
+<td>Rollback</td>
+<td>Antes de empezar, capturar un dump de la BD con <code>mysqldump</code> o equivalente. Si algo sale mal, restaurar el dump.</td>
+</tr>
+<tr>
+<td>Tiempo estimado</td>
+<td>Con ~9+38 facturas de credito y un numero mayor de tenders (depende del volumen historico), puede tomar varios minutos. Mostrar progreso.</td>
+</tr>
+<tr>
+<td>Locking</td>
+<td>Usar <code>DB::beginTransaction()</code> por organizacion y <code>SELECT ... FOR UPDATE</code> en las lineas a procesar para evitar conflictos con operaciones concurrentes.</td>
+</tr>
+<tr>
+<td>Validacion previa</td>
+<td>Antes de ejecutar, correr con <code>--dry-run</code> y revisar el conteo. Si el numero de receipts esperados coincide con el numero de lineas TENDER, proceder.</td>
+</tr>
+<tr>
+<td>Fechas</td>
+<td>Usar <code>Date</code> del header como <code>Date</code> del recibo. Si la factura tiene <code>Date</code> en NULL (no deberia), usar <code>LAST_CHANGE</code> o <code>created_at</code> del detalle.</td>
+</tr>
+<tr>
+<td>Creditos</td>
+<td>El comando SOLO migra tenders. NO toca lineas <code>CREDIT_PAYMENT</code> ni facturas <code>MC-*</code>. Esto se valida explicitamente en la query de seleccion.</td>
+</tr>
+<tr>
+<td>Items_id desconocidos</td>
+<td>El <code>Item_Code</code> de la linea TENDER historica (ej: <code>BRINKS</code>, <code>VISA</code>) se usa tal cual como <code>Method_of_payment</code> y <code>Item_id</code> del recibo. No requiere lookup.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="625-comandos-relacionados-referencia">6.2.5 Comandos relacionados (referencia)<a class="headerlink" href="#625-comandos-relacionados-referencia" title="Permanent link">&para;</a></h4>
+<p>Para comparar el patron de iteracion por organizacion, ver:</p>
+<ul>
+<li><code>app/Console/Commands/Configuration/AddColumnToOrganizationsTableCommand.php</code> (líneas 78-93): itera con <code>Organization::query()-&gt;orderBy('id', 'desc')-&gt;whereNotNull('database')-&gt;cursor()</code> y aplica cambios por BD.</li>
+<li><code>app/Console/Commands/Configuration/CreateTableFromStubCommand.php</code>: usa el mismo patron para crear tablas desde stubs.</li>
+<li><code>app/Console/Commands/Configuration/UpdateStubColumnCommand.php</code>: otro ejemplo de iteracion por organizacion.</li>
+</ul>
+<h4 id="626-script-de-prueba-antes-de-ejecutar-en-produccion">6.2.6 Script de prueba antes de ejecutar en produccion<a class="headerlink" href="#626-script-de-prueba-antes-de-ejecutar-en-produccion" title="Permanent link">&para;</a></h4>
+<ol>
+<li>Seleccionar una organizacion con volumen bajo de tenders (e.g., una gasolinera de prueba).</li>
+<li>Ejecutar con <code>--dry-run --organization=ID</code> y revisar el conteo.</li>
+<li>Sacar un dump de la BD de esa organizacion: <code>mysqldump -h ... -u ... -p ... database_name &gt; backup_pre_migration.sql</code>.</li>
+<li>Ejecutar sin <code>--dry-run</code> solo para esa organizacion: <code>php artisan fuel-station:migrate-tenders-to-receipts --organization=ID</code>.</li>
+<li>Verificar:</li>
+<li>Lineas <code>Sales_Detail_Imp.Category_ID='TENDER'</code> reducidas al valor esperado.</li>
+<li><code>customer_receipt_header_imp</code> tiene los recibos esperados con <code>Method_of_payment</code> correcto.</li>
+<li><code>customer_receipt_detail_imp</code> tiene los detalles vinculados.</li>
+<li>El reporte diario sigue mostrando los mismos totales de pagos.</li>
+<li>Si algo falla, restaurar el dump: <code>mysql -h ... -u ... -p ... database_name &lt; backup_pre_migration.sql</code>.</li>
+</ol>
+<hr />
+<h2 id="7-verificaciones-posteriores-al-cambio">7. Verificaciones posteriores al cambio<a class="headerlink" href="#7-verificaciones-posteriores-al-cambio" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Crear un turno nuevo con:</li>
+<li>1 linea de combustible $100 (Item_id=DIESEL).</li>
+<li>1 linea de mercancia $20 (Item_id=PROD5).</li>
+<li>1 tender BRINKS de $50.</li>
+<li>1 tender VISA de $40.</li>
+<li>1 otro pago (credito) a cliente <code>CLI-1</code> de $30.</li>
+<li>Verificar en BD:</li>
+<li><code>Sales_Header_Imp</code>: 1 factura <code>M-{id}</code> (<code>Net_due = 0</code>) + 1 factura <code>MC-{id}</code> (credito, <code>Net_due = 30</code>).</li>
+<li><code>Sales_Detail_Imp</code> del turno <code>M-{id}</code>: 2 lineas de venta + 1 linea <code>CREDIT_PAYMENT</code> (-$30). <strong>Cero</strong> lineas con <code>Category_ID = 'TENDER'</code>.</li>
+<li><code>customer_receipt_header_imp</code>: 2 recibos con <code>CheckNumber = M-{id}</code>, <code>Method_of_payment</code> = <code>BRINKS</code> y <code>VISA</code>.</li>
+<li><code>customer_receipt_detail_imp</code>: 2 detalles vinculados a esos recibos.</li>
+<li>Generar reporte diario:</li>
+<li><code>payment_methods</code> lista BRINKS $50, VISA $40, CREDIT $30.</li>
+<li>Top 10 clientes a credito lista <code>CLI-1</code> con $30.</li>
+<li>Validacion de duplicidad: intentar guardar otro turno con la misma surtidora/fecha/vendedor/turno debe seguir siendo rechazado.</li>
+</ol>
+<hr />
+<h2 id="8-riesgos-identificados">8. Riesgos identificados<a class="headerlink" href="#8-riesgos-identificados" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Riesgo</th>
+<th>Mitigacion</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><code>getOrdersDetail</code>/<code>getSalesByEmployee</code> dejaban de contar la factura del turno al pasar a <code>Net_due = 0</code></td>
+<td>Cambiar el discriminador a <code>whereExists</code> sobre <code>Sales_Detail_Imp.Category_ID IN ('FUEL','MERCHANDISE')</code></td>
+</tr>
+<tr>
+<td>2</td>
+<td>Alguien lee <code>Sales_Detail_Imp.Category_ID = 'TENDER'</code> fuera de <code>getPaymentMethods</code></td>
+<td>Buscar con grep todos los <code>where.*Category_ID.*TENDER</code> en el codigo y actualizar</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Reporte de clientes no-gasolineros podria leer recibos de gasolinera</td>
+<td>Filtrar recibos de gasolinera por <code>CheckNumber LIKE 'M-%' OR 'T-%' OR 'N-%'</code></td>
+</tr>
+<tr>
+<td>4</td>
+<td>El credito sigue en <code>MC-*</code> + <code>CREDIT_PAYMENT</code>, manteniendo la convencion fragil de prefijos</td>
+<td>Es el mismo esquema actual, no se introduce riesgo nuevo</td>
+</tr>
+<tr>
+<td>5</td>
+<td><code>SendSaleToQuickBooksJob</code> u otros jobs podrian leer las lineas <code>TENDER</code></td>
+<td>Verificar que filtra por <code>Category_ID IN ('FUEL','MERCHANDISE')</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="9-archivos-a-modificar">9. Archivos a modificar<a class="headerlink" href="#9-archivos-a-modificar" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Archivo</th>
+<th>Cambio</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>app/Http/Livewire/Admin/Sage50/CreateFuelSale.php</code></td>
+<td>Net_due=0 en factura del turno, tenders migran a <code>customer_receipt_*</code>, agregar imports</td>
+</tr>
+<tr>
+<td><code>app/Services/DailyReportService.php</code></td>
+<td><code>getPaymentMethods()</code> lee tenders de <code>customer_receipt_*</code> + credito de <code>Sales_Detail_Imp</code>; <code>getOrdersDetail()</code> y <code>getSalesByEmployee()</code> cambian discriminador a <code>whereExists</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="10-archivos-no-modificados">10. Archivos NO modificados<a class="headerlink" href="#10-archivos-no-modificados" title="Permanent link">&para;</a></h2>
+<ul>
+<li><code>app/Models/CustomerReceiptHeaderImp.php</code> (sin cambios)</li>
+<li><code>app/Models/CustomerReceiptDetailImp.php</code> (sin cambios)</li>
+<li><code>app/Models/ImportConfigurationMagaya.php</code> (sigue usandose para <code>AR_Account</code> de <code>MC-*</code>)</li>
+<li>Bloque de "otros pagos" en <code>CreateFuelSale</code> (se mantiene tal cual: <code>MC-*</code> + <code>CREDIT_PAYMENT</code>)</li>
+<li><code>app/Jobs/SendSaleToQuickBooksJob.php</code> (verificar riesgo #5, pero no se modifica en este PR)</li>
+<li>Cualquier archivo Sage 50 / FE / GJE</li>
+<li>Stubs de tabla en <code>app/Models/stubs/</code></li>
+</ul>
+<hr />
+<h2 id="11-orden-de-implementacion-sugerido">11. Orden de implementacion sugerido<a class="headerlink" href="#11-orden-de-implementacion-sugerido" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Modificar <code>CreateFuelSale::guardar()</code>:</li>
+<li>Poner <code>Net_due = 0</code> en la factura del turno.</li>
+<li>Reemplazar el <code>foreach ($this-&gt;pagos)</code> por la creacion de <code>customer_receipt_*</code>.</li>
+<li>Agregar los imports.</li>
+<li>Modificar <code>DailyReportService</code>:</li>
+<li><code>getPaymentMethods()</code>: tenders desde recibos, credito desde <code>Sales_Detail_Imp</code>.</li>
+<li><code>getOrdersDetail()</code>: discriminador con <code>whereExists</code>.</li>
+<li><code>getSalesByEmployee()</code>: mismo ajuste.</li>
+<li>Probar con un turno de prueba (combustible + mercancia + tenders + credito).</li>
+<li>Verificar el reporte diario completo.</li>
+<li>Verificar que <code>SendSaleToQuickBooksJob</code> sigue funcionando.</li>
+<li>Commitear y desplegar.</li>
+</ol>
+<hr />
+<h2 id="12-validaciones-pendientes-antes-de-implementar">12. Validaciones pendientes antes de implementar<a class="headerlink" href="#12-validaciones-pendientes-antes-de-implementar" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Que <code>Method_of_payment</code> en <code>customer_receipt_header_imp</code> acepta los valores: <code>BRINKS</code>, <code>VISA</code>, <code>MASTERCARD</code>, <code>YAPPY</code>, <code>CHUTA</code>, <code>CLAVE</code>, <code>PRIS_CANJE</code>, <code>PRIS_TARJETA</code>, <code>TRANSFERENCIA_BANCARIA</code> (es <code>varchar(20)</code> libre).</li>
+<li>Que <code>SalesHeaderImp</code> no exige <code>Net_due NOT NULL</code> (ahora sera 0).</li>
+<li>Que no hay otros jobs o reportes que dependan de las lineas <code>Category_ID = 'TENDER'</code> en <code>Sales_Detail_Imp</code>.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/aghabrego/docucenter" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.highlight", "search.suggest"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
